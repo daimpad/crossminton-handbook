@@ -5,7 +5,7 @@
 
 import { projektion } from '../fortschritt.js';
 import { label, t, text } from '../i18n.js';
-import { esc, neuRendern } from '../oberflaeche.js';
+import { bausteinIcon, esc, neuRendern } from '../oberflaeche.js';
 import { kompetenzpfad, trainingsuebersicht } from '../pfade.js';
 import { kontinuitaet, registriereEinheitAbschluss, setzeTeilStatus, teilStatus } from '../zustand.js';
 import { uebungsteilHtml } from './baustein.js';
@@ -74,7 +74,7 @@ function renderDurchlauf(el, daten, einheit) {
   el.innerHTML = `
     <section class="einheit-durchlauf">
       <p class="leise">${esc(label('einheit', einheit.id))} · ${esc(t('uebung_x_von_y', { a: sitzung.index + 1, b: einheit.uebungsteile.length }))}</p>
-      <h1>${esc(label('baustein', baustein.id))}</h1>
+      <h1>${bausteinIcon(baustein.id, 'baustein-icon')} ${esc(label('baustein', baustein.id))}</h1>
       <p><a class="leise" href="#/baustein/${esc(baustein.id)}?kontext=kompetenz">${esc(t('zum_baustein'))} →</a></p>
       ${uebungsteilHtml(text(baustein.uebungsteil))}
       <div class="knopf-zeile">

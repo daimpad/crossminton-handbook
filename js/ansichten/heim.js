@@ -6,6 +6,7 @@ import { label, t } from '../i18n.js';
 import { balkenHtml, esc } from '../oberflaeche.js';
 import { kompetenzpfad, themenDomaenen } from '../pfade.js';
 import { diagnose, kontinuitaet, speicherIstVerfuegbar } from '../zustand.js';
+import { zielLabels } from './zielwahl.js';
 
 export function renderHeim(el, daten) {
   const d = diagnose();
@@ -46,8 +47,9 @@ export function renderHeim(el, daten) {
     .map((eintrag) => `<span class="chip">${esc(label('domaene', eintrag.domaene))} · ${eintrag.anzahl}</span>`)
     .join('');
 
-  const zielZeile = d.ziel
-    ? `${esc(t('ziel_aktuell'))}: ${esc(label(d.ziel.dimension === 'vermittlungsziele' ? 'vermittlungsziel_faktor' : 'spielziel_faktor', d.ziel.faktor))}`
+  const zielBeschriftungen = zielLabels(d.ziel);
+  const zielZeile = zielBeschriftungen.length > 0
+    ? `${esc(t('ziel_aktuell'))}: ${esc(zielBeschriftungen.join(' · '))}`
     : esc(t('ziel_keins'));
 
   const trainerKarte = d.trainer

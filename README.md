@@ -1,6 +1,15 @@
 # Crossminton-Handbuch
 
-Clientseitige, mobil-orientierte Lernapp für Crossminton (Erstausbau). Kein Server, kein Build-Schritt: HTML/CSS/JS als ES-Module, Inhalte aus statischen JSON-Dateien, Fortschritt baustein-gebunden in `localStorage`. Konzeptionelle Grundlage: [`docs/uebergabe-spezifikation.md`](docs/uebergabe-spezifikation.md).
+Clientseitige, mobil-orientierte Lernapp für Crossminton. Kein Server, kein Build-Schritt: HTML/CSS/JS als ES-Module, Inhalte aus statischen JSON-Dateien, Fortschritt baustein-gebunden in `localStorage`, mehrsprachig strukturiert (Quellsprache Deutsch befüllt). Konzeptionelle Grundlage: [`docs/uebergabe-spezifikation.md`](docs/uebergabe-spezifikation.md); visuelles Erscheinungsbild: [`docs/ci.md`](docs/ci.md).
+
+**Live:** https://daimpad.github.io/crossminton-handbook/
+
+## Was die App kann
+
+- **Willkommensseite** mit zwei Einstiegen: direkt ins Handbuch (alle Kapitel frei, ohne Angaben) oder der geführte Weg über die Stufen-Diagnostik.
+- **Vier Pfade** durch denselben Baustein-Pool: Kompetenz-, Themen-, Individual- und Trainingspfad, dazu der Cross-Sport-Modifikator (angepasste Erklärungen für Umsteiger, z. B. aus Badminton).
+- **Getrennte Fortschritts-Quittierung** je Erklär- und Übungsteil, Projektionen (global/pfadbezogen), Meilensteine und kumulative Kontinuität — alles lokal im Browser.
+- **Mobil zuerst**, hell, mit lokaler Schrift (Rubik) und Font-Awesome-Icons; Bottom-Bar auf dem Handy, Hamburger-Menü ab Tablet.
 
 ## Starten
 
@@ -28,17 +37,19 @@ Die Pfad-Engine wird ohne Abhängigkeiten direkt unter Node gegen die Referenzda
 node tests/engine.test.mjs
 ```
 
-Abgedeckt: Datenvalidierung, Kompetenz-/Themen-/Individualpfad, Cross-Sport-Modifikator (Delta-Einblendung, Skip-Kandidaten, Nicht-Fehlerfall), Zwei-Ebenen-Logik, Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
+Abgedeckt: Datenvalidierung, Kompetenz-/Themen-/Individualpfad (inkl. Mehrfach-Zielauswahl), Cross-Sport-Modifikator (Delta-Einblendung, Skip-Kandidaten, Nicht-Fehlerfall), Zwei-Ebenen-Logik, Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
+
+Ein durchgehender End-to-End-Browsertest (Playwright, mobil + Desktop) liegt außerhalb des Repos in der Entwicklungsumgebung; sein Ablauf ist in `.claude/skills/verify/SKILL.md` dokumentiert.
 
 ## Struktur
 
 ```
-index.html                 App-Shell (SPA, Hash-Routing)
-css/app.css                helles Design (#38a4f1), mobile Bottom-Bar / Desktop-Hamburger
+index.html                 App-Shell (SPA, Hash-Routing) + Modul-Auffangnetz
+css/app.css                Design & CI (#38a4f1 + Signalfarben), mobile Bottom-Bar / Desktop-Hamburger
 css/schriften.css          lokale Schriften: Rubik + Font-Awesome-Subset (Icons ergänzen = eine Codepoint-Zeile)
 assets/fonts/              woff2-Dateien inkl. Lizenzen (OFL / FA Free)
 js/
-  app.js                   Boot, Router, Navigation
+  app.js                   Boot, Router, Navigation, Hamburger-Menü
   daten.js                 JSON laden, Indizes, Konsistenzprüfung
   graph.js                 topologische Sortierung, Voraussetzungs-Checks
   pfade.js                 Pfad-Engine: 4 Traversierungen + Cross-Sport-Modifikator
@@ -46,20 +57,22 @@ js/
   aktionen.js              Quittierungen + Meilenstein-Erkennung
   zustand.js               localStorage-Store (Diagnose, Fortschritt, Kontinuität, Einstellungen)
   i18n.js                  t()/label()/text() mit de-Fallback
-  oberflaeche.js           geteilte UI-Helfer
-  ansichten/               Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
+  oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
+  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
 data/
   bausteine.beginner-technik.json   Referenzinhalt (unverändert übernommen)
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
   labels/{en,fr,pl}.json            strukturgleiche Gerüste, unbefüllt → Fallback auf de
-docs/uebergabe-spezifikation.md     Spezifikation
+docs/uebergabe-spezifikation.md     Spezifikation (Erstausbau)
+docs/ci.md                          Corporate Identity: Farben, Typo, Icons
 tests/engine.test.mjs               Engine-Tests (node, dependency-frei)
+CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
 ```
 
 ## Datenpflege
 
-- **Inhalte** (`data/bausteine.beginner-technik.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Neue Bausteine brauchen zusätzlich einen Anzeigetitel in `data/labels/de.json` unter `bausteine` (die Engine-Tests prüfen das mit).
+- **Inhalte** (`data/bausteine.beginner-technik.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Neue Bausteine brauchen zusätzlich einen Anzeigetitel in `data/labels/de.json` unter `bausteine` (die Engine-Tests prüfen das mit); ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen.
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Offen vermerkt: das ausgeschriebene Label für die Transfer-Herkunft `BS`.
 - **Trainingseinheiten** (`data/trainingseinheiten.json`): im Erstausbau kuratierte Beispiele; frei ersetzbar. Referenziert werden Baustein-IDs, deren Übungsteil gemeint ist.
 - **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).

@@ -8,7 +8,7 @@ import { bausteinAbsolviert } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { esc, zeigeMeilenstein } from '../oberflaeche.js';
 import { schliesseOnboardingAb, setzeDiagnose } from '../zustand.js';
-import { gewaehltesZiel, zielwahlHtml } from './zielwahl.js';
+import { gewaehlteZiele, zielwahlHtml } from './zielwahl.js';
 
 let assistent = null;
 
@@ -122,7 +122,7 @@ function liesSchrittWerte(el, name) {
     const wert = el.querySelector('input[name="ob-herkunft"]:checked')?.value;
     assistent.herkunft = wert ? wert : null;
   } else if (name === 'ziel') {
-    assistent.ziel = gewaehltesZiel(el) ?? assistent.ziel;
+    assistent.ziel = gewaehlteZiele(el);
   }
 }
 

@@ -8,6 +8,7 @@ import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderIndividual, renderKompetenzpfad, renderThemen } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
 import { renderTraining } from './ansichten/training.js';
+import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initI18n, t } from './i18n.js';
 import { esc } from './oberflaeche.js';
@@ -81,12 +82,21 @@ function rendern() {
   const { segmente, query, roh } = parseHash();
   const el = document.getElementById('ansicht');
 
-  if (!istOnboardingAbgeschlossen() && segmente[0] !== 'onboarding') {
-    window.location.hash = '#/onboarding';
+  // Erstlauf: Willkommensseite mit den zwei Einstiegen; der Wizard ist einer
+  // davon. Tiefe Routen führen bis zur Wahl zurück auf die Startseite.
+  const erstlauf = !istOnboardingAbgeschlossen();
+  if (erstlauf && segmente.length > 0 && segmente[0] !== 'onboarding') {
+    window.location.hash = '#/';
     return;
   }
-  document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding');
+  document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding' || erstlauf);
   beschrifteRahmen();
+
+  if (erstlauf && segmente.length === 0) {
+    renderWillkommen(el, daten);
+    aktualisiereNavigation(segmente);
+    return;
+  }
 
   if (segmente[0] === 'onboarding') {
     renderOnboarding(el, daten);

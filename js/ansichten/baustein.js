@@ -6,7 +6,7 @@
 import { schalteTeil } from '../aktionen.js';
 import { domaenenVon, hatUebungsteil } from '../daten.js';
 import { label, t, text } from '../i18n.js';
-import { absaetze, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
+import { absaetze, bausteinIcon, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
 import { einstellungen } from '../zustand.js';
 
@@ -17,9 +17,10 @@ function kontextZuListe(kontext) {
   return parameter ? `#/pfad/kompetenz/${parameter}` : '#/pfad/kompetenz';
 }
 
+// Ampellogik der CI: offen = Rot, erledigt = Grün (siehe docs/ci.md).
 function statusChip(status) {
   const erledigt = status === 'erledigt';
-  return `<span class="chip ${erledigt ? 'chip-erfolg' : ''}">${esc(label('abschluss_status', erledigt ? 'erledigt' : 'offen'))}</span>`;
+  return `<span class="chip ${erledigt ? 'chip-gruen' : 'chip-rot'}">${esc(label('abschluss_status', erledigt ? 'erledigt' : 'offen'))}</span>`;
 }
 
 function quittierKnopf(id, teil, status, beschriftungOffen, beschriftungErledigt) {
@@ -200,7 +201,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
   el.innerHTML = `
     <article class="baustein">
       ${positionsZeile}
-      <h1>${esc(label('baustein', b.id))}</h1>
+      <h1>${bausteinIcon(b.id, 'baustein-icon')} ${esc(label('baustein', b.id))}</h1>
       <p class="chip-zeile">${metaChips}${transferChips ? ` <span class="chip-trenner">·</span> ${transferChips}` : ''}</p>
       ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
