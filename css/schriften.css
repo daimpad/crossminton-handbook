@@ -94,3 +94,8 @@
 .fa-baseball::before { content: '\f433'; }
 .fa-book-open::before { content: '\f518'; }
 .fa-bullseye::before { content: '\f140'; }
+.fa-stethoscope::before { content: '\f0f1'; }
+.fa-triangle-exclamation::before { content: '\f071'; }
+.fa-eye::before { content: '\f06e'; }
+.fa-magnifying-glass::before { content: '\f002'; }
+.fa-comment-dots::before { content: '\f4ad'; }

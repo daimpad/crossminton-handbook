@@ -4,11 +4,11 @@
 // der Übungsteil des Basisbausteins bleibt stets erhalten (Spez. 4.2, 5).
 
 import { schalteTeil } from '../aktionen.js';
-import { domaenenVon, hatUebungsteil } from '../daten.js';
+import { domaenenVon, fehlerbilderFuer, hatUebungsteil } from '../daten.js';
 import { label, t, text } from '../i18n.js';
 import { absaetze, bausteinIcon, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
-import { einstellungen } from '../zustand.js';
+import { diagnose, einstellungen } from '../zustand.js';
 
 function kontextZuListe(kontext) {
   const [art, parameter] = String(kontext).split(':');
@@ -76,6 +76,42 @@ export function uebungsteilHtml(uebungsteil) {
       return '';
     })
     .join('');
+}
+
+// Trainer-Layer (Spez. 5): in-situ am Basisbaustein, nur in der Trainer-
+// Perspektive. Fehlerbilder sind eigene Entitäten, aber nie eigene Station;
+// die drei Felder spiegeln die diagnostische Kette Symptom → Ursache → Korrektur.
+function trainerLayerHtml(daten, baustein) {
+  if (!diagnose().trainer) return '';
+  const fehlerbilder = fehlerbilderFuer(daten, baustein.id);
+  if (fehlerbilder.length === 0) return '';
+  const feld = (icon, begriff, wert) =>
+    wert ? `<div class="fb-feld"><h4><i class="fa-solid ${icon}" aria-hidden="true"></i> ${esc(begriff)}</h4><p>${esc(wert)}</p></div>` : '';
+  const karten = fehlerbilder
+    .map((fb) => {
+      const inhalt = text(fb.erklaerteil) || {};
+      const ziele = (fb.vermittlungsziele || [])
+        .map((z) => `<span class="chip">${esc(label('vermittlungsziel_faktor', z))}</span>`)
+        .join(' ');
+      return `
+        <article class="fb-karte">
+          <h3><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ${esc(label('fehlerbild', fb.id))}</h3>
+          ${feld('fa-eye', t('fb_symptom'), inhalt.symptom)}
+          ${feld('fa-magnifying-glass', t('fb_ursache'), inhalt.ursache)}
+          ${feld('fa-comment-dots', t('fb_korrektur'), inhalt.korrektur)}
+          ${ziele ? `<p class="chip-zeile">${ziele}</p>` : ''}
+        </article>`;
+    })
+    .join('');
+  return `
+    <section class="abschnitt trainer-layer">
+      <div class="abschnitt-kopf">
+        <h2><i class="fa-solid fa-stethoscope" aria-hidden="true"></i> ${esc(t('trainer_layer'))}</h2>
+        <span class="chip chip-akzent">${esc(label('kompetenzstufe', 'trainer'))}</span>
+      </div>
+      <p class="leise">${esc(t('trainer_layer_hinweis'))}</p>
+      ${karten}
+    </section>`;
 }
 
 function voraussetzungsBanner(station, kontext) {
@@ -206,6 +242,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
       ${uebungsSektion}
+      ${trainerLayerHtml(daten, b)}
       ${abschlussZeile}
       ${einordnungHtml(b, kuerzelSichtbar)}
       ${fussNavigation}

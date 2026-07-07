@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "beschreibung": "Fehlerbilder (Trainer-Layer, Spez. 5): eigene Entitäten, je an einen Basisbaustein gehängt (basis_baustein) — analog zur Delta-Signatur, aber gerendert als in-situ Trainer-Layer, nicht als eigene Station. Nur in der Trainer-Perspektive sichtbar.",
+    "struktur": "typ 'fehlerbild', kompetenzstufe ['trainer'], erklaerteil.de mit den drei benannten Feldern symptom/ursache/korrektur (spiegeln die Vermittlungsziele fehlerbild_erkennen/ursache_von_symptom_trennen/korrekturansage_geben). Kein eigener Übungsteil (Delta-Übungsregel).",
+    "status": "Platzhalter — ein einzelnes Beispiel zur Verifikation des Trainer-Layers. Wird durch die redaktionelle Sechser-Serie (je Basis-Technikbaustein) ersetzt.",
+    "quellsprache": "de"
+  },
+  "fehlerbild_bausteine": [
+    {
+      "id": "griff_fehler_zu_fest",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "griff",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Unterarm ermüdet früh, die Schläge geraten hart und ungenau, das Handgelenk bleibt starr. Häufig sichtbar an weißen Knöcheln und einem Griff, der sich über den ganzen Ballwechsel nicht löst.",
+          "ursache": "Die Hand verkrampft dauerhaft, statt nur im Treffmoment zuzupacken. Meist aus Anspannung oder dem Wunsch nach mehr Kontrolle — doch der feste Griff nimmt genau das Gefühl, das er sucht.",
+          "korrektur": "Locker greifen wie beim Handschlag; fest wird es nur im Moment des Treffens, danach wieder lösen. Ansage: „Halte den Griff so, dass ich dir den Schläger noch leicht aus der Hand drehen könnte — erst im Treffen zupacken, dann sofort lösen.“"
+        }
+      }
+    }
+  ]
+}

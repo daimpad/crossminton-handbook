@@ -11,11 +11,12 @@ async function holeJson(pfad) {
 }
 
 export async function ladeDaten() {
-  const [inhalt, einheiten] = await Promise.all([
+  const [inhalt, einheiten, fehlerbilder] = await Promise.all([
     holeJson('data/bausteine.beginner-technik.json'),
     holeJson('data/trainingseinheiten.json'),
+    holeJson('data/fehlerbilder.json'),
   ]);
-  return baueIndizes(inhalt, einheiten);
+  return baueIndizes(inhalt, einheiten, fehlerbilder);
 }
 
 export function hatUebungsteil(baustein) {
@@ -41,12 +42,20 @@ export function deltaFuer(daten, basisId, herkunft) {
   return daten.deltaVonSchluessel.get(`${basisId}::${herkunft}`) || null;
 }
 
-export function baueIndizes(inhaltRoh, einheitenRoh) {
+// Fehlerbilder eines Basisbausteins (Trainer-Layer, Spez. 5). Eigene Entitäten,
+// aber nie eigene Station — sie werden in-situ in der Baustein-Ansicht gezeigt,
+// nur in der Trainer-Perspektive. Liefert immer ein Array (leer = kein Fehlerfall).
+export function fehlerbilderFuer(daten, basisId) {
+  return daten.fehlerbildVonBasis.get(basisId) || [];
+}
+
+export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
   const warnungen = [];
   const vokabulare = inhaltRoh.vokabulare || {};
   const bausteine = inhaltRoh.bausteine || [];
   const deltas = inhaltRoh.delta_bausteine || [];
   const einheiten = einheitenRoh?.einheiten || [];
+  const fehlerbilder = fehlerbilderRoh?.fehlerbild_bausteine || [];
 
   const daten = {
     meta: inhaltRoh._meta || {},
@@ -55,9 +64,11 @@ export function baueIndizes(inhaltRoh, einheitenRoh) {
     bausteine,
     deltas,
     einheiten,
+    fehlerbilder,
     bausteinVonId: new Map(bausteine.map((b) => [b.id, b])),
     einheitVonId: new Map(einheiten.map((e) => [e.id, e])),
     deltaVonSchluessel: new Map(),
+    fehlerbildVonBasis: new Map(),
     poolIndex: new Map(bausteine.map((b, i) => [b.id, i])),
     koennensOrdnung: (vokabulare.kompetenzstufe || []).filter((s) => s !== 'trainer'),
     herkuenfte: [],
@@ -65,6 +76,12 @@ export function baueIndizes(inhaltRoh, einheitenRoh) {
     vermittlungszielBereichVonFaktor: new Map(),
     warnungen,
   };
+
+  // Fehlerbilder je Basisbaustein bündeln (mehrere pro Baustein erlaubt).
+  for (const fb of fehlerbilder) {
+    if (!daten.fehlerbildVonBasis.has(fb.basis_baustein)) daten.fehlerbildVonBasis.set(fb.basis_baustein, []);
+    daten.fehlerbildVonBasis.get(fb.basis_baustein).push(fb);
+  }
 
   for (const [bereich, faktoren] of Object.entries(vokabulare.spielziele || {})) {
     if (bereich.startsWith('_')) continue;
@@ -144,6 +161,29 @@ function pruefeDaten(daten) {
       const b = daten.bausteinVonId.get(id);
       if (!b) w.push(`${e.id}: referenzierter Baustein "${id}" existiert nicht`);
       else if (!hatUebungsteil(b)) w.push(`${e.id}: Baustein "${id}" hat keinen Übungsteil`);
+    }
+  }
+
+  // Fehlerbilder (Trainer-Layer): eigene Entität mit Relation zum Basisbaustein,
+  // drei benannte Erklärfelder, kein eigener Übungsteil (Spez. 5).
+  const bausteinIds = new Set(daten.bausteine.map((b) => b.id));
+  for (const fb of daten.fehlerbilder) {
+    if (bausteinIds.has(fb.id)) w.push(`${fb.id}: Fehlerbild-id kollidiert mit einem Basisbaustein`);
+    if (fb.typ !== 'fehlerbild') w.push(`${fb.id}: Typ "${fb.typ}" statt "fehlerbild"`);
+    if (!daten.bausteinVonId.has(fb.basis_baustein)) w.push(`${fb.id}: Basisbaustein "${fb.basis_baustein}" existiert nicht`);
+    if (!(fb.kompetenzstufe || []).includes('trainer')) w.push(`${fb.id}: Fehlerbild ohne Trainer-Stufe`);
+    if (hatUebungsteil(fb)) w.push(`${fb.id}: Fehlerbild mit eigenem Übungsteil verletzt die Trainer-Layer-Regel (Spez. 5)`);
+    const inhalt = fb.erklaerteil?.de;
+    for (const feld of ['symptom', 'ursache', 'korrektur']) {
+      if (!inhalt || typeof inhalt[feld] !== 'string' || inhalt[feld].trim() === '') {
+        w.push(`${fb.id}: Erklärfeld "${feld}" fehlt oder ist leer`);
+      }
+    }
+    for (const z of fb.vermittlungsziele || []) {
+      if (!daten.vermittlungszielBereichVonFaktor.has(z)) w.push(`${fb.id}: unbekanntes Vermittlungsziel "${z}"`);
+    }
+    for (const k of fb.transfer_herkunft || []) {
+      if (!inVokabular(voka.transfer_herkunft, k)) w.push(`${fb.id}: unbekanntes Transfer-Kürzel "${k}"`);
     }
   }
 

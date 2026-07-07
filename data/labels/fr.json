@@ -85,6 +85,11 @@
     "vermittlungsziele_gruppe": "",
     "erklaerteil": "",
     "uebungsteil": "",
+    "trainer_layer": "",
+    "trainer_layer_hinweis": "",
+    "fb_symptom": "",
+    "fb_ursache": "",
+    "fb_korrektur": "",
     "als_gelesen": "",
     "gelesen": "",
     "als_erledigt": "",
@@ -171,6 +176,9 @@
     "vorhand_drive": "",
     "rueckhand": "",
     "beinarbeit": ""
+  },
+  "fehlerbilder": {
+    "griff_fehler_zu_fest": ""
   },
   "grafiken": {
     "grundposition_leitgrafik": "",
