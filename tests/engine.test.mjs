@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { baueIndizes, deltaFuer } from '../js/daten.js';
+import { baueIndizes, deltaFuer, fehlerbilderFuer, hatUebungsteil } from '../js/daten.js';
 import { individualpfad, kompetenzpfad, sequenzFuer, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht } from '../js/pfade.js';
 import { globaleProjektion, projektion } from '../js/fortschritt.js';
 import { registriereEinheitAbschluss, setzeDiagnose, setzeTeilStatus, setzeZurueck } from '../js/zustand.js';
@@ -17,6 +17,7 @@ const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
 
 const inhalt = liesJson('data/bausteine.beginner-technik.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
+const fehlerbilder = liesJson('data/fehlerbilder.json');
 const labelsDe = liesJson('data/labels/de.json');
 
 let fehler = 0;
@@ -36,7 +37,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes(inhalt, einheiten);
+const daten = baueIndizes(inhalt, einheiten, fehlerbilder);
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
@@ -131,6 +132,20 @@ pruefe('Delta im Kompetenz-Kontext aktiv', imKontext.station.delta?.id === 'grif
 pruefe('gleicher Baustein im Themen-Kontext ohne Delta', stationImKontext(daten, 'griff', 'themen:technik').station.delta === null);
 pruefe('sequenzFuer versteht kompetenz:trainer (leer im Erstausbau)', sequenzFuer(daten, 'kompetenz:trainer').stationen.length === 0);
 
+console.log('\n[7b] Fehlerbilder (Trainer-Layer)');
+pruefe('fehlerbilderFuer(griff) liefert das Fehlerbild', fehlerbilderFuer(daten, 'griff').length === 1 && fehlerbilderFuer(daten, 'griff')[0].id === 'griff_fehler_zu_fest');
+pruefe('fehlerbilderFuer ohne Eintrag liefert leeres Array (Nicht-Fehlerfall)', gleicheListe(fehlerbilderFuer(daten, 'aufschlag'), []));
+const fb = fehlerbilderFuer(daten, 'griff')[0];
+pruefe('Fehlerbild trägt typ fehlerbild und Trainer-Stufe', fb.typ === 'fehlerbild' && fb.kompetenzstufe.includes('trainer'));
+pruefe('Fehlerbild ohne eigenen Übungsteil (Trainer-Layer-Regel)', !hatUebungsteil(fb));
+pruefe('Fehlerbild trägt die drei benannten Felder', ['symptom', 'ursache', 'korrektur'].every((f) => typeof fb.erklaerteil.de[f] === 'string' && fb.erklaerteil.de[f].trim() !== ''));
+pruefe('Fehlerbild ist nie eine Station (nicht im Baustein-Pool)', !daten.bausteinVonId.has('griff_fehler_zu_fest'));
+pruefe('Fehlerbild taucht in keiner Pfad-Sequenz auf', ['kompetenz', 'kompetenz:trainer', 'themen:technik'].every((k) => !sequenzFuer(daten, k).stationen.some((s) => s.baustein.id === 'griff_fehler_zu_fest')));
+pruefe('leeres Erklärfeld erzeugt eine Warnung', (() => {
+  const kaputt = { fehlerbild_bausteine: [{ ...fb, id: 'test_leer', erklaerteil: { de: { symptom: 'x', ursache: '', korrektur: 'y' } } }] };
+  return baueIndizes(inhalt, einheiten, kaputt).warnungen.some((warnung) => warnung.includes('test_leer') && warnung.includes('ursache'));
+})());
+
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner' });
@@ -156,6 +171,7 @@ const hatLabel = (pfad) => {
   if (typeof wert !== 'string' || wert === '') fehlend.push(pfad.join('.'));
 };
 for (const b of daten.bausteine) hatLabel(['bausteine', b.id]);
+for (const fbEintrag of daten.fehlerbilder) hatLabel(['fehlerbilder', fbEintrag.id]);
 for (const b of [...daten.bausteine, ...daten.deltas]) for (const g of b.grafik || []) hatLabel(['grafiken', g]);
 for (const e of daten.einheiten) hatLabel(['trainingseinheiten', e.id]);
 for (const [gruppe, werte] of Object.entries(daten.vokabulare)) {

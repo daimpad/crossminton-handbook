@@ -42,6 +42,7 @@ Konsolen-/Seitenfehler mitschneiden — Soll ist null.
 8. Wizard-Ausstieg: `#ob-direkt` auf Schritt 1 → Kapitelübersicht ohne Angaben; Heim/Kompetenzpfad/Profil zeigen dann Stufe-nachholen-Zustände.
 9. Desktop (≥768px): Bottom-Bar verborgen, Hamburger `#hamburger` öffnet `#hauptmenue` (Klasse `offen`, ~400ms Übergang), Escape/Klick schließt; Schriften prüfbar via `document.fonts.check('1rem Rubik')` und `'900 1rem "Font Awesome 6 Free"'`.
 10. CI/Design: H1-Farbe == `rgb(30, 139, 214)` (blau); Icons nie `rgb(0,0,0)`; Status-Badges tragen `.chip-rot` (offen) bzw. `.chip-gruen` (erledigt) in `.abschnitt-kopf`.
+11. Trainer-Layer / Fehlerbilder: `.trainer-layer` erscheint in der Baustein-Ansicht NUR wenn `diagnose().trainer` gesetzt ist und für den Baustein ein Fehlerbild existiert (Beispiel: `griff`); nie als eigene Station (auch nicht im Trainer-Kompetenzpfad). Zustand vor dem Boot seeden (`context.addInitScript`, Schlüssel `crossminton.zustand.v1`), sonst liest die SPA `trainer:true` nicht.
 
 Engine-Logik separat und schnell: `node tests/engine.test.mjs` (kein Ersatz für den Browser-Lauf).
 

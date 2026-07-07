@@ -86,6 +86,11 @@
     "vermittlungsziele_gruppe": "Vermittlungsziele",
     "erklaerteil": "Erklärteil",
     "uebungsteil": "Übungsteil",
+    "trainer_layer": "Trainer-Layer: Fehlerbilder",
+    "trainer_layer_hinweis": "Diagnostische Sicht für Trainer — nur in der Trainer-Perspektive sichtbar.",
+    "fb_symptom": "Symptom",
+    "fb_ursache": "Ursache",
+    "fb_korrektur": "Korrektur & Ansage",
     "als_gelesen": "Als gelesen abhaken",
     "gelesen": "Gelesen",
     "als_erledigt": "Als erledigt abhaken",
@@ -172,6 +177,9 @@
     "vorhand_drive": "Der Vorhand-Drive",
     "rueckhand": "Die Rückhand",
     "beinarbeit": "Beinarbeit: Zentrum und Split-Step"
+  },
+  "fehlerbilder": {
+    "griff_fehler_zu_fest": "Griff zu fest"
   },
   "grafiken": {
     "grundposition_leitgrafik": "Leitgrafik: die Grundposition",

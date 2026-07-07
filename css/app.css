@@ -597,6 +597,38 @@ details[open] summary { margin-bottom: 0.5rem; }
   margin-top: 1.2rem;
 }
 
+/* ---------- Trainer-Layer / Fehlerbilder ---------- */
+
+.trainer-layer {
+  border-left: 4px solid var(--primaer);
+  background: linear-gradient(180deg, var(--primaer-weich) 0%, var(--flaeche) 60%);
+}
+
+.trainer-layer .abschnitt-kopf h2 { display: inline-flex; align-items: center; gap: 0.45rem; }
+
+.fb-karte {
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  padding: 0.9rem 1rem;
+  margin-top: 0.8rem;
+}
+
+.fb-karte > h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+  color: var(--signal-rot-text);
+}
+
+.fb-karte > h3 .fa-solid { color: var(--signal-rot); }
+
+.fb-feld { margin-bottom: 0.7rem; }
+.fb-feld h4 { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.2rem; }
+.fb-feld p { margin: 0; }
+.fb-karte .chip-zeile { margin-top: 0.6rem; }
+
 /* ---------- Training ---------- */
 
 .einheit-abschluss { text-align: center; padding: 2rem 1rem; }

@@ -61,6 +61,7 @@ js/
   ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
 data/
   bausteine.beginner-technik.json   Referenzinhalt (unverändert übernommen)
+  fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
   labels/{en,fr,pl}.json            strukturgleiche Gerüste, unbefüllt → Fallback auf de
@@ -74,6 +75,7 @@ CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
 
 - **Inhalte** (`data/bausteine.beginner-technik.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Neue Bausteine brauchen zusätzlich einen Anzeigetitel in `data/labels/de.json` unter `bausteine` (die Engine-Tests prüfen das mit); ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen.
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Offen vermerkt: das ausgeschriebene Label für die Transfer-Herkunft `BS`.
+- **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Werden nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`. Im Erstausbau ein Platzhalter-Beispiel — die redaktionelle Serie ersetzt es.
 - **Trainingseinheiten** (`data/trainingseinheiten.json`): im Erstausbau kuratierte Beispiele; frei ersetzbar. Referenziert werden Baustein-IDs, deren Übungsteil gemeint ist.
 - **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).
 

@@ -50,6 +50,7 @@ Farben, Typografie und Icon-Regeln stehen in `docs/ci.md` und sind als CSS-Varia
 - **`file://` funktioniert nicht** — `fetch()` der JSON braucht HTTP. Immer über einen lokalen Server testen.
 - **Nach Datenänderung Skelette neu erzeugen:** `data/labels/{en,fr,pl}.json` sind strukturgleiche Gerüste von `de.json`; beim Hinzufügen neuer de-Schlüssel die Skelette regenerieren (leere Werte fallen zur Laufzeit auf de zurück).
 - **Deltas sind keine eigenen Stationen.** Ein Delta ersetzt nur den Erklärteil in situ und nur im Kompetenz-Kontext bei passender Herkunft; der Übungsteil bleibt der reguläre (Spez. 4.2/5).
+- **Fehlerbilder (Trainer-Layer) sind auch keine Stationen.** Eigene Entitäten in `data/fehlerbilder.json` (`fehlerbild_bausteine`), je über `basis_baustein` an einen Baustein gehängt — analog zur Delta-Signatur, aber gerendert als in-situ Sektion in der Baustein-Ansicht, nur wenn `diagnose().trainer` gesetzt ist. Nie im Baustein-Pool, nie in einer Pfad-Sequenz. `erklaerteil.de` trägt die drei Felder `symptom`/`ursache`/`korrektur`, kein eigener Übungsteil. Neue Fehlerbilder brauchen einen Titel in `labels/de.json` unter `fehlerbilder` (Test prüft das mit).
 - **Ziele sind eine Liste** (Mehrfachauswahl). `zielEintraege()` in `js/pfade.js` normalisiert alte Einzelziel-Objekte mit — beim Umgang mit `diagnose().ziel` nie ein einzelnes `{dimension, faktor}` annehmen.
 - **JSON der Referenzinhalte nicht umformatieren** — `data/bausteine.beginner-technik.json` wurde byte-identisch übernommen.
 
