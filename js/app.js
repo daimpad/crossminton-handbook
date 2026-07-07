@@ -39,7 +39,7 @@ function aktualisiereNavigation(segmente) {
 
 function beschrifteRahmen() {
   document.title = t('app_titel');
-  document.querySelector('.marke').textContent = t('app_titel');
+  document.querySelector('.marke-text').textContent = t('app_titel');
   const beschriftungen = { lernen: t('nav_lernen'), training: t('nav_training'), profil: t('nav_profil') };
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     verweis.querySelector('.nav-text').textContent = beschriftungen[verweis.dataset.nav];
