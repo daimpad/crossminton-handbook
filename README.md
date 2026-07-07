@@ -60,7 +60,8 @@ js/
   oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
   ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
 data/
-  bausteine.beginner-technik.json   Referenzinhalt (unverändert übernommen)
+  bausteine.beginner-technik.json   Referenzinhalt Technik (unverändert übernommen; kanonisches Vokabular)
+  bausteine.beginner-taktik.json    Inhaltsblock Taktik (mit reflexionsaufgabe-Feld); in denselben Pool gemischt
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
@@ -73,7 +74,7 @@ CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
 
 ## Datenpflege
 
-- **Inhalte** (`data/bausteine.beginner-technik.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Neue Bausteine brauchen zusätzlich einen Anzeigetitel in `data/labels/de.json` unter `bausteine` (die Engine-Tests prüfen das mit); ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen.
+- **Inhalte** (`data/bausteine.<stufe>-<domaene>.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Mehrere Inhaltsdateien werden zu einem Pool gemischt — neue Datei in `INHALTSDATEIEN` (`js/daten.js`) eintragen; nur die Technik-Datei trägt das kanonische `vokabulare`. Bausteine können einen inline-`anzeigetitel` tragen (wird nach `labels/de.json` geliftet) und in der Taktik-Domäne statt des Übungsteils eine `reflexionsaufgabe` (eigener quittierbarer Aufgabenteil). Ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen. Die Engine-Tests prüfen Titel-Vollständigkeit, Reihenfolge und Reflexions-Status mit.
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Offen vermerkt: das ausgeschriebene Label für die Transfer-Herkunft `BS`.
 - **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Werden nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`. Im Erstausbau ein Platzhalter-Beispiel — die redaktionelle Serie ersetzt es.
 - **Trainingseinheiten** (`data/trainingseinheiten.json`): im Erstausbau kuratierte Beispiele; frei ersetzbar. Referenziert werden Baustein-IDs, deren Übungsteil gemeint ist.

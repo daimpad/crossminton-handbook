@@ -5,7 +5,7 @@
 // Zwei-Ebenen-Logik (4.4): der Graph sortiert nur. Zugänglichkeit ist überall
 // frei; nicht absolvierte Voraussetzungen werden als Hinweis mitgegeben.
 
-import { deltaFuer, domaenenVon, hatUebungsteil, niedrigsteStufe } from './daten.js';
+import { deltaFuer, domaenenVon, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe } from './daten.js';
 import { fehlendeVoraussetzungen, topoSortiere } from './graph.js';
 import { absolviertNachId, bausteinAbsolviert } from './fortschritt.js';
 import { diagnose, kontinuitaet, teilStatus } from './zustand.js';
@@ -62,6 +62,7 @@ function baueStation(daten, baustein, mengenIds, herkunft) {
     status: {
       erklaerteil: teilStatus(baustein.id, 'erklaerteil'),
       uebungsteil: hatUebungsteil(baustein) ? teilStatus(baustein.id, 'uebungsteil') : null,
+      reflexionsaufgabe: hatReflexionsaufgabe(baustein) ? teilStatus(baustein.id, 'reflexionsaufgabe') : null,
       absolviert: bausteinAbsolviert(baustein),
     },
   };

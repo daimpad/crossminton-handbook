@@ -32,13 +32,13 @@ export function balkenHtml(projektion, beschriftung = '') {
 }
 
 export function statusPunktHtml(station) {
-  const { erklaerteil, uebungsteil, absolviert } = station.status;
+  const { erklaerteil, uebungsteil, reflexionsaufgabe, absolviert } = station.status;
   let klasse = 'offen';
   let beschriftung = t('status_offen');
   if (absolviert) {
     klasse = 'voll';
     beschriftung = t('status_absolviert');
-  } else if (erklaerteil === 'erledigt' || uebungsteil === 'erledigt') {
+  } else if (erklaerteil === 'erledigt' || uebungsteil === 'erledigt' || reflexionsaufgabe === 'erledigt') {
     klasse = 'teil';
     beschriftung = t('status_teilweise');
   }
@@ -90,6 +90,13 @@ const BAUSTEIN_ICONS = {
   vorhand_drive: 'fa-table-tennis-paddle-ball',
   rueckhand: 'fa-hand-back-fist',
   beinarbeit: 'fa-shoe-prints',
+  // Taktik
+  spielziel_verstehen: 'fa-bullseye',
+  zentrale_position: 'fa-crosshairs',
+  laenge_tiefe: 'fa-ruler-horizontal',
+  rueckhand_des_gegners: 'fa-user-slash',
+  aufschlag_taktisch: 'fa-chess',
+  fehler_vermeiden: 'fa-shield-halved',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

@@ -151,7 +151,7 @@ export function renderProfil(el, daten) {
       <h2>${esc(t('fortschritt'))}</h2>
       <h3>${esc(t('fortschritt_global'))}</h3>
       ${balkenHtml(global)}
-      <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.uebungErledigt, d: global.uebungGesamt }))}</p>
+      <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.aufgabeErledigt, d: global.aufgabeGesamt }))}</p>
       ${d.stufe ? `<h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>${balkenHtml(pfadProjektion)}` : ''}
       <h3>${esc(t('kontinuitaet'))}</h3>
       <p>${esc(t('kontinuitaet_stand', { n: k.gesamt }))}</p>

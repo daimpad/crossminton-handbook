@@ -2,14 +2,14 @@
 // ist die invariante Datengrundlage; alles hier wird live darüber berechnet
 // und nie gespeichert.
 
-import { hatUebungsteil } from './daten.js';
+import { aufgabenTeile } from './daten.js';
 import { teilStatus } from './zustand.js';
 
-// „Absolviert" = Erklärteil erledigt und, falls vorhanden, Übungsteil erledigt.
+// „Absolviert" = Erklärteil erledigt und alle Aufgabenteile (Übung und/oder
+// Reflexion), falls vorhanden, erledigt.
 export function bausteinAbsolviert(baustein) {
   if (teilStatus(baustein.id, 'erklaerteil') !== 'erledigt') return false;
-  if (hatUebungsteil(baustein) && teilStatus(baustein.id, 'uebungsteil') !== 'erledigt') return false;
-  return true;
+  return aufgabenTeile(baustein).every((teil) => teilStatus(baustein.id, teil) === 'erledigt');
 }
 
 export function absolviertNachId(daten) {
@@ -20,21 +20,23 @@ export function absolviertNachId(daten) {
 }
 
 // Projektion über eine beliebige Baustein-Menge (global, pfadbezogen, …).
+// Übung und Reflexion werden als „Aufgabenteile" gemeinsam gezählt (pro Baustein
+// liegt genau eines vor).
 export function projektion(bausteine) {
   const p = {
     gesamt: bausteine.length,
     absolviert: 0,
     quote: 0,
     erklaertErledigt: 0,
-    uebungGesamt: 0,
-    uebungErledigt: 0,
+    aufgabeGesamt: 0,
+    aufgabeErledigt: 0,
   };
   for (const b of bausteine) {
     if (bausteinAbsolviert(b)) p.absolviert += 1;
     if (teilStatus(b.id, 'erklaerteil') === 'erledigt') p.erklaertErledigt += 1;
-    if (hatUebungsteil(b)) {
-      p.uebungGesamt += 1;
-      if (teilStatus(b.id, 'uebungsteil') === 'erledigt') p.uebungErledigt += 1;
+    for (const teil of aufgabenTeile(b)) {
+      p.aufgabeGesamt += 1;
+      if (teilStatus(b.id, teil) === 'erledigt') p.aufgabeErledigt += 1;
     }
   }
   p.quote = p.gesamt === 0 ? 0 : p.absolviert / p.gesamt;
