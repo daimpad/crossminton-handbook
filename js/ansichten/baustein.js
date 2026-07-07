@@ -29,7 +29,7 @@ function quittierKnopf(id, teil, status, beschriftungOffen, beschriftungErledigt
       data-quittiere="${esc(teil)}" data-baustein="${esc(id)}"
       ${erledigt ? `title="${esc(t('zuruecknehmen'))}"` : ''}
       aria-pressed="${erledigt}">
-      ${esc(erledigt ? `${beschriftungErledigt} ✓` : beschriftungOffen)}
+      ${erledigt ? `${esc(beschriftungErledigt)} <i class="fa-solid fa-check" aria-hidden="true"></i>` : esc(beschriftungOffen)}
     </button>`;
 }
 
@@ -38,7 +38,7 @@ function grafikenHtml(baustein) {
     .map(
       (id) => `
       <figure class="grafik-platzhalter">
-        <div class="grafik-flaeche" aria-hidden="true">✦</div>
+        <div class="grafik-flaeche" aria-hidden="true"><i class="fa-solid fa-image"></i></div>
         <figcaption class="leise">${esc(label('grafik', id))} — ${esc(t('grafik_folgt'))}</figcaption>
       </figure>`
     )

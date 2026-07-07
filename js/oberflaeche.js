@@ -64,7 +64,7 @@ export function zeigeMeilenstein(meilenstein) {
     : t('meilenstein_individual');
   zeigeUeberlagerung(`
     <div class="meilenstein-karte">
-      <p class="meilenstein-zeichen" aria-hidden="true">◆</p>
+      <p class="meilenstein-zeichen" aria-hidden="true"><i class="fa-solid fa-medal"></i></p>
       <h2>${esc(t('meilenstein_titel'))}</h2>
       <p>${esc(textZeile)}</p>
       <p class="leise">${esc(t('meilenstein_weiter'))}</p>

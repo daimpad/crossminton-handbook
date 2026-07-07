@@ -166,6 +166,7 @@ export function renderOnboarding(el, daten) {
         ${inhalt.ueberspringbar ? `<button class="knopf knopf-leise" id="ob-ueberspringen">${esc(t('ueberspringen'))}</button>` : ''}
         <button class="knopf knopf-primaer" id="ob-weiter" ${inhalt.weiterAktiv ? '' : 'disabled'}>${esc(istLetzter ? t('fertig') : t('weiter'))}</button>
       </div>
+      ${assistent.schritt === 0 ? `<div class="knopf-zeile ob-direkt-zeile"><button class="knopf knopf-leise" id="ob-direkt">${esc(t('ohne_angaben'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>` : ''}
     </section>`;
 
   const form = el.querySelector('#ob-form');
@@ -190,6 +191,16 @@ export function renderOnboarding(el, daten) {
   el.querySelector('#ob-zurueck')?.addEventListener('click', () => {
     assistent.schritt -= 1;
     renderOnboarding(el, daten);
+  });
+
+  // Freier Zugang ohne Wizard: alle Kapitel bleiben zugänglich (Zwei-Ebenen-
+  // Logik 4.4) — die Stufe ist nur für den geführten Pfad konstitutiv und
+  // lässt sich jederzeit im Profil oder über die Einladung im Heim nachholen.
+  el.querySelector('#ob-direkt')?.addEventListener('click', () => {
+    setzeDiagnose({ stufe: null, trainer: false, herkunft: null, ziel: null });
+    schliesseOnboardingAb();
+    assistent = null;
+    location.hash = '#/pfad/themen';
   });
 
   // Überspringen setzt den Default: keine Herkunft (kein Modifikator), kein Ziel.

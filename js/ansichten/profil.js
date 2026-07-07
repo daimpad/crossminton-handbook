@@ -93,7 +93,7 @@ function editorHtml(daten, d) {
 
 // Vormarkieren jenseits des Onboardings (6.5): jederzeit im Profil möglich.
 function vormarkierenHtml(daten, d) {
-  if (!d.herkunft) return '';
+  if (!d.herkunft || !d.stufe) return '';
   const kandidaten = daten.bausteine.filter(
     (b) => niedrigsteStufe(daten, b) === d.stufe && !deltaFuer(daten, b.id, d.herkunft) && !bausteinAbsolviert(b)
   );
@@ -136,7 +136,7 @@ export function renderProfil(el, daten) {
     <section class="karte">
       <h2>${esc(t('profil_diagnose'))}</h2>
       <p class="leise">${esc(t('profil_diagnose_text'))}</p>
-      ${zeile('stufe', t('profil_stufe'), `${label('kompetenzstufe', d.stufe)}`)}
+      ${zeile('stufe', t('profil_stufe'), d.stufe ? label('kompetenzstufe', d.stufe) : t('keine_angabe'))}
       ${offen === 'stufe' ? editorHtml(daten, d) : ''}
       ${zeile('trainer', t('profil_trainer'), d.trainer ? t('profil_trainer_an') : t('profil_trainer_aus'))}
       ${offen === 'trainer' ? editorHtml(daten, d) : ''}
@@ -153,8 +153,7 @@ export function renderProfil(el, daten) {
       <h3>${esc(t('fortschritt_global'))}</h3>
       ${balkenHtml(global)}
       <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.uebungErledigt, d: global.uebungGesamt }))}</p>
-      <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>
-      ${balkenHtml(pfadProjektion)}
+      ${d.stufe ? `<h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>${balkenHtml(pfadProjektion)}` : ''}
       <h3>${esc(t('kontinuitaet'))}</h3>
       <p>${esc(t('kontinuitaet_stand', { n: k.gesamt }))}</p>
       ${jeEinheit ? `<ul class="leise einheiten-zaehler">${jeEinheit}</ul>` : ''}
