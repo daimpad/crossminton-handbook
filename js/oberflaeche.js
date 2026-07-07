@@ -80,3 +80,19 @@ export function zeigeMeilenstein(meilenstein) {
 export function neuRendern() {
   window.dispatchEvent(new CustomEvent('app:rendern'));
 }
+
+// Sichtbare Baustein-Icons (Font Awesome, immer farbig): Körper, Hand, Schläger,
+// Wege. Neue Bausteine ohne Eintrag bekommen schlicht kein Icon — kein Fehlerfall.
+const BAUSTEIN_ICONS = {
+  grundposition: 'fa-person',
+  griff: 'fa-hand',
+  aufschlag: 'fa-baseball',
+  vorhand_drive: 'fa-table-tennis-paddle-ball',
+  rueckhand: 'fa-hand-back-fist',
+  beinarbeit: 'fa-shoe-prints',
+};
+
+export function bausteinIcon(bausteinId, klasse = '') {
+  const icon = BAUSTEIN_ICONS[bausteinId];
+  return icon ? `<i class="fa-solid ${icon} ${klasse}" aria-hidden="true"></i>` : '';
+}

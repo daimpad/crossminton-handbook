@@ -21,24 +21,28 @@ function standardVergleicher(daten) {
   return (a, b) => domIdx(a) - domIdx(b) || daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id);
 }
 
-function zielFaktoren(ziel) {
+// Ziele normalisieren: erlaubt sind null, ein Einzelziel {dimension, faktor},
+// ein Ziel mit Faktorliste sowie eine Liste von Zielen (Mehrfachauswahl).
+// Ältere gespeicherte Einzelziele bleiben so ohne Migration gültig.
+export function zielEintraege(ziel) {
   if (!ziel) return [];
-  return Array.isArray(ziel.faktor) ? ziel.faktor : [ziel.faktor];
+  const liste = Array.isArray(ziel) ? ziel : [ziel];
+  return liste.flatMap((eintrag) => {
+    if (!eintrag || !eintrag.faktor) return [];
+    const dimension = eintrag.dimension === 'vermittlungsziele' ? 'vermittlungsziele' : 'spielziele';
+    const faktoren = Array.isArray(eintrag.faktor) ? eintrag.faktor : [eintrag.faktor];
+    return faktoren.map((faktor) => ({ dimension, faktor }));
+  });
 }
 
-function zielFeld(ziel) {
-  return ziel?.dimension === 'vermittlungsziele' ? 'vermittlungsziele' : 'spielziele';
-}
-
-function zielTreffer(baustein, ziel) {
-  const eigene = baustein[zielFeld(ziel)] || [];
-  return zielFaktoren(ziel).filter((f) => eigene.includes(f)).length;
+function zielTreffer(baustein, eintraege) {
+  return eintraege.filter((eintrag) => (baustein[eintrag.dimension] || []).includes(eintrag.faktor)).length;
 }
 
 // Individualpfad: Graph primär, Ziel-Nähe sekundär als Füllkriterium (6.2).
-function zielVergleicher(daten, ziel) {
+function zielVergleicher(daten, eintraege) {
   const standard = standardVergleicher(daten);
-  return (a, b) => zielTreffer(b, ziel) - zielTreffer(a, ziel) || standard(a, b);
+  return (a, b) => zielTreffer(b, eintraege) - zielTreffer(a, eintraege) || standard(a, b);
 }
 
 function baueStation(daten, baustein, mengenIds, herkunft) {
@@ -102,13 +106,14 @@ export function themenpfad(daten, domaene) {
 // 6.2 Individualpfad — filtert nach Zielfaktor(en); Voraussetzungen außerhalb
 // der Menge bleiben Hinweis (ausserhalbMenge), werden nie aufgenommen.
 export function individualpfad(daten, ziel = diagnose().ziel) {
-  if (!ziel) return { art: 'individual', ziel: null, stationen: [] };
-  const feld = zielFeld(ziel);
-  const menge = daten.bausteine.filter((b) => zielTreffer(b, ziel) > 0 && (b[feld] || []).length > 0);
+  const eintraege = zielEintraege(ziel);
+  if (eintraege.length === 0) return { art: 'individual', ziel: null, eintraege, stationen: [] };
+  const menge = daten.bausteine.filter((b) => zielTreffer(b, eintraege) > 0);
   return {
     art: 'individual',
     ziel,
-    stationen: zuStationen(daten, menge, zielVergleicher(daten, ziel), null),
+    eintraege,
+    stationen: zuStationen(daten, menge, zielVergleicher(daten, eintraege), null),
   };
 }
 

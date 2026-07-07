@@ -9,16 +9,15 @@ import { label, setzeSprache, sprache, t } from '../i18n.js';
 import { balkenHtml, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
-import { gewaehltesZiel, zielwahlHtml } from './zielwahl.js';
+import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
 const SPRACHNAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', pl: 'Polski' };
 
 let offen = null; // gerade geöffneter Inline-Editor: 'stufe' | 'trainer' | 'herkunft' | 'ziel'
 
 function zielLabel(ziel) {
-  if (!ziel) return t('ziel_keins');
-  const gruppe = ziel.dimension === 'vermittlungsziele' ? 'vermittlungsziel_faktor' : 'spielziel_faktor';
-  return label(gruppe, ziel.faktor);
+  const beschriftungen = zielLabels(ziel);
+  return beschriftungen.length > 0 ? beschriftungen.join(' · ') : t('ziel_keins');
 }
 
 function zeile(schluessel, begriff, wert) {
@@ -200,8 +199,7 @@ export function renderProfil(el, daten) {
         const wert = el.querySelector('input[name="pf-herkunft"]:checked')?.value;
         setzeDiagnose({ herkunft: wert ? wert : null });
       } else if (art === 'ziel') {
-        const ziel = gewaehltesZiel(el);
-        if (ziel) setzeDiagnose({ ziel });
+        setzeDiagnose({ ziel: gewaehlteZiele(el) });
       } else if (art === 'ziel-entfernen') {
         setzeDiagnose({ ziel: null });
       }

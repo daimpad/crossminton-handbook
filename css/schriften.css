@@ -86,3 +86,11 @@
 .fa-play::before { content: '\f04b'; }
 .fa-check::before { content: '\f00c'; }
 .fa-compass::before { content: '\f14e'; }
+.fa-person::before { content: '\f183'; }
+.fa-person-running::before { content: '\f70c'; }
+.fa-hand::before { content: '\f256'; }
+.fa-hand-back-fist::before { content: '\f255'; }
+.fa-shoe-prints::before { content: '\f54b'; }
+.fa-baseball::before { content: '\f433'; }
+.fa-book-open::before { content: '\f518'; }
+.fa-bullseye::before { content: '\f140'; }

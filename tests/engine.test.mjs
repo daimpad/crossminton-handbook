@@ -103,6 +103,17 @@ const griffStation = individuell.stationen[0];
 pruefe('Voraussetzung außerhalb der Menge nur als Hinweis', gleicheListe(griffStation.ausserhalbMenge, ['grundposition']));
 pruefe('ohne Ziel bleibt der Individualpfad leer', individualpfad(daten, null).stationen.length === 0);
 pruefe('Vermittlungsziel-Filter liefert leere Menge (Erstausbau)', individualpfad(daten, { dimension: 'vermittlungsziele', faktor: 'fehlerbild_erkennen' }).stationen.length === 0);
+pruefe(
+  'Mehrfachauswahl: Vereinigungsmenge in Graph-Reihenfolge',
+  gleicheListe(
+    individualpfad(daten, [
+      { dimension: 'spielziele', faktor: 'tempo_haertedosierung' },
+      { dimension: 'spielziele', faktor: 'wiederholte_antrittsschnelligkeit' },
+    ]).stationen.map((s) => s.baustein.id),
+    ['grundposition', 'griff', 'vorhand_drive', 'rueckhand', 'beinarbeit']
+  )
+);
+pruefe('Altformat (Einzelziel-Objekt) bleibt ohne Migration gültig', individualpfad(daten, { dimension: 'spielziele', faktor: 'tempo_haertedosierung' }).stationen.length === 3);
 
 console.log('\n[6] Themenpfad');
 const technik = themenpfad(daten, 'technik');

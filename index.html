@@ -70,5 +70,25 @@
   </noscript>
 
   <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück, sondern
+       eine Meldung mit Neu-laden-Knopf. Statisch in der Quellsprache. -->
+  <script>
+    (function () {
+      window.addEventListener('load', function () {
+        window.setTimeout(function () {
+          var ziel = document.getElementById('ansicht');
+          if (!ziel || ziel.childElementCount > 0) return;
+          ziel.innerHTML =
+            '<div class="karte">' +
+            '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+            '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — meist eine kurze Netzwerk- oder Cache-Störung.</p>' +
+            '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+            '</div>';
+        }, 3000);
+      });
+    })();
+  </script>
 </body>
 </html>

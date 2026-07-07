@@ -2,22 +2,29 @@
    Container-Radius 10px, Hover mit leichtem Schlagschatten, moderne Übergänge.
    Untere Leiste nur mobil; ab 768px Hamburger-Menü oben rechts. */
 
+/* CI-Farbwelt (siehe docs/ci.md): Hauptfarbe + drei Signalfarben.
+   Ampellogik: Rot = offen, Gelb = teilweise/Hinweis, Grün = erledigt. */
 :root {
   --primaer: #38a4f1;
   --primaer-dunkel: #1e8bd6;
   --primaer-tief: #1671b5;
   --primaer-weich: #e7f4fe;
+  --signal-rot: #f91f05;
+  --signal-rot-text: #c81a04;
+  --signal-rot-weich: #fee9e6;
+  --signal-gruen: #25c449;
+  --signal-gruen-text: #148130;
+  --signal-gruen-weich: #e4f8ea;
+  --signal-gelb: #f4e248;
+  --signal-gelb-text: #7a6a05;
+  --signal-gelb-weich: #fcf7d9;
   --hintergrund: #f5f9fd;
   --flaeche: #ffffff;
   --flaeche-2: #eef4fa;
   --tinte: #1f2933;
   --tinte-2: #5f6b7a;
   --linie: #e1e9f2;
-  --erfolg: #1b8a4c;
-  --erfolg-weich: #e6f6ec;
-  --hinweis: #a05e0c;
-  --hinweis-flaeche: #fdf3e2;
-  --gefahr: #c0392b;
+  --ueberschrift: var(--primaer-dunkel);
   --radius: 10px;
   --schatten-karte: 0 1px 3px rgba(31, 41, 51, 0.06);
   --schatten-hover: 0 10px 24px rgba(56, 164, 241, 0.18), 0 2px 6px rgba(31, 41, 51, 0.08);
@@ -45,10 +52,14 @@ h1, h2, h3, h4, p, ul, ol, dl, figure {
   margin: 0 0 0.6rem;
 }
 
-h1 { font-size: 1.45rem; line-height: 1.25; font-weight: 700; }
-h2 { font-size: 1.15rem; font-weight: 600; }
+h1 { font-size: 1.45rem; line-height: 1.25; font-weight: 700; color: var(--ueberschrift); }
+h2 { font-size: 1.15rem; font-weight: 600; color: var(--ueberschrift); }
 h3 { font-size: 1rem; font-weight: 600; }
 h4 { font-size: 0.85rem; font-weight: 600; color: var(--tinte-2); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Icons sind immer farbig, nie schwarz — Default Hauptfarbe, Status in Signalfarben. */
+.fa-solid { color: var(--primaer); }
+.knopf .fa-solid, .hero .fa-solid, .menue-schliessen .fa-solid, .hamburger .fa-solid { color: inherit; }
 
 a { color: var(--primaer-tief); }
 
@@ -134,7 +145,7 @@ main {
   font-weight: 600;
 }
 
-.fussnav a.aktiv .fa-solid { transform: translateY(-1px); }
+.fussnav a.aktiv .fa-solid { transform: translateY(-1px); color: var(--primaer-tief); }
 
 body.im-onboarding .fussnav { display: none; }
 body.im-onboarding main { padding-bottom: 2rem; }
@@ -213,7 +224,7 @@ body.im-onboarding .hamburger { display: none; }
   border: none;
   border-radius: var(--radius);
   background: var(--flaeche-2);
-  color: var(--tinte);
+  color: var(--primaer-tief);
   font-size: 1.05rem;
   cursor: pointer;
   transition: background var(--uebergang), box-shadow var(--uebergang);
@@ -277,7 +288,7 @@ a.karte-link {
 
 .leise { color: var(--tinte-2); font-size: 0.9rem; }
 
-.bestaetigung { color: var(--erfolg); font-weight: 600; }
+.bestaetigung { color: var(--signal-gruen-text); font-weight: 600; }
 
 .abschnitt-titel { margin: 1.3rem 0 0.6rem; }
 
@@ -294,13 +305,18 @@ a.karte-link {
 }
 
 .chip-akzent { background: var(--primaer-weich); color: var(--primaer-tief); }
-.chip-erfolg { background: var(--erfolg-weich); color: var(--erfolg); }
+
+/* Signal-Badges (Ampellogik) — weiche Fläche, kräftige Schrift, farbige Kante. */
+.chip-rot { background: var(--signal-rot-weich); color: var(--signal-rot-text); border: 1px solid var(--signal-rot); }
+.chip-gelb { background: var(--signal-gelb-weich); color: var(--signal-gelb-text); border: 1px solid var(--signal-gelb); }
+.chip-gruen { background: var(--signal-gruen-weich); color: var(--signal-gruen-text); border: 1px solid var(--signal-gruen); }
+
 .chip-zeile { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
 .chip-trenner { color: var(--tinte-2); }
 
 .banner-hinweis {
-  background: var(--hinweis-flaeche);
-  border-left: 3px solid var(--hinweis);
+  background: var(--signal-gelb-weich);
+  border-left: 3px solid var(--signal-gelb);
   border-radius: var(--radius);
   padding: 0.6rem 0.8rem;
   font-size: 0.9rem;
@@ -333,8 +349,8 @@ a.karte-link {
 .knopf-primaer:active { background: var(--primaer-dunkel); }
 .knopf-sekundaer { border-color: var(--linie); background: var(--flaeche); }
 .knopf-leise { color: var(--tinte-2); font-weight: 500; }
-.knopf-gefahr { color: var(--gefahr); border-color: var(--gefahr); }
-.knopf-erledigt { color: var(--erfolg); border-color: var(--erfolg-weich); }
+.knopf-gefahr { color: var(--signal-rot-text); border-color: var(--signal-rot); }
+.knopf-erledigt { color: var(--signal-gruen-text); border-color: var(--signal-gruen); }
 .knopf[disabled] { opacity: 0.45; cursor: default; box-shadow: none; }
 
 .knopf-zeile {
@@ -454,13 +470,16 @@ input[type='radio'], input[type='checkbox'] {
   flex-shrink: 0;
 }
 
-.station-absolviert .station-nummer { background: var(--erfolg-weich); color: var(--erfolg); }
+.station-absolviert .station-nummer { background: var(--signal-gruen-weich); color: var(--signal-gruen-text); }
 
 .station-mitte { flex: 1; display: flex; flex-direction: column; gap: 0.15rem; }
 
 .station-titel { font-weight: 600; }
 
-.station-hinweis { font-size: 0.8rem; color: var(--hinweis); }
+.station-icon { font-size: 0.9em; margin-right: 0.15rem; }
+.baustein-icon { font-size: 0.85em; margin-right: 0.2rem; }
+
+.station-hinweis { font-size: 0.8rem; color: var(--signal-gelb-text); }
 
 .station-skip { margin: 0 0 0.3rem 2.85rem; min-height: 36px; padding: 0.2rem 0.5rem; font-size: 0.85rem; }
 
@@ -473,8 +492,9 @@ input[type='radio'], input[type='checkbox'] {
   transition: background var(--uebergang), border-color var(--uebergang);
 }
 
-.status-teil { border-color: var(--primaer); background: linear-gradient(90deg, var(--primaer) 50%, transparent 50%); }
-.status-voll { border-color: var(--erfolg); background: var(--erfolg); }
+.status-offen { border-color: var(--signal-rot); background: var(--signal-rot-weich); }
+.status-teil { border-color: var(--signal-gelb); background: var(--signal-gelb); }
+.status-voll { border-color: var(--signal-gruen); background: var(--signal-gruen); }
 
 /* ---------- Fortschritt ---------- */
 
@@ -626,9 +646,13 @@ details[open] summary { margin-bottom: 0.5rem; }
 }
 
 .meilenstein-zeichen {
-  font-size: 2.1rem;
-  color: var(--primaer);
+  font-size: 2.3rem;
   margin-bottom: 0.5rem;
+}
+
+.meilenstein-zeichen .fa-solid {
+  color: var(--signal-gelb);
+  filter: drop-shadow(0 2px 3px rgba(31, 41, 51, 0.25));
 }
 
 /* ---------- Hover (nur Geräte mit Zeiger) ---------- */
@@ -655,6 +679,65 @@ details[open] summary { margin-bottom: 0.5rem; }
   .hamburger { display: inline-flex; }
   main { padding: 1.6rem 1.5rem 3rem; }
   h1 { font-size: 1.7rem; }
+}
+
+/* ---------- Willkommen: Hero + Einstiegs-CTAs ---------- */
+
+.hero {
+  background: linear-gradient(135deg, var(--primaer) 0%, var(--primaer-tief) 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.8rem 1.4rem;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--schatten-hover);
+}
+
+.hero h1 { color: #fff; font-size: 1.65rem; margin-bottom: 0.5rem; }
+.hero p { color: rgba(255, 255, 255, 0.92); margin: 0; }
+
+.hero-icons { display: flex; gap: 0.8rem; margin-bottom: 0.9rem; }
+
+.hero-icons .fa-solid {
+  font-size: 1.5rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  width: 2.7rem;
+  height: 2.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-karte {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-symbol {
+  display: grid;
+  place-items: center;
+  width: 3.3rem;
+  height: 3.3rem;
+  border-radius: var(--radius);
+  background: var(--primaer-weich);
+  font-size: 1.45rem;
+  flex-shrink: 0;
+}
+
+.cta-text { flex: 1; display: flex; flex-direction: column; gap: 0.15rem; }
+.cta-text strong { font-size: 1.05rem; color: var(--ueberschrift); }
+
+.cta-pfeil { font-size: 1.1rem; transition: transform var(--uebergang); }
+
+@media (hover: hover) {
+  .cta-karte:hover .cta-pfeil { transform: translateX(5px); }
+  .cta-karte:hover { border-color: var(--primaer); }
 }
 
 /* ---------- Feinheiten ---------- */

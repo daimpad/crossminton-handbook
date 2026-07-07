@@ -5,7 +5,6 @@
     "hinweis": "Erstfassung aller sichtbaren Beschriftungen (redaktionell zu pruefen). Sprachneutrale IDs stehen in bausteine.beginner-technik.json; diese Datei traegt nur die sprachabhaengige Beschriftung.",
     "offen": "Label fuer Transfer-Herkunft 'BS' redaktionell festlegen (Kuerzel in den Referenzdaten ungenutzt)."
   },
-
   "ui": {
     "app_titel": "Crossminton-Handbuch",
     "weiter": "Weiter",
@@ -18,16 +17,21 @@
     "entfernen": "Entfernen",
     "schliessen": "Schließen",
     "zur_liste": "Zur Liste",
-
     "nav_lernen": "Lernen",
     "nav_training": "Training",
     "nav_profil": "Profil",
     "menue": "Menü",
     "menue_schliessen": "Menü schließen",
-
     "onboarding_titel": "Bevor du loslegst",
     "onboarding_intro": "Drei kurze Angaben stellen dir die passenden Inhalte zusammen. Alles lässt sich später im Profil ändern.",
     "onboarding_schritt": "Schritt {a} von {b}",
+    "wk_titel": "Crossminton lernen — Schlag für Schlag.",
+    "wk_untertitel": "Kleine Bausteine, klare Technik, dein Tempo. Läuft komplett im Browser — ohne Anmeldung, dein Fortschritt bleibt auf deinem Gerät.",
+    "wk_einstieg": "Bevor du loslegst: Wähle deinen Einstieg",
+    "wk_handbuch_titel": "Direkt ins Handbuch",
+    "wk_handbuch_text": "Alle {n} Kapitel sofort frei durchstöbern — ohne Angaben, ohne Umwege.",
+    "wk_gefuehrt_titel": "Wo stehst du im Spiel?",
+    "wk_gefuehrt_text": "Drei kurze Fragen, große Wirkung: Das Handbuch sortiert sich nach deiner Stufe — und Umsteiger aus anderen Schlagsportarten bekommen eigens angepasste Erklärungen.",
     "ohne_angaben": "Ohne Angaben fortfahren — direkt zu den Kapiteln",
     "stufe_waehlen": "Stufe wählen",
     "stufe_fehlt": "Du hast noch keine Stufe gewählt — ohne sie gibt es keinen geführten Pfad. Die Wahl dauert eine Minute und bleibt jederzeit änderbar.",
@@ -47,11 +51,10 @@
     "herkunft_hinweis": "Zur Auswahl stehen die Sportarten, für die angepasste Inhalte existieren. Bei passender Herkunft werden einzelne Erklärteile für dich ausgetauscht.",
     "herkunft_keine": "Keine Vorerfahrung",
     "frage_ziel": "Willst du gezielt an etwas arbeiten?",
-    "ziel_hinweis": "Dein Ziel wird gespeichert; im Individualpfad kannst du ihm folgen. Welche Pfade du nutzt, bleibt davon unabhängig — beides ist bewusst getrennt.",
+    "ziel_hinweis": "Wähle ein oder mehrere Ziele — sie werden gespeichert, und im Individualpfad kannst du ihnen folgen. Welche Pfade du nutzt, bleibt davon unabhängig.",
     "vormarkieren_titel": "Schon beherrscht?",
     "vormarkieren_text": "Für diese Bausteine ist bei deiner Herkunft keine Anpassung nötig. Beherrschst du sie bereits sicher, kannst du sie als erledigt vormarkieren.",
     "vormarkieren_leer": "Nichts auswählen ist völlig in Ordnung — du kannst jederzeit im Profil vormarkieren.",
-
     "pfad_kompetenz": "Kompetenzpfad",
     "pfad_kompetenz_text": "Der geführte Weg durch deine Stufe — Baustein für Baustein in sinnvoller Reihenfolge.",
     "pfad_themen": "Themenpfad",
@@ -63,7 +66,6 @@
     "pfade": "Pfade",
     "n_bausteine": "{n} Bausteine",
     "n_einheiten": "{n} Einheiten",
-
     "weiterlernen": "Weiterlernen",
     "station_x_von_y": "Station {a} von {b}",
     "pfad_abgeschlossen_kurz": "Pfad abgeschlossen",
@@ -72,17 +74,16 @@
     "ausserhalb_auswahl": "Außerhalb deiner Zielauswahl:",
     "kann_ich_schon": "Beherrsche ich — als erledigt markieren",
     "ziel_waehlen": "Ziel wählen",
-    "ziel_aktuell": "Dein Ziel",
-    "ziel_keins": "Kein Ziel gewählt",
-    "ziel_entfernen": "Ziel entfernen",
-    "ziel_aendern": "Ziel ändern",
+    "ziel_aktuell": "Deine Ziele",
+    "ziel_keins": "Keine Ziele gewählt",
+    "ziel_entfernen": "Ziele entfernen",
+    "ziel_aendern": "Ziele ändern",
     "status_offen": "offen",
     "status_teilweise": "teilweise erledigt",
     "status_absolviert": "abgeschlossen",
     "nicht_gefunden": "Diesen Inhalt gibt es nicht (mehr).",
     "spielziele_gruppe": "Spielziele",
     "vermittlungsziele_gruppe": "Vermittlungsziele",
-
     "erklaerteil": "Erklärteil",
     "uebungsteil": "Übungsteil",
     "als_gelesen": "Als gelesen abhaken",
@@ -112,12 +113,10 @@
     "ue_selbstkontrolle": "Selbstkontrolle",
     "ue_abschluss": "Abschluss",
     "ue_naechste_stufe": "Nächste Stufe",
-
     "meilenstein_titel": "Meilenstein erreicht",
     "meilenstein_kompetenz": "Du hast den {pfad} deiner Stufe abgeschlossen — ein erarbeiteter Zustandswechsel, kein Zufall.",
     "meilenstein_individual": "Du hast alle Bausteine zu deinem Ziel abgeschlossen.",
     "meilenstein_weiter": "Alles Weitere findest du in den anderen Pfaden — oder im Training.",
-
     "einheit_starten": "Einheit starten",
     "einheit_fortsetzen": "Weiter",
     "uebung_x_von_y": "Übung {a} von {b}",
@@ -133,12 +132,10 @@
     "zum_baustein": "Zum Baustein",
     "kontinuitaet": "Kontinuität",
     "kontinuitaet_text": "Absolvierte Einheiten summieren sich. Pausen entwerten nichts.",
-
     "fortschritt": "Fortschritt",
     "fortschritt_global": "Gesamt",
     "bausteine_erledigt": "{a} von {b} Bausteinen",
     "teile_stand": "Erklärteile {a}/{b} · Übungsteile {c}/{d}",
-
     "profil_diagnose": "Deine Angaben",
     "profil_diagnose_text": "Alles hier ist jederzeit änderbar. Dein Fortschritt bleibt dabei erhalten — er hängt am Baustein, nicht am Pfad.",
     "profil_stufe": "Stufe",
@@ -146,7 +143,7 @@
     "profil_trainer_an": "freigeschaltet",
     "profil_trainer_aus": "nicht freigeschaltet",
     "profil_herkunft": "Herkunft",
-    "profil_ziel": "Ziel",
+    "profil_ziel": "Ziele",
     "vormarkieren_profil": "Beherrschte Bausteine vormarkieren",
     "vormarkieren_keine": "Derzeit keine Kandidaten — alles Übrige trägt eine Anpassung oder ist bereits erledigt.",
     "einstellungen": "Einstellungen",
@@ -158,19 +155,16 @@
     "reset_bestaetigen": "Wirklich alles zurücksetzen? Dein lokaler Fortschritt und deine Angaben werden gelöscht.",
     "ueber": "Über diese App",
     "ueber_text": "Clientseitige Lernapp für Crossminton (Erstausbau). Inhalte auf Deutsch; Fortschritt wird nur auf diesem Gerät gespeichert.",
-
     "leer_stufe": "Für diese Stufe sind noch keine Bausteine hinterlegt. Der Erstausbau enthält den Beginner-Technikpfad.",
     "leer_domaene": "Für dieses Themenfeld sind noch keine Bausteine hinterlegt.",
     "leer_ziel": "Für dieses Ziel gibt es noch keine Bausteine. Der Erstausbau deckt den Beginner-Technikbereich ab.",
     "leer_training": "Noch keine Einheiten hinterlegt.",
     "leer_weiterlernen": "Alle Bausteine deiner Stufe sind abgeschlossen.",
-
     "fehler_laden_titel": "Inhalte konnten nicht geladen werden",
     "fehler_laden_text": "Die Datendateien waren nicht erreichbar. Wird die Seite direkt aus dem Dateisystem geöffnet (file://), blockiert der Browser das Laden — starte stattdessen einen kleinen lokalen Server im Projektordner, z. B.: python3 -m http.server",
     "erneut_versuchen": "Erneut versuchen",
     "speicher_warnung": "Hinweis: Der Browser erlaubt kein dauerhaftes Speichern (z. B. privater Modus). Fortschritt geht beim Schließen verloren."
   },
-
   "bausteine": {
     "grundposition": "Die Grundposition",
     "griff": "Der Universalgriff",
@@ -179,7 +173,6 @@
     "rueckhand": "Die Rückhand",
     "beinarbeit": "Beinarbeit: Zentrum und Split-Step"
   },
-
   "grafiken": {
     "grundposition_leitgrafik": "Leitgrafik: die Grundposition",
     "griff_leitgrafik": "Leitgrafik: der Universalgriff mit V-Stellung",
@@ -190,7 +183,6 @@
     "beinarbeit_seq_1": "Beinarbeit, Bild 1: der Split-Step",
     "beinarbeit_seq_2": "Beinarbeit, Bild 2: der Bewegungskreislauf"
   },
-
   "vokabeln": {
     "domaene": {
       "technik": "Technik",
@@ -238,7 +230,6 @@
       "beherrscht": "beherrscht"
     }
   },
-
   "spielziele": {
     "bereiche": {
       "energetik": "Energetik",
@@ -274,7 +265,6 @@
       "doppel_spezifische_loesungen": "Doppelspezifische Lösungen"
     }
   },
-
   "vermittlungsziele": {
     "bereiche": {
       "vermitteln_zugaenglichmachen": "Vermitteln & Zugänglichmachen",
@@ -298,7 +288,6 @@
       "motivation_sicherheit_halten": "Motivation und Sicherheit halten"
     }
   },
-
   "trainingseinheiten": {
     "einheit_fundament": "Fundament: Stand, Griff, Aufschlag",
     "einheit_schlag_und_weg": "Schlag und Weg"

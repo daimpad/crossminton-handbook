@@ -4,10 +4,10 @@
 import { markiereAbsolviert } from '../aktionen.js';
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { balkenHtml, esc, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, bausteinIcon, esc, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
 import { individualpfad, kompetenzpfad, themenDomaenen, themenpfad } from '../pfade.js';
 import { einstellungen, setzeDiagnose } from '../zustand.js';
-import { gewaehltesZiel, zielwahlHtml } from './zielwahl.js';
+import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
 // In der Liste ordnet bereits die Reihenfolge; der „Empfohlen vorher"-Hinweis
 // gehört zum Zugriffsmoment und lebt in der Baustein-Ansicht (Spez. 4.4).
@@ -37,7 +37,7 @@ function stationslisteHtml(stationen, kontext, { mitSkip = false } = {}) {
           <a class="station-link" href="#/baustein/${esc(station.baustein.id)}?kontext=${encodeURIComponent(kontext)}">
             <span class="station-nummer" aria-hidden="true">${i + 1}</span>
             <span class="station-mitte">
-              <span class="station-titel">${esc(label('baustein', station.baustein.id))} ${deltaChip}</span>
+              <span class="station-titel">${bausteinIcon(station.baustein.id, 'station-icon')} ${esc(label('baustein', station.baustein.id))} ${deltaChip}</span>
               ${hinweisZeilen(station)}
             </span>
             ${statusPunktHtml(station)}
@@ -123,22 +123,24 @@ export function renderIndividual(el, daten) {
       <div class="knopf-zeile"><button class="knopf knopf-primaer" id="ziel-uebernehmen">${esc(t('uebernehmen'))}</button></div>`;
     el.querySelector('#zielform').addEventListener('submit', (ereignis) => ereignis.preventDefault());
     el.querySelector('#ziel-uebernehmen').addEventListener('click', () => {
-      const ziel = gewaehltesZiel(el);
-      if (!ziel) return;
-      setzeDiagnose({ ziel });
+      const ziele = gewaehlteZiele(el);
+      if (!ziele) return;
+      setzeDiagnose({ ziel: ziele });
       neuRendern();
     });
     return;
   }
 
-  const faktorGruppe = pfad.ziel.dimension === 'vermittlungsziele' ? 'vermittlungsziel_faktor' : 'spielziel_faktor';
+  const zielChips = zielLabels(pfad.ziel)
+    .map((beschriftung) => `<span class="chip chip-akzent">${esc(beschriftung)}</span>`)
+    .join(' ');
   const inhalt =
     pfad.stationen.length === 0
       ? `<div class="karte"><p class="leise">${esc(t('leer_ziel'))}</p></div>`
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, 'individual')}`;
   el.innerHTML = `
     <h1>${esc(t('pfad_individual'))}</h1>
-    <p>${esc(t('ziel_aktuell'))}: <strong>${esc(label(faktorGruppe, pfad.ziel.faktor))}</strong></p>
+    <p class="chip-zeile">${esc(t('ziel_aktuell'))}: ${zielChips}</p>
     ${inhalt}
     <details class="karte">
       <summary>${esc(t('ziel_aendern'))}</summary>
@@ -150,9 +152,9 @@ export function renderIndividual(el, daten) {
     </details>`;
   el.querySelector('#zielform').addEventListener('submit', (ereignis) => ereignis.preventDefault());
   el.querySelector('#ziel-uebernehmen').addEventListener('click', () => {
-    const ziel = gewaehltesZiel(el);
-    if (!ziel) return;
-    setzeDiagnose({ ziel });
+    const ziele = gewaehlteZiele(el);
+    if (!ziele) return;
+    setzeDiagnose({ ziel: ziele });
     neuRendern();
   });
   el.querySelector('#ziel-entfernen').addEventListener('click', () => {
