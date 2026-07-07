@@ -185,7 +185,18 @@
     "laenge_tiefe": "Länge und Tiefe als einfachste Waffe",
     "rueckhand_des_gegners": "Die Rückhand des Gegners lesen",
     "aufschlag_taktisch": "Den Aufschlag taktisch nutzen",
-    "fehler_vermeiden": "Fehler vermeiden: die unterschätzte Taktik"
+    "fehler_vermeiden": "Fehler vermeiden: die unterschätzte Taktik",
+    "warum_der_kopf_mitspielt": "Warum der Kopf mitspielt",
+    "routine_vor_dem_aufschlag": "Die Routine vor dem Aufschlag",
+    "ruhig_bleiben_wenn_es_eng_wird": "Ruhig bleiben, wenn es eng wird",
+    "den_fehler_abhaken": "Den Fehler abhaken",
+    "bei_der_sache_bleiben": "Bei der Sache bleiben",
+    "warum_athletik_dein_spiel_traegt": "Warum Athletik dein Spiel trägt",
+    "richtig_aufwaermen": "Richtig aufwärmen",
+    "beweglichkeit_und_schulter": "Beweglichkeit und die Schulter",
+    "schnelle_fuesse": "Schnelle Füße",
+    "durchhalten": "Durchhalten",
+    "erholen": "Erholen"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"
@@ -226,7 +237,9 @@
       "BAD": "Badminton",
       "TEN": "Tennis",
       "SQ": "Squash",
-      "BS": "BS"
+      "BS": "BS",
+      "SP": "Sportpsychologie",
+      "AT": "Athletik-/Trainingswissenschaft"
     },
     "untergrund": {
       "halle": "Halle",

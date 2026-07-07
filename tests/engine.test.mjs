@@ -17,6 +17,8 @@ const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
 
 const technik = liesJson('data/bausteine.beginner-technik.json');
 const taktik = liesJson('data/bausteine.beginner-taktik.json');
+const mentales = liesJson('data/bausteine.beginner-mentales.json');
+const athletik = liesJson('data/bausteine.beginner-athletik_kondition.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const labelsDe = liesJson('data/labels/de.json');
@@ -38,19 +40,24 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik], einheiten, fehlerbilder);
+const daten = baueIndizes([technik, taktik, mentales, athletik], einheiten, fehlerbilder);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
 // am Sequenzvorgänger) und landet durch den Tiebreak korrekt zuletzt.
 const taktikKette = ['spielziel_verstehen', 'zentrale_position', 'laenge_tiefe', 'rueckhand_des_gegners', 'aufschlag_taktisch', 'fehler_vermeiden'];
-// Beginner-Pool: Technik-Block (Domäne primär bei Gleichrang) dann Taktik-Block.
-const erwarteteKette = [...technikKette, ...taktikKette];
+// Mentales & Athletik: Sternform — Rahmen-Einstieg als Wurzel, Werkzeuge als
+// Blätter in Dateireihenfolge (zweite nicht-lineare Graphform).
+const mentalesKette = ['warum_der_kopf_mitspielt', 'routine_vor_dem_aufschlag', 'ruhig_bleiben_wenn_es_eng_wird', 'den_fehler_abhaken', 'bei_der_sache_bleiben'];
+const athletikKette = ['warum_athletik_dein_spiel_traegt', 'richtig_aufwaermen', 'beweglichkeit_und_schulter', 'schnelle_fuesse', 'durchhalten', 'erholen'];
+// Beginner-Pool: Domänen-Blöcke in Vokabular-Reihenfolge (technik, taktik,
+// trainingsgestaltung[leer], mentales, athletik_kondition).
+const erwarteteKette = [...technikKette, ...taktikKette, ...mentalesKette, ...athletikKette];
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('zwölf Basisbausteine (6 Technik + 6 Taktik), fünf Deltas', daten.bausteine.length === 12 && daten.deltas.length === 5);
-pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD]', gleicheListe(daten.herkuenfte, ['BAD']));
+pruefe('23 Basisbausteine (6+6+5+6), fünf Deltas', daten.bausteine.length === 23 && daten.deltas.length === 5);
+pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD] (SP/AT sind keine Delta-Herkünfte)', gleicheListe(daten.herkuenfte, ['BAD']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
 setzeZurueck();
@@ -61,7 +68,11 @@ pruefe(
   gleicheListe(pfadOhne.stationen.map((s) => s.baustein.id), erwarteteKette),
   pfadOhne.stationen.map((s) => s.baustein.id).join(' → ')
 );
-pruefe('Rückverzweigung aufgelöst: fehler_vermeiden nach aufschlag_taktisch', pfadOhne.stationen.at(-1).baustein.id === 'fehler_vermeiden' && pfadOhne.stationen.at(-2).baustein.id === 'aufschlag_taktisch');
+pruefe('Rückverzweigung aufgelöst: fehler_vermeiden am Ende des Taktik-Blocks', pfadOhne.stationen.map((s) => s.baustein.id).slice(6, 12).at(-1) === 'fehler_vermeiden');
+pruefe('Sternform aufgelöst: Rahmen-Einstieg vor seinen Werkzeug-Blättern', (() => {
+  const ids = pfadOhne.stationen.map((s) => s.baustein.id);
+  return ids.indexOf('warum_der_kopf_mitspielt') < ids.indexOf('routine_vor_dem_aufschlag') && ids.indexOf('warum_athletik_dein_spiel_traegt') < ids.indexOf('richtig_aufwaermen');
+})());
 pruefe('keine Deltas aktiv', pfadOhne.stationen.every((s) => s.delta === null));
 pruefe('keine Skip-Kandidaten', pfadOhne.stationen.every((s) => !s.skipKandidat));
 pruefe('Kompetenzpfad Fortgeschritten ist leer (Erstausbau)', kompetenzpfad(daten, 'fortgeschritten').stationen.length === 0);
@@ -82,13 +93,10 @@ for (const station of pfadBad.stationen) {
   pruefe(`Delta an ${station.baustein.id}: ${erwartet ?? 'keins'}`, (station.delta?.id ?? null) === erwartet);
 }
 pruefe('Taktik-Delta greift domänenübergreifend im selben Modifikator', pfadBad.stationen.find((s) => s.baustein.id === 'aufschlag_taktisch').delta?.id === 'aufschlag_taktisch_delta_bad');
-pruefe(
-  'Skip-Kandidaten sind genau die delta-freien Bausteine',
-  gleicheListe(
-    pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id),
-    ['grundposition', 'beinarbeit', 'spielziel_verstehen', 'zentrale_position', 'laenge_tiefe', 'rueckhand_des_gegners', 'fehler_vermeiden']
-  )
-);
+pruefe('Skip-Kandidaten sind die delta-freien Bausteine (18 = 23 − 5 mit Delta)', (() => {
+  const skip = pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id);
+  return skip.length === 18 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
+})());
 pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'TEN') === null);
 
 console.log('\n[4] Zwei-Ebenen-Logik: Hinweis statt Sperre');
@@ -115,28 +123,27 @@ const griffStation = individuell.stationen[0];
 pruefe('Voraussetzung außerhalb der Menge nur als Hinweis', gleicheListe(griffStation.ausserhalbMenge, ['grundposition']));
 pruefe('ohne Ziel bleibt der Individualpfad leer', individualpfad(daten, null).stationen.length === 0);
 pruefe('Vermittlungsziel-Filter liefert leere Menge (Erstausbau)', individualpfad(daten, { dimension: 'vermittlungsziele', faktor: 'fehlerbild_erkennen' }).stationen.length === 0);
-pruefe(
-  'Mehrfachauswahl: Vereinigungsmenge in Graph-Reihenfolge',
-  gleicheListe(
-    individualpfad(daten, [
-      { dimension: 'spielziele', faktor: 'tempo_haertedosierung' },
-      { dimension: 'spielziele', faktor: 'wiederholte_antrittsschnelligkeit' },
-    ]).stationen.map((s) => s.baustein.id),
-    ['grundposition', 'griff', 'vorhand_drive', 'rueckhand', 'beinarbeit', 'zentrale_position']
-  )
-);
+pruefe('Mehrfachauswahl: domänenübergreifende Vereinigungsmenge', (() => {
+  const ids = individualpfad(daten, [
+    { dimension: 'spielziele', faktor: 'tempo_haertedosierung' },
+    { dimension: 'spielziele', faktor: 'wiederholte_antrittsschnelligkeit' },
+  ]).stationen.map((s) => s.baustein.id);
+  // technik (tempo + antritt), taktik (zentrale_position), athletik (schnelle_fuesse)
+  return ids.includes('griff') && ids.includes('zentrale_position') && ids.includes('schnelle_fuesse');
+})());
 pruefe('Altformat (Einzelziel-Objekt) bleibt ohne Migration gültig', individualpfad(daten, { dimension: 'spielziele', faktor: 'tempo_haertedosierung' }).stationen.length === 3);
 
-console.log('\n[6] Themenpfad über zwei Domänen');
-const technikThema = themenpfad(daten, 'technik');
-pruefe('Domäne technik enthält die sechs Technik-Bausteine in Graph-Reihenfolge', gleicheListe(technikThema.stationen.map((s) => s.baustein.id), technikKette));
-const taktikThema = themenpfad(daten, 'taktik');
-pruefe('Domäne taktik enthält die sechs Taktik-Bausteine in Graph-Reihenfolge', gleicheListe(taktikThema.stationen.map((s) => s.baustein.id), taktikKette));
+console.log('\n[6] Themenpfad über fünf Domänen');
+pruefe('Domäne technik in Graph-Reihenfolge', gleicheListe(themenpfad(daten, 'technik').stationen.map((s) => s.baustein.id), technikKette));
+pruefe('Domäne taktik in Graph-Reihenfolge', gleicheListe(themenpfad(daten, 'taktik').stationen.map((s) => s.baustein.id), taktikKette));
+pruefe('Domäne mentales (Sternform) in Graph-Reihenfolge', gleicheListe(themenpfad(daten, 'mentales').stationen.map((s) => s.baustein.id), mentalesKette));
+pruefe('Domäne athletik_kondition (Sternform) in Graph-Reihenfolge', gleicheListe(themenpfad(daten, 'athletik_kondition').stationen.map((s) => s.baustein.id), athletikKette));
 const facetten = themenDomaenen(daten);
-pruefe('Facetten: technik=6, taktik=6, übrige leer', facetten.find((d) => d.domaene === 'technik').anzahl === 6 && facetten.find((d) => d.domaene === 'taktik').anzahl === 6 && facetten.find((d) => d.domaene === 'mentales').anzahl === 0);
+const facette = (d) => facetten.find((f) => f.domaene === d).anzahl;
+pruefe('Facetten: technik=6, taktik=6, mentales=5, athletik=6, trainingsgestaltung leer', facette('technik') === 6 && facette('taktik') === 6 && facette('mentales') === 5 && facette('athletik_kondition') === 6 && facette('trainingsgestaltung') === 0);
 pruefe('Modifikator nicht im Themenpfad verdrahtet', (() => {
   setzeDiagnose({ herkunft: 'BAD' });
-  return themenpfad(daten, 'taktik').stationen.every((s) => s.delta === null);
+  return themenpfad(daten, 'mentales').stationen.every((s) => s.delta === null);
 })());
 
 console.log('\n[7] Baustein im Kontext');
@@ -177,16 +184,33 @@ pruefe('voraussetzungen_querverweis inert (keine Graph-Kante)', (() => {
   return zentral.voraussetzungen_querverweis && gleicheListe(zentral.voraussetzungen, ['spielziel_verstehen']);
 })());
 
+console.log('\n[7d] Domänenübergreifende Zieldiagnose, Vokabular-Erweiterung, delta_erwartet');
+pruefe('Psychoregulation-Ziel (Bereich 4) mappt auf Mentales-Bausteine', (() => {
+  const ids = individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id);
+  return ids.includes('warum_der_kopf_mitspielt') && ids.includes('bei_der_sache_bleiben');
+})());
+pruefe('Energetik-Ziel (Bereich 1) mappt auf Athletik-Bausteine', (() => {
+  const ids = individualpfad(daten, { dimension: 'spielziele', faktor: 'rally_ausdauer' }).stationen.map((s) => s.baustein.id);
+  return ids.includes('warum_athletik_dein_spiel_traegt') && ids.includes('durchhalten');
+})());
+pruefe('satz_match_regeneration mappt genau auf erholen', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'satz_match_regeneration' }).stationen.map((s) => s.baustein.id), ['erholen']));
+pruefe('SP und AT im Transfer-Vokabular ergänzt', daten.vokabulare.transfer_herkunft.includes('SP') && daten.vokabulare.transfer_herkunft.includes('AT'));
+pruefe('SP/AT tragen ausgeschriebene Labels', labelsDe.vokabeln.transfer_herkunft.SP === 'Sportpsychologie' && labelsDe.vokabeln.transfer_herkunft.AT === 'Athletik-/Trainingswissenschaft');
+pruefe('delta_erwartet ist Dokumentation, keine Delta-Kante', (() => {
+  const b = daten.bausteinVonId.get('beweglichkeit_und_schulter');
+  return typeof b.delta_erwartet === 'string' && deltaFuer(daten, 'beweglichkeit_und_schulter', 'BAD') === null && deltaFuer(daten, 'beweglichkeit_und_schulter', 'TEN') === null;
+})());
+
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner' });
-pruefe('global 0 von 12', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 12);
+pruefe('global 0 von 23', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 23);
 setzeTeilStatus('griff', 'erklaerteil', 'erledigt');
 pruefe('nur Erklärteil erledigt → noch nicht absolviert', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).erklaertErledigt === 1);
 setzeTeilStatus('griff', 'uebungsteil', 'erledigt');
-pruefe('beide Teile erledigt → 1 von 12', globaleProjektion(daten).absolviert === 1);
+pruefe('beide Teile erledigt → 1 von 23', globaleProjektion(daten).absolviert === 1);
 const pfadProjektion = projektion(kompetenzpfad(daten).stationen.map((s) => s.baustein));
-pruefe('pfadbezogene Projektion liest denselben Status', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 12);
+pruefe('pfadbezogene Projektion liest denselben Status', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 23);
 const uebersicht = trainingsuebersicht(daten);
 pruefe('zwei kuratierte Einheiten mit auflösbaren Referenzen', uebersicht.length === 2 && uebersicht.every((e) => e.bausteine.length === 3));
 registriereEinheitAbschluss('einheit_fundament');

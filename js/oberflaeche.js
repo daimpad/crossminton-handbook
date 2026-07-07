@@ -97,6 +97,19 @@ const BAUSTEIN_ICONS = {
   rueckhand_des_gegners: 'fa-user-slash',
   aufschlag_taktisch: 'fa-chess',
   fehler_vermeiden: 'fa-shield-halved',
+  // Mentales
+  warum_der_kopf_mitspielt: 'fa-brain',
+  routine_vor_dem_aufschlag: 'fa-list-check',
+  ruhig_bleiben_wenn_es_eng_wird: 'fa-wind',
+  den_fehler_abhaken: 'fa-arrow-rotate-left',
+  bei_der_sache_bleiben: 'fa-eye',
+  // Athletik / Kondition
+  warum_athletik_dein_spiel_traegt: 'fa-heart-pulse',
+  richtig_aufwaermen: 'fa-fire',
+  beweglichkeit_und_schulter: 'fa-child-reaching',
+  schnelle_fuesse: 'fa-shoe-prints',
+  durchhalten: 'fa-gauge-high',
+  erholen: 'fa-bed',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

@@ -56,7 +56,8 @@ Farben, Typografie und Icon-Regeln stehen in `docs/ci.md` und sind als CSS-Varia
 - **`reflexionsaufgabe` ist ein eigener Aufgabenteil** (Taktik-Domäne), Geschwister des Übungsteils mit eigenem `erledigt`-Status — nicht Teil des Erklärteils. `aufgabenTeile()` in `js/daten.js` gibt die quittierbaren Teile ({uebungsteil, reflexionsaufgabe}); „absolviert" = Erklärteil + alle Aufgabenteile. Pro Baustein liegt genau eines von beiden vor.
 - **Titel dürfen inline stehen** (`anzeigetitel.de` im Baustein), müssen aber nach `labels/de.json` geliftet werden — der Laufzeit-Titelpfad bleibt einheitlich das Label-File. Der Lift-Schritt (kleines Node-Skript) läuft bei jeder Datenänderung mit der Skelett-Regeneration.
 - **`voraussetzungen_querverweis` ist Dokumentation**, keine Graph-Kante (wie `*_hinweis`/`*_beleg`). Der Graph liest ausschließlich `voraussetzungen`. Der Voraussetzungsgraph darf verzweigen (nicht nur lineare Ketten) — `topoSortiere` (Kahn) löst das auf.
-- **JSON der Referenzinhalte nicht umformatieren** — `data/bausteine.beginner-technik.json` wurde byte-identisch übernommen.
+- **JSON der Referenzinhalte nicht umformatieren** — der *Inhalt* von `data/bausteine.beginner-technik.json` bleibt byte-identisch. Einzige erlaubte Änderung: koordinierte Vokabular-Erweiterungen in `vokabulare` (z. B. neue `transfer_herkunft`-Kürzel), minimal und formattreu, mit Label in `labels/de.json`. Andere Vokabular-Werte (Domänen, Stufen) analog.
+- **Sternförmiger Graph** ist zulässig (Mentales/Athletik): alle Werkzeug-Bausteine hängen an einem Rahmen-Einstieg, nicht aneinander. `topoSortiere` löst das als Baum auf (Wurzel zuerst, Blätter in Pool-Reihenfolge). Zusammen mit der Taktik-Rückverzweigung die zweite nicht-lineare Graphform.
 
 ## Sprache
 

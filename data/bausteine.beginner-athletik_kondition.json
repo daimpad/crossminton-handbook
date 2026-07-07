@@ -1,0 +1,194 @@
+{
+  "_meta": {
+    "beschreibung": "Beginner-Athletik/Kondition: Themenblock der Domaene 'athletik_kondition' auf Beginner-Stufe. Buchstabiert die Energetik-Faktoren (Spielziele Bereich 1) plus Belastungstoleranz didaktisch aus, rahmender Einstieg + Vorbereitung/Mobilitaet.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "dateiname_konvention": "bausteine.beginner-athletik_kondition.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Technik-Vokabular. AUSNAHME: koordinierte Erweiterung, siehe vokabular_erweiterung.",
+    "vokabular_erweiterung": {
+      "feld": "transfer_herkunft",
+      "neuer_wert": "AT",
+      "bedeutung": "Athletik-/Trainingswissenschaft (allgemein, sportartuebergreifend). Faellt unter keines der bestehenden Kuerzel (CM, BAD, TEN, SQ, BS, SP). Angesagt als koordinierte Erweiterung gemaess Modellentscheidung 2.",
+      "aktion_fuer_claude_code": "Bitte 'AT' dem transfer_herkunft-Vokabular in der kanonischen Technik-Datei hinzufuegen. Label (ausgeschrieben, uebersetzbar) fuer de: 'Athletik-/Trainingswissenschaft'. Hinweis: 'SP' (aus Mentales-Block) ebenfalls noch aufzunehmen, falls nicht geschehen."
+    },
+    "gesundheitsrahmen": "STRIKT. Allgemein gesundheitsorientiert, kein leistungsdiagnostisches Programm. KEINE praezisen Belastungsdosen, KEINE Wiederholungszahlen als Zielvorgaben, KEIN Ernaehrungs-/Gewichtsbezug, KEINE Gradzahlen/Selbstdiagnose. Bei Beschwerden Verweis auf fachliche Abklaerung statt Behandlungsanleitung.",
+    "delta_selektiv": "Nur Schulter-Baustein traegt Delta-Erwartung (crossminton-spezifische Schulterbelastung, Presov-Evidenz). Aufwaermen, Agilitaet, Ausdauer, Erholung ohne Delta.",
+    "ordnungslogik": "verstehen -> vorbereiten (Aufwaermen, Mobilitaet) -> drei konditionelle Faktoren (Antritt, Ausdauer, Erholung)."
+  },
+
+  "bausteine": [
+    {
+      "id": "warum_athletik_dein_spiel_traegt",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": ["rally_ausdauer", "wiederholte_antrittsschnelligkeit"],
+      "spielziele_hinweis": "mittelbar; rahmt die Energetik-Domaene",
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Trainingswissenschaft: konditionelle Faktoren als Voraussetzung, technisches Koennen im ganzen Spiel verfuegbar zu halten. Kein CM-spezifischer Gehalt im Rahmenbaustein.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Warum Athletik dein Spiel trägt"},
+      "erklaerteil": {
+        "de": "Crossminton ist schnell. Kurze Antritte, viele Richtungswechsel, lange Ballwechsel — und das über einen ganzen Satz. Deine Technik mag im Training sauber sitzen. Aber wenn dir gegen Satzende die Luft ausgeht oder die Beine schwer werden, bekommst du sie nicht mehr aufs Feld.\n\nGenau dafür ist Athletik da. Sie ist kein Selbstzweck und kein Fitnessprogramm neben dem Spiel — sie ist das, was dein Können bis zum letzten Ball verfügbar hält. Ein guter Schlag im ersten Satz ist schön. Derselbe Schlag im entscheidenden Moment des dritten Satzes gewinnt Spiele.\n\nEs geht dabei nicht um Höchstleistung. Es geht um eine solide Grundlage: sich gut vorbereiten, beweglich bleiben, schnell auf den Beinen sein, durchhalten und sich wieder erholen. Diese Grundlage kann jeder aufbauen, unabhängig vom Alter oder Ausgangsniveau.\n\nEin Bild: Deine Technik ist das Werkzeug, deine Athletik ist die Hand, die es führt. Eine müde Hand lässt auch das beste Werkzeug fallen.\n\nIn den nächsten Bausteinen geht es der Reihe nach um Vorbereitung, Beweglichkeit, schnelle Füße, Ausdauer und Erholung — die fünf Bausteine einer tragfähigen Grundlage."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an dein letztes längeres Spiel: Ab wann hat deine Leistung nachgelassen — und war es eher die Technik, die Konzentration oder schlicht die Kondition? Achte im nächsten Spiel bewusst darauf, wann dir zuerst die Luft, die Beine oder der Fokus ausgehen. Diese Stelle zeigt dir, wo deine Grundlage zuerst nachgibt."
+      }
+    },
+
+    {
+      "id": "richtig_aufwaermen",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Allgemeine Trainingswissenschaft: Aufwaermen zur Spielbereitschaft und Verletzungsvorbeugung (Kreislauf, Muskeltemperatur, Bewegungsvorbereitung).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Richtig aufwärmen"},
+      "erklaerteil": {
+        "de": "Der erste harte Antritt aus dem Stand, die erste weit gestreckte Rückhand — wenn dein Körper darauf nicht vorbereitet ist, sind das die Momente, in denen etwas zwickt. Aufwärmen sorgt dafür, dass dein Körper bereit ist, bevor das Spiel ernst wird.\n\nGutes Aufwärmen macht zwei Dinge. Es bringt den Kreislauf in Schwung und die Muskeln auf Temperatur — warme Muskeln arbeiten geschmeidiger und reißen seltener. Und es bereitet genau die Bewegungen vor, die du gleich brauchst: Ausfallschritte, Drehungen, Armschwünge.\n\nDeshalb ist ein paar Minuten Laufen allein nicht genug. Nach dem Warmwerden gehören Bewegungen dazu, die dem Spiel ähneln — lockere Ausfallschritte, Rumpfdrehungen, Armkreisen, ein paar Schattenschläge ohne Speeder. So weckst du die Muskeln, die du gleich forderst.\n\nEin Bild: Du würdest ein kaltes Auto nicht sofort auf die Autobahn jagen. Der Motor braucht kurz, um auf Betriebstemperatur zu kommen. Dein Körper genauso.\n\nEine Regel zum Schluss: Aufwärmen heißt warm werden, nicht müde werden. Es soll dich bereit machen, nicht auslaugen."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die kurze Aufwärmfolge",
+          "ziel": "Den Körper vor dem Spiel spielbereit machen — Kreislauf, Wärme, Bewegungsvorbereitung.",
+          "schritte": [
+            "Bring zuerst den Kreislauf in Schwung: ein paar Minuten lockeres Laufen, Traben oder Seilspringen, bis du leicht warm wirst.",
+            "Dann bewegte Vorbereitung: lockere Ausfallschritte nach vorn und zur Seite, Rumpfdrehungen, Arm- und Schulterkreisen.",
+            "Zum Schluss spielnah: ein paar Schattenschläge ohne Speeder — Vorhand, Rückhand, Aufschlagbewegung — und ein paar kleine Antritte."
+          ],
+          "selbstkontrolle": "Du bist gut aufgewärmt, wenn du dich leicht erwärmt und beweglich fühlst, aber noch frisch. Kommst du außer Atem oder ermüdest du, war es zu viel. Achte darauf, besonders die Schulter deines Schlagarms und die Beine einzubeziehen.",
+          "abschluss": "Diese Folge dauert nur wenige Minuten und gehört vor jedes Spiel und jedes Training. Sie ist die günstigste Versicherung gegen Verletzungen, die du hast."
+        }
+      }
+    },
+
+    {
+      "id": "beweglichkeit_und_schulter",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "spielziele_hinweis": "primaerer Nutzen ist Verletzungspraevention/Belastungstoleranz (der Athletik zugeordnete Faktor), im Spielziel-Vokabular nicht als eigener Faktor gefuehrt",
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Einseitige Schulteradaptation im Crossminton crossminton-eigen belegt (Lukacova/Lenkova 2023: dominante Schulter geringere Innen-, hoehere Aussenrotation; GIRD bei einigen Spielern). Praeventive Beweglichkeitspflege (hintere Schulter) aus allgemeiner Trainings-/Sportmedizin.",
+      "untergrund": "halle",
+      "witterung": [],
+      "delta_erwartet": "BAD/TEN/SQ moeglich — Ueberkopf-Rueckschlagsportler bringen aehnliche Schulteradaptation mit; im Erstausbau nicht ausformuliert.",
+      "anzeigetitel": {"de": "Beweglichkeit und die Schulter"},
+      "erklaerteil": {
+        "de": "Beweglichkeit entscheidet, wie weit du kommst, ohne dich zu verletzen — die tiefe Rückhand, der gestreckte Ball in der Ecke. Ein beweglicher Körper erreicht mehr Bälle und hält die Belastung besser aus. Für Crossminton gilt das besonders an einer Stelle: der Schulter deines Schlagarms.\n\nDer Grund ist die einseitige Belastung. Du schlägst fast alles mit einem Arm, und der Speeder ist schwer. Untersuchungen an Crossminton-Spielern zeigen, dass sich die Schulter des Schlagarms mit der Zeit verändert — sie wird in eine Richtung beweglicher und in die andere unbeweglicher als die andere Schulter. Diese einseitige Anpassung ist normal, kann aber auf Dauer Beschwerden begünstigen, wenn man sie nicht ausgleicht.\n\nDeshalb lohnt sich zweierlei. Erstens: die Schulter des Schlagarms regelmäßig sanft beweglich halten, besonders in der Richtung, die durch das Spiel steifer wird. Zweitens: den Körper insgesamt beidseitig fordern, statt immer nur die eine Seite. Ein paar Bewegungen für die schwächere Seite gleichen die einseitige Last aus.\n\nEin Bild: Ein Baum, der immer nur vom selben Wind gebogen wird, wächst schief. Regelmäßiges Gegensteuern hält ihn gerade.\n\nEin wichtiger Hinweis: Sanfte Beweglichkeitspflege ist Vorsorge, keine Behandlung. Wenn deine Schulter schmerzt, dich beim Spielen einschränkt oder Beschwerden bleiben, ist das ein Fall für ärztliche oder physiotherapeutische Abklärung — nicht für Selbstbehandlung."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Schulter pflegen",
+          "ziel": "Die einseitig belastete Schlagschulter beweglich halten und die Belastung ausgleichen.",
+          "schritte": [
+            "Nach dem Spiel, wenn die Schulter warm ist: sanfte, langsame Dehnung der hinteren Schulter deines Schlagarms — den Arm locker vor dem Körper zur Gegenseite führen und dort ruhig halten.",
+            "Kreise die Schlagschulter mehrmals langsam in beide Richtungen aus.",
+            "Fordere bewusst auch die andere Seite: einige Bewegungen und lockere Schläge mit dem nicht-dominanten Arm, um die Einseitigkeit auszugleichen."
+          ],
+          "selbstkontrolle": "Die Dehnung soll ein leichtes Ziehen hinten in der Schulter sein, niemals ein Schmerz vorn oder im Gelenk. Spürst du Schmerz, lass nach. Bleib immer im sanften Bereich — Beweglichkeit gewinnt man mit Geduld, nicht mit Kraft.",
+          "abschluss": "Ein paar Minuten nach jedem Spiel genügen. Regelmäßigkeit zählt hier mehr als Intensität — die Schulter dankt es dir über Jahre."
+        }
+      }
+    },
+
+    {
+      "id": "schnelle_fuesse",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "voraussetzungen_querverweis": "beinarbeit (Technik) — die athletische Grundlage der dort gelernten Bewegungsmuster",
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT", "BAD"],
+      "transfer_herkunft_beleg": "Agilitaet/wiederholte Antrittsschnelligkeit als konditioneller Faktor: Trainingswissenschaft. Richtungswechsel-Muster verwandt mit Badminton-Agility.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Schnelle Füße"},
+      "erklaerteil": {
+        "de": "Crossminton wird auf den ersten zwei Metern entschieden. Nicht der lange Sprint zählt, sondern der kurze, explosive Antritt aus dem Stand — und die Fähigkeit, ihn immer wieder abzurufen, den ganzen Satz lang. Wer eine Zehntelsekunde früher am Speeder ist, spielt ihn kontrolliert statt gehetzt.\n\nDiese Schnelligkeit ist zu einem großen Teil trainierbar. Es geht dabei weniger um Kraft als um flinke, geordnete Füße: kurze Schritte, ein guter erster Abdruck, sofortiges Umschalten in die neue Richtung. Genau das, was du im Technik-Baustein zur Beinarbeit als Split-Step und Rückkehr kennengelernt hast, bekommt hier seine athletische Grundlage.\n\nDer Schlüssel sind kleine, schnelle Kontakte statt großer, schwerfälliger Schritte. Flinke Füße bringen dich schneller in Bewegung und schneller wieder zum Stehen — und beides brauchst du in jedem Ballwechsel.\n\nEin Bild: Denk an einen Boxer, der auf den Fußballen tänzelt. Er steht nie schwer und flach, sondern immer leicht und bereit. Genau diese Leichtigkeit suchst du für dein Feld.\n\nSchnelle Füße baust du mit kurzen, spielerischen Übungen — nicht mit langem, zähem Lauftraining."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Antritt und Richtungswechsel",
+          "ziel": "Den kurzen, explosiven Antritt und das schnelle Umschalten üben.",
+          "schritte": [
+            "Markiere dir ein paar Punkte am Boden — die Ecken und die Mitte deines Feldes reichen.",
+            "Starte aus der Grundposition mit einem Split-Step, sprinte zu einem Punkt, tippe ihn an und kehre zur Mitte zurück.",
+            "Wechsle die Reihenfolge der Punkte, damit du in alle Richtungen antreten musst.",
+            "Baue kurze Pausen ein — es geht um explosive, saubere Antritte, nicht um Dauerlast."
+          ],
+          "selbstkontrolle": "Achte auf leichte, schnelle Füße und einen klaren ersten Abdruck. Werden die Schritte schwer und schlurfend, mach eine kurze Pause — müde Füße üben die falsche Bewegung. Qualität vor Menge.",
+          "abschluss": "Solche kurzen Antrittsübungen passen gut ans Ende des Aufwärmens oder als eigener kleiner Block. Wenige saubere Wiederholungen bringen mehr als lange, müde Serien."
+        }
+      }
+    },
+
+    {
+      "id": "durchhalten",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["rally_ausdauer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Ausdauergrundlage / Ermuedungswiderstand ueber lange Ballwechsel und Saetze: allgemeine Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Durchhalten"},
+      "erklaerteil": {
+        "de": "Ein Satz Crossminton ist ein Wechsel aus kurzen, intensiven Ballwechseln und kleinen Pausen dazwischen — und das viele Male hintereinander. Wer nach den ersten intensiven Ballwechseln einbricht, verliert nicht, weil er schlechter spielt, sondern weil ihn die Kraft verlässt. Ausdauer heißt hier: bis zum letzten Ball dasselbe Niveau halten.\n\nDiese Ausdauer hat zwei Seiten. Die eine ist die allgemeine Grundlage — ein Herz-Kreislauf-System, das die Belastung eines ganzen Spiels trägt. Die baust du mit regelmäßiger, moderater Bewegung auf, ganz gleich ob Laufen, Radfahren oder Schwimmen. Die andere Seite ist die spielnahe Ausdauer — die Fähigkeit, kurze intensive Belastungen immer wieder abzurufen. Die trainierst du am besten, indem du spielst und dabei die intensiven Phasen bewusst durchhältst.\n\nFür den Anfang gilt eine einfache Wahrheit: Wer regelmäßig spielt und sich dabei fordert, baut schon viel Ausdauer auf. Ergänzendes lockeres Ausdauertraining hilft zusätzlich, besonders wenn dir früh die Luft ausgeht.\n\nEin Bild: Ausdauer ist der Tank, aus dem alles andere schöpft. Ist er leer, nützt dir der beste Motor nichts.\n\nWichtig ist der Aufbau mit Geduld. Ausdauer wächst langsam und stetig. Wer zu schnell zu viel will, riskiert Überlastung statt Fortschritt."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Grundlage aufbauen",
+          "ziel": "Eine Ausdauerbasis schaffen, die einen ganzen Satz trägt.",
+          "schritte": [
+            "Baue eine regelmäßige, lockere Ausdauergrundlage auf — eine Bewegungsform, die dir Freude macht und die du durchhältst: Laufen, Radfahren, Schwimmen.",
+            "Halte im Spiel die intensiven Ballwechsel bewusst durch, statt sie abzukürzen — spielnahe Ausdauer entsteht im Spiel selbst.",
+            "Nutze die kurzen Pausen zwischen den Ballwechseln bewusst zum kurzen Durchatmen und Sammeln."
+          ],
+          "selbstkontrolle": "Achte darauf, ob du gegen Ende eines Spiels noch dieselbe Bewegungsqualität hast wie am Anfang. Bricht sie ein, ist die Ausdauergrundlage der Ansatzpunkt. Steigere den Umfang langsam — moderate Regelmäßigkeit schlägt seltene Überanstrengung.",
+          "abschluss": "Ausdauer ist die geduldigste Baustelle: Sie zeigt sich nicht nach einer Woche, aber sie trägt nach ein paar Wochen jedes deiner Spiele."
+        }
+      }
+    },
+
+    {
+      "id": "erholen",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["satz_match_regeneration"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Regeneration zwischen Saetzen und Einheiten, aktive Erholung, Bedeutung von Pausen/Schlaf: allgemeine Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Erholen"},
+      "erklaerteil": {
+        "de": "Erholung klingt nach dem, was passiert, wenn man nichts tut. Tatsächlich ist sie ein aktiver Teil deiner Athletik — und der am meisten unterschätzte. Dein Körper wird nicht im Training stärker, sondern in der Erholung danach. Und innerhalb eines Spiels entscheidet die Erholung zwischen den Sätzen oft darüber, ob du im dritten Satz noch da bist.\n\nZwei Zeitebenen sind wichtig. Die kurze: die Pausen im Spiel selbst, zwischen den Ballwechseln und zwischen den Sätzen. Nutze sie bewusst — ruhig atmen, den Körper lockern, den Kopf sammeln. Wer in den Pausen aufgedreht bleibt, verschenkt Erholung, die er gleich braucht. Die lange: die Zeit zwischen den Trainingseinheiten. Dein Körper braucht Pausen, um sich anzupassen und stärker zu werden. Schlaf ist dabei der wichtigste Erholungsfaktor überhaupt.\n\nDaraus folgt etwas, das vielen schwerfällt: Pausen sind kein Zeichen von Faulheit, sondern Teil des Trainings. Wer jeden Tag hart spielt und nie ruht, wird nicht stärker, sondern müder — und irgendwann anfälliger für Verletzungen.\n\nEin Bild: Erholung ist wie das Nachladen. Ein Feld, das man ohne Pause immer wieder bestellt, laugt aus. Eine Ruhephase lässt es wieder tragen.\n\nDie Kunst ist die Balance: genug Belastung, um besser zu werden, und genug Erholung, damit die Belastung wirkt."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte einmal bewusst auf deine Pausen — im Spiel und zwischen den Trainingstagen. Nutzt du die kurzen Pausen zwischen den Sätzen zum Erholen, oder bleibst du aufgedreht? Und gönnst du dir zwischen intensiven Tagen genug Ruhe und Schlaf? Beobachte, ob du dich an Tagen nach guter Erholung frischer und spielstärker fühlst. Oft ist mehr Ruhe der Fortschritt, den man am wenigsten erwartet."
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}

@@ -184,7 +184,18 @@
     "laenge_tiefe": "",
     "rueckhand_des_gegners": "",
     "aufschlag_taktisch": "",
-    "fehler_vermeiden": ""
+    "fehler_vermeiden": "",
+    "warum_der_kopf_mitspielt": "",
+    "routine_vor_dem_aufschlag": "",
+    "ruhig_bleiben_wenn_es_eng_wird": "",
+    "den_fehler_abhaken": "",
+    "bei_der_sache_bleiben": "",
+    "warum_athletik_dein_spiel_traegt": "",
+    "richtig_aufwaermen": "",
+    "beweglichkeit_und_schulter": "",
+    "schnelle_fuesse": "",
+    "durchhalten": "",
+    "erholen": ""
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": ""
@@ -225,7 +236,9 @@
       "BAD": "",
       "TEN": "",
       "SQ": "",
-      "BS": ""
+      "BS": "",
+      "SP": "",
+      "AT": ""
     },
     "untergrund": {
       "halle": "",

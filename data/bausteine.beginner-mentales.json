@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "beschreibung": "Beginner-Mentales: Themenblock der Domaene 'mentales' auf Beginner-Stufe. Buchstabiert die vier Psychoregulations-Faktoren (Spielziele Bereich 4) didaktisch aus, plus rahmender Einstieg.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "dateiname_konvention": "bausteine.beginner-mentales.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Technik-Vokabular. AUSNAHME: koordinierte Erweiterung, siehe vokabular_erweiterung.",
+    "vokabular_erweiterung": {
+      "feld": "transfer_herkunft",
+      "neuer_wert": "SP",
+      "bedeutung": "Sportpsychologie (allgemein, sportartuebergreifend). Faellt unter keines der fuenf bestehenden Kuerzel (CM, BAD, TEN, SQ, BS). Angesagt als koordinierte Erweiterung gemaess Modellentscheidung 2.",
+      "aktion_fuer_claude_code": "Bitte 'SP' dem transfer_herkunft-Vokabular in der kanonischen Technik-Datei hinzufuegen. Label (ausgeschrieben, uebersetzbar) fuer de: 'Sportpsychologie'."
+    },
+    "kein_delta": "Mentale Werkzeuge sind sportartuebergreifend; der Badminton-Umsteiger bringt sie mit. Keine crossminton-spezifische Umgewoehnung, daher kein Delta.",
+    "ordnungslogik": "verstehen -> vorbereitende Steuerung (vor dem Ballwechsel) -> akute Regulation (im engen Moment) -> Erholung (nach dem Fehler) -> durchgehende Aufmerksamkeit (ueber das Spiel).",
+    "wellbeing_grenze": "Strikt leistungsbezogen und ressourcenorientiert. Mentale Werkzeuge fuer besseres Spielen, kein diagnostisches/therapeutisches Terrain. Wo ein Thema an Klinisches grenzt, bleibt der Baustein bei spielbezogener Bewaeltigung."
+  },
+
+  "bausteine": [
+    {
+      "id": "warum_der_kopf_mitspielt",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "voraussetzungen_querverweis": "fehler_vermeiden (Taktik) — knuepft an die Einsicht an, dass eigene Fehler die meisten Punkte kosten",
+      "spielziele": ["fehler_resilienz", "konzentrationskonstanz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP"],
+      "transfer_herkunft_beleg": "Sportpsychologie: mentale Faktoren (Aufmerksamkeit, Emotionsregulation) als Leistungsmediatoren unter Druck. Kein CM-spezifischer Gehalt im Rahmenbaustein.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Warum der Kopf mitspielt"},
+      "erklaerteil": {
+        "de": "Du hast Technik geübt und Taktik verstanden. Trotzdem passiert im Spiel etwas Merkwürdiges: In der einen Situation gelingt dir alles, in der nächsten — meist wenn es wichtig wird — verlässt dich plötzlich das Gefühl. Das liegt selten an deiner Technik. Es liegt am Kopf.\n\nAuf deinem Niveau entscheidet die mentale Seite mehr Punkte, als die meisten glauben. Ein Ball, den du im Training hundertmal sicher spielst, geht im engen Moment ins Aus — nicht weil du ihn nicht kannst, sondern weil die Anspannung deine Bewegung verändert. Umgekehrt gewinnst du Punkte, wenn du ruhig bleibst, während dein Gegner die Nerven verliert.\n\nDas ist eine gute Nachricht. Denn Ruhe, Konzentration und der Umgang mit Fehlern sind keine Talente, die man hat oder nicht hat. Es sind Werkzeuge, die du lernen kannst — genauso wie einen Schlag.\n\nEin Bild: Dein Können ist ein Auto. Der Kopf ist der Fahrer. Das beste Auto bringt dich nicht ans Ziel, wenn der Fahrer bei jeder Kurve verkrampft. In den nächsten Bausteinen lernst du, ruhiger zu fahren.\n\nEines vorweg: Es geht hier nicht darum, keine Nerven zu haben. Nervosität gehört dazu, auch bei Profis. Es geht darum, was du mit ihr machst."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an eine Situation im letzten Spiel, in der dir ein einfacher Ball misslungen ist, obwohl du ihn eigentlich sicher beherrschst. Was war in diesem Moment anders? Stand es knapp? Hattest du gerade einen Fehler gemacht? Warst du abgelenkt? Du musst nichts lösen — beobachte nur, in welchen Momenten dein Können dich verlässt. Diese Momente sind es, für die du gleich Werkzeuge bekommst."
+      }
+    },
+
+    {
+      "id": "routine_vor_dem_aufschlag",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_der_kopf_mitspielt"],
+      "voraussetzungen_querverweis": "aufschlag_taktisch (Taktik) — der Aufschlag als kontrollierte Handlung ist auch mental der ideale Ankerpunkt",
+      "spielziele": ["vorbereitende_selbststeuerung", "nervenstaerke_enger_satz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP"],
+      "transfer_herkunft_beleg": "Pre-Performance-Routine: sportpsych. Metaanalyse belegt kleine-bis-mittlere Effekte, staerker unter Druck. Drei Bestandteile: koerperliche Komponente, Aufmerksamkeits-Cue, Ausloeser (Simply Psychology; Uni Wien).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Die Routine vor dem Aufschlag"},
+      "erklaerteil": {
+        "de": "Der Aufschlag ist der einzige Moment im Spiel, den du vollständig in der Hand hast — kein Gegner drängt dich. Genau deshalb ist er der beste Ort, um Ruhe zu verankern. Eine kurze, immer gleiche Handlungsfolge vor jedem Aufschlag gibt deinem Kopf einen festen Punkt, an dem er zur Ruhe kommt.\n\nSo eine Routine hat drei Teile. Eine kleine körperliche Handlung — etwa den Speeder zweimal in der Hand drehen oder einmal tief durchatmen. Einen Gedanken, der deine Aufmerksamkeit lenkt — nicht auf das Ergebnis, sondern auf die Aufgabe: „flach und lang\" statt „bloß kein Fehler\". Und einen Auslöser, der sagt: jetzt geht's los — der Blick zum Ziel, bevor du schlägst.\n\nEntscheidend ist, dass die Routine kurz und immer gleich ist. Sie wirkt nicht, weil sie magisch wäre, sondern weil die Wiederholung deinem Nervensystem Verlässlichkeit gibt. Du bringst dich jedes Mal in denselben ruhigen Zustand, bevor du spielst.\n\nEin Bild: Ein Pilot geht vor dem Start eine Checkliste durch — immer dieselbe, auch nach tausend Flügen. Nicht aus Aberglaube, sondern weil die feste Abfolge Fehler verhindert und den Kopf klärt. Dein Aufschlag verdient dieselbe kleine Checkliste.\n\nWichtig: Eine Routine ist keine Verzögerung. Sie dauert wenige Sekunden und darf den Aufschlag nicht hinauszögern — sie ordnet ihn nur."
+      },
+      "reflexionsaufgabe": {
+        "de": "Bau dir eine eigene Routine aus genau drei Schritten: eine kleine körperliche Handlung, ein aufgabenbezogener Gedanke, ein Auslöser. Halt sie so kurz, dass sie in ein paar Sekunden passt. Probier sie im nächsten Training vor jedem Aufschlag aus — immer dieselbe. Achte darauf, ob sich der Aufschlag ruhiger anfühlt, wenn die Abfolge sitzt. Die Routine gehört dir; wenn ein Schritt sich falsch anfühlt, tausch ihn."
+      }
+    },
+
+    {
+      "id": "ruhig_bleiben_wenn_es_eng_wird",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_der_kopf_mitspielt"],
+      "spielziele": ["nervenstaerke_enger_satz", "konstanz_unter_wiederholung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP", "CM"],
+      "transfer_herkunft_beleg": "Arousal-Regulation, externaler Aufmerksamkeitsfokus (Prozess-Cue statt Ergebnis), Atmung: Sportpsychologie. Die 15:15-Zwei-Punkte-Differenz-Drucksituation crossminton-eigen (ICO-Regeln).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Ruhig bleiben, wenn es eng wird"},
+      "erklaerteil": {
+        "de": "Es gibt Momente, in denen der Druck spürbar steigt. Im Crossminton hat einer davon sogar eine feste Adresse: der Stand von 15:15. Ab hier musst du zwei Punkte Vorsprung holen, jeder Ballwechsel kann entscheiden. Genau in solchen Momenten passiert das, was du aus dem ersten Baustein kennst — die Anspannung greift nach deiner Bewegung.\n\nDer Grund ist immer derselbe: Deine Aufmerksamkeit rutscht vom Spiel zum Ergebnis. Statt „wohin spiele ich den nächsten Ball\" denkst du „bloß jetzt keinen Fehler\". Und dieser Gedanke ist selbst der Fehler, denn er verkrampft dich.\n\nDrei Werkzeuge helfen. Erstens der Atem: Ein bewusster, langsamer Atemzug vor dem nächsten Ballwechsel senkt die Anspannung messbar. Zweitens das Tempo: Nimm dir die wenigen erlaubten Sekunden, hetze nicht. Wer hetzt, gibt der Nervosität recht. Drittens der Fokus: Denk an die Aufgabe, nicht ans Ergebnis. „Flach und auf die Rückhand\" ist ein Gedanke, der dich handeln lässt. „Bloß nicht verlieren\" ist ein Gedanke, der dich lähmt.\n\nEin Bild: Stell dir vor, du trägst ein volles Glas durch einen Raum voller Menschen. Starrst du auf das Glas und denkst „bloß nicht verschütten\", zittert deine Hand. Schaust du ruhig nach vorn, wohin du gehst, kommst du sicher an.\n\nDer entscheidende Satz für den engen Moment ist deshalb kurz: nächster Ball, nicht Endstand."
+      },
+      "reflexionsaufgabe": {
+        "de": "Überleg dir vor dem nächsten Spiel einen einzigen aufgabenbezogenen Satz, den du dir im engen Moment sagst — etwas Konkretes wie „flach und lang\" oder „ruhig zur Rückhand\". Wenn es das nächste Mal eng wird, probier das kleine Programm: ein tiefer Atemzug, das Tempo herausnehmen, deinen Satz denken. Achte hinterher darauf, ob du im engen Moment ruhiger geblieben bist als sonst. Es muss nicht sofort gelingen — schon das Bemerken, wohin deine Gedanken rutschen, ist der erste Schritt."
+      }
+    },
+
+    {
+      "id": "den_fehler_abhaken",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_der_kopf_mitspielt"],
+      "spielziele": ["fehler_resilienz", "konzentrationskonstanz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP", "TEN"],
+      "transfer_herkunft_beleg": "Fehler-Reset, kognitives Reframing ('next play'), Kurz-Ritual: Sportpsychologie. Kumulativer Fehlereffekt (vorheriger Fehler erhoeht Folgefehler-Wahrscheinlichkeit) empirisch aus Tennis-Grand-Slam-Analyse >650.000 Punkte (Harris et al.).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Den Fehler abhaken"},
+      "erklaerteil": {
+        "de": "Jeder macht Fehler — auch der beste Spieler. Der Unterschied liegt nicht darin, ob du Fehler machst, sondern darin, was danach passiert. Und hier lauert eine Falle: Ein Fehler zieht oft den nächsten nach sich. Du ärgerst dich, der Ärger sitzt dir im nächsten Ballwechsel im Nacken, und schon setzt du auch den ins Aus.\n\nDas ist kein Zufall und keine Einbildung. In großen Auswertungen zeigt sich: Ein Fehler erhöht messbar die Wahrscheinlichkeit des nächsten. Nicht, weil du plötzlich schlechter spielst, sondern weil dein Kopf noch beim letzten Ball ist, während der neue schon kommt.\n\nDagegen hilft ein kurzer, bewusster Schnitt — eine kleine Reset-Geste, die den Fehler abschließt. Manche wischen kurz mit der Hand über die Saiten, manche atmen einmal aus und schauen weg, manche sagen sich still ein einziges Wort: „weiter\". Was du wählst, ist gleich. Wichtig ist, dass die Geste immer dieselbe ist und eine klare Botschaft trägt: Dieser Ball ist vorbei, der nächste zählt.\n\nEin Bild: Ein Torwart, der ein Gegentor bekommt, hat keine Zeit zu hadern — der nächste Angriff läuft schon. Die besten haben eine Sekunden-Routine, mit der sie das Tor abhaken und wieder da sind. Genau die baust du dir auch.\n\nDer Satz dazu ist der kürzeste im ganzen mentalen Werkzeugkasten: vorbei ist vorbei."
+      },
+      "reflexionsaufgabe": {
+        "de": "Leg dir eine kleine Reset-Geste zurecht — eine körperliche Handlung plus ein Wort, das den Fehler abschließt. Im nächsten Spiel machst du nach jedem eigenen Fehler bewusst diese Geste, bevor der nächste Ballwechsel beginnt. Achte darauf, ob du danach schneller wieder bei der Sache bist. Beobachte auch das Gegenteil: Wenn du an einem Fehler hängen bleibst, kommt dann öfter gleich der nächste? Das eigene Muster zu sehen, ist der halbe Weg."
+      }
+    },
+
+    {
+      "id": "bei_der_sache_bleiben",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_der_kopf_mitspielt"],
+      "spielziele": ["konzentrationskonstanz", "nervenstaerke_enger_satz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP"],
+      "transfer_herkunft_beleg": "Aufmerksamkeitskonstanz, Refokussierung, Praesenz auf dem naechsten Ballwechsel: Sportpsychologie (Achtsamkeit reduziert Reaktivitaet, verbessert Refokussierungs-Geschwindigkeit).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Bei der Sache bleiben"},
+      "erklaerteil": {
+        "de": "Konzentration ist keine Wand, die entweder steht oder fällt. Sie schwankt über ein Spiel hinweg — und sie bricht besonders gern an zwei Stellen ein: kurz nachdem du in Führung gegangen bist, und in den ruhigen Phasen, in denen gerade nichts auf dem Spiel zu stehen scheint. Genau dann schleicht sich der Kopf davon, zum Handy am Spielfeldrand, zum letzten Punkt, zum Endstand.\n\nDas Tückische: Diese Einbrüche fühlen sich harmlos an. Du merkst sie oft erst, wenn du schon zwei Punkte verschenkt hast und dein Vorsprung dahin ist. Ein knapper Vorsprung, sorglos gehalten, ist schneller weg, als er gekommen ist.\n\nDas Werkzeug dagegen ist einfacher, als du denkst: Hol deine Aufmerksamkeit immer wieder auf den einen nächsten Ballwechsel zurück. Nicht auf den Satz, nicht auf den Sieg — nur auf den nächsten Ball. Konzentration heißt nicht, sich stundenlang anzuspannen. Es heißt, sich immer wieder neu auf das Jetzt zu holen, sobald man merkt, dass man abgeschweift ist.\n\nEin Bild: Konzentration ist wie das Balancieren auf einem schmalen Weg. Du wirst immer wieder leicht abkommen — das ist normal. Die Kunst ist nicht, nie zu schwanken, sondern jedes Mal ruhig zurück auf den Weg zu finden.\n\nDeshalb ist das Werkzeug hier kein Kraftakt, sondern eine Gewohnheit: bemerken, dass du weg bist — und zurückkommen. Immer wieder."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte im nächsten Spiel gezielt auf die zwei kritischen Stellen: den Moment direkt nach einer Führung und die ruhigen Phasen. Verlierst du dort öfter Punkte als sonst? Wenn du merkst, dass deine Gedanken abschweifen, hol sie mit einem einzigen Wort zurück — „hier\" oder „nächster Ball\". Es geht nicht darum, nie abzuschweifen, sondern darum, das Abschweifen früher zu bemerken und schneller zurückzukommen."
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}
