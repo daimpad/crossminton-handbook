@@ -60,8 +60,10 @@ js/
   oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
   ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
 data/
-  bausteine.beginner-technik.json   Referenzinhalt Technik (unverändert übernommen; kanonisches Vokabular)
-  bausteine.beginner-taktik.json    Inhaltsblock Taktik (mit reflexionsaufgabe-Feld); in denselben Pool gemischt
+  bausteine.beginner-technik.json   Referenzinhalt Technik; kanonisches Vokabular (nur koordinierte Erweiterungen)
+  bausteine.beginner-taktik.json    Inhaltsblock Taktik (reflexionsaufgabe, Rückverzweigung im Graph)
+  bausteine.beginner-mentales.json  Inhaltsblock Mentales (Sternform-Graph, durchgehend Reflexionsaufgaben)
+  bausteine.beginner-athletik_kondition.json  Inhaltsblock Athletik (Sternform, Übung + Reflexion gemischt)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)

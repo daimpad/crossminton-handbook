@@ -11,7 +11,7 @@
     "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition"],
     "kompetenzstufe": ["beginner", "fortgeschritten", "experte", "trainer"],
     "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein"],
-    "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS"],
+    "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS", "SP", "AT"],
     "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen"],
     "witterung": ["wind", "sonne_blendung", "naesse", "hitze"],
     "abschluss_status_zustandsraum": ["offen", "erledigt", "beherrscht_INAKTIV"],

@@ -105,3 +105,12 @@
 .fa-user-slash::before { content: '\f506'; }
 .fa-chess::before { content: '\f439'; }
 .fa-shield-halved::before { content: '\f3ed'; }
+.fa-brain::before { content: '\f5dc'; }
+.fa-list-check::before { content: '\f0ae'; }
+.fa-wind::before { content: '\f72e'; }
+.fa-arrow-rotate-left::before { content: '\f0e2'; }
+.fa-heart-pulse::before { content: '\f21e'; }
+.fa-fire::before { content: '\f06d'; }
+.fa-child-reaching::before { content: '\e59d'; }
+.fa-gauge-high::before { content: '\f625'; }
+.fa-bed::before { content: '\f236'; }

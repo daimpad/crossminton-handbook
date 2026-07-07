@@ -16,6 +16,8 @@ async function holeJson(pfad) {
 const INHALTSDATEIEN = [
   'data/bausteine.beginner-technik.json',
   'data/bausteine.beginner-taktik.json',
+  'data/bausteine.beginner-mentales.json',
+  'data/bausteine.beginner-athletik_kondition.json',
 ];
 
 export async function ladeDaten() {
