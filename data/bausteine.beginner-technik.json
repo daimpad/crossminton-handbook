@@ -1,0 +1,318 @@
+{
+  "_meta": {
+    "beschreibung": "Referenz-Inhaltsdaten: vollständiger Beginner-Technikpfad als Testdaten für die Pfad-Engine. Zeigt das Metadaten-Schema in Anwendung.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "hinweis": "Texte pro Sprache; im Erstausbau nur 'de' befüllt. Sprachneutrale Identität (id, kuerzel, faktor-ids) getrennt von sprachabhängiger Beschriftung (labels[sprache], text[sprache])."
+  },
+
+  "vokabulare": {
+    "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition"],
+    "kompetenzstufe": ["beginner", "fortgeschritten", "experte", "trainer"],
+    "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein"],
+    "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS"],
+    "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen"],
+    "witterung": ["wind", "sonne_blendung", "naesse", "hitze"],
+    "abschluss_status_zustandsraum": ["offen", "erledigt", "beherrscht_INAKTIV"],
+
+    "spielziele": {
+      "_ordnung": "primaer: limitierender Faktor; sekundaere Facette: Spielsituation",
+      "energetik": ["rally_ausdauer", "wiederholte_antrittsschnelligkeit", "satz_match_regeneration"],
+      "praezision_kontrolle": ["treffsicherheit_im_ziel", "laengen_tiefensteuerung", "tempo_haertedosierung", "konstanz_unter_wiederholung"],
+      "wahrnehmung_antizipation": ["fruehe_flugbahnlesung", "gegner_muster_lesen", "umschaltmoment_erkennen"],
+      "psychoregulation": ["nervenstaerke_enger_satz", "fehler_resilienz", "konzentrationskonstanz", "vorbereitende_selbststeuerung"],
+      "umgebungsanpassung": ["windspiel", "untergrundwechsel", "licht_und_sicht", "temperatur"],
+      "technisch_taktisches_repertoire": ["antwort_gegen_angreifer", "antwort_gegen_defensivspieler", "umschaltloesung", "aufschlag_rueckschlag_eroeffnung", "doppel_spezifische_loesungen"]
+    },
+
+    "vermittlungsziele": {
+      "_ordnung": "primaer: Vermittlungstaetigkeit; sekundaere Facette: Lernphase; Adressatengruppe als spaeterer Modifikator",
+      "vermitteln_zugaenglichmachen": ["bewegungskern_herausarbeiten", "demonstrieren_modell_geben", "in_bilder_analogien_uebersetzen"],
+      "diagnostizieren_korrigieren": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "progression_lernprozess_steuern": ["uebungsreihe_sequenzieren", "schwierigkeit_dosieren", "lernphasen_uebergang_gestalten"],
+      "gruppe_setting_fuehren": ["heterogene_gruppe_organisieren", "einheit_strukturieren", "raum_material_organisieren", "motivation_sicherheit_halten"]
+    }
+  },
+
+  "bausteine": [
+    {
+      "id": "grundposition",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'bleibt nach Schlag in der Ecke stehen / keine Rueckkehr' + Korrekturansage",
+      "grafik": ["grundposition_leitgrafik"],
+      "erklaerteil": {
+        "de": "Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus startest du in jede Richtung.\n\nDenk an einen Torwart vor dem Elfmeter: leicht geladen, wach, sprungbereit. Genau diese Spannung suchst du. Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper, die Schultern bleiben entspannt.\n\nDas ist keine Ruhestellung, sondern eine Bereitschaft. Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung als jede aufrechte Haltung. Wer flach auf den Fersen steht, verliert den ersten Schritt."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Laden und losstarten",
+          "ziel": "Deine Grundposition macht dich tatsächlich schneller — nicht nur gut aussehen.",
+          "schritte": [
+            "Nimm die Grundposition ein: Füße etwas mehr als schulterbreit, Knie leicht gebeugt, Gewicht auf die Fußballen, Schläger locker vor dem Körper.",
+            "Wähle eine Richtung — vor, zurück, links oder rechts.",
+            "Starte explosiv einen einzigen Schritt in diese Richtung.",
+            "Kehre in die Grundposition zurück.",
+            "Wiederhole, jedes Mal in eine andere Richtung."
+          ],
+          "selbstkontrolle": "Wie leicht kommt der erste Schritt? Wenn du dich abstoßen kannst, ohne dich vorher aufzurichten, stimmt die Haltung. Musst du dich erst hochdrücken oder das Gewicht verlagern, standest du zu passiv — zu aufrecht, zu flach auf den Fersen.",
+          "abschluss": "Die Grundposition ist dein Startblock. Ob sie funktioniert, merkst du erst in der Bewegung."
+        }
+      }
+    },
+
+    {
+      "id": "griff",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["grundposition"],
+      "spielziele": ["tempo_haertedosierung", "konstanz_unter_wiederholung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Griff zu fest' + Korrekturansage",
+      "grafik": ["griff_leitgrafik"],
+      "erklaerteil": {
+        "de": "Im Crossminton hältst du den Schläger für jeden Schlag gleich. Kein Umgreifen, keine Varianten für Vor- und Rückhand. Ein Griff für alles — deshalb Universalgriff.\n\nDas klingt unspektakulär, ist aber der Grund, warum du im schnellen Spiel überhaupt mitkommst. Der Speeder ist schneller unterwegs, als du umgreifen könntest. Wer nach dem passenden Griff sucht, kommt zu spät.\n\nSo findest du ihn: Halte den Schläger mit der freien Hand vor dich, die Kante zeigt zum Boden. Jetzt greif zu, als würdest du dem Griff die Hand geben. Zwischen Daumen und Zeigefinger bildet sich ein leichtes „V\". Mehr ist es nicht.\n\nZwei Dinge entscheiden über gut oder schlecht:\n\nDer Druck. Halte locker, nicht verkrampft — etwa so fest, wie du eine Hand schüttelst, ohne sie zu quetschen. Ein zu fester Griff nimmt dir das Gefühl und ermüdet den Unterarm. Fest wird es erst im Moment des Treffens, danach löst du wieder.\n\nDas Handgelenk. Am Anfang hältst du es ruhig und gerade. Die Kraft kommt aus Arm, Schulter und Beinen. Das fühlt sich zunächst an wie ein Tennisschlag, und das ist genau richtig. Erst wenn der Griff sitzt und die Schläge sauber kommen, darf das Handgelenk mitarbeiten und am Ende zuschnappen wie eine Peitsche. Diese Peitsche kommt später — jetzt baust du das Fundament."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Blind greifen",
+          "ziel": "Deine Hand findet den Universalgriff von allein — ohne hinzuschauen, ohne nachzudenken.",
+          "schritte": [
+            "Nimm den Schläger in die freie Hand, Kante zum Boden.",
+            "Greif zu wie zum Handschlag, bilde das „V\" zwischen Daumen und Zeigefinger.",
+            "Schau kurz hin: Stimmt die V-Stellung? Ist der Druck locker?",
+            "Leg den Schläger wieder ab — oder gib ihn ganz aus der Hand.",
+            "Wiederhole. Zehn Mal mit Kontrollblick."
+          ],
+          "steigerung": "Schließ die Augen. Greif zu, ohne hinzusehen. Erst danach prüfst du, ob das „V\" sitzt. Triffst du es zehnmal hintereinander blind, sitzt der Griff.",
+          "selbstkontrolle": "Im Spiel hast du keine Zeit, deinen Griff zu kontrollieren. Er muss von selbst stimmen, sobald du den Schläger führst.",
+          "naechste_stufe": "Sitzt der Griff blind, nimmst du ihn mit in die erste Schlagbewegung. Dort prüfst du, ob er auch hält, wenn der Arm arbeitet — das kommt im Vorhand-Grundschlag."
+        }
+      }
+    },
+
+    {
+      "id": "aufschlag",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["griff", "grundposition"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "laengen_tiefensteuerung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Treffpunkt zu hoch / Aufschlag ungueltig' + Korrekturansage",
+      "grafik": ["aufschlag_seq_1", "aufschlag_seq_2"],
+      "erklaerteil": {
+        "de": "Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand. Genau das macht ihn zum idealen ersten Schlag.\n\nDu hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn und triffst ihn im Fallen. Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben. Ein Aufschlag über Schulterhöhe ist kein gültiger Aufschlag.\n\nDazu zwei Bedingungen, die den Aufschlag gültig machen: Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone deines Feldes. Solange du diese beiden einhältst, zählt dein Aufschlag.\n\nFür den ersten Kontakt darfst du es dir leichter machen: Lass den Speeder aus Hüfthöhe fallen und triff ihn tief, knapp bevor er den Boden erreicht. So gewöhnst du dich an den Fallzeitpunkt. Sitzt das Timing, hebst du den Treffpunkt an — bis er dort liegt, wo die Regel ihn verlangt: unterhalb der Schlaghand."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Fallen lesen, dann treffen",
+          "ziel": "Den Moment finden, in dem du den fallenden Speeder sauber triffst.",
+          "schritte_teil1": [
+            "Halte den Speeder frei vor dir, etwa auf Hüfthöhe.",
+            "Lass ihn fallen und schlag noch nicht — schau nur zu, wie er sinkt.",
+            "Wiederhole ein paar Mal, bis du ein Gefühl dafür hast, wie schnell und wohin er fällt."
+          ],
+          "schritte_teil2": [
+            "Lass den Speeder wieder fallen.",
+            "Führe den Schläger von unten nach vorn und triff ihn tief, kurz bevor er den Boden erreicht.",
+            "Kümmere dich noch nicht um ein Ziel — es zählt allein, dass du ihn sauber triffst."
+          ],
+          "selbstkontrolle": "Triffst du den Speeder gleichmäßig, oder mal zu früh, mal zu spät? Streut der Treffmoment, gib dem Fallen noch etwas mehr Aufmerksamkeit, bevor du schlägst.",
+          "abschluss": "Der Aufschlag gelingt über das Timing, nicht über Kraft. Sobald du den Fallpunkt zuverlässig triffst, kommt das Zielen fast von allein — den Treffpunkt hebst du später an, das Ziel setzt du dir später."
+        }
+      }
+    },
+
+    {
+      "id": "vorhand_drive",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["griff", "grundposition", "aufschlag"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel", "konstanz_unter_wiederholung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'zu grosser Ausholschwung / smash-artig' + Korrekturansage",
+      "grafik": ["vorhand_drive_leitgrafik"],
+      "erklaerteil": {
+        "de": "Der Vorhand-Drive ist dein Brot-und-Butter-Schlag. Flach, direkt, auf deiner Schlägerseite gespielt — der Schlag, den du im Spiel am häufigsten brauchst.\n\nStell dir vor, du wischst mit dem Schläger etwas von einem Tisch in Hüfthöhe zur Seite. Genau dieser Bewegung folgst du: Das Gewicht wandert auf den vorderen Fuß, der Oberkörper dreht in Schlagrichtung, und der Arm bringt den Schläger nach vorn. Du triffst den Speeder vor deinem Körper, nicht neben dir und nicht hinter dir.\n\nDer ganze Schlag ist eine einzige, flüssige Bewegung — Gewicht, Drehung, Schlag gehen ineinander über. Die Kraft kommt aus dieser Kette, aus Beinen und Rumpf, nicht aus einem großen Ausholen mit dem Arm.\n\nUnd hier lösen wir ein, was beim Griff angekündigt war: Noch hältst du das Handgelenk ruhig und schlägst kompakt. Das Zuschnappen des Handgelenks — die Peitsche, die dem Schlag später Tempo gibt — kommt, sobald diese Grundbewegung sitzt. Erst der saubere Bogen, dann die Beschleunigung."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Bogen einschleifen",
+          "ziel": "Die Schlagbewegung sitzt als flüssige Kette, bevor ein Speeder ins Spiel kommt.",
+          "schritte": [
+            "Nimm die Grundposition ein, Universalgriff.",
+            "Verlagere das Gewicht auf den vorderen Fuß, drehe den Oberkörper in Schlagrichtung.",
+            "Führe den Schläger in einem kompakten Bogen nach vorn, als wischst du etwas in Hüfthöhe zur Seite.",
+            "Halte den gedachten Treffpunkt klar vor deinem Körper.",
+            "Kehre in die Grundposition zurück und wiederhole."
+          ],
+          "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Tempo kommt später, zuerst der saubere Bogen.",
+          "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        }
+      }
+    },
+
+    {
+      "id": "rueckhand",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["vorhand_drive", "griff", "grundposition"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel", "antwort_gegen_angreifer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Bewegungskern (Spiegelung Vorhand): Gossen-Systematik. Motivationsrahmen (Rueckhand als Angriffsziel): Lenkova et al. 2023. Beide CM; Belege in Quellendokumentation, nicht in sichtbarer Kennzeichnung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "relational_selbsttragend": true,
+      "trainer_layer_offen": "Fehlerbild 'Rueckhand ausweichend mit Vorhand umlaufen' + Korrekturansage",
+      "grafik": ["rueckhand_leitgrafik"],
+      "erklaerteil": {
+        "de": "Die Rückhand spielst du auf der Seite deines Körpers, die dem Schläger abgewandt ist — dort, wo der Handrücken nach vorn zeigt. Sie ist das Gegenstück zur Vorhand und folgt demselben Prinzip, nur spiegelverkehrt.\n\nWenn du die Vorhand schon kennst, hilft dir dieses Bild: Alles, was dort nach der einen Seite lief, läuft hier zur anderen. Das Gewicht wandert auf den Fuß deiner Schlagseite, der Oberkörper dreht auf, und der Schläger kommt vor dem Körper nach vorn. Du triffst den Speeder auch hier vor deinem Körper, im Zugriff deines Schlagarms.\n\nUnd falls die Vorhand gerade nicht präsent ist: Stell dich seitlich zum Ziel, den Schläger führst du dicht am Körper vorbei nach vorn und öffnest die Bewegung zum Treffpunkt hin. Der Schlag bleibt kompakt, das Handgelenk zunächst ruhig — genau wie bei der Vorhand baust du erst den sauberen Bogen, bevor Tempo dazukommt.\n\nEin Grund, warum die Rückhand sitzen muss: Im Spiel wird sie gezielt angespielt. Viele Aufschläge und Angriffe suchen die Rückhandseite, weil sie bei den meisten die schwächere ist. Eine verlässliche Rückhand nimmt dir genau diese Angriffsfläche."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Den gespiegelten Bogen einschleifen",
+          "ziel": "Die Rückhandbewegung sitzt als flüssige Kette, bevor ein Speeder ins Spiel kommt.",
+          "schritte": [
+            "Nimm die Grundposition ein, Universalgriff.",
+            "Verlagere das Gewicht auf den Fuß deiner Schlagseite, drehe den Oberkörper auf.",
+            "Führe den Schläger dicht am Körper vorbei nach vorn und öffne die Bewegung zum Treffpunkt hin.",
+            "Halte den gedachten Treffpunkt klar vor deinem Körper.",
+            "Kehre in die Grundposition zurück und wiederhole."
+          ],
+          "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Die Rückhand fühlt sich anfangs ungewohnter an als die Vorhand — das legt sich mit den Wiederholungen.",
+          "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        }
+      }
+    },
+
+    {
+      "id": "beinarbeit",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["grundposition", "vorhand_drive", "rueckhand"],
+      "voraussetzungen_lesart": "grundposition = motorisches Aufbauen; vorhand_drive + rueckhand = didaktisches Sinnstiften (Bewegung zum Ball braucht einen zu spielenden Schlag als Zweck)",
+      "spielziele": ["wiederholte_antrittsschnelligkeit", "rally_ausdauer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'bleibt nach Schlag in der Ecke stehen' + Korrekturansage",
+      "grafik": ["beinarbeit_seq_1", "beinarbeit_seq_2"],
+      "hinweis_hoehere_stufen": "Vollstaendiges Beinarbeit-System (Chasse, Lunge, Scherensprung, Block-Sprung, Double-Hop, zonenspezifische Wege) als getrennte Fortgeschrittenen-/Experten-Bausteine. Dort Delta erwartet (netzlose Feldgeometrie weicht von Badminton ab).",
+      "erklaerteil": {
+        "de": "Bisher ging es darum, wie du schlägst. Jetzt geht es darum, wie du rechtzeitig dorthin kommst, wo der Speeder ankommt. Gute Beinarbeit entscheidet oft mehr als der Schlag selbst — sie bringt dich rechtzeitig dorthin, wo der Speeder ankommt.\n\nAlles dreht sich um einen Ort und einen Moment.\n\nDer Ort ist die Mitte deines Feldes — die zentrale Position. Von hier erreichst du jede Ecke am schnellsten. Nach jedem Schlag kehrst du dorthin zurück. Dein Spiel bekommt dadurch einen Rhythmus: raus zum Ball, Schlag, zurück ins Zentrum. Immer wieder.\n\nDer Moment ist der Split-Step — ein kleiner, federnder Hüpfer, kurz bevor dein Gegner den Speeder trifft. Du landest leicht auf beiden Fußballen, und genau aus dieser Landung heraus startest du in jede Richtung. Der Split-Step verwandelt deine ruhige Bereitschaft in gerichtete Bewegung. Ohne ihn stehst du fest am Boden und verlierst den ersten Schritt.\n\nZusammen ergeben beide einen Kreislauf: Du wartest zentral, lädst dich mit dem Split-Step, startest zum Ball, schlägst, kehrst zurück. Dieser Kreislauf ist das Fundament deiner Beweglichkeit im Feld."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Kreislauf laufen",
+          "ziel": "Der Bewegungszyklus sitzt als Ganzes — ohne Speeder, als reine Fußarbeit.",
+          "schritte": [
+            "Stell dich in die zentrale Position deines Feldes, in die Grundhaltung.",
+            "Mach einen kleinen Split-Step — federnder Hüpfer, Landung auf beiden Fußballen.",
+            "Starte aus der Landung heraus zu einer Ecke deines Feldes und deute dort einen Schlag an.",
+            "Kehre in die zentrale Position zurück.",
+            "Wiederhole, jedes Mal in eine andere Ecke."
+          ],
+          "selbstkontrolle": "Achte auf zwei Dinge: Kommt der Start unmittelbar aus dem Split-Step, oder liegt eine Pause dazwischen? Und findest du zuverlässig in die zentrale Position zurück, oder bleibst du nach dem Schlag in der Ecke stehen? Der Kreislauf trägt erst, wenn beides rund läuft.",
+          "abschluss": "Diese Schattenbewegung baut den Rhythmus ein, bevor ein Speeder Druck macht. Sitzt der Kreislauf, kommt die Anpassung an den echten Ball fast von allein — die Wege bleiben dieselben, nur das Ziel bewegt sich dann."
+        }
+      }
+    }
+  ],
+
+  "delta_bausteine": [
+    {
+      "id": "griff_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "griff",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["griff"],
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Du kannst bereits greifen. Der Handschlag-Griff, das „V\" zwischen Daumen und Zeigefinger — alles vertraut. Du musst hier nichts Neues lernen.\n\nDu musst etwas verlernen: das Umgreifen.\n\nIm Badminton wechselst du ständig — Vorhandgriff, Rückhandgriff, Daumen umgelegt, je nach Schlag. Dieser Wechsel sitzt bei dir tief, und genau er wird dir im Crossminton im Weg stehen. Hier gibt es keinen Wechsel. Ein Griff, jeder Schlag.\n\nDas fühlt sich anfangs falsch an. Deine Hand will umgreifen, besonders auf der Rückhand — sie hat es tausendmal getan. Lass sie nicht. Halte den Universalgriff auch dann, wenn dein Badminton-Reflex nach dem Daumen verlangt.\n\nEin kleiner Test: Spiel ein paar Rückhände und beobachte deinen Daumen. Wandert er? Dann greifst du noch um. Ziel ist, dass die Hand ruhig bleibt.\n\nNebenbei: Der Speeder ist schwerer als ein Federball, der Schläger kürzer und dicker bespannt. Dein Griff darf deshalb eine Spur fester sein als gewohnt, und das Handgelenk bleibt am Anfang ruhiger. Aber das ist Feinabstimmung — die eine Sache, die zählt, ist der Verzicht aufs Umgreifen."
+      }
+    },
+    {
+      "id": "aufschlag_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "aufschlag",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["aufschlag"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "laengen_tiefensteuerung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Die Bewegung kennst du: Speeder fallen lassen, von unten treffen. Motorisch musst du nichts umlernen.\n\nWas sich ändert, ist dein Ziel. Im Badminton hebst du den Aufschlag über das Netz — knapp drüber, kontrolliert, in ein nahes Feld. Diese Vorstellung sitzt bei dir. Im Crossminton gibt es kein Netz, das du überwinden musst. An seiner Stelle liegt die neutrale Zone zwischen den Feldern, und die überbrückst du nicht mit Höhe, sondern mit Weite.\n\nDein Aufschlag geht also flacher und weiter, als dein Badminton-Reflex es will. Nicht anheben, sondern nach vorn durch die Zone tragen — bis tief ins gegnerische Feld.\n\nEin kleiner Test: Beobachte die Flugkurve deines Aufschlags. Steigt der Speeder erst hoch und fällt dann kurz dahinter? Dann spielst du noch über ein Netz, das nicht da ist. Ziel ist eine flache, lange Bahn."
+      }
+    },
+    {
+      "id": "vorhand_drive_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "vorhand_drive",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["vorhand_drive"],
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Den Drive kennst du. Treffpunkt vor dem Körper, Gewicht nach vorn, Rotation in Schlagrichtung — das alles bringst du mit.\n\nEine Sache verlagert sich: woher die Kraft kommt. Im Badminton spielst du den Drive stark aus Handgelenk und Fingern, und der flexible Schläger schnappt dabei mit. Dein Gerät hier ist anders — kürzer, steifer, mit strafferer Bespannung, und der Speeder ist doppelt so schwer wie ein Federball. Der Schläger gibt kaum nach, also trägt das Handgelenk allein den Schlag nicht mehr.\n\nNimm den Handgelenksimpuls deshalb zunächst zurück. Deine Kraft kommt jetzt aus einem kompakteren, festeren Schlag — mehr aus Rumpf und Arm, mit einem klaren Zupacken im Griff am Treffpunkt. Das fühlt sich anfangs weniger elegant an als dein Badminton-Drive, überträgt die Energie am steifen Gerät aber sauberer.\n\nDas Handgelenk bleibt nicht für immer außen vor. Sitzt der kompakte Schlag, baust du es dosiert wieder ein — dieselbe Peitsche, die auch die anderen Spieler später lernen, nur an dein Gerät angepasst.\n\nEin kleiner Test: Spiel ein paar Drives und achte auf deinen Unterarm. Bleibt er locker und der Schlag trotzdem kraftvoll? Dann trägt der Körper den Schlag. Kommt die Kraft spürbar nur aus dem Handgelenk, nimm es noch etwas zurück."
+      }
+    },
+    {
+      "id": "rueckhand_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "rueckhand",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["rueckhand"],
+      "delta_buendelung": ["griff_delta_bad", "vorhand_drive_delta_bad"],
+      "delta_buendelung_hinweis": "Verweise auf andere Deltas als weiche Voraussetzung (Lektuereempfehlung), nicht als harte Abhaengigkeit. Fuehrender Punkt: Daumenwechsel. Nachgeordnet: Kraftumgewichtung (Verweis auf vorhand_drive_delta_bad).",
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Auf der Rückhand sitzt deine Badminton-Gewohnheit am tiefsten. Dort drehst du gewohnt in den Daumengriff — Daumen auf die breite Griffseite, der die Kraft über den Hebel erzeugt. Genau dieser Wechsel entfällt hier. Du bleibst im Universalgriff, auch auf der Rückhand, ohne den Daumen umzulegen.\n\nDas ist derselbe Verzicht, den du schon beim Griff kennengelernt hast — auf der Rückhand wird er nur besonders spürbar, weil dein Reflex hier am stärksten nach dem Daumen verlangt.\n\nDazu kommt, wie bei der Vorhand, die veränderte Kraftquelle: Am steifen Gerät trägt nicht der Daumen- oder Handgelenksimpuls den Schlag, sondern der kompaktere Schlag aus dem Körper. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Spiel ein paar Rückhände und achte auf deinen Daumen. Legt er sich um, greifst du noch nach dem Badminton-Muster. Ziel ist, dass er ruhig an seiner Universalgriff-Position bleibt."
+      }
+    }
+  ]
+}

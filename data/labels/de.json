@@ -1,0 +1,297 @@
+{
+  "_meta": {
+    "sprache": "de",
+    "status": "quellsprache_befuellt",
+    "hinweis": "Erstfassung aller sichtbaren Beschriftungen (redaktionell zu pruefen). Sprachneutrale IDs stehen in bausteine.beginner-technik.json; diese Datei traegt nur die sprachabhaengige Beschriftung.",
+    "offen": "Label fuer Transfer-Herkunft 'BS' redaktionell festlegen (Kuerzel in den Referenzdaten ungenutzt)."
+  },
+
+  "ui": {
+    "app_titel": "Crossminton-Handbuch",
+    "weiter": "Weiter",
+    "zurueck": "Zurück",
+    "ueberspringen": "Überspringen",
+    "fertig": "Fertig",
+    "abbrechen": "Abbrechen",
+    "aendern": "Ändern",
+    "uebernehmen": "Übernehmen",
+    "entfernen": "Entfernen",
+    "schliessen": "Schließen",
+    "zur_liste": "Zur Liste",
+
+    "nav_lernen": "Lernen",
+    "nav_training": "Training",
+    "nav_profil": "Profil",
+
+    "onboarding_titel": "Bevor du loslegst",
+    "onboarding_intro": "Drei kurze Angaben stellen dir die passenden Inhalte zusammen. Alles lässt sich später im Profil ändern.",
+    "onboarding_schritt": "Schritt {a} von {b}",
+    "frage_stufe": "Wo stehst du im Spiel?",
+    "frage_trainer": "Lernst du auch, um es anderen beizubringen?",
+    "anker_beginner": "Du bist neu im Crossminton oder hast erst ein paar Mal gespielt. Der Speeder geht mal übers Feld, mal daneben — noch fühlt sich vieles ungewohnt an. Du willst die Grundlagen von Grund auf lernen.",
+    "anker_fortgeschritten": "Du hältst einen Ballwechsel zuverlässig am Laufen. Vorhand, Rückhand und Aufschlag sitzen im Grundsatz, und du bewegst dich brauchbar im Feld. Jetzt willst du sicherer und variabler werden.",
+    "anker_experte": "Du gestaltest lange Ballwechsel aktiv und setzt den Gegner gezielt unter Druck. Du variierst Tempo, Länge und Platzierung bewusst und liest das Spiel. Du suchst den Feinschliff und taktische Tiefe.",
+    "trainer_ja": "Ja — Trainer-Perspektive freischalten",
+    "anker_trainer": "Du willst Crossminton nicht nur selbst spielen, sondern anderen vermitteln — Fehler erkennen, korrigieren, Übungen und Trainingseinheiten aufbauen. Diese Sicht schaltest du zusätzlich zu deiner Spielstufe frei.",
+    "trainer_nein": "Nein — ich lerne für mein eigenes Spiel",
+    "frage_herkunft": "Bringst du Erfahrung aus einem anderen Schlagsport mit?",
+    "herkunft_hinweis": "Zur Auswahl stehen die Sportarten, für die angepasste Inhalte existieren. Bei passender Herkunft werden einzelne Erklärteile für dich ausgetauscht.",
+    "herkunft_keine": "Keine Vorerfahrung",
+    "frage_ziel": "Willst du gezielt an etwas arbeiten?",
+    "ziel_hinweis": "Dein Ziel wird gespeichert; im Individualpfad kannst du ihm folgen. Welche Pfade du nutzt, bleibt davon unabhängig — beides ist bewusst getrennt.",
+    "vormarkieren_titel": "Schon beherrscht?",
+    "vormarkieren_text": "Für diese Bausteine ist bei deiner Herkunft keine Anpassung nötig. Beherrschst du sie bereits sicher, kannst du sie als erledigt vormarkieren.",
+    "vormarkieren_leer": "Nichts auswählen ist völlig in Ordnung — du kannst jederzeit im Profil vormarkieren.",
+
+    "pfad_kompetenz": "Kompetenzpfad",
+    "pfad_kompetenz_text": "Der geführte Weg durch deine Stufe — Baustein für Baustein in sinnvoller Reihenfolge.",
+    "pfad_themen": "Themenpfad",
+    "pfad_themen_text": "Frei stöbern nach Themenfeld. Eine Reihenfolge wird vorgeschlagen, du entscheidest.",
+    "pfad_individual": "Individualpfad",
+    "pfad_individual_text": "Nur die Bausteine, die auf dein gewähltes Ziel einzahlen.",
+    "pfad_training": "Trainingspfad",
+    "pfad_training_text": "Zusammengestellte Einheiten aus Übungsteilen — zum direkten Loslegen.",
+    "pfade": "Pfade",
+    "n_bausteine": "{n} Bausteine",
+    "n_einheiten": "{n} Einheiten",
+
+    "weiterlernen": "Weiterlernen",
+    "station_x_von_y": "Station {a} von {b}",
+    "pfad_abgeschlossen_kurz": "Pfad abgeschlossen",
+    "vorgeschlagene_reihenfolge": "Vorgeschlagene Reihenfolge — frei wählbar.",
+    "empfohlen_vorher": "Empfohlen vorher:",
+    "ausserhalb_auswahl": "Außerhalb deiner Zielauswahl:",
+    "kann_ich_schon": "Beherrsche ich — als erledigt markieren",
+    "ziel_waehlen": "Ziel wählen",
+    "ziel_aktuell": "Dein Ziel",
+    "ziel_keins": "Kein Ziel gewählt",
+    "ziel_entfernen": "Ziel entfernen",
+    "ziel_aendern": "Ziel ändern",
+    "status_offen": "offen",
+    "status_teilweise": "teilweise erledigt",
+    "status_absolviert": "abgeschlossen",
+    "nicht_gefunden": "Diesen Inhalt gibt es nicht (mehr).",
+    "spielziele_gruppe": "Spielziele",
+    "vermittlungsziele_gruppe": "Vermittlungsziele",
+
+    "erklaerteil": "Erklärteil",
+    "uebungsteil": "Übungsteil",
+    "als_gelesen": "Als gelesen abhaken",
+    "gelesen": "Gelesen",
+    "als_erledigt": "Als erledigt abhaken",
+    "erledigt": "Erledigt",
+    "zuruecknehmen": "Tippen, um es zurückzunehmen",
+    "baustein_abgeschlossen": "Baustein abgeschlossen.",
+    "weiter_zu": "Weiter zu: {titel}",
+    "delta_hinweis": "Für Umsteiger aus {herkunft} angepasst.",
+    "delta_uebungsteil_gilt": "Der Übungsteil ist der reguläre — er gilt für alle unverändert.",
+    "lektuere_empfehlung": "Passende Hinweise:",
+    "hinweis_suffix": "Hinweis",
+    "grafik_folgt": "Grafik in Vorbereitung",
+    "einordnung": "Einordnung",
+    "meta_spielziele": "Spielziele",
+    "meta_vermittlungsziele": "Vermittlungsziele",
+    "meta_untergrund": "Untergrund",
+    "meta_witterung": "Witterung",
+    "meta_transfer": "Transfer-Herkunft",
+    "meta_voraussetzungen": "Voraussetzungen",
+    "teil_1": "Teil 1",
+    "teil_2": "Teil 2",
+    "ue_ziel": "Ziel",
+    "ue_schritte": "So gehst du vor",
+    "ue_steigerung": "Steigerung",
+    "ue_selbstkontrolle": "Selbstkontrolle",
+    "ue_abschluss": "Abschluss",
+    "ue_naechste_stufe": "Nächste Stufe",
+
+    "meilenstein_titel": "Meilenstein erreicht",
+    "meilenstein_kompetenz": "Du hast den {pfad} deiner Stufe abgeschlossen — ein erarbeiteter Zustandswechsel, kein Zufall.",
+    "meilenstein_individual": "Du hast alle Bausteine zu deinem Ziel abgeschlossen.",
+    "meilenstein_weiter": "Alles Weitere findest du in den anderen Pfaden — oder im Training.",
+
+    "einheit_starten": "Einheit starten",
+    "einheit_fortsetzen": "Weiter",
+    "uebung_x_von_y": "Übung {a} von {b}",
+    "uebung_erledigt_weiter": "Erledigt — weiter",
+    "einheit_abschliessen": "Einheit abschließen",
+    "einheit_abgeschlossen": "Einheit abgeschlossen.",
+    "einheit_abbrechen_hinweis": "Abbrechen ist jederzeit möglich — der Zähler bleibt unberührt.",
+    "kontinuitaet_stand": "Insgesamt {n} absolvierte Einheiten.",
+    "kontinuitaet_erste": "Deine erste absolvierte Einheit.",
+    "mal_absolviert": "{n}-mal absolviert",
+    "noch_nicht_absolviert": "Noch nicht absolviert",
+    "uebungen_anzahl": "{n} Übungen",
+    "zum_baustein": "Zum Baustein",
+    "kontinuitaet": "Kontinuität",
+    "kontinuitaet_text": "Absolvierte Einheiten summieren sich. Pausen entwerten nichts.",
+
+    "fortschritt": "Fortschritt",
+    "fortschritt_global": "Gesamt",
+    "bausteine_erledigt": "{a} von {b} Bausteinen",
+    "teile_stand": "Erklärteile {a}/{b} · Übungsteile {c}/{d}",
+
+    "profil_diagnose": "Deine Angaben",
+    "profil_diagnose_text": "Alles hier ist jederzeit änderbar. Dein Fortschritt bleibt dabei erhalten — er hängt am Baustein, nicht am Pfad.",
+    "profil_stufe": "Stufe",
+    "profil_trainer": "Trainer-Perspektive",
+    "profil_trainer_an": "freigeschaltet",
+    "profil_trainer_aus": "nicht freigeschaltet",
+    "profil_herkunft": "Herkunft",
+    "profil_ziel": "Ziel",
+    "vormarkieren_profil": "Beherrschte Bausteine vormarkieren",
+    "vormarkieren_keine": "Derzeit keine Kandidaten — alles Übrige trägt eine Anpassung oder ist bereits erledigt.",
+    "einstellungen": "Einstellungen",
+    "sprache": "Sprache",
+    "uebersetzung_fehlt": "Übersetzungen folgen — Inhalte erscheinen vorerst auf Deutsch.",
+    "transfer_schalter": "Transfer-Kürzel anzeigen",
+    "transfer_schalter_text": "Dezente Kürzel zeigen, aus welchem Sport ein Inhalt stammt.",
+    "daten_reset": "Fortschritt und Angaben zurücksetzen",
+    "reset_bestaetigen": "Wirklich alles zurücksetzen? Dein lokaler Fortschritt und deine Angaben werden gelöscht.",
+    "ueber": "Über diese App",
+    "ueber_text": "Clientseitige Lernapp für Crossminton (Erstausbau). Inhalte auf Deutsch; Fortschritt wird nur auf diesem Gerät gespeichert.",
+
+    "leer_stufe": "Für diese Stufe sind noch keine Bausteine hinterlegt. Der Erstausbau enthält den Beginner-Technikpfad.",
+    "leer_domaene": "Für dieses Themenfeld sind noch keine Bausteine hinterlegt.",
+    "leer_ziel": "Für dieses Ziel gibt es noch keine Bausteine. Der Erstausbau deckt den Beginner-Technikbereich ab.",
+    "leer_training": "Noch keine Einheiten hinterlegt.",
+    "leer_weiterlernen": "Alle Bausteine deiner Stufe sind abgeschlossen.",
+
+    "fehler_laden_titel": "Inhalte konnten nicht geladen werden",
+    "fehler_laden_text": "Die Datendateien waren nicht erreichbar. Wird die Seite direkt aus dem Dateisystem geöffnet (file://), blockiert der Browser das Laden — starte stattdessen einen kleinen lokalen Server im Projektordner, z. B.: python3 -m http.server",
+    "erneut_versuchen": "Erneut versuchen",
+    "speicher_warnung": "Hinweis: Der Browser erlaubt kein dauerhaftes Speichern (z. B. privater Modus). Fortschritt geht beim Schließen verloren."
+  },
+
+  "bausteine": {
+    "grundposition": "Die Grundposition",
+    "griff": "Der Universalgriff",
+    "aufschlag": "Der Aufschlag",
+    "vorhand_drive": "Der Vorhand-Drive",
+    "rueckhand": "Die Rückhand",
+    "beinarbeit": "Beinarbeit: Zentrum und Split-Step"
+  },
+
+  "grafiken": {
+    "grundposition_leitgrafik": "Leitgrafik: die Grundposition",
+    "griff_leitgrafik": "Leitgrafik: der Universalgriff mit V-Stellung",
+    "aufschlag_seq_1": "Aufschlag, Bild 1: der Speeder fällt",
+    "aufschlag_seq_2": "Aufschlag, Bild 2: Treffpunkt unterhalb der Schlaghand",
+    "vorhand_drive_leitgrafik": "Leitgrafik: der Vorhand-Drive",
+    "rueckhand_leitgrafik": "Leitgrafik: die Rückhand",
+    "beinarbeit_seq_1": "Beinarbeit, Bild 1: der Split-Step",
+    "beinarbeit_seq_2": "Beinarbeit, Bild 2: der Bewegungskreislauf"
+  },
+
+  "vokabeln": {
+    "domaene": {
+      "technik": "Technik",
+      "taktik": "Taktik",
+      "trainingsgestaltung": "Trainingsgestaltung",
+      "mentales": "Mentales",
+      "athletik_kondition": "Athletik & Kondition"
+    },
+    "kompetenzstufe": {
+      "beginner": "Beginner",
+      "fortgeschritten": "Fortgeschritten",
+      "experte": "Experte",
+      "trainer": "Trainer-Perspektive"
+    },
+    "baustein_typ": {
+      "micro": "Micro-Baustein",
+      "vertiefung": "Vertiefung",
+      "delta": "Cross-Sport-Hinweis",
+      "fehlerbild": "Fehlerbild",
+      "umgebungs_baustein": "Umgebungs-Baustein"
+    },
+    "transfer_herkunft": {
+      "CM": "Crossminton",
+      "BAD": "Badminton",
+      "TEN": "Tennis",
+      "SQ": "Squash",
+      "BS": "BS"
+    },
+    "untergrund": {
+      "halle": "Halle",
+      "sand": "Sand",
+      "rasen": "Rasen",
+      "asche": "Asche",
+      "kunstrasen": "Kunstrasen"
+    },
+    "witterung": {
+      "wind": "Wind",
+      "sonne_blendung": "Sonne & Blendung",
+      "naesse": "Nässe",
+      "hitze": "Hitze"
+    },
+    "abschluss_status": {
+      "offen": "offen",
+      "erledigt": "erledigt",
+      "beherrscht": "beherrscht"
+    }
+  },
+
+  "spielziele": {
+    "bereiche": {
+      "energetik": "Energetik",
+      "praezision_kontrolle": "Präzision & Kontrolle",
+      "wahrnehmung_antizipation": "Wahrnehmung & Antizipation",
+      "psychoregulation": "Psychoregulation",
+      "umgebungsanpassung": "Umgebungsanpassung",
+      "technisch_taktisches_repertoire": "Technisch-taktisches Repertoire"
+    },
+    "faktoren": {
+      "rally_ausdauer": "Rally-Ausdauer",
+      "wiederholte_antrittsschnelligkeit": "Wiederholte Antrittsschnelligkeit",
+      "satz_match_regeneration": "Satz- und Match-Regeneration",
+      "treffsicherheit_im_ziel": "Treffsicherheit im Ziel",
+      "laengen_tiefensteuerung": "Längen- und Tiefensteuerung",
+      "tempo_haertedosierung": "Tempo- und Härtedosierung",
+      "konstanz_unter_wiederholung": "Konstanz unter Wiederholung",
+      "fruehe_flugbahnlesung": "Frühe Flugbahnlesung",
+      "gegner_muster_lesen": "Gegnermuster lesen",
+      "umschaltmoment_erkennen": "Umschaltmoment erkennen",
+      "nervenstaerke_enger_satz": "Nervenstärke im engen Satz",
+      "fehler_resilienz": "Fehler-Resilienz",
+      "konzentrationskonstanz": "Konzentrationskonstanz",
+      "vorbereitende_selbststeuerung": "Vorbereitende Selbststeuerung",
+      "windspiel": "Windspiel",
+      "untergrundwechsel": "Untergrundwechsel",
+      "licht_und_sicht": "Licht und Sicht",
+      "temperatur": "Temperatur",
+      "antwort_gegen_angreifer": "Antwort gegen Angreifer",
+      "antwort_gegen_defensivspieler": "Antwort gegen Defensivspieler",
+      "umschaltloesung": "Umschaltlösung",
+      "aufschlag_rueckschlag_eroeffnung": "Aufschlag-/Rückschlag-Eröffnung",
+      "doppel_spezifische_loesungen": "Doppelspezifische Lösungen"
+    }
+  },
+
+  "vermittlungsziele": {
+    "bereiche": {
+      "vermitteln_zugaenglichmachen": "Vermitteln & Zugänglichmachen",
+      "diagnostizieren_korrigieren": "Diagnostizieren & Korrigieren",
+      "progression_lernprozess_steuern": "Progression & Lernprozess steuern",
+      "gruppe_setting_fuehren": "Gruppe & Setting führen"
+    },
+    "faktoren": {
+      "bewegungskern_herausarbeiten": "Bewegungskern herausarbeiten",
+      "demonstrieren_modell_geben": "Demonstrieren / Modell geben",
+      "in_bilder_analogien_uebersetzen": "In Bilder und Analogien übersetzen",
+      "fehlerbild_erkennen": "Fehlerbild erkennen",
+      "ursache_von_symptom_trennen": "Ursache von Symptom trennen",
+      "korrekturansage_geben": "Korrekturansage geben",
+      "uebungsreihe_sequenzieren": "Übungsreihe sequenzieren",
+      "schwierigkeit_dosieren": "Schwierigkeit dosieren",
+      "lernphasen_uebergang_gestalten": "Lernphasen-Übergang gestalten",
+      "heterogene_gruppe_organisieren": "Heterogene Gruppe organisieren",
+      "einheit_strukturieren": "Einheit strukturieren",
+      "raum_material_organisieren": "Raum und Material organisieren",
+      "motivation_sicherheit_halten": "Motivation und Sicherheit halten"
+    }
+  },
+
+  "trainingseinheiten": {
+    "einheit_fundament": "Fundament: Stand, Griff, Aufschlag",
+    "einheit_schlag_und_weg": "Schlag und Weg"
+  }
+}

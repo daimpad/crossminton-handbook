@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "beschreibung": "Trainingseinheiten: eigene Entität, getrennt vom Baustein (Spez. 3.4). Jede Einheit trägt eine geordnete Referenzliste auf Übungsteile von Bausteinen (referenziert über die Baustein-ID, deren Übungsteil gemeint ist).",
+    "status": "kuratiert",
+    "hinweis": "Beispielhaft kuratierte Einheiten für den Erstausbau — redaktionell frei ersetzbar. Die Struktur hält die spätere regelbasierte Generierung offen, ohne sie umzusetzen.",
+    "quellsprache": "de"
+  },
+  "einheiten": [
+    {
+      "id": "einheit_fundament",
+      "kuratiert": true,
+      "beschreibung": {
+        "de": "Drei Übungen für den Einstieg: Bereitschaft im Stand, der Griff, der erste Aufschlag. Ohne Partner machbar."
+      },
+      "uebungsteile": ["grundposition", "griff", "aufschlag"]
+    },
+    {
+      "id": "einheit_schlag_und_weg",
+      "kuratiert": true,
+      "beschreibung": {
+        "de": "Vorhand- und Rückhandbogen einschleifen, danach den Bewegungskreislauf im Feld laufen. Ohne Partner machbar."
+      },
+      "uebungsteile": ["vorhand_drive", "rueckhand", "beinarbeit"]
+    }
+  ]
+}

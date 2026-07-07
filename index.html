@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Crossminton-Handbuch</title>
+  <meta name="description" content="Clientseitige, mobil-orientierte Lernapp für Crossminton: Bausteine, Pfade, Fortschritt — alles lokal im Browser.">
+  <meta name="theme-color" content="#f6f6f4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111417" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="#/">Crossminton-Handbuch</a>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1"></main>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="#/" data-nav="lernen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V8.5a1 1 0 0 1 .4-.8l7-5.2a1 1 0 0 1 1.2 0l7 5.2a1 1 0 0 1 .4.8V19a1 1 0 0 1-1 1h-4.5v-5.5h-4.2V20H5a1 1 0 0 1-1-1Z"/></svg>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="#/training" data-nav="training">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg>
+      <span class="nav-text">Training</span>
+    </a>
+    <a href="#/profil" data-nav="profil">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.6-5 7-5s6.2 1.8 7 5"/></svg>
+      <span class="nav-text">Profil</span>
+    </a>
+  </nav>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:40rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif">
+      Diese Lernapp läuft vollständig im Browser und benötigt JavaScript.
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
