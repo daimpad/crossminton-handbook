@@ -10,17 +10,39 @@ async function holeJson(pfad) {
   return antwort.json();
 }
 
+// Inhaltsdateien werden zu EINEM gemeinsamen Pool gemischt (Spez. 3.1).
+// Reihenfolge = Reihenfolge hier; die erste Datei mit vokabulare ist die
+// kanonische Vokabular-Quelle (weitere Blöcke tragen keins).
+const INHALTSDATEIEN = [
+  'data/bausteine.beginner-technik.json',
+  'data/bausteine.beginner-taktik.json',
+];
+
 export async function ladeDaten() {
-  const [inhalt, einheiten, fehlerbilder] = await Promise.all([
-    holeJson('data/bausteine.beginner-technik.json'),
+  const [einheiten, fehlerbilder, ...inhaltDateien] = await Promise.all([
     holeJson('data/trainingseinheiten.json'),
     holeJson('data/fehlerbilder.json'),
+    ...INHALTSDATEIEN.map(holeJson),
   ]);
-  return baueIndizes(inhalt, einheiten, fehlerbilder);
+  return baueIndizes(inhaltDateien, einheiten, fehlerbilder);
 }
 
 export function hatUebungsteil(baustein) {
   return baustein.uebungsteil != null;
+}
+
+// Reflexionsaufgabe (Taktik-Domäne): eigenständiger Aufgabenteil, Geschwister
+// des Übungsteils — ersetzt ihn, wo keine Bewegung automatisiert wird.
+export function hatReflexionsaufgabe(baustein) {
+  return baustein.reflexionsaufgabe != null;
+}
+
+// Alle quittierbaren Aufgabenteile eines Bausteins (Übung und/oder Reflexion).
+export function aufgabenTeile(baustein) {
+  const teile = [];
+  if (hatUebungsteil(baustein)) teile.push('uebungsteil');
+  if (hatReflexionsaufgabe(baustein)) teile.push('reflexionsaufgabe');
+  return teile;
 }
 
 export function domaenenVon(baustein) {
@@ -51,14 +73,16 @@ export function fehlerbilderFuer(daten, basisId) {
 
 export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
   const warnungen = [];
-  const vokabulare = inhaltRoh.vokabulare || {};
-  const bausteine = inhaltRoh.bausteine || [];
-  const deltas = inhaltRoh.delta_bausteine || [];
+  // Ein Objekt oder eine Liste von Inhaltsdateien; letztere werden gemischt.
+  const dateien = Array.isArray(inhaltRoh) ? inhaltRoh : [inhaltRoh];
+  const vokabulare = dateien.find((d) => d.vokabulare)?.vokabulare || {};
+  const bausteine = dateien.flatMap((d) => d.bausteine || []);
+  const deltas = dateien.flatMap((d) => d.delta_bausteine || []);
   const einheiten = einheitenRoh?.einheiten || [];
   const fehlerbilder = fehlerbilderRoh?.fehlerbild_bausteine || [];
 
   const daten = {
-    meta: inhaltRoh._meta || {},
+    meta: dateien[0]?._meta || {},
     einheitenMeta: einheitenRoh?._meta || {},
     vokabulare,
     bausteine,
@@ -115,6 +139,13 @@ function pruefeDaten(daten) {
   const deltaIds = new Set(daten.deltas.map((d) => d.id));
   const inVokabular = (liste, wert) => !Array.isArray(liste) || liste.includes(wert);
 
+  // Kollisionen über gemischte Inhaltsdateien hinweg früh melden.
+  const gesehen = new Set();
+  for (const b of daten.bausteine) {
+    if (gesehen.has(b.id)) w.push(`${b.id}: doppelte Baustein-id über Inhaltsdateien`);
+    gesehen.add(b.id);
+  }
+
   for (const b of daten.bausteine) {
     for (const d of domaenenVon(b)) {
       if (!inVokabular(voka.domaene, d)) w.push(`${b.id}: unbekannte Domäne "${d}"`);
@@ -144,6 +175,9 @@ function pruefeDaten(daten) {
     }
     if (b.typ === 'micro' && b.domaene === 'technik' && !hatUebungsteil(b)) {
       w.push(`${b.id}: Technik-Baustein ohne Übungsteil`);
+    }
+    if (hatReflexionsaufgabe(b) && typeof b.reflexionsaufgabe.de !== 'string') {
+      w.push(`${b.id}: reflexionsaufgabe.de fehlt oder ist kein Text`);
     }
   }
 

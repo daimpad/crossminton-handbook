@@ -4,7 +4,7 @@
 // der Übungsteil des Basisbausteins bleibt stets erhalten (Spez. 4.2, 5).
 
 import { schalteTeil } from '../aktionen.js';
-import { domaenenVon, fehlerbilderFuer, hatUebungsteil } from '../daten.js';
+import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil } from '../daten.js';
 import { label, t, text } from '../i18n.js';
 import { absaetze, bausteinIcon, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
@@ -221,6 +221,19 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       </section>`;
   }
 
+  // Reflexionsaufgabe: eigener Aufgabenteil mit eigenem Status; das Quittier-
+  // Label ist reflexions-passend („Mitgenommen"), nicht „Erledigt".
+  let reflexionsSektion = '';
+  if (hatReflexionsaufgabe(b)) {
+    const status = station.status.reflexionsaufgabe;
+    reflexionsSektion = `
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> ${esc(t('reflexionsaufgabe'))}</h2>${statusChip(status)}</div>
+        ${absaetze(text(b.reflexionsaufgabe))}
+        <div class="knopf-zeile">${quittierKnopf(b.id, 'reflexionsaufgabe', status, t('als_mitgenommen'), t('mitgenommen'))}</div>
+      </section>`;
+  }
+
   // Baustein-Abschluss: nur bestätigende Quittierung, keine eigene Gratifikation (8.3.1).
   const abschlussZeile = station.status.absolviert
     ? `<p class="bestaetigung">${esc(t('baustein_abgeschlossen'))}</p>`
@@ -242,6 +255,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
       ${uebungsSektion}
+      ${reflexionsSektion}
       ${trainerLayerHtml(daten, b)}
       ${abschlussZeile}
       ${einordnungHtml(b, kuerzelSichtbar)}

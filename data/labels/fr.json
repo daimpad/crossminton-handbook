@@ -85,6 +85,9 @@
     "vermittlungsziele_gruppe": "",
     "erklaerteil": "",
     "uebungsteil": "",
+    "reflexionsaufgabe": "",
+    "als_mitgenommen": "",
+    "mitgenommen": "",
     "trainer_layer": "",
     "trainer_layer_hinweis": "",
     "fb_symptom": "",
@@ -175,7 +178,13 @@
     "aufschlag": "",
     "vorhand_drive": "",
     "rueckhand": "",
-    "beinarbeit": ""
+    "beinarbeit": "",
+    "spielziel_verstehen": "",
+    "zentrale_position": "",
+    "laenge_tiefe": "",
+    "rueckhand_des_gegners": "",
+    "aufschlag_taktisch": "",
+    "fehler_vermeiden": ""
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": ""

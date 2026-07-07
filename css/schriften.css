@@ -99,3 +99,9 @@
 .fa-eye::before { content: '\f06e'; }
 .fa-magnifying-glass::before { content: '\f002'; }
 .fa-comment-dots::before { content: '\f4ad'; }
+.fa-lightbulb::before { content: '\f0eb'; }
+.fa-crosshairs::before { content: '\f05b'; }
+.fa-ruler-horizontal::before { content: '\f547'; }
+.fa-user-slash::before { content: '\f506'; }
+.fa-chess::before { content: '\f439'; }
+.fa-shield-halved::before { content: '\f3ed'; }

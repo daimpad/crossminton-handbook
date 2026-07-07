@@ -86,6 +86,9 @@
     "vermittlungsziele_gruppe": "Vermittlungsziele",
     "erklaerteil": "Erklärteil",
     "uebungsteil": "Übungsteil",
+    "reflexionsaufgabe": "Reflexionsaufgabe",
+    "als_mitgenommen": "Mitgenommen abhaken",
+    "mitgenommen": "Mitgenommen",
     "trainer_layer": "Trainer-Layer: Fehlerbilder",
     "trainer_layer_hinweis": "Diagnostische Sicht für Trainer — nur in der Trainer-Perspektive sichtbar.",
     "fb_symptom": "Symptom",
@@ -140,7 +143,7 @@
     "fortschritt": "Fortschritt",
     "fortschritt_global": "Gesamt",
     "bausteine_erledigt": "{a} von {b} Bausteinen",
-    "teile_stand": "Erklärteile {a}/{b} · Übungsteile {c}/{d}",
+    "teile_stand": "Erklärteile {a}/{b} · Aufgabenteile {c}/{d}",
     "profil_diagnose": "Deine Angaben",
     "profil_diagnose_text": "Alles hier ist jederzeit änderbar. Dein Fortschritt bleibt dabei erhalten — er hängt am Baustein, nicht am Pfad.",
     "profil_stufe": "Stufe",
@@ -176,7 +179,13 @@
     "aufschlag": "Der Aufschlag",
     "vorhand_drive": "Der Vorhand-Drive",
     "rueckhand": "Die Rückhand",
-    "beinarbeit": "Beinarbeit: Zentrum und Split-Step"
+    "beinarbeit": "Beinarbeit: Zentrum und Split-Step",
+    "spielziel_verstehen": "Das Spielziel verstehen",
+    "zentrale_position": "Zentrale Position und Feldkontrolle",
+    "laenge_tiefe": "Länge und Tiefe als einfachste Waffe",
+    "rueckhand_des_gegners": "Die Rückhand des Gegners lesen",
+    "aufschlag_taktisch": "Den Aufschlag taktisch nutzen",
+    "fehler_vermeiden": "Fehler vermeiden: die unterschätzte Taktik"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"

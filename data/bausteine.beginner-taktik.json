@@ -1,0 +1,184 @@
+{
+  "_meta": {
+    "beschreibung": "Beginner-Taktik: Themenblock der Domaene 'taktik' auf Beginner-Stufe. Erster Inhaltsblock des Themenpfads Taktik; waechst spaeter stufenuebergreifend.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "schema_erweiterung": "Taktik-Domaene: Baustein kann neben 'erklaerteil' und optionalem 'uebungsteil' ein Feld 'reflexionsaufgabe' tragen (eigenstaendig adressierbar, analog zu Symptom/Ursache/Korrektur der Fehlerbilder). Uebungsteil bei Taktik optional (nicht verpflichtend wie bei Technik).",
+    "ordnungslogik": "Bogen zunehmender Handlungskomplexitaet: verstehen -> sich positionieren -> einfachste Einwirkung -> Gegner lesen -> kontrollierte Eroeffnung -> Fehlerquote als Hebel."
+  },
+
+  "bausteine": [
+    {
+      "id": "spielziel_verstehen",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": ["antwort_gegen_defensivspieler", "fehler_resilienz"],
+      "spielziele_hinweis": "mittelbar; rahmt die Grundspannung Fehler-vermeiden vs. Gegner-zwingen. 'Fehler vermeiden' wird in Baustein fehler_vermeiden zum eigenstaendigen Thema.",
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Spielziel und neutrale Zone crossminton-eigen (ICO-Regeln 2024). Taktische Ausdeutung der Fehler-vs-Winner-Spannung aus Badminton/Rueckschlagsport (ICO-Lektion 7 Defensivtaktik).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Das Spielziel verstehen"},
+      "erklaerteil": {
+        "de": "Bevor du über Taktik nachdenkst, musst du wissen, worum es im Ballwechsel überhaupt geht. Es klingt einfach, und im Kern ist es das auch: Du gewinnst einen Punkt, wenn der Speeder im gegnerischen Feld landet — oder wenn dein Gegner einen Fehler macht.\n\nGenau darin steckt schon die ganze Taktik. Denn diese zwei Wege, einen Punkt zu machen, sind ungleich verteilt. Den Speeder aktiv ins Feld zu setzen, sodass der Gegner ihn nicht mehr erreicht, ist schwer. Den Gegner in eine Lage zu bringen, in der er den Fehler macht, ist oft leichter. Gute Taktik heißt deshalb selten, spektakulär zu punkten. Sie heißt, dem Gegner die schwierigere Aufgabe zu geben.\n\nEin Bild dafür: Stell dir den Ballwechsel als ein Kräftemessen vor, bei dem beide versuchen, den anderen aus dem Gleichgewicht zu bringen. Wer im Gleichgewicht bleibt und den anderen ins Wanken bringt, gewinnt — nicht der, der am härtesten zuschlägt.\n\nUnd hier kommt das Besondere am Crossminton ins Spiel. Es gibt kein Netz. Zwischen den beiden Feldern liegt eine neutrale Zone, in der der Speeder nicht landen darf. Du überwindest also keine Höhe wie im Badminton, sondern eine Distanz — und dahinter wartet ein klar begrenztes Zielfeld. Dein ganzes taktisches Denken richtet sich damit auf diese Frage aus: Wie bringe ich den Speeder sauber über die Zone in ein Feld, das mein Gegner nicht mehr verteidigen kann?\n\nAlles Weitere — Position, Länge, das Lesen des Gegners — sind Antworten auf genau diese Frage."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an dein letztes Spiel zurück, oder achte im nächsten bewusst darauf: Wie viele deiner Punkte hast du durch einen eigenen, aktiven Treffer gewonnen — und wie viele, weil der Gegner den Speeder ins Aus oder in die Zone gesetzt hat? Die meisten Anfänger überschätzen den ersten Weg deutlich. Wenn du ehrlich zählst, wirst du sehen, wie viel öfter der zweite Weg zum Punkt führt. Diese Zahl im Kopf zu haben, verändert, wie du spielst."
+      }
+    },
+
+    {
+      "id": "zentrale_position",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["spielziel_verstehen"],
+      "voraussetzungen_querverweis": "beinarbeit (Technik) — loest den dort gelegten Faden der zentralen Position taktisch ein",
+      "spielziele": ["wiederholte_antrittsschnelligkeit", "umschaltmoment_erkennen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Zentrale Position crossminton-eigen (Gossen-Footwork). Taktische Ausdeutung der Feldkontrolle aus Badminton/Rueckschlagsport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Zentrale Position und Feldkontrolle"},
+      "erklaerteil": {
+        "de": "Es gibt einen Ort auf deinem Feld, der dir mehr Spiele gewinnt als jeder einzelne Schlag: die Mitte. Von der zentralen Position aus sind deine Wege zu allen Ecken am kürzesten. Wer dort steht, kommt überall rechtzeitig hin. Wer woanders steht, kommt irgendwo zu spät.\n\nDeshalb ist das Zurückkehren zur Mitte nach jedem Schlag keine reine Laufarbeit — es ist eine taktische Entscheidung. Jeder Speeder zieht dich aus der Mitte heraus, in eine Ecke, nach vorn, nach hinten. Und in genau diesem Moment ist dein Feld offen. Die Kunst besteht darin, nach dem Schlag sofort zurückzukehren, bevor dein Gegner die Lücke bespielen kann.\n\nEin Bild: Denk an die Mitte als dein Zuhause. Du gehst hinaus, um einen Ball zu holen, und kehrst sofort zurück. Je länger du draußen bleibst, desto größer die offene Tür hinter dir.\n\nDas gilt im Crossminton besonders, weil das Feld ein Quadrat ist und dein Gegner den Speeder in jede Ecke setzen kann. Es gibt keine schmale Bahn wie beim Netzspiel — die Mitte ist der einzige Ort, von dem aus du alle vier Ecken gleich schnell erreichst."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte im nächsten Spiel auf einen einzigen Punkt: Kehrst du nach jedem Schlag zur Mitte zurück, oder bleibst du dort stehen, wo du gerade getroffen hast? Die meisten verlieren Punkte, weil sie nach einem guten Schlag kurz stehen bleiben und sich am eigenen Ball erfreuen — und genau dann kommt der Speeder in die offene Ecke. Ein bewusstes „zurück zur Mitte\" nach jedem Schlag verändert dein Spiel mehr als jede neue Technik."
+      }
+    },
+
+    {
+      "id": "laenge_tiefe",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["zentrale_position"],
+      "spielziele": ["laengen_tiefensteuerung", "antwort_gegen_defensivspieler", "umschaltloesung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Spiel in den hinteren Court als Drucktaktik crossminton-eigen belegt (ICO-Lektion 7). Muster tief-dann-kurz aus Badminton/Rueckschlagsport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Länge und Tiefe als einfachste Waffe"},
+      "erklaerteil": {
+        "de": "Du hast eine Waffe, die keinen harten Schlag braucht und trotzdem sofort wirkt: die Länge. Wohin du den Speeder setzt, entscheidet oft mehr als wie hart du ihn schlägst.\n\nDer Grund liegt in der zentralen Position. Dein Gegner will, genau wie du, in der Mitte seines Feldes stehen — von dort erreicht er jede Ecke am schnellsten. Wenn du den Speeder tief nach hinten spielst, zwingst du ihn aus dieser Mitte heraus, weit nach hinten. Jetzt ist seine Vorderseite offen. Der nächste Speeder, kurz nach vorn gespielt, wird für ihn zur Hetzjagd.\n\nDas ist das einfachste taktische Muster im Crossminton: tief, dann kurz. Du ziehst den Gegner nach hinten und setzt den nächsten Ball vor ihn. Oder umgekehrt — du holst ihn nach vorn und spielst dann lang über ihn hinweg. In beiden Fällen gewinnst du nicht durch Kraft, sondern durch die Distanz, die dein Gegner überwinden muss.\n\nEin Bild: Denk an dich als jemanden, der einen Hund an der langen Leine im Kreis laufen lässt. Du stehst ruhig in der Mitte, dein Gegner rennt. Je weiter du seine Wege machst, desto eher kommt er zu spät — und ein Gegner, der zu spät kommt, macht Fehler.\n\nWeil es im Crossminton kein Netz gibt, ist der tiefe Ball besonders wirksam. Du musst keine Höhe finden, um lang zu spielen — du trägst den Speeder flach und weit durch die neutrale Zone bis in den hinteren Teil des gegnerischen Feldes. Ein flacher, langer Ball ist schwerer zu lesen und schwerer zurückzuspielen als ein hoher."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Tiefe treffen",
+          "ziel": "Den Speeder zuverlässig in den hinteren Teil des gegnerischen Feldes setzen.",
+          "schritte": [
+            "Leg dir im hinteren Drittel des gegnerischen Feldes eine Ziellinie oder ein Handtuch als Marke aus.",
+            "Spiele vom eigenen Feld aus Aufschläge und Drives gezielt hinter diese Marke.",
+            "Zähle, wie viele von zehn Speedern hinter der Marke landen.",
+            "Steigere dich über mehrere Durchgänge — erst die Vorhand, dann die Rückhand."
+          ],
+          "selbstkontrolle": "Achte darauf, ob du die Tiefe mit einem flachen, getragenen Schlag erreichst oder ob du den Speeder hoch werfen musst. Der flache, lange Ball ist das Ziel — er kommt schneller an und gibt dem Gegner weniger Zeit."
+        }
+      }
+    },
+
+    {
+      "id": "rueckhand_des_gegners",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["laenge_tiefe"],
+      "voraussetzungen_querverweis": "rueckhand (Technik) — loest den dort gelegten Motivationsrahmen ein",
+      "spielziele": ["antwort_gegen_angreifer", "gegner_muster_lesen", "treffsicherheit_im_ziel"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Wiederholtes Anspielen der gegnerischen Rueckhandecke crossminton-eigen belegt (ICO-Lektion 7). Rueckhand als Schwaeche aus Badminton-Taktik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Die Rückhand des Gegners lesen"},
+      "erklaerteil": {
+        "de": "Bisher ging es um dich — deine Position, deine Länge. Jetzt richtest du den Blick zum ersten Mal auf den Gegner als jemanden mit einer Schwäche, die du nutzen kannst. Und die häufigste Schwäche hat einen Namen: die Rückhand.\n\nBei den meisten Spielern ist die Rückhandseite die unsicherere. Sie erreicht weniger Tempo, weniger Kontrolle, weniger Reichweite als die Vorhand. Das ist keine Ausnahme, sondern die Regel — auch bei dir selbst, wie du aus dem Technikteil weißt. Genau deshalb ist es eine der verlässlichsten taktischen Entscheidungen überhaupt, den Speeder immer wieder auf die Rückhandseite des Gegners zu spielen.\n\nDer Effekt ist doppelt. Erstens bekommst du schwächere, kürzere Rückschläge, die du leichter unter Druck setzen kannst. Zweitens — und das ist subtiler — zwingst du den Gegner, seine schwache Seite zu schützen. Er verschiebt sich, um die Rückhand zu decken, und öffnet dabei die Vorhandseite. Jetzt hast du zwei Ziele statt einem.\n\nEin Bild: Du klopfst immer wieder an dieselbe Tür. Entweder sie gibt nach — der schwache Rückschlag kommt —, oder der Gegner stellt sich davor und lässt die andere Tür unbewacht.\n\nDas ist kein unfairer Trick, sondern der Kern taktischen Spiels: die Schwäche des Gegenübers erkennen und geduldig bespielen, statt auf den einen großen Schlag zu hoffen."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Rückhandecke treffen",
+          "ziel": "Den Speeder gezielt und wiederholt auf die schwache Seite des Gegners setzen.",
+          "schritte": [
+            "Markiere im gegnerischen Feld die Rückhandecke (für einen Rechtshänder die linke hintere Ecke) mit einem Handtuch.",
+            "Spiele aus verschiedenen Positionen gezielt Speeder in diese Ecke — erst Aufschläge, dann Drives.",
+            "Zähle deine Treffer pro zehn Versuchen.",
+            "Steigere die Schwierigkeit: Spiele abwechselnd einen Ball in die Rückhandecke und einen kurz nach vorn, um das Muster „schwache Seite binden, dann öffnen\" zu üben."
+          ],
+          "selbstkontrolle": "Achte darauf, dass du die Ecke mit einem sicheren, kontrollierten Ball anspielst, nicht mit einem riskanten Winner. Die Rückhand-Taktik lebt von der Wiederholung, nicht vom einzelnen perfekten Schlag."
+        }
+      }
+    },
+
+    {
+      "id": "aufschlag_taktisch",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["rueckhand_des_gegners"],
+      "voraussetzungen_querverweis": "aufschlag (Technik) — taktische Ausdeutung der dort gelernten Handlung",
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "gegner_muster_lesen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Aufschlag auf Rueckhandecke crossminton-eigen (ICO-Lektion 7) und Badminton (Stewart). Variation/Unberechenbarkeit aus Rueckschlagsport-Taktik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Den Aufschlag taktisch nutzen"},
+      "erklaerteil": {
+        "de": "Der Aufschlag ist die einzige Handlung im ganzen Spiel, die du vollständig kontrollierst. Kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand, du wählst Zeitpunkt, Ziel und Tempo. Diese eine geschenkte Gelegenheit ungenutzt zu lassen, wäre Verschwendung.\n\nEin regelkonformer Aufschlag bringt den Speeder einfach ins gegnerische Feld. Ein taktischer Aufschlag bringt ihn dorthin, wo er dem Gegner Mühe macht. Zwei Stellschrauben hast du dafür: das Ziel und die Variation.\n\nBeim Ziel gilt, was du schon kennst: die Rückhandseite. Ein Aufschlag tief in die Rückhandecke zwingt den Gegner gleich zu Beginn des Ballwechsels zu seinem unsichersten Schlag. Oft bekommst du einen schwachen Rückschlag, den du sofort unter Druck setzen kannst.\n\nBei der Variation gilt: Werde nicht berechenbar. Wenn jeder deiner Aufschläge gleich kommt — gleiche Länge, gleiches Ziel, gleiches Tempo —, stellt sich der Gegner darauf ein. Misch tiefe und kürzere Aufschläge, wechsle das Ziel. Allein die Unberechenbarkeit erzeugt Fehler.\n\nEin Bild: Der Aufschlag ist dein erster Zug im Schach. Du kannst ihn verschenken, indem du immer dasselbe ziehst — oder du eröffnest damit einen Plan."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachte im nächsten Spiel deine eigenen Aufschläge: Kommen sie alle gleich, oder variierst du bewusst? Und wohin servierst du — einfach ins Feld, oder gezielt auf die schwache Seite? Die meisten Anfänger servieren nur, um den Ballwechsel zu beginnen. Wer stattdessen mit jedem Aufschlag eine Absicht verbindet, gewinnt Punkte, bevor der Ballwechsel richtig begonnen hat."
+      }
+    },
+
+    {
+      "id": "fehler_vermeiden",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["spielziel_verstehen"],
+      "voraussetzungen_hinweis": "loest die in spielziel_verstehen aufgemachte Grundspannung auf; setzt inhaltlich dort an, nicht am unmittelbar vorausgehenden Baustein",
+      "spielziele": ["fehler_resilienz", "konstanz_unter_wiederholung", "nervenstaerke_enger_satz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Defensivtaktik (sichere Schlaege, eigene Fehler minimieren, Gegnerfehler erhoehen) crossminton-eigen belegt (ICO-Lektion 7).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Fehler vermeiden: die unterschätzte Taktik"},
+      "erklaerteil": {
+        "de": "Zum Abschluss die vielleicht wichtigste taktische Einsicht — und die, die den meisten Anfängern am schwersten fällt zu glauben: Auf deinem Niveau gewinnst du die meisten Punkte nicht, weil du groß triffst. Du gewinnst sie, weil dein Gegner den Speeder ins Aus oder in die Zone setzt. Und umgekehrt verlierst du die meisten Punkte durch deine eigenen Fehler.\n\nDas klingt ernüchternd, ist aber eine gute Nachricht. Denn deine Fehlerquote kannst du sofort senken — ganz ohne bessere Technik. Du musst nur sicherer wählen, was du spielst.\n\nSicher spielen heißt: den Speeder mit Rand nach innen setzen, nicht auf die Linie. Den Winkel wählen, der dir Spielraum lässt, nicht den spektakulären. Lieber einen Ball mehr zurückspielen als einen riskanten Winner versuchen, der dreimal von vier Malen im Aus landet. Jeder Ball, den du sicher zurückbringst, gibt deinem Gegner die Chance, seinen Fehler zu machen.\n\nEin Bild: Stell dir vor, ihr beide tragt einen Eimer Wasser durch einen Parcours. Es gewinnt nicht, wer am schnellsten rennt, sondern wer am wenigsten verschüttet. Der Ballwechsel ist genau das — ein Wettbewerb darum, wer zuerst die Geduld oder die Kontrolle verliert.\n\nDas heißt nicht, dass du nie angreifen sollst. Es heißt, dass Sicherheit deine Grundeinstellung ist und der Angriff die Ausnahme, für die sich eine wirklich gute Gelegenheit bietet. Wer das umdreht — Angriff als Regel, Sicherheit als Ausnahme — verschenkt auf Anfängerniveau die meisten Punkte."
+      },
+      "reflexionsaufgabe": {
+        "de": "Zähl im nächsten Spiel bewusst deine eigenen Fehler — jeden Speeder, den du ins Aus oder in die Zone setzt. Vergleiche diese Zahl mit der Zahl deiner echten Winner. Bei den meisten Anfängern übersteigen die eigenen Fehler die Winner deutlich. Diese eine Zahl zu kennen, ist der schnellste Weg, mehr Spiele zu gewinnen — noch vor jeder technischen Verbesserung."
+      }
+    }
+  ],
+
+  "delta_bausteine": [
+    {
+      "id": "aufschlag_taktisch_delta_bad",
+      "typ": "delta",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "aufschlag_taktisch",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["aufschlag_taktisch"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "laengen_tiefensteuerung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Den Aufschlag taktisch nutzen — für Umsteiger aus dem Badminton"},
+      "erklaerteil": {
+        "de": "Du bringst ein durchdachtes Aufschlag-Repertoire mit — aber ein großer Teil davon zielt auf etwas, das es hier nicht gibt. Im Badminton dreht sich die Aufschlagtaktik um das Netz: der kurze, tief gehaltene Aufschlag knapp über die Kante, das ganze Spiel um den dritten Ball. Im Crossminton fällt das weg. Kein Netz, kein kurzes Vorfeld — zwischen euch liegt die neutrale Zone, und dein Aufschlag muss über sie hinweg in ein tiefes Zielfeld.\n\nDeine taktische Vorstellung verlagert sich damit von der Höhe zur Tiefe. Nicht mehr „knapp drüber und kurz\", sondern „flach, weit und gezielt\". Der kurze Aufschlag, deine feine Waffe im Badminton, verliert hier seine Rolle. An seine Stelle tritt die Variation über Länge und Ziel.\n\nWas du behalten darfst: das Anspielen der Rückhand. Der Aufschlag auf die schwache Seite des Gegners funktioniert hier genauso wie dort — nur eben tief in die Rückhandecke statt kurz an die Netzkante.\n\nEin kleiner Test: Wenn du merkst, dass du den Speeder kurz und hoch ansetzt, als müsstest du eine Kante überwinden, spielst du noch Badminton. Ziel ist der flache, lange Aufschlag, der die Zone überbrückt und tief ankommt."
+      }
+    }
+  ]
+}
