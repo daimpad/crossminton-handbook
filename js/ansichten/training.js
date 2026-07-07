@@ -31,7 +31,7 @@ function renderListe(el, daten) {
           <p class="leise">${esc(text(einheit.beschreibung) ?? '')}</p>
           <p class="chip-zeile">${chips}</p>
           <p class="leise">${esc(t('uebungen_anzahl', { n: einheit.uebungsteile.length }))} · ${esc(zaehlerText)}</p>
-          <a class="knopf knopf-primaer" href="#/training/${esc(einheit.id)}">${esc(t('einheit_starten'))}</a>
+          <a class="knopf knopf-primaer" href="#/training/${esc(einheit.id)}"><i class="fa-solid fa-play" aria-hidden="true"></i> ${esc(t('einheit_starten'))}</a>
         </div>`;
     })
     .join('');

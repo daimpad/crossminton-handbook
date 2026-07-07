@@ -38,6 +38,8 @@ Konsolen-/Seitenfehler mitschneiden — Soll ist null.
 5. Training: Einheit durchsteppen → Kontinuität zählt; quittiert nur Übungsteile (globale Projektion steigt erst mit gelesenen Erklärteilen — kein Bug).
 6. Kompetenzpfad vollenden → Meilenstein-Überlagerung.
 7. Profil: Sprachwechsel en (Fallback-Hinweis), Reset mit confirm → zurück ins Onboarding.
+8. Wizard-Ausstieg: `#ob-direkt` auf Schritt 1 → Kapitelübersicht ohne Angaben; Heim/Kompetenzpfad/Profil zeigen dann Stufe-nachholen-Zustände.
+9. Desktop (≥768px): Bottom-Bar verborgen, Hamburger `#hamburger` öffnet `#hauptmenue` (Klasse `offen`, ~400ms Übergang), Escape/Klick schließt; Schriften prüfbar via `document.fonts.check('1rem Rubik')` und `'900 1rem "Font Awesome 6 Free"'`.
 
 Engine-Logik separat und schnell: `node tests/engine.test.mjs` (kein Ersatz für den Browser-Lauf).
 

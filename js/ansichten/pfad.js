@@ -64,6 +64,20 @@ function bindeSkip(el, daten, kontext, stationen) {
 export function renderKompetenzpfad(el, daten, stufe) {
   const pfad = kompetenzpfad(daten, stufe || undefined);
   const kontext = stufe ? `kompetenz:${stufe}` : 'kompetenz';
+  if (!pfad.stufe) {
+    // Ohne Stufe keine Sequenz (Spez. 7.1) — der Zugriff auf die Inhalte
+    // bleibt über Themen-/Individualpfad trotzdem frei.
+    el.innerHTML = `
+      <h1>${esc(t('pfad_kompetenz'))}</h1>
+      <div class="karte">
+        <p class="leise">${esc(t('stufe_fehlt'))}</p>
+        <div class="knopf-zeile" style="justify-content:flex-start">
+          <a class="knopf knopf-primaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>
+          <a class="knopf knopf-leise" href="#/pfad/themen">${esc(t('kapitel_entdecken'))}</a>
+        </div>
+      </div>`;
+    return;
+  }
   const inhalt =
     pfad.stationen.length === 0
       ? `<div class="karte"><p class="leise">${esc(t('leer_stufe'))}</p></div>`

@@ -14,13 +14,24 @@ export function renderHeim(el, daten) {
   const naechste = pfad.stationen.find((s) => !s.status.absolviert);
 
   let weiterlernen = '';
-  if (naechste) {
+  if (!d.stufe) {
+    // Freier Einstieg ohne Wizard: Einladung statt geführtem Wiedereinstieg.
+    weiterlernen = `
+      <section class="karte karte-akzent">
+        <h2>${esc(t('kapitel_entdecken'))}</h2>
+        <p class="leise">${esc(t('onboarding_einladung'))}</p>
+        <div class="knopf-zeile" style="justify-content:flex-start">
+          <a class="knopf knopf-primaer" href="#/pfad/themen">${esc(t('kapitel_entdecken'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="knopf knopf-sekundaer" href="#/onboarding">${esc(t('onboarding_starten'))}</a>
+        </div>
+      </section>`;
+  } else if (naechste) {
     const nummer = pfad.stationen.indexOf(naechste) + 1;
     weiterlernen = `
       <section class="karte karte-akzent">
         <p class="leise">${esc(t('weiterlernen'))} · ${esc(t('station_x_von_y', { a: nummer, b: pfad.stationen.length }))}</p>
         <h2>${esc(label('baustein', naechste.baustein.id))}</h2>
-        <a class="knopf knopf-primaer" href="#/baustein/${esc(naechste.baustein.id)}?kontext=kompetenz">${esc(t('weiter'))}</a>
+        <a class="knopf knopf-primaer" href="#/baustein/${esc(naechste.baustein.id)}?kontext=kompetenz">${esc(t('weiter'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       </section>`;
   } else if (pfad.stationen.length > 0) {
     weiterlernen = `
@@ -47,15 +58,25 @@ export function renderHeim(el, daten) {
       </a>`
     : '';
 
-  el.innerHTML = `
-    ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
-    ${weiterlernen}
-    <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>
+  const kompetenzKarte = d.stufe
+    ? `
     <a class="karte karte-link" href="#/pfad/kompetenz">
       <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>
       <p class="leise">${esc(t('pfad_kompetenz_text'))}</p>
       ${balkenHtml(pfadProjektion)}
-    </a>
+    </a>`
+    : `
+    <div class="karte">
+      <h3>${esc(t('pfad_kompetenz'))}</h3>
+      <p class="leise">${esc(t('stufe_fehlt'))}</p>
+      <a class="knopf knopf-sekundaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>
+    </div>`;
+
+  el.innerHTML = `
+    ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
+    ${weiterlernen}
+    <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>
+    ${kompetenzKarte}
     ${trainerKarte}
     <a class="karte karte-link" href="#/pfad/themen">
       <h3>${esc(t('pfad_themen'))}</h3>

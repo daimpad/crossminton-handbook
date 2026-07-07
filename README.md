@@ -34,7 +34,9 @@ Abgedeckt: Datenvalidierung, Kompetenz-/Themen-/Individualpfad, Cross-Sport-Modi
 
 ```
 index.html                 App-Shell (SPA, Hash-Routing)
-css/app.css                mobile-first, hell/dunkel, Systemschriften
+css/app.css                helles Design (#38a4f1), mobile Bottom-Bar / Desktop-Hamburger
+css/schriften.css          lokale Schriften: Rubik + Font-Awesome-Subset (Icons ergänzen = eine Codepoint-Zeile)
+assets/fonts/              woff2-Dateien inkl. Lizenzen (OFL / FA Free)
 js/
   app.js                   Boot, Router, Navigation
   daten.js                 JSON laden, Indizes, Konsistenzprüfung

@@ -43,6 +43,27 @@ function beschrifteRahmen() {
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     verweis.querySelector('.nav-text').textContent = beschriftungen[verweis.dataset.nav];
   }
+  document.querySelector('.menue-titel').textContent = t('menue');
+  document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
+  document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
+}
+
+// Hamburger-Menü (Desktop): Lade gleitet von rechts herein, Punkte gestaffelt.
+function oeffneMenue() {
+  const menue = document.getElementById('hauptmenue');
+  menue.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => menue.classList.add('offen')));
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+}
+
+function schliesseMenue() {
+  const menue = document.getElementById('hauptmenue');
+  if (menue.hidden) return;
+  menue.classList.remove('offen');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  window.setTimeout(() => {
+    menue.hidden = true;
+  }, 400);
 }
 
 function renderFehler(el, fehler) {
@@ -89,6 +110,10 @@ function rendern() {
   if (roh !== letzteRoute) {
     window.scrollTo(0, 0);
     letzteRoute = roh;
+    // Einstiegs-Übergang nur bei Routenwechsel, nicht bei Zustands-Neuzeichnung.
+    el.classList.remove('einstieg');
+    void el.offsetWidth;
+    el.classList.add('einstieg');
   }
 }
 
@@ -108,6 +133,14 @@ async function boot() {
     return;
   }
   for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
+
+  document.getElementById('hamburger').addEventListener('click', oeffneMenue);
+  for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
+    element.addEventListener('click', schliesseMenue);
+  }
+  window.addEventListener('keydown', (ereignis) => {
+    if (ereignis.key === 'Escape') schliesseMenue();
+  });
 
   window.addEventListener('hashchange', rendern);
   window.addEventListener('app:rendern', rendern);
