@@ -124,3 +124,12 @@
 .fa-bomb::before { content: '\f1e2'; }
 .fa-users::before { content: '\f0c0'; }
 .fa-flag-checkered::before { content: '\f11e'; }
+.fa-toolbox::before { content: '\f552'; }
+.fa-film::before { content: '\f008'; }
+.fa-water::before { content: '\f773'; }
+.fa-anchor::before { content: '\f13d'; }
+.fa-chart-line::before { content: '\f201'; }
+.fa-rocket::before { content: '\f135'; }
+.fa-tree::before { content: '\f1bb'; }
+.fa-stopwatch::before { content: '\f2f2'; }
+.fa-scale-balanced::before { content: '\f24e'; }
