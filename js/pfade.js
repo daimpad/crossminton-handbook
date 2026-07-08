@@ -21,6 +21,18 @@ function standardVergleicher(daten) {
   return (a, b) => domIdx(a) - domIdx(b) || daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id);
 }
 
+// Kompetenzpfad (kann über Stufen kumulieren): Stufe primär, damit sich
+// Stufen-Blöcke bilden (Beginner-Block, dann Fortgeschritten-Block), darin
+// Domäne und Pool-Reihenfolge (Spez. 6.1 „innerhalb einer Stufe").
+function kompetenzVergleicher(daten) {
+  const standard = standardVergleicher(daten);
+  const stufenIdx = (b) => {
+    const idx = daten.koennensOrdnung.indexOf(niedrigsteStufe(daten, b));
+    return idx === -1 ? daten.koennensOrdnung.length : idx;
+  };
+  return (a, b) => stufenIdx(a) - stufenIdx(b) || standard(a, b);
+}
+
 // Ziele normalisieren: erlaubt sind null, ein Einzelziel {dimension, faktor},
 // ein Ziel mit Faktorliste sowie eine Liste von Zielen (Mehrfachauswahl).
 // Ältere gespeicherte Einzelziele bleiben so ohne Migration gültig.
@@ -76,14 +88,23 @@ function zuStationen(daten, bausteine, vergleicher, herkunft) {
 
 // 6.1 Kompetenzpfad — zugleich Standard-Basispfad des Cross-Sport-Modifikators:
 // nur hier ist der Modifikator initial verdrahtet (Delta, Skip, Kennzeichnung).
+// Über Könnensstufen kumulativ: ein Fortgeschrittener sieht Beginner UND
+// Fortgeschritten (aufbauend); jeder Baustein einmalig an seiner niedrigsten
+// Stufe (Spez. 6.1). Trainer ist orthogonal und bleibt exakt.
 export function kompetenzpfad(daten, stufe = diagnose().stufe) {
   const herkunft = diagnose().herkunft;
-  const menge = daten.bausteine.filter((b) => niedrigsteStufe(daten, b) === stufe);
+  const zielIndex = daten.koennensOrdnung.indexOf(stufe);
+  const menge = daten.bausteine.filter((b) => {
+    const eigene = niedrigsteStufe(daten, b);
+    if (zielIndex < 0) return eigene === stufe; // Trainer o. Ä.: exakt
+    const eigenerIndex = daten.koennensOrdnung.indexOf(eigene);
+    return eigenerIndex >= 0 && eigenerIndex <= zielIndex; // bis einschließlich Zielstufe
+  });
   return {
     art: 'kompetenz',
     stufe,
     herkunft,
-    stationen: zuStationen(daten, menge, standardVergleicher(daten), herkunft),
+    stationen: zuStationen(daten, menge, kompetenzVergleicher(daten), herkunft),
   };
 }
 

@@ -58,6 +58,7 @@ Farben, Typografie und Icon-Regeln stehen in `docs/ci.md` und sind als CSS-Varia
 - **`voraussetzungen_querverweis` ist Dokumentation**, keine Graph-Kante (wie `*_hinweis`/`*_beleg`). Der Graph liest ausschließlich `voraussetzungen`. Der Voraussetzungsgraph darf verzweigen (nicht nur lineare Ketten) — `topoSortiere` (Kahn) löst das auf.
 - **JSON der Referenzinhalte nicht umformatieren** — der *Inhalt* von `data/bausteine.beginner-technik.json` bleibt byte-identisch. Einzige erlaubte Änderung: koordinierte Vokabular-Erweiterungen in `vokabulare` (z. B. neue `transfer_herkunft`-Kürzel), minimal und formattreu, mit Label in `labels/de.json`. Andere Vokabular-Werte (Domänen, Stufen) analog.
 - **Sternförmiger Graph** ist zulässig (Mentales/Athletik): alle Werkzeug-Bausteine hängen an einem Rahmen-Einstieg, nicht aneinander. `topoSortiere` löst das als Baum auf (Wurzel zuerst, Blätter in Pool-Reihenfolge). Zusammen mit der Taktik-Rückverzweigung die zweite nicht-lineare Graphform.
+- **Kompetenzpfad ist über Könnensstufen kumulativ** (`js/pfade.js`): `kompetenzpfad(stufe)` zeigt alle Bausteine *bis einschließlich* der gewählten Stufe (ein Fortgeschrittener sieht Beginner + Fortgeschritten), jeder einmalig an seiner niedrigsten Stufe. `kompetenzVergleicher` sortiert Stufe primär → Stufen-Blöcke. Trainer bleibt orthogonal-exakt. `voraussetzungen` dürfen stufenübergreifend zeigen (weiche Kante, ordnet nie sperrt) — der Baustein wird dabei nie umklassifiziert.
 
 ## Sprache
 

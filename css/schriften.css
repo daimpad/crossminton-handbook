@@ -114,3 +114,8 @@
 .fa-child-reaching::before { content: '\e59d'; }
 .fa-gauge-high::before { content: '\f625'; }
 .fa-bed::before { content: '\f236'; }
+.fa-bolt::before { content: '\f0e7'; }
+.fa-arrow-up-long::before { content: '\f176'; }
+.fa-hammer::before { content: '\f6e3'; }
+.fa-feather::before { content: '\f52d'; }
+.fa-arrows-spin::before { content: '\e4bb'; }
