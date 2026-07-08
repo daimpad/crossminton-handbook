@@ -59,6 +59,8 @@
     "pfad_kompetenz_text": "Der geführte Weg durch deine Stufe — Baustein für Baustein in sinnvoller Reihenfolge.",
     "pfad_themen": "Themenpfad",
     "pfad_themen_text": "Frei stöbern nach Themenfeld. Eine Reihenfolge wird vorgeschlagen, du entscheidest.",
+    "pfad_spielform": "Das Doppel",
+    "pfad_spielform_text": "Das ganze Doppel als Querschnittsthema — quer über Taktik, Athletik und Mentales.",
     "pfad_individual": "Individualpfad",
     "pfad_individual_text": "Nur die Bausteine, die auf dein gewähltes Ziel einzahlen.",
     "pfad_training": "Trainingspfad",
@@ -218,7 +220,14 @@
     "explosivitaet": "Explosivität und Sprungkraft",
     "rumpfstabilitaet": "Rumpfstabilität und die Kraftübertragung",
     "intervallausdauer": "Spezifische Ausdauer — der Intervallcharakter",
-    "belastung_steuern_regenerieren": "Belastung steuern und regenerieren"
+    "belastung_steuern_regenerieren": "Belastung steuern und regenerieren",
+    "doppel_als_eigenes_spiel": "Das Doppel als eigenes Spiel",
+    "angriff_im_paar": "Angriff im Paar",
+    "verteidigung_im_paar": "Verteidigung im Paar",
+    "bewegung_als_einheit": "Bewegung als Einheit",
+    "verstaendigung_im_paar": "Verständigung im Paar",
+    "aufschlag_rueckschlag_doppel": "Aufschlag und Rückschlag im Doppel",
+    "das_umschalten_im_doppel": "Das Umschalten im Doppel"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"
@@ -254,6 +263,10 @@
       "fortgeschritten": "Fortgeschritten",
       "experte": "Experte",
       "trainer": "Trainer-Perspektive"
+    },
+    "spielform": {
+      "einzel": "Einzel",
+      "doppel": "Doppel"
     },
     "baustein_typ": {
       "micro": "Micro-Baustein",

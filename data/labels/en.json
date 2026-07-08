@@ -58,6 +58,8 @@
     "pfad_kompetenz_text": "",
     "pfad_themen": "",
     "pfad_themen_text": "",
+    "pfad_spielform": "",
+    "pfad_spielform_text": "",
     "pfad_individual": "",
     "pfad_individual_text": "",
     "pfad_training": "",
@@ -217,7 +219,14 @@
     "explosivitaet": "",
     "rumpfstabilitaet": "",
     "intervallausdauer": "",
-    "belastung_steuern_regenerieren": ""
+    "belastung_steuern_regenerieren": "",
+    "doppel_als_eigenes_spiel": "",
+    "angriff_im_paar": "",
+    "verteidigung_im_paar": "",
+    "bewegung_als_einheit": "",
+    "verstaendigung_im_paar": "",
+    "aufschlag_rueckschlag_doppel": "",
+    "das_umschalten_im_doppel": ""
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": ""
@@ -253,6 +262,10 @@
       "fortgeschritten": "",
       "experte": "",
       "trainer": ""
+    },
+    "spielform": {
+      "einzel": "",
+      "doppel": ""
     },
     "baustein_typ": {
       "micro": "",

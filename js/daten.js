@@ -22,6 +22,7 @@ const INHALTSDATEIEN = [
   'data/bausteine.fortgeschritten-taktik.json',
   'data/bausteine.fortgeschritten-mentales.json',
   'data/bausteine.fortgeschritten-athletik_kondition.json',
+  'data/bausteine.doppel-thema.json',
 ];
 
 export async function ladeDaten() {
@@ -53,6 +54,12 @@ export function aufgabenTeile(baustein) {
 
 export function domaenenVon(baustein) {
   return Array.isArray(baustein.domaene) ? baustein.domaene : [baustein.domaene];
+}
+
+// Spielform (optionale Metadaten-Dimension, orthogonal zur Domäne): fehlendes
+// Feld = 'einzel'. Alle Alt-Bausteine gelten damit ohne Änderung als Einzel.
+export function spielformVon(baustein) {
+  return baustein.spielform || 'einzel';
 }
 
 // Ein mehrfach zugeordneter Baustein gehört in den Kompetenzpfad seiner
@@ -161,6 +168,7 @@ function pruefeDaten(daten) {
       if (!inVokabular(voka.kompetenzstufe, s)) w.push(`${b.id}: unbekannte Stufe "${s}"`);
     }
     if (!inVokabular(voka.baustein_typ, b.typ)) w.push(`${b.id}: unbekannter Typ "${b.typ}"`);
+    if (b.spielform != null && !inVokabular(voka.spielform, b.spielform)) w.push(`${b.id}: unbekannte Spielform "${b.spielform}"`);
     for (const v of b.voraussetzungen || []) {
       if (!daten.bausteinVonId.has(v)) w.push(`${b.id}: Voraussetzung "${v}" existiert nicht`);
     }

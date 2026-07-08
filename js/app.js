@@ -5,7 +5,7 @@
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
-import { renderIndividual, renderKompetenzpfad, renderThemen } from './ansichten/pfad.js';
+import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
@@ -104,6 +104,8 @@ function rendern() {
     renderKompetenzpfad(el, daten, segmente[2] || null);
   } else if (segmente[0] === 'pfad' && segmente[1] === 'themen') {
     renderThemen(el, daten, segmente[2] ? decodeURIComponent(segmente[2]) : null);
+  } else if (segmente[0] === 'pfad' && segmente[1] === 'spielform') {
+    renderSpielform(el, daten, segmente[2] ? decodeURIComponent(segmente[2]) : null);
   } else if (segmente[0] === 'pfad' && segmente[1] === 'individual') {
     renderIndividual(el, daten);
   } else if (segmente[0] === 'training') {

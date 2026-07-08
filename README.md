@@ -7,7 +7,7 @@ Clientseitige, mobil-orientierte Lernapp für Crossminton. Kein Server, kein Bui
 ## Was die App kann
 
 - **Willkommensseite** mit zwei Einstiegen: direkt ins Handbuch (alle Kapitel frei, ohne Angaben) oder der geführte Weg über die Stufen-Diagnostik.
-- **Vier Pfade** durch denselben Baustein-Pool: Kompetenz-, Themen-, Individual- und Trainingspfad, dazu der Cross-Sport-Modifikator (angepasste Erklärungen für Umsteiger, z. B. aus Badminton).
+- **Vier Pfade** durch denselben Baustein-Pool: Kompetenz-, Themen-, Individual- und Trainingspfad, dazu die Spielform-Achse (das Doppel als Querschnittsthema über Domänen) und der Cross-Sport-Modifikator (angepasste Erklärungen für Umsteiger, z. B. aus Badminton).
 - **Getrennte Fortschritts-Quittierung** je Erklär- und Übungsteil, Projektionen (global/pfadbezogen), Meilensteine und kumulative Kontinuität — alles lokal im Browser.
 - **Mobil zuerst**, hell, mit lokaler Schrift (Rubik) und Font-Awesome-Icons; Bottom-Bar auf dem Handy, Hamburger-Menü ab Tablet.
 
@@ -68,6 +68,7 @@ data/
   bausteine.fortgeschritten-taktik.json   Fortgeschritten-Taktik; weiche Kanten über Stufen- UND Domänengrenze
   bausteine.fortgeschritten-mentales.json Fortgeschritten-Mentales (mentales System; durchgehend Reflexionsaufgaben)
   bausteine.fortgeschritten-athletik_kondition.json  Fortgeschritten-Athletik (Gesundheitsrahmen; Reflexion + qualitative Übung)
+  bausteine.doppel-thema.json       Doppel als Querschnittsthema über Domänen (Dimension spielform:doppel)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)

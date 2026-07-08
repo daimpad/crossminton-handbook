@@ -134,6 +134,7 @@
       "id": "doppel_grundlagen",
       "typ": "micro",
       "domaene": "taktik",
+      "spielform": "doppel",
       "kompetenzstufe": ["fortgeschritten"],
       "voraussetzungen": ["zentrale_position"],
       "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): das Doppel setzt das Verstaendnis von Position und Feldkontrolle voraus",
