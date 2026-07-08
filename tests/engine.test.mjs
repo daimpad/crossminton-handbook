@@ -24,6 +24,7 @@ const fgTaktik = liesJson('data/bausteine.fortgeschritten-taktik.json');
 const fgMentales = liesJson('data/bausteine.fortgeschritten-mentales.json');
 const fgAthletik = liesJson('data/bausteine.fortgeschritten-athletik_kondition.json');
 const doppelThema = liesJson('data/bausteine.doppel-thema.json');
+const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const labelsDe = liesJson('data/labels/de.json');
@@ -45,7 +46,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema], einheiten, fehlerbilder);
+const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis], einheiten, fehlerbilder);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -79,8 +80,8 @@ const doppelThemaKette = ['doppel_grundlagen', 'doppel_als_eigenes_spiel', 'angr
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('52 Basisbausteine (23 Beginner + 29 Fortgeschritten inkl. 7 Doppel-Querschnitt), zehn Deltas', daten.bausteine.length === 52 && daten.deltas.length === 10);
-pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD]', gleicheListe(daten.herkuenfte, ['BAD']));
+pruefe('52 Basisbausteine (Doppel-Querschnitt inkl.), 16 Deltas (10 + 6 Tennis)', daten.bausteine.length === 52 && daten.deltas.length === 16);
+pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
 setzeZurueck();
@@ -146,7 +147,7 @@ pruefe('Skip-Kandidaten sind die delta-freien Bausteine (18 = 23 − 5 mit Delta
   const skip = pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id);
   return skip.length === 18 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
 })());
-pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'TEN') === null);
+pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'SQ') === null);
 // Cross-Sport über zwei Stufen: der kumulative Fortgeschritten-Pfad blendet
 // Beginner- UND Fortgeschritten-Deltas ein (10: 5 + 3 Technik + 2 Doppel-Taktik).
 const pfadFgBad = kompetenzpfad(daten, 'fortgeschritten');
@@ -155,6 +156,25 @@ pruefe('Geometrie-Delta an beinarbeit_system aktiv', pfadFgBad.stationen.find((s
 pruefe('Doppel-Deltas (Taktik) greifen im kumulativen Pfad (Grundlagen + Umschalten)', pfadFgBad.stationen.find((s) => s.baustein.id === 'doppel_grundlagen').delta?.id === 'doppel_grundlagen_delta_bad' && pfadFgBad.stationen.find((s) => s.baustein.id === 'das_umschalten_im_doppel').delta?.id === 'das_umschalten_im_doppel_delta_bad');
 pruefe('kumulativer BAD-Pfad zeigt 10 Deltas (5 Beginner + 3 Technik + 2 Doppel-Taktik)', pfadFgBad.stationen.filter((s) => s.delta).length === 10);
 pruefe('handgelenk_peitsche-Delta bündelt auf vorhand_drive_delta_bad', gleicheListe(pfadFgBad.stationen.find((s) => s.baustein.id === 'handgelenk_peitsche').delta.delta_buendelung, ['vorhand_drive_delta_bad']));
+
+console.log('\n[3b] Cross-Sport-Modifikator (Herkunft TEN) — herkunftsreine Delta-Datei, zweite Herkunft');
+// Punkt 1: reine Delta-Datei ohne Basis-Bausteine; Kanten docken über zwei Stufen an.
+pruefe('Tennis-Deltas ohne eigene Basis-Bausteine (nur delta_bausteine)', (deltaTennis.bausteine || []).length === 0 && deltaTennis.delta_bausteine.length === 6);
+pruefe('alle 6 TEN-Deltas an existierende Basis-Bausteine gehängt', deltaTennis.delta_bausteine.every((d) => daten.bausteinVonId.has(d.basis_baustein) && deltaFuer(daten, d.basis_baustein, 'TEN')?.id === d.id));
+pruefe('TEN-Kanten treffen beide Stufen (4 Beginner-Technik + 2 Fortgeschritten)', ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'beginner' && deltaFuer(daten, id, 'TEN')) && ['ueberkopf_clear', 'beinarbeit_system'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'fortgeschritten' && deltaFuer(daten, id, 'TEN')));
+// Punkt 2: griff trägt jetzt zwei Herkunfts-Deltas — genau die gewählte greift.
+pruefe('griff hat sowohl BAD- als auch TEN-Delta', deltaFuer(daten, 'griff', 'BAD')?.id === 'griff_delta_bad' && deltaFuer(daten, 'griff', 'TEN')?.id === 'griff_delta_ten');
+setzeZurueck();
+setzeDiagnose({ stufe: 'fortgeschritten', herkunft: 'TEN' });
+const pfadFgTen = kompetenzpfad(daten, 'fortgeschritten');
+pruefe('Herkunft TEN blendet genau das TEN-Delta ein (BAD ignoriert)', pfadFgTen.stationen.find((s) => s.baustein.id === 'griff').delta?.id === 'griff_delta_ten');
+pruefe('kumulativer TEN-Pfad zeigt genau die 6 Tennis-Deltas', (() => {
+  const mitDelta = pfadFgTen.stationen.filter((s) => s.delta).map((s) => s.baustein.id);
+  return mitDelta.length === 6 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'ueberkopf_clear', 'beinarbeit_system']);
+})());
+pruefe('positiver Transfer ueberkopf_clear trägt das TEN-Delta (strukturell wie die abbauenden)', pfadFgTen.stationen.find((s) => s.baustein.id === 'ueberkopf_clear').delta?.id === 'ueberkopf_clear_delta_ten');
+pruefe('rueckhand_delta_ten bündelt auf griff_delta_ten + vorhand_drive_delta_ten', gleicheListe(pfadFgTen.stationen.find((s) => s.baustein.id === 'rueckhand').delta.delta_buendelung, ['griff_delta_ten', 'vorhand_drive_delta_ten']));
+pruefe('kein TEN-Delta mit eigenem Übungsteil (Delta-Regel)', deltaTennis.delta_bausteine.every((d) => d.eigener_uebungsteil === false && d.uebungsteil == null));
 
 console.log('\n[4] Zwei-Ebenen-Logik: Hinweis statt Sperre');
 const griffVorher = pfadBad.stationen.find((s) => s.baustein.id === 'griff');

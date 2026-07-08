@@ -23,6 +23,7 @@ const INHALTSDATEIEN = [
   'data/bausteine.fortgeschritten-mentales.json',
   'data/bausteine.fortgeschritten-athletik_kondition.json',
   'data/bausteine.doppel-thema.json',
+  'data/bausteine.delta-tennis.json',
 ];
 
 export async function ladeDaten() {
