@@ -124,6 +124,18 @@ const BAUSTEIN_ICONS = {
   gegner_lesen_muster: 'fa-magnifying-glass',
   doppel_grundlagen: 'fa-users',
   engen_satz_fuehren: 'fa-flag-checkered',
+  // Fortgeschritten-Mentales
+  vom_werkzeug_zum_system: 'fa-toolbox',
+  selbstgespraech_steuern: 'fa-comment-dots',
+  sich_das_spiel_vorstellen: 'fa-film',
+  momentum_lesen_und_drehen: 'fa-water',
+  ueber_das_match_stabil_bleiben: 'fa-anchor',
+  // Fortgeschritten-Athletik / Kondition
+  gezielt_trainieren: 'fa-chart-line',
+  explosivitaet: 'fa-rocket',
+  rumpfstabilitaet: 'fa-tree',
+  intervallausdauer: 'fa-stopwatch',
+  belastung_steuern_regenerieren: 'fa-scale-balanced',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

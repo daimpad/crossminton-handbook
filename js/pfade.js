@@ -125,12 +125,22 @@ export function themenpfad(daten, domaene) {
   };
 }
 
-// 6.2 Individualpfad — filtert nach Zielfaktor(en); Voraussetzungen außerhalb
+// 6.2 Individualpfad — filtert nach Zielfaktor(en), über Könnensstufen kumulativ
+// wie der Kompetenzpfad: bei gesetzter Diagnose-Stufe erscheinen nur Bausteine
+// bis einschließlich dieser Stufe (ein Beginner sieht die Beginner-Leiter eines
+// Faktors, ein Fortgeschrittener Beginner + Fortgeschritten). Ohne bekannte Stufe
+// wird nicht gefiltert (nie verbergen, Zwei-Ebenen-Logik). Voraussetzungen außerhalb
 // der Menge bleiben Hinweis (ausserhalbMenge), werden nie aufgenommen.
 export function individualpfad(daten, ziel = diagnose().ziel) {
   const eintraege = zielEintraege(ziel);
   if (eintraege.length === 0) return { art: 'individual', ziel: null, eintraege, stationen: [] };
-  const menge = daten.bausteine.filter((b) => zielTreffer(b, eintraege) > 0);
+  const zielIndex = daten.koennensOrdnung.indexOf(diagnose().stufe);
+  const menge = daten.bausteine.filter((b) => {
+    if (zielTreffer(b, eintraege) === 0) return false;
+    if (zielIndex < 0) return true; // Stufe unbekannt: nicht filtern
+    const eigenerIndex = daten.koennensOrdnung.indexOf(niedrigsteStufe(daten, b));
+    return eigenerIndex >= 0 && eigenerIndex <= zielIndex; // bis einschließlich Diagnose-Stufe
+  });
   return {
     art: 'individual',
     ziel,

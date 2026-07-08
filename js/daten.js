@@ -20,6 +20,8 @@ const INHALTSDATEIEN = [
   'data/bausteine.beginner-athletik_kondition.json',
   'data/bausteine.fortgeschritten-technik.json',
   'data/bausteine.fortgeschritten-taktik.json',
+  'data/bausteine.fortgeschritten-mentales.json',
+  'data/bausteine.fortgeschritten-athletik_kondition.json',
 ];
 
 export async function ladeDaten() {

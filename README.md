@@ -66,6 +66,8 @@ data/
   bausteine.beginner-athletik_kondition.json  Inhaltsblock Athletik (Sternform, Übung + Reflexion gemischt)
   bausteine.fortgeschritten-technik.json  erste Stufe über Beginner; stufenübergreifende Voraussetzungen
   bausteine.fortgeschritten-taktik.json   Fortgeschritten-Taktik; weiche Kanten über Stufen- UND Domänengrenze
+  bausteine.fortgeschritten-mentales.json Fortgeschritten-Mentales (mentales System; durchgehend Reflexionsaufgaben)
+  bausteine.fortgeschritten-athletik_kondition.json  Fortgeschritten-Athletik (Gesundheitsrahmen; Reflexion + qualitative Übung)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
