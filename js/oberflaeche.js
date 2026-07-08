@@ -117,6 +117,13 @@ const BAUSTEIN_ICONS = {
   kurzes_spiel_stopp: 'fa-feather',
   schnitt_spin: 'fa-arrows-spin',
   beinarbeit_system: 'fa-shoe-prints',
+  // Fortgeschritten-Taktik
+  umschalten: 'fa-right-left',
+  punkt_aufbauen: 'fa-layer-group',
+  smash_vorbereiten: 'fa-bomb',
+  gegner_lesen_muster: 'fa-magnifying-glass',
+  doppel_grundlagen: 'fa-users',
+  engen_satz_fuehren: 'fa-flag-checkered',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {
