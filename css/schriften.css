@@ -119,3 +119,8 @@
 .fa-hammer::before { content: '\f6e3'; }
 .fa-feather::before { content: '\f52d'; }
 .fa-arrows-spin::before { content: '\e4bb'; }
+.fa-right-left::before { content: '\f362'; }
+.fa-layer-group::before { content: '\f5fd'; }
+.fa-bomb::before { content: '\f1e2'; }
+.fa-users::before { content: '\f0c0'; }
+.fa-flag-checkered::before { content: '\f11e'; }

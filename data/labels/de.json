@@ -202,7 +202,13 @@
     "smash": "Der Smash",
     "kurzes_spiel_stopp": "Kurzes Spiel: der Stopp",
     "schnitt_spin": "Schnitt und Spin",
-    "beinarbeit_system": "Das Beinarbeit-System"
+    "beinarbeit_system": "Das Beinarbeit-System",
+    "umschalten": "Angriff und Verteidigung — das Umschalten",
+    "punkt_aufbauen": "Den Punkt aufbauen — lang und kurz",
+    "smash_vorbereiten": "Den Smash vorbereiten",
+    "gegner_lesen_muster": "Gegner lesen und Muster brechen",
+    "doppel_grundlagen": "Doppel — Grundlagen",
+    "engen_satz_fuehren": "Den engen Satz führen"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"

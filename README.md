@@ -65,6 +65,7 @@ data/
   bausteine.beginner-mentales.json  Inhaltsblock Mentales (Sternform-Graph, durchgehend Reflexionsaufgaben)
   bausteine.beginner-athletik_kondition.json  Inhaltsblock Athletik (Sternform, Übung + Reflexion gemischt)
   bausteine.fortgeschritten-technik.json  erste Stufe über Beginner; stufenübergreifende Voraussetzungen
+  bausteine.fortgeschritten-taktik.json   Fortgeschritten-Taktik; weiche Kanten über Stufen- UND Domänengrenze
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
