@@ -195,7 +195,13 @@
     "beweglichkeit_und_schulter": "",
     "schnelle_fuesse": "",
     "durchhalten": "",
-    "erholen": ""
+    "erholen": "",
+    "handgelenk_peitsche": "",
+    "ueberkopf_clear": "",
+    "smash": "",
+    "kurzes_spiel_stopp": "",
+    "schnitt_spin": "",
+    "beinarbeit_system": ""
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": ""
@@ -208,7 +214,15 @@
     "vorhand_drive_leitgrafik": "",
     "rueckhand_leitgrafik": "",
     "beinarbeit_seq_1": "",
-    "beinarbeit_seq_2": ""
+    "beinarbeit_seq_2": "",
+    "handgelenk_peitsche_leitgrafik": "",
+    "ueberkopf_clear_leitgrafik": "",
+    "smash_leitgrafik": "",
+    "kurzes_spiel_stopp_leitgrafik": "",
+    "schnitt_spin_leitgrafik": "",
+    "beinarbeit_system_chasse": "",
+    "beinarbeit_system_scherensprung": "",
+    "beinarbeit_system_blocksprung": ""
   },
   "vokabeln": {
     "domaene": {

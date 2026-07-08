@@ -196,7 +196,13 @@
     "beweglichkeit_und_schulter": "Beweglichkeit und die Schulter",
     "schnelle_fuesse": "Schnelle Füße",
     "durchhalten": "Durchhalten",
-    "erholen": "Erholen"
+    "erholen": "Erholen",
+    "handgelenk_peitsche": "Der Handgelenk-Schnapp: die Peitsche",
+    "ueberkopf_clear": "Überkopfschlag und Clear",
+    "smash": "Der Smash",
+    "kurzes_spiel_stopp": "Kurzes Spiel: der Stopp",
+    "schnitt_spin": "Schnitt und Spin",
+    "beinarbeit_system": "Das Beinarbeit-System"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"
@@ -209,7 +215,15 @@
     "vorhand_drive_leitgrafik": "Leitgrafik: der Vorhand-Drive",
     "rueckhand_leitgrafik": "Leitgrafik: die Rückhand",
     "beinarbeit_seq_1": "Beinarbeit, Bild 1: der Split-Step",
-    "beinarbeit_seq_2": "Beinarbeit, Bild 2: der Bewegungskreislauf"
+    "beinarbeit_seq_2": "Beinarbeit, Bild 2: der Bewegungskreislauf",
+    "handgelenk_peitsche_leitgrafik": "Leitgrafik: der Handgelenk-Schnapp",
+    "ueberkopf_clear_leitgrafik": "Leitgrafik: der Überkopfschlag",
+    "smash_leitgrafik": "Leitgrafik: der Smash",
+    "kurzes_spiel_stopp_leitgrafik": "Leitgrafik: der Stopp",
+    "schnitt_spin_leitgrafik": "Leitgrafik: der Schnitt",
+    "beinarbeit_system_chasse": "Beinarbeit-System: der Chassé",
+    "beinarbeit_system_scherensprung": "Beinarbeit-System: der Scherensprung",
+    "beinarbeit_system_blocksprung": "Beinarbeit-System: der Block-Sprung"
   },
   "vokabeln": {
     "domaene": {

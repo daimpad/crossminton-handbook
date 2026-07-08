@@ -110,6 +110,13 @@ const BAUSTEIN_ICONS = {
   schnelle_fuesse: 'fa-shoe-prints',
   durchhalten: 'fa-gauge-high',
   erholen: 'fa-bed',
+  // Fortgeschritten-Technik
+  handgelenk_peitsche: 'fa-bolt',
+  ueberkopf_clear: 'fa-arrow-up-long',
+  smash: 'fa-hammer',
+  kurzes_spiel_stopp: 'fa-feather',
+  schnitt_spin: 'fa-arrows-spin',
+  beinarbeit_system: 'fa-shoe-prints',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

@@ -1,0 +1,289 @@
+{
+  "_meta": {
+    "beschreibung": "Fortgeschritten-Technik: erste Stufe oberhalb Beginner. Loest den im Beginner-Pfad vertagten Handgelenks-Faden ('die Peitsche') ein und fuehrt die fortgeschrittene Schlagfamilie plus das vollstaendige Beinarbeit-System.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau-Erweiterung (erste Nicht-Beginner-Stufe)",
+    "dateiname_konvention": "bausteine.fortgeschritten-technik.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Technik-Vokabular. Keine neue Erweiterung.",
+    "stufenuebergreifende_voraussetzungen": "ERSTE stufenuebergreifende weiche Kanten: fortgeschrittene Bausteine verweisen per 'voraussetzungen' auf Beginner-Bausteine (handgelenk_peitsche -> vorhand_drive; beinarbeit_system -> beinarbeit). Weiche Kanten, sperren nie; das Modell traegt sie bereits.",
+    "geloester_faden": "Der Handgelenks-Schnapp ('Peitsche') wurde im Beginner-Pfad dreimal angekuendigt und vertagt (griff, vorhand_drive). handgelenk_peitsche loest ihn ein.",
+    "delta_stelle": "beinarbeit_system traegt den zentralen BAD-Delta: netzlose Quadrat-Geometrie vs. netzorientierte Sechs-Zonen-Logik des Badminton.",
+    "ordnungslogik": "Kraftquelle (Handgelenk) -> Ueberkopf-Familie (Clear, Smash) -> Finesse (Stopp, Schnitt) -> vollstaendiges Beinarbeit-System.",
+    "baustein_typ": "durchgehend 'micro' (bewusste Entscheidung; 'vertiefung' bleibt reserviert)."
+  },
+
+  "bausteine": [
+    {
+      "id": "handgelenk_peitsche",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["vorhand_drive"],
+      "voraussetzungen_lesart": "motorisches Aufbauen (stufenuebergreifend): der Handgelenks-Schnapp setzt den sauberen kompakten Grundschlag voraus",
+      "spielziele": ["tempo_haertedosierung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Handgelenks-Schnapp/Unterarmrotation als Kraftquelle: Gossen-Technik (CM) und Rueckschlagsport-Mechanik (Badminton-'whip').",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Handgelenk zu frueh/zu spaet, kein Timing' + Korrekturansage",
+      "grafik": ["handgelenk_peitsche_leitgrafik"],
+      "erklaerteil": {
+        "de": "Im Beginner-Bereich hast du das Handgelenk bewusst ruhig gehalten und die Kraft aus Arm, Schulter und Beinen geholt. Das war das Fundament. Jetzt baust du darauf die Bewegung, die dem Schlag sein eigentliches Tempo gibt: das Zuschnappen des Handgelenks. Die Peitsche, die immer angekündigt war.\n\nStell dir vor, wie eine Peitsche knallt: Der Griff bewegt sich kaum, aber am Ende der Schnur entsteht enorme Geschwindigkeit. Genauso funktioniert dein Schlag. Arm und Körper bringen den Schläger auf den Weg, und im letzten Moment vor dem Treffen dreht der Unterarm ein und das Handgelenk schnappt nach vorn. Dieser letzte Schnapp vervielfacht die Kopfgeschwindigkeit des Schlägers, ohne dass du mehr Kraft aufwendest.\n\nDer Schlüssel ist das Timing. Der Schnapp kommt spät — kurz vor dem Treffpunkt, nicht früher. Zu früh, und die Beschleunigung verpufft, bevor der Speeder da ist. Genau im Treffmoment löst sich die Spannung aus dem locker gehaltenen Handgelenk.\n\nUnd hier zahlt sich der lockere Griff aus, den du von Anfang an geübt hast. Ein verkrampftes Handgelenk kann nicht schnappen. Nur eine lockere Hand, die sich erst im Treffmoment kurz festmacht, erzeugt die Peitsche. Fest wird es für den Bruchteil des Kontakts, danach löst du wieder.\n\nDiese Bewegung steckt ab jetzt in fast jedem harten Schlag — im Drive, im Clear, im Smash. Sie ist der Übergang vom kontrollierten Grundschlag zum druckvollen Spiel."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Schnapp timen",
+          "ziel": "Das Handgelenk im richtigen Moment schnappen lassen — spät, gelöst, im Treffpunkt.",
+          "schritte": [
+            "Nimm die Grundposition ein, Universalgriff, Handgelenk locker.",
+            "Spiele einen Vorhand-Drive wie gewohnt — aber lass diesmal im letzten Moment vor dem Treffpunkt das Handgelenk nach vorn schnappen.",
+            "Beginne langsam und übertreibe den Schnapp bewusst, um das Gefühl zu finden.",
+            "Bringe dann einen Speeder hinein: selbst angeworfen, auf Hüfthöhe fallen lassen, im Bogen mit Schnapp treffen.",
+            "Steigere das Tempo erst, wenn der Schnapp zuverlässig im Treffmoment kommt."
+          ],
+          "steigerung": "Wechsle zwischen einem kompakten Schlag ohne Schnapp und einem mit Schnapp. Spürst du den Tempounterschied bei gleichem Kraftaufwand? Dann arbeitet die Peitsche.",
+          "selbstkontrolle": "Achte auf den Klang und das Gefühl: Ein gut getimter Schnapp fühlt sich mühelos an und der Speeder fliegt spürbar schneller. Kommt die Kraft aus einem verkrampften Arm statt aus dem gelösten Schnapp, nimm Tempo heraus und finde erst das Timing wieder.",
+          "abschluss": "Die Peitsche ist kein einzelner Schlag, sondern eine Zutat, die ab jetzt in deine harten Schläge wandert. Gib ihr Zeit — sauberes Timing schlägt rohe Kraft."
+        }
+      }
+    },
+
+    {
+      "id": "ueberkopf_clear",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["handgelenk_peitsche"],
+      "spielziele": ["laengen_tiefensteuerung", "tempo_haertedosierung", "antwort_gegen_angreifer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "TEN"],
+      "transfer_herkunft_beleg": "Ueberkopfschlag nah am Tennisaufschlag (seitliche Stellung, Zeigearm, Unterarmrotation, Handgelenks-Whip): Badminton-Clear und Tennis-Aufschlag.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Treffpunkt zu tief/hinter dem Koerper' + Korrekturansage",
+      "grafik": ["ueberkopf_clear_leitgrafik"],
+      "erklaerteil": {
+        "de": "Der Überkopfschlag ist dein Werkzeug für alle hohen Speeder. Du triffst über dem Kopf, in einer Bewegung, die dem Tennisaufschlag sehr ähnelt — und die Peitsche aus dem letzten Baustein ist ihr Motor.\n\nSo läuft die Bewegung: Du stellst dich seitlich zum Ziel, der freie Arm zeigt zum ankommenden Speeder, das Gewicht ruht zunächst auf dem hinteren Bein. Dann streckst du dich nach oben und triffst den Speeder so hoch wie möglich, leicht vor dem Körper. Im Treffmoment dreht der Unterarm ein und das Handgelenk schnappt — dieselbe Peitsche wie beim Drive, nur über Kopf.\n\nDen Überkopfschlag spielst du in zwei Ausprägungen. Den defensiven Clear schlägst du hoch und weit: Er gibt dir Zeit, wenn du unter Druck stehst, und zwingt den Gegner tief nach hinten. Den offensiven Clear schlägst du flacher und schneller: Er überspielt einen Gegner, der zu weit vorn steht, bevor er zurückkommt.\n\nEin Bild: Der hohe Treffpunkt ist wie das Pflücken eines Apfels vom obersten Ast — du streckst dich ganz, triffst am höchsten Punkt deiner Reichweite. Wer den Speeder sinken lässt und erst auf Kopfhöhe trifft, verliert Höhe, Tempo und Kontrolle.\n\nDer hohe Treffpunkt ist die halbe Miete. Alles am Überkopfschlag steht und fällt damit, dass du früh und oben triffst."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Oben und früh treffen",
+          "ziel": "Den Überkopfschlag am höchsten Punkt treffen, mit seitlicher Stellung und Peitsche.",
+          "schritte": [
+            "Stell dich seitlich zum Ziel, freier Arm zeigt nach oben zum gedachten Speeder, Gewicht auf dem hinteren Bein.",
+            "Übe zunächst die Bewegung ohne Speeder: strecken, oben treffen, Unterarm eindrehen, Handgelenk schnappen.",
+            "Dann wirf dir den Speeder selbst hoch an oder lass ihn dir zuwerfen und triff ihn so hoch wie möglich, leicht vor dem Körper.",
+            "Spiele erst ein paar defensive, hohe Clears, dann ein paar flachere, offensive.",
+            "Kehre nach jedem Schlag in die zentrale Position zurück."
+          ],
+          "steigerung": "Lass dir Speeder in unterschiedliche Höhen und Tiefen zuwerfen, sodass du dich erst zum Ball bewegen musst, bevor du oben triffst.",
+          "selbstkontrolle": "Triffst du den Speeder wirklich über dem Kopf und vor dem Körper, oder rutscht der Treffpunkt nach unten und hinter dich? Ein zu tiefer Treffpunkt ist der häufigste Fehler — dann stimmt meist die Beinarbeit noch nicht, die dich rechtzeitig unter den Speeder bringt.",
+          "abschluss": "Der Überkopfschlag öffnet die Tür zum Smash — er ist die Bewegung, aus der der Angriffsschlag entsteht."
+        }
+      }
+    },
+
+    {
+      "id": "smash",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["ueberkopf_clear"],
+      "spielziele": ["antwort_gegen_defensivspieler", "tempo_haertedosierung", "umschaltloesung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "TEN"],
+      "transfer_herkunft_beleg": "Smash als steiler Angriffsschlag von oben; Konstanz vor Maximaltempo, Beinarbeit hinter den Speeder, Timing/Sprung: Badminton-Smash (Tam), Tennis-Aufschlagmechanik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'alles auf maximales Tempo, keine Konstanz/Erholung' + Korrekturansage",
+      "grafik": ["smash_leitgrafik"],
+      "erklaerteil": {
+        "de": "Der Smash ist dein Abschlussschlag — der harte Ball von oben nach unten, mit dem du einen Punkt beendest. Er wächst direkt aus dem Überkopfschlag: dieselbe Vorbereitung, aber du triffst noch etwas weiter vorn und schlägst steil nach unten ins gegnerische Feld.\n\nDie größte Falle ist der Gedanke, ein Smash müsse vor allem hart sein. Tatsächlich gewinnt der wiederholbare Smash, nicht der schnellste. Wer drei, vier Smashes hintereinander sauber und platziert schlägt, zermürbt die Abwehr des Gegners — die Rückschläge werden mit jedem Mal schwächer. Ein einzelner Wahnsinnsschlag, der danebengeht, bringt dagegen nichts.\n\nDrei Dinge machen den Smash tragfähig. Die Beinarbeit, die dich rechtzeitig hinter und unter den Speeder bringt — ohne sie stehst du falsch und der Smash bringt dich selbst in Not. Das Timing, den Speeder früh und oben zu treffen. Und die Variation: Wechselst du Winkel, Tempo und Ziel, hält kein Gegner dagegen.\n\nEin Bild: Denk an einen Hammer, der einen Nagel trifft — die Kraft kommt aus dem präzisen, getimten Schlag von oben, nicht aus wildem Draufhauen. Ein platzierter, wiederholbarer Smash ist gefährlicher als ein einzelner harter.\n\nUnd ein Punkt, den viele vergessen: Nach dem Smash kehrst du sofort in die zentrale Position zurück. Ein guter Gegner bringt auch einen harten Smash zurück — und dann musst du bereit sein."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Konstanz vor Tempo",
+          "ziel": "Mehrere platzierte Smashes hintereinander sauber schlagen, statt einen maximal harten.",
+          "schritte": [
+            "Lass dir hohe Speeder zuwerfen, die du über Kopf angreifen kannst.",
+            "Schlage den Smash steil nach unten ins gegnerische Feld — mit Peitsche, aber kontrolliert, nicht maximal.",
+            "Ziele auf einen bestimmten Bereich des Feldes, nicht einfach nur nach unten.",
+            "Kehre nach jedem Smash sofort in die zentrale Position zurück, bevor der nächste Speeder kommt.",
+            "Zähle, wie viele Smashes in Folge du sauber und im Zielbereich unterbringst."
+          ],
+          "steigerung": "Variiere bewusst Winkel und Tempo: mal steiler und langsamer, mal flacher und schneller. Ziel ist, dass du mehrere Smashes in Folge kontrollierst, nicht dass einer besonders hart ist.",
+          "selbstkontrolle": "Bleibt deine Qualität über mehrere Smashes hinweg gleich, oder bricht sie nach dem ersten harten Schlag ein? Verlierst du nach dem Smash die zentrale Position? Konstanz und Rückkehr sind wichtiger als das Maximaltempo eines Einzelschlags.",
+          "abschluss": "Der Smash ist der Lohn guter Vorbereitung — Beinarbeit und Überkopfschlag tragen ihn. Ohne sie wird er zum Risiko."
+        }
+      }
+    },
+
+    {
+      "id": "kurzes_spiel_stopp",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["handgelenk_peitsche"],
+      "spielziele": ["laengen_tiefensteuerung", "treffsicherheit_im_ziel", "umschaltloesung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD", "SQ"],
+      "transfer_herkunft_beleg": "Kurzer, fein dosierter Ball mit Taeuschung (gleiche Vorbereitung, weicher Kontakt): Badminton-Drop, Squash-Kurzspiel; netzlose Zonen-Ueberbbrueckung crossminton-eigen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Stopp zu hoch/zu lang, in die Zone gesetzt' + Korrekturansage",
+      "grafik": ["kurzes_spiel_stopp_leitgrafik"],
+      "erklaerteil": {
+        "de": "Nicht jeder Punkt entsteht durch Härte. Der Stopp ist das Gegenteil des Smashes: ein fein dosierter, kurzer Ball, der knapp hinter der neutralen Zone in den vorderen Bereich des gegnerischen Feldes fällt. Er fängt einen Gegner aus, der weit hinten steht und den harten Schlag erwartet.\n\nSeine Waffe ist die Täuschung. Du bereitest den Stopp genauso vor wie einen harten Drive oder Clear — gleiche Stellung, gleicher Ausholweg. Erst im letzten Moment nimmst du das Tempo heraus und lässt den Speeder weich über die Zone fallen. Der Gegner liest deine Vorbereitung als Angriff, steht tief, und der Speeder tröpfelt vor ihm herunter.\n\nDie Kunst liegt in der Dosierung. Der Speeder muss die neutrale Zone gerade eben überbrücken und dann kurz fallen. Zu viel Tempo, und er wird zum leichten Ball für den Gegner. Zu wenig, und er landet in der Zone. Das feine Gefühl dafür entwickelst du nur über viele Wiederholungen.\n\nEin Bild: Der Stopp ist wie ein sanft über eine Mauer gelegter Ball, der direkt dahinter herunterfällt — gerade genug Kraft, um hinüberzukommen, und keinen Hauch mehr.\n\nDer Stopp wirkt am stärksten im Wechsel mit deinen harten Schlägen. Erst der tiefe Clear, der den Gegner nach hinten treibt, dann der Stopp nach vorn — dieser Wechsel aus lang und kurz ist eine der wirksamsten Waffen im fortgeschrittenen Spiel."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Weich über die Zone",
+          "ziel": "Den Speeder fein dosiert knapp hinter die neutrale Zone fallen lassen.",
+          "schritte": [
+            "Leg dir im vorderen Bereich des gegnerischen Feldes, direkt hinter der Zone, eine Zielmarke aus.",
+            "Bereite den Schlag vor wie einen normalen Drive — gleiche Stellung, gleicher Ausholweg.",
+            "Nimm im letzten Moment das Tempo heraus und lass den Speeder weich über die Zone fallen.",
+            "Ziele darauf, dass er kurz hinter der Zone, an deiner Marke, herunterkommt.",
+            "Zähle deine Treffer und variiere die Richtung."
+          ],
+          "steigerung": "Spiele im Wechsel: einen tiefen Clear nach hinten, dann einen Stopp nach vorn. So übst du die Täuschung und das Umschalten zwischen lang und kurz.",
+          "selbstkontrolle": "Fällt der Speeder knapp hinter die Zone, oder setzt du ihn zu lang (leichter Ball für den Gegner) oder zu kurz (in die Zone)? Und liest man deiner Vorbereitung schon an, dass ein Stopp kommt? Je gleicher die Vorbereitung zum harten Schlag, desto wirksamer die Täuschung.",
+          "abschluss": "Der Stopp lebt vom Kontrast. Für sich allein ist er nur ein kurzer Ball — im Wechsel mit deinen harten Schlägen wird er zur Waffe."
+        }
+      }
+    },
+
+    {
+      "id": "schnitt_spin",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["handgelenk_peitsche"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel", "gegner_muster_lesen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["TEN", "SQ"],
+      "transfer_herkunft_beleg": "Schnitt/Slice zur Veraenderung von Flugbahn und Verhalten des Speeders: Tennis-Slice, Squash-Schnitt.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Schnitt kostet Kontrolle, Speeder unsauber getroffen' + Korrekturansage",
+      "grafik": ["schnitt_spin_leitgrafik"],
+      "erklaerteil": {
+        "de": "Bisher ging es darum, den Speeder sauber und voll zu treffen. Der Schnitt ist ein fortgeschrittenes Werkzeug, das bewusst anders arbeitet: Du streifst den Speeder seitlich oder von unten an und gibst ihm dadurch Rotation. Diese Rotation macht seine Flugbahn und sein Verhalten für den Gegner schwerer lesbar.\n\nDer Speeder ist von Natur aus stabil und fliegt gerade. Genau das nutzt du aus, indem du es störst. Streifst du ihn beim Treffen leicht seitlich, statt ihn voll zu treffen, bekommt er einen Drall. Die Flugbahn krümmt sich leicht, das Tempo verändert sich, und der Gegner kann den Ball schwerer einschätzen.\n\nDer Schnitt hat seinen Preis: Ein angeschnittener Ball ist langsamer und du gibst etwas Kontrolle ab. Deshalb setzt du ihn gezielt ein, nicht ständig. Er lohnt sich als Überraschung, als Variation, um den Gegner aus dem Rhythmus zu bringen — besonders bei kurzen Bällen und beim Aufschlag.\n\nEin Bild: Ein angeschnittener Ball ist wie ein Wurf mit Effet beim Boule oder Tischtennis — er kommt anders an, als das Auge erwartet, und diese kleine Irritation reicht oft für einen Fehler des Gegners.\n\nDer Schnitt ist die Kür, nicht die Pflicht. Er baut auf einem sicheren, vollen Treffen auf — wer den Speeder noch nicht zuverlässig sauber trifft, übt zuerst das. Wer es beherrscht, gewinnt mit dem Schnitt eine feine zusätzliche Farbe."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Dem Speeder Drall geben",
+          "ziel": "Den Speeder kontrolliert anschneiden und die veränderte Flugbahn spüren.",
+          "schritte": [
+            "Beginne mit einem einfachen Schlag und streife den Speeder beim Treffen leicht seitlich, statt ihn voll zu treffen.",
+            "Beobachte, wie sich die Flugbahn und das Tempo im Vergleich zum vollen Treffen verändern.",
+            "Probiere den Schnitt zuerst beim Aufschlag, wo du in Ruhe treffen kannst.",
+            "Übertrage ihn dann auf kurze Bälle im Spiel.",
+            "Wechsle bewusst zwischen vollem Treffen und Schnitt."
+          ],
+          "selbstkontrolle": "Triffst du den Speeder trotz Schnitt kontrolliert, oder verlierst du die Richtung? Der Schnitt darf die Kontrolle nur wenig kosten — geht zu viel Genauigkeit verloren, triffst du noch zu unsauber und übst besser erst das volle Treffen weiter.",
+          "abschluss": "Der Schnitt ist eine Variation für besondere Momente. Sparsam und gezielt eingesetzt bringt er den Gegner aus dem Rhythmus."
+        }
+      }
+    },
+
+    {
+      "id": "beinarbeit_system",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["beinarbeit"],
+      "voraussetzungen_lesart": "motorisches Aufbauen (stufenuebergreifend): das vollstaendige System baut auf dem Beginner-Grundzyklus (zentrale Position, Split-Step, Rueckkehr) auf",
+      "spielziele": ["wiederholte_antrittsschnelligkeit", "rally_ausdauer", "umschaltmoment_erkennen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Vollstaendiges Schrittsystem (Chasse, Ausfallschritt, Scherensprung, Block-Sprung, Rueckkehrschritt) crossminton-eigen belegt (Gossen-Footwork-Skript). Chasse/Lunge verwandt mit Badminton.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'falscher Schritttyp fuer die Zone / kreuzt die Fuesse beim Chasse' + Korrekturansage",
+      "grafik": ["beinarbeit_system_chasse", "beinarbeit_system_scherensprung", "beinarbeit_system_blocksprung"],
+      "erklaerteil": {
+        "de": "Im Beginner-Bereich hast du den Grundzyklus gelernt: zentrale Position, Split-Step, raus zum Ball, zurück zur Mitte. Jetzt füllst du diesen Zyklus mit den einzelnen Schritttypen, die jede Zone deines Feldes am schnellsten erreichbar machen. Das ist das vollständige Beinarbeit-System.\n\nVier Schritttypen tragen es. Der Chassé ist ein seitliches Nachstellen, bei dem die Füße einander nie überkreuzen — du bleibst im Gleichgewicht und bereitest damit oft den nächsten Schritt vor. Der Ausfallschritt ist der am häufigsten genutzte Schritt: ein tiefer, explosiver Ausfall in eine Ecke, mit dem schlagseitigen Fuß voran, der dich stabil und weit an den Speeder bringt. Der Scherensprung bringt dich an tiefe, hohe Speeder im hinteren Bereich — du springst ab, wechselst in der Luft die Beinstellung und kommst schlagbereit wieder auf. Der Block-Sprung fängt schnelle Bälle von der Seite ab, wenn keine Zeit für einen ganzen Schritt bleibt.\n\nEntscheidend ist, dass du für jede Zone den passenden Schritt wählst — und nach jedem Schlag mit einem sauberen Rückkehrschritt in die zentrale Position zurückfindest. Der Rückkehrschritt ist der unscheinbarste und wichtigste: Er stellt den Zyklus jedes Mal neu her.\n\nEin Bild: Denk an einen Fechter. Seine Füße stehen nie zufällig — jeder Schritt hat eine Form und einen Zweck, und er kehrt nach jedem Angriff sofort in die Grundstellung zurück. Genau diese Ökonomie suchst du für dein Feld.\n\nDieses System läuft irgendwann unbewusst. Am Anfang wählst du den Schritt bewusst; mit der Zeit wählt dein Körper ihn selbst — und dann bist du überall rechtzeitig."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Schritte den Zonen zuordnen",
+          "ziel": "Für jede Zone des Feldes den passenden Schritttyp abrufen und sauber zurückkehren.",
+          "schritte_teil1": [
+            "Übe die Schritttypen zunächst einzeln, ohne Speeder: den Chassé seitlich, den Ausfallschritt in die vorderen Ecken, den Scherensprung nach hinten, den Block-Sprung zur Seite.",
+            "Achte beim Chassé darauf, dass die Füße einander nie überkreuzen.",
+            "Kehre nach jedem Schritt mit einem Rückkehrschritt in die zentrale Position zurück."
+          ],
+          "schritte_teil2": [
+            "Lass dir jetzt Speeder in verschiedene Zonen zuwerfen.",
+            "Wähle für jede Zone den passenden Schritt, spiele den Speeder und kehre zurück.",
+            "Erhöhe das Tempo erst, wenn die Zuordnung Schritt-zu-Zone sitzt."
+          ],
+          "selbstkontrolle": "Wählst du für jede Zone den passenden Schritt, oder läufst du überall mit denselben Schritten hin? Und findest du nach jedem Ball zuverlässig in die zentrale Position zurück? Das System trägt erst, wenn Schrittwahl und Rückkehr rund laufen.",
+          "abschluss": "Das Beinarbeit-System ist die Grundlage aller fortgeschrittenen Schläge — nur wer rechtzeitig und richtig steht, kann Clear, Smash und Stopp sauber spielen."
+        }
+      }
+    }
+  ],
+
+  "delta_bausteine": [
+    {
+      "id": "handgelenk_peitsche_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "basis_baustein": "handgelenk_peitsche",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["handgelenk_peitsche"],
+      "delta_buendelung": ["vorhand_drive_delta_bad"],
+      "delta_buendelung_hinweis": "Verweist auf das Beginner-Vorhand-Delta (Kraftumgewichtung am steifen Geraet) als weiche Voraussetzung. Fuehrender Punkt hier: die Badminton-Peitsche ans schwerere/steifere Geraet anpassen.",
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Das Handgelenk einsetzen — für Umsteiger aus dem Badminton"},
+      "erklaerteil": {
+        "de": "Die Peitsche musst du nicht erst lernen — du bringst sie mit. Im Badminton lebt fast jeder Schlag vom Handgelenk, und dein Schnapp ist wahrscheinlich schon schnell und sauber. Das ist ein echter Vorteil.\n\nWas du anpasst, ist die Balance zwischen Handgelenk und Unterarm. Dein Badminton-Schläger ist lang und flexibel und schnappt beim Schlag mit; das Handgelenk allein reicht dort für viel Tempo. Dein Gerät hier ist kürzer, steifer und straffer bespannt, und der Speeder ist deutlich schwerer als ein Federball. Der reine Handgelenks-Schnapp überträgt an diesem Gerät weniger.\n\nVerlagere deshalb einen Teil der Arbeit vom Handgelenk in die Unterarmrotation und einen festeren Griff im Treffmoment. Die Peitsche bleibt — aber sie kommt jetzt stärker aus dem eindrehenden Unterarm und weniger aus dem isolierten Handgelenk. Das ist dieselbe Kraftumgewichtung, die du schon beim Vorhand-Drive kennengelernt hast, nur auf die schnelleren, härteren Schläge übertragen.\n\nEin kleiner Test: Spiel ein paar harte Drives und achte darauf, woher das Tempo kommt. Kommt es fast nur aus dem Handgelenk und der Unterarm bleibt passiv, verschenkst du am steifen Gerät Kraft. Dreht der Unterarm mit ein und der Griff macht sich im Treffmoment kurz fest, überträgt sich die Energie sauber."
+      }
+    },
+    {
+      "id": "ueberkopf_clear_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "basis_baustein": "ueberkopf_clear",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["ueberkopf_clear"],
+      "spielziele": ["laengen_tiefensteuerung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Der Überkopfschlag — für Umsteiger aus dem Badminton"},
+      "erklaerteil": {
+        "de": "Diesen Schlag kennst du fast eins zu eins. Die seitliche Stellung, der Zeigearm, das Strecken nach oben, der Schnapp im höchsten Punkt — dein Badminton-Clear und dein Überkopf hier teilen dieselbe Bewegung. Motorisch musst du kaum umlernen.\n\nWas sich ändert, ist das Ziel deiner Flugbahn. Im Badminton hebst du den Clear hoch über das Netz bis an die hintere Linie — die Höhe ist Teil des Zwecks. Hier gibt es kein Netz. An seiner Stelle liegt die neutrale Zone, und du überbrückst sie nicht mit Höhe, sondern mit einer flacheren, weiten Bahn tief ins gegnerische Feld.\n\nDeinen defensiven Clear darfst du weiter hoch spielen, wenn du Zeit brauchst — aber selbst er läuft flacher als im Badminton, weil keine Netzhöhe zu überwinden ist. Dein offensiver Clear wird deutlich flacher und schneller: eine gestreckte Bahn, die den Gegner überspielt, statt eines hohen Bogens.\n\nEin kleiner Test: Beobachte die Bahn deines Clears. Steigt der Speeder erst steil hoch, als müsstest du ein Netz überwinden? Dann spielst du noch die Badminton-Höhe. Ziel ist die flachere, weite Bahn, die die Zone überbrückt und tief ankommt."
+      }
+    },
+    {
+      "id": "beinarbeit_system_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "basis_baustein": "beinarbeit_system",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["beinarbeit_system"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Das Beinarbeit-System — für Umsteiger aus dem Badminton"},
+      "erklaerteil": {
+        "de": "Die einzelnen Schritte kennst du: Chassé und Ausfallschritt sind im Badminton wie hier zu Hause, der Scherensprung ist dir von den hohen Bällen vertraut. Die Schritttypen musst du kaum umlernen.\n\nWas du umlernst, ist ihre Ordnung im Raum — und das ist der größte Unterschied überhaupt. Deine Badminton-Beinarbeit ist um das Netz herum gebaut. Du denkst in einem vorderen und einem hinteren Bereich, dein Zentrum liegt nah an der kurzen Aufschlaglinie, und du bist immer zum Netz ausgerichtet. Diese ganze Landkarte gibt es hier nicht.\n\nDein Feld ist ein Quadrat ohne Netz, und du verteidigst es aus seiner Mitte heraus — nach allen vier Ecken gleich. Es gibt kein Vorn und Hinten im Netzsinn, sondern vier gleichwertige Ecken um ein symmetrisches Zentrum. Der Block-Sprung fängt hier schnelle Bälle von der Seite ab, nicht einen Netzangriff. Und deine Rückkehr führt in die Mitte des Quadrats, nicht an eine netznahe Position.\n\nRichte deine innere Landkarte also neu aus: weg vom netzorientierten Vorn-Hinten, hin zum symmetrischen Quadrat mit vier gleichen Ecken. Die Beine können die Schritte schon — sie müssen nur lernen, in dieser neuen Geometrie zu denken.\n\nEin kleiner Test: Ertappst du dich dabei, dich nach einem Schlag netzartig nach vorn auszurichten oder ein 'hinten' zu bevorzugen? Dann trägt dich noch die Badminton-Landkarte. Ziel ist das gleichmäßige Decken aller vier Ecken aus der Quadratmitte."
+      }
+    }
+  ]
+}
