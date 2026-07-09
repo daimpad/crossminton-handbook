@@ -25,6 +25,7 @@ const fgMentales = liesJson('data/bausteine.fortgeschritten-mentales.json');
 const fgAthletik = liesJson('data/bausteine.fortgeschritten-athletik_kondition.json');
 const doppelThema = liesJson('data/bausteine.doppel-thema.json');
 const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
+const deltaSquash = liesJson('data/bausteine.delta-squash.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const labelsDe = liesJson('data/labels/de.json');
@@ -46,7 +47,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis], einheiten, fehlerbilder);
+const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -80,8 +81,8 @@ const doppelThemaKette = ['doppel_grundlagen', 'doppel_als_eigenes_spiel', 'angr
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('52 Basisbausteine (Doppel-Querschnitt inkl.), 16 Deltas (10 + 6 Tennis)', daten.bausteine.length === 52 && daten.deltas.length === 16);
-pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN']));
+pruefe('52 Basisbausteine (Doppel-Querschnitt inkl.), 22 Deltas (16 + 6 Squash)', daten.bausteine.length === 52 && daten.deltas.length === 22);
+pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN, SQ]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN', 'SQ']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
 setzeZurueck();
@@ -147,7 +148,7 @@ pruefe('Skip-Kandidaten sind die delta-freien Bausteine (18 = 23 − 5 mit Delta
   const skip = pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id);
   return skip.length === 18 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
 })());
-pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'SQ') === null);
+pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'BS') === null);
 // Cross-Sport über zwei Stufen: der kumulative Fortgeschritten-Pfad blendet
 // Beginner- UND Fortgeschritten-Deltas ein (10: 5 + 3 Technik + 2 Doppel-Taktik).
 const pfadFgBad = kompetenzpfad(daten, 'fortgeschritten');
@@ -175,6 +176,29 @@ pruefe('kumulativer TEN-Pfad zeigt genau die 6 Tennis-Deltas', (() => {
 pruefe('positiver Transfer ueberkopf_clear trägt das TEN-Delta (strukturell wie die abbauenden)', pfadFgTen.stationen.find((s) => s.baustein.id === 'ueberkopf_clear').delta?.id === 'ueberkopf_clear_delta_ten');
 pruefe('rueckhand_delta_ten bündelt auf griff_delta_ten + vorhand_drive_delta_ten', gleicheListe(pfadFgTen.stationen.find((s) => s.baustein.id === 'rueckhand').delta.delta_buendelung, ['griff_delta_ten', 'vorhand_drive_delta_ten']));
 pruefe('kein TEN-Delta mit eigenem Übungsteil (Delta-Regel)', deltaTennis.delta_bausteine.every((d) => d.eigener_uebungsteil === false && d.uebungsteil == null));
+
+console.log('\n[3c] Cross-Sport-Modifikator (Herkunft SQ) — dritte Herkunft, Deltas auf bisher delta-freien Bausteinen');
+// Punkt 1: Squash als dritte Onboarding-Herkunft (Ableitung aus dem Delta-Bestand).
+pruefe('Squash-Deltas ohne eigene Basis-Bausteine (nur delta_bausteine)', (deltaSquash.bausteine || []).length === 0 && deltaSquash.delta_bausteine.length === 6);
+pruefe('Herkunftsliste trägt jetzt drei Herkünfte, SQ als dritte', daten.herkuenfte[2] === 'SQ');
+pruefe('alle 6 SQ-Deltas an existierende Basis-Bausteine gehängt', deltaSquash.delta_bausteine.every((d) => daten.bausteinVonId.has(d.basis_baustein) && deltaFuer(daten, d.basis_baustein, 'SQ')?.id === d.id));
+// Punkt 2: Mehrfach-Deltas wachsen — griff/aufschlag/vorhand_drive tragen alle drei.
+pruefe('griff/aufschlag/vorhand_drive tragen je BAD-, TEN- UND SQ-Delta', ['griff', 'aufschlag', 'vorhand_drive'].every((id) => deltaFuer(daten, id, 'BAD') && deltaFuer(daten, id, 'TEN') && deltaFuer(daten, id, 'SQ')));
+// Punkt 3: Deltas auf bisher delta-freien Basis-Bausteinen (Taktik, erstmals).
+pruefe('spielziel_verstehen/zentrale_position: bei BAD/TEN kein Delta, bei SQ eines', ['spielziel_verstehen', 'zentrale_position'].every((id) => deltaFuer(daten, id, 'BAD') === null && deltaFuer(daten, id, 'TEN') === null && deltaFuer(daten, id, 'SQ')?.id === `${id}_delta_sq`));
+setzeZurueck();
+setzeDiagnose({ stufe: 'fortgeschritten', herkunft: 'SQ' });
+const pfadFgSq = kompetenzpfad(daten, 'fortgeschritten');
+pruefe('Herkunft SQ blendet genau das SQ-Delta ein (BAD/TEN ignoriert)', pfadFgSq.stationen.find((s) => s.baustein.id === 'griff').delta?.id === 'griff_delta_sq');
+pruefe('kumulativer SQ-Pfad zeigt genau die 6 Squash-Deltas (inkl. 2 Taktik)', (() => {
+  const mitDelta = pfadFgSq.stationen.filter((s) => s.delta).map((s) => s.baustein.id);
+  return mitDelta.length === 6 && gleicheListe(mitDelta.slice().sort(), ['aufschlag', 'griff', 'schnitt_spin', 'spielziel_verstehen', 'vorhand_drive', 'zentrale_position']);
+})());
+pruefe('positive Transfers (griff, zentrale_position, schnitt_spin) tragen das SQ-Delta', ['griff', 'zentrale_position', 'schnitt_spin'].every((id) => pfadFgSq.stationen.find((s) => s.baustein.id === id).delta?.id === `${id}_delta_sq`));
+pruefe('Taktik-Baustein spielziel_verstehen trägt bei SQ das Wand-Delta', pfadFgSq.stationen.find((s) => s.baustein.id === 'spielziel_verstehen').delta?.id === 'spielziel_verstehen_delta_sq');
+pruefe('bewusst kein SQ-Rückhand-Delta (Squash-Rückhand transferiert glatt)', deltaFuer(daten, 'rueckhand', 'SQ') === null);
+pruefe('vorhand_drive_delta_sq bündelt auf griff_delta_sq', gleicheListe(pfadFgSq.stationen.find((s) => s.baustein.id === 'vorhand_drive').delta.delta_buendelung, ['griff_delta_sq']));
+pruefe('kein SQ-Delta mit eigenem Übungsteil (Delta-Regel)', deltaSquash.delta_bausteine.every((d) => d.eigener_uebungsteil === false && d.uebungsteil == null));
 
 console.log('\n[4] Zwei-Ebenen-Logik: Hinweis statt Sperre');
 const griffVorher = pfadBad.stationen.find((s) => s.baustein.id === 'griff');

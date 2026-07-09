@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "beschreibung": "Squash-Herkunfts-Deltas (SQ): Cross-Sport-Anpassungen fuer Umsteiger aus dem Squash. Herkunftsreine Delta-Datei — enthaelt NUR delta_bausteine, keine Basis-Bausteine. Profil: mehrere POSITIVE Transfers (ein Griff, zentrale Position/T, Schnitt) plus die grosse raeumliche Neuausrichtung (keine Waende).",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.delta-squash.json (herkunftsreine Delta-Datei, parallel zu bausteine.delta-tennis.json).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. SQ ist Bestandswert von transfer_herkunft. Keine Erweiterung.",
+    "aktiviert_herkunft": "Aktiviert SQUASH erstmals als Onboarding-Herkunft (dritte nach Badminton und Tennis), gemaess Ableitung aus dem Delta-Bestand.",
+    "selektionsprinzip": "6 Deltas. Positiv (mitgebrachte Staerke einloesen): griff (ein Griff schon vorhanden), zentrale_position (T = zentrale Position), schnitt_spin (Schnitt vertraut). Divergenz (Gewohnheit umstellen): spielziel_verstehen (keine Waende — die zentrale Neuausrichtung), aufschlag (Frontwand-Aufschlag -> von unten ueber die Zone), vorhand_drive (zur Frontwand mit offenem Schnitt -> flach direkt ueber die Zone).",
+    "bewusst_kein_rueckhand_delta": "Anders als Tennis braucht Squash KEIN Rueckhand-Delta: die Squash-Rueckhand ist bereits einhaendig mit demselben Griff wie die Vorhand — sie transferiert glatt. Selektionsprinzip: Delta nur, wo eine Gewohnheit kollidiert.",
+    "hinweis_anfuehrung": "Innere Zitate in einfachen Anfuehrungszeichen, um JSON-Delimiter-Kollision zu vermeiden."
+  },
+
+  "delta_bausteine": [
+    {
+      "id": "griff_delta_sq",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "griff",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["griff"],
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Griffhaltung — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Beim Griff hast du kaum etwas umzustellen — im Gegenteil, du bringst genau das mit, woran andere zuerst scheitern. Im Squash spielst du längst mit einem einzigen Griff für alles: der Handschlag-Griff mit dem V zwischen Daumen und Zeigefinger, für Vorhand wie Rückhand gleich, ohne Wechsel. Das ist praktisch der crossminton-Universalgriff. Du hast die größte Hürde schon genommen.\n\nZwei kleine Feinheiten passt du an. Erstens die Schlagfläche: Im Squash hältst du den Schläger leicht geöffnet, sodass du auf beiden Seiten die Saiten siehst — das hilft dir dort beim Schneiden und beim Spiel aus den Ecken. Im Crossminton nimmst du die Fläche zunächst neutraler, weil du den Speeder meist voll und flach triffst. Den bewussten Schnitt hebst du dir für später auf.\n\nZweitens das Handgelenk: Im Squash ist es oft nach oben aufgestellt, der Schlägerkopf über dem Handgelenk. Hier hältst du es am Anfang ruhiger und neutraler. Der bewusste Handgelenkseinsatz — die Peitsche — kommt auf der fortgeschrittenen Stufe, angepasst an das crossminton-Gerät.\n\nEin kleiner Test: Siehst du beim ruhigen Halten auf beiden Seiten deine Saiten wie im Squash? Dann ist die Fläche noch geöffnet. Ziel ist die neutrale Fläche auf dem vertrauten einen Griff — den du im Grunde schon dein ganzes Squashleben benutzt."
+      }
+    },
+    {
+      "id": "spielziel_verstehen_delta_sq",
+      "typ": "delta",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "spielziel_verstehen",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["spielziel_verstehen"],
+      "spielziele": ["antwort_gegen_defensivspieler"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Das Spielziel verstehen — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Hier liegt deine größte Umstellung — und sie ist keine Frage der Technik, sondern des ganzen räumlichen Denkens. Squash ist ein Wandspiel. Du spielst den Ball gegen die Frontwand, nutzt Seiten- und Rückwände für Winkel, und du teilst dir mit dem Gegner denselben Raum. Dein ganzes Spielverständnis ist um Wände und Rückpraller gebaut.\n\nCrossminton hat keine Wände. Zwischen dir und dem Gegner liegt eine neutrale Zone, und dahinter ein eigenes, getrenntes Feld, in das du den Speeder direkt spielst. Kein Ball kommt von einer Wand zurück, es gibt keinen Boast, keine Winkel über die Seitenwand, kein geteiltes Spielfeld. Du spielst geradewegs hinüber in das Quadrat des Gegners.\n\nDas ist eine tiefe Neuausrichtung. Statt zu denken 'wie spiele ich den Ball an die Wand, sodass er für den Gegner schwer wird', denkst du jetzt 'wie bringe ich den Speeder über die Zone direkt in eine Ecke, die der Gegner nicht mehr erreicht'. Dein Zielbild wandert von der Wand zum gegnerischen Feld.\n\nEin Bild: Im Squash spielt ihr beide gegen dieselbe Wand, wie zwei, die einen Ball gegen eine Hausmauer spielen. Im Crossminton steht ihr euch gegenüber wie über einen Graben, und jeder verteidigt sein eigenes Stück Boden. Derselbe Schläger, aber eine ganz andere Landkarte des Spiels.\n\nEin kleiner Test: Suchst du im Kopf noch nach der Wand, nach dem Winkel, nach dem Rückpraller? Dann trägt dich noch das Squash-Denken. Ziel ist der direkte Blick auf das gegnerische Feld über die Zone hinweg."
+      }
+    },
+    {
+      "id": "aufschlag_delta_sq",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "aufschlag",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["aufschlag"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Aufschlag — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Dein Squash-Aufschlag zielt auf die Frontwand: aus der Aufschlagbox gespielt, sodass der Ball über die Wand ins gegnerische Rückfeld kommt. Diese Vorstellung legst du hier ab, denn es gibt keine Wand.\n\nDer crossminton-Aufschlag wird von unten gespielt und geht direkt über die neutrale Zone in das gegnerische Feld. Du lässt den Speeder aus der freien Hand fallen und triffst ihn von unten, wobei der ganze Speeder im Treffmoment unterhalb deiner Schlaghand ist, aus der hinteren Zone deines Feldes. Kein Wandkontakt, keine Winkel — eine direkte, flache Bahn hinüber.\n\nDas ist eine neue Bewegung; lerne sie frisch, so wie sie im Grundbaustein steht. Dein Squash-Aufschlag hilft dir dabei nicht, weil sein ganzer Sinn — der Ball über die Frontwand — hier wegfällt.\n\nWas dir hilft, ist dein Gefühl für Präzision und Platzierung aus dem Squash. Sobald du die neue Bewegung beherrschst, kannst du den Aufschlag gezielt setzen — das gezielte Platzieren beherrschst du aus dem Wandspiel bereits gut.\n\nEin kleiner Test: Suchst du beim Aufschlag noch einen Punkt an einer gedachten Wand? Dann denkst du noch im Squash-Raum. Ziel ist die direkte, flache Bahn über die Zone in das gegnerische Feld."
+      }
+    },
+    {
+      "id": "vorhand_drive_delta_sq",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "vorhand_drive",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["vorhand_drive"],
+      "delta_buendelung": ["griff_delta_sq"],
+      "delta_buendelung_hinweis": "Verweist auf das Squash-Griff-Delta (neutrale statt offener Flaeche) als weiche Voraussetzung. Fuehrender Punkt hier: das Ziel wandert von der Wand zum gegnerischen Feld.",
+      "spielziele": ["tempo_haertedosierung", "laengen_tiefensteuerung"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Vorhand-Drive — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Deine Squash-Vorhand bringt viel Brauchbares mit: einen kompakten Schlag, ein gutes Ballgefühl, schnelle Reaktionen. Zwei Dinge stellst du um, und beide hängen an der fehlenden Wand.\n\nErstens das Ziel. Im Squash spielst du den Drive tief und eng an der Seitenwand entlang zur Frontwand — der Ball läuft die Wand hinunter. Im Crossminton gibt es keine Wand, an der du den Ball entlangführst. Du spielst flach und direkt über die neutrale Zone in das gegnerische Feld. Dein Zielbild wandert von der Wandlinie zur Ecke im gegnerischen Quadrat.\n\nZweitens die Schlagfläche. Im Squash öffnest du die Fläche und schneidest den Ball oft an, um ihn tief und kontrolliert an die Wand zu bringen. Im Crossminton triffst du den Speeder für den Grunddrive flacher und voller. Den Schnitt hebst du dir als eigenes Werkzeug für später auf — dort zahlt sich dein Squash-Gefühl dann aus.\n\nDie gute Seite: Dein kompakter Schwung passt gut. Anders als ein Tennisspieler musst du nichts verkürzen — Squash spielt sich ähnlich eng und schnell. Du drehst vor allem das Ziel und die Fläche um.\n\nEin kleiner Test: Führst du den Ball noch an einer gedachten Wand entlang oder schneidest ihn stark an? Dann trägt dich noch das Wandspiel. Ziel ist der flache, volle Drive direkt in das gegnerische Feld."
+      }
+    },
+    {
+      "id": "zentrale_position_delta_sq",
+      "typ": "delta",
+      "domaene": "taktik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "zentrale_position",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["zentrale_position"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Zentrale Position — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Hier bringst du eine deiner größten Stärken mit. Im Squash kehrst du nach jedem Schlag zum 'T' zurück — dem zentralen Punkt, von dem aus du alle Ecken am schnellsten erreichst. Dieses Zurückkehren zur Mitte ist dir längst in Fleisch und Blut übergegangen. Genau diese Gewohnheit ist im Crossminton Gold wert.\n\nDie zentrale Position im Crossminton funktioniert nach demselben Prinzip wie dein T: Nach jedem Schlag kehrst du in die Mitte zurück, weil von dort die Wege zu allen Ecken am kürzesten sind. Du musst dieses Prinzip nicht neu lernen — du überträgst es nur.\n\nEine Sache richtest du neu aus. Dein T im Squash liegt in einem Feld, das du gemeinsam mit dem Gegner bespielst, und du bist zur Frontwand orientiert. Im Crossminton stehst du allein in deinem eigenen Quadrat und deckst vier gleichwertige Ecken um dich herum — es gibt kein Vorn zur Wand, sondern ein symmetrisches Rundum. Deine Mitte ist das Zentrum dieses Quadrats, und du richtest dich zum Gegner über die Zone aus, nicht zu einer Wand.\n\nEin Bild: Dein Squash-T war ein Ankerpunkt in einem geteilten Raum, mit dem Blick nach vorn zur Wand. Deine crossminton-Mitte ist der Mittelpunkt eines eigenen Rings, den du nach allen Seiten gleich deckst. Dieselbe Rückkehr-Gewohnheit, nur in einer runderen Geometrie.\n\nEin kleiner Test: Richtest du dich nach der Rückkehr zur Mitte noch nach vorn aus, als stünde dort eine Wand? Dann trägt dich noch das T-Denken. Ziel ist die symmetrische Mitte, aus der du alle vier Ecken gleich schnell erreichst."
+      }
+    },
+    {
+      "id": "schnitt_spin_delta_sq",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "basis_baustein": "schnitt_spin",
+      "ersetzt_bei_herkunft": "SQ",
+      "voraussetzungen": ["schnitt_spin"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel"],
+      "transfer_herkunft": ["SQ"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Schnitt und Flugbahn — für Umsteiger aus dem Squash"},
+      "erklaerteil": {
+        "de": "Der Schnitt ist für die meisten Spieler fortgeschrittenes Neuland — für dich ist er vertrautes Gelände. Im Squash schneidest du den Ball ständig an, mit offener Schlagfläche, um ihn zu kontrollieren, tief zu halten und aus den Ecken zu holen. Das Gefühl, den Ball anzustreifen statt ihn voll zu treffen, bringst du mit.\n\nDieses Gefühl überträgst du direkt. Wo andere erst lernen müssen, den Speeder seitlich anzustreifen, um ihm Rotation zu geben, greifst du auf eine eingeübte Bewegung zurück. Deine offene Fläche, dein Handgelenksgefühl beim Schneiden — all das hilft dir hier.\n\nZwei Anpassungen gibt es. Der Speeder verhält sich anders als ein Squashball: leichter, mit stärkerem Luftwiderstand, ohne Wand, an der er weiterläuft. Der Effekt deines Schnitts zeigt sich also in der Flugbahn durch die Luft, nicht im Verhalten an einer Wand. Und du setzt den Schnitt hier sparsamer ein als im Squash — er kostet etwas Kontrolle und lohnt sich als gezielte Variation, nicht als Dauermittel.\n\nEin Bild: Dein Squash-Schnitt zähmte den Ball an der Wand. Dein crossminton-Schnitt krümmt die Flugbahn durch die Luft. Dieselbe Handbewegung, eine andere Wirkung.\n\nEin kleiner Test: Erzeugst du den Schnitt mühelos aus dem vertrauten Handgelenk? Dann trägt dich deine Squash-Erfahrung. Achte nur darauf, ihn gezielt und sparsam einzusetzen und den Speeder trotz Schnitt kontrolliert zu treffen."
+      }
+    }
+  ]
+}
