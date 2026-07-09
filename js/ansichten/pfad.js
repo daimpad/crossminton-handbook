@@ -6,7 +6,7 @@ import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { balkenHtml, bausteinIcon, esc, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
 import { individualpfad, kompetenzpfad, spielformen, spielformpfad, themenDomaenen, themenpfad } from '../pfade.js';
-import { einstellungen, setzeDiagnose } from '../zustand.js';
+import { diagnose, einstellungen, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
 // In der Liste ordnet bereits die Reihenfolge; der „Empfohlen vorher"-Hinweis
@@ -135,7 +135,7 @@ export function renderIndividual(el, daten) {
     el.innerHTML = `
       <h1>${esc(t('pfad_individual'))}</h1>
       <p class="leise">${esc(t('ziel_hinweis'))}</p>
-      <form id="zielform">${zielwahlHtml(daten, null, { mitVermittlungszielen: true })}</form>
+      <form id="zielform">${zielwahlHtml(daten, null, { mitVermittlungszielen: diagnose().trainer })}</form>
       <div class="knopf-zeile"><button class="knopf knopf-primaer" id="ziel-uebernehmen">${esc(t('uebernehmen'))}</button></div>`;
     el.querySelector('#zielform').addEventListener('submit', (ereignis) => ereignis.preventDefault());
     el.querySelector('#ziel-uebernehmen').addEventListener('click', () => {
@@ -160,7 +160,7 @@ export function renderIndividual(el, daten) {
     ${inhalt}
     <details class="karte">
       <summary>${esc(t('ziel_aendern'))}</summary>
-      <form id="zielform">${zielwahlHtml(daten, pfad.ziel, { mitVermittlungszielen: true })}</form>
+      <form id="zielform">${zielwahlHtml(daten, pfad.ziel, { mitVermittlungszielen: diagnose().trainer })}</form>
       <div class="knopf-zeile">
         <button class="knopf knopf-leise" id="ziel-entfernen">${esc(t('ziel_entfernen'))}</button>
         <button class="knopf knopf-primaer" id="ziel-uebernehmen">${esc(t('uebernehmen'))}</button>

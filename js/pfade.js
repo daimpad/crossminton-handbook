@@ -27,6 +27,17 @@ function poolVergleicher(daten) {
   return (a, b) => daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id);
 }
 
+// Reine Trainer-Bausteine (technikübergreifendes Meta-Wissen, kompetenzstufe nur
+// ["trainer"]) sind orthogonal zur Könnensstufe (Spez. 7.2, Frage 2) und erscheinen
+// ausschließlich in der Trainer-Perspektive. Ein Baustein mit einer Könnensstufe
+// UND 'trainer' bleibt normal sichtbar (niedrigsteStufe ist dann die Könnensstufe).
+function istNurTrainer(daten, baustein) {
+  return niedrigsteStufe(daten, baustein) === 'trainer';
+}
+function trainerSichtbar(daten, baustein) {
+  return diagnose().trainer || !istNurTrainer(daten, baustein);
+}
+
 // Kompetenzpfad (kann über Stufen kumulieren): Stufe primär, damit sich
 // Stufen-Blöcke bilden (Beginner-Block, dann Fortgeschritten-Block), darin
 // Domäne und Pool-Reihenfolge (Spez. 6.1 „innerhalb einer Stufe").
@@ -114,16 +125,17 @@ export function kompetenzpfad(daten, stufe = diagnose().stufe) {
   };
 }
 
-// 6.3 Themenpfad — Facetten nach Domäne, geordnet-explorativ.
+// 6.3 Themenpfad — Facetten nach Domäne, geordnet-explorativ. Reine Trainer-Domänen
+// (Trainingsgestaltung) zählen nur in der Trainer-Perspektive mit — sonst 0-Facette.
 export function themenDomaenen(daten) {
   return (daten.vokabulare.domaene || []).map((domaene) => ({
     domaene,
-    anzahl: daten.bausteine.filter((b) => domaenenVon(b).includes(domaene)).length,
+    anzahl: daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b)).length,
   }));
 }
 
 export function themenpfad(daten, domaene) {
-  const menge = daten.bausteine.filter((b) => domaenenVon(b).includes(domaene));
+  const menge = daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b));
   return {
     art: 'themen',
     domaene,
@@ -170,8 +182,12 @@ export function individualpfad(daten, ziel = diagnose().ziel) {
   const zielIndex = daten.koennensOrdnung.indexOf(diagnose().stufe);
   const menge = daten.bausteine.filter((b) => {
     if (zielTreffer(b, eintraege) === 0) return false;
+    const eigene = niedrigsteStufe(daten, b);
+    // Trainer-Meta ist orthogonal zur Könnensstufe: nur in der Trainer-Perspektive,
+    // dann aber stufen-unabhängig (nicht vom Könnensstufen-Filter kassiert).
+    if (eigene === 'trainer') return diagnose().trainer;
     if (zielIndex < 0) return true; // Stufe unbekannt: nicht filtern
-    const eigenerIndex = daten.koennensOrdnung.indexOf(niedrigsteStufe(daten, b));
+    const eigenerIndex = daten.koennensOrdnung.indexOf(eigene);
     return eigenerIndex >= 0 && eigenerIndex <= zielIndex; // bis einschließlich Diagnose-Stufe
   });
   return {
