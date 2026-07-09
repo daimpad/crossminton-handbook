@@ -127,35 +127,43 @@ main {
   inset: auto 0 0;
   z-index: 15;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background: var(--flaeche);
   border-top: 1px solid var(--linie);
   box-shadow: 0 -4px 16px rgba(31, 41, 51, 0.06);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.fussnav a {
+.fussnav a,
+.fussnav-mehr {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.2rem;
   padding: 0.55rem 0 0.5rem;
   min-height: 44px;
+  font-family: inherit;
   font-size: 0.76rem;
   font-weight: 500;
   color: var(--tinte-2);
   text-decoration: none;
+  border: 0;
+  background: none;
+  cursor: pointer;
   transition: color var(--uebergang), transform var(--uebergang);
 }
 
-.fussnav a .fa-solid { font-size: 1.15rem; }
+.fussnav a .fa-solid,
+.fussnav-mehr .fa-solid { font-size: 1.15rem; }
 
-.fussnav a.aktiv {
+.fussnav a.aktiv,
+.fussnav-mehr.aktiv {
   color: var(--primaer-tief);
   font-weight: 600;
 }
 
-.fussnav a.aktiv .fa-solid { transform: translateY(-1px); color: var(--primaer-tief); }
+.fussnav a.aktiv .fa-solid,
+.fussnav-mehr.aktiv .fa-solid { transform: translateY(-1px); color: var(--primaer-tief); }
 
 body.im-onboarding .fussnav { display: none; }
 body.im-onboarding main { padding-bottom: 2rem; }
@@ -336,6 +344,16 @@ body.im-onboarding .sprach-anzeige { display: none; }
 .menue.offen .menue-punkt:nth-of-type(4) { transition-delay: 240ms; }
 .menue.offen .menue-punkt:nth-of-type(5) { transition-delay: 300ms; }
 .menue.offen .menue-punkt:nth-of-type(6) { transition-delay: 360ms; }
+.menue.offen .menue-punkt:nth-of-type(7) { transition-delay: 420ms; }
+.menue.offen .menue-punkt:nth-of-type(8) { transition-delay: 480ms; }
+
+/* Trenner vor den Rechtstexten (Impressum/Datenschutz) im Menü. */
+.menue-trenner {
+  display: block;
+  height: 1px;
+  margin: 0.5rem 0.9rem;
+  background: var(--linie);
+}
 
 .menue-punkt.aktiv {
   background: var(--primaer-weich);
@@ -865,7 +883,7 @@ details[open] summary { margin-bottom: 0.5rem; }
   .hamburger:hover { background: var(--primaer-dunkel); box-shadow: var(--schatten-hover); transform: translateY(-1px); }
   .menue-schliessen:hover { background: var(--primaer-weich); box-shadow: var(--schatten-hover); }
   .menue-punkt:hover { background: var(--primaer-weich); color: var(--primaer-tief); }
-  .fussnav a:hover { color: var(--primaer-tief); }
+  .fussnav a:hover, .fussnav-mehr:hover { color: var(--primaer-tief); }
 }
 
 /* ---------- Desktop ---------- */
@@ -898,8 +916,8 @@ details[open] summary { margin-bottom: 0.5rem; }
 .app-footer {
   max-width: 44rem;
   margin: 1.2rem auto 0;
-  /* unten die zweizeilige Bottom-Bar (~115px) freihalten (mobil); Desktop überschreibt. */
-  padding: 0.9rem 1rem calc(8.2rem + env(safe-area-inset-bottom));
+  /* unten die einzeilige Bottom-Bar (~60px) freihalten (mobil); Desktop überschreibt. */
+  padding: 0.9rem 1rem calc(5rem + env(safe-area-inset-bottom));
   border-top: 1px solid var(--linie);
   display: flex;
   flex-wrap: wrap;
