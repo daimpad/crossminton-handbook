@@ -57,9 +57,9 @@
       {
         "id": "uebersetzen",
         "titel": {"de": "Beim Übersetzen helfen"},
-        "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Jede Sprache bringt die App näher an mehr Spielende."},
+        "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Die Sprachdateien liegen unter data/labels/ — jede Sprache bringt die App näher an mehr Spielende."},
         "cta_label": {"de": "Zur Übersetzung beitragen"},
-        "cta_ziel": "https://github.com/daimpad/crossminton-handbook/"
+        "cta_ziel": "https://github.com/daimpad/crossminton-handbook/tree/main/data/labels"
       },
       {
         "id": "code_beitragen",

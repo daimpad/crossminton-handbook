@@ -51,6 +51,14 @@ function aktualisiereNavigation(segmente) {
   for (const verweis of document.querySelectorAll('[data-footer]')) {
     verweis.classList.toggle('aktiv', verweis.dataset.footer === segmente[0]);
   }
+  // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
+  const imMehr = ['regeln', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const mehr = document.querySelector('.fussnav-mehr');
+  if (mehr) {
+    mehr.classList.toggle('aktiv', imMehr);
+    if (imMehr) mehr.setAttribute('aria-current', 'page');
+    else mehr.removeAttribute('aria-current');
+  }
 }
 
 function beschrifteRahmen() {
@@ -63,16 +71,23 @@ function beschrifteRahmen() {
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
     profil: t('nav_profil'),
+    mehr: t('nav_mehr'),
   };
   for (const verweis of document.querySelectorAll('[data-nav]')) {
-    verweis.querySelector('.nav-text').textContent = beschriftungen[verweis.dataset.nav];
+    const ziel = verweis.querySelector('.nav-text');
+    if (ziel && beschriftungen[verweis.dataset.nav]) ziel.textContent = beschriftungen[verweis.dataset.nav];
   }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
+  // Impressum/Datenschutz stehen als reiner Text im Footer und mit Icon im Menü —
+  // deshalb nur den .nav-text-Träger ersetzen, wenn vorhanden (Icon nicht zerstören).
   for (const verweis of document.querySelectorAll('[data-footer]')) {
     const beschriftung = { impressum: t('footer_impressum'), datenschutz: t('footer_datenschutz') }[verweis.dataset.footer];
-    if (beschriftung) verweis.textContent = beschriftung;
+    if (!beschriftung) continue;
+    const ziel = verweis.querySelector('.nav-text');
+    if (ziel) ziel.textContent = beschriftung;
+    else verweis.textContent = beschriftung;
   }
   setzeSprachanzeige();
 }
@@ -149,19 +164,27 @@ function initFooter() {
   if (githubEl && github) githubEl.setAttribute('href', github);
 }
 
-// Hamburger-Menü (Desktop): Lade gleitet von rechts herein, Punkte gestaffelt.
+// Menü öffnen zwei Auslöser: der Hamburger (Kopf, ab Tablet) und „Mehr"
+// (Bottom-Bar, mobil). Beide teilen dieselbe Lade und denselben aria-Zustand.
+function setzeMenueTrigger(offen) {
+  for (const id of ['hamburger', 'mehr-knopf']) {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('aria-expanded', String(offen));
+  }
+}
+
 function oeffneMenue() {
   const menue = document.getElementById('hauptmenue');
   menue.hidden = false;
   requestAnimationFrame(() => requestAnimationFrame(() => menue.classList.add('offen')));
-  document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+  setzeMenueTrigger(true);
 }
 
 function schliesseMenue() {
   const menue = document.getElementById('hauptmenue');
   if (menue.hidden) return;
   menue.classList.remove('offen');
-  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  setzeMenueTrigger(false);
   window.setTimeout(() => {
     menue.hidden = true;
   }, 400);
@@ -257,6 +280,7 @@ async function boot() {
   for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
+  document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);
   initSprachanzeige();
   initFooter();
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
