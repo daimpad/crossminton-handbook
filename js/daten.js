@@ -28,6 +28,8 @@ const INHALTSDATEIEN = [
   // Experten-Stufe: dritte Könnensstufe, herkunftsneutral (keine Cross-Sport-Deltas).
   'data/bausteine.experte-technik.json',
   'data/bausteine.experte-taktik.json',
+  'data/bausteine.experte-mentales.json',
+  'data/bausteine.experte-athletik_kondition.json',
   'data/bausteine.doppel-thema.json',
   'data/bausteine.delta-tennis.json',
   'data/bausteine.delta-squash.json',

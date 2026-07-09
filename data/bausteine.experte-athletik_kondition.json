@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "beschreibung": "Experten-Athletik/Kondition: hoechste athletische Ebene. Formaufbau ueber die Saison, Reaktivkraft, Bewegungsoekonomie, antizipative Schnelligkeit, langfristige Belastbarkeit. Herkunftsneutral — KEINE Cross-Sport-Deltas.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl", "ja"],
+    "stand": "Erstausbau-Erweiterung — vervollstaendigt die Experten-Stufe ueber alle vier Spieler-Domaenen.",
+    "dateiname_konvention": "bausteine.experte-athletik_kondition.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer.",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Fortgeschritten- und teils Beginner-Athletikblock, plus intern.",
+    "gesundheitsrahmen": "STRIKT eingehalten. KEINE Dosierungen, Wiederholungszahlen, Satz-/Umfangsangaben, Ernaehrungshinweise oder Gradwerte. Inhalte bleiben qualitativ (Bewegungsqualitaet, Prinzip, Wahrnehmung). Programmiernahes (konkreter Trainingsplan, Periodisierungsplan, Plyometrie-Umfang) und alles zu Verletzung, Schmerz, Ueberlastung wird ausdruecklich an qualifizierte Anleitung verwiesen (Trainer, Trainingswissenschaft, Physiotherapie, Sportmedizin).",
+    "innere_struktur": "1 uebungsteil (Reaktivkraft, rein qualitaets-/technikorientiert, ohne Dosierung), 4 reflexionsaufgabe.",
+    "ordnungslogik": "Form ueber die Saison -> Reaktivkraft -> Bewegungsoekonomie -> antizipative Schnelligkeit -> langfristig belastbar."
+  },
+
+  "bausteine": [
+    {
+      "id": "form_ueber_die_saison",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "voraussetzungen": ["gezielt_trainieren", "belastung_steuern_regenerieren"],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): weitet das gezielte Trainieren und die Belastungssteuerung auf die Zeitachse einer Saison aus",
+      "spielziele": ["satz_match_regeneration", "rally_ausdauer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Periodisierung als strukturierte Variation zur Leistungsspitze in wichtigen Phasen und zur langfristigen Entwicklung: Trainingswissenschaft. Bewusst nur Prinzip-/Awareness-Ebene; die konkrete Planung wird an qualifizierte Anleitung verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Form über die Saison planen"},
+      "erklaerteil": {
+        "de": "Auf Expertenniveau ist Form nichts Zufälliges. Wer über eine Saison konstant spielen und zu den wichtigen Turnieren in Bestform sein will, denkt in längeren Zeiträumen als der einzelnen Trainingseinheit. Dieser Baustein macht dich mit dem Prinzip vertraut — die konkrete Planung gehört in qualifizierte Hände.\n\nDer Grundgedanke ist, dass sich Form nicht dauerhaft auf höchstem Niveau halten lässt. Es gibt Phasen, in denen du eine Grundlage aufbaust, Phasen intensiver Arbeit und Phasen, in denen du bewusst zurücknimmst, damit der Körper die Anpassung leisten kann. Diese geplante Abwechslung sorgt dafür, dass die Spitze dann kommt, wenn du sie brauchst.\n\nBesonders wichtig ist die Phase vor einem wichtigen Wettkampf. Wer bis zuletzt hart arbeitet, geht müde ins Turnier. Wer die Belastung rechtzeitig zurücknimmt, kommt frisch und leistungsfähig an. Dieses bewusste Zurücknehmen vor dem Höhepunkt ist eines der Kennzeichen erfahrener Athleten.\n\nHier ist die wichtige Grenze: Ein guter Saisonplan ist individuell und gehört in die Hände qualifizierter Anleitung — eines Trainers oder einer Fachperson der Trainingswissenschaft. Dieser Baustein will dich für das Prinzip sensibilisieren, nicht einen Plan vorgeben. Deine Aufgabe ist, in längeren Bögen zu denken und die Planung mit fachkundiger Begleitung anzugehen.\n\nEin Bild: Deine Form über die Saison ist wie das Wachstum in einem Garten über das Jahr. Es gibt Zeiten des Säens, des Wachsens und der Ernte — und niemand erntet das ganze Jahr. Wer alles gleichzeitig will, bekommt nichts zur rechten Zeit."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über deine Saison in längeren Bögen nach: Wann sind deine wichtigsten Turniere, und arbeitest du bisher gleichmäßig durch oder planst du bewusst Aufbau- und Erholungsphasen? Beobachte, ob du zu den wichtigen Terminen frisch oder müde ankommst. Wenn du deine Form gezielter über die Saison steuern willst, ist der nächste Schritt, das mit einem Trainer oder einer Fachperson der Trainingswissenschaft zu planen — dieser Baustein ersetzt diese Begleitung nicht, sondern legt sie dir nahe."
+      }
+    },
+
+    {
+      "id": "reaktivkraft_bodenkontakt",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "voraussetzungen": ["explosivitaet", "schnelle_fuesse"],
+      "voraussetzungen_lesart": "motorisch (stufenuebergreifend): baut auf Explosivitaet und schnellen Fuessen auf",
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Dehnungs-Verkuerzungs-Zyklus: Sehnen speichern in der exzentrischen Phase elastische Energie und geben sie konzentrisch ab; kurzer, schneller Bodenkontakt (Reaktivkraft) macht Bewegung effizienter: Trainingswissenschaft. Qualitativ gehalten; strukturierte Plyometrie wird an qualifizierte Anleitung verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'schwerer, langer Bodenkontakt / harte Landung' + Korrekturansage (Qualitaet, nicht Umfang)",
+      "anzeigetitel": {"de": "Reaktivkraft — der schnelle Bodenkontakt"},
+      "erklaerteil": {
+        "de": "Was einen Experten athletisch auszeichnet, ist oft nicht die rohe Kraft, sondern die Schnelligkeit des Bodenkontakts. Reaktivkraft ist die Fähigkeit, den Boden nur kurz zu berühren und sofort wieder abzudrücken — federnd statt schwer. Sie steckt hinter jedem schnellen Richtungswechsel und jedem explosiven Antritt.\n\nDahinter steht ein einfaches Prinzip: Deine Sehnen wirken wie Federn. Wenn du landest, spannen sie sich und speichern Energie; drückst du sofort wieder ab, geben sie diese Energie zurück und verstärken deine Bewegung. Je kürzer der Bodenkontakt, desto mehr von dieser gespeicherten Energie nutzt du. Ein langer, schwerer Kontakt lässt sie ungenutzt verpuffen.\n\nDeshalb geht es bei der Reaktivkraft um Qualität, nicht um Menge. Der Kontakt soll sich leicht und federnd anfühlen, wie ein Ball, der vom Boden abspringt. Die Landung bleibt dabei immer weich und kontrolliert — Federung entsteht aus Elastizität, nicht aus Härte.\n\nEine klare Grenze: Strukturiertes Reaktivkrafttraining mit Sprüngen gehört in qualifizierte Hände. Der Aufbau, die Belastung und die Auswahl der Übungen sind eine Sache für Trainer oder Trainingswissenschaft — gerade weil Sprungbelastung ohne guten Aufbau die Gelenke fordert. Hier geht es allein um das Gefühl für den kurzen, federnden Kontakt in Bewegungen, die du ohnehin spielst.\n\nEin Bild: Stell dir vor, der Boden wäre heiß und du willst so wenig wie möglich darauf stehen. Genau dieses kurze, leichte Abspringen ist Reaktivkraft."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Kurz und federnd",
+          "ziel": "Ein Gefühl für den kurzen, elastischen Bodenkontakt in vertrauten Bewegungen entwickeln — Qualität, nicht Umfang.",
+          "schritte": [
+            "Spiele deine gewohnte Beinarbeit und achte bewusst auf die Länge des Bodenkontakts: Wie kurz kannst du ihn halten?",
+            "Bei kleinen Ausgleichshüpfern und Richtungswechseln: stell dir den Boden als heiß vor, den du sofort wieder verlässt.",
+            "Achte darauf, dass die Landung dabei immer weich und leise bleibt — federnd, nicht hart.",
+            "Höre auf das Geräusch: ein leiser Kontakt ist meist ein elastischer.",
+            "Beende die Übung, sobald die Bewegung schwer oder die Landung hart wird — Qualität geht vor Fortsetzung."
+          ],
+          "selbstkontrolle": "Fühlt sich dein Bodenkontakt leicht und federnd an oder schwer und lang? Bleibt die Landung weich und leise? Wenn die Federung nachlässt oder die Landung hart wird, ist die Übung für heute vorbei. Für strukturiertes Sprungtraining wende dich an qualifizierte Anleitung.",
+          "abschluss": "Reaktivkraft ist der leichte, kurze Bodenkontakt, der deine Bewegung effizienter macht. Sie wächst über die Qualität des Kontakts — der geplante Aufbau gehört in fachkundige Hände."
+        }
+      }
+    },
+
+    {
+      "id": "bewegungsoekonomie",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "voraussetzungen": ["schnelle_fuesse", "durchhalten"],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): verbindet effiziente Fussarbeit mit dem Durchhalten ueber die Distanz",
+      "spielziele": ["rally_ausdauer", "wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Bewegungsoekonomie: effiziente Umsetzung von Aufwand in Bewegung, weniger Energieverlust; Effizienz haengt eng mit der Nutzung elastischer Energie zusammen: Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Bewegungsökonomie — effizient statt hektisch"},
+      "erklaerteil": {
+        "de": "Erfahrene Spieler wirken oft mühelos, während weniger geübte um dieselben Bälle hektisch rennen. Der Unterschied ist die Bewegungsökonomie: mit möglichst wenig Aufwand dorthin kommen, wo du hin musst. Wer ökonomisch spielt, bleibt länger frisch und ist am Ende des Matches noch da.\n\nÖkonomie beginnt mit dem Weglassen überflüssiger Bewegung. Jeder unnötige Schritt, jedes zu weite Ausholen, jede hektische Korrektur kostet Kraft. Der Experte bewegt sich in klaren, direkten Wegen zum Ball und zurück, ohne Zappeln, ohne Umwege. Ruhe in der Bewegung ist kein Zeichen von Langsamkeit, sondern von Effizienz.\n\nEin zweiter Teil ist die gute Ausgangsposition. Wer nach jedem Schlag zügig in eine zentrale, ausbalancierte Position zurückkehrt, hat kürzere Wege zum nächsten Ball. Ökonomie entsteht auch dadurch, dass du gar nicht erst weit laufen musst, weil du klug stehst.\n\nUnd sie hängt eng mit der Reaktivkraft zusammen: Wer die federnde Energie seiner Sehnen nutzt, bewegt sich mit weniger muskulärem Aufwand. Effiziente Bewegung fühlt sich leicht an, weil sie die kostenlose elastische Energie mitnutzt, statt alles aus reiner Muskelkraft zu holen.\n\nEin Bild: Ein erfahrener Läufer gleitet über die Strecke, ein Anfänger stampft. Beide kommen an, aber der eine hat am Ende noch Reserven, der andere ist leer. Im Crossminton entscheidet diese Reserve oft den dritten Satz."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachte dich im nächsten Training: Wo verschwendest du Bewegung — durch unnötige Schritte, hektisches Zappeln, zu weite Wege, weil du nicht in die Position zurückkehrst? Nimm dir einen einzigen Punkt vor: etwa nach jedem Schlag ruhig und zügig in eine zentrale Position zurückzukehren. Achte darauf, ob du dich am Ende eines Matches frischer fühlst, wenn deine Bewegung ruhiger und direkter wird."
+      }
+    },
+
+    {
+      "id": "antizipative_schnelligkeit",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "voraussetzungen": ["schnelle_fuesse"],
+      "voraussetzungen_lesart": "motorisch/wahrnehmungsbezogen (stufenuebergreifend): verbindet schnelle Fuesse mit dem fruehen Lesen",
+      "spielziele": ["wiederholte_antrittsschnelligkeit", "fruehe_flugbahnlesung", "umschaltmoment_erkennen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT", "SP"],
+      "transfer_herkunft_beleg": "Antizipation als fruehes Extrahieren von Bewegungsinformation aus der Koerpersprache des Gegners (Start deutlich vor dem Treffmoment); Reaktionsschnelligkeit ist trainierbar: Trainingswissenschaft und Wahrnehmungspsychologie im Sport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Antizipative Schnelligkeit — der frühe Start"},
+      "erklaerteil": {
+        "de": "Die schnellsten Spieler sind nicht immer die, die am schnellsten laufen — es sind oft die, die am frühesten starten. Antizipative Schnelligkeit verbindet deine körperliche Schnelligkeit mit dem frühen Lesen: Du bist eher am Ball, weil du eher losläufst.\n\nDer Schlüssel liegt darin, dass gute Spieler nicht auf den Ball warten, sondern auf die Anzeichen davor. Die Körperhaltung des Gegners, seine Ausholbewegung, die Stellung seines Schlägers verraten oft schon, wohin der Ball geht — lange bevor er ihn trifft. Wer diese Zeichen liest, startet einen Sekundenbruchteil früher. Über ein ganzes Match summiert sich dieser Vorsprung zu einem enormen Unterschied.\n\nDieses frühe Lesen ist eine trainierbare Fähigkeit, keine angeborene Gabe. Je öfter du bewusst auf die Vorbereitung des Gegners achtest statt nur auf den Ball, desto besser wird deine Vorhersage. Mit der Zeit geschieht das von allein — du „ahnst“, wohin der Ball kommt, weil dein Blick die richtigen Zeichen gelernt hat.\n\nAthletisch zahlt sich das doppelt aus: Der frühe Start macht dich effektiv schneller, ohne dass du schneller laufen musst. Und er verbindet sich mit der Technik des frühen Nehmens — wer früh startet, kann den Ball früher treffen und dem Gegner Zeit stehlen.\n\nEin Bild: Antizipation ist wie das Lesen der Wolken vor dem Regen. Wer den Himmel liest, ist im Trockenen, bevor der erste Tropfen fällt. Wer auf den Regen wartet, wird nass — auch wenn er schnell rennt."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm dir im nächsten Match vor, bewusst nicht nur den Ball, sondern die Vorbereitung deines Gegners zu beobachten: seine Körperhaltung, seine Ausholbewegung, die Stellung des Schlägers. Verraten sie dir früh, wohin der Ball geht? Achte darauf, ob du früher losläufst, wenn du diese Zeichen liest — und ob du dadurch entspannter und rechtzeitiger am Ball bist, ohne schneller zu rennen."
+      }
+    },
+
+    {
+      "id": "langfristig_belastbar",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "voraussetzungen": ["belastung_steuern_regenerieren", "erholen"],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fasst Belastungssteuerung und Erholung zur langfristigen Belastbarkeit zusammen",
+      "spielziele": ["satz_match_regeneration"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Langfristige Belastbarkeit und Verletzungsvorbeugung durch Bewegungsqualitaet und Belastungsmanagement; Ermuedung zeigt sich u. a. in nachlassender Reaktivkraft: Trainingswissenschaft. Verletzung/Schmerz/Ueberlastung ausdruecklich an Sportmedizin/Physiotherapie verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Langfristig gesund und belastbar bleiben"},
+      "erklaerteil": {
+        "de": "Die größte athletische Leistung nützt nichts, wenn der Körper sie nicht über die Jahre trägt. Langfristige Belastbarkeit — gesund zu bleiben und über eine Saison und darüber hinaus leistungsfähig — ist die stille Grundlage jeder Expertenkarriere. Hier gilt der Gesundheitsgedanke besonders streng.\n\nDer erste Grundsatz ist, auf den Körper zu hören. Erfahrene Athleten kennen den Unterschied zwischen normaler Trainingsmüdigkeit und einem Warnsignal. Anhaltende Erschöpfung, Bewegungen, die schwerer werden, ein Nachlassen der federnden Schnelligkeit — das sind Zeichen, die Aufmerksamkeit verlangen, nicht Härte gegen sich selbst.\n\nDer zweite Grundsatz ist, dass Bewegungsqualität schützt. Sauberes, ökonomisches Bewegen belastet Gelenke und Sehnen weniger als hektisches, unkontrolliertes. Vieles, was du in dieser App über Technik und Bewegung gelernt hast, dient auch deiner Gesundheit.\n\nUnd hier die klare, wichtige Grenze: Alles, was mit Schmerz, Verletzung, anhaltender Überlastung oder dem konkreten Aufbau von Belastung zu tun hat, gehört in fachkundige Hände — Sportmedizin, Physiotherapie, qualifizierte Trainingsbegleitung. Diese App gibt dir keine Behandlungshinweise, keine Belastungsvorgaben und keine Diagnosen. Sie ermutigt dich, bei solchen Fragen die richtige Fachperson aufzusuchen. Das ist kein Zeichen von Schwäche, sondern von Erfahrung.\n\nEin Bild: Ein Instrument, das man pflegt, klingt ein Leben lang; eines, das man überlastet, reißt. Dein Körper ist dein Instrument — wer ihn achtsam behandelt und im Zweifel den Fachmann fragt, spielt am längsten."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk ehrlich über deine Belastbarkeit nach: Hörst du auf die Warnsignale deines Körpers, oder spielst du sie regelmäßig weg? Kennst du den Unterschied zwischen normaler Müdigkeit und einem Zeichen, das Aufmerksamkeit verlangt? Nimm dir vor, bei anhaltender Erschöpfung, Schmerz oder Überlastung nicht härter zu trainieren, sondern die passende Fachperson aufzusuchen — Sportmedizin, Physiotherapie oder qualifizierte Trainingsbegleitung. Langfristige Gesundheit ist die Grundlage, auf der alles andere steht."
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}
