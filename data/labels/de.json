@@ -130,6 +130,10 @@
     "einheit_starten": "Einheit starten",
     "einheit_fortsetzen": "Weiter",
     "uebung_x_von_y": "Übung {a} von {b}",
+    "phase_erwaermung": "Erwärmung",
+    "phase_hauptteil": "Hauptteil",
+    "phase_ausklang": "Ausklang",
+    "einheit_schwerpunkt": "Schwerpunkt",
     "uebung_erledigt_weiter": "Erledigt — weiter",
     "einheit_abschliessen": "Einheit abschließen",
     "einheit_abgeschlossen": "Einheit abgeschlossen.",
@@ -362,7 +366,9 @@
     }
   },
   "trainingseinheiten": {
-    "einheit_fundament": "Fundament: Stand, Griff, Aufschlag",
-    "einheit_schlag_und_weg": "Schlag und Weg"
+    "beginner_erste_schlaege": "Erste Schläge",
+    "beginner_bewegung_und_position": "Bewegung und Position",
+    "fortgeschritten_angriff_aufbauen": "Angriff aufbauen",
+    "doppel_als_paar_spielen": "Als Paar spielen"
   }
 }

@@ -5,7 +5,7 @@
 // Zwei-Ebenen-Logik (4.4): der Graph sortiert nur. Zugänglichkeit ist überall
 // frei; nicht absolvierte Voraussetzungen werden als Hinweis mitgegeben.
 
-import { deltaFuer, domaenenVon, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from './daten.js';
+import { deltaFuer, domaenenVon, einheitReferenzen, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from './daten.js';
 import { fehlendeVoraussetzungen, topoSortiere } from './graph.js';
 import { absolviertNachId, bausteinAbsolviert } from './fortschritt.js';
 import { diagnose, kontinuitaet, teilStatus } from './zustand.js';
@@ -182,14 +182,31 @@ export function individualpfad(daten, ziel = diagnose().ziel) {
   };
 }
 
-// 6.4 Trainingspfad — steuert Übungsteile über kuratierte Einheiten an.
+// 6.4 Trainingspfad — steuert Übungsteile über kuratierte Einheiten an. Einheiten
+// tragen eine Könnensstufe und werden über Stufen kumulativ gefiltert (wie der
+// Kompetenzpfad): ein Beginner sieht Beginner-Einheiten, ein Fortgeschrittener
+// Beginner + Fortgeschritten. Ohne bekannte Stufe wird nicht gefiltert (nie verbergen).
+// Jede Einheit wird zur geordneten, aufgelösten Referenzliste (Phase + Hinweis + Baustein).
 export function trainingsuebersicht(daten) {
   const zaehler = kontinuitaet().jeEinheit;
-  return daten.einheiten.map((einheit) => ({
-    einheit,
-    bausteine: einheit.uebungsteile.map((id) => daten.bausteinVonId.get(id)).filter(Boolean),
-    absolviertZaehler: zaehler[einheit.id] || 0,
-  }));
+  const zielIndex = daten.koennensOrdnung.indexOf(diagnose().stufe);
+  return daten.einheiten
+    .filter((einheit) => {
+      if (zielIndex < 0 || !einheit.kompetenzstufe) return true;
+      const eigenerIndex = daten.koennensOrdnung.indexOf(einheit.kompetenzstufe);
+      return eigenerIndex >= 0 && eigenerIndex <= zielIndex;
+    })
+    .map((einheit) => {
+      const referenzen = einheitReferenzen(einheit)
+        .map((ref) => ({ ...ref, baustein: daten.bausteinVonId.get(ref.baustein) }))
+        .filter((ref) => ref.baustein);
+      return {
+        einheit,
+        referenzen,
+        bausteine: referenzen.map((ref) => ref.baustein),
+        absolviertZaehler: zaehler[einheit.id] || 0,
+      };
+    });
 }
 
 // Kontext-Strings der Ansichten: 'kompetenz', 'kompetenz:trainer',

@@ -129,6 +129,10 @@
     "einheit_starten": "",
     "einheit_fortsetzen": "",
     "uebung_x_von_y": "",
+    "phase_erwaermung": "",
+    "phase_hauptteil": "",
+    "phase_ausklang": "",
+    "einheit_schwerpunkt": "",
     "uebung_erledigt_weiter": "",
     "einheit_abschliessen": "",
     "einheit_abgeschlossen": "",
@@ -361,7 +365,9 @@
     }
   },
   "trainingseinheiten": {
-    "einheit_fundament": "",
-    "einheit_schlag_und_weg": ""
+    "beginner_erste_schlaege": "",
+    "beginner_bewegung_und_position": "",
+    "fortgeschritten_angriff_aufbauen": "",
+    "doppel_als_paar_spielen": ""
   }
 }
