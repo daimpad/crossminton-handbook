@@ -440,6 +440,8 @@ pruefe('App-Info erweitert den Baustein-Pool nicht (69 Bausteine, eigene Entitä
 pruefe('GitHub-Links gefüllt (echte http-URLs): Über-Link + alle drei CTAs', daten.appInfo.ueber.links.every((l) => /^https?:\/\//.test(l.ziel)) && daten.appInfo.mitmachen.moeglichkeiten.every((m) => /^https?:\/\//.test(m.cta_ziel)));
 pruefe('Lizenz + Credits gesetzt (MIT, CC BY, Damian Paderta)', daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /MIT/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /CC BY/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /Damian Paderta/.test(e.de)));
 pruefe('Sprachanzeige-Hinweis aus den Daten entfernt (rein darstellend, keine Anmerkung)', daten.appInfo.sprachen.hinweis === undefined);
+pruefe('App-Info trägt Version + Rechtstexte (Impressum/Datenschutz) für den Footer', typeof daten.appInfo.meta.version === 'string' && daten.appInfo.meta.version !== '' && (daten.appInfo.rechtliches?.impressum?.absaetze || []).length >= 1 && (daten.appInfo.rechtliches?.datenschutz?.absaetze || []).length >= 1);
+pruefe('Footer-Labels (de) vorhanden (Impressum, Datenschutz)', typeof labelsDe.ui.footer_impressum === 'string' && labelsDe.ui.footer_impressum !== '' && typeof labelsDe.ui.footer_datenschutz === 'string' && labelsDe.ui.footer_datenschutz !== '');
 pruefe('Nav-Labels (de) für die neuen Reiter vorhanden', typeof labelsDe.ui.nav_ueber === 'string' && labelsDe.ui.nav_ueber !== '' && typeof labelsDe.ui.nav_mitmachen === 'string' && labelsDe.ui.nav_mitmachen !== '');
 
 console.log('\n[8] Projektionen und Kontinuität');

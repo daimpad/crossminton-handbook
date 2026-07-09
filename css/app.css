@@ -107,8 +107,7 @@ code { font-size: 0.85em; word-break: break-all; }
 main {
   max-width: 44rem;
   margin: 0 auto;
-  /* Untere Leiste ist zweizeilig (sechs Reiter, 3+3) — genug Raum freihalten. */
-  padding: 1.1rem 1rem calc(7rem + env(safe-area-inset-bottom));
+  padding: 1.1rem 1rem 0.6rem;
 }
 
 /* Einstiegs-Übergang: jede Ansicht gleitet sanft herein. */
@@ -206,8 +205,7 @@ body.im-onboarding .hamburger { display: none; }
   transition: background var(--uebergang), box-shadow var(--uebergang);
 }
 
-.sprach-flagge { font-size: 1.05rem; line-height: 1; }
-.sprach-kuerzel { letter-spacing: 0.03em; }
+.sprach-globus { font-size: 1.2rem; line-height: 1; }
 
 .sprach-liste {
   position: absolute;
@@ -235,6 +233,7 @@ body.im-onboarding .hamburger { display: none; }
 
 .sprach-eintrag .sprach-name { flex: 1; }
 .sprach-eintrag.aktiv { background: var(--primaer-weich); color: var(--primaer-tief); font-weight: 600; }
+.sprach-haken { flex: none; width: 1rem; text-align: center; color: var(--primaer-tief); font-weight: 700; }
 
 .sprach-hinweis {
   padding: 0.5rem 0.55rem 0.3rem;
@@ -874,7 +873,9 @@ details[open] summary { margin-bottom: 0.5rem; }
 @media (min-width: 768px) {
   .fussnav { display: none; }
   .hamburger { display: inline-flex; }
-  main { padding: 1.6rem 1.5rem 3rem; }
+  main { padding: 1.6rem 1.5rem 1rem; }
+  .app-footer { padding: 0.9rem 1.5rem 1.6rem; }
+  .footer-links a:hover, .footer-github:hover { color: var(--primaer-tief); }
   h1 { font-size: 1.7rem; }
 }
 
@@ -891,6 +892,32 @@ details[open] summary { margin-bottom: 0.5rem; }
   color: var(--tinte-2);
   word-break: break-word;
 }
+
+/* ---------- App-Footer (Impressum / Datenschutz / GitHub + Version) ---------- */
+
+.app-footer {
+  max-width: 44rem;
+  margin: 1.2rem auto 0;
+  /* unten die zweizeilige Bottom-Bar (~115px) freihalten (mobil); Desktop überschreibt. */
+  padding: 0.9rem 1rem calc(8.2rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--linie);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  font-size: 0.82rem;
+}
+
+.footer-links { display: flex; gap: 1.1rem; }
+.footer-links a { color: var(--tinte-2); text-decoration: none; transition: color var(--uebergang); }
+.footer-links a.aktiv { color: var(--primaer-tief); font-weight: 600; }
+
+.footer-github { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--tinte-2); text-decoration: none; transition: color var(--uebergang); }
+.footer-github-logo { fill: currentColor; flex: none; }
+.footer-version { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+body.im-onboarding .app-footer { display: none; }
 
 /* ---------- Willkommen: Hero + Einstiegs-CTAs ---------- */
 

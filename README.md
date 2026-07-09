@@ -1,105 +1,77 @@
+<div align="center">
+
+<img src="assets/images/speeder.svg" alt="Crossminton-Handbuch" width="92" height="92">
+
 # Crossminton-Handbuch
 
-Clientseitige, mobil-orientierte Lernapp für Crossminton. Kein Server, kein Build-Schritt: HTML/CSS/JS als ES-Module, Inhalte aus statischen JSON-Dateien, Fortschritt baustein-gebunden in `localStorage`, mehrsprachig strukturiert (Quellsprache Deutsch befüllt). Konzeptionelle Grundlage: [`docs/uebergabe-spezifikation.md`](docs/uebergabe-spezifikation.md); visuelles Erscheinungsbild: [`docs/ci.md`](docs/ci.md).
+**Crossminton lernen — Schlag für Schlag.**
 
-**Live:** https://daimpad.github.io/crossminton-handbook/
+Eine clientseitige, mobil-orientierte Lernapp für Crossminton: kleine Bausteine, klare Technik, dein Tempo. Läuft komplett im Browser — ohne Anmeldung, ohne Server, dein Fortschritt bleibt auf deinem Gerät.
 
-## Was die App kann
+[![Live · GitHub Pages](https://img.shields.io/badge/live-GitHub%20Pages-38a4f1?logo=github&logoColor=white)](https://daimpad.github.io/crossminton-handbook/)
+[![Deploy](https://github.com/daimpad/crossminton-handbook/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/daimpad/crossminton-handbook/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Texte: CC BY 4.0](https://img.shields.io/badge/Texte-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e.svg?logo=javascript&logoColor=black)](#)
+[![Build: none](https://img.shields.io/badge/build-none-25c449.svg)](#)
 
-- **Willkommensseite** mit zwei Einstiegen: direkt ins Handbuch (alle Kapitel frei, ohne Angaben) oder der geführte Weg über die Stufen-Diagnostik.
-- **Vier Pfade** durch denselben Baustein-Pool: Kompetenz-, Themen-, Individual- und Trainingspfad, dazu die Spielform-Achse (das Doppel als Querschnittsthema über Domänen) und der Cross-Sport-Modifikator (angepasste Erklärungen für Umsteiger, z. B. aus Badminton).
-- **Regeln-Reiter** als Referenz neben den Lernpfaden: die offiziellen Spielregeln (ICO/DCV), akkurat wiedergegeben und in Klartext erklärt — ein statisches Nachschlagewerk ohne Fortschrittslogik, mit sichtbarer Quellenangabe.
-- **Getrennte Fortschritts-Quittierung** je Erklär- und Übungsteil, Projektionen (global/pfadbezogen), Meilensteine und kumulative Kontinuität — alles lokal im Browser.
-- **Mobil zuerst**, hell, mit lokaler Schrift (Rubik) und Font-Awesome-Icons; Bottom-Bar auf dem Handy, Hamburger-Menü ab Tablet.
+### [**→ App öffnen**](https://daimpad.github.io/crossminton-handbook/)
 
-## Starten
+</div>
 
-Die Inhalte werden zur Laufzeit per `fetch()` geladen — dafür braucht es HTTP (ein Doppelklick auf `index.html` genügt nicht, `file://` blockiert das Laden). Lokal reicht ein Einzeiler im Projektordner:
+---
 
-```sh
-python3 -m http.server 8000
-# oder: npx serve
-```
+## 🏸 Worum es geht
 
-Dann `http://localhost:8000` öffnen.
+Das Crossminton-Handbuch bringt dir das Spiel in kleinen, aufeinander aufbauenden Schritten bei — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau. Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum **eigenständigen Üben** anleiten, nicht zu Dauerbeschäftigung.
 
-## Veröffentlichen
+## ✨ Was die App bietet
 
-Die App ist reine Statik — **auf dem Server braucht es weder Node noch Python**, keine Datenbank, keine Laufzeitumgebung. Node/Python dienen oben nur als lokale Vorschau-Server.
+- **Dein Einstieg, deine Wahl** — direkt ins Handbuch stöbern oder den geführten Weg über eine kurze Stufen-Diagnostik gehen.
+- **Fünf Wege durch denselben Stoff** — Kompetenz-, Themen-, Individual- und Trainingspfad, dazu das **Doppel** als eigenes Querschnittsthema.
+- **Cross-Sport-Modus** — wer aus Badminton, Tennis oder Squash kommt, bekommt gezielt angepasste Erklärungen, wo sich gewohnte Bewegungen unterscheiden.
+- **Drei Könnensstufen** — Beginner, Fortgeschritten und Experte, kumulativ aufeinander aufbauend; dazu eine **Trainer-Perspektive** mit Vermittlungswissen.
+- **Regeln-Reiter** — die offiziellen Spielregeln (ICO/DCV), akkurat wiedergegeben und in Klartext erklärt.
+- **Dein Fortschritt, lokal** — getrennt quittierte Erklär- und Übungsteile, Meilensteine und kumulative Kontinuität, alles im Browser gespeichert.
+- **Mobil zuerst** — hell, schnell, mit Bottom-Bar auf dem Handy und Hamburger-Menü ab Tablet; mehrsprachig angelegt (de · en · fr · pl).
 
-- **GitHub Pages** (eingerichtet): Jeder Push auf `main` veröffentlicht automatisch über [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) nach `https://daimpad.github.io/crossminton-handbook/`. Vorher laufen die Engine-Tests als Qualitätsschranke.
-- **Eigener Webspace**: alle Dateien des Repos (ohne `.git`, `.github`, `tests`, `docs`) per FTP/SFTP in ein Verzeichnis hochladen — fertig. Es genügt jeder Webserver, der Dateien ausliefert (Apache, nginx, Shared Hosting). Alle Pfade sind relativ, die App läuft daher auch in Unterverzeichnissen.
+<div align="center">
+<br>
+<strong>Kein Konto. Kein Tracking. Keine Server.</strong><br>
+<sub>Nur du und das Spiel.</sub>
+</div>
 
-## Tests
+## 🚀 Loslegen
 
-Die Pfad-Engine wird ohne Abhängigkeiten direkt unter Node gegen die Referenzdaten geprüft:
+<div align="center">
 
-```sh
-node tests/engine.test.mjs
-```
+Kein Download, keine Installation — einfach öffnen:
 
-Abgedeckt: Datenvalidierung, Kompetenz-/Themen-/Individualpfad (inkl. Mehrfach-Zielauswahl), Cross-Sport-Modifikator (Delta-Einblendung, Skip-Kandidaten, Nicht-Fehlerfall), Zwei-Ebenen-Logik, Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
+### [daimpad.github.io/crossminton-handbook](https://daimpad.github.io/crossminton-handbook/)
 
-Ein durchgehender End-to-End-Browsertest (Playwright, mobil + Desktop) liegt außerhalb des Repos in der Entwicklungsumgebung; sein Ablauf ist in `.claude/skills/verify/SKILL.md` dokumentiert.
+Im Browser, auf dem Handy, als Lesezeichen auf dem Startbildschirm.
 
-## Struktur
+</div>
 
-```
-index.html                 App-Shell (SPA, Hash-Routing) + Modul-Auffangnetz
-css/app.css                Design & CI (#38a4f1 + Signalfarben), mobile Bottom-Bar / Desktop-Hamburger
-css/schriften.css          lokale Schriften: Rubik + Font-Awesome-Subset (Icons ergänzen = eine Codepoint-Zeile)
-assets/fonts/              woff2-Dateien inkl. Lizenzen (OFL / FA Free)
-js/
-  app.js                   Boot, Router, Navigation, Hamburger-Menü
-  daten.js                 JSON laden, Indizes, Konsistenzprüfung
-  graph.js                 topologische Sortierung, Voraussetzungs-Checks
-  pfade.js                 Pfad-Engine: 4 Traversierungen + Cross-Sport-Modifikator
-  fortschritt.js           Projektionen über den baustein-gebundenen Status
-  aktionen.js              Quittierungen + Meilenstein-Erkennung
-  zustand.js               localStorage-Store (Diagnose, Fortschritt, Kontinuität, Einstellungen)
-  i18n.js                  t()/label()/text() mit de-Fallback
-  oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
-  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Profil, Zielwahl
-data/
-  bausteine.beginner-technik.json   Referenzinhalt Technik; kanonisches Vokabular (nur koordinierte Erweiterungen)
-  bausteine.beginner-taktik.json    Inhaltsblock Taktik (reflexionsaufgabe, Rückverzweigung im Graph)
-  bausteine.beginner-mentales.json  Inhaltsblock Mentales (Sternform-Graph, durchgehend Reflexionsaufgaben)
-  bausteine.beginner-athletik_kondition.json  Inhaltsblock Athletik (Sternform, Übung + Reflexion gemischt)
-  bausteine.trainer-trainingsgestaltung.json  Trainer-Ebene: Vermittlungsziele, Sternform (nur in Trainer-Perspektive sichtbar)
-  bausteine.fortgeschritten-technik.json  erste Stufe über Beginner; stufenübergreifende Voraussetzungen
-  bausteine.fortgeschritten-taktik.json   Fortgeschritten-Taktik; weiche Kanten über Stufen- UND Domänengrenze
-  bausteine.fortgeschritten-mentales.json Fortgeschritten-Mentales (mentales System; durchgehend Reflexionsaufgaben)
-  bausteine.fortgeschritten-athletik_kondition.json  Fortgeschritten-Athletik (Gesundheitsrahmen; Reflexion + qualitative Übung)
-  bausteine.experte-technik.json    dritte Könnensstufe (Technik); herkunftsneutral, keine Cross-Sport-Deltas
-  bausteine.experte-taktik.json     dritte Könnensstufe (Taktik); Matchstrategie/Scouting, herkunftsneutral, gemischt (Übung + Reflexion)
-  bausteine.doppel-thema.json       Doppel als Querschnittsthema über Domänen (Dimension spielform:doppel)
-  bausteine.delta-tennis.json       herkunftsreine Delta-Datei (nur delta_bausteine, Herkunft TEN, über zwei Stufen)
-  bausteine.delta-squash.json       herkunftsreine Delta-Datei (Herkunft SQ; auch auf zuvor delta-freie Taktik-Bausteine)
-  fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
-  trainingseinheiten.json           kuratierte Einheiten in drei Phasen (Erwärmung/Hauptteil/Ausklang), stufen-/spielform-getaggt
-  regeln.json                       Regeln-Reiter: offizielle Spielregeln (ICO/DCV) als Referenz — eigene Entität, nicht im Pool
-  app-info.json                     Info-Reiter „Über"/„Mitmachen" + Sprachanzeige-Konfiguration (eigene Entität, nicht im Pool)
-  labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
-  labels/{en,fr,pl}.json            strukturgleiche Gerüste, unbefüllt → Fallback auf de
-docs/uebergabe-spezifikation.md     Spezifikation (Erstausbau)
-docs/ci.md                          Corporate Identity: Farben, Typo, Icons
-tests/engine.test.mjs               Engine-Tests (node, dependency-frei)
-CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
-```
+## 🤝 Mitmachen
 
-## Datenpflege
+Das Handbuch ist ein **offenes Projekt** und lebt von Beiträgen — ein Hinweis auf einen Fehler, eine Übersetzung oder Code. Du musst kein Profi sein. Der „Mitmachen"-Reiter in der App und die [Issues](https://github.com/daimpad/crossminton-handbook/issues) sind der beste Startpunkt.
 
-- **Inhalte** (`data/bausteine.<stufe>-<domaene>.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Mehrere Inhaltsdateien werden zu einem Pool gemischt — neue Datei in `INHALTSDATEIEN` (`js/daten.js`) eintragen; nur die Technik-Datei trägt das kanonische `vokabulare`. Bausteine können einen inline-`anzeigetitel` tragen (wird nach `labels/de.json` geliftet) und in der Taktik-Domäne statt des Übungsteils eine `reflexionsaufgabe` (eigener quittierbarer Aufgabenteil). Ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen. Die Engine-Tests prüfen Titel-Vollständigkeit, Reihenfolge und Reflexions-Status mit. Zwei Sonderfälle: die **Experten-Stufe** (`bausteine.experte-technik.json`, `bausteine.experte-taktik.json`) ist herkunftsneutral (keine Deltas — der Cross-Sport-Modus fällt dort durch); reine **Trainer-Blöcke** (`bausteine.trainer-trainingsgestaltung.json`, `kompetenzstufe: ["trainer"]`, Dateiname mit `trainer` an Stufen-Stelle) sind orthogonal zur Könnensstufe und in allen Pfaden hinter der Trainer-Perspektive gated.
-- **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. (Das `BS`-Kürzel trägt jetzt das Label „Ballschule", belegt durch den Trainer-Trainingsgestaltungs-Block.)
-- **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Werden nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`. Im Erstausbau ein Platzhalter-Beispiel — die redaktionelle Serie ersetzt es.
-- **Trainingseinheiten** (`data/trainingseinheiten.json`): kuratierte Einheiten, gegliedert in drei Phasen (`phasen.{erwaermung, hauptteil, ausklang}`) mit je `{baustein, hinweis}`-Referenzen auf Bausteine, deren **Übungsteil** gemeint ist (nie Reflexions-Bausteine). Jede Einheit trägt `titel` (nach `labels/de.json` geliftet), `kompetenzstufe` (steuert die stufen-kumulative Filterung im Trainingspfad), `spielform`, `schwerpunkt` und `beschreibung`. Frei ersetzbar/erweiterbar.
-- **Regeln** (`data/regeln.json`): eigener Referenz-Reiter (`#/regeln`), **nicht im Baustein-Pool** — kein Lerninhalt, kein Fortschritt, keine Voraussetzungen/Deltas/Gamification. `abschnitte[]` (auf-/zuklappbar) mit `regeln[]`; jede Regel trägt `inhalt` (akkurat, optional `nummer` zur Rückverfolgung) und optionale `erklaerung` (Du-Form). `_meta.quelle` (Herausgeber + Stand der offiziellen ICO/DCV-Regeln) wird im Reiter angezeigt. Optionale `querverweis`-IDs sind reine Dokumentation (Absprung ins Handbuch, kein Pflicht-Link — nur auflösbare werden verlinkt). Abschnitt-/Regel-Titel bleiben inline; nur die UI-Labels (`nav_regeln`, `regeln_*`, `regel_*`) liegen in `labels/de.json`.
-- **App-Info** (`data/app-info.json`): die Info-Reiter `#/ueber` und `#/mitmachen` plus die Sprachanzeige — statischer Referenzinhalt, **nicht im Baustein-Pool**. `ueber` (Absätze, Dank/Quellen, Lizenz/Credits, GitHub-Link), `mitmachen` (Einleitung + `moeglichkeiten[]` mit `cta_label`/`cta_ziel`). Platzhalter in `[eckigen Klammern]` (Name, Lizenz, GitHub-URL) bleiben **sichtbar**, bis der Betreiber sie ersetzt — sie werden nie verlinkt. Die Sprachanzeige neben dem Hamburger ist rein darstellend (`sprachen.funktion_aktiv: false`, Liste de/en/fr/pl/ja); das funktionale Umschalten bleibt im Profil. Nur `nav_ueber`/`nav_mitmachen` liegen in `labels/de.json`, aller Fließtext inline über `text()`.
-- **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).
+## 📄 Lizenz
 
-## Bewusste Ausbaustufen (strukturell vorgehalten, nicht umgesetzt)
+| | |
+| --- | --- |
+| **Software** | [MIT License](LICENSE) © 2026 Damian Paderta |
+| **Inhalte & Texte** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| **Spielregeln** | Eigentum der **ICO / DCV**, hier zu Lernzwecken wiedergegeben |
 
-- Offline-Fähigkeit als PWA (statische Inhalte, relative Pfade — Manifest + Service Worker genügen später).
-- Schlanke Server-Komponente für geräteübergreifenden Fortschritt.
-- Abschluss-Status `beherrscht` (Mastery): im Zustandsraum vorgesehen, heute inaktiv — Aktivierung ohne Datenmigration.
-- Regelbasierte Generierung von Trainingseinheiten; Fehlerbild-/Trainer-Layer; Grafiken (Platzhalter mit Bildunterschriften sind eingebaut, KI-Prompts siehe Spezifikation, Anhang B).
+## 🛠️ Technik & Architektur
+
+Alles Technische — **Setup, Architektur, Datenmodell, Tests, Projektstruktur und Datenpflege** — steht gebündelt in **[ENTWICKLUNG.md »](ENTWICKLUNG.md)**.
+
+Konzeptionelle Grundlage: [`docs/uebergabe-spezifikation.md`](docs/uebergabe-spezifikation.md) · Erscheinungsbild: [`docs/ci.md`](docs/ci.md)
+
+<div align="center">
+<br>
+<sub>Gebaut mit purem HTML, CSS und JavaScript — kein Framework, kein Build-Schritt.</sub>
+</div>

@@ -4,7 +4,7 @@
 
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
-import { renderMitmachen, renderUeber } from './ansichten/info.js';
+import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
@@ -48,6 +48,9 @@ function aktualisiereNavigation(segmente) {
     if (istAktiv) verweis.setAttribute('aria-current', 'page');
     else verweis.removeAttribute('aria-current');
   }
+  for (const verweis of document.querySelectorAll('[data-footer]')) {
+    verweis.classList.toggle('aktiv', verweis.dataset.footer === segmente[0]);
+  }
 }
 
 function beschrifteRahmen() {
@@ -67,6 +70,10 @@ function beschrifteRahmen() {
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
+  for (const verweis of document.querySelectorAll('[data-footer]')) {
+    const beschriftung = { impressum: t('footer_impressum'), datenschutz: t('footer_datenschutz') }[verweis.dataset.footer];
+    if (beschriftung) verweis.textContent = beschriftung;
+  }
   setzeSprachanzeige();
 }
 
@@ -81,33 +88,36 @@ function spracheEintrag() {
   return liste.find((e) => e.code === aktiv) || liste.find((e) => e.code === s.aktuell) || liste[0] || null;
 }
 
+// Der Kopf zeigt konstant eine Weltkugel; das Untermenü listet die Sprachen und
+// markiert die aktive mit Häkchen + Hervorhebung. Wird bei jedem Rendern frisch
+// aufgebaut, damit die Markierung der aktiven Sprache aktuell bleibt.
 function setzeSprachanzeige() {
   const knopf = document.getElementById('sprach-knopf');
-  if (!knopf) return;
+  const liste = document.getElementById('sprach-liste');
+  const s = daten?.appInfo?.sprachen;
+  if (!knopf || !s) return;
   const eintrag = spracheEintrag();
-  if (!eintrag) return;
-  // Header-Anzeige zeigt nur das Kürzel (kein Flaggen-Icon); die Flaggen leben in der Liste.
-  const flagge = knopf.querySelector('.sprach-flagge');
-  if (flagge) flagge.textContent = eintrag.flagge || '';
-  knopf.querySelector('.sprach-kuerzel').textContent = eintrag.kuerzel || '';
-  knopf.setAttribute('aria-label', `${t('sprache')}: ${text(eintrag.label) ?? eintrag.kuerzel}`);
+  if (eintrag) knopf.setAttribute('aria-label', `${t('sprache')}: ${text(eintrag.label) ?? eintrag.kuerzel}`);
+  if (!liste) return;
+  const aktivCode = eintrag?.code;
+  liste.innerHTML = (s.liste || [])
+    .map((e) => {
+      const istAktiv = e.code === aktivCode;
+      return `<li class="sprach-eintrag${istAktiv ? ' aktiv' : ''}"${istAktiv ? ' aria-current="true"' : ''}>
+        <span aria-hidden="true">${esc(e.flagge || '')}</span>
+        <span class="sprach-name">${esc(text(e.label) ?? e.kuerzel)}</span>
+        <span class="leise">${esc(e.kuerzel)}</span>
+        <span class="sprach-haken" aria-hidden="true">${istAktiv ? '✓' : ''}</span>
+      </li>`;
+    })
+    .join('');
 }
 
 function initSprachanzeige() {
   const wurzel = document.getElementById('sprach-anzeige');
   const knopf = document.getElementById('sprach-knopf');
   const liste = document.getElementById('sprach-liste');
-  const s = daten?.appInfo?.sprachen;
-  if (!wurzel || !knopf || !liste || !s) return;
-  const eintraege = (s.liste || [])
-    .map(
-      (e) =>
-        `<li class="sprach-eintrag${e.code === s.aktuell ? ' aktiv' : ''}"><span aria-hidden="true">${esc(e.flagge || '')}</span> <span class="sprach-name">${esc(text(e.label) ?? e.kuerzel)}</span> <span class="leise">${esc(e.kuerzel)}</span></li>`,
-    )
-    .join('');
-  const hinweis = text(s.hinweis) ? `<li class="sprach-hinweis leise">${esc(text(s.hinweis))}</li>` : '';
-  liste.innerHTML = eintraege + hinweis;
-
+  if (!wurzel || !knopf || !liste || !daten?.appInfo?.sprachen) return;
   const schliesse = () => {
     liste.hidden = true;
     knopf.setAttribute('aria-expanded', 'false');
@@ -126,6 +136,17 @@ function initSprachanzeige() {
   });
   window.addEventListener('hashchange', schliesse); // bei Navigation zuklappen
   setzeSprachanzeige();
+}
+
+// Footer: GitHub-Link und Versionsnummer einmalig aus app-info befüllen
+// (Impressum/Datenschutz laufen über die Labels + den Router).
+function initFooter() {
+  const version = daten?.appInfo?.meta?.version;
+  const github = daten?.appInfo?.ueber?.links?.find((l) => l.typ === 'github')?.ziel;
+  const versionEl = document.getElementById('footer-version');
+  const githubEl = document.getElementById('footer-github');
+  if (versionEl && version) versionEl.textContent = `v${version}`;
+  if (githubEl && github) githubEl.setAttribute('href', github);
 }
 
 // Hamburger-Menü (Desktop): Lade gleitet von rechts herein, Punkte gestaffelt.
@@ -195,6 +216,10 @@ function rendern() {
     renderUeber(el, daten);
   } else if (segmente[0] === 'mitmachen') {
     renderMitmachen(el, daten);
+  } else if (segmente[0] === 'impressum') {
+    renderRechtstext(el, daten, 'impressum');
+  } else if (segmente[0] === 'datenschutz') {
+    renderRechtstext(el, daten, 'datenschutz');
   } else if (segmente[0] === 'baustein' && segmente[1]) {
     renderBaustein(el, daten, decodeURIComponent(segmente[1]), query.get('kontext') || 'kompetenz');
   } else if (segmente[0] === 'profil') {
@@ -233,6 +258,7 @@ async function boot() {
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   initSprachanzeige();
+  initFooter();
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
     element.addEventListener('click', schliesseMenue);
   }
