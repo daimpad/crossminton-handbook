@@ -17,9 +17,18 @@
         <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
         <span class="marke-text">Crossminton-Handbuch</span>
       </a>
-      <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-      </button>
+      <div class="kopf-rechts">
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-haspopup="true" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-flagge" aria-hidden="true">🇩🇪</span>
+            <span class="sprach-kuerzel">DE</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -37,6 +46,14 @@
     <a href="#/regeln" data-nav="regeln">
       <i class="fa-solid fa-book-open" aria-hidden="true"></i>
       <span class="nav-text">Regeln</span>
+    </a>
+    <a href="#/ueber" data-nav="ueber">
+      <i class="fa-solid fa-compass" aria-hidden="true"></i>
+      <span class="nav-text">Über</span>
+    </a>
+    <a href="#/mitmachen" data-nav="mitmachen">
+      <i class="fa-solid fa-comments" aria-hidden="true"></i>
+      <span class="nav-text">Mitmachen</span>
     </a>
     <a href="#/profil" data-nav="profil">
       <i class="fa-solid fa-user" aria-hidden="true"></i>
@@ -64,6 +81,14 @@
       <a href="#/regeln" data-nav="regeln" class="menue-punkt">
         <i class="fa-solid fa-book-open" aria-hidden="true"></i>
         <span class="nav-text">Regeln</span>
+      </a>
+      <a href="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
       </a>
       <a href="#/profil" data-nav="profil" class="menue-punkt">
         <i class="fa-solid fa-user" aria-hidden="true"></i>

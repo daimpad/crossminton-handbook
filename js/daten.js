@@ -33,13 +33,14 @@ const INHALTSDATEIEN = [
 ];
 
 export async function ladeDaten() {
-  const [einheiten, fehlerbilder, regeln, ...inhaltDateien] = await Promise.all([
+  const [einheiten, fehlerbilder, regeln, appInfo, ...inhaltDateien] = await Promise.all([
     holeJson('data/trainingseinheiten.json'),
     holeJson('data/fehlerbilder.json'),
     holeJson('data/regeln.json'),
+    holeJson('data/app-info.json'),
     ...INHALTSDATEIEN.map(holeJson),
   ]);
-  return baueIndizes(inhaltDateien, einheiten, fehlerbilder, regeln);
+  return baueIndizes(inhaltDateien, einheiten, fehlerbilder, regeln, appInfo);
 }
 
 export function hatUebungsteil(baustein) {
@@ -105,7 +106,7 @@ export function fehlerbilderFuer(daten, basisId) {
   return daten.fehlerbildVonBasis.get(basisId) || [];
 }
 
-export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh) {
+export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh, appInfoRoh) {
   const warnungen = [];
   // Ein Objekt oder eine Liste von Inhaltsdateien; letztere werden gemischt.
   const dateien = Array.isArray(inhaltRoh) ? inhaltRoh : [inhaltRoh];
@@ -117,6 +118,14 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh)
   // Regeln: eigener Referenzbereich, NICHT im Baustein-Pool (kein Fortschritt,
   // keine Voraussetzungen, keine Deltas). Nur statischer Inhalt + Quellenangabe.
   const regeln = { meta: regelnRoh?._meta || {}, abschnitte: regelnRoh?.abschnitte || [] };
+  // App-Info: statischer Referenzbereich (Reiter „Über"/„Mitmachen" + Sprachanzeige),
+  // ebenfalls NICHT im Baustein-Pool — kein Fortschritt, keine Gamification.
+  const appInfo = {
+    meta: appInfoRoh?._meta || {},
+    ueber: appInfoRoh?.ueber || null,
+    mitmachen: appInfoRoh?.mitmachen || null,
+    sprachen: appInfoRoh?.sprachen || { funktion_aktiv: false, aktuell: 'de', liste: [] },
+  };
 
   const daten = {
     meta: dateien[0]?._meta || {},
@@ -127,6 +136,7 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh)
     einheiten,
     fehlerbilder,
     regeln,
+    appInfo,
     bausteinVonId: new Map(bausteine.map((b) => [b.id, b])),
     einheitVonId: new Map(einheiten.map((e) => [e.id, e])),
     deltaVonSchluessel: new Map(),
@@ -271,6 +281,17 @@ function pruefeDaten(daten) {
       }
     }
   }
+
+  // App-Info (Reiter Über/Mitmachen + Sprachanzeige): reine Darstellung, kein
+  // Lerninhalt. Nur leichte Struktur-Warnungen — die [eckigen] Platzhalter sind
+  // bewusst gewollt (der Betreiber füllt sie) und lösen keine Warnung aus.
+  const ai = daten.appInfo;
+  if (!ai.ueber) w.push('app-info: Abschnitt "ueber" fehlt');
+  if (!ai.mitmachen) w.push('app-info: Abschnitt "mitmachen" fehlt');
+  else if (!(ai.mitmachen.moeglichkeiten || []).every((m) => m.cta_label && m.cta_ziel)) {
+    w.push('app-info: eine Mitmach-Möglichkeit ohne cta_label/cta_ziel');
+  }
+  if (!(ai.sprachen?.liste || []).length) w.push('app-info: Sprachliste leer');
 
   const { zyklisch } = topoSortiere(daten.bausteine, (a, b) => daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id));
   if (zyklisch.length > 0) w.push(`Voraussetzungszyklus: ${zyklisch.join(', ')}`);

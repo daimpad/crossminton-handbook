@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "beschreibung": "App-Info: statische Inhalte fuer die Navigations-Reiter 'Ueber' und 'Mitmachen' sowie die Konfiguration der Sprach-Anzeige. Kein Lerninhalt, kein Fortschritt.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl", "ja"],
+    "stand": "Erstausbau",
+    "dateiname": "app-info.json (eigene Datei, NICHT im Baustein-Pool).",
+    "platzhalter_hinweis": "Mit [eckigen Klammern] markierte Stellen sind vom Betreiber zu fuellen (Name, Lizenz, GitHub-URL). Sie sind bewusst nicht erfunden.",
+    "reiter": ["ueber", "mitmachen"],
+    "sprachanzeige_hinweis": "Die Sprach-Anzeige ist im Erstausbau NUR Darstellung (funktion_aktiv: false): neben dem Hamburger-Icon wird die aktuell angezeigte Sprache als Flagge oder Kuerzel gezeigt. Die Auswahlliste umfasst de/en/fr/pl/ja; ein Umschalten ist noch nicht funktional."
+  },
+
+  "ueber": {
+    "titel": {"de": "Über diese App"},
+    "absaetze": [
+      {"de": "Diese App ist ein wissenschaftlich fundiertes Lernwerkzeug für Crossminton. Sie vermittelt das Spiel in kleinen, aufeinander aufbauenden Bausteinen — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau."},
+      {"de": "Du wählst deinen eigenen Weg durch den Stoff: nach Könnensstufe, nach persönlichem Ziel, nach Thema oder als geführte Trainingseinheit. Wer aus einer anderen Rückschlagsportart kommt, bekommt gezielte Hinweise, wo sich gewohnte Bewegungen im Crossminton unterscheiden. Dazu gibt es ein eigenes Doppel-Thema und einen Regeln-Reiter mit den offiziellen Spielregeln."},
+      {"de": "Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum eigenständigen Üben anleiten, nicht zu Dauerbeschäftigung."}
+    ],
+    "danksagungen": {
+      "titel": {"de": "Dank und Quellen"},
+      "eintraege": [
+        {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV), Stand Februar 2018."},
+        {"de": "Die fachlichen Grundlagen stützen sich auf Literatur und Materialien aus Crossminton, Trainingswissenschaft und Sportpsychologie sowie auf Transfererfahrungen aus verwandten Rückschlagsportarten."},
+        {"de": "Inhalt und Didaktik: [Name / Verein einsetzen]. Dank an alle, die beim Testen und Verbessern geholfen haben."}
+      ]
+    },
+    "credits_lizenz": {
+      "titel": {"de": "Lizenz und Credits"},
+      "eintraege": [
+        {"de": "Lizenz der App: [Lizenz einsetzen, z. B. MIT, GPL-3.0 oder CC BY-SA 4.0]."},
+        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben."},
+        {"de": "Quellcode und Mitwirkung: siehe GitHub."}
+      ]
+    },
+    "links": [
+      {"label": {"de": "Projekt auf GitHub"}, "ziel": "[GitHub-URL einsetzen, z. B. https://github.com/…]", "typ": "github"}
+    ]
+  },
+
+  "mitmachen": {
+    "titel": {"de": "Mitmachen"},
+    "einleitung": [
+      {"de": "Diese App ist ein offenes Projekt und lebt von Beiträgen. Du musst kein Profi sein — schon ein Hinweis auf einen Fehler oder eine unklare Formulierung hilft weiter."}
+    ],
+    "moeglichkeiten": [
+      {
+        "id": "fehler_melden",
+        "titel": {"de": "Fehler melden oder Verbesserungen vorschlagen"},
+        "text": {"de": "Ist dir ein sachlicher Fehler, ein Tippfehler oder eine missverständliche Erklärung aufgefallen? Hast du eine Idee, wie sich ein Baustein verbessern ließe? Melde es über die Issues auf GitHub — kurz und formlos genügt."},
+        "cta_label": {"de": "Fehler oder Idee melden"},
+        "cta_ziel": "[GitHub-Issues-URL einsetzen, z. B. https://github.com/…/issues]"
+      },
+      {
+        "id": "uebersetzen",
+        "titel": {"de": "Beim Übersetzen helfen"},
+        "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Jede Sprache bringt die App näher an mehr Spielende."},
+        "cta_label": {"de": "Zur Übersetzung beitragen"},
+        "cta_ziel": "[GitHub-URL / Übersetzungshinweis einsetzen]"
+      },
+      {
+        "id": "code_beitragen",
+        "titel": {"de": "Code beitragen"},
+        "text": {"de": "Du entwickelst gern? Verbesserungen an der App selbst sind willkommen. Forke das Projekt, arbeite deine Änderung ein und schick einen Pull Request auf GitHub."},
+        "cta_label": {"de": "Auf GitHub beitragen"},
+        "cta_ziel": "[GitHub-URL einsetzen, z. B. https://github.com/…]"
+      }
+    ]
+  },
+
+  "sprachen": {
+    "funktion_aktiv": false,
+    "hinweis": {"de": "Anzeige-only im Erstausbau. Neben dem Hamburger-Icon wird die aktuell aktive Sprache als Flagge oder Kürzel gezeigt. Umschalten noch ohne Funktion."},
+    "aktuell": "de",
+    "liste": [
+      {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "label": {"de": "Deutsch"}},
+      {"code": "en", "kuerzel": "EN", "flagge": "🇬🇧", "label": {"de": "Englisch"}},
+      {"code": "fr", "kuerzel": "FR", "flagge": "🇫🇷", "label": {"de": "Französisch"}},
+      {"code": "pl", "kuerzel": "PL", "flagge": "🇵🇱", "label": {"de": "Polnisch"}},
+      {"code": "ja", "kuerzel": "JA", "flagge": "🇯🇵", "label": {"de": "Japanisch"}}
+    ]
+  }
+}
