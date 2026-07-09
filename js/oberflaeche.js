@@ -151,6 +151,13 @@ const BAUSTEIN_ICONS = {
   sprung_smash: 'fa-hammer',
   praezision_an_die_linien: 'fa-crosshairs',
   konstanz_unter_hoechstdruck: 'fa-anchor',
+  // Experte-Taktik (Matchstrategie, Scouting) — herkunftsneutral
+  der_matchplan: 'fa-list-check',
+  gegner_typen_gegenrezepte: 'fa-magnifying-glass',
+  dem_gegner_aufzwingen: 'fa-hand-fist',
+  schwaeche_systematisch_angreifen: 'fa-bullseye',
+  matchverlauf_steuern: 'fa-water',
+  entscheidender_punkt: 'fa-flag-checkered',
   // Trainer-Trainingsgestaltung (Vermittlung, Trainer-Ebene)
   was_gutes_vermitteln_ausmacht: 'fa-lightbulb',
   inhalt_zugaenglich_machen: 'fa-feather',

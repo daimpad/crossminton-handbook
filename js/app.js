@@ -86,7 +86,9 @@ function setzeSprachanzeige() {
   if (!knopf) return;
   const eintrag = spracheEintrag();
   if (!eintrag) return;
-  knopf.querySelector('.sprach-flagge').textContent = eintrag.flagge || '';
+  // Header-Anzeige zeigt nur das Kürzel (kein Flaggen-Icon); die Flaggen leben in der Liste.
+  const flagge = knopf.querySelector('.sprach-flagge');
+  if (flagge) flagge.textContent = eintrag.flagge || '';
   knopf.querySelector('.sprach-kuerzel').textContent = eintrag.kuerzel || '';
   knopf.setAttribute('aria-label', `${t('sprache')}: ${text(eintrag.label) ?? eintrag.kuerzel}`);
 }

@@ -22,19 +22,21 @@
       "eintraege": [
         {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV), Stand Februar 2018."},
         {"de": "Die fachlichen Grundlagen stützen sich auf Literatur und Materialien aus Crossminton, Trainingswissenschaft und Sportpsychologie sowie auf Transfererfahrungen aus verwandten Rückschlagsportarten."},
-        {"de": "Inhalt und Didaktik: [Name / Verein einsetzen]. Dank an alle, die beim Testen und Verbessern geholfen haben."}
+        {"de": "Folgende Personen haben sich inhaltlich beteiligt: XXX. Dank an alle, die beim Testen und Verbessern geholfen haben."}
       ]
     },
     "credits_lizenz": {
       "titel": {"de": "Lizenz und Credits"},
       "eintraege": [
-        {"de": "Lizenz der App: [Lizenz einsetzen, z. B. MIT, GPL-3.0 oder CC BY-SA 4.0]."},
+        {"de": "Software-Lizenz: MIT License."},
+        {"de": "Inhalte und Texte: CC BY 4.0."},
+        {"de": "Credits: Damian Paderta."},
         {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben."},
         {"de": "Quellcode und Mitwirkung: siehe GitHub."}
       ]
     },
     "links": [
-      {"label": {"de": "Projekt auf GitHub"}, "ziel": "[GitHub-URL einsetzen, z. B. https://github.com/…]", "typ": "github"}
+      {"label": {"de": "Projekt auf GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/", "typ": "github"}
     ]
   },
 
@@ -49,28 +51,27 @@
         "titel": {"de": "Fehler melden oder Verbesserungen vorschlagen"},
         "text": {"de": "Ist dir ein sachlicher Fehler, ein Tippfehler oder eine missverständliche Erklärung aufgefallen? Hast du eine Idee, wie sich ein Baustein verbessern ließe? Melde es über die Issues auf GitHub — kurz und formlos genügt."},
         "cta_label": {"de": "Fehler oder Idee melden"},
-        "cta_ziel": "[GitHub-Issues-URL einsetzen, z. B. https://github.com/…/issues]"
+        "cta_ziel": "https://github.com/daimpad/crossminton-handbook/issues"
       },
       {
         "id": "uebersetzen",
         "titel": {"de": "Beim Übersetzen helfen"},
         "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Jede Sprache bringt die App näher an mehr Spielende."},
         "cta_label": {"de": "Zur Übersetzung beitragen"},
-        "cta_ziel": "[GitHub-URL / Übersetzungshinweis einsetzen]"
+        "cta_ziel": "https://github.com/daimpad/crossminton-handbook/"
       },
       {
         "id": "code_beitragen",
         "titel": {"de": "Code beitragen"},
         "text": {"de": "Du entwickelst gern? Verbesserungen an der App selbst sind willkommen. Forke das Projekt, arbeite deine Änderung ein und schick einen Pull Request auf GitHub."},
         "cta_label": {"de": "Auf GitHub beitragen"},
-        "cta_ziel": "[GitHub-URL einsetzen, z. B. https://github.com/…]"
+        "cta_ziel": "https://github.com/daimpad/crossminton-handbook/"
       }
     ]
   },
 
   "sprachen": {
     "funktion_aktiv": false,
-    "hinweis": {"de": "Anzeige-only im Erstausbau. Neben dem Hamburger-Icon wird die aktuell aktive Sprache als Flagge oder Kürzel gezeigt. Umschalten noch ohne Funktion."},
     "aktuell": "de",
     "liste": [
       {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "label": {"de": "Deutsch"}},
