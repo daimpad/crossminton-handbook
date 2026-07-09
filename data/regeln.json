@@ -1,0 +1,339 @@
+{
+  "_meta": {
+    "beschreibung": "Regeln-Reiter: eigener REFERENZ-Bereich (kein Lerninhalt, keine Voraussetzungen/Deltas/Fortschritt). Stellt die offiziellen Crossminton-Spielregeln dar und erklaert sie in Du-Form.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "dateiname": "regeln.json (eigene Datei, eigener Reiter, NICHT im Baustein-Pool).",
+    "quelle": {
+      "titel": "Crossminton Spielregeln",
+      "herausgeber": "International Crossminton Organisation (ICO)",
+      "verband_de": "Deutscher Crossminton Verband (DCV)",
+      "stand": "Februar 2018",
+      "hinweis": "Inhalte strikt aus der offiziellen Regelquelle. 'inhalt' gibt die Regel akkurat wieder (mit Regelnummer zur Rueckverfolgung), 'erklaerung' deutet sie in Du-Form. Court-Masse ausser der genannten Feld-Distanz (12,80 m) sind in der Quelle nicht enthalten und werden NICHT ergaenzt."
+    },
+    "entity_schema": {
+      "abschnitt": {
+        "id": "sprachneutraler Bezeichner",
+        "titel": "{sprache: Text}",
+        "einleitung": "{sprache: Text} — OPTIONAL",
+        "regeln": "[regel, ...]"
+      },
+      "regel": {
+        "nummer": "Regelnummer der Quelle (OPTIONAL, zur Rueckverfolgung)",
+        "titel": "{sprache: Text}",
+        "inhalt": "{sprache: Text} — die Regel akkurat",
+        "erklaerung": "{sprache: Text} — OPTIONAL, Erklaerung in Du-Form",
+        "querverweis": "OPTIONAL — Baustein-ID(s) als reine Dokumentation (kein Graph, kein Link-Zwang); verbindet die Regel mit passenden Lerninhalten"
+      }
+    },
+    "reiter_hinweis_fuer_claude_code": "Neuer Top-Level-Reiter 'Regeln' neben den Lernpfaden. Statischer Referenzinhalt: Abschnitte auf-/zuklappbar, keine Fortschrittslogik, keine Gamification. Querverweise duerfen optional als Absprung zu den Lernbausteinen dienen, muessen aber nicht."
+  },
+
+  "abschnitte": [
+    {
+      "id": "grundbegriffe",
+      "titel": {"de": "Grundbegriffe"},
+      "einleitung": {"de": "Ein paar Begriffe, die in den Regeln immer wieder vorkommen. Wer sie kennt, versteht den Rest mühelos."},
+      "regeln": [
+        {
+          "titel": {"de": "Court, Spielfeld und Sicherheitszone"},
+          "inhalt": {"de": "Der Court besteht aus zwei Spielfeldern, die parallel zueinander in einer Entfernung von 12,80 m aufgebaut sind. Die Sicherheitszone ist die Fläche um und zwischen den Spielfeldern."},
+          "erklaerung": {"de": "Ihr spielt nicht über ein Netz, sondern über eine Lücke. Zwischen deinem und dem gegnerischen Feld liegt ein freier Raum von 12,80 m — die Sicherheitszone. Dorthin darf der Speeder nicht gespielt werden; er muss über die Zone hinweg in das gegnerische Feld."},
+          "querverweis": ["spielziel_verstehen"]
+        },
+        {
+          "titel": {"de": "Speeder und Schläger"},
+          "inhalt": {"de": "Der Ball wird Speeder genannt. Gespielt wird mit einem Schläger."},
+          "erklaerung": {"de": "Der Speeder ist der spezielle Crossminton-Ball — schwerer und schneller als ein Federball, mit stabiler Flugbahn."}
+        },
+        {
+          "titel": {"de": "Einzel und Doppel"},
+          "inhalt": {"de": "Einzel: ein Spieler in jedem Spielfeld. Doppel: zwei Spieler in jedem Spielfeld."},
+          "erklaerung": {"de": "Im Einzel stehst du allein deinem Gegner gegenüber. Im Doppel teilst du dir dein Feld mit einem Partner — mit eigenen Regeln, siehe den Doppel-Abschnitt."},
+          "querverweis": ["doppel_grundlagen"]
+        },
+        {
+          "titel": {"de": "Aufschläger, Rückschläger und Rallye"},
+          "inhalt": {"de": "Der Aufschläger ist die aufschlagende Partei, der Rückschläger die rückschlagende. Eine Rallye ist die Abfolge von Schlägen ab dem Aufschlag bis zu dem Moment, in dem der Speeder aus dem Spiel ist."},
+          "erklaerung": {"de": "Jeder Ballwechsel beginnt mit einem Aufschlag und läuft, bis der Speeder den Boden berührt oder ein Fehler passiert. Diese Abfolge heißt Rallye."}
+        }
+      ]
+    },
+
+    {
+      "id": "wahl",
+      "titel": {"de": "Die Wahl vor Spielbeginn"},
+      "regeln": [
+        {
+          "nummer": "1",
+          "titel": {"de": "Wer wählt was"},
+          "inhalt": {"de": "Vor Spielbeginn wird eine Wahl durchgeführt. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit."},
+          "erklaerung": {"de": "Wie beim Münzwurf: Wer die Wahl gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner."}
+        },
+        {
+          "nummer": "1.2",
+          "titel": {"de": "Rollen im Doppel"},
+          "inhalt": {"de": "Im Doppel teilt die aufschlagende Partei der rückschlagenden mit, wer zuerst Aufschläger ist (Rückraumspieler). Die rückschlagende Partei entscheidet frei, wer Angriffs- und wer Rückraumspieler ist."},
+          "erklaerung": {"de": "Schon vor dem ersten Ball legt ihr im Doppel eure Rollen fest — wer vorn als Angriffsspieler und wer hinten als Rückraumspieler beginnt."},
+          "querverweis": ["doppel_grundlagen"]
+        }
+      ]
+    },
+
+    {
+      "id": "punkte_saetze",
+      "titel": {"de": "Punkte und Sätze"},
+      "regeln": [
+        {
+          "nummer": "2.1",
+          "titel": {"de": "Best of 3"},
+          "inhalt": {"de": "Ein Spiel geht über Best of 3 Sätze: Zwei gewonnene Sätze sind nötig, um das Spiel zu gewinnen."},
+          "erklaerung": {"de": "Du musst zwei Sätze gewinnen. Steht es 1:1 nach Sätzen, entscheidet der dritte."}
+        },
+        {
+          "nummer": "2.2 / 2.4",
+          "titel": {"de": "16 Punkte — und die 15:15-Regel"},
+          "inhalt": {"de": "Die Partei, die zuerst 16 Punkte erreicht, gewinnt den Satz — mit einer Ausnahme: Beim Stand von 15:15 gewinnt die Partei, die 2 Punkte Vorsprung hat."},
+          "erklaerung": {"de": "Normalerweise reicht, wer zuerst 16 hat. Wird es aber 15:15, musst du dich um zwei Punkte absetzen — bei 15:15 geht es also weiter, bis eine Partei zwei Punkte vorn liegt. Das macht enge Sätze besonders nervenaufreibend."},
+          "querverweis": ["ruhig_bleiben_wenn_es_eng_wird", "engen_satz_fuehren"]
+        },
+        {
+          "nummer": "2.3",
+          "titel": {"de": "Rallye-Punkt-System"},
+          "inhalt": {"de": "Wer einen Ballwechsel gewinnt, erhält den Punkt — unabhängig davon, wer aufgeschlagen hat. Eine Partei gewinnt den Ballwechsel, wenn die andere einen Fehler macht oder der Speeder den Boden im gegnerischen Feld berührt."},
+          "erklaerung": {"de": "Jeder Ballwechsel bringt einen Punkt, egal wer serviert hat. Es gibt keinen 'Aufschlag ohne Punktchance' — jede Rallye zählt."}
+        },
+        {
+          "nummer": "2.5",
+          "titel": {"de": "Wer den nächsten Satz beginnt"},
+          "inhalt": {"de": "Die Partei, die einen Satz verloren hat, beginnt den folgenden Satz mit dem Aufschlag."},
+          "erklaerung": {"de": "Kleiner Ausgleich: Verlierst du einen Satz, darfst du den nächsten aufschlagen."}
+        }
+      ]
+    },
+
+    {
+      "id": "seitenwechsel",
+      "titel": {"de": "Seitenwechsel"},
+      "regeln": [
+        {
+          "nummer": "3.1",
+          "titel": {"de": "Wann die Seiten gewechselt werden"},
+          "inhalt": {"de": "Die Parteien wechseln die Seiten: nach dem ersten Satz; nach dem zweiten Satz, wenn es einen dritten gibt; und im dritten Satz alle 6 gespielten Punkte."},
+          "erklaerung": {"de": "Damit niemand einen Nachteil durch Licht, Wind oder Untergrund hat, wechselt ihr die Seiten — zwischen den Sätzen und im Entscheidungssatz sogar alle 6 Punkte."}
+        },
+        {
+          "nummer": "3.2",
+          "titel": {"de": "Vergessener Seitenwechsel"},
+          "inhalt": {"de": "Wurde ein Seitenwechsel versäumt, erfolgt er, sobald der Fehler bemerkt wird und der Speeder nicht im Spiel ist. Der Punktestand bleibt bestehen."},
+          "erklaerung": {"de": "Vergesst ihr den Wechsel, holt ihr ihn einfach nach, sobald es auffällt — die Punkte bleiben, wie sie sind."}
+        }
+      ]
+    },
+
+    {
+      "id": "aufschlag",
+      "titel": {"de": "Der Aufschlag"},
+      "einleitung": {"de": "Der Aufschlag hat die genauesten Regeln im ganzen Spiel. Wer sie kennt, verschenkt keine Punkte durch ungültige Aufschläge."},
+      "regeln": [
+        {
+          "nummer": "4.1.2",
+          "titel": {"de": "Aus der Aufschlagzone"},
+          "inhalt": {"de": "Der Aufschläger steht im hinteren Teil des Spielfelds (Aufschlagzone), ohne im Moment des Schlags mit einem Teil des Fußes die (gedachte) Aufschlaglinie zu übertreten."},
+          "erklaerung": {"de": "Du schlägst aus dem hinteren Bereich deines Feldes auf und darfst dabei nicht nach vorn über die Aufschlaglinie treten."},
+          "querverweis": ["aufschlag"]
+        },
+        {
+          "nummer": "4.1.3",
+          "titel": {"de": "Ein Fuß am Boden"},
+          "inhalt": {"de": "Vom Anfang bis zum Ende des Aufschlags muss ein Fuß des Aufschlägers den Boden berühren."},
+          "erklaerung": {"de": "Du darfst beim Aufschlag nicht abspringen — ein Fuß bleibt die ganze Zeit am Boden."}
+        },
+        {
+          "nummer": "4.1.4",
+          "titel": {"de": "Speeder unterhalb der Schlaghand"},
+          "inhalt": {"de": "Im Moment des Treffens auf den Schläger muss der gesamte Speeder unterhalb der Schlaghand des Aufschlägers sein."},
+          "erklaerung": {"de": "Das ist die zentrale Aufschlagregel: Du triffst den Speeder von unten. Der ganze Speeder ist im Treffmoment tiefer als deine Schlaghand — ein Aufschlag über Schulterhöhe ist ungültig."},
+          "querverweis": ["aufschlag"]
+        },
+        {
+          "nummer": "4.1.5 / 4.1.1",
+          "titel": {"de": "Vorwärts und ohne Verzögern"},
+          "inhalt": {"de": "Nach Beginn des Aufschlags muss der Schläger bis zum Ende der Bewegung nach vorn geführt werden (kein Unterbrechen). Der Aufschlag darf nicht absichtlich verzögert werden, sobald beide Parteien bereit sind."},
+          "erklaerung": {"de": "Die Aufschlagbewegung läuft in einem Zug nach vorn durch — du darfst sie nicht anhalten oder täuschen. Und wenn beide bereit sind, spielst du zügig."}
+        },
+        {
+          "nummer": "4.4",
+          "titel": {"de": "Nur wenn der Rückschläger bereit ist"},
+          "inhalt": {"de": "Der Aufschläger darf nur beginnen, wenn der Rückschläger bereit ist. Bereit ist der Rückschläger, wenn erkennbar ist, dass er den Aufschlag returnieren will."},
+          "erklaerung": {"de": "Schlag nicht auf, solange dein Gegner noch nicht steht. Erst wenn er sichtbar bereit ist, darfst du servieren."}
+        },
+        {
+          "nummer": "4.6",
+          "titel": {"de": "Drei Aufschläge in Folge"},
+          "inhalt": {"de": "Jede Partei führt 3 aufeinanderfolgende Aufschläge durch, bevor die andere Partei das Aufschlagrecht erhält."},
+          "erklaerung": {"de": "Du schlägst dreimal hintereinander auf, dann wechselt das Aufschlagrecht zum Gegner. Das gibt dem Spiel seinen Rhythmus."},
+          "querverweis": ["momentum_lesen_und_drehen"]
+        },
+        {
+          "nummer": "4.7",
+          "titel": {"de": "Ab 15:15 nach jedem Punkt"},
+          "inhalt": {"de": "Bei einem Punktestand von 15:15 wechselt das Aufschlagrecht nach jedem Punkt."},
+          "erklaerung": {"de": "In der Schlussphase eines engen Satzes kann sich niemand mehr über drei Aufschläge absetzen — ab 15:15 wandert das Aufschlagrecht nach jedem einzelnen Punkt."},
+          "querverweis": ["engen_satz_fuehren"]
+        },
+        {
+          "nummer": "4.5",
+          "titel": {"de": "Nach dem Aufschlag frei"},
+          "inhalt": {"de": "Nach dem Aufschlag darf sich der Aufschläger aus der Aufschlagzone bewegen."},
+          "erklaerung": {"de": "Sobald der Aufschlag raus ist, bist du frei — du bewegst dich normal im Feld und spielst die Rallye."}
+        }
+      ]
+    },
+
+    {
+      "id": "einzel",
+      "titel": {"de": "Einzel"},
+      "regeln": [
+        {
+          "nummer": "5.1 / 5.2",
+          "titel": {"de": "Aufschlag und Ablauf im Einzel"},
+          "inhalt": {"de": "Aufgeschlagen wird aus dem hinteren Court (Aufschlagzone), von jeder Position darin. Während der Rallye spielen Aufschläger und Rückschläger den Speeder abwechselnd von jeder Position aus, bis er aus dem Spiel ist."},
+          "erklaerung": {"de": "Im Einzel ist es einfach: aufschlagen aus dem hinteren Bereich, danach spielt ihr abwechselnd, wo ihr wollt, bis der Ballwechsel endet."}
+        }
+      ]
+    },
+
+    {
+      "id": "doppel",
+      "titel": {"de": "Doppel"},
+      "einleitung": {"de": "Das Doppel hat eigene Regeln für Rollen, Aufschlagreihenfolge und Position. Sie zu kennen, verhindert vermeidbare Punktverluste."},
+      "regeln": [
+        {
+          "nummer": "6.1",
+          "titel": {"de": "Rollen im Doppel"},
+          "inhalt": {"de": "Ein Spieler der aufschlagenden Partei schlägt aus der Aufschlagzone auf. Jeder Spieler der rückschlagenden Partei gilt als Rückschläger. Nach dem Aufschlag darf der Speeder von jedem Spieler der Partei von jeder Position gespielt werden (beachte die Positionsregel)."},
+          "erklaerung": {"de": "Ihr teilt euch in Angriffsspieler (vorn) und Rückraumspieler (hinten). Nach dem Aufschlag darf jeder von euch den Speeder nehmen — solange ihr die Positionsregel einhaltet."},
+          "querverweis": ["doppel_grundlagen", "doppel_als_eigenes_spiel"]
+        },
+        {
+          "nummer": "6.4",
+          "titel": {"de": "Aufschlagreihenfolge"},
+          "inhalt": {"de": "Das Aufschlagrecht wechselt in fester Reihenfolge: vom Rückraumspieler der Partei A (der zu Beginn aufschlägt) zum Angriffsspieler der Partei B (der dann aufschlägt und Rückraumspieler wird), dann zum Partner von A, dann zum Partner von B, dann wieder zum ersten Aufschläger. Außerhalb dieser Reihenfolge darf niemand aufschlagen."},
+          "erklaerung": {"de": "Der Aufschlag wandert in einer festen Kette durch alle vier Spieler: A1 → B1 → A2 → B2 → wieder A1. Wer aufschlägt, ist dabei immer der Rückraumspieler. Diese Reihenfolge müsst ihr im Kopf haben."},
+          "querverweis": ["aufschlag_rueckschlag_doppel"]
+        },
+        {
+          "nummer": "6.5.1",
+          "titel": {"de": "Die Positionsregel"},
+          "inhalt": {"de": "Positionsfehler während der Rallye: Der Rückraumspieler setzt im Moment des Schlags einen Teil seines grundliniennäheren Fußes vor den Fuß seines Partners — oder der Angreifer setzt seinen grundliniennäheren Fuß hinter den Fuß seines Partners. Beides ist ein Positionsfehler."},
+          "erklaerung": {"de": "Im Treffmoment muss die Reihenfolge stimmen: Der Angriffsspieler bleibt vorn, der Rückraumspieler hinten. Vertauscht ihr die Ordnung im Moment des Schlags, ist es ein Fehler."},
+          "querverweis": ["doppel_grundlagen", "das_umschalten_im_doppel"]
+        },
+        {
+          "nummer": "6.5.2",
+          "titel": {"de": "Folge des Positionsfehlers"},
+          "inhalt": {"de": "Wird ein Positionsfehler beim Aufschlag oder während der Rallye beim Rückschlag bestraft, ist der Punkt sofort verloren, obwohl der Ballwechsel noch nicht beendet ist."},
+          "erklaerung": {"de": "Ein Positionsfehler beendet den Ballwechsel sofort zu euren Ungunsten — der Punkt ist weg, auch wenn ihr gerade angreift. Deshalb lohnt sich die saubere Aufteilung."}
+        },
+        {
+          "nummer": "6.6",
+          "titel": {"de": "Rollen zu Satzbeginn bekannt geben"},
+          "inhalt": {"de": "Zu Beginn des Satzes gibt zuerst die rückschlagende Partei bekannt, wer Angriffs- und wer Rückraumspieler ist, danach die aufschlagende Partei."},
+          "erklaerung": {"de": "Vor jedem Satz legt ihr eure Rollen offen fest, damit für alle klar ist, wer vorn und wer hinten spielt."}
+        }
+      ]
+    },
+
+    {
+      "id": "fehler",
+      "titel": {"de": "Fehler"},
+      "einleitung": {"de": "Ein Fehler beendet den Ballwechsel und gibt der anderen Partei den Punkt. Das sind die wichtigsten Fehlerarten."},
+      "regeln": [
+        {
+          "nummer": "7.1",
+          "titel": {"de": "Ungültiger Aufschlag"},
+          "inhalt": {"de": "Ein Aufschlag, der nicht gemäß den Aufschlagregeln ausgeführt wird, ist ein Fehler."},
+          "erklaerung": {"de": "Alles aus dem Aufschlag-Abschnitt gilt: falscher Stand, Sprung, Speeder zu hoch getroffen, unterbrochene Bewegung — jeder Verstoß ist ein Fehler."}
+        },
+        {
+          "nummer": "7.2.1 / 7.2.2",
+          "titel": {"de": "Speeder außerhalb, an Decke oder Wand"},
+          "inhalt": {"de": "Fehler, wenn der Speeder den Court außerhalb der Linien berührt (nicht auf oder innerhalb der Linien) oder die Decke oder Seitenwände berührt."},
+          "erklaerung": {"de": "Auf der Linie zählt als drin. Außerhalb, an der Decke oder an einer Wand ist Fehler. Anders als im Squash spielt hier keine Wand mit."},
+          "querverweis": ["spielziel_verstehen"]
+        },
+        {
+          "nummer": "7.2.3 / 7.2.4",
+          "titel": {"de": "Speeder berührt Spieler oder Objekt"},
+          "inhalt": {"de": "Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt, oder ein Objekt bzw. eine Person außerhalb des Courts."},
+          "erklaerung": {"de": "Trifft der Speeder dich, deine Kleidung oder etwas außerhalb des Courts, ist der Ballwechsel verloren."}
+        },
+        {
+          "nummer": "7.2.5 / 7.2.6",
+          "titel": {"de": "Fangen, Werfen, Doppelberührung"},
+          "inhalt": {"de": "Fehler, wenn der Speeder mit dem Schläger gefangen/gestoppt und dann geworfen wird, oder wenn er von demselben Spieler zweimal berührt wird. Kein Fehler ist es, wenn der Speeder in einem Schlag gleichzeitig Rahmen und Besaitung trifft."},
+          "erklaerung": {"de": "Du musst den Speeder sauber schlagen, nicht fangen und werfen, und nur einmal treffen. Wenn er in einem Schlag zugleich Rahmen und Saiten berührt, ist das erlaubt."}
+        },
+        {
+          "nummer": "7.2.7 / 7.2.8",
+          "titel": {"de": "Partner-Doppelberührung, Speeder nicht rüber"},
+          "inhalt": {"de": "Fehler, wenn der Speeder von einem Spieler und danach von dessen Partner berührt wird, oder wenn er den Schläger berührt und danach nicht in Richtung der anderen Court-Seite fliegt."},
+          "erklaerung": {"de": "Im Doppel darf nur einer von euch den Speeder pro Schlag berühren. Und dein Schlag muss den Speeder tatsächlich zur anderen Seite bringen."}
+        },
+        {
+          "nummer": "7.3",
+          "titel": {"de": "Behindern, Ablenken, ins Feld greifen"},
+          "inhalt": {"de": "Fehler, wenn ein Spieler bei laufendem Speeder den gegnerischen Court mit Schläger oder Körper betritt, den Gegner an einem ordnungsgemäßen Schlag hindert oder ihn durch Rufen oder Gestikulieren ablenkt."},
+          "erklaerung": {"de": "Bleib bei dir: nicht ins gegnerische Feld greifen, den Gegner nicht behindern und ihn nicht durch Rufen oder Gesten stören."}
+        }
+      ]
+    },
+
+    {
+      "id": "wiederholungen",
+      "titel": {"de": "Wiederholungen"},
+      "regeln": [
+        {
+          "nummer": "8.1",
+          "titel": {"de": "Was eine Wiederholung ist"},
+          "inhalt": {"de": "Bei einer Wiederholung ist der Aufschlag der letzten Rallye ungültig, und der zuletzt aufschlagende Spieler wiederholt den Aufschlag."},
+          "erklaerung": {"de": "Eine Wiederholung (im Tennis 'Let') heißt: Der Ballwechsel zählt nicht, es gibt keinen Punkt, derselbe Aufschlag wird noch einmal gespielt."}
+        },
+        {
+          "nummer": "8.2",
+          "titel": {"de": "Wann wiederholt wird"},
+          "inhalt": {"de": "Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt."},
+          "erklaerung": {"de": "Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben."}
+        }
+      ]
+    },
+
+    {
+      "id": "speeder_im_spiel",
+      "titel": {"de": "Wann der Speeder aus dem Spiel ist"},
+      "regeln": [
+        {
+          "nummer": "9",
+          "titel": {"de": "Ende des Ballwechsels"},
+          "inhalt": {"de": "Der Speeder ist nicht mehr im Spiel, wenn er den Boden des Courts berührt oder wenn es einen Fehler oder eine Wiederholung gibt."},
+          "erklaerung": {"de": "Der Ballwechsel endet in dem Moment, in dem der Speeder den Boden berührt oder ein Fehler bzw. eine Wiederholung eintritt. Bis dahin ist er im Spiel."}
+        }
+      ]
+    },
+
+    {
+      "id": "kommunikation",
+      "titel": {"de": "Verständigung ohne Schiedsrichter"},
+      "einleitung": {"de": "Bei Spielen ohne Schiedsrichter zeigt ihr Entscheidungen mit einem einfachen Handzeichen der freien Hand an."},
+      "regeln": [
+        {
+          "titel": {"de": "Die drei Handzeichen"},
+          "inhalt": {"de": "„In“: der Zeigefinger der freien Hand zeigt nach unten. „Out“: der Zeigefinger zeigt nach oben. „Wiederholung“: Zeige- und Mittelfinger zeigen als „V“ nach oben."},
+          "erklaerung": {"de": "Merke dir die Richtung: Zeigefinger nach unten heißt „drin“ (der Speeder war im Feld), nach oben heißt „aus“. Ein V mit zwei Fingern heißt „Wiederholung“. So klärt ihr Bälle fair ohne Schiedsrichter."}
+        }
+      ]
+    }
+  ]
+}

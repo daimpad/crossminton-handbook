@@ -8,6 +8,7 @@ Clientseitige, mobil-orientierte Lernapp für Crossminton. Kein Server, kein Bui
 
 - **Willkommensseite** mit zwei Einstiegen: direkt ins Handbuch (alle Kapitel frei, ohne Angaben) oder der geführte Weg über die Stufen-Diagnostik.
 - **Vier Pfade** durch denselben Baustein-Pool: Kompetenz-, Themen-, Individual- und Trainingspfad, dazu die Spielform-Achse (das Doppel als Querschnittsthema über Domänen) und der Cross-Sport-Modifikator (angepasste Erklärungen für Umsteiger, z. B. aus Badminton).
+- **Regeln-Reiter** als Referenz neben den Lernpfaden: die offiziellen Spielregeln (ICO/DCV), akkurat wiedergegeben und in Klartext erklärt — ein statisches Nachschlagewerk ohne Fortschrittslogik, mit sichtbarer Quellenangabe.
 - **Getrennte Fortschritts-Quittierung** je Erklär- und Übungsteil, Projektionen (global/pfadbezogen), Meilensteine und kumulative Kontinuität — alles lokal im Browser.
 - **Mobil zuerst**, hell, mit lokaler Schrift (Rubik) und Font-Awesome-Icons; Bottom-Bar auf dem Handy, Hamburger-Menü ab Tablet.
 
@@ -73,6 +74,7 @@ data/
   bausteine.delta-squash.json       herkunftsreine Delta-Datei (Herkunft SQ; auch auf zuvor delta-freie Taktik-Bausteine)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Einheiten in drei Phasen (Erwärmung/Hauptteil/Ausklang), stufen-/spielform-getaggt
+  regeln.json                       Regeln-Reiter: offizielle Spielregeln (ICO/DCV) als Referenz — eigene Entität, nicht im Pool
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
   labels/{en,fr,pl}.json            strukturgleiche Gerüste, unbefüllt → Fallback auf de
 docs/uebergabe-spezifikation.md     Spezifikation (Erstausbau)
@@ -87,6 +89,7 @@ CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Offen vermerkt: das ausgeschriebene Label für die Transfer-Herkunft `BS`.
 - **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Werden nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`. Im Erstausbau ein Platzhalter-Beispiel — die redaktionelle Serie ersetzt es.
 - **Trainingseinheiten** (`data/trainingseinheiten.json`): kuratierte Einheiten, gegliedert in drei Phasen (`phasen.{erwaermung, hauptteil, ausklang}`) mit je `{baustein, hinweis}`-Referenzen auf Bausteine, deren **Übungsteil** gemeint ist (nie Reflexions-Bausteine). Jede Einheit trägt `titel` (nach `labels/de.json` geliftet), `kompetenzstufe` (steuert die stufen-kumulative Filterung im Trainingspfad), `spielform`, `schwerpunkt` und `beschreibung`. Frei ersetzbar/erweiterbar.
+- **Regeln** (`data/regeln.json`): eigener Referenz-Reiter (`#/regeln`), **nicht im Baustein-Pool** — kein Lerninhalt, kein Fortschritt, keine Voraussetzungen/Deltas/Gamification. `abschnitte[]` (auf-/zuklappbar) mit `regeln[]`; jede Regel trägt `inhalt` (akkurat, optional `nummer` zur Rückverfolgung) und optionale `erklaerung` (Du-Form). `_meta.quelle` (Herausgeber + Stand der offiziellen ICO/DCV-Regeln) wird im Reiter angezeigt. Optionale `querverweis`-IDs sind reine Dokumentation (Absprung ins Handbuch, kein Pflicht-Link — nur auflösbare werden verlinkt). Abschnitt-/Regel-Titel bleiben inline; nur die UI-Labels (`nav_regeln`, `regeln_*`, `regel_*`) liegen in `labels/de.json`.
 - **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).
 
 ## Bewusste Ausbaustufen (strukturell vorgehalten, nicht umgesetzt)

@@ -28,12 +28,13 @@ const INHALTSDATEIEN = [
 ];
 
 export async function ladeDaten() {
-  const [einheiten, fehlerbilder, ...inhaltDateien] = await Promise.all([
+  const [einheiten, fehlerbilder, regeln, ...inhaltDateien] = await Promise.all([
     holeJson('data/trainingseinheiten.json'),
     holeJson('data/fehlerbilder.json'),
+    holeJson('data/regeln.json'),
     ...INHALTSDATEIEN.map(holeJson),
   ]);
-  return baueIndizes(inhaltDateien, einheiten, fehlerbilder);
+  return baueIndizes(inhaltDateien, einheiten, fehlerbilder, regeln);
 }
 
 export function hatUebungsteil(baustein) {
@@ -99,7 +100,7 @@ export function fehlerbilderFuer(daten, basisId) {
   return daten.fehlerbildVonBasis.get(basisId) || [];
 }
 
-export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
+export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh) {
   const warnungen = [];
   // Ein Objekt oder eine Liste von Inhaltsdateien; letztere werden gemischt.
   const dateien = Array.isArray(inhaltRoh) ? inhaltRoh : [inhaltRoh];
@@ -108,6 +109,9 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
   const deltas = dateien.flatMap((d) => d.delta_bausteine || []);
   const einheiten = einheitenRoh?.trainingseinheiten || [];
   const fehlerbilder = fehlerbilderRoh?.fehlerbild_bausteine || [];
+  // Regeln: eigener Referenzbereich, NICHT im Baustein-Pool (kein Fortschritt,
+  // keine Voraussetzungen, keine Deltas). Nur statischer Inhalt + Quellenangabe.
+  const regeln = { meta: regelnRoh?._meta || {}, abschnitte: regelnRoh?.abschnitte || [] };
 
   const daten = {
     meta: dateien[0]?._meta || {},
@@ -117,6 +121,7 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
     deltas,
     einheiten,
     fehlerbilder,
+    regeln,
     bausteinVonId: new Map(bausteine.map((b) => [b.id, b])),
     einheitVonId: new Map(einheiten.map((e) => [e.id, e])),
     deltaVonSchluessel: new Map(),
@@ -247,6 +252,18 @@ function pruefeDaten(daten) {
     }
     for (const k of fb.transfer_herkunft || []) {
       if (!inVokabular(voka.transfer_herkunft, k)) w.push(`${fb.id}: unbekanntes Transfer-Kürzel "${k}"`);
+    }
+  }
+
+  // Regeln (Referenz-Reiter): eigener statischer Bereich, NICHT im Baustein-Pool.
+  // `querverweis` ist reine Dokumentation (kein Graph, kein Pflicht-Link, analog
+  // zu voraussetzungen_querverweis) — nicht auflösbare Verweise nur melden.
+  for (const abschnitt of daten.regeln.abschnitte) {
+    for (const regel of abschnitt.regeln || []) {
+      if (!regel.inhalt?.de) w.push(`Regel in Abschnitt "${abschnitt.id}": inhalt.de fehlt`);
+      for (const id of regel.querverweis || []) {
+        if (!daten.bausteinVonId.has(id)) w.push(`Regel (${abschnitt.id}): querverweis "${id}" existiert nicht`);
+      }
     }
   }
 
