@@ -4,6 +4,7 @@
 
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
+import { renderMitmachen, renderUeber } from './ansichten/info.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
@@ -11,7 +12,7 @@ import { renderRegeln } from './ansichten/regeln.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
-import { initI18n, t } from './i18n.js';
+import { initI18n, sprache, t, text } from './i18n.js';
 import { esc } from './oberflaeche.js';
 import { einstellungen, istOnboardingAbgeschlossen, ladeZustand } from './zustand.js';
 
@@ -30,7 +31,17 @@ function parseHash() {
 
 function aktualisiereNavigation(segmente) {
   const aktiv =
-    segmente[0] === 'training' ? 'training' : segmente[0] === 'regeln' ? 'regeln' : segmente[0] === 'profil' ? 'profil' : 'lernen';
+    segmente[0] === 'training'
+      ? 'training'
+      : segmente[0] === 'regeln'
+        ? 'regeln'
+        : segmente[0] === 'ueber'
+          ? 'ueber'
+          : segmente[0] === 'mitmachen'
+            ? 'mitmachen'
+            : segmente[0] === 'profil'
+              ? 'profil'
+              : 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -42,13 +53,77 @@ function aktualisiereNavigation(segmente) {
 function beschrifteRahmen() {
   document.title = t('app_titel');
   document.querySelector('.marke-text').textContent = t('app_titel');
-  const beschriftungen = { lernen: t('nav_lernen'), training: t('nav_training'), regeln: t('nav_regeln'), profil: t('nav_profil') };
+  const beschriftungen = {
+    lernen: t('nav_lernen'),
+    training: t('nav_training'),
+    regeln: t('nav_regeln'),
+    ueber: t('nav_ueber'),
+    mitmachen: t('nav_mitmachen'),
+    profil: t('nav_profil'),
+  };
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     verweis.querySelector('.nav-text').textContent = beschriftungen[verweis.dataset.nav];
   }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
+  setzeSprachanzeige();
+}
+
+// Sprachanzeige (rein darstellend, app-info funktion_aktiv:false): zeigt die aktuell
+// dargestellte Sprache als Flagge + Kürzel neben dem Hamburger. Die Liste lässt sich
+// aufklappen, schaltet aber nichts um — das funktionale Umschalten bleibt im Profil.
+function spracheEintrag() {
+  const s = daten?.appInfo?.sprachen;
+  if (!s) return null;
+  const liste = s.liste || [];
+  const aktiv = sprache();
+  return liste.find((e) => e.code === aktiv) || liste.find((e) => e.code === s.aktuell) || liste[0] || null;
+}
+
+function setzeSprachanzeige() {
+  const knopf = document.getElementById('sprach-knopf');
+  if (!knopf) return;
+  const eintrag = spracheEintrag();
+  if (!eintrag) return;
+  knopf.querySelector('.sprach-flagge').textContent = eintrag.flagge || '';
+  knopf.querySelector('.sprach-kuerzel').textContent = eintrag.kuerzel || '';
+  knopf.setAttribute('aria-label', `${t('sprache')}: ${text(eintrag.label) ?? eintrag.kuerzel}`);
+}
+
+function initSprachanzeige() {
+  const wurzel = document.getElementById('sprach-anzeige');
+  const knopf = document.getElementById('sprach-knopf');
+  const liste = document.getElementById('sprach-liste');
+  const s = daten?.appInfo?.sprachen;
+  if (!wurzel || !knopf || !liste || !s) return;
+  const eintraege = (s.liste || [])
+    .map(
+      (e) =>
+        `<li class="sprach-eintrag${e.code === s.aktuell ? ' aktiv' : ''}"><span aria-hidden="true">${esc(e.flagge || '')}</span> <span class="sprach-name">${esc(text(e.label) ?? e.kuerzel)}</span> <span class="leise">${esc(e.kuerzel)}</span></li>`,
+    )
+    .join('');
+  const hinweis = text(s.hinweis) ? `<li class="sprach-hinweis leise">${esc(text(s.hinweis))}</li>` : '';
+  liste.innerHTML = eintraege + hinweis;
+
+  const schliesse = () => {
+    liste.hidden = true;
+    knopf.setAttribute('aria-expanded', 'false');
+  };
+  knopf.addEventListener('click', (ereignis) => {
+    ereignis.stopPropagation();
+    const offen = knopf.getAttribute('aria-expanded') === 'true';
+    liste.hidden = offen;
+    knopf.setAttribute('aria-expanded', String(!offen));
+  });
+  document.addEventListener('click', (ereignis) => {
+    if (!wurzel.contains(ereignis.target)) schliesse();
+  });
+  window.addEventListener('keydown', (ereignis) => {
+    if (ereignis.key === 'Escape') schliesse();
+  });
+  window.addEventListener('hashchange', schliesse); // bei Navigation zuklappen
+  setzeSprachanzeige();
 }
 
 // Hamburger-Menü (Desktop): Lade gleitet von rechts herein, Punkte gestaffelt.
@@ -114,6 +189,10 @@ function rendern() {
     renderTraining(el, daten, segmente[1] ? decodeURIComponent(segmente[1]) : null);
   } else if (segmente[0] === 'regeln') {
     renderRegeln(el, daten);
+  } else if (segmente[0] === 'ueber') {
+    renderUeber(el, daten);
+  } else if (segmente[0] === 'mitmachen') {
+    renderMitmachen(el, daten);
   } else if (segmente[0] === 'baustein' && segmente[1]) {
     renderBaustein(el, daten, decodeURIComponent(segmente[1]), query.get('kontext') || 'kompetenz');
   } else if (segmente[0] === 'profil') {
@@ -151,6 +230,7 @@ async function boot() {
   for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
+  initSprachanzeige();
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
     element.addEventListener('click', schliesseMenue);
   }

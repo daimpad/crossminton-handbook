@@ -31,6 +31,7 @@ const deltaSquash = liesJson('data/bausteine.delta-squash.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const regeln = liesJson('data/regeln.json');
+const appInfo = liesJson('data/app-info.json');
 const labelsDe = liesJson('data/labels/de.json');
 
 let fehler = 0;
@@ -50,7 +51,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln);
+const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -420,6 +421,16 @@ pruefe('Vermittlungsziele des Blocks decken alle vier Vermittlungstätigkeiten a
   return bereiche.size === 4;
 })());
 setzeZurueck();
+
+console.log('\n[7i] App-Info (Reiter Über/Mitmachen + Sprachanzeige, eigene Entität — nicht im Pool)');
+pruefe('app-info über baueIndizes eingelesen: ueber + mitmachen + sprachen', Boolean(daten.appInfo.ueber && daten.appInfo.mitmachen && daten.appInfo.sprachen));
+pruefe('Über-Reiter: Absätze + Dank/Quellen + Lizenz/Credits + GitHub-Link', (daten.appInfo.ueber.absaetze || []).length >= 1 && (daten.appInfo.ueber.danksagungen?.eintraege || []).length >= 1 && (daten.appInfo.ueber.credits_lizenz?.eintraege || []).length >= 1 && (daten.appInfo.ueber.links || []).some((l) => l.typ === 'github'));
+pruefe('Mitmachen-Reiter: 3 Möglichkeiten, jede mit cta_label + cta_ziel', (daten.appInfo.mitmachen.moeglichkeiten || []).length === 3 && daten.appInfo.mitmachen.moeglichkeiten.every((m) => m.cta_label?.de && m.cta_ziel));
+pruefe('Sprachanzeige rein darstellend (funktion_aktiv:false), 5 Sprachen de/en/fr/pl/ja, aktuell de', daten.appInfo.sprachen.funktion_aktiv === false && gleicheListe((daten.appInfo.sprachen.liste || []).map((s) => s.code), ['de', 'en', 'fr', 'pl', 'ja']) && daten.appInfo.sprachen.aktuell === 'de');
+pruefe('jede Sprache trägt Flagge + Kürzel + Label', (daten.appInfo.sprachen.liste || []).every((s) => s.flagge && s.kuerzel && s.label?.de));
+pruefe('App-Info erweitert den Baustein-Pool nicht (63 Bausteine, eigene Entität)', daten.bausteine.length === 63 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
+pruefe('[eckige] Platzhalter bleiben im Inhalt erhalten (nicht erfunden)', daten.appInfo.mitmachen.moeglichkeiten.some((m) => m.cta_ziel.trim().startsWith('[')));
+pruefe('Nav-Labels (de) für die neuen Reiter vorhanden', typeof labelsDe.ui.nav_ueber === 'string' && labelsDe.ui.nav_ueber !== '' && typeof labelsDe.ui.nav_mitmachen === 'string' && labelsDe.ui.nav_mitmachen !== '');
 
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
