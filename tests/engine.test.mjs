@@ -28,6 +28,7 @@ const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
 const deltaSquash = liesJson('data/bausteine.delta-squash.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
+const regeln = liesJson('data/regeln.json');
 const labelsDe = liesJson('data/labels/de.json');
 
 let fehler = 0;
@@ -47,7 +48,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder);
+const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -343,6 +344,23 @@ pruefe('Delta-Bündelung verweist weich auf das Grundlagen-Doppel-Delta', (() =>
 })());
 pruefe('spielform-Vokabular + Label vorhanden', daten.vokabulare.spielform && daten.vokabulare.spielform.includes('doppel') && labelsDe.vokabeln.spielform.doppel === 'Doppel' && labelsDe.vokabeln.spielform.einzel === 'Einzel');
 pruefe('Themen-/Kompetenzpfad bleiben unberührt vom Spielform-Filter (orthogonal): Doppel-Bausteine weiter in ihren Domänen', sequenzFuer(daten, 'themen:mentales').stationen.some((s) => s.baustein.id === 'verstaendigung_im_paar'));
+
+console.log('\n[7f] Regeln (Referenz-Reiter, eigene Entität — nicht im Baustein-Pool)');
+pruefe('regeln.json über baueIndizes eingelesen: 11 Abschnitte', daten.regeln.abschnitte.length === 11);
+const alleRegeln = daten.regeln.abschnitte.flatMap((a) => a.regeln || []);
+pruefe('36 Regeln insgesamt, jede mit akkuratem inhalt.de', alleRegeln.length === 36 && alleRegeln.every((r) => typeof r.inhalt?.de === 'string' && r.inhalt.de.trim() !== ''));
+pruefe('alle querverweis-IDs lösen auf einen Baustein auf (reine Dokumentation, kein Graph)', alleRegeln.every((r) => (r.querverweis || []).every((id) => daten.bausteinVonId.has(id))));
+// Der Reiter ist eine getrennte Entität: die Abschnitte liegen unter daten.regeln,
+// nie im Pool. (Slug-Überschneidungen wie der Abschnitt "aufschlag" ~ Baustein
+// "aufschlag" sind dabei belanglos — zwei Namensräume, kein Lookup übers Regel-Slug.)
+pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (52 Bausteine, Abschnitte separat)', daten.bausteine.length === 52 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
+pruefe('Regeln tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', alleRegeln.every((r) => r.voraussetzungen === undefined && r.uebungsteil === undefined && r.delta === undefined && r.status === undefined));
+pruefe('Quellenangabe sichtbar hinterlegt (Herausgeber + Stand)', typeof daten.regeln.meta.quelle?.herausgeber === 'string' && daten.regeln.meta.quelle.herausgeber !== '' && typeof daten.regeln.meta.quelle?.stand === 'string' && daten.regeln.meta.quelle.stand !== '');
+pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'regeln_intro', 'regel_label', 'regel_bedeutung', 'regeln_quelle', 'regeln_stand', 'regeln_querverweis'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
+pruefe('nicht auflösbarer querverweis erzeugt eine Warnung (Dokumentations-Check, nie sperrend)', (() => {
+  const kaputt = { _meta: {}, abschnitte: [{ id: 'test_regel', titel: { de: 'T' }, regeln: [{ inhalt: { de: 'x' }, querverweis: ['gibt_es_nicht'] }] }] };
+  return baueIndizes([technik], einheiten, fehlerbilder, kaputt).warnungen.some((warnung) => warnung.includes('querverweis') && warnung.includes('gibt_es_nicht'));
+})());
 
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();

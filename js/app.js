@@ -7,6 +7,7 @@ import { renderHeim } from './ansichten/heim.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
+import { renderRegeln } from './ansichten/regeln.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
@@ -28,7 +29,8 @@ function parseHash() {
 }
 
 function aktualisiereNavigation(segmente) {
-  const aktiv = segmente[0] === 'training' ? 'training' : segmente[0] === 'profil' ? 'profil' : 'lernen';
+  const aktiv =
+    segmente[0] === 'training' ? 'training' : segmente[0] === 'regeln' ? 'regeln' : segmente[0] === 'profil' ? 'profil' : 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -40,7 +42,7 @@ function aktualisiereNavigation(segmente) {
 function beschrifteRahmen() {
   document.title = t('app_titel');
   document.querySelector('.marke-text').textContent = t('app_titel');
-  const beschriftungen = { lernen: t('nav_lernen'), training: t('nav_training'), profil: t('nav_profil') };
+  const beschriftungen = { lernen: t('nav_lernen'), training: t('nav_training'), regeln: t('nav_regeln'), profil: t('nav_profil') };
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     verweis.querySelector('.nav-text').textContent = beschriftungen[verweis.dataset.nav];
   }
@@ -110,6 +112,8 @@ function rendern() {
     renderIndividual(el, daten);
   } else if (segmente[0] === 'training') {
     renderTraining(el, daten, segmente[1] ? decodeURIComponent(segmente[1]) : null);
+  } else if (segmente[0] === 'regeln') {
+    renderRegeln(el, daten);
   } else if (segmente[0] === 'baustein' && segmente[1]) {
     renderBaustein(el, daten, decodeURIComponent(segmente[1]), query.get('kontext') || 'kompetenz');
   } else if (segmente[0] === 'profil') {
