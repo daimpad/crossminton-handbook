@@ -42,6 +42,20 @@ export function renderUeber(el, daten) {
     ${links ? `<section class="karte">${links}</section>` : ''}`;
 }
 
+// Rechtstexte (Impressum / Datenschutz): schlichte Titel-+-Absätze-Ansicht aus
+// app-info.json `rechtliches`. Platzhalter in [eckigen Klammern] bleiben sichtbar.
+export function renderRechtstext(el, daten, schluessel) {
+  const block = daten.appInfo?.rechtliches?.[schluessel];
+  if (!block) {
+    el.innerHTML = `<div class="karte"><p>${esc(t('nicht_gefunden'))}</p></div>`;
+    return;
+  }
+  const absaetze = (block.absaetze || []).map((a) => `<p>${esc(text(a) ?? '')}</p>`).join('');
+  el.innerHTML = `
+    <h1>${esc(text(block.titel) ?? '')}</h1>
+    <section class="karte">${absaetze}</section>`;
+}
+
 export function renderMitmachen(el, daten) {
   const m = daten.appInfo?.mitmachen;
   if (!m) {

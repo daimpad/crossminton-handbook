@@ -125,6 +125,7 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh,
     meta: appInfoRoh?._meta || {},
     ueber: appInfoRoh?.ueber || null,
     mitmachen: appInfoRoh?.mitmachen || null,
+    rechtliches: appInfoRoh?.rechtliches || null,
     sprachen: appInfoRoh?.sprachen || { funktion_aktiv: false, aktuell: 'de', liste: [] },
   };
 
