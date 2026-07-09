@@ -7,8 +7,8 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe } from '../js/daten.js';
-import { individualpfad, kompetenzpfad, sequenzFuer, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht } from '../js/pfade.js';
+import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from '../js/daten.js';
+import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { registriereEinheitAbschluss, setzeDiagnose, setzeTeilStatus, setzeZurueck } from '../js/zustand.js';
 
@@ -23,6 +23,8 @@ const fgTechnik = liesJson('data/bausteine.fortgeschritten-technik.json');
 const fgTaktik = liesJson('data/bausteine.fortgeschritten-taktik.json');
 const fgMentales = liesJson('data/bausteine.fortgeschritten-mentales.json');
 const fgAthletik = liesJson('data/bausteine.fortgeschritten-athletik_kondition.json');
+const doppelThema = liesJson('data/bausteine.doppel-thema.json');
+const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const labelsDe = liesJson('data/labels/de.json');
@@ -44,7 +46,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik], einheiten, fehlerbilder);
+const daten = baueIndizes([technik, taktik, mentales, athletik, fgTechnik, fgTaktik, fgMentales, fgAthletik, doppelThema, deltaTennis], einheiten, fehlerbilder);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -68,11 +70,18 @@ const fgTaktikKette = ['umschalten', 'punkt_aufbauen', 'smash_vorbereiten', 'geg
 // beide stufenübergreifend an ihre Beginner-Gegenstücke gehängt, ohne Delta.
 const fgMentalesKette = ['vom_werkzeug_zum_system', 'selbstgespraech_steuern', 'sich_das_spiel_vorstellen', 'momentum_lesen_und_drehen', 'ueber_das_match_stabil_bleiben'];
 const fgAthletikKette = ['gezielt_trainieren', 'explosivitaet', 'rumpfstabilitaet', 'intervallausdauer', 'belastung_steuern_regenerieren'];
+// Doppel-Querschnitt (spielform:doppel, NEUE Metadaten-Dimension): orthogonal zur
+// Domäne. In Kompetenz-/Themenpfad hängen die Bausteine an ihre Domäne an
+// (Pool-Reihenfolge); auf der Spielform-Achse bilden sie EIN Thema. `doppelTaktikKette`
+// = die fünf Taktik-Doppel-Bausteine; die Athletik-/Mentales-Doppel je einer.
+const doppelTaktikKette = ['doppel_als_eigenes_spiel', 'angriff_im_paar', 'verteidigung_im_paar', 'aufschlag_rueckschlag_doppel', 'das_umschalten_im_doppel'];
+// Spielform-Achse (Erzählreihenfolge): Einstieg doppel_grundlagen + Querschnitt, quer über Taktik/Athletik/Mentales.
+const doppelThemaKette = ['doppel_grundlagen', 'doppel_als_eigenes_spiel', 'angriff_im_paar', 'verteidigung_im_paar', 'bewegung_als_einheit', 'verstaendigung_im_paar', 'aufschlag_rueckschlag_doppel', 'das_umschalten_im_doppel'];
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('45 Basisbausteine (23 Beginner + 22 Fortgeschritten), neun Deltas', daten.bausteine.length === 45 && daten.deltas.length === 9);
-pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD]', gleicheListe(daten.herkuenfte, ['BAD']));
+pruefe('52 Basisbausteine (Doppel-Querschnitt inkl.), 16 Deltas (10 + 6 Tennis)', daten.bausteine.length === 52 && daten.deltas.length === 16);
+pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
 setzeZurueck();
@@ -96,7 +105,7 @@ console.log('\n[2b] Kompetenzpfad über zwei Stufen (kumulativ)');
 const pfadBeginner = kompetenzpfad(daten, 'beginner');
 const pfadFg = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Beginner sieht keine Fortgeschritten-Bausteine', pfadBeginner.stationen.every((s) => ![...fgTechnikKette, ...fgTaktikKette].includes(s.baustein.id)));
-pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten-Blöcke (Technik→Taktik→Mentales→Athletik) (45)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...fgMentalesKette, ...fgAthletikKette]));
+pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten je Domäne (Doppel-Querschnitt hängt an seine Domäne an) (52)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...doppelTaktikKette, ...fgMentalesKette, 'verstaendigung_im_paar', ...fgAthletikKette, 'bewegung_als_einheit']));
 pruefe('Beginner-Bausteine bleiben an ihrer niedrigsten Stufe (Block vorn)', pfadFg.stationen.slice(0, 23).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
 pruefe('Fortgeschritten-Block folgt geschlossen hinten', pfadFg.stationen.slice(23).every((s) => niedrigsteStufe(daten, s.baustein) === 'fortgeschritten'));
 pruefe('stufenübergreifende weiche Voraussetzung: handgelenk_peitsche ← vorhand_drive (Beginner)', (() => {
@@ -138,15 +147,34 @@ pruefe('Skip-Kandidaten sind die delta-freien Bausteine (18 = 23 − 5 mit Delta
   const skip = pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id);
   return skip.length === 18 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
 })());
-pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'TEN') === null);
+pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'SQ') === null);
 // Cross-Sport über zwei Stufen: der kumulative Fortgeschritten-Pfad blendet
-// Beginner- UND Fortgeschritten-Deltas ein (9 gesamt: 5 + 3 Technik + 1 Taktik).
+// Beginner- UND Fortgeschritten-Deltas ein (10: 5 + 3 Technik + 2 Doppel-Taktik).
 const pfadFgBad = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Fortgeschritten-Deltas greifen im kumulativen Pfad', ['handgelenk_peitsche', 'ueberkopf_clear', 'beinarbeit_system'].every((id) => pfadFgBad.stationen.find((s) => s.baustein.id === id).delta?.id === `${id}_delta_bad`));
 pruefe('Geometrie-Delta an beinarbeit_system aktiv', pfadFgBad.stationen.find((s) => s.baustein.id === 'beinarbeit_system').delta?.id === 'beinarbeit_system_delta_bad');
-pruefe('Doppel-Delta (Taktik) greift im kumulativen Pfad', pfadFgBad.stationen.find((s) => s.baustein.id === 'doppel_grundlagen').delta?.id === 'doppel_grundlagen_delta_bad');
-pruefe('kumulativer BAD-Pfad zeigt 9 Deltas (5 Beginner + 3 Technik + 1 Taktik)', pfadFgBad.stationen.filter((s) => s.delta).length === 9);
+pruefe('Doppel-Deltas (Taktik) greifen im kumulativen Pfad (Grundlagen + Umschalten)', pfadFgBad.stationen.find((s) => s.baustein.id === 'doppel_grundlagen').delta?.id === 'doppel_grundlagen_delta_bad' && pfadFgBad.stationen.find((s) => s.baustein.id === 'das_umschalten_im_doppel').delta?.id === 'das_umschalten_im_doppel_delta_bad');
+pruefe('kumulativer BAD-Pfad zeigt 10 Deltas (5 Beginner + 3 Technik + 2 Doppel-Taktik)', pfadFgBad.stationen.filter((s) => s.delta).length === 10);
 pruefe('handgelenk_peitsche-Delta bündelt auf vorhand_drive_delta_bad', gleicheListe(pfadFgBad.stationen.find((s) => s.baustein.id === 'handgelenk_peitsche').delta.delta_buendelung, ['vorhand_drive_delta_bad']));
+
+console.log('\n[3b] Cross-Sport-Modifikator (Herkunft TEN) — herkunftsreine Delta-Datei, zweite Herkunft');
+// Punkt 1: reine Delta-Datei ohne Basis-Bausteine; Kanten docken über zwei Stufen an.
+pruefe('Tennis-Deltas ohne eigene Basis-Bausteine (nur delta_bausteine)', (deltaTennis.bausteine || []).length === 0 && deltaTennis.delta_bausteine.length === 6);
+pruefe('alle 6 TEN-Deltas an existierende Basis-Bausteine gehängt', deltaTennis.delta_bausteine.every((d) => daten.bausteinVonId.has(d.basis_baustein) && deltaFuer(daten, d.basis_baustein, 'TEN')?.id === d.id));
+pruefe('TEN-Kanten treffen beide Stufen (4 Beginner-Technik + 2 Fortgeschritten)', ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'beginner' && deltaFuer(daten, id, 'TEN')) && ['ueberkopf_clear', 'beinarbeit_system'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'fortgeschritten' && deltaFuer(daten, id, 'TEN')));
+// Punkt 2: griff trägt jetzt zwei Herkunfts-Deltas — genau die gewählte greift.
+pruefe('griff hat sowohl BAD- als auch TEN-Delta', deltaFuer(daten, 'griff', 'BAD')?.id === 'griff_delta_bad' && deltaFuer(daten, 'griff', 'TEN')?.id === 'griff_delta_ten');
+setzeZurueck();
+setzeDiagnose({ stufe: 'fortgeschritten', herkunft: 'TEN' });
+const pfadFgTen = kompetenzpfad(daten, 'fortgeschritten');
+pruefe('Herkunft TEN blendet genau das TEN-Delta ein (BAD ignoriert)', pfadFgTen.stationen.find((s) => s.baustein.id === 'griff').delta?.id === 'griff_delta_ten');
+pruefe('kumulativer TEN-Pfad zeigt genau die 6 Tennis-Deltas', (() => {
+  const mitDelta = pfadFgTen.stationen.filter((s) => s.delta).map((s) => s.baustein.id);
+  return mitDelta.length === 6 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'ueberkopf_clear', 'beinarbeit_system']);
+})());
+pruefe('positiver Transfer ueberkopf_clear trägt das TEN-Delta (strukturell wie die abbauenden)', pfadFgTen.stationen.find((s) => s.baustein.id === 'ueberkopf_clear').delta?.id === 'ueberkopf_clear_delta_ten');
+pruefe('rueckhand_delta_ten bündelt auf griff_delta_ten + vorhand_drive_delta_ten', gleicheListe(pfadFgTen.stationen.find((s) => s.baustein.id === 'rueckhand').delta.delta_buendelung, ['griff_delta_ten', 'vorhand_drive_delta_ten']));
+pruefe('kein TEN-Delta mit eigenem Übungsteil (Delta-Regel)', deltaTennis.delta_bausteine.every((d) => d.eigener_uebungsteil === false && d.uebungsteil == null));
 
 console.log('\n[4] Zwei-Ebenen-Logik: Hinweis statt Sperre');
 const griffVorher = pfadBad.stationen.find((s) => s.baustein.id === 'griff');
@@ -192,12 +220,12 @@ pruefe('Altformat (Einzelziel-Objekt) bleibt ohne Migration gültig', individual
 
 console.log('\n[6] Themenpfad über fünf Domänen');
 pruefe('Domäne technik: Beginner- dann Fortgeschritten-Block (12)', gleicheListe(themenpfad(daten, 'technik').stationen.map((s) => s.baustein.id), [...technikKette, ...fgTechnikKette]));
-pruefe('Domäne taktik über zwei Stufen: Beginner- dann Fortgeschritten-Block (12)', gleicheListe(themenpfad(daten, 'taktik').stationen.map((s) => s.baustein.id), [...taktikKette, ...fgTaktikKette]));
-pruefe('Domäne mentales über zwei Stufen: Beginner- dann Fortgeschritten-Block (10)', gleicheListe(themenpfad(daten, 'mentales').stationen.map((s) => s.baustein.id), [...mentalesKette, ...fgMentalesKette]));
-pruefe('Domäne athletik_kondition über zwei Stufen: Beginner- dann Fortgeschritten-Block (11)', gleicheListe(themenpfad(daten, 'athletik_kondition').stationen.map((s) => s.baustein.id), [...athletikKette, ...fgAthletikKette]));
+pruefe('Domäne taktik: Beginner + Fortgeschritten + Doppel-Taktik angehängt (17)', gleicheListe(themenpfad(daten, 'taktik').stationen.map((s) => s.baustein.id), [...taktikKette, ...fgTaktikKette, ...doppelTaktikKette]));
+pruefe('Domäne mentales: Beginner + Fortgeschritten + Doppel-Mentales angehängt (11)', gleicheListe(themenpfad(daten, 'mentales').stationen.map((s) => s.baustein.id), [...mentalesKette, ...fgMentalesKette, 'verstaendigung_im_paar']));
+pruefe('Domäne athletik_kondition: Beginner + Fortgeschritten + Doppel-Athletik angehängt (12)', gleicheListe(themenpfad(daten, 'athletik_kondition').stationen.map((s) => s.baustein.id), [...athletikKette, ...fgAthletikKette, 'bewegung_als_einheit']));
 const facetten = themenDomaenen(daten);
 const facette = (d) => facetten.find((f) => f.domaene === d).anzahl;
-pruefe('Facetten je Beginner+Fortgeschritten: technik=12, taktik=12, mentales=10, athletik=11, trainingsgestaltung leer', facette('technik') === 12 && facette('taktik') === 12 && facette('mentales') === 10 && facette('athletik_kondition') === 11 && facette('trainingsgestaltung') === 0);
+pruefe('Facetten inkl. Doppel-Querschnitt: technik=12, taktik=17, mentales=11, athletik=12, trainingsgestaltung leer', facette('technik') === 12 && facette('taktik') === 17 && facette('mentales') === 11 && facette('athletik_kondition') === 12 && facette('trainingsgestaltung') === 0);
 pruefe('Modifikator nicht im Themenpfad verdrahtet', (() => {
   setzeDiagnose({ herkunft: 'BAD' });
   return themenpfad(daten, 'mentales').stationen.every((s) => s.delta === null);
@@ -252,14 +280,15 @@ pruefe('doppel_spezifische_loesungen, Beginner: leer (Baustein liegt auf Fortges
 // Fortgeschritten-Diagnose: kumulativ Beginner + Fortgeschritten — dieselben Faktoren
 // bespielen jetzt zwei Stufen (Psychoregulation, Energetik). Erstaktivierung doppel.
 setzeDiagnose({ stufe: 'fortgeschritten' });
-pruefe('Psychoregulation-Ziel, Fortgeschritten: kumulativ Beginner + Fortgeschritten-Mentales', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben', 'vom_werkzeug_zum_system', 'selbstgespraech_steuern', 'sich_das_spiel_vorstellen', 'momentum_lesen_und_drehen', 'ueber_das_match_stabil_bleiben']));
+pruefe('Psychoregulation-Ziel, Fortgeschritten: kumulativ Beginner + Fortgeschritten-Mentales (inkl. Doppel-Verständigung)', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben', 'vom_werkzeug_zum_system', 'selbstgespraech_steuern', 'sich_das_spiel_vorstellen', 'momentum_lesen_und_drehen', 'ueber_das_match_stabil_bleiben', 'verstaendigung_im_paar']));
 pruefe('Energetik-Ziel, Fortgeschritten: kumulativ inkl. intervallausdauer + belastung_steuern', (() => {
   const ids = individualpfad(daten, { dimension: 'spielziele', faktor: 'rally_ausdauer' }).stationen.map((s) => s.baustein.id);
   return ids.includes('durchhalten') && ids.includes('intervallausdauer') && ids.includes('belastung_steuern_regenerieren');
 })());
 pruefe('satz_match_regeneration, Fortgeschritten: erholen + Fortgeschritten-Regeneration', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'satz_match_regeneration' }).stationen.map((s) => s.baustein.id), ['erholen', 'intervallausdauer', 'belastung_steuern_regenerieren']));
-// Erstaktivierung Spielziel-Faktor doppel_spezifische_loesungen (Bereich 6): einzelner Beleg.
-pruefe('doppel_spezifische_loesungen (Erstaktivierung), Fortgeschritten: genau doppel_grundlagen', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.map((s) => s.baustein.id), ['doppel_grundlagen']));
+// Spielziel-Faktor doppel_spezifische_loesungen (Bereich 6): durch den Doppel-Block
+// jetzt BREIT belegt — alle acht Doppel-Bausteine tragen ihn (Fortgeschritten-Stufe).
+pruefe('doppel_spezifische_loesungen, Fortgeschritten: breit belegt (alle 8 Doppel-Bausteine)', individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.length === 8);
 pruefe('SP und AT im Transfer-Vokabular ergänzt', daten.vokabulare.transfer_herkunft.includes('SP') && daten.vokabulare.transfer_herkunft.includes('AT'));
 pruefe('SP/AT tragen ausgeschriebene Labels', labelsDe.vokabeln.transfer_herkunft.SP === 'Sportpsychologie' && labelsDe.vokabeln.transfer_herkunft.AT === 'Athletik-/Trainingswissenschaft');
 pruefe('delta_erwartet ist Dokumentation, keine Delta-Kante', (() => {
@@ -267,14 +296,38 @@ pruefe('delta_erwartet ist Dokumentation, keine Delta-Kante', (() => {
   return typeof b.delta_erwartet === 'string' && deltaFuer(daten, 'beweglichkeit_und_schulter', 'BAD') === null && deltaFuer(daten, 'beweglichkeit_und_schulter', 'TEN') === null;
 })());
 
+console.log('\n[7e] Spielform-Achse (NEUE Metadaten-Dimension spielform, Doppel-Querschnitt)');
+setzeZurueck();
+pruefe('spielform fehlt = einzel (Alt-Bausteine unangetastet)', spielformVon(daten.bausteinVonId.get('griff')) === 'einzel');
+pruefe('doppel_grundlagen nachträglich als spielform:doppel markiert', spielformVon(daten.bausteinVonId.get('doppel_grundlagen')) === 'doppel');
+pruefe('spielformen() bietet nur doppel als eigene Achse (einzel ist Default, kein Thema)', gleicheListe(spielformen(daten).map((s) => s.spielform), ['doppel']) && spielformen(daten)[0].anzahl === 8);
+pruefe('Spielform-Achse doppel: 8 Bausteine als ein Thema, quer über Domänen (Erzählreihenfolge)', gleicheListe(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.id), doppelThemaKette));
+pruefe('Doppel-Thema queert drei Domänen (Taktik, Athletik, Mentales)', (() => {
+  const domaenen = new Set(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.domaene));
+  return domaenen.has('taktik') && domaenen.has('athletik_kondition') && domaenen.has('mentales');
+})());
+// Cross-Sport-Modifikator ist auf der Spielform-Achse verdrahtet (wie im Kompetenzpfad).
+setzeDiagnose({ herkunft: 'BAD' });
+pruefe('Cross-Sport auf der Spielform-Achse: BAD blendet die zwei Doppel-Deltas ein', (() => {
+  const mitDelta = spielformpfad(daten, 'doppel').stationen.filter((s) => s.delta).map((s) => `${s.baustein.id}:${s.delta.id}`);
+  return gleicheListe(mitDelta, ['doppel_grundlagen:doppel_grundlagen_delta_bad', 'das_umschalten_im_doppel:das_umschalten_im_doppel_delta_bad']);
+})());
+pruefe('Delta greift auch in der Baustein-Ansicht im Spielform-Kontext', stationImKontext(daten, 'das_umschalten_im_doppel', 'spielform:doppel').station.delta?.id === 'das_umschalten_im_doppel_delta_bad');
+pruefe('Delta-Bündelung verweist weich auf das Grundlagen-Doppel-Delta', (() => {
+  const delta = daten.deltas.find((d) => d.id === 'das_umschalten_im_doppel_delta_bad');
+  return gleicheListe(delta.delta_buendelung || [], ['doppel_grundlagen_delta_bad']) && daten.deltas.some((d) => d.id === 'doppel_grundlagen_delta_bad');
+})());
+pruefe('spielform-Vokabular + Label vorhanden', daten.vokabulare.spielform && daten.vokabulare.spielform.includes('doppel') && labelsDe.vokabeln.spielform.doppel === 'Doppel' && labelsDe.vokabeln.spielform.einzel === 'Einzel');
+pruefe('Themen-/Kompetenzpfad bleiben unberührt vom Spielform-Filter (orthogonal): Doppel-Bausteine weiter in ihren Domänen', sequenzFuer(daten, 'themen:mentales').stationen.some((s) => s.baustein.id === 'verstaendigung_im_paar'));
+
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner' });
-pruefe('global 0 von 45', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 45);
+pruefe('global 0 von 52', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 52);
 setzeTeilStatus('griff', 'erklaerteil', 'erledigt');
 pruefe('nur Erklärteil erledigt → noch nicht absolviert', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).erklaertErledigt === 1);
 setzeTeilStatus('griff', 'uebungsteil', 'erledigt');
-pruefe('beide Teile erledigt → 1 von 45', globaleProjektion(daten).absolviert === 1);
+pruefe('beide Teile erledigt → 1 von 52', globaleProjektion(daten).absolviert === 1);
 const pfadProjektion = projektion(kompetenzpfad(daten).stationen.map((s) => s.baustein));
 pruefe('Beginner-Pfad-Projektion bleibt bei 23 (kumulativ bis Beginner)', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 23);
 const uebersicht = trainingsuebersicht(daten);

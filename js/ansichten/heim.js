@@ -4,7 +4,7 @@
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { balkenHtml, esc } from '../oberflaeche.js';
-import { kompetenzpfad, themenDomaenen } from '../pfade.js';
+import { kompetenzpfad, spielformen, themenDomaenen } from '../pfade.js';
 import { diagnose, kontinuitaet, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
 
@@ -47,6 +47,16 @@ export function renderHeim(el, daten) {
     .map((eintrag) => `<span class="chip">${esc(label('domaene', eintrag.domaene))} · ${eintrag.anzahl}</span>`)
     .join('');
 
+  const doppel = spielformen(daten).find((eintrag) => eintrag.spielform === 'doppel');
+  const spielformKarte =
+    doppel && doppel.anzahl > 0
+      ? `
+    <a class="karte karte-link" href="#/pfad/spielform/doppel">
+      <h3>${esc(t('pfad_spielform'))} <span class="chip">${esc(label('spielform', 'doppel'))} · ${doppel.anzahl}</span></h3>
+      <p class="leise">${esc(t('pfad_spielform_text'))}</p>
+    </a>`
+      : '';
+
   const zielBeschriftungen = zielLabels(d.ziel);
   const zielZeile = zielBeschriftungen.length > 0
     ? `${esc(t('ziel_aktuell'))}: ${esc(zielBeschriftungen.join(' · '))}`
@@ -85,6 +95,7 @@ export function renderHeim(el, daten) {
       <p class="leise">${esc(t('pfad_themen_text'))}</p>
       <p class="chip-zeile">${domaenenChips}</p>
     </a>
+    ${spielformKarte}
     <a class="karte karte-link" href="#/pfad/individual">
       <h3>${esc(t('pfad_individual'))}</h3>
       <p class="leise">${esc(t('pfad_individual_text'))}</p>

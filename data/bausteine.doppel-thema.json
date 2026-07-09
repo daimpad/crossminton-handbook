@@ -1,0 +1,249 @@
+{
+  "_meta": {
+    "beschreibung": "Doppel-Themenblock: vollstaendiges Doppel als Querschnittsthema ueber mehrere Domaenen (Taktik, Athletik, Mentales). Vertieft den Einstieg doppel_grundlagen (aus fortgeschritten-taktik). Navigierbar ueber die NEUE Dimension spielform.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.doppel-thema.json (Themenblock, nicht stufen-/domaenengebunden benannt, da querschnittlich).",
+    "schema_erweiterung_NEUES_FELD": {
+      "feld": "spielform",
+      "art": "NEUE Metadaten-Dimension (neues Feld, nicht neuer Wert in bestehendem Feld). Zweite Feld-Erweiterung nach reflexionsaufgabe.",
+      "werte": ["einzel", "doppel"],
+      "default": "einzel",
+      "orthogonal_zu": "domaene — ein Doppel-Baustein traegt weiter seine fachliche Domaene UND zusaetzlich spielform:doppel.",
+      "aktion_fuer_claude_code": [
+        "1. Neues optionales Feld 'spielform' im Datenmodell einfuehren; fehlendes Feld = 'einzel' (alle bestehenden Bausteine bleiben unangetastet, gelten als einzel).",
+        "2. 'spielform' als eigene Navigationsachse anbieten (alle spielform:doppel-Bausteine als zusammenhaengendes Thema, quer ueber Domaenen).",
+        "3. Bestehenden Baustein 'doppel_grundlagen' (in bausteine.fortgeschritten-taktik.json) nachtraeglich mit spielform:'doppel' markieren — koordinierte Ein-Feld-Ergaenzung, damit der Einstieg zum Doppel-Thema gehoert.",
+        "4. Label (uebersetzbar) de: spielform -> {einzel:'Einzel', doppel:'Doppel'}."
+      ]
+    },
+    "querschnitt_domaenen": "taktik (5), athletik_kondition (1), mentales (1) — demonstriert den Nutzen der spielform-Dimension: ein Thema, mehrere Domaenen.",
+    "delta_stelle": "das_umschalten_im_doppel traegt den BAD-Delta: Badminton rotiert fliessend zwischen zwei Formationen (Front-Hinten-Angriff, Seite-an-Seite-Verteidigung); Crossminton hat feste, aufschlaggebundene Rollen plus Positionsregel.",
+    "ordnungslogik": "Rahmen -> Angriff im Paar -> Verteidigung im Paar -> Bewegung als Einheit -> Verstaendigung -> Aufschlag/Rueckschlag -> Umschalten.",
+    "hinweis_anfuehrung": "Zuruf-Beispiele in einfachen Anfuehrungszeichen ('Meins!'), um JSON-Delimiter-Kollision zu vermeiden."
+  },
+
+  "bausteine": [
+    {
+      "id": "doppel_als_eigenes_spiel",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_grundlagen"],
+      "voraussetzungen_lesart": "didaktisch: vertieft den Doppel-Einstieg der Beginner-nahen Grundlagen",
+      "spielziele": ["doppel_spezifische_loesungen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Doppel als eigenes Spiel mit fester Rollenteilung crossminton-eigen (ICO/DCV-Regeln); Querschnittscharakter aus Rueckschlagsport-Doppel.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Das Doppel als eigenes Spiel"},
+      "erklaerteil": {
+        "de": "Im Doppel-Einstieg hast du die Grundstruktur kennengelernt: Angriffs- und Rückraumspieler, die Aufschlagreihenfolge, die Fußregel, die erste Verständigung. Dieser Themenblock geht in die Tiefe — und zeigt dir, dass das Doppel ein Spiel mit eigenen Gesetzen ist, das durch alle Bereiche deines Spiels greift.\n\nDas Besondere am Doppel ist, dass sich alles verdoppelt und zugleich halbiert. Ihr deckt die Fläche zu zweit, also muss jeder weniger Boden allein machen — aber nur, wenn ihr euch klug aufteilt. Steht ihr euch im Weg, deckt ihr in Wahrheit weniger ab als ein einzelner Spieler, der weiß, wo er hin muss.\n\nDeshalb berührt gutes Doppel mehr als Taktik. Es verlangt taktisches Zusammenspiel (wer greift an, wer sichert), abgestimmte Bewegung (als Einheit über das Feld) und ständige Verständigung (der kurze Ruf, die Absprache). Diese drei Fäden — Taktik, Bewegung, Kommunikation — laufen im Doppel zusammen. Die folgenden Bausteine nehmen sie der Reihe nach auf.\n\nEin Bild: Ein gutes Doppel ist wie ein Tanzpaar. Zwei Menschen bewegen sich als eine Figur, jeder weiß, was der andere tut, und aus zwei einzelnen wird eine Einheit, die mehr kann als beide zusammen. Ein schlechtes Doppel ist wie zwei Tänzer zur selben Musik, die einander auf die Füße treten.\n\nWer das Doppel als eigenes Spiel begreift und nicht als Einzel mit zwei Leuten, hat den wichtigsten Schritt schon getan."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an dein letztes Doppel zurück: Habt ihr euch als Einheit bewegt, oder wart ihr zwei Einzelspieler auf einem Feld? Wo lagen die Lücken — in der Mitte, weil keiner ging, oder an den Seiten, weil beide zur Mitte liefen? Nimm dir für die nächsten Bausteine diese eine Frage mit: An welchem der drei Fäden — Zusammenspiel, Bewegung, Verständigung — hakt es bei euch am meisten?"
+      }
+    },
+
+    {
+      "id": "angriff_im_paar",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_als_eigenes_spiel", "smash_vorbereiten"],
+      "voraussetzungen_lesart": "gemischt: doppel_als_eigenes_spiel (Rahmen); smash_vorbereiten (taktisch, domaenengleich, Einzel-Angriff als Basis)",
+      "spielziele": ["doppel_spezifische_loesungen", "antwort_gegen_defensivspieler"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Angriff im Paar (Rueckraum setzt Druck, Angreifer schliesst schwache Rueckschlaege ab): Doppel-Angriffslogik (Rueckschlagsport), angewandt auf die crossminton-eigene Rollenteilung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'beide hinten, keiner schliesst vorn ab' + Korrekturansage",
+      "anzeigetitel": {"de": "Angriff im Paar"},
+      "erklaerteil": {
+        "de": "Im Angriff spielt euer Paar seine größte Stärke aus: Ihr könnt den Gegner unter Druck setzen und zugleich die Lücken sofort schließen. Das gelingt über die klare Aufgabenteilung zwischen hinten und vorn.\n\nDer Rückraumspieler ist der Motor des Angriffs. Von hinten setzt er die harten, tiefen Schläge — den Smash, den druckvollen Drive —, die den Gegner zwingen, den Speeder hochzuspielen oder schwach zurückzubringen. Er hält den Druck aufrecht.\n\nDer Angriffsspieler vorn ist der Vollstrecker. Er lauert auf den schwachen Rückschlag, den der Druck von hinten erzeugt, und schließt ihn kurz und hart ab, bevor der Gegner sich sortiert. Seine Aufgabe ist das Abfangen und Beenden — er steht bereit, um jede kurze, hohe Antwort sofort zu verwerten.\n\nZusammen ergibt das eine Zange: Der eine drückt, der andere schnappt zu. Solange dieser Rhythmus läuft — Druck von hinten, Abschluss von vorn —, bleibt euer Paar im Angriff und der Gegner in der Defensive.\n\nEin Bild: Ihr seid Hammer und Amboss. Der Rückraumspieler ist der Hammer, der von hinten schlägt; der Angriffsspieler ist der Amboss vorn, an dem der schwache Ball zerbricht. Fehlt einer von beiden, verpufft der Angriff.\n\nDer häufigste Fehler ist, dass beide hinten bleiben und die kurzen Bälle des Gegners ungestraft fallen. Ohne einen Spieler vorn, der abschließt, bleibt der beste Druck von hinten wirkungslos."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Druck und Abschluss",
+          "ziel": "Als Paar den Angriff halten — Rückraum drückt, Angriffsspieler schließt ab.",
+          "schritte": [
+            "Stellt euch als Paar auf: einer hinten als Rückraumspieler, einer vorn als Angriffsspieler.",
+            "Der Rückraumspieler setzt tiefe, druckvolle Schläge, die der zuspielende Gegner nur hoch oder kurz zurückbringen kann.",
+            "Der Angriffsspieler vorn fängt diese schwachen Rückschläge ab und schließt sie kurz ab.",
+            "Haltet den Rhythmus über mehrere Bälle: Druck hinten, Abschluss vorn.",
+            "Wechselt nach einigen Durchgängen die Rollen."
+          ],
+          "selbstkontrolle": "Fängt der Angriffsspieler die kurzen Bälle wirklich ab, oder fallen sie ungestraft? Bleibt der Druck von hinten hoch genug, um schwache Rückschläge zu erzwingen? Der Angriff trägt nur, wenn beide Rollen zusammenarbeiten.",
+          "abschluss": "Die Zange aus Druck und Abschluss ist die Grundfigur des Doppel-Angriffs. Sitzt sie, wird euer Paar im Angriff schwer zu stoppen."
+        }
+      }
+    },
+
+    {
+      "id": "verteidigung_im_paar",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_als_eigenes_spiel"],
+      "spielziele": ["doppel_spezifische_loesungen", "antwort_gegen_angreifer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Verteidigung im Paar (Flaeche decken, Tempo herausnehmen, in den Angriff umschalten): Doppel-Defensivlogik (Rueckschlagsport), angewandt auf die crossminton-eigene Struktur.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Verteidigung im Paar"},
+      "erklaerteil": {
+        "de": "Wenn der Gegner angreift, wird aus eurem Paar eine Verteidigungseinheit. Jetzt geht es darum, die Fläche zu decken, das Tempo aus dem Angriff zu nehmen und den Moment abzupassen, in dem ihr selbst wieder zuschlagen könnt.\n\nDas Wichtigste in der Verteidigung ist, dass ihr die Fläche sinnvoll aufteilt und keine Lücke lasst, in die der Gegner hart hineinschlagen kann. Jeder deckt seinen Bereich, und der gefährlichste Raum — dort, wo der Gegner seinen härtesten Ball hinsetzen kann — muss abgesichert sein. Ihr steht tiefer und breiter, um Zeit zum Reagieren zu haben.\n\nIn der Verteidigung nimmst du bewusst Tempo heraus. Statt den harten Ball hart zurückzuschlagen, bringst du ihn kontrolliert zurück, kaufst dir Zeit und wartest auf den Fehler oder die schwächere Angabe des Gegners. Jeder sichere Rückschlag hält euch im Ballwechsel und zwingt den Gegner, den Angriff noch einmal aufzubauen.\n\nUnd du hältst Ausschau nach dem Umschaltmoment. Sobald der Angriff des Gegners schwächer wird — ein kürzerer Smash, ein hoher Ball —, ist das euer Signal, aus der Verteidigung in den Angriff zu wechseln. Verteidigung im Doppel ist nie nur Abwehr; sie ist das Warten auf die eigene Chance.\n\nEin Bild: Ihr seid zusammen ein Schutzschild, das den Ansturm abfängt. Ein Schild mit einer Lücke ist wertlos — die Kunst ist, dass eure beiden Hälften lückenlos ineinandergreifen, bis der Angriff sich erschöpft."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Fläche decken, Tempo nehmen",
+          "ziel": "Als Paar den Angriff abfangen, ohne Lücke, und den Umschaltmoment abpassen.",
+          "schritte": [
+            "Lasst euch als Paar von den Gegnern angreifen (harte, tiefe Bälle).",
+            "Teilt die Fläche klar auf, sodass keine Lücke für den harten Ball bleibt.",
+            "Bringt die Angriffsbälle kontrolliert zurück, statt sie hart zu erwidern — nehmt Tempo heraus.",
+            "Achtet auf den Moment, in dem der Angriff schwächer wird, und schaltet dann gemeinsam auf Angriff um.",
+            "Wechselt nach einigen Durchgängen die Angriffs- und Verteidigungsrollen der Paare."
+          ],
+          "selbstkontrolle": "Bleibt zwischen euch eine Lücke, in die der Gegner hart hineinschlägt? Nehmt ihr genug Tempo heraus, um im Ballwechsel zu bleiben? Und erkennt ihr den Moment, in dem ihr umschalten könnt? Gute Verteidigung deckt lückenlos und wartet geduldig auf die Chance.",
+          "abschluss": "Eine Verteidigung, die keine Lücke lässt und den Umschaltmoment nutzt, bringt euch aus der Bedrängnis zurück in den Angriff."
+        }
+      }
+    },
+
+    {
+      "id": "bewegung_als_einheit",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_als_eigenes_spiel"],
+      "voraussetzungen_querverweis": "beinarbeit_system (fortgeschrittene Technik) — die individuelle Bewegungsgrundlage, die im Paar abgestimmt wird",
+      "spielziele": ["doppel_spezifische_loesungen", "wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT", "BAD"],
+      "transfer_herkunft_beleg": "Bewegung als Einheit, Raum des Partners decken, abgestimmte Wege: Doppel-Bewegungslehre (Rueckschlagsport), athletisch als Paar-Koordination.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Bewegung als Einheit"},
+      "erklaerteil": {
+        "de": "Zwei Spieler, die sich gut bewegen, sind noch kein gutes Doppel. Erst wenn ihr euch aufeinander abgestimmt bewegt — als eine Einheit, nicht als zwei einzelne —, deckt ihr das Feld wirklich ab. Das ist die athletische Seite des Doppels.\n\nDie Grundregel lautet: Ihr seid verbunden, als hinge ein unsichtbares Band zwischen euch. Bewegt sich einer nach links, rückt der andere mit, um die entstehende Lücke zu schließen. Geht einer nach vorn zum Ball, sichert der andere hinten ab. Ihr haltet immer einen sinnvollen Abstand zueinander — nah genug, um euch zu ergänzen, weit genug, um die Fläche zu decken.\n\nDaraus folgt die wichtigste Bewegungsdisziplin im Doppel: Lauft nie beide zum selben Ball. Das ist der häufigste und teuerste Fehler. Wenn beide denselben Speeder jagen, steht die halbe Fläche offen, und der nächste Ball des Gegners landet garantiert dort. Wer den Ball nimmt, ruft ihn; der andere bleibt und deckt.\n\nDie Wege sind dabei kein Zufall. Nach jedem Schlag richtet ihr euch gemeinsam neu aus, sodass ihr wieder ausgewogen steht. Diese ständige gemeinsame Neuordnung ist Arbeit — sie kostet Kondition und Aufmerksamkeit —, aber sie ist der Unterschied zwischen einem Paar und zwei Nebeneinanderher-Spielern.\n\nEin Bild: Ihr seid wie zwei Scheibenwischer auf einer Windschutzscheibe, die synchron laufen. Bewegen sie sich abgestimmt, bleibt keine Stelle trocken. Laufen sie gegeneinander, verkeilen sie sich und die Scheibe bleibt schmutzig."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Am unsichtbaren Band",
+          "ziel": "Euch als Paar abgestimmt bewegen, Lücken schließen, nie beide zum selben Ball.",
+          "schritte": [
+            "Bewegt euch als Paar über das Feld und stellt euch vor, ein Band verbindet euch: Geht einer, rückt der andere mit.",
+            "Lasst euch Bälle in verschiedene Bereiche spielen und übt, dass immer einer geht und der andere die Lücke absichert.",
+            "Ruft bei jedem Ball, wer ihn nimmt, damit nie beide losgehen.",
+            "Richtet euch nach jedem Schlag gemeinsam neu aus, sodass ihr wieder ausgewogen steht.",
+            "Steigert das Tempo erst, wenn die abgestimmte Bewegung sitzt."
+          ],
+          "selbstkontrolle": "Bleibt der Abstand zwischen euch sinnvoll, oder klumpt ihr zusammen und lasst eine Hälfte offen? Lauft ihr je beide zum selben Ball? Beobachtet, ob ihr euch nach jedem Schlag als Paar neu ausrichtet. Die abgestimmte Bewegung ist anstrengend und genau deshalb ein Trainingsziel.",
+          "abschluss": "Bewegung als Einheit ist die athletische Grundlage des Doppels. Sitzt sie, deckt ihr zu zweit mehr ab als zwei einzelne Spieler je könnten."
+        }
+      }
+    },
+
+    {
+      "id": "verstaendigung_im_paar",
+      "typ": "micro",
+      "domaene": "mentales",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_als_eigenes_spiel"],
+      "spielziele": ["doppel_spezifische_loesungen", "konzentrationskonstanz"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["SP", "BAD"],
+      "transfer_herkunft_beleg": "Kommunikation, Zuruf-Systeme, Partnerschaft/positive Zusammenarbeit unter Druck: Doppel-Kommunikation (Rueckschlagsport) und sportpsychologische Teamdynamik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Verständigung im Paar"},
+      "erklaerteil": {
+        "de": "Kein Doppel funktioniert schweigend. Die Verständigung mit deinem Partner ist so wichtig wie jeder Schlag — und sie ist zugleich die mentale Seite des Doppels, denn sie entscheidet, ob ihr als Team zusammenwachst oder auseinanderfallt.\n\nDie Verständigung läuft auf drei Ebenen. Vor dem Aufschlag trefft ihr kurze Absprachen: wer welchen Bereich übernimmt, welche Taktik ihr fahrt. Während des Ballwechsels helfen kurze, klare Zurufe — 'Meins!', 'Deins!', 'Lass!' —, die in Sekundenbruchteilen klären, wer den Ball nimmt. Zwischen den Punkten gebt ihr euch kurzes Feedback und stimmt euch neu ab.\n\nEntscheidend ist, dass die Zurufe kurz, laut und eindeutig sind. Ein gemurmeltes, spätes Wort hilft nicht. Ein klares 'Meins!' im richtigen Moment verhindert, dass ihr beide zum selben Ball lauft — der teuerste Doppelfehler.\n\nDie mentale Seite geht aber tiefer als das Rufen. Im Doppel macht auch dein Partner Fehler, und wie du darauf reagierst, prägt das ganze Spiel. Ein Partner, der nach jedem Fehler den Kopf hängen lässt oder den anderen anklagt, zieht das Team nach unten. Ein Partner, der aufbaut und ruhig bleibt, hält es zusammen. Ihr gewinnt und verliert gemeinsam — diese Haltung ist die Grundlage jeder guten Partnerschaft auf dem Feld.\n\nEin Bild: Euer Doppel ist wie ein Ruderboot mit zwei Ruderern. Nur wenn ihr im Takt und in dieselbe Richtung zieht, läuft das Boot. Rudert einer verbittert gegen den anderen, dreht ihr euch im Kreis."
+      },
+      "reflexionsaufgabe": {
+        "de": "Sprich mit deinem Doppelpartner vor dem nächsten Spiel drei Dinge ab: klare Zurufe für die Mitte ('Meins!'/'Deins!'), wer im Zweifel den Mittelball nimmt, und dass ihr euch nach Fehlern gegenseitig aufbaut statt anzuklagen. Achte im Spiel darauf, ob ihr wirklich laut und früh genug ruft. Und beobachte dich selbst: Wie reagierst du, wenn dein Partner einen Fehler macht? Deine Reaktion prägt das Team mehr als der Fehler selbst."
+      }
+    },
+
+    {
+      "id": "aufschlag_rueckschlag_doppel",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["doppel_als_eigenes_spiel", "aufschlag_taktisch"],
+      "voraussetzungen_lesart": "gemischt: doppel_als_eigenes_spiel (Rahmen); aufschlag_taktisch (stufenuebergreifend auf Beginner-Taktik, Einzel-Aufschlagtaktik als Basis)",
+      "spielziele": ["doppel_spezifische_loesungen", "aufschlag_rueckschlag_eroeffnung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Aufschlag-/Rueckschlagtaktik im Doppel (Reihenfolge A1-B1-A2-B2, Zielwahl, dritter Ball) crossminton-eigen (ICO-Regeln) plus Doppel-Eroeffnungslogik aus Badminton.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Aufschlag und Rückschlag im Doppel"},
+      "erklaerteil": {
+        "de": "Der Aufschlag eröffnet auch im Doppel jeden Ballwechsel — aber hier ist er in ein festes System eingebettet und bietet dem Paar eigene taktische Möglichkeiten.\n\nDas Aufschlagrecht wandert im Doppel in einer festen Reihenfolge durch alle vier Spieler, und der Aufschläger ist immer der Rückraumspieler. Das heißt: Mit jedem Wechsel des Aufschlagrechts ordnen sich eure Rollen neu. Diese Reihenfolge zu kennen und im Kopf zu haben, gehört zur Doppel-Grundlage — wer durcheinanderkommt, riskiert Fehler schon vor dem ersten Schlag.\n\nTaktisch nutzt du den Aufschlag im Doppel ähnlich wie im Einzel, mit einem wichtigen Zusatz: Dein Partner vorn ist bereit, den Rückschlag zu verwerten. Ein guter Aufschlag zwingt den Gegner zu einer schwachen, hohen Antwort — und genau die fängt dein Angriffsspieler vorn ab. Der Aufschlag ist damit der erste Zug einer Zange, die sich beim dritten Ball schließt.\n\nBeim Rückschlag gilt das Gegenteil: Du willst vermeiden, dem Angriffsspieler des Gegners vorn eine leichte Beute zu liefern. Bring den Rückschlag kontrolliert zurück, möglichst tief oder in eine Lücke, statt ihn hoch und kurz an den lauernden Vollstrecker zu spielen.\n\nEin Bild: Der Aufschlag im Doppel ist wie das Anspiel beim Schach zu zweit — er eröffnet einen Plan, den dein Partner vollendet. Ein gedankenloser Aufschlag verschenkt diesen Vorteil, ein gezielter legt den Punkt für euer Paar auf."
+      },
+      "reflexionsaufgabe": {
+        "de": "Präge dir mit deinem Partner die Aufschlagreihenfolge so ein, dass ihr sie im Spiel sicher beherrscht. Überlegt euch dann eine einfache Aufschlagtaktik: Wohin serviert der Rückraumspieler, damit der Angriffsspieler vorn den schwachen Rückschlag abfangen kann? Und beim Rückschlag: Wie vermeidet ihr, dem gegnerischen Angriffsspieler einen leichten Ball zu liefern? Beobachtet im Spiel, ob euer Aufschlag den dritten Ball tatsächlich vorbereitet."
+      }
+    },
+
+    {
+      "id": "das_umschalten_im_doppel",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["angriff_im_paar", "verteidigung_im_paar"],
+      "voraussetzungen_lesart": "didaktisch: das Umschalten verbindet die zuvor gelernten Angriffs- und Verteidigungsrollen im Paar",
+      "spielziele": ["doppel_spezifische_loesungen", "umschaltmoment_erkennen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Umschalten Angriff/Verteidigung im Paar; im Crossminton durch feste, aufschlaggebundene Rollen und Positionsregel gepraegt (ICO/DCV-Regeln), anders als die fliessende Badminton-Formationsrotation.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Rollen kippen ungeordnet, beide unklar' + Korrekturansage",
+      "anzeigetitel": {"de": "Das Umschalten im Doppel"},
+      "erklaerteil": {
+        "de": "Der Ballwechsel im Doppel wechselt ständig zwischen Angriff und Verteidigung — und wie ihr als Paar zwischen diesen Zuständen umschaltet, entscheidet, wer die Kontrolle behält. Dieser Baustein bringt die beiden Rollen aus den vorigen Bausteinen zusammen.\n\nDer Umschaltmoment ist im Doppel ein gemeinsamer. Wenn der Gegner unter euren Druck einen schwachen Ball spielt, müsst ihr beide gleichzeitig erkennen: Jetzt greifen wir an. Wenn umgekehrt der Gegner in den Angriff kommt, müsst ihr beide zugleich in die Verteidigung finden. Erkennt nur einer den Wechsel, entsteht genau die Lücke, die den Punkt kostet.\n\nIm Crossminton hat dieses Umschalten eine Besonderheit. Eure Rollen sind an den Aufschlag gebunden und durch die Positionsregel geformt — der Angriffsspieler bleibt vorn, der Rückraumspieler hinten, ihre Fußstellung zueinander ist im Treffmoment vorgegeben. Das Umschalten läuft deshalb weniger über einen freien Positionstausch als über die abgestimmte gemeinsame Bewegung und die klare Verständigung: Ihr lest die Lage zusammen und reagiert zusammen.\n\nDeshalb sind die beiden vorigen Fäden hier entscheidend: die Bewegung als Einheit, damit ihr gemeinsam die Position findet, und die Verständigung, damit ihr den Umschaltmoment zusammen ausruft. Ein kurzer Ruf im richtigen Moment — 'Angriff!' oder 'zurück!' — synchronisiert euch.\n\nEin Bild: Euer Umschalten ist wie das gemeinsame Wenden eines langen Bootes. Nur wenn beide zur gleichen Zeit in dieselbe Richtung steuern, dreht das Boot sauber. Zieht einer noch geradeaus, während der andere schon wendet, gerät alles ins Schlingern."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachtet in eurem nächsten Doppel die Umschaltmomente: Erkennt ihr sie gemeinsam, oder reagiert oft nur einer? Vereinbart einen kurzen Ruf für den Wechsel — etwa 'Angriff!', wenn der Gegner schwach zurückspielt, und 'zurück!', wenn ihr in die Verteidigung müsst. Achtet darauf, ob ihr durch das gemeinsame Ausrufen schneller und geschlossener umschaltet."
+      }
+    }
+  ],
+
+  "delta_bausteine": [
+    {
+      "id": "das_umschalten_im_doppel_delta_bad",
+      "typ": "delta",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": ["fortgeschritten"],
+      "basis_baustein": "das_umschalten_im_doppel",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["das_umschalten_im_doppel"],
+      "delta_buendelung": ["doppel_grundlagen_delta_bad"],
+      "delta_buendelung_hinweis": "Verweist auf das Grundlagen-Doppel-Delta (feste Rollen statt fliessender Rotation) als weiche Voraussetzung. Fuehrender Punkt hier: das Umschalten laeuft nicht ueber Formationswechsel.",
+      "spielziele": ["doppel_spezifische_loesungen"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {"de": "Das Umschalten im Doppel — für Umsteiger aus dem Badminton"},
+      "erklaerteil": {
+        "de": "Das Umschalten zwischen Angriff und Verteidigung kennst du aus dem Badminton-Doppel gut — aber dort bedeutet es etwas anderes als hier, und genau das ist die Umstellung.\n\nIm Badminton-Doppel schaltest du um, indem ihr die Formation wechselt: aus der Front-Hinten-Aufstellung im Angriff in die Seite-an-Seite-Aufstellung in der Verteidigung, fließend und je nachdem, wer gerade schlägt. Dieses ständige Rotieren zwischen zwei Formationen sitzt bei dir tief.\n\nIm Crossminton gibt es diese fließende Formationsrotation nicht. Eure Rollen sind an den Aufschlag gebunden und durch die Positionsregel geformt — der Angriffsspieler bleibt vorn, der Rückraumspieler hinten, und im Treffmoment ist ihre Fußstellung zueinander vorgegeben. Ihr wechselt also nicht frei zwischen zwei Formationen, sondern schaltet innerhalb einer festeren Struktur um: über abgestimmte Bewegung und gemeinsame Verständigung, nicht über einen freien Positionstausch.\n\nStell dein Umschalt-Denken also um: weg vom reflexhaften Formationswechsel, hin zum gemeinsamen Lesen und Reagieren innerhalb fester, aufschlaggebundener Rollen. Die Verständigung ersetzt hier einen Teil dessen, was im Badminton die Rotation leistet.\n\nEin kleiner Test: Ertappst du dich dabei, mit deinem Partner reflexhaft in die Seite-an-Seite-Verteidigung zu rotieren oder frei die Positionen zu tauschen? Dann trägt dich noch das Badminton-Doppel. Ziel ist das gemeinsame Umschalten innerhalb der festen crossminton-eigenen Rollen."
+      }
+    }
+  ]
+}

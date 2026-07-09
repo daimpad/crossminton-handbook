@@ -136,6 +136,14 @@ const BAUSTEIN_ICONS = {
   rumpfstabilitaet: 'fa-tree',
   intervallausdauer: 'fa-stopwatch',
   belastung_steuern_regenerieren: 'fa-scale-balanced',
+  // Doppel-Thema (Querschnitt über Domänen, spielform:doppel)
+  doppel_als_eigenes_spiel: 'fa-people-group',
+  angriff_im_paar: 'fa-hand-fist',
+  verteidigung_im_paar: 'fa-shield',
+  bewegung_als_einheit: 'fa-people-arrows',
+  verstaendigung_im_paar: 'fa-comments',
+  aufschlag_rueckschlag_doppel: 'fa-repeat',
+  das_umschalten_im_doppel: 'fa-rotate',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

@@ -10,6 +10,7 @@
   "vokabulare": {
     "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition"],
     "kompetenzstufe": ["beginner", "fortgeschritten", "experte", "trainer"],
+    "spielform": ["einzel", "doppel"],
     "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein"],
     "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS", "SP", "AT"],
     "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen"],

@@ -133,3 +133,10 @@
 .fa-tree::before { content: '\f1bb'; }
 .fa-stopwatch::before { content: '\f2f2'; }
 .fa-scale-balanced::before { content: '\f24e'; }
+.fa-people-group::before { content: '\e533'; }
+.fa-hand-fist::before { content: '\f6de'; }
+.fa-shield::before { content: '\f132'; }
+.fa-people-arrows::before { content: '\e068'; }
+.fa-comments::before { content: '\f086'; }
+.fa-repeat::before { content: '\f363'; }
+.fa-rotate::before { content: '\f2f1'; }

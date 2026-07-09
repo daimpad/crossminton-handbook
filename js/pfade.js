@@ -5,7 +5,7 @@
 // Zwei-Ebenen-Logik (4.4): der Graph sortiert nur. Zugänglichkeit ist überall
 // frei; nicht absolvierte Voraussetzungen werden als Hinweis mitgegeben.
 
-import { deltaFuer, domaenenVon, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe } from './daten.js';
+import { deltaFuer, domaenenVon, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from './daten.js';
 import { fehlendeVoraussetzungen, topoSortiere } from './graph.js';
 import { absolviertNachId, bausteinAbsolviert } from './fortschritt.js';
 import { diagnose, kontinuitaet, teilStatus } from './zustand.js';
@@ -19,6 +19,12 @@ function standardVergleicher(daten) {
     return idx === -1 ? domaenenOrdnung.length : idx;
   };
   return (a, b) => domIdx(a) - domIdx(b) || daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id);
+}
+
+// Reine Pool-Reihenfolge (Datei-/Erzählreihenfolge) — für Querschnittsthemen,
+// die bewusst NICHT nach Domäne blockieren (Spielform-Achse).
+function poolVergleicher(daten) {
+  return (a, b) => daten.poolIndex.get(a.id) - daten.poolIndex.get(b.id);
 }
 
 // Kompetenzpfad (kann über Stufen kumulieren): Stufe primär, damit sich
@@ -125,6 +131,33 @@ export function themenpfad(daten, domaene) {
   };
 }
 
+// Spielform-Achse (Querschnitt, orthogonal zur Domäne): sammelt alle Bausteine
+// einer Spielform (z. B. doppel) domänenübergreifend zu einem zusammenhängenden
+// Thema. 'einzel' ist der Default (praktisch alle Bausteine) und kein Thema —
+// angeboten wird nur, was tatsächlich als eigene Spielform ausgezeichnet ist.
+// Wie der Kompetenzpfad eine Perspektive über den Pool: der Cross-Sport-
+// Modifikator ist hier verdrahtet (Herkunft aus der Diagnose → Delta), denn die
+// Herkunft ist gerade beim Doppel inhaltlich relevant (Badminton-Umstieg).
+export function spielformen(daten) {
+  return (daten.vokabulare.spielform || [])
+    .filter((s) => s !== 'einzel')
+    .map((spielform) => ({
+      spielform,
+      anzahl: daten.bausteine.filter((b) => spielformVon(b) === spielform).length,
+    }));
+}
+
+export function spielformpfad(daten, spielform) {
+  const herkunft = diagnose().herkunft;
+  const menge = daten.bausteine.filter((b) => spielformVon(b) === spielform);
+  return {
+    art: 'spielform',
+    spielform,
+    herkunft,
+    stationen: zuStationen(daten, menge, poolVergleicher(daten), herkunft),
+  };
+}
+
 // 6.2 Individualpfad — filtert nach Zielfaktor(en), über Könnensstufen kumulativ
 // wie der Kompetenzpfad: bei gesetzter Diagnose-Stufe erscheinen nur Bausteine
 // bis einschließlich dieser Stufe (ein Beginner sieht die Beginner-Leiter eines
@@ -164,6 +197,7 @@ export function trainingsuebersicht(daten) {
 export function sequenzFuer(daten, kontext) {
   const [art, parameter] = String(kontext || 'kompetenz').split(':');
   if (art === 'themen') return themenpfad(daten, parameter);
+  if (art === 'spielform') return spielformpfad(daten, parameter);
   if (art === 'individual') return individualpfad(daten);
   return kompetenzpfad(daten, parameter || diagnose().stufe);
 }
@@ -185,7 +219,7 @@ export function stationImKontext(daten, bausteinId, kontext) {
   }
   const baustein = daten.bausteinVonId.get(bausteinId);
   if (!baustein) return null;
-  const herkunft = sequenz.art === 'kompetenz' ? diagnose().herkunft : null;
+  const herkunft = sequenz.art === 'kompetenz' || sequenz.art === 'spielform' ? diagnose().herkunft : null;
   return {
     sequenz,
     station: baueStation(daten, baustein, new Set(), herkunft),
