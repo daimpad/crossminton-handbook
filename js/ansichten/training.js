@@ -1,8 +1,10 @@
-// Trainingspfad (Spez. 6.4): kuratierte Einheiten steuern gezielt Übungsteile an.
-// Eine Sitzung ist flüchtig und wiederholbar; ihr Abschluss zählt kumulativ
-// (Kontinuität ohne Abbruchmechanik, 8.3.3) und quittiert nebenbei offene
-// Übungsteile baustein-gebunden.
+// Trainingspfad (Spez. 6.4): kuratierte Einheiten steuern gezielt Übungsteile an,
+// gegliedert in drei Phasen (Erwärmung → Hauptteil → Ausklang) mit kuratorischen
+// Hinweisen je Übung. Eine Sitzung ist flüchtig und wiederholbar; ihr Abschluss
+// zählt kumulativ (Kontinuität ohne Abbruchmechanik, 8.3.3) und quittiert nebenbei
+// offene Übungsteile baustein-gebunden.
 
+import { einheitReferenzen } from '../daten.js';
 import { projektion } from '../fortschritt.js';
 import { label, t, text } from '../i18n.js';
 import { bausteinIcon, esc, neuRendern } from '../oberflaeche.js';
@@ -18,19 +20,35 @@ function kompetenzQuote(daten) {
   return projektion(stationen.map((s) => s.baustein)).quote;
 }
 
+// Aufgelöste, geordnete Referenzliste einer Einheit (Phase + Hinweis + Baustein).
+// Direktzugriff bleibt frei — die Stufen-Filterung wirkt nur in der Liste (4.4).
+function referenzenVon(daten, einheit) {
+  return einheitReferenzen(einheit)
+    .map((ref) => ({ ...ref, baustein: daten.bausteinVonId.get(ref.baustein) }))
+    .filter((ref) => ref.baustein);
+}
+
 function renderListe(el, daten) {
   sitzung = null;
   const uebersicht = trainingsuebersicht(daten);
   const karten = uebersicht
     .map(({ einheit, bausteine, absolviertZaehler }) => {
       const zaehlerText = absolviertZaehler > 0 ? t('mal_absolviert', { n: absolviertZaehler }) : t('noch_nicht_absolviert');
-      const chips = bausteine.map((b) => `<span class="chip">${esc(label('baustein', b.id))}</span>`).join(' ');
+      const metaChips = [
+        `<span class="chip">${esc(label('kompetenzstufe', einheit.kompetenzstufe))}</span>`,
+        einheit.spielform === 'doppel' ? `<span class="chip chip-akzent">${esc(label('spielform', 'doppel'))}</span>` : '',
+      ]
+        .filter(Boolean)
+        .join(' ');
+      const bausteinChips = bausteine.map((b) => `<span class="chip">${esc(label('baustein', b.id))}</span>`).join(' ');
       return `
         <div class="karte">
           <h3>${esc(label('einheit', einheit.id))}</h3>
+          <p class="chip-zeile">${metaChips}</p>
+          <p><strong>${esc(t('einheit_schwerpunkt'))}:</strong> ${esc(text(einheit.schwerpunkt) ?? '')}</p>
           <p class="leise">${esc(text(einheit.beschreibung) ?? '')}</p>
-          <p class="chip-zeile">${chips}</p>
-          <p class="leise">${esc(t('uebungen_anzahl', { n: einheit.uebungsteile.length }))} · ${esc(zaehlerText)}</p>
+          <p class="chip-zeile">${bausteinChips}</p>
+          <p class="leise">${esc(t('uebungen_anzahl', { n: bausteine.length }))} · ${esc(zaehlerText)}</p>
           <a class="knopf knopf-primaer" href="#/training/${esc(einheit.id)}"><i class="fa-solid fa-play" aria-hidden="true"></i> ${esc(t('einheit_starten'))}</a>
         </div>`;
     })
@@ -66,15 +84,17 @@ function renderAbschluss(el, daten, einheit) {
     </section>`;
 }
 
-function renderDurchlauf(el, daten, einheit) {
-  const bausteinId = einheit.uebungsteile[sitzung.index];
-  const baustein = daten.bausteinVonId.get(bausteinId);
-  const istLetzte = sitzung.index === einheit.uebungsteile.length - 1;
+function renderDurchlauf(el, daten, einheit, referenzen) {
+  const ref = referenzen[sitzung.index];
+  const baustein = ref.baustein;
+  const istLetzte = sitzung.index === referenzen.length - 1;
+  const hinweis = text(ref.hinweis);
 
   el.innerHTML = `
     <section class="einheit-durchlauf">
-      <p class="leise">${esc(label('einheit', einheit.id))} · ${esc(t('uebung_x_von_y', { a: sitzung.index + 1, b: einheit.uebungsteile.length }))}</p>
+      <p class="leise">${esc(label('einheit', einheit.id))} · ${esc(t('uebung_x_von_y', { a: sitzung.index + 1, b: referenzen.length }))} · ${esc(t('phase_' + ref.phase))}</p>
       <h1>${bausteinIcon(baustein.id, 'baustein-icon')} ${esc(label('baustein', baustein.id))}</h1>
+      ${hinweis ? `<p class="einheit-hinweis">${esc(hinweis)}</p>` : ''}
       <p><a class="leise" href="#/baustein/${esc(baustein.id)}?kontext=kompetenz">${esc(t('zum_baustein'))} →</a></p>
       ${uebungsteilHtml(text(baustein.uebungsteil))}
       <div class="knopf-zeile">
@@ -105,7 +125,8 @@ export function renderTraining(el, daten, einheitId) {
     return;
   }
   const einheit = daten.einheitVonId.get(einheitId);
-  if (!einheit || einheit.uebungsteile.length === 0) {
+  const referenzen = einheit ? referenzenVon(daten, einheit) : [];
+  if (!einheit || referenzen.length === 0) {
     el.innerHTML = `<div class="karte"><p>${esc(t('nicht_gefunden'))}</p><a class="knopf knopf-sekundaer" href="#/training">${esc(t('zur_liste'))}</a></div>`;
     return;
   }
@@ -113,5 +134,5 @@ export function renderTraining(el, daten, einheitId) {
     sitzung = { einheitId, index: 0, fertig: false, kompetenzQuoteVorher: kompetenzQuote(daten) };
   }
   if (sitzung.fertig) renderAbschluss(el, daten, einheit);
-  else renderDurchlauf(el, daten, einheit);
+  else renderDurchlauf(el, daten, einheit, referenzen);
 }

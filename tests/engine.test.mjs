@@ -355,10 +355,22 @@ pruefe('beide Teile erledigt → 1 von 52', globaleProjektion(daten).absolviert 
 const pfadProjektion = projektion(kompetenzpfad(daten).stationen.map((s) => s.baustein));
 pruefe('Beginner-Pfad-Projektion bleibt bei 23 (kumulativ bis Beginner)', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 23);
 const uebersicht = trainingsuebersicht(daten);
-pruefe('zwei kuratierte Einheiten mit auflösbaren Referenzen', uebersicht.length === 2 && uebersicht.every((e) => e.bausteine.length === 3));
-registriereEinheitAbschluss('einheit_fundament');
-registriereEinheitAbschluss('einheit_fundament');
-const nachher = trainingsuebersicht(daten).find((e) => e.einheit.id === 'einheit_fundament');
+pruefe('Trainingspfad stufen-kumulativ: Beginner sieht nur die zwei Beginner-Einheiten', uebersicht.length === 2 && uebersicht.every((e) => e.einheit.kompetenzstufe === 'beginner'));
+pruefe('Einheit über drei Phasen aufgelöst (beginner_erste_schlaege: 5 Übungen, Erwärmung→Ausklang)', (() => {
+  const e = uebersicht.find((u) => u.einheit.id === 'beginner_erste_schlaege');
+  return e && e.bausteine.length === 5 && e.referenzen.length === 5 && e.referenzen[0].phase === 'erwaermung' && e.referenzen.at(-1).phase === 'ausklang';
+})());
+pruefe('alle Einheit-Referenzen tragen einen Übungsteil (keine Reflexions-Bausteine)', uebersicht.every((u) => u.referenzen.every((r) => hatUebungsteil(r.baustein))));
+pruefe('kuratorischer Hinweis je Referenz vorhanden', uebersicht[0].referenzen.every((r) => typeof (r.hinweis?.de) === 'string'));
+setzeDiagnose({ stufe: 'fortgeschritten' });
+pruefe('Fortgeschritten kumulativ: alle vier Einheiten (inkl. Doppel-Einheit spielform:doppel)', (() => {
+  const alle = trainingsuebersicht(daten);
+  return alle.length === 4 && alle.some((u) => u.einheit.id === 'doppel_als_paar_spielen' && u.einheit.spielform === 'doppel');
+})());
+setzeDiagnose({ stufe: 'beginner' });
+registriereEinheitAbschluss('beginner_erste_schlaege');
+registriereEinheitAbschluss('beginner_erste_schlaege');
+const nachher = trainingsuebersicht(daten).find((e) => e.einheit.id === 'beginner_erste_schlaege');
 pruefe('Kontinuität summiert kumulativ', nachher.absolviertZaehler === 2);
 
 console.log('\n[9] Vollständigkeit der de-Labels');

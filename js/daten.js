@@ -64,6 +64,19 @@ export function spielformVon(baustein) {
   return baustein.spielform || 'einzel';
 }
 
+// Trainingseinheit (Spez. 3.4): geordnete Referenzliste auf Übungsteile, gegliedert
+// in drei Phasen. `einheitReferenzen` flacht die Phasen in EINE geordnete Liste
+// {baustein, hinweis, phase} ab — die Reihenfolge, in der die Sitzung sie durchläuft.
+// Jede Referenz zeigt auf einen Baustein mit Übungsteil (die ID identifiziert ihn
+// eindeutig, da ein Baustein höchstens einen Übungsteil trägt).
+export const EINHEIT_PHASEN = ['erwaermung', 'hauptteil', 'ausklang'];
+export function einheitReferenzen(einheit) {
+  const phasen = einheit.phasen || {};
+  return EINHEIT_PHASEN.flatMap((phase) =>
+    (phasen[phase] || []).map((ref) => ({ baustein: ref.baustein, hinweis: ref.hinweis || null, phase })),
+  );
+}
+
 // Ein mehrfach zugeordneter Baustein gehört in den Kompetenzpfad seiner
 // niedrigsten Könnensstufe; rein trainer-getaggte in die Trainer-Sicht (Spez. 6.1).
 export function niedrigsteStufe(daten, baustein) {
@@ -93,7 +106,7 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh) {
   const vokabulare = dateien.find((d) => d.vokabulare)?.vokabulare || {};
   const bausteine = dateien.flatMap((d) => d.bausteine || []);
   const deltas = dateien.flatMap((d) => d.delta_bausteine || []);
-  const einheiten = einheitenRoh?.einheiten || [];
+  const einheiten = einheitenRoh?.trainingseinheiten || [];
   const fehlerbilder = fehlerbilderRoh?.fehlerbild_bausteine || [];
 
   const daten = {
@@ -207,10 +220,10 @@ function pruefeDaten(daten) {
   }
 
   for (const e of daten.einheiten) {
-    for (const id of e.uebungsteile || []) {
-      const b = daten.bausteinVonId.get(id);
-      if (!b) w.push(`${e.id}: referenzierter Baustein "${id}" existiert nicht`);
-      else if (!hatUebungsteil(b)) w.push(`${e.id}: Baustein "${id}" hat keinen Übungsteil`);
+    for (const ref of einheitReferenzen(e)) {
+      const b = daten.bausteinVonId.get(ref.baustein);
+      if (!b) w.push(`${e.id}: referenzierter Baustein "${ref.baustein}" existiert nicht`);
+      else if (!hatUebungsteil(b)) w.push(`${e.id}: Baustein "${ref.baustein}" hat keinen Übungsteil`);
     }
   }
 

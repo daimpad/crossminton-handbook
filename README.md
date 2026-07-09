@@ -72,7 +72,7 @@ data/
   bausteine.delta-tennis.json       herkunftsreine Delta-Datei (nur delta_bausteine, Herkunft TEN, über zwei Stufen)
   bausteine.delta-squash.json       herkunftsreine Delta-Datei (Herkunft SQ; auch auf zuvor delta-freie Taktik-Bausteine)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
-  trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
+  trainingseinheiten.json           kuratierte Einheiten in drei Phasen (Erwärmung/Hauptteil/Ausklang), stufen-/spielform-getaggt
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
   labels/{en,fr,pl}.json            strukturgleiche Gerüste, unbefüllt → Fallback auf de
 docs/uebergabe-spezifikation.md     Spezifikation (Erstausbau)
@@ -86,7 +86,7 @@ CLAUDE.md                           Leitfaden für Beitragende / KI-Assistenten
 - **Inhalte** (`data/bausteine.<stufe>-<domaene>.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Mehrere Inhaltsdateien werden zu einem Pool gemischt — neue Datei in `INHALTSDATEIEN` (`js/daten.js`) eintragen; nur die Technik-Datei trägt das kanonische `vokabulare`. Bausteine können einen inline-`anzeigetitel` tragen (wird nach `labels/de.json` geliftet) und in der Taktik-Domäne statt des Übungsteils eine `reflexionsaufgabe` (eigener quittierbarer Aufgabenteil). Ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen. Die Engine-Tests prüfen Titel-Vollständigkeit, Reihenfolge und Reflexions-Status mit.
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Offen vermerkt: das ausgeschriebene Label für die Transfer-Herkunft `BS`.
 - **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Werden nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`. Im Erstausbau ein Platzhalter-Beispiel — die redaktionelle Serie ersetzt es.
-- **Trainingseinheiten** (`data/trainingseinheiten.json`): im Erstausbau kuratierte Beispiele; frei ersetzbar. Referenziert werden Baustein-IDs, deren Übungsteil gemeint ist.
+- **Trainingseinheiten** (`data/trainingseinheiten.json`): kuratierte Einheiten, gegliedert in drei Phasen (`phasen.{erwaermung, hauptteil, ausklang}`) mit je `{baustein, hinweis}`-Referenzen auf Bausteine, deren **Übungsteil** gemeint ist (nie Reflexions-Bausteine). Jede Einheit trägt `titel` (nach `labels/de.json` geliftet), `kompetenzstufe` (steuert die stufen-kumulative Filterung im Trainingspfad), `spielform`, `schwerpunkt` und `beschreibung`. Frei ersetzbar/erweiterbar.
 - **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).
 
 ## Bewusste Ausbaustufen (strukturell vorgehalten, nicht umgesetzt)

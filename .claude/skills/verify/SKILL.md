@@ -36,7 +36,7 @@ Konsolen-/Seitenfehler mitschneiden — Soll ist null.
 2. Kompetenzpfad: 6 Stationen in Graph-Reihenfolge, 4 BAD-Chips, 2 Skip-Knöpfe.
 3. Baustein „griff“ im Kontext `kompetenz`: Delta-Text ersetzt Basistext („Du musst etwas verlernen“), Übungsteil bleibt regulär; im Kontext `themen:technik` erscheint der Basistext.
 4. Getrennte Quittierung (Erklär-/Übungsteil), Toggle rücknehmbar, localStorage prüfen, Reload überlebt.
-5. Training: Einheit durchsteppen → Kontinuität zählt; quittiert nur Übungsteile (globale Projektion steigt erst mit gelesenen Erklärteilen — kein Bug).
+5. Training (Einheiten mit drei Phasen, stufen-kumulativ gefiltert): Liste unter Beginner-Diagnose = 2 Beginner-Einheiten, unter Fortgeschritten = 4 (kumulativ, inkl. Doppel-Einheit `doppel_als_paar_spielen` mit „Doppel"-Chip). Jede Karte zeigt Stufe-/Spielform-Chip, Schwerpunkt, Beschreibung, Baustein-Chips. Einheit durchsteppen → Kopfzeile „Titel · Übung X von Y · Phase" (Erwärmung → Hauptteil → Ausklang), kuratorischer Hinweis je Übung (`.einheit-hinweis`), Übungsteil regulär. Am Ende Kontinuität +1; quittiert nur Übungsteile baustein-gebunden (pool-weit; globale Projektion steigt erst mit gelesenen Erklärteilen — kein Bug). Referenzen zeigen nie auf Reflexions-Bausteine.
 6. Kompetenzpfad vollenden → Meilenstein-Überlagerung.
 7. Profil: Sprachwechsel en (Fallback-Hinweis), Reset mit confirm → zurück ins Onboarding.
 8. Wizard-Ausstieg: `#ob-direkt` auf Schritt 1 → Kapitelübersicht ohne Angaben; Heim/Kompetenzpfad/Profil zeigen dann Stufe-nachholen-Zustände.
