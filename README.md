@@ -70,6 +70,7 @@ data/
   bausteine.fortgeschritten-athletik_kondition.json  Fortgeschritten-Athletik (Gesundheitsrahmen; Reflexion + qualitative Übung)
   bausteine.doppel-thema.json       Doppel als Querschnittsthema über Domänen (Dimension spielform:doppel)
   bausteine.delta-tennis.json       herkunftsreine Delta-Datei (nur delta_bausteine, Herkunft TEN, über zwei Stufen)
+  bausteine.delta-squash.json       herkunftsreine Delta-Datei (Herkunft SQ; auch auf zuvor delta-freie Taktik-Bausteine)
   fehlerbilder.json                 Trainer-Layer je Baustein (Symptom/Ursache/Korrektur), in-situ gerendert
   trainingseinheiten.json           kuratierte Beispiel-Einheiten (redaktionell ersetzbar)
   labels/de.json                    alle sichtbaren Beschriftungen (Quellsprache)
