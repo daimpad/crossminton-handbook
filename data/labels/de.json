@@ -3,7 +3,7 @@
     "sprache": "de",
     "status": "quellsprache_befuellt",
     "hinweis": "Erstfassung aller sichtbaren Beschriftungen (redaktionell zu pruefen). Sprachneutrale IDs stehen in bausteine.beginner-technik.json; diese Datei traegt nur die sprachabhaengige Beschriftung.",
-    "offen": "Label fuer Transfer-Herkunft 'BS' redaktionell festlegen (Kuerzel in den Referenzdaten ungenutzt)."
+    "offen": "Keine offenen Label-Posten. 'BS' = Ballschule (Roth), belegt durch den Trainer-Trainingsgestaltungs-Block."
   },
   "ui": {
     "app_titel": "Crossminton-Handbuch",
@@ -239,7 +239,18 @@
     "bewegung_als_einheit": "Bewegung als Einheit",
     "verstaendigung_im_paar": "Verständigung im Paar",
     "aufschlag_rueckschlag_doppel": "Aufschlag und Rückschlag im Doppel",
-    "das_umschalten_im_doppel": "Das Umschalten im Doppel"
+    "das_umschalten_im_doppel": "Das Umschalten im Doppel",
+    "taeuschung": "Täuschung — die Absicht verbergen",
+    "frueh_nehmen": "Den Speeder früh nehmen",
+    "tempo_rhythmus_wechsel": "Tempo- und Rhythmuswechsel",
+    "sprung_smash": "Der Sprung-Smash",
+    "praezision_an_die_linien": "Präzision an die Linien",
+    "konstanz_unter_hoechstdruck": "Konstanz unter Höchstdruck",
+    "was_gutes_vermitteln_ausmacht": "Was gutes Vermitteln ausmacht",
+    "inhalt_zugaenglich_machen": "Einen Inhalt zugänglich machen",
+    "fehler_erkennen_korrigieren": "Fehler erkennen und korrigieren",
+    "uebungen_aufbauen": "Übungen sinnvoll aufbauen",
+    "gruppe_fuehren": "Eine Gruppe führen"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"
@@ -292,7 +303,7 @@
       "BAD": "Badminton",
       "TEN": "Tennis",
       "SQ": "Squash",
-      "BS": "BS",
+      "BS": "Ballschule",
       "SP": "Sportpsychologie",
       "AT": "Athletik-/Trainingswissenschaft"
     },

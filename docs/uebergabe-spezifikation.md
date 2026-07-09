@@ -2,7 +2,7 @@
 
 Diese Spezifikation bündelt alle konzeptionellen und technischen Entscheidungen für die Umsetzung. Sie ist als Arbeitsgrundlage für die Implementierung gedacht und referenziert die Inhaltsdaten in den `bausteine.*.json`-Dateien.
 
-> **Stand nach Beginner- und Fortgeschritten-Ausbau, Doppel-Thema und drei Cross-Sport-Herkünften.** Gegenüber der vorigen Fassung (fünf Beginner-Domänen) neu abgebildet: die Dimension `spielform` (einzel/doppel), der Doppel-Themenblock, die vier Fortgeschritten-Blöcke, stufenübergreifende Voraussetzungen, die herkunftsreine Delta-Konvention und die Herkünfte Tennis (`TEN`) und Squash (`SQ`). Details gebündelt in Abschnitt 11; vollständige Dateiliste in Abschnitt 9.
+> **Stand nach Beginner- und Fortgeschritten-Ausbau, Doppel-Thema, drei Cross-Sport-Herkünften, Trainingseinheiten und Regeln-Reiter.** Gegenüber der vorigen Fassung (fünf Beginner-Domänen) neu abgebildet: die Dimension `spielform` (einzel/doppel), der Doppel-Themenblock, die vier Fortgeschritten-Blöcke, stufenübergreifende Voraussetzungen, die herkunftsreine Delta-Konvention, die Herkünfte Tennis (`TEN`) und Squash (`SQ`), der **kuratierte Trainingseinheiten-Bestand**, der **Regeln-Reiter** als eigener Referenzbereich, die erste **Experten-Stufe** (Technik, herkunftsneutral) und der erste inhaltliche **Trainer-Block** (Trainingsgestaltung, Vermittlungsziele). Details gebündelt in Abschnitt 11; vollständige Datenlage in Abschnitt 9.
 
 ---
 
@@ -10,9 +10,9 @@ Diese Spezifikation bündelt alle konzeptionellen und technischen Entscheidungen
 
 Zu bauen ist eine **clientseitige, mobil-orientierte Lernanwendung** für Crossminton. Sie vermittelt Inhalte in kleinen, durchklickbaren Einheiten (Bausteinen), führt die lernende Person über mehrere Zugangswege (Pfade) durch den Stoff und begleitet den Fortschritt mit einem zurückhaltenden Gamification-Layer.
 
-**Im Erstausbau enthalten:** das Datenmodell (inkl. der Dimension `spielform`), die Pfad-Engine (vier Pfade plus Cross-Sport-Modifikator, plus `spielform` als Navigationsachse), die Onboarding-Diagnostik, der Gamification-Layer in seiner Grundform, die mehrsprachige Struktur (Quellsprache Deutsch). Referenzinhalt: **alle fünf Domänen auf Beginner-Niveau** (Technik, Taktik, Mentales, Athletik/Kondition; Trainingsgestaltung auf Trainer-Stufe), **die vier Spieler-Domänen zusätzlich auf Fortgeschritten-Niveau**, ein **Doppel-Themenblock** (Querschnitt über drei Domänen) und **Cross-Sport-Deltas für drei Herkünfte** (Badminton, Tennis, Squash).
+**Im Erstausbau enthalten:** das Datenmodell (inkl. der Dimension `spielform`), die Pfad-Engine (vier Pfade plus Cross-Sport-Modifikator, plus `spielform` als Navigationsachse), der **Regeln-Reiter** als eigener Referenzbereich, die Onboarding-Diagnostik, der Gamification-Layer in seiner Grundform, die mehrsprachige Struktur (Quellsprache Deutsch). Referenzinhalt: **alle fünf Domänen auf Beginner-Niveau** (Technik, Taktik, Mentales, Athletik/Kondition; Trainingsgestaltung auf Trainer-Stufe), **die vier Spieler-Domänen zusätzlich auf Fortgeschritten-Niveau** (die Technik überdies auf **Experten-Niveau**), ein **Doppel-Themenblock** (Querschnitt über drei Domänen), **Cross-Sport-Deltas für drei Herkünfte** (Badminton, Tennis, Squash), ein **kuratierter Trainingseinheiten-Bestand** und die vollständigen **Spielregeln** im Regeln-Reiter.
 
-**Ausdrücklich nicht im Erstausbau:** serverseitige Komponenten, geräteübergreifende Synchronisation, Mastery-Checks (nur strukturell vorgehalten), Trainingseinheiten-Generierung (nur kuratiert), die **Experten-Stufe** (noch nicht bespielt), Grafiken (nur Technik-Prompts vorbereitet), Befüllung der Zielsprachen (nur strukturell angelegt).
+**Ausdrücklich nicht im Erstausbau:** serverseitige Komponenten, geräteübergreifende Synchronisation, Mastery-Checks (nur strukturell vorgehalten), Trainingseinheiten-Generierung (nur kuratiert), die **Experten-Stufe außerhalb der Technik** (bislang nur die Technik-Domäne bespielt), Grafiken (nur Technik-Prompts vorbereitet), Befüllung der Zielsprachen (nur strukturell angelegt).
 
 ---
 
@@ -57,7 +57,7 @@ Sprachneutrale **Identität** (IDs, Kürzel, Faktor-IDs, Relationen) ist strikt 
 
 ### 3.4 Die Trainingseinheit
 
-Eigene Entität, getrennt vom Baustein. Enthält eine **geordnete Referenzliste auf Übungsteile** von Bausteinen (nicht auf ganze Bausteine). Im Erstausbau **kuratiert** (von Hand befüllt); die Struktur hält die spätere regelbasierte Generierung offen, ohne sie umzusetzen.
+Eigene Entität, getrennt vom Baustein (Datei `trainingseinheiten.json`, nicht im Baustein-Pool). Enthält eine **nach drei Phasen** (Erwärmung / Hauptteil / Ausklang) geordnete **Referenzliste auf Übungsteile** von Bausteinen (nicht auf ganze Bausteine); jede Referenz nennt die Baustein-ID (1:1 zum Übungsteil) plus optionalen kuratorischen Hinweis. Im Erstausbau **kuratiert** (vier Einheiten, von Hand befüllt); die Struktur hält die spätere regelbasierte Generierung offen, ohne sie umzusetzen. Referenzen zeigen ausnahmslos auf Bausteine **mit** Übungsteil. Details und Schema in Abschnitt 9.
 
 ### 3.5 Der Aufgabenteil: `uebungsteil` vs. `reflexionsaufgabe`
 
@@ -224,28 +224,36 @@ Alle Dateien im gemeinsamen Pool, vollständig getaggt, `de` befüllt, Zielsprac
 8. **`bausteine.fortgeschritten-mentales.json`** — 5 Bausteine, 0 Deltas. Vertieft die Psychoregulations-Ziele.
 9. **`bausteine.fortgeschritten-athletik_kondition.json`** — 5 Bausteine, 0 Deltas. Vertieft die Energetik-Ziele. Strenger Gesundheitsrahmen (programmiernahe Themen als Reflexion, Verweis auf Fachanleitung).
 
+**Experte (1 Block, dritte Könnensstufe — erstmals bespielt):**
+10. **`bausteine.experte-technik.json`** — 6 Bausteine, 0 Deltas, durchgehend `["experte"]`, alle mit Übungsteil (Feinschliff, Täuschung). **Herkunftsneutral** (`kein_delta_grundsatz`): keine Cross-Sport-Deltas — der Modifikator fällt auf Experten-Ebene flächig durch (regulärer Nicht-Fehlerfall, 4.2, für die ganze Stufe). Stufenübergreifende weiche Voraussetzungen Experte → Fortgeschritten (z. B. `taeuschung → kurzes_spiel_stopp`, `sprung_smash → smash`), plus interne Experten-Kanten. Macht den Kompetenzpfad erstmals dreistufig (Beginner → Fortgeschritten → Experte, kumulativ).
+
 **Querschnitt-Thema (1 Block):**
-10. **`bausteine.doppel-thema.json`** — 7 Bausteine + 1 Delta, alle `spielform: doppel`, über drei Domänen (Taktik 5, Athletik 1, Mentales 1). Führt die Dimension `spielform` ein (11.2). `doppel_grundlagen` (aus Datei 7) ist nachträglich mit `spielform: doppel` zu markieren.
+11. **`bausteine.doppel-thema.json`** — 7 Bausteine + 1 Delta, alle `spielform: doppel`, über drei Domänen (Taktik 5, Athletik 1, Mentales 1). Führt die Dimension `spielform` ein (11.2). `doppel_grundlagen` (aus Datei 7) ist nachträglich mit `spielform: doppel` zu markieren.
 
 **Herkunftsreine Delta-Dateien (2):**
-11. **`bausteine.delta-tennis.json`** — 6 Tennis-Deltas (4 Beginner-, 2 Fortgeschritten-Technik). Aktiviert `TEN` im Onboarding. Enthält `ueberkopf_clear_delta_ten` als positiven Transfer.
-12. **`bausteine.delta-squash.json`** — 6 Squash-Deltas (Technik + Taktik, 2 Stufen). Aktiviert `SQ`. Drei positive Transfers, drei Divergenzen; **kein** Rückhand-Delta (bewusst). Deltas auf zuvor delta-freien Taktik-Bausteinen.
+12. **`bausteine.delta-tennis.json`** — 6 Tennis-Deltas (4 Beginner-, 2 Fortgeschritten-Technik). Aktiviert `TEN` im Onboarding. Enthält `ueberkopf_clear_delta_ten` als positiven Transfer.
+13. **`bausteine.delta-squash.json`** — 6 Squash-Deltas (Technik + Taktik, 2 Stufen). Aktiviert `SQ`. Drei positive Transfers, drei Divergenzen; **kein** Rückhand-Delta (bewusst). Deltas auf zuvor delta-freien Taktik-Bausteinen.
 
 Ergänzend im Bau: **`data/fehlerbilder.json`** (Trainer-Layer, technikgebunden, eigene Entität; siehe Abschnitt 5).
 
-Diese Daten machen Pfad-Engine, Modifikator, Onboarding, `spielform`-Navigation und — durch beide Ziel-Dimensionen über zwei Stufen — den Individualpfad real durchspielbar.
+**Eigene Entitäten außerhalb des Baustein-Pools (gebaut):**
+14. **`trainingseinheiten.json`** — 4 kuratierte Trainingseinheiten, je in drei Phasen (Erwärmung/Hauptteil/Ausklang), Referenzen per Baustein-ID auf Übungsteile (1:1). Einheiten: „Erste Schläge" und „Bewegung und Position" (Beginner), „Angriff aufbauen" (Fortgeschritten), „Als Paar spielen" (`spielform: doppel`). Trägt `kompetenzstufe` und `spielform` zur Filterung im Trainingspfad. Alle 19 Übungsteil-Referenzen gegen den Bestand validiert. Entity-Schema in der Datei unter `_meta.entity_schema`. Speist den Trainingspfad (6.4).
+15. **`regeln.json`** — der **Regeln-Reiter**: eigener Top-Level-Referenzbereich (kein Lerninhalt, keine Voraussetzungen/Deltas/Fortschritt/Gamification). 11 Abschnitte, 36 Regeln, jede mit akkuratem Regelinhalt (`inhalt`, mit Quell-Regelnummer) und Erklärung in Du-Form (`erklaerung`); optionale `querverweis`-Felder als Absprung zu Lernbausteinen (reine Dokumentation, gegen Bestand geprüft). **Quelle:** offizielle ICO/DCV-Spielregeln, Stand Februar 2018 (in `_meta.quelle`); Herausgeber und Stand im Reiter sichtbar zu halten. Entity-Schema in der Datei unter `_meta.entity_schema`.
+
+Diese Daten machen Pfad-Engine, Modifikator, Onboarding, `spielform`-Navigation, Trainingspfad und Regeln-Reiter real durchspielbar; durch beide Ziel-Dimensionen über zwei Stufen auch der Individualpfad.
 
 ---
 
 ## 10. Offene inhaltliche Arbeit (noch nicht in den Daten)
 
-- **Experten-Stufe**: die dritte Könnensstufe ist in keiner Domäne bespielt. Der Onboarding-Anker existiert (Anhang A), Inhalt fehlt.
+- **Experten-Stufe außerhalb der Technik**: die dritte Könnensstufe ist jetzt in der **Technik** bespielt (`bausteine.experte-technik.json`, herkunftsneutral) und macht den Kompetenzpfad dreistufig. Taktik, Mentales und Athletik/Kondition auf Experten-Niveau bleiben offen.
+- **Trainer-Ebene über die Trainingsgestaltung hinaus**: der erste inhaltliche Trainer-Block (`bausteine.trainer-trainingsgestaltung.json`, Vermittlungsziele) ist gebaut; weitere technikübergreifende Trainer-Themen und die technikgebundenen Fehlerbilder (`data/fehlerbilder.json`, redaktionelle Serie) bleiben offen.
 - **Grafiken**: acht KI-Prompts nur für den Beginner-Technikpfad (Anhang B), Bilder nicht erzeugt. Fortgeschritten-Technik, die weiteren Domänen und der Doppel-Block haben noch keine Grafik-Prompts. Stil: illustrative, reduzierte vektorähnliche Zeichnung, transparenter/weißer Hintergrund.
 - **Fehlerbilder** (Trainer-Layer, technikgebunden): je Technik-Baustein als `trainer_layer_offen` vermerkt; parallel im Bau (`data/fehlerbilder.json`).
 - **Weitere Cross-Sport-Tiefe**: Tennis- und Squash-Deltas decken bislang v. a. die Technik-Kerne (Squash zusätzlich zwei Taktik-Bausteine). Deltas für weitere Bausteine/Domänen und für das Doppel je Herkunft sind offen.
 - **Zielsprachen** `en, fr, pl`: Struktur angelegt, Übersetzung ausstehend. Labels für `BS`, `SP`, `AT`, `spielform` aufzunehmen.
 - **Unerprobte Vokabulare**: Untergrund und Witterung noch nicht durch Inhalt erprobt (kein Outdoor-Block). Der Faktor `doppel_spezifische_loesungen` ist mit dem Doppel-Block nun breit belegt; die Beobachtung auf mögliche Aufspaltung bleibt bestehen.
-- **Trainingseinheiten**: über den kuratierten Erstbestand hinaus aufzubauen.
+- **Trainingseinheiten**: kuratierter Erstbestand (4 Einheiten) gebaut; darüber hinaus erweiterbar. Regelbasierte Generierung strukturell offen.
 
 ---
 

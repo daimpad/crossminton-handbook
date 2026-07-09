@@ -18,10 +18,15 @@ const INHALTSDATEIEN = [
   'data/bausteine.beginner-taktik.json',
   'data/bausteine.beginner-mentales.json',
   'data/bausteine.beginner-athletik_kondition.json',
+  // Trainer-Ebene: technikübergreifendes Meta-Wissen, kompetenzstufe ["trainer"]
+  // (dockt an keine Könnensstufe an). Dateiname trägt 'trainer' an Stufen-Stelle.
+  'data/bausteine.trainer-trainingsgestaltung.json',
   'data/bausteine.fortgeschritten-technik.json',
   'data/bausteine.fortgeschritten-taktik.json',
   'data/bausteine.fortgeschritten-mentales.json',
   'data/bausteine.fortgeschritten-athletik_kondition.json',
+  // Experten-Stufe: dritte Könnensstufe, herkunftsneutral (keine Cross-Sport-Deltas).
+  'data/bausteine.experte-technik.json',
   'data/bausteine.doppel-thema.json',
   'data/bausteine.delta-tennis.json',
   'data/bausteine.delta-squash.json',

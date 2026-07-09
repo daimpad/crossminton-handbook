@@ -144,6 +144,19 @@ const BAUSTEIN_ICONS = {
   verstaendigung_im_paar: 'fa-comments',
   aufschlag_rueckschlag_doppel: 'fa-repeat',
   das_umschalten_im_doppel: 'fa-rotate',
+  // Experte-Technik (Feinschliff, Täuschung) — herkunftsneutral
+  taeuschung: 'fa-chess',
+  frueh_nehmen: 'fa-bolt',
+  tempo_rhythmus_wechsel: 'fa-gauge-high',
+  sprung_smash: 'fa-hammer',
+  praezision_an_die_linien: 'fa-crosshairs',
+  konstanz_unter_hoechstdruck: 'fa-anchor',
+  // Trainer-Trainingsgestaltung (Vermittlung, Trainer-Ebene)
+  was_gutes_vermitteln_ausmacht: 'fa-lightbulb',
+  inhalt_zugaenglich_machen: 'fa-feather',
+  fehler_erkennen_korrigieren: 'fa-stethoscope',
+  uebungen_aufbauen: 'fa-layer-group',
+  gruppe_fuehren: 'fa-users',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {
