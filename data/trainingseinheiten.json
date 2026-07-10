@@ -1,124 +1,449 @@
 {
-  "_meta": {
-    "beschreibung": "Trainingseinheiten: eigene Entitaet, getrennt vom Baustein. Jede Einheit ist eine geordnete Referenzliste auf UEBUNGSTEILE von Bausteinen (nicht auf ganze Bausteine), gegliedert in drei Phasen (Erwaermung / Hauptteil / Ausklang). Im Erstausbau kuratiert.",
-    "quellsprache": "de",
-    "zielsprachen": ["en", "fr", "pl"],
-    "stand": "Erstausbau — kuratierter Erstbestand (4 Einheiten)",
-    "dateiname": "trainingseinheiten.json (eigene Datei, NICHT im Baustein-Pool).",
-    "entity_schema": {
-      "id": "sprachneutraler Bezeichner",
-      "titel": "{sprache: Text}",
-      "kompetenzstufe": "eine Stufe (beginner/fortgeschritten/...) zur Filterung im Trainingspfad",
-      "spielform": "einzel (Default) / doppel",
-      "schwerpunkt": "{sprache: Text} — der EINE Schwerpunkt der Einheit (Didaktik: ein Hauptteil-Fokus)",
-      "beschreibung": "{sprache: Text} — kurze Einordnung",
-      "phasen": {
-        "erwaermung": "[referenz, ...]",
-        "hauptteil": "[referenz, ...]",
-        "ausklang": "[referenz, ...]"
-      },
-      "referenz": {
-        "baustein": "Baustein-ID; da jeder Baustein hoechstens EINEN Uebungsteil traegt, identifiziert die ID den Uebungsteil eindeutig",
-        "hinweis": "{sprache: Text} — OPTIONAL, kuratorische Anmerkung, wie die Uebung in dieser Einheit einzusetzen/anzupassen ist"
-      }
-    },
-    "regeln_fuer_claude_code": [
-      "Referenzen zeigen IMMER auf Bausteine, die einen 'uebungsteil' tragen (keine reflexionsaufgabe-Bausteine). Der Trainingspfad steuert Uebungsteile an.",
-      "Aufloesung: baustein-ID -> uebungsteil des Bausteins (1:1). Existiert die ID nicht oder hat der Baustein keinen uebungsteil, ist das ein Datenfehler.",
-      "Fortschritt bleibt baustein-gebunden: Wird ein Uebungsteil in einer Einheit als erledigt quittiert, gilt der Uebungsteil des Bausteins pool-weit als erledigt (kein separater Einheiten-Fortschritt).",
-      "Einheit-Abschluss ist ein Gratifikations-Anlass (Gamification 8.3, Sequenzabschluss/Kontinuitaet)."
-    ],
-    "kuratorik": "Ausklang nutzt bewusst entweder eine spielerische Anwendung des Schwerpunkts (z.B. Zielspiel) oder einen Beweglichkeits-/Cool-down-Baustein (z.B. Schulterpflege nach Ueberkopfarbeit)."
+ "_meta": {
+  "beschreibung": "Trainingseinheiten: eigene Entitaet, getrennt vom Baustein. Jede Einheit ist eine geordnete Referenzliste auf UEBUNGSTEILE von Bausteinen (nicht auf ganze Bausteine), gegliedert in drei Phasen (Erwaermung / Hauptteil / Ausklang). Im Erstausbau kuratiert.",
+  "quellsprache": "de",
+  "zielsprachen": [
+   "en",
+   "fr",
+   "pl"
+  ],
+  "stand": "Erstausbau — kuratierter Erstbestand (4 Einheiten)",
+  "dateiname": "trainingseinheiten.json (eigene Datei, NICHT im Baustein-Pool).",
+  "entity_schema": {
+   "id": "sprachneutraler Bezeichner",
+   "titel": "{sprache: Text}",
+   "kompetenzstufe": "eine Stufe (beginner/fortgeschritten/...) zur Filterung im Trainingspfad",
+   "spielform": "einzel (Default) / doppel",
+   "schwerpunkt": "{sprache: Text} — der EINE Schwerpunkt der Einheit (Didaktik: ein Hauptteil-Fokus)",
+   "beschreibung": "{sprache: Text} — kurze Einordnung",
+   "phasen": {
+    "erwaermung": "[referenz, ...]",
+    "hauptteil": "[referenz, ...]",
+    "ausklang": "[referenz, ...]"
+   },
+   "referenz": {
+    "baustein": "Baustein-ID; da jeder Baustein hoechstens EINEN Uebungsteil traegt, identifiziert die ID den Uebungsteil eindeutig",
+    "hinweis": "{sprache: Text} — OPTIONAL, kuratorische Anmerkung, wie die Uebung in dieser Einheit einzusetzen/anzupassen ist"
+   }
   },
-
-  "trainingseinheiten": [
-    {
-      "id": "beginner_erste_schlaege",
-      "titel": {"de": "Erste Schläge"},
-      "kompetenzstufe": "beginner",
-      "spielform": "einzel",
-      "schwerpunkt": {"de": "Die Grundschläge sicher treffen"},
-      "beschreibung": {"de": "Die erste Einheit für Einsteiger: vom Griff über den Aufschlag zum Vorhand-Drive, abgeschlossen mit einem spielerischen Zielspiel auf die Länge."},
-      "phasen": {
-        "erwaermung": [
-          {"baustein": "richtig_aufwaermen", "hinweis": {"de": "Kurze Aufwärmfolge — Kreislauf in Schwung, Schulter und Beine wecken."}}
-        ],
-        "hauptteil": [
-          {"baustein": "griff", "hinweis": {"de": "Zuerst der Universalgriff — er trägt alle folgenden Schläge."}},
-          {"baustein": "aufschlag", "hinweis": {"de": "Partnerunabhängig übbar; ideal als zweiter Schritt."}},
-          {"baustein": "vorhand_drive", "hinweis": {"de": "Der Brot-und-Butter-Schlag; hier liegt der Schwerpunkt der Einheit."}}
-        ],
-        "ausklang": [
-          {"baustein": "laenge_tiefe", "hinweis": {"de": "Spielerische Anwendung: den gelernten Drive auf ein Ziel in der Tiefe spielen."}}
-        ]
+  "regeln_fuer_claude_code": [
+   "Referenzen zeigen IMMER auf Bausteine, die einen 'uebungsteil' tragen (keine reflexionsaufgabe-Bausteine). Der Trainingspfad steuert Uebungsteile an.",
+   "Aufloesung: baustein-ID -> uebungsteil des Bausteins (1:1). Existiert die ID nicht oder hat der Baustein keinen uebungsteil, ist das ein Datenfehler.",
+   "Fortschritt bleibt baustein-gebunden: Wird ein Uebungsteil in einer Einheit als erledigt quittiert, gilt der Uebungsteil des Bausteins pool-weit als erledigt (kein separater Einheiten-Fortschritt).",
+   "Einheit-Abschluss ist ein Gratifikations-Anlass (Gamification 8.3, Sequenzabschluss/Kontinuitaet)."
+  ],
+  "kuratorik": "Ausklang nutzt bewusst entweder eine spielerische Anwendung des Schwerpunkts (z.B. Zielspiel) oder einen Beweglichkeits-/Cool-down-Baustein (z.B. Schulterpflege nach Ueberkopfarbeit)."
+ },
+ "trainingseinheiten": [
+  {
+   "id": "beginner_erste_schlaege",
+   "titel": {
+    "de": "Erste Schläge"
+   },
+   "kompetenzstufe": "beginner",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Die Grundschläge sicher treffen"
+   },
+   "beschreibung": {
+    "de": "Die erste Einheit für Einsteiger: vom Griff über den Aufschlag zum Vorhand-Drive, abgeschlossen mit einem spielerischen Zielspiel auf die Länge."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "richtig_aufwaermen",
+      "hinweis": {
+       "de": "Kurze Aufwärmfolge — Kreislauf in Schwung, Schulter und Beine wecken."
       }
-    },
-
-    {
-      "id": "beginner_bewegung_und_position",
-      "titel": {"de": "Bewegung und Position"},
-      "kompetenzstufe": "beginner",
-      "spielform": "einzel",
-      "schwerpunkt": {"de": "Rechtzeitig am Speeder sein — Grundposition, Antritt, Rückkehr"},
-      "beschreibung": {"de": "Die Bewegungs-Einheit für Einsteiger: die zentrale Position, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege."},
-      "phasen": {
-        "erwaermung": [
-          {"baustein": "richtig_aufwaermen", "hinweis": {"de": "Vor Bewegungsarbeit besonders die Beine gut vorbereiten."}}
-        ],
-        "hauptteil": [
-          {"baustein": "grundposition", "hinweis": {"de": "Die geladene Ausgangshaltung als Startpunkt jeder Bewegung."}},
-          {"baustein": "schnelle_fuesse", "hinweis": {"de": "Antritt und Richtungswechsel — kurze, saubere Wiederholungen."}},
-          {"baustein": "beinarbeit", "hinweis": {"de": "Der Kreislauf aus Split-Step, Weg zum Ball und Rückkehr; Schwerpunkt der Einheit."}}
-        ],
-        "ausklang": [
-          {"baustein": "beweglichkeit_und_schulter", "hinweis": {"de": "Cool-down: sanfte Beweglichkeitspflege, wenn der Körper warm ist."}}
-        ]
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "griff",
+      "hinweis": {
+       "de": "Zuerst der Universalgriff — er trägt alle folgenden Schläge."
       }
-    },
-
-    {
-      "id": "fortgeschritten_angriff_aufbauen",
-      "titel": {"de": "Angriff aufbauen"},
-      "kompetenzstufe": "fortgeschritten",
-      "spielform": "einzel",
-      "schwerpunkt": {"de": "Den Angriff herstellen und abschließen"},
-      "beschreibung": {"de": "Fortgeschrittene Angriffs-Einheit: von der Peitsche über den Überkopfschlag zum Smash, dann die taktische Vorbereitung des Abschlusses. Abschluss mit Schulterpflege nach der Überkopfarbeit."},
-      "phasen": {
-        "erwaermung": [
-          {"baustein": "richtig_aufwaermen", "hinweis": {"de": "Vor Überkopf- und Schnellkraftarbeit gründlich aufwärmen, besonders die Schlagschulter."}}
-        ],
-        "hauptteil": [
-          {"baustein": "handgelenk_peitsche", "hinweis": {"de": "Die Kraftquelle zuerst — sie trägt Clear und Smash."}},
-          {"baustein": "ueberkopf_clear", "hinweis": {"de": "Der hohe Treffpunkt als Grundlage des Angriffs von oben."}},
-          {"baustein": "smash", "hinweis": {"de": "Konstanz vor Tempo; mehrere platzierte Smashes statt eines harten."}},
-          {"baustein": "smash_vorbereiten", "hinweis": {"de": "Taktischer Kern der Einheit: den Smash aus der vorbereiteten Situation setzen."}}
-        ],
-        "ausklang": [
-          {"baustein": "beweglichkeit_und_schulter", "hinweis": {"de": "Cool-down: die einseitig belastete Schlagschulter nach der Überkopfarbeit pflegen."}}
-        ]
+     },
+     {
+      "baustein": "aufschlag",
+      "hinweis": {
+       "de": "Partnerunabhängig übbar; ideal als zweiter Schritt."
       }
-    },
-
-    {
-      "id": "doppel_als_paar_spielen",
-      "titel": {"de": "Als Paar spielen"},
-      "kompetenzstufe": "fortgeschritten",
-      "spielform": "doppel",
-      "schwerpunkt": {"de": "Als Einheit angreifen und verteidigen"},
-      "beschreibung": {"de": "Doppel-Einheit: die abgestimmte Bewegung als Paar, der Angriff in der Zange und die lückenlose Verteidigung, abgeschlossen mit spielnahen Intervallen."},
-      "phasen": {
-        "erwaermung": [
-          {"baustein": "richtig_aufwaermen", "hinweis": {"de": "Gemeinsam aufwärmen; die Bewegungsvorbereitung stimmt euch schon aufeinander ein."}}
-        ],
-        "hauptteil": [
-          {"baustein": "bewegung_als_einheit", "hinweis": {"de": "Zuerst die abgestimmte Bewegung — sie trägt Angriff wie Verteidigung."}},
-          {"baustein": "angriff_im_paar", "hinweis": {"de": "Die Zange aus Druck (hinten) und Abschluss (vorn)."}},
-          {"baustein": "verteidigung_im_paar", "hinweis": {"de": "Lückenlos decken, Tempo herausnehmen, den Umschaltmoment abpassen; Schwerpunkt gemeinsam mit dem Angriff."}}
-        ],
-        "ausklang": [
-          {"baustein": "intervallausdauer", "hinweis": {"de": "Spielnaher Abschluss: intensive Ballwechsel mit kurzer Erholung, im Doppel gespielt."}}
-        ]
+     },
+     {
+      "baustein": "vorhand_drive",
+      "hinweis": {
+       "de": "Der Brot-und-Butter-Schlag; hier liegt der Schwerpunkt der Einheit."
       }
-    }
-  ]
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "laenge_tiefe",
+      "hinweis": {
+       "de": "Spielerische Anwendung: den gelernten Drive auf ein Ziel in der Tiefe spielen."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "beginner_bewegung_und_position",
+   "titel": {
+    "de": "Bewegung und Position"
+   },
+   "kompetenzstufe": "beginner",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Rechtzeitig am Speeder sein — Grundposition, Antritt, Rückkehr"
+   },
+   "beschreibung": {
+    "de": "Die Bewegungs-Einheit für Einsteiger: die zentrale Position, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "richtig_aufwaermen",
+      "hinweis": {
+       "de": "Vor Bewegungsarbeit besonders die Beine gut vorbereiten."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "grundposition",
+      "hinweis": {
+       "de": "Die geladene Ausgangshaltung als Startpunkt jeder Bewegung."
+      }
+     },
+     {
+      "baustein": "schnelle_fuesse",
+      "hinweis": {
+       "de": "Antritt und Richtungswechsel — kurze, saubere Wiederholungen."
+      }
+     },
+     {
+      "baustein": "beinarbeit",
+      "hinweis": {
+       "de": "Der Kreislauf aus Split-Step, Weg zum Ball und Rückkehr; Schwerpunkt der Einheit."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "beweglichkeit_und_schulter",
+      "hinweis": {
+       "de": "Cool-down: sanfte Beweglichkeitspflege, wenn der Körper warm ist."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "fortgeschritten_angriff_aufbauen",
+   "titel": {
+    "de": "Angriff aufbauen"
+   },
+   "kompetenzstufe": "fortgeschritten",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Den Angriff herstellen und abschließen"
+   },
+   "beschreibung": {
+    "de": "Fortgeschrittene Angriffs-Einheit: von der Peitsche über den Überkopfschlag zum Smash, dann die taktische Vorbereitung des Abschlusses. Abschluss mit Schulterpflege nach der Überkopfarbeit."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "richtig_aufwaermen",
+      "hinweis": {
+       "de": "Vor Überkopf- und Schnellkraftarbeit gründlich aufwärmen, besonders die Schlagschulter."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "handgelenk_peitsche",
+      "hinweis": {
+       "de": "Die Kraftquelle zuerst — sie trägt Clear und Smash."
+      }
+     },
+     {
+      "baustein": "ueberkopf_clear",
+      "hinweis": {
+       "de": "Der hohe Treffpunkt als Grundlage des Angriffs von oben."
+      }
+     },
+     {
+      "baustein": "smash",
+      "hinweis": {
+       "de": "Konstanz vor Tempo; mehrere platzierte Smashes statt eines harten."
+      }
+     },
+     {
+      "baustein": "smash_vorbereiten",
+      "hinweis": {
+       "de": "Taktischer Kern der Einheit: den Smash aus der vorbereiteten Situation setzen."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "beweglichkeit_und_schulter",
+      "hinweis": {
+       "de": "Cool-down: die einseitig belastete Schlagschulter nach der Überkopfarbeit pflegen."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "doppel_als_paar_spielen",
+   "titel": {
+    "de": "Als Paar spielen"
+   },
+   "kompetenzstufe": "fortgeschritten",
+   "spielform": "doppel",
+   "schwerpunkt": {
+    "de": "Als Einheit angreifen und verteidigen"
+   },
+   "beschreibung": {
+    "de": "Doppel-Einheit: die abgestimmte Bewegung als Paar, der Angriff in der Zange und die lückenlose Verteidigung, abgeschlossen mit spielnahen Intervallen."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "richtig_aufwaermen",
+      "hinweis": {
+       "de": "Gemeinsam aufwärmen; die Bewegungsvorbereitung stimmt euch schon aufeinander ein."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "bewegung_als_einheit",
+      "hinweis": {
+       "de": "Zuerst die abgestimmte Bewegung — sie trägt Angriff wie Verteidigung."
+      }
+     },
+     {
+      "baustein": "angriff_im_paar",
+      "hinweis": {
+       "de": "Die Zange aus Druck (hinten) und Abschluss (vorn)."
+      }
+     },
+     {
+      "baustein": "verteidigung_im_paar",
+      "hinweis": {
+       "de": "Lückenlos decken, Tempo herausnehmen, den Umschaltmoment abpassen; Schwerpunkt gemeinsam mit dem Angriff."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "intervallausdauer",
+      "hinweis": {
+       "de": "Spielnaher Abschluss: intensive Ballwechsel mit kurzer Erholung, im Doppel gespielt."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "experte_praezision_und_taeuschung",
+   "titel": {
+    "de": "Präzision und Täuschung"
+   },
+   "kompetenzstufe": "experte",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Den Gegner täuschen und die Linien treffen"
+   },
+   "beschreibung": {
+    "de": "Eine Experten-Einheit für Schärfe und Finesse: früh am Speeder sein, die Absicht verschleiern, präzise an die Linien setzen — und das Ganze in eine Partie überführen, in der du dem Gegner dein Spiel aufzwingst."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "beweglichkeit_und_schulter",
+      "hinweis": {
+       "de": "Schulter und Rumpf wecken — die Basis für saubere Überkopf- und Täuschungsbewegungen."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "frueh_nehmen",
+      "hinweis": {
+       "de": "Zuerst den Ball früh nehmen: Das verschafft dir die Zeit, die Täuschung und Präzision überhaupt erst möglich macht."
+      }
+     },
+     {
+      "baustein": "taeuschung",
+      "hinweis": {
+       "de": "Auf der gewonnenen Zeit aufbauend die Absicht verschleiern — gleicher Ansatz, andere Richtung."
+      }
+     },
+     {
+      "baustein": "praezision_an_die_linien",
+      "hinweis": {
+       "de": "Der Schwerpunkt: die getäuschten Bälle präzise an die Linien setzen, wo sie am meisten wehtun."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "dem_gegner_aufzwingen",
+      "hinweis": {
+       "de": "Anwendung in der Partie: mit früh genommenen, getäuschten und präzisen Bällen dem Gegner dein Spiel aufzwingen."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "experte_tempo_und_konstanz",
+   "titel": {
+    "de": "Tempo und Konstanz"
+   },
+   "kompetenzstufe": "experte",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Das Tempo variieren und unter Druck konstant bleiben"
+   },
+   "beschreibung": {
+    "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: das Tempo bewusst wechseln, explosiv vom Boden abdrücken und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "schnelle_fuesse",
+      "hinweis": {
+       "de": "Fußarbeit auf Betriebstemperatur bringen — Antritt und Bodenkontakt für die folgende Reaktivarbeit vorbereiten."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "tempo_rhythmus_wechsel",
+      "hinweis": {
+       "de": "Das Tempo bewusst variieren, um den Rhythmus des Gegners zu brechen."
+      }
+     },
+     {
+      "baustein": "sprung_smash",
+      "hinweis": {
+       "de": "Den harten Abschluss aus dem Sprung setzen — mit dem in der Datei hinterlegten Gesundheitshinweis zur Sprungbelastung."
+      }
+     },
+     {
+      "baustein": "reaktivkraft_bodenkontakt",
+      "hinweis": {
+       "de": "Den explosiven, kurzen Bodenkontakt schulen, der Tempowechsel und Sprung erst trägt."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "konstanz_unter_hoechstdruck",
+      "hinweis": {
+       "de": "Integration: Tempo und Härte auch dann sauber halten, wenn der Druck am größten ist."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "outdoor_wind_und_boden",
+   "titel": {
+    "de": "Wind und Boden"
+   },
+   "kompetenzstufe": "fortgeschritten",
+   "spielform": "einzel",
+   "schwerpunkt": {
+    "de": "Sich draußen auf Wind und Untergrund einstellen"
+   },
+   "beschreibung": {
+    "de": "Eine Outdoor-Einheit für das Spiel im Freien: die Fußarbeit auf wechselndem Boden anpassen, den Wind lesen und nutzen — und die Längensteuerung anwenden, die draußen über Gewinn und Verlust entscheidet."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "schnelle_fuesse",
+      "hinweis": {
+       "de": "Fußarbeit wecken — draußen besonders wichtig, weil der Boden den Abdruck verändert."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "verschiedene_boeden",
+      "hinweis": {
+       "de": "Zuerst den Untergrund lesen und die Fußarbeit an Sand, Rasen, Asche oder Kunstrasen anpassen."
+      }
+     },
+     {
+      "baustein": "wind_lesen_nutzen",
+      "hinweis": {
+       "de": "Dann den Wind einbeziehen: Härte und Länge an die Windrichtung anpassen, gegen die Drift zielen."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "laenge_tiefe",
+      "hinweis": {
+       "de": "Anwendung: die Längensteuerung gezielt einsetzen — draußen ist sie unter Windeinfluss der Schlüssel."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "doppel_beginner_zusammenspiel",
+   "titel": {
+    "de": "Erstes Zusammenspiel im Doppel"
+   },
+   "kompetenzstufe": "beginner",
+   "spielform": "doppel",
+   "schwerpunkt": {
+    "de": "Als Paar aufschlagen, den Ball zuordnen, Platz lassen"
+   },
+   "beschreibung": {
+    "de": "Die erste Doppel-Einheit für Einsteiger-Paare: den Aufschlag in einfacher Reihenfolge, die klare Zuordnung des Balls über den Zuruf und das gegenseitige Platzlassen — die drei Grundlagen eines sicheren Zusammenspiels."
+   },
+   "phasen": {
+    "erwaermung": [
+     {
+      "baustein": "schnelle_fuesse",
+      "hinweis": {
+       "de": "Fußarbeit wecken — im Doppel Grundlage dafür, einander schnell auszuweichen."
+      }
+     }
+    ],
+    "hauptteil": [
+     {
+      "baustein": "aufschlag_im_doppel_einfach",
+      "hinweis": {
+       "de": "Zuerst der Doppel-Aufschlag in einfacher, fester Reihenfolge — so kommt ihr sauber ins Spiel."
+      }
+     },
+     {
+      "baustein": "wer_nimmt_den_ball",
+      "hinweis": {
+       "de": "Dann die wichtigste Grundabsprache: den Ball früh und deutlich einem von beiden zuordnen."
+      }
+     }
+    ],
+    "ausklang": [
+     {
+      "baustein": "einander_platz_lassen",
+      "hinweis": {
+       "de": "Anwendung: sich aufeinander bezogen bewegen und einander bewusst Platz lassen — am unsichtbaren Seil."
+      }
+     }
+    ]
+   }
+  }
+ ]
 }
