@@ -116,7 +116,7 @@ const outdoorKette = ['draussen_spielen', 'wind_lesen_nutzen', 'sonne_blendung',
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('95 Basisbausteine (79 + 5 Doppel-Beginner + 5 Doppel-Experte + 6 Outdoor), 22 Deltas', daten.bausteine.length === 95 && daten.deltas.length === 22);
+pruefe('95 Basisbausteine (79 + 5 Doppel-Beginner + 5 Doppel-Experte + 6 Outdoor), 24 Deltas', daten.bausteine.length === 95 && daten.deltas.length === 24);
 pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN, SQ]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN', 'SQ']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
@@ -195,19 +195,31 @@ pruefe('handgelenk_peitsche-Delta bündelt auf vorhand_drive_delta_bad', gleiche
 
 console.log('\n[3b] Cross-Sport-Modifikator (Herkunft TEN) — herkunftsreine Delta-Datei, zweite Herkunft');
 // Punkt 1: reine Delta-Datei ohne Basis-Bausteine; Kanten docken über zwei Stufen an.
-pruefe('Tennis-Deltas ohne eigene Basis-Bausteine (nur delta_bausteine)', (deltaTennis.bausteine || []).length === 0 && deltaTennis.delta_bausteine.length === 6);
-pruefe('alle 6 TEN-Deltas an existierende Basis-Bausteine gehängt', deltaTennis.delta_bausteine.every((d) => daten.bausteinVonId.has(d.basis_baustein) && deltaFuer(daten, d.basis_baustein, 'TEN')?.id === d.id));
-pruefe('TEN-Kanten treffen beide Stufen (4 Beginner-Technik + 2 Fortgeschritten)', ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'beginner' && deltaFuer(daten, id, 'TEN')) && ['ueberkopf_clear', 'beinarbeit_system'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'fortgeschritten' && deltaFuer(daten, id, 'TEN')));
+pruefe('Tennis-Deltas ohne eigene Basis-Bausteine (nur delta_bausteine)', (deltaTennis.bausteine || []).length === 0 && deltaTennis.delta_bausteine.length === 8);
+pruefe('alle 8 TEN-Deltas an existierende Basis-Bausteine gehängt', deltaTennis.delta_bausteine.every((d) => daten.bausteinVonId.has(d.basis_baustein) && deltaFuer(daten, d.basis_baustein, 'TEN')?.id === d.id));
+pruefe('TEN-Kanten treffen beide Stufen (4 Beginner-Technik + 2 Fortgeschritten-Technik)', ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'beginner' && deltaFuer(daten, id, 'TEN')) && ['ueberkopf_clear', 'beinarbeit_system'].every((id) => niedrigsteStufe(daten, daten.bausteinVonId.get(id)) === 'fortgeschritten' && deltaFuer(daten, id, 'TEN')));
+// TEN deckt jetzt auch die Taktik-Domäne ab: ein Beginner-Ziel (spielziel_verstehen) und ein Fortgeschritten-Doppel (aufschlag_rueckschlag_doppel).
+pruefe('TEN-Deltas erreichen die Taktik-Domäne (spielziel_verstehen beginner, aufschlag_rueckschlag_doppel fortgeschritten/doppel)', (() => {
+  const sv = daten.bausteinVonId.get('spielziel_verstehen');
+  const doppel = daten.bausteinVonId.get('aufschlag_rueckschlag_doppel');
+  return sv.domaene === 'taktik' && niedrigsteStufe(daten, sv) === 'beginner' && deltaFuer(daten, 'spielziel_verstehen', 'TEN')?.id === 'spielziel_verstehen_delta_ten'
+    && doppel.domaene === 'taktik' && spielformVon(doppel) === 'doppel' && niedrigsteStufe(daten, doppel) === 'fortgeschritten' && deltaFuer(daten, 'aufschlag_rueckschlag_doppel', 'TEN')?.id === 'aufschlag_rueckschlag_doppel_delta_ten';
+})());
+pruefe('erstes TEN-Doppel-Delta trägt spielform:doppel und zwei Ziele (doppel_spezifische_loesungen + aufschlag_rueckschlag_eroeffnung)', (() => {
+  const d = deltaFuer(daten, 'aufschlag_rueckschlag_doppel', 'TEN');
+  return d.spielform === 'doppel' && gleicheListe(d.spielziele.slice().sort(), ['aufschlag_rueckschlag_eroeffnung', 'doppel_spezifische_loesungen']);
+})());
 // Punkt 2: griff trägt jetzt zwei Herkunfts-Deltas — genau die gewählte greift.
 pruefe('griff hat sowohl BAD- als auch TEN-Delta', deltaFuer(daten, 'griff', 'BAD')?.id === 'griff_delta_bad' && deltaFuer(daten, 'griff', 'TEN')?.id === 'griff_delta_ten');
 setzeZurueck();
 setzeDiagnose({ stufe: 'fortgeschritten', herkunft: 'TEN' });
 const pfadFgTen = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Herkunft TEN blendet genau das TEN-Delta ein (BAD ignoriert)', pfadFgTen.stationen.find((s) => s.baustein.id === 'griff').delta?.id === 'griff_delta_ten');
-pruefe('kumulativer TEN-Pfad zeigt genau die 6 Tennis-Deltas', (() => {
+pruefe('kumulativer TEN-Pfad zeigt genau die 8 Tennis-Deltas (6 Technik + 2 Taktik)', (() => {
   const mitDelta = pfadFgTen.stationen.filter((s) => s.delta).map((s) => s.baustein.id);
-  return mitDelta.length === 6 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'ueberkopf_clear', 'beinarbeit_system']);
+  return mitDelta.length === 8 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'spielziel_verstehen', 'ueberkopf_clear', 'beinarbeit_system', 'aufschlag_rueckschlag_doppel']);
 })());
+pruefe('Taktik-Baustein spielziel_verstehen trägt bei TEN das Passierzone-Delta', pfadFgTen.stationen.find((s) => s.baustein.id === 'spielziel_verstehen').delta?.id === 'spielziel_verstehen_delta_ten');
 pruefe('positiver Transfer ueberkopf_clear trägt das TEN-Delta (strukturell wie die abbauenden)', pfadFgTen.stationen.find((s) => s.baustein.id === 'ueberkopf_clear').delta?.id === 'ueberkopf_clear_delta_ten');
 pruefe('rueckhand_delta_ten bündelt auf griff_delta_ten + vorhand_drive_delta_ten', gleicheListe(pfadFgTen.stationen.find((s) => s.baustein.id === 'rueckhand').delta.delta_buendelung, ['griff_delta_ten', 'vorhand_drive_delta_ten']));
 pruefe('kein TEN-Delta mit eigenem Übungsteil (Delta-Regel)', deltaTennis.delta_bausteine.every((d) => d.eigener_uebungsteil === false && d.uebungsteil == null));
@@ -220,7 +232,9 @@ pruefe('alle 6 SQ-Deltas an existierende Basis-Bausteine gehängt', deltaSquash.
 // Punkt 2: Mehrfach-Deltas wachsen — griff/aufschlag/vorhand_drive tragen alle drei.
 pruefe('griff/aufschlag/vorhand_drive tragen je BAD-, TEN- UND SQ-Delta', ['griff', 'aufschlag', 'vorhand_drive'].every((id) => deltaFuer(daten, id, 'BAD') && deltaFuer(daten, id, 'TEN') && deltaFuer(daten, id, 'SQ')));
 // Punkt 3: Deltas auf bisher delta-freien Basis-Bausteinen (Taktik, erstmals).
-pruefe('spielziel_verstehen/zentrale_position: bei BAD/TEN kein Delta, bei SQ eines', ['spielziel_verstehen', 'zentrale_position'].every((id) => deltaFuer(daten, id, 'BAD') === null && deltaFuer(daten, id, 'TEN') === null && deltaFuer(daten, id, 'SQ')?.id === `${id}_delta_sq`));
+pruefe('zentrale_position: bei BAD/TEN kein Delta, bei SQ eines', deltaFuer(daten, 'zentrale_position', 'BAD') === null && deltaFuer(daten, 'zentrale_position', 'TEN') === null && deltaFuer(daten, 'zentrale_position', 'SQ')?.id === 'zentrale_position_delta_sq');
+// spielziel_verstehen trägt seit dem TEN-Ausbau zwei Herkunfts-Deltas (TEN Passierzone, SQ Wand) — nur BAD bleibt leer.
+pruefe('spielziel_verstehen: bei BAD kein Delta, bei TEN und SQ je eines', deltaFuer(daten, 'spielziel_verstehen', 'BAD') === null && deltaFuer(daten, 'spielziel_verstehen', 'TEN')?.id === 'spielziel_verstehen_delta_ten' && deltaFuer(daten, 'spielziel_verstehen', 'SQ')?.id === 'spielziel_verstehen_delta_sq');
 setzeZurueck();
 setzeDiagnose({ stufe: 'fortgeschritten', herkunft: 'SQ' });
 const pfadFgSq = kompetenzpfad(daten, 'fortgeschritten');
@@ -376,6 +390,14 @@ pruefe('Cross-Sport auf der Spielform-Achse: BAD blendet die zwei Doppel-Deltas 
   return gleicheListe(mitDelta, ['doppel_grundlagen:doppel_grundlagen_delta_bad', 'das_umschalten_im_doppel:das_umschalten_im_doppel_delta_bad']);
 })());
 pruefe('Delta greift auch in der Baustein-Ansicht im Spielform-Kontext', stationImKontext(daten, 'das_umschalten_im_doppel', 'spielform:doppel').station.delta?.id === 'das_umschalten_im_doppel_delta_bad');
+// Herkunft TEN: das neue Tennis-Doppel-Delta greift auf derselben Achse; die BAD-Deltas fallen weg.
+setzeDiagnose({ herkunft: 'TEN' });
+pruefe('Cross-Sport auf der Spielform-Achse: TEN blendet genau das Tennis-Doppel-Delta ein', (() => {
+  const mitDelta = spielformpfad(daten, 'doppel').stationen.filter((s) => s.delta).map((s) => `${s.baustein.id}:${s.delta.id}`);
+  return gleicheListe(mitDelta, ['aufschlag_rueckschlag_doppel:aufschlag_rueckschlag_doppel_delta_ten']);
+})());
+pruefe('TEN-Doppel-Delta greift auch in der Baustein-Ansicht im Spielform-Kontext', stationImKontext(daten, 'aufschlag_rueckschlag_doppel', 'spielform:doppel').station.delta?.id === 'aufschlag_rueckschlag_doppel_delta_ten');
+setzeDiagnose({ herkunft: 'BAD' });
 pruefe('Delta-Bündelung verweist weich auf das Grundlagen-Doppel-Delta', (() => {
   const delta = daten.deltas.find((d) => d.id === 'das_umschalten_im_doppel_delta_bad');
   return gleicheListe(delta.delta_buendelung || [], ['doppel_grundlagen_delta_bad']) && daten.deltas.some((d) => d.id === 'doppel_grundlagen_delta_bad');
