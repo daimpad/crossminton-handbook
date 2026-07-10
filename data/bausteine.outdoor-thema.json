@@ -1,0 +1,182 @@
+{
+  "_meta": {
+    "beschreibung": "Outdoor-Themenblock: Querschnitt ueber Taktik und Athletik zum Spielen im Freien. Aktiviert erstmals den Baustein-Typ 'umgebungs_baustein' sowie die Dimensionen 'witterung' und 'untergrund' als Navigationsachsen, und belegt die bislang ungenutzten Umgebungsanpassungs-Spielziele (Bereich 5).",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl", "ja"],
+    "stand": "Erstausbau-Erweiterung — erster Outdoor-/Umgebungs-Inhalt.",
+    "dateiname_konvention": "bausteine.outdoor-thema.json (Querschnitt-Thema, analog zum Doppel-Thema).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Belegt erstmals: baustein_typ 'umgebungs_baustein'; witterung ['wind','sonne_blendung','naesse','hitze']; untergrund ['sand','rasen','asche','kunstrasen']; spielziele-Bereich 'umgebungsanpassung' ['windspiel','untergrundwechsel','licht_und_sicht','temperatur'].",
+    "kein_delta_grundsatz": "Outdoor ist crossminton-eigen (das Spiel entstand als netzloses Draussen-Spiel) — kein Herkunftskonflikt. Keine Cross-Sport-Deltas.",
+    "navigationsachsen": "Wie 'spielform' beim Doppel: 'witterung' und 'untergrund' werden zu orthogonalen Navigationsachsen. Ein Umgebungs-Reiter/Filter kann nach Wind/Sonne/Naesse/Hitze bzw. Boden gruppieren. Absent = Halle/kein Umgebungsbezug (Default).",
+    "untergrund_als_liste": "KOORDINIERTE ERWEITERUNG: 'untergrund' wird hier als LISTE gefuehrt (mehrere Boeden je Baustein moeglich), parallel zu 'witterung'. Ein bestehender String-Wert 'halle' ist als ein-elementige Liste ['halle'] zu lesen; fehlend = Halle/Default.",
+    "spielform_neutral": "Diese Bausteine gelten fuer Einzel und Doppel. 'spielform' ist bewusst nicht gesetzt (Default einzel); Outdoor ist orthogonal zur Spielform.",
+    "kompetenzstufe": "fortgeschritten (Anpassung an Wind/Boden setzt Grundkontrolle voraus).",
+    "gesundheitsrahmen": "Naesse und Hitze beruehren Sicherheit. STRIKT bei Achtsamkeit/Sicherheit gehalten (rutschfester Stand, Ueberhitzung erkennen, Schatten in Pausen) — KEINE Dosierungen, Trink-/Ernaehrungsvorgaben oder Gradwerte. Medizinisches wird an qualifizierte Anleitung/aerztlichen Rat verwiesen.",
+    "sachbezug": "Speeder bewusst schwerer/schmaler, windstabil bis Windstaerke 4; fuer staerkeren Wind der Cross-Speeder statt des Match-Speeders (im Turnier modifizierter Speeder nur mit Zustimmung von Organisator/Oberschiedsrichter). Der Seitenwechsel dient laut Regelwerk ausdruecklich dem Ausgleich von Wind und Licht.",
+    "ordnungslogik": "draussen_spielen (Rahmen) -> wind_lesen_nutzen -> sonne_blendung -> naesse_sicherer_stand -> hitze -> verschiedene_boeden."
+  },
+
+  "bausteine": [
+    {
+      "id": "draussen_spielen",
+      "typ": "umgebungs_baustein",
+      "domaene": "taktik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["spielziel_verstehen"],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): der Rahmen baut auf dem Grundverstaendnis von Feld und Passierzone auf",
+      "spielziele": ["windspiel", "laengen_tiefensteuerung"],
+      "vermittlungsziele": [],
+      "witterung": [],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Crossminton wurde als netzloses Outdoor-Spiel erfunden; der Speeder ist bewusst schwerer/schmaler und windstabil: Sportgeschichte/ICO.",
+      "querverweis": ["spielziel_verstehen"],
+      "anzeigetitel": {"de": "Draußen spielen"},
+      "erklaerteil": {
+        "de": "Crossminton ist ein Draußen-Spiel — als solches wurde es erfunden. Es kennt kein Netz, sondern die Passierzone zwischen den beiden Feldern, und genau das macht es überall spielbar: am Strand, im Park, auf der Wiese, auf dem Platz. Wer nach drinnen gewöhnt ist, trifft draußen auf neue Bedingungen, die das Spiel verändern.\n\nDer wichtigste Unterschied ist der Wind. Ohne Netz und mit offener Flugbahn wirkt der Wind direkt auf den Speeder. Dafür ist der Speeder gemacht: schwerer, schmaler und kürzer als ein Federball, fliegt er stabil und ist bis etwa Windstärke 4 gut spielbar. Bei stärkerem Wind gibt es einen eigens dafür entwickelten, schwereren Speeder (den Cross-Speeder) statt des schnelleren Match-Speeders — im Turnier darf ein modifizierter Speeder aber nur mit Zustimmung von Organisator und Oberschiedsrichter zum Einsatz kommen.\n\nAuch der Boden wechselt: Sand, Rasen, Asche oder Kunstrasen verlangen jeweils andere Fußarbeit als der feste Hallenboden. Und Sonne, Nässe und Hitze kommen als Bedingungen hinzu, die es drinnen nicht gibt. Nicht zuletzt hat die Seitenwechsel-Regel draußen einen handfesten Sinn: Sie gleicht Wind und Licht zwischen beiden Parteien aus.\n\nDie folgenden Bausteine gehen diese Bedingungen der Reihe nach durch. Der Grundgedanke ist immer derselbe: Draußen spielst du nicht gegen die Bedingungen, sondern mit ihnen.\n\nEin Bild: Ein Segler flucht nicht über den Wind, er stellt die Segel. Draußen ist die Umgebung dein Mitspieler — wer sie liest, hat einen Vorteil."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an das letzte Mal, als du draußen gespielt hast: Welche Bedingung hat dein Spiel am meisten verändert — Wind, Boden, Sonne oder Hitze? Und hast du versucht, dagegen anzukämpfen, oder dich darauf eingestellt? Nimm dir vor, beim nächsten Mal draußen zuerst die Bedingungen bewusst zu lesen, bevor du losspielst — so wie du einen Gegner liest."
+      }
+    },
+
+    {
+      "id": "wind_lesen_nutzen",
+      "typ": "umgebungs_baustein",
+      "domaene": "taktik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen", "laenge_tiefe"],
+      "voraussetzungen_lesart": "gemischt: draussen_spielen (intra, Rahmen); laenge_tiefe (stufenuebergreifend, Laengensteuerung als Basis)",
+      "spielziele": ["windspiel", "tempo_haertedosierung", "laengen_tiefensteuerung"],
+      "vermittlungsziele": [],
+      "witterung": ["wind"],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Windwirkung auf die offene Flugbahn ohne Netz, Anpassung von Haerte und Laenge, Ausgleich per Seitenwechsel: Crossminton-Praxis und Aerodynamik (Trainingswissenschaft).",
+      "witterung_beleg": "wind",
+      "querverweis": ["seitenwechsel", "laenge_tiefe"],
+      "anzeigetitel": {"de": "Wind lesen und nutzen"},
+      "erklaerteil": {
+        "de": "Der Wind ist die eigentliche Signatur-Herausforderung des Outdoor-Spiels. Weil kein Netz die Flugbahn begrenzt und der Speeder über eine offene Strecke fliegt, greift der Wind spürbar ein — und wer ihn liest, macht ihn zum Verbündeten.\n\nZuerst liest du die Richtung. Spielst du gegen den Wind, bremst er den Speeder und lässt ihn kürzer fallen; du schlägst dann härter und flacher, um die Länge zu halten. Spielst du mit dem Wind, trägt er den Speeder weiter; du nimmst Tempo heraus und spielst kontrollierter, damit er nicht ins Aus getragen wird. Seitenwind versetzt den Speeder zur Seite — du zielst bewusst gegen die Drift, ein Stück in den Wind hinein.\n\nDer schwere, windstabile Speeder hilft dir dabei: Er fliegt bis etwa Windstärke 4 zuverlässig. Bei stärkerem Wind ist der schwerere Cross-Speeder die bessere Wahl. Doch auch der beste Speeder hebt die Drift nicht auf — dein Anpassen bleibt entscheidend.\n\nTaktisch wird der Wind sogar zur Waffe. Mit Rückenwind kannst du Druck über die Länge aufbauen; gegen den Wind ist der hohe, lange Ball riskant und der flache, harte sicherer. Und die Seitenwechsel-Regel sorgt dafür, dass beide Parteien den Vor- und Nachteil des Windes gleichermaßen tragen.\n\nEin Bild: Der Wind ist wie eine Strömung beim Schwimmen. Wer dagegen anstürmt, verliert Kraft; wer sie liest und nutzt, kommt mit halbem Aufwand voran."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Mit dem Wind spielen",
+          "ziel": "Härte, Länge und Zielpunkt bewusst an die Windrichtung anpassen.",
+          "schritte": [
+            "Stell dich an einem windigen Tag zunächst so, dass du gegen den Wind spielst: schlage härter und flacher, um die Länge zu halten.",
+            "Wechsle die Richtung und spiele mit dem Wind: nimm Tempo heraus und spiele kontrollierter, damit der Speeder nicht ins Aus getragen wird.",
+            "Bei Seitenwind: ziele bewusst ein Stück in den Wind hinein, gegen die Drift.",
+            "Beobachte, wie weit der Wind den Speeder jeweils versetzt, und korrigiere von Schlag zu Schlag.",
+            "Wenn der Wind zu stark für den Match-Speeder wird, wechsle zum schwereren Cross-Speeder."
+          ],
+          "selbstkontrolle": "Passt du Härte und Länge an die Windrichtung an, oder spielst du gegen und mit dem Wind gleich? Zielst du bei Seitenwind gegen die Drift? Der Wind ist berechenbar, wenn du ihn liest — dann spielst du mit ihm statt gegen ihn.",
+          "abschluss": "Wind lesen und nutzen ist die Kernkunst des Outdoor-Spiels. Wer Richtung und Stärke einbezieht, verliert draußen keine Punkte mehr an den Wind — sondern gewinnt welche durch ihn."
+        }
+      }
+    },
+
+    {
+      "id": "sonne_blendung",
+      "typ": "umgebungs_baustein",
+      "domaene": "taktik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen"],
+      "voraussetzungen_lesart": "didaktisch (intra): baut auf dem Outdoor-Rahmen auf",
+      "spielziele": ["licht_und_sicht", "fruehe_flugbahnlesung"],
+      "vermittlungsziele": [],
+      "witterung": ["sonne_blendung"],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Blendung bei hohen Baellen, Positionierung und Sichtschutz, Ausgleich per Seitenwechsel: Outdoor-Praxis.",
+      "witterung_beleg": "sonne_blendung",
+      "querverweis": ["seitenwechsel"],
+      "anzeigetitel": {"de": "Sonne und Blendung"},
+      "erklaerteil": {
+        "de": "Die Sonne ist draußen ein stiller Gegner. Besonders bei hohen Bällen kann sie dich blenden und den entscheidenden Sekundenbruchteil kosten, in dem du den Speeder aus den Augen verlierst. Wer die Sonne einplant, verliert diese Punkte nicht.\n\nDer Umgang beginnt mit der Wahrnehmung: Du weißt, wo die Sonne steht, und rechnest damit, dass hohe Bälle in ihre Richtung schwer zu sehen sind. Statt direkt in die Sonne zu blicken, drehst du den Kopf leicht und nimmst den Speeder aus dem Augenwinkel oder fängst ihn früher ab, bevor er in den grellen Bereich steigt. Das frühe Lesen der Flugbahn hilft dir hier doppelt.\n\nEin Schirm an der Kappe oder eine Sonnenbrille können die Blendung mindern. Und taktisch lohnt es sich, dem Gegner die Sonne zu überlassen: Ein hoher Ball in seine Blendrichtung ist schwerer zu returnieren.\n\nAuch hier greift die Seitenwechsel-Regel: Sie sorgt dafür, dass nicht eine Partei das ganze Spiel mit der Sonne im Gesicht steht. Der Nachteil wandert fair zwischen beiden.\n\nEin Bild: Die Sonne ist wie ein Scheinwerfer, der dich im falschen Moment blendet. Wer weiß, wo er steht, dreht rechtzeitig den Kopf — und schaut nicht hinein."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein Spiel in der Sonne: Hast du hohe Bälle verloren, weil dich das Licht geblendet hat? Nimm dir vor, beim nächsten Mal bewusst zu wissen, wo die Sonne steht, hohe Bälle nicht direkt anzublicken, sondern den Kopf leicht zu drehen oder früh abzufangen — und den hohen Ball in die Blendrichtung des Gegners als taktisches Mittel zu nutzen."
+      }
+    },
+
+    {
+      "id": "naesse_sicherer_stand",
+      "typ": "umgebungs_baustein",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen", "schnelle_fuesse"],
+      "voraussetzungen_lesart": "gemischt: draussen_spielen (intra); schnelle_fuesse (stufenuebergreifend, Fussarbeit als Basis)",
+      "spielziele": ["untergrundwechsel", "wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "witterung": ["naesse"],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Rutschgefahr und sicherer Stand auf nassem Boden, angepasste Bewegung; der Speeder ist wasserfest, der Untergrund aber rutschig: Outdoor-Praxis und Bewegungssicherheit.",
+      "witterung_beleg": "naesse",
+      "anzeigetitel": {"de": "Nässe und sicherer Stand"},
+      "erklaerteil": {
+        "de": "Nässe verändert draußen vor allem eines: den Halt. Der Speeder selbst ist wasserfest und fliegt weiter, aber der Boden wird rutschig — und damit rückt die Sicherheit in den Vordergrund. Bei Nässe gilt: kontrollierte Bewegung vor maximalem Tempo.\n\nDer wichtigste Punkt ist der sichere Stand. Auf nassem Rasen, feuchtem Belag oder glattem Boden bremst und wechselt die Richtung schwerer; ein zu hastiger Antritt kann zum Ausrutschen führen. Du nimmst deshalb das Tempo bewusst etwas zurück, machst kürzere, kontrollierte Schritte und vermeidest ruckartige Richtungswechsel, bei denen der Fuß wegrutschen könnte.\n\nGeeignetes Schuhwerk mit gutem Profil hilft, den Halt zu bewahren. Und du prüfst den Boden vor dem Spiel: Wo ist es besonders glatt, wo sammelt sich Wasser? Diese Stellen umspielst du bewusst.\n\nEs geht hier nicht um Leistung, sondern um Unversehrtheit. Wenn der Boden zu rutschig wird, ist es klüger, das Spiel zu unterbrechen, als eine Verletzung zu riskieren. Bei allem, was über vorsichtiges Spielen hinausgeht — Schmerzen nach einem Ausrutschen etwa —, ist qualifizierter Rat die richtige Adresse, nicht das Weiterspielen.\n\nEin Bild: Auf nassem Boden bewegst du dich wie auf einem frisch gewischten Flur — mit kurzen, sicheren Schritten, nicht mit vollem Lauf. Wer das beherzigt, bleibt im Spiel und heil."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an das Spielen auf nassem Boden: Achtest du auf deinen Stand, oder spielst du mit vollem Tempo weiter, als wäre der Boden trocken? Nimm dir vor, bei Nässe kürzere, kontrollierte Schritte zu machen, ruckartige Richtungswechsel zu vermeiden und den Boden vorher auf glatte Stellen zu prüfen. Und mach dir klar: Wird es zu rutschig, ist Unterbrechen klüger als ein Sturz — bei Schmerzen nach einem Ausrutschen gehört die Einschätzung in fachkundige Hände."
+      }
+    },
+
+    {
+      "id": "hitze",
+      "typ": "umgebungs_baustein",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen", "durchhalten"],
+      "voraussetzungen_lesart": "gemischt: draussen_spielen (intra); durchhalten (stufenuebergreifend, Ausdauer als Basis)",
+      "spielziele": ["temperatur", "satz_match_regeneration"],
+      "vermittlungsziele": [],
+      "witterung": ["hitze"],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Achtsamkeit bei Hitze im Freien (Ueberhitzung erkennen, Schatten in Pausen, Tempo einteilen); Medizinisches an qualifizierte Anleitung verwiesen: Outdoor-Praxis und Gesundheitsrahmen.",
+      "witterung_beleg": "hitze",
+      "anzeigetitel": {"de": "Hitze"},
+      "erklaerteil": {
+        "de": "Bei Hitze spielt der Körper mit. Ein Match in der prallen Sonne fordert mehr als dasselbe Spiel in der kühlen Halle — und hier steht die Achtsamkeit für dich selbst über allem. Dieser Baustein gibt dir keine Vorgaben, sondern schärft den Blick für die Zeichen.\n\nDer erste Grundsatz ist, die Signale des eigenen Körpers ernst zu nehmen. Starke Erschöpfung, Schwindel, Übelkeit oder das Nachlassen der Konzentration können bei Hitze Zeichen von Überhitzung sein — sie verlangen eine Pause, nicht Zähnezusammenbeißen. Sich in der Hitze durchzubeißen ist kein Zeichen von Stärke.\n\nDer zweite Grundsatz ist, die Bedingungen klug zu nutzen. Die Pausen zwischen den Sätzen verbringst du möglichst im Schatten. Du teilst dir die Kräfte über das Match ein, statt jeden Ballwechsel auf Anschlag zu spielen. Und du planst, wenn möglich, die heißesten Stunden des Tages nicht für das intensivste Spiel ein.\n\nHier gilt die klare Grenze des Gesundheitsrahmens: Diese App gibt dir keine Trink-, Ernährungs- oder Belastungsvorgaben. Bei allem, was über normales Spielen hinausgeht — anhaltendem Unwohlsein, Anzeichen eines Hitzeschadens —, ist ärztlicher oder fachkundiger Rat die richtige Adresse. Auf sich zu achten ist Erfahrung, nicht Schwäche.\n\nEin Bild: Dein Körper ist bei Hitze wie ein Motor, der heiß läuft. Wer die Temperaturanzeige im Blick behält und rechtzeitig kühlt, kommt an — wer sie ignoriert, bleibt liegen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über das Spielen bei Hitze nach: Nimmst du Warnzeichen wie Schwindel, Übelkeit oder starke Erschöpfung ernst, oder spielst du sie weg? Nimm dir vor, bei Hitze die Pausen im Schatten zu verbringen, dir die Kräfte einzuteilen und bei Anzeichen von Überhitzung zu pausieren statt weiterzuspielen. Und mach dir klar: Bei anhaltendem Unwohlsein ist ärztlicher oder fachkundiger Rat die richtige Adresse."
+      }
+    },
+
+    {
+      "id": "verschiedene_boeden",
+      "typ": "umgebungs_baustein",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen", "beinarbeit"],
+      "voraussetzungen_lesart": "gemischt: draussen_spielen (intra); beinarbeit (stufenuebergreifend, Fussarbeit als Basis)",
+      "spielziele": ["untergrundwechsel", "wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "untergrund": ["sand", "rasen", "asche", "kunstrasen"],
+      "witterung": [],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Angepasste Fussarbeit auf verschiedenen Boeden (Sand weich/langsam, Rasen teils glatt/uneben, Asche rutschig, Kunstrasen griffig); Court-Sicherung per Heringen (weich) oder Klebeband/Kreide (hart): Outdoor-Praxis.",
+      "untergrund_beleg": "sand, rasen, asche, kunstrasen",
+      "querverweis": ["beinarbeit"],
+      "anzeigetitel": {"de": "Verschiedene Böden"},
+      "erklaerteil": {
+        "de": "Der feste Hallenboden ist nur einer von vielen. Draußen spielst du auf Sand, Rasen, Asche oder Kunstrasen — und jeder Boden verlangt eine andere Fußarbeit. Wer den Untergrund liest und seine Bewegung anpasst, steht sicher und ist schneller am Ball.\n\nAuf Sand, etwa am Strand, ist der Boden weich und uneben. Er bremst jeden Schritt, kostet Kraft und macht schnelle Antritte schwerer. Du spielst hier mit breiterem, stabilem Stand, machst kürzere Wege und rechnest mit dem langsameren Abdruck. Auf Rasen kann es je nach Feuchte glatt oder uneben sein — der Halt wechselt, und du prüfst den Boden vorher. Asche ist rutschig und lässt kontrolliertes Gleiten zu, verlangt aber einen sicheren Stand. Kunstrasen bietet meist guten Grip, ähnlich der Halle.\n\nEin praktischer Punkt kommt hinzu: die Feldmarkierung. Auf weichem Boden wie Sand oder Rasen wird der Court mit Heringen gesichert, auf hartem mit Klebeband oder Kreide. Ein sauber fixiertes Feld verhindert Stolperfallen.\n\nDer gemeinsame Nenner ist, den Boden vor dem Spiel bewusst wahrzunehmen und die Fußarbeit darauf einzustellen, statt die Hallen-Gewohnheit einfach zu übertragen.\n\nEin Bild: Ein guter Wanderer wählt den Tritt nach dem Untergrund — auf Fels anders als auf Geröll, auf Sand anders als auf Waldboden. Genauso passt du deine Fußarbeit dem Boden an, auf dem du spielst."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Boden lesen",
+          "ziel": "Die Fußarbeit bewusst an den jeweiligen Untergrund anpassen.",
+          "schritte": [
+            "Spiele oder bewege dich testweise auf einem ungewohnten Boden (z. B. Sand oder Rasen) und spüre, wie sich Abdruck und Halt verändern.",
+            "Auf weichem, langsamem Boden: breiterer, stabiler Stand, kürzere Wege, mit dem langsameren Abdruck rechnen.",
+            "Auf glattem oder rutschigem Boden: kontrollierte Schritte, keine ruckartigen Wechsel, den Boden vorher auf Halt prüfen.",
+            "Achte darauf, die Hallen-Gewohnheit nicht einfach zu übertragen, sondern die Bewegung anzupassen.",
+            "Sichere bei eigenem Aufbau das Feld passend: Heringe auf weichem, Klebeband oder Kreide auf hartem Boden."
+          ],
+          "selbstkontrolle": "Passt du deine Fußarbeit dem Boden an, oder bewegst du dich überall wie in der Halle? Prüfst du den Halt, bevor du mit vollem Tempo spielst? Jeder Boden hat seinen eigenen Tritt — wer ihn liest, steht sicher und kommt schneller an den Speeder.",
+          "abschluss": "Verschiedene Böden verlangen verschiedene Fußarbeit. Wer den Untergrund bewusst liest und sich einstellt, spielt draußen sicher auf jedem Grund."
+        }
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}

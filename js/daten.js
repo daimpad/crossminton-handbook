@@ -30,7 +30,13 @@ const INHALTSDATEIEN = [
   'data/bausteine.experte-taktik.json',
   'data/bausteine.experte-mentales.json',
   'data/bausteine.experte-athletik_kondition.json',
+  // Doppel-Querschnitt über alle drei Stufen (spielform:doppel) — Reihenfolge in
+  // der Datei bestimmt die Spielform-Achse (Beginner → Fortgeschritten → Experte).
+  'data/bausteine.doppel-beginner.json',
   'data/bausteine.doppel-thema.json',
+  'data/bausteine.doppel-experte.json',
+  // Outdoor/Umgebungs-Querschnitt (typ umgebungs_baustein, witterung/untergrund).
+  'data/bausteine.outdoor-thema.json',
   'data/bausteine.delta-tennis.json',
   'data/bausteine.delta-squash.json',
 ];
@@ -72,6 +78,19 @@ export function domaenenVon(baustein) {
 // Feld = 'einzel'. Alle Alt-Bausteine gelten damit ohne Änderung als Einzel.
 export function spielformVon(baustein) {
   return baustein.spielform || 'einzel';
+}
+
+// Untergrund (Modifikator-Dimension, koordinierte Erweiterung: als LISTE geführt).
+// Fehlendes Feld = Halle (Default); ein Alt-String 'halle' liest sich als ['halle'].
+export function untergrundVon(baustein) {
+  const u = baustein.untergrund;
+  if (u == null) return ['halle'];
+  return Array.isArray(u) ? u : [u];
+}
+
+// Witterung (nur outdoor, sonst leere Liste) — Navigationsachse wie Spielform.
+export function witterungVon(baustein) {
+  return Array.isArray(baustein.witterung) ? baustein.witterung : [];
 }
 
 // Trainingseinheit (Spez. 3.4): geordnete Referenzliste auf Übungsteile, gegliedert
@@ -222,7 +241,9 @@ function pruefeDaten(daten) {
     for (const k of kuerzel) {
       if (!inVokabular(voka.transfer_herkunft, k)) w.push(`${b.id}: unbekanntes Transfer-Kürzel "${k}"`);
     }
-    if (b.untergrund && !inVokabular(voka.untergrund, b.untergrund)) w.push(`${b.id}: unbekannter Untergrund "${b.untergrund}"`);
+    for (const grund of untergrundVon(b)) {
+      if (!inVokabular(voka.untergrund, grund)) w.push(`${b.id}: unbekannter Untergrund "${grund}"`);
+    }
     for (const wetter of b.witterung || []) {
       if (!inVokabular(voka.witterung, wetter)) w.push(`${b.id}: unbekannte Witterung "${wetter}"`);
     }

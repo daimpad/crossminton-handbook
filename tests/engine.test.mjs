@@ -7,8 +7,8 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from '../js/daten.js';
-import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht } from '../js/pfade.js';
+import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
+import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { registriereEinheitAbschluss, setzeDiagnose, setzeTeilStatus, setzeZurueck } from '../js/zustand.js';
 
@@ -29,6 +29,9 @@ const experteTaktik = liesJson('data/bausteine.experte-taktik.json');
 const experteMentales = liesJson('data/bausteine.experte-mentales.json');
 const experteAthletik = liesJson('data/bausteine.experte-athletik_kondition.json');
 const doppelThema = liesJson('data/bausteine.doppel-thema.json');
+const doppelBeginner = liesJson('data/bausteine.doppel-beginner.json');
+const doppelExperte = liesJson('data/bausteine.doppel-experte.json');
+const outdoorThema = liesJson('data/bausteine.outdoor-thema.json');
 const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
 const deltaSquash = liesJson('data/bausteine.delta-squash.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
@@ -54,7 +57,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo);
+const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelBeginner, doppelThema, doppelExperte, outdoorThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -64,9 +67,9 @@ const taktikKette = ['spielziel_verstehen', 'zentrale_position', 'laenge_tiefe',
 // Blätter in Dateireihenfolge (zweite nicht-lineare Graphform).
 const mentalesKette = ['warum_der_kopf_mitspielt', 'routine_vor_dem_aufschlag', 'ruhig_bleiben_wenn_es_eng_wird', 'den_fehler_abhaken', 'bei_der_sache_bleiben'];
 const athletikKette = ['warum_athletik_dein_spiel_traegt', 'richtig_aufwaermen', 'beweglichkeit_und_schulter', 'schnelle_fuesse', 'durchhalten', 'erholen'];
-// Beginner-Pool: Domänen-Blöcke in Vokabular-Reihenfolge (technik, taktik,
-// trainingsgestaltung[leer], mentales, athletik_kondition).
-const erwarteteKette = [...technikKette, ...taktikKette, ...mentalesKette, ...athletikKette];
+// Beginner-Pool: Domänen-Blöcke in Vokabular-Reihenfolge; Doppel-Beginner je Domäne
+// angehängt (Taktik 3, Mentales 1, Athletik 1) → 28 Bausteine.
+const erwarteteKette = [...technikKette, ...taktikKette, 'erste_schritte_doppel', 'wer_nimmt_den_ball', 'aufschlag_im_doppel_einfach', ...mentalesKette, 'sich_absprechen', ...athletikKette, 'einander_platz_lassen'];
 // Fortgeschritten-Technik (Kraftquelle → Überkopf → Finesse → Beinarbeit-System).
 const fgTechnikKette = ['handgelenk_peitsche', 'ueberkopf_clear', 'smash', 'kurzes_spiel_stopp', 'schnitt_spin', 'beinarbeit_system'];
 // Fortgeschritten-Taktik: Umschalten (Rahmen) → Punkt aufbauen → Smash vorbereiten
@@ -103,10 +106,17 @@ const experteAthletikKette = ['form_ueber_die_saison', 'reaktivkraft_bodenkontak
 // Trainer-Trainingsgestaltung (Sternform, kompetenzstufe ["trainer"]): Rahmen +
 // vier Vermittlungstätigkeiten. Orthogonal zur Könnensstufe.
 const trainerGestaltungKette = ['was_gutes_vermitteln_ausmacht', 'inhalt_zugaenglich_machen', 'fehler_erkennen_korrigieren', 'uebungen_aufbauen', 'gruppe_fuehren'];
+// Doppel-Ausbau nach unten/oben (spielform:doppel, typ micro): erscheinen im
+// Kompetenz-/Themenpfad an ihrer Domäne/Stufe, auf der Spielform-Achse als ein Thema.
+const doppelBeginnerKette = ['erste_schritte_doppel', 'wer_nimmt_den_ball', 'aufschlag_im_doppel_einfach', 'sich_absprechen', 'einander_platz_lassen'];
+const doppelExperteKette = ['paar_als_system', 'gegnerisches_paar_lesen', 'partner_in_position_bringen', 'nahtlos_umschalten', 'blindes_verstaendnis'];
+// Outdoor-Querschnitt (typ umgebungs_baustein, fortgeschritten): eigene Umgebungs-Achse,
+// aus Kompetenz- und Themenpfad gefiltert (Typ-Filter), erzählgeordnet.
+const outdoorKette = ['draussen_spielen', 'wind_lesen_nutzen', 'sonne_blendung', 'naesse_sicherer_stand', 'hitze', 'verschiedene_boeden'];
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('79 Basisbausteine (69 + 5 Experte-Mentales + 5 Experte-Athletik), 22 Deltas', daten.bausteine.length === 79 && daten.deltas.length === 22);
+pruefe('95 Basisbausteine (79 + 5 Doppel-Beginner + 5 Doppel-Experte + 6 Outdoor), 22 Deltas', daten.bausteine.length === 95 && daten.deltas.length === 22);
 pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN, SQ]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN', 'SQ']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
@@ -125,15 +135,15 @@ pruefe('Sternform aufgelöst: Rahmen-Einstieg vor seinen Werkzeug-Blättern', ((
 })());
 pruefe('keine Deltas aktiv', pfadOhne.stationen.every((s) => s.delta === null));
 pruefe('keine Skip-Kandidaten', pfadOhne.stationen.every((s) => !s.skipKandidat));
-pruefe('Beginner ist kumulativ bis Beginner = nur 23 Beginner-Bausteine', pfadOhne.stationen.length === 23);
+pruefe('Beginner ist kumulativ bis Beginner = 28 Beginner-Bausteine (23 + 5 Doppel-Beginner)', pfadOhne.stationen.length === 28);
 
 console.log('\n[2b] Kompetenzpfad über zwei Stufen (kumulativ)');
 const pfadBeginner = kompetenzpfad(daten, 'beginner');
 const pfadFg = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Beginner sieht keine Fortgeschritten-Bausteine', pfadBeginner.stationen.every((s) => ![...fgTechnikKette, ...fgTaktikKette].includes(s.baustein.id)));
-pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten je Domäne (Doppel-Querschnitt hängt an seine Domäne an) (52)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...doppelTaktikKette, ...fgMentalesKette, 'verstaendigung_im_paar', ...fgAthletikKette, 'bewegung_als_einheit']));
-pruefe('Beginner-Bausteine bleiben an ihrer niedrigsten Stufe (Block vorn)', pfadFg.stationen.slice(0, 23).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
-pruefe('Fortgeschritten-Block folgt geschlossen hinten', pfadFg.stationen.slice(23).every((s) => niedrigsteStufe(daten, s.baustein) === 'fortgeschritten'));
+pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten je Domäne (Doppel-Querschnitt hängt an seine Domäne an) (57)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...doppelTaktikKette, ...fgMentalesKette, 'verstaendigung_im_paar', ...fgAthletikKette, 'bewegung_als_einheit']));
+pruefe('Beginner-Bausteine bleiben an ihrer niedrigsten Stufe (Block vorn)', pfadFg.stationen.slice(0, 28).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
+pruefe('Fortgeschritten-Block folgt geschlossen hinten', pfadFg.stationen.slice(28).every((s) => niedrigsteStufe(daten, s.baustein) === 'fortgeschritten'));
 pruefe('stufenübergreifende weiche Voraussetzung: handgelenk_peitsche ← vorhand_drive (Beginner)', (() => {
   const st = pfadFg.stationen.find((s) => s.baustein.id === 'handgelenk_peitsche');
   const idx = pfadFg.stationen.map((s) => s.baustein.id);
@@ -169,9 +179,9 @@ for (const station of pfadBad.stationen) {
   pruefe(`Delta an ${station.baustein.id}: ${erwartet ?? 'keins'}`, (station.delta?.id ?? null) === erwartet);
 }
 pruefe('Taktik-Delta greift domänenübergreifend im selben Modifikator', pfadBad.stationen.find((s) => s.baustein.id === 'aufschlag_taktisch').delta?.id === 'aufschlag_taktisch_delta_bad');
-pruefe('Skip-Kandidaten sind die delta-freien Bausteine (18 = 23 − 5 mit Delta)', (() => {
+pruefe('Skip-Kandidaten sind die delta-freien Bausteine (23 = 28 − 5 mit Delta)', (() => {
   const skip = pfadBad.stationen.filter((s) => s.skipKandidat).map((s) => s.baustein.id);
-  return skip.length === 18 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
+  return skip.length === 23 && !skip.includes('aufschlag_taktisch') && skip.includes('warum_der_kopf_mitspielt') && skip.includes('erholen');
 })());
 pruefe('deltaFuer liefert für unbekannte Herkunft null', deltaFuer(daten, 'griff', 'BS') === null);
 // Cross-Sport über zwei Stufen: der kumulative Fortgeschritten-Pfad blendet
@@ -251,8 +261,8 @@ pruefe('Voraussetzung außerhalb der Menge nur als Hinweis', gleicheListe(griffS
 // Fortgeschritten-Diagnose: kumulativ Beginner + Fortgeschritten (Ziel-Nähe → Domäne → Pool).
 setzeDiagnose({ stufe: 'fortgeschritten' });
 pruefe(
-  'Fortgeschritten-Diagnose: Faktor kumulativ über beide Stufen (8, domänen-geordnet)',
-  gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'tempo_haertedosierung' }).stationen.map((s) => s.baustein.id), ['griff', 'vorhand_drive', 'rueckhand', 'handgelenk_peitsche', 'ueberkopf_clear', 'smash', 'schnitt_spin', 'rumpfstabilitaet'])
+  'Fortgeschritten-Diagnose: Faktor kumulativ über beide Stufen, inkl. Outdoor-Baustein (9, domänen-geordnet)',
+  gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'tempo_haertedosierung' }).stationen.map((s) => s.baustein.id), ['griff', 'vorhand_drive', 'rueckhand', 'handgelenk_peitsche', 'ueberkopf_clear', 'smash', 'schnitt_spin', 'wind_lesen_nutzen', 'rumpfstabilitaet'])
 );
 setzeDiagnose({ stufe: 'beginner' });
 pruefe('ohne Ziel bleibt der Individualpfad leer', individualpfad(daten, null).stationen.length === 0);
@@ -269,16 +279,16 @@ pruefe('Altformat (Einzelziel-Objekt) bleibt ohne Migration gültig', individual
 
 console.log('\n[6] Themenpfad über fünf Domänen');
 pruefe('Domäne technik: Beginner-, Fortgeschritten-, Experten-Block (18)', gleicheListe(themenpfad(daten, 'technik').stationen.map((s) => s.baustein.id), [...technikKette, ...fgTechnikKette, ...experteTechnikKette]));
-pruefe('Domäne taktik: Beginner + Fortgeschritten + Experte + Doppel-Taktik (23)', gleicheListe(themenpfad(daten, 'taktik').stationen.map((s) => s.baustein.id), [...taktikKette, ...fgTaktikKette, ...experteTaktikKette, ...doppelTaktikKette]));
-pruefe('Domäne mentales: Beginner + Fortgeschritten + Experte + Doppel-Mentales zuletzt (16)', gleicheListe(themenpfad(daten, 'mentales').stationen.map((s) => s.baustein.id), [...mentalesKette, ...fgMentalesKette, ...experteMentalesKette, 'verstaendigung_im_paar']));
-pruefe('Domäne athletik_kondition: Beginner + Fortgeschritten + Experte + Doppel-Athletik zuletzt (17)', gleicheListe(themenpfad(daten, 'athletik_kondition').stationen.map((s) => s.baustein.id), [...athletikKette, ...fgAthletikKette, ...experteAthletikKette, 'bewegung_als_einheit']));
+pruefe('Domäne taktik: Beginner + Fortgeschritten + Experte + Doppel-Taktik (alle drei Stufen) (29)', gleicheListe(themenpfad(daten, 'taktik').stationen.map((s) => s.baustein.id), [...taktikKette, ...fgTaktikKette, ...experteTaktikKette, 'erste_schritte_doppel', 'wer_nimmt_den_ball', 'aufschlag_im_doppel_einfach', ...doppelTaktikKette, 'paar_als_system', 'gegnerisches_paar_lesen', 'partner_in_position_bringen']));
+pruefe('Domäne mentales: Beginner + Fortgeschritten + Experte + Doppel-Mentales (alle drei Stufen) zuletzt (18)', gleicheListe(themenpfad(daten, 'mentales').stationen.map((s) => s.baustein.id), [...mentalesKette, ...fgMentalesKette, ...experteMentalesKette, 'sich_absprechen', 'verstaendigung_im_paar', 'blindes_verstaendnis']));
+pruefe('Domäne athletik_kondition: Beginner + Fortgeschritten + Experte + Doppel-Athletik (alle drei Stufen) zuletzt (19)', gleicheListe(themenpfad(daten, 'athletik_kondition').stationen.map((s) => s.baustein.id), [...athletikKette, ...fgAthletikKette, ...experteAthletikKette, 'einander_platz_lassen', 'bewegung_als_einheit', 'nahtlos_umschalten']));
 // Facetten ohne Trainer-Perspektive: die reine Trainer-Domäne Trainingsgestaltung
 // bleibt eine 0-Facette (gated); alle vier Spieler-Domänen tragen jetzt den Experten-Block.
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner', trainer: false });
 const facetten = themenDomaenen(daten);
 const facette = (d) => facetten.find((f) => f.domaene === d).anzahl;
-pruefe('Facetten (ohne Trainer): technik=18, taktik=23, mentales=16, athletik=17, trainingsgestaltung gated=0', facette('technik') === 18 && facette('taktik') === 23 && facette('mentales') === 16 && facette('athletik_kondition') === 17 && facette('trainingsgestaltung') === 0);
+pruefe('Facetten (ohne Trainer, ohne Outdoor): technik=18, taktik=29, mentales=18, athletik=19, trainingsgestaltung gated=0', facette('technik') === 18 && facette('taktik') === 29 && facette('mentales') === 18 && facette('athletik_kondition') === 19 && facette('trainingsgestaltung') === 0);
 pruefe('Modifikator nicht im Themenpfad verdrahtet', (() => {
   setzeDiagnose({ herkunft: 'BAD' });
   return themenpfad(daten, 'mentales').stationen.every((s) => s.delta === null);
@@ -326,22 +336,22 @@ console.log('\n[7d] Domänenübergreifende Zieldiagnose über zwei Stufen, Vokab
 setzeZurueck();
 // Beginner-Diagnose: Faktoren nur bis Beginner-Stufe (Fortgeschritten-Bausteine ausgeblendet).
 setzeDiagnose({ stufe: 'beginner' });
-pruefe('Psychoregulation-Ziel (Bereich 4), Beginner: nur Beginner-Mentales', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben']));
+pruefe('Psychoregulation-Ziel (Bereich 4), Beginner: Beginner-Mentales inkl. Doppel-Absprache', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben', 'sich_absprechen']));
 pruefe('Energetik-Ziel (Bereich 1), Beginner: nur Beginner-Athletik', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'rally_ausdauer' }).stationen.map((s) => s.baustein.id), ['beinarbeit', 'warum_athletik_dein_spiel_traegt', 'durchhalten']));
 pruefe('satz_match_regeneration, Beginner: genau erholen', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'satz_match_regeneration' }).stationen.map((s) => s.baustein.id), ['erholen']));
-pruefe('doppel_spezifische_loesungen, Beginner: leer (Baustein liegt auf Fortgeschritten)', individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.length === 0);
+pruefe('doppel_spezifische_loesungen, Beginner: jetzt belegt durch das Beginner-Doppel (5)', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.map((s) => s.baustein.id), ['erste_schritte_doppel', 'wer_nimmt_den_ball', 'aufschlag_im_doppel_einfach', 'sich_absprechen', 'einander_platz_lassen']));
 // Fortgeschritten-Diagnose: kumulativ Beginner + Fortgeschritten — dieselben Faktoren
 // bespielen jetzt zwei Stufen (Psychoregulation, Energetik). Erstaktivierung doppel.
 setzeDiagnose({ stufe: 'fortgeschritten' });
-pruefe('Psychoregulation-Ziel, Fortgeschritten: kumulativ Beginner + Fortgeschritten-Mentales (inkl. Doppel-Verständigung)', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben', 'vom_werkzeug_zum_system', 'selbstgespraech_steuern', 'sich_das_spiel_vorstellen', 'momentum_lesen_und_drehen', 'ueber_das_match_stabil_bleiben', 'verstaendigung_im_paar']));
+pruefe('Psychoregulation-Ziel, Fortgeschritten: kumulativ Beginner + Fortgeschritten-Mentales (inkl. Doppel-Absprache + Verständigung)', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'konzentrationskonstanz' }).stationen.map((s) => s.baustein.id), ['warum_der_kopf_mitspielt', 'den_fehler_abhaken', 'bei_der_sache_bleiben', 'vom_werkzeug_zum_system', 'selbstgespraech_steuern', 'sich_das_spiel_vorstellen', 'momentum_lesen_und_drehen', 'ueber_das_match_stabil_bleiben', 'sich_absprechen', 'verstaendigung_im_paar']));
 pruefe('Energetik-Ziel, Fortgeschritten: kumulativ inkl. intervallausdauer + belastung_steuern', (() => {
   const ids = individualpfad(daten, { dimension: 'spielziele', faktor: 'rally_ausdauer' }).stationen.map((s) => s.baustein.id);
   return ids.includes('durchhalten') && ids.includes('intervallausdauer') && ids.includes('belastung_steuern_regenerieren');
 })());
-pruefe('satz_match_regeneration, Fortgeschritten: erholen + Fortgeschritten-Regeneration', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'satz_match_regeneration' }).stationen.map((s) => s.baustein.id), ['erholen', 'intervallausdauer', 'belastung_steuern_regenerieren']));
-// Spielziel-Faktor doppel_spezifische_loesungen (Bereich 6): durch den Doppel-Block
-// jetzt BREIT belegt — alle acht Doppel-Bausteine tragen ihn (Fortgeschritten-Stufe).
-pruefe('doppel_spezifische_loesungen, Fortgeschritten: breit belegt (alle 8 Doppel-Bausteine)', individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.length === 8);
+pruefe('satz_match_regeneration, Fortgeschritten: erholen + Fortgeschritten-Regeneration + Outdoor-Hitze', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'satz_match_regeneration' }).stationen.map((s) => s.baustein.id), ['erholen', 'intervallausdauer', 'belastung_steuern_regenerieren', 'hitze']));
+// Spielziel-Faktor doppel_spezifische_loesungen (Bereich 6): durch den Doppel-Ausbau
+// nach unten jetzt noch breiter belegt (Fortgeschritten-Stufe = Beginner + Fortgeschritten).
+pruefe('doppel_spezifische_loesungen, Fortgeschritten: breit belegt (13 Doppel-Bausteine, Beginner + Fortgeschritten)', individualpfad(daten, { dimension: 'spielziele', faktor: 'doppel_spezifische_loesungen' }).stationen.length === 13);
 pruefe('SP und AT im Transfer-Vokabular ergänzt', daten.vokabulare.transfer_herkunft.includes('SP') && daten.vokabulare.transfer_herkunft.includes('AT'));
 pruefe('SP/AT tragen ausgeschriebene Labels', labelsDe.vokabeln.transfer_herkunft.SP === 'Sportpsychologie' && labelsDe.vokabeln.transfer_herkunft.AT === 'Athletik-/Trainingswissenschaft');
 pruefe('delta_erwartet ist Dokumentation, keine Delta-Kante', (() => {
@@ -353,8 +363,8 @@ console.log('\n[7e] Spielform-Achse (NEUE Metadaten-Dimension spielform, Doppel-
 setzeZurueck();
 pruefe('spielform fehlt = einzel (Alt-Bausteine unangetastet)', spielformVon(daten.bausteinVonId.get('griff')) === 'einzel');
 pruefe('doppel_grundlagen nachträglich als spielform:doppel markiert', spielformVon(daten.bausteinVonId.get('doppel_grundlagen')) === 'doppel');
-pruefe('spielformen() bietet nur doppel als eigene Achse (einzel ist Default, kein Thema)', gleicheListe(spielformen(daten).map((s) => s.spielform), ['doppel']) && spielformen(daten)[0].anzahl === 8);
-pruefe('Spielform-Achse doppel: 8 Bausteine als ein Thema, quer über Domänen (Erzählreihenfolge)', gleicheListe(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.id), doppelThemaKette));
+pruefe('spielformen() bietet nur doppel als eigene Achse (einzel ist Default, kein Thema)', gleicheListe(spielformen(daten).map((s) => s.spielform), ['doppel']) && spielformen(daten)[0].anzahl === 18);
+pruefe('Spielform-Achse doppel: 18 Bausteine über alle drei Stufen als ein Thema (Erzählreihenfolge)', gleicheListe(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.id), ['doppel_grundlagen', ...doppelBeginnerKette, ...doppelThemaKette.slice(1), ...doppelExperteKette]));
 pruefe('Doppel-Thema queert drei Domänen (Taktik, Athletik, Mentales)', (() => {
   const domaenen = new Set(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.domaene));
   return domaenen.has('taktik') && domaenen.has('athletik_kondition') && domaenen.has('mentales');
@@ -381,7 +391,7 @@ pruefe('alle querverweis-IDs lösen auf einen Baustein auf (reine Dokumentation,
 // Der Reiter ist eine getrennte Entität: die Abschnitte liegen unter daten.regeln,
 // nie im Pool. (Slug-Überschneidungen wie der Abschnitt "aufschlag" ~ Baustein
 // "aufschlag" sind dabei belanglos — zwei Namensräume, kein Lookup übers Regel-Slug.)
-pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (79 Bausteine, Abschnitte separat)', daten.bausteine.length === 79 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
+pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (95 Bausteine, Abschnitte separat)', daten.bausteine.length === 95 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
 pruefe('Regeln tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', alleRegeln.every((r) => r.voraussetzungen === undefined && r.uebungsteil === undefined && r.delta === undefined && r.status === undefined));
 pruefe('Quellenangabe sichtbar hinterlegt (Herausgeber + Stand)', typeof daten.regeln.meta.quelle?.herausgeber === 'string' && daten.regeln.meta.quelle.herausgeber !== '' && typeof daten.regeln.meta.quelle?.stand === 'string' && daten.regeln.meta.quelle.stand !== '');
 pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'regeln_intro', 'regel_label', 'regel_bedeutung', 'regeln_quelle', 'regeln_stand', 'regeln_querverweis'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
@@ -397,10 +407,10 @@ pruefe('6 Experte-Taktik-Bausteine (2 Übung, 4 Reflexion), 0 Deltas, alle Takti
 pruefe('5 Experte-Mentales-Bausteine (alle Reflexion), 0 Deltas, alle Mentales/Experte', experteMentales.bausteine.length === 5 && experteMentales.delta_bausteine.length === 0 && experteMentales.bausteine.every((b) => b.domaene === 'mentales' && gleicheListe(b.kompetenzstufe, ['experte']) && b.reflexionsaufgabe && !b.uebungsteil));
 pruefe('5 Experte-Athletik-Bausteine (1 Übung, 4 Reflexion), 0 Deltas, alle Athletik/Experte', experteAthletik.bausteine.length === 5 && experteAthletik.delta_bausteine.length === 0 && experteAthletik.bausteine.every((b) => b.domaene === 'athletik_kondition' && gleicheListe(b.kompetenzstufe, ['experte'])) && experteAthletik.bausteine.filter((b) => b.uebungsteil).length === 1 && experteAthletik.bausteine.filter((b) => b.reflexionsaufgabe).length === 4);
 const pfadExperte = kompetenzpfad(daten, 'experte');
-pruefe('Experte kumulativ = 74 (52 + 6 Technik + 6 Taktik + 5 Mentales + 5 Athletik)', pfadExperte.stationen.length === 74);
-pruefe('Experten-Block domänen-geordnet Technik→Taktik→Mentales→Athletik (22)', gleicheListe(pfadExperte.stationen.slice(-22).map((s) => s.baustein.id), [...experteTechnikKette, ...experteTaktikKette, ...experteMentalesKette, ...experteAthletikKette]));
-pruefe('Fortgeschritten sieht KEINE Experten-Bausteine (alle vier Domänen), bleibt bei 52', kompetenzpfad(daten, 'fortgeschritten').stationen.length === 52 && kompetenzpfad(daten, 'fortgeschritten').stationen.every((s) => ![...experteTechnikKette, ...experteTaktikKette, ...experteMentalesKette, ...experteAthletikKette].includes(s.baustein.id)));
-pruefe('Experte behält den Beginner-Block vorn (kumulativ aufbauend)', pfadExperte.stationen.slice(0, 23).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
+pruefe('Experte kumulativ = 84 (57 bis Fortgeschritten + 22 Experten-native + 5 Doppel-Experte)', pfadExperte.stationen.length === 84);
+pruefe('Experten-Block domänen-geordnet, Doppel-Experte je Domäne eingereiht (27)', gleicheListe(pfadExperte.stationen.slice(-27).map((s) => s.baustein.id), [...experteTechnikKette, ...experteTaktikKette, 'paar_als_system', 'gegnerisches_paar_lesen', 'partner_in_position_bringen', ...experteMentalesKette, 'blindes_verstaendnis', ...experteAthletikKette, 'nahtlos_umschalten']));
+pruefe('Fortgeschritten sieht KEINE Experten-Bausteine (alle vier Domänen + Doppel-Experte), bleibt bei 57', kompetenzpfad(daten, 'fortgeschritten').stationen.length === 57 && kompetenzpfad(daten, 'fortgeschritten').stationen.every((s) => ![...experteTechnikKette, ...experteTaktikKette, ...experteMentalesKette, ...experteAthletikKette, ...doppelExperteKette].includes(s.baustein.id)));
+pruefe('Experte behält den Beginner-Block vorn (kumulativ aufbauend)', pfadExperte.stationen.slice(0, 28).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
 // Stufenübergreifende weiche Voraussetzungen Experte → Fortgeschritten (ordnen, nie sperren).
 pruefe('taeuschung ← kurzes_spiel_stopp + schnitt_spin (Fortgeschritten-Technik)', gleicheListe(daten.bausteinVonId.get('taeuschung').voraussetzungen, ['kurzes_spiel_stopp', 'schnitt_spin']));
 pruefe('sprung_smash ← smash (Fortgeschritten) + frueh_nehmen (Experte, intern)', gleicheListe(daten.bausteinVonId.get('sprung_smash').voraussetzungen, ['smash', 'frueh_nehmen']));
@@ -456,7 +466,7 @@ pruefe('Über-Reiter: Absätze + Dank/Quellen + Lizenz/Credits + GitHub-Link', (
 pruefe('Mitmachen-Reiter: 3 Möglichkeiten, jede mit cta_label + cta_ziel', (daten.appInfo.mitmachen.moeglichkeiten || []).length === 3 && daten.appInfo.mitmachen.moeglichkeiten.every((m) => m.cta_label?.de && m.cta_ziel));
 pruefe('Sprachanzeige rein darstellend (funktion_aktiv:false), 5 Sprachen de/en/fr/pl/ja, aktuell de', daten.appInfo.sprachen.funktion_aktiv === false && gleicheListe((daten.appInfo.sprachen.liste || []).map((s) => s.code), ['de', 'en', 'fr', 'pl', 'ja']) && daten.appInfo.sprachen.aktuell === 'de');
 pruefe('jede Sprache trägt Flagge + Kürzel + Label', (daten.appInfo.sprachen.liste || []).every((s) => s.flagge && s.kuerzel && s.label?.de));
-pruefe('App-Info erweitert den Baustein-Pool nicht (79 Bausteine, eigene Entität)', daten.bausteine.length === 79 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
+pruefe('App-Info erweitert den Baustein-Pool nicht (95 Bausteine, eigene Entität)', daten.bausteine.length === 95 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
 pruefe('GitHub-Links gefüllt (echte http-URLs): Über-Link + alle drei CTAs', daten.appInfo.ueber.links.every((l) => /^https?:\/\//.test(l.ziel)) && daten.appInfo.mitmachen.moeglichkeiten.every((m) => /^https?:\/\//.test(m.cta_ziel)));
 pruefe('Lizenz + Credits gesetzt (MIT, CC BY, Damian Paderta)', daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /MIT/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /CC BY/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /Damian Paderta/.test(e.de)));
 pruefe('Sprachanzeige-Hinweis aus den Daten entfernt (rein darstellend, keine Anmerkung)', daten.appInfo.sprachen.hinweis === undefined);
@@ -464,16 +474,39 @@ pruefe('App-Info trägt Version + Rechtstexte (Impressum/Datenschutz) für den F
 pruefe('Footer-Labels (de) vorhanden (Impressum, Datenschutz)', typeof labelsDe.ui.footer_impressum === 'string' && labelsDe.ui.footer_impressum !== '' && typeof labelsDe.ui.footer_datenschutz === 'string' && labelsDe.ui.footer_datenschutz !== '');
 pruefe('Nav-Labels (de) für die neuen Reiter vorhanden', typeof labelsDe.ui.nav_ueber === 'string' && labelsDe.ui.nav_ueber !== '' && typeof labelsDe.ui.nav_mitmachen === 'string' && labelsDe.ui.nav_mitmachen !== '');
 
+console.log('\n[7k] Doppel über alle drei Stufen + Outdoor/Umgebungs-Achse');
+setzeZurueck();
+pruefe('Beginner-Doppel (5, 3 Übung + 2 Reflexion), 0 Deltas, alle spielform:doppel/beginner', doppelBeginner.bausteine.length === 5 && doppelBeginner.delta_bausteine.length === 0 && doppelBeginner.bausteine.every((b) => b.spielform === 'doppel' && gleicheListe(b.kompetenzstufe, ['beginner'])) && doppelBeginner.bausteine.filter((b) => b.uebungsteil).length === 3 && doppelBeginner.bausteine.filter((b) => b.reflexionsaufgabe).length === 2);
+pruefe('Experte-Doppel (5, 2 Übung + 3 Reflexion), 0 Deltas, alle spielform:doppel/experte', doppelExperte.bausteine.length === 5 && doppelExperte.delta_bausteine.length === 0 && doppelExperte.bausteine.every((b) => b.spielform === 'doppel' && gleicheListe(b.kompetenzstufe, ['experte'])) && doppelExperte.bausteine.filter((b) => b.uebungsteil).length === 2 && doppelExperte.bausteine.filter((b) => b.reflexionsaufgabe).length === 3);
+pruefe('Spielform-Achse doppel deckt jetzt alle drei Stufen ab', (() => {
+  const stufen = new Set(spielformpfad(daten, 'doppel').stationen.map((s) => niedrigsteStufe(daten, s.baustein)));
+  return stufen.has('beginner') && stufen.has('fortgeschritten') && stufen.has('experte');
+})());
+pruefe('6 Outdoor-Bausteine (typ umgebungs_baustein, fortgeschritten, 2 Übung + 4 Reflexion), 0 Deltas', outdoorThema.bausteine.length === 6 && outdoorThema.delta_bausteine.length === 0 && outdoorThema.bausteine.every((b) => b.typ === 'umgebungs_baustein' && gleicheListe(b.kompetenzstufe, ['fortgeschritten'])) && outdoorThema.bausteine.filter((b) => b.uebungsteil).length === 2 && outdoorThema.bausteine.filter((b) => b.reflexionsaufgabe).length === 4);
+pruefe('umgebungs_baustein im Typ-Filter: aus Kompetenz- UND Themenpfad gefiltert', !kompetenzpfad(daten, 'experte').stationen.some((s) => s.baustein.typ === 'umgebungs_baustein') && !['taktik', 'athletik_kondition'].some((d) => themenpfad(daten, d).stationen.some((s) => s.baustein.typ === 'umgebungs_baustein')));
+pruefe('Umgebungs-Achse: umgebungspfad sammelt alle 6 in Erzählreihenfolge', gleicheListe(umgebungspfad(daten).stationen.map((s) => s.baustein.id), outdoorKette));
+pruefe('witterung als Navigationsachse (wind/sonne/naesse/hitze je belegt)', gleicheListe(witterungen(daten).map((e) => e.witterung), ['wind', 'sonne_blendung', 'naesse', 'hitze']));
+pruefe('untergrund als Navigationsachse (sand/rasen/asche/kunstrasen, ohne halle)', gleicheListe(untergruende(daten).map((e) => e.untergrund), ['sand', 'rasen', 'asche', 'kunstrasen']));
+pruefe('untergrund als LISTE: verschiedene_boeden trägt vier Böden, Alt-Baustein bleibt Halle', gleicheListe(untergrundVon(daten.bausteinVonId.get('verschiedene_boeden')), ['sand', 'rasen', 'asche', 'kunstrasen']) && gleicheListe(untergrundVon(daten.bausteinVonId.get('griff')), ['halle']));
+pruefe('witterungpfad wind = wind_lesen_nutzen; untergrundpfad sand = verschiedene_boeden', gleicheListe(umgebungspfad(daten, 'witterung', 'wind').stationen.map((s) => s.baustein.id), ['wind_lesen_nutzen']) && gleicheListe(umgebungspfad(daten, 'untergrund', 'sand').stationen.map((s) => s.baustein.id), ['verschiedene_boeden']));
+// Bereich 5 (Umgebungsanpassung) wird real — über den Individualpfad (Outdoor bleibt aus Kompetenz/Themen gefiltert).
+setzeDiagnose({ stufe: 'fortgeschritten' });
+pruefe('Bereich-5-Ziel windspiel (Fortgeschritten): Outdoor-Bausteine im Individualpfad', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'windspiel' }).stationen.map((s) => s.baustein.id), ['draussen_spielen', 'wind_lesen_nutzen']));
+pruefe('Bereich-5-Ziel untergrundwechsel (Fortgeschritten): Nässe + verschiedene Böden', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'untergrundwechsel' }).stationen.map((s) => s.baustein.id), ['naesse_sicherer_stand', 'verschiedene_boeden']));
+pruefe('Outdoor-/Doppel-Titel ins Label geliftet', labelsDe.bausteine.wind_lesen_nutzen === 'Wind lesen und nutzen' && labelsDe.bausteine.paar_als_system === 'Das Paar als System');
+pruefe('Umgebungs-UI-Labels (de) vorhanden (pfad_umgebung + Achsen-Überschriften)', ['pfad_umgebung', 'pfad_umgebung_text', 'umgebung_wetter', 'umgebung_boden', 'umgebung_alle'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
+setzeZurueck();
+
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner' });
-pruefe('global 0 von 79 (Gesamtpool inkl. Experte alle vier Domänen + Trainer)', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 79);
+pruefe('global 0 von 95 (Gesamtpool inkl. Doppel alle drei Stufen + Outdoor + Trainer)', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 95);
 setzeTeilStatus('griff', 'erklaerteil', 'erledigt');
 pruefe('nur Erklärteil erledigt → noch nicht absolviert', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).erklaertErledigt === 1);
 setzeTeilStatus('griff', 'uebungsteil', 'erledigt');
-pruefe('beide Teile erledigt → 1 von 79', globaleProjektion(daten).absolviert === 1);
+pruefe('beide Teile erledigt → 1 von 95', globaleProjektion(daten).absolviert === 1);
 const pfadProjektion = projektion(kompetenzpfad(daten).stationen.map((s) => s.baustein));
-pruefe('Beginner-Pfad-Projektion bleibt bei 23 (kumulativ bis Beginner)', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 23);
+pruefe('Beginner-Pfad-Projektion bei 28 (kumulativ bis Beginner, inkl. Doppel-Beginner)', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 28);
 const uebersicht = trainingsuebersicht(daten);
 pruefe('Trainingspfad stufen-kumulativ: Beginner sieht nur die zwei Beginner-Einheiten', uebersicht.length === 2 && uebersicht.every((e) => e.einheit.kompetenzstufe === 'beginner'));
 pruefe('Einheit über drei Phasen aufgelöst (beginner_erste_schlaege: 5 Übungen, Erwärmung→Ausklang)', (() => {

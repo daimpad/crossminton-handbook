@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "beschreibung": "Experten-Doppel: hoechste Doppel-Ebene, aufbauend auf dem Fortgeschritten-Doppel (doppel-thema). Das Paar als System, gegnerisches Paar lesen, Partner in Position bringen, nahtloses Umschalten, blindes Verstaendnis. Alle spielform: doppel. Herkunftsneutral — keine Deltas.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl", "ja"],
+    "stand": "Erstausbau-Erweiterung — Doppel-Ausbau nach oben. Vervollstaendigt das Doppel ueber alle drei Stufen.",
+    "dateiname_konvention": "bausteine.doppel-experte.json (Doppel-Thema, Experten-Stufe).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+    "spielform": "Alle Bausteine spielform: doppel. Belegt doppel_spezifische_loesungen (Bereich 6) auf Experten-Ebene.",
+    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer (siehe 11.5).",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf das Fortgeschritten-Doppel (doppel-thema) und die fortgeschrittene Taktik, plus intern.",
+    "innere_struktur": "2 uebungsteil (partner_in_position_bringen, nahtlos_umschalten), 3 reflexionsaufgabe.",
+    "ordnungslogik": "paar_als_system -> gegnerisches_paar_lesen -> partner_in_position_bringen -> nahtlos_umschalten -> blindes_verstaendnis."
+  },
+
+  "bausteine": [
+    {
+      "id": "paar_als_system",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["experte"],
+      "spielform": "doppel",
+      "voraussetzungen": ["doppel_als_eigenes_spiel"],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das Doppel-Grundverstaendnis zum abgestimmten System aus",
+      "spielziele": ["doppel_spezifische_loesungen", "umschaltloesung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Das Paar als System: vorab abgesprochene Muster, sich ergaenzende Staerken, als eine Einheit denken und bewegen (das Bild des unsichtbaren Seils): Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {"de": "Das Paar als System"},
+      "erklaerteil": {
+        "de": "Auf Expertenniveau sind zwei gute Einzelspieler noch lange kein gutes Doppel. Der Unterschied ist das System: ein Paar, das als abgestimmte Einheit denkt, sich ergänzt und vorab weiß, was es tut. Zwei Spieler, die nur nebeneinander ihr bestes Einzel spielen, verlieren gegen ein echtes Team.\n\nDer Kern ist, die Stärken beider zu bündeln. Vielleicht hat einer den härteren Angriff, der andere die bessere Übersicht am Netz; einer ist der ruhige Pol, der andere der Antreiber. Ein gutes System teilt die Rollen so, dass sich die Stärken ergänzen und die Schwächen gegenseitig gedeckt werden. Ihr spielt nicht trotz eurer Unterschiede zusammen, sondern wegen ihnen.\n\nDazu gehören vorab abgesprochene Muster. Erfahrene Paare haben Standardabläufe, die sie ohne Worte abrufen: bestimmte Aufschlagvarianten mit fester Anschlussbewegung, feste Reaktionen auf typische Situationen. Diese Muster nehmen im schnellen Spiel die Entscheidungslast und sorgen dafür, dass ihr in denselben Bahnen denkt.\n\nAm Ende bewegt sich das System als eine Einheit. Das Bild vom unsichtbaren Seil gilt hier in Vollendung: Jede Bewegung des einen löst die passende Antwort des anderen aus, bis das Paar wie ein einziger Organismus über beide Felder wirkt.\n\nEin Bild: Ein Spitzendoppel ist wie ein eingespieltes Musik-Duo. Beide kennen das Stück, jeder hat seine Stimme, und im Zusammenspiel entsteht etwas, das keiner allein hervorbringt."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über dein Doppel als System nach: Was sind die Stärken von dir und deinem Partner, und ergänzen sie sich, oder spielt ihr zwei Einzel nebeneinander? Habt ihr vorab abgesprochene Muster, die ihr ohne Worte abruft? Nimm dir vor, mit deinem Partner ein, zwei feste Abläufe zu vereinbaren und die Rollen so zu teilen, dass sich eure Stärken bündeln."
+      }
+    },
+
+    {
+      "id": "gegnerisches_paar_lesen",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["experte"],
+      "spielform": "doppel",
+      "voraussetzungen": ["paar_als_system", "gegner_lesen_muster"],
+      "voraussetzungen_lesart": "gemischt: paar_als_system (intra); gegner_lesen_muster (stufenuebergreifend, Gegner-Lesen als Basis)",
+      "spielziele": ["doppel_spezifische_loesungen", "gegner_muster_lesen"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Das gegnerische Paar lesen: den schwaecheren Gegner angreifen und die Luecke/Mitte zwischen beiden als Unsicherheitszone nutzen (testet ihre Absprache): Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {"de": "Das gegnerische Paar lesen"},
+      "erklaerteil": {
+        "de": "Ein gegnerisches Paar hat Schwachstellen, die ein einzelner Gegner nicht hat — und der Experte findet und nutzt sie. Wer das gegnerische Duo liest, greift nicht irgendwohin an, sondern genau dorthin, wo es dem Paar am meisten schadet.\n\nDie erste Schwachstelle ist der schwächere der beiden. Fast immer ist einer verwundbarer — schwächer in der Verteidigung, langsamer, nervöser. Ein kluges Paar erkennt das früh und lenkt einen Großteil der Bälle gezielt auf diesen Spieler, bis er unter der Dauerlast Fehler macht oder aus der Position gerät.\n\nDie zweite, oft noch wirksamere Schwachstelle ist die Lücke zwischen beiden — die Mitte. Ein Ball, der genau zwischen die beiden Gegner fällt, erzeugt eine Unsicherheitszone: Beide zögern kurz, weil keiner sicher ist, ob es sein Ball ist. Dieses Zögern testet ihre Absprache und kostet sie den entscheidenden Moment. Gegen ein Paar in der Seite-an-Seite-Verteidigung ist der Ball in die Mitte besonders stark.\n\nBeides zusammen ergibt den Plan: Belaste den schwächeren Gegner und suche die Naht zwischen beiden. So spielst du nicht gegen zwei einzelne Spieler, sondern gegen ihre Abstimmung.\n\nEin Bild: Ein gegnerisches Paar ist wie eine Mauer aus zwei Steinen. Du schlägst nicht gegen den festen Stein, sondern in die Fuge dazwischen — dort hält die Mauer am wenigsten."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein starkes gegnerisches Paar: Wer von beiden war der verwundbarere, und hast du ihn gezielt belastet? Und hast du die Lücke zwischen beiden gesucht, oder nur auf die Spieler selbst gespielt? Nimm dir vor, im nächsten Doppel früh den schwächeren Gegner zu bestimmen und bewusst die Mitte zwischen beiden anzuspielen, besonders wenn sie Seite an Seite verteidigen."
+      }
+    },
+
+    {
+      "id": "partner_in_position_bringen",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": ["experte"],
+      "spielform": "doppel",
+      "voraussetzungen": ["angriff_im_paar", "paar_als_system"],
+      "voraussetzungen_lesart": "gemischt: angriff_im_paar (stufenuebergreifend, Angriffsformation); paar_als_system (intra)",
+      "spielziele": ["doppel_spezifische_loesungen", "aufschlag_rueckschlag_eroeffnung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Den Partner in Position bringen: Aufschlag/Spiel so anlegen, dass ein schwacher Return erzwungen und der Partner zum Angriff aufgebaut wird; nach dem Aufschlag ans Netz nachruecken: Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {"de": "Den Partner in Position bringen"},
+      "erklaerteil": {
+        "de": "Im Spitzendoppel spielst du oft nicht für deinen eigenen Punktgewinn, sondern dafür, deinen Partner in die perfekte Angriffsposition zu bringen. Dieses uneigennützige Aufbauen ist ein Kennzeichen reifer Doppelspieler: Der beste Schlag ist manchmal der, der dem Partner den Punkt vorbereitet.\n\nDer Grundgedanke ist, einen schwachen Ball des Gegners zu erzwingen, den dein Partner verwerten kann. Ein tiefer, präziser Aufschlag oder ein flacher, druckvoller Ball zwingt den Gegner in die Defensive und zu einem hohen, kurzen Return — genau die Vorlage, die dein hinterer Partner in einen Angriff verwandelt.\n\nDabei greift die Rollenteilung von Angriffs- und Rückraumspieler. Der Rückraumspieler baut mit druckvollen Bällen auf und schließt ab; der vordere Angriffsspieler lauert am Netz, um den schwachen Return sofort abzufangen. Nach deinem eigenen Aufschlag rückst du selbst nach vorn, um kurze Rückschläge früh wegzunehmen und deinem Partner den Rücken freizuhalten.\n\nDas verlangt, den Punkt zwei Züge im Voraus zu denken: nicht „wie gewinne ich diesen Ball\", sondern „wie erzwinge ich die Vorlage, die mein Partner verwandelt\". Wer so spielt, macht aus zwei Spielern eine Angriffsmaschine.\n\nEin Bild: Du bist der Vorbereiter, der die Flanke schlägt, damit der Partner den Ball nur noch verwandeln muss. Das Tor schießt er — aber ohne deine Vorlage gäbe es keins."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Vorlage legen",
+          "ziel": "Bälle so anlegen, dass der Partner in die Angriffsposition kommt.",
+          "schritte": [
+            "Spielt zu viert und gebt dem hinteren Spieler die Aufgabe, mit druckvollen, tiefen Bällen einen hohen, kurzen Return zu erzwingen.",
+            "Der vordere Angriffsspieler lauert am Netz und fängt den schwachen Return sofort ab.",
+            "Übt den Aufschlag als Vorlage: tief und präzise, sodass der Gegner nur schwach zurückspielen kann.",
+            "Nach dem eigenen Aufschlag rückt der Server nach vorn, um kurze Rückschläge früh wegzunehmen.",
+            "Denkt jeden Ballwechsel als Vorbereitung: Welcher Ball bringt den Partner in Position?"
+          ],
+          "selbstkontrolle": "Spielst du, um selbst den Punkt zu machen, oder um deinen Partner in Position zu bringen? Erzwingt dein Aufbau einen schwachen Return, den der Partner verwerten kann? Denkst du den Punkt zwei Züge voraus? Gutes Doppel heißt oft, die Vorlage zu legen statt selbst abzuschließen.",
+          "abschluss": "Den Partner in Position zu bringen macht aus zwei Spielern ein Angriffssystem. Wer uneigennützig aufbaut, gewinnt als Paar mehr Punkte als jeder für sich."
+        }
+      }
+    },
+
+    {
+      "id": "nahtlos_umschalten",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["experte"],
+      "spielform": "doppel",
+      "voraussetzungen": ["das_umschalten_im_doppel", "bewegung_als_einheit"],
+      "voraussetzungen_lesart": "gemischt (beide stufenuebergreifend): das taktische Umschalten und die Bewegung als Einheit werden zur nahtlosen, schnellen Rotation zusammengefuehrt",
+      "spielziele": ["doppel_spezifische_loesungen", "umschaltmoment_erkennen", "wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "transfer_herkunft_beleg": "Nahtloses Umschalten zwischen Angriff (vorn-hinten) und Verteidigung (Seite an Seite), schnell und weitgehend wortlos unter Druck, koordiniert wie am Seil: Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {"de": "Nahtlos umschalten"},
+      "erklaerteil": {
+        "de": "Ein Doppel wechselt ständig zwischen zwei Formationen: dem Angriff vorn-hinten und der Verteidigung Seite an Seite. Auf Expertenniveau geschieht dieser Wechsel nahtlos — schnell, flüssig und fast ohne Worte. Wer stockt oder zögert, öffnet dem Gegner genau in diesem Moment die Lücke.\n\nDer Auslöser ist einfach: Wer den Speeder nach unten schlägt, greift an; wer ihn hochspielen muss, verteidigt. Spielt ihr einen harten Ball nach unten, rückt einer ans Netz und ihr steht vorn-hinten. Müsst ihr einen Ball hochnehmen, dreht ihr sofort in die Seite-an-Seite-Verteidigung, um die Breite abzudecken. Dieses Lesen der Situation muss in Sekundenbruchteilen geschehen.\n\nDas Nahtlose entsteht durch die eingespielte Rotation. Rückt einer nach vorn, füllt der andere automatisch den hinteren Raum; dreht einer zur Seite, deckt der andere die andere Hälfte. Auf höchstem Niveau braucht das kaum noch Worte — die Bewegung des einen ist das Signal für den anderen. Das unsichtbare Seil zieht in Echtzeit.\n\nDamit das unter Druck trägt, muss die Rotation tief eingeübt sein. Im Match ist keine Zeit zum Nachdenken; der Wechsel läuft automatisch, weil ihr ihn hundertfach zusammen gespielt habt.\n\nEin Bild: Ein Spitzendoppel wechselt die Formation wie eine Drehtür — beide Flügel bewegen sich zugleich, der eine gibt den Raum frei, den der andere einnimmt, ohne Stocken."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Angriff und Verteidigung drehen",
+          "ziel": "Schnell und flüssig zwischen Angriffs- und Verteidigungsformation wechseln.",
+          "schritte": [
+            "Spielt zu viert und macht euch die Regel klar: Ball nach unten = Angriff (vorn-hinten), Ball nach oben = Verteidigung (Seite an Seite).",
+            "Übt den Wechsel von Verteidigung zu Angriff: einer rückt nach vorn, der andere füllt den hinteren Raum.",
+            "Übt den Wechsel von Angriff zu Verteidigung: der vordere dreht zur Seite, der hintere deckt die andere Hälfte.",
+            "Reduziert nach und nach die Worte, bis die Bewegung des einen das Signal für den anderen ist.",
+            "Steigert das Tempo, bis der Wechsel auch unter Druck flüssig gelingt."
+          ],
+          "selbstkontrolle": "Läuft euer Wechsel flüssig, oder stockt ihr und lasst Lücken? Füllt der Partner automatisch den Raum, den du verlässt? Braucht ihr noch viele Worte, oder liest einer die Bewegung des anderen? Nahtlos wird das Umschalten nur durch viel gemeinsame Übung.",
+          "abschluss": "Das nahtlose Umschalten hält euch immer in der richtigen Formation. Wer flüssig und wortlos rotiert, lässt dem Gegner keine Lücke im Wechsel."
+        }
+      }
+    },
+
+    {
+      "id": "blindes_verstaendnis",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": ["experte"],
+      "spielform": "doppel",
+      "voraussetzungen": ["verstaendigung_im_paar", "paar_als_system"],
+      "voraussetzungen_lesart": "gemischt: verstaendigung_im_paar (stufenuebergreifend, Kommunikation als Basis); paar_als_system (intra)",
+      "spielziele": ["doppel_spezifische_loesungen", "fruehe_flugbahnlesung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "SP"],
+      "transfer_herkunft_beleg": "Blindes Verstaendnis: Antizipation und Vertrauen, die Bewegung des Partners lesen, nonverbale Abstimmung, durch gemeinsames Spielen ueber Zeit gewachsen: Rueckschlagsport-Doppel und Sportpsychologie.",
+      "anzeigetitel": {"de": "Blindes Verständnis"},
+      "erklaerteil": {
+        "de": "Die höchste Stufe des Doppelspiels braucht kaum noch Worte. Eingespielte Paare entwickeln ein blindes Verständnis: Sie ahnen, was der andere tut, bevor er es tut, und decken einander, ohne hinzusehen. Dieses Verständnis ist die stille Krönung des gemeinsamen Spiels.\n\nSein Kern ist die Antizipation des Partners. Du liest nicht nur den Gegner und den Speeder, sondern auch die Bewegung deines Partners: Wohin er startet, welchen Ball er nimmt, welchen Raum er verlässt. Aus dieser Lesung heraus füllst du automatisch die Lücke, die er öffnet — noch bevor ein Wort fallen könnte.\n\nDas Fundament dieses Verständnisses ist Vertrauen. Du verlässt dich darauf, dass dein Partner seinen Ball nimmt, und musst nicht kontrollierend hinsehen. Dieses Vertrauen befreit dich, dich auf deine eigene Aufgabe zu konzentrieren. Ein Paar, das sich vertraut, spielt ruhiger und schneller als eines, das sich ständig absichert.\n\nBlindes Verständnis lässt sich nicht erzwingen — es wächst durch gemeinsames Spielen über die Zeit. Je öfter ihr zusammen spielt, desto mehr verinnerlicht ihr die Muster und Reaktionen des anderen, bis die Abstimmung wortlos geschieht. Es ist der Ertrag geduldiger gemeinsamer Arbeit.\n\nEin Bild: Ein eingespieltes Doppel ist wie zwei Hände derselben Person. Sie müssen sich nicht absprechen — die eine weiß, was die andere tut, und sie greifen wie selbstverständlich ineinander."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über die Abstimmung mit deinem festen Partner nach: Ahnst du seine Bewegungen, oder musst du ständig hinsehen und dich absichern? Vertraust du darauf, dass er seinen Ball nimmt? Blindes Verständnis wächst nur durch gemeinsames Spielen — nimm dir vor, mit einem festen Partner regelmäßig zu spielen und bewusst darauf zu achten, seine Bewegung zu lesen und ihm zu vertrauen, statt zu kontrollieren."
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}

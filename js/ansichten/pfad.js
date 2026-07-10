@@ -5,7 +5,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { balkenHtml, bausteinIcon, esc, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
-import { individualpfad, kompetenzpfad, spielformen, spielformpfad, themenDomaenen, themenpfad } from '../pfade.js';
+import { individualpfad, kompetenzpfad, spielformen, spielformpfad, themenDomaenen, themenpfad, umgebungspfad, untergruende, witterungen } from '../pfade.js';
 import { diagnose, einstellungen, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
@@ -127,6 +127,45 @@ export function renderSpielform(el, daten, spielform) {
     <h1>${esc(t('pfad_spielform'))}</h1>
     <p class="leise">${esc(t('pfad_spielform_text'))}</p>
     ${inhalt}`;
+}
+
+// Umgebungs-Achse (Outdoor, Querschnitt): Hub über die Wetter- und Boden-Themen
+// plus die vollständige Outdoor-Reihe. Einzelne Achsen-Werte (Wind, Sand …) sind
+// eigene Ansichten. Kein Cross-Sport-Modifikator — Outdoor ist crossminton-eigen.
+export function renderUmgebung(el, daten, achse, wert) {
+  if (achse && wert) {
+    const pfad = umgebungspfad(daten, achse, wert);
+    const inhalt =
+      pfad.stationen.length === 0
+        ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+        : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, `${achse}:${wert}`)}`;
+    el.innerHTML = `
+      <h1>${esc(t('pfad_umgebung'))} <span class="chip">${esc(label(achse, wert))}</span></h1>
+      <p class="leise">${esc(t('vorgeschlagene_reihenfolge'))}</p>
+      ${inhalt}`;
+    return;
+  }
+  const achsenKarten = (eintraege, achsenName) =>
+    eintraege
+      .map((e) => {
+        const w = e[achsenName];
+        return `<a class="karte karte-link" href="#/pfad/${achsenName}/${esc(w)}"><h3>${esc(label(achsenName, w))}</h3><p class="leise">${esc(t('n_bausteine', { n: e.anzahl }))}</p></a>`;
+      })
+      .join('');
+  const alle = umgebungspfad(daten);
+  const liste =
+    alle.stationen.length === 0
+      ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+      : `${balkenHtml(projektion(alle.stationen.map((s) => s.baustein)))}${stationslisteHtml(alle.stationen, 'umgebung')}`;
+  el.innerHTML = `
+    <h1>${esc(t('pfad_umgebung'))}</h1>
+    <p class="leise">${esc(t('pfad_umgebung_text'))}</p>
+    <h2>${esc(t('umgebung_wetter'))}</h2>
+    ${achsenKarten(witterungen(daten), 'witterung')}
+    <h2>${esc(t('umgebung_boden'))}</h2>
+    ${achsenKarten(untergruende(daten), 'untergrund')}
+    <h2>${esc(t('umgebung_alle'))}</h2>
+    ${liste}`;
 }
 
 export function renderIndividual(el, daten) {
