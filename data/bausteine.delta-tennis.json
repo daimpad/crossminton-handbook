@@ -1,127 +1,251 @@
 {
-  "_meta": {
-    "beschreibung": "Tennis-Herkunfts-Deltas (TEN): Cross-Sport-Anpassungen fuer Umsteiger aus dem Tennis. Selektiv dort, wo Tennis-Gewohnheiten mit Crossminton kollidieren. Herkunftsreine Delta-Datei — enthaelt NUR delta_bausteine, keine Basis-Bausteine; sie docken per basis_baustein an bestehende Bausteine anderer Dateien an.",
-    "quellsprache": "de",
-    "zielsprachen": ["en", "fr", "pl"],
-    "stand": "Erstausbau-Erweiterung",
-    "dateiname_konvention": "bausteine.delta-tennis.json (Konvention-Erweiterung: herkunftsreine Delta-Datei, keyed nach Herkunft statt nach Stufe/Domaene; deckt Bausteine ueber mehrere Stufen/Domaenen ab).",
-    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. TEN ist Bestandswert von transfer_herkunft. Keine Erweiterung.",
-    "aktiviert_herkunft": "Diese Datei aktiviert TENNIS erstmals als Onboarding-Herkunft. Bisher leitete sich die Herkunftsliste allein aus BAD-Deltas ab; mit diesen TEN-Deltas erscheint Tennis automatisch als waehlbare Herkunft (gemaess Onboarding-Ableitung aus dem Delta-Bestand).",
-    "selektionsprinzip": "6 Deltas: 4 Beginner-Technik-Kerne (griff, aufschlag, vorhand_drive, rueckhand) + 2 Fortgeschritten (ueberkopf_clear als POSITIVER Transfer vom Tennisaufschlag; beinarbeit_system als Geometrie-Delta). Bewusst KEINE Deltas fuer Bausteine, die universell transferieren oder crossminton-eigen ohne Tennis-Ballast sind.",
-    "bruecke": "Der crossminton-Universalgriff entspricht praktisch dem Continental-Griff (Chopper), den der Tennisspieler fuer Aufschlag/Volley/Ueberkopf bereits nutzt — didaktisch als Anknuepfung genutzt.",
-    "hinweis_anfuehrung": "Innere Zitate in einfachen Anfuehrungszeichen, um JSON-Delimiter-Kollision zu vermeiden."
+ "_meta": {
+  "beschreibung": "Tennis-Herkunfts-Deltas (TEN): Cross-Sport-Anpassungen fuer Umsteiger aus dem Tennis. Selektiv dort, wo Tennis-Gewohnheiten mit Crossminton kollidieren. Herkunftsreine Delta-Datei — enthaelt NUR delta_bausteine, keine Basis-Bausteine; sie docken per basis_baustein an bestehende Bausteine anderer Dateien an.",
+  "quellsprache": "de",
+  "zielsprachen": [
+   "en",
+   "fr",
+   "pl"
+  ],
+  "stand": "Erstausbau-Erweiterung",
+  "dateiname_konvention": "bausteine.delta-tennis.json (Konvention-Erweiterung: herkunftsreine Delta-Datei, keyed nach Herkunft statt nach Stufe/Domaene; deckt Bausteine ueber mehrere Stufen/Domaenen ab).",
+  "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. TEN ist Bestandswert von transfer_herkunft. Keine Erweiterung.",
+  "aktiviert_herkunft": "Diese Datei aktiviert TENNIS erstmals als Onboarding-Herkunft. Bisher leitete sich die Herkunftsliste allein aus BAD-Deltas ab; mit diesen TEN-Deltas erscheint Tennis automatisch als waehlbare Herkunft (gemaess Onboarding-Ableitung aus dem Delta-Bestand).",
+  "selektionsprinzip": "6 Deltas: 4 Beginner-Technik-Kerne (griff, aufschlag, vorhand_drive, rueckhand) + 2 Fortgeschritten (ueberkopf_clear als POSITIVER Transfer vom Tennisaufschlag; beinarbeit_system als Geometrie-Delta). Bewusst KEINE Deltas fuer Bausteine, die universell transferieren oder crossminton-eigen ohne Tennis-Ballast sind.",
+  "bruecke": "Der crossminton-Universalgriff entspricht praktisch dem Continental-Griff (Chopper), den der Tennisspieler fuer Aufschlag/Volley/Ueberkopf bereits nutzt — didaktisch als Anknuepfung genutzt.",
+  "hinweis_anfuehrung": "Innere Zitate in einfachen Anfuehrungszeichen, um JSON-Delimiter-Kollision zu vermeiden."
+ },
+ "delta_bausteine": [
+  {
+   "id": "griff_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "beginner"
+   ],
+   "basis_baustein": "griff",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "griff"
+   ],
+   "spielziele": [
+    "tempo_haertedosierung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Griffhaltung — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Im Tennis wechselst du ständig den Griff: ein Griff für die Vorhand, ein anderer für die Rückhand, wieder ein anderer für Aufschlag und Volley. Dieses Wechseln sitzt bei dir tief — und genau das legst du hier ab. Im Crossminton gibt es einen einzigen Griff für alles.\n\nDie gute Nachricht: Diesen einen Griff kennst du schon. Der crossminton-Universalgriff ist praktisch dein Continental-Griff — der Handschlag-Griff mit dem V zwischen Daumen und Zeigefinger, den du für Aufschlag, Volley und Überkopf ohnehin benutzt. Du musst also keinen neuen Griff lernen, sondern nur einen bekannten für alles verwenden.\n\nWas du ablegst, ist zweierlei. Erstens das Wechseln selbst — hier gibt es keinen Griffwechsel, der Speeder ist zu schnell dafür. Zweitens die extremen Vorhandgriffe (Semi-Western, Western), mit denen du im Tennis Topspin erzeugst. Sie funktionieren hier nicht; du bleibst auf dem neutralen Handschlag-Griff.\n\nDeine beidhändige Rückhand ist ein eigenes Thema — dazu mehr im Rückhand-Baustein.\n\nEin kleiner Test: Beobachte deine Schlaghand zwischen den Schlägen. Dreht sie sich, um einen Vorhand- oder Rückhandgriff zu suchen? Dann wechselst du noch nach Tennisart. Ziel ist, dass die Hand ruhig auf dem einen Universalgriff bleibt — dem Griff, den du vom Aufschlag schon kennst."
+   }
   },
-
-  "delta_bausteine": [
-    {
-      "id": "griff_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["beginner"],
-      "basis_baustein": "griff",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["griff"],
-      "spielziele": ["tempo_haertedosierung"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Griffhaltung — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Im Tennis wechselst du ständig den Griff: ein Griff für die Vorhand, ein anderer für die Rückhand, wieder ein anderer für Aufschlag und Volley. Dieses Wechseln sitzt bei dir tief — und genau das legst du hier ab. Im Crossminton gibt es einen einzigen Griff für alles.\n\nDie gute Nachricht: Diesen einen Griff kennst du schon. Der crossminton-Universalgriff ist praktisch dein Continental-Griff — der Handschlag-Griff mit dem V zwischen Daumen und Zeigefinger, den du für Aufschlag, Volley und Überkopf ohnehin benutzt. Du musst also keinen neuen Griff lernen, sondern nur einen bekannten für alles verwenden.\n\nWas du ablegst, ist zweierlei. Erstens das Wechseln selbst — hier gibt es keinen Griffwechsel, der Speeder ist zu schnell dafür. Zweitens die extremen Vorhandgriffe (Semi-Western, Western), mit denen du im Tennis Topspin erzeugst. Sie funktionieren hier nicht; du bleibst auf dem neutralen Handschlag-Griff.\n\nDeine beidhändige Rückhand ist ein eigenes Thema — dazu mehr im Rückhand-Baustein.\n\nEin kleiner Test: Beobachte deine Schlaghand zwischen den Schlägen. Dreht sie sich, um einen Vorhand- oder Rückhandgriff zu suchen? Dann wechselst du noch nach Tennisart. Ziel ist, dass die Hand ruhig auf dem einen Universalgriff bleibt — dem Griff, den du vom Aufschlag schon kennst."
-      }
-    },
-    {
-      "id": "aufschlag_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["beginner"],
-      "basis_baustein": "aufschlag",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["aufschlag"],
-      "spielziele": ["aufschlag_rueckschlag_eroeffnung"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Aufschlag — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Beim Aufschlag musst du deinen wichtigsten Tennisschlag beiseitelegen. Dein Tennisaufschlag geht über Kopf: Ball hochwerfen, strecken, von oben treffen. Der crossminton-Aufschlag ist etwas ganz anderes — er wird von unten gespielt.\n\nHier lässt du den Speeder aus der freien Hand fallen und triffst ihn von unten, wobei der ganze Speeder im Treffmoment unterhalb deiner Schlaghand ist. Kein Hochwerfen, kein Strecken nach oben, kein Schlag von oben. Die Bewegung läuft flach und von unten, aus der hinteren Zone deines Feldes. Lerne sie am besten frisch, so wie sie im Grundbaustein beschrieben ist — dein Tennisaufschlag hilft dir hier nicht.\n\nAber wirf die Bewegung nicht weg. Dein Tennisaufschlag ist ein Schatz, den du später hebst: Seine Bewegung — seitlich stehen, nach oben strecken, das Handgelenk am höchsten Punkt einsetzen — überträgt sich fast eins zu eins auf den Überkopfschlag, den du auf der fortgeschrittenen Stufe lernst. Was hier nicht passt, wird dort dein Vorteil.\n\nEin kleiner Test: Ertappst du dich dabei, den Speeder hochwerfen und über Kopf treffen zu wollen? Das ist der Tennisreflex. Der crossminton-Aufschlag bleibt tief — der Speeder fällt, du triffst ihn unterhalb der Hand."
-      }
-    },
-    {
-      "id": "vorhand_drive_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["beginner"],
-      "basis_baustein": "vorhand_drive",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["vorhand_drive"],
-      "spielziele": ["tempo_haertedosierung"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Vorhand-Drive — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Deine Tennisvorhand ist ein kraftvoller, langer Schlag: großes Ausholen, voller Durchschwung, oft von unten nach oben gebürstet für Topspin. Sie ist gebaut für einen schweren Ball auf einem großen Feld, mit Zeit nach dem Aufsprung. Zwei Dinge davon musst du hier anpassen.\n\nErstens die Länge. Crossminton ist schnell und eng. Ein großes Ausholen wie im Tennis kommt viel zu spät — der Speeder ist längst da. Mach alles kompakter: kurzes Ausholen, ein knapper Schlag, Treffpunkt klar vor dem Körper. Die Kraft kommt später aus dem Handgelenks-Schnapp, den du auf der fortgeschrittenen Stufe lernst, nicht aus einem langen Schwung.\n\nZweitens der Aufsprung, den es hier nicht gibt. Im Tennis wartest du, bis der Ball aufspringt, und triffst ihn auf bequemer Höhe. Der Speeder springt nicht — du spielst ihn aus der Luft, während er fällt. Dein Treffpunkt und dein Timing verschieben sich damit: Du triffst früher, in der Luft, oft im Fallen.\n\nEin Bild: Deine Tennisvorhand ist ein weit ausholender Ruderschlag. Deine crossminton-Vorhand ist ein kurzer, schneller Stoß. Denselben Arm, aber ein viel kürzerer Weg.\n\nEin kleiner Test: Holst du weit aus und wartest auf einen Aufsprung? Dann spielst du noch Tennis. Ziel ist der kompakte Schlag vor dem Körper, aus der Luft getroffen."
-      }
-    },
-    {
-      "id": "rueckhand_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["beginner"],
-      "basis_baustein": "rueckhand",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["rueckhand"],
-      "delta_buendelung": ["griff_delta_ten", "vorhand_drive_delta_ten"],
-      "delta_buendelung_hinweis": "Verweist auf das Tennis-Griff-Delta (ein Griff, einhaendig) und das Tennis-Vorhand-Delta (kompakter, aus der Luft) als weiche Voraussetzungen. Fuehrender Punkt hier: der Wegfall der zweiten Hand.",
-      "spielziele": ["tempo_haertedosierung"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Rückhand — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Wenn du wie die meisten Tennisspieler eine beidhändige Rückhand spielst, ist das hier deine größte Umstellung. Crossminton wird immer einhändig gespielt — ein Griff, eine Hand, auch auf der Rückhand. Deine zweite Hand kommt vom Schläger.\n\nDas fühlt sich am Anfang schwach und ungewohnt an. Deine beidhändige Rückhand bezog ihre Stabilität und Kraft aus der zweiten Hand, die den Schlag führte. Fällt sie weg, wirkt der Arm zunächst allein gelassen. Das gibt sich mit den Wiederholungen — die einhändige Rückhand hat ihre eigene Stabilität, die du aufbaust.\n\nDie gute Seite: Der crossminton-Universalgriff macht die einhändige Rückhand leichter als im Tennis. Du drehst nicht in einen eigenen Rückhandgriff um, sondern bleibst auf demselben Handschlag-Griff wie bei der Vorhand — die Bewegung ist die gespiegelte Vorhand, wie im Grundbaustein beschrieben.\n\nUnd wie bei der Vorhand gilt: kürzer und aus der Luft. Kompakter Schwung, Treffpunkt vor dem Körper, kein Warten auf einen Aufsprung. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Greift deine zweite Hand reflexhaft zum Schläger, wenn ein Ball auf die Rückhand kommt? Dann ist der Tennisreflex noch da. Ziel ist die ruhige einhändige Rückhand auf dem Universalgriff."
-      }
-    },
-    {
-      "id": "ueberkopf_clear_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["fortgeschritten"],
-      "basis_baustein": "ueberkopf_clear",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["ueberkopf_clear"],
-      "spielziele": ["laengen_tiefensteuerung"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Der Überkopfschlag — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Jetzt zahlt sich dein Tennisaufschlag aus. Der Überkopfschlag ist der Schlag, für den deine Tenniserfahrung wie gemacht ist — hier bringst du einen echten Vorteil mit.\n\nDie Bewegung kennst du aus deinem Aufschlag fast eins zu eins: seitlich stehen, der freie Arm weist nach oben, du streckst dich zum höchsten Punkt und setzt am Ende Unterarmdrehung und Handgelenk ein — die Pronation und der Schnapp, die deinem Aufschlag seine Kraft geben. Diese Mechanik überträgt sich direkt. Du musst sie kaum neu lernen.\n\nZwei Dinge stellst du um. Erstens gibt es keinen Ballwurf: Der Speeder kommt vom Gegner, du musst deinen Treffpunkt an seinen Flug anpassen, statt ihn dir selbst zuzuwerfen. Zweitens gibt es kein Netz und keine tiefe gegnerische Grundlinie in Tennisentfernung. Statt den Ball hoch über ein Netz zu heben, trägst du ihn flacher und weit über die neutrale Zone tief ins gegnerische Feld. Dazu kommt das steifere, leichtere Gerät.\n\nEin kleiner Test: Spielst du den Überkopf mit dem hohen Bogen deines Tennisaufschlags, als müsstest du ein Netz überwinden? Dann trägt dich noch die Tennis-Flugbahn. Ziel ist die flachere, weite Bahn, die die Zone überbrückt — mit genau deiner vertrauten Aufschlagbewegung."
-      }
-    },
-    {
-      "id": "beinarbeit_system_delta_ten",
-      "typ": "delta",
-      "domaene": "technik",
-      "kompetenzstufe": ["fortgeschritten"],
-      "basis_baustein": "beinarbeit_system",
-      "ersetzt_bei_herkunft": "TEN",
-      "voraussetzungen": ["beinarbeit_system"],
-      "spielziele": ["wiederholte_antrittsschnelligkeit"],
-      "transfer_herkunft": ["TEN"],
-      "untergrund": "halle",
-      "witterung": [],
-      "eigener_uebungsteil": false,
-      "anzeigetitel": {"de": "Das Beinarbeit-System — für Umsteiger aus dem Tennis"},
-      "erklaerteil": {
-        "de": "Einige deiner Tennis-Bewegungen helfen dir hier: der Split-Step vor dem Schlag, die Rückkehr zur Ausgangsposition, das explosive Antreten. Diese Grundlagen bringst du mit. Was du umlernst, ist der Raum, in dem du sie einsetzt.\n\nDeine Tennis-Beinarbeit ist um ein großes Feld mit Netz gebaut. Du denkst von der Grundlinie aus, deckst ein weites Feld mit langen Wegen, richtest dich zum Netz aus und kehrst hinter die Grundlinie zurück. Diese Landkarte prägt deine Bewegung tief.\n\nCrossminton spielt sich in einem kleinen, netzlosen Quadrat, das du aus seiner Mitte heraus verteidigst — nach allen vier Ecken gleich. Es gibt keine Grundlinie, an der du dich orientierst, kein Netz, zu dem du dich ausrichtest, und die Wege sind viel kürzer und schneller. Deine Bewegung ordnet sich neu: weg vom weiten, netzzugewandten Grundlinienspiel, hin zum kompakten, symmetrischen Quadrat mit vier gleichwertigen Ecken.\n\nEin Bild: Im Tennis bespielst du eine breite Bühne von hinten. Im Crossminton stehst du in der Mitte eines kleinen Rings und deckst ihn nach allen Seiten. Dieselben Schritte, aber eine ganz andere Karte.\n\nEin kleiner Test: Driftest du nach hinten an eine gedachte Grundlinie oder richtest dich zu einem gedachten Netz aus? Dann trägt dich noch die Tenniskarte. Ziel ist das gleichmäßige Decken aller vier Ecken aus der Quadratmitte."
-      }
-    }
-  ]
+  {
+   "id": "aufschlag_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "beginner"
+   ],
+   "basis_baustein": "aufschlag",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "aufschlag"
+   ],
+   "spielziele": [
+    "aufschlag_rueckschlag_eroeffnung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Aufschlag — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Beim Aufschlag musst du deinen wichtigsten Tennisschlag beiseitelegen. Dein Tennisaufschlag geht über Kopf: Ball hochwerfen, strecken, von oben treffen. Der crossminton-Aufschlag ist etwas ganz anderes — er wird von unten gespielt.\n\nHier lässt du den Speeder aus der freien Hand fallen und triffst ihn von unten, wobei der ganze Speeder im Treffmoment unterhalb deiner Schlaghand ist. Kein Hochwerfen, kein Strecken nach oben, kein Schlag von oben. Die Bewegung läuft flach und von unten, aus der hinteren Zone deines Feldes. Lerne sie am besten frisch, so wie sie im Grundbaustein beschrieben ist — dein Tennisaufschlag hilft dir hier nicht.\n\nAber wirf die Bewegung nicht weg. Dein Tennisaufschlag ist ein Schatz, den du später hebst: Seine Bewegung — seitlich stehen, nach oben strecken, das Handgelenk am höchsten Punkt einsetzen — überträgt sich fast eins zu eins auf den Überkopfschlag, den du auf der fortgeschrittenen Stufe lernst. Was hier nicht passt, wird dort dein Vorteil.\n\nEin kleiner Test: Ertappst du dich dabei, den Speeder hochwerfen und über Kopf treffen zu wollen? Das ist der Tennisreflex. Der crossminton-Aufschlag bleibt tief — der Speeder fällt, du triffst ihn unterhalb der Hand."
+   }
+  },
+  {
+   "id": "vorhand_drive_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "beginner"
+   ],
+   "basis_baustein": "vorhand_drive",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "vorhand_drive"
+   ],
+   "spielziele": [
+    "tempo_haertedosierung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Vorhand-Drive — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Deine Tennisvorhand ist ein kraftvoller, langer Schlag: großes Ausholen, voller Durchschwung, oft von unten nach oben gebürstet für Topspin. Sie ist gebaut für einen schweren Ball auf einem großen Feld, mit Zeit nach dem Aufsprung. Zwei Dinge davon musst du hier anpassen.\n\nErstens die Länge. Crossminton ist schnell und eng. Ein großes Ausholen wie im Tennis kommt viel zu spät — der Speeder ist längst da. Mach alles kompakter: kurzes Ausholen, ein knapper Schlag, Treffpunkt klar vor dem Körper. Die Kraft kommt später aus dem Handgelenks-Schnapp, den du auf der fortgeschrittenen Stufe lernst, nicht aus einem langen Schwung.\n\nZweitens der Aufsprung, den es hier nicht gibt. Im Tennis wartest du, bis der Ball aufspringt, und triffst ihn auf bequemer Höhe. Der Speeder springt nicht — du spielst ihn aus der Luft, während er fällt. Dein Treffpunkt und dein Timing verschieben sich damit: Du triffst früher, in der Luft, oft im Fallen.\n\nEin Bild: Deine Tennisvorhand ist ein weit ausholender Ruderschlag. Deine crossminton-Vorhand ist ein kurzer, schneller Stoß. Denselben Arm, aber ein viel kürzerer Weg.\n\nEin kleiner Test: Holst du weit aus und wartest auf einen Aufsprung? Dann spielst du noch Tennis. Ziel ist der kompakte Schlag vor dem Körper, aus der Luft getroffen."
+   }
+  },
+  {
+   "id": "rueckhand_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "beginner"
+   ],
+   "basis_baustein": "rueckhand",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "rueckhand"
+   ],
+   "delta_buendelung": [
+    "griff_delta_ten",
+    "vorhand_drive_delta_ten"
+   ],
+   "delta_buendelung_hinweis": "Verweist auf das Tennis-Griff-Delta (ein Griff, einhaendig) und das Tennis-Vorhand-Delta (kompakter, aus der Luft) als weiche Voraussetzungen. Fuehrender Punkt hier: der Wegfall der zweiten Hand.",
+   "spielziele": [
+    "tempo_haertedosierung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Rückhand — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Wenn du wie die meisten Tennisspieler eine beidhändige Rückhand spielst, ist das hier deine größte Umstellung. Crossminton wird immer einhändig gespielt — ein Griff, eine Hand, auch auf der Rückhand. Deine zweite Hand kommt vom Schläger.\n\nDas fühlt sich am Anfang schwach und ungewohnt an. Deine beidhändige Rückhand bezog ihre Stabilität und Kraft aus der zweiten Hand, die den Schlag führte. Fällt sie weg, wirkt der Arm zunächst allein gelassen. Das gibt sich mit den Wiederholungen — die einhändige Rückhand hat ihre eigene Stabilität, die du aufbaust.\n\nDie gute Seite: Der crossminton-Universalgriff macht die einhändige Rückhand leichter als im Tennis. Du drehst nicht in einen eigenen Rückhandgriff um, sondern bleibst auf demselben Handschlag-Griff wie bei der Vorhand — die Bewegung ist die gespiegelte Vorhand, wie im Grundbaustein beschrieben.\n\nUnd wie bei der Vorhand gilt: kürzer und aus der Luft. Kompakter Schwung, Treffpunkt vor dem Körper, kein Warten auf einen Aufsprung. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Greift deine zweite Hand reflexhaft zum Schläger, wenn ein Ball auf die Rückhand kommt? Dann ist der Tennisreflex noch da. Ziel ist die ruhige einhändige Rückhand auf dem Universalgriff."
+   }
+  },
+  {
+   "id": "ueberkopf_clear_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "basis_baustein": "ueberkopf_clear",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "ueberkopf_clear"
+   ],
+   "spielziele": [
+    "laengen_tiefensteuerung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Der Überkopfschlag — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Jetzt zahlt sich dein Tennisaufschlag aus. Der Überkopfschlag ist der Schlag, für den deine Tenniserfahrung wie gemacht ist — hier bringst du einen echten Vorteil mit.\n\nDie Bewegung kennst du aus deinem Aufschlag fast eins zu eins: seitlich stehen, der freie Arm weist nach oben, du streckst dich zum höchsten Punkt und setzt am Ende Unterarmdrehung und Handgelenk ein — die Pronation und der Schnapp, die deinem Aufschlag seine Kraft geben. Diese Mechanik überträgt sich direkt. Du musst sie kaum neu lernen.\n\nZwei Dinge stellst du um. Erstens gibt es keinen Ballwurf: Der Speeder kommt vom Gegner, du musst deinen Treffpunkt an seinen Flug anpassen, statt ihn dir selbst zuzuwerfen. Zweitens gibt es kein Netz und keine tiefe gegnerische Grundlinie in Tennisentfernung. Statt den Ball hoch über ein Netz zu heben, trägst du ihn flacher und weit über die neutrale Zone tief ins gegnerische Feld. Dazu kommt das steifere, leichtere Gerät.\n\nEin kleiner Test: Spielst du den Überkopf mit dem hohen Bogen deines Tennisaufschlags, als müsstest du ein Netz überwinden? Dann trägt dich noch die Tennis-Flugbahn. Ziel ist die flachere, weite Bahn, die die Zone überbrückt — mit genau deiner vertrauten Aufschlagbewegung."
+   }
+  },
+  {
+   "id": "beinarbeit_system_delta_ten",
+   "typ": "delta",
+   "domaene": "technik",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "basis_baustein": "beinarbeit_system",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "beinarbeit_system"
+   ],
+   "spielziele": [
+    "wiederholte_antrittsschnelligkeit"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Das Beinarbeit-System — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Einige deiner Tennis-Bewegungen helfen dir hier: der Split-Step vor dem Schlag, die Rückkehr zur Ausgangsposition, das explosive Antreten. Diese Grundlagen bringst du mit. Was du umlernst, ist der Raum, in dem du sie einsetzt.\n\nDeine Tennis-Beinarbeit ist um ein großes Feld mit Netz gebaut. Du denkst von der Grundlinie aus, deckst ein weites Feld mit langen Wegen, richtest dich zum Netz aus und kehrst hinter die Grundlinie zurück. Diese Landkarte prägt deine Bewegung tief.\n\nCrossminton spielt sich in einem kleinen, netzlosen Quadrat, das du aus seiner Mitte heraus verteidigst — nach allen vier Ecken gleich. Es gibt keine Grundlinie, an der du dich orientierst, kein Netz, zu dem du dich ausrichtest, und die Wege sind viel kürzer und schneller. Deine Bewegung ordnet sich neu: weg vom weiten, netzzugewandten Grundlinienspiel, hin zum kompakten, symmetrischen Quadrat mit vier gleichwertigen Ecken.\n\nEin Bild: Im Tennis bespielst du eine breite Bühne von hinten. Im Crossminton stehst du in der Mitte eines kleinen Rings und deckst ihn nach allen Seiten. Dieselben Schritte, aber eine ganz andere Karte.\n\nEin kleiner Test: Driftest du nach hinten an eine gedachte Grundlinie oder richtest dich zu einem gedachten Netz aus? Dann trägt dich noch die Tenniskarte. Ziel ist das gleichmäßige Decken aller vier Ecken aus der Quadratmitte."
+   }
+  },
+  {
+   "id": "aufschlag_rueckschlag_doppel_delta_ten",
+   "typ": "delta",
+   "domaene": "taktik",
+   "spielform": "doppel",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "basis_baustein": "aufschlag_rueckschlag_doppel",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "aufschlag_rueckschlag_doppel"
+   ],
+   "spielziele": [
+    "doppel_spezifische_loesungen",
+    "aufschlag_rueckschlag_eroeffnung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Aufschlag und Reihenfolge im Doppel — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Der Aufschlag im Doppel funktioniert im Crossminton ganz anders als im Tennis — und diese Umstellung ist gewöhnungsbedürftig.\n\nIm Tennis-Doppel schlägst du ein ganzes Spiel lang auf, abwechselnd aus dem Einstand- und dem Vorteilsfeld, diagonal über das Netz in ein Aufschlagfeld. Der Aufschlag bleibt eine ganze Weile bei dir, und deine Seite ist festgelegt. Diese Struktur sitzt tief.\n\nIm Crossminton wandert das Aufschlagrecht dagegen in einer festen Reihenfolge durch alle vier Spieler: Jeder ist reihum an der Reihe, keiner schlägt ein ganzes Spiel lang auf. Dazu kommt: Es gibt kein Netz und kein diagonales Aufschlagfeld — du schlägst von unten aus der Aufschlagzone über die Passierzone in das gegnerische Feld, und der ganze Speeder muss dabei im Treffmoment unterhalb deiner Schlaghand sein.\n\nWas du ablegst, ist zweierlei: die Vorstellung, den Aufschlag über mehrere Punkte zu behalten, und die diagonale Über-das-Netz-Logik. Was du übernimmst, ist die Reihum-Rotation durch alle vier Spieler und der flache Unterhand-Aufschlag aus der Zone.\n\nEin Bild: Statt wie im Tennis eine ganze Aufschlag-Serie zu spielen, reichst du das Aufschlagrecht reihum weiter wie eine Karte, die die Runde macht."
+   }
+  },
+  {
+   "id": "spielziel_verstehen_delta_ten",
+   "typ": "delta",
+   "domaene": "taktik",
+   "kompetenzstufe": [
+    "beginner"
+   ],
+   "basis_baustein": "spielziel_verstehen",
+   "ersetzt_bei_herkunft": "TEN",
+   "voraussetzungen": [
+    "spielziel_verstehen"
+   ],
+   "spielziele": [
+    "laengen_tiefensteuerung"
+   ],
+   "transfer_herkunft": [
+    "TEN"
+   ],
+   "untergrund": "halle",
+   "witterung": [],
+   "eigener_uebungsteil": false,
+   "anzeigetitel": {
+    "de": "Das Ziel des Spiels — für Umsteiger aus dem Tennis"
+   },
+   "erklaerteil": {
+    "de": "Das Ziel des Spiels liest sich für dich aus dem Tennis vertraut — den Ball ins gegnerische Feld bringen —, aber ein zentraler Bezugspunkt fällt weg, und das verändert dein Denken.\n\nIm Tennis ist das Netz der Maßstab. Du spielst über das Netz, zielst knapp darüber, und das Mittelfeld — das No-Mans-Land — meidest du. Deine ganze Raumaufteilung ist am Netz orientiert.\n\nIm Crossminton gibt es kein Netz. An seiner Stelle steht die Passierzone: der freie Raum zwischen den beiden Feldern, in den der Speeder nicht fallen darf. Du spielst nicht über ein Hindernis, sondern über eine Distanz hinweg in ein klar umgrenztes Quadrat. Ein zu kurzer Ball landet nicht im Netz, sondern in der Passierzone — und ist genauso verloren.\n\nWas du ablegst, ist die Netz-Orientierung: kein Anlaufen ans Netz, kein Spiel knapp über die Kante. Was du übernimmst, ist das Denken in Passierzone und Zielquadrat — der Speeder muss die Zone sicher überqueren und im gegnerischen Feld landen.\n\nEin Bild: Statt über eine Mauer zu spielen wie im Tennis, spielst du über einen Graben. Wer zu kurz zielt, fällt hinein — auch ohne Netz."
+   }
+  }
+ ]
 }

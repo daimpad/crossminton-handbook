@@ -240,7 +240,7 @@ Alle Dateien im gemeinsamen Pool, vollständig getaggt, `de` befüllt, Zielsprac
 17. **`bausteine.outdoor-thema.json`** — 6 Bausteine vom Typ **`umgebungs_baustein`** (erstmals genutzt), 0 Deltas, `["fortgeschritten"]`, Querschnitt Taktik/Athletik (2 `uebungsteil` / 4 `reflexionsaufgabe`). Aktiviert `witterung`/`untergrund` als Navigationsachsen (6.7) und die Umgebungsanpassungs-Ziele (Bereich 5); `untergrund` wird hier als Liste geführt (11.2). Als Typ gefiltert aus Kompetenz-/Themenpfad.
 
 **Herkunftsreine Delta-Dateien (2):**
-18. **`bausteine.delta-tennis.json`** — 6 Tennis-Deltas (4 Beginner-, 2 Fortgeschritten-Technik). Aktiviert `TEN` im Onboarding. Enthält `ueberkopf_clear_delta_ten` als positiven Transfer.
+18. **`bausteine.delta-tennis.json`** — 8 Tennis-Deltas: 6 Technik (4 Beginner, 2 Fortgeschritten) + 2 Taktik (`spielziel_verstehen`, Beginner: Netz→Passierzone; `aufschlag_rueckschlag_doppel`, Fortgeschritten/`spielform: doppel` — erstes TEN-Doppel-Delta). Aktiviert `TEN` im Onboarding. Enthält `ueberkopf_clear_delta_ten` als positiven Transfer. Das Doppel-Delta greift auch auf der Spielform-Achse (Cross-Sport dort verdrahtet).
 19. **`bausteine.delta-squash.json`** — 6 Squash-Deltas (Technik + Taktik, 2 Stufen). Aktiviert `SQ`. Drei positive Transfers, drei Divergenzen; **kein** Rückhand-Delta (bewusst). Deltas auf zuvor delta-freien Taktik-Bausteinen.
 
 Ergänzend im Bau: **`data/fehlerbilder.json`** (Trainer-Layer, technikgebunden, eigene Entität; siehe Abschnitt 5).
@@ -259,7 +259,7 @@ Diese Daten machen Pfad-Engine, Modifikator, Onboarding, `spielform`-Navigation,
 - **Experten-Stufe**: über alle vier Spieler-Domänen bespielt (Technik, Taktik, Mentales, Athletik) — herkunftsneutral, 0 Deltas. Der Dreistufen-Pfad steht damit vollständig. Erledigt; verbleibende Experten-Ausbauten (z. B. Experten-Doppel, Experten-Einheit) sind optional.
 - **Grafiken**: acht KI-Prompts nur für den Beginner-Technikpfad (Anhang B), Bilder nicht erzeugt. Fortgeschritten-Technik, die weiteren Domänen und der Doppel-Block haben noch keine Grafik-Prompts. Stil: illustrative, reduzierte vektorähnliche Zeichnung, transparenter/weißer Hintergrund.
 - **Fehlerbilder** (Trainer-Layer, technikgebunden): je Technik-Baustein als `trainer_layer_offen` vermerkt; parallel im Bau (`data/fehlerbilder.json`).
-- **Weitere Cross-Sport-Tiefe**: Tennis- und Squash-Deltas decken bislang v. a. die Technik-Kerne (Squash zusätzlich zwei Taktik-Bausteine). Deltas für weitere Bausteine/Domänen und für das Doppel je Herkunft sind offen.
+- **Weitere Cross-Sport-Tiefe**: Tennis- und Squash-Deltas decken die Technik-Kerne und je zwei Taktik-Bausteine ab; Tennis reicht dabei erstmals ins Doppel (`aufschlag_rueckschlag_doppel_delta_ten`, auf der Spielform-Achse verdrahtet). Deltas für weitere Bausteine/Domänen und für das Doppel der übrigen Herkünfte sind offen.
 - **Zielsprachen** `en, fr, pl`: Struktur angelegt, Übersetzung ausstehend. Labels für `BS`, `SP`, `AT`, `spielform` aufzunehmen.
 - **Vokabular-Abdeckung**: Untergrund und Witterung sind mit dem Outdoor-Block nun durch Inhalt erprobt (`untergrund` dabei als Liste geführt, siehe 11.2); die Umgebungsanpassungs-Ziele (Bereich 5) sind belegt. Der Faktor `doppel_spezifische_loesungen` ist über alle drei Stufen breit belegt. Offen bleibt nur eine mögliche Aufspaltung stark belegter Faktoren.
 - **Trainingseinheiten**: kuratierter Erstbestand (4 Einheiten) gebaut; darüber hinaus erweiterbar. Regelbasierte Generierung strukturell offen.
