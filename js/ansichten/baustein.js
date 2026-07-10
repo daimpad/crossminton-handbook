@@ -4,7 +4,7 @@
 // der Übungsteil des Basisbausteins bleibt stets erhalten (Spez. 4.2, 5).
 
 import { schalteTeil } from '../aktionen.js';
-import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil } from '../daten.js';
+import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, untergrundVon, witterungVon } from '../daten.js';
 import { label, t, text } from '../i18n.js';
 import { absaetze, bausteinIcon, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
@@ -13,6 +13,9 @@ import { diagnose, einstellungen } from '../zustand.js';
 function kontextZuListe(kontext) {
   const [art, parameter] = String(kontext).split(':');
   if (art === 'themen') return `#/pfad/themen/${parameter}`;
+  if (art === 'spielform') return `#/pfad/spielform/${parameter}`;
+  if (art === 'umgebung') return '#/pfad/umgebung';
+  if (art === 'witterung' || art === 'untergrund') return `#/pfad/${art}/${parameter}`;
   if (art === 'individual') return '#/pfad/individual';
   return parameter ? `#/pfad/kompetenz/${parameter}` : '#/pfad/kompetenz';
 }
@@ -126,7 +129,8 @@ function einordnungHtml(baustein, kuerzelSichtbar) {
   const zeile = (begriff, wert) => (wert ? `<dt>${esc(begriff)}</dt><dd>${wert}</dd>` : '');
   const spielziele = (baustein.spielziele || []).map((f) => esc(label('spielziel_faktor', f))).join(', ');
   const vermittlungsziele = (baustein.vermittlungsziele || []).map((f) => esc(label('vermittlungsziel_faktor', f))).join(', ');
-  const witterung = (baustein.witterung || []).map((w) => esc(label('witterung', w))).join(', ');
+  const witterung = witterungVon(baustein).map((w) => esc(label('witterung', w))).join(', ');
+  const untergrund = untergrundVon(baustein).filter((u) => u !== 'halle').map((u) => esc(label('untergrund', u))).join(', ');
   const transfer = kuerzelSichtbar
     ? (baustein.transfer_herkunft || []).map((k) => esc(label('transfer_herkunft', k))).join(', ')
     : '';
@@ -139,7 +143,7 @@ function einordnungHtml(baustein, kuerzelSichtbar) {
       <dl>
         ${zeile(t('meta_spielziele'), spielziele)}
         ${zeile(t('meta_vermittlungsziele'), vermittlungsziele)}
-        ${zeile(t('meta_untergrund'), baustein.untergrund ? esc(label('untergrund', baustein.untergrund)) : '')}
+        ${zeile(t('meta_untergrund'), untergrund)}
         ${zeile(t('meta_witterung'), witterung)}
         ${zeile(t('meta_transfer'), transfer)}
         ${zeile(t('meta_voraussetzungen'), voraussetzungen)}
@@ -162,6 +166,8 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
     ...domaenenVon(b).map((d) => `<span class="chip">${esc(label('domaene', d))}</span>`),
     `<span class="chip">${esc(label('baustein_typ', b.typ))}</span>`,
     ...(b.kompetenzstufe || []).map((s) => `<span class="chip">${esc(label('kompetenzstufe', s))}</span>`),
+    ...witterungVon(b).map((w) => `<span class="chip">${esc(label('witterung', w))}</span>`),
+    ...untergrundVon(b).filter((u) => u !== 'halle').map((u) => `<span class="chip">${esc(label('untergrund', u))}</span>`),
   ].join(' ');
 
   // Dezente Transfer-Kennzeichnung, per Schalter ausblendbar (Spez. 3.2/6).

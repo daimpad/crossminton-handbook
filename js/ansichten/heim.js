@@ -4,7 +4,7 @@
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { balkenHtml, esc } from '../oberflaeche.js';
-import { kompetenzpfad, spielformen, themenDomaenen } from '../pfade.js';
+import { kompetenzpfad, spielformen, themenDomaenen, umgebungBausteine } from '../pfade.js';
 import { diagnose, kontinuitaet, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
 
@@ -57,6 +57,16 @@ export function renderHeim(el, daten) {
     </a>`
       : '';
 
+  const umgebung = umgebungBausteine(daten);
+  const umgebungKarte =
+    umgebung.length > 0
+      ? `
+    <a class="karte karte-link" href="#/pfad/umgebung">
+      <h3>${esc(t('pfad_umgebung'))} <span class="chip">${esc(t('n_bausteine', { n: umgebung.length }))}</span></h3>
+      <p class="leise">${esc(t('pfad_umgebung_text'))}</p>
+    </a>`
+      : '';
+
   const zielBeschriftungen = zielLabels(d.ziel);
   const zielZeile = zielBeschriftungen.length > 0
     ? `${esc(t('ziel_aktuell'))}: ${esc(zielBeschriftungen.join(' · '))}`
@@ -96,6 +106,7 @@ export function renderHeim(el, daten) {
       <p class="chip-zeile">${domaenenChips}</p>
     </a>
     ${spielformKarte}
+    ${umgebungKarte}
     <a class="karte karte-link" href="#/pfad/individual">
       <h3>${esc(t('pfad_individual'))}</h3>
       <p class="leise">${esc(t('pfad_individual_text'))}</p>

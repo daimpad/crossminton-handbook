@@ -5,7 +5,7 @@
 // Zwei-Ebenen-Logik (4.4): der Graph sortiert nur. Zugänglichkeit ist überall
 // frei; nicht absolvierte Voraussetzungen werden als Hinweis mitgegeben.
 
-import { deltaFuer, domaenenVon, einheitReferenzen, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon } from './daten.js';
+import { deltaFuer, domaenenVon, einheitReferenzen, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon, witterungVon } from './daten.js';
 import { fehlendeVoraussetzungen, topoSortiere } from './graph.js';
 import { absolviertNachId, bausteinAbsolviert } from './fortschritt.js';
 import { diagnose, kontinuitaet, teilStatus } from './zustand.js';
@@ -36,6 +36,13 @@ function istNurTrainer(daten, baustein) {
 }
 function trainerSichtbar(daten, baustein) {
   return diagnose().trainer || !istNurTrainer(daten, baustein);
+}
+
+// Umgebungs-Bausteine (Outdoor, typ 'umgebungs_baustein') sind ein eigenes
+// Querschnittsthema und aus dem Kompetenz- und Themenpfad gefiltert (Typ-Filter);
+// erreichbar über die Umgebungs-Achse, den Individualpfad (Bereich-5-Ziele) und Deep-Link.
+function umgebungsBaustein(baustein) {
+  return baustein.typ === 'umgebungs_baustein';
 }
 
 // Kompetenzpfad (kann über Stufen kumulieren): Stufe primär, damit sich
@@ -112,6 +119,7 @@ export function kompetenzpfad(daten, stufe = diagnose().stufe) {
   const herkunft = diagnose().herkunft;
   const zielIndex = daten.koennensOrdnung.indexOf(stufe);
   const menge = daten.bausteine.filter((b) => {
+    if (umgebungsBaustein(b)) return false; // Outdoor bleibt aus dem Stufen-Ladder
     const eigene = niedrigsteStufe(daten, b);
     if (zielIndex < 0) return eigene === stufe; // Trainer o. Ä.: exakt
     const eigenerIndex = daten.koennensOrdnung.indexOf(eigene);
@@ -130,12 +138,12 @@ export function kompetenzpfad(daten, stufe = diagnose().stufe) {
 export function themenDomaenen(daten) {
   return (daten.vokabulare.domaene || []).map((domaene) => ({
     domaene,
-    anzahl: daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b)).length,
+    anzahl: daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b) && !umgebungsBaustein(b)).length,
   }));
 }
 
 export function themenpfad(daten, domaene) {
-  const menge = daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b));
+  const menge = daten.bausteine.filter((b) => domaenenVon(b).includes(domaene) && trainerSichtbar(daten, b) && !umgebungsBaustein(b));
   return {
     art: 'themen',
     domaene,
@@ -167,6 +175,41 @@ export function spielformpfad(daten, spielform) {
     spielform,
     herkunft,
     stationen: zuStationen(daten, menge, poolVergleicher(daten), herkunft),
+  };
+}
+
+// Umgebungs-Achse (Outdoor, Querschnitt): witterung und untergrund werden zu
+// Navigationsachsen — analog zur Spielform-Achse, aber ohne Cross-Sport-Modifikator
+// (Outdoor ist crossminton-eigen, kein Herkunftskonflikt → herkunft bleibt außen vor).
+// `witterungen`/`untergruende` bieten nur die tatsächlich belegten Werte an (halle
+// ist der Default/kein Thema, analog 'einzel' bei der Spielform).
+export function umgebungBausteine(daten) {
+  return daten.bausteine.filter((b) => umgebungsBaustein(b));
+}
+
+export function witterungen(daten) {
+  return (daten.vokabulare.witterung || [])
+    .map((witterung) => ({ witterung, anzahl: daten.bausteine.filter((b) => witterungVon(b).includes(witterung)).length }))
+    .filter((e) => e.anzahl > 0);
+}
+
+export function untergruende(daten) {
+  return (daten.vokabulare.untergrund || [])
+    .filter((u) => u !== 'halle')
+    .map((untergrund) => ({ untergrund, anzahl: daten.bausteine.filter((b) => untergrundVon(b).includes(untergrund)).length }))
+    .filter((e) => e.anzahl > 0);
+}
+
+export function umgebungspfad(daten, achse = null, wert = null) {
+  let menge;
+  if (achse === 'witterung') menge = daten.bausteine.filter((b) => witterungVon(b).includes(wert));
+  else if (achse === 'untergrund') menge = daten.bausteine.filter((b) => untergrundVon(b).includes(wert));
+  else menge = umgebungBausteine(daten);
+  return {
+    art: 'umgebung',
+    achse,
+    wert,
+    stationen: zuStationen(daten, menge, poolVergleicher(daten), null),
   };
 }
 
@@ -231,6 +274,9 @@ export function sequenzFuer(daten, kontext) {
   const [art, parameter] = String(kontext || 'kompetenz').split(':');
   if (art === 'themen') return themenpfad(daten, parameter);
   if (art === 'spielform') return spielformpfad(daten, parameter);
+  if (art === 'umgebung') return umgebungspfad(daten);
+  if (art === 'witterung') return umgebungspfad(daten, 'witterung', parameter);
+  if (art === 'untergrund') return umgebungspfad(daten, 'untergrund', parameter);
   if (art === 'individual') return individualpfad(daten);
   return kompetenzpfad(daten, parameter || diagnose().stufe);
 }
