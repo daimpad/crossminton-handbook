@@ -530,7 +530,8 @@ pruefe('beide Teile erledigt → 1 von 95', globaleProjektion(daten).absolviert 
 const pfadProjektion = projektion(kompetenzpfad(daten).stationen.map((s) => s.baustein));
 pruefe('Beginner-Pfad-Projektion bei 28 (kumulativ bis Beginner, inkl. Doppel-Beginner)', pfadProjektion.absolviert === 1 && pfadProjektion.gesamt === 28);
 const uebersicht = trainingsuebersicht(daten);
-pruefe('Trainingspfad stufen-kumulativ: Beginner sieht nur die zwei Beginner-Einheiten', uebersicht.length === 2 && uebersicht.every((e) => e.einheit.kompetenzstufe === 'beginner'));
+pruefe('Trainingspfad stufen-kumulativ: Beginner sieht die drei Beginner-Einheiten (inkl. Doppel-Beginner)', uebersicht.length === 3 && uebersicht.every((e) => e.einheit.kompetenzstufe === 'beginner'));
+pruefe('Beginner-Trainingsliste enthält die Beginner-Doppel-Einheit (spielform:doppel)', uebersicht.some((e) => e.einheit.id === 'doppel_beginner_zusammenspiel' && e.einheit.spielform === 'doppel'));
 pruefe('Einheit über drei Phasen aufgelöst (beginner_erste_schlaege: 5 Übungen, Erwärmung→Ausklang)', (() => {
   const e = uebersicht.find((u) => u.einheit.id === 'beginner_erste_schlaege');
   return e && e.bausteine.length === 5 && e.referenzen.length === 5 && e.referenzen[0].phase === 'erwaermung' && e.referenzen.at(-1).phase === 'ausklang';
@@ -538,10 +539,19 @@ pruefe('Einheit über drei Phasen aufgelöst (beginner_erste_schlaege: 5 Übunge
 pruefe('alle Einheit-Referenzen tragen einen Übungsteil (keine Reflexions-Bausteine)', uebersicht.every((u) => u.referenzen.every((r) => hatUebungsteil(r.baustein))));
 pruefe('kuratorischer Hinweis je Referenz vorhanden', uebersicht[0].referenzen.every((r) => typeof (r.hinweis?.de) === 'string'));
 setzeDiagnose({ stufe: 'fortgeschritten' });
-pruefe('Fortgeschritten kumulativ: alle vier Einheiten (inkl. Doppel-Einheit spielform:doppel)', (() => {
+pruefe('Fortgeschritten kumulativ: sechs Einheiten (3 Beginner + 3 Fortgeschritten, inkl. Doppel + Outdoor)', (() => {
   const alle = trainingsuebersicht(daten);
-  return alle.length === 4 && alle.some((u) => u.einheit.id === 'doppel_als_paar_spielen' && u.einheit.spielform === 'doppel');
+  return alle.length === 6
+    && alle.some((u) => u.einheit.id === 'doppel_als_paar_spielen' && u.einheit.spielform === 'doppel')
+    && alle.some((u) => u.einheit.id === 'outdoor_wind_und_boden' && u.einheit.kompetenzstufe === 'fortgeschritten');
 })());
+setzeDiagnose({ stufe: 'experte' });
+pruefe('Experte kumulativ: alle acht Einheiten, erstmals zwei Experten-Einheiten sichtbar', (() => {
+  const alle = trainingsuebersicht(daten);
+  const experten = alle.filter((u) => u.einheit.kompetenzstufe === 'experte').map((u) => u.einheit.id);
+  return alle.length === 8 && gleicheListe(experten, ['experte_praezision_und_taeuschung', 'experte_tempo_und_konstanz']);
+})());
+pruefe('alle 8 Einheiten: jede Referenz löst auf einen Baustein mit Übungsteil auf', trainingsuebersicht(daten).every((u) => u.referenzen.length > 0 && u.referenzen.every((r) => hatUebungsteil(r.baustein))));
 setzeDiagnose({ stufe: 'beginner' });
 registriereEinheitAbschluss('beginner_erste_schlaege');
 registriereEinheitAbschluss('beginner_erste_schlaege');
