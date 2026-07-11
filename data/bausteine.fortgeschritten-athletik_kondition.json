@@ -1,155 +1,210 @@
 {
-  "_meta": {
-    "beschreibung": "Fortgeschritten-Athletik/Kondition: vertieft die Beginner-Athletik zu gezielteren Faehigkeiten (Explosivitaet, Rumpfstabilitaet/kinetische Kette, Intervallausdauer, Belastungssteuerung/Regeneration).",
-    "quellsprache": "de",
-    "zielsprachen": ["en", "fr", "pl"],
-    "stand": "Erstausbau-Erweiterung",
-    "dateiname_konvention": "bausteine.fortgeschritten-athletik_kondition.json",
-    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
-    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Beginner-Athletikblock.",
-    "kein_delta": "Athletische Anforderungen sind sportartuebergreifend; Divergenzen sind technisch, nicht athletisch.",
-    "gesundheitsrahmen": "STRIKT und hier besonders wichtig. KEINE praezisen Belastungsdosen, Wiederholungs-/Satzzahlen, Trainingsplaene, Ernaehrung, Gewicht. Fortgeschrittene Methoden (Plyometrie, Belastungssteuerung) nur prinzipiell erklaeren; fuer konkrete Programme UND bei Beschwerden konsequent auf qualifizierte Anleitung (Trainer/Aerztin/Physiotherapie) verweisen. Deshalb ueberwiegend reflexionsaufgabe statt prescriptivem uebungsteil; uebungsteile nur bei risikoarmen, qualitativen Inhalten (Rumpf, spielnahe Intervalle) und ohne Zahlen.",
-    "ordnungslogik": "Rahmen (gezielt trainieren) -> Explosivitaet -> Rumpfstabilitaet/kinetische Kette -> Intervallausdauer -> Belastung steuern/regenerieren.",
-    "innere_struktur_verteilung": "reflexionsaufgabe: Rahmen, Explosivitaet, Belastung/Regeneration (programmiernah -> bewusst reflexiv, mit Verweis auf Fachanleitung). uebungsteil (qualitativ, ohne Zahlen, risikoarm): Rumpfstabilitaet, Intervallausdauer."
-  },
-
-  "bausteine": [
-    {
-      "id": "gezielt_trainieren",
-      "typ": "micro",
-      "domaene": "athletik_kondition",
-      "kompetenzstufe": ["fortgeschritten"],
-      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
-      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fuehrt von der allgemeinen Grundlage zum gezielten Training",
-      "spielziele": ["wiederholte_antrittsschnelligkeit", "rally_ausdauer"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["AT"],
-      "transfer_herkunft_beleg": "Sportartspezifisches, progressives Training; Prinzip Basis-vor-Spezialisierung; Fortschrittskontrolle: allgemeine Trainingswissenschaft.",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Gezielt trainieren"},
-      "erklaerteil": {
-        "de": "Im Beginner-Bereich ging es um eine solide Grundlage: aufwärmen, beweglich bleiben, schnelle Füße, Ausdauer, Erholung. Jetzt wird das Training gezielter. Du arbeitest an den Fähigkeiten, die Crossminton konkret verlangt — an der Explosivität für den ersten Schritt, der Kraftübertragung für harte Schläge, der Ausdauer für den typischen Wechsel aus kurzen intensiven Phasen und Pausen.\n\nEin Grundsatz steht über allem: Basis vor Spezialisierung. Gezieltes, forderndes Training baut auf einer soliden Grundlage auf. Wer die Grundlage überspringt und gleich mit fortgeschrittenen Methoden beginnt, riskiert Überlastung. Die fortgeschrittenen Bausteine setzen deshalb voraus, dass die Grundlage aus dem Beginner-Bereich steht.\n\nGezielt heißt auch: die eigene Entwicklung beobachten. Merkst du, dass dir eher die Explosivität, die Kraft oder die Ausdauer fehlt? Dieser ehrliche Blick zeigt dir, woran du arbeiten solltest. Nicht alles auf einmal, sondern der Reihe nach das, was am meisten bremst.\n\nEin wichtiger Hinweis vorweg, der für alle folgenden Bausteine gilt: Dieser Bereich erklärt Prinzipien, keine fertigen Trainingspläne. Fortgeschrittenes körperliches Training — besonders Sprungkraft und Belastungssteuerung — will richtig dosiert und aufgebaut sein. Für ein konkretes, auf dich zugeschnittenes Programm ist eine qualifizierte Trainerin oder ein Trainer die richtige Adresse. Und bei Schmerzen oder Beschwerden gehört die Abklärung in ärztliche oder physiotherapeutische Hände.\n\nEin Bild: Gezieltes Training ist wie der Ausbau eines Hauses. Erst muss das Fundament stehen, dann baust du gezielt die Räume, die du brauchst. Wer auf einem schwachen Fundament aufstockt, gefährdet den ganzen Bau."
-      },
-      "reflexionsaufgabe": {
-        "de": "Schau ehrlich auf dein Spiel: Was bremst dich körperlich am meisten — fehlt dir eher die Explosivität für den ersten Schritt, die Kraft für harte Schläge oder die Ausdauer gegen Satzende? Wähle einen einzigen Schwerpunkt, an dem du zuerst arbeiten willst. Und überleg, ob deine athletische Grundlage aus dem Beginner-Bereich (Aufwärmen, Beweglichkeit, Grundausdauer) tatsächlich steht — sie ist die Voraussetzung für alles Gezieltere. Für ein konkretes Programm ziehe qualifizierte Anleitung hinzu."
-      }
-    },
-
-    {
-      "id": "explosivitaet",
-      "grafik": ["G-034"],
-      "typ": "micro",
-      "domaene": "athletik_kondition",
-      "kompetenzstufe": ["fortgeschritten"],
-      "voraussetzungen": ["gezielt_trainieren", "schnelle_fuesse"],
-      "voraussetzungen_lesart": "gemischt: gezielt_trainieren (Rahmen, gleiche Stufe); schnelle_fuesse (motorisch, stufenuebergreifend auf Beginner-Athletik)",
-      "spielziele": ["wiederholte_antrittsschnelligkeit"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["AT", "BAD"],
-      "transfer_herkunft_beleg": "Explosivkraft/Sprungkraft (plyometrisches Prinzip) fuer Antritt und Ueberkopf-Sprung; Wirkung auf Agilitaet/Schnelligkeit und Verletzungspraevention in Rueckschlagsportarten: Trainingswissenschaft (Plyometrie-Studien Badminton/Court-Sport). WARNUNG aus den Quellen: fortgeschrittene Progressionen nur nach solider Basis und mit korrekter Technik.",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Explosivität und Sprungkraft"},
-      "erklaerteil": {
-        "de": "Crossminton entscheidet sich in Sekundenbruchteilen: der erste Schritt zum Speeder, der Absprung zum Überkopfschlag, das plötzliche Umschalten der Richtung. All das verlangt Explosivität — die Fähigkeit, in kürzester Zeit viel Kraft abzurufen.\n\nExplosivität trainiert man über schnellkräftige, federnde Bewegungen. Das Prinzip dahinter nutzt die natürliche Spannung deiner Muskeln: Ein Muskel, der kurz vorgedehnt wird und sofort zusammenzieht — wie bei einem federnden Sprung —, erzeugt mehr Kraft als aus dem Stand. Genau diese Feder steckt in jedem guten Antritt und Absprung.\n\nSo weit das Prinzip. Bei der Umsetzung ist Vorsicht der wichtigste Begleiter. Schnellkräftige Sprünge belasten Sehnen und Gelenke stark. Sie gehören ans Ende einer soliden Grundlage, nicht an den Anfang, und sie verlangen saubere Technik — ein weicher, kontrollierter Landung ist wichtiger als große Höhe. Wer die Belastung zu schnell steigert, riskiert genau die Verletzung, die gutes Training verhindern soll.\n\nDeshalb der klare Rat: Die ersten Schritte in Richtung Sprungkraft machst du am besten mit qualifizierter Anleitung, die Technik und Steigerung im Blick hat. Sie zeigt dir, welche Bewegungen zu deinem Stand passen und wie du sicher aufbaust.\n\nEin Bild: Explosivität ist wie eine gespannte Feder. Richtig eingesetzt schnellt sie kraftvoll nach vorn. Überdehnt oder falsch belastet, gibt sie nach. Der Aufbau entscheidet, welches von beidem passiert."
-      },
-      "reflexionsaufgabe": {
-        "de": "Beobachte in deinem Spiel die explosiven Momente: der erste Schritt aus der Grundposition, der Absprung zum hohen Ball, das Umschalten der Richtung. Wo kommst du zu spät oder zu schwerfällig weg? Das zeigt dir, wo Explosivität dir am meisten brächte. Wenn du gezielt an Sprungkraft arbeiten willst, hol dir dafür qualifizierte Anleitung — sie sorgt für sichere Technik und den richtigen Aufbau. Achte selbst vor allem auf eines: eine weiche, kontrollierte Landung bei allem, was du springst."
-      }
-    },
-
-    {
-      "id": "rumpfstabilitaet",
-      "typ": "micro",
-      "domaene": "athletik_kondition",
-      "kompetenzstufe": ["fortgeschritten"],
-      "voraussetzungen": ["gezielt_trainieren"],
-      "voraussetzungen_querverweis": "handgelenk_peitsche (fortgeschrittene Technik) — der Rumpf ist das Glied, das die Kraft aus den Beinen in die Peitsche uebertraegt",
-      "spielziele": ["tempo_haertedosierung", "wiederholte_antrittsschnelligkeit"],
-      "spielziele_hinweis": "primaerer Nutzen: Kraftuebertragung (kinetische Kette) und Verletzungspraevention",
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["AT", "CM"],
-      "transfer_herkunft_beleg": "Rumpfstabilitaet als Glied der kinetischen Kette (Kraft von den Beinen zum Schlaeger), verbessert Schlaggeschwindigkeit/Genauigkeit/Spinkontrolle und senkt Verletzungsrisiko (Schulter/Ellbogen/Wirbelsaeule) in Rueckschlagsportarten: Trainingswissenschaft (Kernkraft-Metaanalyse Racket Sports). CM: Bezug zur crossminton-eigenen Peitschenbewegung.",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Rumpfstabilität und die Kraftübertragung"},
-      "erklaerteil": {
-        "de": "Ein harter Schlag entsteht nicht im Arm. Er beginnt in den Beinen, läuft über den Rumpf und endet in der Peitsche des Handgelenks. Der Rumpf — Bauch, Rücken, die tiefe Muskulatur um die Wirbelsäule — ist das entscheidende Glied in dieser Kette. Ist er stabil, überträgt er die Kraft verlustfrei. Ist er schwach, versickert die Kraft auf dem Weg nach oben.\n\nDas ist der Grund, warum Rumpfstabilität im Crossminton so viel bringt. Deine Schlagkraft kommt aus dem ganzen Körper, und der Rumpf ist die Brücke, über die sie fließt. Untersuchungen an Rückschlagsportlern zeigen: Ein stabiler Rumpf verbessert nicht nur die Schlaggeschwindigkeit, sondern auch die Genauigkeit und die Kontrolle über den Schnitt. Zugleich schützt er — ein stabiler Rumpf entlastet Schulter, Ellbogen und Rücken, die sonst die schwache Kraftübertragung ausgleichen müssten.\n\nRumpfstabilität baust du mit Übungen, die den Körper gegen Bewegung stabil halten — Halteübungen, bei denen du eine feste Position gegen die Schwerkraft oder gegen eine Drehung hältst. Das Schöne daran: Diese Übungen sind risikoarm und brauchen kein Gerät. Wichtig ist die saubere Haltung, nicht die Dauer oder Menge.\n\nEin Bild: Der Rumpf ist wie der Stamm eines Baums, aus dem die Äste wachsen. Ein fester Stamm trägt kraftvolle Äste, die sich im Wind biegen, ohne zu brechen. Ein weicher Stamm lässt jede Kraft ins Leere laufen.\n\nWeil Rumpfübungen risikoarm sind, kannst du hier gut selbst beginnen — mit dem Fokus auf saubere Haltung. Für anspruchsvollere Varianten und die richtige Ausführung lohnt sich auch hier ein prüfender Blick von jemandem mit Erfahrung."
-      },
-      "uebungsteil": {
-        "de": {
-          "titel": "Den Rumpf stabil halten",
-          "ziel": "Die tiefe Rumpfmuskulatur als stabile Brücke der Kraftübertragung kräftigen — mit Fokus auf Haltung.",
-          "schritte": [
-            "Nimm eine stabile Halteposition ein, in der du den Rumpf gegen die Schwerkraft fest hältst — etwa den Unterarmstütz mit geradem Körper.",
-            "Achte auf eine saubere Linie: kein Durchhängen, kein Hohlkreuz, der Bauch bleibt angespannt.",
-            "Halte die Position ruhig, solange die Haltung sauber bleibt, und beende sie, sobald die Form nachlässt.",
-            "Ergänze Übungen, die eine Drehung stabil abfangen, um die Rotation deiner Schläge zu stützen.",
-            "Baue die Übungen regelmäßig ein, mit Pausen zwischen den Einheiten."
-          ],
-          "selbstkontrolle": "Bleibt deine Haltung sauber, oder sackt der Körper durch, sobald es anstrengend wird? Qualität geht klar vor Dauer — eine kurze, saubere Halteposition bringt mehr als eine lange, bei der die Form zerfällt. Spürst du die Belastung im Rücken statt im Rumpf, brich ab und prüfe die Haltung.",
-          "abschluss": "Ein stabiler Rumpf zahlt sich doppelt aus: mehr Kraft in den Schlägen und weniger Belastung für die verletzungsanfälligen Gelenke. Er ist die unsichtbare Grundlage deiner Peitsche."
-        }
-      }
-    },
-
-    {
-      "id": "intervallausdauer",
-      "typ": "micro",
-      "domaene": "athletik_kondition",
-      "kompetenzstufe": ["fortgeschritten"],
-      "voraussetzungen": ["durchhalten"],
-      "voraussetzungen_lesart": "motorisch (stufenuebergreifend): baut auf der Beginner-Ausdauergrundlage auf",
-      "spielziele": ["rally_ausdauer", "satz_match_regeneration"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["AT", "CM"],
-      "transfer_herkunft_beleg": "Intervallcharakter (kurze intensive Aktionen mit kurzen Erholungen), wiederholte Antrittsfaehigkeit, aerob-anaerobe Mischbelastung: Trainingswissenschaft (analog Fechten/Badminton). CM: das Spielprofil selbst (Ballwechsel-Pausen-Wechsel).",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Spezifische Ausdauer — der Intervallcharakter"},
-      "erklaerteil": {
-        "de": "Crossminton ist kein Dauerlauf. Es ist ein ständiger Wechsel aus kurzen, hochintensiven Ballwechseln und kleinen Pausen dazwischen — und das über einen ganzen Satz. Genau dieses Muster musst du trainieren, wenn du gegen Satzende nicht einbrechen willst. Eine gleichmäßige Dauerausdauer allein reicht dafür nicht.\n\nDer Schlüssel liegt im Intervallcharakter. Dein Körper muss lernen, eine intensive Belastung abzurufen, sich in der kurzen Pause teilweise zu erholen und dann sofort wieder Vollgas zu geben — immer wieder. Diese Fähigkeit, intensive Aktionen zu wiederholen, ist etwas anderes als lange gleichmäßig durchzuhalten. Sie mischt die ausdauernde und die schnellkräftige Seite.\n\nDas Gute ist: Du trainierst diesen Intervallcharakter am besten im Spiel selbst und in spielnahen Formen. Wer intensive Ballwechsel bewusst voll durchspielt, die kurze Pause zur Teilerholung nutzt und dann den nächsten wieder mit vollem Einsatz angeht, trainiert genau das richtige Muster. Ergänzend hilft eine solide Grundausdauer als Basis, auf der die Intervalle aufsetzen.\n\nEin Bild: Deine Ausdauer im Crossminton ist wie ein Akku, der sich in den Pausen kurz auflädt. Trainiert ist nicht der Akku, der lange gleichmäßig hält, sondern der, der sich schnell wieder auflädt und sofort viel Leistung abgibt.\n\nWichtig bleibt der geduldige Aufbau. Intensive Intervalle sind fordernd — steigere sie langsam und gib deinem Körper zwischen den Einheiten Zeit zur Erholung."
-      },
-      "uebungsteil": {
-        "de": {
-          "titel": "Intensiv spielen, kurz erholen",
-          "ziel": "Das Intervallmuster des Crossminton trainieren — volle Ballwechsel, kurze Teilerholung, wieder voll.",
-          "schritte": [
-            "Spiele Ballwechsel bewusst mit vollem Einsatz aus, statt sie abzukürzen.",
-            "Nutze die kurze Pause danach zum bewussten Durchatmen und kurzen Erholen.",
-            "Geh den nächsten Ballwechsel wieder mit vollem Einsatz an, bevor du ganz erholt bist.",
-            "Nutze spielnahe Formen, in denen intensive Phasen und kurze Pausen einander abwechseln.",
-            "Halte die Bewegungsqualität hoch und beende die Einheit, wenn sie deutlich nachlässt."
-          ],
-          "selbstkontrolle": "Kannst du nach den kurzen Pausen die Intensität wieder abrufen, oder wird jeder Ballwechsel schwächer? Nimmt die Qualität stark ab, brauchst du entweder mehr Grundausdauer als Basis oder längere Pausen. Steigere die Intensität langsam und gönn dir zwischen fordernden Einheiten Erholung.",
-          "abschluss": "Wer das Intervallmuster trainiert, ist im dritten Satz noch da, wenn andere einbrechen. Das ist oft der Unterschied, der enge Spiele entscheidet."
-        }
-      }
-    },
-
-    {
-      "id": "belastung_steuern_regenerieren",
-      "typ": "micro",
-      "domaene": "athletik_kondition",
-      "kompetenzstufe": ["fortgeschritten"],
-      "voraussetzungen": ["erholen"],
-      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das Erholungsverstaendnis zur bewussten Belastungssteuerung aus",
-      "spielziele": ["satz_match_regeneration", "rally_ausdauer"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["AT"],
-      "transfer_herkunft_beleg": "Belastungssteuerung (Wechsel Belastung/Erholung), Ueberlastungsvermeidung, Regeneration ueber Trainingswoche/Turnier, Selbstbeobachtung von Ermuedung: allgemeine Trainingswissenschaft.",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Belastung steuern und regenerieren"},
-      "erklaerteil": {
-        "de": "Je gezielter du trainierst, desto wichtiger wird die Frage, wie du Belastung und Erholung ins Gleichgewicht bringst. Im Beginner-Bereich ging es darum, dass Erholung überhaupt zum Training gehört. Jetzt geht es darum, sie bewusst zu steuern — über eine Trainingswoche, über ein Turnier hinweg.\n\nDas Grundprinzip ist einfach und wird trotzdem oft missachtet: Dein Körper wird stärker in der Erholung, nicht in der Belastung. Die Belastung setzt den Reiz, die Erholung baut die Anpassung. Fehlt die Erholung, kehrt sich der Effekt um — du wirst nicht stärker, sondern müder, und irgendwann anfälliger für Verletzungen. Mehr ist hier nicht automatisch besser.\n\nBelastung steuern heißt, harte und leichte Tage abzuwechseln, nach fordernden Einheiten Erholung einzuplanen und auf die Signale deines Körpers zu hören. Anhaltende Müdigkeit, nachlassende Leistung trotz Training, kleine Wehwehchen, die nicht verschwinden — das sind Zeichen, dass die Balance kippt. Sie ernst zu nehmen ist ein Zeichen von Erfahrung, nicht von Schwäche.\n\nBesonders rund um Turniere lohnt sich der bewusste Blick: vor einem wichtigen Wettkampf die Belastung zurücknehmen, damit du frisch bist; danach dem Körper Erholung gönnen. Schlaf ist und bleibt dabei der wichtigste Erholungsfaktor.\n\nEin Bild: Training ist wie das Bespannen eines Bogens. Die Spannung gibt Kraft — aber ein Bogen, der ständig gespannt bleibt, verliert seine Spannkraft. Erst das Wechselspiel aus Spannen und Lösen hält ihn stark.\n\nEin Hinweis zum Schluss: Für die konkrete Steuerung deiner Belastung — besonders wenn du ernsthaft trainierst oder Wettkämpfe spielst — ist qualifizierte Anleitung wertvoll. Und alles, was nach Verletzung aussieht, gehört fachlich abgeklärt, nicht wegtrainiert."
-      },
-      "reflexionsaufgabe": {
-        "de": "Beobachte über ein, zwei Wochen dein Verhältnis von Belastung und Erholung: Wechselst du fordernde und leichte Tage ab, oder gibst du ständig Vollgas? Wie ist dein Schlaf? Achte auf die Warnsignale — anhaltende Müdigkeit, nachlassende Leistung trotz Training, kleine Beschwerden, die bleiben. Nimm dir vor, nach fordernden Einheiten bewusst Erholung einzuplanen. Wenn du ernsthaft trainierst oder Wettkämpfe spielst, hol dir für die Belastungssteuerung qualifizierte Anleitung — und kläre alles Verletzungsartige fachlich ab."
-      }
-    }
+ "_meta": {
+  "beschreibung": "Fortgeschritten-Athletik/Kondition: vertieft die Beginner-Athletik zu gezielteren Faehigkeiten (Explosivitaet, Rumpfstabilitaet/kinetische Kette, Intervallausdauer, Belastungssteuerung/Regeneration).",
+  "quellsprache": "de",
+  "zielsprachen": [
+   "en",
+   "fr",
+   "pl"
   ],
-
-  "delta_bausteine": []
+  "stand": "Erstausbau-Erweiterung",
+  "dateiname_konvention": "bausteine.fortgeschritten-athletik_kondition.json",
+  "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
+  "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Beginner-Athletikblock.",
+  "kein_delta": "Athletische Anforderungen sind sportartuebergreifend; Divergenzen sind technisch, nicht athletisch.",
+  "gesundheitsrahmen": "STRIKT und hier besonders wichtig. KEINE praezisen Belastungsdosen, Wiederholungs-/Satzzahlen, Trainingsplaene, Ernaehrung, Gewicht. Fortgeschrittene Methoden (Plyometrie, Belastungssteuerung) nur prinzipiell erklaeren; fuer konkrete Programme UND bei Beschwerden konsequent auf qualifizierte Anleitung (Trainer/Aerztin/Physiotherapie) verweisen. Deshalb ueberwiegend reflexionsaufgabe statt prescriptivem uebungsteil; uebungsteile nur bei risikoarmen, qualitativen Inhalten (Rumpf, spielnahe Intervalle) und ohne Zahlen.",
+  "ordnungslogik": "Rahmen (gezielt trainieren) -> Explosivitaet -> Rumpfstabilitaet/kinetische Kette -> Intervallausdauer -> Belastung steuern/regenerieren.",
+  "innere_struktur_verteilung": "reflexionsaufgabe: Rahmen, Explosivitaet, Belastung/Regeneration (programmiernah -> bewusst reflexiv, mit Verweis auf Fachanleitung). uebungsteil (qualitativ, ohne Zahlen, risikoarm): Rumpfstabilitaet, Intervallausdauer."
+ },
+ "bausteine": [
+  {
+   "id": "gezielt_trainieren",
+   "typ": "micro",
+   "domaene": "athletik_kondition",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "voraussetzungen": [
+    "warum_athletik_dein_spiel_traegt"
+   ],
+   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fuehrt von der allgemeinen Grundlage zum gezielten Training",
+   "spielziele": [
+    "wiederholte_antrittsschnelligkeit",
+    "rally_ausdauer"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "AT"
+   ],
+   "transfer_herkunft_beleg": "Sportartspezifisches, progressives Training; Prinzip Basis-vor-Spezialisierung; Fortschrittskontrolle: allgemeine Trainingswissenschaft.",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Gezielt trainieren"
+   },
+   "erklaerteil": {
+    "de": "Im Beginner-Bereich ging es um eine solide Grundlage: aufwärmen, beweglich bleiben, schnelle Füße, Ausdauer, Erholung. Jetzt wird das Training gezielter. Du arbeitest an den Fähigkeiten, die Crossminton konkret verlangt — an der Explosivität für den ersten Schritt, der Kraftübertragung für harte Schläge, der Ausdauer für den typischen Wechsel aus kurzen intensiven Phasen und Pausen.\n\nEin Grundsatz steht über allem: Basis vor Spezialisierung. Gezieltes, forderndes Training baut auf einer soliden Grundlage auf. Wer die Grundlage überspringt und gleich mit fortgeschrittenen Methoden beginnt, riskiert Überlastung. Die fortgeschrittenen Bausteine setzen deshalb voraus, dass die Grundlage aus dem Beginner-Bereich steht.\n\nGezielt heißt auch: die eigene Entwicklung beobachten. Merkst du, dass dir eher die Explosivität, die Kraft oder die Ausdauer fehlt? Dieser ehrliche Blick zeigt dir, woran du arbeiten solltest. Nicht alles auf einmal, sondern der Reihe nach das, was am meisten bremst.\n\nEin wichtiger Hinweis vorweg, der für alle folgenden Bausteine gilt: Dieser Bereich erklärt Prinzipien, keine fertigen Trainingspläne. Fortgeschrittenes körperliches Training — besonders Sprungkraft und Belastungssteuerung — will richtig dosiert und aufgebaut sein. Für ein konkretes, auf dich zugeschnittenes Programm ist eine qualifizierte Trainerin oder ein Trainer die richtige Adresse. Und bei Schmerzen oder Beschwerden gehört die Abklärung in ärztliche oder physiotherapeutische Hände.\n\nGezieltes Training ist wie der Ausbau eines Hauses. Erst muss das Fundament stehen, dann baust du gezielt die Räume, die du brauchst. Wer auf einem schwachen Fundament aufstockt, gefährdet den ganzen Bau."
+   },
+   "reflexionsaufgabe": {
+    "de": "Schau ehrlich auf dein Spiel: Was bremst dich körperlich am meisten — fehlt dir eher die Explosivität für den ersten Schritt, die Kraft für harte Schläge oder die Ausdauer gegen Satzende? Wähle einen einzigen Schwerpunkt, an dem du zuerst arbeiten willst. Und überleg, ob deine athletische Grundlage aus dem Beginner-Bereich (Aufwärmen, Beweglichkeit, Grundausdauer) tatsächlich steht — sie ist die Voraussetzung für alles Gezieltere. Für ein konkretes Programm ziehe qualifizierte Anleitung hinzu."
+   }
+  },
+  {
+   "id": "explosivitaet",
+   "typ": "micro",
+   "domaene": "athletik_kondition",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "voraussetzungen": [
+    "gezielt_trainieren",
+    "schnelle_fuesse"
+   ],
+   "voraussetzungen_lesart": "gemischt: gezielt_trainieren (Rahmen, gleiche Stufe); schnelle_fuesse (motorisch, stufenuebergreifend auf Beginner-Athletik)",
+   "spielziele": [
+    "wiederholte_antrittsschnelligkeit"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "AT",
+    "BAD"
+   ],
+   "transfer_herkunft_beleg": "Explosivkraft/Sprungkraft (plyometrisches Prinzip) fuer Antritt und Ueberkopf-Sprung; Wirkung auf Agilitaet/Schnelligkeit und Verletzungspraevention in Rueckschlagsportarten: Trainingswissenschaft (Plyometrie-Studien Badminton/Court-Sport). WARNUNG aus den Quellen: fortgeschrittene Progressionen nur nach solider Basis und mit korrekter Technik.",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Explosivität und Sprungkraft"
+   },
+   "erklaerteil": {
+    "de": "Crossminton entscheidet sich in Sekundenbruchteilen: der erste Schritt zum Speeder, der Absprung zum Überkopfschlag, das plötzliche Umschalten der Richtung. All das verlangt Explosivität — die Fähigkeit, in kürzester Zeit viel Kraft abzurufen.\n\nExplosivität trainiert man über schnellkräftige, federnde Bewegungen. Das Prinzip dahinter nutzt die natürliche Spannung deiner Muskeln: Ein Muskel, der kurz vorgedehnt wird und sofort zusammenzieht — wie bei einem federnden Sprung —, erzeugt mehr Kraft als aus dem Stand. Genau diese Feder steckt in jedem guten Antritt und Absprung.\n\nSo weit das Prinzip. Bei der Umsetzung ist Vorsicht der wichtigste Begleiter. Schnellkräftige Sprünge belasten Sehnen und Gelenke stark. Sie gehören ans Ende einer soliden Grundlage, nicht an den Anfang, und sie verlangen saubere Technik — ein weicher, kontrollierter Landung ist wichtiger als große Höhe. Wer die Belastung zu schnell steigert, riskiert genau die Verletzung, die gutes Training verhindern soll.\n\nDeshalb der klare Rat: Die ersten Schritte in Richtung Sprungkraft machst du am besten mit qualifizierter Anleitung, die Technik und Steigerung im Blick hat. Sie zeigt dir, welche Bewegungen zu deinem Stand passen und wie du sicher aufbaust.\n\nExplosivität ist wie eine gespannte Feder. Richtig eingesetzt schnellt sie kraftvoll nach vorn. Überdehnt oder falsch belastet, gibt sie nach. Der Aufbau entscheidet, welches von beidem passiert."
+   },
+   "reflexionsaufgabe": {
+    "de": "Beobachte in deinem Spiel die explosiven Momente: der erste Schritt aus der Grundposition, der Absprung zum hohen Ball, das Umschalten der Richtung. Wo kommst du zu spät oder zu schwerfällig weg? Das zeigt dir, wo Explosivität dir am meisten brächte. Wenn du gezielt an Sprungkraft arbeiten willst, hol dir dafür qualifizierte Anleitung — sie sorgt für sichere Technik und den richtigen Aufbau. Achte selbst vor allem auf eines: eine weiche, kontrollierte Landung bei allem, was du springst."
+   }
+  },
+  {
+   "id": "rumpfstabilitaet",
+   "typ": "micro",
+   "domaene": "athletik_kondition",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "voraussetzungen": [
+    "gezielt_trainieren"
+   ],
+   "voraussetzungen_querverweis": "handgelenk_peitsche (fortgeschrittene Technik) — der Rumpf ist das Glied, das die Kraft aus den Beinen in die Peitsche uebertraegt",
+   "spielziele": [
+    "tempo_haertedosierung",
+    "wiederholte_antrittsschnelligkeit"
+   ],
+   "spielziele_hinweis": "primaerer Nutzen: Kraftuebertragung (kinetische Kette) und Verletzungspraevention",
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "AT",
+    "CM"
+   ],
+   "transfer_herkunft_beleg": "Rumpfstabilitaet als Glied der kinetischen Kette (Kraft von den Beinen zum Schlaeger), verbessert Schlaggeschwindigkeit/Genauigkeit/Spinkontrolle und senkt Verletzungsrisiko (Schulter/Ellbogen/Wirbelsaeule) in Rueckschlagsportarten: Trainingswissenschaft (Kernkraft-Metaanalyse Racket Sports). CM: Bezug zur crossminton-eigenen Peitschenbewegung.",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Rumpfstabilität und die Kraftübertragung"
+   },
+   "erklaerteil": {
+    "de": "Ein harter Schlag entsteht nicht im Arm. Er beginnt in den Beinen, läuft über den Rumpf und endet in der Peitsche des Handgelenks. Der Rumpf — Bauch, Rücken, die tiefe Muskulatur um die Wirbelsäule — ist das entscheidende Glied in dieser Kette. Ist er stabil, überträgt er die Kraft verlustfrei. Ist er schwach, versickert die Kraft auf dem Weg nach oben.\n\nDas ist der Grund, warum Rumpfstabilität im Crossminton so viel bringt. Deine Schlagkraft kommt aus dem ganzen Körper, und der Rumpf ist die Brücke, über die sie fließt. Untersuchungen an Rückschlagsportlern zeigen: Ein stabiler Rumpf verbessert die Schlaggeschwindigkeit und ebenso die Genauigkeit und die Kontrolle über den Schnitt. Zugleich schützt er — ein stabiler Rumpf entlastet Schulter, Ellbogen und Rücken, die sonst die schwache Kraftübertragung ausgleichen müssten.\n\nRumpfstabilität baust du mit Übungen, die den Körper gegen Bewegung stabil halten — Halteübungen, bei denen du eine feste Position gegen die Schwerkraft oder gegen eine Drehung hältst. Das Schöne daran: Diese Übungen sind risikoarm und brauchen kein Gerät. Wichtig ist die saubere Haltung, nicht die Dauer oder Menge.\n\nDer Rumpf ist wie der Stamm eines Baums, aus dem die Äste wachsen. Ein fester Stamm trägt kraftvolle Äste, die sich im Wind biegen, ohne zu brechen. Ein weicher Stamm lässt jede Kraft ins Leere laufen.\n\nWeil Rumpfübungen risikoarm sind, kannst du hier gut selbst beginnen — mit dem Fokus auf saubere Haltung. Für anspruchsvollere Varianten und die richtige Ausführung lohnt sich auch hier ein prüfender Blick von jemandem mit Erfahrung."
+   },
+   "uebungsteil": {
+    "de": {
+     "titel": "Den Rumpf stabil halten",
+     "ziel": "Die tiefe Rumpfmuskulatur als stabile Brücke der Kraftübertragung kräftigen — mit Fokus auf Haltung.",
+     "schritte": [
+      "Nimm eine stabile Halteposition ein, in der du den Rumpf gegen die Schwerkraft fest hältst — etwa den Unterarmstütz mit geradem Körper.",
+      "Achte auf eine saubere Linie: kein Durchhängen, kein Hohlkreuz, der Bauch bleibt angespannt.",
+      "Halte die Position ruhig, solange die Haltung sauber bleibt, und beende sie, sobald die Form nachlässt.",
+      "Ergänze Übungen, die eine Drehung stabil abfangen, um die Rotation deiner Schläge zu stützen.",
+      "Baue die Übungen regelmäßig ein, mit Pausen zwischen den Einheiten."
+     ],
+     "selbstkontrolle": "Bleibt deine Haltung sauber, oder sackt der Körper durch, sobald es anstrengend wird? Qualität geht klar vor Dauer — eine kurze, saubere Halteposition bringt mehr als eine lange, bei der die Form zerfällt. Spürst du die Belastung im Rücken statt im Rumpf, brich ab und prüfe die Haltung.",
+     "abschluss": "Ein stabiler Rumpf zahlt sich doppelt aus: mehr Kraft in den Schlägen und weniger Belastung für die verletzungsanfälligen Gelenke. Er ist die unsichtbare Grundlage deiner Peitsche."
+    }
+   }
+  },
+  {
+   "id": "intervallausdauer",
+   "typ": "micro",
+   "domaene": "athletik_kondition",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "voraussetzungen": [
+    "durchhalten"
+   ],
+   "voraussetzungen_lesart": "motorisch (stufenuebergreifend): baut auf der Beginner-Ausdauergrundlage auf",
+   "spielziele": [
+    "rally_ausdauer",
+    "satz_match_regeneration"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "AT",
+    "CM"
+   ],
+   "transfer_herkunft_beleg": "Intervallcharakter (kurze intensive Aktionen mit kurzen Erholungen), wiederholte Antrittsfaehigkeit, aerob-anaerobe Mischbelastung: Trainingswissenschaft (analog Fechten/Badminton). CM: das Spielprofil selbst (Ballwechsel-Pausen-Wechsel).",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Spezifische Ausdauer — der Intervallcharakter"
+   },
+   "erklaerteil": {
+    "de": "Crossminton ist kein Dauerlauf. Es ist ein ständiger Wechsel aus kurzen, hochintensiven Ballwechseln und kleinen Pausen dazwischen — und das über einen ganzen Satz. Genau dieses Muster musst du trainieren, wenn du gegen Satzende nicht einbrechen willst. Eine gleichmäßige Dauerausdauer allein reicht dafür nicht.\n\nDer Schlüssel liegt im Intervallcharakter. Dein Körper muss lernen, eine intensive Belastung abzurufen, sich in der kurzen Pause teilweise zu erholen und dann sofort wieder Vollgas zu geben — immer wieder. Diese Fähigkeit, intensive Aktionen zu wiederholen, ist etwas anderes als lange gleichmäßig durchzuhalten. Sie mischt die ausdauernde und die schnellkräftige Seite.\n\nDas Gute ist: Du trainierst diesen Intervallcharakter am besten im Spiel selbst und in spielnahen Formen. Wer intensive Ballwechsel bewusst voll durchspielt, die kurze Pause zur Teilerholung nutzt und dann den nächsten wieder mit vollem Einsatz angeht, trainiert genau das richtige Muster. Ergänzend hilft eine solide Grundausdauer als Basis, auf der die Intervalle aufsetzen.\n\nDeine Ausdauer im Crossminton ist wie ein Akku, der sich in den Pausen kurz auflädt. Trainiert ist nicht der Akku, der lange gleichmäßig hält, sondern der, der sich schnell wieder auflädt und sofort viel Leistung abgibt.\n\nWichtig bleibt der geduldige Aufbau. Intensive Intervalle sind fordernd — steigere sie langsam und gib deinem Körper zwischen den Einheiten Zeit zur Erholung."
+   },
+   "uebungsteil": {
+    "de": {
+     "titel": "Intensiv spielen, kurz erholen",
+     "ziel": "Das Intervallmuster des Crossminton trainieren — volle Ballwechsel, kurze Teilerholung, wieder voll.",
+     "schritte": [
+      "Spiele Ballwechsel bewusst mit vollem Einsatz aus, statt sie abzukürzen.",
+      "Nutze die kurze Pause danach zum bewussten Durchatmen und kurzen Erholen.",
+      "Geh den nächsten Ballwechsel wieder mit vollem Einsatz an, bevor du ganz erholt bist.",
+      "Nutze spielnahe Formen, in denen intensive Phasen und kurze Pausen einander abwechseln.",
+      "Halte die Bewegungsqualität hoch und beende die Einheit, wenn sie deutlich nachlässt."
+     ],
+     "selbstkontrolle": "Kannst du nach den kurzen Pausen die Intensität wieder abrufen, oder wird jeder Ballwechsel schwächer? Nimmt die Qualität stark ab, brauchst du entweder mehr Grundausdauer als Basis oder längere Pausen. Steigere die Intensität langsam und gönn dir zwischen fordernden Einheiten Erholung.",
+     "abschluss": "Wer das Intervallmuster trainiert, ist im dritten Satz noch da, wenn andere einbrechen. Das ist oft der Unterschied, der enge Spiele entscheidet."
+    }
+   }
+  },
+  {
+   "id": "belastung_steuern_regenerieren",
+   "typ": "micro",
+   "domaene": "athletik_kondition",
+   "kompetenzstufe": [
+    "fortgeschritten"
+   ],
+   "voraussetzungen": [
+    "erholen"
+   ],
+   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das Erholungsverstaendnis zur bewussten Belastungssteuerung aus",
+   "spielziele": [
+    "satz_match_regeneration",
+    "rally_ausdauer"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "AT"
+   ],
+   "transfer_herkunft_beleg": "Belastungssteuerung (Wechsel Belastung/Erholung), Ueberlastungsvermeidung, Regeneration ueber Trainingswoche/Turnier, Selbstbeobachtung von Ermuedung: allgemeine Trainingswissenschaft.",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Belastung steuern und regenerieren"
+   },
+   "erklaerteil": {
+    "de": "Je gezielter du trainierst, desto wichtiger wird die Frage, wie du Belastung und Erholung ins Gleichgewicht bringst. Im Beginner-Bereich ging es darum, dass Erholung überhaupt zum Training gehört. Jetzt geht es darum, sie bewusst zu steuern — über eine Trainingswoche, über ein Turnier hinweg.\n\nDas Grundprinzip ist einfach und wird trotzdem oft missachtet: Dein Körper wird stärker in der Erholung, nicht in der Belastung. Die Belastung setzt den Reiz, die Erholung baut die Anpassung. Fehlt die Erholung, kehrt sich der Effekt um — du wirst müder statt stärker und irgendwann anfälliger für Verletzungen. Mehr ist hier nicht automatisch besser.\n\nBelastung steuern heißt, harte und leichte Tage abzuwechseln, nach fordernden Einheiten Erholung einzuplanen und auf die Signale deines Körpers zu hören. Anhaltende Müdigkeit, nachlassende Leistung trotz Training, kleine Wehwehchen, die nicht verschwinden — das sind Zeichen, dass die Balance kippt. Sie ernst zu nehmen ist ein Zeichen von Erfahrung, nicht von Schwäche.\n\nBesonders rund um Turniere lohnt sich der bewusste Blick: vor einem wichtigen Wettkampf die Belastung zurücknehmen, damit du frisch bist; danach dem Körper Erholung gönnen. Schlaf ist und bleibt dabei der wichtigste Erholungsfaktor.\n\nTraining ist wie das Bespannen eines Bogens. Die Spannung gibt Kraft — aber ein Bogen, der ständig gespannt bleibt, verliert seine Spannkraft. Erst das Wechselspiel aus Spannen und Lösen hält ihn stark.\n\nEin Hinweis zum Schluss: Für die konkrete Steuerung deiner Belastung — besonders wenn du ernsthaft trainierst oder Wettkämpfe spielst — ist qualifizierte Anleitung wertvoll. Und alles, was nach Verletzung aussieht, gehört fachlich abgeklärt, nicht wegtrainiert."
+   },
+   "reflexionsaufgabe": {
+    "de": "Beobachte über ein, zwei Wochen dein Verhältnis von Belastung und Erholung: Wechselst du fordernde und leichte Tage ab, oder gibst du ständig Vollgas? Wie ist dein Schlaf? Achte auf die Warnsignale — anhaltende Müdigkeit, nachlassende Leistung trotz Training, kleine Beschwerden, die bleiben. Nimm dir vor, nach fordernden Einheiten bewusst Erholung einzuplanen. Wenn du ernsthaft trainierst oder Wettkämpfe spielst, hol dir für die Belastungssteuerung qualifizierte Anleitung — und kläre alles Verletzungsartige fachlich ab."
+   }
+  }
+ ],
+ "delta_bausteine": []
 }

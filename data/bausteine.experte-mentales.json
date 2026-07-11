@@ -1,129 +1,186 @@
 {
-  "_meta": {
-    "beschreibung": "Experten-Mentales: hoechste mentale Ebene. Wettkampfzustand, Flow, Druck als Herausforderung deuten, Gelassenheit, langfristige mentale Entwicklung. Herkunftsneutral — KEINE Cross-Sport-Deltas.",
-    "quellsprache": "de",
-    "zielsprachen": ["en", "fr", "pl", "ja"],
-    "stand": "Erstausbau-Erweiterung",
-    "dateiname_konvention": "bausteine.experte-mentales.json",
-    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
-    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer.",
-    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Fortgeschritten-Mentalblock und teils auf den Beginner-Mentalblock, plus intern.",
-    "wellbeing_grenze": "STRIKT leistungsbezogen und ressourcenorientiert. Nervositaet/Erregung werden als normale, nutzbare Leistungsenergie gerahmt, nicht als klinisches Thema. Kein diagnostisches/therapeutisches Terrain; fuer darueber Hinausgehendes bleibt der Baustein bei spielbezogener Bewaeltigung.",
-    "innere_struktur": "durchgehend reflexionsaufgabe.",
-    "ordnungslogik": "optimaler Wettkampfzustand -> Flow -> Druck als Herausforderung -> Gelassenheit bei Unfairness -> mentale Entwicklung."
-  },
-
-  "bausteine": [
-    {
-      "id": "optimaler_wettkampfzustand",
-      "typ": "micro",
-      "domaene": "mentales",
-      "kompetenzstufe": ["experte"],
-      "voraussetzungen": ["vom_werkzeug_zum_system"],
-      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das mentale System zur Wettkampfsteuerung aus",
-      "spielziele": ["vorbereitende_selbststeuerung", "konzentrationskonstanz"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["SP"],
-      "transfer_herkunft_beleg": "Individueller optimaler Erregungszustand (Zone optimalen Funktionierens) und Vorstartroutine; Wettkampfnervositaet als nutzbare Energie umdeuten: Sportpsychologie (IZOF/Hanin, Vorstartroutinen).",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Der optimale Wettkampfzustand"},
-      "erklaerteil": {
-        "de": "Jeder Spieler hat einen Zustand, in dem er am besten spielt — nicht zu angespannt, nicht zu flau, sondern genau richtig aktiviert. Diesen optimalen Wettkampfzustand kennenzulernen und bewusst herzustellen, ist eine der feinsten mentalen Fertigkeiten des Experten.\n\nDas Besondere: Dieser Punkt ist bei jedem anders. Der eine spielt am besten hochgespannt und voller Energie, der andere ruhig und gelassen. Zu viel Anspannung macht hektisch und verkrampft, zu wenig macht müde und unkonzentriert. Deine Aufgabe ist, deinen eigenen optimalen Punkt zu finden — durch Beobachtung: Wie hast du dich gefühlt, als du besonders gut gespielt hast?\n\nDas wichtigste Werkzeug, um diesen Zustand herzustellen, ist eine feste Vorstartroutine. Eine gleichbleibende Abfolge vor dem Match — Aufwärmen, ein paar Atemzüge, eine kurze Vorstellung, die vertrauten Formeln — schaltet dich in den Wettkampfmodus. Sie wirkt doppelt: Sie nimmt dir Entscheidungen ab und gibt Sicherheit, weil sie schon oft funktioniert hat.\n\nUnd hier ein Umdenken, das viel verändert: Nervosität vor einem wichtigen Match ist kein Feind. Das Herzklopfen, die Anspannung — das ist Energie, die dein Körper bereitstellt, um Höchstleistung zu ermöglichen. Wer die Nervosität als positives Zeichen deutet und ihre Energie nutzt, statt gegen sie zu kämpfen, spielt besser.\n\nEin Bild: Dein Wettkampfzustand ist wie die Betriebstemperatur eines Motors. Zu kalt läuft er nicht rund, zu heiß überhitzt er. Die Vorstartroutine bringt dich auf genau die Temperatur, bei der du am besten läufst."
-      },
-      "reflexionsaufgabe": {
-        "de": "Denk an zwei, drei deiner besten Spiele zurück: Wie hast du dich davor und dabei gefühlt — eher ruhig oder eher hochgespannt? Das ist ein Hinweis auf deinen optimalen Zustand. Baue dir daraus eine feste Vorstartroutine, die dich dorthin bringt (z. B. Aufwärmen, ein paar bewusste Atemzüge, eine kurze Vorstellung, deine Formeln). Und übe die Umdeutung: Wenn du das nächste Mal vor einem wichtigen Match nervös bist, sag dir, dass diese Energie dir hilft — und nutze sie."
-      }
-    },
-
-    {
-      "id": "in_den_flow_finden",
-      "typ": "micro",
-      "domaene": "mentales",
-      "kompetenzstufe": ["experte"],
-      "voraussetzungen": ["optimaler_wettkampfzustand", "bei_der_sache_bleiben"],
-      "voraussetzungen_lesart": "gemischt: optimaler_wettkampfzustand (intra); bei_der_sache_bleiben (stufenuebergreifend auf Beginner-Mentales)",
-      "spielziele": ["konzentrationskonstanz", "vorbereitende_selbststeuerung"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["SP"],
-      "transfer_herkunft_beleg": "Flow als Zustand optimaler Passung von Anforderung und Koennen; nicht erzwingbar, aber die Bedingungen sind herstellbar; Ueberdenken stoert den Flow: Sportpsychologie (Csikszentmihalyi; Flow-/Clutch-Forschung).",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "In den Flow finden"},
-      "erklaerteil": {
-        "de": "Manchmal spielst du wie von selbst. Die Schläge gelingen ohne Nachdenken, die Zeit scheint langsamer, du bist ganz im Spiel versunken. Dieser Zustand heißt Flow, und er bringt oft deine besten Leistungen hervor. Der Experte lernt, ihn einzuladen.\n\nFlow entsteht, wenn die Anforderung genau zu deinem Können passt. Ist der Gegner zu leicht, wird es langweilig; ist er überwältigend, entsteht Druck. Dazwischen, wo die Aufgabe dich genau richtig fordert, öffnet sich das Tor zum Flow. Deshalb erleben Experten den Flow oft in engen, gleichwertigen Matches.\n\nDu kannst den Flow nicht auf Kommando herbeizwingen — aber du kannst seine Bedingungen schaffen. Klare, einfache Ziele im Moment. Volle Aufmerksamkeit auf den nächsten Ball, nicht auf das Ergebnis. Deine Vorstartroutine, die dich beruhigt und fokussiert. Und die Abwesenheit von Angst und Selbstzweifel, die den Flow zuverlässig zerstören.\n\nDas Wichtigste, wenn der Flow da ist: Störe ihn nicht durch Nachdenken. Sobald du anfängst, deine Technik bewusst zu analysieren — „wie halte ich noch mal den Schläger“ —, reißt der Faden. Im Flow vertraust du deinem Körper und lässt ihn machen. Das bewusste Steuern gehört in die Übung, nicht in den Flow.\n\nEin Bild: Flow ist wie das Fließen eines Flusses. Du kannst ihn nicht schieben, aber du kannst die Ufer so formen, dass er von allein strömt. Und wenn er strömt, stellst du dich nicht mitten hinein, um ihn zu untersuchen."
-      },
-      "reflexionsaufgabe": {
-        "de": "Erinnere dich an einen Moment, in dem du im Flow warst — alles lief wie von selbst. Was waren die Umstände? Meist ist es ein Gegner auf Augenhöhe und volle Präsenz beim Spiel. Nimm dir vor, im nächsten fordernden Match die Bedingungen zu schaffen: ein einfaches Ziel für den Moment, volle Aufmerksamkeit auf den nächsten Ball, kein Grübeln über das Ergebnis. Und wenn es zu laufen beginnt: analysiere nicht, sondern lass es laufen."
-      }
-    },
-
-    {
-      "id": "druck_als_herausforderung",
-      "typ": "micro",
-      "domaene": "mentales",
-      "kompetenzstufe": ["experte"],
-      "voraussetzungen": ["ueber_das_match_stabil_bleiben"],
-      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut die Match-Robustheit zur Drucksteuerung im entscheidenden Moment aus",
-      "spielziele": ["nervenstaerke_enger_satz", "fehler_resilienz"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["SP", "CM"],
-      "transfer_herkunft_beleg": "Umdeutung von Druck als Herausforderung statt Bedrohung (Selbstwirksamkeit, Kontrolle, Annaeherungsziele); bewusstes 'Hochschalten' im entscheidenden Moment (Clutch): Sportpsychologie (Challenge-/Threat-Theorie, Flow-/Clutch-Modell). CM: der entscheidende Punkt / die 15:15-Zuspitzung.",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Druck als Herausforderung deuten"},
-      "erklaerteil": {
-        "de": "Der entscheidende Punkt, der Matchball, das enge Ende — hier trennt sich der Experte vom guten Spieler nicht durch bessere Schläge, sondern durch die Art, wie er den Druck deutet. Und diese Deutung kannst du bewusst steuern.\n\nDerselbe Moment kann als Bedrohung oder als Herausforderung erlebt werden. Als Bedrohung: „Ich darf jetzt bloß nicht verlieren“ — der Blick auf die Gefahr, der lähmt, verkrampft und Kraft raubt. Als Herausforderung: „Jetzt kommt mein Moment, das kann ich“ — der Blick auf die Chance, der Energie freisetzt und den Körper leistungsfähiger macht. Der Unterschied ist nicht die Situation, sondern deine Deutung.\n\nDrei Dinge fördern die Deutung als Herausforderung. Das Vertrauen in dein Können — du hast diese Situation schon gemeistert. Das Gefühl von Kontrolle — du richtest den Blick auf das, was du steuern kannst, deinen nächsten Ball, statt auf das Ergebnis. Und ein Ziel, das nach vorn gerichtet ist — „ich spiele jetzt mein Muster“, nicht „ich vermeide den Fehler“.\n\nHinzu kommt das bewusste Hochschalten. Anders als der Flow, der von selbst kommt, ist das Spiel im entscheidenden Moment oft eine bewusste Entscheidung: Du erkennst „jetzt ist es soweit“, setzt dir ein klares Ziel und schaltest Anstrengung und Intensität eine Stufe höher. Es ist ein Schalter, den du bewusst umlegst.\n\nEin Bild: Druck ist wie Wind für einen Segler. Wer ihn als Bedrohung fürchtet, wird umgeworfen. Wer ihn als Herausforderung nutzt, segelt gerade dann am schnellsten. Der Wind bleibt derselbe — es zählt, wie du die Segel setzt."
-      },
-      "reflexionsaufgabe": {
-        "de": "Denk an einen entscheidenden Punkt zurück, den du verloren hast: Hast du ihn als Bedrohung erlebt („bloß nicht verlieren“) oder als Herausforderung („jetzt zeige ich es“)? Übe für den nächsten wichtigen Moment die bewusste Umdeutung: Richte den Blick auf das, was du kontrollierst (deinen nächsten Ball), setz dir ein Ziel nach vorn (dein verlässliches Muster spielen), und deute den Druck als dein Zeichen, jetzt eine Stufe hochzuschalten."
-      }
-    },
-
-    {
-      "id": "gelassen_bei_unfairness",
-      "typ": "micro",
-      "domaene": "mentales",
-      "kompetenzstufe": ["experte"],
-      "voraussetzungen": ["den_fehler_abhaken"],
-      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): weitet das Abhaken vom eigenen Fehler auf aeussere Stoerungen aus",
-      "spielziele": ["fehler_resilienz", "konzentrationskonstanz"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["SP"],
-      "transfer_herkunft_beleg": "Gelassenheit bei ungerechten Entscheidungen, Pech und gegnerischer Provokation; Fokus auf das Kontrollierbare: Sportpsychologie (Kontrollfokus, emotionale Selbstregulation).",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Gelassen bleiben, wenn es unfair läuft"},
-      "erklaerteil": {
-        "de": "Nicht alles im Spiel ist gerecht. Ein Ball, der knapp im Aus war und trotzdem zählt. Ein Gegner, der auf Zeit spielt oder provoziert. Eine Serie von Pech. Der Experte zeichnet sich dadurch aus, dass ihn solche Dinge nicht aus der Bahn werfen.\n\nDer Schlüssel ist eine einfache Unterscheidung: Es gibt Dinge, die du kontrollierst, und Dinge, die du nicht kontrollierst. Eine strittige Entscheidung, das Verhalten des Gegners, das Glück — all das liegt außerhalb deiner Kontrolle. Deine Reaktion darauf, dein nächster Ball, deine Konzentration — das liegt in deiner Hand. Wer seine Energie an das Unkontrollierbare verschwendet, nimmt sie vom Kontrollierbaren weg.\n\nBesonders die Provokation eines Gegners ist eine Falle. Wer sich ärgern lässt, spielt genau das Spiel, das der Gegner will — er verliert die Konzentration und trifft schlechtere Entscheidungen. Die stärkste Antwort auf Provokation ist die ungestörte Fortsetzung des eigenen Spiels. Deine Gelassenheit ist zugleich deine Waffe.\n\nDas heißt nicht, dass dich Ungerechtigkeit nicht berühren darf. Aber du hakst sie ab wie einen eigenen Fehler — kurz zur Kenntnis nehmen, dann bewusst den Blick auf den nächsten Ball richten. Die Reset-Geste, die du aus dem Beginner-Bereich kennst, hilft auch hier.\n\nEin Bild: Ungerechtigkeit ist wie schlechtes Wetter auf einer Wanderung. Du kannst es nicht ändern, und dich darüber zu empören bringt dich keinen Schritt weiter. Wer den Kopf senkt und weitergeht, kommt an; wer stehen bleibt und schimpft, verliert nur Zeit."
-      },
-      "reflexionsaufgabe": {
-        "de": "Erinnere dich an ein Match, in dem dich eine ungerechte Entscheidung oder ein provozierender Gegner aus der Ruhe gebracht hat. Wie viel Energie hat dich der Ärger gekostet? Übe die Unterscheidung: Was davon konntest du kontrollieren, was nicht? Nimm dir vor, beim nächsten Mal Unkontrollierbares kurz abzuhaken — mit deiner Reset-Geste — und die Energie sofort auf deinen nächsten Ball zu lenken. Gegen Provokation ist dein ruhiges Weiterspielen die beste Antwort."
-      }
-    },
-
-    {
-      "id": "mentale_staerke_entwickeln",
-      "typ": "micro",
-      "domaene": "mentales",
-      "kompetenzstufe": ["experte"],
-      "voraussetzungen": ["druck_als_herausforderung", "gelassen_bei_unfairness"],
-      "voraussetzungen_lesart": "didaktisch: fasst die Experten-Mentalfertigkeiten zur langfristigen Entwicklung zusammen",
-      "spielziele": ["vorbereitende_selbststeuerung", "fehler_resilienz"],
-      "vermittlungsziele": [],
-      "transfer_herkunft": ["SP"],
-      "transfer_herkunft_beleg": "Langfristige Entwicklung des mentalen Spiels, Selbstwahrnehmung, persoenlicher mentaler Werkzeugkasten, Wachstumshaltung: Sportpsychologie (Mental Skills Training als fortlaufender Prozess).",
-      "untergrund": "halle",
-      "witterung": [],
-      "anzeigetitel": {"de": "Die eigene mentale Stärke entwickeln"},
-      "erklaerteil": {
-        "de": "Mentale Stärke ist kein Zustand, den man erreicht und dann besitzt, sondern eine Fähigkeit, die ein Leben lang wächst. Der reife Experte behandelt sein mentales Spiel wie sein technisches: als etwas, das er bewusst und fortlaufend weiterentwickelt.\n\nDer erste Schritt ist die Selbstwahrnehmung. Du kennst inzwischen deine mentalen Stärken und deine wunden Punkte: Vielleicht bist du im Aufbau geduldig, verlierst aber bei knappen Ständen die Ruhe. Vielleicht spielst du befreit, wenn du führst, und verkrampfst im Rückstand. Diese ehrliche Selbstkenntnis ist die Grundlage jeder Weiterentwicklung.\n\nDaraus baust du deinen persönlichen mentalen Werkzeugkasten. Über die Zeit hast du gelernt, welche Werkzeuge bei dir wirken — die eine Atemtechnik, die eine Formel, die eine Routine. Nicht jedes Werkzeug wirkt bei jedem gleich; deins sind die, die dir verlässlich helfen. Der Experte kennt seinen Kasten und greift im richtigen Moment zum passenden Werkzeug.\n\nUnd über allem steht die Wachstumshaltung. Auch die besten Spieler haben mentale Rückschläge — verlorene Nervenschlachten, Matches, die sie aus der Hand gaben. Der Unterschied ist, dass sie diese als Lernstoff behandeln, nicht als Urteil. Jedes schwere Match ist eine Gelegenheit, den nächsten Schritt in deiner mentalen Entwicklung zu machen.\n\nEin Bild: Dein mentales Spiel ist ein Garten, den du über Jahre pflegst. Du lernst, was bei dir gedeiht, jätest, was schadet, und siehst zu, wie das Ganze mit der Zeit wächst. Kein Garten ist je fertig — und genau das macht ihn lebendig."
-      },
-      "reflexionsaufgabe": {
-        "de": "Nimm dir Zeit für eine ehrliche Bestandsaufnahme deines mentalen Spiels: Was ist deine größte mentale Stärke, was dein wundester Punkt? Und welche mentalen Werkzeuge (Atemtechnik, Formel, Routine, Umdeutung) helfen dir verlässlich — dein persönlicher Werkzeugkasten? Nimm dir vor, an einem einzigen mentalen Punkt über die nächste Saison bewusst zu arbeiten, und behandle Rückschläge dabei als Lernstoff, nicht als Urteil über dich."
-      }
-    }
+ "_meta": {
+  "beschreibung": "Experten-Mentales: hoechste mentale Ebene. Wettkampfzustand, Flow, Druck als Herausforderung deuten, Gelassenheit, langfristige mentale Entwicklung. Herkunftsneutral — KEINE Cross-Sport-Deltas.",
+  "quellsprache": "de",
+  "zielsprachen": [
+   "en",
+   "fr",
+   "pl",
+   "ja"
   ],
-
-  "delta_bausteine": []
+  "stand": "Erstausbau-Erweiterung",
+  "dateiname_konvention": "bausteine.experte-mentales.json",
+  "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+  "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer.",
+  "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Fortgeschritten-Mentalblock und teils auf den Beginner-Mentalblock, plus intern.",
+  "wellbeing_grenze": "STRIKT leistungsbezogen und ressourcenorientiert. Nervositaet/Erregung werden als normale, nutzbare Leistungsenergie gerahmt, nicht als klinisches Thema. Kein diagnostisches/therapeutisches Terrain; fuer darueber Hinausgehendes bleibt der Baustein bei spielbezogener Bewaeltigung.",
+  "innere_struktur": "durchgehend reflexionsaufgabe.",
+  "ordnungslogik": "optimaler Wettkampfzustand -> Flow -> Druck als Herausforderung -> Gelassenheit bei Unfairness -> mentale Entwicklung."
+ },
+ "bausteine": [
+  {
+   "id": "optimaler_wettkampfzustand",
+   "typ": "micro",
+   "domaene": "mentales",
+   "kompetenzstufe": [
+    "experte"
+   ],
+   "voraussetzungen": [
+    "vom_werkzeug_zum_system"
+   ],
+   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das mentale System zur Wettkampfsteuerung aus",
+   "spielziele": [
+    "vorbereitende_selbststeuerung",
+    "konzentrationskonstanz"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "SP"
+   ],
+   "transfer_herkunft_beleg": "Individueller optimaler Erregungszustand (Zone optimalen Funktionierens) und Vorstartroutine; Wettkampfnervositaet als nutzbare Energie umdeuten: Sportpsychologie (IZOF/Hanin, Vorstartroutinen).",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Der optimale Wettkampfzustand"
+   },
+   "erklaerteil": {
+    "de": "Jeder Spieler hat einen Zustand, in dem er am besten spielt: genau richtig aktiviert, weder zu angespannt noch zu flau. Diesen optimalen Wettkampfzustand kennenzulernen und bewusst herzustellen, ist eine der feinsten mentalen Fertigkeiten des Experten.\n\nDas Besondere: Dieser Punkt ist bei jedem anders. Der eine spielt am besten hochgespannt und voller Energie, der andere ruhig und gelassen. Zu viel Anspannung macht hektisch und verkrampft, zu wenig macht müde und unkonzentriert. Deine Aufgabe ist, deinen eigenen optimalen Punkt zu finden — durch Beobachtung: Wie hast du dich gefühlt, als du besonders gut gespielt hast?\n\nDas wichtigste Werkzeug, um diesen Zustand herzustellen, ist eine feste Vorstartroutine. Eine gleichbleibende Abfolge vor dem Match — Aufwärmen, ein paar Atemzüge, eine kurze Vorstellung, die vertrauten Formeln — schaltet dich in den Wettkampfmodus. Sie wirkt doppelt: Sie nimmt dir Entscheidungen ab und gibt Sicherheit, weil sie schon oft funktioniert hat.\n\nUnd hier ein Umdenken, das viel verändert: Nervosität vor einem wichtigen Match ist kein Feind. Das Herzklopfen, die Anspannung — das ist Energie, die dein Körper bereitstellt, um Höchstleistung zu ermöglichen. Wer die Nervosität als positives Zeichen deutet und ihre Energie nutzt, statt gegen sie zu kämpfen, spielt besser.\n\nDein Wettkampfzustand ist wie die Betriebstemperatur eines Motors. Zu kalt läuft er nicht rund, zu heiß überhitzt er. Die Vorstartroutine bringt dich auf genau die Temperatur, bei der du am besten läufst."
+   },
+   "reflexionsaufgabe": {
+    "de": "Denk an zwei, drei deiner besten Spiele zurück: Wie hast du dich davor und dabei gefühlt — eher ruhig oder eher hochgespannt? Das ist ein Hinweis auf deinen optimalen Zustand. Baue dir daraus eine feste Vorstartroutine, die dich dorthin bringt (z. B. Aufwärmen, ein paar bewusste Atemzüge, eine kurze Vorstellung, deine Formeln). Und übe die Umdeutung: Wenn du das nächste Mal vor einem wichtigen Match nervös bist, sag dir, dass diese Energie dir hilft — und nutze sie."
+   }
+  },
+  {
+   "id": "in_den_flow_finden",
+   "typ": "micro",
+   "domaene": "mentales",
+   "kompetenzstufe": [
+    "experte"
+   ],
+   "voraussetzungen": [
+    "optimaler_wettkampfzustand",
+    "bei_der_sache_bleiben"
+   ],
+   "voraussetzungen_lesart": "gemischt: optimaler_wettkampfzustand (intra); bei_der_sache_bleiben (stufenuebergreifend auf Beginner-Mentales)",
+   "spielziele": [
+    "konzentrationskonstanz",
+    "vorbereitende_selbststeuerung"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "SP"
+   ],
+   "transfer_herkunft_beleg": "Flow als Zustand optimaler Passung von Anforderung und Koennen; nicht erzwingbar, aber die Bedingungen sind herstellbar; Ueberdenken stoert den Flow: Sportpsychologie (Csikszentmihalyi; Flow-/Clutch-Forschung).",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "In den Flow finden"
+   },
+   "erklaerteil": {
+    "de": "Manchmal spielst du wie von selbst. Die Schläge gelingen ohne Nachdenken, die Zeit scheint langsamer, du bist ganz im Spiel versunken. Dieser Zustand heißt Flow, und er bringt oft deine besten Leistungen hervor. Der Experte lernt, ihn einzuladen.\n\nFlow entsteht, wenn die Anforderung genau zu deinem Können passt. Ist der Gegner zu leicht, wird es langweilig; ist er überwältigend, entsteht Druck. Dazwischen, wo die Aufgabe dich genau richtig fordert, öffnet sich das Tor zum Flow. Deshalb erleben Experten den Flow oft in engen, gleichwertigen Matches.\n\nDu kannst den Flow nicht auf Kommando herbeizwingen — aber du kannst seine Bedingungen schaffen. Klare, einfache Ziele im Moment. Volle Aufmerksamkeit auf den nächsten Ball, nicht auf das Ergebnis. Deine Vorstartroutine, die dich beruhigt und fokussiert. Und die Abwesenheit von Angst und Selbstzweifel, die den Flow zuverlässig zerstören.\n\nDas Wichtigste, wenn der Flow da ist: Störe ihn nicht durch Nachdenken. Sobald du anfängst, deine Technik bewusst zu analysieren — „wie halte ich noch mal den Schläger“ —, reißt der Faden. Im Flow vertraust du deinem Körper und lässt ihn machen. Das bewusste Steuern gehört in die Übung, nicht in den Flow.\n\nFlow ist wie eine Strömung, die dich trägt, sobald du aufhörst, gegen sie anzukämpfen. Du kannst ihn nicht schieben, aber du kannst die Ufer so formen, dass er von allein strömt. Und wenn er strömt, stellst du dich nicht mitten hinein, um ihn zu untersuchen."
+   },
+   "reflexionsaufgabe": {
+    "de": "Erinnere dich an einen Moment, in dem du im Flow warst — alles lief wie von selbst. Was waren die Umstände? Meist ist es ein Gegner auf Augenhöhe und volle Präsenz beim Spiel. Nimm dir vor, im nächsten fordernden Match die Bedingungen zu schaffen: ein einfaches Ziel für den Moment, volle Aufmerksamkeit auf den nächsten Ball, kein Grübeln über das Ergebnis. Und wenn es zu laufen beginnt: analysiere nicht, sondern lass es laufen."
+   }
+  },
+  {
+   "id": "druck_als_herausforderung",
+   "typ": "micro",
+   "domaene": "mentales",
+   "kompetenzstufe": [
+    "experte"
+   ],
+   "voraussetzungen": [
+    "ueber_das_match_stabil_bleiben"
+   ],
+   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut die Match-Robustheit zur Drucksteuerung im entscheidenden Moment aus",
+   "spielziele": [
+    "nervenstaerke_enger_satz",
+    "fehler_resilienz"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "SP",
+    "CM"
+   ],
+   "transfer_herkunft_beleg": "Umdeutung von Druck als Herausforderung statt Bedrohung (Selbstwirksamkeit, Kontrolle, Annaeherungsziele); bewusstes 'Hochschalten' im entscheidenden Moment (Clutch): Sportpsychologie (Challenge-/Threat-Theorie, Flow-/Clutch-Modell). CM: der entscheidende Punkt / die 15:15-Zuspitzung.",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Druck als Herausforderung deuten"
+   },
+   "erklaerteil": {
+    "de": "Der entscheidende Punkt, der Matchball, das enge Ende — hier trennt sich der Experte vom guten Spieler durch die Art, wie er den Druck deutet, nicht durch bessere Schläge. Und diese Deutung kannst du bewusst steuern.\n\nDerselbe Moment kann als Bedrohung oder als Herausforderung erlebt werden. Als Bedrohung: „Ich darf jetzt bloß nicht verlieren“ — der Blick auf die Gefahr, der lähmt, verkrampft und Kraft raubt. Als Herausforderung: „Jetzt kommt mein Moment, das kann ich“ — der Blick auf die Chance, der Energie freisetzt und den Körper leistungsfähiger macht. Den Unterschied macht deine Deutung, nicht die Situation.\n\nDrei Dinge fördern die Deutung als Herausforderung. Das Vertrauen in dein Können — du hast diese Situation schon gemeistert. Das Gefühl von Kontrolle — du richtest den Blick auf das, was du steuern kannst, deinen nächsten Ball, statt auf das Ergebnis. Und ein Ziel, das nach vorn gerichtet ist — „ich spiele jetzt mein Muster“, nicht „ich vermeide den Fehler“.\n\nHinzu kommt das bewusste Hochschalten. Anders als der Flow, der von selbst kommt, ist das Spiel im entscheidenden Moment oft eine bewusste Entscheidung: Du erkennst „jetzt ist es soweit“, setzt dir ein klares Ziel und schaltest Anstrengung und Intensität eine Stufe höher. Es ist ein Schalter, den du bewusst umlegst.\n\nDruck ist wie Wind für einen Segler. Wer ihn als Bedrohung fürchtet, wird umgeworfen. Wer ihn als Herausforderung nutzt, segelt gerade dann am schnellsten. Der Wind bleibt derselbe — es zählt, wie du die Segel setzt."
+   },
+   "reflexionsaufgabe": {
+    "de": "Denk an einen entscheidenden Punkt zurück, den du verloren hast: Hast du ihn als Bedrohung erlebt („bloß nicht verlieren“) oder als Herausforderung („jetzt zeige ich es“)? Übe für den nächsten wichtigen Moment die bewusste Umdeutung: Richte den Blick auf das, was du kontrollierst (deinen nächsten Ball), setz dir ein Ziel nach vorn (dein verlässliches Muster spielen), und deute den Druck als dein Zeichen, jetzt eine Stufe hochzuschalten."
+   }
+  },
+  {
+   "id": "gelassen_bei_unfairness",
+   "typ": "micro",
+   "domaene": "mentales",
+   "kompetenzstufe": [
+    "experte"
+   ],
+   "voraussetzungen": [
+    "den_fehler_abhaken"
+   ],
+   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): weitet das Abhaken vom eigenen Fehler auf aeussere Stoerungen aus",
+   "spielziele": [
+    "fehler_resilienz",
+    "konzentrationskonstanz"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "SP"
+   ],
+   "transfer_herkunft_beleg": "Gelassenheit bei ungerechten Entscheidungen, Pech und gegnerischer Provokation; Fokus auf das Kontrollierbare: Sportpsychologie (Kontrollfokus, emotionale Selbstregulation).",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Gelassen bleiben, wenn es unfair läuft"
+   },
+   "erklaerteil": {
+    "de": "Nicht alles im Spiel ist gerecht. Ein Ball, der knapp im Aus war und trotzdem zählt. Ein Gegner, der auf Zeit spielt oder provoziert. Eine Serie von Pech. Der Experte zeichnet sich dadurch aus, dass ihn solche Dinge nicht aus der Bahn werfen.\n\nDer Schlüssel ist eine einfache Unterscheidung: Es gibt Dinge, die du kontrollierst, und Dinge, die du nicht kontrollierst. Eine strittige Entscheidung, das Verhalten des Gegners, das Glück — all das liegt außerhalb deiner Kontrolle. Deine Reaktion darauf, dein nächster Ball, deine Konzentration — das liegt in deiner Hand. Wer seine Energie an das Unkontrollierbare verschwendet, nimmt sie vom Kontrollierbaren weg.\n\nBesonders die Provokation eines Gegners ist eine Falle. Wer sich ärgern lässt, spielt genau das Spiel, das der Gegner will — er verliert die Konzentration und trifft schlechtere Entscheidungen. Die stärkste Antwort auf Provokation ist die ungestörte Fortsetzung des eigenen Spiels. Deine Gelassenheit ist zugleich deine Waffe.\n\nDas heißt nicht, dass dich Ungerechtigkeit nicht berühren darf. Aber du hakst sie ab wie einen eigenen Fehler — kurz zur Kenntnis nehmen, dann bewusst den Blick auf den nächsten Ball richten. Die Reset-Geste, die du aus dem Beginner-Bereich kennst, hilft auch hier.\n\nUngerechtigkeit ist wie schlechtes Wetter auf einer Wanderung. Du kannst es nicht ändern, und dich darüber zu empören bringt dich keinen Schritt weiter. Wer den Kopf senkt und weitergeht, kommt an; wer stehen bleibt und schimpft, verliert nur Zeit."
+   },
+   "reflexionsaufgabe": {
+    "de": "Erinnere dich an ein Match, in dem dich eine ungerechte Entscheidung oder ein provozierender Gegner aus der Ruhe gebracht hat. Wie viel Energie hat dich der Ärger gekostet? Übe die Unterscheidung: Was davon konntest du kontrollieren, was nicht? Nimm dir vor, beim nächsten Mal Unkontrollierbares kurz abzuhaken — mit deiner Reset-Geste — und die Energie sofort auf deinen nächsten Ball zu lenken. Gegen Provokation ist dein ruhiges Weiterspielen die beste Antwort."
+   }
+  },
+  {
+   "id": "mentale_staerke_entwickeln",
+   "typ": "micro",
+   "domaene": "mentales",
+   "kompetenzstufe": [
+    "experte"
+   ],
+   "voraussetzungen": [
+    "druck_als_herausforderung",
+    "gelassen_bei_unfairness"
+   ],
+   "voraussetzungen_lesart": "didaktisch: fasst die Experten-Mentalfertigkeiten zur langfristigen Entwicklung zusammen",
+   "spielziele": [
+    "vorbereitende_selbststeuerung",
+    "fehler_resilienz"
+   ],
+   "vermittlungsziele": [],
+   "transfer_herkunft": [
+    "SP"
+   ],
+   "transfer_herkunft_beleg": "Langfristige Entwicklung des mentalen Spiels, Selbstwahrnehmung, persoenlicher mentaler Werkzeugkasten, Wachstumshaltung: Sportpsychologie (Mental Skills Training als fortlaufender Prozess).",
+   "untergrund": "halle",
+   "witterung": [],
+   "anzeigetitel": {
+    "de": "Die eigene mentale Stärke entwickeln"
+   },
+   "erklaerteil": {
+    "de": "Mentale Stärke ist kein Zustand, den man erreicht und dann besitzt, sondern eine Fähigkeit, die ein Leben lang wächst. Der reife Experte behandelt sein mentales Spiel wie sein technisches: als etwas, das er bewusst und fortlaufend weiterentwickelt.\n\nDer erste Schritt ist die Selbstwahrnehmung. Du kennst inzwischen deine mentalen Stärken und deine wunden Punkte: Vielleicht bist du im Aufbau geduldig, verlierst aber bei knappen Ständen die Ruhe. Vielleicht spielst du befreit, wenn du führst, und verkrampfst im Rückstand. Diese ehrliche Selbstkenntnis ist die Grundlage jeder Weiterentwicklung.\n\nDaraus baust du deinen persönlichen mentalen Werkzeugkasten. Über die Zeit hast du gelernt, welche Werkzeuge bei dir wirken — die eine Atemtechnik, die eine Formel, die eine Routine. Nicht jedes Werkzeug wirkt bei jedem gleich; deins sind die, die dir verlässlich helfen. Der Experte kennt seinen Kasten und greift im richtigen Moment zum passenden Werkzeug.\n\nUnd über allem steht die Wachstumshaltung. Auch die besten Spieler haben mentale Rückschläge — verlorene Nervenschlachten, Matches, die sie aus der Hand gaben. Der Unterschied ist, dass sie diese als Lernstoff behandeln, nicht als Urteil. Jedes schwere Match ist eine Gelegenheit, den nächsten Schritt in deiner mentalen Entwicklung zu machen.\n\nMentale Stärke wächst mit jeder überstandenen Probe — jedes schwere Match härtet dich ein Stück. Du lernst, was bei dir gedeiht, jätest, was schadet, und siehst zu, wie das Ganze mit der Zeit wächst. Kein Garten ist je fertig — und genau das macht ihn lebendig."
+   },
+   "reflexionsaufgabe": {
+    "de": "Nimm dir Zeit für eine ehrliche Bestandsaufnahme deines mentalen Spiels: Was ist deine größte mentale Stärke, was dein wundester Punkt? Und welche mentalen Werkzeuge (Atemtechnik, Formel, Routine, Umdeutung) helfen dir verlässlich — dein persönlicher Werkzeugkasten? Nimm dir vor, an einem einzigen mentalen Punkt über die nächste Saison bewusst zu arbeiten, und behandle Rückschläge dabei als Lernstoff, nicht als Urteil über dich."
+   }
+  }
+ ],
+ "delta_bausteine": []
 }
