@@ -149,3 +149,7 @@
 .fa-seedling::before { content: '\f4d8'; }
 .fa-sun::before { content: '\f185'; }
 .fa-forward::before { content: '\f04e'; }
+/* Ergänzt für den Trainingsplan (Kalender/Druck). */
+.fa-calendar-days::before { content: '\f073'; }
+.fa-calendar-plus::before { content: '\f271'; }
+.fa-print::before { content: '\f02f'; }

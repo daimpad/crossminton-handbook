@@ -6,6 +6,7 @@ import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
+import { renderPlan } from './ansichten/plan.js';
 import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, renderUmgebung } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
 import { renderRegeln } from './ansichten/regeln.js';
@@ -31,7 +32,7 @@ function parseHash() {
 
 function aktualisiereNavigation(segmente) {
   const aktiv =
-    segmente[0] === 'training'
+    segmente[0] === 'training' || segmente[0] === 'plan'
       ? 'training'
       : segmente[0] === 'regeln'
         ? 'regeln'
@@ -224,6 +225,8 @@ function rendern() {
     renderUmgebung(el, daten, segmente[1], segmente[2] ? decodeURIComponent(segmente[2]) : null);
   } else if (segmente[0] === 'pfad' && segmente[1] === 'individual') {
     renderIndividual(el, daten);
+  } else if (segmente[0] === 'plan') {
+    renderPlan(el, daten);
   } else if (segmente[0] === 'training') {
     renderTraining(el, daten, segmente[1] ? decodeURIComponent(segmente[1]) : null);
   } else if (segmente[0] === 'regeln') {

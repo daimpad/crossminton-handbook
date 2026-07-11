@@ -33,7 +33,7 @@ flowchart TD
 | Ebene | Dateien | Regel |
 | --- | --- | --- |
 | Daten | `js/daten.js`, `js/graph.js` | reine Funktionen, kein DOM; Indizes + Konsistenzprüfung |
-| Engine | `js/pfade.js`, `js/fortschritt.js`, `js/aktionen.js` | reine Funktionen über Daten + Zustand → annotierte Listen; **kein DOM** |
+| Engine | `js/pfade.js`, `js/fortschritt.js`, `js/aktionen.js`, `js/plan.js` | reine Funktionen über Daten + Zustand → annotierte Listen; **kein DOM** (`plan.js` erzeugt den Trainingsplan deterministisch, ohne `Date.now()`) |
 | Zustand | `js/zustand.js` | einziger localStorage-Zugriff, versioniertes Schema |
 | i18n | `js/i18n.js` | alle sichtbaren Texte laufen hier durch |
 | Ansichten | `js/ansichten/*.js` | rendern HTML-Strings + binden Events; lesen die Engine, mutieren nie direkt |
@@ -84,10 +84,11 @@ js/
   pfade.js                 Pfad-Engine: Traversierungen + Cross-Sport-Modifikator + Trainer-Gatung
   fortschritt.js           Projektionen über den baustein-gebundenen Status
   aktionen.js              Quittierungen + Meilenstein-Erkennung
-  zustand.js               localStorage-Store (Diagnose, Fortschritt, Kontinuität, Einstellungen)
+  plan.js                  Trainingsplan-Generierung (deterministisch): Wochenplan + .ics-Export
+  zustand.js               localStorage-Store (Diagnose, Fortschritt, Kontinuität, Einstellungen, Plan)
   i18n.js                  t()/label()/text() mit de-Fallback
   oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
-  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Regeln, Info, Profil, Zielwahl
+  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Trainingsplan, Regeln, Info, Profil, Zielwahl
 data/
   bausteine.<stufe>-<domaene>.json   Inhaltsblöcke (Beginner/Fortgeschritten/Experte/Trainer), zu EINEM Pool gemischt
   bausteine.delta-<herkunft>.json    herkunftsreine Cross-Sport-Deltas (Tennis, Squash)
@@ -110,7 +111,7 @@ LICENSE                              MIT (Software)
 - **Inhalte** (`data/bausteine.<stufe>-<domaene>.json`): Quellformat gemäß Spezifikation, Abschnitt 3. Mehrere Inhaltsdateien werden zu einem Pool gemischt — neue Datei in `INHALTSDATEIEN` (`js/daten.js`) eintragen; nur die Technik-Datei trägt das kanonische `vokabulare`. Bausteine können einen inline-`anzeigetitel` tragen (wird nach `labels/de.json` geliftet) und statt des Übungsteils eine `reflexionsaufgabe` (eigener quittierbarer Aufgabenteil). Ein passendes Icon lässt sich in `js/oberflaeche.js` (`BAUSTEIN_ICONS`) ergänzen. Die Engine-Tests prüfen Titel-Vollständigkeit, Reihenfolge und Reflexions-Status mit. Zwei Sonderfälle: die **Experten-Stufe** (`bausteine.experte-technik.json`, `bausteine.experte-taktik.json`) ist herkunftsneutral (keine Deltas — der Cross-Sport-Modus fällt dort durch); reine **Trainer-Blöcke** (`bausteine.trainer-trainingsgestaltung.json`, `kompetenzstufe: ["trainer"]`, Dateiname mit `trainer` an Stufen-Stelle) sind orthogonal zur Könnensstufe und in allen Pfaden hinter der Trainer-Perspektive gated.
 - **Beschriftungen** (`data/labels/de.json`): Erstfassungen aus der Implementierung — redaktionell prüfen. Nach dem Hinzufügen neuer de-Schlüssel die Skelette `data/labels/{en,fr,pl}.json` regenerieren (leere Werte fallen zur Laufzeit auf de zurück).
 - **Fehlerbilder / Trainer-Layer** (`data/fehlerbilder.json`): eigene Entitäten mit `basis_baustein`-Relation, `typ: "fehlerbild"`, `kompetenzstufe: ["trainer"]`, `erklaerteil.de` mit den Feldern `symptom`/`ursache`/`korrektur`, kein Übungsteil. Nur in der Trainer-Perspektive in-situ im Basisbaustein gezeigt, nie als eigene Station. Jedes braucht einen Titel in `data/labels/de.json` unter `fehlerbilder`.
-- **Trainingseinheiten** (`data/trainingseinheiten.json`): kuratierte Einheiten in drei Phasen (`phasen.{erwaermung, hauptteil, ausklang}`) mit je `{baustein, hinweis}`-Referenzen auf Bausteine, deren **Übungsteil** gemeint ist (nie Reflexions-Bausteine). Jede Einheit trägt `titel` (geliftet), `kompetenzstufe` (stufen-kumulative Filterung), `spielform`, `schwerpunkt`, `beschreibung`.
+- **Trainingseinheiten** (`data/trainingseinheiten.json`): kuratierte Einheiten in drei Phasen (`phasen.{erwaermung, hauptteil, ausklang}`) mit je `{baustein, hinweis}`-Referenzen auf Bausteine, deren **Übungsteil** gemeint ist (nie Reflexions-Bausteine). Jede Einheit trägt `titel` (geliftet), `kompetenzstufe` (stufen-kumulative Filterung), `spielform`, `schwerpunkt`, `beschreibung`. Auf diesem Bestand generiert der **Trainingsplan** (`js/plan.js`, Route `#/plan`) einen anpassbaren Wochenplan — kein eigener Datenbestand, sondern eine Traversierung/Terminierung der Einheiten; der Plan wird im `plan`-Slice des Zustands gehalten und als PDF (Druckansicht) bzw. Kalender (`.ics`) exportiert.
 - **Regeln** (`data/regeln.json`): eigener Referenz-Reiter (`#/regeln`), **nicht im Pool**. `abschnitte[]` (auf-/zuklappbar) mit `regeln[]`; jede Regel trägt `inhalt` (akkurat, optional `nummer`) und optionale `erklaerung` (Du-Form). `_meta.quelle` (Herausgeber + Stand) wird im Reiter angezeigt. Optionale `querverweis`-IDs sind reine Dokumentation.
 - **App-Info** (`data/app-info.json`): die Reiter `#/ueber`, `#/mitmachen`, die Rechtstexte `#/impressum`/`#/datenschutz` (Footer), die Sprachanzeige und die `_meta.version` (Footer) — statischer Referenzinhalt, **nicht im Pool**. Platzhalter in `[eckigen Klammern]` bleiben **sichtbar**, bis der Betreiber sie ersetzt; echte `http`-Ziele werden zu Links. Nur die UI-Labels (`nav_*`, `footer_*`) liegen in `labels/de.json`, aller Fließtext inline über `text()`.
 - **Übersetzungen**: Werte in `data/labels/{en,fr,pl}.json` befüllen; leere Werte fallen zur Laufzeit auf `de` zurück. Baustein-Texte werden je Sprache direkt in der Inhaltsdatei ergänzt (`erklaerteil.en` usw.).

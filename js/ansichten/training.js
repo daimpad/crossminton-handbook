@@ -56,6 +56,10 @@ function renderListe(el, daten) {
   el.innerHTML = `
     <h1>${esc(t('pfad_training'))}</h1>
     <p class="leise">${esc(t('pfad_training_text'))}</p>
+    <a class="karte karte-link karte-akzent" href="#/plan">
+      <h3><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> ${esc(t('plan_titel'))}</h3>
+      <p class="leise">${esc(t('plan_kachel_text'))}</p>
+    </a>
     <div class="karte">
       <h3>${esc(t('kontinuitaet'))}</h3>
       <p>${esc(t('kontinuitaet_stand', { n: kontinuitaet().gesamt }))}</p>

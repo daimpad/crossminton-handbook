@@ -11,7 +11,8 @@ import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsa
 import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinIcon } from '../js/oberflaeche.js';
-import { registriereEinheitAbschluss, setzeDiagnose, setzeTeilStatus, setzeZurueck } from '../js/zustand.js';
+import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
+import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -603,6 +604,29 @@ pruefe('alle Basis-Bausteine tragen ein Icon (BAUSTEIN_ICONS vollständig)', (()
   const ohne = daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id);
   return ohne.length === 0;
 })(), daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id).join(', '));
+
+console.log('\n[11] Trainingsplan (Engine + Persistenz)');
+setzeZurueck();
+setzeDiagnose({ stufe: 'fortgeschritten' });
+pruefe('planbare Einheiten stufen-kumulativ (Fortgeschritten: 6)', planbareEinheiten(daten).length === 6);
+pruefe('Spielform-Filter doppel: nur Doppel-Einheiten', planbareEinheiten(daten, 'doppel').length >= 1 && planbareEinheiten(daten, 'doppel').every((e) => e.spielform === 'doppel'));
+const planA = erzeugePlan(daten, { wochen: 3, einheitenProWoche: 2, startISO: '2026-07-13' });
+pruefe('erzeugePlan: wochen×proWoche Sessions (3×2=6)', planA.sessions.length === 6);
+pruefe('erzeugePlan: Termine verteilt (Mo/Do, wöchentlich)', planA.sessions[0].datum === '2026-07-13' && planA.sessions[1].datum === '2026-07-16' && planA.sessions[2].datum === '2026-07-20');
+pruefe('erzeugePlan: Wochen-Gruppierung 3×2', gleicheListe(planNachWochen(planA).map((g) => g.sessions.length), [2, 2, 2]));
+pruefe('erzeugePlan: nur planbare (existierende) Einheiten', planA.sessions.every((s) => daten.einheitVonId.has(s.einheit)));
+pruefe('tauscheEinheit ändert die Einheit einer Session', tauscheEinheit(daten, planA, 0).sessions[0].einheit !== planA.sessions[0].einheit);
+pruefe('entferneSession entfernt genau eine', entferneSession(planA, 0).sessions.length === planA.sessions.length - 1);
+pruefe('Grenzen gekappt (99 Wochen → 12, 9/Woche → 4 = 48)', erzeugePlan(daten, { wochen: 99, einheitenProWoche: 9, startISO: '2026-07-13' }).sessions.length === 48);
+const ical = planAlsIcal(planA, (id) => ({ titel: labelsDe.trainingseinheiten[id] || id, schwerpunkt: 'x' }), '20260711T090000Z');
+pruefe('planAlsIcal: gültiges VCALENDAR, eine VEVENT je Session, CRLF', ical.startsWith('BEGIN:VCALENDAR') && ical.trim().endsWith('END:VCALENDAR') && (ical.match(/BEGIN:VEVENT/g) || []).length === planA.sessions.length && ical.includes('\r\n'));
+pruefe('planAlsIcal: ganztägige Termine (DTSTART;VALUE=DATE)', ical.includes('DTSTART;VALUE=DATE:20260713'));
+loeschePlan();
+pruefe('Zustand: kein Plan initial', gespPlan() === null);
+setzePlan(planA);
+pruefe('Zustand: Plan persistiert und lesbar', gespPlan()?.sessions.length === 6);
+loeschePlan();
+pruefe('Zustand: Plan löschbar', gespPlan() === null);
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);
