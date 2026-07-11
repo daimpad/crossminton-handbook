@@ -2,13 +2,13 @@
   "_meta": {
     "beschreibung": "App-Info: statische Inhalte fuer die Navigations-Reiter 'Ueber' und 'Mitmachen' sowie die Konfiguration der Sprach-Anzeige. Kein Lerninhalt, kein Fortschritt.",
     "quellsprache": "de",
-    "zielsprachen": ["en", "fr", "pl", "ja"],
+    "zielsprachen": ["en", "fr", "pl"],
     "stand": "Erstausbau",
     "version": "1.0.0",
     "dateiname": "app-info.json (eigene Datei, NICHT im Baustein-Pool).",
     "platzhalter_hinweis": "Mit [eckigen Klammern] markierte Stellen sind vom Betreiber zu fuellen (Name, Lizenz, GitHub-URL). Sie sind bewusst nicht erfunden.",
     "reiter": ["ueber", "mitmachen"],
-    "sprachanzeige_hinweis": "Die Sprach-Anzeige ist im Erstausbau NUR Darstellung (funktion_aktiv: false): neben dem Hamburger-Icon wird die aktuell angezeigte Sprache als Flagge oder Kuerzel gezeigt. Die Auswahlliste umfasst de/en/fr/pl/ja; ein Umschalten ist noch nicht funktional."
+    "sprachanzeige_hinweis": "Die Sprach-Anzeige ist im Erstausbau NUR Darstellung (funktion_aktiv: false): neben dem Hamburger-Icon wird die aktuell angezeigte Sprache als Flagge und Eigenname gezeigt. Die Auswahlliste umfasst de/en/fr/pl; ein Umschalten ist noch nicht funktional."
   },
 
   "ueber": {
@@ -32,13 +32,11 @@
         {"de": "Software-Lizenz: MIT License."},
         {"de": "Inhalte und Texte: CC BY 4.0."},
         {"de": "Credits: Damian Paderta."},
-        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben."},
-        {"de": "Quellcode und Mitwirkung: siehe GitHub."}
-      ]
+        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben."}
+      ],
+      "github": {"label": {"de": "Quellcode und Mitwirkung: siehe GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/"}
     },
-    "links": [
-      {"label": {"de": "Projekt auf GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/", "typ": "github"}
-    ]
+    "links": []
   },
 
   "mitmachen": {
@@ -75,10 +73,10 @@
     "impressum": {
       "titel": {"de": "Impressum"},
       "absaetze": [
-        {"de": "Angaben gemäß § 5 TMG / § 18 MStV:"},
-        {"de": "[Name und Anschrift des Betreibers einsetzen]"},
-        {"de": "Kontakt: [E-Mail-Adresse einsetzen]"},
-        {"de": "Verantwortlich für den Inhalt: Damian Paderta."}
+        {"de": "Angaben gemäß § 5 TMG / § 18 MStV für nicht-kommerzielle Projekte von Vereinen."},
+        {"de": "Verantwortlich für den Inhalt: Damian Paderta"},
+        {"de": "Kontakt: contact@nozilla.de"},
+        {"de": "Stand: Juli 2026"}
       ]
     },
     "datenschutz": {
@@ -87,7 +85,7 @@
         {"de": "Diese App läuft vollständig in deinem Browser. Dein Lernfortschritt und deine Angaben werden ausschließlich lokal gespeichert (localStorage) und niemals an einen Server übertragen."},
         {"de": "Es findet kein Tracking, keine Analyse und keine Weitergabe an Dritte statt. Es werden keine Cookies zu Werbe- oder Analysezwecken gesetzt."},
         {"de": "Beim Aufruf über GitHub Pages werden technisch bedingt Server-Logs (u. a. IP-Adresse) durch GitHub, Inc. verarbeitet; es gelten zusätzlich deren Datenschutzhinweise."},
-        {"de": "Verantwortlich im Sinne der DSGVO: Damian Paderta. Kontakt: [E-Mail-Adresse einsetzen]."}
+        {"de": "Verantwortlich im Sinne der DSGVO: Damian Paderta. Kontakt: contact@nozilla.de"}
       ]
     }
   },
@@ -96,11 +94,10 @@
     "funktion_aktiv": false,
     "aktuell": "de",
     "liste": [
-      {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "label": {"de": "Deutsch"}},
-      {"code": "en", "kuerzel": "EN", "flagge": "🇬🇧", "label": {"de": "Englisch"}},
-      {"code": "fr", "kuerzel": "FR", "flagge": "🇫🇷", "label": {"de": "Französisch"}},
-      {"code": "pl", "kuerzel": "PL", "flagge": "🇵🇱", "label": {"de": "Polnisch"}},
-      {"code": "ja", "kuerzel": "JA", "flagge": "🇯🇵", "label": {"de": "Japanisch"}}
+      {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "eigenname": "Deutsch", "label": {"de": "Deutsch"}},
+      {"code": "en", "kuerzel": "EN", "flagge": "🇬🇧", "eigenname": "English", "label": {"de": "Englisch"}},
+      {"code": "fr", "kuerzel": "FR", "flagge": "🇫🇷", "eigenname": "Français", "label": {"de": "Französisch"}},
+      {"code": "pl", "kuerzel": "PL", "flagge": "🇵🇱", "eigenname": "Polski", "label": {"de": "Polnisch"}}
     ]
   }
 }

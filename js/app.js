@@ -77,18 +77,11 @@ function beschrifteRahmen() {
     const ziel = verweis.querySelector('.nav-text');
     if (ziel && beschriftungen[verweis.dataset.nav]) ziel.textContent = beschriftungen[verweis.dataset.nav];
   }
-  // Externe Doku-Links (README/TECHNICAL) — als Reiter im Menü, öffnen die
-  // GitHub-gerenderten Dokumente in einem neuen Tab (buildfrei, kein In-App-Renderer).
-  for (const verweis of document.querySelectorAll('[data-doc]')) {
-    const beschriftung = { readme: t('nav_readme'), technical: t('nav_technical') }[verweis.dataset.doc];
-    const ziel = verweis.querySelector('.nav-text');
-    if (ziel && beschriftung) ziel.textContent = beschriftung;
-  }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
-  // Impressum/Datenschutz stehen als reiner Text im Footer und mit Icon im Menü —
-  // deshalb nur den .nav-text-Träger ersetzen, wenn vorhanden (Icon nicht zerstören).
+  // Impressum/Datenschutz stehen mit Icon im „Mehr"-Menü — nur den .nav-text-Träger
+  // ersetzen, wenn vorhanden (Icon nicht zerstören).
   for (const verweis of document.querySelectorAll('[data-footer]')) {
     const beschriftung = { impressum: t('footer_impressum'), datenschutz: t('footer_datenschutz') }[verweis.dataset.footer];
     if (!beschriftung) continue;
@@ -119,16 +112,16 @@ function setzeSprachanzeige() {
   const s = daten?.appInfo?.sprachen;
   if (!knopf || !s) return;
   const eintrag = spracheEintrag();
-  if (eintrag) knopf.setAttribute('aria-label', `${t('sprache')}: ${text(eintrag.label) ?? eintrag.kuerzel}`);
+  if (eintrag) knopf.setAttribute('aria-label', `${t('sprache')}: ${eintrag.eigenname ?? text(eintrag.label) ?? eintrag.kuerzel}`);
   if (!liste) return;
   const aktivCode = eintrag?.code;
+  // Flagge + Sprachname in der jeweiligen Heimatsprache (Eigenname), aktive markiert.
   liste.innerHTML = (s.liste || [])
     .map((e) => {
       const istAktiv = e.code === aktivCode;
       return `<li class="sprach-eintrag${istAktiv ? ' aktiv' : ''}"${istAktiv ? ' aria-current="true"' : ''}>
-        <span aria-hidden="true">${esc(e.flagge || '')}</span>
-        <span class="sprach-name">${esc(text(e.label) ?? e.kuerzel)}</span>
-        <span class="leise">${esc(e.kuerzel)}</span>
+        <span class="sprach-flagge" aria-hidden="true">${esc(e.flagge || '')}</span>
+        <span class="sprach-name">${esc(e.eigenname ?? text(e.label) ?? e.kuerzel)}</span>
         <span class="sprach-haken" aria-hidden="true">${istAktiv ? '✓' : ''}</span>
       </li>`;
     })
@@ -158,17 +151,6 @@ function initSprachanzeige() {
   });
   window.addEventListener('hashchange', schliesse); // bei Navigation zuklappen
   setzeSprachanzeige();
-}
-
-// Footer: GitHub-Link und Versionsnummer einmalig aus app-info befüllen
-// (Impressum/Datenschutz laufen über die Labels + den Router).
-function initFooter() {
-  const version = daten?.appInfo?.meta?.version;
-  const github = daten?.appInfo?.ueber?.links?.find((l) => l.typ === 'github')?.ziel;
-  const versionEl = document.getElementById('footer-version');
-  const githubEl = document.getElementById('footer-github');
-  if (versionEl && version) versionEl.textContent = `v${version}`;
-  if (githubEl && github) githubEl.setAttribute('href', github);
 }
 
 // Menü öffnen zwei Auslöser: der Hamburger (Kopf, ab Tablet) und „Mehr"
@@ -293,7 +275,6 @@ async function boot() {
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);
   initSprachanzeige();
-  initFooter();
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
     element.addEventListener('click', schliesseMenue);
   }

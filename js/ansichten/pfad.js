@@ -91,12 +91,14 @@ export function renderKompetenzpfad(el, daten, stufe) {
 
 export function renderThemen(el, daten, domaene) {
   if (!domaene) {
+    // Nur belegte Domänen zeigen (wie die Startseiten-Chips). Eine reine
+    // Trainer-Domäne (Trainingsgestaltung) hat für Nicht-Trainer 0 Bausteine und
+    // erschiene sonst als leere „0-Bausteine"-Karte — die wird ausgeblendet.
     const zeilen = themenDomaenen(daten)
+      .filter((eintrag) => eintrag.anzahl > 0)
       .map((eintrag) => {
         const beschriftung = `<h3>${esc(label('domaene', eintrag.domaene))}</h3><p class="leise">${esc(t('n_bausteine', { n: eintrag.anzahl }))}</p>`;
-        return eintrag.anzahl > 0
-          ? `<a class="karte karte-link" href="#/pfad/themen/${esc(eintrag.domaene)}">${beschriftung}</a>`
-          : `<div class="karte karte-inaktiv">${beschriftung}</div>`;
+        return `<a class="karte karte-link" href="#/pfad/themen/${esc(eintrag.domaene)}">${beschriftung}</a>`;
       })
       .join('');
     el.innerHTML = `<h1>${esc(t('pfad_themen'))}</h1><p class="leise">${esc(t('pfad_themen_text'))}</p>${zeilen}`;

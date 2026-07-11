@@ -91,7 +91,7 @@ function renderDurchlauf(el, daten, einheit, referenzen) {
   const hinweis = text(ref.hinweis);
 
   el.innerHTML = `
-    <section class="einheit-durchlauf">
+    <section class="karte einheit-durchlauf">
       <p class="leise">${esc(label('einheit', einheit.id))} · ${esc(t('uebung_x_von_y', { a: sitzung.index + 1, b: referenzen.length }))} · ${esc(t('phase_' + ref.phase))}</p>
       <h1>${bausteinIcon(baustein.id, 'baustein-icon')} ${esc(label('baustein', baustein.id))}</h1>
       ${hinweis ? `<p class="einheit-hinweis">${esc(hinweis)}</p>` : ''}
