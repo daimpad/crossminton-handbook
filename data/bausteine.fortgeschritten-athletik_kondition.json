@@ -38,6 +38,7 @@
 
     {
       "id": "explosivitaet",
+      "grafik": ["G-034"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["fortgeschritten"],

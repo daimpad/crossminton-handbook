@@ -37,6 +37,7 @@
 
     {
       "id": "punkt_aufbauen",
+      "grafik": ["G-028"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["fortgeschritten"],
@@ -73,6 +74,7 @@
 
     {
       "id": "smash_vorbereiten",
+      "grafik": ["G-029"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["fortgeschritten"],

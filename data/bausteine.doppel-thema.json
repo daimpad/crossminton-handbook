@@ -27,6 +27,7 @@
   "bausteine": [
     {
       "id": "doppel_als_eigenes_spiel",
+      "grafik": ["G-037"],
       "typ": "micro",
       "domaene": "taktik",
       "spielform": "doppel",
@@ -50,6 +51,7 @@
 
     {
       "id": "angriff_im_paar",
+      "grafik": ["G-038"],
       "typ": "micro",
       "domaene": "taktik",
       "spielform": "doppel",
@@ -86,6 +88,7 @@
 
     {
       "id": "verteidigung_im_paar",
+      "grafik": ["G-039"],
       "typ": "micro",
       "domaene": "taktik",
       "spielform": "doppel",
@@ -120,6 +123,7 @@
 
     {
       "id": "bewegung_als_einheit",
+      "grafik": ["G-042"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "spielform": "doppel",
@@ -155,6 +159,7 @@
 
     {
       "id": "verstaendigung_im_paar",
+      "grafik": ["G-043"],
       "typ": "micro",
       "domaene": "mentales",
       "spielform": "doppel",
@@ -177,6 +182,7 @@
 
     {
       "id": "aufschlag_rueckschlag_doppel",
+      "grafik": ["G-040"],
       "typ": "micro",
       "domaene": "taktik",
       "spielform": "doppel",
@@ -200,6 +206,7 @@
 
     {
       "id": "das_umschalten_im_doppel",
+      "grafik": ["G-041"],
       "typ": "micro",
       "domaene": "taktik",
       "spielform": "doppel",

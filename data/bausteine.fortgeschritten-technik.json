@@ -28,7 +28,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Handgelenk zu frueh/zu spaet, kein Timing' + Korrekturansage",
-      "grafik": ["handgelenk_peitsche_leitgrafik"],
+      "grafik": ["G-009"],
       "erklaerteil": {
         "de": "Im Beginner-Bereich hast du das Handgelenk bewusst ruhig gehalten und die Kraft aus Arm, Schulter und Beinen geholt. Das war das Fundament. Jetzt baust du darauf die Bewegung, die dem Schlag sein eigentliches Tempo gibt: das Zuschnappen des Handgelenks. Die Peitsche, die immer angekündigt war.\n\nStell dir vor, wie eine Peitsche knallt: Der Griff bewegt sich kaum, aber am Ende der Schnur entsteht enorme Geschwindigkeit. Genauso funktioniert dein Schlag. Arm und Körper bringen den Schläger auf den Weg, und im letzten Moment vor dem Treffen dreht der Unterarm ein und das Handgelenk schnappt nach vorn. Dieser letzte Schnapp vervielfacht die Kopfgeschwindigkeit des Schlägers, ohne dass du mehr Kraft aufwendest.\n\nDer Schlüssel ist das Timing. Der Schnapp kommt spät — kurz vor dem Treffpunkt, nicht früher. Zu früh, und die Beschleunigung verpufft, bevor der Speeder da ist. Genau im Treffmoment löst sich die Spannung aus dem locker gehaltenen Handgelenk.\n\nUnd hier zahlt sich der lockere Griff aus, den du von Anfang an geübt hast. Ein verkrampftes Handgelenk kann nicht schnappen. Nur eine lockere Hand, die sich erst im Treffmoment kurz festmacht, erzeugt die Peitsche. Fest wird es für den Bruchteil des Kontakts, danach löst du wieder.\n\nDiese Bewegung steckt ab jetzt in fast jedem harten Schlag — im Drive, im Clear, im Smash. Sie ist der Übergang vom kontrollierten Grundschlag zum druckvollen Spiel."
       },
@@ -63,7 +63,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Treffpunkt zu tief/hinter dem Koerper' + Korrekturansage",
-      "grafik": ["ueberkopf_clear_leitgrafik"],
+      "grafik": ["G-010"],
       "erklaerteil": {
         "de": "Der Überkopfschlag ist dein Werkzeug für alle hohen Speeder. Du triffst über dem Kopf, in einer Bewegung, die dem Tennisaufschlag sehr ähnelt — und die Peitsche aus dem letzten Baustein ist ihr Motor.\n\nSo läuft die Bewegung: Du stellst dich seitlich zum Ziel, der freie Arm zeigt zum ankommenden Speeder, das Gewicht ruht zunächst auf dem hinteren Bein. Dann streckst du dich nach oben und triffst den Speeder so hoch wie möglich, leicht vor dem Körper. Im Treffmoment dreht der Unterarm ein und das Handgelenk schnappt — dieselbe Peitsche wie beim Drive, nur über Kopf.\n\nDen Überkopfschlag spielst du in zwei Ausprägungen. Den defensiven Clear schlägst du hoch und weit: Er gibt dir Zeit, wenn du unter Druck stehst, und zwingt den Gegner tief nach hinten. Den offensiven Clear schlägst du flacher und schneller: Er überspielt einen Gegner, der zu weit vorn steht, bevor er zurückkommt.\n\nEin Bild: Der hohe Treffpunkt ist wie das Pflücken eines Apfels vom obersten Ast — du streckst dich ganz, triffst am höchsten Punkt deiner Reichweite. Wer den Speeder sinken lässt und erst auf Kopfhöhe trifft, verliert Höhe, Tempo und Kontrolle.\n\nDer hohe Treffpunkt ist die halbe Miete. Alles am Überkopfschlag steht und fällt damit, dass du früh und oben triffst."
       },
@@ -98,7 +98,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'alles auf maximales Tempo, keine Konstanz/Erholung' + Korrekturansage",
-      "grafik": ["smash_leitgrafik"],
+      "grafik": ["G-011"],
       "erklaerteil": {
         "de": "Der Smash ist dein Abschlussschlag — der harte Ball von oben nach unten, mit dem du einen Punkt beendest. Er wächst direkt aus dem Überkopfschlag: dieselbe Vorbereitung, aber du triffst noch etwas weiter vorn und schlägst steil nach unten ins gegnerische Feld.\n\nDie größte Falle ist der Gedanke, ein Smash müsse vor allem hart sein. Tatsächlich gewinnt der wiederholbare Smash, nicht der schnellste. Wer drei, vier Smashes hintereinander sauber und platziert schlägt, zermürbt die Abwehr des Gegners — die Rückschläge werden mit jedem Mal schwächer. Ein einzelner Wahnsinnsschlag, der danebengeht, bringt dagegen nichts.\n\nDrei Dinge machen den Smash tragfähig. Die Beinarbeit, die dich rechtzeitig hinter und unter den Speeder bringt — ohne sie stehst du falsch und der Smash bringt dich selbst in Not. Das Timing, den Speeder früh und oben zu treffen. Und die Variation: Wechselst du Winkel, Tempo und Ziel, hält kein Gegner dagegen.\n\nEin Bild: Denk an einen Hammer, der einen Nagel trifft — die Kraft kommt aus dem präzisen, getimten Schlag von oben, nicht aus wildem Draufhauen. Ein platzierter, wiederholbarer Smash ist gefährlicher als ein einzelner harter.\n\nUnd ein Punkt, den viele vergessen: Nach dem Smash kehrst du sofort in die zentrale Position zurück. Ein guter Gegner bringt auch einen harten Smash zurück — und dann musst du bereit sein."
       },
@@ -133,7 +133,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Stopp zu hoch/zu lang, in die Zone gesetzt' + Korrekturansage",
-      "grafik": ["kurzes_spiel_stopp_leitgrafik"],
+      "grafik": ["G-012"],
       "erklaerteil": {
         "de": "Nicht jeder Punkt entsteht durch Härte. Der Stopp ist das Gegenteil des Smashes: ein fein dosierter, kurzer Ball, der knapp hinter der neutralen Zone in den vorderen Bereich des gegnerischen Feldes fällt. Er fängt einen Gegner aus, der weit hinten steht und den harten Schlag erwartet.\n\nSeine Waffe ist die Täuschung. Du bereitest den Stopp genauso vor wie einen harten Drive oder Clear — gleiche Stellung, gleicher Ausholweg. Erst im letzten Moment nimmst du das Tempo heraus und lässt den Speeder weich über die Zone fallen. Der Gegner liest deine Vorbereitung als Angriff, steht tief, und der Speeder tröpfelt vor ihm herunter.\n\nDie Kunst liegt in der Dosierung. Der Speeder muss die neutrale Zone gerade eben überbrücken und dann kurz fallen. Zu viel Tempo, und er wird zum leichten Ball für den Gegner. Zu wenig, und er landet in der Zone. Das feine Gefühl dafür entwickelst du nur über viele Wiederholungen.\n\nEin Bild: Der Stopp ist wie ein sanft über eine Mauer gelegter Ball, der direkt dahinter herunterfällt — gerade genug Kraft, um hinüberzukommen, und keinen Hauch mehr.\n\nDer Stopp wirkt am stärksten im Wechsel mit deinen harten Schlägen. Erst der tiefe Clear, der den Gegner nach hinten treibt, dann der Stopp nach vorn — dieser Wechsel aus lang und kurz ist eine der wirksamsten Waffen im fortgeschrittenen Spiel."
       },
@@ -168,7 +168,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Schnitt kostet Kontrolle, Speeder unsauber getroffen' + Korrekturansage",
-      "grafik": ["schnitt_spin_leitgrafik"],
+      "grafik": ["G-013"],
       "erklaerteil": {
         "de": "Bisher ging es darum, den Speeder sauber und voll zu treffen. Der Schnitt ist ein fortgeschrittenes Werkzeug, das bewusst anders arbeitet: Du streifst den Speeder seitlich oder von unten an und gibst ihm dadurch Rotation. Diese Rotation macht seine Flugbahn und sein Verhalten für den Gegner schwerer lesbar.\n\nDer Speeder ist von Natur aus stabil und fliegt gerade. Genau das nutzt du aus, indem du es störst. Streifst du ihn beim Treffen leicht seitlich, statt ihn voll zu treffen, bekommt er einen Drall. Die Flugbahn krümmt sich leicht, das Tempo verändert sich, und der Gegner kann den Ball schwerer einschätzen.\n\nDer Schnitt hat seinen Preis: Ein angeschnittener Ball ist langsamer und du gibst etwas Kontrolle ab. Deshalb setzt du ihn gezielt ein, nicht ständig. Er lohnt sich als Überraschung, als Variation, um den Gegner aus dem Rhythmus zu bringen — besonders bei kurzen Bällen und beim Aufschlag.\n\nEin Bild: Ein angeschnittener Ball ist wie ein Wurf mit Effet beim Boule oder Tischtennis — er kommt anders an, als das Auge erwartet, und diese kleine Irritation reicht oft für einen Fehler des Gegners.\n\nDer Schnitt ist die Kür, nicht die Pflicht. Er baut auf einem sicheren, vollen Treffen auf — wer den Speeder noch nicht zuverlässig sauber trifft, übt zuerst das. Wer es beherrscht, gewinnt mit dem Schnitt eine feine zusätzliche Farbe."
       },
@@ -203,7 +203,7 @@
       "untergrund": "halle",
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'falscher Schritttyp fuer die Zone / kreuzt die Fuesse beim Chasse' + Korrekturansage",
-      "grafik": ["beinarbeit_system_chasse", "beinarbeit_system_scherensprung", "beinarbeit_system_blocksprung"],
+      "grafik": ["G-014"],
       "erklaerteil": {
         "de": "Im Beginner-Bereich hast du den Grundzyklus gelernt: zentrale Position, Split-Step, raus zum Ball, zurück zur Mitte. Jetzt füllst du diesen Zyklus mit den einzelnen Schritttypen, die jede Zone deines Feldes am schnellsten erreichbar machen. Das ist das vollständige Beinarbeit-System.\n\nVier Schritttypen tragen es. Der Chassé ist ein seitliches Nachstellen, bei dem die Füße einander nie überkreuzen — du bleibst im Gleichgewicht und bereitest damit oft den nächsten Schritt vor. Der Ausfallschritt ist der am häufigsten genutzte Schritt: ein tiefer, explosiver Ausfall in eine Ecke, mit dem schlagseitigen Fuß voran, der dich stabil und weit an den Speeder bringt. Der Scherensprung bringt dich an tiefe, hohe Speeder im hinteren Bereich — du springst ab, wechselst in der Luft die Beinstellung und kommst schlagbereit wieder auf. Der Block-Sprung fängt schnelle Bälle von der Seite ab, wenn keine Zeit für einen ganzen Schritt bleibt.\n\nEntscheidend ist, dass du für jede Zone den passenden Schritt wählst — und nach jedem Schlag mit einem sauberen Rückkehrschritt in die zentrale Position zurückfindest. Der Rückkehrschritt ist der unscheinbarste und wichtigste: Er stellt den Zyklus jedes Mal neu her.\n\nEin Bild: Denk an einen Fechter. Seine Füße stehen nie zufällig — jeder Schritt hat eine Form und einen Zweck, und er kehrt nach jedem Angriff sofort in die Grundstellung zurück. Genau diese Ökonomie suchst du für dein Feld.\n\nDieses System läuft irgendwann unbewusst. Am Anfang wählst du den Schritt bewusst; mit der Zeit wählt dein Körper ihn selbst — und dann bist du überall rechtzeitig."
       },

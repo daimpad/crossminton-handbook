@@ -38,6 +38,7 @@
 
     {
       "id": "reaktivkraft_bodenkontakt",
+      "grafik": ["G-035"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["experte"],
@@ -73,6 +74,7 @@
 
     {
       "id": "bewegungsoekonomie",
+      "grafik": ["G-036"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["experte"],

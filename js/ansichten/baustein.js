@@ -42,8 +42,8 @@ function grafikenHtml(baustein) {
     .map(
       (id) => `
       <figure class="grafik-platzhalter">
-        <div class="grafik-flaeche" aria-hidden="true"><i class="fa-solid fa-image"></i></div>
-        <figcaption class="leise">${esc(label('grafik', id))} — ${esc(t('grafik_folgt'))}</figcaption>
+        <img class="grafik-bild" src="images/${esc(id)}.png" alt="${esc(label('grafik', id))}" loading="lazy" />
+        <figcaption class="leise">${esc(label('grafik', id))}</figcaption>
       </figure>`
     )
     .join('');

@@ -15,6 +15,7 @@
   "bausteine": [
     {
       "id": "taeuschung",
+      "grafik": ["G-016", "G-017"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],
@@ -52,6 +53,7 @@
 
     {
       "id": "frueh_nehmen",
+      "grafik": ["G-015"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],
@@ -87,6 +89,7 @@
 
     {
       "id": "tempo_rhythmus_wechsel",
+      "grafik": ["G-018", "G-019"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],
@@ -121,6 +124,7 @@
 
     {
       "id": "sprung_smash",
+      "grafik": ["G-020"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],
@@ -159,6 +163,7 @@
 
     {
       "id": "praezision_an_die_linien",
+      "grafik": ["G-021"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],
@@ -194,6 +199,7 @@
 
     {
       "id": "konstanz_unter_hoechstdruck",
+      "grafik": ["G-022"],
       "typ": "micro",
       "domaene": "technik",
       "kompetenzstufe": ["experte"],

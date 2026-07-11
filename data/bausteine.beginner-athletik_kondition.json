@@ -73,6 +73,7 @@
 
     {
       "id": "beweglichkeit_und_schulter",
+      "grafik": ["G-033"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["beginner"],
@@ -106,6 +107,7 @@
 
     {
       "id": "schnelle_fuesse",
+      "grafik": ["G-032"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["beginner"],

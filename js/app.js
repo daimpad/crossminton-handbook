@@ -77,6 +77,13 @@ function beschrifteRahmen() {
     const ziel = verweis.querySelector('.nav-text');
     if (ziel && beschriftungen[verweis.dataset.nav]) ziel.textContent = beschriftungen[verweis.dataset.nav];
   }
+  // Externe Doku-Links (README/TECHNICAL) — als Reiter im Menü, öffnen die
+  // GitHub-gerenderten Dokumente in einem neuen Tab (buildfrei, kein In-App-Renderer).
+  for (const verweis of document.querySelectorAll('[data-doc]')) {
+    const beschriftung = { readme: t('nav_readme'), technical: t('nav_technical') }[verweis.dataset.doc];
+    const ziel = verweis.querySelector('.nav-text');
+    if (ziel && beschriftung) ziel.textContent = beschriftung;
+  }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));

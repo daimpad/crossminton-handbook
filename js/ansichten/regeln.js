@@ -69,6 +69,26 @@ function abschnittHtml(daten, abschnitt, offen) {
     </details>`;
 }
 
+// Zwei Referenzgrafiken (bemaßtes Spielfeld, Schiedsrichter-Handzeichen) — keine
+// Lernbausteine, sondern Nachschlage-Bilder des Reiters (G-060/G-061, siehe
+// images/grafik-prompts.md). Eingeklappt, damit sie den Regeltext nicht verdrängen.
+function referenzgrafikenHtml() {
+  const bilder = ['G-060', 'G-061']
+    .map(
+      (id) => `
+      <figure class="grafik-platzhalter">
+        <img class="grafik-bild" src="images/${esc(id)}.png" alt="${esc(label('grafik', id))}" loading="lazy" />
+        <figcaption class="leise">${esc(label('grafik', id))}</figcaption>
+      </figure>`,
+    )
+    .join('');
+  return `
+    <details class="regel-abschnitt karte">
+      <summary><h2>${esc(t('regeln_grafiken'))}</h2></summary>
+      ${bilder}
+    </details>`;
+}
+
 export function renderRegeln(el, daten) {
   const regeln = daten.regeln || { meta: {}, abschnitte: [] };
   const abschnitte = regeln.abschnitte.map((abschnitt, i) => abschnittHtml(daten, abschnitt, i === 0)).join('');
@@ -76,5 +96,6 @@ export function renderRegeln(el, daten) {
     <h1>${esc(t('regeln_titel'))}</h1>
     <p class="leise">${esc(t('regeln_intro'))}</p>
     ${quelleHtml(regeln.meta.quelle)}
-    ${abschnitte || `<div class="karte"><p class="leise">${esc(t('nicht_gefunden'))}</p></div>`}`;
+    ${abschnitte || `<div class="karte"><p class="leise">${esc(t('nicht_gefunden'))}</p></div>`}
+    ${referenzgrafikenHtml()}`;
 }

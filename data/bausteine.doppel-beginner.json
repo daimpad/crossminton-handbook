@@ -16,6 +16,7 @@
   "bausteine": [
     {
       "id": "erste_schritte_doppel",
+      "grafik": ["G-044"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -37,6 +38,7 @@
 
     {
       "id": "wer_nimmt_den_ball",
+      "grafik": ["G-045"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -70,6 +72,7 @@
 
     {
       "id": "aufschlag_im_doppel_einfach",
+      "grafik": ["G-046"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -104,6 +107,7 @@
 
     {
       "id": "sich_absprechen",
+      "grafik": ["G-047"],
       "typ": "micro",
       "domaene": "mentales",
       "kompetenzstufe": ["beginner"],
@@ -125,6 +129,7 @@
 
     {
       "id": "einander_platz_lassen",
+      "grafik": ["G-048"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["beginner"],

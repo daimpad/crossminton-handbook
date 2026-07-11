@@ -16,6 +16,7 @@
   "bausteine": [
     {
       "id": "paar_als_system",
+      "grafik": ["G-049"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["experte"],
@@ -37,6 +38,7 @@
 
     {
       "id": "gegnerisches_paar_lesen",
+      "grafik": ["G-050"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["experte"],
@@ -58,6 +60,7 @@
 
     {
       "id": "partner_in_position_bringen",
+      "grafik": ["G-051"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["experte"],
@@ -91,6 +94,7 @@
 
     {
       "id": "nahtlos_umschalten",
+      "grafik": ["G-052"],
       "typ": "micro",
       "domaene": "athletik_kondition",
       "kompetenzstufe": ["experte"],
@@ -124,6 +128,7 @@
 
     {
       "id": "blindes_verstaendnis",
+      "grafik": ["G-053"],
       "typ": "micro",
       "domaene": "mentales",
       "kompetenzstufe": ["experte"],

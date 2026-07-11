@@ -37,6 +37,7 @@
 
     {
       "id": "gegner_typen_gegenrezepte",
+      "grafik": ["G-030"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["experte"],
@@ -95,6 +96,7 @@
 
     {
       "id": "schwaeche_systematisch_angreifen",
+      "grafik": ["G-031"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["experte"],
