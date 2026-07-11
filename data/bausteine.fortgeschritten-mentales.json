@@ -1,184 +1,184 @@
 {
- "_meta": {
-  "beschreibung": "Fortgeschritten-Mentales: vertieft die vier Psychoregulations-Faktoren aus dem Beginner-Block zu einem trainierbaren mentalen System (Zielsetzung, Selbstgespraech, Vorstellungstraining, Momentum, Match-Robustheit).",
-  "quellsprache": "de",
-  "zielsprachen": [
-   "en",
-   "fr",
-   "pl"
+  "_meta": {
+    "beschreibung": "Fortgeschritten-Mentales: vertieft die vier Psychoregulations-Faktoren aus dem Beginner-Block zu einem trainierbaren mentalen System (Zielsetzung, Selbstgespraech, Vorstellungstraining, Momentum, Match-Robustheit).",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl"
+    ],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.fortgeschritten-mentales.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Beginner-Mentalblock (baut die dort gelernten Werkzeuge aus).",
+    "kein_delta": "Mentale Fertigkeiten sind sportartuebergreifend; der Umsteiger bringt sie mit.",
+    "wellbeing_grenze": "STRIKT leistungsbezogen und ressourcenorientiert. Mentale Werkzeuge fuer besseres Spielen, kein diagnostisches/therapeutisches Terrain. Wo ein Thema an Klinisches grenzt, bleibt der Baustein bei spielbezogener Bewaeltigung und verweist nicht auf Selbstdiagnose.",
+    "ordnungslogik": "Rahmen (Werkzeug zum System) -> Selbstgespraech -> Vorstellung -> Momentum -> Match-Robustheit."
+  },
+  "bausteine": [
+    {
+      "id": "vom_werkzeug_zum_system",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "warum_der_kopf_mitspielt"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fasst die einzelnen Beginner-Werkzeuge zu einem System zusammen",
+      "spielziele": [
+        "vorbereitende_selbststeuerung",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Mental Skills Training als systematischer, trainierbarer Prozess (Bildung -> Aneignung -> Anwendung); Prozess- statt Ergebnisziele: Sportpsychologie (Vealey-Modell, MST-Systematik).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Vom Werkzeug zum System"
+      },
+      "erklaerteil": {
+        "de": "Im Beginner-Bereich hast du einzelne mentale Werkzeuge gelernt: die Aufschlagroutine, das Ruhigbleiben im engen Moment, das Abhaken eines Fehlers, das Zurückholen der Konzentration. Jetzt fügst du diese Werkzeuge zu einem System zusammen — einem mentalen Spiel, das du genauso trainierst wie deine Schläge.\n\nDer erste Schritt ist ein Perspektivwechsel. Mentale Stärke ist eine Fähigkeit, die wächst, wenn du sie übst — nicht eine Eigenschaft, die du hast oder nicht. Genau wie ein Schlag durchläuft sie Stufen: Erst verstehst du ein Werkzeug, dann übst du es bewusst, irgendwann läuft es von allein. Die Beginner-Werkzeuge waren die erste Stufe. Jetzt übst du sie so lange bewusst, bis sie zu Gewohnheiten werden.\n\nDazu gehört ein klarer Blick auf deine Ziele. Es gibt zwei Arten. Ergebnisziele richten sich auf das Resultat: gewinnen, den Satz holen. Prozessziele richten sich auf das, was du tust: sauber aufschlagen, früh zur Mitte zurück, den nächsten Ball spielen. Im Spiel helfen dir die Prozessziele, denn sie liegen in deiner Hand. Das Ergebnis folgt aus ihnen, aber du steuerst es nicht direkt.\n\nDein mentales Spiel ist ein Werkzeugkasten. Bisher hast du gelernt, jedes Werkzeug einzeln zu benutzen. Jetzt lernst du, im richtigen Moment das passende zu greifen — und den Kasten überhaupt dabeizuhaben.\n\nDie folgenden Bausteine geben dir die fortgeschrittenen Werkzeuge: das gezielte Selbstgespräch, die Vorstellung, den Umgang mit Momentum und die Stabilität über ein ganzes Match."
+      },
+      "reflexionsaufgabe": {
+        "de": "Formuliere für dein nächstes Spiel zwei, drei Prozessziele — konkrete Dinge, die du tun willst, unabhängig vom Ergebnis. Zum Beispiel: nach jedem Schlag zurück zur Mitte, jeder Aufschlag mit Absicht, nach jedem Fehler die Reset-Geste. Beobachte nach dem Spiel nicht zuerst, ob du gewonnen hast, sondern ob du deine Prozessziele erreicht hast. Diese Verschiebung des Blicks ist der Kern des fortgeschrittenen Mentaltrainings."
+      }
+    },
+    {
+      "id": "selbstgespraech_steuern",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "vom_werkzeug_zum_system"
+      ],
+      "spielziele": [
+        "nervenstaerke_enger_satz",
+        "fehler_resilienz",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Instruktives und motivierendes Selbstgespraech, kognitives Reframing; belegte Wirkung auf Genauigkeit/Koordination/Ausdauer: Sportpsychologie (Hatzigeorgiadis et al. 2021).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Das Selbstgespräch steuern"
+      },
+      "erklaerteil": {
+        "de": "In deinem Kopf läuft ständig ein Gespräch — mit dir selbst. Nach einem Fehler sagt es vielleicht „nicht schon wieder“, vor einem wichtigen Punkt „bloß jetzt nicht“. Dieses innere Gespräch beeinflusst dein Spiel stärker, als dir bewusst ist. Die gute Nachricht: Du kannst es steuern.\n\nEs gibt zwei nützliche Arten von Selbstgespräch. Das anweisende richtet deine Aufmerksamkeit auf die Aufgabe: „flach und lang“, „früh treffen“, „Augen auf den Speeder“. Es wirkt wie eine kurze Selbstinstruktion und verbessert nachweislich Genauigkeit und Koordination. Das ermutigende gibt dir Energie und Zuversicht: „komm, weiter“, „du kannst das“. Es hilft in Momenten, in denen der Kopf aufgeben will.\n\nDer wichtigste Schritt ist, negatives Selbstgespräch umzudeuten. Der Satz „ich darf diesen Punkt nicht verlieren“ lähmt, weil er auf die Gefahr zeigt. Deute ihn um in „ich spiele jetzt sicher auf die Rückhand“ — ein Satz, der dich handeln lässt. Du tauschst den Gedanken, der dich blockiert, gegen einen, der dich führt.\n\nDein Selbstgespräch ist wie ein Trainer, der dir während des Spiels zuflüstert. Du entscheidest, ob dieser Trainer an dir zweifelt oder dich klar und ruhig anweist. Es ist deine Stimme — also gib ihr die richtigen Worte.\n\nAm wirksamsten sind kurze, feste Formeln. Ein, zwei Wörter, die du dir immer wieder sagst, werden zu verlässlichen Ankern im Spiel."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte im nächsten Spiel einmal bewusst auf dein inneres Gespräch — besonders nach Fehlern und vor wichtigen Punkten. Was sagst du dir? Wähle dann zwei feste Formeln: eine anweisende für die Aufgabe (etwa „flach und lang“) und eine ermutigende für schwere Momente (etwa „komm, weiter“). Nimm einen typischen negativen Satz, den du dir sagst, und formuliere ihn in einen handlungsorientierten um. Übe, im Spiel bewusst diese Worte zu greifen."
+      }
+    },
+    {
+      "id": "sich_das_spiel_vorstellen",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "vom_werkzeug_zum_system"
+      ],
+      "spielziele": [
+        "vorbereitende_selbststeuerung",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Vorstellungstraining/Imagery: mentale Bewegungsvorstellung aktiviert aehnliche Hirnmuster wie die Ausfuehrung; verbessert Fokus, senkt Wettkampfangst, staerkt Zuversicht: Sportpsychologie.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Sich das Spiel vorstellen"
+      },
+      "erklaerteil": {
+        "de": "Dein Gehirn unterscheidet weniger stark zwischen einer lebhaft vorgestellten und einer tatsächlich ausgeführten Bewegung, als du denkst. Stellst du dir einen Schlag genau vor, aktivierst du ähnliche Muster im Gehirn wie beim echten Schlag. Diese Fähigkeit kannst du nutzen — im Training und direkt im Spiel.\n\nVorstellungstraining heißt, eine Bewegung oder Situation im Kopf durchzuspielen, bevor du sie ausführst. Vor dem Spiel kannst du dir vorstellen, wie du sicher aufschlägst, wie du einen langen Ballwechsel ruhig durchstehst, wie du dich in einem engen Satz verhältst. Je lebendiger, desto besser: Sieh das Feld vor dir, spüre den Schläger, höre den Treffmoment.\n\nAuch mitten im Spiel hilft die Vorstellung. Bevor du aufschlägst, siehst du kurz die Flugbahn vor dir, die du treffen willst — flach, lang, in die Rückhandecke. Diese kurze innere Vorschau richtet deine Bewegung aus, noch bevor du sie beginnst.\n\nEin Skispringer steht oben am Balken und fährt den Sprung im Kopf ab, bevor er losfährt — jede Kurve, jede Bewegung. Diese innere Generalprobe macht den echten Sprung sicherer. Genauso stellst du dir deinen Schlag vor, bevor du ihn spielst.\n\nVorstellung ersetzt das Üben nicht, aber sie verstärkt es. Ein paar Minuten bewusste Vorstellung vor dem Spiel oder eine kurze Vorschau vor dem Aufschlag kosten wenig und wirken spürbar."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm dir vor dem nächsten Spiel zwei Minuten und stell dir lebhaft vor, wie du gut spielst: ein sicherer Aufschlag, ein ruhig durchgestandener Ballwechsel, ein souverän geführter enger Satz. Nutze möglichst alle Sinne — sehen, spüren, hören. Übe dann im Spiel die kurze Vorschau: Bevor du aufschlägst, siehst du die Flugbahn einen Moment vor dir, die du treffen willst. Beobachte, ob dein Aufschlag der Vorstellung folgt."
+      }
+    },
+    {
+      "id": "momentum_lesen_und_drehen",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "bei_der_sache_bleiben"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut die Konzentrationskonstanz zur Momentum-Steuerung aus",
+      "spielziele": [
+        "konzentrationskonstanz",
+        "nervenstaerke_enger_satz",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP",
+        "CM"
+      ],
+      "transfer_herkunft_beleg": "Momentum/Serienbildung und deren Unterbrechung, Aufmerksamkeits-Reset: Sportpsychologie. Der Drei-Aufschlag-Rhythmus und die 15:15-Zuspitzung crossminton-eigen (ICO-Regeln).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Momentum lesen und drehen"
+      },
+      "erklaerteil": {
+        "de": "Spiele verlaufen in Wellen. Mal läuft alles für dich, die Bälle fallen, der Gegner wirkt hilflos. Dann kippt es, und plötzlich macht er die Punkte. Dieses Auf und Ab hat einen Namen: Momentum. Wer es lesen und beeinflussen kann, gewinnt Spiele, die er sonst verlieren würde.\n\nMomentum entsteht oft in kleinen Serien. Du gewinnst zwei, drei Punkte, fühlst dich sicher, spielst freier — und diese Sicherheit trägt den nächsten Punkt. Genauso beim Gegner. Der Drei-Aufschlag-Rhythmus im Crossminton verstärkt das: Wer aufschlägt, hat oft einen kleinen Vorteil und kann eine Serie starten.\n\nDas Wichtigste ist, eine negative Welle früh zu unterbrechen. Verlierst du mehrere Punkte in Folge, brich den Rhythmus bewusst: Nimm dir die erlaubte kurze Zeit, atme durch, greife zu deiner Routine, hol die Konzentration auf den einen nächsten Ball zurück. Du unterbrichst damit den Lauf des Gegners und deinen eigenen Abwärtssog.\n\nUmgekehrt reitest du eine positive Welle, indem du einfach weitermachst, was funktioniert — ohne übermütig zu werden. Läuft es, ändere nichts und bleib bei deinem Plan.\n\nMomentum ist wie die Strömung in einem Fluss. Gegen sie zu kämpfen, wenn sie gegen dich läuft, erschöpft dich. Klüger ist, kurz ans Ufer zu treten, durchzuatmen und dann neu einzusteigen. Läuft die Strömung für dich, lässt du dich ruhig tragen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachte im nächsten Spiel die Wellen: Wann läuft eine Serie für dich, wann für den Gegner? Nimm dir eine feste Reaktion für negative Serien vor — verlierst du zwei, drei Punkte in Folge, unterbrichst du bewusst: kurze Zeit nehmen, atmen, Routine, nächster Ball. Beobachte, ob du damit einen Lauf des Gegners früher stoppen kannst. Und achte darauf, ob du positive Serien manchmal selbst beendest, indem du übermütig wirst."
+      }
+    },
+    {
+      "id": "ueber_das_match_stabil_bleiben",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "den_fehler_abhaken",
+        "momentum_lesen_und_drehen"
+      ],
+      "spielziele": [
+        "fehler_resilienz",
+        "konzentrationskonstanz",
+        "nervenstaerke_enger_satz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP",
+        "TEN"
+      ],
+      "transfer_herkunft_beleg": "Mentale Robustheit/Resilienz ueber ein ganzes Match, Integration der Einzelfertigkeiten, Erholung nach Rueckschlaegen: Sportpsychologie (u.a. Resilienzmodelle im Tennis).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Über das ganze Match stabil bleiben"
+      },
+      "erklaerteil": {
+        "de": "Ein Match ist lang. Es hat gute und schlechte Phasen, Sätze, die dir gehören, und solche, in denen nichts gelingt. Die fortgeschrittene mentale Fähigkeit ist, über all diese Wellen hinweg stabil zu bleiben — nicht in jedem Moment perfekt, aber verlässlich immer wieder zurück zu deinem Spiel zu finden.\n\nStabilität heißt nicht, dass dich nichts erschüttert. Auch die Besten haben schlechte Phasen. Der Unterschied ist, wie schnell sie zurückkommen. Eine schlechte Phase darf ein paar Punkte kosten — sie darf nicht das ganze Match bestimmen. Hier zahlen sich alle bisherigen Werkzeuge aus: Du hakst den Fehler ab, du unterbrichst die negative Welle, du holst die Konzentration zurück, du sprichst dir Mut zu. Zusammen ergeben sie deine Widerstandskraft.\n\nBesonders wichtig sind die Übergänge: der Moment nach einem verlorenen Satz, der Moment nach einer vergebenen Führung. Genau dort entscheidet sich, ob du zerbrichst oder standhältst. Ein verlorener Satz ist ein neuer Anfang, kein Urteil über das ganze Match. Wer den nächsten Satz frisch beginnt, hat das vorige Ergebnis hinter sich gelassen.\n\nStell dir deine mentale Stabilität wie ein Stehaufmännchen vor. Es wird angestoßen, es kippt zur Seite — aber sein Schwerpunkt bringt es immer wieder in die aufrechte Lage zurück. Nicht das Wanken macht es stark, sondern die Zuverlässigkeit, mit der es zurückkommt.\n\nDiese Stabilität wächst mit der Erfahrung und mit dem bewussten Üben der einzelnen Werkzeuge. Je vertrauter sie dir sind, desto verlässlicher tragen sie dich durch ein langes Match."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein Match zurück, in dem du nach einer schlechten Phase oder einem verlorenen Satz eingebrochen bist. Was hätte dir geholfen, schneller zurückzukommen? Nimm dir für das nächste Match einen einzigen Übergang vor — etwa den Beginn nach einem verlorenen Satz — und behandle ihn bewusst als frischen Anfang: kurz sammeln, ein Prozessziel setzen, neu starten. Beobachte, ob du eine schlechte Phase besser begrenzen kannst, statt sie das ganze Match bestimmen zu lassen."
+      }
+    }
   ],
-  "stand": "Erstausbau-Erweiterung",
-  "dateiname_konvention": "bausteine.fortgeschritten-mentales.json",
-  "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
-  "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Beginner-Mentalblock (baut die dort gelernten Werkzeuge aus).",
-  "kein_delta": "Mentale Fertigkeiten sind sportartuebergreifend; der Umsteiger bringt sie mit.",
-  "wellbeing_grenze": "STRIKT leistungsbezogen und ressourcenorientiert. Mentale Werkzeuge fuer besseres Spielen, kein diagnostisches/therapeutisches Terrain. Wo ein Thema an Klinisches grenzt, bleibt der Baustein bei spielbezogener Bewaeltigung und verweist nicht auf Selbstdiagnose.",
-  "ordnungslogik": "Rahmen (Werkzeug zum System) -> Selbstgespraech -> Vorstellung -> Momentum -> Match-Robustheit."
- },
- "bausteine": [
-  {
-   "id": "vom_werkzeug_zum_system",
-   "typ": "micro",
-   "domaene": "mentales",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "warum_der_kopf_mitspielt"
-   ],
-   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fasst die einzelnen Beginner-Werkzeuge zu einem System zusammen",
-   "spielziele": [
-    "vorbereitende_selbststeuerung",
-    "konzentrationskonstanz"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP"
-   ],
-   "transfer_herkunft_beleg": "Mental Skills Training als systematischer, trainierbarer Prozess (Bildung -> Aneignung -> Anwendung); Prozess- statt Ergebnisziele: Sportpsychologie (Vealey-Modell, MST-Systematik).",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Vom Werkzeug zum System"
-   },
-   "erklaerteil": {
-    "de": "Im Beginner-Bereich hast du einzelne mentale Werkzeuge gelernt: die Aufschlagroutine, das Ruhigbleiben im engen Moment, das Abhaken eines Fehlers, das Zurückholen der Konzentration. Jetzt fügst du diese Werkzeuge zu einem System zusammen — einem mentalen Spiel, das du genauso trainierst wie deine Schläge.\n\nDer erste Schritt ist ein Perspektivwechsel. Mentale Stärke ist eine Fähigkeit, die wächst, wenn du sie übst — nicht eine Eigenschaft, die du hast oder nicht. Genau wie ein Schlag durchläuft sie Stufen: Erst verstehst du ein Werkzeug, dann übst du es bewusst, irgendwann läuft es von allein. Die Beginner-Werkzeuge waren die erste Stufe. Jetzt übst du sie so lange bewusst, bis sie zu Gewohnheiten werden.\n\nDazu gehört ein klarer Blick auf deine Ziele. Es gibt zwei Arten. Ergebnisziele richten sich auf das Resultat: gewinnen, den Satz holen. Prozessziele richten sich auf das, was du tust: sauber aufschlagen, früh zur Mitte zurück, den nächsten Ball spielen. Im Spiel helfen dir die Prozessziele, denn sie liegen in deiner Hand. Das Ergebnis folgt aus ihnen, aber du steuerst es nicht direkt.\n\nDein mentales Spiel ist ein Werkzeugkasten. Bisher hast du gelernt, jedes Werkzeug einzeln zu benutzen. Jetzt lernst du, im richtigen Moment das passende zu greifen — und den Kasten überhaupt dabeizuhaben.\n\nDie folgenden Bausteine geben dir die fortgeschrittenen Werkzeuge: das gezielte Selbstgespräch, die Vorstellung, den Umgang mit Momentum und die Stabilität über ein ganzes Match."
-   },
-   "reflexionsaufgabe": {
-    "de": "Formuliere für dein nächstes Spiel zwei, drei Prozessziele — konkrete Dinge, die du tun willst, unabhängig vom Ergebnis. Zum Beispiel: nach jedem Schlag zurück zur Mitte, jeder Aufschlag mit Absicht, nach jedem Fehler die Reset-Geste. Beobachte nach dem Spiel nicht zuerst, ob du gewonnen hast, sondern ob du deine Prozessziele erreicht hast. Diese Verschiebung des Blicks ist der Kern des fortgeschrittenen Mentaltrainings."
-   }
-  },
-  {
-   "id": "selbstgespraech_steuern",
-   "typ": "micro",
-   "domaene": "mentales",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "vom_werkzeug_zum_system"
-   ],
-   "spielziele": [
-    "nervenstaerke_enger_satz",
-    "fehler_resilienz",
-    "konzentrationskonstanz"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP"
-   ],
-   "transfer_herkunft_beleg": "Instruktives und motivierendes Selbstgespraech, kognitives Reframing; belegte Wirkung auf Genauigkeit/Koordination/Ausdauer: Sportpsychologie (Hatzigeorgiadis et al. 2021).",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Das Selbstgespräch steuern"
-   },
-   "erklaerteil": {
-    "de": "In deinem Kopf läuft ständig ein Gespräch — mit dir selbst. Nach einem Fehler sagt es vielleicht „nicht schon wieder“, vor einem wichtigen Punkt „bloß jetzt nicht“. Dieses innere Gespräch beeinflusst dein Spiel stärker, als dir bewusst ist. Die gute Nachricht: Du kannst es steuern.\n\nEs gibt zwei nützliche Arten von Selbstgespräch. Das anweisende richtet deine Aufmerksamkeit auf die Aufgabe: „flach und lang“, „früh treffen“, „Augen auf den Speeder“. Es wirkt wie eine kurze Selbstinstruktion und verbessert nachweislich Genauigkeit und Koordination. Das ermutigende gibt dir Energie und Zuversicht: „komm, weiter“, „du kannst das“. Es hilft in Momenten, in denen der Kopf aufgeben will.\n\nDer wichtigste Schritt ist, negatives Selbstgespräch umzudeuten. Der Satz „ich darf diesen Punkt nicht verlieren“ lähmt, weil er auf die Gefahr zeigt. Deute ihn um in „ich spiele jetzt sicher auf die Rückhand“ — ein Satz, der dich handeln lässt. Du tauschst den Gedanken, der dich blockiert, gegen einen, der dich führt.\n\nDein Selbstgespräch ist wie ein Trainer, der dir während des Spiels zuflüstert. Du entscheidest, ob dieser Trainer an dir zweifelt oder dich klar und ruhig anweist. Es ist deine Stimme — also gib ihr die richtigen Worte.\n\nAm wirksamsten sind kurze, feste Formeln. Ein, zwei Wörter, die du dir immer wieder sagst, werden zu verlässlichen Ankern im Spiel."
-   },
-   "reflexionsaufgabe": {
-    "de": "Achte im nächsten Spiel einmal bewusst auf dein inneres Gespräch — besonders nach Fehlern und vor wichtigen Punkten. Was sagst du dir? Wähle dann zwei feste Formeln: eine anweisende für die Aufgabe (etwa „flach und lang“) und eine ermutigende für schwere Momente (etwa „komm, weiter“). Nimm einen typischen negativen Satz, den du dir sagst, und formuliere ihn in einen handlungsorientierten um. Übe, im Spiel bewusst diese Worte zu greifen."
-   }
-  },
-  {
-   "id": "sich_das_spiel_vorstellen",
-   "typ": "micro",
-   "domaene": "mentales",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "vom_werkzeug_zum_system"
-   ],
-   "spielziele": [
-    "vorbereitende_selbststeuerung",
-    "konzentrationskonstanz"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP"
-   ],
-   "transfer_herkunft_beleg": "Vorstellungstraining/Imagery: mentale Bewegungsvorstellung aktiviert aehnliche Hirnmuster wie die Ausfuehrung; verbessert Fokus, senkt Wettkampfangst, staerkt Zuversicht: Sportpsychologie.",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Sich das Spiel vorstellen"
-   },
-   "erklaerteil": {
-    "de": "Dein Gehirn unterscheidet weniger stark zwischen einer lebhaft vorgestellten und einer tatsächlich ausgeführten Bewegung, als du denkst. Stellst du dir einen Schlag genau vor, aktivierst du ähnliche Muster im Gehirn wie beim echten Schlag. Diese Fähigkeit kannst du nutzen — im Training und direkt im Spiel.\n\nVorstellungstraining heißt, eine Bewegung oder Situation im Kopf durchzuspielen, bevor du sie ausführst. Vor dem Spiel kannst du dir vorstellen, wie du sicher aufschlägst, wie du einen langen Ballwechsel ruhig durchstehst, wie du dich in einem engen Satz verhältst. Je lebendiger, desto besser: Sieh das Feld vor dir, spüre den Schläger, höre den Treffmoment.\n\nAuch mitten im Spiel hilft die Vorstellung. Bevor du aufschlägst, siehst du kurz die Flugbahn vor dir, die du treffen willst — flach, lang, in die Rückhandecke. Diese kurze innere Vorschau richtet deine Bewegung aus, noch bevor du sie beginnst.\n\nEin Skispringer steht oben am Balken und fährt den Sprung im Kopf ab, bevor er losfährt — jede Kurve, jede Bewegung. Diese innere Generalprobe macht den echten Sprung sicherer. Genauso stellst du dir deinen Schlag vor, bevor du ihn spielst.\n\nVorstellung ersetzt das Üben nicht, aber sie verstärkt es. Ein paar Minuten bewusste Vorstellung vor dem Spiel oder eine kurze Vorschau vor dem Aufschlag kosten wenig und wirken spürbar."
-   },
-   "reflexionsaufgabe": {
-    "de": "Nimm dir vor dem nächsten Spiel zwei Minuten und stell dir lebhaft vor, wie du gut spielst: ein sicherer Aufschlag, ein ruhig durchgestandener Ballwechsel, ein souverän geführter enger Satz. Nutze möglichst alle Sinne — sehen, spüren, hören. Übe dann im Spiel die kurze Vorschau: Bevor du aufschlägst, siehst du die Flugbahn einen Moment vor dir, die du treffen willst. Beobachte, ob dein Aufschlag der Vorstellung folgt."
-   }
-  },
-  {
-   "id": "momentum_lesen_und_drehen",
-   "typ": "micro",
-   "domaene": "mentales",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "bei_der_sache_bleiben"
-   ],
-   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut die Konzentrationskonstanz zur Momentum-Steuerung aus",
-   "spielziele": [
-    "konzentrationskonstanz",
-    "nervenstaerke_enger_satz",
-    "umschaltmoment_erkennen"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP",
-    "CM"
-   ],
-   "transfer_herkunft_beleg": "Momentum/Serienbildung und deren Unterbrechung, Aufmerksamkeits-Reset: Sportpsychologie. Der Drei-Aufschlag-Rhythmus und die 15:15-Zuspitzung crossminton-eigen (ICO-Regeln).",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Momentum lesen und drehen"
-   },
-   "erklaerteil": {
-    "de": "Spiele verlaufen in Wellen. Mal läuft alles für dich, die Bälle fallen, der Gegner wirkt hilflos. Dann kippt es, und plötzlich macht er die Punkte. Dieses Auf und Ab hat einen Namen: Momentum. Wer es lesen und beeinflussen kann, gewinnt Spiele, die er sonst verlieren würde.\n\nMomentum entsteht oft in kleinen Serien. Du gewinnst zwei, drei Punkte, fühlst dich sicher, spielst freier — und diese Sicherheit trägt den nächsten Punkt. Genauso beim Gegner. Der Drei-Aufschlag-Rhythmus im Crossminton verstärkt das: Wer aufschlägt, hat oft einen kleinen Vorteil und kann eine Serie starten.\n\nDas Wichtigste ist, eine negative Welle früh zu unterbrechen. Verlierst du mehrere Punkte in Folge, brich den Rhythmus bewusst: Nimm dir die erlaubte kurze Zeit, atme durch, greife zu deiner Routine, hol die Konzentration auf den einen nächsten Ball zurück. Du unterbrichst damit den Lauf des Gegners und deinen eigenen Abwärtssog.\n\nUmgekehrt reitest du eine positive Welle, indem du einfach weitermachst, was funktioniert — ohne übermütig zu werden. Läuft es, ändere nichts und bleib bei deinem Plan.\n\nMomentum ist wie die Strömung in einem Fluss. Gegen sie zu kämpfen, wenn sie gegen dich läuft, erschöpft dich. Klüger ist, kurz ans Ufer zu treten, durchzuatmen und dann neu einzusteigen. Läuft die Strömung für dich, lässt du dich ruhig tragen."
-   },
-   "reflexionsaufgabe": {
-    "de": "Beobachte im nächsten Spiel die Wellen: Wann läuft eine Serie für dich, wann für den Gegner? Nimm dir eine feste Reaktion für negative Serien vor — verlierst du zwei, drei Punkte in Folge, unterbrichst du bewusst: kurze Zeit nehmen, atmen, Routine, nächster Ball. Beobachte, ob du damit einen Lauf des Gegners früher stoppen kannst. Und achte darauf, ob du positive Serien manchmal selbst beendest, indem du übermütig wirst."
-   }
-  },
-  {
-   "id": "ueber_das_match_stabil_bleiben",
-   "typ": "micro",
-   "domaene": "mentales",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "den_fehler_abhaken",
-    "momentum_lesen_und_drehen"
-   ],
-   "spielziele": [
-    "fehler_resilienz",
-    "konzentrationskonstanz",
-    "nervenstaerke_enger_satz"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP",
-    "TEN"
-   ],
-   "transfer_herkunft_beleg": "Mentale Robustheit/Resilienz ueber ein ganzes Match, Integration der Einzelfertigkeiten, Erholung nach Rueckschlaegen: Sportpsychologie (u.a. Resilienzmodelle im Tennis).",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Über das ganze Match stabil bleiben"
-   },
-   "erklaerteil": {
-    "de": "Ein Match ist lang. Es hat gute und schlechte Phasen, Sätze, die dir gehören, und solche, in denen nichts gelingt. Die fortgeschrittene mentale Fähigkeit ist, über all diese Wellen hinweg stabil zu bleiben — nicht in jedem Moment perfekt, aber verlässlich immer wieder zurück zu deinem Spiel zu finden.\n\nStabilität heißt nicht, dass dich nichts erschüttert. Auch die Besten haben schlechte Phasen. Der Unterschied ist, wie schnell sie zurückkommen. Eine schlechte Phase darf ein paar Punkte kosten — sie darf nicht das ganze Match bestimmen. Hier zahlen sich alle bisherigen Werkzeuge aus: Du hakst den Fehler ab, du unterbrichst die negative Welle, du holst die Konzentration zurück, du sprichst dir Mut zu. Zusammen ergeben sie deine Widerstandskraft.\n\nBesonders wichtig sind die Übergänge: der Moment nach einem verlorenen Satz, der Moment nach einer vergebenen Führung. Genau dort entscheidet sich, ob du zerbrichst oder standhältst. Ein verlorener Satz ist ein neuer Anfang, kein Urteil über das ganze Match. Wer den nächsten Satz frisch beginnt, hat das vorige Ergebnis hinter sich gelassen.\n\nStell dir deine mentale Stabilität wie ein Stehaufmännchen vor. Es wird angestoßen, es kippt zur Seite — aber sein Schwerpunkt bringt es immer wieder in die aufrechte Lage zurück. Nicht das Wanken macht es stark, sondern die Zuverlässigkeit, mit der es zurückkommt.\n\nDiese Stabilität wächst mit der Erfahrung und mit dem bewussten Üben der einzelnen Werkzeuge. Je vertrauter sie dir sind, desto verlässlicher tragen sie dich durch ein langes Match."
-   },
-   "reflexionsaufgabe": {
-    "de": "Denk an ein Match zurück, in dem du nach einer schlechten Phase oder einem verlorenen Satz eingebrochen bist. Was hätte dir geholfen, schneller zurückzukommen? Nimm dir für das nächste Match einen einzigen Übergang vor — etwa den Beginn nach einem verlorenen Satz — und behandle ihn bewusst als frischen Anfang: kurz sammeln, ein Prozessziel setzen, neu starten. Beobachte, ob du eine schlechte Phase besser begrenzen kannst, statt sie das ganze Match bestimmen zu lassen."
-   }
-  }
- ],
- "delta_bausteine": []
+  "delta_bausteine": []
 }

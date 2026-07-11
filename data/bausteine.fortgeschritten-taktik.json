@@ -1,301 +1,308 @@
 {
- "_meta": {
-  "beschreibung": "Fortgeschritten-Taktik: taktische Stufe oberhalb Beginner. Baut auf der fortgeschrittenen Technik (Clear, Smash, Stopp) und der Beginner-Taktik auf. Fuehrt Umschalten, Punktkonstruktion, tieferes Gegner-Lesen, Doppel-Grundlagen und Satzfuehrung.",
-  "quellsprache": "de",
-  "zielsprachen": [
-   "en",
-   "fr",
-   "pl"
+  "_meta": {
+    "beschreibung": "Fortgeschritten-Taktik: taktische Stufe oberhalb Beginner. Baut auf der fortgeschrittenen Technik (Clear, Smash, Stopp) und der Beginner-Taktik auf. Fuehrt Umschalten, Punktkonstruktion, tieferes Gegner-Lesen, Doppel-Grundlagen und Satzfuehrung.",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl"
+    ],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.fortgeschritten-taktik.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
+    "voraussetzungsvernetzung": "Dichteste bisher: verweist stufenuebergreifend auf Beginner-Taktik UND domaenenuebergreifend auf die fortgeschrittene Technik (punkt_aufbauen -> ueberkopf_clear + kurzes_spiel_stopp). Alle weiche Kanten.",
+    "faktor_erstaktivierung": "doppel_grundlagen aktiviert erstmals den Spielziel-Faktor 'doppel_spezifische_loesungen' (Bereich 6), der als 'beobachtungsbeduerftig — moegliche spaetere Aufspaltung' markiert war. Einstieg; vollstaendiger Doppel-Strang bleibt spaeterer eigener Block.",
+    "delta_stelle": "doppel_grundlagen traegt den BAD-Delta: crossminton-Doppel (feste Angriffs-/Rueckraum-Rollen in einem netzlosen Quadrat, feste Aufschlagreihenfolge, Fussregel) weicht stark von der Badminton-Doppellogik (Front-Hinten-Rotation, Seite-an-Seite-Verteidigung ums Netz) ab.",
+    "ordnungslogik": "Umschalten (Rahmen) -> Punkt aufbauen -> Smash vorbereiten -> Gegner lesen -> Doppel -> engen Satz fuehren."
+  },
+  "bausteine": [
+    {
+      "id": "umschalten",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "spielziel_verstehen"
+      ],
+      "voraussetzungen_lesart": "didaktisches Sinnstiften (stufenuebergreifend): das Umschalten setzt das Grundverstaendnis des Spielziels voraus",
+      "spielziele": [
+        "umschaltmoment_erkennen",
+        "antwort_gegen_angreifer",
+        "antwort_gegen_defensivspieler"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Offensiv-/Defensivtaktik und der Wechsel dazwischen crossminton-eigen (ICO-Lektionen 6 & 7); taktisches Umschalten aus Rueckschlagsport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Angriff und Verteidigung — das Umschalten"
+      },
+      "erklaerteil": {
+        "de": "In der Beginner-Taktik ging es darum, sicher zu spielen und den Gegner zu Fehlern zu zwingen. Jetzt kommt die entscheidende Frage der fortgeschrittenen Taktik dazu: In welcher Rolle bist du gerade — greifst du an oder verteidigst du? Und wann kippt die eine Rolle in die andere?\n\nJeder Ballwechsel bewegt sich zwischen zwei Zuständen. Du bist im Angriff, wenn du den Speeder von oben nach unten spielen kannst und den Gegner unter Druck setzt. Du bist in der Verteidigung, wenn du selbst unter Druck stehst und den Ballwechsel erst einmal am Leben halten musst. Zwischen beiden liegt der wichtigste Moment überhaupt: das Umschalten.\n\nDer Umschaltmoment ist der Augenblick, in dem sich das Blatt wendet — wenn der Gegner einen schwachen Ball spielt und du aus der Verteidigung in den Angriff wechseln kannst, oder wenn dir ein Fehler unterläuft und du plötzlich verteidigen musst. Wer diesen Moment früh erkennt, ist einen Schritt voraus. Wer ihn verpasst, greift zu spät an oder verteidigt zu spät.\n\nDenk an ein Tauziehen. Die meiste Zeit halten beide Seiten die Spannung. Aber es gibt Momente, in denen einer ins Rutschen kommt — und genau dann musst du ziehen, mit aller Kraft und sofort. Wer den Moment verschläft, verschenkt den Vorteil.\n\nDie fortgeschrittene Taktik lebt von diesem Blick: erkennen, in welcher Rolle du bist und wann sie kippt, statt nur den nächsten Ball zu spielen. Die folgenden Bausteine zeigen, wie du im Angriff den Punkt aufbaust, wie du den Umschaltmoment für den Smash nutzt und wie du in der Verteidigung überlebst."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte im nächsten Spiel auf die Rollen: Merkst du, wann du im Angriff bist und wann in der Verteidigung? Versuch, den Moment zu bemerken, in dem es kippt — der schwache Ball des Gegners, den du angreifen könntest, oder der eigene Fehler, der dich in die Defensive bringt. Du musst noch nichts anders machen. Es reicht fürs Erste, dass du beginnst, den Ballwechsel in diesen zwei Rollen und ihrem Umschlagpunkt zu sehen."
+      }
+    },
+    {
+      "id": "punkt_aufbauen",
+      "grafik": [
+        "G-028"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "umschalten",
+        "ueberkopf_clear",
+        "kurzes_spiel_stopp"
+      ],
+      "voraussetzungen_lesart": "gemischt: umschalten (didaktisch, gleiche Stufe); ueberkopf_clear + kurzes_spiel_stopp (motorisch, domaenenuebergreifend auf fortgeschrittene Technik — die Kombination braucht beide Schlaege)",
+      "spielziele": [
+        "umschaltloesung",
+        "laengen_tiefensteuerung",
+        "gegner_muster_lesen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "BAD",
+        "CM"
+      ],
+      "transfer_herkunft_beleg": "Punktkonstruktion ueber Lang-Kurz-Kombination (Clear-Drop) aus Badminton-Singles; Anwendung auf netzloses Feld crossminton-eigen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'spielt jeden Ball gleich, baut nicht auf' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Den Punkt aufbauen — lang und kurz"
+      },
+      "erklaerteil": {
+        "de": "Ein Anfänger reagiert auf jeden Ball einzeln. Ein fortgeschrittener Spieler baut einen Punkt auf — er spielt eine Folge von Schlägen mit einem Plan, an deren Ende eine offene Chance steht. Das wichtigste Werkzeug dafür hast du gerade gelernt: den Wechsel aus langen und kurzen Bällen.\n\nDas Grundmuster ist einfach und wirkungsvoll. Du spielst einen tiefen Clear, der den Gegner weit nach hinten treibt. Er muss zurücklaufen, den Ball hochnehmen, und in dem Moment steht seine Vorderseite offen. Jetzt setzt du den Stopp kurz vor die Zone. Der Gegner, gerade noch hinten, kommt nicht mehr rechtzeitig nach vorn. Lang, dann kurz — und der Punkt ist vorbereitet.\n\nDas Muster funktioniert auch umgekehrt: Ziehst du den Gegner mit einem Stopp nach vorn, steht sein Rückraum offen für den nächsten tiefen Ball. Entscheidend ist, dass du den Gegner mit jedem Schlag ein Stück mehr aus der Balance bringst, statt ihm den Ball bequem in die Mitte zu spielen.\n\nDu bist ein Boxer, der eine Kombination setzt, statt auf den ersten Treffer zu hoffen — ein Schlag öffnet die Deckung, der nächste trifft in die Lücke. Kein einzelner Ball gewinnt den Punkt; die Abfolge tut es.\n\nWichtig ist die Geduld. Der Aufbau braucht mehrere Schläge, und nicht jeder endet mit einem Winner. Oft genügt es, den Gegner so weit zu bewegen, dass er selbst den Fehler macht. Der Aufbau ist die Brücke zwischen sicherem Spiel und aktivem Angriff."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Lang-kurz kombinieren",
+          "ziel": "Den Gegner mit dem Wechsel aus Clear und Stopp bewegen und eine offene Chance herstellen.",
+          "schritte": [
+            "Spiele mit einem Partner: Einer bewegt sich, der andere baut auf.",
+            "Beginne mit einem tiefen Clear, der den Partner nach hinten treibt.",
+            "Setze den nächsten Ball als Stopp kurz vor die Zone.",
+            "Beobachte, ob der Partner rechtzeitig nach vorn kommt — und spiele die Kombination auch umgekehrt (kurz, dann lang).",
+            "Wechsle nach einigen Durchgängen die Rollen."
+          ],
+          "steigerung": "Baue eine dritte Station ein: Clear nach hinten, Stopp nach vorn, und wenn der Partner den Stopp gerade noch erreicht, ziehe wieder lang. Drei Schläge, ein Plan.",
+          "selbstkontrolle": "Bewegst du den Partner tatsächlich aus der Balance, oder spielst du ihm die Bälle bequem erreichbar zu? Der Aufbau wirkt nur, wenn jeder Schlag den Gegner ein Stück weiter aus der zentralen Position zieht.",
+          "abschluss": "Der Punktaufbau ist die Grundfigur des fortgeschrittenen Angriffs. Sitzt der Lang-kurz-Wechsel, kommt der Smash als Abschluss fast von allein."
+        }
+      }
+    },
+    {
+      "id": "smash_vorbereiten",
+      "grafik": [
+        "G-029"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "punkt_aufbauen",
+        "smash"
+      ],
+      "voraussetzungen_lesart": "gemischt: punkt_aufbauen (taktisch, gleiche Stufe); smash (motorisch, domaenenuebergreifend auf fortgeschrittene Technik)",
+      "spielziele": [
+        "antwort_gegen_defensivspieler",
+        "umschaltloesung",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "BAD",
+        "TEN"
+      ],
+      "transfer_herkunft_beleg": "Angriff vorbereiten (Clear erzwingt schwachen Rueckschlag, dann Abschluss), Konstanz statt Einzelschlag: Badminton-Angriffstaktik (Tam).",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'smasht aus schlechter Position / zu frueh' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Den Smash vorbereiten"
+      },
+      "erklaerteil": {
+        "de": "Der Smash ist dein härtester Schlag — aber er gewinnt den Punkt nur, wenn er aus der richtigen Situation kommt. Ein Smash aus schlechter Position bringt dich selbst in Not. Dieser Baustein zeigt, wie du den Moment herstellst, in dem der Smash sitzt.\n\nDer Schlüssel ist der Ball, der dir die Chance öffnet. Ein guter Smash kommt selten aus dem Nichts. Meist geht ihm ein Schlag voraus, der den Gegner zwingt, den Speeder hochzuspielen — ein tiefer Clear, der ihn nach hinten treibt, oder ein Ball, der ihn aus der Balance bringt. Genau dieser hohe, schwache Rückschlag ist deine Einladung zum Smash.\n\nDeshalb gilt: Erkenne den Umschaltmoment. Wenn der Gegner unter Druck einen hohen, kurzen Ball spielt, ist das dein Signal, aus dem Aufbau in den Abschluss zu wechseln. Steht der Ball dagegen zu tief oder zu weit, hältst du lieber und baust weiter auf, statt einen schlechten Smash zu erzwingen.\n\nUnd wie schon bei der Technik: Konstanz schlägt Maximaltempo. Zwei, drei platzierte Smashes hintereinander zermürben die Abwehr mehr als ein einzelner harter, der danebengeht. Nach jedem Smash kehrst du sofort zurück, bereit für den Rückschlag.\n\nDer Smash ist der Nagel, aber der Aufbau ist der Hammerschwung. Ohne den Schwung — den Ball, der den Gegner öffnet — triffst du ins Leere. Wer nur auf den Nagel starrt und wild draufschlägt, verfehlt ihn."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Aus dem Aufbau abschließen",
+          "ziel": "Den Smash aus einer vorbereiteten Situation setzen, nicht erzwingen.",
+          "schritte": [
+            "Spiele mit einem Partner, der dir Bälle zuspielt.",
+            "Beginne mit einem tiefen Clear, der den Partner nach hinten treibt.",
+            "Warte auf seinen Rückschlag: Kommt er hoch und kurz, greife mit dem Smash an. Kommt er tief, baue weiter auf.",
+            "Übe bewusst beide Entscheidungen — abschließen und halten.",
+            "Kehre nach jedem Smash sofort in die zentrale Position zurück."
+          ],
+          "steigerung": "Lass den Partner frei zurückspielen. Trainiere dein Auge dafür, den einen hohen, schwachen Ball unter mehreren zu erkennen und nur den anzugreifen.",
+          "selbstkontrolle": "Smashst du nur aus guten Positionen, oder erzwingst du den Abschluss auch aus schlechten? Ein zurückgehaltener Smash aus schlechter Lage ist eine bessere Entscheidung als ein erzwungener, der dich selbst in die Defensive bringt.",
+          "abschluss": "Der vorbereitete Smash ist der Ertrag des ganzen Aufbaus. Geduld im Aufbau und Entschlossenheit im richtigen Moment gehören zusammen."
+        }
+      }
+    },
+    {
+      "id": "gegner_lesen_muster",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "umschalten",
+        "rueckhand_des_gegners"
+      ],
+      "voraussetzungen_lesart": "didaktisch: baut das Gegner-Lesen aus, das in der Beginner-Taktik mit der Rueckhandschwaeche begann",
+      "spielziele": [
+        "gegner_muster_lesen",
+        "fruehe_flugbahnlesung",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Antizipation, Mustererkennung, frühe Flugbahnlesung: Sportpsychologie/Wahrnehmung; taktische Anwendung aus Rueckschlagsport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'reagiert erst spaet, liest den Gegner nicht' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Gegner lesen und Muster brechen"
+      },
+      "erklaerteil": {
+        "de": "In der Beginner-Taktik hast du eine Schwäche des Gegners kennengelernt: die Rückhand. Jetzt gehst du weiter und liest den ganzen Gegner — seine Gewohnheiten, seine Vorlieben, das, was er unter Druck immer wieder tut.\n\nJeder Spieler hat Muster. Der eine spielt unter Druck fast immer den sicheren Ball in die Mitte. Der andere versucht in der Not den riskanten Winner. Der eine läuft nach seinem Schlag nur langsam zurück. Der andere deckt seine Rückhand so ängstlich, dass seine Vorhandseite offen steht. Wer diese Muster erkennt, weiß den nächsten Ball des Gegners oft, bevor er ihn spielt.\n\nDas Lesen hat zwei Ebenen. Die erste ist die frühe Flugbahnlesung: An der Stellung des Gegners, seiner Ausholbewegung und dem Treffpunkt erkennst du früh, wohin der Ball geht — und startest, bevor er geschlagen ist. Die zweite ist das Mustererkennen über den ganzen Satz: Du merkst dir, was der Gegner in welcher Situation tut, und stellst dich darauf ein.\n\nAber Lesen geht in beide Richtungen. Während du den Gegner liest, liest er dich. Deshalb gehört zum fortgeschrittenen Spiel, die eigenen Muster zu brechen — nicht immer denselben Aufschlag, nicht immer dieselbe Antwort auf denselben Ball. Wer berechenbar ist, wird gelesen.\n\nEin guter Spieler ist wie ein Schachspieler, der zwei Züge vorausdenkt — er sieht das Muster des Gegners und bricht zugleich sein eigenes. Das Spiel wird zum Wettlauf, wer den anderen zuerst durchschaut."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm dir im nächsten Spiel einen Gegner vor und such nach einem einzigen Muster: Was tut er, wenn er unter Druck steht? Wohin spielt er seinen Aufschlag am liebsten? Wie schnell kehrt er zur Mitte zurück? Ein erkanntes Muster reicht, um einen Vorteil zu gewinnen. Und dann die Gegenprobe: Hast du selbst ein Muster, das der Gegner lesen könnte? Beobachte deinen eigenen Aufschlag — kommt er immer gleich?"
+      }
+    },
+    {
+      "id": "doppel_grundlagen",
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "zentrale_position"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): das Doppel setzt das Verstaendnis von Position und Feldkontrolle voraus",
+      "spielziele": [
+        "doppel_spezifische_loesungen"
+      ],
+      "spielziele_hinweis": "ERSTE Aktivierung des Faktors doppel_spezifische_loesungen (Bereich 6, war beobachtungsbeduerftig markiert).",
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Doppel-Struktur (Angriffs-/Rueckraumspieler in einem Quadrat, Aufschlagreihenfolge A1-B1-A2-B2, Fussregel) crossminton-eigen belegt (ICO-Regeln, DCV-Spielregeln 6.4/6.5); Doppel-Koordination allgemein aus Badminton.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'beide Spieler laufen zum selben Ball / keine Rollenklarheit' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Doppel — Grundlagen"
+      },
+      "erklaerteil": {
+        "de": "Das Doppel ist ein eigenes Spiel. Zwei Spieler teilen sich ein Quadrat, und der ganze Reiz liegt darin, wie ihr euch die Fläche und die Aufgaben teilt. Wer das Doppel wie ein Einzel mit zwei Leuten spielt, steht sich gegenseitig im Weg.\n\nDie Grundstruktur ist klar geregelt. Ihr teilt euch in einen Angriffsspieler und einen Rückraumspieler. Der Rückraumspieler steht hinten und deckt die tiefen Bälle, der Angriffsspieler steht vorn und setzt die kurzen, harten Schläge. Eine feste Regel begrenzt eure Stellung: Der Rückraumspieler darf im Treffmoment seinen hinteren Fuß nicht vor den seines Partners setzen — sonst geht der Punkt verloren. Diese Regel hält die Rollen sauber getrennt.\n\nBesonders ist die Aufschlagordnung. Der Aufschläger ist immer der Rückraumspieler, und das Aufschlagrecht wandert in einer festen Reihenfolge durch alle vier Spieler: von einem Spieler der einen Partei zum Angreifer der anderen, dann zu den jeweiligen Partnern. Mit jedem Wechsel des Aufschlagrechts können sich die Rollen neu ordnen. Nach dem Aufschlag dürft ihr euch frei bewegen — aber die gedachte Aufteilung in vorn und hinten bleibt euer Gerüst.\n\nDas Wichtigste im Doppel ist die Verständigung. Wer nimmt den Ball in der Mitte? Wer deckt welche Ecke? Ein kurzer Ruf, ein abgesprochenes Zeichen — ohne Kommunikation laufen beide zum selben Speeder oder keiner.\n\nEin gutes Doppel ist wie zwei Türsteher an einer breiten Tür. Jeder deckt seine Seite, sie reden miteinander, und in der Mitte ist vorher klar, wer zupackt. Zwei, die sich nicht abstimmen, lassen genau in der Mitte die Lücke."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Rollen und Verständigung",
+          "ziel": "Als Paar die Angriffs-/Rückraum-Aufteilung halten und die Mitte klären.",
+          "schritte": [
+            "Stellt euch als Paar auf: einer als Angriffsspieler vorn, einer als Rückraumspieler hinten.",
+            "Lasst euch Bälle in verschiedene Bereiche zuspielen und übt, wer welchen Ball nimmt.",
+            "Klärt vorab per Absprache, wer die Bälle in der Mitte nimmt.",
+            "Ruft bei jedem Mittelball kurz, wer ihn spielt.",
+            "Wechselt nach einigen Durchgängen die Rollen und übt auch den Rollenwechsel beim Aufschlagwechsel."
+          ],
+          "selbstkontrolle": "Ist immer klar, wer welchen Ball nimmt — besonders in der Mitte? Bleibt die Aufteilung in vorn und hinten erhalten, oder steht ihr euch im Weg? Ein Doppel funktioniert über Rollenklarheit und Rufen, nicht über zwei Einzelspieler nebeneinander.",
+          "abschluss": "Dies sind die Grundlagen. Das Doppel hat eine eigene, tiefe Taktik — hier legst du das Fundament: klare Rollen und ständige Verständigung."
+        }
+      }
+    },
+    {
+      "id": "engen_satz_fuehren",
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "umschalten",
+        "fehler_vermeiden"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): die Satzfuehrung baut auf der Fehler-vermeiden-Einsicht der Beginner-Taktik auf",
+      "spielziele": [
+        "konstanz_unter_wiederholung",
+        "antwort_gegen_defensivspieler",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "15:15-Zwei-Punkte-Regel und Aufschlagwechsel-nach-jedem-Punkt crossminton-eigen (ICO-Regeln); Endspiel-/Fuehrungsmanagement aus Rueckschlagsport-Taktik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'wird bei Fuehrung/Enge riskanter statt sicherer' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Den engen Satz führen"
+      },
+      "erklaerteil": {
+        "de": "Ein Satz wird selten gleichmäßig entschieden. Es gibt Momente, die mehr zählen als andere — eine knappe Führung, ein Rückstand, und vor allem das Ende eines engen Satzes. Wie du diese Momente taktisch führst, entscheidet oft das ganze Spiel. Dies ist die taktische Seite; die mentale Ruhe dazu findest du im Mentalbereich.\n\nCrossminton hat eine Regel, die das Ende besonders zuspitzt: Ab 15:15 brauchst du zwei Punkte Vorsprung, und das Aufschlagrecht wechselt nach jedem Punkt. Jeder einzelne Ballwechsel wiegt jetzt schwer, und niemand kann sich mit ein paar Aufschlägen in Folge absetzen. Der enge Satz wird zur Nervenprobe — und zur taktischen Prüfung.\n\nDie wichtigste taktische Entscheidung im engen Moment ist die Wahl der Sicherheit. Genau jetzt, wo jeder Punkt zählt, ist die Versuchung groß, den spektakulären Winner zu suchen. Das ist meist der Fehler. In der Enge gewinnt der, der den Gegner den Fehler machen lässt — sichere Bälle, hohe Ballwechsel-Beteiligung, kein unnötiges Risiko. Du drehst die Verantwortung für den nächsten Fehler auf die andere Seite.\n\nEine knappe Führung verwaltest du ähnlich: Du wirst nicht passiv, aber du wählst die sicheren Optionen und zwingst den Gegner, das Risiko zu suchen. Wer eine Führung mit riskanten Schlägen verspielt, hat sie selbst weggegeben.\n\nDer enge Satz ist wie das Tragen einer vollen Schale die letzten Schritte zum Tisch. Jetzt ist nicht der Moment für große Gesten — jetzt zählt der ruhige, sichere Schritt. Wer am Ende noch hektisch wird, verschüttet alles kurz vor dem Ziel."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an einen engen Satz zurück, den du verloren hast: Bist du am Ende riskanter geworden oder sicherer? Viele verlieren die Enge, weil sie genau dann den spektakulären Ball suchen. Nimm dir für den nächsten engen Satz eine einzige taktische Regel vor: Ab 15:15 spiele ich den sicheren Ball und lasse den Gegner das Risiko tragen. Beobachte, ob sich das Ergebnis ändert."
+      }
+    }
   ],
-  "stand": "Erstausbau-Erweiterung",
-  "dateiname_konvention": "bausteine.fortgeschritten-taktik.json",
-  "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine neue Erweiterung.",
-  "voraussetzungsvernetzung": "Dichteste bisher: verweist stufenuebergreifend auf Beginner-Taktik UND domaenenuebergreifend auf die fortgeschrittene Technik (punkt_aufbauen -> ueberkopf_clear + kurzes_spiel_stopp). Alle weiche Kanten.",
-  "faktor_erstaktivierung": "doppel_grundlagen aktiviert erstmals den Spielziel-Faktor 'doppel_spezifische_loesungen' (Bereich 6), der als 'beobachtungsbeduerftig — moegliche spaetere Aufspaltung' markiert war. Einstieg; vollstaendiger Doppel-Strang bleibt spaeterer eigener Block.",
-  "delta_stelle": "doppel_grundlagen traegt den BAD-Delta: crossminton-Doppel (feste Angriffs-/Rueckraum-Rollen in einem netzlosen Quadrat, feste Aufschlagreihenfolge, Fussregel) weicht stark von der Badminton-Doppellogik (Front-Hinten-Rotation, Seite-an-Seite-Verteidigung ums Netz) ab.",
-  "ordnungslogik": "Umschalten (Rahmen) -> Punkt aufbauen -> Smash vorbereiten -> Gegner lesen -> Doppel -> engen Satz fuehren."
- },
- "bausteine": [
-  {
-   "id": "umschalten",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "spielziel_verstehen"
-   ],
-   "voraussetzungen_lesart": "didaktisches Sinnstiften (stufenuebergreifend): das Umschalten setzt das Grundverstaendnis des Spielziels voraus",
-   "spielziele": [
-    "umschaltmoment_erkennen",
-    "antwort_gegen_angreifer",
-    "antwort_gegen_defensivspieler"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "CM",
-    "BAD"
-   ],
-   "transfer_herkunft_beleg": "Offensiv-/Defensivtaktik und der Wechsel dazwischen crossminton-eigen (ICO-Lektionen 6 & 7); taktisches Umschalten aus Rueckschlagsport.",
-   "untergrund": "halle",
-   "witterung": [],
-   "anzeigetitel": {
-    "de": "Angriff und Verteidigung — das Umschalten"
-   },
-   "erklaerteil": {
-    "de": "In der Beginner-Taktik ging es darum, sicher zu spielen und den Gegner zu Fehlern zu zwingen. Jetzt kommt die entscheidende Frage der fortgeschrittenen Taktik dazu: In welcher Rolle bist du gerade — greifst du an oder verteidigst du? Und wann kippt die eine Rolle in die andere?\n\nJeder Ballwechsel bewegt sich zwischen zwei Zuständen. Du bist im Angriff, wenn du den Speeder von oben nach unten spielen kannst und den Gegner unter Druck setzt. Du bist in der Verteidigung, wenn du selbst unter Druck stehst und den Ballwechsel erst einmal am Leben halten musst. Zwischen beiden liegt der wichtigste Moment überhaupt: das Umschalten.\n\nDer Umschaltmoment ist der Augenblick, in dem sich das Blatt wendet — wenn der Gegner einen schwachen Ball spielt und du aus der Verteidigung in den Angriff wechseln kannst, oder wenn dir ein Fehler unterläuft und du plötzlich verteidigen musst. Wer diesen Moment früh erkennt, ist einen Schritt voraus. Wer ihn verpasst, greift zu spät an oder verteidigt zu spät.\n\nDenk an ein Tauziehen. Die meiste Zeit halten beide Seiten die Spannung. Aber es gibt Momente, in denen einer ins Rutschen kommt — und genau dann musst du ziehen, mit aller Kraft und sofort. Wer den Moment verschläft, verschenkt den Vorteil.\n\nDie fortgeschrittene Taktik lebt von diesem Blick: erkennen, in welcher Rolle du bist und wann sie kippt, statt nur den nächsten Ball zu spielen. Die folgenden Bausteine zeigen, wie du im Angriff den Punkt aufbaust, wie du den Umschaltmoment für den Smash nutzt und wie du in der Verteidigung überlebst."
-   },
-   "reflexionsaufgabe": {
-    "de": "Achte im nächsten Spiel auf die Rollen: Merkst du, wann du im Angriff bist und wann in der Verteidigung? Versuch, den Moment zu bemerken, in dem es kippt — der schwache Ball des Gegners, den du angreifen könntest, oder der eigene Fehler, der dich in die Defensive bringt. Du musst noch nichts anders machen. Es reicht fürs Erste, dass du beginnst, den Ballwechsel in diesen zwei Rollen und ihrem Umschlagpunkt zu sehen."
-   }
-  },
-  {
-   "id": "punkt_aufbauen",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "umschalten",
-    "ueberkopf_clear",
-    "kurzes_spiel_stopp"
-   ],
-   "voraussetzungen_lesart": "gemischt: umschalten (didaktisch, gleiche Stufe); ueberkopf_clear + kurzes_spiel_stopp (motorisch, domaenenuebergreifend auf fortgeschrittene Technik — die Kombination braucht beide Schlaege)",
-   "spielziele": [
-    "umschaltloesung",
-    "laengen_tiefensteuerung",
-    "gegner_muster_lesen"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "BAD",
-    "CM"
-   ],
-   "transfer_herkunft_beleg": "Punktkonstruktion ueber Lang-Kurz-Kombination (Clear-Drop) aus Badminton-Singles; Anwendung auf netzloses Feld crossminton-eigen.",
-   "untergrund": "halle",
-   "witterung": [],
-   "trainer_layer_offen": "Fehlerbild 'spielt jeden Ball gleich, baut nicht auf' + Korrekturansage",
-   "anzeigetitel": {
-    "de": "Den Punkt aufbauen — lang und kurz"
-   },
-   "erklaerteil": {
-    "de": "Ein Anfänger reagiert auf jeden Ball einzeln. Ein fortgeschrittener Spieler baut einen Punkt auf — er spielt eine Folge von Schlägen mit einem Plan, an deren Ende eine offene Chance steht. Das wichtigste Werkzeug dafür hast du gerade gelernt: den Wechsel aus langen und kurzen Bällen.\n\nDas Grundmuster ist einfach und wirkungsvoll. Du spielst einen tiefen Clear, der den Gegner weit nach hinten treibt. Er muss zurücklaufen, den Ball hochnehmen, und in dem Moment steht seine Vorderseite offen. Jetzt setzt du den Stopp kurz vor die Zone. Der Gegner, gerade noch hinten, kommt nicht mehr rechtzeitig nach vorn. Lang, dann kurz — und der Punkt ist vorbereitet.\n\nDas Muster funktioniert auch umgekehrt: Ziehst du den Gegner mit einem Stopp nach vorn, steht sein Rückraum offen für den nächsten tiefen Ball. Entscheidend ist, dass du den Gegner mit jedem Schlag ein Stück mehr aus der Balance bringst, statt ihm den Ball bequem in die Mitte zu spielen.\n\nDu bist ein Boxer, der eine Kombination setzt, statt auf den ersten Treffer zu hoffen — ein Schlag öffnet die Deckung, der nächste trifft in die Lücke. Kein einzelner Ball gewinnt den Punkt; die Abfolge tut es.\n\nWichtig ist die Geduld. Der Aufbau braucht mehrere Schläge, und nicht jeder endet mit einem Winner. Oft genügt es, den Gegner so weit zu bewegen, dass er selbst den Fehler macht. Der Aufbau ist die Brücke zwischen sicherem Spiel und aktivem Angriff."
-   },
-   "uebungsteil": {
-    "de": {
-     "titel": "Lang-kurz kombinieren",
-     "ziel": "Den Gegner mit dem Wechsel aus Clear und Stopp bewegen und eine offene Chance herstellen.",
-     "schritte": [
-      "Spiele mit einem Partner: Einer bewegt sich, der andere baut auf.",
-      "Beginne mit einem tiefen Clear, der den Partner nach hinten treibt.",
-      "Setze den nächsten Ball als Stopp kurz vor die Zone.",
-      "Beobachte, ob der Partner rechtzeitig nach vorn kommt — und spiele die Kombination auch umgekehrt (kurz, dann lang).",
-      "Wechsle nach einigen Durchgängen die Rollen."
-     ],
-     "steigerung": "Baue eine dritte Station ein: Clear nach hinten, Stopp nach vorn, und wenn der Partner den Stopp gerade noch erreicht, ziehe wieder lang. Drei Schläge, ein Plan.",
-     "selbstkontrolle": "Bewegst du den Partner tatsächlich aus der Balance, oder spielst du ihm die Bälle bequem erreichbar zu? Der Aufbau wirkt nur, wenn jeder Schlag den Gegner ein Stück weiter aus der zentralen Position zieht.",
-     "abschluss": "Der Punktaufbau ist die Grundfigur des fortgeschrittenen Angriffs. Sitzt der Lang-kurz-Wechsel, kommt der Smash als Abschluss fast von allein."
+  "delta_bausteine": [
+    {
+      "id": "doppel_grundlagen_delta_bad",
+      "typ": "delta",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "basis_baustein": "doppel_grundlagen",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": [
+        "doppel_grundlagen"
+      ],
+      "spielziele": [
+        "doppel_spezifische_loesungen"
+      ],
+      "transfer_herkunft": [
+        "BAD"
+      ],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {
+        "de": "Doppel — für Umsteiger aus dem Badminton"
+      },
+      "erklaerteil": {
+        "de": "Doppel kennst du — aber das Badminton-Doppel und das Crossminton-Doppel sind trotz gleicher Grundidee zwei verschiedene Spiele. Deine eingespielten Doppel-Reflexe passen hier nur teilweise.\n\nIm Badminton rotiert ihr ständig. Im Angriff steht ihr hintereinander (vorn und hinten), in der Verteidigung nebeneinander (Seite an Seite), und ihr wechselt fließend zwischen beiden Formationen — alles um das Netz herum organisiert. Diese ständige Rotation sitzt bei dir tief.\n\nIm Crossminton gibt es diese fließende Rotation nicht. Die Rollen sind fest: ein Angriffsspieler vorn, ein Rückraumspieler hinten. Sie sind an das Aufschlagrecht gebunden, statt frei im Ballwechsel zu wechseln — mit jedem Aufschlagwechsel ordnen sie sich neu. Dazu kommt eine Regel, die es im Badminton nicht gibt: Der Rückraumspieler darf im Treffmoment seinen hinteren Fuß nicht vor den seines Partners setzen. Und es gibt kein Netz, an dem sich eure Formationen ausrichten — nur das gemeinsame Quadrat.\n\nStell deine Doppel-Vorstellung also um: weg von der fließenden Netz-Rotation, hin zur festen Rollenteilung im Quadrat, die sich mit dem Aufschlag ordnet. Auch die Aufschlagreihenfolge ist fest vorgegeben (A1 zu B1 zu A2 zu B2) und will gelernt sein.\n\nEin kleiner Test: Ertappst du dich dabei, mit deinem Partner reflexartig in die Seite-an-Seite-Verteidigung oder die Front-Hinten-Rotation zu kippen? Dann trägt dich noch das Badminton-Doppel. Ziel ist die feste, aufschlaggebundene Rollenteilung im netzlosen Quadrat."
+      }
     }
-   }
-  },
-  {
-   "id": "smash_vorbereiten",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "punkt_aufbauen",
-    "smash"
-   ],
-   "voraussetzungen_lesart": "gemischt: punkt_aufbauen (taktisch, gleiche Stufe); smash (motorisch, domaenenuebergreifend auf fortgeschrittene Technik)",
-   "spielziele": [
-    "antwort_gegen_defensivspieler",
-    "umschaltloesung",
-    "umschaltmoment_erkennen"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "BAD",
-    "TEN"
-   ],
-   "transfer_herkunft_beleg": "Angriff vorbereiten (Clear erzwingt schwachen Rueckschlag, dann Abschluss), Konstanz statt Einzelschlag: Badminton-Angriffstaktik (Tam).",
-   "untergrund": "halle",
-   "witterung": [],
-   "trainer_layer_offen": "Fehlerbild 'smasht aus schlechter Position / zu frueh' + Korrekturansage",
-   "anzeigetitel": {
-    "de": "Den Smash vorbereiten"
-   },
-   "erklaerteil": {
-    "de": "Der Smash ist dein härtester Schlag — aber er gewinnt den Punkt nur, wenn er aus der richtigen Situation kommt. Ein Smash aus schlechter Position bringt dich selbst in Not. Dieser Baustein zeigt, wie du den Moment herstellst, in dem der Smash sitzt.\n\nDer Schlüssel ist der Ball, der dir die Chance öffnet. Ein guter Smash kommt selten aus dem Nichts. Meist geht ihm ein Schlag voraus, der den Gegner zwingt, den Speeder hochzuspielen — ein tiefer Clear, der ihn nach hinten treibt, oder ein Ball, der ihn aus der Balance bringt. Genau dieser hohe, schwache Rückschlag ist deine Einladung zum Smash.\n\nDeshalb gilt: Erkenne den Umschaltmoment. Wenn der Gegner unter Druck einen hohen, kurzen Ball spielt, ist das dein Signal, aus dem Aufbau in den Abschluss zu wechseln. Steht der Ball dagegen zu tief oder zu weit, hältst du lieber und baust weiter auf, statt einen schlechten Smash zu erzwingen.\n\nUnd wie schon bei der Technik: Konstanz schlägt Maximaltempo. Zwei, drei platzierte Smashes hintereinander zermürben die Abwehr mehr als ein einzelner harter, der danebengeht. Nach jedem Smash kehrst du sofort zurück, bereit für den Rückschlag.\n\nDer Smash ist der Nagel, aber der Aufbau ist der Hammerschwung. Ohne den Schwung — den Ball, der den Gegner öffnet — triffst du ins Leere. Wer nur auf den Nagel starrt und wild draufschlägt, verfehlt ihn."
-   },
-   "uebungsteil": {
-    "de": {
-     "titel": "Aus dem Aufbau abschließen",
-     "ziel": "Den Smash aus einer vorbereiteten Situation setzen, nicht erzwingen.",
-     "schritte": [
-      "Spiele mit einem Partner, der dir Bälle zuspielt.",
-      "Beginne mit einem tiefen Clear, der den Partner nach hinten treibt.",
-      "Warte auf seinen Rückschlag: Kommt er hoch und kurz, greife mit dem Smash an. Kommt er tief, baue weiter auf.",
-      "Übe bewusst beide Entscheidungen — abschließen und halten.",
-      "Kehre nach jedem Smash sofort in die zentrale Position zurück."
-     ],
-     "steigerung": "Lass den Partner frei zurückspielen. Trainiere dein Auge dafür, den einen hohen, schwachen Ball unter mehreren zu erkennen und nur den anzugreifen.",
-     "selbstkontrolle": "Smashst du nur aus guten Positionen, oder erzwingst du den Abschluss auch aus schlechten? Ein zurückgehaltener Smash aus schlechter Lage ist eine bessere Entscheidung als ein erzwungener, der dich selbst in die Defensive bringt.",
-     "abschluss": "Der vorbereitete Smash ist der Ertrag des ganzen Aufbaus. Geduld im Aufbau und Entschlossenheit im richtigen Moment gehören zusammen."
-    }
-   }
-  },
-  {
-   "id": "gegner_lesen_muster",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "umschalten",
-    "rueckhand_des_gegners"
-   ],
-   "voraussetzungen_lesart": "didaktisch: baut das Gegner-Lesen aus, das in der Beginner-Taktik mit der Rueckhandschwaeche begann",
-   "spielziele": [
-    "gegner_muster_lesen",
-    "fruehe_flugbahnlesung",
-    "umschaltmoment_erkennen"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "SP",
-    "BAD"
-   ],
-   "transfer_herkunft_beleg": "Antizipation, Mustererkennung, frühe Flugbahnlesung: Sportpsychologie/Wahrnehmung; taktische Anwendung aus Rueckschlagsport.",
-   "untergrund": "halle",
-   "witterung": [],
-   "trainer_layer_offen": "Fehlerbild 'reagiert erst spaet, liest den Gegner nicht' + Korrekturansage",
-   "anzeigetitel": {
-    "de": "Gegner lesen und Muster brechen"
-   },
-   "erklaerteil": {
-    "de": "In der Beginner-Taktik hast du eine Schwäche des Gegners kennengelernt: die Rückhand. Jetzt gehst du weiter und liest den ganzen Gegner — seine Gewohnheiten, seine Vorlieben, das, was er unter Druck immer wieder tut.\n\nJeder Spieler hat Muster. Der eine spielt unter Druck fast immer den sicheren Ball in die Mitte. Der andere versucht in der Not den riskanten Winner. Der eine läuft nach seinem Schlag nur langsam zurück. Der andere deckt seine Rückhand so ängstlich, dass seine Vorhandseite offen steht. Wer diese Muster erkennt, weiß den nächsten Ball des Gegners oft, bevor er ihn spielt.\n\nDas Lesen hat zwei Ebenen. Die erste ist die frühe Flugbahnlesung: An der Stellung des Gegners, seiner Ausholbewegung und dem Treffpunkt erkennst du früh, wohin der Ball geht — und startest, bevor er geschlagen ist. Die zweite ist das Mustererkennen über den ganzen Satz: Du merkst dir, was der Gegner in welcher Situation tut, und stellst dich darauf ein.\n\nAber Lesen geht in beide Richtungen. Während du den Gegner liest, liest er dich. Deshalb gehört zum fortgeschrittenen Spiel, die eigenen Muster zu brechen — nicht immer denselben Aufschlag, nicht immer dieselbe Antwort auf denselben Ball. Wer berechenbar ist, wird gelesen.\n\nEin guter Spieler ist wie ein Schachspieler, der zwei Züge vorausdenkt — er sieht das Muster des Gegners und bricht zugleich sein eigenes. Das Spiel wird zum Wettlauf, wer den anderen zuerst durchschaut."
-   },
-   "reflexionsaufgabe": {
-    "de": "Nimm dir im nächsten Spiel einen Gegner vor und such nach einem einzigen Muster: Was tut er, wenn er unter Druck steht? Wohin spielt er seinen Aufschlag am liebsten? Wie schnell kehrt er zur Mitte zurück? Ein erkanntes Muster reicht, um einen Vorteil zu gewinnen. Und dann die Gegenprobe: Hast du selbst ein Muster, das der Gegner lesen könnte? Beobachte deinen eigenen Aufschlag — kommt er immer gleich?"
-   }
-  },
-  {
-   "id": "doppel_grundlagen",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "zentrale_position"
-   ],
-   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): das Doppel setzt das Verstaendnis von Position und Feldkontrolle voraus",
-   "spielziele": [
-    "doppel_spezifische_loesungen"
-   ],
-   "spielziele_hinweis": "ERSTE Aktivierung des Faktors doppel_spezifische_loesungen (Bereich 6, war beobachtungsbeduerftig markiert).",
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "CM",
-    "BAD"
-   ],
-   "transfer_herkunft_beleg": "Doppel-Struktur (Angriffs-/Rueckraumspieler in einem Quadrat, Aufschlagreihenfolge A1-B1-A2-B2, Fussregel) crossminton-eigen belegt (ICO-Regeln, DCV-Spielregeln 6.4/6.5); Doppel-Koordination allgemein aus Badminton.",
-   "untergrund": "halle",
-   "witterung": [],
-   "trainer_layer_offen": "Fehlerbild 'beide Spieler laufen zum selben Ball / keine Rollenklarheit' + Korrekturansage",
-   "anzeigetitel": {
-    "de": "Doppel — Grundlagen"
-   },
-   "erklaerteil": {
-    "de": "Das Doppel ist ein eigenes Spiel. Zwei Spieler teilen sich ein Quadrat, und der ganze Reiz liegt darin, wie ihr euch die Fläche und die Aufgaben teilt. Wer das Doppel wie ein Einzel mit zwei Leuten spielt, steht sich gegenseitig im Weg.\n\nDie Grundstruktur ist klar geregelt. Ihr teilt euch in einen Angriffsspieler und einen Rückraumspieler. Der Rückraumspieler steht hinten und deckt die tiefen Bälle, der Angriffsspieler steht vorn und setzt die kurzen, harten Schläge. Eine feste Regel begrenzt eure Stellung: Der Rückraumspieler darf im Treffmoment seinen hinteren Fuß nicht vor den seines Partners setzen — sonst geht der Punkt verloren. Diese Regel hält die Rollen sauber getrennt.\n\nBesonders ist die Aufschlagordnung. Der Aufschläger ist immer der Rückraumspieler, und das Aufschlagrecht wandert in einer festen Reihenfolge durch alle vier Spieler: von einem Spieler der einen Partei zum Angreifer der anderen, dann zu den jeweiligen Partnern. Mit jedem Wechsel des Aufschlagrechts können sich die Rollen neu ordnen. Nach dem Aufschlag dürft ihr euch frei bewegen — aber die gedachte Aufteilung in vorn und hinten bleibt euer Gerüst.\n\nDas Wichtigste im Doppel ist die Verständigung. Wer nimmt den Ball in der Mitte? Wer deckt welche Ecke? Ein kurzer Ruf, ein abgesprochenes Zeichen — ohne Kommunikation laufen beide zum selben Speeder oder keiner.\n\nEin gutes Doppel ist wie zwei Türsteher an einer breiten Tür. Jeder deckt seine Seite, sie reden miteinander, und in der Mitte ist vorher klar, wer zupackt. Zwei, die sich nicht abstimmen, lassen genau in der Mitte die Lücke."
-   },
-   "uebungsteil": {
-    "de": {
-     "titel": "Rollen und Verständigung",
-     "ziel": "Als Paar die Angriffs-/Rückraum-Aufteilung halten und die Mitte klären.",
-     "schritte": [
-      "Stellt euch als Paar auf: einer als Angriffsspieler vorn, einer als Rückraumspieler hinten.",
-      "Lasst euch Bälle in verschiedene Bereiche zuspielen und übt, wer welchen Ball nimmt.",
-      "Klärt vorab per Absprache, wer die Bälle in der Mitte nimmt.",
-      "Ruft bei jedem Mittelball kurz, wer ihn spielt.",
-      "Wechselt nach einigen Durchgängen die Rollen und übt auch den Rollenwechsel beim Aufschlagwechsel."
-     ],
-     "selbstkontrolle": "Ist immer klar, wer welchen Ball nimmt — besonders in der Mitte? Bleibt die Aufteilung in vorn und hinten erhalten, oder steht ihr euch im Weg? Ein Doppel funktioniert über Rollenklarheit und Rufen, nicht über zwei Einzelspieler nebeneinander.",
-     "abschluss": "Dies sind die Grundlagen. Das Doppel hat eine eigene, tiefe Taktik — hier legst du das Fundament: klare Rollen und ständige Verständigung."
-    }
-   }
-  },
-  {
-   "id": "engen_satz_fuehren",
-   "typ": "micro",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "voraussetzungen": [
-    "umschalten",
-    "fehler_vermeiden"
-   ],
-   "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): die Satzfuehrung baut auf der Fehler-vermeiden-Einsicht der Beginner-Taktik auf",
-   "spielziele": [
-    "konstanz_unter_wiederholung",
-    "antwort_gegen_defensivspieler",
-    "umschaltmoment_erkennen"
-   ],
-   "vermittlungsziele": [],
-   "transfer_herkunft": [
-    "CM",
-    "BAD"
-   ],
-   "transfer_herkunft_beleg": "15:15-Zwei-Punkte-Regel und Aufschlagwechsel-nach-jedem-Punkt crossminton-eigen (ICO-Regeln); Endspiel-/Fuehrungsmanagement aus Rueckschlagsport-Taktik.",
-   "untergrund": "halle",
-   "witterung": [],
-   "trainer_layer_offen": "Fehlerbild 'wird bei Fuehrung/Enge riskanter statt sicherer' + Korrekturansage",
-   "anzeigetitel": {
-    "de": "Den engen Satz führen"
-   },
-   "erklaerteil": {
-    "de": "Ein Satz wird selten gleichmäßig entschieden. Es gibt Momente, die mehr zählen als andere — eine knappe Führung, ein Rückstand, und vor allem das Ende eines engen Satzes. Wie du diese Momente taktisch führst, entscheidet oft das ganze Spiel. Dies ist die taktische Seite; die mentale Ruhe dazu findest du im Mentalbereich.\n\nCrossminton hat eine Regel, die das Ende besonders zuspitzt: Ab 15:15 brauchst du zwei Punkte Vorsprung, und das Aufschlagrecht wechselt nach jedem Punkt. Jeder einzelne Ballwechsel wiegt jetzt schwer, und niemand kann sich mit ein paar Aufschlägen in Folge absetzen. Der enge Satz wird zur Nervenprobe — und zur taktischen Prüfung.\n\nDie wichtigste taktische Entscheidung im engen Moment ist die Wahl der Sicherheit. Genau jetzt, wo jeder Punkt zählt, ist die Versuchung groß, den spektakulären Winner zu suchen. Das ist meist der Fehler. In der Enge gewinnt der, der den Gegner den Fehler machen lässt — sichere Bälle, hohe Ballwechsel-Beteiligung, kein unnötiges Risiko. Du drehst die Verantwortung für den nächsten Fehler auf die andere Seite.\n\nEine knappe Führung verwaltest du ähnlich: Du wirst nicht passiv, aber du wählst die sicheren Optionen und zwingst den Gegner, das Risiko zu suchen. Wer eine Führung mit riskanten Schlägen verspielt, hat sie selbst weggegeben.\n\nDer enge Satz ist wie das Tragen einer vollen Schale die letzten Schritte zum Tisch. Jetzt ist nicht der Moment für große Gesten — jetzt zählt der ruhige, sichere Schritt. Wer am Ende noch hektisch wird, verschüttet alles kurz vor dem Ziel."
-   },
-   "reflexionsaufgabe": {
-    "de": "Denk an einen engen Satz zurück, den du verloren hast: Bist du am Ende riskanter geworden oder sicherer? Viele verlieren die Enge, weil sie genau dann den spektakulären Ball suchen. Nimm dir für den nächsten engen Satz eine einzige taktische Regel vor: Ab 15:15 spiele ich den sicheren Ball und lasse den Gegner das Risiko tragen. Beobachte, ob sich das Ergebnis ändert."
-   }
-  }
- ],
- "delta_bausteine": [
-  {
-   "id": "doppel_grundlagen_delta_bad",
-   "typ": "delta",
-   "domaene": "taktik",
-   "kompetenzstufe": [
-    "fortgeschritten"
-   ],
-   "basis_baustein": "doppel_grundlagen",
-   "ersetzt_bei_herkunft": "BAD",
-   "voraussetzungen": [
-    "doppel_grundlagen"
-   ],
-   "spielziele": [
-    "doppel_spezifische_loesungen"
-   ],
-   "transfer_herkunft": [
-    "BAD"
-   ],
-   "untergrund": "halle",
-   "witterung": [],
-   "eigener_uebungsteil": false,
-   "anzeigetitel": {
-    "de": "Doppel — für Umsteiger aus dem Badminton"
-   },
-   "erklaerteil": {
-    "de": "Doppel kennst du — aber das Badminton-Doppel und das Crossminton-Doppel sind trotz gleicher Grundidee zwei verschiedene Spiele. Deine eingespielten Doppel-Reflexe passen hier nur teilweise.\n\nIm Badminton rotiert ihr ständig. Im Angriff steht ihr hintereinander (vorn und hinten), in der Verteidigung nebeneinander (Seite an Seite), und ihr wechselt fließend zwischen beiden Formationen — alles um das Netz herum organisiert. Diese ständige Rotation sitzt bei dir tief.\n\nIm Crossminton gibt es diese fließende Rotation nicht. Die Rollen sind fest: ein Angriffsspieler vorn, ein Rückraumspieler hinten. Sie sind an das Aufschlagrecht gebunden, statt frei im Ballwechsel zu wechseln — mit jedem Aufschlagwechsel ordnen sie sich neu. Dazu kommt eine Regel, die es im Badminton nicht gibt: Der Rückraumspieler darf im Treffmoment seinen hinteren Fuß nicht vor den seines Partners setzen. Und es gibt kein Netz, an dem sich eure Formationen ausrichten — nur das gemeinsame Quadrat.\n\nStell deine Doppel-Vorstellung also um: weg von der fließenden Netz-Rotation, hin zur festen Rollenteilung im Quadrat, die sich mit dem Aufschlag ordnet. Auch die Aufschlagreihenfolge ist fest vorgegeben (A1 zu B1 zu A2 zu B2) und will gelernt sein.\n\nEin kleiner Test: Ertappst du dich dabei, mit deinem Partner reflexartig in die Seite-an-Seite-Verteidigung oder die Front-Hinten-Rotation zu kippen? Dann trägt dich noch das Badminton-Doppel. Ziel ist die feste, aufschlaggebundene Rollenteilung im netzlosen Quadrat."
-   }
-  }
- ]
+  ]
 }
