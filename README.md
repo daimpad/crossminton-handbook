@@ -26,7 +26,7 @@ Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik
 ## Das Angebot
 
 - **Vier Lernpfade** — Technik, Taktik, Mentales und Athletik/Kondition, jeweils über drei Könnensstufen: Beginner, Fortgeschritten und Experte.
-- **Herkunftsbewusstes Onboarding** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede als gezielte Hinweise, genau dort, wo eine mitgebrachte Gewohnheit kollidiert.
+- **Onboarding** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede als gezielte Hinweise, genau dort, wo eine mitgebrachte Gewohnheit kollidiert.
 - **Doppel spielen** — vom ersten Zusammenspiel bis zum eingespielten Paar als System.
 - **Outdoor** — Wind lesen und nutzen, Sonne, Nässe, Hitze und verschiedene Böden.
 - **Trainingseinheiten** — kuratierte Einheiten in drei Phasen, die die Übungsteile zu sinnvollen Sessions verbinden.
