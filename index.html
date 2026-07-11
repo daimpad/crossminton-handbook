@@ -9,6 +9,31 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
   <link rel="stylesheet" href="css/schriften.css">
   <link rel="stylesheet" href="css/app.css">
+
+  <!-- Modul-Graph vorab laden: Ohne diese Hinweise entdeckt der Browser die
+       ES-Module erst nacheinander im Import-Wasserfall (app.js → Ansichten →
+       Engine → Daten). Fällt dabei EINE Anfrage aus (kurzer CDN-/Netz-Aussetzer,
+       in Firefox häufiger sichtbar), lädt die App gar nicht. modulepreload holt
+       den ganzen Graphen sofort parallel und macht das Laden robust. -->
+  <link rel="modulepreload" href="js/app.js">
+  <link rel="modulepreload" href="js/i18n.js">
+  <link rel="modulepreload" href="js/oberflaeche.js">
+  <link rel="modulepreload" href="js/zustand.js">
+  <link rel="modulepreload" href="js/daten.js">
+  <link rel="modulepreload" href="js/graph.js">
+  <link rel="modulepreload" href="js/fortschritt.js">
+  <link rel="modulepreload" href="js/pfade.js">
+  <link rel="modulepreload" href="js/aktionen.js">
+  <link rel="modulepreload" href="js/ansichten/willkommen.js">
+  <link rel="modulepreload" href="js/ansichten/heim.js">
+  <link rel="modulepreload" href="js/ansichten/onboarding.js">
+  <link rel="modulepreload" href="js/ansichten/pfad.js">
+  <link rel="modulepreload" href="js/ansichten/baustein.js">
+  <link rel="modulepreload" href="js/ansichten/training.js">
+  <link rel="modulepreload" href="js/ansichten/regeln.js">
+  <link rel="modulepreload" href="js/ansichten/info.js">
+  <link rel="modulepreload" href="js/ansichten/profil.js">
+  <link rel="modulepreload" href="js/ansichten/zielwahl.js">
 </head>
 <body>
   <header class="kopf">
@@ -130,18 +155,31 @@
   <script type="module" src="js/app.js"></script>
 
   <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
-       Störung, sehr alter Browser), bleibt keine leere Seite zurück, sondern
-       eine Meldung mit Neu-laden-Knopf. Statisch in der Quellsprache. -->
+       Störung, CDN-Aussetzer, sehr alter Browser), bleibt keine leere Seite
+       zurück. Ein EINMALIGER automatischer Neuversuch (über sessionStorage
+       gegen Endlosschleifen abgesichert) fängt kurze Aussetzer ab; erst wenn
+       auch der scheitert, erscheint die Meldung mit Neu-laden-Knopf. -->
   <script>
     (function () {
       window.addEventListener('load', function () {
         window.setTimeout(function () {
           var ziel = document.getElementById('ansicht');
-          if (!ziel || ziel.childElementCount > 0) return;
+          if (!ziel) return;
+          if (ziel.childElementCount > 0) {
+            try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+            return;
+          }
+          try {
+            if (!sessionStorage.getItem('modul-neuversuch')) {
+              sessionStorage.setItem('modul-neuversuch', '1');
+              window.location.reload();
+              return;
+            }
+          } catch (e) {}
           ziel.innerHTML =
             '<div class="karte">' +
             '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
-            '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — meist eine kurze Netzwerk- oder Cache-Störung.</p>' +
+            '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — meist eine kurze Netzwerk- oder Cache-Störung. Ein Neuladen behebt das in aller Regel.</p>' +
             '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
             '</div>';
         }, 3000);
