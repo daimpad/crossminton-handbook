@@ -4,9 +4,9 @@
 
 # Crossminton-Handbuch
 
-**Das wissenschaftlich fundierte Lern- und Trainingshandbuch für Crossminton — als schlanke, mobile Web-App.**
+**Das Lern- und Trainingshandbuch für Crossminton**
 
-Vom ersten Schlag bis zur Turnierreife: strukturiert, niederschwellig, herkunftsbewusst.
+Vom ersten Schlag bis zur Turnierreife
 
 <br />
 
@@ -23,9 +23,7 @@ Vom ersten Schlag bis zur Turnierreife: strukturiert, niederschwellig, herkunfts
 
 ## Was ist das?
 
-Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik, Mentales und Athletik — in einer App, die dich dort abholt, wo du stehst. Statt einer linearen Textwüste bietet es viele kleine, in sich geschlossene Lernbausteine, die über weiche Verbindungen zu einem persönlichen Lernpfad zusammenwachsen.
-
-Der Ton ist durchgehend niederschwellig und direkt in der Du-Form gehalten, die Inhalte sind sachlich und fachlich sauber grundiert. Ein zentrales Bild pro Baustein trägt das Verständnis.
+Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik, Mentales und Athletik — in einer App, die dich dort abholt, wo du stehst. Statt einem linearen Text bietet es viele kleine, in sich geschlossene Lernbausteine, die über weiche Verbindungen zu einem persönlichen Lernpfad zusammenwachsen.
 
 ## Das Angebot
 
@@ -61,6 +59,6 @@ Dieses Projekt trennt Code und Inhalt:
 - **Quellcode** — [MIT-Lizenz](LICENSE)
 - **Inhalte** (Texte, Didaktik, Grafiken) — [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
-© [Jahr] [Rechteinhaber]. Erstellt in Zusammenarbeit mit der Crossminton-Community. Regelgrundlage: offizielle ICO/DCV-Spielregeln (Stand Februar 2018).
+Erstellt in Zusammenarbeit mit der Crossminton-Community. Regelgrundlage: offizielle ICO/DCV-Spielregeln.
 
 <div align="center"><sub>Speeder™ ist eine Marke der jeweiligen Rechteinhaber. Dieses Projekt steht in keiner offiziellen Verbindung zur ICO.</sub></div>
