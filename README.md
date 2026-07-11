@@ -46,8 +46,6 @@ Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständi
 
 **📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
 
-Die Bild-Prompts und Platzhalter finden sich gesammelt und durchnummeriert unter [`images/grafik-prompts.md`](images/grafik-prompts.md).
-
 ## Mitmachen
 
 Beiträge sind willkommen — Fehler melden, übersetzen, Code beitragen. Die Details stehen im Reiter „Mitmachen" der App und in der [technischen Dokumentation](docs/TECHNICAL.md).
