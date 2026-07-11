@@ -6,8 +6,6 @@
 
 **Das Lern- und Trainingshandbuch für Crossminton**
 
-Vom ersten Schlag bis zur Turnierreife
-
 <br />
 
 [![License Code: MIT](https://img.shields.io/badge/License%20(Code)-MIT-blue.svg)](LICENSE)
@@ -29,12 +27,10 @@ Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik
 
 - **Vier Lernpfade** — Technik, Taktik, Mentales und Athletik/Kondition, jeweils über drei Könnensstufen: Beginner, Fortgeschritten und Experte.
 - **Herkunftsbewusstes Onboarding** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede als gezielte Hinweise, genau dort, wo eine mitgebrachte Gewohnheit kollidiert.
-- **Doppel über alle drei Stufen** — vom ersten Zusammenspiel bis zum eingespielten Paar als System.
+- **Doppel spielen** — vom ersten Zusammenspiel bis zum eingespielten Paar als System.
 - **Outdoor** — Wind lesen und nutzen, Sonne, Nässe, Hitze und verschiedene Böden.
 - **Trainingseinheiten** — kuratierte Einheiten in drei Phasen, die die Übungsteile zu sinnvollen Sessions verbinden.
-- **Regeln-Reiter** — die vollständigen Spielregeln, jede Regel in klarer Erklärung, auf Grundlage des offiziellen ICO/DCV-Regelwerks.
-- **Gamification & Fortschritt** — Bausteine als erledigt quittieren, Sequenzen abschließen, dranbleiben.
-- **Mobil zuerst & offline-fähig** — als Progressive Web App gedacht, die überall funktioniert.
+- **Spielregeln** — die vollständigen Spielregeln, jede Regel in klarer Erklärung, auf Grundlage des offiziellen ICO/DCV-Regelwerks.
 
 ## Für wen?
 
@@ -42,9 +38,7 @@ Für Einsteiger, die einen klaren ersten Weg suchen. Für Umsteiger aus verwandt
 
 ## Technische Dokumentation
 
-Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständige Spezifikation — liegt bewusst außerhalb dieser Übersicht im eigenen Reiter:
-
-**📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
+Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständige Spezifikation unter: **📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
 
 ## Mitmachen
 
