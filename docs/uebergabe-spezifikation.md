@@ -308,6 +308,32 @@ Mit dem Outdoor-Themenblock (Datei 22) sind erstmals aktiv: der Baustein-Typ `um
 
 ---
 
+## 12. Qualitätssicherung — Validierungs-Suite und Manifest
+
+Zwei ausführbare bzw. dokumentarische Artefakte sichern die Integrität des Korpus und seinen Transport ins Repository. Beide liegen im Root.
+
+### 12.1 Validierungs-Suite (`validate.py`)
+
+Ein eigenständiges Skript, das die Kontrollen bündelt, die zuvor je Block von Hand liefen. Aufruf `python3 validate.py <verzeichnis>` (Default: aktuelles Verzeichnis; im Repo der Ort der Inhalts-JSONs, etwa `data/`). Exit-Code **0** = grün, **1** = mindestens ein Fehler; jeder Fund wird mit Datei und Baustein-ID ausgewiesen. Das kanonische Vokabular wird aus `bausteine.beginner-technik.json` (`vokabulare`) gelesen; `SP` und `AT` gelten als koordinierte Herkunfts-Erweiterungen (11.2).
+
+Geprüft wird:
+- **JSON-Gültigkeit** aller Inhaltsdateien.
+- **Schema und Pflichtfelder** je Baustein (`typ`, `domaene`, `kompetenzstufe`, `erklaerteil`).
+- **Wertkonformität** gegen das Vokabular: `domaene`, `kompetenzstufe`, `typ`, `transfer_herkunft`, `spielform`, `untergrund` (String **oder** Liste, 11.6), `witterung`, `spielziele`, `vermittlungsziele`.
+- **Innere Struktur**: genau **eines** von `{uebungsteil, reflexionsaufgabe}` je Baustein (11.1 / 3.5).
+- **Voraussetzungen** lösen auf — keine Kante zeigt auf eine unbekannte ID.
+- **Delta-Integrität**: `basis_baustein` existiert; **keine** Kante auf einen Experten-Baustein (Herkunftsneutralität, 11.5); keine doppelte `(Basis, Herkunft)`-Kante; `eigener_uebungsteil: false`; gültige `ersetzt_bei_herkunft`.
+- **Trainingseinheiten**: jede Referenz zeigt auf einen existierenden Baustein **mit** `uebungsteil` (6.4).
+- **Sprachregeln**: keine „Ein Bild:"-Formel, keine „nicht/kein …, sondern …"-Antithese, Glossar-Treue (u. a. Aufbauschläge, Tempo-Steuerung).
+
+Stand gegen den aktuellen Korpus: **95 Bausteine, 24 Deltas, 19 Baustein-Dateien, 0 Fehler**. Ein Negativtest (absichtlich injizierte Fehler: unbekannte Domäne, ins Leere zeigende Voraussetzung, „Ein Bild:", Antithese) bestätigt, dass alle vier gemeldet werden und der Exit-Code auf 1 springt. Das Skript eignet sich als CI-Schritt: bei jedem Commit ausgeführt, meldet es Bruchstellen vor dem Erreichen der App.
+
+### 12.2 Manifest (`MANIFEST.md`)
+
+Die Transport-Übersicht: Sie listet alle Inhalts-JSONs, die Root-Dokumente, `docs/TECHNICAL.md` und den `images/`-Ordner mit **Soll-Pfad im Repo**, Kurzbeschreibung und dem Hinweis, welche Datei eine ältere Version überschreibt. Oben steht der Vier-Schritte-Ablauf (herunterladen, einordnen, committen, verdrahten) samt Zielstruktur-Baum, unten der Prüfaufruf. Zweck ist die klare Arbeitsteilung an der Repo-Grenze: Inhalt wird hier geschrieben und geprüft, die Dateien werden ins Repo transportiert, Claude Code verdrahtet sie technisch. Der Ordnername für die Inhalts-JSONs (`data/` oder `content/`) bleibt offen und richtet sich nach dem App-Aufbau.
+
+---
+
 ## Anhang A — Verhaltensnahe Stufen-Anker (Quellsprache de)
 
 **Frage 1 — Wo stehst du im Spiel?**
