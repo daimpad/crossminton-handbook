@@ -1,77 +1,66 @@
 <div align="center">
 
-<img src="assets/images/speeder.svg" alt="Crossminton-Handbuch" width="92" height="92">
+<img src="images/logo-speeder.svg" alt="Speeder-Logo" width="130" />
 
 # Crossminton-Handbuch
 
-**Crossminton lernen — Schlag für Schlag.**
+**Das wissenschaftlich fundierte Lern- und Trainingshandbuch für Crossminton — als schlanke, mobile Web-App.**
 
-Eine clientseitige, mobil-orientierte Lernapp für Crossminton: kleine Bausteine, klare Technik, dein Tempo. Läuft komplett im Browser — ohne Anmeldung, ohne Server, dein Fortschritt bleibt auf deinem Gerät.
+Vom ersten Schlag bis zur Turnierreife: strukturiert, niederschwellig, herkunftsbewusst.
 
-[![Live · GitHub Pages](https://img.shields.io/badge/live-GitHub%20Pages-38a4f1?logo=github&logoColor=white)](https://daimpad.github.io/crossminton-handbook/)
-[![Deploy](https://github.com/daimpad/crossminton-handbook/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/daimpad/crossminton-handbook/actions/workflows/deploy-pages.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Texte: CC BY 4.0](https://img.shields.io/badge/Texte-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e.svg?logo=javascript&logoColor=black)](#)
-[![Build: none](https://img.shields.io/badge/build-none-25c449.svg)](#)
+<br />
 
-### [**→ App öffnen**](https://daimpad.github.io/crossminton-handbook/)
+[![License Code: MIT](https://img.shields.io/badge/License%20(Code)-MIT-blue.svg)](LICENSE)
+[![License Content: CC BY-SA 4.0](https://img.shields.io/badge/License%20(Content)-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[![PWA](https://img.shields.io/badge/PWA-ready-5a0fc8.svg)](#das-angebot)
+[![Sprachen](https://img.shields.io/badge/Sprachen-de%20·%20en%20·%20fr%20·%20pl-38a4f1.svg)](#das-angebot)
+[![Status](https://img.shields.io/badge/Status-Erstausbau-25c449.svg)](docs/TECHNICAL.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-25c449.svg)](https://github.com/daimpad/crossminton-handbook/pulls)
 
 </div>
 
 ---
 
-## 🏸 Worum es geht
+## Was ist das?
 
-Das Crossminton-Handbuch bringt dir das Spiel in kleinen, aufeinander aufbauenden Schritten bei — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau. Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum **eigenständigen Üben** anleiten, nicht zu Dauerbeschäftigung.
+Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik, Mentales und Athletik — in einer App, die dich dort abholt, wo du stehst. Statt einer linearen Textwüste bietet es viele kleine, in sich geschlossene Lernbausteine, die über weiche Verbindungen zu einem persönlichen Lernpfad zusammenwachsen.
 
-## ✨ Was die App bietet
+Der Ton ist durchgehend niederschwellig und direkt in der Du-Form gehalten, die Inhalte sind sachlich und fachlich sauber grundiert. Ein zentrales Bild pro Baustein trägt das Verständnis.
 
-- **Dein Einstieg, deine Wahl** — direkt ins Handbuch stöbern oder den geführten Weg über eine kurze Stufen-Diagnostik gehen.
-- **Fünf Wege durch denselben Stoff** — Kompetenz-, Themen-, Individual- und Trainingspfad, dazu das **Doppel** als eigenes Querschnittsthema.
-- **Cross-Sport-Modus** — wer aus Badminton, Tennis oder Squash kommt, bekommt gezielt angepasste Erklärungen, wo sich gewohnte Bewegungen unterscheiden.
-- **Drei Könnensstufen** — Beginner, Fortgeschritten und Experte, kumulativ aufeinander aufbauend; dazu eine **Trainer-Perspektive** mit Vermittlungswissen.
-- **Regeln-Reiter** — die offiziellen Spielregeln (ICO/DCV), akkurat wiedergegeben und in Klartext erklärt.
-- **Dein Fortschritt, lokal** — getrennt quittierte Erklär- und Übungsteile, Meilensteine und kumulative Kontinuität, alles im Browser gespeichert.
-- **Mobil zuerst** — hell, schnell, mit Bottom-Bar auf dem Handy und Hamburger-Menü ab Tablet; mehrsprachig angelegt (de · en · fr · pl).
+## Das Angebot
 
-<div align="center">
-<br>
-<strong>Kein Konto. Kein Tracking. Keine Server.</strong><br>
-<sub>Nur du und das Spiel.</sub>
-</div>
+- **Vier Lernpfade** — Technik, Taktik, Mentales und Athletik/Kondition, jeweils über drei Könnensstufen: Beginner, Fortgeschritten und Experte.
+- **Herkunftsbewusstes Onboarding** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede als gezielte Hinweise, genau dort, wo eine mitgebrachte Gewohnheit kollidiert.
+- **Doppel über alle drei Stufen** — vom ersten Zusammenspiel bis zum eingespielten Paar als System.
+- **Outdoor** — Wind lesen und nutzen, Sonne, Nässe, Hitze und verschiedene Böden.
+- **Trainingseinheiten** — kuratierte Einheiten in drei Phasen, die die Übungsteile zu sinnvollen Sessions verbinden.
+- **Regeln-Reiter** — die vollständigen Spielregeln, jede Regel in klarer Erklärung, auf Grundlage des offiziellen ICO/DCV-Regelwerks.
+- **Gamification & Fortschritt** — Bausteine als erledigt quittieren, Sequenzen abschließen, dranbleiben.
+- **Mobil zuerst & offline-fähig** — als Progressive Web App gedacht, die überall funktioniert.
 
-## 🚀 Loslegen
+## Für wen?
 
-<div align="center">
+Für Einsteiger, die einen klaren ersten Weg suchen. Für Umsteiger aus verwandten Rückschlagsportarten, die schnell den Unterschied verstehen wollen. Und für ambitionierte Spieler, die bis in die Experten-Feinheiten arbeiten.
 
-Kein Download, keine Installation — einfach öffnen:
+## Technische Dokumentation
 
-### [daimpad.github.io/crossminton-handbook](https://daimpad.github.io/crossminton-handbook/)
+Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständige Spezifikation — liegt bewusst außerhalb dieser Übersicht im eigenen Reiter:
 
-Im Browser, auf dem Handy, als Lesezeichen auf dem Startbildschirm.
+**📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
 
-</div>
+Die Bild-Prompts und Platzhalter finden sich gesammelt und durchnummeriert unter [`images/grafik-prompts.md`](images/grafik-prompts.md).
 
-## 🤝 Mitmachen
+## Mitmachen
 
-Das Handbuch ist ein **offenes Projekt** und lebt von Beiträgen — ein Hinweis auf einen Fehler, eine Übersetzung oder Code. Du musst kein Profi sein. Der „Mitmachen"-Reiter in der App und die [Issues](https://github.com/daimpad/crossminton-handbook/issues) sind der beste Startpunkt.
+Beiträge sind willkommen — Fehler melden, übersetzen, Code beitragen. Die Details stehen im Reiter „Mitmachen" der App und in der [technischen Dokumentation](docs/TECHNICAL.md).
 
-## 📄 Lizenz
+## Lizenz
 
-| | |
-| --- | --- |
-| **Software** | [MIT License](LICENSE) © 2026 Damian Paderta |
-| **Inhalte & Texte** | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| **Spielregeln** | Eigentum der **ICO / DCV**, hier zu Lernzwecken wiedergegeben |
+Dieses Projekt trennt Code und Inhalt:
 
-## 🛠️ Technik & Architektur
+- **Quellcode** — [MIT-Lizenz](LICENSE)
+- **Inhalte** (Texte, Didaktik, Grafiken) — [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
-Alles Technische — **Setup, Architektur, Datenmodell, Tests, Projektstruktur und Datenpflege** — steht gebündelt in **[ENTWICKLUNG.md »](ENTWICKLUNG.md)**.
+© [Jahr] [Rechteinhaber]. Erstellt in Zusammenarbeit mit der Crossminton-Community. Regelgrundlage: offizielle ICO/DCV-Spielregeln (Stand Februar 2018).
 
-Konzeptionelle Grundlage: [`docs/uebergabe-spezifikation.md`](docs/uebergabe-spezifikation.md) · Erscheinungsbild: [`docs/ci.md`](docs/ci.md)
-
-<div align="center">
-<br>
-<sub>Gebaut mit purem HTML, CSS und JavaScript — kein Framework, kein Build-Schritt.</sub>
-</div>
+<div align="center"><sub>Speeder™ ist eine Marke der jeweiligen Rechteinhaber. Dieses Projekt steht in keiner offiziellen Verbindung zur ICO.</sub></div>

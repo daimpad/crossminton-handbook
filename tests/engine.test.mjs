@@ -3,7 +3,7 @@
 // Prüft Datenvalidierung, Pfad-Traversierungen, Modifikator, Zwei-Ebenen-Logik,
 // Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
 
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -585,6 +585,18 @@ for (const [bereich, faktoren] of Object.entries(daten.vokabulare.vermittlungszi
   for (const f of faktoren) hatLabel(['vermittlungsziele', 'faktoren', f]);
 }
 pruefe('alle sichtbaren IDs tragen ein de-Label', fehlend.length === 0, fehlend.join(', '));
+
+console.log('\n[10] Grafiksystem (G-XXX-Nummernkreis + Platzhalter-Dateien)');
+const grafikRefs = [...daten.bausteine, ...daten.deltas].flatMap((b) => b.grafik || []);
+const alleG = Array.from({ length: 61 }, (_, i) => `G-${String(i + 1).padStart(3, '0')}`);
+pruefe('alle Baustein-Grafiken folgen dem G-XXX-Schema', grafikRefs.length > 0 && grafikRefs.every((g) => /^G-\d{3}$/.test(g)));
+pruefe('55 Bausteine tragen eine Grafik, 59 G-Referenzen (4 Zwei-Bild-Sequenzen)', daten.bausteine.filter((b) => (b.grafik || []).length > 0).length === 55 && grafikRefs.length === 59);
+pruefe('Sequenz-Bausteine tragen zwei Grafiken (aufschlag/beinarbeit/taeuschung/tempo_rhythmus_wechsel)', ['aufschlag', 'beinarbeit', 'taeuschung', 'tempo_rhythmus_wechsel'].every((id) => (daten.bausteinVonId.get(id).grafik || []).length === 2));
+pruefe('Deltas tragen keine eigene Grafik (nur Basis-Bausteine)', daten.deltas.every((d) => !(d.grafik && d.grafik.length)));
+pruefe('jede referenzierte G-XXX hat eine Platzhalter-Datei images/G-XXX.png', [...new Set(grafikRefs)].every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
+pruefe('alle 61 Platzhalter G-001..G-061 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
+pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein', labelsDe.grafiken['G-060'] && labelsDe.grafiken['G-061'] && !grafikRefs.includes('G-060') && !grafikRefs.includes('G-061'));
+pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

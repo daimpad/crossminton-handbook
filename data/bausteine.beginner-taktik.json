@@ -11,6 +11,7 @@
   "bausteine": [
     {
       "id": "spielziel_verstehen",
+      "grafik": ["G-023"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -33,6 +34,7 @@
 
     {
       "id": "zentrale_position",
+      "grafik": ["G-024"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -55,6 +57,7 @@
 
     {
       "id": "laenge_tiefe",
+      "grafik": ["G-025"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -86,6 +89,7 @@
 
     {
       "id": "rueckhand_des_gegners",
+      "grafik": ["G-026"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
@@ -118,6 +122,7 @@
 
     {
       "id": "aufschlag_taktisch",
+      "grafik": ["G-027"],
       "typ": "micro",
       "domaene": "taktik",
       "kompetenzstufe": ["beginner"],
