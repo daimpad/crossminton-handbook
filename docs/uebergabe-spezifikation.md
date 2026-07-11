@@ -57,7 +57,7 @@ Sprachneutrale **Identität** (IDs, Kürzel, Faktor-IDs, Relationen) ist strikt 
 
 ### 3.4 Die Trainingseinheit
 
-Eigene Entität, getrennt vom Baustein (Datei `trainingseinheiten.json`, nicht im Baustein-Pool). Enthält eine **nach drei Phasen** (Erwärmung / Hauptteil / Ausklang) geordnete **Referenzliste auf Übungsteile** von Bausteinen (nicht auf ganze Bausteine); jede Referenz nennt die Baustein-ID (1:1 zum Übungsteil) plus optionalen kuratorischen Hinweis. Im Erstausbau **kuratiert** (acht Einheiten, von Hand befüllt); die Struktur hält die spätere regelbasierte Generierung offen, ohne sie umzusetzen. Referenzen zeigen ausnahmslos auf Bausteine **mit** Übungsteil. Details und Schema in Abschnitt 9.
+Eigene Entität, getrennt vom Baustein (Datei `trainingseinheiten.json`, nicht im Baustein-Pool). Enthält eine **nach drei Phasen** (Erwärmung / Hauptteil / Ausklang) geordnete **Referenzliste auf Übungsteile** von Bausteinen (nicht auf ganze Bausteine); jede Referenz nennt die Baustein-ID (1:1 zum Übungsteil) plus optionalen kuratorischen Hinweis. Im Erstausbau **kuratiert** (acht Einheiten, von Hand befüllt). Auf diesem Bestand setzt der **Trainingsplan** auf (regelbasierte Wochenplan-Generierung, 6.4) — der kuratierte Bestand bleibt die Quelle, der Plan rotiert und terminiert ihn. Referenzen zeigen ausnahmslos auf Bausteine **mit** Übungsteil. Details und Schema in Abschnitt 9.
 
 ### 3.5 Der Aufgabenteil: `uebungsteil` vs. `reflexionsaufgabe`
 
@@ -141,7 +141,8 @@ Vier gleichrangige Pfade plus ein überlagernder Modifikator. Alle erben die Zwe
 
 ### 6.4 Trainingspfad
 - Steuert **Übungsteile** an (nicht ganze Bausteine).
-- Einheiten sind **kuratiert** (eigene Entität mit Referenzliste, Abschnitt 3.4). Generierung strukturell offen, nicht umgesetzt.
+- Einheiten sind **kuratiert** (eigene Entität mit Referenzliste, Abschnitt 3.4).
+- **Trainingsplan (regelbasierte Generierung, umgesetzt):** Aus dem kuratierten Einheiten-Bestand wird ein **persönlicher Wochenplan** erzeugt (`js/plan.js`, rein/deterministisch). Konfiguriert über Wochenzahl (1–12), Einheiten pro Woche (1–4), Startdatum und Spielform-Filter (alle/einzel/doppel); die Einheiten werden stufen-gerecht (via `trainingsuebersicht`) rotiert und über die Woche verteilt. Der Vorschlag ist **anpassbar** (einzelne Sitzungen tauschen/entfernen), wird baustein-gebunden im Zustand persistiert (`plan`-Slice) und ist **exportierbar als PDF (Druckansicht)** und **Kalender (`.ics`, Ganztags-VEVENTs)** — beides rein clientseitig, ohne Build/Server. Route `#/plan`, Ansicht `js/ansichten/plan.js`.
 
 ### 6.5 Cross-Sport-Modifikator (kein eigener Pfad)
 Überlagernde Schicht über einem Basispfad (Standard: Kompetenzpfad; über jeden Basispfad legbar, aber initial nur Kompetenzpfad verdrahtet). Erbt die Sequenz des Basispfads und führt drei Operationen aus:
@@ -264,7 +265,7 @@ Diese Daten machen Pfad-Engine, Modifikator, Onboarding, `spielform`-Navigation,
 - **Weitere Cross-Sport-Tiefe**: Deltas bestehen für Badminton (10, inkl. Doppel), Tennis (8, inkl. Doppel und Taktik) und Squash (6, Technik + Taktik). Offen bleiben u. a. weitere Bausteine je Herkunft; **bewusst ausgelassen**: ein Squash-Doppel-Delta (Squash wird praktisch nur im Einzel gespielt — keine kollidierende Gewohnheit, Selektivitätsprinzip) sowie Deltas für Mentales/Athletik (sportartübergreifend).
 - **Zielsprachen** `en, fr, pl` (plus `ja` bislang nur in der Sprach-Anzeige): Struktur angelegt, Übersetzung ausstehend. Labels für `BS`, `SP`, `AT`, `spielform`, `witterung`, `untergrund` aufzunehmen.
 - **Outdoor / Umgebung**: mit dem Outdoor-Themenblock erstmals bespielt — der Typ `umgebungs_baustein` ist genutzt, `witterung` und `untergrund` sind belegt und als Navigationsachsen aktiv, die Umgebungsanpassungs-Spielziele sind belegt. Erweiterbar (z. B. weitere Böden/Bedingungen, Outdoor auf anderen Stufen). Der Faktor `doppel_spezifische_loesungen` ist über alle drei Doppel-Stufen belegt.
-- **Trainingseinheiten**: kuratierter Bestand auf 8 Einheiten ausgebaut — über alle drei Stufen (inkl. erstmals zwei Experten-Einheiten), dazu eine Outdoor- und eine Beginner-Doppel-Einheit. Darüber hinaus erweiterbar; regelbasierte Generierung strukturell offen.
+- **Trainingseinheiten**: kuratierter Bestand auf 8 Einheiten ausgebaut — über alle drei Stufen (inkl. erstmals zwei Experten-Einheiten), dazu eine Outdoor- und eine Beginner-Doppel-Einheit. Darüber hinaus erweiterbar. Die **regelbasierte Generierung** ist als **Trainingsplan** realisiert (6.4): ein anpassbarer Wochenplan über den Einheiten-Bestand, exportierbar als PDF und Kalender (`.ics`).
 - **Ungenutzter Typ**: `vertiefung` (ausführlichere Einheit mit Grafik) noch nicht genutzt; `umgebungs_baustein` nun aktiv.
 
 ---

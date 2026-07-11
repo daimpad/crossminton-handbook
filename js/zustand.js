@@ -17,6 +17,8 @@ function vorgabe() {
     fortschritt: {},
     kontinuitaet: { gesamt: 0, jeEinheit: {} },
     einstellungen: { sprache: 'de', transferKuerzelSichtbar: true },
+    // Persönlicher Trainingsplan (generiert, anpassbar): null = noch keiner erstellt.
+    plan: null,
   };
 }
 
@@ -121,6 +123,23 @@ export function registriereEinheitAbschluss(einheitId) {
   k.jeEinheit[einheitId] = (k.jeEinheit[einheitId] || 0) + 1;
   speichereZustand();
   return k.gesamt;
+}
+
+// Trainingsplan: ein generierter, danach anpassbarer Wochenplan. Rein persistent,
+// kein Fortschritt (der bleibt baustein-gebunden über die Einheiten-Referenzen).
+export function plan() {
+  return stelleSicher().plan;
+}
+
+export function setzePlan(neu) {
+  stelleSicher().plan = neu;
+  speichereZustand();
+  return neu;
+}
+
+export function loeschePlan() {
+  stelleSicher().plan = null;
+  speichereZustand();
 }
 
 export function setzeZurueck() {

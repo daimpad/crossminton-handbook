@@ -995,3 +995,47 @@ details[open] summary { margin-bottom: 0.5rem; }
     animation: none !important;
   }
 }
+
+/* ---------- Trainingsplan ---------- */
+
+.plan-felder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+}
+.plan-feld { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.82rem; color: var(--tinte-2); font-weight: 600; }
+.plan-feld input, .plan-feld select {
+  font: inherit; font-weight: 400; color: var(--tinte);
+  padding: 0.5rem 0.6rem; border: 1px solid var(--linie); border-radius: var(--radius); background: var(--flaeche);
+}
+.plan-uebersicht { margin-top: 1rem; }
+.plan-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.4rem; }
+.plan-aktionen { margin: 0; }
+.plan-woche { margin-top: 1.1rem; }
+.plan-woche > h3 { color: var(--ueberschrift); border-bottom: 1px solid var(--linie); padding-bottom: 0.3rem; margin-bottom: 0.3rem; }
+.plan-session {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.4rem 0.9rem;
+  align-items: start;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--linie);
+}
+.plan-session:last-child { border-bottom: 0; }
+.plan-session-datum { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primaer-tief); white-space: nowrap; font-size: 0.88rem; padding-top: 0.15rem; }
+.plan-session-inhalt h4 { margin: 0 0 0.15rem; font-size: 1rem; }
+.plan-session-link { display: inline-block; margin-top: 0.15rem; }
+.plan-session-knoepfe { display: flex; gap: 0.3rem; }
+.plan-session-knoepfe .knopf { padding: 0.4rem 0.55rem; }
+
+/* Druckansicht = „Als PDF": nur der Plan, ohne Navigation, Formular und Knöpfe. */
+@media print {
+  .kopf, .fussnav, .menue, .sprach-anzeige,
+  .plan-konfig, .plan-aktionen, .plan-session-knoepfe, .plan-session-link { display: none !important; }
+  body { background: #fff; }
+  main { padding: 0; max-width: none; }
+  .karte { box-shadow: none; border: 1px solid #ccc; margin: 0 0 0.6rem; }
+  .plan-session { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
