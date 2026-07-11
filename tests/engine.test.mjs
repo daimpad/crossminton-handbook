@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
 import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
+import { bausteinIcon } from '../js/oberflaeche.js';
 import { registriereEinheitAbschluss, setzeDiagnose, setzeTeilStatus, setzeZurueck } from '../js/zustand.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -415,8 +416,8 @@ pruefe('alle querverweis-IDs lösen auf einen Baustein auf (reine Dokumentation,
 // "aufschlag" sind dabei belanglos — zwei Namensräume, kein Lookup übers Regel-Slug.)
 pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (95 Bausteine, Abschnitte separat)', daten.bausteine.length === 95 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
 pruefe('Regeln tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', alleRegeln.every((r) => r.voraussetzungen === undefined && r.uebungsteil === undefined && r.delta === undefined && r.status === undefined));
-pruefe('Quellenangabe sichtbar hinterlegt (Herausgeber + Stand)', typeof daten.regeln.meta.quelle?.herausgeber === 'string' && daten.regeln.meta.quelle.herausgeber !== '' && typeof daten.regeln.meta.quelle?.stand === 'string' && daten.regeln.meta.quelle.stand !== '');
-pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'regeln_intro', 'regel_label', 'regel_bedeutung', 'regeln_quelle', 'regeln_stand', 'regeln_querverweis'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
+pruefe('Quellenangabe sichtbar hinterlegt (Herausgeber + Stand + PDF-Link)', typeof daten.regeln.meta.quelle?.herausgeber === 'string' && daten.regeln.meta.quelle.herausgeber !== '' && typeof daten.regeln.meta.quelle?.stand === 'string' && daten.regeln.meta.quelle.stand !== '' && /^https?:\/\/.*\.pdf$/i.test(daten.regeln.meta.quelle?.link || ''));
+pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'regeln_intro', 'regel_label', 'regel_bedeutung', 'regeln_quelle', 'regeln_stand', 'regeln_querverweis', 'regeln_quelle_link'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
 pruefe('nicht auflösbarer querverweis erzeugt eine Warnung (Dokumentations-Check, nie sperrend)', (() => {
   const kaputt = { _meta: {}, abschnitte: [{ id: 'test_regel', titel: { de: 'T' }, regeln: [{ inhalt: { de: 'x' }, querverweis: ['gibt_es_nicht'] }] }] };
   return baueIndizes([technik], einheiten, fehlerbilder, kaputt).warnungen.some((warnung) => warnung.includes('querverweis') && warnung.includes('gibt_es_nicht'));
@@ -484,12 +485,12 @@ setzeZurueck();
 
 console.log('\n[7i] App-Info (Reiter Über/Mitmachen + Sprachanzeige, eigene Entität — nicht im Pool)');
 pruefe('app-info über baueIndizes eingelesen: ueber + mitmachen + sprachen', Boolean(daten.appInfo.ueber && daten.appInfo.mitmachen && daten.appInfo.sprachen));
-pruefe('Über-Reiter: Absätze + Dank/Quellen + Lizenz/Credits + GitHub-Link', (daten.appInfo.ueber.absaetze || []).length >= 1 && (daten.appInfo.ueber.danksagungen?.eintraege || []).length >= 1 && (daten.appInfo.ueber.credits_lizenz?.eintraege || []).length >= 1 && (daten.appInfo.ueber.links || []).some((l) => l.typ === 'github'));
+pruefe('Über-Reiter: Absätze + Dank/Quellen + Lizenz/Credits + GitHub-Link (in Credits)', (daten.appInfo.ueber.absaetze || []).length >= 1 && (daten.appInfo.ueber.danksagungen?.eintraege || []).length >= 1 && (daten.appInfo.ueber.credits_lizenz?.eintraege || []).length >= 1 && /^https?:\/\//.test(daten.appInfo.ueber.credits_lizenz?.github?.ziel || ''));
 pruefe('Mitmachen-Reiter: 3 Möglichkeiten, jede mit cta_label + cta_ziel', (daten.appInfo.mitmachen.moeglichkeiten || []).length === 3 && daten.appInfo.mitmachen.moeglichkeiten.every((m) => m.cta_label?.de && m.cta_ziel));
-pruefe('Sprachanzeige rein darstellend (funktion_aktiv:false), 5 Sprachen de/en/fr/pl/ja, aktuell de', daten.appInfo.sprachen.funktion_aktiv === false && gleicheListe((daten.appInfo.sprachen.liste || []).map((s) => s.code), ['de', 'en', 'fr', 'pl', 'ja']) && daten.appInfo.sprachen.aktuell === 'de');
+pruefe('Sprachanzeige rein darstellend (funktion_aktiv:false), 4 Sprachen de/en/fr/pl mit Eigenname + Flagge, aktuell de', daten.appInfo.sprachen.funktion_aktiv === false && gleicheListe((daten.appInfo.sprachen.liste || []).map((s) => s.code), ['de', 'en', 'fr', 'pl']) && (daten.appInfo.sprachen.liste || []).every((s) => typeof s.eigenname === 'string' && s.eigenname && s.flagge) && daten.appInfo.sprachen.aktuell === 'de');
 pruefe('jede Sprache trägt Flagge + Kürzel + Label', (daten.appInfo.sprachen.liste || []).every((s) => s.flagge && s.kuerzel && s.label?.de));
 pruefe('App-Info erweitert den Baustein-Pool nicht (95 Bausteine, eigene Entität)', daten.bausteine.length === 95 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
-pruefe('GitHub-Links gefüllt (echte http-URLs): Über-Link + alle drei CTAs', daten.appInfo.ueber.links.every((l) => /^https?:\/\//.test(l.ziel)) && daten.appInfo.mitmachen.moeglichkeiten.every((m) => /^https?:\/\//.test(m.cta_ziel)));
+pruefe('GitHub-Links gefüllt (echte http-URLs): Credits-Link + alle drei CTAs', /^https?:\/\//.test(daten.appInfo.ueber.credits_lizenz.github.ziel) && daten.appInfo.mitmachen.moeglichkeiten.every((m) => /^https?:\/\//.test(m.cta_ziel)));
 pruefe('Lizenz + Credits gesetzt (MIT, CC BY, Damian Paderta)', daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /MIT/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /CC BY/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /Damian Paderta/.test(e.de)));
 pruefe('Sprachanzeige-Hinweis aus den Daten entfernt (rein darstellend, keine Anmerkung)', daten.appInfo.sprachen.hinweis === undefined);
 pruefe('App-Info trägt Version + Rechtstexte (Impressum/Datenschutz) für den Footer', typeof daten.appInfo.meta.version === 'string' && daten.appInfo.meta.version !== '' && (daten.appInfo.rechtliches?.impressum?.absaetze || []).length >= 1 && (daten.appInfo.rechtliches?.datenschutz?.absaetze || []).length >= 1);
@@ -597,6 +598,11 @@ pruefe('jede referenzierte G-XXX hat eine Platzhalter-Datei images/G-XXX.png', [
 pruefe('alle 61 Platzhalter G-001..G-061 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
 pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein', labelsDe.grafiken['G-060'] && labelsDe.grafiken['G-061'] && !grafikRefs.includes('G-060') && !grafikRefs.includes('G-061'));
 pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
+// Jeder Basis-Baustein trägt ein Icon (BAUSTEIN_ICONS in js/oberflaeche.js) — Doppel/Outdoor/Experte inklusive.
+pruefe('alle Basis-Bausteine tragen ein Icon (BAUSTEIN_ICONS vollständig)', (() => {
+  const ohne = daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id);
+  return ohne.length === 0;
+})(), daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id).join(', '));
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

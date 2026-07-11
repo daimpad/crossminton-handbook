@@ -164,6 +164,37 @@ const BAUSTEIN_ICONS = {
   fehler_erkennen_korrigieren: 'fa-stethoscope',
   uebungen_aufbauen: 'fa-layer-group',
   gruppe_fuehren: 'fa-users',
+  // Doppel-Beginner (spielform:doppel, erstes Zusammenspiel)
+  erste_schritte_doppel: 'fa-handshake',
+  wer_nimmt_den_ball: 'fa-hand',
+  aufschlag_im_doppel_einfach: 'fa-baseball',
+  sich_absprechen: 'fa-comments',
+  einander_platz_lassen: 'fa-people-arrows',
+  // Doppel-Experte (Paar als System)
+  paar_als_system: 'fa-people-group',
+  gegnerisches_paar_lesen: 'fa-magnifying-glass',
+  partner_in_position_bringen: 'fa-compass',
+  nahtlos_umschalten: 'fa-right-left',
+  blindes_verstaendnis: 'fa-link',
+  // Experte-Mentales (Wettkampfzustand, Flow, Druck) — herkunftsneutral
+  optimaler_wettkampfzustand: 'fa-star',
+  in_den_flow_finden: 'fa-infinity',
+  druck_als_herausforderung: 'fa-mountain',
+  gelassen_bei_unfairness: 'fa-scale-balanced',
+  mentale_staerke_entwickeln: 'fa-seedling',
+  // Experte-Athletik / Kondition (Formaufbau, Reaktivkraft) — herkunftsneutral
+  form_ueber_die_saison: 'fa-chart-line',
+  reaktivkraft_bodenkontakt: 'fa-bolt',
+  bewegungsoekonomie: 'fa-feather',
+  antizipative_schnelligkeit: 'fa-forward',
+  langfristig_belastbar: 'fa-heart-pulse',
+  // Outdoor / Umgebung (umgebungs_baustein)
+  draussen_spielen: 'fa-tree',
+  wind_lesen_nutzen: 'fa-wind',
+  sonne_blendung: 'fa-sun',
+  naesse_sicherer_stand: 'fa-water',
+  hitze: 'fa-fire',
+  verschiedene_boeden: 'fa-layer-group',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

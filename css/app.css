@@ -239,6 +239,7 @@ body.im-onboarding .hamburger { display: none; }
   font-size: 0.9rem;
 }
 
+.sprach-flagge { flex: none; font-size: 1.2rem; line-height: 1; }
 .sprach-eintrag .sprach-name { flex: 1; }
 .sprach-eintrag.aktiv { background: var(--primaer-weich); color: var(--primaer-tief); font-weight: 600; }
 .sprach-haken { flex: none; width: 1rem; text-align: center; color: var(--primaer-tief); font-weight: 700; }
@@ -336,14 +337,6 @@ body.im-onboarding .sprach-anzeige { display: none; }
   color: var(--primaer);
 }
 
-/* Kleines Extern-Icon rechts an den Doku-Links (README/TECHNICAL). */
-.menue-punkt .menue-extern {
-  margin-left: auto;
-  width: auto;
-  font-size: 0.72em;
-  opacity: 0.55;
-}
-
 /* Gestaffeltes Hereingleiten der Menüpunkte. */
 .menue.offen .menue-punkt { opacity: 1; transform: translateX(0); }
 .menue.offen .menue-punkt:nth-of-type(1) { transition-delay: 60ms; }
@@ -354,8 +347,6 @@ body.im-onboarding .sprach-anzeige { display: none; }
 .menue.offen .menue-punkt:nth-of-type(6) { transition-delay: 360ms; }
 .menue.offen .menue-punkt:nth-of-type(7) { transition-delay: 420ms; }
 .menue.offen .menue-punkt:nth-of-type(8) { transition-delay: 480ms; }
-.menue.offen .menue-punkt:nth-of-type(9) { transition-delay: 540ms; }
-.menue.offen .menue-punkt:nth-of-type(10) { transition-delay: 600ms; }
 
 /* Trenner vor den Rechtstexten (Impressum/Datenschutz) im Menü. */
 .menue-trenner {
@@ -536,6 +527,18 @@ input[type='radio'], input[type='checkbox'] {
 }
 
 .ziel-dimension { margin-top: 1rem; }
+
+/* Große Schirme: die Ziel-Checkboxen zweispaltig, damit die Liste nicht so lang wird.
+   Die Legende (Bereichstitel) spannt beide Spalten. */
+@media (min-width: 768px) {
+  .ziel-bereich {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.2rem;
+    align-items: start;
+  }
+  .ziel-bereich legend { grid-column: 1 / -1; }
+}
 
 .onboarding-schritt { margin-top: 0.4rem; }
 
@@ -900,8 +903,6 @@ details[open] summary { margin-bottom: 0.5rem; }
   .fussnav { display: none; }
   .hamburger { display: inline-flex; }
   main { padding: 1.6rem 1.5rem 1rem; }
-  .app-footer { padding: 0.9rem 1.5rem 1.6rem; }
-  .footer-links a:hover, .footer-github:hover { color: var(--primaer-tief); }
   h1 { font-size: 1.7rem; }
 }
 
@@ -919,31 +920,8 @@ details[open] summary { margin-bottom: 0.5rem; }
   word-break: break-word;
 }
 
-/* ---------- App-Footer (Impressum / Datenschutz / GitHub + Version) ---------- */
-
-.app-footer {
-  max-width: 44rem;
-  margin: 1.2rem auto 0;
-  /* unten die einzeilige Bottom-Bar (~60px) freihalten (mobil); Desktop überschreibt. */
-  padding: 0.9rem 1rem calc(5rem + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--linie);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem 1rem;
-  font-size: 0.82rem;
-}
-
-.footer-links { display: flex; gap: 1.1rem; }
-.footer-links a { color: var(--tinte-2); text-decoration: none; transition: color var(--uebergang); }
-.footer-links a.aktiv { color: var(--primaer-tief); font-weight: 600; }
-
-.footer-github { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--tinte-2); text-decoration: none; transition: color var(--uebergang); }
-.footer-github-logo { fill: currentColor; flex: none; }
-.footer-version { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
-
-body.im-onboarding .app-footer { display: none; }
+/* GitHub-Logo (Inline-SVG) im „Über"-Reiter unter Lizenz/Credits. */
+.github-logo { fill: currentColor; flex: none; vertical-align: -0.2em; margin-right: 0.15rem; }
 
 /* ---------- Willkommen: Hero + Einstiegs-CTAs ---------- */
 

@@ -14,11 +14,15 @@ function quelleHtml(quelle) {
   if (!quelle || !quelle.herausgeber) return '';
   const teile = [quelle.titel, quelle.herausgeber, quelle.verband_de].filter(Boolean).join(' · ');
   const stand = quelle.stand ? ` · ${t('regeln_stand')}: ${quelle.stand}` : '';
+  const link = quelle.link
+    ? `<a class="regeln-quelle-link" href="${esc(quelle.link)}" target="_blank" rel="noopener noreferrer">${esc(t('regeln_quelle_link'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`
+    : '';
   return `
     <p class="regeln-quelle leise">
       <i class="fa-solid fa-book-open" aria-hidden="true"></i>
       ${esc(t('regeln_quelle'))}: ${esc(teile)}${esc(stand)}
-    </p>`;
+    </p>
+    ${link ? `<p class="regeln-quelle leise">${link}</p>` : ''}`;
 }
 
 // Absprünge zu passenden Lernbausteinen. Nur auflösbare IDs werden verlinkt —
