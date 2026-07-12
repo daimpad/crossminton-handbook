@@ -76,7 +76,7 @@ function schrittInhalt(daten, name) {
       .join('');
     const keine = `
       <label class="option-karte">
-        <input type="radio" name="ob-herkunft" value="" ${assistent.herkunft === null ? '' : ''}>
+        <input type="radio" name="ob-herkunft" value="" ${assistent.herkunft === null ? 'checked' : ''}>
         <span class="option-inhalt"><strong>${esc(t('herkunft_keine'))}</strong></span>
       </label>`;
     return {

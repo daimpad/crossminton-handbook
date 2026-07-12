@@ -50,7 +50,10 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   for (const verweis of document.querySelectorAll('[data-footer]')) {
-    verweis.classList.toggle('aktiv', verweis.dataset.footer === segmente[0]);
+    const istAktiv = verweis.dataset.footer === segmente[0];
+    verweis.classList.toggle('aktiv', istAktiv);
+    if (istAktiv) verweis.setAttribute('aria-current', 'page');
+    else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
   const imMehr = ['regeln', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
@@ -249,12 +252,15 @@ function rendern() {
 
   aktualisiereNavigation(segmente);
   if (roh !== letzteRoute) {
+    const ersterLauf = letzteRoute === null;
     window.scrollTo(0, 0);
     letzteRoute = roh;
     // Einstiegs-Übergang nur bei Routenwechsel, nicht bei Zustands-Neuzeichnung.
     el.classList.remove('einstieg');
     void el.offsetWidth;
     el.classList.add('einstieg');
+    // Tastatur-/Screenreader-Fokus auf den neuen Inhalt lenken (nicht beim Erstaufbau).
+    if (!ersterLauf) el.focus({ preventScroll: true });
   }
 }
 

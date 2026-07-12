@@ -232,7 +232,8 @@ export function renderProfil(el, daten) {
     } catch {
       ereignis.target.value = sprache();
     }
-    renderProfil(el, daten);
+    // Sprachwechsel muss auch Navigation/Menü/Kopf neu beschriften → globales Re-Render.
+    neuRendern();
   });
 
   el.querySelector('#pf-transfer').addEventListener('change', (ereignis) => {

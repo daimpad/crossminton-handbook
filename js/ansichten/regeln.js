@@ -6,7 +6,7 @@
 // kein Graph, kein Pflicht-Link) — nicht auflösbare IDs werden still ausgelassen.
 
 import { label, t, text } from '../i18n.js';
-import { esc } from '../oberflaeche.js';
+import { esc, externesZiel } from '../oberflaeche.js';
 
 // Quellenangabe sichtbar im Reiter (Herausgeber + Stand): die Regeln sind strikt
 // aus der offiziellen Quelle, das gehört benannt.
@@ -14,7 +14,7 @@ function quelleHtml(quelle) {
   if (!quelle || !quelle.herausgeber) return '';
   const teile = [quelle.titel, quelle.herausgeber, quelle.verband_de].filter(Boolean).join(' · ');
   const stand = quelle.stand ? ` · ${t('regeln_stand')}: ${quelle.stand}` : '';
-  const link = quelle.link
+  const link = externesZiel(quelle.link)
     ? `<a class="regeln-quelle-link" href="${esc(quelle.link)}" target="_blank" rel="noopener noreferrer">${esc(t('regeln_quelle_link'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`
     : '';
   return `

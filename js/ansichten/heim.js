@@ -95,6 +95,7 @@ export function renderHeim(el, daten) {
     </div>`;
 
   el.innerHTML = `
+    <h1 class="nur-sr">${esc(t('nav_lernen'))}</h1>
     ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
     ${weiterlernen}
     <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>

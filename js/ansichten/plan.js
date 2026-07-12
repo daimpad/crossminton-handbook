@@ -3,12 +3,10 @@
 // neu erzeugen) und herunterladen kann — als Druckansicht (PDF) und als Kalender (.ics).
 // Der Plan lebt im Zustand (persistent); Fortschritt bleibt baustein-gebunden.
 
-import { label, t, text } from '../i18n.js';
+import { label, sprache, t, text } from '../i18n.js';
 import { bausteinIcon, esc, neuRendern } from '../oberflaeche.js';
 import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../plan.js';
 import { plan as gespeicherterPlan, setzePlan, loeschePlan } from '../zustand.js';
-
-const WOCHENTAGE = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
 function naechsterMontagISO() {
   const d = new Date();
@@ -16,10 +14,13 @@ function naechsterMontagISO() {
   return d.toISOString().slice(0, 10);
 }
 
+// Wochentag + Datum in der aktiven Sprache (Intl); UTC, damit das ISO-Datum nicht kippt.
 function formatDatum(iso) {
   const [j, m, t2] = iso.split('-').map(Number);
-  const wd = WOCHENTAGE[new Date(Date.UTC(j, m - 1, t2)).getUTCDay()];
-  return `${wd}, ${String(t2).padStart(2, '0')}.${String(m).padStart(2, '0')}.${j}`;
+  const d = new Date(Date.UTC(j, m - 1, t2));
+  return new Intl.DateTimeFormat(sprache(), {
+    weekday: 'short', day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC',
+  }).format(d);
 }
 
 function ladeHerunter(name, inhalt, mime) {
@@ -73,8 +74,8 @@ function sessionHtml(daten, session, index) {
         <a class="leise plan-session-link" href="#/training/${esc(session.einheit)}">${esc(t('einheit_starten'))} →</a>
       </div>
       <div class="plan-session-knoepfe">
-        <button class="knopf knopf-leise plan-tausch" data-index="${index}" title="${esc(t('plan_tauschen'))}"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button>
-        <button class="knopf knopf-leise plan-entfernen" data-index="${index}" title="${esc(t('plan_entfernen'))}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <button class="knopf knopf-leise plan-tausch" data-index="${index}" aria-label="${esc(t('plan_tauschen'))}" title="${esc(t('plan_tauschen'))}"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button>
+        <button class="knopf knopf-leise plan-entfernen" data-index="${index}" aria-label="${esc(t('plan_entfernen'))}" title="${esc(t('plan_entfernen'))}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
     </div>`;
 }

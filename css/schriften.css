@@ -81,10 +81,10 @@
 .fa-bars::before { content: '\f0c9'; }
 .fa-xmark::before { content: '\f00d'; }
 .fa-medal::before { content: '\f5a2'; }
-.fa-image::before { content: '\f03e'; }
 .fa-arrow-right::before { content: '\f061'; }
 .fa-play::before { content: '\f04b'; }
 .fa-check::before { content: '\f00c'; }
+.fa-minus::before { content: '\f068'; }
 .fa-compass::before { content: '\f14e'; }
 .fa-person::before { content: '\f183'; }
 .fa-person-running::before { content: '\f70c'; }

@@ -4,7 +4,7 @@
 // sie füllt (Name, Lizenz, GitHub-URL) — sie werden nie erfunden oder verlinkt.
 
 import { t, text } from '../i18n.js';
-import { esc } from '../oberflaeche.js';
+import { esc, externesZiel } from '../oberflaeche.js';
 
 function istPlatzhalter(wert) {
   return typeof wert === 'string' && wert.trim().startsWith('[');
@@ -13,7 +13,7 @@ function istPlatzhalter(wert) {
 // Externer Absprung. Ein noch nicht gefüllter Platzhalter wird sichtbar gelassen
 // (der Betreiber ersetzt ihn), aber nie als Link ausgegeben.
 function externerLink(ziel, beschriftung, klasse) {
-  if (!ziel || istPlatzhalter(ziel)) {
+  if (istPlatzhalter(ziel) || !externesZiel(ziel)) {
     return `<span class="${klasse} knopf-inaktiv" role="link" aria-disabled="true">${esc(beschriftung)}</span>
       <span class="info-platzhalter leise">${esc(ziel || '')}</span>`;
   }

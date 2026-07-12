@@ -244,13 +244,6 @@ body.im-onboarding .hamburger { display: none; }
 .sprach-eintrag.aktiv { background: var(--primaer-weich); color: var(--primaer-tief); font-weight: 600; }
 .sprach-haken { flex: none; width: 1rem; text-align: center; color: var(--primaer-tief); font-weight: 700; }
 
-.sprach-hinweis {
-  padding: 0.5rem 0.55rem 0.3rem;
-  margin-top: 0.25rem;
-  border-top: 1px solid var(--linie);
-  font-size: 0.78rem;
-  line-height: 1.4;
-}
 
 body.im-onboarding .sprach-anzeige { display: none; }
 
@@ -387,6 +380,16 @@ a.karte-link {
 
 .leise { color: var(--tinte-2); font-size: 0.9rem; }
 
+/* Nur für Screenreader (visuell versteckt) — Struktur-H1 der Startseite, aria-live-Ansagen. */
+.nur-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+/* Programmatisch fokussierter Inhaltsanker bei Routenwechsel — kein sichtbarer Ring. */
+#ansicht:focus { outline: none; }
+
 .bestaetigung { color: var(--signal-gruen-text); font-weight: 600; }
 
 .abschnitt-titel { margin: 1.3rem 0 0.6rem; }
@@ -407,7 +410,6 @@ a.karte-link {
 
 /* Signal-Badges (Ampellogik) — weiche Fläche, kräftige Schrift, farbige Kante. */
 .chip-rot { background: var(--signal-rot-weich); color: var(--signal-rot-text); border: 1px solid var(--signal-rot); }
-.chip-gelb { background: var(--signal-gelb-weich); color: var(--signal-gelb-text); border: 1px solid var(--signal-gelb); }
 .chip-gruen { background: var(--signal-gruen-weich); color: var(--signal-gruen-text); border: 1px solid var(--signal-gruen); }
 
 .chip-zeile { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
@@ -602,12 +604,19 @@ input[type='radio'], input[type='checkbox'] {
   border-radius: 50%;
   border: 2px solid var(--linie);
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: background var(--uebergang), border-color var(--uebergang);
 }
+/* Form/Icon je Zustand zusätzlich zur Ampelfarbe — nicht allein farbabhängig (Farbfehlsicht). */
+.status-punkt i { font-size: 8px; line-height: 1; }
 
 .status-offen { border-color: var(--signal-rot); background: var(--signal-rot-weich); }
 .status-teil { border-color: var(--signal-gelb); background: var(--signal-gelb); }
+.status-teil i { color: #4d4300; }
 .status-voll { border-color: var(--signal-gruen); background: var(--signal-gruen); }
+.status-voll i { color: #0f3d1e; }
 
 /* ---------- Fortschritt ---------- */
 

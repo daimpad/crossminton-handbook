@@ -34,6 +34,9 @@ const STANDARD = { wochen: 4, einheitenProWoche: 2, spielform: 'alle' };
 // sie auf Termine ab startISO. Ohne planbare Einheiten bleibt `sessions` leer.
 export function erzeugePlan(daten, konfig = {}) {
   const k = { ...STANDARD, ...konfig };
+  if (!k.startISO || Number.isNaN(Date.parse(k.startISO))) {
+    throw new Error('erzeugePlan: gültiges startISO (YYYY-MM-DD) erforderlich');
+  }
   const wochen = Math.max(1, Math.min(12, (k.wochen | 0) || STANDARD.wochen));
   const proWoche = Math.max(1, Math.min(4, (k.einheitenProWoche | 0) || STANDARD.einheitenProWoche));
   const pool = planbareEinheiten(daten, k.spielform).map((e) => e.id);
