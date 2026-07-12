@@ -11,6 +11,11 @@ export function esc(wert) {
     .replaceAll('"', '&quot;');
 }
 
+// Nur echte externe Ziele (http/https/mailto) als Absprung zulassen — nie javascript:/data:.
+export function externesZiel(ziel) {
+  return /^(https?:|mailto:)/i.test(String(ziel ?? '').trim()) ? ziel : null;
+}
+
 // Erklärtexte trennen Absätze mit Leerzeilen.
 export function absaetze(text) {
   return String(text ?? '')
@@ -35,25 +40,65 @@ export function statusPunktHtml(station) {
   const { erklaerteil, uebungsteil, reflexionsaufgabe, absolviert } = station.status;
   let klasse = 'offen';
   let beschriftung = t('status_offen');
+  let glyph = '';
   if (absolviert) {
     klasse = 'voll';
     beschriftung = t('status_absolviert');
+    glyph = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
   } else if (erklaerteil === 'erledigt' || uebungsteil === 'erledigt' || reflexionsaufgabe === 'erledigt') {
     klasse = 'teil';
     beschriftung = t('status_teilweise');
+    glyph = '<i class="fa-solid fa-minus" aria-hidden="true"></i>';
   }
-  return `<span class="status-punkt status-${klasse}" role="img" aria-label="${esc(beschriftung)}" title="${esc(beschriftung)}"></span>`;
+  // Form/Icon zusätzlich zur Ampelfarbe — nicht allein über Farbe unterscheidbar (Farbfehlsicht).
+  return `<span class="status-punkt status-${klasse}" role="img" aria-label="${esc(beschriftung)}" title="${esc(beschriftung)}">${glyph}</span>`;
+}
+
+let vorherigerFokus = null;
+
+function fokussierbare(wurzel) {
+  return [...wurzel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+}
+
+// Tastatur im Dialog: Esc schließt, Tab bleibt im Dialog gefangen (Fokusfalle).
+function dialogTasten(ereignis) {
+  const dialog = document.querySelector('#dialog-wurzel .ueberlagerung');
+  if (!dialog) return;
+  if (ereignis.key === 'Escape') { schliesseUeberlagerung(); return; }
+  if (ereignis.key !== 'Tab') return;
+  const ziele = fokussierbare(dialog);
+  if (ziele.length === 0) { ereignis.preventDefault(); return; }
+  const erst = ziele[0];
+  const letzt = ziele[ziele.length - 1];
+  if (ereignis.shiftKey && document.activeElement === erst) { letzt.focus(); ereignis.preventDefault(); }
+  else if (!ereignis.shiftKey && document.activeElement === letzt) { erst.focus(); ereignis.preventDefault(); }
 }
 
 export function zeigeUeberlagerung(innenHtml) {
   const wurzel = document.getElementById('dialog-wurzel');
-  wurzel.innerHTML = `<div class="ueberlagerung" role="dialog" aria-modal="true">${innenHtml}</div>`;
-  wurzel.querySelector('[data-schliessen]')?.focus();
+  vorherigerFokus = document.activeElement;
+  wurzel.innerHTML = `<div class="ueberlagerung" role="dialog" aria-modal="true" tabindex="-1">${innenHtml}</div>`;
+  const dialog = wurzel.querySelector('.ueberlagerung');
+  const titel = dialog.querySelector('h1, h2, h3');
+  if (titel) { titel.id = titel.id || 'dialog-titel'; dialog.setAttribute('aria-labelledby', titel.id); }
+  document.addEventListener('keydown', dialogTasten, true);
+  (dialog.querySelector('[data-schliessen]') || dialog).focus();
 }
 
 export function schliesseUeberlagerung() {
   const wurzel = document.getElementById('dialog-wurzel');
+  document.removeEventListener('keydown', dialogTasten, true);
   if (wurzel) wurzel.innerHTML = '';
+  if (vorherigerFokus && typeof vorherigerFokus.focus === 'function') vorherigerFokus.focus();
+  vorherigerFokus = null;
+}
+
+// In eine aria-live-Region ansagen (Screenreader-Rückmeldung, visuell versteckt).
+export function melde(mitteilung) {
+  const region = document.getElementById('ansage');
+  if (!region) return;
+  region.textContent = '';
+  requestAnimationFrame(() => { region.textContent = String(mitteilung ?? ''); });
 }
 
 // Sequenzabschluss-Gratifikation (Spez. 8.3): würdigend, aber zurückhaltend.

@@ -2,6 +2,7 @@
 // Meilensteins (Spez. 8.3.2). Der Status selbst bleibt baustein-gebunden;
 // der Meilenstein ist reine Projektion über die Pfadmenge vorher/nachher.
 
+import { aufgabenTeile } from './daten.js';
 import { projektion } from './fortschritt.js';
 import { sequenzFuer } from './pfade.js';
 import { setzeTeilStatus, teilStatus } from './zustand.js';
@@ -37,6 +38,8 @@ export function schalteTeil(daten, kontext, bausteinId, teil) {
 export function markiereAbsolviert(daten, kontext, baustein) {
   const vorher = pfadQuote(daten, kontext).quote;
   setzeTeilStatus(baustein.id, 'erklaerteil', 'erledigt');
-  if (baustein.uebungsteil != null) setzeTeilStatus(baustein.id, 'uebungsteil', 'erledigt');
+  // Alle quittierbaren Aufgabenteile mitschließen — Übungsteil ODER Reflexionsaufgabe;
+  // sonst bliebe ein reflexions-only Baustein trotz „Vormarkieren" offen (Spez. 3.5/6.5).
+  for (const teil of aufgabenTeile(baustein)) setzeTeilStatus(baustein.id, teil, 'erledigt');
   return { meilenstein: meilensteinFuer(daten, kontext, vorher) };
 }

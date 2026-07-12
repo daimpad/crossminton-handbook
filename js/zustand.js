@@ -22,16 +22,25 @@ function vorgabe() {
   };
 }
 
-function verschmelze(basis, gespeichert) {
-  if (gespeichert == null || typeof gespeichert !== 'object') return basis;
+// Tiefer Merge: gespeicherte Werte überlagern die Vorgabe rekursiv, sodass auch
+// künftige verschachtelte Default-Keys erhalten bleiben. Arrays und Skalare ersetzen.
+function tiefMerge(basis, gespeichert) {
+  if (gespeichert == null || typeof gespeichert !== 'object' || Array.isArray(gespeichert)) return basis;
   const ergebnis = { ...basis };
   for (const [k, v] of Object.entries(gespeichert)) {
-    if (basis[k] && typeof basis[k] === 'object' && !Array.isArray(basis[k]) && v && typeof v === 'object' && !Array.isArray(v)) {
-      ergebnis[k] = { ...basis[k], ...v };
+    const b = basis[k];
+    if (b && typeof b === 'object' && !Array.isArray(b) && v && typeof v === 'object' && !Array.isArray(v)) {
+      ergebnis[k] = tiefMerge(b, v);
     } else {
       ergebnis[k] = v;
     }
   }
+  return ergebnis;
+}
+
+function verschmelze(basis, gespeichert) {
+  if (gespeichert == null || typeof gespeichert !== 'object') return basis;
+  const ergebnis = tiefMerge(basis, gespeichert);
   ergebnis.schemaVersion = SCHEMA_VERSION;
   return ergebnis;
 }

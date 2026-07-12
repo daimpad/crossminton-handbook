@@ -247,11 +247,14 @@ function pruefeDaten(daten) {
     for (const wetter of b.witterung || []) {
       if (!inVokabular(voka.witterung, wetter)) w.push(`${b.id}: unbekannte Witterung "${wetter}"`);
     }
-    if (b.typ === 'micro' && b.domaene === 'technik' && !hatUebungsteil(b)) {
+    if (b.typ === 'micro' && domaenenVon(b).includes('technik') && !hatUebungsteil(b)) {
       w.push(`${b.id}: Technik-Baustein ohne Übungsteil`);
     }
     if (hatReflexionsaufgabe(b) && typeof b.reflexionsaufgabe.de !== 'string') {
       w.push(`${b.id}: reflexionsaufgabe.de fehlt oder ist kein Text`);
+    }
+    if (hatUebungsteil(b) && hatReflexionsaufgabe(b)) {
+      w.push(`${b.id}: trägt Übungsteil UND Reflexionsaufgabe (höchstens eines erlaubt, Spez. 3.5)`);
     }
   }
 

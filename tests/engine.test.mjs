@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
 import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
+import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
 import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
@@ -342,6 +343,10 @@ setzeTeilStatus('spielziel_verstehen', 'erklaerteil', 'erledigt');
 pruefe('nur Erklärteil erledigt → Reflexions-Baustein noch nicht absolviert', !bausteinAbsolviert(spielziel));
 setzeTeilStatus('spielziel_verstehen', 'reflexionsaufgabe', 'erledigt');
 pruefe('Erklärteil + Reflexion erledigt → absolviert', bausteinAbsolviert(spielziel));
+setzeZurueck();
+setzeDiagnose({ stufe: 'beginner' });
+markiereAbsolviert(daten, 'kompetenz', spielziel);
+pruefe('markiereAbsolviert schließt reflexions-only Baustein vollständig (Regression Skip-No-op)', bausteinAbsolviert(spielziel));
 pruefe('Titel aus anzeigetitel ins Label geliftet', labelsDe.bausteine.spielziel_verstehen === 'Das Spielziel verstehen');
 pruefe('voraussetzungen_querverweis inert (keine Graph-Kante)', (() => {
   const zentral = daten.bausteinVonId.get('zentrale_position');
