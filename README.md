@@ -20,11 +20,9 @@
 ---
 
 ## Was ist das?
-
 Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik, Mentales und Athletik — in einer App, die dich dort abholt, wo du stehst. Statt einem linearen Text bietet es viele kleine, in sich geschlossene Lernbausteine, die über weiche Verbindungen zu einem persönlichen Lernpfad zusammenwachsen.
 
 ## Das Angebot
-
 - **Vier Lernpfade** — Technik, Taktik, Mentales und Athletik/Kondition, jeweils über drei Könnensstufen: Beginner, Fortgeschritten und Experte.
 - **Onboarding** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede als gezielte Hinweise, genau dort, wo eine mitgebrachte Gewohnheit kollidiert.
 - **Doppel spielen** — vom ersten Zusammenspiel bis zum eingespielten Paar als System.
@@ -33,24 +31,19 @@ Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik
 - **Spielregeln** — die vollständigen Spielregeln, jede Regel in klarer Erklärung, auf Grundlage des offiziellen ICO/DCV-Regelwerks.
 
 ## Für wen?
-
 Für Einsteiger, die einen klaren ersten Weg suchen. Für Umsteiger aus verwandten Rückschlagsportarten, die schnell den Unterschied verstehen wollen. Und für ambitionierte Spieler, die bis in die Experten-Feinheiten arbeiten.
 
 ## Technische Dokumentation
-
-Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständige Spezifikation unter: **📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
+Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständige Spezifikation unter: **
+📄 [Technische Dokumentation →](docs/TECHNICAL.md)**
 
 ## Mitmachen
-
 Beiträge sind willkommen — Fehler melden, übersetzen, Code beitragen. Die Details stehen im Reiter „Mitmachen" der App und in der [technischen Dokumentation](docs/TECHNICAL.md).
 
 ## Lizenz
-
 Dieses Projekt trennt Code und Inhalt:
-
-- **Quellcode** — [MIT-Lizenz](LICENSE)
-- **Inhalte** (Texte, Didaktik, Grafiken) — [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- **Quellcode** [MIT-Lizenz](LICENSE)
+- **Inhalte** (Texte, Didaktik, Grafiken) [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
 Erstellt in Zusammenarbeit mit der Crossminton-Community. Regelgrundlage: offizielle ICO/DCV-Spielregeln.
-
 <div align="center"><sub>Speeder™ ist eine Marke der jeweiligen Rechteinhaber. Dieses Projekt steht in keiner offiziellen Verbindung zur ICO.</sub></div>
