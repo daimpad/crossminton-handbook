@@ -1,51 +1,65 @@
 # Corporate Identity — Crossminton-Handbuch
 
-Kurzer, verbindlicher Leitfaden für das visuelle Erscheinungsbild. Die Werte sind zentral in `css/app.css` als CSS-Variablen (`:root`) hinterlegt — Änderungen dort wirken app-weit.
+Kurzer, verbindlicher Leitfaden für das visuelle Erscheinungsbild. Die Werte sind zentral in `css/app.css` als CSS-Variablen (`:root`) hinterlegt — Änderungen dort wirken app-weit. Das Design ist bewusst **fein und ruhig** gehalten: Blau ist Akzent (nicht Flächenfarbe), Überschriften ruhen in Tinte, Tiefe entsteht durch weiche Elevation statt harter Rahmen.
+
+## Hell & Dunkel
+
+Die App trägt **zwei Farbschemata über denselben Variablensatz**: Der Baustein-, Ansichts- und Komponenten-Code liest ausschließlich Tokens (`var(--flaeche)`, `var(--tinte)`, `var(--linie)` …), sodass ein Umschalten der Tokens das ganze Bild kippt.
+
+- **Automatisch (Default):** folgt dem System über `@media (prefers-color-scheme: dark)`.
+- **Manuell:** der Profil-Umschalter „Darstellung" (auto / hell / dunkel) setzt `data-theme` auf `<html>`. `data-theme="hell"` erzwingt hell (auch bei dunklem System), `data-theme="dunkel"` erzwingt dunkel. `auto` entfernt die Markierung.
+- Ein **Inline-Skript im `<head>`** (`index.html`) setzt `data-theme` vor dem ersten Anstrich → kein Flackern; zur Laufzeit übernimmt `wendeThemaAn()` (`js/oberflaeche.js`). Beide halten die Browser-Leiste (`theme-color`) am effektiven Modus.
+- **Hauptfarbe und Ampellogik bleiben in beiden Schemata verbindlich** — im Dunkeln werden die Töne nur angehoben (heller, damit der Kontrast auf dunklem Grund stimmt).
 
 ## Farben
 
-### Hauptfarbe
+### Hauptfarbe (Akzent)
 
-| Rolle | Hex | Variable | Einsatz |
-| --- | --- | --- | --- |
-| Primär | `#38a4f1` | `--primaer` | Buttons, aktive Icons, Akzente, Fortschritt |
-| Primär dunkel | `#1e8bd6` | `--primaer-dunkel` | Überschriften (H1/H2), Button-Hover |
-| Primär tief | `#1671b5` | `--primaer-tief` | Links, aktive Navigation |
-| Primär weich | `#e7f4fe` | `--primaer-weich` | Flächen, Chip-Hintergründe |
+| Rolle | Hell | Dunkel | Variable | Einsatz |
+| --- | --- | --- | --- | --- |
+| Primär | `#38a4f1` | `#4fb0f4` | `--primaer` | Buttons, aktive Icons, Links, Fortschritt, Aktiv-Zustand |
+| Primär dunkel | `#1e8bd6` | `#6bbdf6` | `--primaer-dunkel` | Button-Hover, Marke |
+| Primär tief | `#1568ad` | `#9acdf8` | `--primaer-tief` | tiefe Akzente |
+| Primär weich | `#e8f3fe` | `#143247` | `--primaer-weich` | dezente Flächen |
 
 ### Signalfarben (Ampellogik)
 
-Konsequent nach Bedeutung, nie dekorativ:
+Konsequent nach Bedeutung, nie dekorativ. Je Signal drei Rollen: Grundton (Flächen/Ränder/Punkte), `-text` (lesbarer Text) und `-weich` (zarte Hintergründe).
 
-| Farbe | Hex | Variable | Bedeutung |
-| --- | --- | --- | --- |
-| 🔴 Rot | `#f91f05` | `--signal-rot` | **offen** — noch nicht bearbeitet (Status-Badge, Statuspunkt) |
-| 🟡 Gelb | `#f4e248` | `--signal-gelb` | **teilweise / Hinweis** — angefangen, Voraussetzungs-Hinweise, Warnbanner |
-| 🟢 Grün | `#25c449` | `--signal-gruen` | **erledigt** — abgeschlossen, Bestätigungen, Meilenstein-Medaille (Gold-Ton) |
+| Farbe | Hell | Dunkel | Variable | Bedeutung |
+| --- | --- | --- | --- | --- |
+| 🔴 Rot | `#f4402a` | `#ff5a44` | `--signal-rot` | **offen** — noch nicht bearbeitet (Status-Badge, Statuspunkt) |
+| 🟡 Gelb | `#f2d93b` | `#f2d93b` | `--signal-gelb` | **teilweise / Hinweis** — angefangen, Voraussetzungs-Hinweise, Warnbanner |
+| 🟢 Grün | `#24bd47` | `#33cf5a` | `--signal-gruen` | **erledigt** — abgeschlossen, Bestätigungen, Meilenstein-Medaille |
 
-Für Text auf hellem Grund werden abgedunkelte Varianten genutzt (`--signal-*-text`), damit der Kontrast (WCAG AA) stimmt; die reinen Signalfarben tragen Flächen, Ränder und Punkte.
+Für Text wird die abgedunkelte (hell) bzw. aufgehellte (dunkel) Variante `--signal-*-text` genutzt, damit der Kontrast (WCAG AA) stimmt; die reinen Signalfarben tragen Flächen, Ränder und Punkte, `--signal-*-weich` die zarten Banner-Hintergründe.
 
 ### Neutrale
 
-| Rolle | Hex | Variable |
-| --- | --- | --- |
-| Hintergrund | `#f5f9fd` | `--hintergrund` |
-| Fläche | `#ffffff` | `--flaeche` |
-| Text | `#1f2933` | `--tinte` |
-| Text leise | `#5f6b7a` | `--tinte-2` |
-| Linie | `#e1e9f2` | `--linie` |
+| Rolle | Hell | Dunkel | Variable |
+| --- | --- | --- | --- |
+| Hintergrund | `#f2f6fc` → `#eaf1fa` (Verlauf) | `#0f151c` → `#131c26` | `--hintergrund` / `--hintergrund-2` |
+| Fläche | `#ffffff` | `#18232f` | `--flaeche` |
+| Fläche 2 | `#f1f5fb` | `#1f2c3a` | `--flaeche-2` |
+| Text | `#16202b` | `#e8eef5` | `--tinte` |
+| Text leise | `#5a6675` | `#a2b2c4` | `--tinte-2` |
+| Text sehr leise | `#8a94a3` | `#7f8ea0` | `--tinte-3` |
+| Linie | `#e9eef6` | `#273543` | `--linie` |
+| Linie stark | `#dae3ee` | `#3a4b5e` | `--linie-stark` |
 
 ## Typografie
 
 - **Schrift:** [Rubik](https://fonts.google.com/specimen/Rubik) — lokal gehostet (kein CDN), Schnitte 400/500/700, Latin + Latin-Ext. Fallback: System-Sans.
-- **H1/H2:** immer Blau (`--ueberschrift` = `--primaer-dunkel`), 700/600.
-- **Fließtext:** `--tinte`, 1rem, Zeilenhöhe 1.55.
+- **Überschriften ruhen in Tinte** (`--ueberschrift` = `--tinte`), **nicht** blau — Blau ist Akzent. Gewicht 600, leicht negatives Tracking (`letter-spacing` −0.01…−0.015em) für einen feineren Satz.
+- **Skala mit Luft:** H1 ~1.9rem, H2 ~1.3rem, H3 ~1.05rem, H4 als Kapitälchen-Label (0.78rem, `letter-spacing` 0.06em). Der Abstand zum Fließtext (1rem) trägt die Hierarchie mit.
+- **Fließtext:** `--tinte`, 1rem, Zeilenhöhe 1.6; kantengeglättet (`-webkit-font-smoothing: antialiased`).
 
 ## Form & Bewegung
 
-- **Radius:** 10px für alle Container (`--radius`).
-- **Hover:** leichter Schlagschatten (`--schatten-hover`) plus 2px Anheben — nur auf Zeigergeräten (`@media (hover: hover)`).
-- **Übergänge:** 220ms als Standard (`--uebergang`); Ansichtswechsel gleiten ein, Menü und Meilenstein mit eigenem Timing. `prefers-reduced-motion` schaltet alles ab.
+- **Radius gestuft:** 14px Standard (`--radius`), 20px für große Flächen/Hero (`--radius-gross`), 9px für kleine Elemente (`--radius-klein`).
+- **Weiche, mehrlagige Elevation statt harter Rahmen:** Karten tragen dauerhaft einen zarten Schatten (`--schatten-karte`) plus feine Linie; der harte 1px-Rahmen dominiert das Bild nicht mehr.
+- **Hover:** stärkerer, blau getönter Schatten (`--schatten-hover`) plus 2px Anheben — nur auf Zeigergeräten (`@media (hover: hover)`).
+- **Übergänge:** 200ms mit weicher Kurve (`--uebergang`, `cubic-bezier(0.33, 1, 0.5, 1)`); Ansichtswechsel gleiten ein, Menü und Meilenstein mit eigenem Timing. `prefers-reduced-motion` schaltet alles ab.
 
 ## Icons
 

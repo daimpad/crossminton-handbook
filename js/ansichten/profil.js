@@ -6,7 +6,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../fortschritt.js';
 import { label, setzeSprache, sprache, t } from '../i18n.js';
-import { balkenHtml, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, esc, neuRendern, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -129,6 +129,10 @@ export function renderProfil(el, daten) {
     .map(([kuerzel, name]) => `<option value="${kuerzel}" ${sprache() === kuerzel ? 'selected' : ''}>${esc(name)}</option>`)
     .join('');
 
+  const themaOptionen = ['auto', 'hell', 'dunkel']
+    .map((w) => `<option value="${w}" ${(e.thema || 'auto') === w ? 'selected' : ''}>${esc(t(`thema_${w}`))}</option>`)
+    .join('');
+
   el.innerHTML = `
     <h1>${esc(t('nav_profil'))}</h1>
 
@@ -166,6 +170,10 @@ export function renderProfil(el, daten) {
         <select id="pf-sprache">${sprachOptionen}</select>
       </div>
       ${sprache() !== 'de' ? `<p class="leise">${esc(t('uebersetzung_fehlt'))}</p>` : ''}
+      <div class="profil-zeile">
+        <label for="pf-thema">${esc(t('thema'))}</label>
+        <select id="pf-thema">${themaOptionen}</select>
+      </div>
       <div class="profil-zeile">
         <label for="pf-transfer">${esc(t('transfer_schalter'))}<span class="leise" style="display:block">${esc(t('transfer_schalter_text'))}</span></label>
         <input type="checkbox" id="pf-transfer" ${e.transferKuerzelSichtbar ? 'checked' : ''}>
@@ -234,6 +242,12 @@ export function renderProfil(el, daten) {
     }
     // Sprachwechsel muss auch Navigation/Menü/Kopf neu beschriften → globales Re-Render.
     neuRendern();
+  });
+
+  el.querySelector('#pf-thema').addEventListener('change', (ereignis) => {
+    const neu = ereignis.target.value;
+    setzeEinstellung('thema', neu);
+    wendeThemaAn(neu);
   });
 
   el.querySelector('#pf-transfer').addEventListener('change', (ereignis) => {

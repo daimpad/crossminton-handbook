@@ -16,7 +16,7 @@ function vorgabe() {
     diagnose: { stufe: null, trainer: false, herkunft: null, ziel: null },
     fortschritt: {},
     kontinuitaet: { gesamt: 0, jeEinheit: {} },
-    einstellungen: { sprache: 'de', transferKuerzelSichtbar: true },
+    einstellungen: { sprache: 'de', transferKuerzelSichtbar: true, thema: 'auto' },
     // Persönlicher Trainingsplan (generiert, anpassbar): null = noch keiner erstellt.
     plan: null,
   };
