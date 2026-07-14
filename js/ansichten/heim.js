@@ -3,7 +3,7 @@
 
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { balkenHtml, esc } from '../oberflaeche.js';
+import { esc, ringHtml } from '../oberflaeche.js';
 import { kompetenzpfad, spielformen, themenDomaenen, umgebungBausteine } from '../pfade.js';
 import { diagnose, kontinuitaet, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
@@ -83,9 +83,13 @@ export function renderHeim(el, daten) {
   const kompetenzKarte = d.stufe
     ? `
     <a class="karte karte-link" href="#/pfad/kompetenz">
-      <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>
-      <p class="leise">${esc(t('pfad_kompetenz_text'))}</p>
-      ${balkenHtml(pfadProjektion)}
+      <div class="karte-ring">
+        <div>
+          <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>
+          <p class="leise">${esc(t('pfad_kompetenz_text'))}</p>
+        </div>
+        ${ringHtml(pfadProjektion, { groesse: 60, staerke: 6 })}
+      </div>
     </a>`
     : `
     <div class="karte">

@@ -6,7 +6,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../fortschritt.js';
 import { label, setzeSprache, sprache, t } from '../i18n.js';
-import { balkenHtml, esc, neuRendern, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, esc, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -154,8 +154,13 @@ export function renderProfil(el, daten) {
     <section class="karte">
       <h2>${esc(t('fortschritt'))}</h2>
       <h3>${esc(t('fortschritt_global'))}</h3>
-      ${balkenHtml(global)}
-      <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.aufgabeErledigt, d: global.aufgabeGesamt }))}</p>
+      <div class="ring-zeile">
+        ${ringHtml(global)}
+        <div>
+          <p>${esc(t('bausteine_erledigt', { a: global.absolviert, b: global.gesamt }))}</p>
+          <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.aufgabeErledigt, d: global.aufgabeGesamt }))}</p>
+        </div>
+      </div>
       ${d.stufe ? `<h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>${balkenHtml(pfadProjektion)}` : ''}
       <h3>${esc(t('kontinuitaet'))}</h3>
       <p>${esc(t('kontinuitaet_stand', { n: k.gesamt }))}</p>

@@ -4,7 +4,7 @@
 import { markiereAbsolviert } from '../aktionen.js';
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { balkenHtml, bausteinIcon, esc, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, bausteinIcon, esc, leerHtml, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
 import { individualpfad, kompetenzpfad, spielformen, spielformpfad, themenDomaenen, themenpfad, umgebungspfad, untergruende, witterungen } from '../pfade.js';
 import { diagnose, einstellungen, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -80,7 +80,7 @@ export function renderKompetenzpfad(el, daten, stufe) {
   }
   const inhalt =
     pfad.stationen.length === 0
-      ? `<div class="karte"><p class="leise">${esc(t('leer_stufe'))}</p></div>`
+      ? leerHtml(t('leer_stufe'))
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, kontext, { mitSkip: Boolean(pfad.herkunft) })}`;
   el.innerHTML = `
     <h1>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', pfad.stufe))}</span></h1>
@@ -107,7 +107,7 @@ export function renderThemen(el, daten, domaene) {
   const pfad = themenpfad(daten, domaene);
   const inhalt =
     pfad.stationen.length === 0
-      ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+      ? leerHtml(t('leer_domaene'))
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, `themen:${domaene}`)}`;
   el.innerHTML = `
     <h1>${esc(label('domaene', domaene))}</h1>
@@ -123,7 +123,7 @@ export function renderSpielform(el, daten, spielform) {
   const pfad = gewaehlt ? spielformpfad(daten, gewaehlt) : { stationen: [] };
   const inhalt =
     pfad.stationen.length === 0
-      ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+      ? leerHtml(t('leer_domaene'))
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, `spielform:${gewaehlt}`)}`;
   el.innerHTML = `
     <h1>${esc(t('pfad_spielform'))}</h1>
@@ -139,7 +139,7 @@ export function renderUmgebung(el, daten, achse, wert) {
     const pfad = umgebungspfad(daten, achse, wert);
     const inhalt =
       pfad.stationen.length === 0
-        ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+        ? leerHtml(t('leer_domaene'))
         : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, `${achse}:${wert}`)}`;
     el.innerHTML = `
       <h1>${esc(t('pfad_umgebung'))} <span class="chip">${esc(label(achse, wert))}</span></h1>
@@ -157,7 +157,7 @@ export function renderUmgebung(el, daten, achse, wert) {
   const alle = umgebungspfad(daten);
   const liste =
     alle.stationen.length === 0
-      ? `<div class="karte"><p class="leise">${esc(t('leer_domaene'))}</p></div>`
+      ? leerHtml(t('leer_domaene'))
       : `${balkenHtml(projektion(alle.stationen.map((s) => s.baustein)))}${stationslisteHtml(alle.stationen, 'umgebung')}`;
   el.innerHTML = `
     <h1>${esc(t('pfad_umgebung'))}</h1>
@@ -193,7 +193,7 @@ export function renderIndividual(el, daten) {
     .join(' ');
   const inhalt =
     pfad.stationen.length === 0
-      ? `<div class="karte"><p class="leise">${esc(t('leer_ziel'))}</p></div>`
+      ? leerHtml(t('leer_ziel'), 'fa-bullseye')
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, 'individual')}`;
   el.innerHTML = `
     <h1>${esc(t('pfad_individual'))}</h1>

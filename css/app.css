@@ -182,15 +182,22 @@ main {
   padding: 1.1rem 1rem 0.6rem;
 }
 
-/* Einstiegs-Übergang: jede Ansicht gleitet sanft herein. */
+/* Einstiegs-Übergang: die Blöcke der Ansicht gleiten gestaffelt herein — nur
+   bei Routenwechsel (app.js setzt .einstieg dann neu), nicht bei jeder Zustands-
+   Neuzeichnung. prefers-reduced-motion schaltet es unten global ab. */
 @keyframes ansicht-einstieg {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-#ansicht.einstieg {
-  animation: ansicht-einstieg 380ms cubic-bezier(0.22, 0.9, 0.35, 1) both;
+#ansicht.einstieg > * {
+  animation: ansicht-einstieg 400ms cubic-bezier(0.22, 0.9, 0.35, 1) both;
 }
+#ansicht.einstieg > :nth-child(2) { animation-delay: 45ms; }
+#ansicht.einstieg > :nth-child(3) { animation-delay: 90ms; }
+#ansicht.einstieg > :nth-child(4) { animation-delay: 135ms; }
+#ansicht.einstieg > :nth-child(5) { animation-delay: 180ms; }
+#ansicht.einstieg > :nth-child(n+6) { animation-delay: 220ms; }
 
 /* ---------- Untere Leiste (nur mobil) ---------- */
 
@@ -1077,6 +1084,134 @@ details[open] summary { margin-bottom: 0.5rem; }
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* ---------- Feinschliff: Ziffern, Lesemaß, Ikon-Kachel, Ring, Leerzustand ---------- */
+
+/* Tabellenziffern überall, wo Zahlen zählen (Fortschritt, Stationen, Plan) —
+   gleiche Ziffernbreite, damit nichts springt. */
+.fortschritt-zeile .leise,
+.ring-text,
+.station-nummer,
+.stationszahl,
+.plan-feld input,
+.einheiten-zaehler {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ruhiges Lesemaß für Fließtext in den Abschnitten (Erklär-/Übungs-/Reflexion).
+   Auf schmalen Schirmen greift 100% ohnehin zuerst. */
+.abschnitt > p,
+.ue-block > p,
+.delta-hinweis {
+  max-width: 64ch;
+}
+
+/* Stationszahl in der Baustein-Ansicht als dezentes Kapitälchen-Label. */
+.stationszahl {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinte-3);
+}
+
+/* Baustein-Titel: das Icon wird eine ruhige, getönte Kachel statt nacktem Glyph. */
+.baustein > h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.baustein-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  border-radius: var(--radius-klein);
+  background: var(--primaer-weich);
+  color: var(--primaer);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+/* Fortschritts-Ring (SVG-Donut). */
+.ring {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.ring svg {
+  transform: rotate(-90deg); /* 0 % beginnt oben statt rechts */
+}
+.ring-spur { stroke: var(--flaeche-2); }
+.ring-wert {
+  stroke: var(--primaer);
+  transition: stroke-dasharray 600ms cubic-bezier(0.22, 0.9, 0.35, 1);
+}
+.ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ueberschrift);
+}
+.ring-prozent { font-size: 0.62em; color: var(--tinte-2); margin-left: 0.06em; }
+
+/* Profil-Gesamt: Ring neben der Kennzahl. */
+.ring-zeile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+.ring-zeile .leise { margin: 0; }
+
+/* Kompetenz-Karte auf der Startseite: Text links, Ring rechts. */
+.karte-ring {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.karte-ring > div { min-width: 0; }
+.karte-ring > div > :last-child { margin-bottom: 0; }
+
+/* Leerer Zustand: zentriertes ruhiges Icon über dem Hinweis. */
+.leer-zustand {
+  text-align: center;
+  padding: 1.8rem 1.25rem;
+}
+.leer-zustand > i {
+  font-size: 1.6rem;
+  color: var(--primaer);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.leer-zustand > p { margin: 0; }
+
+/* Dunkelmodus-Tiefe: höher liegende Flächen tragen einen zarten oberen
+   Lichtsaum (Elevation-Overlay) — sonst liest sich Tiefe im Dunkeln flach. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='hell']) .karte,
+  :root:not([data-theme='hell']) .abschnitt,
+  :root:not([data-theme='hell']) .station {
+    box-shadow: var(--schatten-karte), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  }
+}
+:root[data-theme='dunkel'] .karte,
+:root[data-theme='dunkel'] .abschnitt,
+:root[data-theme='dunkel'] .station {
+  box-shadow: var(--schatten-karte), inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 /* ---------- Trainingsplan ---------- */
