@@ -15,7 +15,7 @@ import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initI18n, sprache, t, text } from './i18n.js';
 import { esc } from './oberflaeche.js';
-import { einstellungen, istOnboardingAbgeschlossen, ladeZustand } from './zustand.js';
+import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb } from './zustand.js';
 
 let daten = null;
 let letzteRoute = null;
@@ -199,11 +199,17 @@ function rendern() {
   const el = document.getElementById('ansicht');
 
   // Erstlauf: Willkommensseite mit den zwei Einstiegen; der Wizard ist einer
-  // davon. Tiefe Routen führen bis zur Wahl zurück auf die Startseite.
-  const erstlauf = !istOnboardingAbgeschlossen();
+  // davon. Nur die leere Route zeigt die Willkommensseite — aktive Navigation
+  // tritt frei ein (s. u.).
+  let erstlauf = !istOnboardingAbgeschlossen();
+  // Zwei-Ebenen-Logik (4.4): Zugriff wird nie gesperrt. Navigiert die Person vor
+  // Abschluss des Onboardings aktiv in einen echten Bereich (z. B. über die
+  // Kopf-Navigation), gilt das als freier Einstieg — wie „Freies Handbuch" —
+  // statt sie auf die Willkommensseite zurückzuwerfen. So funktioniert die
+  // Navigation von Anfang an, und Kopf-Icons bleiben durchgehend sichtbar.
   if (erstlauf && segmente.length > 0 && segmente[0] !== 'onboarding') {
-    window.location.hash = '#/';
-    return;
+    schliesseOnboardingAb();
+    erstlauf = false;
   }
   document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding' || erstlauf);
   beschrifteRahmen();

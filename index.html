@@ -7,6 +7,11 @@
   <meta name="description" content="Clientseitige, mobil-orientierte Lernapp für Crossminton: Bausteine, Pfade, Fortschritt — alles lokal im Browser.">
   <meta name="theme-color" content="#f5f9fd">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <!-- Kritische Icon-Schrift vorab laden: Font Awesome trägt font-display:block
+       (Icons bleiben unsichtbar, bis die Schrift da ist). Ohne Preload können die
+       Kopf-Icons (Hamburger, Globus) beim ersten Anstrich kurz fehlen und erst
+       nach einer Interaktion erscheinen. -->
+  <link rel="preload" href="assets/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/schriften.css">
   <link rel="stylesheet" href="css/app.css">
 
