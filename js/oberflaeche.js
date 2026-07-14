@@ -36,6 +36,38 @@ export function balkenHtml(projektion, beschriftung = '') {
     </div>`;
 }
 
+// Fortschritts-Ring (SVG-Donut) für Kennzahlen, bei denen der Anteil im
+// Vordergrund steht (Profil-Gesamt, Kompetenz-Karte). Rein darstellend über
+// stroke-dasharray; die Zugänglichkeit trägt role=progressbar + aria-Werte.
+export function ringHtml(projektion, { groesse = 76, staerke = 8, beschriftung = '' } = {}) {
+  const prozent = Math.round(projektion.quote * 100);
+  const r = (groesse - staerke) / 2;
+  const umfang = 2 * Math.PI * r;
+  const gefuellt = (prozent / 100) * umfang;
+  const mitte = groesse / 2;
+  const textZeile = beschriftung || t('bausteine_erledigt', { a: projektion.absolviert, b: projektion.gesamt });
+  return `
+    <div class="ring" role="progressbar" aria-valuenow="${prozent}" aria-valuemin="0" aria-valuemax="100" aria-label="${esc(textZeile)}">
+      <svg width="${groesse}" height="${groesse}" viewBox="0 0 ${groesse} ${groesse}" aria-hidden="true">
+        <circle class="ring-spur" cx="${mitte}" cy="${mitte}" r="${r}" fill="none" stroke-width="${staerke}"></circle>
+        <circle class="ring-wert" cx="${mitte}" cy="${mitte}" r="${r}" fill="none" stroke-width="${staerke}" stroke-linecap="round"
+          stroke-dasharray="${gefuellt.toFixed(2)} ${(umfang - gefuellt).toFixed(2)}"></circle>
+      </svg>
+      <span class="ring-text">${prozent}<span class="ring-prozent">%</span></span>
+    </div>`;
+}
+
+// Leerer Zustand mit ruhigem Icon statt nacktem Satz. Die Zwei-Ebenen-Logik
+// sperrt nie — das sind echte Leermengen (z. B. ein Faktor ohne Beleg auf der
+// Stufe), kein Fehlerfall.
+export function leerHtml(nachricht, icon = 'fa-compass') {
+  return `
+    <div class="karte leer-zustand">
+      <i class="fa-solid ${icon}" aria-hidden="true"></i>
+      <p class="leise">${esc(nachricht)}</p>
+    </div>`;
+}
+
 export function statusPunktHtml(station) {
   const { erklaerteil, uebungsteil, reflexionsaufgabe, absolviert } = station.status;
   let klasse = 'offen';

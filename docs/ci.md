@@ -59,7 +59,13 @@ Für Text wird die abgedunkelte (hell) bzw. aufgehellte (dunkel) Variante `--sig
 - **Radius gestuft:** 14px Standard (`--radius`), 20px für große Flächen/Hero (`--radius-gross`), 9px für kleine Elemente (`--radius-klein`).
 - **Weiche, mehrlagige Elevation statt harter Rahmen:** Karten tragen dauerhaft einen zarten Schatten (`--schatten-karte`) plus feine Linie; der harte 1px-Rahmen dominiert das Bild nicht mehr.
 - **Hover:** stärkerer, blau getönter Schatten (`--schatten-hover`) plus 2px Anheben — nur auf Zeigergeräten (`@media (hover: hover)`).
-- **Übergänge:** 200ms mit weicher Kurve (`--uebergang`, `cubic-bezier(0.33, 1, 0.5, 1)`); Ansichtswechsel gleiten ein, Menü und Meilenstein mit eigenem Timing. `prefers-reduced-motion` schaltet alles ab.
+- **Übergänge:** 200ms mit weicher Kurve (`--uebergang`, `cubic-bezier(0.33, 1, 0.5, 1)`); Menü und Meilenstein mit eigenem Timing. `prefers-reduced-motion` schaltet alles ab.
+- **Gestaffelter Einstieg:** bei Routenwechsel gleiten die Blöcke der Ansicht nacheinander herein (`#ansicht.einstieg > *`, ~45ms Versatz) — nur bei echter Navigation, nicht bei Zustands-Neuzeichnung.
+- **Fortschritts-Ring** (`ringHtml`, SVG-Donut) für die Kennzahl im Vordergrund (Profil-Gesamt, Kompetenz-Karte); der schlanke Balken (`balkenHtml`) bleibt für Nebenmetriken.
+- **Ikon-Kachel:** der Baustein-Titel trägt sein Icon in einer weichen getönten Rundung (`--primaer-weich`, `--radius-klein`) statt als nacktem Glyph.
+- **Leere Zustände** (`leerHtml`) tragen ein ruhiges, zentriertes Icon über dem Hinweis — nie eine nackte Textzeile.
+- **Tabellenziffern** (`tabular-nums`) überall, wo Zahlen zählen (Fortschritt, Stationen, Plan); Fließtext bleibt auf ein ruhiges Lesemaß (~64ch) begrenzt.
+- **Dunkelmodus-Tiefe:** höher liegende Flächen tragen einen zarten oberen Lichtsaum (`inset`-Highlight), damit Elevation im Dunkeln nicht flach wirkt.
 
 ## Icons
 

@@ -182,7 +182,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
 
   const positionsZeile =
     index >= 0
-      ? `<p class="leise">${esc(t('station_x_von_y', { a: index + 1, b: sequenz.stationen.length }))}</p>`
+      ? `<p class="stationszahl">${esc(t('station_x_von_y', { a: index + 1, b: sequenz.stationen.length }))}</p>`
       : '';
 
   // Delta-Einblendung: ersetzt den Erklärteil, Lektüreempfehlungen der
