@@ -246,7 +246,6 @@ main {
 
 body.im-onboarding .fussnav { display: none; }
 body.im-onboarding main { padding-bottom: 2rem; }
-body.im-onboarding .hamburger { display: none; }
 
 /* ---------- Hamburger + Menü (Desktop) ---------- */
 
@@ -322,9 +321,6 @@ body.im-onboarding .hamburger { display: none; }
 .sprach-eintrag .sprach-name { flex: 1; }
 .sprach-eintrag.aktiv { background: var(--primaer-weich); color: var(--primaer-tief); font-weight: 600; }
 .sprach-haken { flex: none; width: 1rem; text-align: center; color: var(--primaer-tief); font-weight: 700; }
-
-
-body.im-onboarding .sprach-anzeige { display: none; }
 
 .menue {
   position: fixed;
