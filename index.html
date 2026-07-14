@@ -10,6 +10,23 @@
   <link rel="stylesheet" href="css/schriften.css">
   <link rel="stylesheet" href="css/app.css">
 
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        var thema = z && z.einstellungen && z.einstellungen.thema;
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema !== 'hell' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Modul-Graph vorab laden: Ohne diese Hinweise entdeckt der Browser die
        ES-Module erst nacheinander im Import-Wasserfall (app.js → Ansichten →
        Engine → Daten). Fällt dabei EINE Anfrage aus (kurzer CDN-/Netz-Aussetzer,

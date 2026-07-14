@@ -126,6 +126,22 @@ export function neuRendern() {
   window.dispatchEvent(new CustomEvent('app:rendern'));
 }
 
+// Thema (hell/dunkel/auto) auf das Wurzelelement anwenden. 'auto' entfernt die
+// Markierung und folgt dem OS (prefers-color-scheme); hell/dunkel erzwingen.
+// Hält die Browser-Leiste (theme-color) am effektiven Modus. Das Boot-Skript in
+// index.html macht dasselbe vor dem ersten Anstrich (kein Flackern); dies hier
+// ist der Laufzeit-Weg beim Umschalten im Profil.
+export function wendeThemaAn(thema) {
+  const wurzel = document.documentElement;
+  if (thema === 'hell' || thema === 'dunkel') wurzel.dataset.theme = thema;
+  else delete wurzel.dataset.theme;
+  const dunkel =
+    thema === 'dunkel' ||
+    (thema !== 'hell' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+}
+
 // Sichtbare Baustein-Icons (Font Awesome, immer farbig): Körper, Hand, Schläger,
 // Wege. Neue Bausteine ohne Eintrag bekommen schlicht kein Icon — kein Fehlerfall.
 const BAUSTEIN_ICONS = {

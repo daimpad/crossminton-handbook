@@ -40,10 +40,11 @@ Für den End-to-End-Durchlauf (Playwright, mobil + Desktop) siehe `.claude/skill
 
 Farben, Typografie und Icon-Regeln stehen in `docs/ci.md` und sind als CSS-Variablen in `css/app.css` (`:root`) zentralisiert. Verbindlich:
 
-- **Hauptfarbe `#38a4f1`**; H1/H2 immer blau.
-- **Signalfarben nach Ampellogik**, nie dekorativ: Rot `#f91f05` = offen, Gelb `#f4e248` = teilweise/Hinweis, Grün `#25c449` = erledigt.
+- **Hauptfarbe `#38a4f1` ist Akzent** (Links, Aktion, Aktiv-Zustand), keine Flächenfarbe; **Überschriften ruhen in Tinte** (`--ueberschrift` = `--tinte`), nicht blau.
+- **Signalfarben nach Ampellogik**, nie dekorativ: Rot `#f4402a` = offen, Gelb `#f2d93b` = teilweise/Hinweis, Grün `#24bd47` = erledigt (je mit `-text`/`-weich`-Rolle). Werte gelten hell wie dunkel — im Dunkeln nur aufgehellt.
+- **Hell & Dunkel über denselben Token-Satz** (`:root` hell; `@media (prefers-color-scheme: dark)` + `:root[data-theme='dunkel']` kippen die Tokens). Weil Ansichten/Komponenten **ausschließlich Tokens** lesen, flippt das ganze Bild automatisch — Farben nie hart schreiben. Umschalter im Profil („Darstellung": auto/hell/dunkel, `einstellungen.thema`) setzt `data-theme` auf `<html>`; das **Inline-Skript im `<head>`** setzt es flackerfrei vor dem ersten Anstrich, `wendeThemaAn()` (`js/oberflaeche.js`) zur Laufzeit — beide halten `theme-color` nach. Hauptfarbe & Ampel bleiben in beiden Schemata verbindlich.
 - **Icons immer farbig, nie schwarz** (Font Awesome Solid, lokal). Neue Icons: eine Codepoint-Zeile in `css/schriften.css`; Baustein-Icons in `js/oberflaeche.js` (`BAUSTEIN_ICONS`).
-- **Container-Radius 10px**, Hover-Schatten nur auf Zeigergeräten, `prefers-reduced-motion` respektieren.
+- **Container-Radius 14px** (gestuft: `--radius`/`--radius-gross` 20px/`--radius-klein` 9px), **weiche mehrlagige Elevation** (`--schatten-karte` dauerhaft, kein dominanter 1px-Rahmen), Hover-Schatten nur auf Zeigergeräten, `prefers-reduced-motion` respektieren.
 
 ## Fallstricke
 
