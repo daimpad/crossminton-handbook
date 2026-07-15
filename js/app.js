@@ -13,6 +13,7 @@ import { renderRegeln } from './ansichten/regeln.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
+import { initFeedbackWennGewuenscht } from './feedback.js';
 import { initI18n, sprache, t, text } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
 import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb, setzeEinstellung } from './zustand.js';
@@ -328,6 +329,10 @@ async function boot() {
   window.addEventListener('hashchange', rendern);
   window.addEventListener('app:rendern', rendern);
   rendern();
+
+  // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft
+  // beiläufig — schlägt es fehl, bleibt die App davon unberührt.
+  initFeedbackWennGewuenscht({ email: 'contact@nozilla.de' });
 }
 
 boot();
