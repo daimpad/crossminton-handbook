@@ -169,6 +169,23 @@
   <script>
     (function () {
       var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
       function geladen() {
         var ziel = document.getElementById('ansicht');
         return ziel && ziel.childElementCount > 0;
@@ -182,8 +199,10 @@
           window.setTimeout(function () { pruefe(versuch + 1); }, 400);
           return;
         }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
         try {
-          if (!sessionStorage.getItem('modul-neuversuch')) {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
             sessionStorage.setItem('modul-neuversuch', '1');
             window.location.reload();
             return;
@@ -193,7 +212,8 @@
         if (ziel) ziel.innerHTML =
           '<div class="karte">' +
           '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
-          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — meist eine kurze Netzwerk- oder Cache-Störung. Ein Neuladen behebt das in aller Regel.</p>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
           '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
           '</div>';
       }
