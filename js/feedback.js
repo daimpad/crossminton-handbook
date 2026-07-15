@@ -1,16 +1,22 @@
-// Feedback-Modus (opt-in über ?feedback in der URL): bindet den Kommentator
-// (daimpad/kommentator, lokal in vendor/kommentator/) ein, damit Rezensent:innen
-// die aktuelle Ansicht markieren, kommentieren und als JSON oder E-Mail
-// zurückschicken können. Wird NUR geladen, wenn der Flag gesetzt ist — normale
-// Besucher merken nichts davon (keine Extra-Bytes, kein Extra-UI).
+// Feedback-Modus: bindet den Kommentator (daimpad/kommentator, lokal in
+// vendor/kommentator/) ein, damit Rezensent:innen die aktuelle Ansicht
+// markieren, kommentieren und als JSON oder E-Mail zurückschicken können.
+//
+// Zwei Wege ihn zu starten, beide über dieselbe Aktivierung:
+//   • ?feedback in der URL  → automatisch beim Booten (teilbarer Link)
+//   • Knopf unter „Mitmachen" → aktiviereFeedback() auf Klick (ohne Reload)
+// Normale Besucher ohne beides laden nichts davon (keine Extra-Bytes/-UI).
 //
 // Der Kommentator ist ein klassisches Skript (window.Kommentare), kein ES-Modul;
-// wir laden CSS + JS daher dynamisch nach. Er scoped sein Thema über eigene
+// CSS + JS werden dynamisch nachgeladen. Sein Thema scoped er über eigene
 // Klassen (kommentare-dark/-light), nie über <html data-theme> — kein Konflikt
-// mit dem App-Thema; wir reichen nur den passenden Wert hinein und halten ihn
-// beim Umschalten nach.
+// mit dem App-Thema; wir reichen den passenden Wert hinein und führen ihn nach.
+// Sein CI wird über css/feedback.css an das App-CI angeglichen.
 
 import { einstellungen } from './zustand.js';
+
+const KONTAKT_EMAIL = 'contact@nozilla.de';
+let aktiv = false;
 
 // App-Thema (auto/hell/dunkel) → Kommentator-Thema (auto/light/dark).
 function kommentatorThema() {
@@ -43,17 +49,27 @@ function ladeSkript(src) {
   });
 }
 
-// Bindet den Kommentator ein, sobald ?feedback gesetzt ist. Fehler bleiben
-// lokal — schlägt das Laden fehl, läuft die App unverändert weiter.
-export async function initFeedbackWennGewuenscht({ email = '' } = {}) {
-  if (!feedbackGewuenscht()) return;
+export function feedbackAktiv() {
+  return aktiv;
+}
+
+// Startet den Kommentator (idempotent). Fehler bleiben lokal — schlägt das Laden
+// fehl, läuft die App unverändert weiter.
+export async function aktiviereFeedback() {
+  if (aktiv) return;
+  aktiv = true;
   ladeStil('vendor/kommentator/kommentare.css');
+  ladeStil('css/feedback.css'); // CI-Angleichung, NACH der Vendor-CSS
   try {
     await ladeSkript('vendor/kommentator/kommentare.js');
   } catch {
+    aktiv = false;
     return;
   }
-  if (!window.Kommentare) return;
+  if (!window.Kommentare) {
+    aktiv = false;
+    return;
+  }
   const instanz = window.Kommentare.init({
     container: '#ansicht', // die Lern-Inhalte; Kopf/Navigation bleiben außen vor
     autor: 'Gast',
@@ -63,7 +79,7 @@ export async function initFeedbackWennGewuenscht({ email = '' } = {}) {
     help: true,
     themeToggle: false, // das Thema steuert die App, nicht der Kommentator
     theme: kommentatorThema(),
-    email: email || undefined,
+    email: KONTAKT_EMAIL,
     emailSubject: 'Feedback Crossminton-Handbuch',
   });
   // Thema mitführen, wenn es im Menü/Profil umgeschaltet wird (wendeThemaAn
@@ -75,4 +91,9 @@ export async function initFeedbackWennGewuenscht({ email = '' } = {}) {
       /* egal */
     }
   });
+}
+
+// Beiläufig beim Booten: nur der teilbare ?feedback-Link aktiviert automatisch.
+export function initFeedbackWennGewuenscht() {
+  if (feedbackGewuenscht()) aktiviereFeedback();
 }

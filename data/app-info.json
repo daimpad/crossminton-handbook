@@ -66,7 +66,13 @@
         "cta_label": {"de": "Auf GitHub beitragen"},
         "cta_ziel": "https://github.com/daimpad/crossminton-handbook/"
       }
-    ]
+    ],
+    "feedback": {
+      "titel": {"de": "Direkt auf der Seite kommentieren"},
+      "text": {"de": "Am schnellsten geht Feedback direkt hier in der App: Markiere eine Textstelle, schreib deinen Kommentar dazu und schick alle Rückmeldungen am Ende gesammelt als Datei oder E-Mail. Es wird nichts gespeichert — deine Notizen bleiben nur in dieser Sitzung."},
+      "knopf": {"de": "Feedback-Modus starten"},
+      "aktiv": {"de": "Feedback-Modus läuft — der runde Knopf unten rechts öffnet die Werkzeuge zum Markieren, Kommentieren und Verschicken."}
+    }
   },
 
   "rechtliches": {
