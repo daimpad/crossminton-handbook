@@ -429,6 +429,64 @@ body.im-onboarding main { padding-bottom: 2rem; }
   color: var(--primaer-tief);
 }
 
+/* Themen-Steuerung (Darstellung) im Menü — segmentierter Umschalter. */
+.menue-thema { padding: 0.4rem 0.9rem 0.7rem; }
+.menue-thema-titel {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinte-3);
+}
+.menue-thema-optionen {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  background: var(--flaeche-2);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+.menue-thema-knopf {
+  flex: 1;
+  padding: 0.45rem 0.3rem;
+  border: 0;
+  border-radius: var(--radius-klein);
+  background: transparent;
+  color: var(--tinte-2);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--uebergang), color var(--uebergang);
+}
+.menue-thema-knopf.aktiv {
+  background: var(--flaeche);
+  color: var(--primaer-tief);
+  box-shadow: var(--schatten-weich);
+}
+
+/* Kleine Rechtstext-Links am Menüfuß (Impressum · Datenschutz). */
+.menue-rechtliches {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  padding: 0.7rem 0.9rem 0.2rem;
+  border-top: 1px solid var(--linie);
+  color: var(--tinte-3);
+  font-size: 0.82rem;
+}
+.menue-mini { color: var(--tinte-2); text-decoration: none; }
+.menue-mini.aktiv { color: var(--primaer-tief); font-weight: 600; }
+
+@media (hover: hover) {
+  .menue-thema-knopf:not(.aktiv):hover { color: var(--primaer-tief); }
+  .menue-mini:hover { color: var(--primaer-tief); text-decoration: underline; }
+}
+
 /* ---------- Grundbausteine ---------- */
 
 .karte {

@@ -14,8 +14,8 @@ import { renderTraining } from './ansichten/training.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initI18n, sprache, t, text } from './i18n.js';
-import { esc } from './oberflaeche.js';
-import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb } from './zustand.js';
+import { esc, wendeThemaAn } from './oberflaeche.js';
+import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb, setzeEinstellung } from './zustand.js';
 
 let daten = null;
 let letzteRoute = null;
@@ -94,6 +94,24 @@ function beschrifteRahmen() {
     else verweis.textContent = beschriftung;
   }
   setzeSprachanzeige();
+  aktualisiereThemaMenue();
+}
+
+// Themen-Steuerung im Menü (Darstellung): aktuelle Wahl beschriften + markieren.
+// Das Umschalten selbst wird einmalig in boot() verdrahtet. Läuft bei jedem
+// Rendern mit, damit Sprachwechsel und Auswahl aktuell bleiben.
+function aktualisiereThemaMenue() {
+  const aktiv = einstellungen().thema || 'auto';
+  const titel = document.querySelector('[data-thema-titel]');
+  if (titel) titel.textContent = t('thema');
+  const beschriftung = { auto: t('thema_auto_kurz'), hell: t('thema_hell'), dunkel: t('thema_dunkel') };
+  for (const knopf of document.querySelectorAll('.menue-thema-knopf')) {
+    const wert = knopf.dataset.thema;
+    if (beschriftung[wert]) knopf.textContent = beschriftung[wert];
+    const istAktiv = wert === aktiv;
+    knopf.classList.toggle('aktiv', istAktiv);
+    knopf.setAttribute('aria-pressed', String(istAktiv));
+  }
 }
 
 // Sprachanzeige (rein darstellend, app-info funktion_aktiv:false): zeigt die aktuell
@@ -290,8 +308,18 @@ async function boot() {
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);
   initSprachanzeige();
-  for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt')) {
+  for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt, .menue-mini')) {
     element.addEventListener('click', schliesseMenue);
+  }
+  // Themen-Umschalter im Menü: setzt die Einstellung + wendet sie sofort an.
+  // Schließt das Menü bewusst nicht (Auswahl bleibt sichtbar vergleichbar).
+  for (const knopf of document.querySelectorAll('.menue-thema-knopf')) {
+    knopf.addEventListener('click', () => {
+      const wert = knopf.dataset.thema;
+      setzeEinstellung('thema', wert);
+      wendeThemaAn(wert);
+      aktualisiereThemaMenue();
+    });
   }
   window.addEventListener('keydown', (ereignis) => {
     if (ereignis.key === 'Escape') schliesseMenue();
