@@ -331,8 +331,9 @@ async function boot() {
   rendern();
 
   // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft
-  // beiläufig — schlägt es fehl, bleibt die App davon unberührt.
-  initFeedbackWennGewuenscht({ email: 'contact@nozilla.de' });
+  // beiläufig — schlägt es fehl, bleibt die App davon unberührt. Der Knopf unter
+  // „Mitmachen" startet ihn alternativ ohne Reload (aktiviereFeedback).
+  initFeedbackWennGewuenscht();
 }
 
 boot();

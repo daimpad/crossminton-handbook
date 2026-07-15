@@ -3,6 +3,7 @@
 // Platzhalter in [eckigen Klammern] bleiben bewusst sichtbar, bis der Betreiber
 // sie füllt (Name, Lizenz, GitHub-URL) — sie werden nie erfunden oder verlinkt.
 
+import { aktiviereFeedback, feedbackAktiv } from '../feedback.js';
 import { t, text } from '../i18n.js';
 import { esc, externesZiel } from '../oberflaeche.js';
 
@@ -81,8 +82,36 @@ export function renderMitmachen(el, daten) {
       </section>`,
     )
     .join('');
+  // Feedback direkt auf der Seite (Kommentator, js/feedback.js). Der Knopf startet
+  // den Modus ohne Reload; ist er schon aktiv (Knopf zuvor oder ?feedback-Link),
+  // steht stattdessen der Hinweis.
+  const fb = m.feedback;
+  const feedbackKarte = fb
+    ? `
+      <section class="karte karte-akzent">
+        <h3>${esc(text(fb.titel) ?? '')}</h3>
+        <p>${esc(text(fb.text) ?? '')}</p>
+        <div id="feedback-bereich" class="info-cta">
+          ${
+            feedbackAktiv()
+              ? `<p class="bestaetigung">${esc(text(fb.aktiv) ?? '')}</p>`
+              : `<button class="knopf knopf-primaer" id="feedback-start"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i> ${esc(text(fb.knopf) ?? '')}</button>`
+          }
+        </div>
+      </section>`
+    : '';
+
   el.innerHTML = `
     <h1>${esc(text(m.titel) ?? t('nav_mitmachen'))}</h1>
     ${einleitung}
-    ${karten}`;
+    ${karten}
+    ${feedbackKarte}`;
+
+  el.querySelector('#feedback-start')?.addEventListener('click', async (ereignis) => {
+    const knopf = ereignis.currentTarget;
+    knopf.disabled = true;
+    await aktiviereFeedback();
+    const bereich = el.querySelector('#feedback-bereich');
+    if (bereich) bereich.innerHTML = `<p class="bestaetigung">${esc(text(fb.aktiv) ?? '')}</p>`;
+  });
 }
