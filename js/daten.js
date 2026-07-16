@@ -42,14 +42,15 @@ const INHALTSDATEIEN = [
 ];
 
 export async function ladeDaten() {
-  const [einheiten, fehlerbilder, regeln, appInfo, ...inhaltDateien] = await Promise.all([
+  const [einheiten, fehlerbilder, regeln, appInfo, turnierregeln, ...inhaltDateien] = await Promise.all([
     holeJson('data/trainingseinheiten.json'),
     holeJson('data/fehlerbilder.json'),
     holeJson('data/regeln.json'),
     holeJson('data/app-info.json'),
+    holeJson('data/turnierregeln.json'),
     ...INHALTSDATEIEN.map(holeJson),
   ]);
-  return baueIndizes(inhaltDateien, einheiten, fehlerbilder, regeln, appInfo);
+  return baueIndizes(inhaltDateien, einheiten, fehlerbilder, regeln, appInfo, turnierregeln);
 }
 
 export function hatUebungsteil(baustein) {
@@ -128,7 +129,7 @@ export function fehlerbilderFuer(daten, basisId) {
   return daten.fehlerbildVonBasis.get(basisId) || [];
 }
 
-export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh, appInfoRoh) {
+export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh, appInfoRoh, turnierregelnRoh) {
   const warnungen = [];
   // Ein Objekt oder eine Liste von Inhaltsdateien; letztere werden gemischt.
   const dateien = Array.isArray(inhaltRoh) ? inhaltRoh : [inhaltRoh];
@@ -149,6 +150,16 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh,
     rechtliches: appInfoRoh?.rechtliches || null,
     sprachen: appInfoRoh?.sprachen || { funktion_aktiv: false, aktuell: 'de', liste: [] },
   };
+  // Turnier-Regularium: eigener Referenzbereich (wie Regeln), NICHT im Baustein-Pool.
+  // Je Turnierstufe explizite Werte (nicht rein kumulativ); Varianten (Doppel/Junior)
+  // hängen als Modifikator an bestimmten Stufen. Kein Fortschritt, keine Gamification.
+  const turnierregeln = {
+    meta: turnierregelnRoh?._meta || {},
+    stufen: turnierregelnRoh?.stufen || [],
+    kategorien: turnierregelnRoh?.kategorien || [],
+    anforderungen: turnierregelnRoh?.anforderungen || [],
+    varianten: turnierregelnRoh?.varianten || [],
+  };
 
   const daten = {
     meta: dateien[0]?._meta || {},
@@ -160,6 +171,7 @@ export function baueIndizes(inhaltRoh, einheitenRoh, fehlerbilderRoh, regelnRoh,
     fehlerbilder,
     regeln,
     appInfo,
+    turnierregeln,
     bausteinVonId: new Map(bausteine.map((b) => [b.id, b])),
     einheitVonId: new Map(einheiten.map((e) => [e.id, e])),
     deltaVonSchluessel: new Map(),
@@ -307,6 +319,39 @@ function pruefeDaten(daten) {
       for (const id of regel.querverweis || []) {
         if (!daten.bausteinVonId.has(id)) w.push(`Regel (${abschnitt.id}): querverweis "${id}" existiert nicht`);
       }
+    }
+  }
+
+  // Turnier-Regularium (Referenz-Reiter): eigener statischer Bereich, NICHT im
+  // Baustein-Pool. Werte sind je Turnierstufe explizit; Varianten hängen als
+  // Modifikator an Stufen. Nur leichte Struktur-/Konsistenz-Warnungen.
+  const tr = daten.turnierregeln;
+  const stufenIds = new Set(tr.stufen.map((s) => s.id));
+  const katIds = new Set(tr.kategorien.map((k) => k.id));
+  for (const a of tr.anforderungen) {
+    if (!katIds.has(a.kategorie)) w.push(`Turnier-Anforderung "${a.id}": unbekannte Kategorie "${a.kategorie}"`);
+    const werte = a.werte || {};
+    if (Object.keys(werte).length === 0) w.push(`Turnier-Anforderung "${a.id}": keine Stufen-Werte`);
+    for (const [stufe, wert] of Object.entries(werte)) {
+      if (!stufenIds.has(stufe)) w.push(`Turnier-Anforderung "${a.id}": unbekannte Stufe "${stufe}"`);
+      if (!['pflicht', 'empfehlung'].includes(wert.stufe)) w.push(`Turnier-Anforderung "${a.id}" (${stufe}): ungültige Pflichtstufe "${wert.stufe}"`);
+      if (!wert.text?.de) w.push(`Turnier-Anforderung "${a.id}" (${stufe}): text.de fehlt`);
+    }
+  }
+  // Varianten: beide Richtungen konsistent (Stufe listet Variante, Variante trägt Abweichungen).
+  for (const v of tr.varianten) {
+    for (const s of v.stufen || []) {
+      if (!stufenIds.has(s)) w.push(`Turnier-Variante "${v.id}": unbekannte Stufe "${s}"`);
+      if (!(v.abweichungen?.[s] || []).length) w.push(`Turnier-Variante "${v.id}": keine Abweichungen für "${s}"`);
+      const stufe = tr.stufen.find((x) => x.id === s);
+      if (stufe && !(stufe.varianten || []).includes(v.id)) w.push(`Turnier-Variante "${v.id}": Stufe "${s}" listet sie nicht`);
+    }
+  }
+  // Rückrichtung: jede in einer Stufe gelistete Variante existiert auch.
+  const variantenIds = new Set(tr.varianten.map((v) => v.id));
+  for (const s of tr.stufen) {
+    for (const vid of s.varianten || []) {
+      if (!variantenIds.has(vid)) w.push(`Turnier-Stufe "${s.id}": unbekannte Variante "${vid}"`);
     }
   }
 

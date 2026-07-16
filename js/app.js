@@ -11,6 +11,7 @@ import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, r
 import { renderProfil } from './ansichten/profil.js';
 import { renderRegeln } from './ansichten/regeln.js';
 import { renderTraining } from './ansichten/training.js';
+import { renderTurnier } from './ansichten/turnier.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
@@ -35,7 +36,7 @@ function aktualisiereNavigation(segmente) {
   const aktiv =
     segmente[0] === 'training' || segmente[0] === 'plan'
       ? 'training'
-      : segmente[0] === 'regeln'
+      : segmente[0] === 'regeln' || segmente[0] === 'turnier'
         ? 'regeln'
         : segmente[0] === 'ueber'
           ? 'ueber'
@@ -57,7 +58,7 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['regeln', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['regeln', 'turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
@@ -259,6 +260,8 @@ function rendern() {
     renderTraining(el, daten, segmente[1] ? decodeURIComponent(segmente[1]) : null);
   } else if (segmente[0] === 'regeln') {
     renderRegeln(el, daten);
+  } else if (segmente[0] === 'turnier') {
+    renderTurnier(el, daten);
   } else if (segmente[0] === 'ueber') {
     renderUeber(el, daten);
   } else if (segmente[0] === 'mitmachen') {
