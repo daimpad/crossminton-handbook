@@ -290,6 +290,8 @@ const BAUSTEIN_ICONS = {
   naesse_sicherer_stand: 'fa-water',
   hitze: 'fa-fire',
   verschiedene_boeden: 'fa-layer-group',
+  // Ausrüstung (eigene Domäne)
+  deine_ausruestung: 'fa-toolbox',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

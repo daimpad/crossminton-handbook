@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "datei": "bausteine.ausruestung-grundlagen.json",
+    "zweck": "Ausrüstungs-Grundlagen (Speeder, Schläger/Bespannung, Schuhe, Kleidung) — eigene Domäne 'ausruestung', herkunftsneutral (kein Delta). Ein Wissens-Baustein mit Reflexionsaufgabe, kein Übungsteil (Ausrüstung ist keine Bewegung, die man automatisiert). Vokabular liegt in der kanonischen Technik-Datei; 'ausruestung' ist dort als Domäne ergänzt."
+  },
+  "bausteine": [
+    {
+      "id": "deine_ausruestung",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "TEN", "SQ"],
+      "transfer_herkunft_beleg": "Schläger, Saitenspannung, Griffband und Hallenschuhe sind aus Badminton, Tennis und Squash unmittelbar vertraut — übertragbar ist das Materialwissen. Crossminton-eigen bleibt der Speeder samt seiner Auswahl nach Tempo und Witterung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Deine Ausrüstung"
+      },
+      "erklaerteil": {
+        "de": "Crossminton kommt mit wenig aus: einem Schläger, ein paar Speedern, passenden Schuhen. Trotzdem beeinflusst jedes Teil, wie du spielst — und das meiste davon wählst du mit ein paar Grundregeln richtig aus.\n\nDer Speeder ist dein Ball. Er fliegt schwer und schnell und ist deutlich windstabiler als ein Federball — aber nur im passenden Typ. Es gibt langsamere Speeder für den Einstieg und die Halle und schwerere für draußen im Wind; bei manchen Modellen verstellst du das Tempo über kleine Aufsätze. Halte am Anfang zwei oder drei bereit: Übungsmaterial nutzt sich ab, und ein angeschlagener Speeder fliegt unberechenbar.\n\nDer Schläger ist kürzer und steifer als ein Badmintonschläger und wie dieser besaitet. Die Saitenspannung ist ein Kompromiss — straffer bespannt bringt mehr Kontrolle, weicher bespannt mehr Tempo aus dem Schläger heraus. Als Einsteiger passt die Standardbespannung; darüber musst du dir noch keine Gedanken machen. Wichtiger ist der Griff: Rutscht er im Schweiß, wechsle das Griffband. Ein sicherer Griff spart Kraft und schont das Handgelenk.\n\nDie Schuhe tragen dein Spiel mehr, als man denkt. Crossminton lebt von kurzen, harten Antritten zur Seite — dafür brauchst du seitlichen Halt und eine Sohle, die greift. In der Halle gehört eine helle, nicht abfärbende Sohle dazu; viele Hallen bestehen darauf. Draußen entscheidet der Untergrund: Auf Sand, Asche oder Rasen greift ein Profil, das drinnen nur rutschen würde.\n\nDie Kleidung soll dich frei bewegen lassen: atmungsaktiv und weit genug für tiefe Ausfallschritte. Draußen richtest du sie nach der Witterung — im Zweifel eine Schicht mehr, die du ablegen kannst. Bei offiziellen Turnieren gehört ein Trikot mit deinem Nachnamen dazu (Näheres im Turnier-Regularium unter „Regeln“).\n\nGute Ausrüstung macht dich nicht zum besseren Spieler. Falsche oder verschlissene hält dich aber auf. Sieh sie ab und zu durch, dann steht sie deinem Spiel nie im Weg."
+      },
+      "reflexionsaufgabe": {
+        "de": "Leg deinen Schläger, ein paar Speeder und deine Schuhe vor dich hin und geh sie einmal durch: Ist der Griff noch griffig oder rutscht er im Schweiß? Passen deine Speeder zu dem Ort, an dem du meistens spielst — Halle oder draußen? Hinterlässt deine Sohle Streifen auf dem Hallenboden? Notiere dir eine Sache, die du ersetzen, ergänzen oder einmal ausprobieren willst, und kümmere dich vor dem nächsten Spiel darum."
+      }
+    }
+  ],
+  "delta_bausteine": []
+}
