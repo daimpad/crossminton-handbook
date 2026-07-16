@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "datei": "bausteine.ausruestung-fortgeschritten.json",
+    "zweck": "Ausrüstungs-Vertiefung (Domäne 'ausruestung', Stufe fortgeschritten, herkunftsneutral). Zwei Feinabstimmungs-Bausteine — Bespannung und Griff/Griffband — mit Reflexionsaufgabe, kein Übungsteil. Der Gesundheitsrahmen gilt: Prinzipien statt konkreter Dosierungen. Vokabular in der kanonischen Technik-Datei."
+  },
+  "bausteine": [
+    {
+      "id": "die_bespannung",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": [],
+      "voraussetzungen_querverweis": "Setzt den Schläger-Baustein voraus (Aluminium verträgt weniger Zug als Carbon) und knüpft an die Handgelenk-Peitsche an: erst mit sauberer Technik lohnt die Feinabstimmung der Härte.",
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["TEN", "SQ"],
+      "transfer_herkunft_beleg": "Bespannt wird mit Squash- und Tennissaiten; von dort kommt das Wissen um Saitenart, Stärke und Härte. Der Bruch mit dem Badminton ist gerade der Punkt: dessen dünne Saiten und hohe Spannungen tragen nicht.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Die Bespannung"
+      },
+      "erklaerteil": {
+        "de": "Die Bespannung ist die Stelle, an der sich Crossminton am deutlichsten vom Badminton unterscheidet — und an der die meisten Missverständnisse kursieren, weil viele Spielerinnen und Spieler aus dem Badminton kommen. Wer die Badminton-Gewohnheiten einfach überträgt, liegt hier daneben.\n\nBespannt wird mit Squash- oder Tennissaiten, mit einer Stärke von höchstens etwa 1,25 Millimetern. Zum Vergleich: Im Badminton sind rund 0,65 Millimeter üblich. Der Grund liegt im Ball. Ein Speeder von 8 bis 10 Gramm bei Tempo bis gegen 290 Kilometer pro Stunde belastet die Saiten ungleich stärker als ein Federball; eine dünne Badmintonsaite hielte das nicht lange aus. Verwendet werden weichere Multifilamentsaiten, die den Arm schonen, aber schneller nachlassen, und härtere Monofilamentsaiten, die länger halten und ein direkteres Gefühl geben.\n\nDie eigentliche Stellschraube ist die Härte. Eine härtere Bespannung gibt dir mehr Kontrolle und Ballgefühl und weniger Kraft aus der Saite; eine weichere dreht das um. Das anschauliche Modell dafür ist das Trampolin: Ein locker gespanntes Tuch schleudert den Ball kräftig zurück, ein straff gespanntes gibt weniger nach und lässt sich dafür genauer steuern. Daraus folgt eine Faustregel, die aus dem Badminton stammt und gut überträgt: Wer noch nicht genug Kraft aus der eigenen Technik holt, gewinnt mit einer weicheren Bespannung; wer Kraft genug hat und trotzdem an Länge verliert, gewinnt mit einer härteren. Der einfachste Selbsttest: Segeln deine Bälle regelmäßig über das Feld hinaus, spricht das für härter; fallen sie zu kurz, für weicher.\n\nÄndere die Härte behutsam und in kleinen Schritten. Ein großer Sprung kostet dich das Ballgefühl, nimmt zu viel Kraft und belastet den Schlagarm — das ist der Punkt, an dem falsche Ausrüstung dem Körper schadet. Taste dich lieber langsam an deinen Wert heran.\n\nEin paar Richtwerte zur Einordnung, keine Vorschriften: Auf den Turnierschlägern steht oft eine Empfehlung wie „16 x 14 kp“ — 16 Kilopond längs, 14 quer, als empfohlenes Maximum. Aluminiumrahmen vertragen weniger, meist bis etwa 12 Kilopond; Carbonrahmen liegen darüber. Als grobe Grenze gilt, höchstens etwa zwei Kilopond über die Empfehlung auf dem Rahmen zu gehen — Kilopond und Kilogramm meinen dabei dasselbe. Und weil eine Bespannung auch ohne Riss über die Wochen an Spannung verliert, ist ein gerissener Faden der späteste, nicht der beste Zeitpunkt zum Neubespannen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Schau nach, was auf deinem Rahmen als empfohlene Bespannung steht, und ob er aus Aluminium oder Carbon ist — das steckt den Rahmen ab, in dem du dich bewegen kannst. Dann beobachte deine Bälle im nächsten Spiel: Fallen sie eher zu kurz oder segeln sie zu lang? Wenn du daraufhin etwas ändern willst, ändere es in einem kleinen Schritt und spür nach, bevor du weitergehst."
+      }
+    },
+    {
+      "id": "griff_und_griffband",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": [],
+      "voraussetzungen_querverweis": "Eng verbunden mit der Handgelenk-Peitsche (handgelenk_peitsche): Der lockere Griff ist deren Voraussetzung, und ein zu dünner Griff macht die nötige Lockerheit unmöglich.",
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "TEN", "SQ"],
+      "transfer_herkunft_beleg": "Griffstärke, Bandarten und der Zusammenhang mit dem Tennisarm sind aus Badminton, Tennis und Squash bekannt und übertragen sich unmittelbar auf den Crossminton-Griff.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Griff & Griffband"
+      },
+      "erklaerteil": {
+        "de": "Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Badminton: Wenn du den Schläger normal greifst, sollte zwischen deinen Fingerspitzen und dem Handballen etwa die Breite eines kleinen Fingers Platz bleiben. Anders gesagt berührt der Daumen den Griff, ohne die anderen Finger zu überlappen.\n\nDer gefährliche Fehler geht nach unten. Ist der Griff zu dünn, bohren sich die Fingerspitzen in den Ballen, und du musst den Schläger dauerhaft fest umklammern, damit er sich beim Schlag nicht verdreht. Diese ständige Anspannung wandert in den Unterarm und gilt als einer der Hauptauslöser des Tennisarms. Für dein Spiel hat das eine unmittelbare Folge: Der lockere Griff ist die Voraussetzung für die Peitsche aus dem Handgelenk. Ein zu dünner Griff macht diese Lockerheit unmöglich — dann arbeitet das Material gegen deine Technik.\n\nAuf dem Griff sitzen bis zu drei Lagen. Das Basisband ist werkseitig aufgezogen, etwa 1,8 Millimeter dick, dämpft Vibrationen und hält lange. Das Overgrip ist mit 0,4 bis 0,7 Millimetern dünn, wird darübergewickelt und ist ein Verschleißteil. Ein Frotteeband ist dicker und saugt Schweiß wie ein Handtuch — die richtige Wahl für stark schwitzende Hände, oft zusammen mit etwas Griffpuder.\n\nDas Overgrip ist zugleich dein Werkzeug, um die Griffstärke fein einzustellen: Jede Lage vergrößert den Durchmesser. Wenn du weißt, dass du ohnehin ein Overgrip nutzt, wähle den Schläger von vornherein eine Nummer dünner. Umgekehrt kannst du ein Overgrip direkt auf den nackten Griff wickeln, um besonders dünn zu greifen. Als Obergrenze gilt: Basisband plus ein Overgrip; alles darüber wird zu dick.\n\nOvergrips sind Verschleißteile. Nach ein paar Wochen lassen sie in der Griffigkeit nach — dann wechselst du sie, statt gleich das teurere Basisband zu erneuern. Das Basisband hält je nach Zustand etwa ein halbes Jahr. Und weil der Griff die Stelle ist, an der Schweiß und Hand am längsten zusammenkommen, halte ihn sauber und tausch ihn, wenn er abgegriffen ist."
+      },
+      "reflexionsaufgabe": {
+        "de": "Greif deinen Schläger, wie du ihn im Spiel hältst, und schieb einen Finger zwischen Fingerspitzen und Handballen: Passt gut ein kleiner Finger hinein, oder ist es enger? Achte im nächsten Ballwechsel darauf, ob du den Griff umklammern musst, damit er nicht wegdreht — ein Zeichen, dass er dir zu dünn ist. Und prüf dein Overgrip: Ist es noch griffig, oder ist es Zeit für ein frisches?"
+      }
+    }
+  ],
+  "delta_bausteine": []
+}
