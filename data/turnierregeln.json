@@ -1,0 +1,190 @@
+{
+  "_meta": {
+    "titel": {"de": "Turnier-Regularium"},
+    "einleitung": {"de": "Wähle die Turnier-Kategorie — die Liste zeigt, woran ein offizielles Turnier gebunden ist. Nach oben werden die Auflagen strenger."},
+    "quelle": {"de": "ICO Tournament Standards (Saison 2025) · Deutscher Crossminton Verband (DCV)"},
+    "stand": {"de": "Saison 2025"},
+    "hinweis": {"de": "Auszug der wichtigsten Anforderungen zur schnellen Orientierung. Verbindlich ist stets das vollständige offizielle Regelwerk — im Zweifel dort prüfen."},
+    "dokumente": [
+      {"titel": {"de": "ICO-Turnierstandards (Original-PDFs)"}, "pfad": "rules/", "hinweis": {"de": "100/250/500/1000 Punkte inkl. Doppel-, Junior- und Fun-Varianten."}},
+      {"titel": {"de": "DCV-Spielordnung"}, "pfad": "rules/Spielordnung.pdf"},
+      {"titel": {"de": "DCV-Schiedsrichterordnung"}, "pfad": "rules/Schiedsrichterordnung.pdf"},
+      {"titel": {"de": "DCV-Spielregeln Crossminton"}, "pfad": "rules/Spielregeln_Crossminton.pdf"}
+    ]
+  },
+  "stufen": [
+    {"id": "fun",   "rang": 0, "name": {"de": "Fun"},    "serie": {"de": "Lokal / Fun"},         "punkte": {"de": "ohne Wertung"}, "kurz": {"de": "Lockeres Turnier ohne ICO-Sanktionierung — es gelten die Spielregeln, sonst keine Auflagen."}, "varianten": []},
+    {"id": "t100",  "rang": 1, "name": {"de": "100er"},  "serie": {"de": "National Series"},      "punkte": {"de": "100 Punkte"},   "kurz": {"de": "Einstiegs-Ranglistenturnier auf nationaler Ebene."}, "varianten": []},
+    {"id": "t250",  "rang": 2, "name": {"de": "250er"},  "serie": {"de": "International Series"},  "punkte": {"de": "250 Punkte"},   "kurz": {"de": "Internationales Ranglistenturnier."}, "varianten": ["doppel"]},
+    {"id": "t500",  "rang": 3, "name": {"de": "500er"},  "serie": {"de": "World Series"},         "punkte": {"de": "500 Punkte"},   "kurz": {"de": "Großes Weltranglisten-Turnier."}, "varianten": ["doppel", "junior"]},
+    {"id": "t1000", "rang": 4, "name": {"de": "1000er"}, "serie": {"de": "World Series"},         "punkte": {"de": "1000 Punkte"},  "kurz": {"de": "Höchste Kategorie mit den strengsten Auflagen."}, "varianten": []}
+  ],
+  "kategorien": [
+    {"id": "org",        "titel": {"de": "Anmeldung & Organisation"}},
+    {"id": "teilnehmer", "titel": {"de": "Teilnehmer & Auslosung"}},
+    {"id": "anlage",     "titel": {"de": "Anlage & Ausrüstung"}},
+    {"id": "ablauf",     "titel": {"de": "Ablauf & Schiedsgericht"}},
+    {"id": "nach",       "titel": {"de": "Nach dem Turnier"}}
+  ],
+  "anforderungen": [
+    {"id": "regelwerk", "kategorie": "org", "titel": {"de": "Regelwerk"}, "werte": {
+      "fun":   {"stufe": "empfehlung", "text": {"de": "Es gelten die offiziellen ICO-Spielregeln (Feld, Zählweise, Aufschlag)."}},
+      "t100":  {"stufe": "pflicht", "text": {"de": "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."}}
+    }},
+    {"id": "lizenz", "kategorie": "org", "titel": {"de": "Spieler-Lizenz"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Keine ICO-Lizenz nötig, aber ein Spielerprofil in der Tournament Software (durch den nationalen Administrator)."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Gültige ICO-Lizenz für alle Spieler:innen."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Gültige ICO-Lizenz für alle Spieler:innen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Gültige ICO-Lizenz für alle Spieler:innen."}}
+    }},
+    {"id": "antrag", "kategorie": "org", "titel": {"de": "Turnier-Antrag & Kalender"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Anmeldung in der Tournament Software, 1 Monat vorher."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Termin 1 Monat vorher bei der ICO; danach offizielle Ankündigung in der Tournament Software."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Termin bis zum Vorjahres-Stichtag (23.11.); Kalenderfreigabe durch das ICO-Board; Ankündigung 3 Monate vorher."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Termin bis zum Vorjahres-Stichtag (23.11.); Kalenderfreigabe durch das ICO-Board; Ankündigung 3 Monate vorher."}}
+    }},
+    {"id": "meldeschluss", "kategorie": "org", "titel": {"de": "Meldeschluss der Spieler"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Mindestens 7 Tage vor Turnierbeginn."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 7 Tage vor Turnierbeginn."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 14 Tage vor Turnierbeginn."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Mindestens 14 Tage vor Turnierbeginn."}}
+    }},
+    {"id": "organisator", "kategorie": "org", "titel": {"de": "Organisation"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "1 benannter Organisator."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "1 Vollzeit-Organisator (Empfehlung: spielt nicht selbst mit)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "1 Vollzeit-Organisator (Empfehlung: spielt nicht selbst mit)."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "1 Vollzeit-Organisator, der nicht selbst mitspielen darf."}}
+    }},
+    {"id": "beobachter", "kategorie": "org", "titel": {"de": "Unabhängiger Beobachter"}, "werte": {
+      "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 1 unabhängiger Beobachter; ICO-Sponsoring nach erreichtem Standard-Prozentsatz."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 1 unabhängiger Beobachter; ICO-Sponsoring nach erreichtem Standard-Prozentsatz."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Mindestens 1 unabhängiger Beobachter; Standards werden vom ICO-Board abgenommen."}}
+    }},
+    {"id": "min_kategorien", "kategorie": "teilnehmer", "titel": {"de": "Kategorien (für die Wertung)"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Mindestens 2 Einzel-Kategorien; je mind. 4 gemeldete Spieler:innen."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 4 Einzel-Kategorien (Damen und Open verpflichtend); je mind. 4 Spieler:innen."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 6 Einzel-Kategorien (Damen und Open verpflichtend); je mind. 4 Spieler:innen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Mindestens 6 Kategorien (Erwachsene, Junioren, Senioren); je mind. 8 Spieler:innen."}}
+    }},
+    {"id": "min_teilnehmer", "kategorie": "teilnehmer", "titel": {"de": "Mindest-Teilnehmerzahl"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Mindestens 10 Spieler:innen."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 25 Spieler:innen."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 50 Spieler:innen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Mindestens 80 Spieler:innen."}}
+    }},
+    {"id": "min_kapazitaet", "kategorie": "teilnehmer", "titel": {"de": "Mindest-Kapazität der Halle"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Für mindestens 10 Spieler:innen."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Für mindestens 50 Spieler:innen (Feld darf begrenzt werden, nicht darunter)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Für mindestens 80 Spieler:innen (Feld darf begrenzt werden, nicht darunter)."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Für mindestens 120 Spieler:innen; die Teilnehmerzahl darf nicht begrenzt werden."}}
+    }},
+    {"id": "auslosung", "kategorie": "teilnehmer", "titel": {"de": "Auslosung & Setzung"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei vorab zur Prüfung an die ICO."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 3 Tage vorher zur Prüfung an die ICO."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 7 Tage vorher zur Prüfung an die ICO."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 7 Tage vorher zur Prüfung an die ICO."}}
+    }},
+    {"id": "spielfeld", "kategorie": "anlage", "titel": {"de": "Spielfeld & Markierung"}, "werte": {
+      "fun":   {"stufe": "empfehlung", "text": {"de": "Feldmaße und Markierung nach Regelwerk."}},
+      "t100":  {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}}
+    }},
+    {"id": "felder", "kategorie": "anlage", "titel": {"de": "Anzahl Spielfelder"}, "werte": {
+      "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 4 Felder."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 6 Felder."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Mindestens 8 Felder."}}
+    }},
+    {"id": "flughafen", "kategorie": "anlage", "titel": {"de": "Lage zum Flughafen"}, "werte": {
+      "t250":  {"stufe": "empfehlung", "text": {"de": "Höchstens 100 km zu einem internationalen Flughafen."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Höchstens 100 km zu einem internationalen Flughafen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Höchstens 100 km zu einem internationalen Flughafen."}}
+    }},
+    {"id": "scoreboards", "kategorie": "anlage", "titel": {"de": "Anzeigetafeln"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Eine Anzeigetafel pro Feld."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Eine Anzeigetafel pro Feld."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Eine Anzeigetafel pro Feld."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Eine Anzeigetafel pro Feld."}}
+    }},
+    {"id": "center_court", "kategorie": "anlage", "titel": {"de": "Center Court"}, "werte": {
+      "t250":  {"stufe": "empfehlung", "text": {"de": "Gestalteter, gebrandeter Center Court empfohlen."}},
+      "t500":  {"stufe": "empfehlung", "text": {"de": "Gestalteter, gebrandeter Center Court empfohlen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Eigens gebrandeter, gestalteter Center Court (alle ICO-Sponsoren)."}}
+    }},
+    {"id": "medizin", "kategorie": "anlage", "titel": {"de": "Medizinische Versorgung"}, "werte": {
+      "fun":   {"stufe": "empfehlung", "text": {"de": "Erste-Hilfe-Material bereithalten."}},
+      "t100":  {"stufe": "pflicht", "text": {"de": "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."}}
+    }},
+    {"id": "head_umpire", "kategorie": "ablauf", "titel": {"de": "Oberschiedsrichter (Head Umpire)"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}}
+    }},
+    {"id": "schiedsrichter", "kategorie": "ablauf", "titel": {"de": "Match- & Linienrichter"}, "werte": {
+      "t250":  {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter in den Finals aller Kategorien."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter ab dem Halbfinale aller Kategorien."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter ab dem Halbfinale aller Kategorien (Match-Umpire lizenziert oder erfahren)."}}
+    }},
+    {"id": "moderation", "kategorie": "ablauf", "titel": {"de": "Moderation"}, "werte": {
+      "t250":  {"stufe": "empfehlung", "text": {"de": "Vollzeit-Moderator empfohlen (nennt die ICO-Sponsoren)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "1 Vollzeit-Moderator, der die ICO-Sponsoren ansagt."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "1 Vollzeit-Moderator, der die ICO-Sponsoren ansagt."}}
+    }},
+    {"id": "live_stream", "kategorie": "ablauf", "titel": {"de": "Live-Stream"}, "werte": {
+      "t250":  {"stufe": "empfehlung", "text": {"de": "Live-Stream inkl. ICO-Partner-Werbung empfohlen."}},
+      "t500":  {"stufe": "empfehlung", "text": {"de": "Live-Stream inkl. ICO-Partner-Werbung empfohlen."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Live-Stream inkl. ICO-Partner-Werbung."}}
+    }},
+    {"id": "siegerehrung", "kategorie": "ablauf", "titel": {"de": "Siegerehrung"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Ehrung mit Podium und ICO-/Sponsor-Werbung; Urkunden/Medaillen für die Plätze 1–3 empfohlen."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Ehrung mit Podium, Ansager; Urkunden und Medaillen/Pokale für die Plätze 1–3."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Ehrung mit Podium, Ansager; Urkunden und Medaillen/Pokale für die Plätze 1–3."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Ehrung mit Podium, Ansager, Nationalhymne der Sieger; Urkunden und Medaillen/Pokale."}}
+    }},
+    {"id": "preisgeld", "kategorie": "ablauf", "titel": {"de": "Preisgeld"}, "werte": {
+      "t500":  {"stufe": "pflicht", "text": {"de": "Preisgeld für Sieger und Finalist der Damen- und der Open-Einzelkonkurrenz."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Preisgeld für Sieger und Finalist der Damen- und der Open-Einzelkonkurrenz."}}
+    }},
+    {"id": "spielergebuehr", "kategorie": "nach", "titel": {"de": "Spielergebühr"}, "werte": {
+      "t250":  {"stufe": "pflicht", "text": {"de": "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."}}
+    }},
+    {"id": "ergebnis_report", "kategorie": "nach", "titel": {"de": "Ergebnisse & Turnierbericht"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Ergebnisse über den Tournament Planner veröffentlichen."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."}}
+    }}
+  ],
+  "varianten": [
+    {"id": "doppel", "label": {"de": "Doppel"}, "stufen": ["t250", "t500"], "abweichungen": {
+      "t250": [
+        {"de": "Es werden Doppel-Kategorien ausgespielt (mind. 4 Kategorien; Open-, Damen- oder Mixed-Doppel verpflichtend), je mind. 4 Paare."},
+        {"de": "Mindestens 30 Spieler:innen und Hallen-Kapazität für 30 (statt 25 bzw. 50)."},
+        {"de": "Ein reines K.-o.-System ist bei Doppel-Turnieren nicht zulässig."}
+      ],
+      "t500": [
+        {"de": "Es werden Doppel-Kategorien ausgespielt, je mind. 4 Paare."},
+        {"de": "Hallen-Kapazität für mindestens 50 (statt 80)."}
+      ]
+    }},
+    {"id": "junior", "label": {"de": "Junior"}, "stufen": ["t500"], "abweichungen": {
+      "t500": [
+        {"de": "Junioren-Kategorien (U12/U14/U18 …); U12 und U14 werden zusammengelegt."},
+        {"de": "Mindestens 4 Einzel-Kategorien und mindestens 4 Felder (statt 6/6)."},
+        {"de": "Mindestens 30 Spieler:innen und Kapazität für 30 (statt 50/80)."},
+        {"de": "Antrag 3 Monate vorher; Junioren sollen nicht als Match-/Linienrichter eingesetzt werden."},
+        {"de": "Kein Preisgeld und keine Spielergebühr; Sachpreise für die Podestplätze empfohlen."}
+      ]
+    }}
+  ]
+}

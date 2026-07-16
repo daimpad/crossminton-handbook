@@ -99,6 +99,10 @@ export function renderRegeln(el, daten) {
   el.innerHTML = `
     <h1>${esc(t('regeln_titel'))}</h1>
     <p class="leise">${esc(t('regeln_intro'))}</p>
+    <a class="karte karte-link karte-akzent" href="#/turnier">
+      <h3><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> ${esc(t('turnier_titel'))}</h3>
+      <p class="leise">${esc(t('turnier_kachel_text'))}</p>
+    </a>
     ${quelleHtml(regeln.meta.quelle)}
     ${abschnitte || `<div class="karte"><p class="leise">${esc(t('nicht_gefunden'))}</p></div>`}
     ${referenzgrafikenHtml()}`;

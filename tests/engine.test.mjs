@@ -41,6 +41,7 @@ const einheiten = liesJson('data/trainingseinheiten.json');
 const fehlerbilder = liesJson('data/fehlerbilder.json');
 const regeln = liesJson('data/regeln.json');
 const appInfo = liesJson('data/app-info.json');
+const turnierregeln = liesJson('data/turnierregeln.json');
 const labelsDe = liesJson('data/labels/de.json');
 
 let fehler = 0;
@@ -60,7 +61,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelBeginner, doppelThema, doppelExperte, outdoorThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo);
+const daten = baueIndizes([technik, taktik, mentales, athletik, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelBeginner, doppelThema, doppelExperte, outdoorThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo, turnierregeln);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -427,6 +428,44 @@ pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'reg
 pruefe('nicht auflösbarer querverweis erzeugt eine Warnung (Dokumentations-Check, nie sperrend)', (() => {
   const kaputt = { _meta: {}, abschnitte: [{ id: 'test_regel', titel: { de: 'T' }, regeln: [{ inhalt: { de: 'x' }, querverweis: ['gibt_es_nicht'] }] }] };
   return baueIndizes([technik], einheiten, fehlerbilder, kaputt).warnungen.some((warnung) => warnung.includes('querverweis') && warnung.includes('gibt_es_nicht'));
+})());
+
+console.log('\n[7f-t] Turnier-Regularium (Referenz-Filter unter „Regeln", eigene Entität)');
+const tr = daten.turnierregeln;
+const turnierStufen = ['fun', 't100', 't250', 't500', 't1000'];
+pruefe('turnierregeln.json über baueIndizes eingelesen: 5 Stufen, 5 Kategorien, 24 Anforderungen, 2 Varianten', tr.stufen.length === 5 && tr.kategorien.length === 5 && tr.anforderungen.length === 24 && tr.varianten.length === 2);
+pruefe('Stufen tragen id/rang/name/serie/punkte, Ränge streng aufsteigend 0…4', gleicheListe(tr.stufen.map((s) => s.id), turnierStufen) && tr.stufen.every((s, i) => s.rang === i && s.name?.de && s.serie?.de && s.punkte?.de));
+const alleWerte = tr.anforderungen.flatMap((a) => Object.entries(a.werte));
+pruefe('jede Anforderung: bekannte Kategorie, Werte je bekannter Stufe mit gültiger Pflichtstufe + text.de', tr.anforderungen.every((a) => tr.kategorien.some((k) => k.id === a.kategorie) && Object.keys(a.werte).length > 0) && alleWerte.every(([stufe, w]) => turnierStufen.includes(stufe) && ['pflicht', 'empfehlung'].includes(w.stufe) && typeof w.text?.de === 'string' && w.text.de.trim() !== ''));
+pruefe('Varianten konsistent: Doppel an 250/500, Junior an 500; jede Stufe listet ihre Variante, jede Variante trägt Abweichungen', (() => {
+  const doppel = tr.varianten.find((v) => v.id === 'doppel');
+  const junior = tr.varianten.find((v) => v.id === 'junior');
+  const stufeListet = (sid, vid) => (tr.stufen.find((s) => s.id === sid)?.varianten || []).includes(vid);
+  return gleicheListe(doppel.stufen, ['t250', 't500']) && gleicheListe(junior.stufen, ['t500'])
+    && tr.varianten.every((v) => v.stufen.every((s) => (v.abweichungen?.[s] || []).length > 0 && stufeListet(s, v.id)));
+})());
+// Kern-Mehrwert: „woran bin ich ZUSÄTZLICH gebunden" — je höher die Stufe, desto mehr Auflagen.
+pruefe('Anforderungen kumulieren nach Rang: fun < 100er < 250er < 500er ≤ 1000er', (() => {
+  const zahl = (sid) => tr.anforderungen.filter((a) => a.werte[sid]).length;
+  return zahl('fun') < zahl('t100') && zahl('t100') < zahl('t250') && zahl('t250') < zahl('t500') && zahl('t500') <= zahl('t1000');
+})());
+pruefe('„neu ab Stufe" real belegt: Beobachter neu ab 250er, Preisgeld neu ab 500er (keine Vorstufen-Werte)', (() => {
+  const beob = tr.anforderungen.find((a) => a.id === 'beobachter').werte;
+  const preis = tr.anforderungen.find((a) => a.id === 'preisgeld').werte;
+  return !beob.fun && !beob.t100 && beob.t250 && !preis.t250 && preis.t500;
+})());
+pruefe('„verschärft" real belegt: Mindest-Teilnehmerzahl ändert Text von 100er auf 250er', (() => {
+  const w = tr.anforderungen.find((a) => a.id === 'min_teilnehmer').werte;
+  return w.t100 && w.t250 && w.t100.text.de !== w.t250.text.de;
+})());
+pruefe('Turnier-Regularium verunreinigt den Baustein-Pool nicht (95 Bausteine, Regularium separat)', daten.bausteine.length === 95 && !tr.anforderungen.some((a) => daten.bausteinVonId.has(a.id)));
+pruefe('Anforderungen tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', tr.anforderungen.every((a) => a.voraussetzungen === undefined && a.uebungsteil === undefined && a.delta === undefined && a.status === undefined));
+pruefe('Meta trägt Quelle + Stand + verlinkte Dokumente (rules/…)', typeof tr.meta.quelle?.de === 'string' && tr.meta.quelle.de !== '' && typeof tr.meta.stand?.de === 'string' && (tr.meta.dokumente || []).length >= 1 && tr.meta.dokumente.every((d) => typeof d.pfad === 'string' && d.pfad.startsWith('rules/')));
+pruefe('Turnier-UI-Labels (de) vollständig', ['turnier_titel', 'turnier_kachel_text', 'turnier_frage', 'turnier_konkurrenz', 'turnier_einzel', 'turnier_neu', 'turnier_verschaerft', 'turnier_pflicht', 'turnier_empfehlung', 'turnier_basis', 'turnier_ggue', 'turnier_variante_titel', 'turnier_dokumente', 'turnier_quelle', 'turnier_stand', 'turnier_leer'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
+pruefe('saubere Referenzdaten: keine Turnier-Warnung im echten Bestand', !daten.warnungen.some((w) => w.includes('Turnier')));
+pruefe('kaputte Turnier-Daten erzeugen eine Warnung (unbekannte Stufe, nie sperrend)', (() => {
+  const kaputt = { stufen: [{ id: 't100', rang: 1, name: { de: 'x' }, varianten: [] }], kategorien: [{ id: 'org', titel: { de: 'O' } }], anforderungen: [{ id: 'x', kategorie: 'org', werte: { txxx: { stufe: 'pflicht', text: { de: 'y' } } } }], varianten: [] };
+  return baueIndizes([technik], einheiten, fehlerbilder, regeln, appInfo, kaputt).warnungen.some((warnung) => warnung.includes('Turnier') && warnung.includes('txxx'));
 })());
 
 console.log('\n[7g] Experte-Stufe Technik + Taktik (dritte Könnensstufe, herkunftsneutral)');
