@@ -18,8 +18,8 @@ const INHALTSDATEIEN = [
   'data/bausteine.beginner-taktik.json',
   'data/bausteine.beginner-mentales.json',
   'data/bausteine.beginner-athletik_kondition.json',
-  // Ausrüstungs-Grundlagen: eigene Domäne 'ausruestung' (Speeder, Schläger, Schuhe,
-  // Kleidung) — ein herkunftsneutraler Beginner-Wissensbaustein, kein Delta.
+  // Ausrüstungs-Grundlagen: eigene Domäne 'ausruestung' (Übersicht + Speeder, Schläger,
+  // Schuhe, Kleidung) — herkunftsneutrale Beginner-Wissensbausteine, keine Deltas.
   'data/bausteine.ausruestung-grundlagen.json',
   // Trainer-Ebene: technikübergreifendes Meta-Wissen, kompetenzstufe ["trainer"]
   // (dockt an keine Könnensstufe an). Dateiname trägt 'trainer' an Stufen-Stelle.
@@ -28,6 +28,8 @@ const INHALTSDATEIEN = [
   'data/bausteine.fortgeschritten-taktik.json',
   'data/bausteine.fortgeschritten-mentales.json',
   'data/bausteine.fortgeschritten-athletik_kondition.json',
+  // Ausrüstungs-Vertiefung (Domäne 'ausruestung', fortgeschritten): Bespannung + Griff.
+  'data/bausteine.ausruestung-fortgeschritten.json',
   // Experten-Stufe: dritte Könnensstufe, herkunftsneutral (keine Cross-Sport-Deltas).
   'data/bausteine.experte-technik.json',
   'data/bausteine.experte-taktik.json',

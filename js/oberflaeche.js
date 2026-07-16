@@ -290,8 +290,14 @@ const BAUSTEIN_ICONS = {
   naesse_sicherer_stand: 'fa-water',
   hitze: 'fa-fire',
   verschiedene_boeden: 'fa-layer-group',
-  // Ausrüstung (eigene Domäne)
+  // Ausrüstung (eigene Domäne) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
   deine_ausruestung: 'fa-toolbox',
+  der_speeder: 'fa-baseball',
+  der_schlaeger: 'fa-table-tennis-paddle-ball',
+  schuhe_finden: 'fa-shoe-prints',
+  funktionskleidung: 'fa-layer-group',
+  die_bespannung: 'fa-gauge-high',
+  griff_und_griffband: 'fa-hand',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

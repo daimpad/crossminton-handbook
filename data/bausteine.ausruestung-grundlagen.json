@@ -1,7 +1,7 @@
 {
   "_meta": {
     "datei": "bausteine.ausruestung-grundlagen.json",
-    "zweck": "Ausrüstungs-Grundlagen (Speeder, Schläger/Bespannung, Schuhe, Kleidung) — eigene Domäne 'ausruestung', herkunftsneutral (kein Delta). Ein Wissens-Baustein mit Reflexionsaufgabe, kein Übungsteil (Ausrüstung ist keine Bewegung, die man automatisiert). Vokabular liegt in der kanonischen Technik-Datei; 'ausruestung' ist dort als Domäne ergänzt."
+    "zweck": "Ausrüstungs-Grundlagen (eigene Domäne 'ausruestung', herkunftsneutral, kein Delta). Übersicht + je ein Wissens-Baustein zu Speeder, Schläger, Schuhen und Kleidung — alle mit Reflexionsaufgabe, kein Übungsteil (Ausrüstung ist keine Bewegung, die man automatisiert). Vertiefung (Bespannung, Griff) liegt in bausteine.ausruestung-fortgeschritten.json. Vokabular liegt in der kanonischen Technik-Datei; 'ausruestung' ist dort als Domäne ergänzt."
   },
   "bausteine": [
     {
@@ -20,10 +20,98 @@
         "de": "Deine Ausrüstung"
       },
       "erklaerteil": {
-        "de": "Crossminton kommt mit wenig aus: einem Schläger, ein paar Speedern, passenden Schuhen. Trotzdem beeinflusst jedes Teil, wie du spielst — und das meiste davon wählst du mit ein paar Grundregeln richtig aus.\n\nDer Speeder ist dein Ball. Er fliegt schwer und schnell und ist deutlich windstabiler als ein Federball — aber nur im passenden Typ. Es gibt langsamere Speeder für den Einstieg und die Halle und schwerere für draußen im Wind; bei manchen Modellen verstellst du das Tempo über kleine Aufsätze. Halte am Anfang zwei oder drei bereit: Übungsmaterial nutzt sich ab, und ein angeschlagener Speeder fliegt unberechenbar.\n\nDer Schläger ist kürzer und steifer als ein Badmintonschläger und wie dieser besaitet. Die Saitenspannung ist ein Kompromiss — straffer bespannt bringt mehr Kontrolle, weicher bespannt mehr Tempo aus dem Schläger heraus. Als Einsteiger passt die Standardbespannung; darüber musst du dir noch keine Gedanken machen. Wichtiger ist der Griff: Rutscht er im Schweiß, wechsle das Griffband. Ein sicherer Griff spart Kraft und schont das Handgelenk.\n\nDie Schuhe tragen dein Spiel mehr, als man denkt. Crossminton lebt von kurzen, harten Antritten zur Seite — dafür brauchst du seitlichen Halt und eine Sohle, die greift. In der Halle gehört eine helle, nicht abfärbende Sohle dazu; viele Hallen bestehen darauf. Draußen entscheidet der Untergrund: Auf Sand, Asche oder Rasen greift ein Profil, das drinnen nur rutschen würde.\n\nDie Kleidung soll dich frei bewegen lassen: atmungsaktiv und weit genug für tiefe Ausfallschritte. Draußen richtest du sie nach der Witterung — im Zweifel eine Schicht mehr, die du ablegen kannst. Bei offiziellen Turnieren gehört ein Trikot mit deinem Nachnamen dazu (Näheres im Turnier-Regularium unter „Regeln“).\n\nGute Ausrüstung macht dich nicht zum besseren Spieler. Falsche oder verschlissene hält dich aber auf. Sieh sie ab und zu durch, dann steht sie deinem Spiel nie im Weg."
+        "de": "Crossminton kommt mit wenig aus: einem Schläger, ein paar Speedern, passenden Schuhen. Trotzdem beeinflusst jedes Teil, wie du spielst — und das meiste davon wählst du mit ein paar Grundregeln richtig aus.\n\nDer Speeder ist dein Ball. Er fliegt schwer und schnell und ist deutlich windstabiler als ein Federball — aber nur im passenden Typ. Es gibt langsamere Speeder für den Einstieg und die Halle und schwerere für draußen im Wind; bei manchen Modellen verstellst du das Tempo über kleine Aufsätze. Halte am Anfang zwei oder drei bereit: Übungsmaterial nutzt sich ab, und ein angeschlagener Speeder fliegt unberechenbar.\n\nDer Schläger ist kürzer und steifer als ein Badmintonschläger und wie dieser besaitet. Die Saitenspannung ist ein Kompromiss — straffer bespannt bringt mehr Kontrolle, weicher bespannt mehr Tempo aus dem Schläger heraus. Als Einsteiger passt die Standardbespannung; darüber musst du dir noch keine Gedanken machen. Wichtiger ist der Griff: Rutscht er im Schweiß, wechsle das Griffband. Ein sicherer Griff spart Kraft und schont das Handgelenk.\n\nDie Schuhe tragen dein Spiel mehr, als man denkt. Crossminton lebt von kurzen, harten Antritten zur Seite — dafür brauchst du seitlichen Halt und eine Sohle, die greift. In der Halle gehört eine helle, nicht abfärbende Sohle dazu; viele Hallen bestehen darauf. Draußen entscheidet der Untergrund: Auf Sand, Asche oder Rasen greift ein Profil, das drinnen nur rutschen würde.\n\nDie Kleidung soll dich frei bewegen lassen: atmungsaktiv und weit genug für tiefe Ausfallschritte. Draußen richtest du sie nach der Witterung — im Zweifel eine Schicht mehr, die du ablegen kannst. Bei offiziellen Turnieren gehört ein Trikot mit deinem Nachnamen dazu (Näheres im Turnier-Regularium unter „Regeln“).\n\nGute Ausrüstung macht dich nicht zum besseren Spieler. Falsche oder verschlissene hält dich aber auf. Sieh sie ab und zu durch, dann steht sie deinem Spiel nie im Weg. Die folgenden Bausteine gehen die vier Stücke einzeln durch."
       },
       "reflexionsaufgabe": {
         "de": "Leg deinen Schläger, ein paar Speeder und deine Schuhe vor dich hin und geh sie einmal durch: Ist der Griff noch griffig oder rutscht er im Schweiß? Passen deine Speeder zu dem Ort, an dem du meistens spielst — Halle oder draußen? Hinterlässt deine Sohle Streifen auf dem Hallenboden? Notiere dir eine Sache, die du ersetzen, ergänzen oder einmal ausprobieren willst, und kümmere dich vor dem nächsten Spiel darum."
+      }
+    },
+    {
+      "id": "der_speeder",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Der Speeder ist crossminton-eigen: Weder Federball noch Tennis- oder Squashball übertragen sich auf ihn. Aus anderen Sportarten kommt bestenfalls die Gewohnheit, das Spielgerät nach den Bedingungen zu wählen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Der Speeder"
+      },
+      "erklaerteil": {
+        "de": "Der Speeder ist der Ball des Crossminton — und der Grund, warum es den Sport überhaupt gibt. Am Anfang stand die Suche nach einem Ball, der auch bei Wind fliegt, wo ein Federball längst abtreibt. Die Antwort ist kürzer, schwerer und schmaler gebaut als ein Federball: Das verkürzte Flugkleid nimmt weniger Luftwiderstand mit, das höhere Gewicht bringt mehr Trägheit. Zusammen ergibt das eine flache, schnelle, weite Bahn, die stabil bleibt. Ein Speeder wiegt zwischen 8 und 10 Gramm, etwa dreimal so viel wie ein Federball, und ist wasser- und reißfest.\n\nEs gibt ihn in mehreren Typen, und für dein Spiel zählt vor allem, den richtigen zu greifen. Der rote Fun Speeder ist der leichteste und langsamste: ideal für den Einstieg, für Kinder und fürs Training — in der Altersklasse U12 ist er sogar vorgeschrieben. Der gelbe Match Speeder ist der offizielle Wettkampfball; mit ihm wird in allen anderen Kategorien gespielt. Der Cross Speeder ist der schwerste und fliegt am weitesten, gedacht für lange Distanzen und Wind. Der Night Speeder trägt eine durchsichtige Kappe für ein Leuchtstäbchen und macht das Spiel bei Dunkelheit möglich. Der Heli ist besonders windstabil und auf kurze Wege gebaut.\n\nDie Weiten- und Tempoangaben der Hersteller schwanken je nach Quelle stark — nimm sie als Größenordnung, nicht als Messwert. Fest steht die Reihenfolge: Fun am langsamsten, Match in der Mitte, Cross am schnellsten und weitesten.\n\nBei Wind hast du drei Stufen. Der Speeder selbst ist bis etwa Windstärke 4 spielbar gebaut — das ist sein eigentlicher Zweck. Reicht das nicht, stülpst du einen Windring unter die Kappe: Er erhöht das Gewicht, und mehr Masse bei gleicher Angriffsfläche macht die Bahn träger gegen den Seitenwind, also stabiler. Ein verbreiteter Irrtum ist, der Ring senke den Luftwiderstand. Das stimmt nicht: Er lässt die Form unverändert und erhöht allein das Gewicht. Erst wenn auch das nicht genügt, greifst du zu einem schwereren Typ wie dem Cross — im Wettkampf allerdings nur nach Rücksprache mit dem Organisator und im Einvernehmen mit dem Oberschiedsrichter.\n\nZwei Regeln solltest du kennen. Die Form des Speeders darf sich nicht ändern — ihn zwischendurch in die Hosentasche zu stecken ist ausdrücklich verboten. Und einen sichtbar beschädigten Speeder darfst du nicht absichtlich weiterspielen; verformt er sich im Ballwechsel, wird der Punkt wiederholt. Prüfe deine Speeder deshalb nach jedem Match und sortiere angeschlagene aus."
+      },
+      "reflexionsaufgabe": {
+        "de": "Schau dir deine Speeder an: Welcher Typ liegt bei dir in der Tasche — rot (Fun) oder gelb (Match)? Passt er zu dem, was du meistens spielst? Dreh jeden einmal in der Hand und prüf ihn auf Risse und Dellen; angeschlagene Speeder fliegen unberechenbar und gehören aussortiert. Und wenn du draußen spielst: Hast du für Wind eine Antwort dabei — einen Windring oder einen schwereren Speeder?"
+      }
+    },
+    {
+      "id": "der_schlaeger",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "TEN", "SQ"],
+      "transfer_herkunft_beleg": "Die Bauform entstand als Antwort auf Badminton- und Squashschläger; wer aus diesen Sportarten kommt, kennt die Begriffe Gewicht, Balance und Steifigkeit bereits. Übertragbar ist das Kaufwissen, crossminton-eigen die konkrete Form.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Der Schläger"
+      },
+      "erklaerteil": {
+        "de": "Warum es überhaupt einen eigenen Crossminton-Schläger gibt, erzählt viel über den Sport. Die ersten Ballwechsel wurden mit Badminton- und Squashschlägern gespielt. Die Badmintonschläger hielten der Wucht nicht stand — der Speeder ist rund dreimal so schwer wie ein Federball und zerlegte die feinen Rahmen. Die Squashschläger waren zu lang und zu träge für das Tempo. Aus diesem Zwischenraum entstand eine eigene Bauform: kurz und wendig wie beim Squash, aber robust genug für den schweren Ball.\n\nDas Regelwerk zieht nur zwei Grenzen: Der Schläger ist höchstens 61 Zentimeter lang, und der Kopf misst höchstens 650 Quadratzentimeter. Alles andere — Gewicht, Material, Balance, Bespannung, Griffstärke — ist frei. Deine Wahl richtet sich also nach dir, nicht nach einer Vorschrift.\n\nDas Gewicht liegt üblicherweise zwischen 100 und 145 Gramm. Ein leichterer Schläger ist wendiger und ermüdet die Schlaghand später — ein Vorteil, weil Crossminton mit hoher Frequenz in alle vier Ecken gespielt wird. Ein schwererer trägt mehr Masse in den Schlag. Für den Anfang ist ein eher leichter, ausgewogener Schläger die sichere Wahl.\n\nBeim Material trennen sich Einstieg und Turnier. Einsteigerschläger bestehen meist aus Aluminium: günstig, robust, oft mit kürzerem Schaft und größerer Schlagfläche, was das Treffen erleichtert — genau richtig für Schule und Verleih. Turnierschläger bestehen aus Graphit und Carbon, häufig mit Kevlar verstärkt; sie sind leichter, steifer und geben ein direkteres Gefühl beim Treffen. Der Materialunterschied hat eine Folge, die beim Bespannen wichtig wird: Aluminium verträgt deutlich weniger Saitenzug als Carbon.\n\nDrei Begriffe begegnen dir in jeder Kaufberatung. Die Balance sagt, wo das Gewicht sitzt: kopflastig unterstützt die Schlagkraft, grifflastig das Handling, ausgewogen ist vielseitig. Die Steifigkeit beschreibt, wie sehr der Rahmen nachgibt: ein steifer meldet den Treffer direkt zurück, ein flexibler verzeiht mehr. Und der Sweet Spot ist der optimale Treffbereich — ein größerer Kopf macht ihn größer und das Treffen leichter. Diese Angaben stammen aus den Schlägersportarten und sind für Crossminton nicht eigens belegt; nimm sie als Orientierung und vertraue am Ende dem eigenen Gefühl beim Probeschlagen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm deinen Schläger in die Hand und spür ihm nach: Fühlt er sich nach einem langen Ballwechsel noch leicht an, oder zieht er die Hand nach unten? Ist er aus Aluminium oder aus Carbon? Balanciere ihn locker auf einem Finger — sitzt das Gewicht eher im Kopf (Kraft) oder im Griff (Kontrolle)? Überlege, ob das zu der Art passt, wie du spielen willst."
+      }
+    },
+    {
+      "id": "schuhe_finden",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["BAD", "SQ"],
+      "transfer_herkunft_beleg": "Es gibt keine eigenen Crossminton-Schuhe; gespielt wird in Hallenschuhen aus Badminton und Squash. Deren Kernanforderungen übertragen sich gut, die vorn-hinten-Ausrichtung ihrer Bauart nur teilweise.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Schuhe finden"
+      },
+      "erklaerteil": {
+        "de": "Fangen wir mit der ehrlichen Auskunft an: Es gibt keine eigenen Crossminton-Schuhe und keine Schuhregel. Gespielt wird in Badminton-, Squash- oder allgemeinen Hallenschuhen. Das Regelwerk kümmert sich um den Boden — er darf keine erhöhte Verletzungsgefahr bergen —, den Schuh überlässt es dir.\n\nDie Übertragung aus dem Hallensport passt gut, aber nicht restlos. Badminton- und Squashschuhe sind für ein Feld gebaut, das nach vorne und hinten arbeitet — zum Netz, zur Frontwand. Das Crossminton-Feld ist ein Quadrat mit vier gleichwertigen Ecken um ein Zentrum. Gefragt ist damit weniger die Bewegung nach vorn als der sichere Ausfallschritt in jede Richtung. Die Kernanforderungen der Hallenschuhe treffen es trotzdem, denn sie zielen ohnehin auf Stop-and-Go, seitlichen Halt und schnelle Richtungswechsel.\n\nWorauf du in der Halle achtest: eine helle, nicht abfärbende Sohle, die viele Hallen schon am Eingang verlangen; seitliche Stabilität mit fester Fersenkappe gegen das Umknicken beim Ausfallschritt; eine flache, flexible Bauweise für schnelle Reaktionen; etwas Dämpfung gegen die Stöße beim Abdrücken und Landen; und einen festen Sitz, damit beim Antritt keine Kraft verloren geht. Tennisschuhe eignen sich nur bedingt — sie sind schwerer und für andere Wege gebaut. Handball- und Volleyballschuhe können passen, wenn sie diese Punkte erfüllen.\n\nEinen Zielkonflikt kannst du nicht auflösen, nur gewichten: Dämpfung und Stabilität stehen gegen Leichtigkeit und Reaktionsschnelligkeit. Was dir wichtiger ist, entscheidest du selbst.\n\nDraußen wird es unübersichtlich. Crossminton läuft auf Rasen, Sand, Asphalt, Asche und Kunstrasen, und für keinen dieser Böden gibt es eine belastbare Schuhempfehlung. Sicher ist nur: Eine Hallensohle ist auf Asphalt schnell abgerieben, und der Halt unterscheidet sich je Belag grundlegend. Wenn du regelmäßig draußen spielst, lohnt ein zweites Paar mit Profil — welches, findest du am ehesten durch Ausprobieren auf deinem Platz heraus. Wie du dich auf wechselnde Böden einstellst, steht im Outdoor-Teil des Handbuchs."
+      },
+      "reflexionsaufgabe": {
+        "de": "Dreh deine Hallenschuhe um und schau auf die Sohle: Färbt sie ab, oder ist sie hell und griffig? Gib dir in der Halle einen harten Ausfallschritt zur Seite — hält der Schuh, oder knickt der Fuß nach außen weg? Und wenn du auch draußen spielst: Greift dieselbe Sohle auf deinem Platz, oder rutschst du? Notiere, ob ein zweites Paar für draußen sinnvoll wäre."
+      }
+    },
+    {
+      "id": "funktionskleidung",
+      "typ": "micro",
+      "domaene": "ausruestung",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": [],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Material, Schichtprinzip und Witterungsschutz kommen aus der allgemeinen Sport- und Outdoor-Lehre. Crossminton-eigen ist allein, dass flatternde Kleidung durch die Speeder-Berührung ein unmittelbares Punktrisiko wird.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Funktionskleidung"
+      },
+      "erklaerteil": {
+        "de": "Bei der Kleidung steht eine Regel über allem, und sie ist crossminton-eigen: Berührt der Speeder deinen Körper oder deine Kleidung — ausdrücklich samt Schuhen und Socken —, ist der Punkt verloren. Weite, flatternde Sachen sind damit ein unmittelbares Risiko. Ein loses Hemd, das der Speeder im Vorbeiflug streift, kostet dich den Ballwechsel. Die erste Regel der Spielkleidung heißt deshalb schlicht: eng genug, dass nichts flattert.\n\nDazu kommt bei offiziellen Turnieren die Trikot-Pflicht. Auf den großen Turnieren trägst du in allen Matches ein Oberteil mit deinem Namen und deinem Land auf dem Rücken; auf kleineren gilt das ab dem Halbfinale, auf den 100-Punkte-Turnieren gar nicht. Die Einzelheiten stehen im Turnier-Regularium unter „Regeln“.\n\nBeim Material lohnt ein Blick auf den Stoff. Baumwolle saugt sich mit Schweiß voll und hält dann eine feuchte Schicht direkt auf der Haut; im Hochsommer kühlt das angenehm, an kühlen Tagen holt es dir die Wärme aus dem Körper. Funktionsfasern aus Polyester nehmen kaum Feuchtigkeit auf, transportieren sie nach außen und trocknen schnell — für kurze, intensive Einheiten die erste Wahl. Merinowolle nimmt zwar Feuchtigkeit auf, leitet sie aber besser ab als Baumwolle und riecht länger frisch; ihre Stärke ist langes Tragen bei wechselnder Temperatur.\n\nFür draußen hilft das Schichtprinzip: eine dünne Basisschicht, die den Schweiß von der Haut wegführt, darüber eine wärmende Schicht aus eingeschlossener Luft und bei Wind oder Nässe eine Schutzschicht obenauf. Der Vorteil ist, dass du Schichten ablegen und wieder anziehen kannst. Wichtig ist die Durchgängigkeit: Eine einzige Baumwollschicht mittendrin saugt sich voll und macht das ganze System zunichte. An kühlen Tagen darf die Kleidung ruhig etwas lockerer sitzen, weil die Luft dazwischen isoliert — „locker“ meint hier eine Luftschicht, kein Flattern; die Fehlerregel von oben gilt weiter.\n\nWind und Sonne verlangen wenig Extra. Eine winddichte, eng geschnittene Jacke hält den Wind ab und bleibt trotzdem atmungsaktiv; bei Wind ist eine flatternde Jacke doppelt ungünstig, als Punktrisiko und als Störung. Gegen Sonne gibt es Sportshirts mit hohem UV-Schutz, die deutlich mehr abhalten als ein weißes Baumwollshirt. Wie warm oder kalt dir dabei wird, ist von Mensch zu Mensch verschieden; gerade deshalb ist das Schichtprinzip so praktisch, denn es lässt sich an dein eigenes Empfinden anpassen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Zieh an, was du beim Spielen trägst, und mach einen tiefen Ausfallschritt: Flattert irgendwo etwas, das der Speeder erwischen könnte? Fühl den Stoff — Baumwolle, die sich vollsaugt, oder Funktionsmaterial, das trocken bleibt? Und wenn du draußen spielst: Hast du eine Schicht dabei, die du bei Wind oder Kälte über- und bei Wärme wieder ausziehen kannst?"
       }
     }
   ],
