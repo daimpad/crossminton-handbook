@@ -9,9 +9,9 @@
       "titel": "Crossminton Spielregeln",
       "herausgeber": "International Crossminton Organisation (ICO)",
       "verband_de": "Deutscher Crossminton Verband (DCV)",
-      "stand": "Februar 2018",
+      "stand": "ICO-Fassung 2024/dec (deutsche Wiedergabe)",
       "link": "https://crossminton.de/wp-content/uploads/2021/10/Spielregeln_Crossminton.pdf",
-      "hinweis": "Inhalte strikt aus der offiziellen Regelquelle. 'inhalt' gibt die Regel akkurat wieder (mit Regelnummer zur Rueckverfolgung), 'erklaerung' deutet sie in Du-Form. Court-Masse ausser der genannten Feld-Distanz (12,80 m) sind in der Quelle nicht enthalten und werden NICHT ergaenzt."
+      "hinweis": "Die deutsche Wiedergabe folgt der DCV-Uebersetzung und ist mit den inhaltlichen Aenderungen der ICO-Fassung 2024/dec abgeglichen (u. a. eigenes Ausruestungs-Kapitel, IN/OUT-Praezisierung 'der Kopf entscheidet', Fehler bei Beruehrung von Schuhen und Socken, 30-Sekunden-Aufschlag bei Extremwetter). Regelnummern folgen teils der DCV-Fassung 2018, teils der ICO-Fassung 2024. 'inhalt' gibt die Regel akkurat wieder, 'erklaerung' deutet sie in Du-Form."
     },
     "entity_schema": {
       "abschnitt": {
@@ -63,14 +63,43 @@
     },
 
     {
+      "id": "ausruestung",
+      "titel": {"de": "Ausrüstung (Speeder & Schläger)"},
+      "einleitung": {"de": "Die ICO-Fassung 2024 hat ein eigenes Ausrüstungs-Kapitel. Es legt fest, welche Speeder und Schläger regelkonform sind — der Rest der Wahl bleibt frei."},
+      "regeln": [
+        {
+          "nummer": "1.1",
+          "titel": {"de": "Maße des Speeders"},
+          "inhalt": {"de": "Der Speeder wiegt mindestens 8 und höchstens 10 Gramm (in der Altersklasse U12: 6 bis 10 Gramm). Er ist 57 bis 63 mm hoch, der Korb misst an der breitesten Stelle 47 bis 53 mm. Die Schlagkappe ist halbkugelförmig aus Thermoplast, mit 25 bis 27 mm Durchmesser. Offizieller Matchball ist der gelbe Match Speeder; in der U12 ist der rote Fun Speeder vorgeschrieben."},
+          "erklaerung": {"de": "Nicht jeder Speeder ist turniertauglich: Gewicht, Höhe und Kappe sind genau festgelegt. Im Wettkampf spielst du den gelben Match Speeder, bei den Jüngsten den langsameren roten Fun Speeder."},
+          "querverweis": ["der_speeder"]
+        },
+        {
+          "nummer": "1.1.3 / 1.1.4 / 1.1.6",
+          "titel": {"de": "Windring, Wind und Formveränderung"},
+          "inhalt": {"de": "Ein Gummiring direkt unter der Schlagkappe darf das Höchstgewicht um 1 Gramm überschreiten. Bei starkem Wind darf nach Rücksprache mit dem Organisator und im Einvernehmen mit dem Oberschiedsrichter ein anderer Speeder verwendet werden. Die Form des Speeders darf sich vor und während des Matches nicht ändern; Handlungen, die sie beeinflussen könnten — etwa das Stecken in die Hosentasche — sind untersagt."},
+          "erklaerung": {"de": "Gegen Wind ist ein Windring erlaubt (er darf den Ball etwas schwerer machen), bei viel Wind auf Absprache auch ein schwererer Speeder. Was du nicht darfst: die Form des Speeders verändern — auch nicht durch die Hosentasche."},
+          "querverweis": ["der_speeder"]
+        },
+        {
+          "nummer": "1.2",
+          "titel": {"de": "Maße des Schlägers"},
+          "inhalt": {"de": "Der Schläger ist höchstens 61 cm lang, der Kopf misst höchstens 650 cm² (Außenmaße). In der U12 dürfen Länge und Kopfgröße abweichen. Keine Vorrichtung ist erlaubt, die die Flugqualität des Speeders verändert, seine Beschaffenheit künstlich beeinflusst oder Gegner bzw. Partner gefährdet."},
+          "erklaerung": {"de": "Geregelt sind nur zwei Obergrenzen — Länge und Kopf — plus ein Sicherheits- und Manipulationsverbot. Gewicht, Material, Balance, Bespannung und Griff bleiben deine freie Wahl."},
+          "querverweis": ["der_schlaeger", "deine_ausruestung"]
+        }
+      ]
+    },
+
+    {
       "id": "wahl",
       "titel": {"de": "Die Wahl vor Spielbeginn"},
       "regeln": [
         {
-          "nummer": "1",
+          "nummer": "1 / 2.1",
           "titel": {"de": "Wer wählt was"},
-          "inhalt": {"de": "Vor Spielbeginn wird eine Wahl durchgeführt. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit."},
-          "erklaerung": {"de": "Wie beim Münzwurf: Wer die Wahl gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner."}
+          "inhalt": {"de": "Vor Spielbeginn wird eine Wahl durchgeführt — üblicherweise durch Werfen des Speeders; die Richtung, in die die Schlagkappe am Boden zeigt, entscheidet. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit."},
+          "erklaerung": {"de": "Statt einer Münze wirfst du den Speeder: Wohin die Kappe am Boden zeigt, gewinnt die Wahl. Wer gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner."}
         },
         {
           "nummer": "1.2",
@@ -189,6 +218,12 @@
           "titel": {"de": "Nach dem Aufschlag frei"},
           "inhalt": {"de": "Nach dem Aufschlag darf sich der Aufschläger aus der Aufschlagzone bewegen."},
           "erklaerung": {"de": "Sobald der Aufschlag raus ist, bist du frei — du bewegst dich normal im Feld und spielst die Rallye."}
+        },
+        {
+          "nummer": "5.1.1",
+          "titel": {"de": "Extremwetter: 30 Sekunden"},
+          "inhalt": {"de": "Bei extremen Wetterbedingungen muss der Aufschlag spätestens 30 Sekunden nach dem Ende des vorherigen Punkts erfolgen."},
+          "erklaerung": {"de": "Draußen bei Wind, Hitze oder Kälte soll das Spiel nicht ins Stocken geraten: Nach jedem Punkt hast du dann höchstens 30 Sekunden bis zum nächsten Aufschlag. Diese Vorgabe kam mit der Fassung 2024 dazu."}
         }
       ]
     },
@@ -266,10 +301,11 @@
           "querverweis": ["spielziel_verstehen"]
         },
         {
-          "nummer": "7.2.3 / 7.2.4",
+          "nummer": "7.2.3 / 7.2.4 (ICO 8.2.3)",
           "titel": {"de": "Speeder berührt Spieler oder Objekt"},
-          "inhalt": {"de": "Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt, oder ein Objekt bzw. eine Person außerhalb des Courts."},
-          "erklaerung": {"de": "Trifft der Speeder dich, deine Kleidung oder etwas außerhalb des Courts, ist der Ballwechsel verloren."}
+          "inhalt": {"de": "Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt — einschließlich Schuhe und Socken —, oder ein Objekt bzw. eine Person außerhalb des Courts."},
+          "erklaerung": {"de": "Trifft der Speeder dich, deine Kleidung, deine Schuhe oder Socken oder etwas außerhalb des Courts, ist der Ballwechsel verloren. Die Fassung 2024 nennt Schuhe und Socken ausdrücklich — ein Grund mehr für eng sitzende Kleidung."},
+          "querverweis": ["funktionskleidung"]
         },
         {
           "nummer": "7.2.5 / 7.2.6",
@@ -293,6 +329,27 @@
     },
 
     {
+      "id": "in_out",
+      "titel": {"de": "In oder Out — die Linienentscheidung"},
+      "einleitung": {"de": "Wann ein Ball „in“ ist, entscheidet nicht der ganze Speeder, sondern sein Kopf. Die Fassung 2024 hat das ausdrücklich präzisiert."},
+      "regeln": [
+        {
+          "nummer": "11.6.1",
+          "titel": {"de": "Der Kopf entscheidet"},
+          "inhalt": {"de": "Der Kopf (die Schlagkappe) des Speeders trifft zuerst auf. Berührt der Kopf die Linie, ist der Ball „in“. Berührt der Kopf die Linie nicht, ist der Ball „out“ — auch wenn ein anderer Teil des Speeders die Linie berührt."},
+          "erklaerung": {"de": "Schau auf die Kappe, nicht auf den Korb: Nur wenn der Kopf die Linie trifft, zählt der Ball als drin. Streift nur der Korb die Linie, während der Kopf daneben aufkommt, ist er draußen."},
+          "querverweis": ["praezision_an_die_linien"]
+        },
+        {
+          "nummer": "11.6.2",
+          "titel": {"de": "Schleifspur an der Frontlinie"},
+          "inhalt": {"de": "Kommt der Speeder vor der Frontlinie auf und hinterlässt eine sichtbare Schleifspur, gilt er nur dann als „in“, wenn die Spur höchstens so lang ist wie der Kopf des Speeders."},
+          "erklaerung": {"de": "Rutscht der Speeder vor der Frontlinie noch in die Linie, entscheidet die Länge der Schleifspur: Ist sie länger als der Kopf, war der erste Bodenkontakt zu weit vorn — der Ball ist draußen. Auch das ist neu in der Fassung 2024."}
+        }
+      ]
+    },
+
+    {
       "id": "wiederholungen",
       "titel": {"de": "Wiederholungen"},
       "regeln": [
@@ -303,10 +360,10 @@
           "erklaerung": {"de": "Eine Wiederholung (im Tennis 'Let') heißt: Der Ballwechsel zählt nicht, es gibt keinen Punkt, derselbe Aufschlag wird noch einmal gespielt."}
         },
         {
-          "nummer": "8.2",
+          "nummer": "8.2 (ICO 9.2)",
           "titel": {"de": "Wann wiederholt wird"},
-          "inhalt": {"de": "Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt."},
-          "erklaerung": {"de": "Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben."}
+          "inhalt": {"de": "Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; zwei Speeder sich in der Luft treffen; eine Linie während des Ballwechsels verschoben wird; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt."},
+          "erklaerung": {"de": "Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben. Die Fassung 2024 nennt zusätzlich zwei kollidierende Speeder und eine im Spiel verschobene Linie."}
         }
       ]
     },

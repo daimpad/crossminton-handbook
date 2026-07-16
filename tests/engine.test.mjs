@@ -429,9 +429,9 @@ pruefe('spielform-Vokabular + Label vorhanden', daten.vokabulare.spielform && da
 pruefe('Themen-/Kompetenzpfad bleiben unberührt vom Spielform-Filter (orthogonal): Doppel-Bausteine weiter in ihren Domänen', sequenzFuer(daten, 'themen:mentales').stationen.some((s) => s.baustein.id === 'verstaendigung_im_paar'));
 
 console.log('\n[7f] Regeln (Referenz-Reiter, eigene Entität — nicht im Baustein-Pool)');
-pruefe('regeln.json über baueIndizes eingelesen: 11 Abschnitte', daten.regeln.abschnitte.length === 11);
+pruefe('regeln.json über baueIndizes eingelesen: 13 Abschnitte (inkl. Ausrüstung + In/Out aus ICO 2024)', daten.regeln.abschnitte.length === 13);
 const alleRegeln = daten.regeln.abschnitte.flatMap((a) => a.regeln || []);
-pruefe('36 Regeln insgesamt, jede mit akkuratem inhalt.de', alleRegeln.length === 36 && alleRegeln.every((r) => typeof r.inhalt?.de === 'string' && r.inhalt.de.trim() !== ''));
+pruefe('42 Regeln insgesamt, jede mit akkuratem inhalt.de', alleRegeln.length === 42 && alleRegeln.every((r) => typeof r.inhalt?.de === 'string' && r.inhalt.de.trim() !== ''));
 pruefe('alle querverweis-IDs lösen auf einen Baustein auf (reine Dokumentation, kein Graph)', alleRegeln.every((r) => (r.querverweis || []).every((id) => daten.bausteinVonId.has(id))));
 // Der Reiter ist eine getrennte Entität: die Abschnitte liegen unter daten.regeln,
 // nie im Pool. (Slug-Überschneidungen wie der Abschnitt "aufschlag" ~ Baustein
