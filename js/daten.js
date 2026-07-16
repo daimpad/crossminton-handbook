@@ -18,6 +18,9 @@ const INHALTSDATEIEN = [
   'data/bausteine.beginner-taktik.json',
   'data/bausteine.beginner-mentales.json',
   'data/bausteine.beginner-athletik_kondition.json',
+  // Ausrüstungs-Grundlagen: eigene Domäne 'ausruestung' (Speeder, Schläger, Schuhe,
+  // Kleidung) — ein herkunftsneutraler Beginner-Wissensbaustein, kein Delta.
+  'data/bausteine.ausruestung-grundlagen.json',
   // Trainer-Ebene: technikübergreifendes Meta-Wissen, kompetenzstufe ["trainer"]
   // (dockt an keine Könnensstufe an). Dateiname trägt 'trainer' an Stufen-Stelle.
   'data/bausteine.trainer-trainingsgestaltung.json',
