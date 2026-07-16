@@ -179,7 +179,9 @@ code { font-size: 0.85em; word-break: break-all; }
 main {
   max-width: 44rem;
   margin: 0 auto;
-  padding: 1.1rem 1rem 0.6rem;
+  /* Unten Platz für die fixierte Bottom-Bar (nur mobil sichtbar) lassen, damit der
+     letzte Container nicht dahinter verschwindet; ab Tablet ohne Bar überschrieben. */
+  padding: 1.1rem 1rem calc(5rem + env(safe-area-inset-bottom));
 }
 
 /* Einstiegs-Übergang: die Blöcke der Ansicht gleiten gestaffelt herein — nur
