@@ -18,7 +18,7 @@ export function renderHeim(el, daten) {
   if (!d.stufe) {
     // Freier Einstieg ohne Wizard: Einladung statt geführtem Wiedereinstieg.
     weiterlernen = `
-      <section class="karte karte-akzent">
+      <section class="karte">
         <h2>${esc(t('kapitel_entdecken'))}</h2>
         <p class="leise">${esc(t('onboarding_einladung'))}</p>
         <div class="knopf-zeile" style="justify-content:flex-start">
@@ -29,14 +29,14 @@ export function renderHeim(el, daten) {
   } else if (naechste) {
     const nummer = pfad.stationen.indexOf(naechste) + 1;
     weiterlernen = `
-      <section class="karte karte-akzent">
+      <section class="karte">
         <p class="leise">${esc(t('weiterlernen'))} · ${esc(t('station_x_von_y', { a: nummer, b: pfad.stationen.length }))}</p>
         <h2>${esc(label('baustein', naechste.baustein.id))}</h2>
         <a class="knopf knopf-primaer" href="#/baustein/${esc(naechste.baustein.id)}?kontext=kompetenz">${esc(t('weiter'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       </section>`;
   } else if (pfad.stationen.length > 0) {
     weiterlernen = `
-      <section class="karte karte-akzent">
+      <section class="karte">
         <p class="bestaetigung">${esc(t('leer_weiterlernen'))}</p>
         <a class="knopf knopf-sekundaer" href="#/pfad/themen">${esc(t('pfad_themen'))}</a>
       </section>`;
@@ -76,14 +76,14 @@ export function renderHeim(el, daten) {
 
   const kompetenzKachel = d.stufe
     ? kachel({
-        href: '#/pfad/kompetenz', hue: 'pf-blau', icon: 'fa-chart-line', lead: true,
+        href: '#/pfad/kompetenz', hue: 'pf-blau', icon: 'fa-chart-line',
         titel: esc(t('pfad_kompetenz')),
         meta: ` <span class="chip chip-stufe chip-stufe-${esc(d.stufe)}">${esc(label('kompetenzstufe', d.stufe))}</span>`,
         text: esc(t('pfad_kompetenz_text')),
-        ring: `<div class="pfad-kachel-ring">${ringHtml(pfadProjektion, { groesse: 62, staerke: 6 })}</div>`,
+        ring: `<div class="pfad-kachel-ring">${ringHtml(pfadProjektion, { groesse: 52, staerke: 5 })}</div>`,
       })
     : kachel({
-        hue: 'pf-blau', icon: 'fa-chart-line', lead: true, alsLink: false,
+        hue: 'pf-blau', icon: 'fa-chart-line', alsLink: false,
         titel: esc(t('pfad_kompetenz')),
         text: esc(t('stufe_fehlt')),
         extra: `<a class="knopf knopf-sekundaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>`,
@@ -99,7 +99,7 @@ export function renderHeim(el, daten) {
     : '';
 
   const themenKachel = kachel({
-    href: '#/pfad/themen', hue: 'pf-teal', icon: 'fa-layer-group',
+    href: '#/pfad/themen', hue: 'pf-teal', icon: 'fa-layer-group', lead: true,
     titel: esc(t('pfad_themen')),
     text: esc(t('pfad_themen_text')),
     extra: domaenenChips ? `<p class="chip-zeile pfad-kachel-chips">${domaenenChips}</p>` : '',
@@ -143,12 +143,12 @@ export function renderHeim(el, daten) {
     ${weiterlernen}
     <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>
     <div class="pfad-gitter">
-      ${kompetenzKachel}
-      ${trainerKachel}
       ${themenKachel}
-      ${doppelKachel}
+      ${trainerKachel}
       ${umgebungKachel}
-      ${individualKachel}
+      ${doppelKachel}
       ${trainingKachel}
+      ${individualKachel}
+      ${kompetenzKachel}
     </div>`;
 }
