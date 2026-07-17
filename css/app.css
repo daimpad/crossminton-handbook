@@ -12,6 +12,11 @@
   --primaer-dunkel: #1e8bd6;
   --primaer-tief: #1568ad;
   --primaer-weich: #e8f3fe;
+  /* Kompetenzstufen-Rampe (Blau-Intensität, Einsteiger→Experte). KEINE Ampelfarben —
+     Rot/Gelb/Grün bleiben dem Status vorbehalten; die Stufe kodiert nur Intensität. */
+  --stufe-1-flaeche: #e8f3fe; --stufe-1-text: #1568ad;
+  --stufe-2-flaeche: #bfe1fb; --stufe-2-text: #0f4f86;
+  --stufe-3-flaeche: #1568ad; --stufe-3-text: #ffffff;
   --signal-rot: #f4402a;
   --signal-rot-text: #c4180a;
   --signal-rot-weich: #fdece9;
@@ -56,6 +61,9 @@
     --primaer-dunkel: #6bbdf6;
     --primaer-tief: #9acdf8;
     --primaer-weich: #143247;
+    --stufe-1-flaeche: #143247; --stufe-1-text: #9acdf8;
+    --stufe-2-flaeche: #1d4a6b; --stufe-2-text: #cbe6fb;
+    --stufe-3-flaeche: #4fb0f4; --stufe-3-text: #08243b;
     --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
     --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
     --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
@@ -81,6 +89,9 @@
   --primaer-dunkel: #6bbdf6;
   --primaer-tief: #9acdf8;
   --primaer-weich: #143247;
+  --stufe-1-flaeche: #143247; --stufe-1-text: #9acdf8;
+  --stufe-2-flaeche: #1d4a6b; --stufe-2-text: #cbe6fb;
+  --stufe-3-flaeche: #4fb0f4; --stufe-3-text: #08243b;
   --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
   --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
   --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
@@ -548,6 +559,28 @@ a.karte-link {
 /* Signal-Badges (Ampellogik) — weiche Fläche, kräftige Schrift, farbige Kante. */
 .chip-rot { background: var(--signal-rot-weich); color: var(--signal-rot-text); border: 1px solid var(--signal-rot); }
 .chip-gruen { background: var(--signal-gruen-weich); color: var(--signal-gruen-text); border: 1px solid var(--signal-gruen); }
+
+/* Baustein-Chips als Buttons: leicht blau hervorgehoben, Sprung direkt in den Baustein. */
+.chip-baustein { background: var(--primaer-weich); color: var(--primaer-tief); border-color: transparent; }
+
+/* Kompetenzstufen-Chips: Blau-Intensitätsrampe (Einsteiger hell → Experte tief).
+   Bewusst KEINE Ampel-Signalfarben — Rot/Gelb/Grün bleiben dem Status vorbehalten. */
+.chip-stufe { border-color: transparent; font-weight: 600; }
+.chip-stufe-beginner { background: var(--stufe-1-flaeche); color: var(--stufe-1-text); }
+.chip-stufe-fortgeschritten { background: var(--stufe-2-flaeche); color: var(--stufe-2-text); }
+.chip-stufe-experte { background: var(--stufe-3-flaeche); color: var(--stufe-3-text); }
+.chip-stufe-trainer { background: var(--flaeche-2); color: var(--tinte-2); border-color: var(--linie-stark); }
+
+/* Chip-Links klickbar: kleiner Hover (nur Zeigergeräte; Lift nur ohne reduce-motion). */
+a.chip { text-decoration: none; cursor: pointer; transition: transform var(--uebergang), box-shadow var(--uebergang), border-color var(--uebergang); }
+a.chip:focus-visible { outline: 2px solid var(--primaer); outline-offset: 2px; }
+@media (hover: hover) {
+  a.chip:hover { box-shadow: var(--schatten-weich); }
+  a.chip-baustein:hover { border-color: var(--primaer); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  a.chip:hover { transform: translateY(-1px); }
+}
 
 .chip-zeile { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: center; }
 .chip-trenner { color: var(--tinte-2); }

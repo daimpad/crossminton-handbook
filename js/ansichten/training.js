@@ -34,13 +34,19 @@ function renderListe(el, daten) {
   const karten = uebersicht
     .map(({ einheit, bausteine, absolviertZaehler }) => {
       const zaehlerText = absolviertZaehler > 0 ? t('mal_absolviert', { n: absolviertZaehler }) : t('noch_nicht_absolviert');
+      // Stufen-Chip klickbar → Kompetenzpfad der Stufe; Blau-Intensität kodiert die
+      // Stufe (chip-stufe-<stufe>), bewusst ohne Ampelfarben (Status bleibt Rot/Gelb/Grün).
+      const stufe = einheit.kompetenzstufe;
       const metaChips = [
-        `<span class="chip">${esc(label('kompetenzstufe', einheit.kompetenzstufe))}</span>`,
-        einheit.spielform === 'doppel' ? `<span class="chip chip-akzent">${esc(label('spielform', 'doppel'))}</span>` : '',
+        `<a class="chip chip-stufe chip-stufe-${esc(stufe)}" href="#/pfad/kompetenz/${esc(stufe)}">${esc(label('kompetenzstufe', stufe))}</a>`,
+        einheit.spielform === 'doppel' ? `<a class="chip chip-akzent" href="#/pfad/spielform/doppel">${esc(label('spielform', 'doppel'))}</a>` : '',
       ]
         .filter(Boolean)
         .join(' ');
-      const bausteinChips = bausteine.map((b) => `<span class="chip">${esc(label('baustein', b.id))}</span>`).join(' ');
+      // Baustein-Titel als direkte Sprung-Buttons in den jeweiligen Baustein.
+      const bausteinChips = bausteine
+        .map((b) => `<a class="chip chip-baustein" href="#/baustein/${esc(b.id)}?kontext=kompetenz">${esc(label('baustein', b.id))}</a>`)
+        .join(' ');
       return `
         <div class="karte">
           <h3>${esc(label('einheit', einheit.id))}</h3>
