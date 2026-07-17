@@ -73,6 +73,7 @@ Ein durchgehender End-to-End-Browsertest (Playwright, mobil + Desktop) liegt au�
 
 ```
 index.html                 App-Shell (SPA, Hash-Routing), Header (Sprachanzeige), Footer, Modul-Auffangnetz
+sw.js                      Service Worker (Offline, buildfrei): App-Hülle vorladen + stale-while-revalidate
 css/app.css                Design & CI (#38a4f1 + Signalfarben), mobile Bottom-Bar / Desktop-Hamburger
 css/schriften.css          lokale Schriften: Rubik + Font-Awesome-Subset (Icons ergänzen = eine Codepoint-Zeile)
 assets/fonts/              woff2-Dateien inkl. Lizenzen (OFL / FA Free)
@@ -118,7 +119,6 @@ LICENSE                              MIT (Software)
 
 ## Bewusste Ausbaustufen (strukturell vorgehalten, nicht umgesetzt)
 
-- Offline-Fähigkeit als PWA (statische Inhalte, relative Pfade — Manifest + Service Worker genügen später).
 - Schlanke Server-Komponente für geräteübergreifenden Fortschritt.
 - Funktionales Sprach-Umschalten für die Zielsprachen (Struktur angelegt; die Sprachanzeige im Header ist derzeit rein darstellend, der Umschalter im Profil funktional für de/en/fr/pl).
 - Abschluss-Status `beherrscht` (Mastery): im Zustandsraum vorgesehen, heute inaktiv — Aktivierung ohne Datenmigration.
