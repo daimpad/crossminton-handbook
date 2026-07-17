@@ -305,6 +305,23 @@ body.im-onboarding main { padding-bottom: 2rem; }
   gap: 0.5rem;
 }
 
+/* Kopf-Suchknopf: immer sichtbar — auch mobil, wo der Hamburger verborgen ist
+   (die Suche ist von jeder Seite erreichbar). */
+.kopf-suche {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius);
+  color: var(--primaer);
+  text-decoration: none;
+  transition: background var(--uebergang), box-shadow var(--uebergang), transform var(--uebergang);
+}
+@media (hover: hover) {
+  .kopf-suche:hover { background: var(--primaer-weich); box-shadow: var(--schatten-hover); transform: translateY(-1px); }
+}
+
 /* Sprachanzeige — rein darstellend (app-info funktion_aktiv:false): Flagge +
    Kürzel neben dem Hamburger; die Liste klappt auf, schaltet aber nichts um. */
 .sprach-anzeige { position: relative; }
@@ -1648,6 +1665,62 @@ details[open] summary { margin-bottom: 0.5rem; }
   display: block;
 }
 .leer-zustand > p { margin: 0; }
+/* Aktiver Leer-Zustand: Ausweg-Knöpfe unter der Nachricht, zentriert. */
+.leer-aktion { justify-content: center; margin-top: 1rem; }
+
+/* ---------- Suche ---------- */
+.such-form { margin: 0 0 1rem; }
+.such-feld-zeile { position: relative; display: flex; align-items: center; }
+.such-feld-icon { position: absolute; left: 0.85rem; color: var(--primaer); opacity: 0.75; pointer-events: none; }
+.such-feld {
+  width: 100%;
+  padding: 0.72rem 0.9rem 0.72rem 2.5rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font: inherit;
+  box-shadow: var(--schatten-karte);
+}
+.such-feld::placeholder { color: var(--tinte-2); }
+.such-feld:focus-visible { outline: 2px solid var(--primaer); outline-offset: 1px; border-color: var(--primaer); }
+
+.such-start { text-align: center; }
+.such-vorschlaege { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 0.8rem 0 0; }
+.such-vorschlag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--primaer-weich);
+  color: var(--primaer-tief);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--uebergang), color var(--uebergang);
+}
+@media (hover: hover) { .such-vorschlag:hover { background: var(--primaer); color: #fff; } }
+
+.such-anzahl { margin: 0 0 0.75rem; }
+.such-liste { display: flex; flex-direction: column; gap: 0.6rem; }
+.such-treffer { display: flex; align-items: flex-start; gap: 0.85rem; margin-bottom: 0; }
+.such-medaille {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-klein);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pf-weich);
+  color: var(--pf);
+}
+.such-medaille .fa-solid { color: inherit; }
+.such-treffer-text { flex: 1; min-width: 0; }
+.such-treffer-text h3 { margin: 0 0 0.2rem; font-size: 1.05rem; }
+.such-meta { margin: 0 0 0.3rem; font-size: 0.8rem; }
+.such-ausschnitt { margin: 0; font-size: 0.9rem; color: var(--tinte); }
+.such-ausschnitt mark { background: var(--primaer-weich); color: var(--primaer-tief); padding: 0 0.12em; border-radius: 3px; }
 
 /* Dunkelmodus-Tiefe: höher liegende Flächen tragen einen zarten oberen
    Lichtsaum (Elevation-Overlay) — sonst liest sich Tiefe im Dunkeln flach. */

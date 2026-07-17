@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
 import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
+import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
@@ -686,6 +687,25 @@ setzePlan(planA);
 pruefe('Zustand: Plan persistiert und lesbar', gespPlan()?.sessions.length === 6);
 loeschePlan();
 pruefe('Zustand: Plan löschbar', gespPlan() === null);
+
+// ---- Volltext-Suche (js/suche.js) ----
+// Der Titel-Auflöser reicht die de-Titel herein (die Engine kennt keine Labels).
+const titelVon = (id) => labelsDe.bausteine[id] || id;
+pruefe('normalisiere: Umlaut falten + klein + trim', normalisiere('  Täuschung ') === 'tauschung');
+pruefe('bausteinText: nicht leer für einen bekannten Baustein', bausteinText(daten.bausteinVonId.get('aufschlag')).length > 0);
+
+const trefferAufschlag = sucheBausteine(daten, 'Aufschlag', titelVon);
+pruefe('Suche „Aufschlag": Treffer enthalten den aufschlag-Baustein', trefferAufschlag.some((tr) => tr.baustein.id === 'aufschlag'));
+pruefe('Suche: Titeltreffer rankt oben (Term steht im Titel des ersten Treffers)', normalisiere(titelVon(trefferAufschlag[0].baustein.id)).includes('aufschlag'));
+pruefe('Suche: jeder Treffer enthält den Term (Titel oder Inhalt)', trefferAufschlag.every((tr) => normalisiere(`${titelVon(tr.baustein.id)} ${bausteinText(tr.baustein)}`).includes('aufschlag')));
+
+pruefe('Suche umlautfrei „tauschung" findet taeuschung (Titel „Täuschung")', sucheBausteine(daten, 'tauschung', titelVon).some((tr) => tr.baustein.id === 'taeuschung'));
+pruefe('Suche UND: unerfüllbarer Zusatzterm → keine Treffer', sucheBausteine(daten, 'aufschlag xyzqwknichtvorhanden', titelVon).length === 0);
+pruefe('Suche: leere Anfrage → keine Treffer', sucheBausteine(daten, '   ', titelVon).length === 0);
+pruefe('Suche: Kauderwelsch → keine Treffer', sucheBausteine(daten, 'zzxqwvbnmlkj', titelVon).length === 0);
+const suchA = sucheBausteine(daten, 'spiel', titelVon).map((tr) => tr.baustein.id);
+const suchB = sucheBausteine(daten, 'spiel', titelVon).map((tr) => tr.baustein.id);
+pruefe('Suche: deterministische Reihenfolge bei gleicher Anfrage', suchA.length > 0 && gleicheListe(suchA, suchB));
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

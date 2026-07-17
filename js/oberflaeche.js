@@ -59,13 +59,24 @@ export function ringHtml(projektion, { groesse = 76, staerke = 8, beschriftung =
 
 // Leerer Zustand mit ruhigem Icon statt nacktem Satz. Die Zwei-Ebenen-Logik
 // sperrt nie — das sind echte Leermengen (z. B. ein Faktor ohne Beleg auf der
-// Stufe), kein Fehlerfall.
-export function leerHtml(nachricht, icon = 'fa-compass') {
+// Stufe), kein Fehlerfall. `aktionHtml` ist optionales, bereits gebautes HTML
+// (ein CTA-Knopf/-Link), damit ein Leer-Zustand nicht in eine Sackgasse führt,
+// sondern einen Ausweg anbietet.
+export function leerHtml(nachricht, icon = 'fa-compass', aktionHtml = '') {
   return `
     <div class="karte leer-zustand">
       <i class="fa-solid ${icon}" aria-hidden="true"></i>
       <p class="leise">${esc(nachricht)}</p>
+      ${aktionHtml ? `<div class="knopf-zeile leer-aktion">${aktionHtml}</div>` : ''}
     </div>`;
+}
+
+// Häufiger Ausweg aus einem Leer-Zustand: „Kapitel entdecken" führt in den
+// Themenpfad, „Suche" ins Suchfeld. Gibt fertiges Knopf-HTML für leerHtml zurück.
+export function entdeckenAktion() {
+  return `
+    <a class="knopf knopf-primaer" href="#/pfad/themen">${esc(t('kapitel_entdecken'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    <a class="knopf knopf-leise" href="#/suche">${esc(t('nav_suche'))}</a>`;
 }
 
 // Marken-Hero im Layout des OG-Bilds (Speeder links, Text rechts, Akzentleiste

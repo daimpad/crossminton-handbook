@@ -10,6 +10,7 @@ import { renderPlan } from './ansichten/plan.js';
 import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, renderUmgebung } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
 import { renderRegeln } from './ansichten/regeln.js';
+import { renderSuche } from './ansichten/suche.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderTurnier } from './ansichten/turnier.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
@@ -44,7 +45,9 @@ function aktualisiereNavigation(segmente) {
             ? 'mitmachen'
             : segmente[0] === 'profil'
               ? 'profil'
-              : 'lernen';
+              : segmente[0] === 'suche'
+                ? 'suche'
+                : 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -58,7 +61,7 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['regeln', 'turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['suche', 'regeln', 'turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
@@ -74,6 +77,7 @@ function beschrifteRahmen() {
     lernen: t('nav_lernen'),
     training: t('nav_training'),
     regeln: t('nav_regeln'),
+    suche: t('nav_suche'),
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
     profil: t('nav_profil'),
@@ -85,6 +89,7 @@ function beschrifteRahmen() {
   }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
+  document.getElementById('kopf-suche')?.setAttribute('aria-label', t('nav_suche'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
   // Impressum/Datenschutz stehen mit Icon im „Mehr"-Menü — nur den .nav-text-Träger
   // ersetzen, wenn vorhanden (Icon nicht zerstören).
@@ -258,6 +263,8 @@ function rendern() {
     renderPlan(el, daten);
   } else if (segmente[0] === 'training') {
     renderTraining(el, daten, segmente[1] ? decodeURIComponent(segmente[1]) : null);
+  } else if (segmente[0] === 'suche') {
+    renderSuche(el, daten);
   } else if (segmente[0] === 'regeln') {
     renderRegeln(el, daten);
   } else if (segmente[0] === 'turnier') {

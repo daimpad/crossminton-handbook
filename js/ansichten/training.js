@@ -7,7 +7,7 @@
 import { einheitReferenzen } from '../daten.js';
 import { projektion } from '../fortschritt.js';
 import { label, t, text } from '../i18n.js';
-import { bausteinIcon, esc, heroKlein, leerHtml, neuRendern } from '../oberflaeche.js';
+import { bausteinIcon, entdeckenAktion, esc, heroKlein, leerHtml, neuRendern } from '../oberflaeche.js';
 import { kompetenzpfad, trainingsuebersicht } from '../pfade.js';
 import { kontinuitaet, registriereEinheitAbschluss, setzeTeilStatus, teilStatus } from '../zustand.js';
 import { uebungsteilHtml } from './baustein.js';
@@ -70,7 +70,7 @@ function renderListe(el, daten) {
       <p>${esc(t('kontinuitaet_stand', { n: kontinuitaet().gesamt }))}</p>
       <p class="leise">${esc(t('kontinuitaet_text'))}</p>
     </div>
-    ${karten || leerHtml(t('leer_training'), 'fa-table-tennis-paddle-ball')}`;
+    ${karten || leerHtml(t('leer_training'), 'fa-table-tennis-paddle-ball', entdeckenAktion())}`;
 }
 
 function renderAbschluss(el, daten, einheit) {

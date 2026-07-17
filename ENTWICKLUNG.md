@@ -86,10 +86,11 @@ js/
   fortschritt.js           Projektionen über den baustein-gebundenen Status
   aktionen.js              Quittierungen + Meilenstein-Erkennung
   plan.js                  Trainingsplan-Generierung (deterministisch): Wochenplan + .ics-Export
+  suche.js                 Volltext-Suche über den Pool (DOM-frei, Titel-Auflöser injiziert)
   zustand.js               localStorage-Store (Diagnose, Fortschritt, Kontinuität, Einstellungen, Plan)
   i18n.js                  t()/label()/text() mit de-Fallback
   oberflaeche.js           geteilte UI-Helfer, Baustein-Icons
-  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Trainingsplan, Regeln, Info, Profil, Zielwahl
+  ansichten/               Willkommen, Onboarding, Heim, Pfadlisten, Baustein, Training, Trainingsplan, Regeln, Suche, Info, Profil, Zielwahl
 data/
   bausteine.<stufe>-<domaene>.json   Inhaltsblöcke (Beginner/Fortgeschritten/Experte/Trainer), zu EINEM Pool gemischt
   bausteine.delta-<herkunft>.json    herkunftsreine Cross-Sport-Deltas (Tennis, Squash)
