@@ -3,7 +3,7 @@
 
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { esc, ringHtml } from '../oberflaeche.js';
+import { esc, markeHeroGross, ringHtml } from '../oberflaeche.js';
 import { kompetenzpfad, spielformen, themenDomaenen, umgebungBausteine } from '../pfade.js';
 import { diagnose, kontinuitaet, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
@@ -99,7 +99,7 @@ export function renderHeim(el, daten) {
     </div>`;
 
   el.innerHTML = `
-    <h1 class="nur-sr">${esc(t('nav_lernen'))}</h1>
+    ${markeHeroGross()}
     ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
     ${weiterlernen}
     <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>

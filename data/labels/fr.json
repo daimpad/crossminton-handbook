@@ -6,6 +6,9 @@
   },
   "ui": {
     "app_titel": "",
+    "hero_untertitel": "",
+    "hero_themen": "",
+    "profil_intro": "",
     "weiter": "",
     "zurueck": "",
     "ueberspringen": "",

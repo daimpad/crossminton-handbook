@@ -1270,6 +1270,66 @@ details[open] summary { margin-bottom: 0.5rem; }
   justify-content: center;
 }
 
+/* Marken-Hero (Layout des OG-Bilds): Speeder/Icon links, Text rechts, Akzentleiste
+   unten. Nur Tokens → hell/dunkel automatisch. Groß auf Start/Willkommen, .klein
+   auf den obersten Landingpages. */
+.marke-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  position: relative;
+  overflow: hidden;
+  padding: 1.35rem 1.35rem 1.55rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten-karte);
+  background: linear-gradient(135deg, var(--hintergrund-2) 0%, var(--flaeche) 55%, var(--primaer-weich) 100%);
+}
+.marke-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: var(--primaer);
+}
+.marke-hero-bild {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  filter: drop-shadow(0 10px 22px rgba(20, 30, 45, 0.16));
+}
+.marke-hero-icon {
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-klein);
+  background: var(--primaer-weich);
+  color: var(--primaer-tief);
+  font-size: 1.35rem;
+}
+.marke-hero-text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.marke-hero-text h1 { margin: 0; font-size: 1.5rem; line-height: 1.1; color: var(--tinte); letter-spacing: -0.015em; }
+.marke-hero-untertitel { margin: 0; font-weight: 600; color: var(--primaer-tief); font-size: 1rem; }
+.marke-hero-themen { margin: 0.1rem 0 0; color: var(--tinte-2); font-size: 0.86rem; }
+
+.marke-hero.klein { gap: 0.9rem; padding: 0.9rem 1.1rem 1.05rem; }
+.marke-hero.klein::after { height: 4px; }
+.marke-hero.klein .marke-hero-text h1 { font-size: 1.25rem; }
+.marke-hero.klein .marke-hero-untertitel { font-weight: 500; font-size: 0.9rem; color: var(--tinte-2); }
+.willkommen-lead { margin: -0.5rem 0 1.1rem; }
+
+@media (min-width: 40rem) {
+  .marke-hero { gap: 1.6rem; padding: 1.6rem 1.7rem 1.8rem; }
+  .marke-hero-bild { width: 120px; height: 120px; }
+  .marke-hero-text h1 { font-size: 1.85rem; }
+}
+
 .cta-karte {
   display: flex;
   align-items: center;

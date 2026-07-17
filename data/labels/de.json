@@ -7,6 +7,9 @@
   },
   "ui": {
     "app_titel": "Crossminton-Handbuch",
+    "hero_untertitel": "Lern- und Trainingshandbuch",
+    "hero_themen": "Technik · Training · Theorie · Regeln · Ausrüstung",
+    "profil_intro": "Deine Angaben, dein Fortschritt und deine Einstellungen — jederzeit änderbar.",
     "weiter": "Weiter",
     "zurueck": "Zurück",
     "ueberspringen": "Überspringen",

@@ -6,7 +6,7 @@
 // kein Graph, kein Pflicht-Link) — nicht auflösbare IDs werden still ausgelassen.
 
 import { label, t, text } from '../i18n.js';
-import { esc, externesZiel } from '../oberflaeche.js';
+import { esc, externesZiel, heroKlein } from '../oberflaeche.js';
 
 // Quellenangabe sichtbar im Reiter (Herausgeber + Stand): die Regeln sind strikt
 // aus der offiziellen Quelle, das gehört benannt.
@@ -97,8 +97,7 @@ export function renderRegeln(el, daten) {
   const regeln = daten.regeln || { meta: {}, abschnitte: [] };
   const abschnitte = regeln.abschnitte.map((abschnitt, i) => abschnittHtml(daten, abschnitt, i === 0)).join('');
   el.innerHTML = `
-    <h1>${esc(t('regeln_titel'))}</h1>
-    <p class="leise">${esc(t('regeln_intro'))}</p>
+    ${heroKlein('fa-book-open', t('regeln_titel'), t('regeln_intro'))}
     <a class="karte karte-link karte-akzent" href="#/turnier">
       <h3><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> ${esc(t('turnier_titel'))}</h3>
       <p class="leise">${esc(t('turnier_kachel_text'))}</p>
