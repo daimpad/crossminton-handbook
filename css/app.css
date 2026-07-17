@@ -608,6 +608,22 @@ a.karte-link {
 }
 .pfad-kachel-chips { margin-top: 0.5rem; }
 .pfad-kachel-ziel { margin-top: 0.35rem; }
+/* CTA je Kachel: dezenter Button-Look in der Pfad-Hue, unten linksbündig. */
+.pfad-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--pf);
+}
+.pfad-cta .fa-solid { color: inherit; transition: transform var(--uebergang); }
+@media (hover: hover) {
+  a.pfad-kachel:hover .pfad-cta .fa-solid { transform: translateX(3px); }
+}
 .pfad-kachel-ring {
   position: relative;
   flex: none;
@@ -1445,6 +1461,8 @@ details[open] summary { margin-bottom: 0.5rem; }
 .marke-hero-text h1 { margin: 0; font-size: 1.5rem; line-height: 1.1; color: var(--tinte); letter-spacing: -0.015em; }
 .marke-hero-untertitel { margin: 0; font-weight: 600; color: var(--tinte-2); font-size: 1rem; }
 .marke-hero-themen { margin: 0.1rem 0 0; color: var(--tinte-3); font-size: 0.86rem; }
+/* Einstiegs-CTAs direkt unter dem Hero-Text (nur Startseite). */
+.marke-hero-cta { margin-top: 0.95rem; }
 
 .marke-hero.klein { gap: 0.9rem; padding: 0.95rem 1.1rem; }
 .marke-hero.klein .marke-hero-text h1 { font-size: 1.25rem; display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }

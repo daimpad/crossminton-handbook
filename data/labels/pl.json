@@ -2,7 +2,8 @@
   "_meta": {
     "sprache": "pl",
     "status": "unbefuellt",
-    "hinweis": "Strukturgleiches Geruest zur de-Quelldatei. Leere Werte fallen zur Laufzeit auf de zurueck."
+    "hinweis": "Strukturgleiches Geruest zur de-Quelldatei. Leere Werte fallen zur Laufzeit auf de zurueck.",
+    "offen": ""
   },
   "ui": {
     "app_titel": "",
@@ -45,7 +46,10 @@
     "stufe_fehlt": "",
     "onboarding_einladung": "",
     "onboarding_starten": "",
+    "onboarding": "",
     "kapitel_entdecken": "",
+    "ansehen": "",
+    "regeln_kachel": "",
     "keine_angabe": "",
     "frage_stufe": "",
     "frage_trainer": "",
