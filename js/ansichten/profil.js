@@ -134,7 +134,7 @@ export function renderProfil(el, daten) {
     .join('');
 
   el.innerHTML = `
-    ${heroKlein('fa-user', t('nav_profil'), t('profil_intro'))}
+    ${heroKlein('fa-user', t('nav_profil'), t('profil_intro'), 'pf-blau')}
 
     <section class="karte">
       <h2>${esc(t('profil_diagnose'))}</h2>
@@ -161,7 +161,11 @@ export function renderProfil(el, daten) {
           <p class="leise">${esc(t('teile_stand', { a: global.erklaertErledigt, b: global.gesamt, c: global.aufgabeErledigt, d: global.aufgabeGesamt }))}</p>
         </div>
       </div>
-      ${d.stufe ? `<h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>${balkenHtml(pfadProjektion)}` : ''}
+      ${d.stufe ? `
+        <a class="karte-link profil-kompetenz-link" href="#/pfad/kompetenz">
+          <h3>${esc(t('pfad_kompetenz'))} <span class="chip chip-stufe chip-stufe-${esc(d.stufe)}">${esc(label('kompetenzstufe', d.stufe))}</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3>
+          ${balkenHtml(pfadProjektion)}
+        </a>` : ''}
       <h3>${esc(t('kontinuitaet'))}</h3>
       <p>${esc(t('kontinuitaet_stand', { n: k.gesamt }))}</p>
       ${jeEinheit ? `<ul class="leise einheiten-zaehler">${jeEinheit}</ul>` : ''}
