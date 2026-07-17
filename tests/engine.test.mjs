@@ -448,7 +448,7 @@ pruefe('nicht auflösbarer querverweis erzeugt eine Warnung (Dokumentations-Chec
 console.log('\n[7f-t] Turnier-Regularium (Referenz-Filter unter „Regeln", eigene Entität)');
 const tr = daten.turnierregeln;
 const turnierStufen = ['fun', 't100', 't250', 't500', 't1000'];
-pruefe('turnierregeln.json über baueIndizes eingelesen: 5 Stufen, 5 Kategorien, 24 Anforderungen, 2 Varianten', tr.stufen.length === 5 && tr.kategorien.length === 5 && tr.anforderungen.length === 24 && tr.varianten.length === 2);
+pruefe('turnierregeln.json über baueIndizes eingelesen: 5 Stufen, 5 Kategorien, 26 Anforderungen, 2 Varianten', tr.stufen.length === 5 && tr.kategorien.length === 5 && tr.anforderungen.length === 26 && tr.varianten.length === 2);
 pruefe('Stufen tragen id/rang/name/serie/punkte, Ränge streng aufsteigend 0…4', gleicheListe(tr.stufen.map((s) => s.id), turnierStufen) && tr.stufen.every((s, i) => s.rang === i && s.name?.de && s.serie?.de && s.punkte?.de));
 const alleWerte = tr.anforderungen.flatMap((a) => Object.entries(a.werte));
 pruefe('jede Anforderung: bekannte Kategorie, Werte je bekannter Stufe mit gültiger Pflichtstufe + text.de', tr.anforderungen.every((a) => tr.kategorien.some((k) => k.id === a.kategorie) && Object.keys(a.werte).length > 0) && alleWerte.every(([stufe, w]) => turnierStufen.includes(stufe) && ['pflicht', 'empfehlung'].includes(w.stufe) && typeof w.text?.de === 'string' && w.text.de.trim() !== ''));

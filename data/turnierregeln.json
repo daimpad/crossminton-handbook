@@ -2,10 +2,11 @@
   "_meta": {
     "titel": {"de": "Turnier-Regularium"},
     "einleitung": {"de": "Wähle die Kategorie deines Turniers. Die Liste zeigt, woran ein offizielles Turnier gebunden ist — und hebt hervor, was mit jeder Stufe neu dazukommt oder strenger wird."},
-    "quelle": {"de": "ICO Tournament Standards (Saison 2025) · Deutscher Crossminton Verband (DCV)"},
-    "stand": {"de": "Saison 2025"},
-    "hinweis": {"de": "Auszug der wichtigsten Anforderungen zur schnellen Orientierung. Verbindlich ist stets das vollständige offizielle Regelwerk — im Zweifel dort prüfen."},
+    "quelle": {"de": "ICO Tournament Regulations (Fassung 2024/dec) + ICO Tournament Standards je Kategorie · International Crossminton Organisation (ICO) / Deutscher Crossminton Verband (DCV)"},
+    "stand": {"de": "ICO-Fassung 2024/dec"},
+    "hinweis": {"de": "Auszug der wichtigsten Anforderungen zur schnellen Orientierung. Der allgemeine Rahmen (Aufbau, Modus, Offizielle, Spielerkleidung) folgt der ICO Tournament Regulations 2024/dec; die stufenspezifischen Zahlen (Mindest-Teilnehmer, Kategorien, Felder, Fristen, Gebühren) stehen in den separaten ICO-Tournament-Standards je Kategorie. Verbindlich ist stets das vollständige offizielle Regelwerk — im Zweifel dort prüfen."},
     "dokumente": [
+      {"titel": {"de": "ICO Tournament Regulations (2024/dec)"}, "pfad": "rules/ICO-Tournament-Regulations-2024.pdf", "hinweis": {"de": "Allgemeines Regelwerk: Aufbau, Turniermodus, Offizielle, Spielerkleidung."}},
       {"titel": {"de": "ICO-Turnierstandards (Original-PDFs)"}, "pfad": "rules/", "hinweis": {"de": "100/250/500/1000 Punkte inkl. Doppel-, Junior- und Fun-Varianten."}},
       {"titel": {"de": "DCV-Spielordnung"}, "pfad": "rules/Spielordnung.pdf"},
       {"titel": {"de": "DCV-Schiedsrichterordnung"}, "pfad": "rules/Schiedsrichterordnung.pdf"},
@@ -94,6 +95,12 @@
       "t500":  {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}},
       "t1000": {"stufe": "pflicht", "text": {"de": "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."}}
     }},
+    {"id": "hallenhoehe", "kategorie": "anlage", "titel": {"de": "Hallenhöhe"}, "werte": {
+      "t100":  {"stufe": "pflicht", "text": {"de": "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."}},
+      "t250":  {"stufe": "pflicht", "text": {"de": "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."}}
+    }},
     {"id": "felder", "kategorie": "anlage", "titel": {"de": "Anzahl Spielfelder"}, "werte": {
       "t250":  {"stufe": "pflicht", "text": {"de": "Mindestens 4 Felder."}},
       "t500":  {"stufe": "pflicht", "text": {"de": "Mindestens 6 Felder."}},
@@ -123,7 +130,6 @@
       "t1000": {"stufe": "pflicht", "text": {"de": "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."}}
     }},
     {"id": "head_umpire", "kategorie": "ablauf", "titel": {"de": "Oberschiedsrichter (Head Umpire)"}, "werte": {
-      "t100":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire."}},
       "t250":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}},
       "t500":  {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}},
       "t1000": {"stufe": "pflicht", "text": {"de": "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."}}
@@ -132,6 +138,11 @@
       "t250":  {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter in den Finals aller Kategorien."}},
       "t500":  {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter ab dem Halbfinale aller Kategorien."}},
       "t1000": {"stufe": "pflicht", "text": {"de": "Match- & Linienrichter ab dem Halbfinale aller Kategorien (Match-Umpire lizenziert oder erfahren)."}}
+    }},
+    {"id": "spielerkleidung", "kategorie": "ablauf", "titel": {"de": "Spielerkleidung (Name & Land)"}, "werte": {
+      "t250":  {"stufe": "pflicht", "text": {"de": "Oberteil mit Name und Land (oder Länderkürzel) auf dem Rücken — ab dem Halbfinale (International Series)."}},
+      "t500":  {"stufe": "pflicht", "text": {"de": "Oberteil (T-Shirt) mit Name und Land (oder Länderkürzel) auf dem Rücken — in allen Spielen (World Series)."}},
+      "t1000": {"stufe": "pflicht", "text": {"de": "Oberteil (T-Shirt) mit Name und Land (oder Länderkürzel) auf dem Rücken — in allen Spielen (World Series)."}}
     }},
     {"id": "moderation", "kategorie": "ablauf", "titel": {"de": "Moderation"}, "werte": {
       "t250":  {"stufe": "empfehlung", "text": {"de": "Vollzeit-Moderator empfohlen (nennt die ICO-Sponsoren)."}},
@@ -170,7 +181,7 @@
       "t250": [
         {"de": "Es werden Doppel-Kategorien ausgespielt (mind. 4 Kategorien; Open-, Damen- oder Mixed-Doppel verpflichtend), je mind. 4 Paare."},
         {"de": "Mindestens 30 Spieler:innen und Hallen-Kapazität für 30 (statt 25 bzw. 50)."},
-        {"de": "Ein reines K.-o.-System ist bei Doppel-Turnieren nicht zulässig."}
+        {"de": "Anders als im Einzel darf im Doppel die Gruppenphase entfallen — reines K.-o. ist zulässig (Entscheidung spätestens direkt nach dem Meldeschluss)."}
       ],
       "t500": [
         {"de": "Es werden Doppel-Kategorien ausgespielt, je mind. 4 Paare."},
