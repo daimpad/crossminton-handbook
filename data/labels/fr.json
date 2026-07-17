@@ -6,6 +6,9 @@
   },
   "ui": {
     "app_titel": "",
+    "hero_untertitel": "",
+    "hero_themen": "",
+    "profil_intro": "",
     "weiter": "",
     "zurueck": "",
     "ueberspringen": "",
@@ -189,7 +192,8 @@
     "turnier_frage": "",
     "turnier_konkurrenz": "",
     "turnier_einzel": "",
-    "turnier_auflagen": "",
+    "turnier_auflagen_fuer": "",
+    "turnier_davon": "",
     "turnier_basis": "",
     "turnier_wie_zuvor": "",
     "turnier_ggue": "",
@@ -326,6 +330,13 @@
     "naesse_sicherer_stand": "",
     "hitze": "",
     "verschiedene_boeden": "",
+    "deine_ausruestung": "",
+    "der_speeder": "",
+    "der_schlaeger": "",
+    "schuhe_finden": "",
+    "funktionskleidung": "",
+    "die_bespannung": "",
+    "griff_und_griffband": "",
     "erste_schritte_doppel": "",
     "wer_nimmt_den_ball": "",
     "aufschlag_im_doppel_einfach": "",
@@ -409,7 +420,8 @@
       "taktik": "",
       "trainingsgestaltung": "",
       "mentales": "",
-      "athletik_kondition": ""
+      "athletik_kondition": "",
+      "ausruestung": ""
     },
     "kompetenzstufe": {
       "beginner": "",

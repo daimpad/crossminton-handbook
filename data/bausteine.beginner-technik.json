@@ -8,7 +8,7 @@
   },
 
   "vokabulare": {
-    "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition"],
+    "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition", "ausruestung"],
     "kompetenzstufe": ["beginner", "fortgeschritten", "experte", "trainer"],
     "spielform": ["einzel", "doppel"],
     "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein"],

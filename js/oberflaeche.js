@@ -68,6 +68,33 @@ export function leerHtml(nachricht, icon = 'fa-compass') {
     </div>`;
 }
 
+// Marken-Hero im Layout des OG-Bilds (Speeder links, Text rechts, Akzentleiste
+// unten). Groß auf Startseite + Willkommen; die obersten Landingpages nutzen die
+// kleine Variante heroKlein(icon, titel, untertitel). Alle Farben aus Tokens —
+// hell/dunkel kippen automatisch mit.
+export function markeHeroGross() {
+  return `
+    <section class="marke-hero">
+      <img class="marke-hero-bild" src="assets/images/speeder.svg" alt="" width="96" height="96">
+      <div class="marke-hero-text">
+        <h1>${esc(t('app_titel'))}</h1>
+        <p class="marke-hero-untertitel">${esc(t('hero_untertitel'))}</p>
+        <p class="marke-hero-themen">${esc(t('hero_themen'))}</p>
+      </div>
+    </section>`;
+}
+
+export function heroKlein(icon, titel, untertitel = '') {
+  return `
+    <section class="marke-hero klein">
+      <span class="marke-hero-icon"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>${esc(titel)}</h1>
+        ${untertitel ? `<p class="marke-hero-untertitel">${esc(untertitel)}</p>` : ''}
+      </div>
+    </section>`;
+}
+
 export function statusPunktHtml(station) {
   const { erklaerteil, uebungsteil, reflexionsaufgabe, absolviert } = station.status;
   let klasse = 'offen';
@@ -290,6 +317,14 @@ const BAUSTEIN_ICONS = {
   naesse_sicherer_stand: 'fa-water',
   hitze: 'fa-fire',
   verschiedene_boeden: 'fa-layer-group',
+  // Ausrüstung (eigene Domäne) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  deine_ausruestung: 'fa-toolbox',
+  der_speeder: 'fa-baseball',
+  der_schlaeger: 'fa-table-tennis-paddle-ball',
+  schuhe_finden: 'fa-shoe-prints',
+  funktionskleidung: 'fa-layer-group',
+  die_bespannung: 'fa-gauge-high',
+  griff_und_griffband: 'fa-hand',
 };
 
 export function bausteinIcon(bausteinId, klasse = '') {

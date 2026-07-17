@@ -82,25 +82,24 @@ function leiterHtml(tr, stufe) {
 
 // Kopf-Zusammenfassung: Anzahl der Auflagen + Delta-Satz gegenüber der Vorstufe.
 function summeHtml(stufe, vorige, anzahl, neu, verschaerft) {
+  const vorher = vorige ? (text(vorige.name) ?? vorige.id) : '';
   let delta;
   if (!vorige) {
     delta = t('turnier_basis');
   } else if (neu + verschaerft === 0) {
-    delta = t('turnier_wie_zuvor', { vorher: text(vorige.name) ?? vorige.id });
+    delta = t('turnier_wie_zuvor', { vorher });
   } else {
     const teile = [];
     if (neu) teile.push(`${neu} ${t('turnier_neu')}`);
     if (verschaerft) teile.push(`${verschaerft} ${t('turnier_verschaerft')}`);
-    delta = `${teile.join(' · ')} ${t('turnier_ggue', { vorher: text(vorige.name) ?? vorige.id })}`;
+    delta = `${t('turnier_davon')} ${teile.join(', ')} ${t('turnier_ggue', { vorher })}`;
   }
-  const punkte = text(stufe?.punkte) ?? '';
   return `
     <div class="turnier-summe-kopf">
-      <span class="turnier-summe-zahl" aria-hidden="true">${anzahl}</span>
+      <span class="turnier-summe-zahl">${anzahl}</span>
       <div class="turnier-summe-text">
-        <strong>${esc(text(stufe?.name) ?? '')}${punkte ? ` · ${esc(punkte)}` : ''}</strong>
+        <strong>${esc(t('turnier_auflagen_fuer', { name: text(stufe?.name) ?? '' }))}</strong>
         <span class="leise">${esc(delta)}</span>
-        <span class="nur-sr">${esc(t('turnier_auflagen', { n: anzahl }))}</span>
       </div>
     </div>`;
 }

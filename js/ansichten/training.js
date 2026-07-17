@@ -7,7 +7,7 @@
 import { einheitReferenzen } from '../daten.js';
 import { projektion } from '../fortschritt.js';
 import { label, t, text } from '../i18n.js';
-import { bausteinIcon, esc, leerHtml, neuRendern } from '../oberflaeche.js';
+import { bausteinIcon, esc, heroKlein, leerHtml, neuRendern } from '../oberflaeche.js';
 import { kompetenzpfad, trainingsuebersicht } from '../pfade.js';
 import { kontinuitaet, registriereEinheitAbschluss, setzeTeilStatus, teilStatus } from '../zustand.js';
 import { uebungsteilHtml } from './baustein.js';
@@ -54,8 +54,7 @@ function renderListe(el, daten) {
     })
     .join('');
   el.innerHTML = `
-    <h1>${esc(t('pfad_training'))}</h1>
-    <p class="leise">${esc(t('pfad_training_text'))}</p>
+    ${heroKlein('fa-table-tennis-paddle-ball', t('pfad_training'), t('pfad_training_text'))}
     <a class="karte karte-link karte-akzent" href="#/plan">
       <h3><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> ${esc(t('plan_titel'))}</h3>
       <p class="leise">${esc(t('plan_kachel_text'))}</p>
