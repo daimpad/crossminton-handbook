@@ -6,7 +6,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../fortschritt.js';
 import { label, setzeSprache, sprache, t } from '../i18n.js';
-import { balkenHtml, esc, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, esc, heroKlein, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -134,7 +134,7 @@ export function renderProfil(el, daten) {
     .join('');
 
   el.innerHTML = `
-    <h1>${esc(t('nav_profil'))}</h1>
+    ${heroKlein('fa-user', t('nav_profil'), t('profil_intro'))}
 
     <section class="karte">
       <h2>${esc(t('profil_diagnose'))}</h2>

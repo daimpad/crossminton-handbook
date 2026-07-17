@@ -3,20 +3,14 @@
 // Weg über die Diagnostik — mit kurzer Begründung, warum Anpassen lohnt.
 
 import { t } from '../i18n.js';
-import { esc } from '../oberflaeche.js';
+import { esc, markeHeroGross } from '../oberflaeche.js';
 import { schliesseOnboardingAb, setzeDiagnose } from '../zustand.js';
 
 export function renderWillkommen(el, daten) {
   const kapitelAnzahl = daten.bausteine.length;
   el.innerHTML = `
-    <section class="hero">
-      <div class="hero-icons">
-        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
-        <i class="fa-solid fa-person-running" aria-hidden="true"></i>
-      </div>
-      <h1>${esc(t('wk_titel'))}</h1>
-      <p>${esc(t('wk_untertitel'))}</p>
-    </section>
+    ${markeHeroGross()}
+    <p class="leise willkommen-lead">${esc(t('wk_untertitel'))}</p>
 
     <h2 class="abschnitt-titel">${esc(t('wk_einstieg'))}</h2>
 
