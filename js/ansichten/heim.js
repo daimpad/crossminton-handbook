@@ -48,78 +48,107 @@ export function renderHeim(el, daten) {
     .join('');
 
   const doppel = spielformen(daten).find((eintrag) => eintrag.spielform === 'doppel');
-  const spielformKarte =
-    doppel && doppel.anzahl > 0
-      ? `
-    <a class="karte karte-link" href="#/pfad/spielform/doppel">
-      <h3>${esc(t('pfad_spielform'))} <span class="chip">${esc(label('spielform', 'doppel'))} · ${doppel.anzahl}</span></h3>
-      <p class="leise">${esc(t('pfad_spielform_text'))}</p>
-    </a>`
-      : '';
-
   const umgebung = umgebungBausteine(daten);
-  const umgebungKarte =
-    umgebung.length > 0
-      ? `
-    <a class="karte karte-link" href="#/pfad/umgebung">
-      <h3>${esc(t('pfad_umgebung'))} <span class="chip">${esc(t('n_bausteine', { n: umgebung.length }))}</span></h3>
-      <p class="leise">${esc(t('pfad_umgebung_text'))}</p>
-    </a>`
-      : '';
 
   const zielBeschriftungen = zielLabels(d.ziel);
   const zielZeile = zielBeschriftungen.length > 0
     ? `${esc(t('ziel_aktuell'))}: ${esc(zielBeschriftungen.join(' · '))}`
     : esc(t('ziel_keins'));
 
-  const trainerKarte = d.trainer
-    ? `
-      <a class="karte karte-link" href="#/pfad/kompetenz/trainer">
-        <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', 'trainer'))}</span></h3>
-        <p class="leise">${esc(t('n_bausteine', { n: kompetenzpfad(daten, 'trainer').stationen.length }))}</p>
-      </a>`
+  // Eine Pfad-Kachel: farbige Icon-Medaille (Hue je Pfad) + Titel + Kurztext, im
+  // gemeinsamen Raster. Konsistentes Muster statt schnöder Abfolge; unterschieden
+  // wird über Medaille/Hue, nicht über Flächenfarbe (CI: Blau = Akzent, keine Fläche).
+  const kachel = ({ href, hue, icon, titel, meta = '', text = '', extra = '', ring = '', lead = false, alsLink = true }) => {
+    const tag = alsLink ? 'a' : 'div';
+    const attr = alsLink ? ` href="${esc(href)}"` : '';
+    const klassen = `karte ${alsLink ? 'karte-link ' : ''}pfad-kachel ${hue}${lead ? ' pfad-kachel--lead' : ''}`;
+    return `
+      <${tag} class="${klassen}"${attr}>
+        <span class="pfad-medaille"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>
+        <div class="pfad-kachel-text">
+          <h3>${titel}${meta}</h3>
+          ${text ? `<p class="leise">${text}</p>` : ''}
+          ${extra}
+        </div>
+        ${ring}
+      </${tag}>`;
+  };
+
+  const kompetenzKachel = d.stufe
+    ? kachel({
+        href: '#/pfad/kompetenz', hue: 'pf-blau', icon: 'fa-chart-line', lead: true,
+        titel: esc(t('pfad_kompetenz')),
+        meta: ` <span class="chip chip-stufe chip-stufe-${esc(d.stufe)}">${esc(label('kompetenzstufe', d.stufe))}</span>`,
+        text: esc(t('pfad_kompetenz_text')),
+        ring: `<div class="pfad-kachel-ring">${ringHtml(pfadProjektion, { groesse: 62, staerke: 6 })}</div>`,
+      })
+    : kachel({
+        hue: 'pf-blau', icon: 'fa-chart-line', lead: true, alsLink: false,
+        titel: esc(t('pfad_kompetenz')),
+        text: esc(t('stufe_fehlt')),
+        extra: `<a class="knopf knopf-sekundaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>`,
+      });
+
+  const trainerKachel = d.trainer
+    ? kachel({
+        href: '#/pfad/kompetenz/trainer', hue: 'pf-schiefer', icon: 'fa-people-group',
+        titel: esc(t('pfad_kompetenz')),
+        meta: ` <span class="chip">${esc(label('kompetenzstufe', 'trainer'))}</span>`,
+        text: esc(t('n_bausteine', { n: kompetenzpfad(daten, 'trainer').stationen.length })),
+      })
     : '';
 
-  const kompetenzKarte = d.stufe
-    ? `
-    <a class="karte karte-link" href="#/pfad/kompetenz">
-      <div class="karte-ring">
-        <div>
-          <h3>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', d.stufe))}</span></h3>
-          <p class="leise">${esc(t('pfad_kompetenz_text'))}</p>
-        </div>
-        ${ringHtml(pfadProjektion, { groesse: 60, staerke: 6 })}
-      </div>
-    </a>`
-    : `
-    <div class="karte">
-      <h3>${esc(t('pfad_kompetenz'))}</h3>
-      <p class="leise">${esc(t('stufe_fehlt'))}</p>
-      <a class="knopf knopf-sekundaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>
-    </div>`;
+  const themenKachel = kachel({
+    href: '#/pfad/themen', hue: 'pf-teal', icon: 'fa-layer-group',
+    titel: esc(t('pfad_themen')),
+    text: esc(t('pfad_themen_text')),
+    extra: domaenenChips ? `<p class="chip-zeile pfad-kachel-chips">${domaenenChips}</p>` : '',
+  });
+
+  const doppelKachel = doppel && doppel.anzahl > 0
+    ? kachel({
+        href: '#/pfad/spielform/doppel', hue: 'pf-magenta', icon: 'fa-users',
+        titel: esc(t('pfad_spielform')),
+        meta: ` <span class="chip">${esc(label('spielform', 'doppel'))} · ${doppel.anzahl}</span>`,
+        text: esc(t('pfad_spielform_text')),
+      })
+    : '';
+
+  const umgebungKachel = umgebung.length > 0
+    ? kachel({
+        href: '#/pfad/umgebung', hue: 'pf-sky', icon: 'fa-mountain',
+        titel: esc(t('pfad_umgebung')),
+        meta: ` <span class="chip">${esc(t('n_bausteine', { n: umgebung.length }))}</span>`,
+        text: esc(t('pfad_umgebung_text')),
+      })
+    : '';
+
+  const individualKachel = kachel({
+    href: '#/pfad/individual', hue: 'pf-violett', icon: 'fa-bullseye',
+    titel: esc(t('pfad_individual')),
+    text: esc(t('pfad_individual_text')),
+    extra: `<p class="leise pfad-kachel-ziel">${zielZeile}</p>`,
+  });
+
+  const trainingKachel = kachel({
+    href: '#/training', hue: 'pf-indigo', icon: 'fa-table-tennis-paddle-ball',
+    titel: esc(t('pfad_training')),
+    text: esc(t('pfad_training_text')),
+    extra: `<p class="leise">${esc(t('n_einheiten', { n: daten.einheiten.length }))} · ${esc(t('kontinuitaet_stand', { n: kontinuitaet().gesamt }))}</p>`,
+  });
 
   el.innerHTML = `
     ${markeHeroGross()}
     ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
     ${weiterlernen}
     <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>
-    ${kompetenzKarte}
-    ${trainerKarte}
-    <a class="karte karte-link" href="#/pfad/themen">
-      <h3>${esc(t('pfad_themen'))}</h3>
-      <p class="leise">${esc(t('pfad_themen_text'))}</p>
-      <p class="chip-zeile">${domaenenChips}</p>
-    </a>
-    ${spielformKarte}
-    ${umgebungKarte}
-    <a class="karte karte-link" href="#/pfad/individual">
-      <h3>${esc(t('pfad_individual'))}</h3>
-      <p class="leise">${esc(t('pfad_individual_text'))}</p>
-      <p class="leise">${zielZeile}</p>
-    </a>
-    <a class="karte karte-link" href="#/training">
-      <h3>${esc(t('pfad_training'))}</h3>
-      <p class="leise">${esc(t('pfad_training_text'))}</p>
-      <p class="leise">${esc(t('n_einheiten', { n: daten.einheiten.length }))} · ${esc(t('kontinuitaet_stand', { n: kontinuitaet().gesamt }))}</p>
-    </a>`;
+    <div class="pfad-gitter">
+      ${kompetenzKachel}
+      ${trainerKachel}
+      ${themenKachel}
+      ${doppelKachel}
+      ${umgebungKachel}
+      ${individualKachel}
+      ${trainingKachel}
+    </div>`;
 }
