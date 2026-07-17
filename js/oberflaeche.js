@@ -84,12 +84,16 @@ export function markeHeroGross() {
     </section>`;
 }
 
-export function heroKlein(icon, titel, untertitel = '') {
+// hue (z. B. 'pf-teal') färbt Icon-Medaille + eine leichte Tönung des Hero passend
+// zur Startseiten-Kachel des Pfades; meta ist optionales Inline-HTML (z. B. ein
+// Stufen-Chip) neben dem Titel. Ohne hue bleibt der Hero neutral-blau wie bisher.
+export function heroKlein(icon, titel, untertitel = '', hue = '', meta = '') {
+  const klassen = `marke-hero klein${hue ? ` hue ${hue}` : ''}`;
   return `
-    <section class="marke-hero klein">
+    <section class="${klassen}">
       <span class="marke-hero-icon"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>
       <div class="marke-hero-text">
-        <h1>${esc(titel)}</h1>
+        <h1>${esc(titel)}${meta}</h1>
         ${untertitel ? `<p class="marke-hero-untertitel">${esc(untertitel)}</p>` : ''}
       </div>
     </section>`;

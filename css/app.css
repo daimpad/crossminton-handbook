@@ -1447,8 +1447,14 @@ details[open] summary { margin-bottom: 0.5rem; }
 .marke-hero-themen { margin: 0.1rem 0 0; color: var(--tinte-3); font-size: 0.86rem; }
 
 .marke-hero.klein { gap: 0.9rem; padding: 0.95rem 1.1rem; }
-.marke-hero.klein .marke-hero-text h1 { font-size: 1.25rem; }
+.marke-hero.klein .marke-hero-text h1 { font-size: 1.25rem; display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
 .marke-hero.klein .marke-hero-untertitel { font-weight: 500; font-size: 0.9rem; color: var(--tinte-2); }
+
+/* Farbige Variante (Pfad-Landingpages): leichte Hue-Tönung + Icon in der Pfad-Hue,
+   passend zur jeweiligen Startseiten-Kachel. Ohne .hue bleibt der Hero neutral. */
+.marke-hero.klein.hue { background: linear-gradient(160deg, var(--pf-weich) 0%, var(--flaeche) 78%); }
+.marke-hero.klein.hue .marke-hero-icon { background: var(--pf-weich); color: var(--pf); }
+.marke-hero.klein.hue .marke-hero-icon .fa-solid { color: inherit; }
 .willkommen-lead { margin: -0.5rem 0 1.1rem; }
 
 @media (min-width: 40rem) {

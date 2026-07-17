@@ -4,7 +4,7 @@
 import { markiereAbsolviert } from '../aktionen.js';
 import { projektion } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { balkenHtml, bausteinIcon, esc, leerHtml, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, bausteinIcon, esc, heroKlein, leerHtml, neuRendern, statusPunktHtml, zeigeMeilenstein } from '../oberflaeche.js';
 import { individualpfad, kompetenzpfad, spielformen, spielformpfad, themenDomaenen, themenpfad, umgebungspfad, untergruende, witterungen } from '../pfade.js';
 import { diagnose, einstellungen, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -68,7 +68,7 @@ export function renderKompetenzpfad(el, daten, stufe) {
     // Ohne Stufe keine Sequenz (Spez. 7.1) — der Zugriff auf die Inhalte
     // bleibt über Themen-/Individualpfad trotzdem frei.
     el.innerHTML = `
-      <h1>${esc(t('pfad_kompetenz'))}</h1>
+      ${heroKlein('fa-chart-line', t('pfad_kompetenz'), '', 'pf-blau')}
       <div class="karte">
         <p class="leise">${esc(t('stufe_fehlt'))}</p>
         <div class="knopf-zeile" style="justify-content:flex-start">
@@ -83,8 +83,7 @@ export function renderKompetenzpfad(el, daten, stufe) {
       ? leerHtml(t('leer_stufe'))
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, kontext, { mitSkip: Boolean(pfad.herkunft) })}`;
   el.innerHTML = `
-    <h1>${esc(t('pfad_kompetenz'))} <span class="chip">${esc(label('kompetenzstufe', pfad.stufe))}</span></h1>
-    <p class="leise">${esc(t('pfad_kompetenz_text'))}</p>
+    ${heroKlein('fa-chart-line', t('pfad_kompetenz'), t('pfad_kompetenz_text'), 'pf-blau', ` <span class="chip chip-stufe chip-stufe-${esc(pfad.stufe)}">${esc(label('kompetenzstufe', pfad.stufe))}</span>`)}
     ${inhalt}`;
   bindeSkip(el, daten, kontext, pfad.stationen);
 }
@@ -101,7 +100,7 @@ export function renderThemen(el, daten, domaene) {
         return `<a class="karte karte-link" href="#/pfad/themen/${esc(eintrag.domaene)}">${beschriftung}</a>`;
       })
       .join('');
-    el.innerHTML = `<h1>${esc(t('pfad_themen'))}</h1><p class="leise">${esc(t('pfad_themen_text'))}</p>${zeilen}`;
+    el.innerHTML = `${heroKlein('fa-layer-group', t('pfad_themen'), t('pfad_themen_text'), 'pf-teal')}${zeilen}`;
     return;
   }
   const pfad = themenpfad(daten, domaene);
@@ -126,8 +125,7 @@ export function renderSpielform(el, daten, spielform) {
       ? leerHtml(t('leer_domaene'))
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, `spielform:${gewaehlt}`)}`;
   el.innerHTML = `
-    <h1>${esc(t('pfad_spielform'))}</h1>
-    <p class="leise">${esc(t('pfad_spielform_text'))}</p>
+    ${heroKlein('fa-users', t('pfad_spielform'), t('pfad_spielform_text'), 'pf-magenta')}
     ${inhalt}`;
 }
 
@@ -160,8 +158,7 @@ export function renderUmgebung(el, daten, achse, wert) {
       ? leerHtml(t('leer_domaene'))
       : `${balkenHtml(projektion(alle.stationen.map((s) => s.baustein)))}${stationslisteHtml(alle.stationen, 'umgebung')}`;
   el.innerHTML = `
-    <h1>${esc(t('pfad_umgebung'))}</h1>
-    <p class="leise">${esc(t('pfad_umgebung_text'))}</p>
+    ${heroKlein('fa-mountain', t('pfad_umgebung'), t('pfad_umgebung_text'), 'pf-sky')}
     <h2>${esc(t('umgebung_wetter'))}</h2>
     ${achsenKarten(witterungen(daten), 'witterung')}
     <h2>${esc(t('umgebung_boden'))}</h2>
@@ -174,8 +171,7 @@ export function renderIndividual(el, daten) {
   const pfad = individualpfad(daten);
   if (!pfad.ziel) {
     el.innerHTML = `
-      <h1>${esc(t('pfad_individual'))}</h1>
-      <p class="leise">${esc(t('ziel_hinweis'))}</p>
+      ${heroKlein('fa-bullseye', t('pfad_individual'), t('ziel_hinweis'), 'pf-violett')}
       <form id="zielform">${zielwahlHtml(daten, null, { mitVermittlungszielen: diagnose().trainer })}</form>
       <div class="knopf-zeile"><button class="knopf knopf-primaer" id="ziel-uebernehmen">${esc(t('uebernehmen'))}</button></div>`;
     el.querySelector('#zielform').addEventListener('submit', (ereignis) => ereignis.preventDefault());
@@ -196,7 +192,7 @@ export function renderIndividual(el, daten) {
       ? leerHtml(t('leer_ziel'), 'fa-bullseye')
       : `${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, 'individual')}`;
   el.innerHTML = `
-    <h1>${esc(t('pfad_individual'))}</h1>
+    ${heroKlein('fa-bullseye', t('pfad_individual'), '', 'pf-violett')}
     <p class="chip-zeile">${esc(t('ziel_aktuell'))}: ${zielChips}</p>
     ${inhalt}
     <details class="karte">

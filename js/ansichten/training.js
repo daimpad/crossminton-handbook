@@ -60,7 +60,7 @@ function renderListe(el, daten) {
     })
     .join('');
   el.innerHTML = `
-    ${heroKlein('fa-table-tennis-paddle-ball', t('pfad_training'), t('pfad_training_text'))}
+    ${heroKlein('fa-table-tennis-paddle-ball', t('pfad_training'), t('pfad_training_text'), 'pf-indigo')}
     <a class="karte karte-link karte-akzent" href="#/plan">
       <h3><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> ${esc(t('plan_titel'))}</h3>
       <p class="leise">${esc(t('plan_kachel_text'))}</p>
