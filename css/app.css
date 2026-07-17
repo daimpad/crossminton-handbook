@@ -17,6 +17,14 @@
   --stufe-1-flaeche: #e8f3fe; --stufe-1-text: #1568ad;
   --stufe-2-flaeche: #bfe1fb; --stufe-2-text: #0f4f86;
   --stufe-3-flaeche: #1568ad; --stufe-3-text: #ffffff;
+  /* Pfad-Kachel-Hues (kühle, markennahe Palette; bewusst KEINE Ampelfarben). */
+  --pf-blau: #1568ad; --pf-blau-weich: #e8f3fe;
+  --pf-teal: #0e8a86; --pf-teal-weich: #d7f1ef;
+  --pf-violett: #6b46c9; --pf-violett-weich: #ece7fb;
+  --pf-indigo: #3b4bc0; --pf-indigo-weich: #e5e8fd;
+  --pf-magenta: #b83c8f; --pf-magenta-weich: #f7e3f0;
+  --pf-sky: #0f83c4; --pf-sky-weich: #dceffb;
+  --pf-schiefer: #586577; --pf-schiefer-weich: #eaeef4;
   --signal-rot: #f4402a;
   --signal-rot-text: #c4180a;
   --signal-rot-weich: #fdece9;
@@ -64,6 +72,13 @@
     --stufe-1-flaeche: #143247; --stufe-1-text: #9acdf8;
     --stufe-2-flaeche: #1d4a6b; --stufe-2-text: #cbe6fb;
     --stufe-3-flaeche: #4fb0f4; --stufe-3-text: #08243b;
+    --pf-blau: #6fb8f0; --pf-blau-weich: #152c40;
+    --pf-teal: #48c2ba; --pf-teal-weich: #0f2b2a;
+    --pf-violett: #a98cf0; --pf-violett-weich: #221b3a;
+    --pf-indigo: #8894f0; --pf-indigo-weich: #1a2044;
+    --pf-magenta: #e58cc6; --pf-magenta-weich: #311a29;
+    --pf-sky: #55b4e8; --pf-sky-weich: #0e2a3d;
+    --pf-schiefer: #9fb0c4; --pf-schiefer-weich: #202a35;
     --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
     --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
     --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
@@ -92,6 +107,13 @@
   --stufe-1-flaeche: #143247; --stufe-1-text: #9acdf8;
   --stufe-2-flaeche: #1d4a6b; --stufe-2-text: #cbe6fb;
   --stufe-3-flaeche: #4fb0f4; --stufe-3-text: #08243b;
+  --pf-blau: #6fb8f0; --pf-blau-weich: #152c40;
+  --pf-teal: #48c2ba; --pf-teal-weich: #0f2b2a;
+  --pf-violett: #a98cf0; --pf-violett-weich: #221b3a;
+  --pf-indigo: #8894f0; --pf-indigo-weich: #1a2044;
+  --pf-magenta: #e58cc6; --pf-magenta-weich: #311a29;
+  --pf-sky: #55b4e8; --pf-sky-weich: #0e2a3d;
+  --pf-schiefer: #9fb0c4; --pf-schiefer-weich: #202a35;
   --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
   --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
   --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
@@ -523,6 +545,89 @@ a.karte-link {
 .karte-akzent { border-left: 3px solid var(--primaer); }
 
 .karte-inaktiv { opacity: 0.55; }
+
+/* Pfade als konsistentes Kachel-Raster (2-spaltig ab Tablet) statt schnöder Liste.
+   Jede Kachel trägt eine farbige Icon-Medaille in ihrer Hue + dezenten Hue-Schimmer;
+   die Fläche bleibt neutral (CI: Blau = Akzent, keine Flächenfarbe). Hue-Zuordnung
+   über --pf/--pf-weich, die in beiden Themes automatisch kippen. */
+.pfad-gitter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+  margin-bottom: 1.05rem;
+}
+@media (min-width: 34rem) {
+  .pfad-gitter { grid-template-columns: 1fr 1fr; }
+}
+.pfad-kachel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+.pfad-kachel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8.5rem;
+  height: 8.5rem;
+  background: radial-gradient(circle at top left, var(--pf-weich), transparent 72%);
+  opacity: 0.75;
+  pointer-events: none;
+}
+.pfad-medaille {
+  position: relative;
+  flex: none;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: var(--radius-klein);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pf-weich);
+  color: var(--pf);
+  font-size: 1.2rem;
+}
+/* Medaillen-Icon trägt die Pfad-Hue, nicht das globale Akzentblau (.fa-solid). */
+.pfad-medaille .fa-solid { color: inherit; }
+.pfad-kachel-text {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.pfad-kachel-text > :last-child { margin-bottom: 0; }
+.pfad-kachel-text h3 {
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.pfad-kachel-chips { margin-top: 0.5rem; }
+.pfad-kachel-ziel { margin-top: 0.35rem; }
+.pfad-kachel-ring {
+  position: relative;
+  flex: none;
+  align-self: center;
+}
+.pfad-kachel--lead {
+  grid-column: 1 / -1;
+  align-items: center;
+}
+@media (hover: hover) {
+  a.pfad-kachel:hover { border-color: var(--pf); }
+}
+
+.pf-blau { --pf: var(--pf-blau); --pf-weich: var(--pf-blau-weich); }
+.pf-teal { --pf: var(--pf-teal); --pf-weich: var(--pf-teal-weich); }
+.pf-violett { --pf: var(--pf-violett); --pf-weich: var(--pf-violett-weich); }
+.pf-indigo { --pf: var(--pf-indigo); --pf-weich: var(--pf-indigo-weich); }
+.pf-magenta { --pf: var(--pf-magenta); --pf-weich: var(--pf-magenta-weich); }
+.pf-sky { --pf: var(--pf-sky); --pf-weich: var(--pf-sky-weich); }
+.pf-schiefer { --pf: var(--pf-schiefer); --pf-weich: var(--pf-schiefer-weich); }
 
 .leise { color: var(--tinte-2); font-size: 0.9rem; }
 
