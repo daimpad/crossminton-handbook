@@ -1473,6 +1473,8 @@ details[open] summary { margin-bottom: 0.5rem; }
 .marke-hero.klein.hue { background: linear-gradient(160deg, var(--pf-weich) 0%, var(--flaeche) 78%); }
 .marke-hero.klein.hue .marke-hero-icon { background: var(--pf-weich); color: var(--pf); }
 .marke-hero.klein.hue .marke-hero-icon .fa-solid { color: inherit; }
+/* Baustein-Hero: der Titel ist die Hauptüberschrift der Seite, etwas größer. */
+.baustein-hero .marke-hero-text h1 { font-size: 1.4rem; }
 .willkommen-lead { margin: -0.5rem 0 1.1rem; }
 
 @media (min-width: 40rem) {
