@@ -151,6 +151,17 @@ function einordnungHtml(baustein, kuerzelSichtbar) {
     </details>`;
 }
 
+// Domänen-Hue für den Baustein-Hero (analog zu den Startseiten-Kacheln): färbt
+// Icon-Medaille und Tönung nach der fachlichen Domäne. Fällt auf Blau zurück.
+const DOMAENE_HUE = {
+  technik: 'pf-blau',
+  taktik: 'pf-indigo',
+  mentales: 'pf-violett',
+  athletik_kondition: 'pf-teal',
+  ausruestung: 'pf-schiefer',
+  trainingsgestaltung: 'pf-magenta',
+};
+
 export function renderBaustein(el, daten, bausteinId, kontext) {
   const info = stationImKontext(daten, bausteinId, kontext);
   if (!info) {
@@ -162,10 +173,10 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
   const delta = station.delta;
   const kuerzelSichtbar = einstellungen().transferKuerzelSichtbar;
 
+  // Domäne + Könnensstufe wandern in den Hero-Untertitel (s. u.); der interne
+  // Typ ('micro' auf 96/102 – kein Unterscheidungsmerkmal) wird nicht mehr als
+  // Chip gezeigt. Hier bleiben nur die spezifischen Outdoor-Chips.
   const metaChips = [
-    ...domaenenVon(b).map((d) => `<span class="chip">${esc(label('domaene', d))}</span>`),
-    `<span class="chip">${esc(label('baustein_typ', b.typ))}</span>`,
-    ...(b.kompetenzstufe || []).map((s) => `<span class="chip">${esc(label('kompetenzstufe', s))}</span>`),
     ...witterungVon(b).map((w) => `<span class="chip">${esc(label('witterung', w))}</span>`),
     ...untergrundVon(b).filter((u) => u !== 'halle').map((u) => `<span class="chip">${esc(label('untergrund', u))}</span>`),
   ].join(' ');
@@ -178,6 +189,26 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
           return `<span class="chip ${aktiv ? 'chip-akzent' : ''}" title="${esc(label('transfer_herkunft', k))}">${esc(k)}</span>`;
         })
         .join(' ')
+    : '';
+
+  // Kleiner Hero je Baustein: eigenes Icon in der Domänen-Hue + Titel; die
+  // Unterzeile nennt Domäne(n) und Könnensstufe(n), z. B. „Mentales · Experte".
+  const domaenen = domaenenVon(b);
+  const heroHue = DOMAENE_HUE[domaenen[0]] || 'pf-blau';
+  const heroUntertitel = [
+    ...domaenen.map((dd) => label('domaene', dd)),
+    ...(b.kompetenzstufe || []).map((s) => label('kompetenzstufe', s)),
+  ].join(' · ');
+  const heroSektion = `
+    <section class="marke-hero klein hue ${heroHue} baustein-hero">
+      <span class="marke-hero-icon">${bausteinIcon(b.id) || '<i class="fa-solid fa-feather" aria-hidden="true"></i>'}</span>
+      <div class="marke-hero-text">
+        <h1>${esc(label('baustein', b.id))}</h1>
+        ${heroUntertitel ? `<p class="marke-hero-untertitel">${esc(heroUntertitel)}</p>` : ''}
+      </div>
+    </section>`;
+  const chipZeile = metaChips || transferChips
+    ? `<p class="chip-zeile">${metaChips}${metaChips && transferChips ? ' <span class="chip-trenner">·</span> ' : ''}${transferChips}</p>`
     : '';
 
   const positionsZeile =
@@ -256,8 +287,8 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
   el.innerHTML = `
     <article class="baustein">
       ${positionsZeile}
-      <h1>${bausteinIcon(b.id, 'baustein-icon')} ${esc(label('baustein', b.id))}</h1>
-      <p class="chip-zeile">${metaChips}${transferChips ? ` <span class="chip-trenner">·</span> ${transferChips}` : ''}</p>
+      ${heroSektion}
+      ${chipZeile}
       ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
       ${uebungsSektion}
