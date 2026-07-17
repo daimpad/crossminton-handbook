@@ -337,6 +337,21 @@ async function boot() {
   // beiläufig — schlägt es fehl, bleibt die App davon unberührt. Der Knopf unter
   // „Mitmachen" startet ihn alternativ ohne Reload (aktiviereFeedback).
   initFeedbackWennGewuenscht();
+
+  registriereServiceWorker();
+}
+
+// Offline-Fähigkeit: den Service Worker beiläufig registrieren. Jeder Fehler
+// (kein SW-Support, file://) wird verschluckt — die App bleibt unberührt.
+// Relativer Pfad, damit die Registrierung unter „/" wie unter Unterpfad greift.
+// boot() ist async und wartet auf i18n+Daten; das 'load'-Ereignis kann dabei
+// schon gefeuert haben. Darum: ist die Seite fertig, sofort registrieren, sonst
+// auf 'load' warten — sonst verpasste ein zu spät gesetzter Listener das Ereignis.
+function registriereServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+  const registriere = () => navigator.serviceWorker.register('sw.js').catch(() => {});
+  if (document.readyState === 'complete') registriere();
+  else window.addEventListener('load', registriere, { once: true });
 }
 
 boot();
