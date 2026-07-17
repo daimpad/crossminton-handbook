@@ -73,7 +73,7 @@ export function renderKompetenzpfad(el, daten, stufe) {
         <p class="leise">${esc(t('stufe_fehlt'))}</p>
         <div class="knopf-zeile" style="justify-content:flex-start">
           <a class="knopf knopf-primaer" href="#/onboarding">${esc(t('stufe_waehlen'))}</a>
-          <a class="knopf knopf-leise" href="#/pfad/themen">${esc(t('kapitel_entdecken'))}</a>
+          <a class="knopf knopf-leise" href="#/pfad/themen">${esc(t('kapitel_entdecken'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>`;
     return;

@@ -41,7 +41,9 @@
   --flaeche-2: #f1f5fb;
   --tinte: #16202b;
   --tinte-2: #5a6675;
-  --tinte-3: #8a94a3;
+  /* #6b7686 statt #8a94a3: ~4,6:1 auf Weiß (AA für die kleinen Sekundär-Labels,
+     die diesen Token tragen). Nur Hellmodus; der Dunkelwert bleibt. */
+  --tinte-3: #6b7686;
   --linie: #e9eef6;
   --linie-stark: #dae3ee;
   /* Überschriften ruhen in Tinte; Blau wird Akzent (Links, Aktion, Aktiv-Zustand). */
@@ -682,6 +684,25 @@ a.karte-link {
 /* Programmatisch fokussierter Inhaltsanker bei Routenwechsel — kein sichtbarer Ring. */
 #ansicht:focus { outline: none; }
 
+/* Skip-Link: springt für Tastatur-Nutzer über Kopf + Navigation direkt zum
+   Inhalt. Außerhalb des Viewports geparkt, gleitet bei Fokus herein. */
+.zum-inhalt {
+  position: absolute;
+  left: 0.5rem;
+  top: -3.5rem;
+  z-index: 200;
+  padding: 0.55rem 0.9rem;
+  background: var(--flaeche);
+  color: var(--primaer-tief);
+  border: 1px solid var(--primaer);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten-karte);
+  text-decoration: none;
+  font-weight: 600;
+  transition: top var(--uebergang);
+}
+.zum-inhalt:focus { top: 0.5rem; }
+
 .bestaetigung { color: var(--signal-gruen-text); font-weight: 600; }
 
 .abschnitt-titel { margin: 1.3rem 0 0.6rem; }
@@ -762,7 +783,11 @@ a.chip:focus-visible { outline: 2px solid var(--primaer); outline-offset: 2px; }
   transition: background var(--uebergang), box-shadow var(--uebergang), transform var(--uebergang), color var(--uebergang);
 }
 
-.knopf-primaer { background: var(--primaer); color: #fff; box-shadow: 0 6px 16px -6px rgba(56, 164, 241, 0.55); }
+/* Füllung im Hellmodus auf --primaer-tief (#1568ad, ~5,8:1 mit Weiß) statt --primaer
+   (#38a4f1, nur 2,7:1) — WCAG-AA-Kontrast für den meistgenutzten Button. Akzent-Blau
+   bleibt für Links/Rahmen/Icons; der Dunkelmodus kippt unten zurück auf --primaer
+   (dort trägt der Button ohnehin dunkle Schrift). */
+.knopf-primaer { background: var(--primaer-tief); color: #fff; box-shadow: 0 6px 16px -6px rgba(56, 164, 241, 0.55); }
 .knopf-primaer:active { background: var(--primaer-dunkel); }
 .knopf-sekundaer { border-color: var(--linie); background: var(--flaeche); }
 .knopf-leise { color: var(--tinte-2); font-weight: 500; }
@@ -859,6 +884,11 @@ input[type='radio'], input[type='checkbox'] {
 }
 
 .onboarding-schritt { margin-top: 0.4rem; }
+/* Die Frage ist die H1 jedes Schritts (genau eine H1 je Ansicht) — modest gehalten,
+   damit sie nicht zu groß wirkt; der Willkommens-Vorspann (Schritt 1) steht als
+   ruhiger Lead darüber. */
+.onboarding h1 { font-size: 1.35rem; margin: 0.1rem 0 0.6rem; }
+.onboarding-willkommen { font-weight: 600; color: var(--tinte); margin-bottom: 0.25rem; }
 
 /* ---------- Stationslisten ---------- */
 
@@ -1774,10 +1804,10 @@ details[open] summary { margin-bottom: 0.5rem; }
 /* Der Primär-Button trägt im Dunkeln dunklen Text auf dem hellen Marken-Blau;
    der Willkommens-Hero behält einen tiefen Blauverlauf (weißer Text bleibt lesbar). */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='hell']) .knopf-primaer { color: #08151f; }
+  :root:not([data-theme='hell']) .knopf-primaer { color: #08151f; background: var(--primaer); }
   :root:not([data-theme='hell']) .hero { background: linear-gradient(135deg, #1c6fae 0%, #0e4a79 100%); }
 }
-:root[data-theme='dunkel'] .knopf-primaer { color: #08151f; }
+:root[data-theme='dunkel'] .knopf-primaer { color: #08151f; background: var(--primaer); }
 :root[data-theme='dunkel'] .hero { background: linear-gradient(135deg, #1c6fae 0%, #0e4a79 100%); }
 
 /* Druckansicht = „Als PDF": nur der Plan, ohne Navigation, Formular und Knöpfe. */
