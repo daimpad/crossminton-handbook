@@ -318,6 +318,14 @@ async function boot() {
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);
+  // Skip-Link: Fokus auf den Inhalt lenken, OHNE den Hash zu ändern — der Router
+  // würde "#ansicht" sonst als (unbekannte) Route deuten und die Startseite zeigen.
+  // #ansicht trägt tabindex="-1", ist also programmatisch fokussierbar.
+  document.querySelector('.zum-inhalt')?.addEventListener('click', (ereignis) => {
+    ereignis.preventDefault();
+    el.focus();
+    el.scrollIntoView();
+  });
   initSprachanzeige();
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt, .menue-mini')) {
     element.addEventListener('click', schliesseMenue);

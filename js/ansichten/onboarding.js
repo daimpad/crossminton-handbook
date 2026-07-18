@@ -157,9 +157,9 @@ export function renderOnboarding(el, daten) {
 
   el.innerHTML = `
     <section class="onboarding">
-      ${assistent.schritt === 0 ? `<h1>${esc(t('onboarding_titel'))}</h1><p class="leise">${esc(t('onboarding_intro'))}</p>` : ''}
+      ${assistent.schritt === 0 ? `<p class="onboarding-willkommen">${esc(t('onboarding_titel'))}</p><p class="leise">${esc(t('onboarding_intro'))}</p>` : ''}
       <p class="leise onboarding-schritt">${esc(t('onboarding_schritt', { a: assistent.schritt + 1, b: schritte.length }))}</p>
-      <h2>${esc(inhalt.frage)}</h2>
+      <h1>${esc(inhalt.frage)}</h1>
       <form id="ob-form">${inhalt.html}</form>
       <div class="knopf-zeile">
         ${assistent.schritt > 0 ? `<button class="knopf knopf-sekundaer" id="ob-zurueck">${esc(t('zurueck'))}</button>` : ''}
