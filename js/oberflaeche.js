@@ -335,6 +335,11 @@ const BAUSTEIN_ICONS = {
   naesse_sicherer_stand: 'fa-water',
   hitze: 'fa-fire',
   verschiedene_boeden: 'fa-layer-group',
+  // Spielmodi (Umgebungs-Varianten) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  spielarten_ueberblick: 'fa-compass',
+  snowminton: 'fa-mountain',
+  beachminton: 'fa-sun',
+  blackminton: 'fa-eye',
   // Ausrüstung (eigene Domäne) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
   deine_ausruestung: 'fa-toolbox',
   der_speeder: 'fa-baseball',

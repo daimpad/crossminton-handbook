@@ -18,6 +18,7 @@ Bewusst **ohne Leitgrafik** bleiben:
 - **Abstrakte Taktik** — `fehler_vermeiden`, `umschalten`, `gegner_lesen_muster`, `doppel_grundlagen`, `engen_satz_fuehren`, `der_matchplan`, `dem_gegner_aufzwingen`, `matchverlauf_steuern`, `entscheidender_punkt`.
 - **Konditionelle Athletik** — `warum_athletik_dein_spiel_traegt`, `richtig_aufwaermen`, `durchhalten`, `erholen`, `gezielt_trainieren`, `rumpfstabilitaet`, `intervallausdauer`, `belastung_steuern_regenerieren`, `form_ueber_die_saison`, `antizipative_schnelligkeit`, `langfristig_belastbar` — Belastungs-/Regenerationsthemen ohne sinnvolles Einzelbild (Gesundheitsrahmen).
 - **Trainer-Trainingsgestaltung** — Meta-Ebene, kein Lernbild.
+- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht, Nummernkreis ab G-062). Der Grafik-Test bleibt bis dahin bei 55/59.
 
 Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer Durchgang vorgesehen.
 
