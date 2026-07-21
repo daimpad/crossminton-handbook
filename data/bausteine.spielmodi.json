@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "beschreibung": "Spielmodi-Block: die benannten Umgebungs-Varianten des Crossminton (Snowminton, Beachminton, Blackminton). Baut auf dem Outdoor-Block auf und nutzt denselben Baustein-Typ 'umgebungs_baustein'. Diese Varianten aendern nicht das Regelwerk, nur Untergrund, Temperatur oder Licht.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau — erster Spielmodi-Inhalt (Umgebungs-Varianten).",
+    "dateiname_konvention": "bausteine.spielmodi.json (Querschnitt-Thema, analog zum Outdoor-Thema).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Belegt erstmals: untergrund 'schnee'; witterung 'kaelte' und 'dunkelheit' (Dunkelheit ist streng genommen eine Lichtbedingung — sie sitzt auf der Witterungs-Achse neben 'sonne_blendung', die ebenfalls Licht betrifft).",
+    "kein_delta_grundsatz": "Die Umgebungs-Varianten sind crossminton-eigen (dasselbe Spiel, andere Umgebung) — kein Herkunftskonflikt, keine Cross-Sport-Deltas.",
+    "abgrenzung": "Snowminton/Beachminton sind offizielle ICO-Formate (Beachminton in der Fun Series); Blackminton ist ein Event-/Freizeitformat. Alle drei lassen das Regelwerk unveraendert — Einzel/Doppel (Wettkampfform) und freie Halte-Spielweisen sind eine andere Kategorie und hier nur eingeordnet, nicht ausgebaut.",
+    "kompetenzstufe": "fortgeschritten (Umgebungsanpassung setzt Grundkontrolle voraus, wie der Outdoor-Block).",
+    "gesundheitsrahmen": "Kaelte (Snowminton) und Hitze (Beachminton) beruehren Sicherheit; STRIKT bei Achtsamkeit gehalten (aufwaermen, Warnzeichen ernst nehmen) — KEINE Dosierungen, Grad- oder Trinkvorgaben; Medizinisches an qualifizierte Anleitung/aerztlichen Rat verwiesen. Blackminton traegt einen Sicherheitshinweis (reduzierte Sicht: freie Flaeche, Tempo drosseln).",
+    "sachbezug": "Snowminton: ICO — dieselbe Sportart, nur die Feldoberflaeche ist Schnee, andere Schuhe/Kleidung. Beachminton: ICO Fun Series, Spiel auf Sand mit Hitze/Sonne. Blackminton: Night Speeder mit Speedlight (Knicklicht, ~3 h Leuchtdauer, nicht im Lieferumfang) bzw. Schwarzlicht-Aufbau mit fluoreszierenden Materialien.",
+    "ordnungslogik": "spielarten_ueberblick (Rahmen) -> snowminton -> beachminton -> blackminton."
+  },
+  "bausteine": [
+    {
+      "id": "spielarten_ueberblick",
+      "typ": "umgebungs_baustein",
+      "domaene": "taktik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["draussen_spielen"],
+      "voraussetzungen_lesart": "didaktisch (intra): baut auf dem Outdoor-Rahmen auf",
+      "spielziele": ["untergrundwechsel"],
+      "vermittlungsziele": [],
+      "witterung": [],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Benannte Umgebungs-Varianten desselben Spiels (Snow/Beach/Black); Regelwerk unveraendert: ICO und Crossminton-Praxis.",
+      "querverweis": ["draussen_spielen"],
+      "anzeigetitel": {
+        "de": "Spielarten im Überblick"
+      },
+      "erklaerteil": {
+        "de": "Crossminton bleibt dasselbe Spiel, egal wo du es spielst. Rund um das Grundspiel haben sich aber ein paar benannte Spielarten herausgebildet, die vor allem eines gemeinsam haben: Sie verändern die Umgebung, während das Regelwerk gleich bleibt.\n\nDrei davon sind über die Umgebung definiert. Snowminton wird auf Schnee gespielt, mit Kälte als Begleiter. Beachminton läuft auf Sand, meist bei Hitze und Sonne. Und Blackminton findet in der Dunkelheit statt, mit einem leuchtenden Speeder als einzigem verlässlichen Signal. In allen dreien zählst du, schlägst auf und wechselst die Seiten genau wie sonst — was sich ändert, ist der Boden unter den Füßen, die Temperatur oder das Licht.\n\nDavon zu unterscheiden sind zwei andere Kategorien, die hier nur eingeordnet werden. Einzel und Doppel sind Wettkampfformen: Sie ändern die Struktur des Spiels (einer oder zwei pro Seite), nicht die Umgebung, und haben im Handbuch ihren eigenen Ort. Und es gibt freie, gesellige Spielweisen, bei denen es nur darum geht, den Speeder möglichst lange gemeinsam im Spiel zu halten — ohne Zählung, ohne Gegeneinander.\n\nDieser Block geht die drei umgebungsbedingten Spielarten der Reihe nach durch. Der rote Faden aus dem Outdoor-Kapitel gilt weiter: Du spielst mit den Bedingungen, nicht gegen sie — hier nur unter Schnee, Sand und Dunkelheit.\n\nEin gutes Lied bleibt dasselbe, ob am Lagerfeuer oder in der Halle gesungen. Nur der Raum um es herum klingt anders — und genau den lernst du hier lesen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Welche der drei Spielarten reizt dich am meisten — Schnee, Sand oder Dunkelheit? Überlege, was sich in ihr gegenüber dem Hallenspiel wirklich ändert: der Boden, die Temperatur oder das Licht. Und mach dir bewusst, dass das Regelwerk in allen dreien dasselbe bleibt — die Kunst liegt darin, dich auf die veränderte Umgebung einzustellen, so wie du es draußen bei Wind und Sonne schon geübt hast."
+      }
+    },
+    {
+      "id": "snowminton",
+      "typ": "umgebungs_baustein",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["spielarten_ueberblick", "naesse_sicherer_stand"],
+      "voraussetzungen_lesart": "gemischt: spielarten_ueberblick (intra, Rahmen); naesse_sicherer_stand (intra, rutschiger Untergrund als Basis)",
+      "spielziele": ["untergrundwechsel", "temperatur"],
+      "vermittlungsziele": [],
+      "untergrund": ["schnee"],
+      "witterung": ["kaelte"],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "ICO: Snowminton ist dieselbe Sportart, nur die Feldoberflaeche ist Schnee; andere Schuhe/Kleidung. Rutschiger, nachgebender Untergrund und Kaelte: Outdoor-Praxis und Bewegungssicherheit.",
+      "untergrund_beleg": "schnee",
+      "witterung_beleg": "kaelte",
+      "querverweis": ["naesse_sicherer_stand", "schuhe_finden", "funktionskleidung", "richtig_aufwaermen"],
+      "anzeigetitel": {
+        "de": "Snowminton — Spiel auf Schnee"
+      },
+      "erklaerteil": {
+        "de": "Snowminton ist Crossminton auf Schnee — nach dem Regelwerk dasselbe Spiel, nur liegt die Feldoberfläche im Weißen. Gezählt, aufgeschlagen und gewechselt wird wie immer; der Speeder fliegt wie gewohnt. Was sich ändert, sind zwei Dinge: der Untergrund und die Kälte.\n\nDer Schnee macht den Boden weich und rutschig zugleich. Wie schon auf nassem Grund gilt: kontrollierte Bewegung geht vor maximalem Tempo. Du machst kürzere, sichere Schritte, vermeidest ruckartige Richtungswechsel, bei denen der Fuß wegrutscht, und arbeitest mehr über breiten, stabilen Stand als über explosive Antritte. Getretener Schnee trägt anders als frischer — den Boden liest du vor dem Spiel.\n\nDie Kälte ist der zweite Faktor, und hier steht die Achtsamkeit für dich selbst über allem. Kalte Muskeln sind verletzlicher, deshalb bekommt das Aufwärmen bei Frost besonderes Gewicht — der Vergleich mit dem kalten Motor wird auf Schnee wörtlich. Du hältst dich zwischen den Ballwechseln warm und ziehst dich in Schichten an, die du bei Bedarf öffnen kannst. Die ICO nennt genau das als einzigen Ausrüstungsunterschied: andere Schuhe und Kleidung, passend für Kälte und Schnee.\n\nBeim Schuhwerk zählt Grip auf rutschigem, kaltem Grund — die glatte Hallensohle ist hier fehl am Platz. Bei der Kleidung hilft das Schichtprinzip aus dem Ausrüstungskapitel: eine Schicht, die Feuchtigkeit vom Körper wegführt, darüber wärmende und eine winddichte Lage.\n\nEine klare Grenze bleibt: Diese App gibt dir keine Vorgaben zu Kälteschutz-Werten oder Belastung. Bei allem, was über vorsichtiges Spielen hinausgeht — Taubheit, Zittern, anhaltendem Frieren —, gehört die Einschätzung in fachkundige Hände, nicht ins Weiterspielen.\n\nAuf Schnee bewegst du dich wie auf einem zugefrorenen See: mit ruhigen, sicheren Schritten, den Blick für die glatten Stellen. Wer das beherzigt, spielt auch im Weißen sicher."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein Spiel bei Kälte oder auf glattem Grund: Hast du dich vorher gründlich aufgewärmt, oder bist du kalt hineingegangen? Nimm dir für den Schnee vor, dem Aufwärmen mehr Zeit zu geben, dich in Schichten zu kleiden, dich zwischen den Ballwechseln warm zu halten und mit kurzen, sicheren Schritten zu spielen. Und mach dir klar: Bei Warnzeichen wie Taubheit oder anhaltendem Frieren ist Aufhören klüger als Weitermachen — die Einschätzung gehört dann in fachkundige Hände."
+      }
+    },
+    {
+      "id": "beachminton",
+      "typ": "umgebungs_baustein",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["spielarten_ueberblick", "verschiedene_boeden"],
+      "voraussetzungen_lesart": "gemischt: spielarten_ueberblick (intra, Rahmen); verschiedene_boeden (intra, Sand als Boden bereits behandelt)",
+      "spielziele": ["untergrundwechsel", "temperatur"],
+      "vermittlungsziele": [],
+      "untergrund": ["sand"],
+      "witterung": ["hitze", "sonne_blendung"],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "ICO Fun Series: Beachminton auf Sand. Weicher, nachgebender Boden (bereits als 'verschiedene_boeden' behandelt) plus Hitze und Sonnenblendung: Outdoor-Praxis und Gesundheitsrahmen.",
+      "untergrund_beleg": "sand",
+      "witterung_beleg": "hitze, sonne_blendung",
+      "querverweis": ["verschiedene_boeden", "hitze", "sonne_blendung"],
+      "anzeigetitel": {
+        "de": "Beachminton — Spiel auf Sand"
+      },
+      "erklaerteil": {
+        "de": "Beachminton ist Crossminton am Strand — auf Sand, meist bei Hitze und Sonne. Die ICO führt es als Fun-Series-Format; nach dem Regelwerk bleibt es dasselbe Spiel. Das Besondere ist die Kombination dreier Bedingungen, die du einzeln schon kennst: weicher Boden, Hitze und Blendung.\n\nDer Sand ist der Kern. Er ist weich und uneben, bremst jeden Schritt und nimmt dir die feste Abdruckkante, die du in der Halle gewohnt bist. Wie beim Spiel auf verschiedenen Böden heißt das: breiter, stabiler Stand, kürzere Wege und ein langsamerer Abdruck. Schnelle, explosive Antritte kosten im Sand viel Kraft und bringen wenig — du teilst dir die Wege klüger ein. Barfuß oder mit geeignetem Schuh ist Geschmackssache und hängt von Sand und Untergrund ab.\n\nDie Hitze ist der zweite Faktor. Hier gilt der Gesundheitsrahmen aus dem Outdoor-Kapitel unverändert: Warnzeichen wie Schwindel oder starke Erschöpfung ernst nehmen, die Pausen im Schatten verbringen, sich die Kräfte einteilen. Die App macht dir dabei keine Trink- oder Belastungsvorgaben; bei anhaltendem Unwohlsein ist fachkundiger Rat die richtige Adresse.\n\nDazu kommt die Sonne. Am offenen Strand steht sie oft hoch und hell, und hohe Bälle können dich blenden — der Umgang ist derselbe wie beim Outdoor-Baustein zur Blendung: früh abfangen, den Kopf leicht drehen, die Blendrichtung dem Gegner überlassen. Und der Court wird auf weichem Sand mit Heringen gesichert, damit die Markierung hält.\n\nDer Strand ist wie ein weicher Teppich, der jeden Schritt schluckt. Wer ihn kennt, tritt kürzer und stabiler — und spart die Kraft für die Bälle, die zählen."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein Spiel im Sand oder in praller Sonne: Hast du versucht, wie in der Halle zu sprinten, und dabei früh Kraft verloren? Nimm dir für den Strand vor, mit breiterem Stand und kürzeren Wegen zu spielen, dir bei Hitze die Kräfte einzuteilen und die Pausen im Schatten zu verbringen. Und übertrage den Umgang mit der Blendung vom Outdoor-Spiel: hohe Bälle früh abfangen, statt in die Sonne zu blicken."
+      }
+    },
+    {
+      "id": "blackminton",
+      "typ": "umgebungs_baustein",
+      "domaene": "taktik",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["spielarten_ueberblick", "sonne_blendung"],
+      "voraussetzungen_lesart": "gemischt: spielarten_ueberblick (intra, Rahmen); sonne_blendung (intra, Licht und Sicht als Thema bereits angelegt)",
+      "spielziele": ["licht_und_sicht", "fruehe_flugbahnlesung"],
+      "vermittlungsziele": [],
+      "witterung": ["dunkelheit"],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Blackminton (Speedminton/ICO-Umfeld): Spiel in der Dunkelheit mit Night Speeder und Speedlight bzw. Schwarzlicht. Wahrnehmung auf einen einzelnen Lichtpunkt reduziert; Regelwerk unveraendert.",
+      "witterung_beleg": "dunkelheit",
+      "querverweis": ["sonne_blendung", "der_speeder", "frueh_nehmen"],
+      "anzeigetitel": {
+        "de": "Blackminton — Spiel im Dunkeln"
+      },
+      "erklaerteil": {
+        "de": "Blackminton ist Crossminton bei Nacht — dasselbe Spiel im Dunkeln, von der Dämmerung bis zum Morgengrauen. Am Regelwerk ändert sich nichts; die ganze Abweichung liegt im Licht und in deiner Wahrnehmung. Das macht Blackminton zum Extremfall des Themas Licht und Sicht, das du beim Spiel gegen die Sonne schon angerissen hast.\n\nEs gibt zwei Ausbaustufen. In der einfachen spielst du mit dem Night Speeder — einem Flugkörper mit durchsichtiger Kappe, in die ein Speedlight gedrückt wird, ein Knicklicht ähnlich denen beim Angeln. Es leuchtet rund drei Stunden und ist nicht im Lieferumfang enthalten; ein paar Leuchtbänder am Körper helfen zusätzlich. In der aufwändigen Stufe bringt ein Schwarzlicht-Aufbau Feld, Ausrüstung und Kleidung über fluoreszierende Materialien zum Leuchten.\n\nDer entscheidende Unterschied ist die Wahrnehmung. Im Dunkeln fehlen dir fast alle gewohnten Anhaltspunkte: Der Speeder ist ein Lichtpunkt ohne erkennbare Fluglage, Rahmen und Hand des Gegenübers bleiben unsichtbar, und die Feldgrenzen verschwimmen. Statt aus vielen Signalen zu lesen, verlässt du dich auf das eine verlässliche: die Bahn des Leuchtpunkts. Genau darin liegt der Reiz — Blackminton schult die Flugbahn-Lesung, die im Hellen unter der Fülle der Eindrücke verborgen bleibt.\n\nWeil die frühen Zeichen aus der Körperhaltung des Gegners wegfallen, wird das frühe Nehmen schwerer und die Täuschung über die Vorbereitung verliert an Wirkung. Du richtest deine Aufmerksamkeit ganz auf den Lichtpunkt und erschließt den Treffpunkt aus seiner Bahn.\n\nEin Sicherheitshinweis gehört dazu: Bei reduzierter Sicht sinkt die Tiefenwahrnehmung, Landungen und Stopps werden unsicherer. Spiel auf einer freien, gut geräumten Fläche, drossle das Tempo gegenüber dem Tageslicht und geh kein Risiko für einen Ball ein, den du kaum siehst.\n\nIm Dunkeln schrumpft das ganze Spiel auf einen einzigen leuchtenden Punkt — wie ein Glühwürmchen in der Nacht, dem dein Blick folgt. Wer gelernt hat, diesem Punkt zu vertrauen, sieht plötzlich klarer als im hellen Gewimmel."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Dem Lichtpunkt folgen",
+          "ziel": "Die Wahrnehmung bei schwachem Licht auf die Flugbahn des leuchtenden Speeders schärfen — sicher und mit kontrolliertem Tempo.",
+          "schritte": [
+            "Wähle eine freie, gut geräumte Fläche und dämpfe das Licht schrittweise (Dämmerung oder ein abgedunkelter Raum), statt gleich in völliger Dunkelheit zu beginnen.",
+            "Spiel mit dem Night Speeder locker zu und richte den Blick allein auf den Leuchtpunkt — lies seine Bahn, statt nach Rahmen oder Hand des Gegenübers zu suchen.",
+            "Nimm das Tempo bewusst zurück und fang den Speeder eher früh ab, sobald du seine Bahn erkennst.",
+            "Steigere die Dunkelheit erst weiter, wenn du dem Lichtpunkt sicher folgen kannst und dich auf der Fläche sicher bewegst."
+          ],
+          "steigerung": "Verkürze nach und nach die Zeit, die du brauchst, um die Bahn zu lesen, und spiele flachere, schnellere Bälle — immer nur so weit, wie du dem Punkt sicher folgen kannst.",
+          "selbstkontrolle": "Folgst du dem Leuchtpunkt ruhig mit dem Blick, oder suchst du nach den gewohnten Signalen, die im Dunkeln fehlen? Bleibt dein Tempo kontrolliert und dein Stand sicher? Wer der Bahn des Punkts vertraut, trifft auch im Dunkeln.",
+          "abschluss": "Blackminton macht aus dem Speeder einen Lichtpunkt und aus dem Spiel eine Schule der Wahrnehmung. Wer der Flugbahn folgt und das Tempo im Griff behält, spielt sicher durch die Nacht."
+        }
+      }
+    }
+  ],
+  "delta_bausteine": []
+}

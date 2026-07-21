@@ -359,7 +359,11 @@
     "gegnerisches_paar_lesen": "Das gegnerische Paar lesen",
     "partner_in_position_bringen": "Den Partner in Position bringen",
     "nahtlos_umschalten": "Nahtlos umschalten",
-    "blindes_verstaendnis": "Blindes Verständnis"
+    "blindes_verstaendnis": "Blindes Verständnis",
+    "spielarten_ueberblick": "Spielarten im Überblick",
+    "snowminton": "Snowminton — Spiel auf Schnee",
+    "beachminton": "Beachminton — Spiel auf Sand",
+    "blackminton": "Blackminton — Spiel im Dunkeln"
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": "Griff zu fest"
@@ -467,13 +471,16 @@
       "sand": "Sand",
       "rasen": "Rasen",
       "asche": "Asche",
-      "kunstrasen": "Kunstrasen"
+      "kunstrasen": "Kunstrasen",
+      "schnee": "Schnee"
     },
     "witterung": {
       "wind": "Wind",
       "sonne_blendung": "Sonne & Blendung",
       "naesse": "Nässe",
-      "hitze": "Hitze"
+      "hitze": "Hitze",
+      "kaelte": "Kälte",
+      "dunkelheit": "Dunkelheit"
     },
     "abschluss_status": {
       "offen": "offen",

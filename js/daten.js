@@ -42,6 +42,8 @@ const INHALTSDATEIEN = [
   'data/bausteine.doppel-experte.json',
   // Outdoor/Umgebungs-Querschnitt (typ umgebungs_baustein, witterung/untergrund).
   'data/bausteine.outdoor-thema.json',
+  // Spielmodi: benannte Umgebungs-Varianten (Snow/Beach/Black), bauen auf Outdoor auf.
+  'data/bausteine.spielmodi.json',
   'data/bausteine.delta-tennis.json',
   'data/bausteine.delta-squash.json',
 ];

@@ -359,7 +359,11 @@
     "gegnerisches_paar_lesen": "",
     "partner_in_position_bringen": "",
     "nahtlos_umschalten": "",
-    "blindes_verstaendnis": ""
+    "blindes_verstaendnis": "",
+    "spielarten_ueberblick": "",
+    "snowminton": "",
+    "beachminton": "",
+    "blackminton": ""
   },
   "fehlerbilder": {
     "griff_fehler_zu_fest": ""
@@ -467,13 +471,16 @@
       "sand": "",
       "rasen": "",
       "asche": "",
-      "kunstrasen": ""
+      "kunstrasen": "",
+      "schnee": ""
     },
     "witterung": {
       "wind": "",
       "sonne_blendung": "",
       "naesse": "",
-      "hitze": ""
+      "hitze": "",
+      "kaelte": "",
+      "dunkelheit": ""
     },
     "abschluss_status": {
       "offen": "",

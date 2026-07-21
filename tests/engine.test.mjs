@@ -38,6 +38,7 @@ const doppelThema = liesJson('data/bausteine.doppel-thema.json');
 const doppelBeginner = liesJson('data/bausteine.doppel-beginner.json');
 const doppelExperte = liesJson('data/bausteine.doppel-experte.json');
 const outdoorThema = liesJson('data/bausteine.outdoor-thema.json');
+const spielmodi = liesJson('data/bausteine.spielmodi.json');
 const deltaTennis = liesJson('data/bausteine.delta-tennis.json');
 const deltaSquash = liesJson('data/bausteine.delta-squash.json');
 const einheiten = liesJson('data/trainingseinheiten.json');
@@ -64,7 +65,7 @@ function gleicheListe(a, b) {
   return a.length === b.length && a.every((wert, i) => wert === b[i]);
 }
 
-const daten = baueIndizes([technik, taktik, mentales, athletik, ausruestung, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, ausruestungFg, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelBeginner, doppelThema, doppelExperte, outdoorThema, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo, turnierregeln);
+const daten = baueIndizes([technik, taktik, mentales, athletik, ausruestung, trainerGestaltung, fgTechnik, fgTaktik, fgMentales, fgAthletik, ausruestungFg, experteTechnik, experteTaktik, experteMentales, experteAthletik, doppelBeginner, doppelThema, doppelExperte, outdoorThema, spielmodi, deltaTennis, deltaSquash], einheiten, fehlerbilder, regeln, appInfo, turnierregeln);
 
 const technikKette = ['grundposition', 'griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'beinarbeit'];
 // Taktik-Graph verzweigt: fehler_vermeiden hängt an spielziel_verstehen (nicht
@@ -121,10 +122,11 @@ const doppelExperteKette = ['paar_als_system', 'gegnerisches_paar_lesen', 'partn
 // Outdoor-Querschnitt (typ umgebungs_baustein, fortgeschritten): eigene Umgebungs-Achse,
 // aus Kompetenz- und Themenpfad gefiltert (Typ-Filter), erzählgeordnet.
 const outdoorKette = ['draussen_spielen', 'wind_lesen_nutzen', 'sonne_blendung', 'naesse_sicherer_stand', 'hitze', 'verschiedene_boeden'];
+const spielmodiKette = ['spielarten_ueberblick', 'snowminton', 'beachminton', 'blackminton'];
 
 console.log('\n[1] Datenvalidierung');
 pruefe('Referenzdaten ohne Warnungen', daten.warnungen.length === 0, daten.warnungen.join(' | '));
-pruefe('102 Basisbausteine (86 + 5 Doppel-Beginner + 5 Doppel-Experte + 6 Outdoor), 24 Deltas', daten.bausteine.length === 102 && daten.deltas.length === 24);
+pruefe('106 Basisbausteine (86 + 5 Doppel-Beginner + 5 Doppel-Experte + 6 Outdoor + 4 Spielmodi), 24 Deltas', daten.bausteine.length === 106 && daten.deltas.length === 24);
 pruefe('Herkunftsliste aus Delta-Bestand generiert = [BAD, TEN, SQ]', gleicheListe(daten.herkuenfte, ['BAD', 'TEN', 'SQ']));
 
 console.log('\n[2] Kompetenzpfad ohne Herkunft');
@@ -437,7 +439,7 @@ pruefe('alle querverweis-IDs lösen auf einen Baustein auf (reine Dokumentation,
 // Der Reiter ist eine getrennte Entität: die Abschnitte liegen unter daten.regeln,
 // nie im Pool. (Slug-Überschneidungen wie der Abschnitt "aufschlag" ~ Baustein
 // "aufschlag" sind dabei belanglos — zwei Namensräume, kein Lookup übers Regel-Slug.)
-pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (102 Bausteine, Abschnitte separat)', daten.bausteine.length === 102 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
+pruefe('Regeln erweitern/verunreinigen den Baustein-Pool nicht (106 Bausteine, Abschnitte separat)', daten.bausteine.length === 106 && !daten.bausteine.some((b) => daten.regeln.abschnitte.includes(b)));
 pruefe('Regeln tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', alleRegeln.every((r) => r.voraussetzungen === undefined && r.uebungsteil === undefined && r.delta === undefined && r.status === undefined));
 pruefe('Quellenangabe sichtbar hinterlegt (Herausgeber + Stand + PDF-Link)', typeof daten.regeln.meta.quelle?.herausgeber === 'string' && daten.regeln.meta.quelle.herausgeber !== '' && typeof daten.regeln.meta.quelle?.stand === 'string' && daten.regeln.meta.quelle.stand !== '' && /^https?:\/\/.*\.pdf$/i.test(daten.regeln.meta.quelle?.link || ''));
 pruefe('Regeln-UI-Labels (de) vollständig', ['nav_regeln', 'regeln_titel', 'regeln_intro', 'regel_label', 'regel_bedeutung', 'regeln_quelle', 'regeln_stand', 'regeln_querverweis', 'regeln_quelle_link'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
@@ -474,7 +476,7 @@ pruefe('„verschärft" real belegt: Mindest-Teilnehmerzahl ändert Text von 100
   const w = tr.anforderungen.find((a) => a.id === 'min_teilnehmer').werte;
   return w.t100 && w.t250 && w.t100.text.de !== w.t250.text.de;
 })());
-pruefe('Turnier-Regularium verunreinigt den Baustein-Pool nicht (102 Bausteine, Regularium separat)', daten.bausteine.length === 102 && !tr.anforderungen.some((a) => daten.bausteinVonId.has(a.id)));
+pruefe('Turnier-Regularium verunreinigt den Baustein-Pool nicht (106 Bausteine, Regularium separat)', daten.bausteine.length === 106 && !tr.anforderungen.some((a) => daten.bausteinVonId.has(a.id)));
 pruefe('Anforderungen tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', tr.anforderungen.every((a) => a.voraussetzungen === undefined && a.uebungsteil === undefined && a.delta === undefined && a.status === undefined));
 pruefe('Meta trägt Quelle + Stand + verlinkte Dokumente (rules/…)', typeof tr.meta.quelle?.de === 'string' && tr.meta.quelle.de !== '' && typeof tr.meta.stand?.de === 'string' && (tr.meta.dokumente || []).length >= 1 && tr.meta.dokumente.every((d) => typeof d.pfad === 'string' && d.pfad.startsWith('rules/')));
 pruefe('Turnier-UI-Labels (de) vollständig', ['turnier_titel', 'turnier_kachel_text', 'turnier_frage', 'turnier_konkurrenz', 'turnier_einzel', 'turnier_auflagen_fuer', 'turnier_davon', 'turnier_neu', 'turnier_verschaerft', 'turnier_pflicht', 'turnier_empfehlung', 'turnier_basis', 'turnier_ggue', 'turnier_wie_zuvor', 'turnier_variante_titel', 'turnier_dokumente', 'turnier_quelle', 'turnier_stand', 'turnier_leer'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
@@ -550,7 +552,7 @@ pruefe('Über-Reiter: Absätze + Dank/Quellen + Lizenz/Credits + GitHub-Link (in
 pruefe('Mitmachen-Reiter: 3 Möglichkeiten, jede mit cta_label + cta_ziel', (daten.appInfo.mitmachen.moeglichkeiten || []).length === 3 && daten.appInfo.mitmachen.moeglichkeiten.every((m) => m.cta_label?.de && m.cta_ziel));
 pruefe('Sprachanzeige rein darstellend (funktion_aktiv:false), 4 Sprachen de/en/fr/pl mit Eigenname + Flagge, aktuell de', daten.appInfo.sprachen.funktion_aktiv === false && gleicheListe((daten.appInfo.sprachen.liste || []).map((s) => s.code), ['de', 'en', 'fr', 'pl']) && (daten.appInfo.sprachen.liste || []).every((s) => typeof s.eigenname === 'string' && s.eigenname && s.flagge) && daten.appInfo.sprachen.aktuell === 'de');
 pruefe('jede Sprache trägt Flagge + Kürzel + Label', (daten.appInfo.sprachen.liste || []).every((s) => s.flagge && s.kuerzel && s.label?.de));
-pruefe('App-Info erweitert den Baustein-Pool nicht (102 Bausteine, eigene Entität)', daten.bausteine.length === 102 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
+pruefe('App-Info erweitert den Baustein-Pool nicht (106 Bausteine, eigene Entität)', daten.bausteine.length === 106 && !daten.bausteinVonId.has('ueber') && !daten.bausteinVonId.has('mitmachen'));
 pruefe('GitHub-Links gefüllt (echte http-URLs): Credits-Link + alle drei CTAs', /^https?:\/\//.test(daten.appInfo.ueber.credits_lizenz.github.ziel) && daten.appInfo.mitmachen.moeglichkeiten.every((m) => /^https?:\/\//.test(m.cta_ziel)));
 pruefe('Lizenz + Credits gesetzt (MIT, CC BY, Damian Paderta)', daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /MIT/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /CC BY/.test(e.de)) && daten.appInfo.ueber.credits_lizenz.eintraege.some((e) => /Damian Paderta/.test(e.de)));
 pruefe('Sprachanzeige-Hinweis aus den Daten entfernt (rein darstellend, keine Anmerkung)', daten.appInfo.sprachen.hinweis === undefined);
@@ -568,23 +570,29 @@ pruefe('Spielform-Achse doppel deckt jetzt alle drei Stufen ab', (() => {
 })());
 pruefe('6 Outdoor-Bausteine (typ umgebungs_baustein, fortgeschritten, 2 Übung + 4 Reflexion), 0 Deltas', outdoorThema.bausteine.length === 6 && outdoorThema.delta_bausteine.length === 0 && outdoorThema.bausteine.every((b) => b.typ === 'umgebungs_baustein' && gleicheListe(b.kompetenzstufe, ['fortgeschritten'])) && outdoorThema.bausteine.filter((b) => b.uebungsteil).length === 2 && outdoorThema.bausteine.filter((b) => b.reflexionsaufgabe).length === 4);
 pruefe('umgebungs_baustein im Typ-Filter: aus Kompetenz- UND Themenpfad gefiltert', !kompetenzpfad(daten, 'experte').stationen.some((s) => s.baustein.typ === 'umgebungs_baustein') && !['taktik', 'athletik_kondition'].some((d) => themenpfad(daten, d).stationen.some((s) => s.baustein.typ === 'umgebungs_baustein')));
-pruefe('Umgebungs-Achse: umgebungspfad sammelt alle 6 in Erzählreihenfolge', gleicheListe(umgebungspfad(daten).stationen.map((s) => s.baustein.id), outdoorKette));
-pruefe('witterung als Navigationsachse (wind/sonne/naesse/hitze je belegt)', gleicheListe(witterungen(daten).map((e) => e.witterung), ['wind', 'sonne_blendung', 'naesse', 'hitze']));
-pruefe('untergrund als Navigationsachse (sand/rasen/asche/kunstrasen, ohne halle)', gleicheListe(untergruende(daten).map((e) => e.untergrund), ['sand', 'rasen', 'asche', 'kunstrasen']));
+pruefe('Umgebungs-Achse: umgebungspfad sammelt alle 10 (Outdoor + Spielmodi) in Erzählreihenfolge', gleicheListe(umgebungspfad(daten).stationen.map((s) => s.baustein.id), [...outdoorKette, ...spielmodiKette]));
+pruefe('witterung als Navigationsachse (wind/sonne/naesse/hitze/kaelte/dunkelheit je belegt)', gleicheListe(witterungen(daten).map((e) => e.witterung), ['wind', 'sonne_blendung', 'naesse', 'hitze', 'kaelte', 'dunkelheit']));
+pruefe('untergrund als Navigationsachse (sand/rasen/asche/kunstrasen/schnee, ohne halle)', gleicheListe(untergruende(daten).map((e) => e.untergrund), ['sand', 'rasen', 'asche', 'kunstrasen', 'schnee']));
 pruefe('untergrund als LISTE: verschiedene_boeden trägt vier Böden, Alt-Baustein bleibt Halle', gleicheListe(untergrundVon(daten.bausteinVonId.get('verschiedene_boeden')), ['sand', 'rasen', 'asche', 'kunstrasen']) && gleicheListe(untergrundVon(daten.bausteinVonId.get('griff')), ['halle']));
-pruefe('witterungpfad wind = wind_lesen_nutzen; untergrundpfad sand = verschiedene_boeden', gleicheListe(umgebungspfad(daten, 'witterung', 'wind').stationen.map((s) => s.baustein.id), ['wind_lesen_nutzen']) && gleicheListe(umgebungspfad(daten, 'untergrund', 'sand').stationen.map((s) => s.baustein.id), ['verschiedene_boeden']));
+pruefe('witterungpfad wind = wind_lesen_nutzen; untergrundpfad sand = verschiedene_boeden', gleicheListe(umgebungspfad(daten, 'witterung', 'wind').stationen.map((s) => s.baustein.id), ['wind_lesen_nutzen']) && gleicheListe(umgebungspfad(daten, 'untergrund', 'sand').stationen.map((s) => s.baustein.id), ['verschiedene_boeden', 'beachminton']));
 // Bereich 5 (Umgebungsanpassung) wird real — über den Individualpfad (Outdoor bleibt aus Kompetenz/Themen gefiltert).
 setzeDiagnose({ stufe: 'fortgeschritten' });
 pruefe('Bereich-5-Ziel windspiel (Fortgeschritten): Outdoor-Bausteine im Individualpfad', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'windspiel' }).stationen.map((s) => s.baustein.id), ['draussen_spielen', 'wind_lesen_nutzen']));
-pruefe('Bereich-5-Ziel untergrundwechsel (Fortgeschritten): Nässe + verschiedene Böden', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'untergrundwechsel' }).stationen.map((s) => s.baustein.id), ['naesse_sicherer_stand', 'verschiedene_boeden']));
+pruefe('Bereich-5-Ziel untergrundwechsel (Fortgeschritten): Nässe + Böden + Snow/Beach', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'untergrundwechsel' }).stationen.map((s) => s.baustein.id), ['spielarten_ueberblick', 'naesse_sicherer_stand', 'verschiedene_boeden', 'snowminton', 'beachminton']));
 pruefe('Outdoor-/Doppel-Titel ins Label geliftet', labelsDe.bausteine.wind_lesen_nutzen === 'Wind lesen und nutzen' && labelsDe.bausteine.paar_als_system === 'Das Paar als System');
 pruefe('Umgebungs-UI-Labels (de) vorhanden (pfad_umgebung + Achsen-Überschriften)', ['pfad_umgebung', 'pfad_umgebung_text', 'umgebung_wetter', 'umgebung_boden', 'umgebung_alle'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
+// Spielmodi-Block (Umgebungs-Varianten Snow/Beach/Black): eigener typ umgebungs_baustein, fortgeschritten.
+pruefe('4 Spielmodi-Bausteine (typ umgebungs_baustein, fortgeschritten, 1 Übung + 3 Reflexion), 0 Deltas', spielmodi.bausteine.length === 4 && spielmodi.delta_bausteine.length === 0 && spielmodi.bausteine.every((b) => b.typ === 'umgebungs_baustein' && gleicheListe(b.kompetenzstufe, ['fortgeschritten'])) && spielmodi.bausteine.filter((b) => b.uebungsteil).length === 1 && spielmodi.bausteine.filter((b) => b.reflexionsaufgabe).length === 3);
+pruefe('Spielmodi aus Kompetenz- UND Themenpfad gefiltert (typ umgebungs_baustein)', !kompetenzpfad(daten, 'experte').stationen.some((s) => spielmodiKette.includes(s.baustein.id)) && !['taktik', 'athletik_kondition'].some((d) => themenpfad(daten, d).stationen.some((s) => spielmodiKette.includes(s.baustein.id))));
+pruefe('neue Umgebungs-Achsenwerte: untergrund/schnee = snowminton; witterung/kaelte = snowminton; witterung/dunkelheit = blackminton', gleicheListe(umgebungspfad(daten, 'untergrund', 'schnee').stationen.map((s) => s.baustein.id), ['snowminton']) && gleicheListe(umgebungspfad(daten, 'witterung', 'kaelte').stationen.map((s) => s.baustein.id), ['snowminton']) && gleicheListe(umgebungspfad(daten, 'witterung', 'dunkelheit').stationen.map((s) => s.baustein.id), ['blackminton']));
+pruefe('Spielmodi belegen Bereich-5-Ziele im Individualpfad (temperatur: +Snow/Beach; licht_und_sicht: +Black)', gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'temperatur' }).stationen.map((s) => s.baustein.id), ['hitze', 'snowminton', 'beachminton']) && gleicheListe(individualpfad(daten, { dimension: 'spielziele', faktor: 'licht_und_sicht' }).stationen.map((s) => s.baustein.id), ['sonne_blendung', 'blackminton']));
+pruefe('Spielmodi-Titel + neue Vokabel-Labels geliftet', labelsDe.bausteine.snowminton === 'Snowminton — Spiel auf Schnee' && labelsDe.bausteine.blackminton === 'Blackminton — Spiel im Dunkeln' && labelsDe.vokabeln.untergrund.schnee === 'Schnee' && labelsDe.vokabeln.witterung.kaelte === 'Kälte' && labelsDe.vokabeln.witterung.dunkelheit === 'Dunkelheit');
 setzeZurueck();
 
 console.log('\n[8] Projektionen und Kontinuität');
 setzeZurueck();
 setzeDiagnose({ stufe: 'beginner' });
-pruefe('global 0 von 102 (Gesamtpool inkl. Doppel alle drei Stufen + Outdoor + Trainer + Ausrüstung)', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 102);
+pruefe('global 0 von 106 (Gesamtpool inkl. Doppel alle drei Stufen + Outdoor + Spielmodi + Trainer + Ausrüstung)', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).gesamt === 106);
 setzeTeilStatus('griff', 'erklaerteil', 'erledigt');
 pruefe('nur Erklärteil erledigt → noch nicht absolviert', globaleProjektion(daten).absolviert === 0 && globaleProjektion(daten).erklaertErledigt === 1);
 setzeTeilStatus('griff', 'uebungsteil', 'erledigt');

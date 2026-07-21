@@ -13,8 +13,8 @@
     "spielform": ["einzel", "doppel"],
     "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein"],
     "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS", "SP", "AT"],
-    "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen"],
-    "witterung": ["wind", "sonne_blendung", "naesse", "hitze"],
+    "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen", "schnee"],
+    "witterung": ["wind", "sonne_blendung", "naesse", "hitze", "kaelte", "dunkelheit"],
     "abschluss_status_zustandsraum": ["offen", "erledigt", "beherrscht_INAKTIV"],
 
     "spielziele": {
