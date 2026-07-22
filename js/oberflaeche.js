@@ -360,7 +360,7 @@ export function bausteinIcon(bausteinId, klasse = '') {
 // SVG liest die CI-Tokens (var(--tinte)/var(--primaer) …) und kippt daher mit dem Theme;
 // KI-Illustrationen bleiben PNG. Beide Dateien existieren stets — das PNG ist der sofort
 // sichtbare Fallback, das SVG die progressive Aufwertung nach dem Rendern.
-export const SVG_GRAFIKEN = new Set(['G-023', 'G-024', 'G-060']);
+export const SVG_GRAFIKEN = new Set(['G-023', 'G-024', 'G-025', 'G-026', 'G-027', 'G-031', 'G-060']);
 
 export function grafikFigurHtml(id) {
   const beschriftung = label('grafik', id);
