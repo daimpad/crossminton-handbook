@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Das gegnerische Paar lesen: die Lücke zwischen den beiden Gegnern erkennen und anspielen.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .geg{fill:var(--tinte-3,#6b7686)}
+    .luecke{fill:var(--primaer,#38a4f1);opacity:.15}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <circle class="geg" cx="96"  cy="96" r="10"/>
+  <circle class="geg" cx="200" cy="140" r="10"/>
+  <text class="st" x="96" y="76">Gegner</text>
+  <circle class="luecke" cx="150" cy="182" r="26"/>
+  <circle class="ring" cx="150" cy="182" r="26"/>
+  <path class="pf" d="M150,288 L150,214" marker-end="url(#ah)"/>
+  <text class="zt" x="150" y="186">Lücke</text>
+</svg>
