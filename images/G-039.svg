@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Verteidigung im Paar: beide Spieler nebeneinander, jeder deckt eine Hälfte des Feldes.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .spieler{fill:var(--primaer,#38a4f1)}
+    .teiler{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.8;stroke-dasharray:7 5}
+    .haelfte{fill:var(--primaer,#38a4f1);opacity:.06}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+
+  <rect class="haelfte" x="52" y="42" width="98" height="196"/>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <line class="teiler" x1="150" y1="42" x2="150" y2="238"/>
+
+  <circle class="spieler" cx="101" cy="140" r="11"/>
+  <circle class="spieler" cx="199" cy="140" r="11"/>
+  <text class="subtext" x="101" y="170">deine Hälfte</text>
+  <text class="subtext" x="199" y="170">Partner-Hälfte</text>
+
+  <text class="zonetext" x="150" y="272">Verteidigung: nebeneinander</text>
+</svg>
