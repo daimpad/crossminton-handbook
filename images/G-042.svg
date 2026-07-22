@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Bewegung als Einheit: beide Partner verschieben sich gemeinsam in dieselbe Richtung, mit gleichbleibendem Abstand.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .spieler{fill:var(--primaer,#38a4f1)}
+    .band{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;opacity:.5}
+    .pfeil{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .marker{fill:var(--primaer,#38a4f1)}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="marker"/></marker></defs>
+
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+
+  <line class="band" x1="96" y1="150" x2="150" y2="150"/>
+  <circle class="spieler" cx="96"  cy="150" r="11"/>
+  <circle class="spieler" cx="150" cy="150" r="11"/>
+
+  <line class="pfeil" x1="96"  y1="118" x2="150" y2="118" marker-end="url(#ah)"/>
+  <line class="pfeil" x1="150" y1="182" x2="204" y2="182" marker-end="url(#ah)"/>
+
+  <text class="zonetext" x="150" y="272">gemeinsam verschieben — Abstand hält</text>
+</svg>
