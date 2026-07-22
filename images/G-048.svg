@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Einander Platz lassen: beide Partner halten klaren Abstand und laufen sich nicht in die Quere.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .sp{fill:var(--primaer,#38a4f1)}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .abst{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.6;stroke-dasharray:6 4}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .mkg{fill:var(--tinte-3,#6b7686)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+    <marker id="ad" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="5" refY="5" orient="auto-start-reverse"><path d="M2.5,2.5 L6,5 L2.5,7.5" fill="none" stroke="var(--tinte-3,#6b7686)" stroke-width="1.3"/></marker>
+  </defs>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <line class="abst" x1="112" y1="120" x2="188" y2="120" marker-start="url(#ad)" marker-end="url(#ad)"/>
+  <text class="st" x="150" y="112">Abstand</text>
+  <circle class="sp" cx="108" cy="150" r="11"/>
+  <circle class="sp" cx="192" cy="150" r="11"/>
+  <path class="pf" d="M100,182 L74,182" marker-end="url(#ah)"/>
+  <path class="pf" d="M200,182 L226,182" marker-end="url(#ah)"/>
+  <text class="zt" x="150" y="272">einander Platz lassen</text>
+</svg>
