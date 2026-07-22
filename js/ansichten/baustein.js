@@ -6,7 +6,7 @@
 import { schalteTeil } from '../aktionen.js';
 import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, untergrundVon, witterungVon } from '../daten.js';
 import { label, t, text } from '../i18n.js';
-import { absaetze, bausteinIcon, esc, neuRendern, zeigeMeilenstein } from '../oberflaeche.js';
+import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, verbessereGrafiken, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
 import { diagnose, einstellungen } from '../zustand.js';
 
@@ -38,15 +38,7 @@ function quittierKnopf(id, teil, status, beschriftungOffen, beschriftungErledigt
 }
 
 function grafikenHtml(baustein) {
-  return (baustein.grafik || [])
-    .map(
-      (id) => `
-      <figure class="grafik-platzhalter">
-        <img class="grafik-bild" src="images/${esc(id)}.png" alt="${esc(label('grafik', id))}" loading="lazy" />
-        <figcaption class="leise">${esc(label('grafik', id))}</figcaption>
-      </figure>`
-    )
-    .join('');
+  return (baustein.grafik || []).map((id) => grafikFigurHtml(id)).join('');
 }
 
 // Übungsteile sind heterogen (schritte vs. schritte_teil1/2, optionale Felder).
@@ -306,4 +298,6 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       else neuRendern();
     });
   }
+
+  verbessereGrafiken(el);
 }

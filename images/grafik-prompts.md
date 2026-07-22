@@ -8,6 +8,10 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 
 **Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
 
+**Zwei Bildquellen (Trennlinie: Raum/Geometrie vs. Körper/Textur):**
+- **Diagramme** (Feld, Positionen, Flugbahnen, Formationen, Bemaßung) werden als **theme-fähiges Inline-SVG** hand-gezeichnet — nutzen die CI-Tokens, kippen mit dem Umschalter, sind gestochen scharf und winzig. Nummern im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`); zu jeder liegt **`G-XXX.svg` UND `G-XXX.png`** (Fallback) vor. **Erledigt: G-023, G-024, G-060.** Kandidaten (rein diagrammatisch): der Rest der Taktik (G-025–031), die Doppel-Positionen (G-037–042, 044–046, 048–052), G-014, G-055, G-059, G-061.
+- **Illustrationen** (Griff, Schlag, Körperhaltung, Bewegung, Outdoor-Szene) kommen aus dem **KI-Bildgenerator** über die Prompts unten — als `G-XXX.png`. Für ein einheitliches Set jedem Prompt den gemeinsamen Stil (oben) voranstellen und transparenten/schlichten Hintergrund verlangen.
+
 ## Abdeckung (Audit)
 
 Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor** und zwei **Referenzgrafiken** im Regeln-Reiter.

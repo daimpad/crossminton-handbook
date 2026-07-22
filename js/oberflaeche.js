@@ -354,3 +354,50 @@ export function bausteinIcon(bausteinId, klasse = '') {
   const icon = BAUSTEIN_ICONS[bausteinId];
   return icon ? `<i class="fa-solid ${icon} ${klasse}" aria-hidden="true"></i>` : '';
 }
+
+// ── Grafiken: PNG-Platzhalter mit optionalem Inline-SVG (theme-fähige Diagramme) ──
+// Diagramm-Grafiken (Feld, Positionen, Flugbahnen) liegen zusätzlich als SVG vor. Das
+// SVG liest die CI-Tokens (var(--tinte)/var(--primaer) …) und kippt daher mit dem Theme;
+// KI-Illustrationen bleiben PNG. Beide Dateien existieren stets — das PNG ist der sofort
+// sichtbare Fallback, das SVG die progressive Aufwertung nach dem Rendern.
+export const SVG_GRAFIKEN = new Set(['G-023', 'G-024', 'G-060']);
+
+export function grafikFigurHtml(id) {
+  const beschriftung = label('grafik', id);
+  const svgHaken = SVG_GRAFIKEN.has(id) ? ` data-grafik-svg="images/${esc(id)}.svg"` : '';
+  return `
+      <figure class="grafik-platzhalter"${svgHaken}>
+        <img class="grafik-bild" src="images/${esc(id)}.png" alt="${esc(beschriftung)}" loading="lazy" />
+        <figcaption class="leise">${esc(beschriftung)}</figcaption>
+      </figure>`;
+}
+
+const svgZwischenspeicher = new Map();
+// Nach dem Rendern aufrufen: ersetzt das PNG durch das Inline-SVG (theme-fähig). Scheitert
+// der Abruf (offline vor dem ersten SWR-Caching), bleibt das PNG stehen. Idempotent.
+export async function verbessereGrafiken(wurzel) {
+  if (!wurzel || typeof fetch !== 'function' || typeof document === 'undefined') return;
+  for (const figur of wurzel.querySelectorAll('figure[data-grafik-svg]')) {
+    const url = figur.getAttribute('data-grafik-svg');
+    figur.removeAttribute('data-grafik-svg');
+    try {
+      let markup = svgZwischenspeicher.get(url);
+      if (markup == null) {
+        const antwort = await fetch(url);
+        if (!antwort.ok) throw new Error(String(antwort.status));
+        markup = await antwort.text();
+        svgZwischenspeicher.set(url, markup);
+      }
+      const bild = figur.querySelector('img.grafik-bild');
+      const gestell = document.createElement('div');
+      gestell.innerHTML = markup;
+      const svg = gestell.querySelector('svg');
+      if (bild && svg) {
+        svg.setAttribute('class', 'grafik-bild grafik-svg');
+        bild.replaceWith(svg);
+      }
+    } catch {
+      /* PNG bleibt als Fallback stehen */
+    }
+  }
+}

@@ -6,7 +6,7 @@
 // kein Graph, kein Pflicht-Link) — nicht auflösbare IDs werden still ausgelassen.
 
 import { label, t, text } from '../i18n.js';
-import { esc, externesZiel, heroKlein } from '../oberflaeche.js';
+import { esc, externesZiel, grafikFigurHtml, heroKlein, verbessereGrafiken } from '../oberflaeche.js';
 
 // Quellenangabe sichtbar im Reiter (Herausgeber + Stand): die Regeln sind strikt
 // aus der offiziellen Quelle, das gehört benannt.
@@ -77,15 +77,7 @@ function abschnittHtml(daten, abschnitt, offen) {
 // Lernbausteine, sondern Nachschlage-Bilder des Reiters (G-060/G-061, siehe
 // images/grafik-prompts.md). Eingeklappt, damit sie den Regeltext nicht verdrängen.
 function referenzgrafikenHtml() {
-  const bilder = ['G-060', 'G-061']
-    .map(
-      (id) => `
-      <figure class="grafik-platzhalter">
-        <img class="grafik-bild" src="images/${esc(id)}.png" alt="${esc(label('grafik', id))}" loading="lazy" />
-        <figcaption class="leise">${esc(label('grafik', id))}</figcaption>
-      </figure>`,
-    )
-    .join('');
+  const bilder = ['G-060', 'G-061'].map((id) => grafikFigurHtml(id)).join('');
   return `
     <details class="regel-abschnitt karte">
       <summary><h2>${esc(t('regeln_grafiken'))}</h2></summary>
@@ -105,4 +97,6 @@ export function renderRegeln(el, daten) {
     ${quelleHtml(regeln.meta.quelle)}
     ${abschnitte || `<div class="karte"><p class="leise">${esc(t('nicht_gefunden'))}</p></div>`}
     ${referenzgrafikenHtml()}`;
+
+  verbessereGrafiken(el);
 }
