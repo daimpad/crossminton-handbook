@@ -12,7 +12,7 @@ import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad,
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
-import { bausteinIcon } from '../js/oberflaeche.js';
+import { bausteinIcon, SVG_GRAFIKEN } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
 import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 
@@ -667,6 +667,7 @@ pruefe('jede referenzierte G-XXX hat eine Platzhalter-Datei images/G-XXX.png', [
 pruefe('alle 61 Platzhalter G-001..G-061 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
 pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein', labelsDe.grafiken['G-060'] && labelsDe.grafiken['G-061'] && !grafikRefs.includes('G-060') && !grafikRefs.includes('G-061'));
 pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
+pruefe('SVG_GRAFIKEN: jede Diagramm-Grafik hat .svg UND .png (Inline-SVG + PNG-Fallback)', SVG_GRAFIKEN.size >= 3 && [...SVG_GRAFIKEN].every((g) => existsSync(join(wurzel, 'images', `${g}.svg`)) && existsSync(join(wurzel, 'images', `${g}.png`))));
 // Jeder Basis-Baustein trägt ein Icon (BAUSTEIN_ICONS in js/oberflaeche.js) — Doppel/Outdoor/Experte inklusive.
 pruefe('alle Basis-Bausteine tragen ein Icon (BAUSTEIN_ICONS vollständig)', (() => {
   const ohne = daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id);
