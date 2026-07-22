@@ -1519,6 +1519,20 @@ details[open] summary { margin-bottom: 0.5rem; }
 /* Einstiegs-CTAs direkt unter dem Hero-Text (nur Startseite). */
 .marke-hero-cta { margin-top: 0.95rem; }
 
+/* Großer Marken-Hero auf Mobil: vertikal gestapelt und zentriert (Speeder oben),
+   damit Titel/Untertitel/Themen und die CTAs nicht in eine schmale Spalte gequetscht
+   werden. Die CTAs stapeln sich voll­breit (große Tap-Ziele). Ab Tablet wieder
+   Speeder-links / Text-rechts (Media-Query unten). Betrifft nur den großen Hero –
+   die kompakten .klein-/Baustein-Heroes bleiben eine Icon-links-Zeile. */
+.marke-hero:not(.klein) {
+  flex-direction: column;
+  text-align: center;
+  gap: 0.85rem;
+  padding: 1.5rem 1.25rem;
+}
+.marke-hero:not(.klein) .marke-hero-text { align-items: center; width: 100%; }
+.marke-hero:not(.klein) .marke-hero-cta { flex-direction: column; align-items: stretch; width: 100%; }
+
 .marke-hero.klein { gap: 0.9rem; padding: 0.95rem 1.1rem; }
 .marke-hero.klein .marke-hero-text h1 { font-size: 1.25rem; display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
 .marke-hero.klein .marke-hero-untertitel { font-weight: 500; font-size: 0.9rem; color: var(--tinte-2); }
@@ -1534,6 +1548,10 @@ details[open] summary { margin-bottom: 0.5rem; }
 
 @media (min-width: 40rem) {
   .marke-hero { gap: 1.6rem; padding: 1.6rem 1.7rem; }
+  /* Großer Hero ab Tablet zurück zu Speeder-links / Text-rechts, linksbündig. */
+  .marke-hero:not(.klein) { flex-direction: row; text-align: left; gap: 1.6rem; padding: 1.6rem 1.7rem; }
+  .marke-hero:not(.klein) .marke-hero-text { align-items: flex-start; }
+  .marke-hero:not(.klein) .marke-hero-cta { flex-direction: row; align-items: center; justify-content: flex-start; }
   .marke-hero-bild { width: 120px; height: 120px; }
   .marke-hero-text h1 { font-size: 1.85rem; }
 }
