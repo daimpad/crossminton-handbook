@@ -47,10 +47,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Vorbereitung verraet den Schlag / Finte telegrafiert' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Täuschung — die Absicht verbergen"
+        "de": "Täuschung — die Absicht verbergen",
+        "en": "Deception — hiding your intent"
       },
       "erklaerteil": {
-        "de": "Auf Expertenniveau entscheidet immer öfter die verborgene Absicht über den Punkt, nicht mehr der bessere Schlag allein. Die Täuschung ist die Signatur des Experten: Der Gegner liest deinen Schlag falsch, weil du ihm bis zum letzten Moment nicht verrätst, was kommt.\n\nDas Geheimnis liegt in der Vorbereitung, die immer gleich aussieht. Ob du hart schlägst, kurz stoppst oder lang spielst — dein Anlauf, deine Ausholbewegung, deine Körperhaltung sind identisch. Erst im allerletzten Moment vor dem Treffen entscheidest du, welcher Schlag es wird. Die Finte sitzt auf einem Ablauf, den du ohnehin beherrschst; du fügst nur die späte Entscheidung hinzu.\n\nDas Timing ist alles. Du hältst den Schlag bis zum letzten Augenblick und triffst dann — zu früh entscheiden verrät dich, zu spät verdirbt den Schlag. Bei der Täuschung eines Stopps holst du zunächst schnell aus wie für einen harten Schlag und nimmst erst kurz vor dem Kontakt das Tempo heraus.\n\nDeine Füße erzählen die Geschichte mit. Wenn du einen Smash vortäuschst, muss dein Anlauf zum Smash passen — eine halbherzige Bewegung enttarnt die Finte sofort. Und nach der Täuschung kehrst du sofort ins Gleichgewicht zurück, denn ein guter Gegner kommt auch an einen getäuschten Ball heran.\n\nDie Täuschung ist ein Pokerface. Deine Karten wechseln, dein Gesicht bleibt gleich. Erst wenn es zu spät ist, sieht der Gegner, was du wirklich hältst.\n\nEin Grundsatz noch: Sparsam einsetzen. Eine Finte, die der Gegner schon dreimal gesehen hat, ist keine mehr. Die Täuschung lebt von der Überraschung, nicht von der Wiederholung."
+        "de": "Auf Expertenniveau entscheidet immer öfter die verborgene Absicht über den Punkt, nicht mehr der bessere Schlag allein. Die Täuschung ist die Signatur des Experten: Der Gegner liest deinen Schlag falsch, weil du ihm bis zum letzten Moment nicht verrätst, was kommt.\n\nDas Geheimnis liegt in der Vorbereitung, die immer gleich aussieht. Ob du hart schlägst, kurz stoppst oder lang spielst — dein Anlauf, deine Ausholbewegung, deine Körperhaltung sind identisch. Erst im allerletzten Moment vor dem Treffen entscheidest du, welcher Schlag es wird. Die Finte sitzt auf einem Ablauf, den du ohnehin beherrschst; du fügst nur die späte Entscheidung hinzu.\n\nDas Timing ist alles. Du hältst den Schlag bis zum letzten Augenblick und triffst dann — zu früh entscheiden verrät dich, zu spät verdirbt den Schlag. Bei der Täuschung eines Stopps holst du zunächst schnell aus wie für einen harten Schlag und nimmst erst kurz vor dem Kontakt das Tempo heraus.\n\nDeine Füße erzählen die Geschichte mit. Wenn du einen Smash vortäuschst, muss dein Anlauf zum Smash passen — eine halbherzige Bewegung enttarnt die Finte sofort. Und nach der Täuschung kehrst du sofort ins Gleichgewicht zurück, denn ein guter Gegner kommt auch an einen getäuschten Ball heran.\n\nDie Täuschung ist ein Pokerface. Deine Karten wechseln, dein Gesicht bleibt gleich. Erst wenn es zu spät ist, sieht der Gegner, was du wirklich hältst.\n\nEin Grundsatz noch: Sparsam einsetzen. Eine Finte, die der Gegner schon dreimal gesehen hat, ist keine mehr. Die Täuschung lebt von der Überraschung, nicht von der Wiederholung.",
+        "en": "At expert level it is more and more often the hidden intention that decides the point, no longer the better stroke alone. Deception is the expert's signature: the opponent reads your stroke wrong because you don't reveal what's coming until the last moment.\n\nThe secret lies in the preparation that always looks the same. Whether you hit hard, drop short, or play long — your approach, your backswing, your body posture are identical. Only in the very last moment before contact do you decide which stroke it becomes. The feint sits on a sequence you already master; you only add the late decision.\n\nTiming is everything. You hold the stroke until the last instant and then strike — deciding too early gives you away, too late ruins the stroke. When deceiving a drop shot, you first swing quickly as if for a hard stroke and only take the pace out just before contact.\n\nYour feet tell the story too. When you fake a smash, your approach has to fit the smash — a half-hearted movement exposes the feint immediately. And after the deception you return to balance at once, because a good opponent gets to a deceived ball too.\n\nDeception is a poker face. Your cards change, your face stays the same. Only when it's too late does the opponent see what you're really holding.\n\nOne more principle: use it sparingly. A feint the opponent has already seen three times is no feint anymore. Deception lives on surprise, not on repetition."
       },
       "uebungsteil": {
         "de": {
@@ -67,6 +69,21 @@
           ],
           "selbstkontrolle": "Frag deinen Partner, ob er deinen Schlag früh kommen sieht. Verrät deine Vorbereitung schon, was kommt? Sieht der weiche Stopp genauso aus wie der harte Schlag — bis zum letzten Moment? Nur eine wirklich neutrale Vorbereitung täuscht.",
           "abschluss": "Die Täuschung ist der Kern des Expertenspiels. Sie steht und fällt mit der neutralen Vorbereitung — und mit der Zurückhaltung, sie nur im richtigen Moment zu zeigen."
+        },
+        "en": {
+          "titel": "Same preparation, late decision",
+          "ziel": "Play the clear, drop shot, and hard stroke from an identical preparation and decide only late.",
+          "schritte_teil1": [
+            "From the back court, play the clear, drop shot, and drive one after another — with deliberately identical preparation: same approach, same backswing, even on the soft drop shot.",
+            "At first exaggerate the full preparation on the drop shot too, until it feels the same as on the hard stroke."
+          ],
+          "schritte_teil2": [
+            "Have a partner feed you and decide only at the last moment which of the three strokes you play.",
+            "On the deceived drop shot: swing quickly as if for a hard stroke, take the pace out only just before contact.",
+            "Return to balance immediately after every stroke."
+          ],
+          "selbstkontrolle": "Ask your partner whether they see your stroke coming early. Does your preparation already give away what's coming? Does the soft drop shot look exactly like the hard stroke — until the last moment? Only a truly neutral preparation deceives.",
+          "abschluss": "Deception is the core of the expert game. It stands and falls with the neutral preparation — and with the restraint to show it only at the right moment."
         }
       }
     },
@@ -100,10 +117,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'wartet den Speeder ab, statt frueh zu nehmen' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Den Speeder früh nehmen"
+        "de": "Den Speeder früh nehmen",
+        "en": "Taking the Speeder early"
       },
       "erklaerteil": {
-        "de": "Zeit ist im Crossminton die wertvollste Ressource. Der Experte stiehlt sie dem Gegner, indem er den Speeder früher nimmt, als der Gegner erwartet — am höchsten und frühesten Punkt, statt ihn sinken zu lassen.\n\nWer den Speeder früh trifft, verkürzt dem Gegner die Reaktionszeit dramatisch. Jeder Sekundenbruchteil, den du früher spielst, fehlt dem Gegner, um sich zu sortieren und zurückzukehren. Aus einem gleichwertigen Ballwechsel wird so einer, in dem du ständig einen Schritt voraus bist.\n\nFrüh nehmen verlangt drei Dinge zusammen. Die frühe Flugbahnlesung, damit du den Speeder früh erkennst und startest, bevor er geschlagen ist. Die schnelle Beinarbeit, die dich rechtzeitig in Position bringt. Und den kompakten Schlag, der ohne langes Ausholen sofort ausgeführt ist. Fehlt eines davon, kommst du zu spät.\n\nBesonders wirksam ist das Abfangen: Du nimmst einen Ball, den der Gegner erst hinter dir erwartet, schon vorn aus der Luft. Das überrascht ihn doppelt — er hat weniger Zeit und rechnet nicht damit.\n\nStell dir vor, du fängst einen Ball im Fallen, statt zu warten, bis er aufkommt. Wer immer am höchsten Punkt zugreift, diktiert das Tempo — der andere hechelt hinterher.\n\nFrüh nehmen ist auch die Grundlage vieler anderer Expertenschläge: Der frühe Treffpunkt macht deine Täuschung gefährlicher und deinen Angriff schneller."
+        "de": "Zeit ist im Crossminton die wertvollste Ressource. Der Experte stiehlt sie dem Gegner, indem er den Speeder früher nimmt, als der Gegner erwartet — am höchsten und frühesten Punkt, statt ihn sinken zu lassen.\n\nWer den Speeder früh trifft, verkürzt dem Gegner die Reaktionszeit dramatisch. Jeder Sekundenbruchteil, den du früher spielst, fehlt dem Gegner, um sich zu sortieren und zurückzukehren. Aus einem gleichwertigen Ballwechsel wird so einer, in dem du ständig einen Schritt voraus bist.\n\nFrüh nehmen verlangt drei Dinge zusammen. Die frühe Flugbahnlesung, damit du den Speeder früh erkennst und startest, bevor er geschlagen ist. Die schnelle Beinarbeit, die dich rechtzeitig in Position bringt. Und den kompakten Schlag, der ohne langes Ausholen sofort ausgeführt ist. Fehlt eines davon, kommst du zu spät.\n\nBesonders wirksam ist das Abfangen: Du nimmst einen Ball, den der Gegner erst hinter dir erwartet, schon vorn aus der Luft. Das überrascht ihn doppelt — er hat weniger Zeit und rechnet nicht damit.\n\nStell dir vor, du fängst einen Ball im Fallen, statt zu warten, bis er aufkommt. Wer immer am höchsten Punkt zugreift, diktiert das Tempo — der andere hechelt hinterher.\n\nFrüh nehmen ist auch die Grundlage vieler anderer Expertenschläge: Der frühe Treffpunkt macht deine Täuschung gefährlicher und deinen Angriff schneller.",
+        "en": "Time is the most valuable resource in Crossminton. The expert steals it from the opponent by taking the Speeder earlier than the opponent expects — at the highest and earliest point, instead of letting it drop.\n\nWhoever meets the Speeder early cuts the opponent's reaction time dramatically. Every fraction of a second you play earlier is one the opponent lacks to get sorted and return. An even rally becomes one in which you are constantly a step ahead.\n\nTaking it early demands three things together. The early reading of the trajectory, so you recognize the Speeder early and set off before it's even struck. The fast footwork that gets you into position in time. And the compact stroke that is executed at once without a long backswing. If one of these is missing, you arrive too late.\n\nInterception is especially effective: you take a ball the opponent expects only behind you already at the front, out of the air. That surprises them twice over — they have less time and don't expect it.\n\nImagine catching a ball as it falls, instead of waiting until it lands. Whoever always takes it at the highest point dictates the pace — the other pants along behind.\n\nTaking it early is also the foundation of many other expert strokes: the early point of contact makes your deception more dangerous and your attack faster."
       },
       "uebungsteil": {
         "de": {
@@ -118,6 +137,19 @@
           ],
           "selbstkontrolle": "Triffst du den Speeder wirklich früher als sonst, oder lässt du ihn aus Gewohnheit sinken? Kommst du mit dem kompakten Schlag rechtzeitig durch, oder holst du zu weit aus? Früh nehmen gelingt nur, wenn Lesen, Beine und kompakter Schlag zusammenspielen.",
           "abschluss": "Wer den Speeder früh nimmt, diktiert das Tempo. Diese gestohlene Zeit ist einer der größten Vorteile im Expertenspiel."
+        },
+        "en": {
+          "titel": "Meeting it at the highest point",
+          "ziel": "Meet the Speeder earlier and higher to take time from the opponent.",
+          "schritte": [
+            "Have balls fed to you and meet them deliberately at the earliest, highest point, instead of letting them drop.",
+            "Make sure you start early — read the trajectory already from the feeder's movement.",
+            "Practice interception: meet balls you would normally take behind you already at the front, out of the air.",
+            "Keep the stroke compact, without a long backswing.",
+            "Increase the pace of the feed once meeting it early works reliably."
+          ],
+          "selbstkontrolle": "Do you really meet the Speeder earlier than usual, or do you let it drop out of habit? Do you get through in time with the compact stroke, or do you swing too far back? Taking it early only works when reading, legs, and compact stroke play together.",
+          "abschluss": "Whoever takes the Speeder early dictates the pace. This stolen time is one of the greatest advantages in the expert game."
         }
       }
     },
@@ -150,10 +182,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'spielt in gleichbleibendem Tempo, berechenbar' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Tempo- und Rhythmuswechsel"
+        "de": "Tempo- und Rhythmuswechsel",
+        "en": "Changes of pace and rhythm"
       },
       "erklaerteil": {
-        "de": "Ein Gegner, der sich auf dein Tempo eingestellt hat, spielt sicher gegen dich. Der Experte nimmt ihm diese Sicherheit, indem er das Tempo und den Rhythmus des Ballwechsels bewusst bricht — mal schnell, mal langsam, ohne es anzukündigen.\n\nJeder Ballwechsel hat einen Rhythmus, in den sich beide Spieler einschwingen. Genau diesen Rhythmus störst du absichtlich. Nach mehreren schnellen, harten Bällen kommt plötzlich ein langsamer, hoher — der Gegner, auf Tempo eingestellt, ist überrascht. Nach ein paar ruhigen Bällen kommt unvermittelt ein schneller, der ihn im falschen Moment erwischt.\n\nDer Schlüssel ist, dass der Wechsel nicht angekündigt wird. Deshalb baut dieser Baustein auf der Täuschung auf: Wenn deine Vorbereitung immer gleich aussieht, sieht der Gegner den Tempowechsel nicht kommen. Erst der Speeder verrät, dass du das Tempo gebrochen hast — dann ist es zu spät.\n\nBesonders wirksam ist der plötzliche Wechsel innerhalb deiner eigenen Bewegung: Du bewegst dich schnell zum Ball, wie für einen harten Schlag, und nimmst dann im letzten Moment das Tempo heraus. Diese Diskrepanz zwischen schneller Bewegung und langsamem Schlag verwirrt den Gegner besonders.\n\nDenk an einen Musiker, der mitten im Stück das Tempo bricht. Wer im gleichmäßigen Takt mitwippt, kommt genau dann aus dem Tritt. Dein Spiel soll diesen Taktbruch beherrschen — vorhersehbares Tempo macht dich lesbar.\n\nWie bei der Täuschung gilt: Der Wechsel wirkt durch Überraschung. Wer ständig das Tempo wechselt, wird selbst berechenbar in seiner Unberechenbarkeit."
+        "de": "Ein Gegner, der sich auf dein Tempo eingestellt hat, spielt sicher gegen dich. Der Experte nimmt ihm diese Sicherheit, indem er das Tempo und den Rhythmus des Ballwechsels bewusst bricht — mal schnell, mal langsam, ohne es anzukündigen.\n\nJeder Ballwechsel hat einen Rhythmus, in den sich beide Spieler einschwingen. Genau diesen Rhythmus störst du absichtlich. Nach mehreren schnellen, harten Bällen kommt plötzlich ein langsamer, hoher — der Gegner, auf Tempo eingestellt, ist überrascht. Nach ein paar ruhigen Bällen kommt unvermittelt ein schneller, der ihn im falschen Moment erwischt.\n\nDer Schlüssel ist, dass der Wechsel nicht angekündigt wird. Deshalb baut dieser Baustein auf der Täuschung auf: Wenn deine Vorbereitung immer gleich aussieht, sieht der Gegner den Tempowechsel nicht kommen. Erst der Speeder verrät, dass du das Tempo gebrochen hast — dann ist es zu spät.\n\nBesonders wirksam ist der plötzliche Wechsel innerhalb deiner eigenen Bewegung: Du bewegst dich schnell zum Ball, wie für einen harten Schlag, und nimmst dann im letzten Moment das Tempo heraus. Diese Diskrepanz zwischen schneller Bewegung und langsamem Schlag verwirrt den Gegner besonders.\n\nDenk an einen Musiker, der mitten im Stück das Tempo bricht. Wer im gleichmäßigen Takt mitwippt, kommt genau dann aus dem Tritt. Dein Spiel soll diesen Taktbruch beherrschen — vorhersehbares Tempo macht dich lesbar.\n\nWie bei der Täuschung gilt: Der Wechsel wirkt durch Überraschung. Wer ständig das Tempo wechselt, wird selbst berechenbar in seiner Unberechenbarkeit.",
+        "en": "An opponent who has adjusted to your pace plays securely against you. The expert takes this security away by deliberately breaking the pace and rhythm of the rally — now fast, now slow, without announcing it.\n\nEvery rally has a rhythm both players settle into. This is exactly the rhythm you disrupt on purpose. After several fast, hard balls comes a sudden slow, high one — the opponent, tuned to pace, is surprised. After a few calm balls comes an abrupt fast one that catches them at the wrong moment.\n\nThe key is that the change is not announced. That's why this module builds on deception: if your preparation always looks the same, the opponent doesn't see the change of pace coming. Only the Speeder reveals that you've broken the pace — and then it's too late.\n\nEspecially effective is the sudden change within your own movement: you move fast to the ball, as if for a hard stroke, and then take the pace out at the last moment. This discrepancy between fast movement and slow stroke confuses the opponent particularly.\n\nThink of a musician who breaks the tempo in the middle of a piece. Whoever is bobbing along to the steady beat is thrown off exactly then. Your game should master this break in the beat — a predictable pace makes you readable.\n\nAs with deception: the change works through surprise. Whoever constantly changes pace becomes predictable in their own unpredictability."
       },
       "uebungsteil": {
         "de": {
@@ -168,6 +202,19 @@
           ],
           "selbstkontrolle": "Kommt dein Partner durch die Tempowechsel aus dem Rhythmus, oder stellt er sich schnell darauf ein? Verrät deine Vorbereitung den Wechsel schon vorher? Der Tempobruch wirkt nur, wenn er überrascht — also gleiche Vorbereitung und sparsamer Einsatz.",
           "abschluss": "Das bewusste Brechen des Tempos hält den Gegner im Ungewissen. Zusammen mit der Täuschung macht es dein Spiel schwer lesbar."
+        },
+        "en": {
+          "titel": "Breaking the beat",
+          "ziel": "Change pace and rhythm within the rally deliberately and without warning.",
+          "schritte": [
+            "Play longer rallies with a partner and deliberately plan in changes of pace.",
+            "Play several fast balls, then abruptly a slow, high one — and vice versa.",
+            "Keep your preparation the same, so the change isn't announced.",
+            "Practice the change within the movement: fast to the ball, then take the pace out at the last moment.",
+            "Watch whether the partner is thrown off by the change."
+          ],
+          "selbstkontrolle": "Does your partner fall out of rhythm from the changes of pace, or do they adjust quickly? Does your preparation give away the change beforehand? The break in pace only works when it surprises — so keep the same preparation and use it sparingly.",
+          "abschluss": "Deliberately breaking the pace keeps the opponent uncertain. Together with deception it makes your game hard to read."
         }
       }
     },
@@ -200,10 +247,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'Sprung ohne Kontrolle / harte Landung' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Der Sprung-Smash"
+        "de": "Der Sprung-Smash",
+        "en": "The jump smash"
       },
       "erklaerteil": {
-        "de": "Der Sprung-Smash ist die kraftvollste Ausbaustufe deines Angriffs. Du springst ab, um den Speeder noch höher und früher zu treffen — und gewinnst dadurch einen steileren Winkel und mehr Druck.\n\nDer Gewinn liegt in der Höhe. Je höher du triffst, desto steiler kannst du den Speeder nach unten schlagen, und desto weniger Zeit bleibt dem Gegner. Der Sprung bringt dich über den Treffpunkt, den du am Boden erreichen würdest, und verbindet so den hohen Treffpunkt mit der Wucht des Smashes. Deshalb baut er auf dem frühen Nehmen auf: Es geht um den frühest- und höchstmöglichen Kontakt.\n\nDer Ablauf verbindet Absprung und Schlag zu einer Bewegung. Du springst ab, triffst im höchsten Punkt des Sprungs mit der vollen Peitsche und kommst schlagbereit wieder auf. Der Schlag geschieht in der Luft, im Scheitelpunkt des Sprungs.\n\nHier ist der Sprung-Smash zugleich eine körperliche Sache — und hier ist Sorgfalt wichtig. Das Abspringen und Landen belastet Beine und Gelenke stark. Die weiche, kontrollierte Landung ist wichtiger als die Sprunghöhe. Bau den Sprung-Smash schrittweise auf, auf einer soliden Grundlage aus Kraft und Beinarbeit, und hol dir für den athletischen Teil im Zweifel qualifizierte Anleitung. Ein sauber gelandeter, kontrollierter Sprung schlägt einen wilden, hohen.\n\nDer Sprung-Smash gleicht einem Volleyballspieler, der zum Angriff hochsteigt: Die Höhe schafft den Winkel, aus dem der Ball unerreichbar nach unten fällt. Aber jeder gute Angreifer landet weich und kontrolliert.\n\nUnd wie beim Smash am Boden gilt: Konstanz und Rückkehr vor Maximaltempo. Nach dem Sprung-Smash musst du sofort wieder im Gleichgewicht und bereit sein."
+        "de": "Der Sprung-Smash ist die kraftvollste Ausbaustufe deines Angriffs. Du springst ab, um den Speeder noch höher und früher zu treffen — und gewinnst dadurch einen steileren Winkel und mehr Druck.\n\nDer Gewinn liegt in der Höhe. Je höher du triffst, desto steiler kannst du den Speeder nach unten schlagen, und desto weniger Zeit bleibt dem Gegner. Der Sprung bringt dich über den Treffpunkt, den du am Boden erreichen würdest, und verbindet so den hohen Treffpunkt mit der Wucht des Smashes. Deshalb baut er auf dem frühen Nehmen auf: Es geht um den frühest- und höchstmöglichen Kontakt.\n\nDer Ablauf verbindet Absprung und Schlag zu einer Bewegung. Du springst ab, triffst im höchsten Punkt des Sprungs mit der vollen Peitsche und kommst schlagbereit wieder auf. Der Schlag geschieht in der Luft, im Scheitelpunkt des Sprungs.\n\nHier ist der Sprung-Smash zugleich eine körperliche Sache — und hier ist Sorgfalt wichtig. Das Abspringen und Landen belastet Beine und Gelenke stark. Die weiche, kontrollierte Landung ist wichtiger als die Sprunghöhe. Bau den Sprung-Smash schrittweise auf, auf einer soliden Grundlage aus Kraft und Beinarbeit, und hol dir für den athletischen Teil im Zweifel qualifizierte Anleitung. Ein sauber gelandeter, kontrollierter Sprung schlägt einen wilden, hohen.\n\nDer Sprung-Smash gleicht einem Volleyballspieler, der zum Angriff hochsteigt: Die Höhe schafft den Winkel, aus dem der Ball unerreichbar nach unten fällt. Aber jeder gute Angreifer landet weich und kontrolliert.\n\nUnd wie beim Smash am Boden gilt: Konstanz und Rückkehr vor Maximaltempo. Nach dem Sprung-Smash musst du sofort wieder im Gleichgewicht und bereit sein.",
+        "en": "The jump smash is the most powerful development stage of your attack. You jump off to meet the Speeder even higher and earlier — and gain a steeper angle and more pressure through it.\n\nThe gain lies in the height. The higher you meet it, the more steeply you can hit the Speeder downward, and the less time the opponent has. The jump lifts you above the point of contact you would reach on the ground, and so combines the high point of contact with the force of the smash. That's why it builds on taking it early: it's about the earliest and highest possible contact.\n\nThe sequence joins takeoff and stroke into one movement. You jump off, meet it at the highest point of the jump with the full whip, and land ready to play again. The stroke happens in the air, at the apex of the jump.\n\nHere the jump smash is at the same time a physical matter — and here care is important. Jumping off and landing loads the legs and joints heavily. The soft, controlled landing matters more than the jump height. Build the jump smash up step by step, on a solid foundation of strength and footwork, and get qualified guidance for the athletic part if in doubt. A cleanly landed, controlled jump beats a wild, high one.\n\nThe jump smash resembles a volleyball player rising to attack: the height creates the angle from which the ball falls unreachably downward. But every good attacker lands soft and controlled.\n\nAnd as with the smash on the ground: consistency and return before maximum pace. After the jump smash you have to be back in balance and ready at once."
       },
       "uebungsteil": {
         "de": {
@@ -221,6 +270,22 @@
           ],
           "selbstkontrolle": "Landest du weich und kontrolliert, oder hart und aus dem Gleichgewicht? Triffst du im Scheitelpunkt des Sprungs? Wenn die Landung nicht sauber ist oder du dich unsicher fühlst, nimm die Sprunghöhe zurück und bau langsamer auf — und zieh für den athletischen Teil qualifizierte Anleitung hinzu.",
           "abschluss": "Der Sprung-Smash verbindet Höhe, Winkel und Wucht. Er lohnt sich nur mit sauberer Landung und geduldigem Aufbau — die Kontrolle steht über der Höhe."
+        },
+        "en": {
+          "titel": "Height for the angle",
+          "ziel": "Play the smash from a controlled takeoff — with a clean, soft landing.",
+          "schritte_teil1": [
+            "First practice the takeoff without a Speeder: jump off loosely, indicate the striking motion at the highest point, land soft and controlled.",
+            "From the start, pay more attention to the soft landing than to the height."
+          ],
+          "schritte_teil2": [
+            "Have high balls fed to you and hit the smash from the takeoff, meeting it at the apex.",
+            "Aim steeply downward — use the height you've gained for the angle.",
+            "Land ready to play and in balance after every jump smash.",
+            "Increase height and pace only slowly and on a solid foundation."
+          ],
+          "selbstkontrolle": "Do you land soft and controlled, or hard and off balance? Do you meet it at the apex of the jump? If the landing isn't clean or you feel unsure, reduce the jump height and build up more slowly — and bring in qualified guidance for the athletic part.",
+          "abschluss": "The jump smash combines height, angle, and force. It's only worth it with a clean landing and patient buildup — control comes before height."
         }
       }
     },
@@ -253,10 +318,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'zielt zu sicher in die Mitte / uebertreibt das Risiko' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Präzision an die Linien"
+        "de": "Präzision an die Linien",
+        "en": "Precision to the lines"
       },
       "erklaerteil": {
-        "de": "Auf Expertenniveau entscheiden Zentimeter. Ein Ball in die Mitte des Feldes ist leicht zu erreichen; ein Ball an die äußerste Linie ist es nicht. Der Experte spielt bewusst an die Ränder — mit kleinster Sicherheitsmarge und maximalem Ertrag.\n\nDer Gewinn der engen Platzierung ist groß. Je näher du an die Linie spielst, desto weiter muss der Gegner laufen und desto weniger Zeit hat er. Ein Ball, der genau in die Ecke fällt, ist oft unerreichbar. Deshalb zielst du jetzt auf die Ecken und Linien, statt aufs ganze Feld.\n\nDer Preis ist das Risiko. Je enger du zielst, desto größer die Gefahr, dass der Ball ins Aus geht. Die Kunst des Experten ist die bewusste Abwägung: In welchem Moment lohnt das enge Ziel, und wann genügt der sichere Ball? Bei einem klaren Vorteil spielst du eng und beendest den Punkt; unter Druck oder im engen Satz nimmst du etwas Marge, statt den Fehler zu riskieren.\n\nDiese Präzision entsteht nur durch viele Wiederholungen. Du trainierst das Auge und die Hand, den Speeder immer knapper ans Ziel zu bringen, ohne die Kontrolle zu verlieren.\n\nPräzision an die Linien ist wie das Einfädeln eines Fadens durch ein Nadelöhr. Millimeter daneben, und es klappt nicht — aber wer es trifft, gewinnt den Punkt. Der Experte weiß, wann sich das Nadelöhr lohnt und wann der sichere Weg klüger ist.\n\nEnge Platzierung und Sicherheit schließen sich nicht aus; sie sind eine Wahl, die du in jedem Moment triffst."
+        "de": "Auf Expertenniveau entscheiden Zentimeter. Ein Ball in die Mitte des Feldes ist leicht zu erreichen; ein Ball an die äußerste Linie ist es nicht. Der Experte spielt bewusst an die Ränder — mit kleinster Sicherheitsmarge und maximalem Ertrag.\n\nDer Gewinn der engen Platzierung ist groß. Je näher du an die Linie spielst, desto weiter muss der Gegner laufen und desto weniger Zeit hat er. Ein Ball, der genau in die Ecke fällt, ist oft unerreichbar. Deshalb zielst du jetzt auf die Ecken und Linien, statt aufs ganze Feld.\n\nDer Preis ist das Risiko. Je enger du zielst, desto größer die Gefahr, dass der Ball ins Aus geht. Die Kunst des Experten ist die bewusste Abwägung: In welchem Moment lohnt das enge Ziel, und wann genügt der sichere Ball? Bei einem klaren Vorteil spielst du eng und beendest den Punkt; unter Druck oder im engen Satz nimmst du etwas Marge, statt den Fehler zu riskieren.\n\nDiese Präzision entsteht nur durch viele Wiederholungen. Du trainierst das Auge und die Hand, den Speeder immer knapper ans Ziel zu bringen, ohne die Kontrolle zu verlieren.\n\nPräzision an die Linien ist wie das Einfädeln eines Fadens durch ein Nadelöhr. Millimeter daneben, und es klappt nicht — aber wer es trifft, gewinnt den Punkt. Der Experte weiß, wann sich das Nadelöhr lohnt und wann der sichere Weg klüger ist.\n\nEnge Platzierung und Sicherheit schließen sich nicht aus; sie sind eine Wahl, die du in jedem Moment triffst.",
+        "en": "At expert level, centimeters decide. A ball to the middle of the court is easy to reach; a ball to the outermost line is not. The expert deliberately plays to the edges — with the smallest safety margin and the maximum payoff.\n\nThe gain of tight placement is large. The closer you play to the line, the farther the opponent has to run and the less time they have. A ball that falls exactly into the corner is often unreachable. That's why you now aim at the corners and lines, instead of at the whole court.\n\nThe price is the risk. The tighter you aim, the greater the danger that the ball goes out. The expert's art is the deliberate weighing: at which moment is the tight target worth it, and when does the safe ball suffice? With a clear advantage you play tight and end the point; under pressure or in a tight set you take a little margin instead of risking the error.\n\nThis precision only comes from many repetitions. You train the eye and the hand to bring the Speeder ever closer to the target without losing control.\n\nPrecision to the lines is like threading a thread through the eye of a needle. Millimeters off, and it doesn't work — but whoever hits it wins the point. The expert knows when the needle's eye is worth it and when the safe way is smarter.\n\nTight placement and safety don't exclude each other; they are a choice you make in every moment."
       },
       "uebungsteil": {
         "de": {
@@ -271,6 +338,19 @@
           ],
           "selbstkontrolle": "Triffst du die Randziele zuverlässig, oder geht zu viel ins Aus? Wählst du das enge Ziel im richtigen Moment — bei Vorteil ja, unter Druck lieber sicher? Präzision heißt, das richtige Ziel im richtigen Moment zu treffen — nicht, immer das engste zu suchen.",
           "abschluss": "Die Platzierung an die Linien ist der Feinschliff der Genauigkeit. Sie gewinnt Punkte — wenn du Risiko und Sicherheit bewusst gegeneinander abwägst."
+        },
+        "en": {
+          "titel": "Hitting the edges",
+          "ziel": "Place the Speeder deliberately on lines and in corners and weigh the risk consciously.",
+          "schritte": [
+            "Lay out target markers in the corners and just on the lines of the opposing court.",
+            "Play clears and drop shots deliberately at these edge targets, instead of into the middle of the court.",
+            "Count your hits and watch how often you go out.",
+            "Deliberately practice both decisions: the tight target with a clear advantage, the safe target under pressure.",
+            "Reduce the margin only once you hit the edges reliably."
+          ],
+          "selbstkontrolle": "Do you hit the edge targets reliably, or does too much go out? Do you choose the tight target at the right moment — yes with an advantage, safer under pressure? Precision means hitting the right target at the right moment — not always seeking the tightest one.",
+          "abschluss": "Placement to the lines is the fine polish of accuracy. It wins points — when you deliberately weigh risk and safety against each other."
         }
       }
     },
@@ -303,10 +383,12 @@
       "witterung": [],
       "trainer_layer_offen": "Fehlerbild 'sucht unter Druck den spektakulaeren statt des sicheren Schlags' + Korrekturansage",
       "anzeigetitel": {
-        "de": "Konstanz unter Höchstdruck"
+        "de": "Konstanz unter Höchstdruck",
+        "en": "Consistency under maximum pressure"
       },
       "erklaerteil": {
-        "de": "Am Ende trennt der zuverlässigste Schlag die Experten, nicht der spektakulärste. Konstanz unter Höchstdruck ist die technische Robustheit, deine Qualität genau dann zu halten, wenn es am meisten zählt — im entscheidenden Punkt, im engen Satz, gegen den stärksten Gegner.\n\nUnter Druck zerfällt bei vielen die Technik. Der Griff verkrampft, die Bewegung wird hektisch, die eingeübte Präzision bricht ein. Der Experte hält seine Technik stabil, egal wie hoch der Einsatz ist. Diese Robustheit ist keine eigene Bewegung; sie ist die Fähigkeit, alle deine Schläge auch unter Belastung sauber abzurufen.\n\nSie entsteht auf zwei Wegen. Der erste ist die tiefe Automatisierung: Ein Schlag, den du tausendfach sauber gespielt hast, läuft auch unter Druck von allein — die Technik trägt, weil sie nicht mehr nachdenken muss. Der zweite ist die kluge Schlagwahl: Unter Höchstdruck wählst du den Schlag, den du am sichersten beherrschst, statt den riskantesten zu suchen. Der beste Experte kennt seine verlässlichsten Schläge und greift im entscheidenden Moment zu ihnen.\n\nHier berührt die Technik das Mentale. Die ruhige Hand unter Druck kommt aus geübter Technik und aus mentaler Gelassenheit zusammen — die mentale Seite findest du im Mentalbereich, die technische baust du hier.\n\nKonstanz unter Druck ist wie eine gut gebaute Brücke im Sturm. Sie muss nicht die schönste sein — sie muss halten, wenn die Last am größten ist. Genau das unterscheidet den Experten vom brillanten, aber unzuverlässigen Spieler.\n\nDiese Robustheit ist der stille Kern der Meisterschaft: die Qualität, die auch im schwersten Moment hält, nicht der eine Wahnsinnsschlag."
+        "de": "Am Ende trennt der zuverlässigste Schlag die Experten, nicht der spektakulärste. Konstanz unter Höchstdruck ist die technische Robustheit, deine Qualität genau dann zu halten, wenn es am meisten zählt — im entscheidenden Punkt, im engen Satz, gegen den stärksten Gegner.\n\nUnter Druck zerfällt bei vielen die Technik. Der Griff verkrampft, die Bewegung wird hektisch, die eingeübte Präzision bricht ein. Der Experte hält seine Technik stabil, egal wie hoch der Einsatz ist. Diese Robustheit ist keine eigene Bewegung; sie ist die Fähigkeit, alle deine Schläge auch unter Belastung sauber abzurufen.\n\nSie entsteht auf zwei Wegen. Der erste ist die tiefe Automatisierung: Ein Schlag, den du tausendfach sauber gespielt hast, läuft auch unter Druck von allein — die Technik trägt, weil sie nicht mehr nachdenken muss. Der zweite ist die kluge Schlagwahl: Unter Höchstdruck wählst du den Schlag, den du am sichersten beherrschst, statt den riskantesten zu suchen. Der beste Experte kennt seine verlässlichsten Schläge und greift im entscheidenden Moment zu ihnen.\n\nHier berührt die Technik das Mentale. Die ruhige Hand unter Druck kommt aus geübter Technik und aus mentaler Gelassenheit zusammen — die mentale Seite findest du im Mentalbereich, die technische baust du hier.\n\nKonstanz unter Druck ist wie eine gut gebaute Brücke im Sturm. Sie muss nicht die schönste sein — sie muss halten, wenn die Last am größten ist. Genau das unterscheidet den Experten vom brillanten, aber unzuverlässigen Spieler.\n\nDiese Robustheit ist der stille Kern der Meisterschaft: die Qualität, die auch im schwersten Moment hält, nicht der eine Wahnsinnsschlag.",
+        "en": "In the end it is the most reliable stroke that separates the experts, not the most spectacular. Consistency under maximum pressure is the technical robustness to hold your quality exactly when it counts most — on the decisive point, in the tight set, against the strongest opponent.\n\nUnder pressure, many players' technique falls apart. The grip tenses up, the movement becomes hectic, the practiced precision breaks down. The expert keeps their technique stable, no matter how high the stakes. This robustness is not a stroke of its own; it is the ability to call up all your strokes cleanly even under load.\n\nIt comes about in two ways. The first is deep automation: a stroke you've played cleanly a thousand times runs on its own under pressure too — the technique holds because it no longer has to think. The second is smart shot selection: under maximum pressure you choose the stroke you master most safely, instead of seeking the riskiest. The best expert knows their most reliable strokes and reaches for them at the decisive moment.\n\nHere technique touches the mental. The steady hand under pressure comes from practiced technique and mental composure together — you'll find the mental side in the mental area, the technical you build here.\n\nConsistency under pressure is like a well-built bridge in a storm. It doesn't have to be the most beautiful — it has to hold when the load is greatest. That is exactly what distinguishes the expert from the brilliant but unreliable player.\n\nThis robustness is the quiet core of mastery: the quality that holds even in the hardest moment, not the one crazy stroke."
       },
       "uebungsteil": {
         "de": {
@@ -321,6 +403,19 @@
           ],
           "selbstkontrolle": "Bleibt deine Technik unter Druck sauber, oder wird sie hektisch und verkrampft? Greifst du im entscheidenden Moment zu deinem sichersten Schlag oder suchst du das Risiko? Robustheit heißt, die geübte Qualität auch dann abzurufen, wenn der Einsatz hoch ist.",
           "abschluss": "Konstanz unter Höchstdruck ist der stille Kern der Meisterschaft. Sie krönt die Experten-Technik: Es gewinnt der Schlag, der auch im schwersten Moment hält, nicht der brillanteste."
+        },
+        "en": {
+          "titel": "Holding quality when it counts",
+          "ziel": "Call up your own strokes cleanly and reliably even under heightened pressure.",
+          "schritte": [
+            "Deliberately build pressure into your training: play for points, set yourself targets you have to hit, simulate tight set scores.",
+            "Watch which strokes break down first under pressure — that's where your work lies.",
+            "In the pressure situations, deliberately choose your most reliable stroke, not the riskiest.",
+            "Repeat your safest strokes so often that they run on their own even under load.",
+            "Watch for a loose grip — tensing up is the first sign of pressure."
+          ],
+          "selbstkontrolle": "Does your technique stay clean under pressure, or does it become hectic and cramped? Do you reach for your safest stroke at the decisive moment, or do you seek the risk? Robustness means calling up the practiced quality even when the stakes are high.",
+          "abschluss": "Consistency under maximum pressure is the quiet core of mastery. It crowns the expert technique: the stroke that holds even in the hardest moment wins, not the most brilliant."
         }
       }
     }
