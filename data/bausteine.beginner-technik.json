@@ -51,7 +51,8 @@
       "trainer_layer_offen": "Fehlerbild 'bleibt nach Schlag in der Ecke stehen / keine Rueckkehr' + Korrekturansage",
       "grafik": ["G-002"],
       "erklaerteil": {
-        "de": "Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus startest du in jede Richtung.\n\nDenk an einen Torwart vor dem Elfmeter: leicht geladen, wach, sprungbereit. Genau diese Spannung suchst du. Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper, die Schultern bleiben entspannt.\n\nDas ist aktive Bereitschaft, keine Ruhestellung. Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung als jede aufrechte Haltung. Wer flach auf den Fersen steht, verliert den ersten Schritt."
+        "de": "Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus startest du in jede Richtung.\n\nDenk an einen Torwart vor dem Elfmeter: leicht geladen, wach, sprungbereit. Genau diese Spannung suchst du. Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper, die Schultern bleiben entspannt.\n\nDas ist aktive Bereitschaft, keine Ruhestellung. Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung als jede aufrechte Haltung. Wer flach auf den Fersen steht, verliert den ersten Schritt.",
+        "en": "Between two strokes there's a moment when you have to be ready for anything. That moment has a posture — the base position. From it you set off in any direction.\n\nThink of a goalkeeper facing a penalty: lightly loaded, alert, ready to spring. That's exactly the tension you're after. Feet a little more than shoulder-width apart, knees slightly bent, your weight shifted forward onto the balls of your feet — your heels barely touch the floor. Hold the racket loosely in front of your body, shoulders relaxed.\n\nThis is active readiness, not a resting stance. The low, slightly forward-leaning stance gets you moving faster than any upright posture. Stand flat on your heels and you lose the first step."
       },
       "uebungsteil": {
         "de": {
@@ -66,6 +67,19 @@
           ],
           "selbstkontrolle": "Wie leicht kommt der erste Schritt? Wenn du dich abstoßen kannst, ohne dich vorher aufzurichten, stimmt die Haltung. Musst du dich erst hochdrücken oder das Gewicht verlagern, standest du zu passiv — zu aufrecht, zu flach auf den Fersen.",
           "abschluss": "Die Grundposition ist dein Startblock. Ob sie funktioniert, merkst du erst in der Bewegung."
+        },
+        "en": {
+          "titel": "Load and launch",
+          "ziel": "Your base position actually makes you faster — not just look good.",
+          "schritte": [
+            "Take the base position: feet a little more than shoulder-width apart, knees slightly bent, weight on the balls of your feet, racket loose in front of your body.",
+            "Pick a direction — forward, back, left or right.",
+            "Explode into a single step in that direction.",
+            "Return to the base position.",
+            "Repeat, each time in a different direction."
+          ],
+          "selbstkontrolle": "How easily does the first step come? If you can push off without straightening up first, your posture is right. If you have to push yourself up or shift your weight first, you were standing too passively — too upright, too flat on your heels.",
+          "abschluss": "The base position is your starting block. Whether it works, you only notice once you're moving."
         }
       }
     },
@@ -84,7 +98,8 @@
       "trainer_layer_offen": "Fehlerbild 'Griff zu fest' + Korrekturansage",
       "grafik": ["G-001"],
       "erklaerteil": {
-        "de": "Im Crossminton hältst du den Schläger für jeden Schlag gleich. Kein Umgreifen, keine Varianten für Vor- und Rückhand. Ein Griff für alles — deshalb Universalgriff.\n\nDas klingt unspektakulär, ist aber der Grund, warum du im schnellen Spiel überhaupt mitkommst. Der Speeder ist schneller unterwegs, als du umgreifen könntest. Wer nach dem passenden Griff sucht, kommt zu spät.\n\nSo findest du ihn: Halte den Schläger mit der freien Hand vor dich, die Kante zeigt zum Boden. Jetzt greif zu, als würdest du dem Griff die Hand geben. Zwischen Daumen und Zeigefinger bildet sich ein leichtes „V\". Mehr ist es nicht.\n\nZwei Dinge entscheiden über gut oder schlecht:\n\nDer Druck. Halte locker, nicht verkrampft — etwa so fest, wie du eine Hand schüttelst, ohne sie zu quetschen. Ein zu fester Griff nimmt dir das Gefühl und ermüdet den Unterarm. Fest wird es erst im Moment des Treffens, danach löst du wieder.\n\nDas Handgelenk. Am Anfang hältst du es ruhig und gerade. Die Kraft kommt aus Arm, Schulter und Beinen. Das fühlt sich zunächst an wie ein Tennisschlag, und das ist genau richtig. Erst wenn der Griff sitzt und die Schläge sauber kommen, darf das Handgelenk mitarbeiten und am Ende zuschnappen wie eine Peitsche. Diese Peitsche kommt später — jetzt baust du das Fundament."
+        "de": "Im Crossminton hältst du den Schläger für jeden Schlag gleich. Kein Umgreifen, keine Varianten für Vor- und Rückhand. Ein Griff für alles — deshalb Universalgriff.\n\nDas klingt unspektakulär, ist aber der Grund, warum du im schnellen Spiel überhaupt mitkommst. Der Speeder ist schneller unterwegs, als du umgreifen könntest. Wer nach dem passenden Griff sucht, kommt zu spät.\n\nSo findest du ihn: Halte den Schläger mit der freien Hand vor dich, die Kante zeigt zum Boden. Jetzt greif zu, als würdest du dem Griff die Hand geben. Zwischen Daumen und Zeigefinger bildet sich ein leichtes „V\". Mehr ist es nicht.\n\nZwei Dinge entscheiden über gut oder schlecht:\n\nDer Druck. Halte locker, nicht verkrampft — etwa so fest, wie du eine Hand schüttelst, ohne sie zu quetschen. Ein zu fester Griff nimmt dir das Gefühl und ermüdet den Unterarm. Fest wird es erst im Moment des Treffens, danach löst du wieder.\n\nDas Handgelenk. Am Anfang hältst du es ruhig und gerade. Die Kraft kommt aus Arm, Schulter und Beinen. Das fühlt sich zunächst an wie ein Tennisschlag, und das ist genau richtig. Erst wenn der Griff sitzt und die Schläge sauber kommen, darf das Handgelenk mitarbeiten und am Ende zuschnappen wie eine Peitsche. Diese Peitsche kommt später — jetzt baust du das Fundament.",
+        "en": "In Crossminton you hold the racket the same way for every stroke. No re-gripping, no variants for forehand and backhand. One grip for everything — hence the universal grip.\n\nThat sounds unremarkable, but it's the reason you can keep up in the fast game at all. The Speeder travels faster than you could ever re-grip. Anyone hunting for the right grip arrives too late.\n\nHere's how to find it: hold the racket in front of you with your free hand, the edge pointing to the floor. Now grab it as if you were shaking hands with the grip. A slight \"V\" forms between thumb and index finger. That's all there is to it.\n\nTwo things decide between good and bad:\n\nThe pressure. Hold it loosely, not tensely — about as firmly as you shake someone's hand without crushing it. Too tight a grip robs you of feel and tires your forearm. It only firms up at the moment of contact, and afterwards you release again.\n\nThe wrist. At the start you keep it quiet and straight. The power comes from arm, shoulder and legs. At first this feels like a tennis stroke, and that's exactly right. Only once the grip is secure and your strokes come cleanly may the wrist join in and, at the end, snap like a whip. That whip comes later — for now you're building the foundation."
       },
       "uebungsteil": {
         "de": {
@@ -100,6 +115,20 @@
           "steigerung": "Schließ die Augen. Greif zu, ohne hinzusehen. Erst danach prüfst du, ob das „V\" sitzt. Triffst du es zehnmal hintereinander blind, sitzt der Griff.",
           "selbstkontrolle": "Im Spiel hast du keine Zeit, deinen Griff zu kontrollieren. Er muss von selbst stimmen, sobald du den Schläger führst.",
           "naechste_stufe": "Sitzt der Griff blind, nimmst du ihn mit in die erste Schlagbewegung. Dort prüfst du, ob er auch hält, wenn der Arm arbeitet — das kommt im Vorhand-Grundschlag."
+        },
+        "en": {
+          "titel": "Grip it blind",
+          "ziel": "Your hand finds the universal grip on its own — without looking, without thinking.",
+          "schritte": [
+            "Take the racket in your free hand, edge to the floor.",
+            "Grab it as for a handshake, forming the \"V\" between thumb and index finger.",
+            "Glance down: is the V right? Is the pressure loose?",
+            "Put the racket down again — or let go of it entirely.",
+            "Repeat. Ten times with a checking glance."
+          ],
+          "steigerung": "Close your eyes. Grab it without looking. Only afterwards check whether the \"V\" is right. Get it ten times in a row blind and the grip is set.",
+          "selbstkontrolle": "In a match you have no time to check your grip. It has to be right on its own, the moment you handle the racket.",
+          "naechste_stufe": "Once the grip holds blind, you take it into your first hitting motion. There you check whether it holds when the arm works too — that comes in the forehand drive."
         }
       }
     },
@@ -118,7 +147,8 @@
       "trainer_layer_offen": "Fehlerbild 'Treffpunkt zu hoch / Aufschlag ungueltig' + Korrekturansage",
       "grafik": ["G-005", "G-006"],
       "erklaerteil": {
-        "de": "Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand. Genau das macht ihn zum idealen ersten Schlag.\n\nDu hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn und triffst ihn im Fallen. Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben. Ein Aufschlag über Schulterhöhe ist kein gültiger Aufschlag.\n\nDazu zwei Bedingungen, die den Aufschlag gültig machen: Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone deines Feldes. Solange du diese beiden einhältst, zählt dein Aufschlag.\n\nFür den ersten Kontakt darfst du es dir leichter machen: Lass den Speeder aus Hüfthöhe fallen und triff ihn tief, knapp bevor er den Boden erreicht. So gewöhnst du dich an den Fallzeitpunkt. Sitzt das Timing, hebst du den Treffpunkt an — bis er dort liegt, wo die Regel ihn verlangt: unterhalb der Schlaghand."
+        "de": "Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand. Genau das macht ihn zum idealen ersten Schlag.\n\nDu hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn und triffst ihn im Fallen. Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben. Ein Aufschlag über Schulterhöhe ist kein gültiger Aufschlag.\n\nDazu zwei Bedingungen, die den Aufschlag gültig machen: Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone deines Feldes. Solange du diese beiden einhältst, zählt dein Aufschlag.\n\nFür den ersten Kontakt darfst du es dir leichter machen: Lass den Speeder aus Hüfthöhe fallen und triff ihn tief, knapp bevor er den Boden erreicht. So gewöhnst du dich an den Fallzeitpunkt. Sitzt das Timing, hebst du den Treffpunkt an — bis er dort liegt, wo die Regel ihn verlangt: unterhalb der Schlaghand.",
+        "en": "The serve opens every rally. It's the only stroke you prepare in complete calm — no opponent puts you under pressure, the Speeder rests in your hand alone. That's exactly what makes it the ideal first stroke.\n\nYou hold the Speeder out in front of you and let it drop. As it falls, you bring the racket forward from below and hit it on the way down. The decisive point: at the moment of contact the whole Speeder is below your hitting hand. This one requirement shapes the entire motion — you hit from below, not from above. A serve above shoulder height is not a valid serve.\n\nOn top of that, two conditions make the serve legal: one foot stays on the floor throughout the motion, and you hit from the rear zone of your court. As long as you keep to both, your serve counts.\n\nFor your first attempts you may make it easier on yourself: drop the Speeder from hip height and hit it low, just before it reaches the floor. That way you get used to the timing of the drop. Once the timing sits, you raise the contact point — until it's where the rule demands it: below your hitting hand."
       },
       "uebungsteil": {
         "de": {
@@ -136,6 +166,22 @@
           ],
           "selbstkontrolle": "Triffst du den Speeder gleichmäßig, oder mal zu früh, mal zu spät? Streut der Treffmoment, gib dem Fallen noch etwas mehr Aufmerksamkeit, bevor du schlägst.",
           "abschluss": "Der Aufschlag gelingt über das Timing, nicht über Kraft. Sobald du den Fallpunkt zuverlässig triffst, kommt das Zielen fast von allein — den Treffpunkt hebst du später an, das Ziel setzt du dir später."
+        },
+        "en": {
+          "titel": "Read the drop, then hit",
+          "ziel": "Find the moment when you cleanly hit the falling Speeder.",
+          "schritte_teil1": [
+            "Hold the Speeder out in front of you, about hip height.",
+            "Let it drop and don't hit yet — just watch it fall.",
+            "Repeat a few times until you get a feel for how fast and where it falls."
+          ],
+          "schritte_teil2": [
+            "Let the Speeder drop again.",
+            "Bring the racket forward from below and hit it low, just before it reaches the floor.",
+            "Don't worry about a target yet — all that counts is hitting it cleanly."
+          ],
+          "selbstkontrolle": "Do you hit the Speeder consistently, or sometimes too early, sometimes too late? If the contact moment scatters, give the drop a little more attention before you hit.",
+          "abschluss": "The serve succeeds through timing, not power. Once you hit the drop point reliably, aiming almost takes care of itself — you raise the contact point later, and you set yourself a target later."
         }
       }
     },
@@ -154,7 +200,8 @@
       "trainer_layer_offen": "Fehlerbild 'zu grosser Ausholschwung / smash-artig' + Korrekturansage",
       "grafik": ["G-003"],
       "erklaerteil": {
-        "de": "Der Vorhand-Drive ist dein Brot-und-Butter-Schlag. Flach, direkt, auf deiner Schlägerseite gespielt — der Schlag, den du im Spiel am häufigsten brauchst.\n\nStell dir vor, du wischst mit dem Schläger etwas von einem Tisch in Hüfthöhe zur Seite. Genau dieser Bewegung folgst du: Das Gewicht wandert auf den vorderen Fuß, der Oberkörper dreht in Schlagrichtung, und der Arm bringt den Schläger nach vorn. Du triffst den Speeder vor deinem Körper, nicht neben dir und nicht hinter dir.\n\nDer ganze Schlag ist eine einzige, flüssige Bewegung — Gewicht, Drehung, Schlag gehen ineinander über. Die Kraft kommt aus dieser Kette, aus Beinen und Rumpf, nicht aus einem großen Ausholen mit dem Arm.\n\nUnd hier lösen wir ein, was beim Griff angekündigt war: Noch hältst du das Handgelenk ruhig und schlägst kompakt. Das Zuschnappen des Handgelenks — die Peitsche, die dem Schlag später Tempo gibt — kommt, sobald diese Grundbewegung sitzt. Erst der saubere Bogen, dann die Beschleunigung."
+        "de": "Der Vorhand-Drive ist dein Brot-und-Butter-Schlag. Flach, direkt, auf deiner Schlägerseite gespielt — der Schlag, den du im Spiel am häufigsten brauchst.\n\nStell dir vor, du wischst mit dem Schläger etwas von einem Tisch in Hüfthöhe zur Seite. Genau dieser Bewegung folgst du: Das Gewicht wandert auf den vorderen Fuß, der Oberkörper dreht in Schlagrichtung, und der Arm bringt den Schläger nach vorn. Du triffst den Speeder vor deinem Körper, nicht neben dir und nicht hinter dir.\n\nDer ganze Schlag ist eine einzige, flüssige Bewegung — Gewicht, Drehung, Schlag gehen ineinander über. Die Kraft kommt aus dieser Kette, aus Beinen und Rumpf, nicht aus einem großen Ausholen mit dem Arm.\n\nUnd hier lösen wir ein, was beim Griff angekündigt war: Noch hältst du das Handgelenk ruhig und schlägst kompakt. Das Zuschnappen des Handgelenks — die Peitsche, die dem Schlag später Tempo gibt — kommt, sobald diese Grundbewegung sitzt. Erst der saubere Bogen, dann die Beschleunigung.",
+        "en": "The forehand drive is your bread-and-butter stroke. Flat, direct, played on your racket side — the stroke you need most often in a match.\n\nPicture wiping something off a table at hip height with the racket. That's exactly the motion you follow: your weight moves onto the front foot, your upper body turns in the direction of the shot, and your arm brings the racket forward. You hit the Speeder in front of your body, not beside you and not behind you.\n\nThe whole stroke is a single, flowing motion — weight, rotation and hit blend into one another. The power comes from this chain, from legs and trunk, not from a big backswing of the arm.\n\nAnd here we deliver on what the grip promised: for now you keep the wrist quiet and hit compactly. The snap of the wrist — the whip that gives the shot its pace later — comes once this basic motion is in place. First the clean arc, then the acceleration."
       },
       "uebungsteil": {
         "de": {
@@ -169,6 +216,19 @@
           ],
           "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Tempo kommt später, zuerst der saubere Bogen.",
           "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        },
+        "en": {
+          "titel": "Groove the arc",
+          "ziel": "The hitting motion sits as a flowing chain before a Speeder comes into play.",
+          "schritte": [
+            "Take the base position, universal grip.",
+            "Shift your weight onto the front foot, turn your upper body in the direction of the shot.",
+            "Bring the racket forward in a compact arc, as if wiping something aside at hip height.",
+            "Keep the imagined contact point clearly in front of your body.",
+            "Return to the base position and repeat."
+          ],
+          "selbstkontrolle": "Watch whether weight, rotation and hit blend into one another. If the motion stalls, slow it down until it flows. Pace comes later, the clean arc comes first.",
+          "naechste_stufe": "Once the motion sits, you bring a Speeder in — toss it up to yourself briefly, let it drop to hip height and hit it in the arc in front of your body. Now you check whether the chain holds with real contact too."
         }
       }
     },
@@ -189,7 +249,8 @@
       "trainer_layer_offen": "Fehlerbild 'Rueckhand ausweichend mit Vorhand umlaufen' + Korrekturansage",
       "grafik": ["G-004"],
       "erklaerteil": {
-        "de": "Die Rückhand spielst du auf der Seite deines Körpers, die dem Schläger abgewandt ist — dort, wo der Handrücken nach vorn zeigt. Sie ist das Gegenstück zur Vorhand und folgt demselben Prinzip, nur spiegelverkehrt.\n\nWenn du die Vorhand schon kennst, hilft dir dieses Bild: Alles, was dort nach der einen Seite lief, läuft hier zur anderen. Das Gewicht wandert auf den Fuß deiner Schlagseite, der Oberkörper dreht auf, und der Schläger kommt vor dem Körper nach vorn. Du triffst den Speeder auch hier vor deinem Körper, im Zugriff deines Schlagarms.\n\nUnd falls die Vorhand gerade nicht präsent ist: Stell dich seitlich zum Ziel, den Schläger führst du dicht am Körper vorbei nach vorn und öffnest die Bewegung zum Treffpunkt hin. Der Schlag bleibt kompakt, das Handgelenk zunächst ruhig — genau wie bei der Vorhand baust du erst den sauberen Bogen, bevor Tempo dazukommt.\n\nEin Grund, warum die Rückhand sitzen muss: Im Spiel wird sie gezielt angespielt. Viele Aufschläge und Angriffe suchen die Rückhandseite, weil sie bei den meisten die schwächere ist. Eine verlässliche Rückhand nimmt dir genau diese Angriffsfläche."
+        "de": "Die Rückhand spielst du auf der Seite deines Körpers, die dem Schläger abgewandt ist — dort, wo der Handrücken nach vorn zeigt. Sie ist das Gegenstück zur Vorhand und folgt demselben Prinzip, nur spiegelverkehrt.\n\nWenn du die Vorhand schon kennst, hilft dir dieses Bild: Alles, was dort nach der einen Seite lief, läuft hier zur anderen. Das Gewicht wandert auf den Fuß deiner Schlagseite, der Oberkörper dreht auf, und der Schläger kommt vor dem Körper nach vorn. Du triffst den Speeder auch hier vor deinem Körper, im Zugriff deines Schlagarms.\n\nUnd falls die Vorhand gerade nicht präsent ist: Stell dich seitlich zum Ziel, den Schläger führst du dicht am Körper vorbei nach vorn und öffnest die Bewegung zum Treffpunkt hin. Der Schlag bleibt kompakt, das Handgelenk zunächst ruhig — genau wie bei der Vorhand baust du erst den sauberen Bogen, bevor Tempo dazukommt.\n\nEin Grund, warum die Rückhand sitzen muss: Im Spiel wird sie gezielt angespielt. Viele Aufschläge und Angriffe suchen die Rückhandseite, weil sie bei den meisten die schwächere ist. Eine verlässliche Rückhand nimmt dir genau diese Angriffsfläche.",
+        "en": "You play the backhand on the side of your body turned away from the racket — where the back of your hand points forward. It's the counterpart to the forehand and follows the same principle, just mirrored.\n\nIf you already know the forehand, this image helps: everything that ran to one side there runs to the other here. Your weight moves onto the foot on your hitting side, your upper body opens up, and the racket comes forward in front of your body. Here too you hit the Speeder in front of you, within reach of your hitting arm.\n\nAnd in case the forehand isn't fresh in your mind: stand side-on to the target, guide the racket forward close past your body and open the motion out toward the contact point. The stroke stays compact, the wrist quiet at first — just as with the forehand, you build the clean arc before pace comes in.\n\nOne reason the backhand has to be solid: in a match it's deliberately targeted. Many serves and attacks seek out the backhand side, because for most people it's the weaker one. A reliable backhand takes exactly that opening away from your opponent."
       },
       "uebungsteil": {
         "de": {
@@ -204,6 +265,19 @@
           ],
           "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Die Rückhand fühlt sich anfangs ungewohnter an als die Vorhand — das legt sich mit den Wiederholungen.",
           "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        },
+        "en": {
+          "titel": "Groove the mirrored arc",
+          "ziel": "The backhand motion sits as a flowing chain before a Speeder comes into play.",
+          "schritte": [
+            "Take the base position, universal grip.",
+            "Shift your weight onto the foot on your hitting side, open up your upper body.",
+            "Guide the racket forward close past your body and open the motion out toward the contact point.",
+            "Keep the imagined contact point clearly in front of your body.",
+            "Return to the base position and repeat."
+          ],
+          "selbstkontrolle": "Watch whether weight, rotation and hit blend into one another. If the motion stalls, slow it down until it flows. The backhand feels more unfamiliar than the forehand at first — that settles with the repetitions.",
+          "naechste_stufe": "Once the motion sits, you bring a Speeder in — toss it up to yourself briefly, let it drop to hip height and hit it in the arc in front of your body. Now you check whether the chain holds with real contact too."
         }
       }
     },
@@ -224,7 +298,8 @@
       "grafik": ["G-007", "G-008"],
       "hinweis_hoehere_stufen": "Vollstaendiges Beinarbeit-System (Chasse, Lunge, Scherensprung, Block-Sprung, Double-Hop, zonenspezifische Wege) als getrennte Fortgeschrittenen-/Experten-Bausteine. Dort Delta erwartet (netzlose Feldgeometrie weicht von Badminton ab).",
       "erklaerteil": {
-        "de": "Bisher ging es darum, wie du schlägst. Jetzt geht es darum, wie du rechtzeitig dorthin kommst, wo der Speeder ankommt. Gute Beinarbeit entscheidet oft mehr als der Schlag selbst — sie bringt dich rechtzeitig dorthin, wo der Speeder ankommt.\n\nAlles dreht sich um einen Ort und einen Moment.\n\nDer Ort ist die Mitte deines Feldes — die zentrale Position. Von hier erreichst du jede Ecke am schnellsten. Nach jedem Schlag kehrst du dorthin zurück. Dein Spiel bekommt dadurch einen Rhythmus: raus zum Ball, Schlag, zurück ins Zentrum. Immer wieder.\n\nDer Moment ist der Split-Step — ein kleiner, federnder Hüpfer, kurz bevor dein Gegner den Speeder trifft. Du landest leicht auf beiden Fußballen, und genau aus dieser Landung heraus startest du in jede Richtung. Der Split-Step verwandelt deine ruhige Bereitschaft in gerichtete Bewegung. Ohne ihn stehst du fest am Boden und verlierst den ersten Schritt.\n\nZusammen ergeben beide einen Kreislauf: Du wartest zentral, lädst dich mit dem Split-Step, startest zum Ball, schlägst, kehrst zurück. Dieser Kreislauf ist das Fundament deiner Beweglichkeit im Feld."
+        "de": "Bisher ging es darum, wie du schlägst. Jetzt geht es darum, wie du rechtzeitig dorthin kommst, wo der Speeder ankommt. Gute Beinarbeit entscheidet oft mehr als der Schlag selbst — sie bringt dich rechtzeitig dorthin, wo der Speeder ankommt.\n\nAlles dreht sich um einen Ort und einen Moment.\n\nDer Ort ist die Mitte deines Feldes — die zentrale Position. Von hier erreichst du jede Ecke am schnellsten. Nach jedem Schlag kehrst du dorthin zurück. Dein Spiel bekommt dadurch einen Rhythmus: raus zum Ball, Schlag, zurück ins Zentrum. Immer wieder.\n\nDer Moment ist der Split-Step — ein kleiner, federnder Hüpfer, kurz bevor dein Gegner den Speeder trifft. Du landest leicht auf beiden Fußballen, und genau aus dieser Landung heraus startest du in jede Richtung. Der Split-Step verwandelt deine ruhige Bereitschaft in gerichtete Bewegung. Ohne ihn stehst du fest am Boden und verlierst den ersten Schritt.\n\nZusammen ergeben beide einen Kreislauf: Du wartest zentral, lädst dich mit dem Split-Step, startest zum Ball, schlägst, kehrst zurück. Dieser Kreislauf ist das Fundament deiner Beweglichkeit im Feld.",
+        "en": "So far it's been about how you hit. Now it's about how you get to where the Speeder lands in time. Good footwork often decides more than the stroke itself — it gets you to where the Speeder arrives in time.\n\nEverything revolves around one place and one moment.\n\nThe place is the middle of your court — the central position. From here you reach every corner fastest. After every stroke you return to it. This gives your game a rhythm: out to the ball, hit, back to the center. Again and again.\n\nThe moment is the split step — a small, springy hop just before your opponent hits the Speeder. You land lightly on the balls of both feet, and from that landing you set off in any direction. The split step turns your quiet readiness into directed movement. Without it you're planted on the floor and lose the first step.\n\nTogether the two form a cycle: you wait centrally, load with the split step, set off to the ball, hit, return. This cycle is the foundation of your mobility on the court."
       },
       "uebungsteil": {
         "de": {
@@ -239,6 +314,19 @@
           ],
           "selbstkontrolle": "Achte auf zwei Dinge: Kommt der Start unmittelbar aus dem Split-Step, oder liegt eine Pause dazwischen? Und findest du zuverlässig in die zentrale Position zurück, oder bleibst du nach dem Schlag in der Ecke stehen? Der Kreislauf trägt erst, wenn beides rund läuft.",
           "abschluss": "Diese Schattenbewegung baut den Rhythmus ein, bevor ein Speeder Druck macht. Sitzt der Kreislauf, kommt die Anpassung an den echten Ball fast von allein — die Wege bleiben dieselben, nur das Ziel bewegt sich dann."
+        },
+        "en": {
+          "titel": "Run the cycle",
+          "ziel": "The movement cycle sits as a whole — without a Speeder, as pure footwork.",
+          "schritte": [
+            "Stand in the central position of your court, in the ready stance.",
+            "Do a small split step — springy hop, landing on the balls of both feet.",
+            "From the landing, set off to a corner of your court and mime a stroke there.",
+            "Return to the central position.",
+            "Repeat, each time to a different corner."
+          ],
+          "selbstkontrolle": "Watch two things: does the start come straight out of the split step, or is there a pause in between? And do you reliably find your way back to the central position, or do you stay in the corner after the stroke? The cycle only holds once both run smoothly.",
+          "abschluss": "This shadow drill builds in the rhythm before a Speeder adds pressure. Once the cycle sits, adapting to the real ball almost takes care of itself — the paths stay the same, only the target then moves."
         }
       }
     }
@@ -259,7 +347,8 @@
       "witterung": [],
       "eigener_uebungsteil": false,
       "erklaerteil": {
-        "de": "Du kannst bereits greifen. Der Handschlag-Griff, das „V\" zwischen Daumen und Zeigefinger — alles vertraut. Du musst hier nichts Neues lernen.\n\nDu musst etwas verlernen: das Umgreifen.\n\nIm Badminton wechselst du ständig — Vorhandgriff, Rückhandgriff, Daumen umgelegt, je nach Schlag. Dieser Wechsel sitzt bei dir tief, und genau er wird dir im Crossminton im Weg stehen. Hier gibt es keinen Wechsel. Ein Griff, jeder Schlag.\n\nDas fühlt sich anfangs falsch an. Deine Hand will umgreifen, besonders auf der Rückhand — sie hat es tausendmal getan. Lass sie nicht. Halte den Universalgriff auch dann, wenn dein Badminton-Reflex nach dem Daumen verlangt.\n\nEin kleiner Test: Spiel ein paar Rückhände und beobachte deinen Daumen. Wandert er? Dann greifst du noch um. Ziel ist, dass die Hand ruhig bleibt.\n\nNebenbei: Der Speeder ist schwerer als ein Federball, der Schläger kürzer und dicker bespannt. Dein Griff darf deshalb eine Spur fester sein als gewohnt, und das Handgelenk bleibt am Anfang ruhiger. Aber das ist Feinabstimmung — die eine Sache, die zählt, ist der Verzicht aufs Umgreifen."
+        "de": "Du kannst bereits greifen. Der Handschlag-Griff, das „V\" zwischen Daumen und Zeigefinger — alles vertraut. Du musst hier nichts Neues lernen.\n\nDu musst etwas verlernen: das Umgreifen.\n\nIm Badminton wechselst du ständig — Vorhandgriff, Rückhandgriff, Daumen umgelegt, je nach Schlag. Dieser Wechsel sitzt bei dir tief, und genau er wird dir im Crossminton im Weg stehen. Hier gibt es keinen Wechsel. Ein Griff, jeder Schlag.\n\nDas fühlt sich anfangs falsch an. Deine Hand will umgreifen, besonders auf der Rückhand — sie hat es tausendmal getan. Lass sie nicht. Halte den Universalgriff auch dann, wenn dein Badminton-Reflex nach dem Daumen verlangt.\n\nEin kleiner Test: Spiel ein paar Rückhände und beobachte deinen Daumen. Wandert er? Dann greifst du noch um. Ziel ist, dass die Hand ruhig bleibt.\n\nNebenbei: Der Speeder ist schwerer als ein Federball, der Schläger kürzer und dicker bespannt. Dein Griff darf deshalb eine Spur fester sein als gewohnt, und das Handgelenk bleibt am Anfang ruhiger. Aber das ist Feinabstimmung — die eine Sache, die zählt, ist der Verzicht aufs Umgreifen.",
+        "en": "You can already grip. The handshake grip, the \"V\" between thumb and index finger — all familiar. There's nothing new to learn here.\n\nThere's something to unlearn: re-gripping.\n\nIn badminton you switch constantly — forehand grip, backhand grip, thumb laid on, depending on the shot. That switch sits deep in you, and it's exactly what will get in your way in Crossminton. Here there's no switch. One grip, every stroke.\n\nAt first this feels wrong. Your hand wants to re-grip, especially on the backhand — it has done it a thousand times. Don't let it. Hold the universal grip even when your badminton reflex calls for the thumb.\n\nA quick test: play a few backhands and watch your thumb. Does it wander? Then you're still re-gripping. The goal is for the hand to stay quiet.\n\nBy the way: the Speeder is heavier than a shuttlecock, the racket shorter and strung thicker. Your grip may therefore be a touch firmer than you're used to, and the wrist stays quieter at the start. But that's fine-tuning — the one thing that counts is dropping the re-grip."
       }
     },
     {
@@ -276,7 +365,8 @@
       "witterung": [],
       "eigener_uebungsteil": false,
       "erklaerteil": {
-        "de": "Die Bewegung kennst du: Speeder fallen lassen, von unten treffen. Motorisch musst du nichts umlernen.\n\nWas sich ändert, ist dein Ziel. Im Badminton hebst du den Aufschlag über das Netz — knapp drüber, kontrolliert, in ein nahes Feld. Diese Vorstellung sitzt bei dir. Im Crossminton gibt es kein Netz, das du überwinden musst. An seiner Stelle liegt die neutrale Zone zwischen den Feldern, und die überbrückst du mit Weite statt mit Höhe.\n\nDein Aufschlag geht also flacher und weiter, als dein Badminton-Reflex es will. Nicht anheben, sondern nach vorn durch die Zone tragen — bis tief ins gegnerische Feld.\n\nEin kleiner Test: Beobachte die Flugkurve deines Aufschlags. Steigt der Speeder erst hoch und fällt dann kurz dahinter? Dann spielst du noch über ein Netz, das nicht da ist. Ziel ist eine flache, lange Bahn."
+        "de": "Die Bewegung kennst du: Speeder fallen lassen, von unten treffen. Motorisch musst du nichts umlernen.\n\nWas sich ändert, ist dein Ziel. Im Badminton hebst du den Aufschlag über das Netz — knapp drüber, kontrolliert, in ein nahes Feld. Diese Vorstellung sitzt bei dir. Im Crossminton gibt es kein Netz, das du überwinden musst. An seiner Stelle liegt die neutrale Zone zwischen den Feldern, und die überbrückst du mit Weite statt mit Höhe.\n\nDein Aufschlag geht also flacher und weiter, als dein Badminton-Reflex es will. Nicht anheben, sondern nach vorn durch die Zone tragen — bis tief ins gegnerische Feld.\n\nEin kleiner Test: Beobachte die Flugkurve deines Aufschlags. Steigt der Speeder erst hoch und fällt dann kurz dahinter? Dann spielst du noch über ein Netz, das nicht da ist. Ziel ist eine flache, lange Bahn.",
+        "en": "You know the motion: drop the Speeder, hit it from below. Nothing to relearn physically.\n\nWhat changes is your target. In badminton you lift the serve over the net — just over, controlled, into a nearby area. That picture sits in you. In Crossminton there's no net to clear. In its place lies the neutral zone between the courts, and you bridge it with distance rather than height.\n\nSo your serve goes flatter and farther than your badminton reflex wants. Don't lift it, carry it forward through the zone — deep into your opponent's court.\n\nA quick test: watch the flight path of your serve. Does the Speeder first rise high and then drop just behind? Then you're still playing over a net that isn't there. The goal is a flat, long trajectory."
       }
     },
     {
@@ -293,7 +383,8 @@
       "witterung": [],
       "eigener_uebungsteil": false,
       "erklaerteil": {
-        "de": "Den Drive kennst du. Treffpunkt vor dem Körper, Gewicht nach vorn, Rotation in Schlagrichtung — das alles bringst du mit.\n\nEine Sache verlagert sich: woher die Kraft kommt. Im Badminton spielst du den Drive stark aus Handgelenk und Fingern, und der flexible Schläger schnappt dabei mit. Dein Gerät hier ist anders — kürzer, steifer, mit strafferer Bespannung, und der Speeder ist doppelt so schwer wie ein Federball. Der Schläger gibt kaum nach, also trägt das Handgelenk allein den Schlag nicht mehr.\n\nNimm den Handgelenksimpuls deshalb zunächst zurück. Deine Kraft kommt jetzt aus einem kompakteren, festeren Schlag — mehr aus Rumpf und Arm, mit einem klaren Zupacken im Griff am Treffpunkt. Das fühlt sich anfangs weniger elegant an als dein Badminton-Drive, überträgt die Energie am steifen Gerät aber sauberer.\n\nDas Handgelenk bleibt nicht für immer außen vor. Sitzt der kompakte Schlag, baust du es dosiert wieder ein — dieselbe Peitsche, die auch die anderen Spieler später lernen, nur an dein Gerät angepasst.\n\nEin kleiner Test: Spiel ein paar Drives und achte auf deinen Unterarm. Bleibt er locker und der Schlag trotzdem kraftvoll? Dann trägt der Körper den Schlag. Kommt die Kraft spürbar nur aus dem Handgelenk, nimm es noch etwas zurück."
+        "de": "Den Drive kennst du. Treffpunkt vor dem Körper, Gewicht nach vorn, Rotation in Schlagrichtung — das alles bringst du mit.\n\nEine Sache verlagert sich: woher die Kraft kommt. Im Badminton spielst du den Drive stark aus Handgelenk und Fingern, und der flexible Schläger schnappt dabei mit. Dein Gerät hier ist anders — kürzer, steifer, mit strafferer Bespannung, und der Speeder ist doppelt so schwer wie ein Federball. Der Schläger gibt kaum nach, also trägt das Handgelenk allein den Schlag nicht mehr.\n\nNimm den Handgelenksimpuls deshalb zunächst zurück. Deine Kraft kommt jetzt aus einem kompakteren, festeren Schlag — mehr aus Rumpf und Arm, mit einem klaren Zupacken im Griff am Treffpunkt. Das fühlt sich anfangs weniger elegant an als dein Badminton-Drive, überträgt die Energie am steifen Gerät aber sauberer.\n\nDas Handgelenk bleibt nicht für immer außen vor. Sitzt der kompakte Schlag, baust du es dosiert wieder ein — dieselbe Peitsche, die auch die anderen Spieler später lernen, nur an dein Gerät angepasst.\n\nEin kleiner Test: Spiel ein paar Drives und achte auf deinen Unterarm. Bleibt er locker und der Schlag trotzdem kraftvoll? Dann trägt der Körper den Schlag. Kommt die Kraft spürbar nur aus dem Handgelenk, nimm es noch etwas zurück.",
+        "en": "You know the drive. Contact point in front of the body, weight forward, rotation in the direction of the shot — all of that you bring with you.\n\nOne thing shifts: where the power comes from. In badminton you play the drive largely from wrist and fingers, and the flexible racket snaps along with it. Your gear here is different — shorter, stiffer, with tighter stringing, and the Speeder is twice as heavy as a shuttlecock. The racket barely gives, so the wrist alone no longer carries the shot.\n\nSo pull the wrist impulse back at first. Your power now comes from a more compact, firmer stroke — more from trunk and arm, with a clear grab in the grip at the contact point. At first this feels less elegant than your badminton drive, but it transfers the energy more cleanly on the stiff gear.\n\nThe wrist isn't left out forever. Once the compact stroke sits, you build it back in measured doses — the same whip the other players learn later, just adapted to your gear.\n\nA quick test: play a few drives and pay attention to your forearm. Does it stay loose while the shot is still powerful? Then your body carries the shot. If the power noticeably comes only from the wrist, pull it back a little more."
       }
     },
     {
@@ -312,7 +403,8 @@
       "witterung": [],
       "eigener_uebungsteil": false,
       "erklaerteil": {
-        "de": "Auf der Rückhand sitzt deine Badminton-Gewohnheit am tiefsten. Dort drehst du gewohnt in den Daumengriff — Daumen auf die breite Griffseite, der die Kraft über den Hebel erzeugt. Genau dieser Wechsel entfällt hier. Du bleibst im Universalgriff, auch auf der Rückhand, ohne den Daumen umzulegen.\n\nDas ist derselbe Verzicht, den du schon beim Griff kennengelernt hast — auf der Rückhand wird er nur besonders spürbar, weil dein Reflex hier am stärksten nach dem Daumen verlangt.\n\nDazu kommt, wie bei der Vorhand, die veränderte Kraftquelle: Am steifen Gerät kommt die Kraft aus dem kompakteren Körperschlag, nicht aus dem Daumen- oder Handgelenksimpuls. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Spiel ein paar Rückhände und achte auf deinen Daumen. Legt er sich um, greifst du noch nach dem Badminton-Muster. Ziel ist, dass er ruhig an seiner Universalgriff-Position bleibt."
+        "de": "Auf der Rückhand sitzt deine Badminton-Gewohnheit am tiefsten. Dort drehst du gewohnt in den Daumengriff — Daumen auf die breite Griffseite, der die Kraft über den Hebel erzeugt. Genau dieser Wechsel entfällt hier. Du bleibst im Universalgriff, auch auf der Rückhand, ohne den Daumen umzulegen.\n\nDas ist derselbe Verzicht, den du schon beim Griff kennengelernt hast — auf der Rückhand wird er nur besonders spürbar, weil dein Reflex hier am stärksten nach dem Daumen verlangt.\n\nDazu kommt, wie bei der Vorhand, die veränderte Kraftquelle: Am steifen Gerät kommt die Kraft aus dem kompakteren Körperschlag, nicht aus dem Daumen- oder Handgelenksimpuls. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Spiel ein paar Rückhände und achte auf deinen Daumen. Legt er sich um, greifst du noch nach dem Badminton-Muster. Ziel ist, dass er ruhig an seiner Universalgriff-Position bleibt.",
+        "en": "On the backhand your badminton habit sits deepest. There you're used to turning into the thumb grip — thumb on the broad side of the handle, generating power through leverage. It's exactly this switch that falls away here. You stay in the universal grip, on the backhand too, without laying the thumb on.\n\nIt's the same thing to drop that you already met with the grip — on the backhand it's just especially noticeable, because your reflex here calls for the thumb most strongly.\n\nOn top of that, as with the forehand, comes the changed power source: on the stiff gear the power comes from the more compact body stroke, not from a thumb or wrist impulse. You'll find the details in the forehand note.\n\nA quick test: play a few backhands and watch your thumb. If it lays itself on, you're still gripping by the badminton pattern. The goal is for it to stay quietly in its universal-grip position."
       }
     }
   ]
