@@ -38,22 +38,26 @@
   {
    "id": "beginner_erste_schlaege",
    "titel": {
-    "de": "Erste Schläge"
+    "de": "Erste Schläge",
+    "en": "First strokes"
    },
    "kompetenzstufe": "beginner",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Die Grundschläge sicher treffen"
+    "de": "Die Grundschläge sicher treffen",
+    "en": "Hitting the basic strokes reliably"
    },
    "beschreibung": {
-    "de": "Die erste Einheit für Einsteiger: vom Griff über den Aufschlag zum Vorhand-Drive, abgeschlossen mit einem spielerischen Zielspiel auf die Länge."
+    "de": "Die erste Einheit für Einsteiger: vom Griff über den Aufschlag zum Vorhand-Drive, abgeschlossen mit einem spielerischen Zielspiel auf die Länge.",
+    "en": "The first session for beginners: from the grip through the serve to the forehand drive, rounded off with a playful target game for length."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "richtig_aufwaermen",
       "hinweis": {
-       "de": "Kurze Aufwärmfolge — Kreislauf in Schwung, Schulter und Beine wecken."
+       "de": "Kurze Aufwärmfolge — Kreislauf in Schwung, Schulter und Beine wecken.",
+       "en": "A short warm-up sequence — get the circulation going, wake up the shoulder and legs."
       }
      }
     ],
@@ -61,19 +65,22 @@
      {
       "baustein": "griff",
       "hinweis": {
-       "de": "Zuerst der Universalgriff — er trägt alle folgenden Schläge."
+       "de": "Zuerst der Universalgriff — er trägt alle folgenden Schläge.",
+       "en": "First the universal grip — it carries every stroke that follows."
       }
      },
      {
       "baustein": "aufschlag",
       "hinweis": {
-       "de": "Partnerunabhängig übbar; ideal als zweiter Schritt."
+       "de": "Partnerunabhängig übbar; ideal als zweiter Schritt.",
+       "en": "Can be practiced without a partner; ideal as the second step."
       }
      },
      {
       "baustein": "vorhand_drive",
       "hinweis": {
-       "de": "Der Brot-und-Butter-Schlag; hier liegt der Schwerpunkt der Einheit."
+       "de": "Der Brot-und-Butter-Schlag; hier liegt der Schwerpunkt der Einheit.",
+       "en": "The bread-and-butter stroke; this is where the session's focus lies."
       }
      }
     ],
@@ -81,7 +88,8 @@
      {
       "baustein": "laenge_tiefe",
       "hinweis": {
-       "de": "Spielerische Anwendung: den gelernten Drive auf ein Ziel in der Tiefe spielen."
+       "de": "Spielerische Anwendung: den gelernten Drive auf ein Ziel in der Tiefe spielen.",
+       "en": "A playful application: play the drive you have learned onto a target deep in the court."
       }
      }
     ]
@@ -90,22 +98,26 @@
   {
    "id": "beginner_bewegung_und_position",
    "titel": {
-    "de": "Bewegung und Position"
+    "de": "Bewegung und Position",
+    "en": "Movement and position"
    },
    "kompetenzstufe": "beginner",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Rechtzeitig am Speeder sein — Grundposition, Antritt, Rückkehr"
+    "de": "Rechtzeitig am Speeder sein — Grundposition, Antritt, Rückkehr",
+    "en": "Being at the Speeder in time — base position, first step, recovery"
    },
    "beschreibung": {
-    "de": "Die Bewegungs-Einheit für Einsteiger: die zentrale Position, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege."
+    "de": "Die Bewegungs-Einheit für Einsteiger: die zentrale Position, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege.",
+    "en": "The movement session for beginners: the central position, quick feet and the movement cycle, rounded off with mobility care."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "richtig_aufwaermen",
       "hinweis": {
-       "de": "Vor Bewegungsarbeit besonders die Beine gut vorbereiten."
+       "de": "Vor Bewegungsarbeit besonders die Beine gut vorbereiten.",
+       "en": "Before movement work, prepare the legs especially well."
       }
      }
     ],
@@ -113,19 +125,22 @@
      {
       "baustein": "grundposition",
       "hinweis": {
-       "de": "Die geladene Ausgangshaltung als Startpunkt jeder Bewegung."
+       "de": "Die geladene Ausgangshaltung als Startpunkt jeder Bewegung.",
+       "en": "The loaded ready stance as the starting point of every movement."
       }
      },
      {
       "baustein": "schnelle_fuesse",
       "hinweis": {
-       "de": "Antritt und Richtungswechsel — kurze, saubere Wiederholungen."
+       "de": "Antritt und Richtungswechsel — kurze, saubere Wiederholungen.",
+       "en": "First step and change of direction — short, clean repetitions."
       }
      },
      {
       "baustein": "beinarbeit",
       "hinweis": {
-       "de": "Der Kreislauf aus Split-Step, Weg zum Ball und Rückkehr; Schwerpunkt der Einheit."
+       "de": "Der Kreislauf aus Split-Step, Weg zum Ball und Rückkehr; Schwerpunkt der Einheit.",
+       "en": "The cycle of split step, path to the ball and recovery; the session's focus."
       }
      }
     ],
@@ -133,7 +148,8 @@
      {
       "baustein": "beweglichkeit_und_schulter",
       "hinweis": {
-       "de": "Cool-down: sanfte Beweglichkeitspflege, wenn der Körper warm ist."
+       "de": "Cool-down: sanfte Beweglichkeitspflege, wenn der Körper warm ist.",
+       "en": "Cool-down: gentle mobility care while the body is warm."
       }
      }
     ]
@@ -142,22 +158,26 @@
   {
    "id": "fortgeschritten_angriff_aufbauen",
    "titel": {
-    "de": "Angriff aufbauen"
+    "de": "Angriff aufbauen",
+    "en": "Building the attack"
    },
    "kompetenzstufe": "fortgeschritten",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Den Angriff herstellen und abschließen"
+    "de": "Den Angriff herstellen und abschließen",
+    "en": "Creating the attack and finishing it"
    },
    "beschreibung": {
-    "de": "Fortgeschrittene Angriffs-Einheit: von der Peitsche über den Überkopfschlag zum Smash, dann die taktische Vorbereitung des Abschlusses. Abschluss mit Schulterpflege nach der Überkopfarbeit."
+    "de": "Fortgeschrittene Angriffs-Einheit: von der Peitsche über den Überkopfschlag zum Smash, dann die taktische Vorbereitung des Abschlusses. Abschluss mit Schulterpflege nach der Überkopfarbeit.",
+    "en": "An advanced attacking session: from the whip through the overhead to the smash, then the tactical setup of the finish. Closing with shoulder care after the overhead work."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "richtig_aufwaermen",
       "hinweis": {
-       "de": "Vor Überkopf- und Schnellkraftarbeit gründlich aufwärmen, besonders die Schlagschulter."
+       "de": "Vor Überkopf- und Schnellkraftarbeit gründlich aufwärmen, besonders die Schlagschulter.",
+       "en": "Warm up thoroughly before overhead and power work, especially the hitting shoulder."
       }
      }
     ],
@@ -165,25 +185,29 @@
      {
       "baustein": "handgelenk_peitsche",
       "hinweis": {
-       "de": "Die Kraftquelle zuerst — sie trägt Clear und Smash."
+       "de": "Die Kraftquelle zuerst — sie trägt Clear und Smash.",
+       "en": "The power source first — it carries the clear and the smash."
       }
      },
      {
       "baustein": "ueberkopf_clear",
       "hinweis": {
-       "de": "Der hohe Treffpunkt als Grundlage des Angriffs von oben."
+       "de": "Der hohe Treffpunkt als Grundlage des Angriffs von oben.",
+       "en": "The high contact point as the basis of the attack from above."
       }
      },
      {
       "baustein": "smash",
       "hinweis": {
-       "de": "Konstanz vor Tempo; mehrere platzierte Smashes statt eines harten."
+       "de": "Konstanz vor Tempo; mehrere platzierte Smashes statt eines harten.",
+       "en": "Consistency before pace; several placed smashes rather than one hard one."
       }
      },
      {
       "baustein": "smash_vorbereiten",
       "hinweis": {
-       "de": "Taktischer Kern der Einheit: den Smash aus der vorbereiteten Situation setzen."
+       "de": "Taktischer Kern der Einheit: den Smash aus der vorbereiteten Situation setzen.",
+       "en": "The tactical core of the session: land the smash out of the prepared situation."
       }
      }
     ],
@@ -191,7 +215,8 @@
      {
       "baustein": "beweglichkeit_und_schulter",
       "hinweis": {
-       "de": "Cool-down: die einseitig belastete Schlagschulter nach der Überkopfarbeit pflegen."
+       "de": "Cool-down: die einseitig belastete Schlagschulter nach der Überkopfarbeit pflegen.",
+       "en": "Cool-down: care for the one-sidedly loaded hitting shoulder after the overhead work."
       }
      }
     ]
@@ -200,22 +225,26 @@
   {
    "id": "doppel_als_paar_spielen",
    "titel": {
-    "de": "Als Paar spielen"
+    "de": "Als Paar spielen",
+    "en": "Playing as a pair"
    },
    "kompetenzstufe": "fortgeschritten",
    "spielform": "doppel",
    "schwerpunkt": {
-    "de": "Als Einheit angreifen und verteidigen"
+    "de": "Als Einheit angreifen und verteidigen",
+    "en": "Attacking and defending as one unit"
    },
    "beschreibung": {
-    "de": "Doppel-Einheit: die abgestimmte Bewegung als Paar, der Angriff in der Zange und die lückenlose Verteidigung, abgeschlossen mit spielnahen Intervallen."
+    "de": "Doppel-Einheit: die abgestimmte Bewegung als Paar, der Angriff in der Zange und die lückenlose Verteidigung, abgeschlossen mit spielnahen Intervallen.",
+    "en": "A doubles session: the coordinated movement as a pair, the attack in the pincer and the seamless defense, rounded off with match-like intervals."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "richtig_aufwaermen",
       "hinweis": {
-       "de": "Gemeinsam aufwärmen; die Bewegungsvorbereitung stimmt euch schon aufeinander ein."
+       "de": "Gemeinsam aufwärmen; die Bewegungsvorbereitung stimmt euch schon aufeinander ein.",
+       "en": "Warm up together; the movement prep already gets you attuned to each other."
       }
      }
     ],
@@ -223,19 +252,22 @@
      {
       "baustein": "bewegung_als_einheit",
       "hinweis": {
-       "de": "Zuerst die abgestimmte Bewegung — sie trägt Angriff wie Verteidigung."
+       "de": "Zuerst die abgestimmte Bewegung — sie trägt Angriff wie Verteidigung.",
+       "en": "First the coordinated movement — it carries both attack and defense."
       }
      },
      {
       "baustein": "angriff_im_paar",
       "hinweis": {
-       "de": "Die Zange aus Druck (hinten) und Abschluss (vorn)."
+       "de": "Die Zange aus Druck (hinten) und Abschluss (vorn).",
+       "en": "The pincer of pressure (at the back) and finish (at the front)."
       }
      },
      {
       "baustein": "verteidigung_im_paar",
       "hinweis": {
-       "de": "Lückenlos decken, Tempo herausnehmen, den Umschaltmoment abpassen; Schwerpunkt gemeinsam mit dem Angriff."
+       "de": "Lückenlos decken, Tempo herausnehmen, den Umschaltmoment abpassen; Schwerpunkt gemeinsam mit dem Angriff.",
+       "en": "Cover seamlessly, take the pace off, catch the switching moment; the focus together with the attack."
       }
      }
     ],
@@ -243,7 +275,8 @@
      {
       "baustein": "intervallausdauer",
       "hinweis": {
-       "de": "Spielnaher Abschluss: intensive Ballwechsel mit kurzer Erholung, im Doppel gespielt."
+       "de": "Spielnaher Abschluss: intensive Ballwechsel mit kurzer Erholung, im Doppel gespielt.",
+       "en": "A match-like finish: intense rallies with short recovery, played as doubles."
       }
      }
     ]
@@ -252,22 +285,26 @@
   {
    "id": "experte_praezision_und_taeuschung",
    "titel": {
-    "de": "Präzision und Täuschung"
+    "de": "Präzision und Täuschung",
+    "en": "Precision and deception"
    },
    "kompetenzstufe": "experte",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Den Gegner täuschen und die Linien treffen"
+    "de": "Den Gegner täuschen und die Linien treffen",
+    "en": "Deceiving the opponent and hitting the lines"
    },
    "beschreibung": {
-    "de": "Eine Experten-Einheit für Schärfe und Finesse: früh am Speeder sein, die Absicht verschleiern, präzise an die Linien setzen — und das Ganze in eine Partie überführen, in der du dem Gegner dein Spiel aufzwingst."
+    "de": "Eine Experten-Einheit für Schärfe und Finesse: früh am Speeder sein, die Absicht verschleiern, präzise an die Linien setzen — und das Ganze in eine Partie überführen, in der du dem Gegner dein Spiel aufzwingst.",
+    "en": "An expert session for sharpness and finesse: be at the Speeder early, disguise your intention, place the ball precisely on the lines — and carry it all into a match where you impose your game on the opponent."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "beweglichkeit_und_schulter",
       "hinweis": {
-       "de": "Schulter und Rumpf wecken — die Basis für saubere Überkopf- und Täuschungsbewegungen."
+       "de": "Schulter und Rumpf wecken — die Basis für saubere Überkopf- und Täuschungsbewegungen.",
+       "en": "Wake up the shoulder and trunk — the basis for clean overhead and deception movements."
       }
      }
     ],
@@ -275,19 +312,22 @@
      {
       "baustein": "frueh_nehmen",
       "hinweis": {
-       "de": "Zuerst den Ball früh nehmen: Das verschafft dir die Zeit, die Täuschung und Präzision überhaupt erst möglich macht."
+       "de": "Zuerst den Ball früh nehmen: Das verschafft dir die Zeit, die Täuschung und Präzision überhaupt erst möglich macht.",
+       "en": "First take the ball early: that buys you the time that makes deception and precision possible in the first place."
       }
      },
      {
       "baustein": "taeuschung",
       "hinweis": {
-       "de": "Auf der gewonnenen Zeit aufbauend die Absicht verschleiern — gleicher Ansatz, andere Richtung."
+       "de": "Auf der gewonnenen Zeit aufbauend die Absicht verschleiern — gleicher Ansatz, andere Richtung.",
+       "en": "Building on the time you have gained, disguise your intention — same preparation, different direction."
       }
      },
      {
       "baustein": "praezision_an_die_linien",
       "hinweis": {
-       "de": "Der Schwerpunkt: die getäuschten Bälle präzise an die Linien setzen, wo sie am meisten wehtun."
+       "de": "Der Schwerpunkt: die getäuschten Bälle präzise an die Linien setzen, wo sie am meisten wehtun.",
+       "en": "The focus: place the disguised balls precisely on the lines, where they hurt the most."
       }
      }
     ],
@@ -295,7 +335,8 @@
      {
       "baustein": "dem_gegner_aufzwingen",
       "hinweis": {
-       "de": "Anwendung in der Partie: mit früh genommenen, getäuschten und präzisen Bällen dem Gegner dein Spiel aufzwingen."
+       "de": "Anwendung in der Partie: mit früh genommenen, getäuschten und präzisen Bällen dem Gegner dein Spiel aufzwingen.",
+       "en": "Application in the match: impose your game on the opponent with early-taken, disguised and precise balls."
       }
      }
     ]
@@ -304,22 +345,26 @@
   {
    "id": "experte_tempo_und_konstanz",
    "titel": {
-    "de": "Tempo und Konstanz"
+    "de": "Tempo und Konstanz",
+    "en": "Pace and consistency"
    },
    "kompetenzstufe": "experte",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Das Tempo variieren und unter Druck konstant bleiben"
+    "de": "Das Tempo variieren und unter Druck konstant bleiben",
+    "en": "Varying the pace and staying consistent under pressure"
    },
    "beschreibung": {
-    "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: das Tempo bewusst wechseln, explosiv vom Boden abdrücken und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck."
+    "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: das Tempo bewusst wechseln, explosiv vom Boden abdrücken und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck.",
+    "en": "An expert session for rhythm and resilience: change the pace deliberately, push off the ground explosively and land the hard stroke out of the jump — rounded off with holding quality under the greatest pressure."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "schnelle_fuesse",
       "hinweis": {
-       "de": "Fußarbeit auf Betriebstemperatur bringen — Antritt und Bodenkontakt für die folgende Reaktivarbeit vorbereiten."
+       "de": "Fußarbeit auf Betriebstemperatur bringen — Antritt und Bodenkontakt für die folgende Reaktivarbeit vorbereiten.",
+       "en": "Bring the footwork up to operating temperature — prepare the first step and ground contact for the reactive work to follow."
       }
      }
     ],
@@ -327,19 +372,22 @@
      {
       "baustein": "tempo_rhythmus_wechsel",
       "hinweis": {
-       "de": "Das Tempo bewusst variieren, um den Rhythmus des Gegners zu brechen."
+       "de": "Das Tempo bewusst variieren, um den Rhythmus des Gegners zu brechen.",
+       "en": "Vary the pace deliberately to break the opponent's rhythm."
       }
      },
      {
       "baustein": "sprung_smash",
       "hinweis": {
-       "de": "Den harten Abschluss aus dem Sprung setzen — mit dem in der Datei hinterlegten Gesundheitshinweis zur Sprungbelastung."
+       "de": "Den harten Abschluss aus dem Sprung setzen — mit dem in der Datei hinterlegten Gesundheitshinweis zur Sprungbelastung.",
+       "en": "Land the hard finish out of the jump — with the health note on jump loading noted in the module."
       }
      },
      {
       "baustein": "reaktivkraft_bodenkontakt",
       "hinweis": {
-       "de": "Den explosiven, kurzen Bodenkontakt schulen, der Tempowechsel und Sprung erst trägt."
+       "de": "Den explosiven, kurzen Bodenkontakt schulen, der Tempowechsel und Sprung erst trägt.",
+       "en": "Train the explosive, short ground contact that makes the pace changes and the jump possible."
       }
      }
     ],
@@ -347,7 +395,8 @@
      {
       "baustein": "konstanz_unter_hoechstdruck",
       "hinweis": {
-       "de": "Integration: Tempo und Härte auch dann sauber halten, wenn der Druck am größten ist."
+       "de": "Integration: Tempo und Härte auch dann sauber halten, wenn der Druck am größten ist.",
+       "en": "Integration: keep pace and power clean even when the pressure is greatest."
       }
      }
     ]
@@ -356,22 +405,26 @@
   {
    "id": "outdoor_wind_und_boden",
    "titel": {
-    "de": "Wind und Boden"
+    "de": "Wind und Boden",
+    "en": "Wind and surface"
    },
    "kompetenzstufe": "fortgeschritten",
    "spielform": "einzel",
    "schwerpunkt": {
-    "de": "Sich draußen auf Wind und Untergrund einstellen"
+    "de": "Sich draußen auf Wind und Untergrund einstellen",
+    "en": "Adjusting to wind and surface outdoors"
    },
    "beschreibung": {
-    "de": "Eine Outdoor-Einheit für das Spiel im Freien: die Fußarbeit auf wechselndem Boden anpassen, den Wind lesen und nutzen — und die Längensteuerung anwenden, die draußen über Gewinn und Verlust entscheidet."
+    "de": "Eine Outdoor-Einheit für das Spiel im Freien: die Fußarbeit auf wechselndem Boden anpassen, den Wind lesen und nutzen — und die Längensteuerung anwenden, die draußen über Gewinn und Verlust entscheidet.",
+    "en": "An outdoor session for playing in the open: adapt your footwork to changing ground, read and use the wind — and apply the length control that decides between winning and losing outdoors."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "schnelle_fuesse",
       "hinweis": {
-       "de": "Fußarbeit wecken — draußen besonders wichtig, weil der Boden den Abdruck verändert."
+       "de": "Fußarbeit wecken — draußen besonders wichtig, weil der Boden den Abdruck verändert.",
+       "en": "Wake up the footwork — especially important outdoors, because the ground changes your push-off."
       }
      }
     ],
@@ -379,13 +432,15 @@
      {
       "baustein": "verschiedene_boeden",
       "hinweis": {
-       "de": "Zuerst den Untergrund lesen und die Fußarbeit an Sand, Rasen, Asche oder Kunstrasen anpassen."
+       "de": "Zuerst den Untergrund lesen und die Fußarbeit an Sand, Rasen, Asche oder Kunstrasen anpassen.",
+       "en": "First read the surface and adapt your footwork to sand, grass, clay or artificial turf."
       }
      },
      {
       "baustein": "wind_lesen_nutzen",
       "hinweis": {
-       "de": "Dann den Wind einbeziehen: Härte und Länge an die Windrichtung anpassen, gegen die Drift zielen."
+       "de": "Dann den Wind einbeziehen: Härte und Länge an die Windrichtung anpassen, gegen die Drift zielen.",
+       "en": "Then factor in the wind: adjust power and length to the wind direction, aim against the drift."
       }
      }
     ],
@@ -393,7 +448,8 @@
      {
       "baustein": "laenge_tiefe",
       "hinweis": {
-       "de": "Anwendung: die Längensteuerung gezielt einsetzen — draußen ist sie unter Windeinfluss der Schlüssel."
+       "de": "Anwendung: die Längensteuerung gezielt einsetzen — draußen ist sie unter Windeinfluss der Schlüssel.",
+       "en": "Application: use length control deliberately — outdoors, under the wind's influence, it is the key."
       }
      }
     ]
@@ -402,22 +458,26 @@
   {
    "id": "doppel_beginner_zusammenspiel",
    "titel": {
-    "de": "Erstes Zusammenspiel im Doppel"
+    "de": "Erstes Zusammenspiel im Doppel",
+    "en": "First teamwork in doubles"
    },
    "kompetenzstufe": "beginner",
    "spielform": "doppel",
    "schwerpunkt": {
-    "de": "Als Paar aufschlagen, den Ball zuordnen, Platz lassen"
+    "de": "Als Paar aufschlagen, den Ball zuordnen, Platz lassen",
+    "en": "Serving as a pair, assigning the ball, leaving space"
    },
    "beschreibung": {
-    "de": "Die erste Doppel-Einheit für Einsteiger-Paare: den Aufschlag in einfacher Reihenfolge, die klare Zuordnung des Balls über den Zuruf und das gegenseitige Platzlassen — die drei Grundlagen eines sicheren Zusammenspiels."
+    "de": "Die erste Doppel-Einheit für Einsteiger-Paare: den Aufschlag in einfacher Reihenfolge, die klare Zuordnung des Balls über den Zuruf und das gegenseitige Platzlassen — die drei Grundlagen eines sicheren Zusammenspiels.",
+    "en": "The first doubles session for beginner pairs: the serve in a simple order, the clear assignment of the ball by calling it, and leaving each other space — the three foundations of reliable teamwork."
    },
    "phasen": {
     "erwaermung": [
      {
       "baustein": "schnelle_fuesse",
       "hinweis": {
-       "de": "Fußarbeit wecken — im Doppel Grundlage dafür, einander schnell auszuweichen."
+       "de": "Fußarbeit wecken — im Doppel Grundlage dafür, einander schnell auszuweichen.",
+       "en": "Wake up the footwork — in doubles the basis for getting out of each other's way quickly."
       }
      }
     ],
@@ -425,13 +485,15 @@
      {
       "baustein": "aufschlag_im_doppel_einfach",
       "hinweis": {
-       "de": "Zuerst der Doppel-Aufschlag in einfacher, fester Reihenfolge — so kommt ihr sauber ins Spiel."
+       "de": "Zuerst der Doppel-Aufschlag in einfacher, fester Reihenfolge — so kommt ihr sauber ins Spiel.",
+       "en": "First the doubles serve in a simple, fixed order — that is how you get cleanly into the game."
       }
      },
      {
       "baustein": "wer_nimmt_den_ball",
       "hinweis": {
-       "de": "Dann die wichtigste Grundabsprache: den Ball früh und deutlich einem von beiden zuordnen."
+       "de": "Dann die wichtigste Grundabsprache: den Ball früh und deutlich einem von beiden zuordnen.",
+       "en": "Then the most important basic agreement: assign the ball early and clearly to one of you."
       }
      }
     ],
@@ -439,7 +501,8 @@
      {
       "baustein": "einander_platz_lassen",
       "hinweis": {
-       "de": "Anwendung: sich aufeinander bezogen bewegen und einander bewusst Platz lassen — am unsichtbaren Seil."
+       "de": "Anwendung: sich aufeinander bezogen bewegen und einander bewusst Platz lassen — am unsichtbaren Seil.",
+       "en": "Application: move in relation to each other and deliberately leave each other space — as if on an invisible rope."
       }
      }
     ]
