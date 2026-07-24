@@ -15,6 +15,7 @@ import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon, SVG_GRAFIKEN } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
 import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
+import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -47,6 +48,7 @@ const regeln = liesJson('data/regeln.json');
 const appInfo = liesJson('data/app-info.json');
 const turnierregeln = liesJson('data/turnierregeln.json');
 const labelsDe = liesJson('data/labels/de.json');
+const labelsEn = liesJson('data/labels/en.json');
 
 let fehler = 0;
 let laufend = 0;
@@ -715,6 +717,18 @@ pruefe('Suche: Kauderwelsch → keine Treffer', sucheBausteine(daten, 'zzxqwvbnm
 const suchA = sucheBausteine(daten, 'spiel', titelVon).map((tr) => tr.baustein.id);
 const suchB = sucheBausteine(daten, 'spiel', titelVon).map((tr) => tr.baustein.id);
 pruefe('Suche: deterministische Reihenfolge bei gleicher Anfrage', suchA.length > 0 && gleicheListe(suchA, suchB));
+
+console.log('\n[12] i18n-Struktur & Ring-0-Labels (en)');
+// Struktur-Gate: en/fr/pl müssen exakt die de-Schlüsselmenge spiegeln, damit ein
+// neuer de-Schlüssel nicht still unübersetzt durchrutscht (Laufzeit fällt sonst auf de).
+const i18nStruktur = pruefeI18nStruktur(wurzel);
+pruefe('en/fr/pl spiegeln die de-Schlüsselmenge strukturell', i18nStruktur.ok, i18nStruktur.probleme.join('; '));
+// Ring-0-Wächter: die UI-Labels sind englisch befüllt (Stichprobe quer über alle
+// Namespaces — kein 100%-Zwang, damit neue de-Labels nicht sofort den Build brechen).
+pruefe('EN-Labels befüllt (Stichprobe quer über Namespaces)',
+  labelsEn.ui.nav_lernen === 'Learn' && labelsEn.ui.pfad_kompetenz !== '' && labelsEn.bausteine.aufschlag !== ''
+  && labelsEn.grafiken['G-001'] !== '' && labelsEn.vokabeln.domaene.technik !== ''
+  && labelsEn.spielziele.faktoren.rally_ausdauer !== '' && labelsEn.trainingseinheiten.beginner_erste_schlaege !== '');
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);
