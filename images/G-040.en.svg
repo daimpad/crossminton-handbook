@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 520" role="img" aria-label="Serve and return in doubles: the right to serve moves in a fixed order through all four players.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .zone{fill:var(--primaer,#38a4f1);opacity:.08}
+    .rot{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.8;stroke-dasharray:7 6}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .mkg{fill:var(--tinte-3,#6b7686)}
+    .badge{fill:var(--tinte,#16202b)}
+    .bt{fill:var(--flaeche,#fff);font:700 13px/1 system-ui,sans-serif;text-anchor:middle}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,sans-serif;letter-spacing:.5px;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mkg"/></marker>
+  </defs>
+  <rect class="zone" x="55" y="230" width="190" height="100"/>
+  <rect class="linie" x="55" y="40"  width="190" height="190"/>
+  <rect class="linie" x="55" y="330" width="190" height="190"/>
+  <!-- feste Reihenfolge 1->2->3->4 (rundum) -->
+  <path class="rot" d="M108,410 C 60,340 60,190 108,124" marker-end="url(#ag)"/>
+  <path class="rot" d="M192,144 C 240,190 240,340 192,420" marker-end="url(#ag)"/>
+  <path class="pf"  d="M150,404 L150,158" marker-end="url(#ah)"/>
+  <circle class="mkg" cx="108" cy="120" r="9"/>
+  <circle class="mkg" cx="192" cy="144" r="9"/>
+  <circle class="mk"  cx="108" cy="410" r="9"/>
+  <circle class="mk"  cx="192" cy="440" r="9"/>
+  <g><circle class="badge" cx="108" cy="410" r="13"/><text class="bt" x="108" y="415">1</text></g>
+  <g><circle class="badge" cx="108" cy="120" r="13"/><text class="bt" x="108" y="125">2</text></g>
+  <g><circle class="badge" cx="192" cy="144" r="13"/><text class="bt" x="192" y="149">3</text></g>
+  <g><circle class="badge" cx="192" cy="440" r="13"/><text class="bt" x="192" y="445">4</text></g>
+  <text class="zt" x="150" y="290">serve</text>
+  <text class="st" x="150" y="505">in turn: 1 → 2 → 3 → 4</text>
+</svg>
