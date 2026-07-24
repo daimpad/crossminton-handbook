@@ -34,58 +34,58 @@
   "abschnitte": [
     {
       "id": "grundbegriffe",
-      "titel": {"de": "Grundbegriffe"},
-      "einleitung": {"de": "Ein paar Begriffe, die in den Regeln immer wieder vorkommen. Wer sie kennt, versteht den Rest mühelos."},
+      "titel": {"de": "Grundbegriffe", "en": "Basic terms"},
+      "einleitung": {"de": "Ein paar Begriffe, die in den Regeln immer wieder vorkommen. Wer sie kennt, versteht den Rest mühelos.", "en": "A few terms that keep coming up in the rules. Once you know them, the rest is easy to follow."},
       "regeln": [
         {
-          "titel": {"de": "Court, Spielfeld und Sicherheitszone"},
-          "inhalt": {"de": "Der Court besteht aus zwei Spielfeldern, die parallel zueinander in einer Entfernung von 12,80 m aufgebaut sind. Die Sicherheitszone ist die Fläche um und zwischen den Spielfeldern."},
-          "erklaerung": {"de": "Ihr spielt nicht über ein Netz, sondern über eine Lücke. Zwischen deinem und dem gegnerischen Feld liegt ein freier Raum von 12,80 m — die Sicherheitszone. Dorthin darf der Speeder nicht gespielt werden; er muss über die Zone hinweg in das gegnerische Feld."},
+          "titel": {"de": "Court, Spielfeld und Sicherheitszone", "en": "Court, playing field and safety zone"},
+          "inhalt": {"de": "Der Court besteht aus zwei Spielfeldern, die parallel zueinander in einer Entfernung von 12,80 m aufgebaut sind. Die Sicherheitszone ist die Fläche um und zwischen den Spielfeldern.", "en": "The court consists of two playing fields set up parallel to each other at a distance of 12.80 m. The safety zone is the area around and between the playing fields."},
+          "erklaerung": {"de": "Ihr spielt nicht über ein Netz, sondern über eine Lücke. Zwischen deinem und dem gegnerischen Feld liegt ein freier Raum von 12,80 m — die Sicherheitszone. Dorthin darf der Speeder nicht gespielt werden; er muss über die Zone hinweg in das gegnerische Feld.", "en": "You don't play over a net but over a gap. Between your field and your opponent's lies an open space of 12.80 m — the safety zone. The Speeder must not be played into it; it has to travel across the zone into the opponent's field."},
           "querverweis": ["spielziel_verstehen"]
         },
         {
-          "titel": {"de": "Speeder und Schläger"},
-          "inhalt": {"de": "Der Ball wird Speeder genannt. Gespielt wird mit einem Schläger."},
-          "erklaerung": {"de": "Der Speeder ist der spezielle Crossminton-Ball — schwerer und schneller als ein Federball, mit stabiler Flugbahn."}
+          "titel": {"de": "Speeder und Schläger", "en": "Speeder and racket"},
+          "inhalt": {"de": "Der Ball wird Speeder genannt. Gespielt wird mit einem Schläger.", "en": "The ball is called the Speeder. It is played with a racket."},
+          "erklaerung": {"de": "Der Speeder ist der spezielle Crossminton-Ball — schwerer und schneller als ein Federball, mit stabiler Flugbahn.", "en": "The Speeder is the special Crossminton ball — heavier and faster than a shuttlecock, with a stable flight path."}
         },
         {
-          "titel": {"de": "Einzel und Doppel"},
-          "inhalt": {"de": "Einzel: ein Spieler in jedem Spielfeld. Doppel: zwei Spieler in jedem Spielfeld."},
-          "erklaerung": {"de": "Im Einzel stehst du allein deinem Gegner gegenüber. Im Doppel teilst du dir dein Feld mit einem Partner — mit eigenen Regeln, siehe den Doppel-Abschnitt."},
+          "titel": {"de": "Einzel und Doppel", "en": "Singles and doubles"},
+          "inhalt": {"de": "Einzel: ein Spieler in jedem Spielfeld. Doppel: zwei Spieler in jedem Spielfeld.", "en": "Singles: one player in each field. Doubles: two players in each field."},
+          "erklaerung": {"de": "Im Einzel stehst du allein deinem Gegner gegenüber. Im Doppel teilst du dir dein Feld mit einem Partner — mit eigenen Regeln, siehe den Doppel-Abschnitt.", "en": "In singles you face your opponent alone. In doubles you share your field with a partner — with its own rules, see the doubles section."},
           "querverweis": ["doppel_grundlagen"]
         },
         {
-          "titel": {"de": "Aufschläger, Rückschläger und Rallye"},
-          "inhalt": {"de": "Der Aufschläger ist die aufschlagende Partei, der Rückschläger die rückschlagende. Eine Rallye ist die Abfolge von Schlägen ab dem Aufschlag bis zu dem Moment, in dem der Speeder aus dem Spiel ist."},
-          "erklaerung": {"de": "Jeder Ballwechsel beginnt mit einem Aufschlag und läuft, bis der Speeder den Boden berührt oder ein Fehler passiert. Diese Abfolge heißt Rallye."}
+          "titel": {"de": "Aufschläger, Rückschläger und Rallye", "en": "Server, returner and rally"},
+          "inhalt": {"de": "Der Aufschläger ist die aufschlagende Partei, der Rückschläger die rückschlagende. Eine Rallye ist die Abfolge von Schlägen ab dem Aufschlag bis zu dem Moment, in dem der Speeder aus dem Spiel ist.", "en": "The server is the serving side, the returner the receiving side. A rally is the sequence of strokes from the serve until the moment the Speeder is out of play."},
+          "erklaerung": {"de": "Jeder Ballwechsel beginnt mit einem Aufschlag und läuft, bis der Speeder den Boden berührt oder ein Fehler passiert. Diese Abfolge heißt Rallye.", "en": "Every rally begins with a serve and runs until the Speeder touches the ground or a fault occurs. This sequence is called a rally."}
         }
       ]
     },
 
     {
       "id": "ausruestung",
-      "titel": {"de": "Ausrüstung (Speeder & Schläger)"},
-      "einleitung": {"de": "Die ICO-Fassung 2024 hat ein eigenes Ausrüstungs-Kapitel. Es legt fest, welche Speeder und Schläger regelkonform sind — der Rest der Wahl bleibt frei."},
+      "titel": {"de": "Ausrüstung (Speeder & Schläger)", "en": "Equipment (Speeder & racket)"},
+      "einleitung": {"de": "Die ICO-Fassung 2024 hat ein eigenes Ausrüstungs-Kapitel. Es legt fest, welche Speeder und Schläger regelkonform sind — der Rest der Wahl bleibt frei.", "en": "The ICO 2024 version has its own equipment chapter. It defines which Speeders and rackets are rule-compliant — the rest of the choice is up to you."},
       "regeln": [
         {
           "nummer": "1.1",
-          "titel": {"de": "Maße des Speeders"},
-          "inhalt": {"de": "Der Speeder wiegt mindestens 8 und höchstens 10 Gramm (in der Altersklasse U12: 6 bis 10 Gramm). Er ist 57 bis 63 mm hoch, der Korb misst an der breitesten Stelle 47 bis 53 mm. Die Schlagkappe ist halbkugelförmig aus Thermoplast, mit 25 bis 27 mm Durchmesser. Offizieller Matchball ist der gelbe Match Speeder; in der U12 ist der rote Fun Speeder vorgeschrieben."},
-          "erklaerung": {"de": "Nicht jeder Speeder ist turniertauglich: Gewicht, Höhe und Kappe sind genau festgelegt. Im Wettkampf spielst du den gelben Match Speeder, bei den Jüngsten den langsameren roten Fun Speeder."},
+          "titel": {"de": "Maße des Speeders", "en": "Speeder dimensions"},
+          "inhalt": {"de": "Der Speeder wiegt mindestens 8 und höchstens 10 Gramm (in der Altersklasse U12: 6 bis 10 Gramm). Er ist 57 bis 63 mm hoch, der Korb misst an der breitesten Stelle 47 bis 53 mm. Die Schlagkappe ist halbkugelförmig aus Thermoplast, mit 25 bis 27 mm Durchmesser. Offizieller Matchball ist der gelbe Match Speeder; in der U12 ist der rote Fun Speeder vorgeschrieben.", "en": "The Speeder weighs at least 8 and at most 10 grams (in the U12 age group: 6 to 10 grams). It is 57 to 63 mm tall, and the basket measures 47 to 53 mm at its widest point. The head is a hemispherical thermoplastic cap, 25 to 27 mm in diameter. The official match ball is the yellow Match Speeder; in U12 the red Fun Speeder is mandatory."},
+          "erklaerung": {"de": "Nicht jeder Speeder ist turniertauglich: Gewicht, Höhe und Kappe sind genau festgelegt. Im Wettkampf spielst du den gelben Match Speeder, bei den Jüngsten den langsameren roten Fun Speeder.", "en": "Not every Speeder is tournament-legal: weight, height and cap are precisely defined. In competition you play the yellow Match Speeder, and for the youngest players the slower red Fun Speeder."},
           "querverweis": ["der_speeder"]
         },
         {
           "nummer": "1.1.3 / 1.1.4 / 1.1.6",
-          "titel": {"de": "Windring, Wind und Formveränderung"},
-          "inhalt": {"de": "Ein Gummiring direkt unter der Schlagkappe darf das Höchstgewicht um 1 Gramm überschreiten. Bei starkem Wind darf nach Rücksprache mit dem Organisator und im Einvernehmen mit dem Oberschiedsrichter ein anderer Speeder verwendet werden. Die Form des Speeders darf sich vor und während des Matches nicht ändern; Handlungen, die sie beeinflussen könnten — etwa das Stecken in die Hosentasche — sind untersagt."},
-          "erklaerung": {"de": "Gegen Wind ist ein Windring erlaubt (er darf den Ball etwas schwerer machen), bei viel Wind auf Absprache auch ein schwererer Speeder. Was du nicht darfst: die Form des Speeders verändern — auch nicht durch die Hosentasche."},
+          "titel": {"de": "Windring, Wind und Formveränderung", "en": "Wind ring, wind and change of shape"},
+          "inhalt": {"de": "Ein Gummiring direkt unter der Schlagkappe darf das Höchstgewicht um 1 Gramm überschreiten. Bei starkem Wind darf nach Rücksprache mit dem Organisator und im Einvernehmen mit dem Oberschiedsrichter ein anderer Speeder verwendet werden. Die Form des Speeders darf sich vor und während des Matches nicht ändern; Handlungen, die sie beeinflussen könnten — etwa das Stecken in die Hosentasche — sind untersagt.", "en": "A rubber ring directly under the head may exceed the maximum weight by 1 gram. In strong wind, another Speeder may be used after consulting the organizer and with the agreement of the head referee. The shape of the Speeder must not change before or during the match; actions that could affect it — such as putting it in a trouser pocket — are prohibited."},
+          "erklaerung": {"de": "Gegen Wind ist ein Windring erlaubt (er darf den Ball etwas schwerer machen), bei viel Wind auf Absprache auch ein schwererer Speeder. Was du nicht darfst: die Form des Speeders verändern — auch nicht durch die Hosentasche.", "en": "Against wind a wind ring is allowed (it may make the ball a little heavier), and in a lot of wind, by arrangement, a heavier Speeder too. What you may not do: change the Speeder's shape — not even via your trouser pocket."},
           "querverweis": ["der_speeder"]
         },
         {
           "nummer": "1.2",
-          "titel": {"de": "Maße des Schlägers"},
-          "inhalt": {"de": "Der Schläger ist höchstens 61 cm lang, der Kopf misst höchstens 650 cm² (Außenmaße). In der U12 dürfen Länge und Kopfgröße abweichen. Keine Vorrichtung ist erlaubt, die die Flugqualität des Speeders verändert, seine Beschaffenheit künstlich beeinflusst oder Gegner bzw. Partner gefährdet."},
-          "erklaerung": {"de": "Geregelt sind nur zwei Obergrenzen — Länge und Kopf — plus ein Sicherheits- und Manipulationsverbot. Gewicht, Material, Balance, Bespannung und Griff bleiben deine freie Wahl."},
+          "titel": {"de": "Maße des Schlägers", "en": "Racket dimensions"},
+          "inhalt": {"de": "Der Schläger ist höchstens 61 cm lang, der Kopf misst höchstens 650 cm² (Außenmaße). In der U12 dürfen Länge und Kopfgröße abweichen. Keine Vorrichtung ist erlaubt, die die Flugqualität des Speeders verändert, seine Beschaffenheit künstlich beeinflusst oder Gegner bzw. Partner gefährdet.", "en": "The racket is at most 61 cm long, and the head measures at most 650 cm² (outer dimensions). In U12, length and head size may differ. No device is permitted that alters the flight quality of the Speeder, artificially influences its properties, or endangers opponents or partners."},
+          "erklaerung": {"de": "Geregelt sind nur zwei Obergrenzen — Länge und Kopf — plus ein Sicherheits- und Manipulationsverbot. Gewicht, Material, Balance, Bespannung und Griff bleiben deine freie Wahl.", "en": "Only two upper limits are regulated — length and head — plus a safety and tampering ban. Weight, material, balance, string tension and grip remain your free choice."},
           "querverweis": ["der_schlaeger", "deine_ausruestung"]
         }
       ]
@@ -93,19 +93,19 @@
 
     {
       "id": "wahl",
-      "titel": {"de": "Die Wahl vor Spielbeginn"},
+      "titel": {"de": "Die Wahl vor Spielbeginn", "en": "The choice before the game starts"},
       "regeln": [
         {
           "nummer": "1 / 2.1",
-          "titel": {"de": "Wer wählt was"},
-          "inhalt": {"de": "Vor Spielbeginn wird eine Wahl durchgeführt — üblicherweise durch Werfen des Speeders; die Richtung, in die die Schlagkappe am Boden zeigt, entscheidet. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit."},
-          "erklaerung": {"de": "Statt einer Münze wirfst du den Speeder: Wohin die Kappe am Boden zeigt, gewinnt die Wahl. Wer gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner."}
+          "titel": {"de": "Wer wählt was", "en": "Who chooses what"},
+          "inhalt": {"de": "Vor Spielbeginn wird eine Wahl durchgeführt — üblicherweise durch Werfen des Speeders; die Richtung, in die die Schlagkappe am Boden zeigt, entscheidet. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit.", "en": "Before the game starts a choice is made — usually by tossing the Speeder; the direction the head points on the ground decides. The winning side decides either whether to serve or receive first, or which side to start on. The losing side decides the remaining option."},
+          "erklaerung": {"de": "Statt einer Münze wirfst du den Speeder: Wohin die Kappe am Boden zeigt, gewinnt die Wahl. Wer gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner.", "en": "Instead of a coin you toss the Speeder: whichever way the cap points on the ground wins the choice. The winner picks one — serve/receive or side. The other is left to the opponent."}
         },
         {
           "nummer": "1.2",
-          "titel": {"de": "Rollen im Doppel"},
-          "inhalt": {"de": "Im Doppel teilt die aufschlagende Partei der rückschlagenden mit, wer zuerst Aufschläger ist (Rückraumspieler). Die rückschlagende Partei entscheidet frei, wer Angriffs- und wer Rückraumspieler ist."},
-          "erklaerung": {"de": "Schon vor dem ersten Ball legt ihr im Doppel eure Rollen fest — wer vorn als Angriffsspieler und wer hinten als Rückraumspieler beginnt."},
+          "titel": {"de": "Rollen im Doppel", "en": "Roles in doubles"},
+          "inhalt": {"de": "Im Doppel teilt die aufschlagende Partei der rückschlagenden mit, wer zuerst Aufschläger ist (Rückraumspieler). Die rückschlagende Partei entscheidet frei, wer Angriffs- und wer Rückraumspieler ist.", "en": "In doubles the serving side tells the receiving side who serves first (the backcourt player). The receiving side decides freely who is the attacking player and who is the backcourt player."},
+          "erklaerung": {"de": "Schon vor dem ersten Ball legt ihr im Doppel eure Rollen fest — wer vorn als Angriffsspieler und wer hinten als Rückraumspieler beginnt.", "en": "Even before the first ball, in doubles you set your roles — who starts up front as the attacking player and who at the back as the backcourt player."},
           "querverweis": ["doppel_grundlagen"]
         }
       ]
@@ -113,283 +113,283 @@
 
     {
       "id": "punkte_saetze",
-      "titel": {"de": "Punkte und Sätze"},
+      "titel": {"de": "Punkte und Sätze", "en": "Points and sets"},
       "regeln": [
         {
           "nummer": "2.1",
-          "titel": {"de": "Best of 3"},
-          "inhalt": {"de": "Ein Spiel geht über Best of 3 Sätze: Zwei gewonnene Sätze sind nötig, um das Spiel zu gewinnen."},
-          "erklaerung": {"de": "Du musst zwei Sätze gewinnen. Steht es 1:1 nach Sätzen, entscheidet der dritte."}
+          "titel": {"de": "Best of 3", "en": "Best of 3"},
+          "inhalt": {"de": "Ein Spiel geht über Best of 3 Sätze: Zwei gewonnene Sätze sind nötig, um das Spiel zu gewinnen.", "en": "A match is played best of 3 sets: two sets won are needed to win the match."},
+          "erklaerung": {"de": "Du musst zwei Sätze gewinnen. Steht es 1:1 nach Sätzen, entscheidet der dritte.", "en": "You have to win two sets. If it's 1:1 in sets, the third decides."}
         },
         {
           "nummer": "2.2 / 2.4",
-          "titel": {"de": "16 Punkte — und die 15:15-Regel"},
-          "inhalt": {"de": "Die Partei, die zuerst 16 Punkte erreicht, gewinnt den Satz — mit einer Ausnahme: Beim Stand von 15:15 gewinnt die Partei, die 2 Punkte Vorsprung hat."},
-          "erklaerung": {"de": "Normalerweise reicht, wer zuerst 16 hat. Wird es aber 15:15, musst du dich um zwei Punkte absetzen — bei 15:15 geht es also weiter, bis eine Partei zwei Punkte vorn liegt. Das macht enge Sätze besonders nervenaufreibend."},
+          "titel": {"de": "16 Punkte — und die 15:15-Regel", "en": "16 points — and the 15:15 rule"},
+          "inhalt": {"de": "Die Partei, die zuerst 16 Punkte erreicht, gewinnt den Satz — mit einer Ausnahme: Beim Stand von 15:15 gewinnt die Partei, die 2 Punkte Vorsprung hat.", "en": "The side that reaches 16 points first wins the set — with one exception: at 15:15 the side that is 2 points ahead wins."},
+          "erklaerung": {"de": "Normalerweise reicht, wer zuerst 16 hat. Wird es aber 15:15, musst du dich um zwei Punkte absetzen — bei 15:15 geht es also weiter, bis eine Partei zwei Punkte vorn liegt. Das macht enge Sätze besonders nervenaufreibend.", "en": "Normally whoever reaches 16 first is enough. But if it becomes 15:15, you have to pull ahead by two points — so at 15:15 play continues until one side leads by two. That makes close sets especially nerve-racking."},
           "querverweis": ["ruhig_bleiben_wenn_es_eng_wird", "engen_satz_fuehren"]
         },
         {
           "nummer": "2.3",
-          "titel": {"de": "Rallye-Punkt-System"},
-          "inhalt": {"de": "Wer einen Ballwechsel gewinnt, erhält den Punkt — unabhängig davon, wer aufgeschlagen hat. Eine Partei gewinnt den Ballwechsel, wenn die andere einen Fehler macht oder der Speeder den Boden im gegnerischen Feld berührt."},
-          "erklaerung": {"de": "Jeder Ballwechsel bringt einen Punkt, egal wer serviert hat. Es gibt keinen 'Aufschlag ohne Punktchance' — jede Rallye zählt."}
+          "titel": {"de": "Rallye-Punkt-System", "en": "Rally point system"},
+          "inhalt": {"de": "Wer einen Ballwechsel gewinnt, erhält den Punkt — unabhängig davon, wer aufgeschlagen hat. Eine Partei gewinnt den Ballwechsel, wenn die andere einen Fehler macht oder der Speeder den Boden im gegnerischen Feld berührt.", "en": "Whoever wins a rally gets the point — regardless of who served. A side wins the rally when the other makes a fault or the Speeder touches the ground in the opponent's field."},
+          "erklaerung": {"de": "Jeder Ballwechsel bringt einen Punkt, egal wer serviert hat. Es gibt keinen 'Aufschlag ohne Punktchance' — jede Rallye zählt.", "en": "Every rally produces a point, no matter who served. There is no 'serve without a chance to score' — every rally counts."}
         },
         {
           "nummer": "2.5",
-          "titel": {"de": "Wer den nächsten Satz beginnt"},
-          "inhalt": {"de": "Die Partei, die einen Satz verloren hat, beginnt den folgenden Satz mit dem Aufschlag."},
-          "erklaerung": {"de": "Kleiner Ausgleich: Verlierst du einen Satz, darfst du den nächsten aufschlagen."}
+          "titel": {"de": "Wer den nächsten Satz beginnt", "en": "Who begins the next set"},
+          "inhalt": {"de": "Die Partei, die einen Satz verloren hat, beginnt den folgenden Satz mit dem Aufschlag.", "en": "The side that lost a set begins the following set with the serve."},
+          "erklaerung": {"de": "Kleiner Ausgleich: Verlierst du einen Satz, darfst du den nächsten aufschlagen.", "en": "A small compensation: if you lose a set, you get to serve the next one."}
         }
       ]
     },
 
     {
       "id": "seitenwechsel",
-      "titel": {"de": "Seitenwechsel"},
+      "titel": {"de": "Seitenwechsel", "en": "Change of ends"},
       "regeln": [
         {
           "nummer": "3.1",
-          "titel": {"de": "Wann die Seiten gewechselt werden"},
-          "inhalt": {"de": "Die Parteien wechseln die Seiten: nach dem ersten Satz; nach dem zweiten Satz, wenn es einen dritten gibt; und im dritten Satz alle 6 gespielten Punkte."},
-          "erklaerung": {"de": "Damit niemand einen Nachteil durch Licht, Wind oder Untergrund hat, wechselt ihr die Seiten — zwischen den Sätzen und im Entscheidungssatz sogar alle 6 Punkte."}
+          "titel": {"de": "Wann die Seiten gewechselt werden", "en": "When to change ends"},
+          "inhalt": {"de": "Die Parteien wechseln die Seiten: nach dem ersten Satz; nach dem zweiten Satz, wenn es einen dritten gibt; und im dritten Satz alle 6 gespielten Punkte.", "en": "The sides change ends: after the first set; after the second set if there is a third; and in the third set every 6 points played."},
+          "erklaerung": {"de": "Damit niemand einen Nachteil durch Licht, Wind oder Untergrund hat, wechselt ihr die Seiten — zwischen den Sätzen und im Entscheidungssatz sogar alle 6 Punkte.", "en": "So that no one is disadvantaged by light, wind or surface, you change ends — between sets and, in the deciding set, even every 6 points."}
         },
         {
           "nummer": "3.2",
-          "titel": {"de": "Vergessener Seitenwechsel"},
-          "inhalt": {"de": "Wurde ein Seitenwechsel versäumt, erfolgt er, sobald der Fehler bemerkt wird und der Speeder nicht im Spiel ist. Der Punktestand bleibt bestehen."},
-          "erklaerung": {"de": "Vergesst ihr den Wechsel, holt ihr ihn einfach nach, sobald es auffällt — die Punkte bleiben, wie sie sind."}
+          "titel": {"de": "Vergessener Seitenwechsel", "en": "A forgotten change of ends"},
+          "inhalt": {"de": "Wurde ein Seitenwechsel versäumt, erfolgt er, sobald der Fehler bemerkt wird und der Speeder nicht im Spiel ist. Der Punktestand bleibt bestehen.", "en": "If a change of ends was missed, it takes place as soon as the mistake is noticed and the Speeder is not in play. The score stands."},
+          "erklaerung": {"de": "Vergesst ihr den Wechsel, holt ihr ihn einfach nach, sobald es auffällt — die Punkte bleiben, wie sie sind.", "en": "If you forget the change, you simply make it up as soon as it's noticed — the points stay as they are."}
         }
       ]
     },
 
     {
       "id": "aufschlag",
-      "titel": {"de": "Der Aufschlag"},
-      "einleitung": {"de": "Der Aufschlag hat die genauesten Regeln im ganzen Spiel. Wer sie kennt, verschenkt keine Punkte durch ungültige Aufschläge."},
+      "titel": {"de": "Der Aufschlag", "en": "The serve"},
+      "einleitung": {"de": "Der Aufschlag hat die genauesten Regeln im ganzen Spiel. Wer sie kennt, verschenkt keine Punkte durch ungültige Aufschläge.", "en": "The serve has the most precise rules in the whole game. Knowing them means you don't give away points through invalid serves."},
       "regeln": [
         {
           "nummer": "4.1.2",
-          "titel": {"de": "Aus der Aufschlagzone"},
-          "inhalt": {"de": "Der Aufschläger steht im hinteren Teil des Spielfelds (Aufschlagzone), ohne im Moment des Schlags mit einem Teil des Fußes die (gedachte) Aufschlaglinie zu übertreten."},
-          "erklaerung": {"de": "Du schlägst aus dem hinteren Bereich deines Feldes auf und darfst dabei nicht nach vorn über die Aufschlaglinie treten."},
+          "titel": {"de": "Aus der Aufschlagzone", "en": "From the serving zone"},
+          "inhalt": {"de": "Der Aufschläger steht im hinteren Teil des Spielfelds (Aufschlagzone), ohne im Moment des Schlags mit einem Teil des Fußes die (gedachte) Aufschlaglinie zu übertreten.", "en": "The server stands in the rear part of the field (the serving zone), without any part of the foot crossing the (imaginary) serve line at the moment of the stroke."},
+          "erklaerung": {"de": "Du schlägst aus dem hinteren Bereich deines Feldes auf und darfst dabei nicht nach vorn über die Aufschlaglinie treten.", "en": "You serve from the rear area of your field and must not step forward over the serve line while doing so."},
           "querverweis": ["aufschlag"]
         },
         {
           "nummer": "4.1.3",
-          "titel": {"de": "Ein Fuß am Boden"},
-          "inhalt": {"de": "Vom Anfang bis zum Ende des Aufschlags muss ein Fuß des Aufschlägers den Boden berühren."},
-          "erklaerung": {"de": "Du darfst beim Aufschlag nicht abspringen — ein Fuß bleibt die ganze Zeit am Boden."}
+          "titel": {"de": "Ein Fuß am Boden", "en": "One foot on the ground"},
+          "inhalt": {"de": "Vom Anfang bis zum Ende des Aufschlags muss ein Fuß des Aufschlägers den Boden berühren.", "en": "From the beginning to the end of the serve, one foot of the server must touch the ground."},
+          "erklaerung": {"de": "Du darfst beim Aufschlag nicht abspringen — ein Fuß bleibt die ganze Zeit am Boden.", "en": "You may not jump on the serve — one foot stays on the ground the whole time."}
         },
         {
           "nummer": "4.1.4",
-          "titel": {"de": "Speeder unterhalb der Schlaghand"},
-          "inhalt": {"de": "Im Moment des Treffens auf den Schläger muss der gesamte Speeder unterhalb der Schlaghand des Aufschlägers sein."},
-          "erklaerung": {"de": "Das ist die zentrale Aufschlagregel: Du triffst den Speeder von unten. Der ganze Speeder ist im Treffmoment tiefer als deine Schlaghand — ein Aufschlag über Schulterhöhe ist ungültig."},
+          "titel": {"de": "Speeder unterhalb der Schlaghand", "en": "Speeder below the racket hand"},
+          "inhalt": {"de": "Im Moment des Treffens auf den Schläger muss der gesamte Speeder unterhalb der Schlaghand des Aufschlägers sein.", "en": "At the moment of contact with the racket, the entire Speeder must be below the server's racket hand."},
+          "erklaerung": {"de": "Das ist die zentrale Aufschlagregel: Du triffst den Speeder von unten. Der ganze Speeder ist im Treffmoment tiefer als deine Schlaghand — ein Aufschlag über Schulterhöhe ist ungültig.", "en": "This is the central serving rule: you hit the Speeder from below. At contact the whole Speeder is lower than your racket hand — a serve above shoulder height is invalid."},
           "querverweis": ["aufschlag"]
         },
         {
           "nummer": "4.1.5 / 4.1.1",
-          "titel": {"de": "Vorwärts und ohne Verzögern"},
-          "inhalt": {"de": "Nach Beginn des Aufschlags muss der Schläger bis zum Ende der Bewegung nach vorn geführt werden (kein Unterbrechen). Der Aufschlag darf nicht absichtlich verzögert werden, sobald beide Parteien bereit sind."},
-          "erklaerung": {"de": "Die Aufschlagbewegung läuft in einem Zug nach vorn durch — du darfst sie nicht anhalten oder täuschen. Und wenn beide bereit sind, spielst du zügig."}
+          "titel": {"de": "Vorwärts und ohne Verzögern", "en": "Forward and without delay"},
+          "inhalt": {"de": "Nach Beginn des Aufschlags muss der Schläger bis zum Ende der Bewegung nach vorn geführt werden (kein Unterbrechen). Der Aufschlag darf nicht absichtlich verzögert werden, sobald beide Parteien bereit sind.", "en": "Once the serve has begun, the racket must be carried forward to the end of the motion (no interruption). The serve must not be deliberately delayed once both sides are ready."},
+          "erklaerung": {"de": "Die Aufschlagbewegung läuft in einem Zug nach vorn durch — du darfst sie nicht anhalten oder täuschen. Und wenn beide bereit sind, spielst du zügig.", "en": "The serving motion runs forward in one continuous move — you may not stop or fake it. And once both are ready, you serve promptly."}
         },
         {
           "nummer": "4.4",
-          "titel": {"de": "Nur wenn der Rückschläger bereit ist"},
-          "inhalt": {"de": "Der Aufschläger darf nur beginnen, wenn der Rückschläger bereit ist. Bereit ist der Rückschläger, wenn erkennbar ist, dass er den Aufschlag returnieren will."},
-          "erklaerung": {"de": "Schlag nicht auf, solange dein Gegner noch nicht steht. Erst wenn er sichtbar bereit ist, darfst du servieren."}
+          "titel": {"de": "Nur wenn der Rückschläger bereit ist", "en": "Only when the returner is ready"},
+          "inhalt": {"de": "Der Aufschläger darf nur beginnen, wenn der Rückschläger bereit ist. Bereit ist der Rückschläger, wenn erkennbar ist, dass er den Aufschlag returnieren will.", "en": "The server may only begin when the returner is ready. The returner is ready when it is apparent that they intend to return the serve."},
+          "erklaerung": {"de": "Schlag nicht auf, solange dein Gegner noch nicht steht. Erst wenn er sichtbar bereit ist, darfst du servieren.", "en": "Don't serve while your opponent isn't set. Only when they are visibly ready may you serve."}
         },
         {
           "nummer": "4.6",
-          "titel": {"de": "Drei Aufschläge in Folge"},
-          "inhalt": {"de": "Jede Partei führt 3 aufeinanderfolgende Aufschläge durch, bevor die andere Partei das Aufschlagrecht erhält."},
-          "erklaerung": {"de": "Du schlägst dreimal hintereinander auf, dann wechselt das Aufschlagrecht zum Gegner. Das gibt dem Spiel seinen Rhythmus."},
+          "titel": {"de": "Drei Aufschläge in Folge", "en": "Three serves in a row"},
+          "inhalt": {"de": "Jede Partei führt 3 aufeinanderfolgende Aufschläge durch, bevor die andere Partei das Aufschlagrecht erhält.", "en": "Each side performs 3 consecutive serves before the other side gets the right to serve."},
+          "erklaerung": {"de": "Du schlägst dreimal hintereinander auf, dann wechselt das Aufschlagrecht zum Gegner. Das gibt dem Spiel seinen Rhythmus.", "en": "You serve three times in a row, then the right to serve passes to the opponent. That gives the game its rhythm."},
           "querverweis": ["momentum_lesen_und_drehen"]
         },
         {
           "nummer": "4.7",
-          "titel": {"de": "Ab 15:15 nach jedem Punkt"},
-          "inhalt": {"de": "Bei einem Punktestand von 15:15 wechselt das Aufschlagrecht nach jedem Punkt."},
-          "erklaerung": {"de": "In der Schlussphase eines engen Satzes kann sich niemand mehr über drei Aufschläge absetzen — ab 15:15 wandert das Aufschlagrecht nach jedem einzelnen Punkt."},
+          "titel": {"de": "Ab 15:15 nach jedem Punkt", "en": "From 15:15 after every point"},
+          "inhalt": {"de": "Bei einem Punktestand von 15:15 wechselt das Aufschlagrecht nach jedem Punkt.", "en": "At a score of 15:15, the right to serve changes after every point."},
+          "erklaerung": {"de": "In der Schlussphase eines engen Satzes kann sich niemand mehr über drei Aufschläge absetzen — ab 15:15 wandert das Aufschlagrecht nach jedem einzelnen Punkt.", "en": "In the closing phase of a tight set no one can pull ahead over three serves anymore — from 15:15 the right to serve moves after every single point."},
           "querverweis": ["engen_satz_fuehren"]
         },
         {
           "nummer": "4.5",
-          "titel": {"de": "Nach dem Aufschlag frei"},
-          "inhalt": {"de": "Nach dem Aufschlag darf sich der Aufschläger aus der Aufschlagzone bewegen."},
-          "erklaerung": {"de": "Sobald der Aufschlag raus ist, bist du frei — du bewegst dich normal im Feld und spielst die Rallye."}
+          "titel": {"de": "Nach dem Aufschlag frei", "en": "Free after the serve"},
+          "inhalt": {"de": "Nach dem Aufschlag darf sich der Aufschläger aus der Aufschlagzone bewegen.", "en": "After the serve, the server may move out of the serving zone."},
+          "erklaerung": {"de": "Sobald der Aufschlag raus ist, bist du frei — du bewegst dich normal im Feld und spielst die Rallye.", "en": "As soon as the serve is out, you're free — you move normally in the field and play the rally."}
         },
         {
           "nummer": "5.1.1",
-          "titel": {"de": "Extremwetter: 30 Sekunden"},
-          "inhalt": {"de": "Bei extremen Wetterbedingungen muss der Aufschlag spätestens 30 Sekunden nach dem Ende des vorherigen Punkts erfolgen."},
-          "erklaerung": {"de": "Draußen bei Wind, Hitze oder Kälte soll das Spiel nicht ins Stocken geraten: Nach jedem Punkt hast du dann höchstens 30 Sekunden bis zum nächsten Aufschlag. Diese Vorgabe kam mit der Fassung 2024 dazu."}
+          "titel": {"de": "Extremwetter: 30 Sekunden", "en": "Extreme weather: 30 seconds"},
+          "inhalt": {"de": "Bei extremen Wetterbedingungen muss der Aufschlag spätestens 30 Sekunden nach dem Ende des vorherigen Punkts erfolgen.", "en": "In extreme weather conditions, the serve must be made no later than 30 seconds after the end of the previous point."},
+          "erklaerung": {"de": "Draußen bei Wind, Hitze oder Kälte soll das Spiel nicht ins Stocken geraten: Nach jedem Punkt hast du dann höchstens 30 Sekunden bis zum nächsten Aufschlag. Diese Vorgabe kam mit der Fassung 2024 dazu.", "en": "Outdoors in wind, heat or cold, the game shouldn't stall: after each point you then have at most 30 seconds until the next serve. This requirement was added with the 2024 version."}
         }
       ]
     },
 
     {
       "id": "einzel",
-      "titel": {"de": "Einzel"},
+      "titel": {"de": "Einzel", "en": "Singles"},
       "regeln": [
         {
           "nummer": "5.1 / 5.2",
-          "titel": {"de": "Aufschlag und Ablauf im Einzel"},
-          "inhalt": {"de": "Aufgeschlagen wird aus dem hinteren Court (Aufschlagzone), von jeder Position darin. Während der Rallye spielen Aufschläger und Rückschläger den Speeder abwechselnd von jeder Position aus, bis er aus dem Spiel ist."},
-          "erklaerung": {"de": "Im Einzel ist es einfach: aufschlagen aus dem hinteren Bereich, danach spielt ihr abwechselnd, wo ihr wollt, bis der Ballwechsel endet."}
+          "titel": {"de": "Aufschlag und Ablauf im Einzel", "en": "Serve and flow in singles"},
+          "inhalt": {"de": "Aufgeschlagen wird aus dem hinteren Court (Aufschlagzone), von jeder Position darin. Während der Rallye spielen Aufschläger und Rückschläger den Speeder abwechselnd von jeder Position aus, bis er aus dem Spiel ist.", "en": "The serve is made from the rear court (the serving zone), from any position within it. During the rally, server and returner play the Speeder alternately from any position until it is out of play."},
+          "erklaerung": {"de": "Im Einzel ist es einfach: aufschlagen aus dem hinteren Bereich, danach spielt ihr abwechselnd, wo ihr wollt, bis der Ballwechsel endet.", "en": "In singles it's simple: serve from the rear area, then you play alternately wherever you like until the rally ends."}
         }
       ]
     },
 
     {
       "id": "doppel",
-      "titel": {"de": "Doppel"},
-      "einleitung": {"de": "Das Doppel hat eigene Regeln für Rollen, Aufschlagreihenfolge und Position. Sie zu kennen, verhindert vermeidbare Punktverluste."},
+      "titel": {"de": "Doppel", "en": "Doubles"},
+      "einleitung": {"de": "Das Doppel hat eigene Regeln für Rollen, Aufschlagreihenfolge und Position. Sie zu kennen, verhindert vermeidbare Punktverluste.", "en": "Doubles has its own rules for roles, serving order and position. Knowing them prevents avoidable lost points."},
       "regeln": [
         {
           "nummer": "6.1",
-          "titel": {"de": "Rollen im Doppel"},
-          "inhalt": {"de": "Ein Spieler der aufschlagenden Partei schlägt aus der Aufschlagzone auf. Jeder Spieler der rückschlagenden Partei gilt als Rückschläger. Nach dem Aufschlag darf der Speeder von jedem Spieler der Partei von jeder Position gespielt werden (beachte die Positionsregel)."},
-          "erklaerung": {"de": "Ihr teilt euch in Angriffsspieler (vorn) und Rückraumspieler (hinten). Nach dem Aufschlag darf jeder von euch den Speeder nehmen — solange ihr die Positionsregel einhaltet."},
+          "titel": {"de": "Rollen im Doppel", "en": "Roles in doubles"},
+          "inhalt": {"de": "Ein Spieler der aufschlagenden Partei schlägt aus der Aufschlagzone auf. Jeder Spieler der rückschlagenden Partei gilt als Rückschläger. Nach dem Aufschlag darf der Speeder von jedem Spieler der Partei von jeder Position gespielt werden (beachte die Positionsregel).", "en": "One player of the serving side serves from the serving zone. Every player of the receiving side counts as a returner. After the serve, the Speeder may be played by any player of the side from any position (mind the position rule)."},
+          "erklaerung": {"de": "Ihr teilt euch in Angriffsspieler (vorn) und Rückraumspieler (hinten). Nach dem Aufschlag darf jeder von euch den Speeder nehmen — solange ihr die Positionsregel einhaltet.", "en": "You split into an attacking player (front) and a backcourt player (back). After the serve either of you may take the Speeder — as long as you keep to the position rule."},
           "querverweis": ["doppel_grundlagen", "doppel_als_eigenes_spiel"]
         },
         {
           "nummer": "6.4",
-          "titel": {"de": "Aufschlagreihenfolge"},
-          "inhalt": {"de": "Das Aufschlagrecht wechselt in fester Reihenfolge: vom Rückraumspieler der Partei A (der zu Beginn aufschlägt) zum Angriffsspieler der Partei B (der dann aufschlägt und Rückraumspieler wird), dann zum Partner von A, dann zum Partner von B, dann wieder zum ersten Aufschläger. Außerhalb dieser Reihenfolge darf niemand aufschlagen."},
-          "erklaerung": {"de": "Der Aufschlag wandert in einer festen Kette durch alle vier Spieler: A1 → B1 → A2 → B2 → wieder A1. Wer aufschlägt, ist dabei immer der Rückraumspieler. Diese Reihenfolge müsst ihr im Kopf haben."},
+          "titel": {"de": "Aufschlagreihenfolge", "en": "Serving order"},
+          "inhalt": {"de": "Das Aufschlagrecht wechselt in fester Reihenfolge: vom Rückraumspieler der Partei A (der zu Beginn aufschlägt) zum Angriffsspieler der Partei B (der dann aufschlägt und Rückraumspieler wird), dann zum Partner von A, dann zum Partner von B, dann wieder zum ersten Aufschläger. Außerhalb dieser Reihenfolge darf niemand aufschlagen.", "en": "The right to serve changes in a fixed order: from the backcourt player of side A (who serves at the start) to the attacking player of side B (who then serves and becomes the backcourt player), then to A's partner, then to B's partner, then back to the first server. No one may serve outside this order."},
+          "erklaerung": {"de": "Der Aufschlag wandert in einer festen Kette durch alle vier Spieler: A1 → B1 → A2 → B2 → wieder A1. Wer aufschlägt, ist dabei immer der Rückraumspieler. Diese Reihenfolge müsst ihr im Kopf haben.", "en": "The serve moves in a fixed chain through all four players: A1 → B1 → A2 → B2 → back to A1. Whoever serves is always the backcourt player. You need to keep this order in your head."},
           "querverweis": ["aufschlag_rueckschlag_doppel"]
         },
         {
           "nummer": "6.5.1",
-          "titel": {"de": "Die Positionsregel"},
-          "inhalt": {"de": "Positionsfehler während der Rallye: Der Rückraumspieler setzt im Moment des Schlags einen Teil seines grundliniennäheren Fußes vor den Fuß seines Partners — oder der Angreifer setzt seinen grundliniennäheren Fuß hinter den Fuß seines Partners. Beides ist ein Positionsfehler."},
-          "erklaerung": {"de": "Im Treffmoment muss die Reihenfolge stimmen: Der Angriffsspieler bleibt vorn, der Rückraumspieler hinten. Vertauscht ihr die Ordnung im Moment des Schlags, ist es ein Fehler."},
+          "titel": {"de": "Die Positionsregel", "en": "The position rule"},
+          "inhalt": {"de": "Positionsfehler während der Rallye: Der Rückraumspieler setzt im Moment des Schlags einen Teil seines grundliniennäheren Fußes vor den Fuß seines Partners — oder der Angreifer setzt seinen grundliniennäheren Fuß hinter den Fuß seines Partners. Beides ist ein Positionsfehler.", "en": "Position fault during the rally: at the moment of the stroke the backcourt player places part of their baseline-nearer foot ahead of their partner's foot — or the attacker places their baseline-nearer foot behind their partner's foot. Both are a position fault."},
+          "erklaerung": {"de": "Im Treffmoment muss die Reihenfolge stimmen: Der Angriffsspieler bleibt vorn, der Rückraumspieler hinten. Vertauscht ihr die Ordnung im Moment des Schlags, ist es ein Fehler.", "en": "At contact the order must be right: the attacking player stays in front, the backcourt player behind. If you swap the order at the moment of the stroke, it's a fault."},
           "querverweis": ["doppel_grundlagen", "das_umschalten_im_doppel"]
         },
         {
           "nummer": "6.5.2",
-          "titel": {"de": "Folge des Positionsfehlers"},
-          "inhalt": {"de": "Wird ein Positionsfehler beim Aufschlag oder während der Rallye beim Rückschlag bestraft, ist der Punkt sofort verloren, obwohl der Ballwechsel noch nicht beendet ist."},
-          "erklaerung": {"de": "Ein Positionsfehler beendet den Ballwechsel sofort zu euren Ungunsten — der Punkt ist weg, auch wenn ihr gerade angreift. Deshalb lohnt sich die saubere Aufteilung."}
+          "titel": {"de": "Folge des Positionsfehlers", "en": "Consequence of the position fault"},
+          "inhalt": {"de": "Wird ein Positionsfehler beim Aufschlag oder während der Rallye beim Rückschlag bestraft, ist der Punkt sofort verloren, obwohl der Ballwechsel noch nicht beendet ist.", "en": "If a position fault is penalized on the serve or during the rally on the return, the point is lost immediately, even though the rally is not yet over."},
+          "erklaerung": {"de": "Ein Positionsfehler beendet den Ballwechsel sofort zu euren Ungunsten — der Punkt ist weg, auch wenn ihr gerade angreift. Deshalb lohnt sich die saubere Aufteilung.", "en": "A position fault ends the rally immediately against you — the point is gone, even if you're on the attack. That's why a clean division of roles pays off."}
         },
         {
           "nummer": "6.6",
-          "titel": {"de": "Rollen zu Satzbeginn bekannt geben"},
-          "inhalt": {"de": "Zu Beginn des Satzes gibt zuerst die rückschlagende Partei bekannt, wer Angriffs- und wer Rückraumspieler ist, danach die aufschlagende Partei."},
-          "erklaerung": {"de": "Vor jedem Satz legt ihr eure Rollen offen fest, damit für alle klar ist, wer vorn und wer hinten spielt."}
+          "titel": {"de": "Rollen zu Satzbeginn bekannt geben", "en": "Announcing roles at the start of the set"},
+          "inhalt": {"de": "Zu Beginn des Satzes gibt zuerst die rückschlagende Partei bekannt, wer Angriffs- und wer Rückraumspieler ist, danach die aufschlagende Partei.", "en": "At the start of the set, the receiving side first announces who is the attacking player and who is the backcourt player, then the serving side does so."},
+          "erklaerung": {"de": "Vor jedem Satz legt ihr eure Rollen offen fest, damit für alle klar ist, wer vorn und wer hinten spielt.", "en": "Before each set you openly set your roles, so it's clear to everyone who plays in front and who at the back."}
         }
       ]
     },
 
     {
       "id": "fehler",
-      "titel": {"de": "Fehler"},
-      "einleitung": {"de": "Ein Fehler beendet den Ballwechsel und gibt der anderen Partei den Punkt. Das sind die wichtigsten Fehlerarten."},
+      "titel": {"de": "Fehler", "en": "Faults"},
+      "einleitung": {"de": "Ein Fehler beendet den Ballwechsel und gibt der anderen Partei den Punkt. Das sind die wichtigsten Fehlerarten.", "en": "A fault ends the rally and gives the other side the point. These are the most important kinds of fault."},
       "regeln": [
         {
           "nummer": "7.1",
-          "titel": {"de": "Ungültiger Aufschlag"},
-          "inhalt": {"de": "Ein Aufschlag, der nicht gemäß den Aufschlagregeln ausgeführt wird, ist ein Fehler."},
-          "erklaerung": {"de": "Alles aus dem Aufschlag-Abschnitt gilt: falscher Stand, Sprung, Speeder zu hoch getroffen, unterbrochene Bewegung — jeder Verstoß ist ein Fehler."}
+          "titel": {"de": "Ungültiger Aufschlag", "en": "Invalid serve"},
+          "inhalt": {"de": "Ein Aufschlag, der nicht gemäß den Aufschlagregeln ausgeführt wird, ist ein Fehler.", "en": "A serve that is not performed according to the serving rules is a fault."},
+          "erklaerung": {"de": "Alles aus dem Aufschlag-Abschnitt gilt: falscher Stand, Sprung, Speeder zu hoch getroffen, unterbrochene Bewegung — jeder Verstoß ist ein Fehler.", "en": "Everything from the serve section applies: wrong stance, a jump, the Speeder hit too high, an interrupted motion — every violation is a fault."}
         },
         {
           "nummer": "7.2.1 / 7.2.2",
-          "titel": {"de": "Speeder außerhalb, an Decke oder Wand"},
-          "inhalt": {"de": "Fehler, wenn der Speeder den Court außerhalb der Linien berührt (nicht auf oder innerhalb der Linien) oder die Decke oder Seitenwände berührt."},
-          "erklaerung": {"de": "Auf der Linie zählt als drin. Außerhalb, an der Decke oder an einer Wand ist Fehler. Anders als im Squash spielt hier keine Wand mit."},
+          "titel": {"de": "Speeder außerhalb, an Decke oder Wand", "en": "Speeder out, on the ceiling or a wall"},
+          "inhalt": {"de": "Fehler, wenn der Speeder den Court außerhalb der Linien berührt (nicht auf oder innerhalb der Linien) oder die Decke oder Seitenwände berührt.", "en": "A fault when the Speeder touches the court outside the lines (not on or inside the lines) or touches the ceiling or side walls."},
+          "erklaerung": {"de": "Auf der Linie zählt als drin. Außerhalb, an der Decke oder an einer Wand ist Fehler. Anders als im Squash spielt hier keine Wand mit.", "en": "On the line counts as in. Outside, on the ceiling or on a wall is a fault. Unlike in squash, no wall is in play here."},
           "querverweis": ["spielziel_verstehen"]
         },
         {
           "nummer": "7.2.3 / 7.2.4 (ICO 8.2.3)",
-          "titel": {"de": "Speeder berührt Spieler oder Objekt"},
-          "inhalt": {"de": "Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt — einschließlich Schuhe und Socken —, oder ein Objekt bzw. eine Person außerhalb des Courts."},
-          "erklaerung": {"de": "Trifft der Speeder dich, deine Kleidung, deine Schuhe oder Socken oder etwas außerhalb des Courts, ist der Ballwechsel verloren. Die Fassung 2024 nennt Schuhe und Socken ausdrücklich — ein Grund mehr für eng sitzende Kleidung."},
+          "titel": {"de": "Speeder berührt Spieler oder Objekt", "en": "Speeder touches a player or object"},
+          "inhalt": {"de": "Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt — einschließlich Schuhe und Socken —, oder ein Objekt bzw. eine Person außerhalb des Courts.", "en": "A fault when the Speeder touches a player or their clothing — including shoes and socks — or an object or person outside the court."},
+          "erklaerung": {"de": "Trifft der Speeder dich, deine Kleidung, deine Schuhe oder Socken oder etwas außerhalb des Courts, ist der Ballwechsel verloren. Die Fassung 2024 nennt Schuhe und Socken ausdrücklich — ein Grund mehr für eng sitzende Kleidung.", "en": "If the Speeder hits you, your clothing, your shoes or socks, or something outside the court, the rally is lost. The 2024 version names shoes and socks explicitly — one more reason for close-fitting clothing."},
           "querverweis": ["funktionskleidung"]
         },
         {
           "nummer": "7.2.5 / 7.2.6",
-          "titel": {"de": "Fangen, Werfen, Doppelberührung"},
-          "inhalt": {"de": "Fehler, wenn der Speeder mit dem Schläger gefangen/gestoppt und dann geworfen wird, oder wenn er von demselben Spieler zweimal berührt wird. Kein Fehler ist es, wenn der Speeder in einem Schlag gleichzeitig Rahmen und Besaitung trifft."},
-          "erklaerung": {"de": "Du musst den Speeder sauber schlagen, nicht fangen und werfen, und nur einmal treffen. Wenn er in einem Schlag zugleich Rahmen und Saiten berührt, ist das erlaubt."}
+          "titel": {"de": "Fangen, Werfen, Doppelberührung", "en": "Catching, throwing, double touch"},
+          "inhalt": {"de": "Fehler, wenn der Speeder mit dem Schläger gefangen/gestoppt und dann geworfen wird, oder wenn er von demselben Spieler zweimal berührt wird. Kein Fehler ist es, wenn der Speeder in einem Schlag gleichzeitig Rahmen und Besaitung trifft.", "en": "A fault when the Speeder is caught/stopped with the racket and then thrown, or when it is touched twice by the same player. It is not a fault if the Speeder hits the frame and strings at the same time in a single stroke."},
+          "erklaerung": {"de": "Du musst den Speeder sauber schlagen, nicht fangen und werfen, und nur einmal treffen. Wenn er in einem Schlag zugleich Rahmen und Saiten berührt, ist das erlaubt.", "en": "You must hit the Speeder cleanly, not catch and throw it, and touch it only once. If it touches frame and strings together in a single stroke, that's allowed."}
         },
         {
           "nummer": "7.2.7 / 7.2.8",
-          "titel": {"de": "Partner-Doppelberührung, Speeder nicht rüber"},
-          "inhalt": {"de": "Fehler, wenn der Speeder von einem Spieler und danach von dessen Partner berührt wird, oder wenn er den Schläger berührt und danach nicht in Richtung der anderen Court-Seite fliegt."},
-          "erklaerung": {"de": "Im Doppel darf nur einer von euch den Speeder pro Schlag berühren. Und dein Schlag muss den Speeder tatsächlich zur anderen Seite bringen."}
+          "titel": {"de": "Partner-Doppelberührung, Speeder nicht rüber", "en": "Partner double touch, Speeder not over"},
+          "inhalt": {"de": "Fehler, wenn der Speeder von einem Spieler und danach von dessen Partner berührt wird, oder wenn er den Schläger berührt und danach nicht in Richtung der anderen Court-Seite fliegt.", "en": "A fault when the Speeder is touched by one player and then by their partner, or when it touches the racket and then does not fly toward the other side of the court."},
+          "erklaerung": {"de": "Im Doppel darf nur einer von euch den Speeder pro Schlag berühren. Und dein Schlag muss den Speeder tatsächlich zur anderen Seite bringen.", "en": "In doubles only one of you may touch the Speeder per stroke. And your stroke must actually get the Speeder to the other side."}
         },
         {
           "nummer": "7.3",
-          "titel": {"de": "Behindern, Ablenken, ins Feld greifen"},
-          "inhalt": {"de": "Fehler, wenn ein Spieler bei laufendem Speeder den gegnerischen Court mit Schläger oder Körper betritt, den Gegner an einem ordnungsgemäßen Schlag hindert oder ihn durch Rufen oder Gestikulieren ablenkt."},
-          "erklaerung": {"de": "Bleib bei dir: nicht ins gegnerische Feld greifen, den Gegner nicht behindern und ihn nicht durch Rufen oder Gesten stören."}
+          "titel": {"de": "Behindern, Ablenken, ins Feld greifen", "en": "Obstructing, distracting, reaching into the field"},
+          "inhalt": {"de": "Fehler, wenn ein Spieler bei laufendem Speeder den gegnerischen Court mit Schläger oder Körper betritt, den Gegner an einem ordnungsgemäßen Schlag hindert oder ihn durch Rufen oder Gestikulieren ablenkt.", "en": "A fault when, with the Speeder in play, a player enters the opponent's court with racket or body, prevents the opponent from making a proper stroke, or distracts them by shouting or gesturing."},
+          "erklaerung": {"de": "Bleib bei dir: nicht ins gegnerische Feld greifen, den Gegner nicht behindern und ihn nicht durch Rufen oder Gesten stören.", "en": "Stay on your side: don't reach into the opponent's field, don't obstruct the opponent, and don't disturb them by shouting or gesturing."}
         }
       ]
     },
 
     {
       "id": "in_out",
-      "titel": {"de": "In oder Out — die Linienentscheidung"},
-      "einleitung": {"de": "Wann ein Ball „in“ ist, entscheidet nicht der ganze Speeder, sondern sein Kopf. Die Fassung 2024 hat das ausdrücklich präzisiert."},
+      "titel": {"de": "In oder Out — die Linienentscheidung", "en": "In or out — the line call"},
+      "einleitung": {"de": "Wann ein Ball „in“ ist, entscheidet nicht der ganze Speeder, sondern sein Kopf. Die Fassung 2024 hat das ausdrücklich präzisiert.", "en": "Whether a ball is \"in\" is decided not by the whole Speeder but by its head. The 2024 version made this explicit."},
       "regeln": [
         {
           "nummer": "11.6.1",
-          "titel": {"de": "Der Kopf entscheidet"},
-          "inhalt": {"de": "Der Kopf (die Schlagkappe) des Speeders trifft zuerst auf. Berührt der Kopf die Linie, ist der Ball „in“. Berührt der Kopf die Linie nicht, ist der Ball „out“ — auch wenn ein anderer Teil des Speeders die Linie berührt."},
-          "erklaerung": {"de": "Schau auf die Kappe, nicht auf den Korb: Nur wenn der Kopf die Linie trifft, zählt der Ball als drin. Streift nur der Korb die Linie, während der Kopf daneben aufkommt, ist er draußen."},
+          "titel": {"de": "Der Kopf entscheidet", "en": "The head decides"},
+          "inhalt": {"de": "Der Kopf (die Schlagkappe) des Speeders trifft zuerst auf. Berührt der Kopf die Linie, ist der Ball „in“. Berührt der Kopf die Linie nicht, ist der Ball „out“ — auch wenn ein anderer Teil des Speeders die Linie berührt.", "en": "The head (the cap) of the Speeder lands first. If the head touches the line, the ball is \"in\". If the head does not touch the line, the ball is \"out\" — even if another part of the Speeder touches the line."},
+          "erklaerung": {"de": "Schau auf die Kappe, nicht auf den Korb: Nur wenn der Kopf die Linie trifft, zählt der Ball als drin. Streift nur der Korb die Linie, während der Kopf daneben aufkommt, ist er draußen.", "en": "Look at the cap, not the basket: only if the head hits the line does the ball count as in. If only the basket grazes the line while the head lands beside it, it's out."},
           "querverweis": ["praezision_an_die_linien"]
         },
         {
           "nummer": "11.6.2",
-          "titel": {"de": "Schleifspur an der Frontlinie"},
-          "inhalt": {"de": "Kommt der Speeder vor der Frontlinie auf und hinterlässt eine sichtbare Schleifspur, gilt er nur dann als „in“, wenn die Spur höchstens so lang ist wie der Kopf des Speeders."},
-          "erklaerung": {"de": "Rutscht der Speeder vor der Frontlinie noch in die Linie, entscheidet die Länge der Schleifspur: Ist sie länger als der Kopf, war der erste Bodenkontakt zu weit vorn — der Ball ist draußen. Auch das ist neu in der Fassung 2024."}
+          "titel": {"de": "Schleifspur an der Frontlinie", "en": "Skid mark at the front line"},
+          "inhalt": {"de": "Kommt der Speeder vor der Frontlinie auf und hinterlässt eine sichtbare Schleifspur, gilt er nur dann als „in“, wenn die Spur höchstens so lang ist wie der Kopf des Speeders.", "en": "If the Speeder lands in front of the front line and leaves a visible skid mark, it counts as \"in\" only if the mark is at most as long as the head of the Speeder."},
+          "erklaerung": {"de": "Rutscht der Speeder vor der Frontlinie noch in die Linie, entscheidet die Länge der Schleifspur: Ist sie länger als der Kopf, war der erste Bodenkontakt zu weit vorn — der Ball ist draußen. Auch das ist neu in der Fassung 2024.", "en": "If the Speeder skids into the line from in front of it, the length of the skid mark decides: if it's longer than the head, the first ground contact was too far forward — the ball is out. This too is new in the 2024 version."}
         }
       ]
     },
 
     {
       "id": "wiederholungen",
-      "titel": {"de": "Wiederholungen"},
+      "titel": {"de": "Wiederholungen", "en": "Lets"},
       "regeln": [
         {
           "nummer": "8.1",
-          "titel": {"de": "Was eine Wiederholung ist"},
-          "inhalt": {"de": "Bei einer Wiederholung ist der Aufschlag der letzten Rallye ungültig, und der zuletzt aufschlagende Spieler wiederholt den Aufschlag."},
-          "erklaerung": {"de": "Eine Wiederholung (im Tennis 'Let') heißt: Der Ballwechsel zählt nicht, es gibt keinen Punkt, derselbe Aufschlag wird noch einmal gespielt."}
+          "titel": {"de": "Was eine Wiederholung ist", "en": "What a let is"},
+          "inhalt": {"de": "Bei einer Wiederholung ist der Aufschlag der letzten Rallye ungültig, und der zuletzt aufschlagende Spieler wiederholt den Aufschlag.", "en": "In a let, the serve of the last rally is invalid, and the player who served last repeats the serve."},
+          "erklaerung": {"de": "Eine Wiederholung (im Tennis 'Let') heißt: Der Ballwechsel zählt nicht, es gibt keinen Punkt, derselbe Aufschlag wird noch einmal gespielt.", "en": "A let (the same term tennis uses) means: the rally does not count, there is no point, and the same serve is played again."}
         },
         {
           "nummer": "8.2 (ICO 9.2)",
-          "titel": {"de": "Wann wiederholt wird"},
-          "inhalt": {"de": "Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; zwei Speeder sich in der Luft treffen; eine Linie während des Ballwechsels verschoben wird; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt."},
-          "erklaerung": {"de": "Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben. Die Fassung 2024 nennt zusätzlich zwei kollidierende Speeder und eine im Spiel verschobene Linie."}
+          "titel": {"de": "Wann wiederholt wird", "en": "When a let is played"},
+          "inhalt": {"de": "Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; zwei Speeder sich in der Luft treffen; eine Linie während des Ballwechsels verschoben wird; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt.", "en": "A let is played when, among other things: the server strikes before the returner is ready; a fault is committed by both sides at once; the Speeder is defective or deforms; two Speeders meet in the air; a line is moved during the rally; play is disturbed; or an object falls into the field during the rally."},
+          "erklaerung": {"de": "Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben. Die Fassung 2024 nennt zusätzlich zwei kollidierende Speeder und eine im Spiel verschobene Linie.", "en": "Whenever something unfair or unforeseen happens that can't be blamed on either side, the rally is replayed instead of awarding a point. The 2024 version additionally names two colliding Speeders and a line moved during play."}
         }
       ]
     },
 
     {
       "id": "speeder_im_spiel",
-      "titel": {"de": "Wann der Speeder aus dem Spiel ist"},
+      "titel": {"de": "Wann der Speeder aus dem Spiel ist", "en": "When the Speeder is out of play"},
       "regeln": [
         {
           "nummer": "9",
-          "titel": {"de": "Ende des Ballwechsels"},
-          "inhalt": {"de": "Der Speeder ist nicht mehr im Spiel, wenn er den Boden des Courts berührt oder wenn es einen Fehler oder eine Wiederholung gibt."},
-          "erklaerung": {"de": "Der Ballwechsel endet in dem Moment, in dem der Speeder den Boden berührt oder ein Fehler bzw. eine Wiederholung eintritt. Bis dahin ist er im Spiel."}
+          "titel": {"de": "Ende des Ballwechsels", "en": "End of the rally"},
+          "inhalt": {"de": "Der Speeder ist nicht mehr im Spiel, wenn er den Boden des Courts berührt oder wenn es einen Fehler oder eine Wiederholung gibt.", "en": "The Speeder is no longer in play when it touches the ground of the court or when there is a fault or a let."},
+          "erklaerung": {"de": "Der Ballwechsel endet in dem Moment, in dem der Speeder den Boden berührt oder ein Fehler bzw. eine Wiederholung eintritt. Bis dahin ist er im Spiel.", "en": "The rally ends the moment the Speeder touches the ground or a fault or let occurs. Until then it is in play."}
         }
       ]
     },
 
     {
       "id": "kommunikation",
-      "titel": {"de": "Verständigung ohne Schiedsrichter"},
-      "einleitung": {"de": "Bei Spielen ohne Schiedsrichter zeigt ihr Entscheidungen mit einem einfachen Handzeichen der freien Hand an."},
+      "titel": {"de": "Verständigung ohne Schiedsrichter", "en": "Communicating without a referee"},
+      "einleitung": {"de": "Bei Spielen ohne Schiedsrichter zeigt ihr Entscheidungen mit einem einfachen Handzeichen der freien Hand an.", "en": "In matches without a referee, you signal decisions with a simple hand sign of the free hand."},
       "regeln": [
         {
-          "titel": {"de": "Die drei Handzeichen"},
-          "inhalt": {"de": "„In“: der Zeigefinger der freien Hand zeigt nach unten. „Out“: der Zeigefinger zeigt nach oben. „Wiederholung“: Zeige- und Mittelfinger zeigen als „V“ nach oben."},
-          "erklaerung": {"de": "Merke dir die Richtung: Zeigefinger nach unten heißt „drin“ (der Speeder war im Feld), nach oben heißt „aus“. Ein V mit zwei Fingern heißt „Wiederholung“. So klärt ihr Bälle fair ohne Schiedsrichter."}
+          "titel": {"de": "Die drei Handzeichen", "en": "The three hand signals"},
+          "inhalt": {"de": "„In“: der Zeigefinger der freien Hand zeigt nach unten. „Out“: der Zeigefinger zeigt nach oben. „Wiederholung“: Zeige- und Mittelfinger zeigen als „V“ nach oben.", "en": "\"In\": the index finger of the free hand points down. \"Out\": the index finger points up. \"Let\": index and middle finger point up as a \"V\"."},
+          "erklaerung": {"de": "Merke dir die Richtung: Zeigefinger nach unten heißt „drin“ (der Speeder war im Feld), nach oben heißt „aus“. Ein V mit zwei Fingern heißt „Wiederholung“. So klärt ihr Bälle fair ohne Schiedsrichter.", "en": "Remember the direction: index finger down means \"in\" (the Speeder was in the field), up means \"out\". A V with two fingers means \"let\". That's how you settle balls fairly without a referee."}
         }
       ]
     }
