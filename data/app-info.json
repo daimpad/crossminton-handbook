@@ -22,7 +22,7 @@
     "danksagungen": {
       "titel": {"de": "Dank und Quellen", "en": "Thanks and sources"},
       "eintraege": [
-        {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV), Stand Februar 2018.", "en": "The rules of play are taken from the official Crossminton rules of the International Crossminton Organisation (ICO), represented in Germany by the Deutscher Crossminton Verband (DCV), as of February 2018."},
+        {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV); die Wiedergabe ist mit der ICO-Fassung 2024/dec abgeglichen.", "en": "The rules of play are taken from the official Crossminton rules of the International Crossminton Organisation (ICO), represented in Germany by the Deutscher Crossminton Verband (DCV); the rendering is reconciled with the ICO version 2024/dec."},
         {"de": "Die fachlichen Grundlagen stützen sich auf Literatur und Materialien aus Crossminton, Trainingswissenschaft und Sportpsychologie sowie auf Transfererfahrungen aus verwandten Rückschlagsportarten.", "en": "The subject-matter fundamentals draw on literature and materials from Crossminton, training science and sport psychology, as well as transfer experience from related racket sports."},
         {"de": "Folgende Personen haben sich inhaltlich beteiligt: XXX. Dank an alle, die beim Testen und Verbessern geholfen haben.", "en": "The following people contributed to the content: XXX. Thanks to everyone who helped test and improve it."}
       ]
