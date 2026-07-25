@@ -1115,12 +1115,48 @@ details[open] summary { margin-bottom: 0.5rem; }
 /* ---------- Regeln (Referenz-Reiter) ---------- */
 
 /* Quellenangabe: sichtbar, aber zurückhaltend — Herausgeber und Stand. */
-.regeln-quelle {
+/* Quellenangabe im Regeln-Reiter: ruhige, abgesetzte Notiz-Karte (Metadaten,
+   nicht Inhalt) — getönter Grund + Akzentkante, damit sie sich von den weißen
+   Inhaltskarten abhebt, ohne mit ihnen zu konkurrieren. */
+.regeln-quelle-box {
+  margin: 0 0 1.1rem;
+  padding: 0.8rem 1rem;
+  background: var(--flaeche-2);
+  border: 1px solid var(--linie);
+  border-left: 3px solid var(--primaer);
+  border-radius: var(--radius);
+}
+.regeln-quelle-kopf {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.35rem;
+}
+.regeln-quelle-kopf .fa-solid { color: var(--primaer); }
+.regeln-quelle-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primaer-tief);
+}
+.regeln-quelle-text {
+  margin: 0 0 0.55rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--tinte-3);
+}
+.regeln-quelle-link {
+  display: inline-flex;
+  align-items: center;
   gap: 0.4rem;
-  margin-bottom: 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primaer-tief);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .regeln-quelle-link:hover { text-decoration: underline; }
 }
 
 /* Abschnitt = aufklappbares <details> mit H2-Titel und eigener Chevron-Marke
