@@ -255,7 +255,11 @@
     "fehler_laden_titel": "",
     "fehler_laden_text": "",
     "erneut_versuchen": "",
-    "speicher_warnung": ""
+    "speicher_warnung": "",
+    "nav_ausruestung": "",
+    "ausruestung_untertitel": "",
+    "ausruestung_intro": "",
+    "thema_wechseln": ""
   },
   "bausteine": {
     "grundposition": "",

@@ -7,7 +7,7 @@ import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderPlan } from './ansichten/plan.js';
-import { renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, renderUmgebung } from './ansichten/pfad.js';
+import { renderAusruestung, renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, renderUmgebung } from './ansichten/pfad.js';
 import { renderProfil } from './ansichten/profil.js';
 import { renderRegeln } from './ansichten/regeln.js';
 import { renderSuche } from './ansichten/suche.js';
@@ -39,15 +39,17 @@ function aktualisiereNavigation(segmente) {
       ? 'training'
       : segmente[0] === 'regeln' || segmente[0] === 'turnier'
         ? 'regeln'
-        : segmente[0] === 'ueber'
-          ? 'ueber'
-          : segmente[0] === 'mitmachen'
-            ? 'mitmachen'
-            : segmente[0] === 'profil'
-              ? 'profil'
-              : segmente[0] === 'suche'
-                ? 'suche'
-                : 'lernen';
+        : segmente[0] === 'ausruestung'
+          ? 'ausruestung'
+          : segmente[0] === 'ueber'
+            ? 'ueber'
+            : segmente[0] === 'mitmachen'
+              ? 'mitmachen'
+              : segmente[0] === 'profil'
+                ? 'profil'
+                : segmente[0] === 'suche'
+                  ? 'suche'
+                  : 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -61,7 +63,7 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['suche', 'regeln', 'turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
@@ -77,6 +79,7 @@ function beschrifteRahmen() {
     lernen: t('nav_lernen'),
     training: t('nav_training'),
     regeln: t('nav_regeln'),
+    ausruestung: t('nav_ausruestung'),
     suche: t('nav_suche'),
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
@@ -109,16 +112,12 @@ function beschrifteRahmen() {
 // Rendern mit, damit Sprachwechsel und Auswahl aktuell bleiben.
 function aktualisiereThemaMenue() {
   const aktiv = einstellungen().thema || 'auto';
-  const titel = document.querySelector('[data-thema-titel]');
-  if (titel) titel.textContent = t('thema');
   const beschriftung = { auto: t('thema_auto_kurz'), hell: t('thema_hell'), dunkel: t('thema_dunkel') };
-  for (const knopf of document.querySelectorAll('.menue-thema-knopf')) {
-    const wert = knopf.dataset.thema;
-    if (beschriftung[wert]) knopf.textContent = beschriftung[wert];
-    const istAktiv = wert === aktiv;
-    knopf.classList.toggle('aktiv', istAktiv);
-    knopf.setAttribute('aria-pressed', String(istAktiv));
-  }
+  const knopf = document.querySelector('[data-thema-zyklus]');
+  if (!knopf) return;
+  const etikett = knopf.querySelector('[data-thema-label]');
+  if (etikett) etikett.textContent = beschriftung[aktiv] || beschriftung.auto;
+  knopf.setAttribute('aria-label', `${t('thema')}: ${beschriftung[aktiv] || ''} — ${t('thema_wechseln')}`);
 }
 
 // Sprachanzeige (rein darstellend, app-info funktion_aktiv:false): zeigt die aktuell
@@ -267,6 +266,8 @@ function rendern() {
     renderSuche(el, daten);
   } else if (segmente[0] === 'regeln') {
     renderRegeln(el, daten);
+  } else if (segmente[0] === 'ausruestung') {
+    renderAusruestung(el, daten);
   } else if (segmente[0] === 'turnier') {
     renderTurnier(el, daten);
   } else if (segmente[0] === 'ueber') {
@@ -327,19 +328,21 @@ async function boot() {
     el.scrollIntoView();
   });
   initSprachanzeige();
-  for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt, .menue-mini')) {
+  // Navigierende Menüpunkte UND die Knopfleisten-Links (Profil/Suche) schließen das
+  // Menü; der Theme-Zyklus-Knopf (ein <button>) bleibt bewusst außen vor.
+  for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt, .menue-mini, a.menue-knopf')) {
     element.addEventListener('click', schliesseMenue);
   }
-  // Themen-Umschalter im Menü: setzt die Einstellung + wendet sie sofort an.
-  // Schließt das Menü bewusst nicht (Auswahl bleibt sichtbar vergleichbar).
-  for (const knopf of document.querySelectorAll('.menue-thema-knopf')) {
-    knopf.addEventListener('click', () => {
-      const wert = knopf.dataset.thema;
-      setzeEinstellung('thema', wert);
-      wendeThemaAn(wert);
-      aktualisiereThemaMenue();
-    });
-  }
+  // Darstellung im Menü: ein Knopf schaltet auto → hell → dunkel durch, wendet die
+  // Wahl sofort an und schließt das Menü bewusst nicht (Wirkung bleibt sichtbar).
+  document.querySelector('[data-thema-zyklus]')?.addEventListener('click', () => {
+    const reihenfolge = ['auto', 'hell', 'dunkel'];
+    const jetzt = einstellungen().thema || 'auto';
+    const naechste = reihenfolge[(reihenfolge.indexOf(jetzt) + 1) % reihenfolge.length];
+    setzeEinstellung('thema', naechste);
+    wendeThemaAn(naechste);
+    aktualisiereThemaMenue();
+  });
   window.addEventListener('keydown', (ereignis) => {
     if (ereignis.key === 'Escape') schliesseMenue();
   });

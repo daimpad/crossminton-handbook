@@ -17,6 +17,7 @@ function kontextZuListe(kontext) {
   if (art === 'umgebung') return '#/pfad/umgebung';
   if (art === 'witterung' || art === 'untergrund') return `#/pfad/${art}/${parameter}`;
   if (art === 'individual') return '#/pfad/individual';
+  if (art === 'ausruestung') return '#/ausruestung';
   return parameter ? `#/pfad/kompetenz/${parameter}` : '#/pfad/kompetenz';
 }
 

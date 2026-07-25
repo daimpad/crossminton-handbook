@@ -255,7 +255,11 @@
     "fehler_laden_titel": "Content could not be loaded",
     "fehler_laden_text": "The data files couldn't be reached. If the page is opened directly from the file system (file://), the browser blocks loading — start a small local server in the project folder instead, e.g.: python3 -m http.server",
     "erneut_versuchen": "Try again",
-    "speicher_warnung": "Note: the browser doesn't allow persistent storage (e.g. private mode). Progress is lost when you close it."
+    "speicher_warnung": "Note: the browser doesn't allow persistent storage (e.g. private mode). Progress is lost when you close it.",
+    "nav_ausruestung": "Equipment",
+    "ausruestung_untertitel": "Speeder, racket, shoes and clothing",
+    "ausruestung_intro": "The right gear makes the game easier, safer and more fun. Here's what really matters for the Speeder, racket, string tension, shoes and clothing.",
+    "thema_wechseln": "Switch appearance"
   },
   "bausteine": {
     "grundposition": "The base position",
