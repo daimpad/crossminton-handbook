@@ -483,43 +483,40 @@ body.im-onboarding main { padding-bottom: 2rem; }
   color: var(--primaer-tief);
 }
 
-/* Themen-Steuerung (Darstellung) im Menü — segmentierter Umschalter. */
-.menue-thema { padding: 0.4rem 0.9rem 0.7rem; }
-.menue-thema-titel {
-  display: block;
-  margin-bottom: 0.45rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--tinte-3);
-}
-.menue-thema-optionen {
+/* Knopfleiste im Menü: Profil · Suche · Darstellung als kompakte Knöpfe. */
+.menue-knopfleiste {
   display: flex;
-  gap: 0.3rem;
-  padding: 0.25rem;
-  background: var(--flaeche-2);
+  gap: 0.4rem;
+  padding: 0.2rem 0.9rem 0.4rem;
+}
+.menue-knopf {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.7rem 0.4rem;
   border: 1px solid var(--linie);
   border-radius: var(--radius);
-}
-.menue-thema-knopf {
-  flex: 1;
-  padding: 0.45rem 0.3rem;
-  border: 0;
-  border-radius: var(--radius-klein);
-  background: transparent;
+  background: var(--flaeche-2);
   color: var(--tinte-2);
+  text-decoration: none;
   font: inherit;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--uebergang), color var(--uebergang);
+  transition: background var(--uebergang), color var(--uebergang), box-shadow var(--uebergang);
 }
-.menue-thema-knopf.aktiv {
-  background: var(--flaeche);
+.menue-knopf .fa-solid {
+  font-size: 1.15rem;
+  color: var(--primaer);
+  transition: color var(--uebergang);
+}
+.menue-knopf.aktiv {
+  background: var(--primaer-weich);
   color: var(--primaer-tief);
-  box-shadow: var(--schatten-weich);
 }
+.menue-knopf.aktiv .fa-solid { color: var(--primaer-tief); }
 
 /* Kleine Rechtstext-Links am Menüfuß (Impressum · Datenschutz). */
 .menue-rechtliches {
@@ -537,7 +534,7 @@ body.im-onboarding main { padding-bottom: 2rem; }
 .menue-mini.aktiv { color: var(--primaer-tief); font-weight: 600; }
 
 @media (hover: hover) {
-  .menue-thema-knopf:not(.aktiv):hover { color: var(--primaer-tief); }
+  .menue-knopf:not(.aktiv):hover { background: var(--primaer-weich); color: var(--primaer-tief); box-shadow: var(--schatten-weich); }
   .menue-mini:hover { color: var(--primaer-tief); text-decoration: underline; }
 }
 

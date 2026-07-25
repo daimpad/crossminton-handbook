@@ -22,7 +22,7 @@
     "zur_liste": "Zur Liste",
     "baustein_navigation": "Baustein-Navigation",
     "nav_lernen": "Lernen",
-    "nav_training": "Training",
+    "nav_training": "Trainieren",
     "nav_regeln": "Regeln",
     "nav_ueber": "Über",
     "nav_mitmachen": "Mitmachen",
@@ -255,7 +255,11 @@
     "fehler_laden_titel": "Inhalte konnten nicht geladen werden",
     "fehler_laden_text": "Die Datendateien waren nicht erreichbar. Wird die Seite direkt aus dem Dateisystem geöffnet (file://), blockiert der Browser das Laden — starte stattdessen einen kleinen lokalen Server im Projektordner, z. B.: python3 -m http.server",
     "erneut_versuchen": "Erneut versuchen",
-    "speicher_warnung": "Hinweis: Der Browser erlaubt kein dauerhaftes Speichern (z. B. privater Modus). Fortschritt geht beim Schließen verloren."
+    "speicher_warnung": "Hinweis: Der Browser erlaubt kein dauerhaftes Speichern (z. B. privater Modus). Fortschritt geht beim Schließen verloren.",
+    "nav_ausruestung": "Ausrüstung",
+    "ausruestung_untertitel": "Speeder, Schläger, Schuhe und Kleidung",
+    "ausruestung_intro": "Das richtige Material macht das Spiel leichter, sicherer und macht mehr Spaß. Hier findest du, worauf es bei Speeder, Schläger, Bespannung, Schuhen und Kleidung wirklich ankommt.",
+    "thema_wechseln": "Darstellung wechseln"
   },
   "bausteine": {
     "grundposition": "Die Grundposition",

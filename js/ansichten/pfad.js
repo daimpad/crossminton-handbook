@@ -114,6 +114,18 @@ export function renderThemen(el, daten, domaene) {
     ${inhalt}`;
 }
 
+// Ausrüstung als eigene Seite (nicht nur Themen-Facette): dieselbe fachliche
+// Domäne wie im Themenpfad, aber als Top-Level-Ziel im Menü mit Hero und
+// Kurzeinstieg. Kontext 'ausruestung' führt aus den Bausteinen hierher zurück.
+export function renderAusruestung(el, daten) {
+  const pfad = themenpfad(daten, 'ausruestung');
+  const inhalt =
+    pfad.stationen.length === 0
+      ? leerHtml(t('leer_domaene'), 'fa-toolbox', entdeckenAktion())
+      : `<p class="leise ausruestung-intro">${esc(t('ausruestung_intro'))}</p>${balkenHtml(projektion(pfad.stationen.map((s) => s.baustein)))}${stationslisteHtml(pfad.stationen, 'ausruestung')}`;
+  el.innerHTML = `${heroKlein('fa-toolbox', label('domaene', 'ausruestung'), t('ausruestung_untertitel'), 'pf-teal')}${inhalt}`;
+}
+
 // Spielform-Achse (Querschnittsthema): rendert alle Bausteine einer Spielform
 // domänenübergreifend als ein Thema. Der Cross-Sport-Modifikator ist verdrahtet
 // (Delta-Chip in der Liste), analog zum Kompetenzpfad.
