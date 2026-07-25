@@ -16,7 +16,7 @@ import { renderTurnier } from './ansichten/turnier.js';
 import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
-import { initI18n, sprache, t, text } from './i18n.js';
+import { initI18n, setzeSprache, sprache, t, text } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
 import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb, setzeEinstellung } from './zustand.js';
 
@@ -120,9 +120,9 @@ function aktualisiereThemaMenue() {
   knopf.setAttribute('aria-label', `${t('thema')}: ${beschriftung[aktiv] || ''} — ${t('thema_wechseln')}`);
 }
 
-// Sprachanzeige (rein darstellend, app-info funktion_aktiv:false): zeigt die aktuell
-// dargestellte Sprache als Flagge + Kürzel neben dem Hamburger. Die Liste lässt sich
-// aufklappen, schaltet aber nichts um — das funktionale Umschalten bleibt im Profil.
+// Sprachwahl im Kopf (app-info funktion_aktiv:true): die Weltkugel zeigt die aktuelle
+// Sprache; das Untermenü listet de/en/fr/pl mit Flagge + Eigenname und schaltet beim
+// Klick funktional um (parallel zum Profil-Selektor). Die aktive ist markiert (✓).
 function spracheEintrag() {
   const s = daten?.appInfo?.sprachen;
   if (!s) return null;
@@ -147,10 +147,12 @@ function setzeSprachanzeige() {
   liste.innerHTML = (s.liste || [])
     .map((e) => {
       const istAktiv = e.code === aktivCode;
-      return `<li class="sprach-eintrag${istAktiv ? ' aktiv' : ''}"${istAktiv ? ' aria-current="true"' : ''}>
-        <span class="sprach-flagge" aria-hidden="true">${esc(e.flagge || '')}</span>
-        <span class="sprach-name">${esc(e.eigenname ?? text(e.label) ?? e.kuerzel)}</span>
-        <span class="sprach-haken" aria-hidden="true">${istAktiv ? '✓' : ''}</span>
+      return `<li>
+        <button type="button" class="sprach-eintrag${istAktiv ? ' aktiv' : ''}" data-sprach-code="${esc(e.code)}"${istAktiv ? ' aria-current="true"' : ''}>
+          <span class="sprach-flagge" aria-hidden="true">${esc(e.flagge || '')}</span>
+          <span class="sprach-name">${esc(e.eigenname ?? text(e.label) ?? e.kuerzel)}</span>
+          <span class="sprach-haken" aria-hidden="true">${istAktiv ? '✓' : ''}</span>
+        </button>
       </li>`;
     })
     .join('');
@@ -170,6 +172,23 @@ function initSprachanzeige() {
     const offen = knopf.getAttribute('aria-expanded') === 'true';
     liste.hidden = offen;
     knopf.setAttribute('aria-expanded', String(!offen));
+  });
+  // Sprachwahl im Kopf schaltet die App funktional um (lädt die Labels, persistiert
+  // die Einstellung und rendert global neu — beschriftet Navigation/Menü/Kopf mit).
+  liste.addEventListener('click', async (ereignis) => {
+    const ziel = ereignis.target.closest('[data-sprach-code]');
+    if (!ziel) return;
+    const neu = ziel.dataset.sprachCode;
+    if (neu !== sprache()) {
+      try {
+        await setzeSprache(neu);
+        setzeEinstellung('sprache', neu);
+      } catch {
+        /* Sprache nicht ladbar → bei der aktuellen bleiben */
+      }
+    }
+    schliesse();
+    rendern();
   });
   document.addEventListener('click', (ereignis) => {
     if (!wurzel.contains(ereignis.target)) schliesse();

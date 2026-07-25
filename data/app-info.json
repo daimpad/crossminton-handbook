@@ -8,7 +8,7 @@
     "dateiname": "app-info.json (eigene Datei, NICHT im Baustein-Pool).",
     "platzhalter_hinweis": "Mit [eckigen Klammern] markierte Stellen sind vom Betreiber zu fuellen (Name, Lizenz, GitHub-URL). Sie sind bewusst nicht erfunden.",
     "reiter": ["ueber", "mitmachen"],
-    "sprachanzeige_hinweis": "Die Sprach-Anzeige ist im Erstausbau NUR Darstellung (funktion_aktiv: false): neben dem Hamburger-Icon wird die aktuell angezeigte Sprache als Flagge und Eigenname gezeigt. Die Auswahlliste umfasst de/en/fr/pl; ein Umschalten ist noch nicht funktional.",
+    "sprachanzeige_hinweis": "Die Sprachwahl im Kopf (Weltkugel neben dem Hamburger) schaltet die App funktional um (funktion_aktiv: true): die Auswahlliste umfasst de/en/fr/pl mit Flagge und Eigenname; ein Klick lädt die Labels, persistiert die Einstellung und rendert global neu. Die aktive Sprache ist mit Häkchen markiert. Der Profil-Selektor bleibt als zweiter Weg bestehen.",
     "uebersetzung_hinweis": "Ring 1: englische Inhaltstexte (en-Zwillinge) ergaenzt. fr/pl folgen; leere/fehlende Werte fallen zur Laufzeit auf de zurueck."
   },
 
@@ -98,7 +98,7 @@
   },
 
   "sprachen": {
-    "funktion_aktiv": false,
+    "funktion_aktiv": true,
     "aktuell": "de",
     "liste": [
       {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "eigenname": "Deutsch", "label": {"de": "Deutsch", "en": "German"}},
