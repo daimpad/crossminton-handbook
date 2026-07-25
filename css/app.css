@@ -366,15 +366,25 @@ body.im-onboarding main { padding-bottom: 2rem; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
   padding: 0.45rem 0.55rem;
+  border: 0;
   border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  font: inherit;
   font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
 }
 
 .sprach-flagge { flex: none; font-size: 1.2rem; line-height: 1; }
 .sprach-eintrag .sprach-name { flex: 1; }
 .sprach-eintrag.aktiv { background: var(--primaer-weich); color: var(--primaer-tief); font-weight: 600; }
 .sprach-haken { flex: none; width: 1rem; text-align: center; color: var(--primaer-tief); font-weight: 700; }
+@media (hover: hover) {
+  .sprach-eintrag:not(.aktiv):hover { background: var(--flaeche-2); }
+}
 
 .menue {
   position: fixed;
