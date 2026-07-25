@@ -18,11 +18,11 @@ function quelleHtml(quelle) {
     ? `<a class="regeln-quelle-link" href="${esc(quelle.link)}" target="_blank" rel="noopener noreferrer">${esc(t('regeln_quelle_link'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>`
     : '';
   return `
-    <p class="regeln-quelle leise">
-      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
-      ${esc(t('regeln_quelle'))}: ${esc(teile)}${esc(stand)}
-    </p>
-    ${link ? `<p class="regeln-quelle leise">${link}</p>` : ''}`;
+    <aside class="regeln-quelle-box">
+      <p class="regeln-quelle-kopf"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span class="regeln-quelle-label">${esc(t('regeln_quelle'))}</span></p>
+      <p class="regeln-quelle-text">${esc(teile)}${esc(stand)}</p>
+      ${link}
+    </aside>`;
 }
 
 // Absprünge zu passenden Lernbausteinen. Nur auflösbare IDs werden verlinkt —
