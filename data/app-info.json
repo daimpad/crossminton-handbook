@@ -9,90 +9,90 @@
     "platzhalter_hinweis": "Mit [eckigen Klammern] markierte Stellen sind vom Betreiber zu fuellen (Name, Lizenz, GitHub-URL). Sie sind bewusst nicht erfunden.",
     "reiter": ["ueber", "mitmachen"],
     "sprachanzeige_hinweis": "Die Sprachwahl im Kopf (Weltkugel neben dem Hamburger) schaltet die App funktional um (funktion_aktiv: true): die Auswahlliste umfasst de/en/fr/pl mit Flagge und Eigenname; ein Klick lädt die Labels, persistiert die Einstellung und rendert global neu. Die aktive Sprache ist mit Häkchen markiert. Der Profil-Selektor bleibt als zweiter Weg bestehen.",
-    "uebersetzung_hinweis": "Ring 1: englische Inhaltstexte (en-Zwillinge) ergaenzt. fr/pl folgen; leere/fehlende Werte fallen zur Laufzeit auf de zurueck."
+    "uebersetzung_hinweis": "Ring 1: englische UND franzoesische Inhaltstexte (en-/fr-Zwillinge) ergaenzt. pl folgt; leere/fehlende Werte fallen zur Laufzeit auf de zurueck."
   },
 
   "ueber": {
-    "titel": {"de": "Über diese App", "en": "About this app"},
+    "titel": {"de": "Über diese App", "en": "About this app", "fr": "À propos de cette app"},
     "absaetze": [
-      {"de": "Diese App ist ein wissenschaftlich fundiertes Lernwerkzeug für Crossminton. Sie vermittelt das Spiel in kleinen, aufeinander aufbauenden Bausteinen — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau.", "en": "This app is a scientifically grounded learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level."},
-      {"de": "Du wählst deinen eigenen Weg durch den Stoff: nach Könnensstufe, nach persönlichem Ziel, nach Thema oder als geführte Trainingseinheit. Wer aus einer anderen Rückschlagsportart kommt, bekommt gezielte Hinweise, wo sich gewohnte Bewegungen im Crossminton unterscheiden. Dazu gibt es ein eigenes Doppel-Thema und einen Regeln-Reiter mit den offiziellen Spielregeln.", "en": "You choose your own way through the material: by skill level, by personal goal, by topic or as a guided training session. If you come from another racket sport, you get targeted notes on where familiar movements differ in Crossminton. There's also a dedicated doubles topic and a Rules tab with the official rules of play."},
-      {"de": "Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum eigenständigen Üben anleiten, nicht zu Dauerbeschäftigung.", "en": "The content is kept factual and rests on established fundamentals from training theory and sports science. The app aims to guide you toward practicing on your own, not to keep you busy."}
+      {"de": "Diese App ist ein wissenschaftlich fundiertes Lernwerkzeug für Crossminton. Sie vermittelt das Spiel in kleinen, aufeinander aufbauenden Bausteinen — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau.", "en": "This app is a scientifically grounded learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.", "fr": "Cette app est un outil d'apprentissage du Crossminton à base scientifique. Elle transmet le jeu par petits modules progressifs — des premières frappes à la finition au niveau expert."},
+      {"de": "Du wählst deinen eigenen Weg durch den Stoff: nach Könnensstufe, nach persönlichem Ziel, nach Thema oder als geführte Trainingseinheit. Wer aus einer anderen Rückschlagsportart kommt, bekommt gezielte Hinweise, wo sich gewohnte Bewegungen im Crossminton unterscheiden. Dazu gibt es ein eigenes Doppel-Thema und einen Regeln-Reiter mit den offiziellen Spielregeln.", "en": "You choose your own way through the material: by skill level, by personal goal, by topic or as a guided training session. If you come from another racket sport, you get targeted notes on where familiar movements differ in Crossminton. There's also a dedicated doubles topic and a Rules tab with the official rules of play.", "fr": "Tu choisis ton propre chemin dans la matière : par niveau, par objectif personnel, par thème ou comme séance guidée. Si tu viens d'un autre sport de raquette, tu reçois des repères ciblés là où les gestes habituels diffèrent au Crossminton. Il y a aussi un thème double dédié et un onglet Règles avec les règles officielles du jeu."},
+      {"de": "Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum eigenständigen Üben anleiten, nicht zu Dauerbeschäftigung.", "en": "The content is kept factual and rests on established fundamentals from training theory and sports science. The app aims to guide you toward practicing on your own, not to keep you busy.", "fr": "Les contenus sont factuels et s'appuient sur des fondements établis de la théorie de l'entraînement et des sciences du sport. L'app veut te guider vers une pratique autonome, pas t'occuper en permanence."}
     ],
     "danksagungen": {
-      "titel": {"de": "Dank und Quellen", "en": "Thanks and sources"},
+      "titel": {"de": "Dank und Quellen", "en": "Thanks and sources", "fr": "Remerciements et sources"},
       "eintraege": [
-        {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV); die Wiedergabe ist mit der ICO-Fassung 2024/dec abgeglichen.", "en": "The rules of play are taken from the official Crossminton rules of the International Crossminton Organisation (ICO), represented in Germany by the Deutscher Crossminton Verband (DCV); the rendering is reconciled with the ICO version 2024/dec."},
-        {"de": "Die fachlichen Grundlagen stützen sich auf Literatur und Materialien aus Crossminton, Trainingswissenschaft und Sportpsychologie sowie auf Transfererfahrungen aus verwandten Rückschlagsportarten.", "en": "The subject-matter fundamentals draw on literature and materials from Crossminton, training science and sport psychology, as well as transfer experience from related racket sports."},
-        {"de": "Folgende Personen haben sich inhaltlich beteiligt: XXX. Dank an alle, die beim Testen und Verbessern geholfen haben.", "en": "The following people contributed to the content: XXX. Thanks to everyone who helped test and improve it."}
+        {"de": "Die Spielregeln stammen aus den offiziellen Crossminton-Spielregeln der International Crossminton Organisation (ICO), in Deutschland vertreten durch den Deutschen Crossminton Verband (DCV); die Wiedergabe ist mit der ICO-Fassung 2024/dec abgeglichen.", "en": "The rules of play are taken from the official Crossminton rules of the International Crossminton Organisation (ICO), represented in Germany by the Deutscher Crossminton Verband (DCV); the rendering is reconciled with the ICO version 2024/dec.", "fr": "Les règles du jeu proviennent des règles officielles du Crossminton de l'International Crossminton Organisation (ICO), représentée en Allemagne par le Deutscher Crossminton Verband (DCV) ; la reproduction est alignée sur la version ICO 2024/déc."},
+        {"de": "Die fachlichen Grundlagen stützen sich auf Literatur und Materialien aus Crossminton, Trainingswissenschaft und Sportpsychologie sowie auf Transfererfahrungen aus verwandten Rückschlagsportarten.", "en": "The subject-matter fundamentals draw on literature and materials from Crossminton, training science and sport psychology, as well as transfer experience from related racket sports.", "fr": "Les fondements techniques s'appuient sur la littérature et des supports issus du Crossminton, des sciences de l'entraînement et de la psychologie du sport, ainsi que sur des expériences de transfert depuis des sports de raquette apparentés."},
+        {"de": "Folgende Personen haben sich inhaltlich beteiligt: XXX. Dank an alle, die beim Testen und Verbessern geholfen haben.", "en": "The following people contributed to the content: XXX. Thanks to everyone who helped test and improve it.", "fr": "Les personnes suivantes ont contribué au contenu : XXX. Merci à toutes celles et ceux qui ont aidé à tester et à améliorer."}
       ]
     },
     "credits_lizenz": {
-      "titel": {"de": "Lizenz und Credits", "en": "License and credits"},
+      "titel": {"de": "Lizenz und Credits", "en": "License and credits", "fr": "Licence et crédits"},
       "eintraege": [
-        {"de": "Software-Lizenz: MIT License.", "en": "Software license: MIT License."},
-        {"de": "Inhalte und Texte: CC BY 4.0.", "en": "Content and text: CC BY 4.0."},
-        {"de": "Credits: Damian Paderta.", "en": "Credits: Damian Paderta."},
-        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben.", "en": "The rules of play remain the property of the ICO/DCV and are reproduced here for learning purposes."}
+        {"de": "Software-Lizenz: MIT License.", "en": "Software license: MIT License.", "fr": "Licence logicielle : MIT License."},
+        {"de": "Inhalte und Texte: CC BY 4.0.", "en": "Content and text: CC BY 4.0.", "fr": "Contenus et textes : CC BY 4.0."},
+        {"de": "Credits: Damian Paderta.", "en": "Credits: Damian Paderta.", "fr": "Crédits : Damian Paderta."},
+        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben.", "en": "The rules of play remain the property of the ICO/DCV and are reproduced here for learning purposes.", "fr": "Les règles du jeu restent la propriété de l'ICO/DCV et sont reproduites ici à des fins d'apprentissage."}
       ],
-      "github": {"label": {"de": "Quellcode und Mitwirkung: siehe GitHub", "en": "Source code and contributions: see GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/"}
+      "github": {"label": {"de": "Quellcode und Mitwirkung: siehe GitHub", "en": "Source code and contributions: see GitHub", "fr": "Code source et contributions : voir GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/"}
     },
     "links": []
   },
 
   "mitmachen": {
-    "titel": {"de": "Mitmachen", "en": "Contribute"},
+    "titel": {"de": "Mitmachen", "en": "Contribute", "fr": "Participer"},
     "einleitung": [
-      {"de": "Diese App ist ein offenes Projekt und lebt von Beiträgen. Du musst kein Profi sein — schon ein Hinweis auf einen Fehler oder eine unklare Formulierung hilft weiter.", "en": "This app is an open project and thrives on contributions. You don't have to be a pro — even pointing out a mistake or an unclear wording helps."}
+      {"de": "Diese App ist ein offenes Projekt und lebt von Beiträgen. Du musst kein Profi sein — schon ein Hinweis auf einen Fehler oder eine unklare Formulierung hilft weiter.", "en": "This app is an open project and thrives on contributions. You don't have to be a pro — even pointing out a mistake or an unclear wording helps.", "fr": "Cette app est un projet ouvert qui vit des contributions. Pas besoin d'être un pro — signaler une erreur ou une formulation peu claire aide déjà."}
     ],
     "moeglichkeiten": [
       {
         "id": "fehler_melden",
-        "titel": {"de": "Fehler melden oder Verbesserungen vorschlagen", "en": "Report mistakes or suggest improvements"},
-        "text": {"de": "Ist dir ein sachlicher Fehler, ein Tippfehler oder eine missverständliche Erklärung aufgefallen? Hast du eine Idee, wie sich ein Baustein verbessern ließe? Melde es über die Issues auf GitHub — kurz und formlos genügt.", "en": "Spotted a factual error, a typo or a confusing explanation? Have an idea for how a module could be better? Report it via the Issues on GitHub — short and informal is fine."},
-        "cta_label": {"de": "Fehler oder Idee melden", "en": "Report a mistake or idea"},
+        "titel": {"de": "Fehler melden oder Verbesserungen vorschlagen", "en": "Report mistakes or suggest improvements", "fr": "Signaler des erreurs ou proposer des améliorations"},
+        "text": {"de": "Ist dir ein sachlicher Fehler, ein Tippfehler oder eine missverständliche Erklärung aufgefallen? Hast du eine Idee, wie sich ein Baustein verbessern ließe? Melde es über die Issues auf GitHub — kurz und formlos genügt.", "en": "Spotted a factual error, a typo or a confusing explanation? Have an idea for how a module could be better? Report it via the Issues on GitHub — short and informal is fine.", "fr": "Tu as repéré une erreur factuelle, une faute de frappe ou une explication ambiguë ? Tu as une idée pour améliorer un module ? Signale-le via les Issues sur GitHub — bref et informel suffit."},
+        "cta_label": {"de": "Fehler oder Idee melden", "en": "Report a mistake or idea", "fr": "Signaler une erreur ou une idée"},
         "cta_ziel": "https://github.com/daimpad/crossminton-handbook/issues"
       },
       {
         "id": "uebersetzen",
-        "titel": {"de": "Beim Übersetzen helfen", "en": "Help with translation"},
-        "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Die Sprachdateien liegen unter data/labels/ — jede Sprache bringt die App näher an mehr Spielende.", "en": "The app is built for multiple languages. If you're fluent in one of the target languages, you can help translate and review the content. The language files live under data/labels/ — every language brings the app closer to more players."},
-        "cta_label": {"de": "Zur Übersetzung beitragen", "en": "Contribute a translation"},
+        "titel": {"de": "Beim Übersetzen helfen", "en": "Help with translation", "fr": "Aider à la traduction"},
+        "text": {"de": "Die App ist auf Mehrsprachigkeit angelegt. Wenn du eine der Zielsprachen gut beherrschst, kannst du helfen, die Inhalte zu übersetzen und zu prüfen. Die Sprachdateien liegen unter data/labels/ — jede Sprache bringt die App näher an mehr Spielende.", "en": "The app is built for multiple languages. If you're fluent in one of the target languages, you can help translate and review the content. The language files live under data/labels/ — every language brings the app closer to more players.", "fr": "L'app est conçue pour le multilinguisme. Si tu maîtrises bien l'une des langues cibles, tu peux aider à traduire et à relire les contenus. Les fichiers de langue se trouvent sous data/labels/ — chaque langue rapproche l'app de plus de joueuses et joueurs."},
+        "cta_label": {"de": "Zur Übersetzung beitragen", "en": "Contribute a translation", "fr": "Contribuer à la traduction"},
         "cta_ziel": "https://github.com/daimpad/crossminton-handbook/tree/main/data/labels"
       },
       {
         "id": "code_beitragen",
-        "titel": {"de": "Code beitragen", "en": "Contribute code"},
-        "text": {"de": "Du entwickelst gern? Verbesserungen an der App selbst sind willkommen. Forke das Projekt, arbeite deine Änderung ein und schick einen Pull Request auf GitHub.", "en": "Enjoy coding? Improvements to the app itself are welcome. Fork the project, make your change and send a pull request on GitHub."},
-        "cta_label": {"de": "Auf GitHub beitragen", "en": "Contribute on GitHub"},
+        "titel": {"de": "Code beitragen", "en": "Contribute code", "fr": "Contribuer au code"},
+        "text": {"de": "Du entwickelst gern? Verbesserungen an der App selbst sind willkommen. Forke das Projekt, arbeite deine Änderung ein und schick einen Pull Request auf GitHub.", "en": "Enjoy coding? Improvements to the app itself are welcome. Fork the project, make your change and send a pull request on GitHub.", "fr": "Tu aimes développer ? Les améliorations de l'app elle-même sont bienvenues. Forke le projet, intègre ta modification et envoie une pull request sur GitHub."},
+        "cta_label": {"de": "Auf GitHub beitragen", "en": "Contribute on GitHub", "fr": "Contribuer sur GitHub"},
         "cta_ziel": "https://github.com/daimpad/crossminton-handbook/"
       }
     ],
     "feedback": {
-      "titel": {"de": "Direkt auf der Seite kommentieren", "en": "Comment right on the page"},
-      "text": {"de": "Am schnellsten geht Feedback direkt hier in der App: Markiere eine Textstelle, schreib deinen Kommentar dazu und schick alle Rückmeldungen am Ende gesammelt als Datei oder E-Mail. Es wird nichts gespeichert — deine Notizen bleiben nur in dieser Sitzung.", "en": "The quickest way to give feedback is right here in the app: highlight a passage, add your comment, and send all your feedback at the end together as a file or email. Nothing is stored — your notes stay in this session only."},
-      "knopf": {"de": "Feedback-Modus starten", "en": "Start feedback mode"},
-      "aktiv": {"de": "Feedback-Modus läuft — der runde Knopf unten rechts öffnet die Werkzeuge zum Markieren, Kommentieren und Verschicken.", "en": "Feedback mode is running — the round button at the bottom right opens the tools for highlighting, commenting and sending."}
+      "titel": {"de": "Direkt auf der Seite kommentieren", "en": "Comment right on the page", "fr": "Commenter directement sur la page"},
+      "text": {"de": "Am schnellsten geht Feedback direkt hier in der App: Markiere eine Textstelle, schreib deinen Kommentar dazu und schick alle Rückmeldungen am Ende gesammelt als Datei oder E-Mail. Es wird nichts gespeichert — deine Notizen bleiben nur in dieser Sitzung.", "en": "The quickest way to give feedback is right here in the app: highlight a passage, add your comment, and send all your feedback at the end together as a file or email. Nothing is stored — your notes stay in this session only.", "fr": "Le plus rapide pour donner un retour, c'est directement ici dans l'app : surligne un passage, ajoute ton commentaire et envoie tous tes retours à la fin, regroupés dans un fichier ou un e-mail. Rien n'est enregistré — tes notes restent uniquement dans cette session."},
+      "knopf": {"de": "Feedback-Modus starten", "en": "Start feedback mode", "fr": "Démarrer le mode retour"},
+      "aktiv": {"de": "Feedback-Modus läuft — der runde Knopf unten rechts öffnet die Werkzeuge zum Markieren, Kommentieren und Verschicken.", "en": "Feedback mode is running — the round button at the bottom right opens the tools for highlighting, commenting and sending.", "fr": "Le mode retour est actif — le bouton rond en bas à droite ouvre les outils pour surligner, commenter et envoyer."}
     }
   },
 
   "rechtliches": {
     "impressum": {
-      "titel": {"de": "Impressum", "en": "Legal notice"},
+      "titel": {"de": "Impressum", "en": "Legal notice", "fr": "Mentions légales"},
       "absaetze": [
-        {"de": "Angaben gemäß § 5 TMG / § 18 MStV für nicht-kommerzielle Projekte von Vereinen.", "en": "Information pursuant to § 5 TMG / § 18 MStV for non-commercial projects by associations."},
-        {"de": "Verantwortlich für den Inhalt: Damian Paderta", "en": "Responsible for the content: Damian Paderta"},
-        {"de": "Kontakt: contact@nozilla.de", "en": "Contact: contact@nozilla.de"},
-        {"de": "Stand: Juli 2026", "en": "As of: July 2026"}
+        {"de": "Angaben gemäß § 5 TMG / § 18 MStV für nicht-kommerzielle Projekte von Vereinen.", "en": "Information pursuant to § 5 TMG / § 18 MStV for non-commercial projects by associations.", "fr": "Informations conformément au § 5 TMG / § 18 MStV pour les projets non commerciaux d'associations."},
+        {"de": "Verantwortlich für den Inhalt: Damian Paderta", "en": "Responsible for the content: Damian Paderta", "fr": "Responsable du contenu : Damian Paderta"},
+        {"de": "Kontakt: contact@nozilla.de", "en": "Contact: contact@nozilla.de", "fr": "Contact : contact@nozilla.de"},
+        {"de": "Stand: Juli 2026", "en": "As of: July 2026", "fr": "Mise à jour : juillet 2026"}
       ]
     },
     "datenschutz": {
-      "titel": {"de": "Datenschutz", "en": "Privacy"},
+      "titel": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité"},
       "absaetze": [
-        {"de": "Diese App läuft vollständig in deinem Browser. Dein Lernfortschritt und deine Angaben werden ausschließlich lokal gespeichert (localStorage) und niemals an einen Server übertragen.", "en": "This app runs entirely in your browser. Your learning progress and your details are stored locally only (localStorage) and never transmitted to a server."},
-        {"de": "Es findet kein Tracking, keine Analyse und keine Weitergabe an Dritte statt. Es werden keine Cookies zu Werbe- oder Analysezwecken gesetzt.", "en": "There is no tracking, no analytics and no sharing with third parties. No cookies are set for advertising or analytics purposes."},
-        {"de": "Beim Aufruf über GitHub Pages werden technisch bedingt Server-Logs (u. a. IP-Adresse) durch GitHub, Inc. verarbeitet; es gelten zusätzlich deren Datenschutzhinweise.", "en": "When accessed via GitHub Pages, server logs (including your IP address) are processed by GitHub, Inc. for technical reasons; their privacy policy applies in addition."},
-        {"de": "Verantwortlich im Sinne der DSGVO: Damian Paderta. Kontakt: contact@nozilla.de", "en": "Controller under the GDPR: Damian Paderta. Contact: contact@nozilla.de"}
+        {"de": "Diese App läuft vollständig in deinem Browser. Dein Lernfortschritt und deine Angaben werden ausschließlich lokal gespeichert (localStorage) und niemals an einen Server übertragen.", "en": "This app runs entirely in your browser. Your learning progress and your details are stored locally only (localStorage) and never transmitted to a server.", "fr": "Cette app fonctionne entièrement dans ton navigateur. Ta progression et tes informations sont enregistrées uniquement en local (localStorage) et ne sont jamais transmises à un serveur."},
+        {"de": "Es findet kein Tracking, keine Analyse und keine Weitergabe an Dritte statt. Es werden keine Cookies zu Werbe- oder Analysezwecken gesetzt.", "en": "There is no tracking, no analytics and no sharing with third parties. No cookies are set for advertising or analytics purposes.", "fr": "Il n'y a aucun suivi, aucune analyse et aucune transmission à des tiers. Aucun cookie n'est déposé à des fins publicitaires ou d'analyse."},
+        {"de": "Beim Aufruf über GitHub Pages werden technisch bedingt Server-Logs (u. a. IP-Adresse) durch GitHub, Inc. verarbeitet; es gelten zusätzlich deren Datenschutzhinweise.", "en": "When accessed via GitHub Pages, server logs (including your IP address) are processed by GitHub, Inc. for technical reasons; their privacy policy applies in addition.", "fr": "Lors de l'accès via GitHub Pages, des journaux serveur (dont l'adresse IP) sont traités pour des raisons techniques par GitHub, Inc. ; leur politique de confidentialité s'applique en complément."},
+        {"de": "Verantwortlich im Sinne der DSGVO: Damian Paderta. Kontakt: contact@nozilla.de", "en": "Controller under the GDPR: Damian Paderta. Contact: contact@nozilla.de", "fr": "Responsable au sens du RGPD : Damian Paderta. Contact : contact@nozilla.de"}
       ]
     }
   },
@@ -101,10 +101,10 @@
     "funktion_aktiv": true,
     "aktuell": "de",
     "liste": [
-      {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "eigenname": "Deutsch", "label": {"de": "Deutsch", "en": "German"}},
-      {"code": "en", "kuerzel": "EN", "flagge": "🇬🇧", "eigenname": "English", "label": {"de": "Englisch", "en": "English"}},
-      {"code": "fr", "kuerzel": "FR", "flagge": "🇫🇷", "eigenname": "Français", "label": {"de": "Französisch", "en": "French"}},
-      {"code": "pl", "kuerzel": "PL", "flagge": "🇵🇱", "eigenname": "Polski", "label": {"de": "Polnisch", "en": "Polish"}}
+      {"code": "de", "kuerzel": "DE", "flagge": "🇩🇪", "eigenname": "Deutsch", "label": {"de": "Deutsch", "en": "German", "fr": "Allemand"}},
+      {"code": "en", "kuerzel": "EN", "flagge": "🇬🇧", "eigenname": "English", "label": {"de": "Englisch", "en": "English", "fr": "Anglais"}},
+      {"code": "fr", "kuerzel": "FR", "flagge": "🇫🇷", "eigenname": "Français", "label": {"de": "Französisch", "en": "French", "fr": "Français"}},
+      {"code": "pl", "kuerzel": "PL", "flagge": "🇵🇱", "eigenname": "Polski", "label": {"de": "Polnisch", "en": "Polish", "fr": "Polonais"}}
     ]
   }
 }
