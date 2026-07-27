@@ -8,7 +8,7 @@ import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, un
 import { label, t, text } from '../i18n.js';
 import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, verbessereGrafiken, zeigeMeilenstein } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
-import { diagnose, einstellungen } from '../zustand.js';
+import { diagnose } from '../zustand.js';
 
 function kontextZuListe(kontext) {
   const [art, parameter] = String(kontext).split(':');
@@ -118,15 +118,12 @@ function voraussetzungsBanner(station, kontext) {
   return `<div class="banner-hinweis">${esc(t('empfohlen_vorher'))} ${verweise}</div>`;
 }
 
-function einordnungHtml(baustein, kuerzelSichtbar) {
+function einordnungHtml(baustein) {
   const zeile = (begriff, wert) => (wert ? `<dt>${esc(begriff)}</dt><dd>${wert}</dd>` : '');
   const spielziele = (baustein.spielziele || []).map((f) => esc(label('spielziel_faktor', f))).join(', ');
   const vermittlungsziele = (baustein.vermittlungsziele || []).map((f) => esc(label('vermittlungsziel_faktor', f))).join(', ');
   const witterung = witterungVon(baustein).map((w) => esc(label('witterung', w))).join(', ');
   const untergrund = untergrundVon(baustein).filter((u) => u !== 'halle').map((u) => esc(label('untergrund', u))).join(', ');
-  const transfer = kuerzelSichtbar
-    ? (baustein.transfer_herkunft || []).map((k) => esc(label('transfer_herkunft', k))).join(', ')
-    : '';
   const voraussetzungen = (baustein.voraussetzungen || [])
     .map((id) => `<a href="#/baustein/${esc(id)}?kontext=kompetenz">${esc(label('baustein', id))}</a>`)
     .join(', ');
@@ -138,7 +135,6 @@ function einordnungHtml(baustein, kuerzelSichtbar) {
         ${zeile(t('meta_vermittlungsziele'), vermittlungsziele)}
         ${zeile(t('meta_untergrund'), untergrund)}
         ${zeile(t('meta_witterung'), witterung)}
-        ${zeile(t('meta_transfer'), transfer)}
         ${zeile(t('meta_voraussetzungen'), voraussetzungen)}
       </dl>
     </details>`;
@@ -164,25 +160,15 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
   const { station, sequenz, index, vorherige, naechste } = info;
   const b = station.baustein;
   const delta = station.delta;
-  const kuerzelSichtbar = einstellungen().transferKuerzelSichtbar;
 
   // Domäne + Könnensstufe wandern in den Hero-Untertitel (s. u.); der interne
   // Typ ('micro' auf 96/102 – kein Unterscheidungsmerkmal) wird nicht mehr als
-  // Chip gezeigt. Hier bleiben nur die spezifischen Outdoor-Chips.
+  // Chip gezeigt. Hier bleiben nur die spezifischen Outdoor-Chips (Herkunfts-
+  // Kürzel werden bewusst nicht mehr angezeigt).
   const metaChips = [
     ...witterungVon(b).map((w) => `<span class="chip">${esc(label('witterung', w))}</span>`),
     ...untergrundVon(b).filter((u) => u !== 'halle').map((u) => `<span class="chip">${esc(label('untergrund', u))}</span>`),
   ].join(' ');
-
-  // Dezente Transfer-Kennzeichnung, per Schalter ausblendbar (Spez. 3.2/6).
-  const transferChips = kuerzelSichtbar
-    ? (b.transfer_herkunft || [])
-        .map((k) => {
-          const aktiv = delta && delta.ersetzt_bei_herkunft === k;
-          return `<span class="chip ${aktiv ? 'chip-akzent' : ''}" title="${esc(label('transfer_herkunft', k))}">${esc(k)}</span>`;
-        })
-        .join(' ')
-    : '';
 
   // Kleiner Hero je Baustein: eigenes Icon in der Domänen-Hue + Titel; die
   // Unterzeile nennt Domäne(n) und Könnensstufe(n), z. B. „Mentales · Experte".
@@ -200,9 +186,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
         ${heroUntertitel ? `<p class="marke-hero-untertitel">${esc(heroUntertitel)}</p>` : ''}
       </div>
     </section>`;
-  const chipZeile = metaChips || transferChips
-    ? `<p class="chip-zeile">${metaChips}${metaChips && transferChips ? ' <span class="chip-trenner">·</span> ' : ''}${transferChips}</p>`
-    : '';
+  const chipZeile = metaChips ? `<p class="chip-zeile">${metaChips}</p>` : '';
 
   const positionsZeile =
     index >= 0
@@ -282,13 +266,13 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${positionsZeile}
       ${heroSektion}
       ${chipZeile}
-      ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
       ${uebungsSektion}
       ${reflexionsSektion}
       ${trainerLayerHtml(daten, b)}
       ${abschlussZeile}
-      ${einordnungHtml(b, kuerzelSichtbar)}
+      ${einordnungHtml(b)}
+      ${voraussetzungsBanner(station, kontext)}
       ${fussNavigation}
     </article>`;
 

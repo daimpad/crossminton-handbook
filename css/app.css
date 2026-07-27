@@ -771,7 +771,7 @@ a.chip:focus-visible { outline: 2px solid var(--primaer); outline-offset: 2px; }
   border-radius: var(--radius);
   padding: 0.6rem 0.8rem;
   font-size: 0.9rem;
-  margin-bottom: 0.8rem;
+  margin: 0.8rem 0;
 }
 
 .banner-hinweis a { color: inherit; font-weight: 600; }
