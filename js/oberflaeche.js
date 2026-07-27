@@ -80,11 +80,10 @@ export function entdeckenAktion() {
 }
 
 // Marken-Hero im Layout des OG-Bilds (Speeder links, Text rechts, Akzentleiste
-// unten). Groß auf Startseite + Willkommen; die obersten Landingpages nutzen die
-// kleine Variante heroKlein(icon, titel, untertitel). Alle Farben aus Tokens —
+// unten). Groß auf der Startseite; die obersten Landingpages nutzen die kleine
+// Variante heroKlein(icon, titel, untertitel). Alle Farben aus Tokens —
 // hell/dunkel kippen automatisch mit.
 // extra ist optionales Inline-HTML unter dem Hero-Text (Startseite: die Einstiegs-CTAs).
-// Ohne extra bleibt der Hero rein darstellend (Willkommensseite).
 export function markeHeroGross(extra = '') {
   return `
     <section class="marke-hero">

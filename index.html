@@ -55,9 +55,11 @@
     (function () {
       try {
         var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
-        var thema = z && z.einstellungen && z.einstellungen.thema;
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
         if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
-        var dunkel = thema === 'dunkel' || (thema !== 'hell' && window.matchMedia
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
           && window.matchMedia('(prefers-color-scheme: dark)').matches);
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
@@ -79,7 +81,6 @@
   <link rel="modulepreload" href="js/fortschritt.js">
   <link rel="modulepreload" href="js/pfade.js">
   <link rel="modulepreload" href="js/aktionen.js">
-  <link rel="modulepreload" href="js/ansichten/willkommen.js">
   <link rel="modulepreload" href="js/ansichten/heim.js">
   <link rel="modulepreload" href="js/ansichten/onboarding.js">
   <link rel="modulepreload" href="js/ansichten/pfad.js">
