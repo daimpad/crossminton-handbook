@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Reactive strength: the short, springy ground contact of foot and lower leg — minimal contact time, shown by a small compression arc and a fast rebound arrow.">
+  <style>
+    .bein{fill:none;stroke:var(--tinte,#16202b);stroke-width:20;stroke-linecap:round}
+    .fuss{fill:none;stroke:var(--tinte,#16202b);stroke-width:16;stroke-linecap:round}
+    .komp{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-linecap:round}
+    .rueck{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4.2;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-dasharray:6 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m035" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <!-- Unterschenkel -->
+  <path class="bein" d="M150,70 L150,196"/>
+  <!-- Fuß auf dem Ballen, kurzer Kontakt -->
+  <path class="fuss" d="M150,196 L188,206"/>
+  <!-- Rückfederungspfeil nach oben -->
+  <path class="rueck" d="M118,190 L118,86" marker-end="url(#m035)"/>
+  <!-- Kompressionsbogen am Bodenkontakt -->
+  <path class="komp" d="M150,222 C 168,214 186,216 200,224"/>
+  <line class="boden" x1="96" y1="230" x2="230" y2="230"/>
+  <text class="st" x="150" y="262">short ground contact · fast rebound</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Fast feet: a low, athletic stance on the balls of the feet, small rapid steps suggested by light motion lines at the feet, ready to change direction.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .tempo{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <circle class="kopf" cx="150" cy="66" r="15"/>
+  <path class="fig" d="M150,90 L150,148"/>
+  <path class="fig" d="M150,104 L126,116 L140,142"/>
+  <path class="fig" d="M150,104 L174,116 L160,142"/>
+  <!-- tiefe Haltung, kurze schnelle Schritte -->
+  <path class="fig" d="M150,148 L128,182 L124,214"/>
+  <path class="fig" d="M150,148 L172,182 L176,214"/>
+  <line class="schaft" x1="150" y1="142" x2="150" y2="170"/>
+  <ellipse class="kelle" cx="150" cy="186" rx="11" ry="15"/>
+  <!-- Bewegungslinien an den Füßen (schnelle Schritte) -->
+  <path class="tempo" d="M100,208 L118,208"/>
+  <path class="tempo" d="M96,220 L116,220"/>
+  <path class="tempo" d="M182,208 L200,208"/>
+  <path class="tempo" d="M184,220 L204,220"/>
+  <line class="boden" x1="92" y1="230" x2="208" y2="230"/>
+  <text class="st" x="150" y="262">fast, light feet on the balls</text>
+</svg>

@@ -359,7 +359,15 @@ export function bausteinIcon(bausteinId, klasse = '') {
 // SVG liest die CI-Tokens (var(--tinte)/var(--primaer) …) und kippt daher mit dem Theme;
 // KI-Illustrationen bleiben PNG. Beide Dateien existieren stets — das PNG ist der sofort
 // sichtbare Fallback, das SVG die progressive Aufwertung nach dem Rendern.
-export const SVG_GRAFIKEN = new Set(['G-014', 'G-023', 'G-024', 'G-025', 'G-026', 'G-027', 'G-028', 'G-029', 'G-030', 'G-031', 'G-037', 'G-038', 'G-039', 'G-040', 'G-041', 'G-042', 'G-044', 'G-045', 'G-046', 'G-048', 'G-049', 'G-050', 'G-051', 'G-052', 'G-055', 'G-059', 'G-060', 'G-061']);
+export const SVG_GRAFIKEN = new Set([
+  'G-001', 'G-002', 'G-003', 'G-004', 'G-005', 'G-006', 'G-007', 'G-008', 'G-009', 'G-010',
+  'G-011', 'G-012', 'G-013', 'G-014', 'G-015', 'G-016', 'G-017', 'G-018', 'G-019', 'G-020',
+  'G-021', 'G-022', 'G-023', 'G-024', 'G-025', 'G-026', 'G-027', 'G-028', 'G-029', 'G-030',
+  'G-031', 'G-032', 'G-033', 'G-034', 'G-035', 'G-036', 'G-037', 'G-038', 'G-039', 'G-040',
+  'G-041', 'G-042', 'G-043', 'G-044', 'G-045', 'G-046', 'G-047', 'G-048', 'G-049', 'G-050',
+  'G-051', 'G-052', 'G-053', 'G-054', 'G-055', 'G-056', 'G-057', 'G-058', 'G-059', 'G-060',
+  'G-061',
+]);
 
 // Sprachen mit übersetzten Diagramm-Grafiken (nur die Diagramm-SVGs tragen Text;
 // je Nummer liegen dann G-XXX.<sprache>.svg UND .png neben der deutschen Basis).
@@ -402,6 +410,10 @@ export async function verbessereGrafiken(wurzel) {
       const svg = gestell.querySelector('svg');
       if (bild && svg) {
         svg.setAttribute('class', 'grafik-bild grafik-svg');
+        // Übersetzten Alt-Text als Zugänglichkeitsnamen übernehmen (bei text-freien
+        // Piktogrammen trägt das Inline-SVG sonst nur die deutsche aria-label).
+        const alt = bild.getAttribute('alt');
+        if (alt) svg.setAttribute('aria-label', alt);
         bild.replaceWith(svg);
       }
     } catch {

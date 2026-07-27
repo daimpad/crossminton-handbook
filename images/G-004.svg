@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Die Rückhand: Gewicht auf dem schlägerseitigen Fuß, Oberkörper öffnet zur Schlagrichtung, der Schläger wird eng am Körper vorbei nach vorn geführt.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m004" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="104" cy="94" r="14"/>
+  <path class="fig" d="M104,108 L108,168"/>
+  <!-- Schlagarm eng am Körper vorbei nach vorn, Ellbogen führt -->
+  <path class="fig" d="M106,120 L118,138 L156,134"/>
+  <!-- freier Arm zur Balance nach hinten -->
+  <path class="fig" d="M105,126 L86,138"/>
+  <!-- Beine: Gewicht auf dem vorderen (schlägerseitigen) Fuß -->
+  <path class="fig" d="M108,168 L134,200 L150,236"/>
+  <path class="fig" d="M108,168 L90,204 L78,238"/>
+  <!-- Schläger + Treffpunkt vor dem Körper -->
+  <line class="schaft" x1="156" y1="134" x2="174" y2="130"/>
+  <ellipse class="kelle" cx="184" cy="128" rx="10" ry="14" transform="rotate(80 184 128)"/>
+  <!-- Flugbahn nach vorn -->
+  <path class="bahn" d="M196,128 L278,124" marker-end="url(#m004)"/>
+  <line class="boden" x1="70" y1="242" x2="186" y2="242"/>
+  <text class="st" x="150" y="270">eng am Körper vorbei · Treffpunkt vorn</text>
+</svg>

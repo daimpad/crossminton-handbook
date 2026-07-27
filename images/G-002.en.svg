@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The ready position: feet a little more than shoulder-width apart, knees bent, weight on the balls of the feet, racket held loosely in front of the body.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:15;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- Kopf -->
+  <circle class="kopf" cx="150" cy="58" r="16"/>
+  <!-- Rumpf -->
+  <path class="fig" d="M150,82 L150,150"/>
+  <!-- Arme locker nach vorn, Hände treffen sich vor dem Körper -->
+  <path class="fig" d="M150,100 L123,110 L138,142"/>
+  <path class="fig" d="M150,100 L177,110 L162,142"/>
+  <!-- Beine breit, Knie gebeugt -->
+  <path class="fig" d="M150,150 L116,188 L110,232"/>
+  <path class="fig" d="M150,150 L184,188 L190,232"/>
+  <!-- Schläger vor dem Körper -->
+  <line class="schaft" x1="150" y1="142" x2="150" y2="176"/>
+  <ellipse class="kelle" cx="150" cy="192" rx="12" ry="16"/>
+  <!-- Boden -->
+  <line class="boden" x1="94" y1="240" x2="206" y2="240"/>
+  <text class="st" x="150" y="264">knees bent · weight on the balls of the feet</text>
+</svg>
