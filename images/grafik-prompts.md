@@ -8,9 +8,12 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 
 **Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
 
-**Zwei Bildquellen (Trennlinie: Raum/Geometrie vs. Körper/Textur):**
-- **Diagramme** (Feld, Positionen, Flugbahnen, Formationen, Bemaßung) werden als **theme-fähiges Inline-SVG** hand-gezeichnet — nutzen die CI-Tokens, kippen mit dem Umschalter, sind gestochen scharf und winzig. Nummern im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`); zu jeder liegt **`G-XXX.svg` UND `G-XXX.png`** (Fallback) vor. **Erledigt: ALLE 28 Diagramm-Grafiken** (G-014, G-023–031, G-037–042, G-044–046, G-048–052, G-055, G-059, G-060, G-061) — Feld/Positionen/Flugbahnen/Formationen/Bemaßung als theme-fähiges Inline-SVG. Der schematische Teil ist damit vollständig; offen bleiben nur die **KI-Illustrationen** (Körper/Griff/Szene) über die Prompts unten.
-- **Illustrationen** (Griff, Schlag, Körperhaltung, Bewegung, Outdoor-Szene) kommen aus dem **KI-Bildgenerator** über die Prompts unten — als `G-XXX.png`. Für ein einheitliches Set jedem Prompt den gemeinsamen Stil (oben) voranstellen und transparenten/schlichten Hintergrund verlangen.
+**Alle 61 Grafiken sind hand-gezeichnetes, theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG** — auch die Figur-/Griff-/Szene-Motive als **abstrakte Piktogramme** (klare Rundkappen-Strichfiguren, CI-Tokens, kurze Caption). Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
+
+- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 61 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
+- **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.en.svg`/`.en.png`** (nur `<text>`+`aria-label` englisch, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. fr/pl fallen sauber auf de zurück.
+- **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` erzeugt den en-Zwilling aus der Übersetzungsmap → en-`.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
+- Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
 
