@@ -24,9 +24,13 @@ export function insertFr(pfad, FR) {
   for (const [id, t] of Object.entries(FR)) {
     const b = byId[id];
     if (!b) { console.error('unbekannte id', id); process.exit(1); }
-    if (t.t != null) { // anzeigetitel (inline)
+    if (t.t != null) { // anzeigetitel — Stil erkennen: inline vs. mehrzeilig
       const en = b.anzeigetitel.en;
-      ers(`"en": ${JSON.stringify(en)}`, `"en": ${JSON.stringify(en)}, "fr": ${JSON.stringify(t.t)}`, `${id}.anzeigetitel`);
+      const needle = `"en": ${JSON.stringify(en)}`;
+      const pos = s.indexOf(needle);
+      const davor = pos >= 0 ? s.slice(Math.max(0, pos - 16), pos) : '';
+      const sep = davor.includes('\n') ? `,\n        "fr": ` : `, "fr": `;
+      ers(needle, `${needle}${sep}${JSON.stringify(t.t)}`, `${id}.anzeigetitel`);
     }
     if (t.e != null) { // erklaerteil (String, mehrzeiliges Objekt)
       const en = b.erklaerteil.en;
