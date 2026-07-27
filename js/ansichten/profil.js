@@ -130,7 +130,7 @@ export function renderProfil(el, daten) {
     .join('');
 
   const themaOptionen = ['auto', 'hell', 'dunkel']
-    .map((w) => `<option value="${w}" ${(e.thema || 'auto') === w ? 'selected' : ''}>${esc(t(`thema_${w}`))}</option>`)
+    .map((w) => `<option value="${w}" ${(e.thema || 'hell') === w ? 'selected' : ''}>${esc(t(`thema_${w}`))}</option>`)
     .join('');
 
   el.innerHTML = `

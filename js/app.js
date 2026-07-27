@@ -13,12 +13,11 @@ import { renderRegeln } from './ansichten/regeln.js';
 import { renderSuche } from './ansichten/suche.js';
 import { renderTraining } from './ansichten/training.js';
 import { renderTurnier } from './ansichten/turnier.js';
-import { renderWillkommen } from './ansichten/willkommen.js';
 import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
 import { initI18n, setzeSprache, sprache, t, text } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
-import { einstellungen, istOnboardingAbgeschlossen, ladeZustand, schliesseOnboardingAb, setzeEinstellung } from './zustand.js';
+import { einstellungen, ladeZustand, setzeEinstellung } from './zustand.js';
 
 let daten = null;
 let letzteRoute = null;
@@ -111,7 +110,7 @@ function beschrifteRahmen() {
 // Das Umschalten selbst wird einmalig in boot() verdrahtet. Läuft bei jedem
 // Rendern mit, damit Sprachwechsel und Auswahl aktuell bleiben.
 function aktualisiereThemaMenue() {
-  const aktiv = einstellungen().thema || 'auto';
+  const aktiv = einstellungen().thema || 'hell';
   const beschriftung = { auto: t('thema_auto_kurz'), hell: t('thema_hell'), dunkel: t('thema_dunkel') };
   const knopf = document.querySelector('[data-thema-zyklus]');
   if (!knopf) return;
@@ -241,27 +240,13 @@ function rendern() {
   const { segmente, query, roh } = parseHash();
   const el = document.getElementById('ansicht');
 
-  // Erstlauf: Willkommensseite mit den zwei Einstiegen; der Wizard ist einer
-  // davon. Nur die leere Route zeigt die Willkommensseite — aktive Navigation
-  // tritt frei ein (s. u.).
-  let erstlauf = !istOnboardingAbgeschlossen();
-  // Zwei-Ebenen-Logik (4.4): Zugriff wird nie gesperrt. Navigiert die Person vor
-  // Abschluss des Onboardings aktiv in einen echten Bereich (z. B. über die
-  // Kopf-Navigation), gilt das als freier Einstieg — wie „Freies Handbuch" —
-  // statt sie auf die Willkommensseite zurückzuwerfen. So funktioniert die
-  // Navigation von Anfang an, und Kopf-Icons bleiben durchgehend sichtbar.
-  if (erstlauf && segmente.length > 0 && segmente[0] !== 'onboarding') {
-    schliesseOnboardingAb();
-    erstlauf = false;
-  }
-  document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding' || erstlauf);
+  // Kein erzwungenes Onboarding: Der Erstbesuch landet auf der vollen Startseite
+  // (renderHeim mit allen Kacheln), nicht auf einer Abfrage. Der Wizard bleibt
+  // optional über die Hero-CTA „Onboarding" (#/onboarding) und das Profil
+  // erreichbar. Nur die Onboarding-Ansicht selbst blendet die Bottom-Nav aus
+  // (fokussierter Ablauf); überall sonst bleibt die normale Navigation sichtbar.
+  document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding');
   beschrifteRahmen();
-
-  if (erstlauf && segmente.length === 0) {
-    renderWillkommen(el, daten);
-    aktualisiereNavigation(segmente);
-    return;
-  }
 
   if (segmente[0] === 'onboarding') {
     renderOnboarding(el, daten);
@@ -356,7 +341,7 @@ async function boot() {
   // Wahl sofort an und schließt das Menü bewusst nicht (Wirkung bleibt sichtbar).
   document.querySelector('[data-thema-zyklus]')?.addEventListener('click', () => {
     const reihenfolge = ['auto', 'hell', 'dunkel'];
-    const jetzt = einstellungen().thema || 'auto';
+    const jetzt = einstellungen().thema || 'hell';
     const naechste = reihenfolge[(reihenfolge.indexOf(jetzt) + 1) % reihenfolge.length];
     setzeEinstellung('thema', naechste);
     wendeThemaAn(naechste);
