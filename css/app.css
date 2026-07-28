@@ -1065,6 +1065,14 @@ details[open] summary { margin-bottom: 0.5rem; }
   align-items: center;
   margin-top: 1.2rem;
 }
+.baustein-fussnav .fussnav-seite {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+/* Rechte Gruppe (nächster Baustein + „Zur Liste"-CTA) rechtsbündig, auch wenn links leer ist. */
+.baustein-fussnav .fussnav-rechts { justify-content: flex-end; margin-left: auto; }
 
 /* ---------- Trainer-Layer / Fehlerbilder ---------- */
 
@@ -1121,7 +1129,7 @@ details[open] summary { margin-bottom: 0.5rem; }
 .regeln-quelle-box {
   margin: 0 0 1.1rem;
   padding: 0.8rem 1rem;
-  background: var(--flaeche-2);
+  background: var(--flaeche);
   border: 1px solid var(--linie);
   border-left: 3px solid var(--primaer);
   border-radius: var(--radius);
@@ -1142,9 +1150,9 @@ details[open] summary { margin-bottom: 0.5rem; }
 }
 .regeln-quelle-text {
   margin: 0 0 0.55rem;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--tinte-3);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--tinte-2);
 }
 .regeln-quelle-link {
   display: inline-flex;
@@ -1534,6 +1542,7 @@ details[open] summary { margin-bottom: 0.5rem; }
    (kein zweiter Blauton neben der Überschrift). Nur Tokens → hell/dunkel
    automatisch. Groß auf Start/Willkommen, .klein auf den obersten Landingpages. */
 .marke-hero {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1.15rem;
@@ -1564,7 +1573,17 @@ details[open] summary { margin-bottom: 0.5rem; }
 .marke-hero-text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
 .marke-hero-text h1 { margin: 0; font-size: 1.5rem; line-height: 1.1; color: var(--tinte); letter-spacing: -0.015em; }
 .marke-hero-untertitel { margin: 0; font-weight: 600; color: var(--tinte-2); font-size: 1rem; }
-.marke-hero-themen { margin: 0.1rem 0 0; color: var(--tinte-3); font-size: 0.86rem; }
+/* Themen-Schlagworte als Chip-Reihe oben im Hero-Text (erste Zeile, über dem
+   Titel). Mobil zentriert, ab Tablet rechtsbündig — so sitzen sie oben rechts
+   im Hero, ohne den Titel zu überlagern. */
+.marke-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+  margin: 0 0 0.4rem;
+}
+.marke-hero-chips .chip { background: var(--primaer-weich); color: var(--primaer-tief); border: none; }
 /* Einstiegs-CTAs direkt unter dem Hero-Text (nur Startseite). */
 .marke-hero-cta { margin-top: 0.95rem; }
 
@@ -1603,6 +1622,8 @@ details[open] summary { margin-bottom: 0.5rem; }
   .marke-hero:not(.klein) .marke-hero-cta { flex-direction: row; align-items: center; justify-content: flex-start; }
   .marke-hero-bild { width: 120px; height: 120px; }
   .marke-hero-text h1 { font-size: 1.85rem; }
+  /* Chips ab Tablet rechtsbündig (oben rechts im Hero-Text, über dem Titel). */
+  .marke-hero:not(.klein) .marke-hero-chips { justify-content: flex-end; }
 }
 
 .cta-karte {

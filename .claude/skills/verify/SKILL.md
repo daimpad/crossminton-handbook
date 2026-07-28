@@ -67,4 +67,4 @@ Engine-Logik separat und schnell: `node tests/engine.test.mjs` (kein Ersatz für
 
 - Ansichten rendern nach Zustandsänderung neu → nach Klicks kurz warten (`waitForTimeout(150–200)`).
 - Hash-Routing: direkte Sprünge via `page.goto(BASIS + '#/pfad/kompetenz')` funktionieren.
-- „Empfohlen vorher“ erscheint bewusst nur in der Baustein-Ansicht, nicht in den Listen; Listen zeigen nur „Außerhalb deiner Zielauswahl“ (Individualpfad).
+- „Empfohlen vorher“ erscheint bewusst nur in der Baustein-Ansicht, nicht in den Listen. Der frühere „Außerhalb deiner Zielauswahl“-Hinweis in den Listen ist entfernt — die Stationsliste bleibt schlank (kein `.station-hinweis` mehr).

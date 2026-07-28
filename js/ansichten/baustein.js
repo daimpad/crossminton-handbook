@@ -254,11 +254,18 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
     : '';
 
   const listeHref = kontextZuListe(kontext);
+  // Fußnav: links der Rückweg (vorheriger), rechts als CTA „Zur Liste" plus der
+  // nächste Baustein. „Zur Liste" ist bewusst ein sichtbarer Knopf (kein leiser),
+  // rechts gruppiert — der klare Ausweg zurück in die Übersicht.
   const fussNavigation = `
     <nav class="baustein-fussnav" aria-label="${esc(t('baustein_navigation'))}">
-      ${vorherige ? `<a class="knopf knopf-sekundaer" href="#/baustein/${esc(vorherige.baustein.id)}?kontext=${encodeURIComponent(kontext)}"><span aria-hidden="true">←</span> ${esc(label('baustein', vorherige.baustein.id))}</a>` : ''}
-      <a class="knopf knopf-leise" href="${listeHref}">${esc(t('zur_liste'))}</a>
-      ${naechste ? `<a class="knopf ${station.status.absolviert ? 'knopf-primaer' : 'knopf-sekundaer'}" href="#/baustein/${esc(naechste.baustein.id)}?kontext=${encodeURIComponent(kontext)}">${esc(label('baustein', naechste.baustein.id))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` : ''}
+      <div class="fussnav-seite">
+        ${vorherige ? `<a class="knopf knopf-sekundaer" href="#/baustein/${esc(vorherige.baustein.id)}?kontext=${encodeURIComponent(kontext)}"><span aria-hidden="true">←</span> ${esc(label('baustein', vorherige.baustein.id))}</a>` : ''}
+      </div>
+      <div class="fussnav-seite fussnav-rechts">
+        ${naechste ? `<a class="knopf ${station.status.absolviert ? 'knopf-primaer' : 'knopf-sekundaer'}" href="#/baustein/${esc(naechste.baustein.id)}?kontext=${encodeURIComponent(kontext)}">${esc(label('baustein', naechste.baustein.id))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` : ''}
+        <a class="knopf knopf-sekundaer baustein-zur-liste" href="${listeHref}">${esc(t('zur_liste'))}</a>
+      </div>
     </nav>`;
 
   el.innerHTML = `

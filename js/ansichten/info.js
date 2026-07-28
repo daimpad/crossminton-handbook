@@ -35,6 +35,33 @@ function abschnittHtml(block) {
   return `<section class="karte"><h2>${esc(text(block.titel) ?? '')}</h2>${eintraege}${github}</section>`;
 }
 
+// Inline-Absprung im Fließtext (Lizenzname/Credit-Name als echter Link). Nicht-
+// externe/Platzhalter-Ziele bleiben unverlinkter Text.
+function inlineLink(ziel, beschriftung) {
+  return externesZiel(ziel)
+    ? `<a href="${esc(ziel)}" target="_blank" rel="noopener noreferrer">${esc(beschriftung)}</a>`
+    : esc(beschriftung);
+}
+
+// Lizenz/Credits: strukturiert mit externen Links — die Lizenzen ausgeschrieben und
+// verlinkt, die Credits als verlinkte Namen (Damian Paderta, nozilla). Eigener
+// Renderer statt des generischen abschnittHtml, weil hier echte <a> gebraucht werden.
+function creditsLizenzHtml(block) {
+  if (!block) return '';
+  const lizenzen = (block.lizenzen || [])
+    .map((l) => `<p class="leise">${esc(text(l.rolle) ?? '')}: ${inlineLink(l.ziel, text(l.name) ?? '')}</p>`)
+    .join('');
+  const c = block.credits;
+  const credits = c
+    ? `<p class="leise">${esc(text(c.praefix) ?? '')}: ${(c.personen || []).map((p) => inlineLink(p.ziel, p.name)).join(' · ')}</p>`
+    : '';
+  const github =
+    block.github && block.github.ziel && !istPlatzhalter(block.github.ziel)
+      ? `<p class="info-cta"><a class="knopf knopf-sekundaer info-github" href="${esc(block.github.ziel)}" target="_blank" rel="noopener noreferrer">${GITHUB_SVG} ${esc(text(block.github.label) ?? 'GitHub')}</a></p>`
+      : '';
+  return `<section class="karte"><h2>${esc(text(block.titel) ?? '')}</h2>${lizenzen}${credits}${github}</section>`;
+}
+
 export function renderUeber(el, daten) {
   const u = daten.appInfo?.ueber;
   if (!u) {
@@ -47,7 +74,7 @@ export function renderUeber(el, daten) {
     ${heroKlein('fa-compass', text(u.titel) ?? t('nav_ueber'), '', 'pf-blau')}
     ${absaetze ? `<section class="karte">${absaetze}</section>` : ''}
     ${abschnittHtml(u.danksagungen)}
-    ${abschnittHtml(u.credits_lizenz)}
+    ${creditsLizenzHtml(u.credits_lizenz)}
     ${links ? `<section class="karte">${links}</section>` : ''}`;
 }
 
