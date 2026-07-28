@@ -85,13 +85,21 @@ export function entdeckenAktion() {
 // hell/dunkel kippen automatisch mit.
 // extra ist optionales Inline-HTML unter dem Hero-Text (Startseite: die Einstiegs-CTAs).
 export function markeHeroGross(extra = '') {
+  // Die Themen-Schlagworte stehen als Chip-Reihe oben rechts im Hero (statt als
+  // Fließtext unter dem Untertitel). Der „ · "-getrennte Label-String wird in
+  // einzelne Chips zerlegt.
+  const chips = String(t('hero_themen'))
+    .split(/\s*·\s*/)
+    .filter(Boolean)
+    .map((wort) => `<span class="chip">${esc(wort)}</span>`)
+    .join('');
   return `
     <section class="marke-hero">
       <img class="marke-hero-bild" src="assets/images/speeder.svg" alt="" width="96" height="96">
       <div class="marke-hero-text">
+        ${chips ? `<div class="marke-hero-chips">${chips}</div>` : ''}
         <h1>${esc(t('app_titel'))}</h1>
         <p class="marke-hero-untertitel">${esc(t('hero_untertitel'))}</p>
-        <p class="marke-hero-themen">${esc(t('hero_themen'))}</p>
         ${extra}
       </div>
     </section>`;

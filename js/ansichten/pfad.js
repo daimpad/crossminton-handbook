@@ -10,15 +10,9 @@ import { diagnose, einstellungen, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
 // In der Liste ordnet bereits die Reihenfolge; der „Empfohlen vorher"-Hinweis
-// gehört zum Zugriffsmoment und lebt in der Baustein-Ansicht (Spez. 4.4).
-// Hier erscheint nur, was die Liste selbst nicht zeigen kann: Voraussetzungen
-// außerhalb der gefilterten Menge (Individualpfad, 6.2).
-function hinweisZeilen(station) {
-  if (station.status.absolviert || station.ausserhalbMenge.length === 0) return '';
-  const namen = station.ausserhalbMenge.map((id) => label('baustein', id)).join(', ');
-  return `<span class="station-hinweis">${esc(`${t('ausserhalb_auswahl')} ${namen}`)}</span>`;
-}
-
+// gehört zum Zugriffsmoment und lebt in der Baustein-Ansicht (Spez. 4.4). Der
+// frühere „Außerhalb deiner Zielauswahl"-Hinweis wurde bewusst entfernt — die
+// Liste bleibt schlank; die Zwei-Ebenen-Logik ordnet weiterhin nur (sperrt nie).
 function stationslisteHtml(stationen, kontext, { mitSkip = false } = {}) {
   const kuerzelSichtbar = einstellungen().transferKuerzelSichtbar;
   const eintraege = stationen
@@ -38,7 +32,6 @@ function stationslisteHtml(stationen, kontext, { mitSkip = false } = {}) {
             <span class="station-nummer" aria-hidden="true">${i + 1}</span>
             <span class="station-mitte">
               <span class="station-titel">${bausteinIcon(station.baustein.id, 'station-icon')} ${esc(label('baustein', station.baustein.id))} ${deltaChip}</span>
-              ${hinweisZeilen(station)}
             </span>
             ${statusPunktHtml(station)}
           </a>

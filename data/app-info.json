@@ -15,7 +15,7 @@
   "ueber": {
     "titel": {"de": "Über diese App", "en": "About this app", "fr": "À propos de cette app"},
     "absaetze": [
-      {"de": "Diese App ist ein wissenschaftlich fundiertes Lernwerkzeug für Crossminton. Sie vermittelt das Spiel in kleinen, aufeinander aufbauenden Bausteinen — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau.", "en": "This app is a scientifically grounded learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.", "fr": "Cette app est un outil d'apprentissage du Crossminton à base scientifique. Elle transmet le jeu par petits modules progressifs — des premières frappes à la finition au niveau expert."},
+      {"de": "Diese App ist ein Lernwerkzeug für Crossminton. Sie vermittelt das Spiel in kleinen, aufeinander aufbauenden Bausteinen — von den ersten Schlägen bis zum Feinschliff auf Expertenniveau.", "en": "This app is a learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.", "fr": "Cette app est un outil d'apprentissage du Crossminton. Elle transmet le jeu par petits modules progressifs — des premières frappes à la finition au niveau expert."},
       {"de": "Du wählst deinen eigenen Weg durch den Stoff: nach Könnensstufe, nach persönlichem Ziel, nach Thema oder als geführte Trainingseinheit. Wer aus einer anderen Rückschlagsportart kommt, bekommt gezielte Hinweise, wo sich gewohnte Bewegungen im Crossminton unterscheiden. Dazu gibt es ein eigenes Doppel-Thema und einen Regeln-Reiter mit den offiziellen Spielregeln.", "en": "You choose your own way through the material: by skill level, by personal goal, by topic or as a guided training session. If you come from another racket sport, you get targeted notes on where familiar movements differ in Crossminton. There's also a dedicated doubles topic and a Rules tab with the official rules of play.", "fr": "Tu choisis ton propre chemin dans la matière : par niveau, par objectif personnel, par thème ou comme séance guidée. Si tu viens d'un autre sport de raquette, tu reçois des repères ciblés là où les gestes habituels diffèrent au Crossminton. Il y a aussi un thème double dédié et un onglet Règles avec les règles officielles du jeu."},
       {"de": "Die Inhalte sind sachlich gehalten und auf gesicherte Grundlagen aus Trainingslehre und Sportwissenschaft gestützt. Die App will dich zum eigenständigen Üben anleiten, nicht zu Dauerbeschäftigung.", "en": "The content is kept factual and rests on established fundamentals from training theory and sports science. The app aims to guide you toward practicing on your own, not to keep you busy.", "fr": "Les contenus sont factuels et s'appuient sur des fondements établis de la théorie de l'entraînement et des sciences du sport. L'app veut te guider vers une pratique autonome, pas t'occuper en permanence."}
     ],
@@ -29,12 +29,17 @@
     },
     "credits_lizenz": {
       "titel": {"de": "Lizenz und Credits", "en": "License and credits", "fr": "Licence et crédits"},
-      "eintraege": [
-        {"de": "Software-Lizenz: MIT License.", "en": "Software license: MIT License.", "fr": "Licence logicielle : MIT License."},
-        {"de": "Inhalte und Texte: CC BY 4.0.", "en": "Content and text: CC BY 4.0.", "fr": "Contenus et textes : CC BY 4.0."},
-        {"de": "Credits: Damian Paderta.", "en": "Credits: Damian Paderta.", "fr": "Crédits : Damian Paderta."},
-        {"de": "Die Spielregeln bleiben Eigentum der ICO/DCV und werden hier zu Lernzwecken wiedergegeben.", "en": "The rules of play remain the property of the ICO/DCV and are reproduced here for learning purposes.", "fr": "Les règles du jeu restent la propriété de l'ICO/DCV et sont reproduites ici à des fins d'apprentissage."}
+      "lizenzen": [
+        {"rolle": {"de": "Software", "en": "Software", "fr": "Logiciel"}, "name": {"de": "MIT License", "en": "MIT License", "fr": "MIT License"}, "ziel": "https://opensource.org/license/mit"},
+        {"rolle": {"de": "Inhalte und Texte", "en": "Content and text", "fr": "Contenus et textes"}, "name": {"de": "Creative Commons Namensnennung 4.0 International (CC BY 4.0)", "en": "Creative Commons Attribution 4.0 International (CC BY 4.0)", "fr": "Creative Commons Attribution 4.0 International (CC BY 4.0)"}, "ziel": "https://creativecommons.org/licenses/by/4.0/deed.de"}
       ],
+      "credits": {
+        "praefix": {"de": "Credits", "en": "Credits", "fr": "Crédits"},
+        "personen": [
+          {"name": "Damian Paderta", "ziel": "https://paderta.com"},
+          {"name": "nozilla | bits & bytes mit ❤", "ziel": "https://nozilla.de"}
+        ]
+      },
       "github": {"label": {"de": "Quellcode und Mitwirkung: siehe GitHub", "en": "Source code and contributions: see GitHub", "fr": "Code source et contributions : voir GitHub"}, "ziel": "https://github.com/daimpad/crossminton-handbook/"}
     },
     "links": []
