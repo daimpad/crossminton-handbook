@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Strzał nadgarstka: przedramię pozostaje spokojne, nadgarstek jest odchylony do tyłu i strzela do przodu — wygięty łuk ruchu i lekkie rozmycie główki rakiety pokazują przyspieszenie.">
+  <style>
+    .arm{fill:none;stroke:var(--tinte,#16202b);stroke-width:18;stroke-linecap:round}
+    .gelenk{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6}
+    .geist{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:5;stroke-linecap:round;opacity:.4}
+    .geistk{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:4;opacity:.4}
+    .snap{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:3 6;stroke-linecap:round}
+    .blur{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-linecap:round;opacity:.5}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m009" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="var(--primaer,#38a4f1)"/></marker></defs>
+  <!-- ruhiger Unterarm -->
+  <path class="arm" d="M60,236 L138,150"/>
+  <circle class="gelenk" cx="138" cy="150" r="11"/>
+  <!-- zurückgelegtes (gecocktes) Handgelenk: blasser Schläger -->
+  <path class="geist" d="M138,150 L110,96"/>
+  <ellipse class="geistk" cx="104" cy="84" rx="9" ry="14" transform="rotate(28 104 84)"/>
+  <!-- nach vorn geschnappter Schläger -->
+  <path class="schaft" d="M138,150 L172,100"/>
+  <ellipse class="kelle" cx="180" cy="88" rx="10" ry="15" transform="rotate(-32 180 88)"/>
+  <!-- Schnapp-Bogen von gecockt nach vorn -->
+  <path class="snap" d="M112,92 C 146,66 168,70 180,84" marker-end="url(#m009)"/>
+  <!-- Unschärfe am Kopf -->
+  <path class="blur" d="M164,96 C 172,90 180,86 190,84"/>
+  <path class="blur" d="M170,104 C 178,98 186,94 196,92"/>
+  <line x1="52" y1="248" x2="150" y2="248" stroke="var(--tinte-3,#6b7686)" stroke-width="2.6" stroke-dasharray="5 6" fill="none"/>
+  <text class="st" x="150" y="274">nadgarstek strzela · przedramię spokojne</text>
+</svg>
