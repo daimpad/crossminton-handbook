@@ -22,31 +22,23 @@ export function mische(liste, zufall = Math.random) {
   return kopie;
 }
 
-function naechstePotenzVonZwei(n) {
-  let p = 1;
-  while (p < n) p *= 2;
-  return p;
-}
-
-// Runde 1 aus einer bereits gemischten Teilnehmerliste: Ist die Teilnehmerzahl keine
-// Zweierpotenz, entstehen Freilose (automatisch entschiedene Matches mit nur einer
-// Person) — gleichmäßig verteilt, sodass Runde 2 wieder eine saubere Zweierpotenz ist.
-// Da `gemischt` bereits zufällig geordnet ist, ist auch die Freilos-Vergabe zufällig.
-function ersteRunde(gemischt) {
-  const groesse = naechstePotenzVonZwei(gemischt.length);
-  const freilose = groesse - gemischt.length;
-  const matchZahl = groesse / 2;
+// Baut eine Runde aus einer Teilnehmer-/Sieger-Liste: paarweise Matches, plus
+// HÖCHSTENS EIN Freilos (automatisch entschiedenes Match mit nur einer Person),
+// falls die Länge ungerade ist — nie mehr. Bei einer Nicht-Zweierpotenz kaskadiert
+// das Freilos so über mehrere Runden (je Runde maximal eins), statt sie alle auf
+// einmal in Runde 1 zu bündeln. Das Freilos geht an die letzte Position der Liste —
+// bei Runde 1 ist die Reihenfolge bereits durch mische() zufällig, bei Folgerunden
+// steckt die Zufälligkeit in der geerbten Sieger-Reihenfolge derselben Auslosung.
+function baueRunde(liste) {
+  const n = liste.length;
+  const gerade = n % 2 === 0 ? n : n - 1;
   const matches = [];
-  let cursor = 0;
-  for (let i = 0; i < matchZahl; i++) {
-    if (i >= matchZahl - freilose) {
-      const a = gemischt[cursor]; cursor += 1;
-      matches.push({ a, b: null, sieger: a });
-    } else {
-      const a = gemischt[cursor]; cursor += 1;
-      const b = gemischt[cursor]; cursor += 1;
-      matches.push({ a, b, sieger: null });
-    }
+  for (let i = 0; i < gerade; i += 2) {
+    matches.push({ a: liste[i], b: liste[i + 1], sieger: null });
+  }
+  if (n % 2 !== 0) {
+    const freilos = liste[n - 1];
+    matches.push({ a: freilos, b: null, sieger: freilos });
   }
   return matches;
 }
@@ -65,7 +57,7 @@ export function erzeugeTurnier(titel, gemischteTeilnehmer) {
   return {
     titel: String(titel || '').trim(),
     teilnehmer,
-    runden: [ersteRunde(teilnehmer)],
+    runden: [baueRunde(teilnehmer)],
   };
 }
 
@@ -88,11 +80,7 @@ export function traegtSiegerEin(turnier, rundenIndex, matchIndex, sieger) {
   if (runden[rundenIndex].every((m) => m.sieger)) {
     const siegerListe = runden[rundenIndex].map((m) => m.sieger);
     if (siegerListe.length > 1) {
-      const naechste = [];
-      for (let i = 0; i < siegerListe.length; i += 2) {
-        naechste.push({ a: siegerListe[i], b: siegerListe[i + 1], sieger: null });
-      }
-      runden.push(naechste);
+      runden.push(baueRunde(siegerListe));
     }
   }
   return { ...turnier, runden };
