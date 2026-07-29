@@ -1,0 +1,682 @@
+[
+ [
+  "titel",
+  "Turnier-Regularium"
+ ],
+ [
+  "einleitung",
+  "Wähle die Kategorie deines Turniers. Die Liste zeigt, woran ein offizielles Turnier gebunden ist — und hebt hervor, was mit jeder Stufe neu dazukommt oder strenger wird."
+ ],
+ [
+  "quelle",
+  "ICO Tournament Regulations (Fassung 2024/dec) + ICO Tournament Standards je Kategorie · International Crossminton Organisation (ICO) / Deutscher Crossminton Verband (DCV)"
+ ],
+ [
+  "stand",
+  "ICO-Fassung 2024/dec"
+ ],
+ [
+  "hinweis",
+  "Auszug der wichtigsten Anforderungen zur schnellen Orientierung. Der allgemeine Rahmen (Aufbau, Modus, Offizielle, Spielerkleidung) folgt der ICO Tournament Regulations 2024/dec; die stufenspezifischen Zahlen (Mindest-Teilnehmer, Kategorien, Felder, Fristen, Gebühren) stehen in den separaten ICO-Tournament-Standards je Kategorie. Verbindlich ist stets das vollständige offizielle Regelwerk — im Zweifel dort prüfen."
+ ],
+ [
+  "titel",
+  "ICO Tournament Regulations (2024/dec)"
+ ],
+ [
+  "hinweis",
+  "Allgemeines Regelwerk: Aufbau, Turniermodus, Offizielle, Spielerkleidung."
+ ],
+ [
+  "titel",
+  "ICO-Turnierstandards (Original-PDFs)"
+ ],
+ [
+  "hinweis",
+  "100/250/500/1000 Punkte inkl. Doppel-, Junior- und Fun-Varianten."
+ ],
+ [
+  "titel",
+  "DCV-Spielordnung"
+ ],
+ [
+  "titel",
+  "DCV-Schiedsrichterordnung"
+ ],
+ [
+  "titel",
+  "DCV-Spielregeln Crossminton"
+ ],
+ [
+  "name",
+  "Fun"
+ ],
+ [
+  "serie",
+  "Lokal / Fun"
+ ],
+ [
+  "punkte",
+  "ohne Wertung"
+ ],
+ [
+  "kurz",
+  "Lockeres Turnier ohne ICO-Sanktionierung — es gelten die Spielregeln, sonst keine Auflagen."
+ ],
+ [
+  "name",
+  "100er"
+ ],
+ [
+  "serie",
+  "National Series"
+ ],
+ [
+  "punkte",
+  "100 Punkte"
+ ],
+ [
+  "kurz",
+  "Einstiegs-Ranglistenturnier auf nationaler Ebene."
+ ],
+ [
+  "name",
+  "250er"
+ ],
+ [
+  "serie",
+  "International Series"
+ ],
+ [
+  "punkte",
+  "250 Punkte"
+ ],
+ [
+  "kurz",
+  "Internationales Ranglistenturnier."
+ ],
+ [
+  "name",
+  "500er"
+ ],
+ [
+  "serie",
+  "World Series"
+ ],
+ [
+  "punkte",
+  "500 Punkte"
+ ],
+ [
+  "kurz",
+  "Großes Weltranglisten-Turnier."
+ ],
+ [
+  "name",
+  "1000er"
+ ],
+ [
+  "serie",
+  "World Series"
+ ],
+ [
+  "punkte",
+  "1000 Punkte"
+ ],
+ [
+  "kurz",
+  "Höchste Kategorie mit den strengsten Auflagen."
+ ],
+ [
+  "titel",
+  "Anmeldung & Organisation"
+ ],
+ [
+  "titel",
+  "Teilnehmer & Auslosung"
+ ],
+ [
+  "titel",
+  "Anlage & Ausrüstung"
+ ],
+ [
+  "titel",
+  "Ablauf & Schiedsgericht"
+ ],
+ [
+  "titel",
+  "Nach dem Turnier"
+ ],
+ [
+  "titel",
+  "Regelwerk"
+ ],
+ [
+  "text",
+  "Es gelten die offiziellen ICO-Spielregeln (Feld, Zählweise, Aufschlag)."
+ ],
+ [
+  "text",
+  "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."
+ ],
+ [
+  "text",
+  "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."
+ ],
+ [
+  "text",
+  "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."
+ ],
+ [
+  "text",
+  "Durchführung nach ICO-Turnierordnung, ICO-Spielregeln und ICO-Schiedsrichterordnung."
+ ],
+ [
+  "titel",
+  "Spieler-Lizenz"
+ ],
+ [
+  "text",
+  "Keine ICO-Lizenz nötig, aber ein Spielerprofil in der Tournament Software (durch den nationalen Administrator)."
+ ],
+ [
+  "text",
+  "Gültige ICO-Lizenz für alle Spieler:innen."
+ ],
+ [
+  "text",
+  "Gültige ICO-Lizenz für alle Spieler:innen."
+ ],
+ [
+  "text",
+  "Gültige ICO-Lizenz für alle Spieler:innen."
+ ],
+ [
+  "titel",
+  "Turnier-Antrag & Kalender"
+ ],
+ [
+  "text",
+  "Anmeldung in der Tournament Software, 1 Monat vorher."
+ ],
+ [
+  "text",
+  "Termin 1 Monat vorher bei der ICO; danach offizielle Ankündigung in der Tournament Software."
+ ],
+ [
+  "text",
+  "Termin bis zum Vorjahres-Stichtag (23.11.); Kalenderfreigabe durch das ICO-Board; Ankündigung 3 Monate vorher."
+ ],
+ [
+  "text",
+  "Termin bis zum Vorjahres-Stichtag (23.11.); Kalenderfreigabe durch das ICO-Board; Ankündigung 3 Monate vorher."
+ ],
+ [
+  "titel",
+  "Meldeschluss der Spieler"
+ ],
+ [
+  "text",
+  "Mindestens 7 Tage vor Turnierbeginn."
+ ],
+ [
+  "text",
+  "Mindestens 7 Tage vor Turnierbeginn."
+ ],
+ [
+  "text",
+  "Mindestens 14 Tage vor Turnierbeginn."
+ ],
+ [
+  "text",
+  "Mindestens 14 Tage vor Turnierbeginn."
+ ],
+ [
+  "titel",
+  "Organisation"
+ ],
+ [
+  "text",
+  "1 benannter Organisator."
+ ],
+ [
+  "text",
+  "1 Vollzeit-Organisator (Empfehlung: spielt nicht selbst mit)."
+ ],
+ [
+  "text",
+  "1 Vollzeit-Organisator (Empfehlung: spielt nicht selbst mit)."
+ ],
+ [
+  "text",
+  "1 Vollzeit-Organisator, der nicht selbst mitspielen darf."
+ ],
+ [
+  "titel",
+  "Unabhängiger Beobachter"
+ ],
+ [
+  "text",
+  "Mindestens 1 unabhängiger Beobachter; ICO-Sponsoring nach erreichtem Standard-Prozentsatz."
+ ],
+ [
+  "text",
+  "Mindestens 1 unabhängiger Beobachter; ICO-Sponsoring nach erreichtem Standard-Prozentsatz."
+ ],
+ [
+  "text",
+  "Mindestens 1 unabhängiger Beobachter; Standards werden vom ICO-Board abgenommen."
+ ],
+ [
+  "titel",
+  "Kategorien (für die Wertung)"
+ ],
+ [
+  "text",
+  "Mindestens 2 Einzel-Kategorien; je mind. 4 gemeldete Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 4 Einzel-Kategorien (Damen und Open verpflichtend); je mind. 4 Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 6 Einzel-Kategorien (Damen und Open verpflichtend); je mind. 4 Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 6 Kategorien (Erwachsene, Junioren, Senioren); je mind. 8 Spieler:innen."
+ ],
+ [
+  "titel",
+  "Mindest-Teilnehmerzahl"
+ ],
+ [
+  "text",
+  "Mindestens 10 Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 25 Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 50 Spieler:innen."
+ ],
+ [
+  "text",
+  "Mindestens 80 Spieler:innen."
+ ],
+ [
+  "titel",
+  "Mindest-Kapazität der Halle"
+ ],
+ [
+  "text",
+  "Für mindestens 10 Spieler:innen."
+ ],
+ [
+  "text",
+  "Für mindestens 50 Spieler:innen (Feld darf begrenzt werden, nicht darunter)."
+ ],
+ [
+  "text",
+  "Für mindestens 80 Spieler:innen (Feld darf begrenzt werden, nicht darunter)."
+ ],
+ [
+  "text",
+  "Für mindestens 120 Spieler:innen; die Teilnehmerzahl darf nicht begrenzt werden."
+ ],
+ [
+  "titel",
+  "Auslosung & Setzung"
+ ],
+ [
+  "text",
+  "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei vorab zur Prüfung an die ICO."
+ ],
+ [
+  "text",
+  "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 3 Tage vorher zur Prüfung an die ICO."
+ ],
+ [
+  "text",
+  "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 7 Tage vorher zur Prüfung an die ICO."
+ ],
+ [
+  "text",
+  "Setzung nach ICO-Rangliste; Auslosung im Tournament Planner, .tp-Datei mind. 7 Tage vorher zur Prüfung an die ICO."
+ ],
+ [
+  "titel",
+  "Spielfeld & Markierung"
+ ],
+ [
+  "text",
+  "Feldmaße und Markierung nach Regelwerk."
+ ],
+ [
+  "text",
+  "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."
+ ],
+ [
+  "text",
+  "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."
+ ],
+ [
+  "text",
+  "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."
+ ],
+ [
+  "text",
+  "Feldmaße und Markierung (Feldnummern, Aufschlaglinie …) nach ICO-Standard."
+ ],
+ [
+  "titel",
+  "Hallenhöhe"
+ ],
+ [
+  "text",
+  "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."
+ ],
+ [
+  "text",
+  "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."
+ ],
+ [
+  "text",
+  "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."
+ ],
+ [
+  "text",
+  "Halle mindestens 7 m hoch (über allen Feldern); Ausnahmen nur mit ICO-Genehmigung."
+ ],
+ [
+  "titel",
+  "Anzahl Spielfelder"
+ ],
+ [
+  "text",
+  "Mindestens 4 Felder."
+ ],
+ [
+  "text",
+  "Mindestens 6 Felder."
+ ],
+ [
+  "text",
+  "Mindestens 8 Felder."
+ ],
+ [
+  "titel",
+  "Lage zum Flughafen"
+ ],
+ [
+  "text",
+  "Höchstens 100 km zu einem internationalen Flughafen."
+ ],
+ [
+  "text",
+  "Höchstens 100 km zu einem internationalen Flughafen."
+ ],
+ [
+  "text",
+  "Höchstens 100 km zu einem internationalen Flughafen."
+ ],
+ [
+  "titel",
+  "Anzeigetafeln"
+ ],
+ [
+  "text",
+  "Eine Anzeigetafel pro Feld."
+ ],
+ [
+  "text",
+  "Eine Anzeigetafel pro Feld."
+ ],
+ [
+  "text",
+  "Eine Anzeigetafel pro Feld."
+ ],
+ [
+  "text",
+  "Eine Anzeigetafel pro Feld."
+ ],
+ [
+  "titel",
+  "Center Court"
+ ],
+ [
+  "text",
+  "Gestalteter, gebrandeter Center Court empfohlen."
+ ],
+ [
+  "text",
+  "Gestalteter, gebrandeter Center Court empfohlen."
+ ],
+ [
+  "text",
+  "Eigens gebrandeter, gestalteter Center Court (alle ICO-Sponsoren)."
+ ],
+ [
+  "titel",
+  "Medizinische Versorgung"
+ ],
+ [
+  "text",
+  "Erste-Hilfe-Material bereithalten."
+ ],
+ [
+  "text",
+  "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."
+ ],
+ [
+  "text",
+  "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."
+ ],
+ [
+  "text",
+  "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."
+ ],
+ [
+  "text",
+  "Medizinische Versorgung durch den Veranstalter; Sanitäranlagen nötig."
+ ],
+ [
+  "titel",
+  "Oberschiedsrichter (Head Umpire)"
+ ],
+ [
+  "text",
+  "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."
+ ],
+ [
+  "text",
+  "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."
+ ],
+ [
+  "text",
+  "1 lizenzierter Head Umpire (Empfehlung: spielt nicht selbst mit)."
+ ],
+ [
+  "titel",
+  "Match- & Linienrichter"
+ ],
+ [
+  "text",
+  "Match- & Linienrichter in den Finals aller Kategorien."
+ ],
+ [
+  "text",
+  "Match- & Linienrichter ab dem Halbfinale aller Kategorien."
+ ],
+ [
+  "text",
+  "Match- & Linienrichter ab dem Halbfinale aller Kategorien (Match-Umpire lizenziert oder erfahren)."
+ ],
+ [
+  "titel",
+  "Spielerkleidung (Name & Land)"
+ ],
+ [
+  "text",
+  "Oberteil mit Name und Land (oder Länderkürzel) auf dem Rücken — ab dem Halbfinale (International Series)."
+ ],
+ [
+  "text",
+  "Oberteil (T-Shirt) mit Name und Land (oder Länderkürzel) auf dem Rücken — in allen Spielen (World Series)."
+ ],
+ [
+  "text",
+  "Oberteil (T-Shirt) mit Name und Land (oder Länderkürzel) auf dem Rücken — in allen Spielen (World Series)."
+ ],
+ [
+  "titel",
+  "Moderation"
+ ],
+ [
+  "text",
+  "Vollzeit-Moderator empfohlen (nennt die ICO-Sponsoren)."
+ ],
+ [
+  "text",
+  "1 Vollzeit-Moderator, der die ICO-Sponsoren ansagt."
+ ],
+ [
+  "text",
+  "1 Vollzeit-Moderator, der die ICO-Sponsoren ansagt."
+ ],
+ [
+  "titel",
+  "Live-Stream"
+ ],
+ [
+  "text",
+  "Live-Stream inkl. ICO-Partner-Werbung empfohlen."
+ ],
+ [
+  "text",
+  "Live-Stream inkl. ICO-Partner-Werbung empfohlen."
+ ],
+ [
+  "text",
+  "Live-Stream inkl. ICO-Partner-Werbung."
+ ],
+ [
+  "titel",
+  "Siegerehrung"
+ ],
+ [
+  "text",
+  "Ehrung mit Podium und ICO-/Sponsor-Werbung; Urkunden/Medaillen für die Plätze 1–3 empfohlen."
+ ],
+ [
+  "text",
+  "Ehrung mit Podium, Ansager; Urkunden und Medaillen/Pokale für die Plätze 1–3."
+ ],
+ [
+  "text",
+  "Ehrung mit Podium, Ansager; Urkunden und Medaillen/Pokale für die Plätze 1–3."
+ ],
+ [
+  "text",
+  "Ehrung mit Podium, Ansager, Nationalhymne der Sieger; Urkunden und Medaillen/Pokale."
+ ],
+ [
+  "titel",
+  "Preisgeld"
+ ],
+ [
+  "text",
+  "Preisgeld für Sieger und Finalist der Damen- und der Open-Einzelkonkurrenz."
+ ],
+ [
+  "text",
+  "Preisgeld für Sieger und Finalist der Damen- und der Open-Einzelkonkurrenz."
+ ],
+ [
+  "titel",
+  "Spielergebühr"
+ ],
+ [
+  "text",
+  "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."
+ ],
+ [
+  "text",
+  "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."
+ ],
+ [
+  "text",
+  "2,50 € je Spieler:in an die ICO (nach dem Turnier verrechnet)."
+ ],
+ [
+  "titel",
+  "Ergebnisse & Turnierbericht"
+ ],
+ [
+  "text",
+  "Ergebnisse über den Tournament Planner veröffentlichen."
+ ],
+ [
+  "text",
+  "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."
+ ],
+ [
+  "text",
+  "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."
+ ],
+ [
+  "text",
+  "Offiziellen ICO-Turnierbericht (mit Fotos) 1 Tag nach dem Turnier senden."
+ ],
+ [
+  "label",
+  "Doppel"
+ ],
+ [
+  "t250[0]",
+  "Es werden Doppel-Kategorien ausgespielt (mind. 4 Kategorien; Open-, Damen- oder Mixed-Doppel verpflichtend), je mind. 4 Paare."
+ ],
+ [
+  "t250[1]",
+  "Mindestens 30 Spieler:innen und Hallen-Kapazität für 30 (statt 25 bzw. 50)."
+ ],
+ [
+  "t250[2]",
+  "Anders als im Einzel darf im Doppel die Gruppenphase entfallen — reines K.-o. ist zulässig (Entscheidung spätestens direkt nach dem Meldeschluss)."
+ ],
+ [
+  "t500[0]",
+  "Es werden Doppel-Kategorien ausgespielt, je mind. 4 Paare."
+ ],
+ [
+  "t500[1]",
+  "Hallen-Kapazität für mindestens 50 (statt 80)."
+ ],
+ [
+  "label",
+  "Junior"
+ ],
+ [
+  "t500[0]",
+  "Junioren-Kategorien (U12/U14/U18 …); U12 und U14 werden zusammengelegt."
+ ],
+ [
+  "t500[1]",
+  "Mindestens 4 Einzel-Kategorien und mindestens 4 Felder (statt 6/6)."
+ ],
+ [
+  "t500[2]",
+  "Mindestens 30 Spieler:innen und Kapazität für 30 (statt 50/80)."
+ ],
+ [
+  "t500[3]",
+  "Antrag 3 Monate vorher; Junioren sollen nicht als Match-/Linienrichter eingesetzt werden."
+ ],
+ [
+  "t500[4]",
+  "Kein Preisgeld und keine Spielergebühr; Sachpreise für die Podestplätze empfohlen."
+ ]
+]

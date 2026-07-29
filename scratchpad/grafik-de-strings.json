@@ -1,0 +1,436 @@
+{
+ "G-001": {
+  "aria": "Der Universalgriff: die Hand hält den Griff locker wie einen Händedruck, zwischen Daumen und Zeigefinger bildet sich ein klares V auf der oberen Kante des Griffs.",
+  "texts": [
+   "V",
+   "locker wie ein Händedruck · Daumen-V oben"
+  ]
+ },
+ "G-002": {
+  "aria": "Die Grundposition: Füße etwas mehr als schulterbreit, Knie gebeugt, Gewicht auf den Fußballen, Schläger locker vor dem Körper.",
+  "texts": [
+   "Knie gebeugt · Gewicht auf den Fußballen"
+  ]
+ },
+ "G-003": {
+  "aria": "Der Vorhand-Drive: Gewicht auf dem vorderen Fuß, Oberkörper zur Schlagrichtung gedreht, kompakter, flacher Treffpunkt klar vor dem Körper.",
+  "texts": [
+   "flach und direkt · vor dem Körper"
+  ]
+ },
+ "G-004": {
+  "aria": "Die Rückhand: Gewicht auf dem schlägerseitigen Fuß, Oberkörper öffnet zur Schlagrichtung, der Schläger wird eng am Körper vorbei nach vorn geführt.",
+  "texts": [
+   "eng am Körper vorbei · Treffpunkt vorn"
+  ]
+ },
+ "G-005": {
+  "aria": "Aufschlag, Bild 1: die freie Hand lässt den Speeder auf Hüfthöhe fallen, der Schlagarm ist tief bereit, von unten nach vorn zu schwingen.",
+  "texts": [
+   "Speeder fällt auf Hüfthöhe"
+  ]
+ },
+ "G-006": {
+  "aria": "Aufschlag, Bild 2: der Schläger trifft den Speeder von unten, der ganze Speeder ist im Treffpunkt klar unterhalb der Schlaghand.",
+  "texts": [
+   "Treffpunkt unterhalb der Schlaghand"
+  ]
+ },
+ "G-007": {
+  "aria": "Beinarbeit, Bild 1: der Split-Step — ein kleiner federnder Hüpfer, Landung auf den Ballen beider Füße, Knie gebeugt, bereit zum Abdruck in jede Richtung.",
+  "texts": [
+   "kleiner federnder Hüpfer · auf die Ballen"
+  ]
+ },
+ "G-008": {
+  "aria": "Beinarbeit, Bild 2: der Bewegungskreislauf — mit einem Ausfallschritt in die Ecke den Speeder spielen und auf gebogenem Weg zurück zur zentralen Position in der Mitte.",
+  "texts": [
+   "zur Ecke ausfallen — zurück zur Mitte"
+  ]
+ },
+ "G-009": {
+  "aria": "Der Handgelenk-Schnapp: der Unterarm bleibt ruhig, das Handgelenk wird zurückgelegt und schnappt dann nach vorn — ein gebogener Bewegungsbogen und leichte Unschärfe am Schlägerkopf zeigen die Beschleunigung.",
+  "texts": [
+   "Handgelenk schnappt · Unterarm bleibt ruhig"
+  ]
+ },
+ "G-010": {
+  "aria": "Der Überkopfschlag: hoher Treffpunkt über dem Kopf, gestreckter Schlagarm, die Flugbahn zieht in hohem, tiefem Bogen weit ins gegnerische Feld.",
+  "texts": [
+   "hoher Treffpunkt · tiefer Bogen ins Feld"
+  ]
+ },
+ "G-011": {
+  "aria": "Der Smash: hoher Treffpunkt über und vor dem Kopf, aggressiver Schlag nach unten, die Flugbahn führt steil und gerade ins gegnerische Feld.",
+  "texts": [
+   "hoher Treffpunkt · steil nach unten"
+  ]
+ },
+ "G-012": {
+  "aria": "Der Stopp: große Vorbereitung, aber weicher, abgebremster Kontakt — der Speeder überquert knapp die neutrale Zone und fällt kurz hinter die vordere Linie.",
+  "texts": [
+   "kurz und weich · fällt knapp hinter die Linie"
+  ]
+ },
+ "G-013": {
+  "aria": "Der Schnitt: die angeschrägte Schlagfläche streift den Speeder seitlich statt ihn gerade zu treffen; gebogene Bewegungslinien zeigen die schneidende Bahn und die entstehende Rotation.",
+  "texts": [
+   "die Fläche streift · Schnitt und Rotation"
+  ]
+ },
+ "G-014": {
+  "aria": "Das Beinarbeit-System: von der zentralen Basis in die Ecken ausbrechen und sofort zur Mitte zurückkehren.",
+  "texts": [
+   "Basis",
+   "raus zur Ecke — zurück zur Mitte"
+  ]
+ },
+ "G-015": {
+  "aria": "Den Speeder früh nehmen: Kontakt am höchsten, frühesten Punkt klar vor und über dem Körper; ein blasser tieferer Treffpunkt zeigt, wo ein langsamerer Spieler getroffen hätte.",
+  "texts": [
+   "früh und hoch — gestohlene Zeit"
+  ]
+ },
+ "G-016": {
+  "aria": "Täuschung, Bild 1: eine bewusst neutrale, identische Vorbereitung, die nichts verrät — voller Rückschwung, ruhiger Körper, kein festgelegter Schlag.",
+  "texts": [
+   "?",
+   "gleiche Vorbereitung — nichts verraten"
+  ]
+ },
+ "G-017": {
+  "aria": "Täuschung, Bild 2: dieselbe Vorbereitung, aus der zwei verschiedene Schläge abzweigen — ein flacher, schneller Drive und ein kurzer, weicher Stopp; die Wahl fällt erst im letzten Moment.",
+  "texts": [
+   "eine Vorbereitung, zwei Möglichkeiten"
+  ]
+ },
+ "G-018": {
+  "aria": "Tempowechsel, Bild 1: ein schneller, harter Schlag mit deutlicher Bewegungsunschärfe und flacher, schneller Flugbahn — hohes Tempo.",
+  "texts": [
+   "hohes Tempo · flach und schnell"
+  ]
+ },
+ "G-019": {
+  "aria": "Tempowechsel, Bild 2: fast identische Vorbereitung, nun ein langsamer, hoher, weicher Schlag mit sanftem Bogen — ein bewusster Bruch im Rhythmus.",
+  "texts": [
+   "gebrochener Rhythmus · hoch und weich"
+  ]
+ },
+ "G-020": {
+  "aria": "Der Sprung-Smash: der Spieler trifft im höchsten Punkt des Sprungs, Füße vom Boden gelöst, mit steiler Flugbahn nach unten ins gegnerische Feld.",
+  "texts": [
+   "im Sprung · steil nach unten"
+  ]
+ },
+ "G-021": {
+  "aria": "Präzision an die Linien: der Speeder landet genau auf einer Ecklinie am äußersten Rand des Feldes; enge Zielzonen in den Ecken und ein dünner Pfeil zeigen die punktgenaue Platzierung mit minimalem Rand.",
+  "texts": [
+   "genau auf die Linie · minimaler Rand"
+  ]
+ },
+ "G-022": {
+  "aria": "Konstanz unter Höchstdruck: ein sauberer, ausbalancierter Schlag mit ruhiger Haltung — stabile Basis, ruhiger Kopf, kontrolliertes Ausschwingen, verlässlich wiederholbar.",
+  "texts": [
+   "ruhig und wiederholbar · unter Druck"
+  ]
+ },
+ "G-023": {
+  "aria": "Das Spielziel: den Speeder über die Passierzone ins gegnerische Feld spielen.",
+  "texts": [
+   "gegnerisches Feld",
+   "PASSIERZONE",
+   "dein Feld"
+  ]
+ },
+ "G-024": {
+  "aria": "Zentrale Position: von der Mitte des Feldes sind die Wege zu allen vier Ecken gleich kurz.",
+  "texts": [
+   "Mitte",
+   "gleich schnell zu jeder Ecke"
+  ]
+ },
+ "G-025": {
+  "aria": "Länge und Tiefe: einen kurzen Ball an die Vorderlinie oder einen tiefen Ball an die Grundlinie spielen.",
+  "texts": [
+   "tief — an die Grundlinie",
+   "kurz — an die Vorderlinie"
+  ]
+ },
+ "G-026": {
+  "aria": "Die Rückhand des Gegners: den Speeder gezielt in die Rückhand-Ecke des Gegners spielen.",
+  "texts": [
+   "Gegner",
+   "Rückhand"
+  ]
+ },
+ "G-027": {
+  "aria": "Den Aufschlag taktisch nutzen: aus der Aufschlagzone verschiedene Zielpunkte im gegnerischen Feld anspielen.",
+  "texts": [
+   "Aufschlagzone"
+  ]
+ },
+ "G-028": {
+  "aria": "Den Punkt aufbauen: den Gegner mit mehreren Schlägen von Ecke zu Ecke bewegen, bis eine Öffnung entsteht.",
+  "texts": [
+   "1",
+   "2",
+   "3",
+   "offen",
+   "Punkt aufbauen → Öffnung"
+  ]
+ },
+ "G-029": {
+  "aria": "Den Smash vorbereiten: tief drücken, den Gegner zum hohen Ball zwingen, dann steil abschließen.",
+  "texts": [
+   "1",
+   "tief drücken",
+   "2",
+   "3",
+   "drücken → hoch → Smash"
+  ]
+ },
+ "G-030": {
+  "aria": "Gegner-Typen und Gegenrezepte: gegen Angreifer, Verteidiger und langsame Gegner je eine passende Antwort.",
+  "texts": [
+   "Angreifer",
+   "Tempo rausnehmen",
+   "Verteidiger",
+   "Ecke zu Ecke",
+   "Langsam",
+   "weite Winkel"
+  ]
+ },
+ "G-031": {
+  "aria": "Eine Schwäche systematisch angreifen: den Speeder immer wieder in dieselbe schwache Ecke des Gegners spielen.",
+  "texts": [
+   "Schwäche",
+   "öffnen"
+  ]
+ },
+ "G-032": {
+  "aria": "Schnelle Füße: tiefe, athletische Haltung auf den Fußballen, kleine schnelle Schritte, angedeutet durch leichte Bewegungslinien an den Füßen, bereit zum Richtungswechsel.",
+  "texts": [
+   "schnelle, leichte Füße auf den Ballen"
+  ]
+ },
+ "G-033": {
+  "aria": "Beweglichkeit und die Schulter: eine sanfte Schulter- und Rumpfmobilisation, ein Arm kreist entlang eines gebogenen Bewegungsbogens über die Schulter, entspannte aufrechte Haltung.",
+  "texts": [
+   "sanfte Schulterkreise · Beweglichkeit"
+  ]
+ },
+ "G-034": {
+  "aria": "Explosivität und Sprungkraft: aus tiefer, geladener Haltung explosiv in eine Ecke abdrücken, ein starker Bewegungspfeil aus dem drückenden Bein nach oben-vorn.",
+  "texts": [
+   "explosiv abdrücken · Sprungkraft"
+  ]
+ },
+ "G-035": {
+  "aria": "Reaktivkraft: der kurze, federnde Bodenkontakt von Fuß und Unterschenkel — minimale Kontaktzeit, angedeutet durch einen kleinen Kompressionsbogen und einen schnellen Rückfederungspfeil.",
+  "texts": [
+   "kurzer Bodenkontakt · schnelle Rückfederung"
+  ]
+ },
+ "G-036": {
+  "aria": "Bewegungsökonomie: links ein Spieler, der sich effizient bewegt — ein glatter, kurzer Weg; rechts blass eine hektische Variante mit vielen verstreuten Extra-Bewegungslinien.",
+  "texts": [
+   "effizient statt hektisch"
+  ]
+ },
+ "G-037": {
+  "aria": "Das Doppel als eigenes Spiel: zwei gegen zwei, jedes Paar teilt sich ein Feld.",
+  "texts": [
+   "gegnerisches Paar",
+   "2 gegen 2",
+   "euer Paar"
+  ]
+ },
+ "G-038": {
+  "aria": "Angriff im Paar: ein Spieler vorne, der Partner dahinter — die Angriffsformation vorne-hinten.",
+  "texts": [
+   "Angriff",
+   "vorne",
+   "hinten",
+   "Angriff: vorne–hinten"
+  ]
+ },
+ "G-039": {
+  "aria": "Verteidigung im Paar: beide Spieler nebeneinander, jeder deckt eine Hälfte des Feldes.",
+  "texts": [
+   "deine Hälfte",
+   "Partner-Hälfte",
+   "Verteidigung: nebeneinander"
+  ]
+ },
+ "G-040": {
+  "aria": "Aufschlag und Rückschlag im Doppel: das Aufschlagrecht wandert in fester Reihenfolge durch alle vier Spieler.",
+  "texts": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "Aufschlag",
+   "reihum: 1 → 2 → 3 → 4"
+  ]
+ },
+ "G-041": {
+  "aria": "Das Umschalten im Doppel: von der Angriffsformation vorne-hinten in die Verteidigung nebeneinander wechseln.",
+  "texts": [
+   "Angriff",
+   "vorne–hinten",
+   "Verteidigung",
+   "nebeneinander"
+  ]
+ },
+ "G-042": {
+  "aria": "Bewegung als Einheit: beide Partner verschieben sich gemeinsam in dieselbe Richtung, mit gleichbleibendem Abstand.",
+  "texts": [
+   "gemeinsam verschieben — Abstand hält"
+  ]
+ },
+ "G-043": {
+  "aria": "Verständigung im Paar: zwei Doppelpartner von hinten, die sich zwischen den Punkten abstimmen — einer gibt hinter dem Rücken ein verdecktes Handzeichen.",
+  "texts": [
+   "verdecktes Handzeichen · Verständigung"
+  ]
+ },
+ "G-044": {
+  "aria": "Erste Schritte im Doppel: zwei Partner mit bequemem Abstand nebeneinander.",
+  "texts": [
+   "bequemer Abstand",
+   "erste Schritte zu zweit"
+  ]
+ },
+ "G-045": {
+  "aria": "Wer nimmt den Ball: von zwei Partnern nimmt einer den mittigen Speeder, der andere lässt ihm den Platz.",
+  "texts": [
+   "nehmen",
+   "lassen",
+   "wer nimmt den Ball?"
+  ]
+ },
+ "G-046": {
+  "aria": "Aufschlag im Doppel, einfach: aus fester Reihenfolge schlägt einer über die Passierzone auf.",
+  "texts": [
+   "1",
+   "gegnerisches Paar",
+   "euer Paar",
+   "Aufschlag"
+  ]
+ },
+ "G-047": {
+  "aria": "Sich absprechen: zwei Doppelpartner von hinten stimmen sich zwischen den Punkten mit einer kurzen Geste ab, entspannte Haltung — einfache Kommunikation als Paar.",
+  "texts": [
+   "kurz absprechen · als Paar"
+  ]
+ },
+ "G-048": {
+  "aria": "Einander Platz lassen: beide Partner halten klaren Abstand und laufen sich nicht in die Quere.",
+  "texts": [
+   "Abstand",
+   "einander Platz lassen"
+  ]
+ },
+ "G-049": {
+  "aria": "Das Paar als System: beide Partner decken gemeinsam das ganze Feld, verbunden und koordiniert.",
+  "texts": [
+   "als ein System — ganzes Feld"
+  ]
+ },
+ "G-050": {
+  "aria": "Das gegnerische Paar lesen: die Lücke zwischen den beiden Gegnern erkennen und anspielen.",
+  "texts": [
+   "Gegner",
+   "Lücke"
+  ]
+ },
+ "G-051": {
+  "aria": "Den Partner in Position bringen: der eigene Schlag setzt den Partner in eine bessere Angriffsposition.",
+  "texts": [
+   "dein Schlag",
+   "Partner",
+   "Partner in Position bringen"
+  ]
+ },
+ "G-052": {
+  "aria": "Nahtlos umschalten: das Paar wechselt fließend zwischen Angriff und Verteidigung.",
+  "texts": [
+   "nahtlos umschalten"
+  ]
+ },
+ "G-053": {
+  "aria": "Blindes Verständnis: zwei Doppelpartner bewegen sich in perfekter Antizipation, ohne sich anzusehen — gespiegelte, gleichgerichtete Bewegungspfeile und ein gemeinsames Wahrnehmungsband.",
+  "texts": [
+   "blindes Verständnis · ohne hinzusehen"
+  ]
+ },
+ "G-054": {
+  "aria": "Draußen spielen: ein Spieler auf einem Feld ohne Netz unter offenem Himmel mit einfachem Untergrund, entspannte, anpassungsfähige Haltung.",
+  "texts": [
+   "draußen spielen · offenes Feld"
+  ]
+ },
+ "G-055": {
+  "aria": "Wind lesen und nutzen: der Wind versetzt den Speeder zur Seite, darum zielst du bewusst gegen die Drift.",
+  "texts": [
+   "Wind →",
+   "Ziel",
+   "gegen die Drift zielen"
+  ]
+ },
+ "G-056": {
+  "aria": "Sonne und Blendung: ein Spieler schirmt die Augen gegen eine tiefe Sonne ab, während er einen hohen Speeder verfolgt; Sonne und Blendstrahlen in einer Ecke, angepasste Kopfhaltung.",
+  "texts": [
+   "gegen die Sonne · Augen abschirmen"
+  ]
+ },
+ "G-057": {
+  "aria": "Nässe und sicherer Stand: ein Spieler mit verbreiterter, vorsichtiger Haltung auf nassem Boden, angedeutete Wassertropfen und ein tiefer, sicherer Körperschwerpunkt.",
+  "texts": [
+   "nasser Boden · breiter, sicherer Stand"
+  ]
+ },
+ "G-058": {
+  "aria": "Hitze: ein Spieler teilt sich bei Hitze die Kräfte ein, die Sonne hoch über dem Kopf, eine Wasserflasche daneben, ruhige, bedachte Haltung.",
+  "texts": [
+   "Hitze · Tempo drosseln, trinken"
+  ]
+ },
+ "G-059": {
+  "aria": "Verschiedene Böden: Sand, Rasen, Asche und Kunstrasen verlangen jeweils eine andere Fußarbeit.",
+  "texts": [
+   "Sand",
+   "Rasen",
+   "Asche",
+   "Kunstrasen",
+   "jeder Boden — eigene Fußarbeit"
+  ]
+ },
+ "G-060": {
+  "aria": "Bemaßtes Crossminton-Spielfeld: zwei Felder 5,50 mal 5,50 m, Passierzone 12,80 m, Aufschlaglinie 3,00 m von der Vorderlinie.",
+  "texts": [
+   "SPIELFELD",
+   "Aufschlagzone",
+   "Aufschlaglinie",
+   "SPIELFELD",
+   "Aufschlagzone",
+   "PASSIERZONE",
+   "kein Netz — der Speeder muss hinüber",
+   "5,50 m",
+   "5,50 m",
+   "12,80 m",
+   "3,00 m"
+  ]
+ },
+ "G-061": {
+  "aria": "Schiedsrichter-Handzeichen: IN, OUT, Auszeit, Wiederholung, Seitenwechsel und Aufschlagfehler als Übersicht.",
+  "texts": [
+   "IN — im Feld",
+   "OUT — daneben",
+   "Auszeit (T)",
+   "Wiederholung",
+   "Seitenwechsel",
+   "Aufschlagfehler"
+  ]
+ }
+}
