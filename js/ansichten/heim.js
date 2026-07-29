@@ -27,8 +27,8 @@ export function renderHeim(el, daten) {
   // Eine Bereich-Kachel: farbige Icon-Medaille (Hue) + Titel + Kurztext + CTA.
   // Die ganze Kachel ist ein Link; der CTA verstärkt die Aktion sichtbar.
   const cta = `<span class="pfad-cta">${esc(t('ansehen'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>`;
-  const kachel = ({ href, hue, icon, titel, meta = '', text = '', extra = '' }) => `
-    <a class="karte karte-link pfad-kachel ${hue}" href="${esc(href)}">
+  const kachel = ({ href, hue, icon, titel, meta = '', text = '', extra = '', lead = false }) => `
+    <a class="karte karte-link pfad-kachel ${hue}${lead ? ' pfad-kachel--lead' : ''}" href="${esc(href)}">
       <span class="pfad-medaille"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>
       <div class="pfad-kachel-text">
         <h3>${titel}${meta}</h3>
@@ -86,6 +86,15 @@ export function renderHeim(el, daten) {
     text: esc(t('profil_intro')),
   });
 
+  // Ganz unten, über die volle Breite: das KO-Turnier-Werkzeug — sonst nur über
+  // das „Mehr"-Menü erreichbar und für viele schwer zu finden. pf-teal ist die
+  // einzige Hue, die unter den Startseiten-Kacheln noch nicht vergeben ist.
+  const koTurnierKachel = kachel({
+    href: '#/ko-turnier', hue: 'pf-teal', icon: 'fa-flag-checkered', lead: true,
+    titel: esc(t('ko_turnier_titel')),
+    text: esc(t('ko_turnier_kachel_text')),
+  });
+
   el.innerHTML = `
     ${markeHeroGross(heroCta)}
     ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
@@ -97,5 +106,6 @@ export function renderHeim(el, daten) {
       ${individualKachel}
       ${regelnKachel}
       ${profilKachel}
+      ${koTurnierKachel}
     </div>`;
 }
