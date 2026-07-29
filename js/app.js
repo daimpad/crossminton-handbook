@@ -5,6 +5,7 @@
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
+import { renderKoTurnier } from './ansichten/ko-turnier.js';
 import { renderMerkliste } from './ansichten/merkliste.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderPlan } from './ansichten/plan.js';
@@ -44,6 +45,7 @@ function aktualisiereNavigation(segmente) {
     mitmachen: 'mitmachen',
     profil: 'profil',
     merkliste: 'merkliste',
+    'ko-turnier': 'ko-turnier',
     suche: 'suche',
   };
   const aktiv = navFuer[segmente[0]] || 'lernen';
@@ -60,7 +62,7 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'merkliste', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'merkliste', 'ko-turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
@@ -90,6 +92,7 @@ function beschrifteRahmen() {
     regeln: t('nav_regeln'),
     ausruestung: t('nav_ausruestung'),
     merkliste: t('nav_merkliste'),
+    'ko-turnier': t('nav_ko_turnier'),
     suche: t('nav_suche'),
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
@@ -299,6 +302,8 @@ function rendern() {
     renderProfil(el, daten);
   } else if (segmente[0] === 'merkliste') {
     renderMerkliste(el, daten);
+  } else if (segmente[0] === 'ko-turnier') {
+    renderKoTurnier(el, daten);
   } else {
     renderHeim(el, daten);
   }

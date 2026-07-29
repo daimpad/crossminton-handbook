@@ -17,7 +17,7 @@
 // Kern-Dateien den CACHE-Namen erhöhen — dann lädt der neue SW die Hülle frisch
 // und räumt die alten Caches weg.
 
-const CACHE = 'crossminton-v31';
+const CACHE = 'crossminton-v32';
 
 // App-Hülle: alles, was für den ersten Start ohne Netz nötig ist. Die
 // Baustein-Grafiken (images/G-XXX.png) sind bewusst NICHT dabei — sie sind viele
@@ -38,6 +38,7 @@ const SHELL = [
   'js/fortschritt.js',
   'js/graph.js',
   'js/i18n.js',
+  'js/ko-turnier.js',
   'js/oberflaeche.js',
   'js/pfade.js',
   'js/plan.js',
@@ -46,6 +47,7 @@ const SHELL = [
   'js/ansichten/baustein.js',
   'js/ansichten/heim.js',
   'js/ansichten/info.js',
+  'js/ansichten/ko-turnier.js',
   'js/ansichten/merkliste.js',
   'js/ansichten/onboarding.js',
   'js/ansichten/pfad.js',

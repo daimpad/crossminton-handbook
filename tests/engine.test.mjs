@@ -13,8 +13,9 @@ import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortsch
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
-import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan } from '../js/zustand.js';
+import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier } from '../js/zustand.js';
 import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
+import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -739,6 +740,86 @@ pruefe('EN-Labels befüllt (Stichprobe quer über Namespaces)',
   labelsEn.ui.nav_lernen === 'Learn' && labelsEn.ui.pfad_kompetenz !== '' && labelsEn.bausteine.aufschlag !== ''
   && labelsEn.grafiken['G-001'] !== '' && labelsEn.vokabeln.domaene.technik !== ''
   && labelsEn.spielziele.faktoren.rally_ausdauer !== '' && labelsEn.trainingseinheiten.beginner_erste_schlaege !== '');
+
+console.log('\n[13] KO-Turnier (Engine + Persistenz) — Spaßturnier-Werkzeug, kein Lerninhalt');
+// Feste 'Zufalls'-Quelle statt Math.random(): die Engine bleibt deterministisch
+// testbar, weil sie den Mischer nie selbst aufruft (mische() nimmt sie herein).
+let saat = 0.05;
+const testZufall = () => { saat = (saat + 0.29) % 1; return saat; };
+
+const sechsNamen = ['Anna', 'Ben', 'Cem', 'Dana', 'Emil', 'Finn'];
+const gemischtSechs = mische(sechsNamen, testZufall);
+pruefe('mische: liefert eine Permutation derselben Namen', gleicheListe([...gemischtSechs].sort(), [...sechsNamen].sort()));
+pruefe('mische: rein (Original bleibt unverändert)', gleicheListe(sechsNamen, ['Anna', 'Ben', 'Cem', 'Dana', 'Emil', 'Finn']));
+
+let ko = erzeugeTurnier('Test-Cup', gemischtSechs);
+pruefe('erzeugeTurnier: Titel + Teilnehmerliste übernommen', ko.titel === 'Test-Cup' && gleicheListe([...ko.teilnehmer].sort(), [...sechsNamen].sort()));
+pruefe('erzeugeTurnier (N=6): Runde 1 hat 4 Matches (nächste Zweierpotenz 8)', ko.runden[0].length === 4);
+const freiloseR1 = ko.runden[0].filter((m) => m.b === null);
+pruefe('erzeugeTurnier (N=6): genau 2 Freilose, automatisch entschieden', freiloseR1.length === 2 && freiloseR1.every((m) => m.sieger === m.a));
+pruefe('erzeugeTurnier: alle 6 Namen kommen in Runde 1 genau einmal vor', gleicheListe([...ko.runden[0].flatMap((m) => [m.a, m.b]).filter(Boolean)].sort(), [...sechsNamen].sort()));
+
+// Runde 1 komplettieren (die offenen 2 Matches entscheiden) → Runde 2 entsteht automatisch.
+for (let i = 0; i < ko.runden[0].length; i++) {
+  if (!ko.runden[0][i].sieger) ko = traegtSiegerEin(ko, 0, i, ko.runden[0][i].a);
+}
+pruefe('traegtSiegerEin: komplette Runde erzeugt automatisch die nächste (Halbfinale, 2 Matches)', ko.runden.length === 2 && ko.runden[1].length === 2);
+pruefe('istAbgeschlossen: vor dem Finale falsch', !istAbgeschlossen(ko));
+pruefe('turniersieger: vor dem Finale null', turniersieger(ko) === null);
+
+for (let i = 0; i < ko.runden[1].length; i++) ko = traegtSiegerEin(ko, 1, i, ko.runden[1][i].a);
+pruefe('traegtSiegerEin: Halbfinale komplett erzeugt das Finale (1 Match)', ko.runden.length === 3 && ko.runden[2].length === 1);
+
+const finalSieger = ko.runden[2][0].a;
+const koVorFinale = ko;
+ko = traegtSiegerEin(ko, 2, 0, finalSieger);
+pruefe('istAbgeschlossen: nach dem Finale wahr', istAbgeschlossen(ko));
+pruefe('turniersieger: liefert den Finalgewinner', turniersieger(ko) === finalSieger);
+pruefe('traegtSiegerEin: Immutability (Ursprungsobjekt vor dem Finale unverändert)', koVorFinale.runden.length === 3 && !koVorFinale.runden[2][0].sieger);
+
+pruefe('rundenName: 1→finale, 2→halbfinale, 4→viertelfinale, 8→achtelfinale, 3→kein Name',
+  rundenName(1) === 'finale' && rundenName(2) === 'halbfinale' && rundenName(4) === 'viertelfinale' && rundenName(8) === 'achtelfinale' && rundenName(3) === null);
+
+const plaetze = platzierungen(ko);
+pruefe('platzierungen: enthält alle 6 Teilnehmer:innen genau einmal', plaetze.length === 6 && gleicheListe([...plaetze.map((p) => p.name)].sort(), [...sechsNamen].sort()));
+pruefe('platzierungen: der Champion steht an erster Stelle (ausgeschiedenInRunde null)', plaetze[0].name === finalSieger && plaetze[0].ausgeschiedenInRunde === null);
+pruefe('platzierungen: sortiert nach bester Platzierung (Runde absteigend)', plaetze.every((p, i) => i === 0 || (plaetze[i - 1].ausgeschiedenInRunde ?? Infinity) >= (p.ausgeschiedenInRunde ?? Infinity)));
+pruefe('platzierungen: Runde-1-Verliererinnen tragen ausgeschiedenInRunde 0', plaetze.some((p) => p.ausgeschiedenInRunde === 0));
+
+// Sieger einer FRÜHEREN (bereits verarbeiteten) Runde nachträglich ändern: die
+// darauf aufbauenden späteren Runden müssen verworfen werden (neu zu entscheiden).
+const r0Match0 = ko.runden[0][0];
+const anderer = r0Match0.a === r0Match0.sieger ? r0Match0.b : r0Match0.a;
+if (anderer) {
+  const koKorrigiert = traegtSiegerEin(ko, 0, 0, anderer);
+  pruefe('traegtSiegerEin (Korrektur einer früheren Runde): spätere Runden werden verworfen', koKorrigiert.runden.length === 2 && koKorrigiert.runden[0][0].sieger === anderer);
+  pruefe('traegtSiegerEin (Korrektur): Original bleibt unverändert (Immutability)', ko.runden.length === 3);
+}
+pruefe('traegtSiegerEin: erneut denselben Sieger eintragen ist ein No-op (identisches Objekt)', traegtSiegerEin(ko, 2, 0, finalSieger) === ko);
+pruefe('traegtSiegerEin: unbeteiligter Name ändert nichts (kein Fehlerfall)', traegtSiegerEin(ko, 0, 0, 'Niemand-von-beiden') === ko);
+
+// Randfälle: N=2 (sofortiges Finale), N=8 (keine Freilose nötig).
+const koZwei = erzeugeTurnier('Duell', mische(['X', 'Y'], testZufall));
+pruefe('erzeugeTurnier (N=2): eine Runde mit einem Match (direktes Finale)', koZwei.runden.length === 1 && koZwei.runden[0].length === 1 && koZwei.runden[0][0].b !== null);
+const koAcht = erzeugeTurnier('Acht', mische(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], testZufall));
+pruefe('erzeugeTurnier (N=8): 4 Matches in Runde 1, keine Freilose', koAcht.runden[0].length === 4 && koAcht.runden[0].every((m) => m.b !== null));
+
+// Fehlerfälle: zu wenig bzw. doppelte Teilnehmer:innen sind ein echter Programmfehler
+// (die Ansicht verhindert das schon bei der Eingabe) — kein Nicht-Fehlerfall wie sonst üblich.
+let wirftZuWenig = false;
+try { erzeugeTurnier('zu wenig', ['Nur Eine']); } catch { wirftZuWenig = true; }
+pruefe('erzeugeTurnier: wirft bei < 2 Teilnehmer:innen', wirftZuWenig);
+let wirftDuplikat = false;
+try { erzeugeTurnier('Duplikat', ['A', 'A']); } catch { wirftDuplikat = true; }
+pruefe('erzeugeTurnier: wirft bei doppelten Namen', wirftDuplikat);
+
+// Zustand: ein aktives Turnier zur Zeit, wie der Trainingsplan.
+loescheKoTurnier();
+pruefe('Zustand: kein KO-Turnier initial', gespKoTurnier() === null);
+setzeKoTurnier(koZwei);
+pruefe('Zustand: KO-Turnier persistiert und lesbar', gespKoTurnier()?.titel === 'Duell');
+loescheKoTurnier();
+pruefe('Zustand: KO-Turnier löschbar', gespKoTurnier() === null);
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

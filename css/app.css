@@ -2002,6 +2002,99 @@ details[open] summary { margin-bottom: 0.5rem; }
   font-size: 0.9rem;
 }
 
+/* ---------- KO-Turnier (Spaßturnier-Werkzeug, kein Lerninhalt) ---------- */
+
+/* Setup: Namens-Eingabe + Hinzufügen-Knopf in einer Zeile, darunter die Chip-Liste
+   der erfassten Namen. */
+.ko-namen-eingabe { display: flex; gap: 0.6rem; align-items: flex-end; margin: 0.8rem 0; }
+.ko-namen-eingabe .plan-feld { flex: 1; }
+.ko-chip-zeile { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+.ko-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: var(--primaer-weich);
+  color: var(--primaer-tief);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.ko-chip-entfernen {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+/* Champion-Banner: wiederverwendet die Meilenstein-Bildsprache (nicht überlagert,
+   sondern inline oben in der Ansicht — das Turnier bleibt sichtbar). */
+.ko-champion-banner {
+  text-align: center;
+  background: linear-gradient(160deg, var(--signal-gruen-weich) 0%, var(--flaeche) 78%);
+}
+.ko-champion-zeichen { font-size: 2.1rem; color: var(--signal-gruen-text); margin-bottom: 0.3rem; }
+.ko-champion-name { font-size: 1.4rem; font-weight: 700; margin-top: 0.2rem; }
+
+/* Platzierung: kompakte Liste, Rundenname links, Namen rechtsbündig-fließend. */
+.ko-platz-liste { list-style: none; padding: 0; margin: 0; }
+.ko-platz {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--linie);
+}
+.ko-platz:last-child { border-bottom: 0; }
+.ko-platz-titel { font-weight: 600; flex-shrink: 0; }
+.ko-platz-namen { color: var(--tinte-2); text-align: right; }
+
+/* Bracket: Runden als gestapelte Sektionen (mobil-first — ein breiter, horizontal
+   scrollender Baum ist auf schmalen Screens nicht praktikabel). */
+.ko-bracket { margin-top: 1rem; }
+.ko-runde { margin-bottom: 1.2rem; }
+.ko-runde h3 { margin-bottom: 0.5rem; }
+.ko-matches { display: flex; flex-direction: column; gap: 0.55rem; }
+.ko-match {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten-karte);
+  padding: 0.4rem;
+}
+.ko-match-gegen { font-size: 0.75rem; color: var(--tinte-3); flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.04em; }
+.ko-match-seite {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-klein);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  transition: background var(--uebergang), border-color var(--uebergang), color var(--uebergang), opacity var(--uebergang);
+}
+button.ko-match-seite:hover { border-color: var(--primaer); }
+.ko-match-sieger { background: var(--signal-gruen-weich); border-color: var(--signal-gruen); color: var(--signal-gruen-text); }
+.ko-match-verlierer { opacity: 0.55; text-decoration: line-through; }
+.ko-match-freilos .ko-match-seite { flex: 0 1 auto; cursor: default; }
+.ko-match-freilos { justify-content: space-between; }
+
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */
 /* Der Primär-Button trägt im Dunkeln dunklen Text auf dem hellen Marken-Blau;
    der Willkommens-Hero behält einen tiefen Blauverlauf (weißer Text bleibt lesbar). */
