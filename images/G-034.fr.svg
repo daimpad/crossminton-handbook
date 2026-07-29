@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Explosivité et détente : depuis une posture basse et chargée, repousser de façon explosive vers un coin, une forte flèche de mouvement partant de la jambe motrice vers le haut et l'avant.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .druck{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4.2;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m034" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="104" cy="110" r="14"/>
+  <path class="fig" d="M104,124 L118,172"/>
+  <!-- Arme dynamisch -->
+  <path class="fig" d="M106,132 L134,120"/>
+  <path class="fig" d="M106,138 L86,164"/>
+  <!-- drückendes Bein (hinten, gestreckt) + vorderes Bein -->
+  <path class="fig" d="M118,172 L100,204 L86,234"/>
+  <path class="fig" d="M118,172 L146,196 L162,224"/>
+  <!-- explosiver Abdruck-Pfeil aus dem hinteren Bein nach oben-vorn -->
+  <path class="druck" d="M92,232 L176,120" marker-end="url(#m034)"/>
+  <line class="boden" x1="72" y1="238" x2="188" y2="238"/>
+  <text class="st" x="150" y="266">repousser de façon explosive · détente</text>
+</svg>

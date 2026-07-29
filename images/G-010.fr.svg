@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Le dégagement au-dessus de la tête : point de frappe haut au-dessus de la tête, bras de frappe tendu, la trajectoire décrit un arc haut et profond loin dans le terrain adverse.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah10" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+  </defs>
+  <!-- Kopf -->
+  <circle class="kopf" cx="104" cy="96" r="14"/>
+  <!-- Rumpf, leicht gestreckt -->
+  <path class="fig" d="M104,110 L110,172"/>
+  <!-- Schlagarm hoch gestreckt -->
+  <path class="fig" d="M105,120 L126,86 L150,58"/>
+  <!-- freier Arm -->
+  <path class="fig" d="M107,126 L86,150"/>
+  <!-- Beine, Ausfallschritt -->
+  <path class="fig" d="M110,172 L92,206 L82,240"/>
+  <path class="fig" d="M110,172 L134,204 L150,236"/>
+  <!-- Schläger am hohen Treffpunkt -->
+  <line class="schaft" x1="150" y1="58" x2="164" y2="42"/>
+  <ellipse class="kelle" cx="170" cy="34" rx="11" ry="15" transform="rotate(42 170 34)"/>
+  <!-- Flugbahn: hoher, tiefer Bogen -->
+  <path class="bahn" d="M178,36 C 224,22 262,54 268,150" marker-end="url(#ah10)"/>
+  <!-- Boden -->
+  <line class="boden" x1="70" y1="244" x2="190" y2="244"/>
+  <text class="st" x="150" y="270">point de frappe haut · arc profond au fond</text>
+</svg>
