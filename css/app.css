@@ -1480,6 +1480,9 @@ details[open] summary { margin-bottom: 0.5rem; }
   .menue-schliessen:hover { background: var(--primaer-weich); box-shadow: var(--schatten-hover); }
   .menue-punkt:hover { background: var(--primaer-weich); color: var(--primaer-tief); }
   .fussnav a:hover, .fussnav-mehr:hover { color: var(--primaer-tief); }
+  .fab:hover { box-shadow: var(--schatten-hover); transform: translateY(-2px); }
+  .fab-aktiv:hover { background: var(--primaer-dunkel); border-color: var(--primaer-dunkel); }
+  .merk-entfernen:hover { background: var(--primaer-weich); color: var(--tinte); }
 }
 
 /* ---------- Desktop ---------- */
@@ -1489,6 +1492,9 @@ details[open] summary { margin-bottom: 0.5rem; }
   .hamburger { display: inline-flex; }
   main { padding: 1.6rem 1.5rem 1rem; }
   h1 { font-size: 1.7rem; }
+  /* Ohne Bottom-Bar rücken Floating-Aktionen und Toast tiefer. */
+  .fab-leiste { right: 1.5rem; bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+  .toast { bottom: calc(2rem + env(safe-area-inset-bottom)); }
 }
 
 /* ---------- Info-Reiter (Über / Mitmachen) ---------- */
@@ -1888,19 +1894,129 @@ details[open] summary { margin-bottom: 0.5rem; }
 .plan-session-knoepfe { display: flex; gap: 0.3rem; }
 .plan-session-knoepfe .knopf { padding: 0.4rem 0.55rem; }
 
+/* ---------- Floating-Aktionen (Teilen / Merken), Toast, Merkliste ---------- */
+/* Schwebende Aktionen unten rechts über der Bottom-Navigation (mobil); auf dem
+   Desktop rückt die Leiste tiefer, weil die Bar dort ausgeblendet ist. */
+.fab-leiste {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+  z-index: 14;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.fab {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--linie);
+  background: var(--flaeche);
+  color: var(--primaer-tief);
+  box-shadow: var(--schatten-karte);
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--uebergang), box-shadow var(--uebergang), background var(--uebergang), color var(--uebergang), border-color var(--uebergang);
+}
+.fab .fa-solid { color: inherit; }
+/* Gemerkt: gefüllter Akzent — im Hellmodus über --primaer-tief, damit das weiße
+   Icon genug Kontrast trägt (analog zum Primär-Button, CI-A11y-Regel). */
+.fab-aktiv {
+  background: var(--primaer-tief);
+  border-color: var(--primaer-tief);
+  color: #fff;
+}
+
+/* Kurz-Rückmeldung unten mittig; ohne .toast-sichtbar unsichtbar und nie im Weg. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(5.6rem + env(safe-area-inset-bottom));
+  transform: translate(-50%, 0.5rem);
+  z-index: 40;
+  max-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.6rem 0.95rem;
+  border-radius: var(--radius-klein);
+  background: var(--tinte);
+  color: var(--flaeche);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: var(--schatten-hover);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--uebergang), transform var(--uebergang);
+}
+.toast-sichtbar { opacity: 1; transform: translate(-50%, 0); }
+
+/* Merkliste-Eintrag: Stations-Link + Entfernen-Knopf in einer Zeile. */
+.merk-station { display: flex; align-items: center; }
+.merk-station .station-link { flex: 1; }
+.merk-entfernen {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-right: 0.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--tinte-3);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--uebergang), color var(--uebergang);
+}
+
+/* Merk-Zähler am Menüpunkt: kleines Akzent-Abzeichen rechts. */
+.merk-badge {
+  margin-left: auto;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  padding: 0 0.35rem;
+  border-radius: 0.65rem;
+  background: var(--primaer-weich);
+  color: var(--primaer-tief);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Teilen-Rückfall (kein Web-Share, keine Zwischenablage): Link zum Kopieren. */
+.teilen-karte { text-align: left; }
+.teilen-feld {
+  width: 100%;
+  margin: 0.6rem 0 0.9rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-klein);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */
 /* Der Primär-Button trägt im Dunkeln dunklen Text auf dem hellen Marken-Blau;
    der Willkommens-Hero behält einen tiefen Blauverlauf (weißer Text bleibt lesbar). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='hell']) .knopf-primaer { color: #08151f; background: var(--primaer); }
+  :root:not([data-theme='hell']) .fab-aktiv { color: #08151f; background: var(--primaer); border-color: var(--primaer); }
   :root:not([data-theme='hell']) .hero { background: linear-gradient(135deg, #1c6fae 0%, #0e4a79 100%); }
 }
 :root[data-theme='dunkel'] .knopf-primaer { color: #08151f; background: var(--primaer); }
+:root[data-theme='dunkel'] .fab-aktiv { color: #08151f; background: var(--primaer); border-color: var(--primaer); }
 :root[data-theme='dunkel'] .hero { background: linear-gradient(135deg, #1c6fae 0%, #0e4a79 100%); }
 
 /* Druckansicht = „Als PDF": nur der Plan, ohne Navigation, Formular und Knöpfe. */
 @media print {
-  .kopf, .fussnav, .menue, .sprach-anzeige,
+  .kopf, .fussnav, .menue, .sprach-anzeige, .fab-leiste, .toast,
   .plan-konfig, .plan-aktionen, .plan-session-knoepfe, .plan-session-link { display: none !important; }
   body { background: #fff; }
   main { padding: 0; max-width: none; }

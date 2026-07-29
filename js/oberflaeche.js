@@ -185,6 +185,49 @@ export function melde(mitteilung) {
   requestAnimationFrame(() => { region.textContent = String(mitteilung ?? ''); });
 }
 
+// Kurze, sich selbst schließende Rückmeldung (z. B. „Link kopiert", „Gemerkt").
+// Visuell unten eingeblendet; die role=status-Region (index.html) sagt sie auch
+// Screenreadern höflich an. Idempotent — ein laufender Timer wird zurückgesetzt.
+let toastZeitgeber = null;
+export function zeigeToast(nachricht) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = String(nachricht ?? '');
+  toast.classList.add('toast-sichtbar');
+  if (toastZeitgeber) clearTimeout(toastZeitgeber);
+  toastZeitgeber = setTimeout(() => toast.classList.remove('toast-sichtbar'), 2600);
+}
+
+// Einen Link teilen: bevorzugt die native Teilen-Auswahl (Web Share API, v. a.
+// mobil), sonst in die Zwischenablage kopieren und quittieren. Bricht die Person
+// die native Auswahl ab, passiert bewusst nichts. Fehlt auch die Zwischenablage
+// (unsicherer Kontext), wird der Link zum manuellen Kopieren angezeigt.
+export async function teileLink(url, titel = '') {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title: titel || undefined, url });
+    } catch {
+      /* Abbruch/keine Freigabe — nichts weiter tun */
+    }
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    zeigeToast(t('link_kopiert'));
+  } catch {
+    zeigeUeberlagerung(`
+      <div class="teilen-karte">
+        <h2>${esc(t('teilen'))}</h2>
+        <p class="leise">${esc(t('link_manuell'))}</p>
+        <input class="teilen-feld" type="text" readonly value="${esc(url)}" aria-label="${esc(t('teilen'))}">
+        <button class="knopf knopf-primaer" data-schliessen>${esc(t('schliessen'))}</button>
+      </div>`);
+    const feld = document.querySelector('#dialog-wurzel .teilen-feld');
+    if (feld) { feld.focus(); feld.select(); }
+    document.querySelector('#dialog-wurzel [data-schliessen]')?.addEventListener('click', schliesseUeberlagerung);
+  }
+}
+
 // Sequenzabschluss-Gratifikation (Spez. 8.3): würdigend, aber zurückhaltend.
 export function zeigeMeilenstein(meilenstein) {
   const istKompetenz = meilenstein.art === 'kompetenz';

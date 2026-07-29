@@ -5,6 +5,7 @@
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
+import { renderMerkliste } from './ansichten/merkliste.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderPlan } from './ansichten/plan.js';
 import { renderAusruestung, renderIndividual, renderKompetenzpfad, renderSpielform, renderThemen, renderUmgebung } from './ansichten/pfad.js';
@@ -17,7 +18,7 @@ import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
 import { initI18n, setzeSprache, sprache, t, text } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
-import { einstellungen, ladeZustand, setzeEinstellung } from './zustand.js';
+import { einstellungen, ladeZustand, merkliste, setzeEinstellung } from './zustand.js';
 
 let daten = null;
 let letzteRoute = null;
@@ -33,22 +34,19 @@ function parseHash() {
 }
 
 function aktualisiereNavigation(segmente) {
-  const aktiv =
-    segmente[0] === 'training' || segmente[0] === 'plan'
-      ? 'training'
-      : segmente[0] === 'regeln' || segmente[0] === 'turnier'
-        ? 'regeln'
-        : segmente[0] === 'ausruestung'
-          ? 'ausruestung'
-          : segmente[0] === 'ueber'
-            ? 'ueber'
-            : segmente[0] === 'mitmachen'
-              ? 'mitmachen'
-              : segmente[0] === 'profil'
-                ? 'profil'
-                : segmente[0] === 'suche'
-                  ? 'suche'
-                  : 'lernen';
+  const navFuer = {
+    training: 'training',
+    plan: 'training',
+    regeln: 'regeln',
+    turnier: 'regeln',
+    ausruestung: 'ausruestung',
+    ueber: 'ueber',
+    mitmachen: 'mitmachen',
+    profil: 'profil',
+    merkliste: 'merkliste',
+    suche: 'suche',
+  };
+  const aktiv = navFuer[segmente[0]] || 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -62,12 +60,24 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'merkliste', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
     if (imMehr) mehr.setAttribute('aria-current', 'page');
     else mehr.removeAttribute('aria-current');
+  }
+  aktualisiereMerkAnzahl();
+}
+
+// Merk-Zähler am Menüpunkt: zeigt die Anzahl gemerkter Bausteine (ab 1), sonst
+// verborgen. Läuft bei jedem Rendern mit und reagiert auf das 'app:merk'-Ereignis
+// (Umschalten aus der Baustein-Ansicht ohne Neu-Rendern).
+function aktualisiereMerkAnzahl() {
+  const anzahl = merkliste().length;
+  for (const abzeichen of document.querySelectorAll('[data-merk-anzahl]')) {
+    abzeichen.textContent = anzahl > 0 ? String(anzahl) : '';
+    abzeichen.hidden = anzahl === 0;
   }
 }
 
@@ -79,6 +89,7 @@ function beschrifteRahmen() {
     training: t('nav_training'),
     regeln: t('nav_regeln'),
     ausruestung: t('nav_ausruestung'),
+    merkliste: t('nav_merkliste'),
     suche: t('nav_suche'),
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
@@ -286,6 +297,8 @@ function rendern() {
     renderBaustein(el, daten, decodeURIComponent(segmente[1]), query.get('kontext') || 'kompetenz');
   } else if (segmente[0] === 'profil') {
     renderProfil(el, daten);
+  } else if (segmente[0] === 'merkliste') {
+    renderMerkliste(el, daten);
   } else {
     renderHeim(el, daten);
   }
@@ -353,6 +366,8 @@ async function boot() {
 
   window.addEventListener('hashchange', rendern);
   window.addEventListener('app:rendern', rendern);
+  // Merk-Zähler ohne Neu-Rendern nachziehen (Umschalten aus der Baustein-Ansicht).
+  window.addEventListener('app:merk', aktualisiereMerkAnzahl);
   rendern();
 
   // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft

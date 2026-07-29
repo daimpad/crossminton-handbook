@@ -8,7 +8,7 @@
 import { deltaFuer, domaenenVon, einheitReferenzen, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon, witterungVon } from './daten.js';
 import { fehlendeVoraussetzungen, topoSortiere } from './graph.js';
 import { absolviertNachId, bausteinAbsolviert } from './fortschritt.js';
-import { diagnose, kontinuitaet, teilStatus } from './zustand.js';
+import { diagnose, kontinuitaet, merkliste, teilStatus } from './zustand.js';
 
 // Gleichrangige Bausteine: Domäne sekundär (Reihenfolge des Vokabulars),
 // Pool-Reihenfolge tertiär — deterministisch.
@@ -268,8 +268,20 @@ export function trainingsuebersicht(daten) {
     });
 }
 
+// Merkliste-Wiedervorlage: löst gemerkte IDs zu Stationen auf (Status inklusive),
+// in Merk-Reihenfolge. Unbekannte IDs (z. B. nach einer Datenänderung) werden
+// übersprungen — kein Fehlerfall. Reine Sammlung über den Pool, kein Kontext und
+// kein Cross-Sport-Modifikator; die Zwei-Ebenen-Logik sperrt hier nichts. `ids`
+// wird hereingereicht (testbar ohne Zustand), die Ansicht liefert `merkliste()`.
+export function merklisteStationen(daten, ids) {
+  return (ids || [])
+    .map((id) => daten.bausteinVonId.get(id))
+    .filter(Boolean)
+    .map((baustein) => baueStation(daten, baustein, new Set(), null));
+}
+
 // Kontext-Strings der Ansichten: 'kompetenz', 'kompetenz:trainer',
-// 'themen:<domaene>', 'individual'.
+// 'themen:<domaene>', 'individual', 'merkliste'.
 export function sequenzFuer(daten, kontext) {
   const [art, parameter] = String(kontext || 'kompetenz').split(':');
   if (art === 'themen') return themenpfad(daten, parameter);
@@ -278,6 +290,7 @@ export function sequenzFuer(daten, kontext) {
   if (art === 'witterung') return umgebungspfad(daten, 'witterung', parameter);
   if (art === 'untergrund') return umgebungspfad(daten, 'untergrund', parameter);
   if (art === 'individual') return individualpfad(daten);
+  if (art === 'merkliste') return { art: 'merkliste', stationen: merklisteStationen(daten, merkliste()) };
   return kompetenzpfad(daten, parameter || diagnose().stufe);
 }
 

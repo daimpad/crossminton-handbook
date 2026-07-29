@@ -8,7 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
-import { individualpfad, kompetenzpfad, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
+import { individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
@@ -338,6 +338,15 @@ pruefe('Nachbarn im Kompetenzpfad stimmen', imKontext.vorherige.baustein.id === 
 pruefe('Delta im Kompetenz-Kontext aktiv', imKontext.station.delta?.id === 'griff_delta_bad');
 pruefe('gleicher Baustein im Themen-Kontext ohne Delta', stationImKontext(daten, 'griff', 'themen:technik').station.delta === null);
 pruefe('sequenzFuer versteht kompetenz:trainer (die 5 Trainer-Trainingsgestaltungs-Bausteine)', sequenzFuer(daten, 'kompetenz:trainer').stationen.length === 5);
+
+console.log('\n[7a] Merkliste (Wiedervorlage, baustein-gebunden)');
+const merkStationen = merklisteStationen(daten, ['aufschlag', 'griff']);
+pruefe('merklisteStationen löst IDs in Merk-Reihenfolge auf', merkStationen.length === 2 && merkStationen[0].baustein.id === 'aufschlag' && merkStationen[1].baustein.id === 'griff');
+pruefe('merklisteStationen trägt Status je Station', merkStationen.every((s) => s.status && typeof s.status.absolviert === 'boolean'));
+pruefe('merklisteStationen filtert unbekannte IDs (kein Fehlerfall)', merklisteStationen(daten, ['griff', 'gibt_es_nicht', 'aufschlag']).length === 2);
+pruefe('merklisteStationen bei leerer/fehlender Liste ist leer', merklisteStationen(daten, []).length === 0 && merklisteStationen(daten, null).length === 0);
+pruefe('merklisteStationen ist herkunftsneutral (kein Delta, wie Deep-Link)', merklisteStationen(daten, ['griff'])[0].delta === null);
+pruefe('sequenzFuer versteht den merkliste-Kontext (Default leer)', sequenzFuer(daten, 'merkliste').art === 'merkliste' && sequenzFuer(daten, 'merkliste').stationen.length === 0);
 
 console.log('\n[7b] Fehlerbilder (Trainer-Layer)');
 pruefe('fehlerbilderFuer(griff) liefert das Fehlerbild', fehlerbilderFuer(daten, 'griff').length === 1 && fehlerbilderFuer(daten, 'griff')[0].id === 'griff_fehler_zu_fest');
