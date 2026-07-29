@@ -754,20 +754,26 @@ pruefe('mische: rein (Original bleibt unverändert)', gleicheListe(sechsNamen, [
 
 let ko = erzeugeTurnier('Test-Cup', gemischtSechs);
 pruefe('erzeugeTurnier: Titel + Teilnehmerliste übernommen', ko.titel === 'Test-Cup' && gleicheListe([...ko.teilnehmer].sort(), [...sechsNamen].sort()));
-pruefe('erzeugeTurnier (N=6): Runde 1 hat 4 Matches (nächste Zweierpotenz 8)', ko.runden[0].length === 4);
-const freiloseR1 = ko.runden[0].filter((m) => m.b === null);
-pruefe('erzeugeTurnier (N=6): genau 2 Freilose, automatisch entschieden', freiloseR1.length === 2 && freiloseR1.every((m) => m.sieger === m.a));
+// N=6 ist gerade: Runde 1 hat 3 Matches, KEIN Freilos — Freilose entstehen nur bei
+// ungerader Teilnehmerzahl, nie durch Auffüllen auf die nächste Zweierpotenz.
+pruefe('erzeugeTurnier (N=6): Runde 1 hat 3 Matches, keine Freilose (gerade Teilnehmerzahl)', ko.runden[0].length === 3 && ko.runden[0].every((m) => m.b !== null));
 pruefe('erzeugeTurnier: alle 6 Namen kommen in Runde 1 genau einmal vor', gleicheListe([...ko.runden[0].flatMap((m) => [m.a, m.b]).filter(Boolean)].sort(), [...sechsNamen].sort()));
 
-// Runde 1 komplettieren (die offenen 2 Matches entscheiden) → Runde 2 entsteht automatisch.
+// Runde 1 komplettieren (die offenen 3 Matches entscheiden) → Runde 2 entsteht automatisch.
 for (let i = 0; i < ko.runden[0].length; i++) {
   if (!ko.runden[0][i].sieger) ko = traegtSiegerEin(ko, 0, i, ko.runden[0][i].a);
 }
+// 3 Sieger aus Runde 1 → Runde 2 hat 1 reguläres Match + HÖCHSTENS EIN Freilos
+// (nie mehr, das war der ursprüngliche Bug) — macht das Halbfinale trotzdem 2 Matches.
 pruefe('traegtSiegerEin: komplette Runde erzeugt automatisch die nächste (Halbfinale, 2 Matches)', ko.runden.length === 2 && ko.runden[1].length === 2);
+const freiloseR2 = ko.runden[1].filter((m) => m.b === null);
+pruefe('traegtSiegerEin (Runde 2, 3 Sieger aus Runde 1): genau EIN Freilos, nie mehr', freiloseR2.length === 1 && freiloseR2[0].sieger === freiloseR2[0].a);
 pruefe('istAbgeschlossen: vor dem Finale falsch', !istAbgeschlossen(ko));
 pruefe('turniersieger: vor dem Finale null', turniersieger(ko) === null);
 
-for (let i = 0; i < ko.runden[1].length; i++) ko = traegtSiegerEin(ko, 1, i, ko.runden[1][i].a);
+for (let i = 0; i < ko.runden[1].length; i++) {
+  if (!ko.runden[1][i].sieger) ko = traegtSiegerEin(ko, 1, i, ko.runden[1][i].a);
+}
 pruefe('traegtSiegerEin: Halbfinale komplett erzeugt das Finale (1 Match)', ko.runden.length === 3 && ko.runden[2].length === 1);
 
 const finalSieger = ko.runden[2][0].a;
@@ -803,6 +809,32 @@ const koZwei = erzeugeTurnier('Duell', mische(['X', 'Y'], testZufall));
 pruefe('erzeugeTurnier (N=2): eine Runde mit einem Match (direktes Finale)', koZwei.runden.length === 1 && koZwei.runden[0].length === 1 && koZwei.runden[0][0].b !== null);
 const koAcht = erzeugeTurnier('Acht', mische(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], testZufall));
 pruefe('erzeugeTurnier (N=8): 4 Matches in Runde 1, keine Freilose', koAcht.runden[0].length === 4 && koAcht.runden[0].every((m) => m.b !== null));
+
+// Regressionstest für den ursprünglichen Bug: bei einer Teilnehmerzahl knapp über
+// einer Zweierpotenz (hier N=9, „nächste" wäre 16) darf NIE mehr als ein Freilos
+// gleichzeitig entstehen — es kaskadiert höchstens eins pro Runde über mehrere
+// Runden (9 → 5 → 3 → 2 → 1), statt alle 7 Freilose auf einmal in Runde 1 zu bündeln.
+// Eigene Zufallsquelle, damit die nachfolgenden Zustands-Tests unten (die den
+// gemeinsamen `testZufall`-Zähler nicht weiterreichen) unberührt bleiben.
+let saatNeun = 0.11;
+const neunZufall = () => { saatNeun = (saatNeun + 0.17) % 1; return saatNeun; };
+const neunNamen = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9'];
+let koNeun = erzeugeTurnier('Neun', mische(neunNamen, neunZufall));
+let rundenIndexNeun = 0;
+let hoechstensEinFreilosJeRunde = true;
+let rundenDurchlaufenNeun = 0;
+while (!istAbgeschlossen(koNeun)) {
+  const runde = koNeun.runden[rundenIndexNeun];
+  if (runde.filter((m) => m.b === null).length > 1) hoechstensEinFreilosJeRunde = false;
+  for (let i = 0; i < runde.length; i++) {
+    if (!koNeun.runden[rundenIndexNeun][i].sieger) koNeun = traegtSiegerEin(koNeun, rundenIndexNeun, i, koNeun.runden[rundenIndexNeun][i].a);
+  }
+  rundenIndexNeun += 1;
+  rundenDurchlaufenNeun += 1;
+}
+pruefe('erzeugeTurnier (N=9): jede Runde höchstens ein Freilos, nie mehrere gebündelt', hoechstensEinFreilosJeRunde);
+pruefe('erzeugeTurnier (N=9): kaskadiert über 4 Runden zum Champion (9→5→3→2→1)', rundenDurchlaufenNeun === 4 && istAbgeschlossen(koNeun));
+pruefe('erzeugeTurnier (N=9): alle 9 Teilnehmer:innen tauchen in der Platzierung auf', platzierungen(koNeun).length === 9 && gleicheListe([...platzierungen(koNeun).map((p) => p.name)].sort(), [...neunNamen].sort()));
 
 // Fehlerfälle: zu wenig bzw. doppelte Teilnehmer:innen sind ein echter Programmfehler
 // (die Ansicht verhindert das schon bei der Eingabe) — kein Nicht-Fehlerfall wie sonst üblich.
