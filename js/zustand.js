@@ -19,6 +19,9 @@ function vorgabe() {
     einstellungen: { sprache: 'de', transferKuerzelSichtbar: false, thema: 'hell' },
     // Persönlicher Trainingsplan (generiert, anpassbar): null = noch keiner erstellt.
     plan: null,
+    // Merkliste: baustein-gebundene Wiedervorlage (Liste von Baustein-IDs in
+    // Merk-Reihenfolge). Wie der Fortschritt am Baustein, nie am Pfad.
+    merkliste: [],
   };
 }
 
@@ -149,6 +152,36 @@ export function setzePlan(neu) {
 export function loeschePlan() {
   stelleSicher().plan = null;
   speichereZustand();
+}
+
+// Merkliste: eine Liste gemerkter Baustein-IDs (Wiedervorlage). Baustein-gebunden
+// wie der Fortschritt; die Reihenfolge ist die Merk-Reihenfolge (hinten angehängt).
+// Unbekannte IDs (z. B. nach einer Datenänderung) werden erst beim Rendern gefiltert.
+export function merkliste() {
+  return stelleSicher().merkliste;
+}
+
+export function istGemerkt(bausteinId) {
+  return stelleSicher().merkliste.includes(bausteinId);
+}
+
+// Umschalten: fügt hinten an oder entfernt. Gibt den neuen Zustand zurück (true = gemerkt).
+export function schalteMerken(bausteinId) {
+  const liste = stelleSicher().merkliste;
+  const i = liste.indexOf(bausteinId);
+  if (i >= 0) liste.splice(i, 1);
+  else liste.push(bausteinId);
+  speichereZustand();
+  return liste.includes(bausteinId);
+}
+
+export function vergiss(bausteinId) {
+  const liste = stelleSicher().merkliste;
+  const i = liste.indexOf(bausteinId);
+  if (i >= 0) {
+    liste.splice(i, 1);
+    speichereZustand();
+  }
 }
 
 export function setzeZurueck() {

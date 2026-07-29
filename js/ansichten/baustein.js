@@ -6,9 +6,9 @@
 import { schalteTeil } from '../aktionen.js';
 import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, untergrundVon, witterungVon } from '../daten.js';
 import { label, t, text } from '../i18n.js';
-import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, verbessereGrafiken, zeigeMeilenstein } from '../oberflaeche.js';
+import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, teileLink, verbessereGrafiken, zeigeMeilenstein, zeigeToast } from '../oberflaeche.js';
 import { stationImKontext } from '../pfade.js';
-import { diagnose } from '../zustand.js';
+import { diagnose, istGemerkt, schalteMerken } from '../zustand.js';
 
 function kontextZuListe(kontext) {
   const [art, parameter] = String(kontext).split(':');
@@ -18,6 +18,7 @@ function kontextZuListe(kontext) {
   if (art === 'witterung' || art === 'untergrund') return `#/pfad/${art}/${parameter}`;
   if (art === 'individual') return '#/pfad/individual';
   if (art === 'ausruestung') return '#/ausruestung';
+  if (art === 'merkliste') return '#/merkliste';
   return parameter ? `#/pfad/kompetenz/${parameter}` : '#/pfad/kompetenz';
 }
 
@@ -268,6 +269,23 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       </div>
     </nav>`;
 
+  // Floating-Aktionen (Teilen + Merken): schweben unten rechts über der Navigation.
+  // Teilen nutzt die native Auswahl bzw. die Zwischenablage; Merken hängt den
+  // Baustein baustein-gebunden in die Merkliste (kein Pfadbezug). Der Merken-Zustand
+  // wird in situ aktualisiert (kein Neu-Rendern → Fokus/Scroll bleiben erhalten).
+  const gemerkt = istGemerkt(b.id);
+  const fabLeiste = `
+    <div class="fab-leiste" role="group" aria-label="${esc(t('baustein_aktionen'))}">
+      <button type="button" class="fab fab-teilen" data-teilen aria-label="${esc(t('teilen'))}" title="${esc(t('teilen'))}">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken${gemerkt ? ' fab-aktiv' : ''}" data-merken
+        aria-pressed="${gemerkt}" aria-label="${esc(gemerkt ? t('merken_entfernen') : t('merken'))}"
+        title="${esc(gemerkt ? t('gemerkt') : t('merken'))}">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div>`;
+
   el.innerHTML = `
     <article class="baustein">
       ${positionsZeile}
@@ -281,7 +299,8 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${einordnungHtml(b)}
       ${voraussetzungsBanner(station, kontext)}
       ${fussNavigation}
-    </article>`;
+    </article>
+    ${fabLeiste}`;
 
   for (const knopf of el.querySelectorAll('[data-quittiere]')) {
     knopf.addEventListener('click', () => {
@@ -290,6 +309,22 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       else neuRendern();
     });
   }
+
+  el.querySelector('[data-teilen]')?.addEventListener('click', () => {
+    teileLink(window.location.href, label('baustein', b.id));
+  });
+
+  const merkKnopf = el.querySelector('[data-merken]');
+  merkKnopf?.addEventListener('click', () => {
+    const jetztGemerkt = schalteMerken(b.id);
+    merkKnopf.classList.toggle('fab-aktiv', jetztGemerkt);
+    merkKnopf.setAttribute('aria-pressed', String(jetztGemerkt));
+    merkKnopf.setAttribute('aria-label', jetztGemerkt ? t('merken_entfernen') : t('merken'));
+    merkKnopf.setAttribute('title', jetztGemerkt ? t('gemerkt') : t('merken'));
+    zeigeToast(jetztGemerkt ? t('merken_hinzugefuegt') : t('merken_entfernt'));
+    // Menü-Zähler nachziehen, ohne die Ansicht neu zu zeichnen.
+    window.dispatchEvent(new CustomEvent('app:merk'));
+  });
 
   verbessereGrafiken(el);
 }
