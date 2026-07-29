@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Le smash sauté : le joueur frappe au point le plus haut du saut, pieds décollés du sol, avec une trajectoire raide vers le bas dans le terrain adverse.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-dasharray:2 7;stroke-linecap:round}
+    .sprung{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-linecap:round;opacity:.5}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m020" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="100" cy="86" r="14"/>
+  <path class="fig" d="M100,100 L108,150"/>
+  <!-- Schlagarm hoch -->
+  <path class="fig" d="M101,108 L124,80 L146,56"/>
+  <path class="fig" d="M103,114 L84,132"/>
+  <!-- Beine angezogen, in der Luft -->
+  <path class="fig" d="M108,150 L96,178 L108,196"/>
+  <path class="fig" d="M108,150 L128,176 L122,200"/>
+  <line class="schaft" x1="146" y1="56" x2="160" y2="42"/>
+  <ellipse class="kelle" cx="166" cy="34" rx="10" ry="14" transform="rotate(44 166 34)"/>
+  <!-- steile Flugbahn nach unten -->
+  <path class="bahn" d="M172,42 L250,196" marker-end="url(#m020)"/>
+  <!-- Absprung-Linien unter den Füßen -->
+  <path class="sprung" d="M96,214 L120,214"/>
+  <path class="sprung" d="M104,226 L128,226"/>
+  <line class="boden" x1="72" y1="244" x2="190" y2="244"/>
+  <text class="st" x="150" y="272">en sautant · raide vers le bas</text>
+</svg>

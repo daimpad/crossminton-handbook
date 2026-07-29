@@ -380,7 +380,7 @@ export const SVG_GRAFIKEN = new Set([
 // Sprachen mit übersetzten Diagramm-Grafiken (nur die Diagramm-SVGs tragen Text;
 // je Nummer liegen dann G-XXX.<sprache>.svg UND .png neben der deutschen Basis).
 // Erweiterbar, sobald fr/pl-Grafiken folgen.
-export const GRAFIK_SPRACHEN = new Set(['en']);
+export const GRAFIK_SPRACHEN = new Set(['en', 'fr']);
 
 export function grafikFigurHtml(id) {
   const beschriftung = label('grafik', id);
