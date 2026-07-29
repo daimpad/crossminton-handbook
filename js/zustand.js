@@ -22,6 +22,9 @@ function vorgabe() {
     // Merkliste: baustein-gebundene Wiedervorlage (Liste von Baustein-IDs in
     // Merk-Reihenfolge). Wie der Fortschritt am Baustein, nie am Pfad.
     merkliste: [],
+    // KO-Turnier (Spaßturnier-Werkzeug, kein Lerninhalt): null = kein aktives
+    // Turnier. Ein Turnier zur Zeit, wie der Trainingsplan.
+    koTurnier: null,
   };
 }
 
@@ -182,6 +185,24 @@ export function vergiss(bausteinId) {
     liste.splice(i, 1);
     speichereZustand();
   }
+}
+
+// KO-Turnier: ein generiertes, danach fortgeschriebenes Bracket (js/ko-turnier.js).
+// Rein persistent, kein Fortschritt und keine Baustein-Bindung — ein eigenständiges
+// Werkzeug für ein selbst organisiertes Spaßturnier.
+export function koTurnier() {
+  return stelleSicher().koTurnier;
+}
+
+export function setzeKoTurnier(neu) {
+  stelleSicher().koTurnier = neu;
+  speichereZustand();
+  return neu;
+}
+
+export function loescheKoTurnier() {
+  stelleSicher().koTurnier = null;
+  speichereZustand();
 }
 
 export function setzeZurueck() {
