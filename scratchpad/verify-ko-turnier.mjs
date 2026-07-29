@@ -27,7 +27,7 @@ await crossLink.click();
 await page.waitForTimeout(300);
 melde('Cross-Link führt zu #/ko-turnier', page.url().endsWith('#/ko-turnier'));
 
-// 2) Setup: 6 Namen eintragen (führt zu 2 Freilosen), Duplikat + Entfernen prüfen
+// 2) Setup: 6 Namen eintragen (gerade Zahl, Runde 1 ohne Freilos), Duplikat + Entfernen prüfen
 for (const n of ['Anna', 'Ben', 'Cem', 'Dana', 'Emil']) await nameHinzufuegen(n);
 await nameHinzufuegen('Anna'); // Duplikat, sollte NICHT hinzugefügt werden
 const anzahlNachDuplikat = await page.$$eval('.ko-chip', (n) => n.length);
@@ -55,12 +55,13 @@ const heroTitel = await page.$eval('h1', (h) => h.textContent.trim());
 melde('Nach Auslosung: Hero zeigt Turniernamen', heroTitel.includes('Blackminton Cup'));
 const rundenUeberschriften = await page.$$eval('.ko-runde h3', (n) => n.map((x) => x.textContent.trim()));
 console.log('   Runden direkt nach Auslosung:', rundenUeberschriften);
-// 6 Teiln. → nächste Zweierpotenz 8 → Runde 1 hat 4 Matches → heißt bracket-üblich
-// schon "Viertelfinale" (Standard-Turniersprache, unabhängig davon, dass es die
-// erste Runde ist); Runde 2/3 existieren erst, sobald Runde 1 komplett ist.
-melde('direkt nach Auslosung: genau 1 Runde ("Viertelfinale", 4 Matches)', rundenUeberschriften.length === 1 && rundenUeberschriften[0] === 'Viertelfinale');
+// 6 Teiln. ist gerade → Runde 1 hat 3 Matches, KEIN Freilos (Freilose entstehen nur
+// bei ungerader Teilnehmerzahl, höchstens eins, nie durch Auffüllen auf die nächste
+// Zweierpotenz gebündelt). 3 Matches passt zu keinem Bracket-Namen → "Runde 1".
+// Runde 2/3 existieren erst, sobald Runde 1 komplett ist.
+melde('direkt nach Auslosung: genau 1 Runde ("Runde 1", 3 Matches, kein Freilos)', rundenUeberschriften.length === 1 && /Runde 1/i.test(rundenUeberschriften[0]));
 const freiloseSichtbar = await page.$$eval('.ko-match-freilos', (n) => n.length);
-melde('Freilose sichtbar (2 bei 6 Teilnehmenden)', freiloseSichtbar === 2);
+melde('Keine Freilose in Runde 1 (6 ist gerade)', freiloseSichtbar === 0);
 await page.screenshot({ path: 'scratchpad/ko-2-bracket-r1.png' });
 
 // 4) Runde 1 offene Matches entscheiden. Jeder Klick löst ein Neu-Rendern aus
@@ -71,7 +72,7 @@ await page.screenshot({ path: 'scratchpad/ko-2-bracket-r1.png' });
 // zum nächsten offenen Match vor (robust über Re-Renders hinweg).
 const unentschiedenSelektor = '.ko-match-seite:not(.ko-match-sieger):not(.ko-match-verlierer)';
 const offeneAnzahl = (await page.$$eval(unentschiedenSelektor, (n) => n.length)) / 2;
-melde('2 offene Matches in Runde 1 (6 Teiln., 2 Freilose)', offeneAnzahl === 2);
+melde('3 offene Matches in Runde 1 (6 Teiln., gerade, kein Freilos)', offeneAnzahl === 3);
 for (let i = 0; i < offeneAnzahl; i++) {
   await page.click(unentschiedenSelektor);
   await page.waitForTimeout(150);
@@ -79,6 +80,10 @@ for (let i = 0; i < offeneAnzahl; i++) {
 
 const rundenNachR1 = await page.$$eval('.ko-runde h3', (n) => n.map((x) => x.textContent.trim()));
 melde('Nach Runde 1: Halbfinale automatisch erzeugt', rundenNachR1.some((t) => /Halbfinale/i.test(t)));
+// 3 Sieger aus Runde 1 (ungerade) → Halbfinale hat 2 Matches, davon höchstens 1
+// Freilos (kaskadierend, nie mehr) — bleibt bei genau 1, da 3 ungerade ist.
+const freiloseHalbfinale = await page.$$eval('.ko-match-freilos', (n) => n.length);
+melde('Halbfinale: genau 1 Freilos (3 Sieger aus Runde 1, ungerade)', freiloseHalbfinale === 1);
 await page.screenshot({ path: 'scratchpad/ko-3-nach-runde1.png' });
 
 // 5) Platzierung zeigt "noch im Turnier" + Ausgeschiedene
@@ -86,12 +91,10 @@ const platzTitel = await page.$$eval('.ko-platz-titel', (n) => n.map((x) => x.te
 console.log('   Platzierungs-Titel:', platzTitel);
 melde('Platzierung zeigt "Noch im Turnier"', platzTitel.some((t) => /Noch im Turnier/i.test(t)));
 
-// 6) Halbfinale (2 Matches) + Finale (1 Match) entscheiden — derselbe robuste
-// "erste unentschiedene Seite"-Selektor wie in Runde 1.
-for (let i = 0; i < 2; i++) {
-  await page.click(unentschiedenSelektor);
-  await page.waitForTimeout(150);
-}
+// 6) Halbfinale entscheiden (nur 1 offenes Match — das zweite ist bereits als
+// Freilos entschieden) + danach das automatisch erzeugte Finale entscheiden.
+await page.click(unentschiedenSelektor);
+await page.waitForTimeout(150);
 await page.waitForTimeout(200);
 const championName = (await page.$eval(unentschiedenSelektor, (el) => el.textContent)).trim();
 await page.click(unentschiedenSelektor);
