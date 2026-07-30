@@ -1,3 +1,10 @@
 # Wegwerf-Renders aus den scratchpad-Grafikwerkzeugen (Montagen/PNG-Vorschauen).
 # Die eigentlichen Bilder liegen versioniert unter images/.
 scratchpad/*.png
+
+# scripts/prerender.mjs (SEO Tier 2, Baustein 2): Playwright ist eine reine
+# CI-Werkzeug-Abhängigkeit (im Deploy-Workflow per `npm install --no-save`
+# installiert), keine Repo-/Laufzeitabhängigkeit — node_modules/ nie einchecken.
+# _site/ ist das Prerender-Ausgabeverzeichnis (Deploy-Artefakt, kein Quellcode).
+node_modules/
+_site/
