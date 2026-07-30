@@ -1,6 +1,6 @@
 // E2E: Trainings-Metadaten im Plan-Generator — Profil-Zeile je Session, in vier Sprachen.
 import pw from '/opt/node22/lib/node_modules/playwright/index.js';
-const BASIS = 'http://localhost:8145';
+const BASIS = 'http://localhost:8150';
 const browser = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const ctx = await browser.newContext({ viewport: { width: 390, height: 900 }, deviceScaleFactor: 2 });
 const page = await ctx.newPage();
