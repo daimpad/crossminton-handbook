@@ -3,7 +3,7 @@
 // Screenshots als Beleg, Konsolenfehler müssen 0 bleiben.
 import pw from '/opt/node22/lib/node_modules/playwright/index.js';
 
-const BASIS = 'http://localhost:8143';
+const BASIS = 'http://localhost:8144';
 const browser = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const ctx = await browser.newContext({ viewport: { width: 390, height: 900 }, deviceScaleFactor: 2 });
 const page = await ctx.newPage();
@@ -107,6 +107,22 @@ await setzeSprache('pl');
 await oeffne('#/baustein/mehrfeld');
 const plText = await page.$eval('#ansicht', (el) => el.textContent);
 melde('PL: mehrfeld ist polnisch übersetzt', /wspólnego środka|Układ wielu pól/i.test(plText));
+
+
+// --- 7) Übersetzungsring: Fehlerbilder in en/fr/pl (nach dem Ring ergänzt) ----
+for (const [code, probe] of [['en', /Contact point|contact point|Wrong contact point/],
+                             ['fr', /point d'impact|Mauvais point/],
+                             ['pl', /punkt trafienia|Zły punkt/]]) {
+  await setzeSprache(code);
+  await oeffne('#/baustein/smash');
+  const t = await page.$eval('#ansicht', (el) => el.textContent);
+  melde(`${code.toUpperCase()}: Fehlerbild am smash ist übersetzt`, probe.test(t));
+}
+await setzeSprache('fr');
+await oeffne('#/baustein/griff');
+const frGriff = await page.$eval('#ansicht', (el) => el.textContent);
+melde('FR: alle drei Griff-Fehlerbilder übersetzt (inkl. Consigne-Ansage)',
+  /Crispation|prise trop ferme/i.test(frGriff) && /Consigne/.test(frGriff));
 
 console.log('\nKonsolenfehler:', fehler.length ? fehler : '0');
 if (fehler.length) process.exitCode = 1;
