@@ -1031,6 +1031,8 @@ input[type='radio'], input[type='checkbox'] {
   display: block;
   width: 100%;
   height: auto;
+  max-height: 26rem;
+  margin-inline: auto;
   border: 1.5px solid var(--linie);
   border-radius: var(--radius);
   background: var(--flaeche-2);

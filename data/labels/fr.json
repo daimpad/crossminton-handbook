@@ -122,7 +122,7 @@
     "plan_fokus": "Accent",
     "ko_turnier_titel": "Tournoi à élimination",
     "ko_turnier_untertitel": "Saisis des noms, tire au sort le tableau et suis qui gagne — pour ton propre tournoi amical.",
-    "ko_turnier_kachel_text": "Pas le règlement officiel — un outil pour tirer au sort et suivre ton propre tournoi à élimination directe.",
+    "ko_turnier_kachel_text": "Un outil pour organiser ton propre tournoi amical à élimination directe.",
     "ko_turnier_neues": "Nouveau tournoi",
     "ko_turnier_intro": "Saisis les noms de tous les participants. Au tirage au sort, l'app mélange l'ordre au hasard ; si le nombre n'est pas une puissance de deux, des exempts sont ajoutés automatiquement au premier tour.",
     "ko_turnier_name_label": "Nom du tournoi (facultatif)",

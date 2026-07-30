@@ -1,19 +1,19 @@
 // Heim: Marken-Hero mit Einstiegs-CTAs plus die Bereich-Kacheln als Raster.
 // Jede Kachel trägt eine eigene Hue (Icon-Medaille) + einen CTA. Der frühere
 // Weiterlernen-/„Kapitel entdecken"-Container ist in den Hero gewandert; der
-// Themen-Einstieg ist jetzt der Hero-CTA „Kapitel entdecken". Kompetenzpfad
-// ist von der Startseite entfernt; dafür führen Regeln und Profil als Kacheln.
+// Hero-CTA „Kapitel entdecken" bleibt daneben bestehen. Reihenfolge fest
+// vorgegeben: Themenpfad (volle Breite) / Training / Individual / Ausrüstung /
+// Regeln / Profil, KO-Turnier als zweite volle-Breite-Kachel am Ende. Umgebung
+// und Doppel bleiben eigene Achsen (erreichbar über den Themenpfad-Einstieg
+// bzw. Deep-Link), aber keine eigenen Startseiten-Kacheln mehr.
 
-import { label, t } from '../i18n.js';
+import { t } from '../i18n.js';
 import { esc, markeHeroGross } from '../oberflaeche.js';
-import { spielformen, umgebungBausteine } from '../pfade.js';
 import { diagnose, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
 
 export function renderHeim(el, daten) {
   const d = diagnose();
-  const doppel = spielformen(daten).find((eintrag) => eintrag.spielform === 'doppel');
-  const umgebung = umgebungBausteine(daten);
   const zielBeschriftungen = zielLabels(d.ziel);
 
   // Einstiegs-CTAs im Hero: „Kapitel entdecken" öffnet den Themen-Einstieg,
@@ -38,23 +38,13 @@ export function renderHeim(el, daten) {
       </div>
     </a>`;
 
-  const umgebungKachel = umgebung.length > 0
-    ? kachel({
-        href: '#/pfad/umgebung', hue: 'pf-sky', icon: 'fa-mountain',
-        titel: esc(t('pfad_umgebung')),
-        meta: ` <span class="chip">${esc(t('n_bausteine', { n: umgebung.length }))}</span>`,
-        text: esc(t('pfad_umgebung_text')),
-      })
-    : '';
-
-  const doppelKachel = doppel && doppel.anzahl > 0
-    ? kachel({
-        href: '#/pfad/spielform/doppel', hue: 'pf-magenta', icon: 'fa-users',
-        titel: esc(t('pfad_spielform')),
-        meta: ` <span class="chip">${esc(label('spielform', 'doppel'))} · ${doppel.anzahl}</span>`,
-        text: esc(t('pfad_spielform_text')),
-      })
-    : '';
+  // Ganz oben, über die volle Breite: der Themenpfad-Einstieg — der breiteste
+  // Weg ins Handbuch, entsprechend prominent platziert.
+  const themenKachel = kachel({
+    href: '#/pfad/themen', hue: 'pf-sky', icon: 'fa-layer-group', lead: true,
+    titel: esc(t('pfad_themen')),
+    text: esc(t('pfad_themen_text')),
+  });
 
   const trainingKachel = kachel({
     href: '#/training', hue: 'pf-indigo', icon: 'fa-table-tennis-paddle-ball',
@@ -74,6 +64,12 @@ export function renderHeim(el, daten) {
       : '',
   });
 
+  const ausruestungKachel = kachel({
+    href: '#/ausruestung', hue: 'pf-magenta', icon: 'fa-toolbox',
+    titel: esc(t('nav_ausruestung')),
+    text: esc(t('ausruestung_untertitel')),
+  });
+
   const regelnKachel = kachel({
     href: '#/regeln', hue: 'pf-schiefer', icon: 'fa-book-open',
     titel: esc(t('nav_regeln')),
@@ -87,8 +83,7 @@ export function renderHeim(el, daten) {
   });
 
   // Ganz unten, über die volle Breite: das KO-Turnier-Werkzeug — sonst nur über
-  // das „Mehr"-Menü erreichbar und für viele schwer zu finden. pf-teal ist die
-  // einzige Hue, die unter den Startseiten-Kacheln noch nicht vergeben ist.
+  // das „Mehr"-Menü erreichbar und für viele schwer zu finden.
   const koTurnierKachel = kachel({
     href: '#/ko-turnier', hue: 'pf-teal', icon: 'fa-flag-checkered', lead: true,
     titel: esc(t('ko_turnier_titel')),
@@ -100,10 +95,10 @@ export function renderHeim(el, daten) {
     ${speicherIstVerfuegbar() ? '' : `<div class="banner-hinweis">${esc(t('speicher_warnung'))}</div>`}
     <h2 class="abschnitt-titel">${esc(t('pfade'))}</h2>
     <div class="pfad-gitter">
-      ${umgebungKachel}
-      ${doppelKachel}
+      ${themenKachel}
       ${trainingKachel}
       ${individualKachel}
+      ${ausruestungKachel}
       ${regelnKachel}
       ${profilKachel}
       ${koTurnierKachel}
