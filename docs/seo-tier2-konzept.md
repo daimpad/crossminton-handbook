@@ -97,11 +97,11 @@ klein; die Hebel sind dann **einzigartige URLs mit gutem Titel/Snippet** und
 **Backlinks** (crossminton.de, DCV, Vereine). Tier 2 macht die Inhalte
 überhaupt erst auffindbar — das ist die Voraussetzung, nicht die Garantie.
 
-## Offene Entscheidung
+## Entscheidung: Custom Domain (umgesetzt)
 
-- **Custom Domain** (z. B. `handbuch.crossminton.de`) statt `github.io`-Unterpfad?
-  Würde `<base href>` vereinfachen (`/` statt `/crossminton-handbook/`) und wirkt
-  vertrauenswürdiger. Erfordert DNS-Zugriff und einen `CNAME`-Eintrag.
+Produktion läuft seit dem Domain-Umzug unter **`https://crossminton-handbook.de/`**
+statt unter dem `github.io`-Unterpfad — s. den Nachtrag „Custom-Domain-Umzug" am
+Ende dieses Dokuments für die Details.
 
 ## Baustein 1 — Stand nach Umsetzung (Abweichungen vom Plan)
 
@@ -234,3 +234,33 @@ Canonical/Social-Vorschau je Snapshot stichprobenartig geprüft, 0 Laufzeitfehle
 `<loc>`-Einträgen bestätigt) und einem Playwright-Rauchtest der Live-App
 (Klick-Navigation, Browser-Zurück, Deep-Link-Reload, Rückkehr zur Startseite —
 0 unerwartete Konsolenfehler).
+
+### Nachtrag: Custom-Domain-Umzug (`daimpad.github.io/crossminton-handbook/` → `crossminton-handbook.de`)
+
+Die oben beschriebenen Details zu Baustein 1 (`<base href="/crossminton-handbook/">`,
+Unterpfad-Montage) und dem Nachtrag zu den zwei Unterpfad-Fehlern beschreiben den
+**ursprünglichen** Produktions-Fall — den `github.io`-Unterpfad. Dieser Fall bleibt
+als Design-Historie akkurat (der Mechanismus, der ihn behandelt, existiert
+unverändert im Code), beschreibt aber nicht mehr die aktuelle Konfiguration.
+Produktion läuft jetzt unter der **Custom Domain `https://crossminton-handbook.de/`**,
+gemountet an der Wurzel:
+
+- `PRAEFIX` in `index.html`/`404.html` steht auf `''`, `SITE_URL` in
+  `scripts/prerender.mjs` auf `https://crossminton-handbook.de` (leitet `PRAEFIX`
+  automatisch als `''` ab) — `praefixSymlink()`/`pruefeLinks()` sind dadurch im
+  aktuellen Deploy No-ops, bleiben aber als Absicherung im Code, falls die App
+  je wieder unter einem Unterpfad läuft.
+- Canonical/OG/Twitter/JSON-LD in `index.html`, `robots.txt`s `Sitemap:`-Zeile
+  und die eingecheckte `sitemap.xml` zeigen auf die neue Domain.
+- Eine neue Datei **`CNAME`** im Repo-Root (Inhalt: `crossminton-handbook.de`)
+  sagt GitHub Pages die Custom Domain an; `kopiere()` in `scripts/prerender.mjs`
+  nimmt sie automatisch mit ins `_site`-Artefakt.
+- **Zwei Schritte bleiben zwingend außerhalb des Repos**, nicht durch einen
+  Commit lösbar: (1) im GitHub-Repo unter Settings → Pages → „Custom domain"
+  `crossminton-handbook.de` eintragen und nach DNS-Propagation „Enforce HTTPS"
+  aktivieren; (2) beim Domain-Registrar/DNS-Anbieter die Records auf GitHub
+  Pages zeigen lassen (nackte Domain: vier `A`-Records auf GitHubs IPv4-Adressen,
+  optional `AAAA` für IPv6; Subdomain: ein `CNAME`-Record auf `<user>.github.io`).
+  Ohne diese beiden externen Schritte bleibt die App unter
+  `daimpad.github.io/crossminton-handbook/` erreichbar, auch wenn alle
+  Repo-Werte schon auf die neue Domain zeigen.

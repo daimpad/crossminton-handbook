@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://daimpad.github.io/crossminton-handbook/sitemap.xml
+Sitemap: https://crossminton-handbook.de/sitemap.xml

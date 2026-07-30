@@ -25,7 +25,7 @@ import { fileURLToPath } from 'node:url';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(REPO, process.argv[2] || '_site');
-const SITE_URL = 'https://daimpad.github.io/crossminton-handbook';
+const SITE_URL = 'https://crossminton-handbook.de';
 const PORT = 8123;
 
 // Montagepunkt der Produktion, aus SITE_URL abgeleitet (kein weiterer
