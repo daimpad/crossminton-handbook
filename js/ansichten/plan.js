@@ -42,11 +42,11 @@ function konfigHtml(vorgabe) {
       <p class="leise">${esc(t('plan_intro'))}</p>
       <div class="plan-felder">
         <label class="plan-feld"><span>${esc(t('plan_wochen'))}</span>
-          <input type="number" id="plan-wochen" min="1" max="12" value="${vorgabe.wochen}"></label>
+          <input type="number" id="plan-wochen" min="1" max="12" value="${esc(vorgabe.wochen)}"></label>
         <label class="plan-feld"><span>${esc(t('plan_pro_woche'))}</span>
-          <input type="number" id="plan-pro-woche" min="1" max="4" value="${vorgabe.einheitenProWoche}"></label>
+          <input type="number" id="plan-pro-woche" min="1" max="4" value="${esc(vorgabe.einheitenProWoche)}"></label>
         <label class="plan-feld"><span>${esc(t('plan_start'))}</span>
-          <input type="date" id="plan-start" value="${vorgabe.startISO}"></label>
+          <input type="date" id="plan-start" value="${esc(vorgabe.startISO)}"></label>
         <label class="plan-feld"><span>${esc(t('plan_spielform'))}</span>
           <select id="plan-spielform">
             <option value="alle">${esc(t('plan_spielform_alle'))}</option>

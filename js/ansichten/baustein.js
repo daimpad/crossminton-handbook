@@ -10,8 +10,14 @@ import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, teileLink, ve
 import { stationImKontext } from '../pfade.js';
 import { diagnose, istGemerkt, schalteMerken } from '../zustand.js';
 
+// Der Kontext kommt roh aus der URL (?kontext=…) — sein Parameter-Teil wird hier
+// zu einem URL-Pfadsegment und muss daher kodiert werden, sonst trägt er beliebiges
+// Markup in das href der Fußnavigation (reflektiertes XSS über einen teilbaren
+// Link, auch über den 404-Umweg der Produktion). Zusätzlich escapt die Ansicht das
+// Ergebnis beim Einsetzen — Kodierung an der Quelle, Escaping an der Senke.
 function kontextZuListe(kontext) {
-  const [art, parameter] = String(kontext).split(':');
+  const [art, roh] = String(kontext).split(':');
+  const parameter = roh ? encodeURIComponent(roh) : '';
   if (art === 'themen') return `#/pfad/themen/${parameter}`;
   if (art === 'spielform') return `#/pfad/spielform/${parameter}`;
   if (art === 'umgebung') return '#/pfad/umgebung';
@@ -265,7 +271,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       </div>
       <div class="fussnav-seite fussnav-rechts">
         ${naechste ? `<a class="knopf ${station.status.absolviert ? 'knopf-primaer' : 'knopf-sekundaer'}" href="#/baustein/${esc(naechste.baustein.id)}?kontext=${encodeURIComponent(kontext)}">${esc(label('baustein', naechste.baustein.id))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` : ''}
-        <a class="knopf knopf-sekundaer baustein-zur-liste" href="${listeHref}">${esc(t('zur_liste'))}</a>
+        <a class="knopf knopf-sekundaer baustein-zur-liste" href="${esc(listeHref)}">${esc(t('zur_liste'))}</a>
       </div>
     </nav>`;
 

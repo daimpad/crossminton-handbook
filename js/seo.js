@@ -78,21 +78,27 @@ export function seiteMeta(daten, segmente) {
   }
   if (a === 'ausruestung') return { titel: mit(label('domaene', 'ausruestung')), beschreibung: t('ausruestung_intro') };
 
-  if (a === 'ueber' && daten.appInfo) {
-    const beschreibung = kuerzen(text(daten.appInfo.ueber.absaetze?.[0]) ?? '');
-    return { titel: mit(text(daten.appInfo.ueber.titel)), beschreibung: beschreibung || standard.beschreibung };
+  // `daten.appInfo` ist immer ein Objekt (baueIndizes baut es unbedingt) — nullbar
+  // sind die Abschnitte darin. Fehlt einer, warnt pruefeDaten nur (nie sperrend),
+  // also muss auch hier degradiert statt geworfen werden — wie in den
+  // Schwesterzweigen impressum/datenschutz unten.
+  if (a === 'ueber') {
+    const abschnitt = daten.appInfo?.ueber;
+    const beschreibung = kuerzen(text(abschnitt?.absaetze?.[0]) ?? '');
+    return { titel: mit(text(abschnitt?.titel)), beschreibung: beschreibung || standard.beschreibung };
   }
-  if (a === 'mitmachen' && daten.appInfo) {
-    const beschreibung = kuerzen(text(daten.appInfo.mitmachen.einleitung?.[0]) ?? '');
-    return { titel: mit(text(daten.appInfo.mitmachen.titel)), beschreibung: beschreibung || standard.beschreibung };
+  if (a === 'mitmachen') {
+    const abschnitt = daten.appInfo?.mitmachen;
+    const beschreibung = kuerzen(text(abschnitt?.einleitung?.[0]) ?? '');
+    return { titel: mit(text(abschnitt?.titel)), beschreibung: beschreibung || standard.beschreibung };
   }
-  if (a === 'impressum' && daten.appInfo) {
-    const rechtstext = daten.appInfo.rechtliches?.impressum;
+  if (a === 'impressum') {
+    const rechtstext = daten.appInfo?.rechtliches?.impressum;
     const beschreibung = kuerzen(text(rechtstext?.absaetze?.[0]) ?? '');
     return { titel: mit(text(rechtstext?.titel)), beschreibung: beschreibung || standard.beschreibung };
   }
-  if (a === 'datenschutz' && daten.appInfo) {
-    const rechtstext = daten.appInfo.rechtliches?.datenschutz;
+  if (a === 'datenschutz') {
+    const rechtstext = daten.appInfo?.rechtliches?.datenschutz;
     const beschreibung = kuerzen(text(rechtstext?.absaetze?.[0]) ?? '');
     return { titel: mit(text(rechtstext?.titel)), beschreibung: beschreibung || standard.beschreibung };
   }
