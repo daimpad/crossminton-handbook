@@ -2,12 +2,13 @@
 // Jede Kachel trägt eine eigene Hue (Icon-Medaille) + einen CTA. Der frühere
 // Weiterlernen-/„Kapitel entdecken"-Container ist in den Hero gewandert; der
 // Hero-CTA „Kapitel entdecken" bleibt daneben bestehen. Reihenfolge fest
-// vorgegeben: Themenpfad (volle Breite) / Training / Individual / Umgebung /
-// Doppel / Ausrüstung / Regeln / Profil, KO-Turnier als zweite volle-Breite-
-// Kachel am Ende. Neun Kacheln auf sieben Hues — Themenpfad und Ausrüstung
-// tragen bewusst je eine bereits vergebene Hue (Teal wie KO-Turnier als die
-// beiden „lead"-Kacheln; Violett wie Individual, diagonal genug von ihm
-// entfernt, um nicht als Verwechslung zu wirken).
+// vorgegeben: Themenpfad (volle Breite, einzige „lead"-Kachel) / Training /
+// Individual / Umgebung / Doppel / Ausrüstung / Regeln / Profil / KO-Turnier —
+// die reguläre 2-Spalten-Reihe hat damit eine gerade Anzahl (acht) Kacheln,
+// KO-Turnier bildet mit Profil das letzte Paar. Neun Kacheln auf sieben Hues —
+// Themenpfad und Ausrüstung tragen bewusst je eine bereits vergebene Hue
+// (Teal wie KO-Turnier, Violett wie Individual — beide diagonal genug entfernt
+// im Gitter, um nicht als Verwechslung zu wirken).
 
 import { label, t } from '../i18n.js';
 import { esc, markeHeroGross } from '../oberflaeche.js';
@@ -105,10 +106,10 @@ export function renderHeim(el, daten) {
     text: esc(t('profil_intro')),
   });
 
-  // Ganz unten, über die volle Breite: das KO-Turnier-Werkzeug — sonst nur über
-  // das „Mehr"-Menü erreichbar und für viele schwer zu finden.
+  // Als letzte reguläre Kachel neben Profil (ergänzt die Zeile zu zweit) — sonst
+  // nur über das „Mehr"-Menü erreichbar und für viele schwer zu finden.
   const koTurnierKachel = kachel({
-    href: '#/ko-turnier', hue: 'pf-teal', icon: 'fa-flag-checkered', lead: true,
+    href: '#/ko-turnier', hue: 'pf-teal', icon: 'fa-flag-checkered',
     titel: esc(t('ko_turnier_titel')),
     text: esc(t('ko_turnier_kachel_text')),
   });
