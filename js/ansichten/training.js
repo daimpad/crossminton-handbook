@@ -32,7 +32,7 @@ function renderListe(el, daten) {
   sitzung = null;
   const uebersicht = trainingsuebersicht(daten);
   const karten = uebersicht
-    .map(({ einheit, bausteine, absolviertZaehler }) => {
+    .map(({ einheit, bausteine, absolviertZaehler }, index) => {
       const zaehlerText = absolviertZaehler > 0 ? t('mal_absolviert', { n: absolviertZaehler }) : t('noch_nicht_absolviert');
       // Stufen-Chip klickbar → Kompetenzpfad der Stufe; Blau-Intensität kodiert die
       // Stufe (chip-stufe-<stufe>), bewusst ohne Ampelfarben (Status bleibt Rot/Gelb/Grün).
@@ -49,7 +49,7 @@ function renderListe(el, daten) {
         .join(' ');
       return `
         <div class="karte">
-          <h3>${esc(label('einheit', einheit.id))}</h3>
+          <h3>${index + 1}. ${esc(label('einheit', einheit.id))}</h3>
           <p class="chip-zeile">${metaChips}</p>
           <p><strong>${esc(t('einheit_schwerpunkt'))}:</strong> ${esc(text(einheit.schwerpunkt) ?? '')}</p>
           <p class="leise">${esc(text(einheit.beschreibung) ?? '')}</p>

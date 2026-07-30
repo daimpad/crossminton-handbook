@@ -123,7 +123,7 @@
     "plan_fokus": "Focus",
     "ko_turnier_titel": "Knockout tournament",
     "ko_turnier_untertitel": "Enter names, draw the bracket and track who wins — for your own fun tournament.",
-    "ko_turnier_kachel_text": "Not the official rules — a tool to draw and track your own knockout tournament.",
+    "ko_turnier_kachel_text": "A tool to hold your own fun knockout tournament.",
     "ko_turnier_neues": "New tournament",
     "ko_turnier_intro": "Enter the names of everyone taking part. When you draw the bracket, the app shuffles the order at random; if the count isn't a power of two, byes are added automatically to the first round.",
     "ko_turnier_name_label": "Tournament name (optional)",
