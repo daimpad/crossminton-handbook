@@ -79,7 +79,9 @@ function zeichneSetup(el, fokusNachAdd = false) {
   for (const knopf of el.querySelectorAll('[data-entfernen-namen]')) {
     knopf.addEventListener('click', () => {
       entwurfNamen.splice(Number(knopf.dataset.entfernenNamen), 1);
-      zeichneSetup(el);
+      // Mit Fokus-Flag neu zeichnen: innerHTML ersetzt den geklickten Knopf, sonst
+      // fällt der Fokus auf <body> und Tastaturnutzende verlieren die Stelle.
+      zeichneSetup(el, true);
     });
   }
 

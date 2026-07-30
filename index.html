@@ -189,9 +189,9 @@
 
   <div class="menue" id="hauptmenue" hidden>
     <div class="menue-schleier" data-menue-zu></div>
-    <nav class="menue-lade" aria-label="Menü">
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
       <div class="menue-kopf">
-        <span class="menue-titel">Menü</span>
+        <span class="menue-titel" id="menue-titel">Menü</span>
         <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
@@ -199,6 +199,14 @@
       <a href="#/pfad/themen" data-nav="lernen" class="menue-punkt">
         <i class="fa-solid fa-book-open" aria-hidden="true"></i>
         <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
       </a>
       <a href="#/training" data-nav="training" class="menue-punkt">
         <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>

@@ -117,6 +117,9 @@ function trainerLayerHtml(daten, baustein) {
     </section>`;
 }
 
+// Steht VOR dem Erklärteil, nicht darunter: Der Hinweis ist nur handlungsfähig,
+// solange man den Baustein noch nicht gelesen hat (Spez. 4.4 — Hinweis, nie Sperre).
+// Wer über Suche oder Deep-Link einsteigt, sah ihn vorher erst ganz am Seitenende.
 function voraussetzungsBanner(station, kontext) {
   if (station.status.absolviert || station.fehlendeVoraussetzungen.length === 0) return '';
   const verweise = station.fehlendeVoraussetzungen
@@ -161,7 +164,7 @@ const DOMAENE_HUE = {
 export function renderBaustein(el, daten, bausteinId, kontext) {
   const info = stationImKontext(daten, bausteinId, kontext);
   if (!info) {
-    el.innerHTML = `<div class="karte"><p>${esc(t('nicht_gefunden'))}</p><a class="knopf knopf-sekundaer" href="#/">${esc(t('zurueck'))}</a></div>`;
+    el.innerHTML = `<div class="karte"><h1>${esc(t('nicht_gefunden'))}</h1><a class="knopf knopf-sekundaer" href="#/">${esc(t('zurueck'))}</a></div>`;
     return;
   }
   const { station, sequenz, index, vorherige, naechste } = info;
@@ -297,13 +300,13 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${positionsZeile}
       ${heroSektion}
       ${chipZeile}
+      ${voraussetzungsBanner(station, kontext)}
       ${erklaerSektion}
       ${uebungsSektion}
       ${reflexionsSektion}
       ${trainerLayerHtml(daten, b)}
       ${abschlussZeile}
       ${einordnungHtml(b)}
-      ${voraussetzungsBanner(station, kontext)}
       ${fussNavigation}
     </article>
     ${fabLeiste}`;

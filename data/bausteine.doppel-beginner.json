@@ -183,7 +183,6 @@
       ],
       "transfer_herkunft_beleg": "Grundlogik des Doppel-Aufschlags (aus der Aufschlagzone, feste Reihenfolge) auf einfacher Ebene: ICO/DCV-Doppelregeln.",
       "querverweis": [
-        "doppel",
         "aufschlag"
       ],
       "anzeigetitel": {

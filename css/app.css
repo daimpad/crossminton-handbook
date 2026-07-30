@@ -19,11 +19,11 @@
   --stufe-3-flaeche: #1568ad; --stufe-3-text: #ffffff;
   /* Pfad-Kachel-Hues (kühle, markennahe Palette; bewusst KEINE Ampelfarben). */
   --pf-blau: #1568ad; --pf-blau-weich: #e8f3fe;
-  --pf-teal: #0e8a86; --pf-teal-weich: #d7f1ef;
+  --pf-teal: #0c7b77; --pf-teal-weich: #d7f1ef;
   --pf-violett: #6b46c9; --pf-violett-weich: #ece7fb;
   --pf-indigo: #3b4bc0; --pf-indigo-weich: #e5e8fd;
   --pf-magenta: #b83c8f; --pf-magenta-weich: #f7e3f0;
-  --pf-sky: #0f83c4; --pf-sky-weich: #dceffb;
+  --pf-sky: #0d73ac; --pf-sky-weich: #dceffb;
   --pf-schiefer: #586577; --pf-schiefer-weich: #eaeef4;
   --signal-rot: #f4402a;
   --signal-rot-text: #c4180a;
@@ -43,8 +43,13 @@
   --tinte-2: #5a6675;
   /* #6b7686 statt #8a94a3: ~4,6:1 auf Weiß (AA für die kleinen Sekundär-Labels,
      die diesen Token tragen). Nur Hellmodus; der Dunkelwert bleibt. */
-  --tinte-3: #6b7686;
+  --tinte-3: #656f7e;
   --linie: #e9eef6;
+  /* Fokusring und Feldrahmen brauchen 3:1 gegen ihre Umgebung (WCAG 1.4.11).
+     --primaer (#38a4f1) schafft hell nur 2,71:1 — darum dieselbe Hell/Dunkel-
+     Umkehr wie beim Primaer-Knopf: hell die tiefe Variante, dunkel die helle. */
+  --fokus: var(--primaer-tief);
+  --linie-feld: #8a93a3;
   --linie-stark: #dae3ee;
   /* Überschriften ruhen in Tinte; Blau wird Akzent (Links, Aktion, Aktiv-Zustand). */
   --ueberschrift: var(--tinte);
@@ -90,8 +95,10 @@
     --flaeche-2: #1f2c3a;
     --tinte: #e8eef5;
     --tinte-2: #a2b2c4;
-    --tinte-3: #7f8ea0;
+    --tinte-3: #8795a6;
     --linie: #273543;
+  --fokus: var(--primaer);
+  --linie-feld: #5f7085;
     --linie-stark: #3a4b5e;
     --kopf-bg: rgba(15, 21, 28, 0.82);
     --overlay: rgba(6, 12, 18, 0.62);
@@ -125,8 +132,10 @@
   --flaeche-2: #1f2c3a;
   --tinte: #e8eef5;
   --tinte-2: #a2b2c4;
-  --tinte-3: #7f8ea0;
+  --tinte-3: #8795a6;
   --linie: #273543;
+  --fokus: var(--primaer);
+  --linie-feld: #5f7085;
   --linie-stark: #3a4b5e;
   --kopf-bg: rgba(15, 21, 28, 0.82);
   --overlay: rgba(6, 12, 18, 0.62);
@@ -591,7 +600,10 @@ a.karte-link {
    Medaille (inline-flex) stünde ÜBER dem Text statt links daneben. */
 a.pfad-kachel {
   display: flex;
-  align-items: flex-start;
+  /* stretch (nicht flex-start), damit die Textspalte die volle Kachelhöhe
+     einnimmt — nur dann kann der CTA per margin-top:auto am Boden sitzen.
+     Die Medaille hält sich mit align-self selbst oben. */
+  align-items: stretch;
   gap: 1rem;
   margin-bottom: 0;
   position: relative;
@@ -613,6 +625,7 @@ a.pfad-kachel {
 .pfad-medaille {
   position: relative;
   flex: none;
+  align-self: flex-start;
   width: 3.6rem;
   height: 3.6rem;
   border-radius: var(--radius);
@@ -629,6 +642,9 @@ a.pfad-kachel {
   position: relative;
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .pfad-kachel-text > :last-child { margin-bottom: 0; }
 .pfad-kachel-text h3 {
@@ -647,7 +663,11 @@ a.pfad-kachel {
   align-items: center;
   gap: 0.35rem;
   align-self: flex-start;
-  margin-top: 0.7rem;
+  /* Kacheln einer Zeile sind gleich hoch (Grid), ihr Inhalt ist unterschiedlich
+     lang — ohne auto-Margin schwebte der CTA auf ungleichen Höhen (23 vs. 77px
+     Abstand zum Kachelboden in derselben Zeile). */
+  margin-top: auto;
+  padding-top: 0.7rem;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--pf);
@@ -731,7 +751,12 @@ a.pfad-kachel {
   font-weight: 500;
   letter-spacing: 0.01em;
   vertical-align: middle;
+  /* Chips bleiben einzeilig, brechen aber um, wenn der Titel breiter ist als
+     der Container — sonst schiebt ein langer Baustein-Titel bei 320px die
+     ganze Seite auf (WCAG 1.4.10 Reflow). */
   white-space: nowrap;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .chip-akzent { background: var(--primaer-weich); color: var(--primaer-tief); }
@@ -753,7 +778,7 @@ a.pfad-kachel {
 
 /* Chip-Links klickbar: kleiner Hover (nur Zeigergeräte; Lift nur ohne reduce-motion). */
 a.chip { text-decoration: none; cursor: pointer; transition: transform var(--uebergang), box-shadow var(--uebergang), border-color var(--uebergang); }
-a.chip:focus-visible { outline: 2px solid var(--primaer); outline-offset: 2px; }
+a.chip:focus-visible { outline: 2px solid var(--fokus); outline-offset: 2px; }
 @media (hover: hover) {
   a.chip:hover { box-shadow: var(--schatten-weich); }
   a.chip-baustein:hover { border-color: var(--primaer); }
@@ -821,8 +846,10 @@ a.chip:focus-visible { outline: 2px solid var(--primaer); outline-offset: 2px; }
 select {
   font: inherit;
   color: inherit;
+  max-width: 100%;
+  min-width: 0;
   background: var(--flaeche);
-  border: 1px solid var(--linie);
+  border: 1px solid var(--linie-feld);
   border-radius: var(--radius);
   padding: 0.4rem 0.55rem;
 }
@@ -1408,6 +1435,7 @@ details[open] summary { margin-bottom: 0.5rem; }
 
 .profil-zeile {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
@@ -1668,7 +1696,7 @@ details[open] summary { margin-bottom: 0.5rem; }
 /* ---------- Feinheiten ---------- */
 
 :focus-visible {
-  outline: 2px solid var(--primaer);
+  outline: 2px solid var(--fokus);
   outline-offset: 2px;
 }
 
@@ -1809,7 +1837,7 @@ details[open] summary { margin-bottom: 0.5rem; }
   box-shadow: var(--schatten-karte);
 }
 .such-feld::placeholder { color: var(--tinte-2); }
-.such-feld:focus-visible { outline: 2px solid var(--primaer); outline-offset: 1px; border-color: var(--primaer); }
+.such-feld:focus-visible { outline: 2px solid var(--fokus); outline-offset: 1px; border-color: var(--fokus); }
 
 .such-start { text-align: center; }
 .such-vorschlaege { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 0.8rem 0 0; }
@@ -1874,7 +1902,7 @@ details[open] summary { margin-bottom: 0.5rem; }
 .plan-feld { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.82rem; color: var(--tinte-2); font-weight: 600; }
 .plan-feld input, .plan-feld select {
   font: inherit; font-weight: 400; color: var(--tinte);
-  padding: 0.5rem 0.6rem; border: 1px solid var(--linie); border-radius: var(--radius); background: var(--flaeche);
+  padding: 0.5rem 0.6rem; border: 1px solid var(--linie-feld); border-radius: var(--radius); background: var(--flaeche);
 }
 .plan-uebersicht { margin-top: 1rem; }
 .plan-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.4rem; }
@@ -2012,8 +2040,8 @@ details[open] summary { margin-bottom: 0.5rem; }
 
 /* Setup: Namens-Eingabe + Hinzufügen-Knopf in einer Zeile, darunter die Chip-Liste
    der erfassten Namen. */
-.ko-namen-eingabe { display: flex; gap: 0.6rem; align-items: flex-end; margin: 0.8rem 0; }
-.ko-namen-eingabe .plan-feld { flex: 1; }
+.ko-namen-eingabe { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: flex-end; margin: 0.8rem 0; }
+.ko-namen-eingabe .plan-feld { flex: 1 1 12rem; min-width: 0; }
 .ko-chip-zeile { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
 .ko-chip {
   display: inline-flex;

@@ -31,7 +31,9 @@ const SHELL = [
   '404.html',
   'manifest.json',
   'assets/images/speeder.svg',
-  'images/logo-speeder.svg',
+  // images/logo-speeder.svg ist byte-identisch, wird aber NUR von README.md auf
+  // GitHub genutzt — die App fordert es nie an. Es lag doppelt in der Hülle und
+  // kostete 88 KB Precache ohne Gegenwert.
   'css/app.css',
   'css/feedback.css',
   'css/schriften.css',

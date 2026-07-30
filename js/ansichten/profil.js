@@ -5,13 +5,12 @@
 import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../fortschritt.js';
-import { label, setzeSprache, sprache, t } from '../i18n.js';
+import { label, setzeSprache, sprache, t, text } from '../i18n.js';
 import { balkenHtml, esc, geheZu, heroKlein, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
 
-const SPRACHNAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', pl: 'Polski' };
 
 let offen = null; // gerade geöffneter Inline-Editor: 'stufe' | 'trainer' | 'herkunft' | 'ziel'
 
@@ -125,8 +124,14 @@ export function renderProfil(el, daten) {
     .map(([id, anzahl]) => `<li>${esc(label('einheit', id))}: ${esc(t('mal_absolviert', { n: anzahl }))}</li>`)
     .join('');
 
-  const sprachOptionen = Object.entries(SPRACHNAMEN)
-    .map(([kuerzel, name]) => `<option value="${kuerzel}" ${sprache() === kuerzel ? 'selected' : ''}>${esc(name)}</option>`)
+  // Sprachnamen kommen aus app-info.json (`sprachen.liste[].eigenname`) — dieselbe
+  // Quelle, die der Kopf-Selektor nutzt. Vorher stand hier eine zweite, per Hand
+  // gepflegte Liste; eine neue Sprache hätte man an zwei Stellen nachtragen müssen.
+  const sprachOptionen = (daten?.appInfo?.sprachen?.liste || [])
+    .map((eintrag) => {
+      const name = eintrag.eigenname ?? text(eintrag.label) ?? eintrag.kuerzel ?? eintrag.code;
+      return `<option value="${esc(eintrag.code)}" ${sprache() === eintrag.code ? 'selected' : ''}>${esc(name)}</option>`;
+    })
     .join('');
 
   const themaOptionen = ['auto', 'hell', 'dunkel']

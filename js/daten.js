@@ -100,8 +100,13 @@ export function untergrundVon(baustein) {
 }
 
 // Witterung (nur outdoor, sonst leere Liste) — Navigationsachse wie Spielform.
+// Normalisiert wie untergrundVon: ein Alt-String 'wind' liest sich als ['wind'].
+// Ohne diese Symmetrie verschwände ein solcher Baustein lautlos von der Achse,
+// und pruefeDaten warnte zeichenweise ("unbekannte Witterung \"w\"").
 export function witterungVon(baustein) {
-  return Array.isArray(baustein.witterung) ? baustein.witterung : [];
+  const w = baustein.witterung;
+  if (w == null) return [];
+  return Array.isArray(w) ? w : [w];
 }
 
 // Trainingseinheit (Spez. 3.4): geordnete Referenzliste auf Übungsteile, gegliedert
@@ -266,7 +271,7 @@ function pruefeDaten(daten) {
     for (const grund of untergrundVon(b)) {
       if (!inVokabular(voka.untergrund, grund)) w.push(`${b.id}: unbekannter Untergrund "${grund}"`);
     }
-    for (const wetter of b.witterung || []) {
+    for (const wetter of witterungVon(b)) {
       if (!inVokabular(voka.witterung, wetter)) w.push(`${b.id}: unbekannte Witterung "${wetter}"`);
     }
     if (b.typ === 'micro' && domaenenVon(b).includes('technik') && !hatUebungsteil(b)) {

@@ -136,7 +136,7 @@ export function renderTraining(el, daten, einheitId) {
   const einheit = daten.einheitVonId.get(einheitId);
   const referenzen = einheit ? referenzenVon(daten, einheit) : [];
   if (!einheit || referenzen.length === 0) {
-    el.innerHTML = `<div class="karte"><p>${esc(t('nicht_gefunden'))}</p><a class="knopf knopf-sekundaer" href="#/training">${esc(t('zur_liste'))}</a></div>`;
+    el.innerHTML = `<div class="karte"><h1>${esc(t('nicht_gefunden'))}</h1><a class="knopf knopf-sekundaer" href="#/training">${esc(t('zur_liste'))}</a></div>`;
     return;
   }
   if (!sitzung || sitzung.einheitId !== einheitId) {
