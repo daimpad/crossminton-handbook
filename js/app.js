@@ -6,6 +6,7 @@
 // mehr über den Hash — nur so sind die Inhalte einzeln indexierbar (SEO Tier 2,
 // Baustein 1 aus docs/seo-tier2-konzept.md).
 
+import { zaehleAufruf } from './analytics.js';
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
@@ -386,6 +387,7 @@ function rendern() {
     const ersterLauf = letzteRoute === null;
     window.scrollTo(0, 0);
     letzteRoute = roh;
+    zaehleAufruf(window.location.pathname);
     // Einstiegs-Übergang nur bei Routenwechsel, nicht bei Zustands-Neuzeichnung.
     el.classList.remove('einstieg');
     void el.offsetWidth;

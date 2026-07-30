@@ -20,7 +20,7 @@
 // Kern-Dateien den CACHE-Namen erhöhen — dann lädt der neue SW die Hülle frisch
 // und räumt die alten Caches weg.
 
-const CACHE = 'crossminton-v35';
+const CACHE = 'crossminton-v36';
 
 // App-Hülle: alles, was für den ersten Start ohne Netz nötig ist. Die
 // Baustein-Grafiken (images/G-XXX.png) sind bewusst NICHT dabei — sie sind viele
@@ -35,7 +35,12 @@ const SHELL = [
   'css/app.css',
   'css/feedback.css',
   'css/schriften.css',
+  // Anders als vendor/kommentator/ (nur im Feedback-Modus nachgeladen) lädt
+  // dieses Skript unconditioniert auf jeder Seite (index.html) — gehört daher
+  // in die Hülle, nicht in den lazy/SWR-Bereich.
+  'vendor/goatcounter/count.js',
   'js/aktionen.js',
+  'js/analytics.js',
   'js/app.js',
   'js/daten.js',
   'js/feedback.js',
