@@ -2,7 +2,7 @@
   "_meta": {
     "beschreibung": "Fehlerbilder (Trainer-Layer, Spez. 5): eigene Entitäten, je an einen Basisbaustein gehängt (basis_baustein) — analog zur Delta-Signatur, aber gerendert als in-situ Trainer-Layer, nicht als eigene Station. Nur in der Trainer-Perspektive sichtbar.",
     "struktur": "typ 'fehlerbild', kompetenzstufe ['trainer'], erklaerteil.de mit den drei benannten Feldern symptom/ursache/korrektur (spiegeln die Vermittlungsziele fehlerbild_erkennen/ursache_von_symptom_trennen/korrekturansage_geben). Kein eigener Übungsteil (Delta-Übungsregel).",
-    "status": "Platzhalter — ein einzelnes Beispiel zur Verifikation des Trainer-Layers. Wird durch die redaktionelle Sechser-Serie (je Basis-Technikbaustein) ersetzt.",
+    "status": "Ausgebaut: 17 Fehlerbilder zu 14 Basis-Bausteinen. Der Erstbestand (griff_fehler_zu_fest) ist vollstaendig de/en/fr/pl uebersetzt; die 16 neu uebernommenen Eintraege sind zunaechst deutsch und fallen ueber die i18n-Kette auf de zurueck (Uebersetzung als eigener Ring, wie bei jedem Inhaltszuwachs).",
     "quellsprache": "de"
   },
   "fehlerbild_bausteine": [
@@ -34,6 +34,262 @@
           "symptom": "Przedramię męczy się wcześnie, uderzenia robią się twarde i niedokładne, nadgarstek pozostaje sztywny. Często widoczne po zbielałych kłykciach i chwycie, który przez całą wymianę się nie rozluźnia.",
           "ursache": "Ręka spina się trwale, zamiast zacisnąć tylko w chwili trafienia. Przeważnie z napięcia albo z pragnienia większej kontroli — ale mocny chwyt odbiera dokładnie to czucie, którego szuka.",
           "korrektur": "Chwytaj luźno jak przy uścisku dłoni; mocno robi się tylko w chwili trafienia, potem znów rozluźnij. Wskazówka: „Trzymaj chwyt tak, żebym mógł ci jeszcze lekko wykręcić rakietę z ręki — zaciśnij dopiero w trafieniu, potem natychmiast rozluźnij.\""
+        }
+      }
+    },
+    {
+      "id": "fb_grundposition_flach",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "grundposition",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der erste Schritt kommt spät und schwerfällig; zwischen den Schlägen wirkt der Spieler aufgerichtet und ruhig.",
+          "ursache": "Das Gewicht liegt auf den Fersen, die Knie sind fast gestreckt, der Körper steht aufrecht statt in Bereitschaft.",
+          "korrektur": "Bring ihn tiefer: „Knie locker beugen, Gewicht auf die Fußballen, immer leicht in Bewegung bleiben.“"
+        }
+      }
+    },
+    {
+      "id": "fb_griff_umklammern",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "griff",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Schläger verdreht sich im Treffmoment; der Spieler hält ihn sichtbar fest umklammert.",
+          "ursache": "Der Griff ist zu fest — oft, weil er zu dünn ist —, sodass die Hand ständig gegen das Verdrehen arbeitet.",
+          "korrektur": "„Halt den Schläger so locker, dass ich ihn dir fast herausziehen könnte.“ Prüfe zusätzlich die Griffstärke."
+        }
+      }
+    },
+    {
+      "id": "fb_griff_umgreifen",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "griff",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Vor Rückhandbällen dreht der Spieler die Hand in einen Daumengriff um.",
+          "ursache": "Gewohnheit aus Tennis oder Badminton — dort ist der Griffwechsel richtig, im Crossminton nicht.",
+          "korrektur": "„Bleib bei einem Griff, auch auf der Rückhand — kein Umlegen des Daumens.“"
+        }
+      }
+    },
+    {
+      "id": "fb_aufschlag_treffpunkt",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "aufschlag",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Aufschlag segelt zu hoch und lang ins Aus, oder der Schiedsrichter pfeift ihn ab.",
+          "ursache": "Der Speeder wird über Handhöhe getroffen, oder die Schlagfläche zeigt zu steil nach oben.",
+          "korrektur": "„Triff den ganzen Speeder unterhalb deiner Schlaghand, mit flacherer Fläche nach vorn.“"
+        }
+      }
+    },
+    {
+      "id": "fb_aufschlag_fussfehler",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "aufschlag",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Aufschlag wird als Fußfehler gewertet.",
+          "ursache": "Der Spieler tritt im Schwung mit dem Fuß über die Aufschlaglinie.",
+          "korrektur": "„Bleib mit dem Fuß hinter der Linie, bis der Speeder weg ist.“"
+        }
+      }
+    },
+    {
+      "id": "fb_vorhand_drive_nurarm",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "vorhand_drive",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Drive fliegt zu hoch oder kommt ohne Tempo.",
+          "ursache": "Der Schlag kommt allein aus dem Arm; die Kette aus Beinen, Rumpf und später Beschleunigung fehlt.",
+          "korrektur": "„Beschleunige spät und aus dem ganzen Körper, und triff den Speeder vor dir.“"
+        }
+      }
+    },
+    {
+      "id": "fb_rueckhand_ellenbogen",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "rueckhand",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Die Rückhand ist kraftlos, der Ball fällt kurz.",
+          "ursache": "Der Ellenbogen bleibt zu tief, und der Speeder wird zu weit hinten oder neben dem Körper getroffen.",
+          "korrektur": "„Nimm den Ellenbogen höher und triff den Speeder weiter vor dir.“"
+        }
+      }
+    },
+    {
+      "id": "fb_beinarbeit_splitstep",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "beinarbeit",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler wird auf dem falschen Fuß erwischt und startet zu spät.",
+          "ursache": "Der Split-Step fehlt oder kommt zum falschen Zeitpunkt; der Spieler steht flach.",
+          "korrektur": "„Setz den kleinen Split-Step, genau wenn der Gegner trifft, und lande auf den Ballen.“"
+        }
+      }
+    },
+    {
+      "id": "fb_handgelenk_peitsche_peitsche",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "handgelenk_peitsche",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Trotz großer Bewegung kommt kein Tempo in den Ball.",
+          "ursache": "Das Handgelenk ist die ganze Zeit angespannt; das späte Schnappen kurz vor dem Treffpunkt fehlt.",
+          "korrektur": "„Halt das Handgelenk locker und lass es erst im letzten Moment schnappen — wie eine Peitsche.“"
+        }
+      }
+    },
+    {
+      "id": "fb_ueberkopf_clear_treffpunkt",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "ueberkopf_clear",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Überkopfball fällt zu kurz oder wird unsauber getroffen.",
+          "ursache": "Der Speeder wird zu tief und zu weit vorn getroffen, ohne Seitstellung und Streckung.",
+          "korrektur": "„Dreh dich seitlich und triff den Speeder gestreckt am höchsten Punkt über der Schulter.“"
+        }
+      }
+    },
+    {
+      "id": "fb_smash_treffpunkt",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "smash",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Smash landet in der neutralen Zone oder segelt lang hinaus.",
+          "ursache": "Der Treffpunkt liegt zu weit hinten, und der Schlag geht zu flach statt nach vorn-unten.",
+          "korrektur": "„Triff etwas vor dem Kopf und schlag klar nach vorn-unten ins Feld.“"
+        }
+      }
+    },
+    {
+      "id": "fb_kurzes_spiel_stopp_dosierung",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "kurzes_spiel_stopp",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Stopp fällt in die neutrale Zone oder steht als bequemer Angriffsball hoch.",
+          "ursache": "Zu viel oder zu wenig Handgelenk; die Schlagfläche ist zu offen.",
+          "korrektur": "„Nimm das Tempo ganz heraus und leg den Speeder sanft knapp hinter die Zone.“"
+        }
+      }
+    },
+    {
+      "id": "fb_schnitt_spin_zusteil",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "schnitt_spin",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Ball ist zwar angeschnitten, verliert aber die Kontrolle und geht ins Aus.",
+          "ursache": "Der Schnitt ist zu steil, die Fläche zu offen, der Vorwärtsanteil fehlt.",
+          "korrektur": "„Streif den Speeder flacher an und nimm etwas Vorwärtsbewegung mit.“"
+        }
+      }
+    },
+    {
+      "id": "fb_beinarbeit_system_schritttyp",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "beinarbeit_system",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "In bestimmten Ecken kommt der Spieler regelmäßig zu spät.",
+          "ursache": "Für die jeweilige Zone wird der falsche Schritttyp gewählt; die Übergänge sind ungeübt.",
+          "korrektur": "„Ordne jeder Ecke ihren Schritt zu und übe gezielt die Übergänge dorthin.“"
+        }
+      }
+    },
+    {
+      "id": "fb_sprung_smash_absprung",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "sprung_smash",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Sprung bringt keinen Vorteil, die Landung ist unkontrolliert.",
+          "ursache": "Der Absprung kommt zu früh oder zu spät, der Treffpunkt liegt nicht im höchsten Punkt, die Landung wird nicht abgefangen.",
+          "korrektur": "„Spring so ab, dass du im höchsten Punkt triffst, und fang die Landung weich ab.“"
+        }
+      }
+    },
+    {
+      "id": "fb_praezision_an_die_linien_abstand",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "praezision_an_die_linien",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Auffällig viele Bälle landen knapp im Aus.",
+          "ursache": "Es wird direkt auf die Linie gezielt, ohne Sicherheitsabstand.",
+          "korrektur": "„Ziel eine Handbreit innerhalb der Linie — das richtige Ziel, nicht das engste.“"
         }
       }
     }

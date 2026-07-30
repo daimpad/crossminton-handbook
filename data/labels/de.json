@@ -410,10 +410,28 @@
     "spielarten_ueberblick": "Spielarten im Überblick",
     "snowminton": "Snowminton — Spiel auf Schnee",
     "beachminton": "Beachminton — Spiel auf Sand",
-    "blackminton": "Blackminton — Spiel im Dunkeln"
+    "blackminton": "Blackminton — Spiel im Dunkeln",
+    "funplay": "Funplay — gemeinsam halten",
+    "mehrfeld": "Mehrfeldanordnung"
   },
   "fehlerbilder": {
-    "griff_fehler_zu_fest": "Griff zu fest"
+    "griff_fehler_zu_fest": "Griff zu fest",
+    "fb_grundposition_flach": "Zu hoher, träger Stand",
+    "fb_griff_umklammern": "Umklammern und Verdrehen",
+    "fb_griff_umgreifen": "Umgreifen auf der Rückhand",
+    "fb_aufschlag_treffpunkt": "Treffpunkt über der Hand",
+    "fb_aufschlag_fussfehler": "Fuß über der Linie",
+    "fb_vorhand_drive_nurarm": "Schlag nur aus dem Arm",
+    "fb_rueckhand_ellenbogen": "Ellenbogen zu tief",
+    "fb_beinarbeit_splitstep": "Fehlender Split-Step",
+    "fb_handgelenk_peitsche_peitsche": "Kein spätes Schnappen",
+    "fb_ueberkopf_clear_treffpunkt": "Treffpunkt zu tief",
+    "fb_smash_treffpunkt": "Falscher Treffpunkt, flache Bahn",
+    "fb_kurzes_spiel_stopp_dosierung": "Zu kurz oder zu hoch",
+    "fb_schnitt_spin_zusteil": "Zu steiler Schnitt",
+    "fb_beinarbeit_system_schritttyp": "Falscher Schritttyp je Zone",
+    "fb_sprung_smash_absprung": "Unkontrollierter Absprung",
+    "fb_praezision_an_die_linien_abstand": "Zu nah an die Linie"
   },
   "grafiken": {
     "G-001": "Leitgrafik: der Universalgriff mit V-Stellung",
@@ -502,7 +520,7 @@
       "vertiefung": "Vertiefung",
       "delta": "Cross-Sport-Hinweis",
       "fehlerbild": "Fehlerbild",
-      "umgebungs_baustein": "Umgebungs-Baustein"
+      "umgebungs_baustein": "Umgebungs-Baustein", "modus_baustein": "Spielform-Baustein"
     },
     "transfer_herkunft": {
       "CM": "Crossminton",

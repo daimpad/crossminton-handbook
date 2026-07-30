@@ -390,6 +390,9 @@ const BAUSTEIN_ICONS = {
   snowminton: 'fa-mountain',
   beachminton: 'fa-sun',
   blackminton: 'fa-eye',
+  // Spielformen (typ modus_baustein) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  funplay: 'fa-handshake',
+  mehrfeld: 'fa-people-arrows',
   // Ausrüstung (eigene Domäne) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
   deine_ausruestung: 'fa-toolbox',
   der_speeder: 'fa-baseball',

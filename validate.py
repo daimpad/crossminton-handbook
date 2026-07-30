@@ -47,6 +47,11 @@ ALLOW = {
     "spielform": {"einzel", "doppel"},
     "spielziele": flat(V.get("spielziele", {})),
     "vermittlungsziele": flat(V.get("vermittlungsziele", {})),
+    # Trainings-Metadaten (Zuarbeit fuer den Trainingsplan, Spez. 13.4)
+    "geeignete_phase": set(V.get("trainings_metadaten", {}).get("geeignete_phase", [])),
+    "dauer_klasse": set(V.get("trainings_metadaten", {}).get("dauer_klasse", [])),
+    "intensitaet": set(V.get("trainings_metadaten", {}).get("intensitaet", [])),
+    "fokus": set(V.get("trainings_metadaten", {}).get("fokus", [])),
 }
 
 # ---------------------------------------------------------------- sammeln
@@ -104,6 +109,17 @@ def check_baustein(fn, b):
         if z not in ALLOW["spielziele"]: err(fn, bid, f"unbekanntes spielziel: {z}")
     for z in b.get("vermittlungsziele", []):
         if z not in ALLOW["vermittlungsziele"]: err(fn, bid, f"unbekanntes vermittlungsziel: {z}")
+    # Trainings-Metadaten: Werte gegen das Vokabular; jeder Uebungsteil muss sie tragen
+    for ph in b.get("geeignete_phase", []):
+        if ph not in ALLOW["geeignete_phase"]: err(fn, bid, f"unbekannte geeignete_phase: {ph}")
+    if "dauer_klasse" in b and b["dauer_klasse"] not in ALLOW["dauer_klasse"]:
+        err(fn, bid, f"unbekannte dauer_klasse: {b['dauer_klasse']}")
+    if "intensitaet" in b and b["intensitaet"] not in ALLOW["intensitaet"]:
+        err(fn, bid, f"unbekannte intensitaet: {b['intensitaet']}")
+    for fk in b.get("fokus", []):
+        if fk not in ALLOW["fokus"]: err(fn, bid, f"unbekannter fokus: {fk}")
+    if "uebungsteil" in b and "geeignete_phase" not in b:
+        warn(fn, bid, "Uebungsteil ohne Trainings-Metadaten (geeignete_phase/dauer_klasse/intensitaet/fokus)")
     # innere Struktur: genau eines von uebungsteil/reflexionsaufgabe
     inner = [k for k in ("uebungsteil", "reflexionsaufgabe") if k in b]
     if len(inner) != 1:
@@ -167,6 +183,21 @@ if te:
                 ref = it.get("baustein")
                 if ref not in pool: err("trainingseinheiten.json", eid, f"Referenz zeigt ins Leere: {ref}")
                 elif ref not in has_uebung: err("trainingseinheiten.json", eid, f"Referenz '{ref}' hat keinen uebungsteil")
+
+# Fehlerbilder (Trainer-Layer, Spez. 13.5): basis_baustein muss aufloesen und der
+# Basisbaustein den trainer_layer_offen-Marker tragen (sonst nur Warnung, nie sperrend).
+fb = load(path("fehlerbilder.json"))
+if fb:
+    for e in fb.get("fehlerbild_bausteine", []):
+        eid = e.get("id", "?")
+        ref = e.get("basis_baustein")
+        if ref not in pool:
+            err("fehlerbilder.json", eid, f"basis_baustein zeigt ins Leere: {ref}")
+        elif not pool[ref][1].get("trainer_layer_offen"):
+            warn("fehlerbilder.json", eid, f"Basisbaustein '{ref}' hat keinen trainer_layer_offen-Marker")
+        for feld in ("symptom", "ursache", "korrektur"):
+            if not (e.get("erklaerteil", {}).get("de", {}) or {}).get(feld):
+                err("fehlerbilder.json", eid, f"erklaerteil.de.{feld} fehlt")
 
 # reine JSON-Ladepruefung fuer restliche Dateien
 for extra in ("regeln.json", "app-info.json"):
