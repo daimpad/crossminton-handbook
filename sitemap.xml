@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Vorerst nur die Startseite: Bei Hash-Routing (#/...) ist die Wurzel die einzige
-     echte URL. Mit Tier 2 (Pfad-URLs + Deploy-Prerendering, s. docs/seo-tier2-konzept.md)
-     wird diese Sitemap um alle Bausteine, Regeln und Pfade erweitert. -->
+<!-- Nur die eingecheckte Fassung für den lokalen, buildfreien Betrieb (python3 -m
+     http.server) — sie zeigt bewusst nur die Startseite, weil ohne Deploy-Prerendering
+     keine der anderen Routen als echte statische Datei existiert. Beim Deploy überschreibt
+     scripts/prerender.mjs diese Datei mit der vollständigen Liste aller ~149 Routen
+     (Bausteine, Pfade, Regeln, Turnier, Ausrüstung, Training …) — s. docs/seo-tier2-konzept.md,
+     Baustein 2. Diese Datei hier NICHT von Hand um einzelne Routen ergänzen. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://daimpad.github.io/crossminton-handbook/</loc>

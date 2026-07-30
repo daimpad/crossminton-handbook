@@ -1,5 +1,10 @@
-# Veröffentlicht die App auf GitHub Pages — reine Statik, kein Build.
-# Vorher laufen die Engine-Tests als Qualitätsschranke.
+# Veröffentlicht die App auf GitHub Pages — reine Statik, kein Build für die
+# Laufzeit-App selbst. Vorher laufen die Engine-Tests als Qualitätsschranke.
+# Der deploy-Job prerendert zusätzlich statische Snapshots je Route + die volle
+# sitemap.xml (SEO Tier 2, Baustein 2, s. docs/seo-tier2-konzept.md) — Playwright
+# ist dafür eine reine CI-Werkzeug-Abhängigkeit (per `npm install --no-save`),
+# keine Repo-/Laufzeitabhängigkeit; lokale Entwicklung bleibt unverändert
+# buildfrei über `python3 -m http.server`.
 name: Deploy GitHub Pages
 
 on:
@@ -35,11 +40,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Playwright installieren (nur für den Prerender-Schritt, keine Repo-Abhängigkeit)
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Prerendern (statische Snapshots je Route + volle sitemap.xml)
+        run: node scripts/prerender.mjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

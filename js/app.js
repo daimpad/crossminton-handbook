@@ -23,10 +23,22 @@ import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
 import { initI18n, setzeSprache, sprache, t, text } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
+import { seiteMeta } from './seo.js';
 import { einstellungen, ladeZustand, merkliste, setzeEinstellung } from './zustand.js';
 
 let daten = null;
 let letzteRoute = null;
+
+// Startseite behält ihren handgepflegten Tier-1-Kopf aus index.html (reichhaltige
+// OG-Beschreibung + Produktions-Canonical) — einmalig gesichert, bevor der erste
+// rendern()-Lauf ihn anfassen könnte, und bei jeder Rückkehr zu '/' wiederhergestellt
+// (sonst bliebe nach einem Ausflug auf eine andere Route eine falsche Beschreibung
+// hängen). Dieselbe Ausnahme trifft scripts/prerender.mjs (baueSnapshot()).
+const urspruenglicherKopf = {
+  titel: document.title,
+  beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '',
+  kanonisch: document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? '',
+};
 
 // App-Wurzel (Montagepunkt) = das <base href> aus index.html. Das Inline-Skript
 // dort setzt es vor allen anderen Tags auf den Montagepunkt ('/' lokal,
@@ -123,8 +135,16 @@ function aktualisiereMerkAnzahl() {
   }
 }
 
-function beschrifteRahmen() {
-  document.title = t('app_titel');
+// Titel + Meta-Description + Canonical sind je Route eigenständig (seo.js, SEO
+// Tier 2 Baustein 2) — dieselbe Zuordnung nutzt auch der Deploy-Prerender.
+function beschrifteRahmen(segmente) {
+  const { titel, beschreibung, kanonisch } =
+    segmente.length > 0
+      ? { ...seiteMeta(daten, segmente), kanonisch: window.location.origin + window.location.pathname }
+      : urspruenglicherKopf;
+  document.title = titel;
+  document.querySelector('meta[name="description"]')?.setAttribute('content', beschreibung);
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', kanonisch);
   document.querySelector('.marke-text').textContent = t('app_titel');
   const beschriftungen = {
     lernen: t('nav_lernen'),
@@ -301,7 +321,7 @@ function rendern() {
   // erreichbar. Nur die Onboarding-Ansicht selbst blendet die Bottom-Nav aus
   // (fokussierter Ablauf); überall sonst bleibt die normale Navigation sichtbar.
   document.body.classList.toggle('im-onboarding', segmente[0] === 'onboarding');
-  beschrifteRahmen();
+  beschrifteRahmen(segmente);
 
   if (segmente[0] === 'onboarding') {
     renderOnboarding(el, daten);

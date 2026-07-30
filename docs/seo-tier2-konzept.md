@@ -3,10 +3,9 @@
 Ziel: Aus der Startseite-only-Auffindbarkeit echte, indexierbare URLs machen —
 **ohne** das „buildfrei"-Prinzip der Laufzeit-App zu verletzen. Tier 1 (Social-
 Vorschau, PWA-Manifest, strukturierte Daten, robots/Sitemap-Grundgerüst,
-noscript-Inhalt) ist umgesetzt. **Baustein 1 (History-Routing) ist jetzt
-ebenfalls umgesetzt** — die Abweichungen vom ursprünglichen Plan stehen am
-Ende dieses Dokuments. Baustein 2 (Prerendering) bleibt offen, bewusst als
-zweiter, eigener Schritt (s. „Reihenfolge & Risiko" unten).
+noscript-Inhalt) ist umgesetzt. **Baustein 1 (History-Routing) und Baustein 2
+(Prerendering + volle Sitemap) sind jetzt beide umgesetzt** — die Abweichungen
+vom ursprünglichen Plan stehen am Ende dieses Dokuments.
 
 ## Warum überhaupt
 
@@ -147,3 +146,62 @@ JS verzögern (aktuell rendert die Seite ohne JS-Wartezeit) und die
 Konsolen-Logs. Der Effekt ist read-only, ändert nichts am Ergebnis und tritt
 NUR unter Unterpfad-Deploy auf; lokal (Montage unter `/`) bleibt die Konsole
 vollständig sauber (Playwright-Testsuite bestätigt 0 Fehler bei Root-Montage).
+
+## Baustein 2 — Stand nach Umsetzung (Abweichungen vom Plan)
+
+Ein neues, geteiltes Modul **`js/seo.js`** (`seiteMeta(daten, segmente)`) leitet
+Titel + Beschreibung je Route aus genau den Funktionen/Labels ab, die die
+jeweilige Ansicht selbst schon für ihre Überschrift nutzt (`kompetenzpfad`,
+`themenDomaenen`, `bausteinText()`/`ausschnitt()` aus `js/suche.js` für die
+Baustein-Beschreibung, `app-info.json` für Über/Mitmachen/Impressum/
+Datenschutz). **Eine Quelle für zwei Verbraucher:** `js/app.js` ruft es bei
+jedem `rendern()` auf und setzt `document.title` + `<meta name="description">`
++ `<link rel="canonical">` **live im Client** — das war im ursprünglichen Plan
+nicht vorgesehen (der sprach nur vom Prerender-Output), schließt aber dieselbe
+Lücke für JEDEN Aufruf, nicht nur den ersten: ohne das bliebe der Browser-Tab-
+Titel nach einer SPA-Navigation für immer generisch. `scripts/prerender.mjs`
+liest denselben, bereits vom Client gesetzten Wert einfach aus dem DOM aus
+(`document.title` etc.) — es gibt **keine zweite, parallele Titel-Zuordnung**.
+
+**Die Startseite behält ihren handgepflegten Tier-1-Kopf unangetastet** (reichhaltige
+OG-Beschreibung + Produktions-Canonical aus `index.html`) — sowohl im
+Prerender (`baueSnapshot()` überspringt `pfad === '/'`) als auch im Live-Client
+(`beschrifteRahmen()` sichert die drei Original-Werte einmalig beim Modul-Load
+und stellt sie bei jeder Rückkehr zu `/` wieder her, statt sie durch die
+generische `seiteMeta()`-Zuordnung zu ersetzen). Diese Ausnahme stand nicht im
+ursprünglichen Plan, war aber nötig: ohne sie hätte der erste Client-Boot die
+sorgfältig formulierte Tier-1-Beschreibung sofort durch einen generischen
+Platzhalter überschrieben — ein Playwright-Rauchtest deckte das auf (Titel/
+Beschreibung vor und nach einem Ausflug auf eine andere Route verglichen).
+
+**Das Prerendern läuft über einen einzigen Tab mit SPA-In-Page-Navigation,
+nicht über 149 einzelne `page.goto()`-Aufrufe.** `scripts/prerender.mjs` bootet
+die App genau einmal (ein `ladeDaten()`-Lauf), leitet daraus per
+`page.evaluate()` die Routenliste ab (dieselben reinen Funktionen aus
+`js/daten.js`/`js/pfade.js` — keine zweite, gepflegte Liste) und durchläuft sie
+per `history.pushState` + `popstate` (derselbe Weg, den auch ein Klick nimmt).
+Das ist schneller (~2 s für alle 149 Routen lokal) und schließt aus, dass die
+Routenliste aus dem Skript und die Routenliste der App-Laufzeit auseinanderlaufen.
+
+**Node erlaubt kein rekursives `cp()` in eine eigene Unterverzeichnis** — das
+Staging-Verzeichnis `_site` liegt unter dem Repo-Wurzelverzeichnis, darum kopiert
+`kopiere()` Eintrag für Eintrag (`readdirSync` + `cpSync` je Top-Level-Datei/
+-Ordner, `.git`/`node_modules`/`_site` ausgenommen) statt eines einzigen
+`cpSync(REPO, ZIEL, {recursive:true})`-Aufrufs.
+
+**Playwright ist eine reine CI-Werkzeug-Abhängigkeit**, installiert im
+`deploy`-Job per `npm install --no-save playwright@1.56.1` — kein
+`package.json` im Repo, `node_modules`/`_site` sind gitignored. Lokale
+Entwicklung bleibt vollständig unverändert buildfrei über
+`python3 -m http.server`; das eingecheckte `sitemap.xml` zeigt weiterhin nur
+die Startseite (Platzhalter für den lokalen Betrieb) und wird ausschließlich
+beim Deploy durch die vollständige, generierte Fassung ersetzt.
+
+**Ergebnis:** 149 statische Routen (108 Bausteine, alle Pfad-Achsen,
+8 Trainingseinheiten, Regeln/Turnier/Ausrüstung/Über/Mitmachen/Impressum/
+Datenschutz), verifiziert per lokalem Prerender-Testlauf (Titel/Beschreibung/
+Canonical/Social-Vorschau je Snapshot stichprobenartig geprüft, 0 Laufzeitfehler
+über alle Routen, sitemap.xml als wohlgeformtes XML mit 149 eindeutigen
+`<loc>`-Einträgen bestätigt) und einem Playwright-Rauchtest der Live-App
+(Klick-Navigation, Browser-Zurück, Deep-Link-Reload, Rückkehr zur Startseite —
+0 unerwartete Konsolenfehler).
