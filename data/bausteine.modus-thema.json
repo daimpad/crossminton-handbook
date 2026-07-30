@@ -10,7 +10,7 @@
     "typ_verankerung": "Anders als 'umgebungs_baustein' NICHT typ-gefiltert: beide tragen eine fachliche Domaene, eine Kompetenzstufe und eine echte Voraussetzung und erscheinen darum regulaer im Kompetenz-, Themen- und Individualpfad (Spez. 13.2: 'im Pool, mit Voraussetzungen und Achsen-Verzahnung').",
     "abgrenzung": "Funplay ist die kooperative Spielweise ohne Zaehlung; die Mehrfeldanordnung ist eine Freizeit-Aufstellung mehrerer Matches um ein gemeinsames Zentrum. Beide lassen das Regelwerk unberuehrt — sie ersetzen es nur situativ durch eine andere Zielsetzung bzw. Aufstellung.",
     "sicherheitsrahmen": "Die Mehrfeldanordnung traegt einen Sicherheitshinweis (gekreuzte Flugbahnen im Zentrum: erhoehtes Kollisions- und Trefferrisiko, Uebersicht und Ruecksicht vor Tempo).",
-    "bildlos": "Bewusst ohne grafik-Feld — wie der uebrige Spielmodi-Block.",
+    "grafiken": "G-062 (funplay) und G-063 (mehrfeld) — hand gezeichnetes, theme-faehiges SVG mit en/fr/pl-Varianten wie der uebrige Grafik-Bestand. Die mitgelieferten spielmodi-*.svg des Uebergabepakets waren hart gefaerbt und im Dunkelmodus unbrauchbar.",
     "ordnungslogik": "funplay (Beginner-Einstieg, Technik) -> mehrfeld (Fortgeschritten, Mentales)."
   },
   "bausteine": [
@@ -30,6 +30,7 @@
       "dauer_klasse": "mittel",
       "intensitaet": "niedrig",
       "fokus": ["technik"],
+      "grafik": ["G-062"],
       "anzeigetitel": {
         "de": "Funplay: gemeinsam halten",
         "en": "Funplay: keeping it up together",
@@ -108,6 +109,7 @@
       "vermittlungsziele": [],
       "witterung": [],
       "transfer_herkunft": ["CM"],
+      "grafik": ["G-063"],
       "anzeigetitel": {
         "de": "Mehrfeldanordnung",
         "en": "Multi-court set-up",

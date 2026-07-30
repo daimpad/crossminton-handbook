@@ -7,14 +7,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { aufgabenTeile, baueIndizes, deltaFuer, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
+import { aufgabenTeile, baueIndizes, deltaFuer, einheitReferenzen, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
 import { individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier } from '../js/zustand.js';
-import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
+import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 
@@ -356,9 +356,16 @@ console.log('\n[7b] Fehlerbilder (Trainer-Layer)');
 pruefe('fehlerbilderFuer(griff) liefert alle drei Griff-Fehlerbilder', fehlerbilderFuer(daten, 'griff').length === 3
   && fehlerbilderFuer(daten, 'griff').some((f) => f.id === 'griff_fehler_zu_fest'));
 pruefe('fehlerbilderFuer ohne Eintrag liefert leeres Array (Nicht-Fehlerfall)', gleicheListe(fehlerbilderFuer(daten, 'grundschlaege_ueberblick'), []));
-pruefe('Fehlerbilder decken 14 Basis-Bausteine ab, 17 Einträge gesamt', (() => {
+pruefe('Fehlerbilder decken 29 Basis-Bausteine ab, 32 Einträge gesamt', (() => {
   const alle = daten.fehlerbilder ?? [];
-  return alle.length === 17 && new Set(alle.map((f) => f.basis_baustein)).size === 14;
+  return alle.length === 32 && new Set(alle.map((f) => f.basis_baustein)).size === 29;
+})());
+// Der trainer_layer_offen-Marker ist die redaktionelle Zusage, dass hier ein
+// Fehlerbild hingehört — er darf nicht unbedient bleiben.
+pruefe('jeder Baustein mit trainer_layer_offen-Marker trägt mindestens ein Fehlerbild', (() => {
+  const belegt = new Set((daten.fehlerbilder ?? []).map((f) => f.basis_baustein));
+  const offen = daten.bausteine.filter((b) => JSON.stringify(b).includes('trainer_layer_offen') && !belegt.has(b.id));
+  return offen.length === 0;
 })());
 pruefe('jedes Fehlerbild hängt an einem existierenden Baustein und trägt die drei Felder', (daten.fehlerbilder ?? []).every((f) =>
   daten.bausteinVonId.has(f.basis_baustein) && f.erklaerteil?.de?.symptom && f.erklaerteil?.de?.ursache && f.erklaerteil?.de?.korrektur));
@@ -701,13 +708,13 @@ pruefe('alle sichtbaren IDs tragen ein de-Label', fehlend.length === 0, fehlend.
 
 console.log('\n[10] Grafiksystem (G-XXX-Nummernkreis + Platzhalter-Dateien)');
 const grafikRefs = [...daten.bausteine, ...daten.deltas].flatMap((b) => b.grafik || []);
-const alleG = Array.from({ length: 61 }, (_, i) => `G-${String(i + 1).padStart(3, '0')}`);
+const alleG = Array.from({ length: 63 }, (_, i) => `G-${String(i + 1).padStart(3, '0')}`);
 pruefe('alle Baustein-Grafiken folgen dem G-XXX-Schema', grafikRefs.length > 0 && grafikRefs.every((g) => /^G-\d{3}$/.test(g)));
-pruefe('55 Bausteine tragen eine Grafik, 59 G-Referenzen (4 Zwei-Bild-Sequenzen)', daten.bausteine.filter((b) => (b.grafik || []).length > 0).length === 55 && grafikRefs.length === 59);
+pruefe('57 Bausteine tragen eine Grafik, 61 G-Referenzen (4 Zwei-Bild-Sequenzen)', daten.bausteine.filter((b) => (b.grafik || []).length > 0).length === 57 && grafikRefs.length === 61);
 pruefe('Sequenz-Bausteine tragen zwei Grafiken (aufschlag/beinarbeit/taeuschung/tempo_rhythmus_wechsel)', ['aufschlag', 'beinarbeit', 'taeuschung', 'tempo_rhythmus_wechsel'].every((id) => (daten.bausteinVonId.get(id).grafik || []).length === 2));
 pruefe('Deltas tragen keine eigene Grafik (nur Basis-Bausteine)', daten.deltas.every((d) => !(d.grafik && d.grafik.length)));
 pruefe('jede referenzierte G-XXX hat eine Platzhalter-Datei images/G-XXX.png', [...new Set(grafikRefs)].every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
-pruefe('alle 61 Platzhalter G-001..G-061 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
+pruefe('alle 63 Grafiken G-001..G-063 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
 pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein', labelsDe.grafiken['G-060'] && labelsDe.grafiken['G-061'] && !grafikRefs.includes('G-060') && !grafikRefs.includes('G-061'));
 pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
 pruefe('SVG_GRAFIKEN: jede Diagramm-Grafik hat .svg UND .png (Inline-SVG + PNG-Fallback)', SVG_GRAFIKEN.size >= 3 && [...SVG_GRAFIKEN].every((g) => existsSync(join(wurzel, 'images', `${g}.svg`)) && existsSync(join(wurzel, 'images', `${g}.png`))));
@@ -728,6 +735,82 @@ pruefe('erzeugePlan: wochen×proWoche Sessions (3×2=6)', planA.sessions.length 
 pruefe('erzeugePlan: Termine verteilt (Mo/Do, wöchentlich)', planA.sessions[0].datum === '2026-07-13' && planA.sessions[1].datum === '2026-07-16' && planA.sessions[2].datum === '2026-07-20');
 pruefe('erzeugePlan: Wochen-Gruppierung 3×2', gleicheListe(planNachWochen(planA).map((g) => g.sessions.length), [2, 2, 2]));
 pruefe('erzeugePlan: nur planbare (existierende) Einheiten', planA.sessions.every((s) => daten.einheitVonId.has(s.einheit)));
+
+// --- Trainings-Metadaten im Plan (Spez. 13.4) --------------------------------
+// Das Profil verdichtet die Baustein-Metadaten der Einheit: Umfang als Klasse,
+// Intensität als SPITZE (nicht Mittelwert), Fokus als Vereinigung.
+const profilA = einheitProfil(daten, 'beginner_bewegung_und_position');
+pruefe('einheitProfil verdichtet Umfang/Intensität/Fokus', Boolean(profilA)
+  && profilA.dauer === 'kurz' && profilA.intensitaet === 'hoch'
+  && gleicheListe(profilA.fokus, ['kondition', 'koordination', 'technik']));
+pruefe('einheitProfil nimmt die Intensitäts-SPITZE, nicht den Mittelwert', (() => {
+  const einheit = daten.einheitVonId.get('beginner_bewegung_und_position');
+  const stufen = einheitReferenzen(einheit)
+    .map((r) => daten.bausteinVonId.get(r.baustein)?.intensitaet)
+    .filter(Boolean);
+  return stufen.includes('hoch') && !stufen.every((i) => i === 'hoch') && profilA.intensitaet === 'hoch';
+})());
+pruefe('einheitProfil für unbekannte Einheit liefert null (Nicht-Fehlerfall)', einheitProfil(daten, 'gibt_es_nicht') === null);
+pruefe('alle planbaren Einheiten haben ein Profil (alle Übungsbausteine sind getaggt)',
+  planbareEinheiten(daten, 'alle').every((e) => einheitProfil(daten, e.id) !== null));
+// phasenTreu ist informativ, KEIN Lint: die kuratierten Einheiten nutzen den
+// Ausklang als spielerischen Abschluss und setzen dort bewusst Hauptteil-Übungen.
+pruefe('phasenTreu ist informativ — der bekannte Ausklang-Befund bleibt sichtbar', (() => {
+  const untreu = planbareEinheiten(daten, 'alle')
+    .map((e) => einheitProfil(daten, e.id))
+    .filter((p) => p && !p.phasenTreu);
+  return untreu.length > 0 && untreu.every((p) => p.abweichungen.every((a) => a.phase === 'ausklang'));
+})());
+
+// Die Spitze taugt nicht zum Verteilen (7 von 8 Einheiten sind „hoch"), die
+// abgestufte Last schon — sie trennt die Einheiten von 1,40 bis 2,80.
+pruefe('einheitProfil liefert die abgestufte Last neben der Spitze', (() => {
+  const lasten = planbareEinheiten(daten, 'alle').map((e) => einheitProfil(daten, e.id).last);
+  return lasten.every((l) => l >= 1 && l <= 3) && new Set(lasten).size > 1
+    && Math.max(...lasten) - Math.min(...lasten) > 0.5;
+})());
+// Die Auswahl ist ein Kompromiss aus Lastwechsel UND Fokus-Abwechslung: eine etwas
+// schwerere Einheit darf gewinnen, wenn sie thematisch besser abwechselt. Geprüft
+// wird darum die dokumentierte Greedy-Invariante — der Gewählte minimiert das
+// Gewicht `lastStrafe + Fokus-Überschneidung` unter den noch übrigen Kandidaten.
+pruefe('erzeugePlan minimiert das dokumentierte Auswahl-Gewicht (Lastwechsel + Abwechslung)', (() => {
+  const plan = erzeugePlan(daten, { wochen: 4, einheitenProWoche: 2, startISO: '2026-07-13' });
+  const ids = plan.sessions.map((s) => s.einheit);
+  const pool = planbareEinheiten(daten, 'alle').map((e) => e.id);
+  const gewicht = (vor, p) => (vor.last >= 2.0 ? p.last * 2 : 0) + p.fokus.filter((f) => vor.fokus.includes(f)).length;
+  for (let i = 1; i < Math.min(ids.length, pool.length); i++) {
+    const vor = einheitProfil(daten, ids[i - 1]);
+    const uebrig = pool.filter((id) => !ids.slice(0, i).includes(id));
+    if (!uebrig.length) break;
+    const bestes = Math.min(...uebrig.map((id) => gewicht(vor, einheitProfil(daten, id))));
+    if (gewicht(vor, einheitProfil(daten, ids[i])) > bestes + 1e-9) return false;
+  }
+  return true;
+})());
+pruefe('erzeugePlan schiebt die schwerste Einheit nach hinten (Progression)', (() => {
+  const plan = erzeugePlan(daten, { wochen: 4, einheitenProWoche: 2, startISO: '2026-07-13' });
+  const lasten = plan.sessions.map((s) => einheitProfil(daten, s.einheit).last);
+  return lasten.indexOf(Math.max(...lasten)) > lasten.indexOf(Math.min(...lasten));
+})());
+pruefe('erzeugePlan bleibt deterministisch (gleiche Konfig → gleicher Plan)', (() => {
+  const a = erzeugePlan(daten, { wochen: 3, einheitenProWoche: 3, startISO: '2026-08-03' });
+  const b = erzeugePlan(daten, { wochen: 3, einheitenProWoche: 3, startISO: '2026-08-03' });
+  return gleicheListe(a.sessions.map((s) => s.einheit), b.sessions.map((s) => s.einheit));
+})());
+pruefe('erzeugePlan schöpft den Pool aus, bevor er wiederholt', (() => {
+  const pool = planbareEinheiten(daten, 'alle').length;
+  const plan = erzeugePlan(daten, { wochen: 3, einheitenProWoche: 2, startISO: '2026-07-13' });
+  const erste = plan.sessions.slice(0, Math.min(pool, plan.sessions.length)).map((s) => s.einheit);
+  return new Set(erste).size === erste.length;
+})());
+// Jeder Vokabular-Wert braucht ein de-Label, sonst zeigt die Profil-Zeile die rohe ID.
+pruefe('jeder Trainings-Metadaten-Wert trägt ein de-Label', ['dauer_klasse', 'intensitaet', 'fokus', 'geeignete_phase'].every((gruppe) => {
+  const werte = technik.vokabulare.trainings_metadaten[gruppe];
+  const labels = labelsDe.vokabeln[gruppe] || {};
+  return Array.isArray(werte) && werte.length > 0 && werte.every((w) => typeof labels[w] === 'string' && labels[w] !== '');
+}));
+pruefe('Plan-Profil-UI-Labels (de) vollständig', ['plan_profil', 'plan_dauer', 'plan_intensitaet', 'plan_fokus']
+  .every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
 pruefe('tauscheEinheit ändert die Einheit einer Session', tauscheEinheit(daten, planA, 0).sessions[0].einheit !== planA.sessions[0].einheit);
 pruefe('entferneSession entfernt genau eine', entferneSession(planA, 0).sessions.length === planA.sessions.length - 1);
 pruefe('Grenzen gekappt (99 Wochen → 12, 9/Woche → 4 = 48)', erzeugePlan(daten, { wochen: 99, einheitenProWoche: 9, startISO: '2026-07-13' }).sessions.length === 48);

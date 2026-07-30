@@ -117,6 +117,10 @@
     "plan_entfernen": "Entfernen",
     "plan_leer": "Keine Einheiten im Plan — passe den Umfang an oder generiere neu.",
     "plan_keine_einheiten": "Für deine Stufe gibt es noch keine planbaren Einheiten. Wähle im Profil eine Könnensstufe.",
+    "plan_profil": "Profil",
+    "plan_dauer": "Umfang",
+    "plan_intensitaet": "Intensität",
+    "plan_fokus": "Fokus",
     "ko_turnier_titel": "KO-Turnier",
     "ko_turnier_untertitel": "Trage Namen ein, lose aus und halte fest, wer gewinnt — für dein eigenes Spaßturnier.",
     "ko_turnier_kachel_text": "Kein offizielles Regelwerk — ein Werkzeug, um ein eigenes K.-o.-Turnier auszulosen und zu verfolgen.",
@@ -431,7 +435,22 @@
     "fb_schnitt_spin_zusteil": "Zu steiler Schnitt",
     "fb_beinarbeit_system_schritttyp": "Falscher Schritttyp je Zone",
     "fb_sprung_smash_absprung": "Unkontrollierter Absprung",
-    "fb_praezision_an_die_linien_abstand": "Zu nah an die Linie"
+    "fb_praezision_an_die_linien_abstand": "Zu nah an die Linie",
+    "fb_punkt_aufbauen_einzelball": "Jeder Ball für sich",
+    "fb_smash_vorbereiten_aus_der_not": "Smash aus schlechter Position",
+    "fb_gegner_lesen_muster_kein_blick": "Kein Blick für den Gegner",
+    "fb_engen_satz_fuehren_risiko": "Risiko im entscheidenden Moment",
+    "fb_dem_gegner_aufzwingen_mitgespielt": "Im Spiel des Gegners gefangen",
+    "fb_gegner_typen_gegenrezepte_ein_rezept": "Ein Rezept für alle",
+    "fb_schwaeche_systematisch_angreifen_vergessen": "Schwäche erkannt, dann vergessen",
+    "fb_taeuschung_verraten": "Die Absicht verraten",
+    "fb_frueh_nehmen_abwarten": "Den Speeder sinken lassen",
+    "fb_tempo_rhythmus_wechsel_ein_tempo": "Immer dasselbe Tempo",
+    "fb_konstanz_unter_hoechstdruck_hektik": "Technik zerfällt unter Druck",
+    "fb_doppel_grundlagen_wie_einzel": "Doppel wie ein Einzel gespielt",
+    "fb_angriff_im_paar_beide_hinten": "Beide bleiben hinten",
+    "fb_das_umschalten_im_doppel_ungleichzeitig": "Ungleichzeitiges Umschalten",
+    "fb_reaktivkraft_bodenkontakt_schwer": "Schwerer, langer Bodenkontakt"
   },
   "grafiken": {
     "G-001": "Leitgrafik: der Universalgriff mit V-Stellung",
@@ -494,7 +513,9 @@
     "G-058": "Leitgrafik: Hitze",
     "G-059": "Leitgrafik: Verschiedene Böden",
     "G-060": "Grafik: das bemaßte Spielfeld",
-    "G-061": "Grafik: die Schiedsrichter-Handzeichen"
+    "G-061": "Grafik: die Schiedsrichter-Handzeichen",
+    "G-062": "Grafik: Funplay — gemeinsam halten",
+    "G-063": "Grafik: die Mehrfeldanordnung"
   },
   "vokabeln": {
     "domaene": {
@@ -515,6 +536,10 @@
       "einzel": "Einzel",
       "doppel": "Doppel"
     },
+    "dauer_klasse": { "kurz": "Kurz", "mittel": "Mittel", "lang": "Lang" },
+    "intensitaet": { "niedrig": "Niedrig", "mittel": "Mittel", "hoch": "Hoch" },
+    "fokus": { "technik": "Technik", "taktik": "Taktik", "kondition": "Kondition", "koordination": "Koordination", "mental": "Mental" },
+    "geeignete_phase": { "erwaermung": "Erwärmung", "hauptteil": "Hauptteil", "ausklang": "Ausklang" },
     "baustein_typ": {
       "micro": "Micro-Baustein",
       "vertiefung": "Vertiefung",

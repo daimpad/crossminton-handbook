@@ -5,7 +5,7 @@
 
 import { label, sprache, t, text } from '../i18n.js';
 import { bausteinIcon, esc, heroKlein, neuRendern } from '../oberflaeche.js';
-import { erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../plan.js';
+import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../plan.js';
 import { plan as gespeicherterPlan, setzePlan, loeschePlan } from '../zustand.js';
 
 function naechsterMontagISO() {
@@ -60,6 +60,23 @@ function konfigHtml(vorgabe) {
     </form>`;
 }
 
+// Profil-Zeile aus den Trainings-Metadaten (Spez. 13.4): Umfang, Intensität, Fokus.
+// Bewusst Klassen statt Minuten — der Gesundheitsrahmen verbietet Dosierungsangaben.
+// Fehlt das Profil (Einheit ohne getaggte Bausteine), entfällt die Zeile lautlos.
+function profilHtml(daten, einheitId) {
+  const p = einheitProfil(daten, einheitId);
+  if (!p) return '';
+  const chip = (schluessel, gruppe, wert) =>
+    `<span class="chip">${esc(t(schluessel))}: ${esc(label(gruppe, wert))}</span>`;
+  const fokus = p.fokus.map((f) => esc(label('fokus', f))).join(', ');
+  return `
+    <p class="chip-zeile plan-profil">
+      ${chip('plan_dauer', 'dauer_klasse', p.dauer)}
+      ${chip('plan_intensitaet', 'intensitaet', p.intensitaet)}
+      <span class="chip">${esc(t('plan_fokus'))}: ${fokus}</span>
+    </p>`;
+}
+
 function sessionHtml(daten, session, index) {
   const e = daten.einheitVonId.get(session.einheit);
   const titel = label('einheit', session.einheit);
@@ -71,6 +88,7 @@ function sessionHtml(daten, session, index) {
       <div class="plan-session-inhalt">
         <h4>${bausteinIcon(e ? e.phasen?.hauptteil?.[0]?.baustein : '', 'plan-icon')} ${esc(titel)} ${spielform}</h4>
         ${schwerpunkt ? `<p class="leise">${esc(schwerpunkt)}</p>` : ''}
+        ${profilHtml(daten, session.einheit)}
         <a class="leise plan-session-link" href="#/training/${esc(session.einheit)}">${esc(t('einheit_starten'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       </div>
       <div class="plan-session-knoepfe">

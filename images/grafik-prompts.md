@@ -2,7 +2,7 @@
 
 Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-XXX` steht für genau ein Bild und entspricht einer Platzhalter-Datei `G-XXX.png` in diesem Ordner. Sobald ein Bild erzeugt ist, ersetzt es den gleichnamigen Platzhalter — die Zuordnung Baustein ↔ Nummer ↔ Datei ↔ Prompt bleibt dabei stabil.
 
-**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061).
+**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063).
 
 **Gemeinsamer Stil** (jedem Prompt voranstellen): illustrative, reduced vector-style drawing, clean flat lines, minimal detail, limited flat colour palette, no background or plain white background, easily abstractable, instructional sports-diagram aesthetic. Keine Fotorealistik, keine Marken/Logos.
 
@@ -287,3 +287,19 @@ Precise top-down technical diagram of a crossminton court: two 5.5 x 5.5 m squar
 *Referenzgrafik: die Schiedsrichter-Handzeichen*  
 A clean multi-panel reference sheet of crossminton umpire hand signals (in; out; time-out 'T'; repeated play; change of ends; service-line fault), each panel a simple line figure with a caption slot. Reduced vector reference style, transparent/white background.
 
+## Spielformen (G-062–063)
+
+Die zwei `modus_baustein`-Spielformen (Spez. 13.2). Beide als theme-fähiges Inline-SVG
+im Hausstil, mit `en`/`fr`/`pl`-Varianten.
+
+**G-062** · `images/G-062.svg` · `funplay` · Zwei Strichfiguren auf mittlerer Distanz,
+einander zugewandt, **ohne Court-Rechteck** (nur eine angedeutete Bodenlinie — Funplay
+kennt kein Feld). Die Bahn läuft flach in beide Richtungen (zwei Bögen mit Pfeilspitzen),
+der Speeder sitzt oben in der Mitte. Caption: „gemeinsam halten · Kontrolle vor Kraft".
+
+**G-063** · `images/G-063.svg` · `mehrfeld` · Aufsicht: das eigene Match als zwei
+Felder oben/unten in `--primaer` mit durchgezogener eigener Bahn, zwei fremde Matches
+links/rechts in `--tinte`, deren Bahnen gestrichelt queren, plus zwei querende Diagonalen.
+Das gemeinsame Zentrum ist als gestrichelter Kreis mit leichter Tönung markiert.
+Caption: „im Zentrum kreuzen sich die Bahnen" — die Zentrum-Beschriftung steht bewusst
+**nicht** im Bild (die kreuzenden Bahnen schneiden sie unlesbar).

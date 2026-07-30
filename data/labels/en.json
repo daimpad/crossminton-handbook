@@ -117,6 +117,10 @@
     "plan_entfernen": "Remove",
     "plan_leer": "No sessions in the plan — adjust the scope or generate again.",
     "plan_keine_einheiten": "There are no plannable sessions for your level yet. Choose a skill level in your profile.",
+    "plan_profil": "Profile",
+    "plan_dauer": "Volume",
+    "plan_intensitaet": "Intensity",
+    "plan_fokus": "Focus",
     "ko_turnier_titel": "Knockout tournament",
     "ko_turnier_untertitel": "Enter names, draw the bracket and track who wins — for your own fun tournament.",
     "ko_turnier_kachel_text": "Not the official rules — a tool to draw and track your own knockout tournament.",
@@ -431,7 +435,22 @@
     "fb_schnitt_spin_zusteil": "Slice too steep",
     "fb_beinarbeit_system_schritttyp": "Wrong step type per zone",
     "fb_sprung_smash_absprung": "Uncontrolled take-off",
-    "fb_praezision_an_die_linien_abstand": "Too close to the line"
+    "fb_praezision_an_die_linien_abstand": "Too close to the line",
+    "fb_punkt_aufbauen_einzelball": "Every ball on its own",
+    "fb_smash_vorbereiten_aus_der_not": "Smash from a bad position",
+    "fb_gegner_lesen_muster_kein_blick": "No eye for the opponent",
+    "fb_engen_satz_fuehren_risiko": "Risk at the decisive moment",
+    "fb_dem_gegner_aufzwingen_mitgespielt": "Caught in the opponent's game",
+    "fb_gegner_typen_gegenrezepte_ein_rezept": "One recipe for everyone",
+    "fb_schwaeche_systematisch_angreifen_vergessen": "Weakness spotted, then forgotten",
+    "fb_taeuschung_verraten": "Giving the intention away",
+    "fb_frueh_nehmen_abwarten": "Letting the Speeder drop",
+    "fb_tempo_rhythmus_wechsel_ein_tempo": "Always the same pace",
+    "fb_konstanz_unter_hoechstdruck_hektik": "Technique falls apart under pressure",
+    "fb_doppel_grundlagen_wie_einzel": "Doubles played like singles",
+    "fb_angriff_im_paar_beide_hinten": "Both stay back",
+    "fb_das_umschalten_im_doppel_ungleichzeitig": "Switching out of sync",
+    "fb_reaktivkraft_bodenkontakt_schwer": "Heavy, long ground contact"
   },
   "grafiken": {
     "G-001": "Key graphic: the universal grip with V-position",
@@ -494,7 +513,9 @@
     "G-058": "Key graphic: heat",
     "G-059": "Key graphic: different surfaces",
     "G-060": "Graphic: the dimensioned court",
-    "G-061": "Graphic: the referee hand signals"
+    "G-061": "Graphic: the referee hand signals",
+    "G-062": "Diagram: funplay — keeping it up together",
+    "G-063": "Diagram: the multi-court set-up"
   },
   "vokabeln": {
     "domaene": {
@@ -515,6 +536,10 @@
       "einzel": "Singles",
       "doppel": "Doubles"
     },
+    "dauer_klasse": { "kurz": "Short", "mittel": "Medium", "lang": "Long" },
+    "intensitaet": { "niedrig": "Low", "mittel": "Medium", "hoch": "High" },
+    "fokus": { "technik": "Technique", "taktik": "Tactics", "kondition": "Conditioning", "koordination": "Coordination", "mental": "Mental" },
+    "geeignete_phase": { "erwaermung": "Warm-up", "hauptteil": "Main part", "ausklang": "Cool-down" },
     "baustein_typ": {
       "micro": "Micro module",
       "vertiefung": "Deep dive",
