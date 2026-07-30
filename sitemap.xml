@@ -7,7 +7,7 @@
      Baustein 2. Diese Datei hier NICHT von Hand um einzelne Routen ergänzen. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://daimpad.github.io/crossminton-handbook/</loc>
+    <loc>https://crossminton-handbook.de/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

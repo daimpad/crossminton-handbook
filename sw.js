@@ -13,8 +13,10 @@
 //     im Cache und sind danach offline verfügbar.
 //
 // Alle Pfade sind RELATIV zum SW-Standort (Wurzel des Deployments), damit das
-// Skript sowohl unter „/" (lokaler Server) als auch unter „/crossminton-handbook/"
-// (GitHub Pages) ohne <base>-Tag funktioniert. Bei inhaltlicher Änderung an
+// Skript sowohl unter „/" (lokaler Server, wie auch die Produktion unter der
+// Custom Domain crossminton-handbook.de) als auch unter einem Unterpfad
+// (z. B. „/crossminton-handbook/" bei github.io) ohne <base>-Tag funktioniert.
+// Bei inhaltlicher Änderung an
 // Kern-Dateien den CACHE-Namen erhöhen — dann lädt der neue SW die Hülle frisch
 // und räumt die alten Caches weg.
 
