@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crossminton-Handbuch</title>
+<meta name="robots" content="noindex">
+<script>
+  // GitHub Pages liefert für echte Pfade wie /baustein/griff einen 404, weil dort
+  // keine Datei liegt. Der etablierte SPA-Trick (rafgraph/spa-github-pages): den
+  // angefragten Pfad in einen Query-Parameter kodieren und zur Wurzel umleiten;
+  // das Gegenstück im <head> von index.html stellt ihn vor dem Boot wieder her.
+  //
+  // MONTAGEPUNKT: Diese Datei kann ihren eigenen Ort NICHT ermitteln — Pages
+  // serviert sie unter der angefragten URL, nicht unter ihrem Dateipfad. Der
+  // Präfix muss also bekannt sein. Er wird nur ANGEWENDET, wenn der angefragte
+  // Pfad ihn wirklich trägt; sonst gilt '/'. Damit funktioniert dieselbe Datei
+  // unter GitHub Pages (/crossminton-handbook/) und lokal unter '/', ohne dass
+  // die „läuft an beliebigem Montagepunkt"-Regel gebrochen wird.
+  // Bei Custom Domain (Wurzel-Deployment) einfach auf '' setzen.
+  var PRAEFIX = '/crossminton-handbook';
+
+  (function () {
+    var pfad = window.location.pathname;
+    var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+    var route = pfad.slice(wurzel.length);
+    // '&' im Pfad/Query maskieren, damit der eine Query-Parameter nicht zerfällt.
+    var maskiert = function (s) { return s.replace(/&/g, '~and~'); };
+    var query = window.location.search ? '&' + maskiert(window.location.search.slice(1)) : '';
+    window.location.replace(wurzel + '?/' + maskiert(route) + query + window.location.hash);
+  }());
+</script>
+</head>
+<body>
+  <p>Weiterleitung … <a href="./">zur Startseite</a></p>
+</body>
+</html>

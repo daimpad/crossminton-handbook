@@ -2,6 +2,56 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade; der Präfix ist der eine deploy-abhängige Wert, gespiegelt in
+       404.html; bei Custom Domain auf '' setzen). -->
+  <base href="/">
+  <script>
+    (function () {
+      var PRAEFIX = '/crossminton-handbook';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Crossminton-Handbuch</title>
   <meta name="description" content="Crossminton lernen — Schlag für Schlag: Technik, Taktik, Regeln, Training und Ausrüstung als kostenloses, werbefreies Handbuch. Läuft direkt im Browser, ohne Anmeldung.">
@@ -51,6 +101,7 @@
   <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
        gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
        Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
   <script>
     (function () {
       try {
@@ -67,32 +118,9 @@
     })();
   </script>
 
-  <!-- Modul-Graph vorab laden: Ohne diese Hinweise entdeckt der Browser die
-       ES-Module erst nacheinander im Import-Wasserfall (app.js → Ansichten →
-       Engine → Daten). Fällt dabei EINE Anfrage aus (kurzer CDN-/Netz-Aussetzer,
-       in Firefox häufiger sichtbar), lädt die App gar nicht. modulepreload holt
-       den ganzen Graphen sofort parallel und macht das Laden robust. -->
-  <link rel="modulepreload" href="js/app.js">
-  <link rel="modulepreload" href="js/i18n.js">
-  <link rel="modulepreload" href="js/oberflaeche.js">
-  <link rel="modulepreload" href="js/zustand.js">
-  <link rel="modulepreload" href="js/daten.js">
-  <link rel="modulepreload" href="js/graph.js">
-  <link rel="modulepreload" href="js/fortschritt.js">
-  <link rel="modulepreload" href="js/pfade.js">
-  <link rel="modulepreload" href="js/aktionen.js">
-  <link rel="modulepreload" href="js/ansichten/heim.js">
-  <link rel="modulepreload" href="js/ansichten/onboarding.js">
-  <link rel="modulepreload" href="js/ansichten/pfad.js">
-  <link rel="modulepreload" href="js/ansichten/baustein.js">
-  <link rel="modulepreload" href="js/ansichten/merkliste.js">
-  <link rel="modulepreload" href="js/ko-turnier.js">
-  <link rel="modulepreload" href="js/ansichten/ko-turnier.js">
-  <link rel="modulepreload" href="js/ansichten/training.js">
-  <link rel="modulepreload" href="js/ansichten/regeln.js">
-  <link rel="modulepreload" href="js/ansichten/info.js">
-  <link rel="modulepreload" href="js/ansichten/profil.js">
-  <link rel="modulepreload" href="js/ansichten/zielwahl.js">
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
 </head>
 <body>
   <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>

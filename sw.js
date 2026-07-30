@@ -5,7 +5,8 @@
 // Zwei Strategien:
 //   • Navigationen (das HTML-Dokument): erst Netz, bei Ausfall die gecachte
 //     index.html — so bekommt man online stets die frische Hülle, offline die
-//     zuletzt gesehene. Deep-Links (…/#/baustein/x) laden dasselbe Dokument.
+//     zuletzt gesehene. Deep-Links (…/baustein/x) laden dasselbe Dokument; eine
+//     404-Antwort des Servers wird dabei verworfen (s. bedieneNavigation).
 //   • Alles andere (JS, CSS, JSON, Schriften, Grafiken): stale-while-revalidate —
 //     sofort aus dem Cache, parallel im Hintergrund aktualisiert. Nicht
 //     vorgeladene Dateien (Baustein-Grafiken) landen dabei beim ersten Abruf
@@ -17,7 +18,7 @@
 // Kern-Dateien den CACHE-Namen erhöhen — dann lädt der neue SW die Hülle frisch
 // und räumt die alten Caches weg.
 
-const CACHE = 'crossminton-v34';
+const CACHE = 'crossminton-v35';
 
 // App-Hülle: alles, was für den ersten Start ohne Netz nötig ist. Die
 // Baustein-Grafiken (images/G-XXX.png) sind bewusst NICHT dabei — sie sind viele
@@ -25,6 +26,7 @@ const CACHE = 'crossminton-v34';
 const SHELL = [
   './',
   'index.html',
+  '404.html',
   'manifest.json',
   'assets/images/speeder.svg',
   'images/logo-speeder.svg',
@@ -120,9 +122,21 @@ self.addEventListener('activate', (ereignis) => {
 
 // Navigationsanfragen: erst Netz (frische Hülle), bei Ausfall gecachte index.html.
 function bedieneNavigation(anfrage) {
-  return fetch(anfrage).catch(() =>
-    caches.match('index.html').then((treffer) => treffer || caches.match('./')),
-  );
+  const huelle = () => caches.match('index.html').then((treffer) => treffer || caches.match('./'));
+  return fetch(anfrage)
+    .then((antwort) => {
+      // Seit dem Pfad-Routing (SEO Tier 2, Baustein 1) trifft eine Navigation auf
+      // /baustein/griff — dort liegt auf GitHub Pages keine Datei, der Server
+      // antwortet mit 404.html. Diese Antwort NICHT ausliefern: sonst sieht der
+      // Nutzer die Umleitungsseite statt der App. Stattdessen die gecachte Hülle,
+      // die den Pfad selbst auflöst. Erst ohne Cache-Treffer greift die 404-Antwort
+      // (dann übernimmt deren Umleitung).
+      if (!antwort || !antwort.ok) {
+        return huelle().then((treffer) => treffer || antwort);
+      }
+      return antwort;
+    })
+    .catch(huelle);
 }
 
 // Übrige Anfragen: stale-while-revalidate. Cache-Treffer sofort ausliefern,

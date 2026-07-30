@@ -6,7 +6,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
-import { esc, zeigeMeilenstein } from '../oberflaeche.js';
+import { esc, geheZu, zeigeMeilenstein } from '../oberflaeche.js';
 import { schliesseOnboardingAb, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielwahlHtml } from './zielwahl.js';
 
@@ -144,7 +144,7 @@ function schliesseAb(el, daten, mitVormarkierung) {
   }
   schliesseOnboardingAb();
   assistent = null;
-  location.hash = '#/';
+  geheZu('#/');
   if (meilenstein) zeigeMeilenstein(meilenstein);
 }
 
@@ -200,7 +200,7 @@ export function renderOnboarding(el, daten) {
     setzeDiagnose({ stufe: null, trainer: false, herkunft: null, ziel: null });
     schliesseOnboardingAb();
     assistent = null;
-    location.hash = '#/pfad/themen';
+    geheZu('#/pfad/themen');
   });
 
   // Überspringen setzt den Default: keine Herkunft (kein Modifikator), kein Ziel.
