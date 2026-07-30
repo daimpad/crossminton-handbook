@@ -420,7 +420,7 @@ export const SVG_GRAFIKEN = new Set([
   'G-031', 'G-032', 'G-033', 'G-034', 'G-035', 'G-036', 'G-037', 'G-038', 'G-039', 'G-040',
   'G-041', 'G-042', 'G-043', 'G-044', 'G-045', 'G-046', 'G-047', 'G-048', 'G-049', 'G-050',
   'G-051', 'G-052', 'G-053', 'G-054', 'G-055', 'G-056', 'G-057', 'G-058', 'G-059', 'G-060',
-  'G-061',
+  'G-061', 'G-062', 'G-063',
 ]);
 
 // Sprachen mit übersetzten Diagramm-Grafiken (nur die Diagramm-SVGs tragen Text;
