@@ -950,6 +950,50 @@ pruefe('erzeugeTurnier (N=9): jede Runde höchstens ein Freilos, nie mehrere geb
 pruefe('erzeugeTurnier (N=9): kaskadiert über 4 Runden zum Champion (9→5→3→2→1)', rundenDurchlaufenNeun === 4 && istAbgeschlossen(koNeun));
 pruefe('erzeugeTurnier (N=9): alle 9 Teilnehmer:innen tauchen in der Platzierung auf', platzierungen(koNeun).length === 9 && gleicheListe([...platzierungen(koNeun).map((p) => p.name)].sort(), [...neunNamen].sort()));
 
+// Das Freilos ROTIERT: niemand bekommt zwei. Vorher hing es an der letzten
+// Listenposition — der Freilos-Gewinner erbte sie und setzte jede Runde erneut
+// aus (bei N=5 stand so jemand mit EINEM gespielten Match im Finale, bei N=17 mit
+// vier weniger als alle anderen). Die alten Prüfungen deckten das nicht ab: sie
+// zählen Freilose je Runde, nie je Person.
+function freilosZaehlung(namen) {
+  let t = erzeugeTurnier('Freilos-Rotation', namen);
+  for (let r = 0; r < namen.length; r++) {
+    const runde = t.runden[r];
+    if (!runde) break;
+    for (let i = 0; i < runde.length; i++) {
+      if (!t.runden[r][i].sieger) t = traegtSiegerEin(t, r, i, t.runden[r][i].a);
+    }
+    if (t.runden.length === r + 1) break;
+  }
+  const je = new Map();
+  for (const runde of t.runden) {
+    for (const m of runde) {
+      if (m.b === null) je.set(m.a, (je.get(m.a) || 0) + 1);
+    }
+  }
+  return { turnier: t, maximum: Math.max(0, ...je.values()) };
+}
+const freilosGrossen = [5, 7, 9, 11, 17];
+pruefe(
+  'Freilos rotiert: bei 5/7/9/11/17 Teilnehmenden bekommt niemand mehr als EINS',
+  freilosGrossen.every((n) => freilosZaehlung(Array.from({ length: n }, (_, i) => `P${i + 1}`)).maximum <= 1),
+);
+// Konkret der Fall, der den Fehler sichtbar machte: bei N=5 muss die Person mit
+// dem Runde-1-Freilos in Runde 2 ein echtes Match bestreiten.
+const koFuenf = freilosZaehlung(['Anna', 'Ben', 'Cem', 'Dana', 'Emil']).turnier;
+const freilosR1 = koFuenf.runden[0].find((m) => m.b === null)?.a;
+pruefe(
+  'Freilos rotiert: die Freilos-Person aus Runde 1 spielt in Runde 2 ein echtes Match',
+  Boolean(freilosR1) && koFuenf.runden[1].some((m) => m.b !== null && (m.a === freilosR1 || m.b === freilosR1)),
+);
+// Ein Freilos-Match trägt seinen Sieger automatisch; `null` ist kein gültiger
+// Sieger und darf ihn nicht löschen (b === null passierte sonst den Beteiligten-Test).
+const koGuard = erzeugeTurnier('Guard', ['A', 'B', 'C']);
+pruefe(
+  'traegtSiegerEin: null als Sieger lässt auch ein Freilos-Match unverändert',
+  traegtSiegerEin(koGuard, 0, 1, null) === koGuard,
+);
+
 // Fehlerfälle: zu wenig bzw. doppelte Teilnehmer:innen sind ein echter Programmfehler
 // (die Ansicht verhindert das schon bei der Eingabe) — kein Nicht-Fehlerfall wie sonst üblich.
 let wirftZuWenig = false;

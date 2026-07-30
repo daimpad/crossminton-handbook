@@ -22,24 +22,53 @@ export function mische(liste, zufall = Math.random) {
   return kopie;
 }
 
+// Wer im bisherigen Turnierverlauf schon ein Freilos hatte (Match ohne Gegner).
+function freilosEmpfaenger(runden) {
+  const namen = new Set();
+  for (const runde of runden) {
+    for (const m of runde) {
+      if (m.b === null) namen.add(m.a);
+    }
+  }
+  return namen;
+}
+
 // Baut eine Runde aus einer Teilnehmer-/Sieger-Liste: paarweise Matches, plus
 // HÖCHSTENS EIN Freilos (automatisch entschiedenes Match mit nur einer Person),
 // falls die Länge ungerade ist — nie mehr. Bei einer Nicht-Zweierpotenz kaskadiert
 // das Freilos so über mehrere Runden (je Runde maximal eins), statt sie alle auf
-// einmal in Runde 1 zu bündeln. Das Freilos geht an die letzte Position der Liste —
-// bei Runde 1 ist die Reihenfolge bereits durch mische() zufällig, bei Folgerunden
-// steckt die Zufälligkeit in der geerbten Sieger-Reihenfolge derselben Auslosung.
-function baueRunde(liste) {
+// einmal in Runde 1 zu bündeln.
+//
+// Das Freilos ROTIERT: es geht an die hinterste Person, die noch KEINS hatte
+// (`hatteFreilos`). Ohne diese Prüfung landete es in jeder Runde erneut bei
+// derselben Person — sie erbt als Freilos-Gewinnerin wieder die letzte Position
+// der Sieger-Liste. Bei 5 Teilnehmenden stand so jemand mit einem einzigen
+// gespielten Match im Finale, bei 9 mit dreien weniger als alle anderen. Wer den
+// Rest der Auslosung betrifft: die Reihenfolge bleibt unangetastet (Runde 1 ist
+// durch mische() zufällig, Folgerunden erben sie), es wird nur bestimmt, WER von
+// den Nichtgepaarten aussetzt — eine zweite Zufallsziehung braucht es nicht.
+function baueRunde(liste, hatteFreilos = new Set()) {
   const n = liste.length;
-  const gerade = n % 2 === 0 ? n : n - 1;
   const matches = [];
-  for (let i = 0; i < gerade; i += 2) {
-    matches.push({ a: liste[i], b: liste[i + 1], sieger: null });
+  if (n % 2 === 0) {
+    for (let i = 0; i < n; i += 2) {
+      matches.push({ a: liste[i], b: liste[i + 1], sieger: null });
+    }
+    return matches;
   }
-  if (n % 2 !== 0) {
-    const freilos = liste[n - 1];
-    matches.push({ a: freilos, b: null, sieger: freilos });
+  let freilosIndex = n - 1;
+  for (let i = n - 1; i >= 0; i--) {
+    if (!hatteFreilos.has(liste[i])) {
+      freilosIndex = i;
+      break;
+    }
   }
+  const rest = liste.filter((_, i) => i !== freilosIndex);
+  for (let i = 0; i < rest.length; i += 2) {
+    matches.push({ a: rest[i], b: rest[i + 1], sieger: null });
+  }
+  const freilos = liste[freilosIndex];
+  matches.push({ a: freilos, b: null, sieger: freilos });
   return matches;
 }
 
@@ -71,6 +100,10 @@ export function erzeugeTurnier(titel, gemischteTeilnehmer) {
 export function traegtSiegerEin(turnier, rundenIndex, matchIndex, sieger) {
   const aktuellesMatch = turnier.runden[rundenIndex]?.[matchIndex];
   if (!aktuellesMatch) return turnier;
+  // Kein Name = kein gültiger Sieger. Ohne diese Prüfung käme `null` bei einem
+  // Freilos-Match (b === null) durch den Beteiligten-Test und löschte dessen
+  // Sieger samt aller Folgerunden.
+  if (!sieger) return turnier;
   if (aktuellesMatch.a !== sieger && aktuellesMatch.b !== sieger) return turnier;
   if (aktuellesMatch.sieger === sieger) return turnier;
 
@@ -80,7 +113,9 @@ export function traegtSiegerEin(turnier, rundenIndex, matchIndex, sieger) {
   if (runden[rundenIndex].every((m) => m.sieger)) {
     const siegerListe = runden[rundenIndex].map((m) => m.sieger);
     if (siegerListe.length > 1) {
-      runden.push(baueRunde(siegerListe));
+      // Bisherige Freilos-Empfänger:innen hereinreichen, damit das Freilos
+      // rotiert statt erneut bei derselben Person zu landen (s. baueRunde).
+      runden.push(baueRunde(siegerListe, freilosEmpfaenger(runden)));
     }
   }
   return { ...turnier, runden };
