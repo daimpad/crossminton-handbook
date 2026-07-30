@@ -109,7 +109,9 @@ function aktualisiereNavigation(segmente) {
     'ko-turnier': 'ko-turnier',
     suche: 'suche',
   };
-  const aktiv = navFuer[segmente[0]] || 'lernen';
+  // Der Kompetenzpfad hat einen eigenen Menüpunkt — beide Pfad-Routen teilen
+  // sich aber das erste Segment 'pfad', darum hier am zweiten unterscheiden.
+  const aktiv = segmente[0] === 'pfad' && segmente[1] === 'kompetenz' ? 'kompetenz' : navFuer[segmente[0]] || 'lernen';
   for (const verweis of document.querySelectorAll('[data-nav]')) {
     const istAktiv = verweis.dataset.nav === aktiv;
     verweis.classList.toggle('aktiv', istAktiv);
@@ -157,6 +159,7 @@ function beschrifteRahmen(segmente) {
   document.querySelector('.marke-text').textContent = t('app_titel');
   const beschriftungen = {
     lernen: t('nav_lernen'),
+    kompetenz: t('pfad_kompetenz'),
     training: t('nav_training'),
     regeln: t('nav_regeln'),
     ausruestung: t('nav_ausruestung'),
@@ -174,6 +177,10 @@ function beschrifteRahmen(segmente) {
   }
   document.querySelector('.menue-titel').textContent = t('menue');
   document.getElementById('hamburger').setAttribute('aria-label', t('menue'));
+  // Statische aria-Labels des Rahmens mitübersetzen — sie standen sonst dauerhaft
+  // auf Deutsch, auch in en/fr/pl (die Lade trägt ihren Namen über aria-labelledby
+  // auf .menue-titel, das oben schon gesetzt wird).
+  document.querySelector('.fussnav')?.setAttribute('aria-label', t('nav_hauptnavigation'));
   document.getElementById('kopf-suche')?.setAttribute('aria-label', t('nav_suche'));
   document.querySelector('.menue-schliessen').setAttribute('aria-label', t('menue_schliessen'));
   // Impressum/Datenschutz stehen mit Icon im „Mehr"-Menü — nur den .nav-text-Träger
@@ -292,11 +299,46 @@ function setzeMenueTrigger(offen) {
   }
 }
 
+// Fokusführung des Menüs (SC 2.4.3): Die Lade ist ein modales Overlay — per Maus
+// blockiert der Schleier den Hintergrund, per Tastatur tat er das nicht. Ohne
+// Führung liefen bis zu 13 Tab-Schritte unsichtbar hinter dem Schleier durch die
+// Startseiten-Kacheln, bevor der Fokus die Lade überhaupt erreichte. Dasselbe
+// Muster setzt zeigeUeberlagerung() in js/oberflaeche.js schon korrekt um; hier
+// wird es für das Hauptmenü nachgezogen (eigene Umsetzung, weil das Menü statisch
+// in index.html steht und nicht über dialog-wurzel läuft).
+let menueVorherigerFokus = null;
+
+function fokussierbare(wurzel) {
+  return [...wurzel.querySelectorAll('a[href], button:not([disabled]), input, select, [tabindex]:not([tabindex="-1"])')]
+    .filter((el) => el.offsetParent !== null || el === document.activeElement);
+}
+
+function menueTasten(ereignis) {
+  if (ereignis.key !== 'Tab') return;
+  const lade = document.querySelector('#hauptmenue .menue-lade');
+  if (!lade) return;
+  const ziele = fokussierbare(lade);
+  if (ziele.length === 0) return;
+  const erstes = ziele[0];
+  const letztes = ziele[ziele.length - 1];
+  // Zirkulieren statt in den verdeckten Hintergrund zu entkommen.
+  if (ereignis.shiftKey && (document.activeElement === erstes || document.activeElement === lade)) {
+    ereignis.preventDefault();
+    letztes.focus();
+  } else if (!ereignis.shiftKey && document.activeElement === letztes) {
+    ereignis.preventDefault();
+    erstes.focus();
+  }
+}
+
 function oeffneMenue() {
   const menue = document.getElementById('hauptmenue');
+  menueVorherigerFokus = document.activeElement;
   menue.hidden = false;
   requestAnimationFrame(() => requestAnimationFrame(() => menue.classList.add('offen')));
   setzeMenueTrigger(true);
+  document.addEventListener('keydown', menueTasten, true);
+  menue.querySelector('.menue-lade')?.focus();
 }
 
 function schliesseMenue() {
@@ -304,6 +346,12 @@ function schliesseMenue() {
   if (menue.hidden) return;
   menue.classList.remove('offen');
   setzeMenueTrigger(false);
+  document.removeEventListener('keydown', menueTasten, true);
+  // Fokus zurück auf den Auslöser (Hamburger bzw. „Mehr"), nicht auf <body>.
+  if (menueVorherigerFokus && typeof menueVorherigerFokus.focus === 'function') {
+    menueVorherigerFokus.focus();
+  }
+  menueVorherigerFokus = null;
   window.setTimeout(() => {
     menue.hidden = true;
   }, 400);

@@ -13,6 +13,7 @@
 // mit dem App-Thema; wir reichen den passenden Wert hinein und führen ihn nach.
 // Sein CI wird über css/feedback.css an das App-CI angeglichen.
 
+import { t } from './i18n.js';
 import { einstellungen } from './zustand.js';
 
 const KONTAKT_EMAIL = 'contact@nozilla.de';
@@ -72,7 +73,7 @@ export async function aktiviereFeedback() {
   }
   const instanz = window.Kommentare.init({
     container: '#ansicht', // die Lern-Inhalte; Kopf/Navigation bleiben außen vor
-    autor: 'Gast',
+    autor: t('feedback_autor'),
     toolbarMode: 'floating', // Knopf unten rechts öffnet das Menü
     notes: 'floating', // schwebende Notizspalte — baut das Seitenlayout nicht um
     resizable: true,
@@ -80,7 +81,7 @@ export async function aktiviereFeedback() {
     themeToggle: false, // das Thema steuert die App, nicht der Kommentator
     theme: kommentatorThema(),
     email: KONTAKT_EMAIL,
-    emailSubject: 'Feedback Crossminton-Handbuch',
+    emailSubject: t('feedback_betreff'),
   });
   // Thema mitführen, wenn es im Menü/Profil umgeschaltet wird (wendeThemaAn
   // sendet 'app:thema'). Fehler ignorieren — der Kommentator ist optional.

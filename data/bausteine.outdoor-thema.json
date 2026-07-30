@@ -98,7 +98,6 @@
       "transfer_herkunft_beleg": "Windwirkung auf die offene Flugbahn ohne Netz, Anpassung von Haerte und Laenge, Ausgleich per Seitenwechsel: Crossminton-Praxis und Aerodynamik (Trainingswissenschaft).",
       "witterung_beleg": "wind",
       "querverweis": [
-        "seitenwechsel",
         "laenge_tiefe"
       ],
       "anzeigetitel": {
@@ -200,7 +199,7 @@
       "transfer_herkunft_beleg": "Blendung bei hohen Baellen, Positionierung und Sichtschutz, Ausgleich per Seitenwechsel: Outdoor-Praxis.",
       "witterung_beleg": "sonne_blendung",
       "querverweis": [
-        "seitenwechsel"
+        "blackminton"
       ],
       "anzeigetitel": {
         "de": "Sonne und Blendung",
