@@ -116,6 +116,10 @@
     "plan_entfernen": "Usuń",
     "plan_leer": "Brak jednostek w planie — dostosuj zakres lub wygeneruj od nowa.",
     "plan_keine_einheiten": "Dla twojego poziomu nie ma jeszcze jednostek do zaplanowania. Wybierz poziom w profilu.",
+    "plan_profil": "Profil",
+    "plan_dauer": "Objętość",
+    "plan_intensitaet": "Intensywność",
+    "plan_fokus": "Akcent",
     "ko_turnier_titel": "Turniej pucharowy",
     "ko_turnier_untertitel": "Wpisz nazwiska, wylosuj drabinkę i śledź, kto wygrywa — dla twojego własnego turnieju dla zabawy.",
     "ko_turnier_kachel_text": "To nie oficjalny regulamin — narzędzie do losowania i śledzenia własnego turnieju pucharowego.",
@@ -514,6 +518,10 @@
       "einzel": "Gra pojedyncza",
       "doppel": "Gra podwójna"
     },
+    "dauer_klasse": { "kurz": "Krótko", "mittel": "Średnio", "lang": "Długo" },
+    "intensitaet": { "niedrig": "Niska", "mittel": "Średnia", "hoch": "Wysoka" },
+    "fokus": { "technik": "Technika", "taktik": "Taktyka", "kondition": "Kondycja", "koordination": "Koordynacja", "mental": "Mentalnie" },
+    "geeignete_phase": { "erwaermung": "Rozgrzewka", "hauptteil": "Część główna", "ausklang": "Wyciszenie" },
     "baustein_typ": {
       "micro": "Mikromoduł",
       "vertiefung": "Pogłębienie",

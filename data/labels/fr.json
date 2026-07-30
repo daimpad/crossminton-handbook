@@ -116,6 +116,10 @@
     "plan_entfernen": "Retirer",
     "plan_leer": "Aucune séance dans le plan — ajuste l'ampleur ou régénère.",
     "plan_keine_einheiten": "Aucune séance planifiable pour ton niveau. Choisis un niveau dans le profil.",
+    "plan_profil": "Profil",
+    "plan_dauer": "Volume",
+    "plan_intensitaet": "Intensité",
+    "plan_fokus": "Accent",
     "ko_turnier_titel": "Tournoi à élimination",
     "ko_turnier_untertitel": "Saisis des noms, tire au sort le tableau et suis qui gagne — pour ton propre tournoi amical.",
     "ko_turnier_kachel_text": "Pas le règlement officiel — un outil pour tirer au sort et suivre ton propre tournoi à élimination directe.",
@@ -514,6 +518,10 @@
       "einzel": "Simple",
       "doppel": "Double"
     },
+    "dauer_klasse": { "kurz": "Court", "mittel": "Moyen", "lang": "Long" },
+    "intensitaet": { "niedrig": "Faible", "mittel": "Moyenne", "hoch": "Élevée" },
+    "fokus": { "technik": "Technique", "taktik": "Tactique", "kondition": "Condition physique", "koordination": "Coordination", "mental": "Mental" },
+    "geeignete_phase": { "erwaermung": "Échauffement", "hauptteil": "Corps de séance", "ausklang": "Retour au calme" },
     "baustein_typ": {
       "micro": "Micro-module",
       "vertiefung": "Approfondissement",

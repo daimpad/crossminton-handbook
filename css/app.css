@@ -1891,6 +1891,10 @@ details[open] summary { margin-bottom: 0.5rem; }
 .plan-session-datum { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primaer-tief); white-space: nowrap; font-size: 0.88rem; padding-top: 0.15rem; }
 .plan-session-inhalt h4 { margin: 0 0 0.15rem; font-size: 1rem; }
 .plan-session-link { display: inline-block; margin-top: 0.15rem; }
+/* Profil-Chips aus den Trainings-Metadaten: kompakter als die Baustein-Chips,
+   damit die Session-Zeile nicht auseinanderfällt. */
+.plan-profil { margin: 0.3rem 0 0.15rem; gap: 0.25rem; }
+.plan-profil .chip { font-size: 0.72rem; padding: 0.1rem 0.42rem; }
 .plan-session-knoepfe { display: flex; gap: 0.3rem; }
 .plan-session-knoepfe .knopf { padding: 0.4rem 0.55rem; }
 

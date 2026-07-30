@@ -117,6 +117,10 @@
     "plan_entfernen": "Remove",
     "plan_leer": "No sessions in the plan — adjust the scope or generate again.",
     "plan_keine_einheiten": "There are no plannable sessions for your level yet. Choose a skill level in your profile.",
+    "plan_profil": "Profile",
+    "plan_dauer": "Volume",
+    "plan_intensitaet": "Intensity",
+    "plan_fokus": "Focus",
     "ko_turnier_titel": "Knockout tournament",
     "ko_turnier_untertitel": "Enter names, draw the bracket and track who wins — for your own fun tournament.",
     "ko_turnier_kachel_text": "Not the official rules — a tool to draw and track your own knockout tournament.",
@@ -515,6 +519,10 @@
       "einzel": "Singles",
       "doppel": "Doubles"
     },
+    "dauer_klasse": { "kurz": "Short", "mittel": "Medium", "lang": "Long" },
+    "intensitaet": { "niedrig": "Low", "mittel": "Medium", "hoch": "High" },
+    "fokus": { "technik": "Technique", "taktik": "Tactics", "kondition": "Conditioning", "koordination": "Coordination", "mental": "Mental" },
+    "geeignete_phase": { "erwaermung": "Warm-up", "hauptteil": "Main part", "ausklang": "Cool-down" },
     "baustein_typ": {
       "micro": "Micro module",
       "vertiefung": "Deep dive",
