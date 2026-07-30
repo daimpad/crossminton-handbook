@@ -410,10 +410,28 @@
     "spielarten_ueberblick": "Play modes at a glance",
     "snowminton": "Snowminton — playing on snow",
     "beachminton": "Beachminton — playing on sand",
-    "blackminton": "Blackminton — playing in the dark"
+    "blackminton": "Blackminton — playing in the dark",
+    "funplay": "Funplay — keeping it up together",
+    "mehrfeld": "Multi-court set-up"
   },
   "fehlerbilder": {
-    "griff_fehler_zu_fest": "Grip too tight"
+    "griff_fehler_zu_fest": "Grip too tight",
+    "fb_grundposition_flach": "Standing too tall and sluggish",
+    "fb_griff_umklammern": "Clamping and twisting",
+    "fb_griff_umgreifen": "Regripping on the backhand",
+    "fb_aufschlag_treffpunkt": "Contact point above the hand",
+    "fb_aufschlag_fussfehler": "Foot over the line",
+    "fb_vorhand_drive_nurarm": "Hitting from the arm alone",
+    "fb_rueckhand_ellenbogen": "Elbow too low",
+    "fb_beinarbeit_splitstep": "Missing split-step",
+    "fb_handgelenk_peitsche_peitsche": "No late snap",
+    "fb_ueberkopf_clear_treffpunkt": "Contact point too low",
+    "fb_smash_treffpunkt": "Wrong contact point, flat trajectory",
+    "fb_kurzes_spiel_stopp_dosierung": "Too short or too high",
+    "fb_schnitt_spin_zusteil": "Slice too steep",
+    "fb_beinarbeit_system_schritttyp": "Wrong step type per zone",
+    "fb_sprung_smash_absprung": "Uncontrolled take-off",
+    "fb_praezision_an_die_linien_abstand": "Too close to the line"
   },
   "grafiken": {
     "G-001": "Key graphic: the universal grip with V-position",
@@ -502,7 +520,7 @@
       "vertiefung": "Deep dive",
       "delta": "Cross-sport note",
       "fehlerbild": "Fault pattern",
-      "umgebungs_baustein": "Environment module"
+      "umgebungs_baustein": "Environment module", "modus_baustein": "Play-mode module"
     },
     "transfer_herkunft": {
       "CM": "Crossminton",

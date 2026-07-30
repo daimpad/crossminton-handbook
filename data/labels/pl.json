@@ -409,10 +409,28 @@
     "spielarten_ueberblick": "Przegląd odmian gry",
     "snowminton": "Snowminton — gra na śniegu",
     "beachminton": "Beachminton — gra na piasku",
-    "blackminton": "Blackminton — gra w ciemności"
+    "blackminton": "Blackminton — gra w ciemności",
+    "funplay": "Funplay — utrzymać wymianę razem",
+    "mehrfeld": "Układ wielu pól"
   },
   "fehlerbilder": {
-    "griff_fehler_zu_fest": "Zbyt mocny chwyt"
+    "griff_fehler_zu_fest": "Zbyt mocny chwyt",
+    "fb_grundposition_flach": "Zbyt wysoka, ospała postawa",
+    "fb_griff_umklammern": "Kurczowy chwyt i przekręcanie",
+    "fb_griff_umgreifen": "Zmiana chwytu na bekhendzie",
+    "fb_aufschlag_treffpunkt": "Punkt trafienia nad dłonią",
+    "fb_aufschlag_fussfehler": "Stopa za linią",
+    "fb_vorhand_drive_nurarm": "Uderzenie samym ramieniem",
+    "fb_rueckhand_ellenbogen": "Zbyt nisko opuszczony łokieć",
+    "fb_beinarbeit_splitstep": "Brak split-stepu",
+    "fb_handgelenk_peitsche_peitsche": "Brak późnego strzelenia nadgarstkiem",
+    "fb_ueberkopf_clear_treffpunkt": "Zbyt niski punkt trafienia",
+    "fb_smash_treffpunkt": "Zły punkt trafienia, płaski tor",
+    "fb_kurzes_spiel_stopp_dosierung": "Za krótko albo za wysoko",
+    "fb_schnitt_spin_zusteil": "Zbyt strome podcięcie",
+    "fb_beinarbeit_system_schritttyp": "Zły rodzaj kroku w danej strefie",
+    "fb_sprung_smash_absprung": "Niekontrolowane odbicie",
+    "fb_praezision_an_die_linien_abstand": "Zbyt blisko linii"
   },
   "grafiken": {
     "G-001": "Grafika główna: chwyt uniwersalny z ułożeniem V",
@@ -501,7 +519,7 @@
       "vertiefung": "Pogłębienie",
       "delta": "Wskazówka cross-sport",
       "fehlerbild": "Typowy błąd",
-      "umgebungs_baustein": "Moduł środowiskowy"
+      "umgebungs_baustein": "Moduł środowiskowy", "modus_baustein": "Moduł formy gry"
     },
     "transfer_herkunft": {
       "CM": "Crossminton",

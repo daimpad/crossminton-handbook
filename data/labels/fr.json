@@ -409,10 +409,28 @@
     "spielarten_ueberblick": "Les variantes de jeu en aperçu",
     "snowminton": "Snowminton — jouer sur la neige",
     "beachminton": "Beachminton — jouer sur le sable",
-    "blackminton": "Blackminton — jouer dans le noir"
+    "blackminton": "Blackminton — jouer dans le noir",
+    "funplay": "Funplay — tenir l’échange ensemble",
+    "mehrfeld": "Disposition multi-terrains"
   },
   "fehlerbilder": {
-    "griff_fehler_zu_fest": "Prise trop serrée"
+    "griff_fehler_zu_fest": "Prise trop serrée",
+    "fb_grundposition_flach": "Position trop haute et lourde",
+    "fb_griff_umklammern": "Crispation et rotation de la raquette",
+    "fb_griff_umgreifen": "Changement de prise en revers",
+    "fb_aufschlag_treffpunkt": "Point d'impact au-dessus de la main",
+    "fb_aufschlag_fussfehler": "Pied au-delà de la ligne",
+    "fb_vorhand_drive_nurarm": "Frappe uniquement du bras",
+    "fb_rueckhand_ellenbogen": "Coude trop bas",
+    "fb_beinarbeit_splitstep": "Split-step absent",
+    "fb_handgelenk_peitsche_peitsche": "Pas de claquement tardif",
+    "fb_ueberkopf_clear_treffpunkt": "Point d'impact trop bas",
+    "fb_smash_treffpunkt": "Mauvais point d'impact, trajectoire plate",
+    "fb_kurzes_spiel_stopp_dosierung": "Trop court ou trop haut",
+    "fb_schnitt_spin_zusteil": "Coupe trop prononcée",
+    "fb_beinarbeit_system_schritttyp": "Type de pas inadapté à la zone",
+    "fb_sprung_smash_absprung": "Appel non contrôlé",
+    "fb_praezision_an_die_linien_abstand": "Trop près de la ligne"
   },
   "grafiken": {
     "G-001": "Illustration : la prise universelle avec le V",
@@ -501,7 +519,7 @@
       "vertiefung": "Approfondissement",
       "delta": "Note cross-sport",
       "fehlerbild": "Erreur type",
-      "umgebungs_baustein": "Module d'environnement"
+      "umgebungs_baustein": "Module d'environnement", "modus_baustein": "Module de forme de jeu"
     },
     "transfer_herkunft": {
       "CM": "Crossminton",

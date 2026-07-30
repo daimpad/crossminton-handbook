@@ -44,6 +44,9 @@ const INHALTSDATEIEN = [
   'data/bausteine.outdoor-thema.json',
   // Spielmodi: benannte Umgebungs-Varianten (Snow/Beach/Black), bauen auf Outdoor auf.
   'data/bausteine.spielmodi.json',
+  // Spielformen (typ modus_baustein): veraendern das Spiel selbst, nicht nur die
+  // Umgebung — darum regulaere Pool-Bausteine, nicht typ-gefiltert.
+  'data/bausteine.modus-thema.json',
   'data/bausteine.delta-tennis.json',
   'data/bausteine.delta-squash.json',
 ];
