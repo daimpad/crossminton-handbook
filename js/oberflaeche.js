@@ -253,6 +253,14 @@ export function neuRendern() {
   window.dispatchEvent(new CustomEvent('app:rendern'));
 }
 
+// Programmatisch navigieren (statt location.hash zu setzen — der Router läuft über
+// die History API). Läuft wie neuRendern() über ein Ereignis, damit die Ansichten
+// den Router nicht importieren müssen (js/app.js importiert sie ja bereits).
+// `ziel` in der gewohnten Schreibweise: '#/pfad/themen' oder '/pfad/themen'.
+export function geheZu(ziel) {
+  window.dispatchEvent(new CustomEvent('app:gehe-zu', { detail: { ziel } }));
+}
+
 // Thema (hell/dunkel/auto) auf das Wurzelelement anwenden. 'auto' entfernt die
 // Markierung und folgt dem OS (prefers-color-scheme); hell/dunkel erzwingen.
 // Hält die Browser-Leiste (theme-color) am effektiven Modus. Das Boot-Skript in

@@ -1,6 +1,10 @@
-// App-Einstieg: Boot (Zustand → Sprache → Daten), Hash-Router und Navigation.
+// App-Einstieg: Boot (Zustand → Sprache → Daten), Pfad-Router und Navigation.
 // Ansichten rendern in #ansicht; Zustandsänderungen stoßen über das Ereignis
 // 'app:rendern' ein Neu-Rendern der aktuellen Route an.
+//
+// Der Router läuft über die History API (echte Pfade wie /baustein/griff), nicht
+// mehr über den Hash — nur so sind die Inhalte einzeln indexierbar (SEO Tier 2,
+// Baustein 1 aus docs/seo-tier2-konzept.md).
 
 import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
@@ -24,14 +28,50 @@ import { einstellungen, ladeZustand, merkliste, setzeEinstellung } from './zusta
 let daten = null;
 let letzteRoute = null;
 
-function parseHash() {
-  const roh = window.location.hash.replace(/^#\/?/, '');
+// App-Wurzel (Montagepunkt) = das <base href> aus index.html. Das Inline-Skript
+// dort setzt es vor allen anderen Tags auf den Montagepunkt ('/' lokal,
+// '/crossminton-handbook/' auf Pages) — es ist die EINE Quelle der Wahrheit und
+// bleibt korrekt, auch wenn das Dokument unter einer verschachtelten Route
+// ausgeliefert wird (404-Umweg oder Service-Worker-Cache). Genau darum wurde das
+// <base> eingeführt: relative Pfade allein tragen verschachtelte Routen nicht.
+export const WURZEL = new URL(document.baseURI).pathname;
+
+// '#/baustein/griff' oder '/baustein/griff' → echte, montagepunkt-korrekte URL.
+function zuUrl(ziel) {
+  const rein = String(ziel ?? '').replace(/^#/, '').replace(/^\//, '');
+  return WURZEL + rein;
+}
+
+function parsePfad() {
+  const pfad = window.location.pathname;
+  const roh = (pfad.startsWith(WURZEL) ? pfad.slice(WURZEL.length) : pfad.replace(/^\//, ''))
+    + window.location.search;
   const [pfadTeil, queryTeil] = roh.split('?');
   return {
     segmente: pfadTeil.split('/').filter(Boolean),
     query: new URLSearchParams(queryTeil || ''),
     roh,
   };
+}
+
+// Die Ansichten schreiben ihre Links weiter als href="#/…" — das ist eine
+// stabile, gut testbare Schreibweise und hält den Umbau aus 13 Ansichtsdateien
+// heraus. Nach jedem Rendern werden sie hier EINMAL auf echte Pfade normalisiert;
+// im DOM (und damit im späteren Prerender-Schnappschuss) stehen also nie Hashes.
+// Idempotent: bereits umgeschriebene Links tragen kein '#/' mehr.
+export function normalisiereLinks(wurzelEl = document) {
+  for (const a of wurzelEl.querySelectorAll('a[href^="#/"]')) {
+    a.setAttribute('href', zuUrl(a.getAttribute('href')));
+  }
+}
+
+// Programmatische Navigation: Pfad in die History schieben und neu rendern.
+function navigiere(ziel, { ersetzen = false } = {}) {
+  const url = zuUrl(ziel);
+  if (url === window.location.pathname + window.location.search) return;
+  if (ersetzen) window.history.replaceState({}, '', url);
+  else window.history.pushState({}, '', url);
+  rendern();
 }
 
 function aktualisiereNavigation(segmente) {
@@ -209,7 +249,8 @@ function initSprachanzeige() {
   window.addEventListener('keydown', (ereignis) => {
     if (ereignis.key === 'Escape') schliesse();
   });
-  window.addEventListener('hashchange', schliesse); // bei Navigation zuklappen
+  window.addEventListener('popstate', schliesse); // bei Navigation zuklappen
+  window.addEventListener('app:navigiert', schliesse);
   setzeSprachanzeige();
 }
 
@@ -251,7 +292,7 @@ function renderFehler(el, fehler) {
 }
 
 function rendern() {
-  const { segmente, query, roh } = parseHash();
+  const { segmente, query, roh } = parsePfad();
   const el = document.getElementById('ansicht');
 
   // Kein erzwungenes Onboarding: Der Erstbesuch landet auf der vollen Startseite
@@ -308,6 +349,10 @@ function rendern() {
     renderHeim(el, daten);
   }
 
+  // Die Ansichten haben gerade '#/…'-Links geschrieben — hier einmal auf echte
+  // Pfade ziehen (samt dem statischen Rahmen aus index.html, der beim ersten
+  // Lauf noch Hashes trägt).
+  normalisiereLinks(document);
   aktualisiereNavigation(segmente);
   if (roh !== letzteRoute) {
     const ersterLauf = letzteRoute === null;
@@ -369,10 +414,47 @@ async function boot() {
     if (ereignis.key === 'Escape') schliesseMenue();
   });
 
-  window.addEventListener('hashchange', rendern);
+  window.addEventListener('popstate', rendern);
   window.addEventListener('app:rendern', rendern);
+  window.addEventListener('app:gehe-zu', (ereignis) => navigiere(ereignis.detail?.ziel ?? '/'));
+  // Interne Links abfangen und über die History navigieren, statt die Seite neu
+  // zu laden. Fremde Ziele, neue Tabs (Modifier/Mittelklick), Downloads und
+  // target=_blank bleiben unangetastet.
+  document.addEventListener('click', (ereignis) => {
+    if (ereignis.defaultPrevented || ereignis.button !== 0) return;
+    if (ereignis.metaKey || ereignis.ctrlKey || ereignis.shiftKey || ereignis.altKey) return;
+    const a = ereignis.target.closest?.('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    const roh = a.getAttribute('href');
+    // Ein paar Ansichten patchen ihren Ergebnis-Bereich LOKAL statt über den
+    // globalen rendern()-Zyklus (Suche hält so den Eingabe-Fokus, KO-Turnier den
+    // Setup-Entwurf) — deren frisch eingefügte Links haben `normalisiereLinks()`
+    // dabei nie gesehen und tragen noch rohes `#/…`. `new URL('#/x', …)` würde
+    // das als reines Fragment lesen (pathname bliebe unverändert, der Klick liefe
+    // ins Leere) — darum wird ein '#/'-Präfix hier direkt erkannt, nicht über die
+    // URL-Auflösung.
+    if (roh.startsWith('#/')) {
+      ereignis.preventDefault();
+      navigiere(roh);
+      window.dispatchEvent(new CustomEvent('app:navigiert'));
+      return;
+    }
+    const url = new URL(roh, window.location.href);
+    if (url.origin !== window.location.origin) return;
+    if (!url.pathname.startsWith(WURZEL)) return; // z. B. die PDFs unter rules/
+    if (/\.[a-z0-9]{2,5}$/i.test(url.pathname)) return; // echte Dateien (PDF, PNG …)
+    ereignis.preventDefault();
+    navigiere(url.pathname + url.search);
+    window.dispatchEvent(new CustomEvent('app:navigiert'));
+  });
   // Merk-Zähler ohne Neu-Rendern nachziehen (Umschalten aus der Baustein-Ansicht).
   window.addEventListener('app:merk', aktualisiereMerkAnzahl);
+  // Altbestand: vor Tier 2 geteilte Links tragen '#/…' (die Teilen-Funktion gab
+  // sie so aus). Einmal auf den echten Pfad umschreiben, damit sie weiter tragen.
+  if (/^#\//.test(window.location.hash)) {
+    const ziel = window.location.hash.replace(/^#\/?/, '');
+    window.history.replaceState({}, '', zuUrl(ziel));
+  }
   rendern();
 
   // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft

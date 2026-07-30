@@ -7,6 +7,16 @@ description: Build-freie Web-App im Browser verifizieren — Server starten, per
 
 Reine Client-App ohne Build. Oberfläche = Browser (mobil gedacht, 390×844).
 
+**Routen sind seit SEO-Tier-2-Baustein-1 echte Pfade, kein Hash mehr.** Ansichten
+schreiben intern weiter `href="#/…"`, aber `normalisiereLinks()` zieht das nach
+jedem Rendern auf echte Pfade (`/…`) — im DOM steht also nie `#/…`. Direkt
+navigieren geht mit beidem (`page.goto(url + '/baustein/griff')` wie ein alter
+`#/baustein/griff`-Link, der beim Booten einmalig umgeschrieben wird), aber ein
+Selektor wie `[href="#/x"]` **matcht nach dem ersten Rendern nichts mehr** —
+`[href="/x"]` oder `[href$="/x"]` verwenden. Unten stehende Routenangaben in
+Fließtext (`#/pfad/...`) sind als Navigationsziele weiter gültig (Eingabe), nicht
+als exakte href-Selektoren (Ausgabe).
+
 ## Starten
 
 ```sh

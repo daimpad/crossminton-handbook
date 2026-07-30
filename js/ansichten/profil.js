@@ -6,7 +6,7 @@ import { markiereAbsolviert } from '../aktionen.js';
 import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../fortschritt.js';
 import { label, setzeSprache, sprache, t } from '../i18n.js';
-import { balkenHtml, esc, heroKlein, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
+import { balkenHtml, esc, geheZu, heroKlein, neuRendern, ringHtml, wendeThemaAn, zeigeMeilenstein } from '../oberflaeche.js';
 import { kompetenzpfad } from '../pfade.js';
 import { diagnose, einstellungen, kontinuitaet, setzeDiagnose, setzeEinstellung, setzeZurueck } from '../zustand.js';
 import { gewaehlteZiele, zielLabels, zielwahlHtml } from './zielwahl.js';
@@ -268,7 +268,7 @@ export function renderProfil(el, daten) {
     setzeZurueck();
     await setzeSprache('de');
     offen = null;
-    location.hash = '#/onboarding';
+    geheZu('#/onboarding');
     neuRendern();
   });
 }
