@@ -50,6 +50,21 @@
           "symptom": "Der erste Schritt kommt spät und schwerfällig; zwischen den Schlägen wirkt der Spieler aufgerichtet und ruhig.",
           "ursache": "Das Gewicht liegt auf den Fersen, die Knie sind fast gestreckt, der Körper steht aufrecht statt in Bereitschaft.",
           "korrektur": "Bring ihn tiefer: „Knie locker beugen, Gewicht auf die Fußballen, immer leicht in Bewegung bleiben.“"
+        },
+        "en": {
+          "symptom": "The first step comes late and heavily; between shots the player looks upright and settled.",
+          "ursache": "The weight sits on the heels, the knees are almost straight, the body stands tall instead of ready.",
+          "korrektur": "Get them lower: Cue: \"Bend the knees loosely, weight on the balls of your feet, always stay slightly in motion.\""
+        },
+        "fr": {
+          "symptom": "Le premier pas arrive tard et lourdement ; entre les frappes, le joueur paraît redressé et posé.",
+          "ursache": "Le poids repose sur les talons, les genoux sont presque tendus, le corps est droit au lieu d'être prêt.",
+          "korrektur": "Fais-le descendre : Consigne : « Fléchis les genoux souplement, le poids sur la plante des pieds, reste toujours légèrement en mouvement. »"
+        },
+        "pl": {
+          "symptom": "Pierwszy krok przychodzi późno i ciężko; między uderzeniami gracz wygląda wyprostowany i spokojny.",
+          "ursache": "Ciężar spoczywa na piętach, kolana są niemal wyprostowane, ciało stoi w pionie zamiast w gotowości.",
+          "korrektur": "Obniż go: Wskazówka: „Ugnij luźno kolana, ciężar na śródstopiu, zostań zawsze lekko w ruchu.\""
         }
       }
     },
@@ -66,6 +81,21 @@
           "symptom": "Der Schläger verdreht sich im Treffmoment; der Spieler hält ihn sichtbar fest umklammert.",
           "ursache": "Der Griff ist zu fest — oft, weil er zu dünn ist —, sodass die Hand ständig gegen das Verdrehen arbeitet.",
           "korrektur": "„Halt den Schläger so locker, dass ich ihn dir fast herausziehen könnte.“ Prüfe zusätzlich die Griffstärke."
+        },
+        "en": {
+          "symptom": "The racket twists at the moment of contact; the player is visibly clamping it tight.",
+          "ursache": "The grip is too tight — often because it is too thin — so the hand works constantly against the twisting.",
+          "korrektur": "Cue: \"Hold the racket so loosely that I could almost pull it out of your hand.\" Check the grip size as well."
+        },
+        "fr": {
+          "symptom": "La raquette pivote au moment de la frappe ; le joueur la serre visiblement.",
+          "ursache": "La prise est trop ferme — souvent parce qu'elle est trop fine —, si bien que la main lutte en permanence contre la rotation.",
+          "korrektur": "Consigne : « Tiens la raquette si souplement que je pourrais presque te la retirer de la main. » Vérifie aussi la taille du manche."
+        },
+        "pl": {
+          "symptom": "Rakieta przekręca się w chwili trafienia; gracz wyraźnie kurczowo ją zaciska.",
+          "ursache": "Chwyt jest zbyt mocny — często dlatego, że jest zbyt cienki — więc ręka stale pracuje przeciw przekręcaniu.",
+          "korrektur": "Wskazówka: „Trzymaj rakietę tak luźno, żebym mógł ci ją niemal wyciągnąć z ręki.\" Sprawdź też grubość chwytu."
         }
       }
     },
@@ -82,6 +112,21 @@
           "symptom": "Vor Rückhandbällen dreht der Spieler die Hand in einen Daumengriff um.",
           "ursache": "Gewohnheit aus Tennis oder Badminton — dort ist der Griffwechsel richtig, im Crossminton nicht.",
           "korrektur": "„Bleib bei einem Griff, auch auf der Rückhand — kein Umlegen des Daumens.“"
+        },
+        "en": {
+          "symptom": "Before backhand shots the player turns the hand into a thumb grip.",
+          "ursache": "A habit from tennis or badminton — there the grip change is correct, in Crossminton it is not.",
+          "korrektur": "Cue: \"Stay with one grip, on the backhand too — no shifting the thumb.\""
+        },
+        "fr": {
+          "symptom": "Avant les balles en revers, le joueur tourne la main vers une prise pouce.",
+          "ursache": "Une habitude venue du tennis ou du badminton — là le changement de prise est juste, au Crossminton non.",
+          "korrektur": "Consigne : « Garde une seule prise, en revers aussi — pas de repositionnement du pouce. »"
+        },
+        "pl": {
+          "symptom": "Przed piłkami z bekhendu gracz obraca dłoń w chwyt kciukowy.",
+          "ursache": "Nawyk z tenisa albo badmintona — tam zmiana chwytu jest słuszna, w crossmintonie nie.",
+          "korrektur": "Wskazówka: „Zostań przy jednym chwycie, także na bekhendzie — bez przekładania kciuka.\""
         }
       }
     },
@@ -98,6 +143,21 @@
           "symptom": "Der Aufschlag segelt zu hoch und lang ins Aus, oder der Schiedsrichter pfeift ihn ab.",
           "ursache": "Der Speeder wird über Handhöhe getroffen, oder die Schlagfläche zeigt zu steil nach oben.",
           "korrektur": "„Triff den ganzen Speeder unterhalb deiner Schlaghand, mit flacherer Fläche nach vorn.“"
+        },
+        "en": {
+          "symptom": "The serve sails too high and long out of the square, or the umpire calls it.",
+          "ursache": "The Speeder is struck above hand height, or the racket face points too steeply upwards.",
+          "korrektur": "Cue: \"Meet the whole Speeder below your racket hand, with a flatter face going forward.\""
+        },
+        "fr": {
+          "symptom": "Le service part trop haut et trop long en dehors du carré, ou l'arbitre le siffle.",
+          "ursache": "Le speeder est frappé au-dessus de la hauteur de la main, ou la face de raquette pointe trop vers le haut.",
+          "korrektur": "Consigne : « Frappe tout le speeder sous ta main de raquette, avec une face plus plate vers l'avant. »"
+        },
+        "pl": {
+          "symptom": "Serwis leci zbyt wysoko i za długo na aut, albo sędzia go odgwizduje.",
+          "ursache": "Speeder jest trafiany powyżej wysokości dłoni, albo płaszczyzna rakiety jest skierowana zbyt stromo w górę.",
+          "korrektur": "Wskazówka: „Trafiaj całego speedera poniżej dłoni trzymającej rakietę, płaszczyzną bardziej płasko do przodu.\""
         }
       }
     },
@@ -114,6 +174,21 @@
           "symptom": "Der Aufschlag wird als Fußfehler gewertet.",
           "ursache": "Der Spieler tritt im Schwung mit dem Fuß über die Aufschlaglinie.",
           "korrektur": "„Bleib mit dem Fuß hinter der Linie, bis der Speeder weg ist.“"
+        },
+        "en": {
+          "symptom": "The serve is called as a foot fault.",
+          "ursache": "The player steps over the service line with the foot during the swing.",
+          "korrektur": "Cue: \"Keep your foot behind the line until the Speeder is gone.\""
+        },
+        "fr": {
+          "symptom": "Le service est sanctionné comme faute de pied.",
+          "ursache": "Le joueur franchit la ligne de service avec le pied pendant le mouvement.",
+          "korrektur": "Consigne : « Garde le pied derrière la ligne jusqu'à ce que le speeder soit parti. »"
+        },
+        "pl": {
+          "symptom": "Serwis jest liczony jako błąd stopy.",
+          "ursache": "Gracz w zamachu przekracza stopą linię serwisową.",
+          "korrektur": "Wskazówka: „Zostań stopą za linią, dopóki speeder nie odleci.\""
         }
       }
     },
@@ -130,6 +205,21 @@
           "symptom": "Der Drive fliegt zu hoch oder kommt ohne Tempo.",
           "ursache": "Der Schlag kommt allein aus dem Arm; die Kette aus Beinen, Rumpf und später Beschleunigung fehlt.",
           "korrektur": "„Beschleunige spät und aus dem ganzen Körper, und triff den Speeder vor dir.“"
+        },
+        "en": {
+          "symptom": "The drive flies too high or arrives without pace.",
+          "ursache": "The stroke comes from the arm alone; the chain from legs through trunk and the late acceleration are missing.",
+          "korrektur": "Cue: \"Accelerate late and out of the whole body, and meet the Speeder in front of you.\""
+        },
+        "fr": {
+          "symptom": "Le drive part trop haut ou arrive sans rythme.",
+          "ursache": "La frappe vient du seul bras ; la chaîne jambes-tronc et l'accélération tardive manquent.",
+          "korrektur": "Consigne : « Accélère tard et avec tout le corps, et frappe le speeder devant toi. »"
+        },
+        "pl": {
+          "symptom": "Drive leci zbyt wysoko albo przychodzi bez tempa.",
+          "ursache": "Uderzenie pochodzi wyłącznie z ramienia; brakuje łańcucha od nóg przez tułów i późnego przyspieszenia.",
+          "korrektur": "Wskazówka: „Przyspieszaj późno i całym ciałem, a speedera trafiaj przed sobą.\""
         }
       }
     },
@@ -146,6 +236,21 @@
           "symptom": "Die Rückhand ist kraftlos, der Ball fällt kurz.",
           "ursache": "Der Ellenbogen bleibt zu tief, und der Speeder wird zu weit hinten oder neben dem Körper getroffen.",
           "korrektur": "„Nimm den Ellenbogen höher und triff den Speeder weiter vor dir.“"
+        },
+        "en": {
+          "symptom": "The backhand is powerless, the shot drops short.",
+          "ursache": "The elbow stays too low, and the Speeder is met too far back or beside the body.",
+          "korrektur": "Cue: \"Lift the elbow higher and meet the Speeder further in front of you.\""
+        },
+        "fr": {
+          "symptom": "Le revers manque de puissance, la balle tombe court.",
+          "ursache": "Le coude reste trop bas, et le speeder est frappé trop en arrière ou à côté du corps.",
+          "korrektur": "Consigne : « Monte le coude plus haut et frappe le speeder plus devant toi. »"
+        },
+        "pl": {
+          "symptom": "Bekhend jest bez siły, piłka pada krótko.",
+          "ursache": "Łokieć pozostaje zbyt nisko, a speeder jest trafiany zbyt z tyłu albo obok ciała.",
+          "korrektur": "Wskazówka: „Podnieś łokieć wyżej i trafiaj speedera dalej przed sobą.\""
         }
       }
     },
@@ -162,6 +267,21 @@
           "symptom": "Der Spieler wird auf dem falschen Fuß erwischt und startet zu spät.",
           "ursache": "Der Split-Step fehlt oder kommt zum falschen Zeitpunkt; der Spieler steht flach.",
           "korrektur": "„Setz den kleinen Split-Step, genau wenn der Gegner trifft, und lande auf den Ballen.“"
+        },
+        "en": {
+          "symptom": "The player is caught on the wrong foot and starts too late.",
+          "ursache": "The split step is missing or comes at the wrong moment; the player stands flat.",
+          "korrektur": "Cue: \"Put in the small split step exactly when your opponent makes contact, and land on the balls of your feet.\""
+        },
+        "fr": {
+          "symptom": "Le joueur est pris sur le mauvais pied et démarre trop tard.",
+          "ursache": "Le split-step manque ou arrive au mauvais moment ; le joueur reste à plat.",
+          "korrektur": "Consigne : « Place le petit split-step juste au moment où l'adversaire frappe, et retombe sur la plante des pieds. »"
+        },
+        "pl": {
+          "symptom": "Gracz zostaje złapany na złej nodze i startuje zbyt późno.",
+          "ursache": "Brakuje split-stepu albo przychodzi w złym momencie; gracz stoi płasko.",
+          "korrektur": "Wskazówka: „Wykonaj mały split-step dokładnie wtedy, gdy przeciwnik trafia, i wyląduj na śródstopiu.\""
         }
       }
     },
@@ -178,6 +298,21 @@
           "symptom": "Trotz großer Bewegung kommt kein Tempo in den Ball.",
           "ursache": "Das Handgelenk ist die ganze Zeit angespannt; das späte Schnappen kurz vor dem Treffpunkt fehlt.",
           "korrektur": "„Halt das Handgelenk locker und lass es erst im letzten Moment schnappen — wie eine Peitsche.“"
+        },
+        "en": {
+          "symptom": "Despite a big movement no pace reaches the Speeder.",
+          "ursache": "The wrist is tense the whole time; the late snap just before the contact point is missing.",
+          "korrektur": "Cue: \"Keep the wrist loose and let it snap only at the last moment — like a whip.\""
+        },
+        "fr": {
+          "symptom": "Malgré un grand mouvement, aucun rythme n'arrive dans le speeder.",
+          "ursache": "Le poignet est tendu tout du long ; le claquement tardif juste avant le point d'impact manque.",
+          "korrektur": "Consigne : « Garde le poignet souple et ne le fais claquer qu'au dernier moment — comme un fouet. »"
+        },
+        "pl": {
+          "symptom": "Mimo dużego ruchu w speederze nie ma tempa.",
+          "ursache": "Nadgarstek jest cały czas napięty; brakuje późnego strzelenia krótko przed punktem trafienia.",
+          "korrektur": "Wskazówka: „Trzymaj nadgarstek luźno i pozwól mu strzelić dopiero w ostatniej chwili — jak bat.\""
         }
       }
     },
@@ -194,6 +329,21 @@
           "symptom": "Der Überkopfball fällt zu kurz oder wird unsauber getroffen.",
           "ursache": "Der Speeder wird zu tief und zu weit vorn getroffen, ohne Seitstellung und Streckung.",
           "korrektur": "„Dreh dich seitlich und triff den Speeder gestreckt am höchsten Punkt über der Schulter.“"
+        },
+        "en": {
+          "symptom": "The overhead shot falls short or is struck untidily.",
+          "ursache": "The Speeder is met too low and too far in front, without turning side-on and without extension.",
+          "korrektur": "Cue: \"Turn side-on and meet the Speeder fully extended at the highest point above your shoulder.\""
+        },
+        "fr": {
+          "symptom": "La balle au-dessus de la tête tombe court ou est frappée sans netteté.",
+          "ursache": "Le speeder est frappé trop bas et trop en avant, sans placement de profil ni extension.",
+          "korrektur": "Consigne : « Place-toi de profil et frappe le speeder en extension, au point le plus haut au-dessus de l'épaule. »"
+        },
+        "pl": {
+          "symptom": "Piłka nad głową pada zbyt krótko albo jest trafiona nieczysto.",
+          "ursache": "Speeder jest trafiany zbyt nisko i zbyt z przodu, bez ustawienia bokiem i bez wyprostu.",
+          "korrektur": "Wskazówka: „Obróć się bokiem i trafiaj speedera w wyproście, w najwyższym punkcie nad barkiem.\""
         }
       }
     },
@@ -210,6 +360,21 @@
           "symptom": "Der Smash landet in der neutralen Zone oder segelt lang hinaus.",
           "ursache": "Der Treffpunkt liegt zu weit hinten, und der Schlag geht zu flach statt nach vorn-unten.",
           "korrektur": "„Triff etwas vor dem Kopf und schlag klar nach vorn-unten ins Feld.“"
+        },
+        "en": {
+          "symptom": "The smash lands in the neutral zone or sails long out.",
+          "ursache": "The contact point is too far back, and the stroke goes too flat instead of forward and down.",
+          "korrektur": "Cue: \"Meet it slightly in front of your head and hit clearly forward and down into the square.\""
+        },
+        "fr": {
+          "symptom": "Le smash retombe dans la zone neutre ou part long en dehors.",
+          "ursache": "Le point d'impact est trop en arrière, et la frappe part trop à plat au lieu d'aller vers l'avant et le bas.",
+          "korrektur": "Consigne : « Frappe un peu devant la tête et dirige clairement vers l'avant et le bas dans le carré. »"
+        },
+        "pl": {
+          "symptom": "Smecz pada w strefie neutralnej albo leci długo na aut.",
+          "ursache": "Punkt trafienia leży zbyt z tyłu, a uderzenie idzie zbyt płasko zamiast w przód i w dół.",
+          "korrektur": "Wskazówka: „Trafiaj trochę przed głową i uderzaj wyraźnie w przód i w dół w pole.\""
         }
       }
     },
@@ -226,6 +391,21 @@
           "symptom": "Der Stopp fällt in die neutrale Zone oder steht als bequemer Angriffsball hoch.",
           "ursache": "Zu viel oder zu wenig Handgelenk; die Schlagfläche ist zu offen.",
           "korrektur": "„Nimm das Tempo ganz heraus und leg den Speeder sanft knapp hinter die Zone.“"
+        },
+        "en": {
+          "symptom": "The drop shot falls into the neutral zone or sits up as a comfortable attacking ball.",
+          "ursache": "Too much or too little wrist; the racket face is too open.",
+          "korrektur": "Cue: \"Take the pace right out and place the Speeder gently just behind the zone.\""
+        },
+        "fr": {
+          "symptom": "L'amorti tombe dans la zone neutre ou reste haut, en balle d'attaque confortable.",
+          "ursache": "Trop ou trop peu de poignet ; la face de raquette est trop ouverte.",
+          "korrektur": "Consigne : « Retire complètement le rythme et pose le speeder doucement juste derrière la zone. »"
+        },
+        "pl": {
+          "symptom": "Skrót pada w strefie neutralnej albo stoi wysoko jako wygodna piłka do ataku.",
+          "ursache": "Za dużo albo za mało nadgarstka; płaszczyzna rakiety jest zbyt otwarta.",
+          "korrektur": "Wskazówka: „Zabierz tempo do końca i połóż speedera delikatnie zaraz za strefą.\""
         }
       }
     },
@@ -242,6 +422,21 @@
           "symptom": "Der Ball ist zwar angeschnitten, verliert aber die Kontrolle und geht ins Aus.",
           "ursache": "Der Schnitt ist zu steil, die Fläche zu offen, der Vorwärtsanteil fehlt.",
           "korrektur": "„Streif den Speeder flacher an und nimm etwas Vorwärtsbewegung mit.“"
+        },
+        "en": {
+          "symptom": "The Speeder does carry slice, but loses control and goes out.",
+          "ursache": "The cut is too steep, the face too open, the forward component is missing.",
+          "korrektur": "Cue: \"Brush the Speeder more flatly and take a little forward movement with you.\""
+        },
+        "fr": {
+          "symptom": "Le speeder est bien coupé, mais perd le contrôle et sort.",
+          "ursache": "La coupe est trop prononcée, la face trop ouverte, la composante vers l'avant manque.",
+          "korrektur": "Consigne : « Effleure le speeder plus à plat et emporte un peu de mouvement vers l'avant. »"
+        },
+        "pl": {
+          "symptom": "Speeder wprawdzie ma podcięcie, ale traci kontrolę i wychodzi na aut.",
+          "ursache": "Podcięcie jest zbyt strome, płaszczyzna zbyt otwarta, brakuje składowej do przodu.",
+          "korrektur": "Wskazówka: „Muśnij speedera bardziej płasko i zabierz trochę ruchu do przodu.\""
         }
       }
     },
@@ -258,6 +453,21 @@
           "symptom": "In bestimmten Ecken kommt der Spieler regelmäßig zu spät.",
           "ursache": "Für die jeweilige Zone wird der falsche Schritttyp gewählt; die Übergänge sind ungeübt.",
           "korrektur": "„Ordne jeder Ecke ihren Schritt zu und übe gezielt die Übergänge dorthin.“"
+        },
+        "en": {
+          "symptom": "In certain corners the player is regularly too late.",
+          "ursache": "The wrong step type is chosen for the zone in question; the transitions are unpractised.",
+          "korrektur": "Cue: \"Assign each corner its step and practise the transitions there deliberately.\""
+        },
+        "fr": {
+          "symptom": "Dans certains coins, le joueur arrive régulièrement trop tard.",
+          "ursache": "Le mauvais type de pas est choisi pour la zone concernée ; les transitions ne sont pas travaillées.",
+          "korrektur": "Consigne : « Attribue à chaque coin son pas et travaille précisément les transitions vers lui. »"
+        },
+        "pl": {
+          "symptom": "W określonych narożnikach gracz regularnie przychodzi za późno.",
+          "ursache": "Do danej strefy wybierany jest zły rodzaj kroku; przejścia są nieprzetrenowane.",
+          "korrektur": "Wskazówka: „Przypisz każdemu narożnikowi jego krok i ćwicz celowo przejścia w tamtą stronę.\""
         }
       }
     },
@@ -274,6 +484,21 @@
           "symptom": "Der Sprung bringt keinen Vorteil, die Landung ist unkontrolliert.",
           "ursache": "Der Absprung kommt zu früh oder zu spät, der Treffpunkt liegt nicht im höchsten Punkt, die Landung wird nicht abgefangen.",
           "korrektur": "„Spring so ab, dass du im höchsten Punkt triffst, und fang die Landung weich ab.“"
+        },
+        "en": {
+          "symptom": "The jump brings no advantage, the landing is uncontrolled.",
+          "ursache": "The take-off comes too early or too late, the contact point is not at the highest point, the landing is not absorbed.",
+          "korrektur": "Cue: \"Time your take-off so that you make contact at the highest point, and absorb the landing softly.\""
+        },
+        "fr": {
+          "symptom": "Le saut n'apporte aucun avantage, la réception n'est pas contrôlée.",
+          "ursache": "L'appel arrive trop tôt ou trop tard, le point d'impact n'est pas au point le plus haut, la réception n'est pas amortie.",
+          "korrektur": "Consigne : « Prends ton appel de sorte à frapper au point le plus haut, et amortis la réception en douceur. »"
+        },
+        "pl": {
+          "symptom": "Wyskok nie daje żadnej przewagi, lądowanie jest niekontrolowane.",
+          "ursache": "Odbicie przychodzi zbyt wcześnie albo zbyt późno, punkt trafienia nie leży w najwyższym punkcie, lądowanie nie jest amortyzowane.",
+          "korrektur": "Wskazówka: „Odbijaj się tak, żebyś trafiał w najwyższym punkcie, i amortyzuj lądowanie miękko.\""
         }
       }
     },
@@ -290,6 +515,21 @@
           "symptom": "Auffällig viele Bälle landen knapp im Aus.",
           "ursache": "Es wird direkt auf die Linie gezielt, ohne Sicherheitsabstand.",
           "korrektur": "„Ziel eine Handbreit innerhalb der Linie — das richtige Ziel, nicht das engste.“"
+        },
+        "en": {
+          "symptom": "A striking number of shots land just out.",
+          "ursache": "The player aims directly at the line, without a safety margin.",
+          "korrektur": "Cue: \"Aim a hand's width inside the line — the right target, not the tightest one.\""
+        },
+        "fr": {
+          "symptom": "Un nombre frappant de balles retombent juste en dehors.",
+          "ursache": "On vise directement la ligne, sans marge de sécurité.",
+          "korrektur": "Consigne : « Vise une largeur de main à l'intérieur de la ligne — la bonne cible, pas la plus serrée. »"
+        },
+        "pl": {
+          "symptom": "Zaskakująco wiele piłek pada tuż na aucie.",
+          "ursache": "Celuje się wprost w linię, bez marginesu bezpieczeństwa.",
+          "korrektur": "Wskazówka: „Celuj na szerokość dłoni wewnątrz linii — właściwy cel, nie najciaśniejszy.\""
         }
       }
     }

@@ -362,6 +362,10 @@ pruefe('Fehlerbilder decken 14 Basis-Bausteine ab, 17 Einträge gesamt', (() => 
 })());
 pruefe('jedes Fehlerbild hängt an einem existierenden Baustein und trägt die drei Felder', (daten.fehlerbilder ?? []).every((f) =>
   daten.bausteinVonId.has(f.basis_baustein) && f.erklaerteil?.de?.symptom && f.erklaerteil?.de?.ursache && f.erklaerteil?.de?.korrektur));
+// Übersetzungsring abgeschlossen: alle Fehlerbilder tragen die drei Felder in
+// allen vier Sprachen (der en/fr/pl-Zwilling muss die Form von .de spiegeln).
+pruefe('jedes Fehlerbild ist in en/fr/pl übersetzt (drei Felder je Sprache)', (daten.fehlerbilder ?? []).every((f) =>
+  ['de', 'en', 'fr', 'pl'].every((L) => f.erklaerteil?.[L]?.symptom && f.erklaerteil[L].ursache && f.erklaerteil[L].korrektur)));
 const fb = fehlerbilderFuer(daten, 'griff')[0];
 pruefe('Fehlerbild trägt typ fehlerbild und Trainer-Stufe', fb.typ === 'fehlerbild' && fb.kompetenzstufe.includes('trainer'));
 pruefe('Fehlerbild ohne eigenen Übungsteil (Trainer-Layer-Regel)', !hatUebungsteil(fb));
