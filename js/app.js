@@ -48,10 +48,18 @@ const urspruenglicherKopf = {
 // <base> eingeführt: relative Pfade allein tragen verschachtelte Routen nicht.
 export const WURZEL = new URL(document.baseURI).pathname;
 
-// '#/baustein/griff' oder '/baustein/griff' → echte, montagepunkt-korrekte URL.
+// '#/baustein/griff', '/baustein/griff' oder ein bereits montagepunkt-absoluter
+// Pfad ('/crossminton-handbook/baustein/griff') → echte, korrekte URL.
+// IDEMPOTENT, und das ist der Kern: Der Klick-Interceptor reicht `url.pathname`
+// herein, und der trägt den Montagepunkt schon (die Links im DOM sind nach
+// `normalisiereLinks()` bzw. im Prerender-Schnappschuss absolut). Ohne die
+// Präfix-Prüfung käme unter Unterpfad-Deploy '/crossminton-handbook/' doppelt
+// davor — der Pfad zeigte ins Leere. Lokal an der Wurzel (WURZEL === '/') fällt
+// das nicht auf, weil das Verdoppeln dort ein No-op ist.
 function zuUrl(ziel) {
-  const rein = String(ziel ?? '').replace(/^#/, '').replace(/^\//, '');
-  return WURZEL + rein;
+  const roh = String(ziel ?? '').replace(/^#/, '');
+  if (roh.startsWith(WURZEL)) return roh;
+  return WURZEL + roh.replace(/^\//, '');
 }
 
 function parsePfad() {

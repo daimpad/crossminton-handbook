@@ -19,7 +19,7 @@
 
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
-import { cpSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -27,6 +27,18 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(REPO, process.argv[2] || '_site');
 const SITE_URL = 'https://daimpad.github.io/crossminton-handbook';
 const PORT = 8123;
+
+// Montagepunkt der Produktion, aus SITE_URL abgeleitet (kein weiterer
+// deploy-abhängiger Wert). '/crossminton-handbook' auf Pages, '' bei Custom
+// Domain. WARUM das hier gebraucht wird: die Ansichten schreiben ihre Links als
+// '#/…', und `normalisiereLinks()` zieht sie beim Rendern auf ECHTE Pfade —
+// also auf `WURZEL + rest`. WURZEL kommt aus dem <base>, das sich aus dem Pfad
+// ergibt, unter dem das Dokument ausgeliefert wird. Prerendern wir unter '/',
+// werden Links als '/pfad/themen' eingebacken; unter '/crossminton-handbook/'
+// ausgeliefert zeigen die dann NEBEN die App und liefern einen echten 404
+// (genau dieser Fehler war live). Darum wird zum Prerendern unter dem
+// Produktions-Präfix ausgeliefert — s. praefixSymlink().
+const PRAEFIX = new URL(SITE_URL).pathname.replace(/\/$/, '');
 
 function esc(wert) {
   return String(wert ?? '')
@@ -48,6 +60,19 @@ function kopiere() {
     if (AUSSCHLUSS.has(eintrag)) continue;
     cpSync(join(REPO, eintrag), join(ZIEL, eintrag), { recursive: true });
   }
+}
+
+// Damit der Prerender-Tab unter dem PRODUKTIONS-Präfix lädt (und nicht unter '/'),
+// bekommt das Staging-Verzeichnis einen Symlink auf sich selbst, benannt wie der
+// Präfix: eine Anfrage auf '/crossminton-handbook/pfad/themen' landet damit auf
+// '_site/pfad/themen'. So sieht das <base>-Skript denselben Montagepunkt wie im
+// Deploy, und `normalisiereLinks()` backt Links mit Präfix ein. Der Symlink wird
+// nach dem Erfassen wieder entfernt — er darf nie ins Artefakt gelangen.
+function praefixSymlink(anlegen) {
+  if (!PRAEFIX) return;
+  const pfad = join(ZIEL, PRAEFIX.replace(/^\//, ''));
+  rmSync(pfad, { force: true, recursive: false });
+  if (anlegen) symlinkSync('.', pfad, 'dir');
 }
 
 // --- 2. Lokaler Server über der Kopie (fetch() der JSON braucht HTTP). ---
@@ -83,7 +108,10 @@ async function warteAufServer() {
 // oder eine personalisierte/interaktive Ansicht, keinen indexierbaren Inhalt.
 async function ermittleRouten(page) {
   return page.evaluate(async () => {
-    const [{ ladeDaten }, pfade] = await Promise.all([import('/js/daten.js'), import('/js/pfade.js')]);
+    // Über document.baseURI auflösen, nicht wurzel-absolut ('/js/daten.js') —
+    // der Tab läuft unter dem Produktions-Präfix, nicht unter '/'.
+    const modul = (name) => import(new URL(name, document.baseURI).href);
+    const [{ ladeDaten }, pfade] = await Promise.all([modul('js/daten.js'), modul('js/pfade.js')]);
     const daten = await ladeDaten();
     const { themenDomaenen, spielformen, witterungen, untergruende } = pfade;
     const liste = [];
@@ -127,6 +155,8 @@ async function ermittleRouten(page) {
 }
 
 async function erfasseSchnappschuss(page, pfad) {
+  // Der Tab läuft unter dem Produktions-Präfix — die Route muss es mittragen,
+  // sonst deutet parsePfad() sie falsch.
   return page.evaluate((ziel) => {
     window.history.pushState({}, '', ziel);
     window.dispatchEvent(new PopStateEvent('popstate'));
@@ -135,7 +165,27 @@ async function erfasseSchnappschuss(page, pfad) {
       beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
       inhalt: document.getElementById('ansicht').innerHTML,
     };
-  }, pfad);
+  }, PRAEFIX + pfad);
+}
+
+// Selbstprüfung gegen genau den Fehler, der Baustein 2 zunächst live brach:
+// ein <a>-Link im Schnappschuss, der wurzel-absolut NEBEN den Montagepunkt zeigt
+// (z. B. '/pfad/themen' statt '/crossminton-handbook/pfad/themen'), liefert
+// ausgeliefert einen echten 404. Lieber den Deploy abbrechen als das ausrollen.
+function pruefeLinks(html, pfad) {
+  if (!PRAEFIX) return;
+  const daneben = new Set();
+  for (const treffer of html.matchAll(/<a\s[^>]*?href="(\/[^"/][^"]*|\/)"/g)) {
+    const ziel = treffer[1];
+    if (ziel === PRAEFIX || ziel.startsWith(`${PRAEFIX}/`)) continue;
+    daneben.add(ziel);
+  }
+  if (daneben.size > 0) {
+    throw new Error(
+      `Schnappschuss ${pfad} trägt ${daneben.size} Link(s) außerhalb des Montagepunkts ` +
+        `${PRAEFIX}/ — ausgeliefert wären das 404er: ${[...daneben].slice(0, 5).join(', ')}`,
+    );
+  }
 }
 
 // --- 4. Vorlage → Snapshot-Datei. Die Startseite behält ihren handgepflegten
@@ -182,6 +232,7 @@ function baueSitemap(routen) {
 async function haupt() {
   console.log(`[prerender] Staging-Kopie → ${relative(REPO, ZIEL)}`);
   kopiere();
+  praefixSymlink(true);
 
   const server = starteServer();
   const browser = await chromium.launch();
@@ -199,17 +250,20 @@ async function haupt() {
       if (m.type() === 'error') fehler.push(m.text());
     });
 
-    await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'load' });
+    // Unter dem Produktions-Präfix laden, damit eingebackene Links es mittragen.
+    await page.goto(`http://localhost:${PORT}${PRAEFIX}/`, { waitUntil: 'load' });
     const routen = await ermittleRouten(page);
-    console.log(`[prerender] ${routen.length} Routen ermittelt`);
+    console.log(`[prerender] ${routen.length} Routen ermittelt (Montagepunkt ${PRAEFIX || '/'})`);
 
     const vorlage = readFileSync(join(ZIEL, 'index.html'), 'utf8');
     for (const route of routen) {
       const schnappschuss = await erfasseSchnappschuss(page, route.pfad);
       const vollstaendig = { ...route, ...schnappschuss };
+      const html = baueSnapshot(vorlage, vollstaendig);
+      pruefeLinks(html, route.pfad);
       const datei = zielDatei(route.pfad);
       mkdirSync(dirname(datei), { recursive: true });
-      writeFileSync(datei, baueSnapshot(vorlage, vollstaendig));
+      writeFileSync(datei, html);
     }
 
     if (fehler.length > 0) {
@@ -221,6 +275,7 @@ async function haupt() {
   } finally {
     await browser.close();
     server.kill();
+    praefixSymlink(false); // darf nie ins Pages-Artefakt gelangen
   }
 }
 

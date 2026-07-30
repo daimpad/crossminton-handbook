@@ -197,6 +197,35 @@ Entwicklung bleibt vollständig unverändert buildfrei über
 die Startseite (Platzhalter für den lokalen Betrieb) und wird ausschließlich
 beim Deploy durch die vollständige, generierte Fassung ersetzt.
 
+### Nachtrag: zwei Unterpfad-Fehler, die erst live auffielen
+
+Beide Fehler hatten dieselbe Wurzel — **lokal wird unter `/` entwickelt, ausgeliefert
+wird unter `/crossminton-handbook/`**, und beide Fehler sind bei Wurzel-Montage
+ein No-op. Genau darum fiel keiner in der lokalen Prüfung auf:
+
+1. **Der Prerender backte wurzel-relative Links ein.** Der Tab lief unter `/`, also
+   zog `normalisiereLinks()` die Links auf `/pfad/themen` statt
+   `/crossminton-handbook/pfad/themen`. Ausgeliefert zeigten sie neben die App →
+   echter 404 auf jeder prerenderten Seite. **Fix:** Der Prerender liefert das
+   Staging-Verzeichnis jetzt unter dem Produktions-Präfix aus (Selbst-Symlink,
+   `praefixSymlink()`), sieht also denselben Montagepunkt wie der Deploy.
+2. **`zuUrl()` verdoppelte den Präfix.** Der Klick-Interceptor reicht
+   `url.pathname` herein — der trägt den Montagepunkt schon, weil die Links im DOM
+   nach `normalisiereLinks()` absolut sind. `zuUrl()` stellte WURZEL trotzdem
+   erneut davor: `/crossminton-handbook/crossminton-handbook/pfad/themen`. Das
+   war ein **Baustein-1-Fehler**, kein Prerender-Fehler; er zeigte sich als
+   „Klick tut nichts, ich bleibe auf derselben Seite" (der Router deutete die
+   Doppel-Route als unbekannt und rendert dann die Startseite). **Fix:**
+   `zuUrl()` ist jetzt idempotent — ein bereits montagepunkt-absoluter Pfad wird
+   unverändert übernommen.
+
+**Daraus zwei dauerhafte Konsequenzen.** Erstens prüft `scripts/prerender.mjs` per
+`pruefeLinks()` jeden Schnappschuss darauf, dass kein `<a href>` wurzel-absolut
+neben den Montagepunkt zeigt, und **bricht den Deploy mit Exit-Code 1 ab**, statt
+so etwas noch einmal auszurollen. Zweitens gilt für alles, was Pfade baut: **unter
+einem simulierten Unterpfad verifizieren, nicht nur unter `/`** — die
+Wurzel-Montage verdeckt genau diese Fehlerklasse.
+
 **Ergebnis:** 149 statische Routen (108 Bausteine, alle Pfad-Achsen,
 8 Trainingseinheiten, Regeln/Turnier/Ausrüstung/Über/Mitmachen/Impressum/
 Datenschutz), verifiziert per lokalem Prerender-Testlauf (Titel/Beschreibung/
