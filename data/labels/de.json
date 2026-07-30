@@ -435,7 +435,22 @@
     "fb_schnitt_spin_zusteil": "Zu steiler Schnitt",
     "fb_beinarbeit_system_schritttyp": "Falscher Schritttyp je Zone",
     "fb_sprung_smash_absprung": "Unkontrollierter Absprung",
-    "fb_praezision_an_die_linien_abstand": "Zu nah an die Linie"
+    "fb_praezision_an_die_linien_abstand": "Zu nah an die Linie",
+    "fb_punkt_aufbauen_einzelball": "Jeder Ball für sich",
+    "fb_smash_vorbereiten_aus_der_not": "Smash aus schlechter Position",
+    "fb_gegner_lesen_muster_kein_blick": "Kein Blick für den Gegner",
+    "fb_engen_satz_fuehren_risiko": "Risiko im entscheidenden Moment",
+    "fb_dem_gegner_aufzwingen_mitgespielt": "Im Spiel des Gegners gefangen",
+    "fb_gegner_typen_gegenrezepte_ein_rezept": "Ein Rezept für alle",
+    "fb_schwaeche_systematisch_angreifen_vergessen": "Schwäche erkannt, dann vergessen",
+    "fb_taeuschung_verraten": "Die Absicht verraten",
+    "fb_frueh_nehmen_abwarten": "Den Speeder sinken lassen",
+    "fb_tempo_rhythmus_wechsel_ein_tempo": "Immer dasselbe Tempo",
+    "fb_konstanz_unter_hoechstdruck_hektik": "Technik zerfällt unter Druck",
+    "fb_doppel_grundlagen_wie_einzel": "Doppel wie ein Einzel gespielt",
+    "fb_angriff_im_paar_beide_hinten": "Beide bleiben hinten",
+    "fb_das_umschalten_im_doppel_ungleichzeitig": "Ungleichzeitiges Umschalten",
+    "fb_reaktivkraft_bodenkontakt_schwer": "Schwerer, langer Bodenkontakt"
   },
   "grafiken": {
     "G-001": "Leitgrafik: der Universalgriff mit V-Stellung",

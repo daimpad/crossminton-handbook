@@ -2,7 +2,7 @@
   "_meta": {
     "beschreibung": "Fehlerbilder (Trainer-Layer, Spez. 5): eigene Entitäten, je an einen Basisbaustein gehängt (basis_baustein) — analog zur Delta-Signatur, aber gerendert als in-situ Trainer-Layer, nicht als eigene Station. Nur in der Trainer-Perspektive sichtbar.",
     "struktur": "typ 'fehlerbild', kompetenzstufe ['trainer'], erklaerteil.de mit den drei benannten Feldern symptom/ursache/korrektur (spiegeln die Vermittlungsziele fehlerbild_erkennen/ursache_von_symptom_trennen/korrekturansage_geben). Kein eigener Übungsteil (Delta-Übungsregel).",
-    "status": "Ausgebaut: 17 Fehlerbilder zu 14 Basis-Bausteinen. Der Erstbestand (griff_fehler_zu_fest) ist vollstaendig de/en/fr/pl uebersetzt; die 16 neu uebernommenen Eintraege sind zunaechst deutsch und fallen ueber die i18n-Kette auf de zurueck (Uebersetzung als eigener Ring, wie bei jedem Inhaltszuwachs).",
+    "status": "Ausgebaut: 32 Fehlerbilder zu 29 Basis-Bausteinen (Technik, Taktik, Doppel-Taktik, Athletik) — damit tragen alle Bausteine mit trainer_layer_offen-Marker ein Fehlerbild. Vollstaendig de/en/fr/pl uebersetzt.",
     "quellsprache": "de"
   },
   "fehlerbild_bausteine": [
@@ -530,6 +530,471 @@
           "symptom": "Zaskakująco wiele piłek pada tuż na aucie.",
           "ursache": "Celuje się wprost w linię, bez marginesu bezpieczeństwa.",
           "korrektur": "Wskazówka: „Celuj na szerokość dłoni wewnątrz linii — właściwy cel, nie najciaśniejszy.\""
+        }
+      }
+    },
+    {
+      "id": "fb_punkt_aufbauen_einzelball",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "punkt_aufbauen",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler antwortet auf jeden Ball einzeln; eine erkennbare Folge über mehrere Schläge entsteht nie.",
+          "ursache": "Es fehlt der Plan über den einzelnen Schlag hinaus — der Wechsel aus langen und kurzen Bällen wird nicht als Werkzeug genutzt.",
+          "korrektur": "Gib ihm ein Muster mit. Ansage: „Erst tief nach hinten treiben, dann kurz vor die Frontlinie — zwei Schläge, ein Plan.“"
+        },
+        "en": {
+          "symptom": "The player answers each ball on its own; a recognisable sequence across several shots never forms.",
+          "ursache": "The plan beyond the single shot is missing — the alternation of long and short balls is not used as a tool.",
+          "korrektur": "Give them a pattern. Cue: \"First drive them deep, then short in front of the front line — two shots, one plan.\""
+        },
+        "fr": {
+          "symptom": "Le joueur répond à chaque balle isolément ; aucune séquence reconnaissable sur plusieurs frappes ne se forme.",
+          "ursache": "Le plan au-delà de la frappe isolée manque — l'alternance de balles longues et courtes n'est pas utilisée comme outil.",
+          "korrektur": "Donne-lui un schéma. Consigne : « D'abord le repousser au fond, puis court devant la ligne avant — deux frappes, un plan. »"
+        },
+        "pl": {
+          "symptom": "Gracz odpowiada na każdą piłkę osobno; rozpoznawalna sekwencja przez kilka uderzeń nigdy nie powstaje.",
+          "ursache": "Brakuje planu wykraczającego poza pojedyncze uderzenie — zmiana piłek długich i krótkich nie jest używana jako narzędzie.",
+          "korrektur": "Daj mu schemat. Wskazówka: „Najpierw wypchnij go głęboko do tyłu, potem krótko przed linię przednią — dwa uderzenia, jeden plan.“"
+        }
+      }
+    },
+    {
+      "id": "fb_smash_vorbereiten_aus_der_not",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "smash_vorbereiten",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Smash kommt aus dem Lauf oder aus der Tiefe und landet im Aus — oder er bringt den Spieler selbst in Not.",
+          "ursache": "Der Schlag wird gesucht, statt vorbereitet: es fehlt der treibende Ball davor, der den Gegner zum Hochspielen zwingt.",
+          "korrektur": "Verlange erst die Vorbereitung. Ansage: „Treib ihn tief nach hinten und smashe erst, wenn er den Speeder hochspielen muss.“"
+        },
+        "en": {
+          "symptom": "The smash comes on the run or from deep and lands out — or it leaves the player in trouble.",
+          "ursache": "The shot is hunted rather than set up: the pressing ball before it, forcing the opponent to lift, is missing.",
+          "korrektur": "Ask for the set-up first. Cue: \"Drive them deep and only smash once they have to lift the Speeder.\""
+        },
+        "fr": {
+          "symptom": "Le smash part en courant ou depuis le fond et sort — ou il met le joueur lui-même en difficulté.",
+          "ursache": "La frappe est cherchée au lieu d'être préparée : la balle appuyée qui précède, celle qui force l'adversaire à lever, manque.",
+          "korrektur": "Exige la préparation. Consigne : « Repousse-le au fond et ne smashe que lorsqu'il doit lever le speeder. »"
+        },
+        "pl": {
+          "symptom": "Smecz przychodzi z biegu albo z głębi i pada na aucie — albo sam wpędza gracza w kłopoty.",
+          "ursache": "Uderzenie jest szukane, a nie przygotowane: brakuje wcześniejszej piłki napierającej, która zmusza przeciwnika do podbicia.",
+          "korrektur": "Wymagaj najpierw przygotowania. Wskazówka: „Wypchnij go głęboko do tyłu i smecz dopiero, gdy musi podbić speedera.“"
+        }
+      }
+    },
+    {
+      "id": "fb_gegner_lesen_muster_kein_blick",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "gegner_lesen_muster",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler wird von denselben Bällen immer wieder überrascht; er kann nach dem Satz nicht sagen, was der Gegner unter Druck tut.",
+          "ursache": "Die Aufmerksamkeit liegt vollständig beim eigenen Schlag — der Gegner wird nicht beobachtet, seine Gewohnheiten bleiben unbemerkt.",
+          "korrektur": "Gib ihm einen Beobachtungsauftrag. Ansage: „Merk dir für die nächsten fünf Punkte nur eines: Wohin spielt er, wenn es eng wird?“"
+        },
+        "en": {
+          "symptom": "The player is surprised by the same balls again and again; after the set they cannot say what the opponent does under pressure.",
+          "ursache": "Attention sits entirely on their own stroke — the opponent goes unwatched and their habits stay unnoticed.",
+          "korrektur": "Give them an observation task. Cue: \"For the next five points note one thing only: where do they play when it gets tight?\""
+        },
+        "fr": {
+          "symptom": "Le joueur est surpris encore et encore par les mêmes balles ; après le set, il ne peut pas dire ce que fait l'adversaire sous pression.",
+          "ursache": "L'attention est entièrement sur sa propre frappe — l'adversaire n'est pas observé, ses habitudes passent inaperçues.",
+          "korrektur": "Donne-lui une mission d'observation. Consigne : « Sur les cinq prochains points, retiens une seule chose : où joue-t-il quand ça se resserre ? »"
+        },
+        "pl": {
+          "symptom": "Gracz wciąż daje się zaskakiwać tym samym piłkom; po secie nie potrafi powiedzieć, co przeciwnik robi pod presją.",
+          "ursache": "Uwaga jest w całości przy własnym uderzeniu — przeciwnik nie jest obserwowany, jego nawyki pozostają niezauważone.",
+          "korrektur": "Daj mu zadanie obserwacyjne. Wskazówka: „Na najbliższe pięć punktów zapamiętaj tylko jedno: gdzie gra, gdy jest ciasno?“"
+        }
+      }
+    },
+    {
+      "id": "fb_engen_satz_fuehren_risiko",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "engen_satz_fuehren",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Ab 15:15 sucht der Spieler den spektakulären Winner und verliert den Punkt durch eigenen Fehler.",
+          "ursache": "Der Druck wird mit erhöhtem Risiko beantwortet statt mit der sicheren, gut gewählten Lösung.",
+          "korrektur": "Nimm das Risiko heraus. Ansage: „Jetzt der Ball, den du zehnmal von zehn treffen kannst — der Punkt kommt über seinen Fehler.“"
+        },
+        "en": {
+          "symptom": "From 15-15 the player hunts the spectacular winner and loses the point through their own error.",
+          "ursache": "Pressure is answered with more risk instead of with the safe, well-chosen solution.",
+          "korrektur": "Take the risk out. Cue: \"Now the ball you make ten times out of ten — the point comes from their error.\""
+        },
+        "fr": {
+          "symptom": "À partir de 15-15, le joueur cherche le coup gagnant spectaculaire et perd le point sur sa propre faute.",
+          "ursache": "La pression est traitée par plus de risque au lieu de la solution sûre et bien choisie.",
+          "korrektur": "Retire le risque. Consigne : « Maintenant la balle que tu réussis dix fois sur dix — le point viendra de sa faute. »"
+        },
+        "pl": {
+          "symptom": "Od 15:15 gracz szuka spektakularnego kończącego uderzenia i traci punkt własnym błędem.",
+          "ursache": "Na presję odpowiada większym ryzykiem, zamiast pewnym, dobrze wybranym rozwiązaniem.",
+          "korrektur": "Wyjmij ryzyko. Wskazówka: „Teraz piłka, którą trafiasz dziesięć razy na dziesięć — punkt przyjdzie z jego błędu.“"
+        }
+      }
+    },
+    {
+      "id": "fb_dem_gegner_aufzwingen_mitgespielt",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "dem_gegner_aufzwingen",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler tut, was der Gegner vorgibt: gegen den Tempospieler schlägt er hart, gegen den Geduldigen wird er ungeduldig.",
+          "ursache": "Die eigene Stärke wird nicht durchgesetzt — statt sein Spiel aufzuzwingen, übernimmt er das fremde.",
+          "korrektur": "Hol ihn zu seiner Stärke zurück. Ansage: „Was kannst du besser als er? Genau das spielst du jetzt, egal was er anbietet.“"
+        },
+        "en": {
+          "symptom": "The player does what the opponent dictates: hard against the pace player, impatient against the patient one.",
+          "ursache": "Their own strength is not imposed — instead of forcing their game, they adopt the other's.",
+          "korrektur": "Bring them back to their strength. Cue: \"What do you do better than them? Play exactly that now, whatever they offer.\""
+        },
+        "fr": {
+          "symptom": "Le joueur fait ce que l'adversaire dicte : dur contre le joueur de rythme, impatient contre le patient.",
+          "ursache": "Sa propre force n'est pas imposée — au lieu d'imposer son jeu, il adopte celui de l'autre.",
+          "korrektur": "Ramène-le à sa force. Consigne : « Qu'est-ce que tu fais mieux que lui ? C'est exactement ça que tu joues, quoi qu'il propose. »"
+        },
+        "pl": {
+          "symptom": "Gracz robi to, co narzuca przeciwnik: przeciw graczowi tempa bije mocno, przeciw cierpliwemu traci cierpliwość.",
+          "ursache": "Własna siła nie jest narzucana — zamiast wymuszać swoją grę, przejmuje obcą.",
+          "korrektur": "Sprowadź go do jego siły. Wskazówka: „Co robisz lepiej niż on? Właśnie to teraz grasz, cokolwiek zaproponuje.“"
+        }
+      }
+    },
+    {
+      "id": "fb_gegner_typen_gegenrezepte_ein_rezept",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "gegner_typen_gegenrezepte",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler spielt gegen jeden Gegnertyp gleich und verliert regelmäßig gegen einen bestimmten Typ.",
+          "ursache": "Der Gegner wird nicht eingeordnet; das eigene Standardspiel läuft unabhängig davon, wer gegenübersteht.",
+          "korrektur": "Lass ihn zuerst einordnen. Ansage: „Angreifer, Defensivspieler oder langsam? Sag mir den Typ, dann das Gegenrezept.“"
+        },
+        "en": {
+          "symptom": "The player plays the same way against every type and loses regularly to one particular type.",
+          "ursache": "The opponent is never classified; the standard game runs regardless of who is on the other side.",
+          "korrektur": "Have them classify first. Cue: \"Attacker, defender or slow mover? Name the type, then the counter.\""
+        },
+        "fr": {
+          "symptom": "Le joueur joue de la même manière contre chaque type et perd régulièrement contre un type précis.",
+          "ursache": "L'adversaire n'est pas catégorisé ; le jeu standard se déroule sans égard à qui est en face.",
+          "korrektur": "Fais-le catégoriser d'abord. Consigne : « Attaquant, défenseur ou lent ? Nomme le type, puis la contre-mesure. »"
+        },
+        "pl": {
+          "symptom": "Gracz gra tak samo przeciw każdemu typowi i regularnie przegrywa z jednym określonym.",
+          "ursache": "Przeciwnik nie jest klasyfikowany; własna gra standardowa toczy się niezależnie od tego, kto stoi po drugiej stronie.",
+          "korrektur": "Każ mu najpierw sklasyfikować. Wskazówka: „Atakujący, defensywny czy powolny? Podaj typ, potem kontrśrodek.“"
+        }
+      }
+    },
+    {
+      "id": "fb_schwaeche_systematisch_angreifen_vergessen",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "schwaeche_systematisch_angreifen",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler findet die Schwäche des Gegners, nutzt sie zwei Punkte lang und verliert sie danach aus den Augen.",
+          "ursache": "Es fehlt die Systematik: die Erkenntnis wird nicht über den Satz gehalten, sondern durch den nächsten Einfall verdrängt.",
+          "korrektur": "Mach die Schwäche zum Auftrag. Ansage: „Diese Ecke bleibt bis zum Satzende dein Ziel — mindestens jeder dritte Ball geht dorthin.“"
+        },
+        "en": {
+          "symptom": "The player finds the opponent's weakness, uses it for two points and then loses sight of it.",
+          "ursache": "The system is missing: the insight is not held across the set but displaced by the next idea.",
+          "korrektur": "Make the weakness the task. Cue: \"That corner stays your target until the end of the set — at least every third ball goes there.\""
+        },
+        "fr": {
+          "symptom": "Le joueur trouve la faiblesse de l'adversaire, l'exploite deux points puis la perd de vue.",
+          "ursache": "La systématique manque : le constat n'est pas tenu sur tout le set, il est chassé par l'idée suivante.",
+          "korrektur": "Fais de la faiblesse la consigne. Consigne : « Ce coin reste ta cible jusqu'à la fin du set — au moins une balle sur trois y va. »"
+        },
+        "pl": {
+          "symptom": "Gracz znajduje słabość przeciwnika, wykorzystuje ją przez dwa punkty i potem traci ją z oczu.",
+          "ursache": "Brakuje systematyczności: spostrzeżenie nie jest utrzymywane przez cały set, lecz wypierane przez kolejny pomysł.",
+          "korrektur": "Zrób ze słabości zadanie. Wskazówka: „Ten narożnik zostaje twoim celem do końca seta — co najmniej co trzecia piłka tam idzie.“"
+        }
+      }
+    },
+    {
+      "id": "fb_taeuschung_verraten",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "taeuschung",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Gegner liest jeden Schlag früh; die Täuschung wirkt nie, obwohl der Spieler sie versucht.",
+          "ursache": "Die Vorbereitung sieht je Schlag anders aus — Ausholbewegung und Körperhaltung kündigen an, was kommt.",
+          "korrektur": "Mach die Vorbereitung gleich. Ansage: „Gleicher Anlauf, gleiches Ausholen für alle drei Schläge — entscheide erst im letzten Moment.“"
+        },
+        "en": {
+          "symptom": "The opponent reads every shot early; the deception never works although the player attempts it.",
+          "ursache": "The preparation looks different per shot — backswing and posture announce what is coming.",
+          "korrektur": "Make the preparation identical. Cue: \"Same approach, same backswing for all three shots — decide only at the last moment.\""
+        },
+        "fr": {
+          "symptom": "L'adversaire lit chaque frappe tôt ; la feinte ne fonctionne jamais bien que le joueur l'essaie.",
+          "ursache": "La préparation diffère selon la frappe — l'armé et la posture annoncent ce qui vient.",
+          "korrektur": "Rends la préparation identique. Consigne : « Même approche, même armé pour les trois frappes — ne décide qu'au dernier moment. »"
+        },
+        "pl": {
+          "symptom": "Przeciwnik czyta każde uderzenie wcześnie; zwód nigdy nie działa, choć gracz go próbuje.",
+          "ursache": "Przygotowanie wygląda inaczej przy każdym uderzeniu — zamach i postawa zapowiadają, co nadchodzi.",
+          "korrektur": "Ujednolić przygotowanie. Wskazówka: „Ten sam dobieg, ten sam zamach do wszystkich trzech uderzeń — decyduj dopiero w ostatniej chwili.“"
+        }
+      }
+    },
+    {
+      "id": "fb_frueh_nehmen_abwarten",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "frueh_nehmen",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Spieler kommt ständig einen Schritt zu spät, obwohl er schnell genug läuft.",
+          "ursache": "Der Speeder wird abgewartet und tief genommen, statt am frühesten und höchsten Punkt — die gestohlene Zeit fehlt.",
+          "korrektur": "Zieh den Treffpunkt vor. Ansage: „Geh dem Speeder entgegen und nimm ihn im Steigen, nicht im Fallen.“"
+        },
+        "en": {
+          "symptom": "The player is constantly a step late although they move fast enough.",
+          "ursache": "The Speeder is waited for and taken low instead of at the earliest, highest point — the stolen time is missing.",
+          "korrektur": "Move the contact point forward. Cue: \"Step towards the Speeder and take it on the rise, not on the way down.\""
+        },
+        "fr": {
+          "symptom": "Le joueur arrive sans cesse un pas trop tard, bien qu'il se déplace assez vite.",
+          "ursache": "Le speeder est attendu et pris bas au lieu du point le plus tôt et le plus haut — le temps volé manque.",
+          "korrektur": "Avance le point d'impact. Consigne : « Va au-devant du speeder et prends-le à la montée, pas à la descente. »"
+        },
+        "pl": {
+          "symptom": "Gracz stale przychodzi krok za późno, choć porusza się wystarczająco szybko.",
+          "ursache": "Speeder jest wyczekiwany i brany nisko, a nie w najwcześniejszym i najwyższym punkcie — brakuje skradzionego czasu.",
+          "korrektur": "Przesuń punkt trafienia do przodu. Wskazówka: „Wyjdź speederowi naprzeciw i bierz go we wznoszeniu, nie w opadaniu.“"
+        }
+      }
+    },
+    {
+      "id": "fb_tempo_rhythmus_wechsel_ein_tempo",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "tempo_rhythmus_wechsel",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Der Gegner stellt sich nach wenigen Ballwechseln ein und spielt sicher zurück.",
+          "ursache": "Der Spieler hält ein einziges Tempo — meist das höchste — und gibt dem Gegner damit einen verlässlichen Rhythmus.",
+          "korrektur": "Verlange den Bruch. Ansage: „Nach drei harten Bällen einer hoch und langsam — brich den Rhythmus, ohne es anzukündigen.“"
+        },
+        "en": {
+          "symptom": "The opponent settles in after a few rallies and returns safely.",
+          "ursache": "The player holds a single pace — usually the highest — and thereby hands the opponent a reliable rhythm.",
+          "korrektur": "Ask for the break. Cue: \"After three hard balls, one high and slow — break the rhythm without announcing it.\""
+        },
+        "fr": {
+          "symptom": "L'adversaire s'ajuste après quelques échanges et renvoie sans risque.",
+          "ursache": "Le joueur tient un seul rythme — le plus élevé le plus souvent — et offre ainsi à l'adversaire une cadence fiable.",
+          "korrektur": "Exige la rupture. Consigne : « Après trois balles dures, une haute et lente — casse le rythme sans l'annoncer. »"
+        },
+        "pl": {
+          "symptom": "Przeciwnik po kilku wymianach się dostraja i pewnie odgrywa.",
+          "ursache": "Gracz trzyma jedno tempo — zwykle najwyższe — i tym samym daje przeciwnikowi niezawodny rytm.",
+          "korrektur": "Wymagaj złamania. Wskazówka: „Po trzech mocnych piłkach jedna wysoka i wolna — złam rytm, nie zapowiadając tego.“"
+        }
+      }
+    },
+    {
+      "id": "fb_konstanz_unter_hoechstdruck_hektik",
+      "typ": "fehlerbild",
+      "domaene": "technik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "konstanz_unter_hoechstdruck",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "In den engen Punkten wird die Bewegung hektisch, der Griff fester, die eingeübte Präzision bricht ein.",
+          "ursache": "Der Druck schlägt auf die Technik durch: Tempo und Spannung steigen, obwohl der Schlag derselbe bleiben müsste.",
+          "korrektur": "Hol das Tempo aus dem Ablauf, nicht aus dem Schlag. Ansage: „Gleiche Bewegung wie im Training — locker greifen, einmal ausatmen, dann spielen.“"
+        },
+        "en": {
+          "symptom": "In the tight points the movement turns hectic, the grip tightens, the practised precision collapses.",
+          "ursache": "The pressure reaches the technique: pace and tension rise although the stroke should stay the same.",
+          "korrektur": "Take the speed out of the routine, not the stroke. Cue: \"Same movement as in practice — loose grip, one breath out, then play.\""
+        },
+        "fr": {
+          "symptom": "Dans les points serrés, le mouvement devient fébrile, la prise se raidit, la précision travaillée s'effondre.",
+          "ursache": "La pression atteint la technique : le rythme et la tension montent alors que la frappe devrait rester la même.",
+          "korrektur": "Retire la vitesse du rituel, pas de la frappe. Consigne : « Même mouvement qu'à l'entraînement — prise souple, une expiration, puis joue. »"
+        },
+        "pl": {
+          "symptom": "W ciasnych punktach ruch staje się nerwowy, chwyt twardnieje, wypracowana precyzja się załamuje.",
+          "ursache": "Presja przebija się na technikę: tempo i napięcie rosną, choć uderzenie powinno zostać takie samo.",
+          "korrektur": "Zabierz tempo z rytuału, nie z uderzenia. Wskazówka: „Ten sam ruch jak na treningu — luźny chwyt, jeden wydech, potem gra.“"
+        }
+      }
+    },
+    {
+      "id": "fb_doppel_grundlagen_wie_einzel",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "doppel_grundlagen",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Beide Partner laufen zum selben Ball und stehen sich im Weg; Bälle fallen zwischen ihnen zu Boden.",
+          "ursache": "Die Rollenteilung in Angriffs- und Rückraumspieler ist nicht gesetzt — jeder spielt sein eigenes Einzel auf halber Fläche.",
+          "korrektur": "Verteile die Rollen ausdrücklich. Ansage: „Du vorn, du hinten — sagt vor dem Aufschlag, wer welche Rolle hat.“"
+        },
+        "en": {
+          "symptom": "Both partners run to the same ball and get in each other’s way; balls drop between them.",
+          "ursache": "The split into attacker and back-space player is not set — each plays their own singles on half the area.",
+          "korrektur": "Assign the roles explicitly. Cue: \"You in front, you at the back — say who has which role before the serve.\""
+        },
+        "fr": {
+          "symptom": "Les deux partenaires courent sur la même balle et se gênent ; des balles tombent entre eux.",
+          "ursache": "La répartition en joueur d'attaque et joueur de fond n'est pas posée — chacun joue son propre simple sur la moitié de la surface.",
+          "korrektur": "Attribue les rôles explicitement. Consigne : « Toi devant, toi derrière — dites avant le service qui a quel rôle. »"
+        },
+        "pl": {
+          "symptom": "Obaj partnerzy biegną do tej samej piłki i wchodzą sobie w drogę; piłki padają między nimi.",
+          "ursache": "Podział na gracza atakującego i tylnego nie jest ustalony — każdy gra własnego singla na połowie powierzchni.",
+          "korrektur": "Rozdziel role wyraźnie. Wskazówka: „Ty z przodu, ty z tyłu — powiedzcie przed serwisem, kto ma jaką rolę.“"
+        }
+      }
+    },
+    {
+      "id": "fb_angriff_im_paar_beide_hinten",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "angriff_im_paar",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Das Paar setzt den Gegner unter Druck, aber der schwache Rückball wird nicht abgeholt — vorn steht niemand.",
+          "ursache": "Nach dem harten Schlag von hinten rückt der Angriffsspieler nicht nach; die Vollstrecker-Position bleibt leer.",
+          "korrektur": "Schick den Vorderen nach vorn. Ansage: „Wenn er hinten smasht, gehst du an die Frontlinie und wartest auf den kurzen Ball.“"
+        },
+        "en": {
+          "symptom": "The pair applies pressure, but the weak return is not picked up — nobody is at the front.",
+          "ursache": "After the hard shot from the back the attacker does not move up; the finisher position stays empty.",
+          "korrektur": "Send the front player forward. Cue: \"When they smash from the back, you go to the front line and wait for the short ball.\""
+        },
+        "fr": {
+          "symptom": "La paire met la pression, mais le renvoi faible n'est pas récupéré — personne n'est devant.",
+          "ursache": "Après la frappe dure du fond, le joueur d'attaque n'avance pas ; la position de finisseur reste vide.",
+          "korrektur": "Envoie le joueur avant devant. Consigne : « Quand il smashe du fond, tu vas à la ligne avant et tu attends la balle courte. »"
+        },
+        "pl": {
+          "symptom": "Para wywiera presję, ale słaby odbiór nie jest odebrany — z przodu nikogo nie ma.",
+          "ursache": "Po mocnym uderzeniu z tyłu gracz atakujący nie wysuwa się; pozycja wykończeniowa pozostaje pusta.",
+          "korrektur": "Wyślij przedniego do przodu. Wskazówka: „Gdy on smeczuje z tyłu, ty idziesz na linię przednią i czekasz na krótką piłkę.“"
+        }
+      }
+    },
+    {
+      "id": "fb_das_umschalten_im_doppel_ungleichzeitig",
+      "typ": "fehlerbild",
+      "domaene": "taktik",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "das_umschalten_im_doppel",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Einer greift schon an, während der andere noch verteidigt; zwischen den beiden reißt eine Lücke auf.",
+          "ursache": "Der Umschaltmoment wird nicht gemeinsam erkannt — jeder entscheidet für sich, wann Angriff und wann Verteidigung gilt.",
+          "korrektur": "Mach das Umschalten hörbar. Ansage: „Wer den schwachen Ball sieht, ruft „Angriff!“ — dann rücken beide gemeinsam.“"
+        },
+        "en": {
+          "symptom": "One is already attacking while the other still defends; a gap opens between them.",
+          "ursache": "The switching moment is not recognised together — each decides alone when it is attack and when defence.",
+          "korrektur": "Make the switch audible. Cue: \"Whoever sees the weak ball calls 'Attack!' — then you both move up together.\""
+        },
+        "fr": {
+          "symptom": "L'un attaque déjà pendant que l'autre défend encore ; un trou s'ouvre entre les deux.",
+          "ursache": "Le moment de bascule n'est pas reconnu ensemble — chacun décide seul quand c'est l'attaque et quand c'est la défense.",
+          "korrektur": "Rends la bascule audible. Consigne : « Celui qui voit la balle faible crie « Attaque ! » — puis vous avancez ensemble. »"
+        },
+        "pl": {
+          "symptom": "Jeden już atakuje, gdy drugi jeszcze się broni; między nimi otwiera się luka.",
+          "ursache": "Moment przełączenia nie jest rozpoznawany wspólnie — każdy sam decyduje, kiedy jest atak, a kiedy obrona.",
+          "korrektur": "Uczyń przełączenie słyszalnym. Wskazówka: „Kto widzi słabą piłkę, woła „Atak!“ — wtedy wysuwacie się oboje razem.“"
+        }
+      }
+    },
+    {
+      "id": "fb_reaktivkraft_bodenkontakt_schwer",
+      "typ": "fehlerbild",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["trainer"],
+      "basis_baustein": "reaktivkraft_bodenkontakt",
+      "vermittlungsziele": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "transfer_herkunft": ["CM"],
+      "erklaerteil": {
+        "de": {
+          "symptom": "Die Landung ist laut und der Fuß bleibt lange am Boden; der nächste Antritt kommt schwer in Gang.",
+          "ursache": "Es wird in die Landung hineingesunken statt federnd abgedrückt — die Sehnen speichern keine Energie.",
+          "korrektur": "Kürze die Bodenzeit. Ansage: „Leise landen und sofort wieder weg — der Boden ist heiß.“"
+        },
+        "en": {
+          "symptom": "The landing is loud and the foot stays on the ground for a long time; the next start gets going only heavily.",
+          "ursache": "The player sinks into the landing instead of pushing off springily — the tendons store no energy.",
+          "korrektur": "Shorten the ground time. Cue: \"Land quietly and leave at once — the ground is hot.\""
+        },
+        "fr": {
+          "symptom": "L'atterrissage est bruyant et le pied reste longtemps au sol ; le départ suivant se lance lourdement.",
+          "ursache": "Le joueur s'enfonce dans la réception au lieu de repousser avec ressort — les tendons ne stockent aucune énergie.",
+          "korrektur": "Raccourcis le temps au sol. Consigne : « Atterris en silence et repars aussitôt — le sol est brûlant. »"
+        },
+        "pl": {
+          "symptom": "Lądowanie jest głośne, a stopa długo zostaje na podłożu; kolejny start rozkręca się ciężko.",
+          "ursache": "Gracz zapada się w lądowanie, zamiast sprężyście odbić — ścięgna nie magazynują energii.",
+          "korrektur": "Skróć czas na podłożu. Wskazówka: „Ląduj cicho i natychmiast odbijaj — podłoże jest gorące.“"
         }
       }
     }

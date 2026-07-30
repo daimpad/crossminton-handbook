@@ -434,7 +434,22 @@
     "fb_schnitt_spin_zusteil": "Zbyt strome podcięcie",
     "fb_beinarbeit_system_schritttyp": "Zły rodzaj kroku w danej strefie",
     "fb_sprung_smash_absprung": "Niekontrolowane odbicie",
-    "fb_praezision_an_die_linien_abstand": "Zbyt blisko linii"
+    "fb_praezision_an_die_linien_abstand": "Zbyt blisko linii",
+    "fb_punkt_aufbauen_einzelball": "Każda piłka osobno",
+    "fb_smash_vorbereiten_aus_der_not": "Smecz ze złej pozycji",
+    "fb_gegner_lesen_muster_kein_blick": "Brak spojrzenia na przeciwnika",
+    "fb_engen_satz_fuehren_risiko": "Ryzyko w decydującym momencie",
+    "fb_dem_gegner_aufzwingen_mitgespielt": "Uwięziony w grze przeciwnika",
+    "fb_gegner_typen_gegenrezepte_ein_rezept": "Jedna recepta na wszystkich",
+    "fb_schwaeche_systematisch_angreifen_vergessen": "Słabość rozpoznana, potem zapomniana",
+    "fb_taeuschung_verraten": "Zdradzony zamiar",
+    "fb_frueh_nehmen_abwarten": "Pozwalanie speederowi opadać",
+    "fb_tempo_rhythmus_wechsel_ein_tempo": "Zawsze to samo tempo",
+    "fb_konstanz_unter_hoechstdruck_hektik": "Technika rozpada się pod presją",
+    "fb_doppel_grundlagen_wie_einzel": "Debel grany jak singiel",
+    "fb_angriff_im_paar_beide_hinten": "Oboje zostają z tyłu",
+    "fb_das_umschalten_im_doppel_ungleichzeitig": "Niezgrane przełączanie",
+    "fb_reaktivkraft_bodenkontakt_schwer": "Ciężki, długi kontakt z podłożem"
   },
   "grafiken": {
     "G-001": "Grafika główna: chwyt uniwersalny z ułożeniem V",

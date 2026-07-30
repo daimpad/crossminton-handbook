@@ -356,9 +356,16 @@ console.log('\n[7b] Fehlerbilder (Trainer-Layer)');
 pruefe('fehlerbilderFuer(griff) liefert alle drei Griff-Fehlerbilder', fehlerbilderFuer(daten, 'griff').length === 3
   && fehlerbilderFuer(daten, 'griff').some((f) => f.id === 'griff_fehler_zu_fest'));
 pruefe('fehlerbilderFuer ohne Eintrag liefert leeres Array (Nicht-Fehlerfall)', gleicheListe(fehlerbilderFuer(daten, 'grundschlaege_ueberblick'), []));
-pruefe('Fehlerbilder decken 14 Basis-Bausteine ab, 17 Einträge gesamt', (() => {
+pruefe('Fehlerbilder decken 29 Basis-Bausteine ab, 32 Einträge gesamt', (() => {
   const alle = daten.fehlerbilder ?? [];
-  return alle.length === 17 && new Set(alle.map((f) => f.basis_baustein)).size === 14;
+  return alle.length === 32 && new Set(alle.map((f) => f.basis_baustein)).size === 29;
+})());
+// Der trainer_layer_offen-Marker ist die redaktionelle Zusage, dass hier ein
+// Fehlerbild hingehört — er darf nicht unbedient bleiben.
+pruefe('jeder Baustein mit trainer_layer_offen-Marker trägt mindestens ein Fehlerbild', (() => {
+  const belegt = new Set((daten.fehlerbilder ?? []).map((f) => f.basis_baustein));
+  const offen = daten.bausteine.filter((b) => JSON.stringify(b).includes('trainer_layer_offen') && !belegt.has(b.id));
+  return offen.length === 0;
 })());
 pruefe('jedes Fehlerbild hängt an einem existierenden Baustein und trägt die drei Felder', (daten.fehlerbilder ?? []).every((f) =>
   daten.bausteinVonId.has(f.basis_baustein) && f.erklaerteil?.de?.symptom && f.erklaerteil?.de?.ursache && f.erklaerteil?.de?.korrektur));
