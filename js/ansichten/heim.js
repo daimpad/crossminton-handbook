@@ -2,18 +2,23 @@
 // Jede Kachel trägt eine eigene Hue (Icon-Medaille) + einen CTA. Der frühere
 // Weiterlernen-/„Kapitel entdecken"-Container ist in den Hero gewandert; der
 // Hero-CTA „Kapitel entdecken" bleibt daneben bestehen. Reihenfolge fest
-// vorgegeben: Themenpfad (volle Breite) / Training / Individual / Ausrüstung /
-// Regeln / Profil, KO-Turnier als zweite volle-Breite-Kachel am Ende. Umgebung
-// und Doppel bleiben eigene Achsen (erreichbar über den Themenpfad-Einstieg
-// bzw. Deep-Link), aber keine eigenen Startseiten-Kacheln mehr.
+// vorgegeben: Themenpfad (volle Breite) / Training / Individual / Umgebung /
+// Doppel / Ausrüstung / Regeln / Profil, KO-Turnier als zweite volle-Breite-
+// Kachel am Ende. Neun Kacheln auf sieben Hues — Themenpfad und Ausrüstung
+// tragen bewusst je eine bereits vergebene Hue (Teal wie KO-Turnier als die
+// beiden „lead"-Kacheln; Violett wie Individual, diagonal genug von ihm
+// entfernt, um nicht als Verwechslung zu wirken).
 
-import { t } from '../i18n.js';
+import { label, t } from '../i18n.js';
 import { esc, markeHeroGross } from '../oberflaeche.js';
+import { spielformen, umgebungBausteine } from '../pfade.js';
 import { diagnose, speicherIstVerfuegbar } from '../zustand.js';
 import { zielLabels } from './zielwahl.js';
 
 export function renderHeim(el, daten) {
   const d = diagnose();
+  const doppel = spielformen(daten).find((eintrag) => eintrag.spielform === 'doppel');
+  const umgebung = umgebungBausteine(daten);
   const zielBeschriftungen = zielLabels(d.ziel);
 
   // Einstiegs-CTAs im Hero: „Kapitel entdecken" öffnet den Themen-Einstieg,
@@ -41,7 +46,7 @@ export function renderHeim(el, daten) {
   // Ganz oben, über die volle Breite: der Themenpfad-Einstieg — der breiteste
   // Weg ins Handbuch, entsprechend prominent platziert.
   const themenKachel = kachel({
-    href: '#/pfad/themen', hue: 'pf-sky', icon: 'fa-layer-group', lead: true,
+    href: '#/pfad/themen', hue: 'pf-teal', icon: 'fa-layer-group', lead: true,
     titel: esc(t('pfad_themen')),
     text: esc(t('pfad_themen_text')),
   });
@@ -64,8 +69,26 @@ export function renderHeim(el, daten) {
       : '',
   });
 
+  const umgebungKachel = umgebung.length > 0
+    ? kachel({
+        href: '#/pfad/umgebung', hue: 'pf-sky', icon: 'fa-mountain',
+        titel: esc(t('pfad_umgebung')),
+        meta: ` <span class="chip">${esc(t('n_bausteine', { n: umgebung.length }))}</span>`,
+        text: esc(t('pfad_umgebung_text')),
+      })
+    : '';
+
+  const doppelKachel = doppel && doppel.anzahl > 0
+    ? kachel({
+        href: '#/pfad/spielform/doppel', hue: 'pf-magenta', icon: 'fa-users',
+        titel: esc(t('pfad_spielform')),
+        meta: ` <span class="chip">${esc(label('spielform', 'doppel'))} · ${doppel.anzahl}</span>`,
+        text: esc(t('pfad_spielform_text')),
+      })
+    : '';
+
   const ausruestungKachel = kachel({
-    href: '#/ausruestung', hue: 'pf-magenta', icon: 'fa-toolbox',
+    href: '#/ausruestung', hue: 'pf-violett', icon: 'fa-toolbox',
     titel: esc(t('nav_ausruestung')),
     text: esc(t('ausruestung_untertitel')),
   });
@@ -98,6 +121,8 @@ export function renderHeim(el, daten) {
       ${themenKachel}
       ${trainingKachel}
       ${individualKachel}
+      ${umgebungKachel}
+      ${doppelKachel}
       ${ausruestungKachel}
       ${regelnKachel}
       ${profilKachel}
