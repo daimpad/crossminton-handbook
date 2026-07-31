@@ -159,8 +159,13 @@ export function renderOnboarding(el, daten) {
     <section class="onboarding">
       ${assistent.schritt === 0 ? `<p class="onboarding-willkommen">${esc(t('onboarding_titel'))}</p><p class="leise">${esc(t('onboarding_intro'))}</p>` : ''}
       <p class="leise onboarding-schritt">${esc(t('onboarding_schritt', { a: assistent.schritt + 1, b: schritte.length }))}</p>
-      <h1>${esc(inhalt.frage)}</h1>
-      <form id="ob-form">${inhalt.html}</form>
+      <h1 id="ob-frage">${esc(inhalt.frage)}</h1>
+      <!-- Die Optionen sind eine zusammengehörige Gruppe (Radios bzw. Checkboxen).
+           role=group + aria-labelledby gibt ihr die Schrittfrage als Namen — sonst
+           hört man beim Hineinspringen nur die Einzeloption ohne die Frage dazu.
+           role=group statt radiogroup, weil derselbe Rahmen auch die Mehrfachauswahl
+           der Ziel- und Vormarkier-Schritte trägt. -->
+      <form id="ob-form" role="group" aria-labelledby="ob-frage">${inhalt.html}</form>
       <div class="knopf-zeile">
         ${assistent.schritt > 0 ? `<button class="knopf knopf-sekundaer" id="ob-zurueck">${esc(t('zurueck'))}</button>` : ''}
         ${inhalt.ueberspringbar ? `<button class="knopf knopf-leise" id="ob-ueberspringen">${esc(t('ueberspringen'))}</button>` : ''}

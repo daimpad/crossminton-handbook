@@ -3,7 +3,7 @@
 // Prüft Datenvalidierung, Pfad-Traversierungen, Modifikator, Zwei-Ebenen-Logik,
 // Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -1043,6 +1043,101 @@ pruefe('Trainings-Metadaten sind vokabular-konform', uebungsBausteine.every((b) 
   && b.fokus.length > 0 && b.fokus.every((f) => tmVokabular.fokus.includes(f))));
 pruefe('Reflexions-Bausteine tragen KEINE Trainings-Metadaten (nur Übungsteile sind planbar)',
   daten.bausteine.filter((b) => hatReflexionsaufgabe(b)).every((b) => b.dauer_klasse === undefined));
+
+// ---------------------------------------------------------------------------
+console.log('\n[15] Attribut-Escaping in den Ansichten (Quell-Lint)');
+// Die Ansichten bauen HTML als Template-Strings. Ein interpolierter Wert IN EINEM
+// ATTRIBUT muss durch esc() — sonst kann er das Attribut verlassen. Genau eine
+// solche Lücke gab es: das href der Baustein-Fußnav nahm den ?kontext=-Parameter
+// roh entgegen (reflektiertes XSS über einen teilbaren Link). Sie fiel nicht auf,
+// weil jedes Nachbar-Attribut in derselben Vorlage es richtig machte.
+//
+// Der Lint ist bewusst rein textuell (kein Parser, keine Abhängigkeit): er sucht
+// `attribut="…${…}…"` und verlangt, dass JEDER Ausdruck darin mit einem
+// zugelassenen Erzeuger beginnt. Er kann Absicht nicht erkennen — deshalb steht
+// unten eine kurze, benannte Ausnahmeliste statt einer stillen Heuristik.
+const ANSICHTS_DATEIEN = [
+  'app.js', 'oberflaeche.js', 'feedback.js',
+  ...readdirSync(new URL('../js/ansichten/', import.meta.url)).filter((f) => f.endsWith('.js')).map((f) => `ansichten/${f}`),
+];
+// Zugelassene Erzeuger: escapen selbst, kodieren fürs Ziel, oder liefern eine
+// feste, im Code stehende Zeichenkette (Ternär aus Literalen, Zahlen, Flags).
+// Zugelassen: escapt, kodiert, oder nachweislich aus Literalen erzeugt
+// (Ternär mit gequoteten Zweigen, .toFixed()/.join() über Code-Werte).
+const SICHER = /^\s*(esc\(|encodeURIComponent\(|String\(erledigt\)|erledigt\b|istAktiv\b|offen\b|[0-9])|\?\s*'|\.toFixed\(|\.join\(/;
+// Benannte Ausnahmen — je Eintrag der Grund, warum der Wert nicht escapt wird.
+const ESC_AUSNAHMEN = new Set([
+  // Feste Klassennamen/Token aus dem Code, nie aus Daten oder URL.
+  'hue', 'lead', 'heroHue', 'ikone', 'icon', 'klasse', 'zusatz', 'variante',
+  'achsenName', 'teil', 'phase', 'stufe', 'w', 'wert', 'code',
+]);
+const attributMuster = /(\w[\w-]*)="([^"]*\$\{[^"]*)"/g;
+const ausdruckMuster = /\$\{([^}]*)\}/g;
+// Zeilen, in denen `attribut="…"` ein CSS-SELEKTOR ist (querySelector/zeichne),
+// nicht erzeugtes HTML — dort gibt es nichts zu escapen.
+const SELEKTOR_ZEILE = /querySelector|closest\(|zeichne\(/;
+// Reviewte Ausnahmen als datei::ausdruck. Jeder Eintrag wurde einmal geprüft und
+// ist code-kontrolliert (Zahl, Boolean oder aus Literalen zusammengesetzt) — kein
+// Wert stammt aus Daten, URL oder Eingabe. Neue/geänderte Interpolationen fallen
+// hier NICHT hinein und brechen den Test.
+const ESC_BASIS = new Set([
+  // Zahlen aus Berechnungen (Ring-/Balken-Geometrie, Prozentwerte).
+  'oberflaeche.js::prozent', 'oberflaeche.js::groesse', 'oberflaeche.js::mitte',
+  'oberflaeche.js::r', 'oberflaeche.js::staerke',
+  // Klassenkette aus Literalen + code-gesetztem hue.
+  'oberflaeche.js::klassen',
+  // Booleans für aria-pressed.
+  'ansichten/baustein.js::gemerkt', 'ansichten/ko-turnier.js::istSieger',
+  'ansichten/turnier.js::aktiv',
+  // Schleifen-Indizes.
+  'ansichten/ko-turnier.js::i', 'ansichten/ko-turnier.js::rundenIndex',
+  'ansichten/ko-turnier.js::matchIndex', 'ansichten/plan.js::index',
+  // Klassen-Token aus Literal-Ternären.
+  'ansichten/turnier.js::an', 'ansichten/turnier.js::hervor',
+  // Icon-/Hue-/Klassennamen: durchgereichte Code-Literale ('fa-book-open',
+  // 'pf-teal', …) bzw. Werte aus einer Konstanten-Abbildung im Modul.
+  'oberflaeche.js::icon', 'oberflaeche.js::klasse', 'oberflaeche.js::variante',
+  'ansichten/baustein.js::icon', 'ansichten/baustein.js::heroHue',
+  'ansichten/heim.js::hue', 'ansichten/heim.js::icon',
+  'ansichten/info.js::klasse', 'ansichten/suche.js::hue', 'ansichten/turnier.js::icon',
+  // Feste Vokabularwerte aus im Code stehenden Listen.
+  'ansichten/onboarding.js::stufe', 'ansichten/profil.js::stufe', 'ansichten/profil.js::w',
+  'ansichten/pfad.js::achsenName',
+]);
+const roheAttribute = [];
+for (const datei of ANSICHTS_DATEIEN) {
+  const quelle = readFileSync(new URL(`../js/${datei}`, import.meta.url), 'utf8');
+  for (const zeile of quelle.split('\n')) {
+    if (SELEKTOR_ZEILE.test(zeile)) continue;
+    for (const treffer of zeile.matchAll(attributMuster)) {
+      for (const ausdruck of treffer[2].matchAll(ausdruckMuster)) {
+        const inhalt = ausdruck[1].trim();
+        if (SICHER.test(inhalt)) continue;
+        if (ESC_BASIS.has(`${datei}::${inhalt}`)) continue;
+        roheAttribute.push(`${datei}: ${treffer[1]}="…\${${inhalt.slice(0, 46)}}…"`);
+      }
+    }
+  }
+}
+if (roheAttribute.length > 0) console.log('   ', roheAttribute.join('\n    '));
+pruefe(
+  `kein un-escapter Ausdruck in einem HTML-Attribut (${ANSICHTS_DATEIEN.length} Dateien geprüft)`,
+  roheAttribute.length === 0,
+);
+// Gegenprobe: Der Lint muss den echten Fehler auch fangen — sonst wäre er wertlos.
+// `listeHref` ist bewusst NICHT als sicher gelistet: genau diese Variable trug das
+// XSS. Sie ist nur deshalb harmlos, weil kontextZuListe() intern kodiert UND die
+// Ansicht zusätzlich esc() setzt — verschwindet eines von beidem, muss es auffallen.
+const boesartig = 'class="knopf" href="${listeHref}" title="${kontext}"';
+const gefunden = [...boesartig.matchAll(attributMuster)].flatMap((tr) =>
+  [...tr[2].matchAll(ausdruckMuster)]
+    .map((a) => a[1].trim())
+    .filter((inh) => !SICHER.test(inh) && !ESC_BASIS.has(`ansichten/baustein.js::${inh}`)),
+);
+pruefe(
+  'Lint erkennt roh interpolierte Attributwerte (Selbsttest: listeHref + kontext)',
+  gefunden.length === 2 && gefunden[0] === 'listeHref' && gefunden[1] === 'kontext',
+);
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

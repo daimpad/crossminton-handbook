@@ -89,7 +89,7 @@ export function renderThemen(el, daten, domaene) {
     const zeilen = themenDomaenen(daten)
       .filter((eintrag) => eintrag.anzahl > 0)
       .map((eintrag) => {
-        const beschriftung = `<h3>${esc(label('domaene', eintrag.domaene))}</h3><p class="leise">${esc(t('n_bausteine', { n: eintrag.anzahl }))}</p>`;
+        const beschriftung = `<h2 class="karte-titel">${esc(label('domaene', eintrag.domaene))}</h2><p class="leise">${esc(t('n_bausteine', { n: eintrag.anzahl }))}</p>`;
         return `<a class="karte karte-link" href="#/pfad/themen/${esc(eintrag.domaene)}">${beschriftung}</a>`;
       })
       .join('');
@@ -154,7 +154,7 @@ export function renderUmgebung(el, daten, achse, wert) {
     eintraege
       .map((e) => {
         const w = e[achsenName];
-        return `<a class="karte karte-link" href="#/pfad/${achsenName}/${esc(w)}"><h3>${esc(label(achsenName, w))}</h3><p class="leise">${esc(t('n_bausteine', { n: e.anzahl }))}</p></a>`;
+        return `<a class="karte karte-link" href="#/pfad/${achsenName}/${esc(w)}"><h2 class="karte-titel">${esc(label(achsenName, w))}</h2><p class="leise">${esc(t('n_bausteine', { n: e.anzahl }))}</p></a>`;
       })
       .join('');
   const alle = umgebungspfad(daten);

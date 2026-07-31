@@ -62,11 +62,11 @@ function renderListe(el, daten) {
   el.innerHTML = `
     ${heroKlein('fa-table-tennis-paddle-ball', t('pfad_training'), t('pfad_training_text'), 'pf-indigo')}
     <a class="karte karte-link karte-akzent" href="#/plan">
-      <h3><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> ${esc(t('plan_titel'))}</h3>
+      <h2 class="karte-titel"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> ${esc(t('plan_titel'))}</h2>
       <p class="leise">${esc(t('plan_kachel_text'))}</p>
     </a>
     <div class="karte">
-      <h3>${esc(t('kontinuitaet'))}</h3>
+      <h2 class="karte-titel">${esc(t('kontinuitaet'))}</h2>
       <p>${esc(t('kontinuitaet_stand', { n: kontinuitaet().gesamt }))}</p>
       <p class="leise">${esc(t('kontinuitaet_text'))}</p>
     </div>
