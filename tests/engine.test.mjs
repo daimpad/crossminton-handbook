@@ -17,6 +17,8 @@ import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan
 import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
+import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
+import { sammleRouten } from '../scripts/routen.mjs';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -1137,6 +1139,46 @@ const gefunden = [...boesartig.matchAll(attributMuster)].flatMap((tr) =>
 pruefe(
   'Lint erkennt roh interpolierte Attributwerte (Selbsttest: listeHref + kontext)',
   gefunden.length === 2 && gefunden[0] === 'listeHref' && gefunden[1] === 'kontext',
+);
+
+console.log('\n[16] Sitemap (eingecheckt — die Produktion hat keinen Build-Schritt)');
+
+// Die Produktion (Plesk/netcup) liefert den Repo-Stand aus: sitemap.xml MUSS
+// eingecheckt und aktuell sein, sonst findet Google nur die Startseite. Ohne
+// diese Prüfung veraltet sie still, sobald jemand einen Baustein hinzufügt.
+const sitemapStand = pruefeSitemapAktuell();
+pruefe(
+  `sitemap.xml ist auf dem Stand der Daten (${sitemapStand.vorhandeneRouten} Routen)`,
+  sitemapStand.aktuell,
+  sitemapStand.aktuell
+    ? ''
+    : `eingecheckt ${sitemapStand.vorhandeneRouten}, aus den Daten folgen ${sitemapStand.erwarteteRouten} — 'node scripts/sitemap.mjs' laufen lassen`,
+);
+
+// Die Routenliste ist mit dem Prerender geteilt (scripts/routen.mjs) — hier nur
+// die Eigenschaften, die die Sitemap gültig machen.
+const sitemapRouten = sammleRouten(ladeDatenAusDateien());
+pruefe(
+  `jeder Baustein steht in der Sitemap (${daten.bausteine.length})`,
+  daten.bausteine.every((b) => sitemapRouten.some((r) => r.pfad === `/baustein/${encodeURIComponent(b.id)}`)),
+);
+pruefe(
+  'keine doppelten Routen',
+  new Set(sitemapRouten.map((r) => r.pfad)).size === sitemapRouten.length,
+);
+// Personalisierte/interaktive Ansichten gehören nicht hinein: ohne localStorage
+// zeigen sie nur ein leeres Formular — als Suchtreffer wären sie eine Sackgasse.
+const NICHT_INDEXIERBAR = ['/onboarding', '/pfad/individual', '/plan', '/suche', '/profil', '/merkliste', '/ko-turnier'];
+pruefe(
+  'zustandsabhängige Routen bleiben draußen',
+  NICHT_INDEXIERBAR.every((pfad) => !sitemapRouten.some((r) => r.pfad === pfad)),
+  NICHT_INDEXIERBAR.filter((pfad) => sitemapRouten.some((r) => r.pfad === pfad)).join(', '),
+);
+// Der SPA-Fallback der .htaccess lässt alles mit Dateiendung als Asset durch —
+// eine punktbehaftete Route bekäme dort einen 404 statt der Hülle.
+pruefe(
+  'keine Route trägt eine Dateiendung (sonst greift der .htaccess-Fallback nicht)',
+  sitemapRouten.every((r) => !/\.[a-zA-Z0-9]{1,8}$/.test(r.pfad)),
 );
 
 setzeZurueck();

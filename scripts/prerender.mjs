@@ -23,9 +23,12 @@ import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, symlinkSync, writ
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Routenliste + Sitemap-Bau teilt sich dieses Skript mit scripts/sitemap.mjs —
+// eine Ableitung, zwei Verbraucher (s. scripts/routen.mjs).
+import { baueSitemap, SITE_URL } from './routen.mjs';
+
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(REPO, process.argv[2] || '_site');
-const SITE_URL = 'https://crossminton-handbook.de';
 const PORT = 8123;
 
 // Montagepunkt der Produktion, aus SITE_URL abgeleitet (kein weiterer
@@ -101,56 +104,19 @@ async function warteAufServer() {
 }
 
 // --- 3. Routenliste + Snapshots: ein einziger Tab, ein einziger ladeDaten()-Lauf. ---
-// Prerender-würdig ist, was ohne persönlichen Zustand eine echte, eigenständige
-// Seite ergibt (Zwei-Ebenen-Logik: nichts ist gesperrt). Bewusst ausgeschlossen:
-// /onboarding, /pfad/individual, /plan, /suche, /profil, /merkliste,
-// /ko-turnier — alle zeigen ohne localStorage-Zustand nur ein leeres Formular
-// oder eine personalisierte/interaktive Ansicht, keinen indexierbaren Inhalt.
+// Welche Routen indexierbar sind (und welche bewusst nicht), steht in
+// scripts/routen.mjs — dieselbe Ableitung nutzt scripts/sitemap.mjs für die
+// eingecheckte sitemap.xml, damit beide nicht auseinanderlaufen.
 async function ermittleRouten(page) {
   return page.evaluate(async () => {
     // Über document.baseURI auflösen, nicht wurzel-absolut ('/js/daten.js') —
     // der Tab läuft unter dem Produktions-Präfix, nicht unter '/'.
     const modul = (name) => import(new URL(name, document.baseURI).href);
-    const [{ ladeDaten }, pfade] = await Promise.all([modul('js/daten.js'), modul('js/pfade.js')]);
-    const daten = await ladeDaten();
-    const { themenDomaenen, spielformen, witterungen, untergruende } = pfade;
-    const liste = [];
-    const fuege = (pfad, prioritaet) => liste.push({ pfad, prioritaet });
-
-    fuege('/', 1.0);
-
-    fuege('/pfad/kompetenz', 0.8);
-    for (const stufe of [...daten.koennensOrdnung, 'trainer']) {
-      fuege(`/pfad/kompetenz/${encodeURIComponent(stufe)}`, 0.8);
-    }
-
-    fuege('/pfad/themen', 0.8);
-    for (const eintrag of themenDomaenen(daten)) {
-      if (eintrag.anzahl > 0) fuege(`/pfad/themen/${encodeURIComponent(eintrag.domaene)}`, 0.7);
-    }
-
-    for (const eintrag of spielformen(daten)) {
-      if (eintrag.anzahl > 0) fuege(`/pfad/spielform/${encodeURIComponent(eintrag.spielform)}`, 0.7);
-    }
-
-    fuege('/pfad/umgebung', 0.7);
-    for (const eintrag of witterungen(daten)) fuege(`/pfad/witterung/${encodeURIComponent(eintrag.witterung)}`, 0.6);
-    for (const eintrag of untergruende(daten)) fuege(`/pfad/untergrund/${encodeURIComponent(eintrag.untergrund)}`, 0.6);
-
-    fuege('/training', 0.8);
-    for (const einheit of daten.einheiten) fuege(`/training/${encodeURIComponent(einheit.id)}`, 0.6);
-
-    fuege('/regeln', 0.8);
-    fuege('/turnier', 0.7);
-    fuege('/ausruestung', 0.8);
-    fuege('/ueber', 0.5);
-    fuege('/mitmachen', 0.5);
-    fuege('/impressum', 0.2);
-    fuege('/datenschutz', 0.2);
-
-    for (const baustein of daten.bausteine) fuege(`/baustein/${encodeURIComponent(baustein.id)}`, 0.7);
-
-    return liste;
+    const [{ ladeDaten }, { sammleRouten }] = await Promise.all([
+      modul('js/daten.js'),
+      modul('scripts/routen.mjs'),
+    ]);
+    return sammleRouten(await ladeDaten());
   });
 }
 
@@ -216,19 +182,6 @@ function zielDatei(pfad) {
 }
 
 // --- 5. sitemap.xml aus derselben Routenliste (löst den Tier-1-Platzhalter ab). ---
-function baueSitemap(routen) {
-  const eintraege = routen
-    .map(
-      (r) => `  <url>
-    <loc>${esc(SITE_URL + r.pfad)}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>${r.prioritaet.toFixed(1)}</priority>
-  </url>`,
-    )
-    .join('\n');
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${eintraege}\n</urlset>\n`;
-}
-
 async function haupt() {
   console.log(`[prerender] Staging-Kopie → ${relative(REPO, ZIEL)}`);
   kopiere();
@@ -270,7 +223,7 @@ async function haupt() {
       throw new Error(`Laufzeitfehler während des Prerenderns:\n${fehler.join('\n')}`);
     }
 
-    writeFileSync(join(ZIEL, 'sitemap.xml'), baueSitemap(routen));
+    writeFileSync(join(ZIEL, 'sitemap.xml'), baueSitemap(routen, SITE_URL));
     console.log(`[prerender] ${routen.length} Snapshots + sitemap.xml geschrieben`);
   } finally {
     await browser.close();
