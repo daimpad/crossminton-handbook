@@ -24,7 +24,7 @@ function zeile(schluessel, begriff, wert) {
   return `
     <div class="profil-zeile">
       <div><p class="leise">${esc(begriff)}</p><p>${esc(wert)}</p></div>
-      <button class="knopf knopf-leise" data-bearbeite="${schluessel}">${esc(aktiv ? t('schliessen') : t('aendern'))}</button>
+      <button class="knopf knopf-leise" data-bearbeite="${esc(schluessel)}">${esc(aktiv ? t('schliessen') : t('aendern'))}</button>
     </div>`;
 }
 

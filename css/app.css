@@ -171,6 +171,9 @@ h1, h2, h3, h4, p, ul, ol, dl, figure {
 h1 { font-size: 1.9rem; line-height: 1.2; font-weight: 600; letter-spacing: -0.015em; color: var(--ueberschrift); }
 h2 { font-size: 1.3rem; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; color: var(--ueberschrift); }
 h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.005em; color: var(--ueberschrift); }
+/* Karten-Überschriften: semantisch h2 (der kleine Hero liefert die h1, h3 wäre
+   ein übersprungener Rang), optisch aber weiter die ruhigere h3-Größe. */
+.karte-titel { font-size: 1.05rem; letter-spacing: -0.005em; }
 h4 { font-size: 0.78rem; font-weight: 600; color: var(--tinte-2); text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* Icons sind immer farbig, nie schwarz — Default Hauptfarbe, Status in Signalfarben. */
@@ -1292,11 +1295,14 @@ details[open] summary { margin-bottom: 0.5rem; }
 }
 .turnier-stufe-name { font-weight: 600; font-size: 0.95rem; }
 .turnier-stufe-serie { font-size: 0.72rem; color: var(--tinte-3); }
+/* Aktiv-Rahmen über --fokus statt --primaer: dieselbe Hell/Dunkel-Umkehr wie
+   beim Fokusring, damit die Umrandung als Zustandsmarker 3:1 erreicht. Der
+   Zustand wird ohnehin mehrfach kodiert (aria-pressed, Fläche, Textfarbe). */
 .turnier-stufe[aria-pressed='true'] {
-  border-color: var(--primaer);
+  border-color: var(--fokus);
   background: var(--primaer-weich);
   color: var(--primaer-tief);
-  box-shadow: 0 0 0 1px var(--primaer) inset;
+  box-shadow: 0 0 0 1px var(--fokus) inset;
 }
 .turnier-stufe[aria-pressed='true'] .turnier-stufe-serie { color: var(--primaer-tief); }
 @media (hover: hover) {
