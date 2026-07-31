@@ -7,6 +7,7 @@ import { deltaFuer, niedrigsteStufe } from '../daten.js';
 import { bausteinAbsolviert } from '../fortschritt.js';
 import { label, t } from '../i18n.js';
 import { esc, geheZu, zeigeMeilenstein } from '../oberflaeche.js';
+import { zielEintraege } from '../pfade.js';
 import { schliesseOnboardingAb, setzeDiagnose } from '../zustand.js';
 import { gewaehlteZiele, zielwahlHtml } from './zielwahl.js';
 
@@ -143,8 +144,15 @@ function schliesseAb(el, daten, mitVormarkierung) {
     }
   }
   schliesseOnboardingAb();
+  // Wohin nach dem Wizard? Bisher landete man auf der Startseite — dort spiegelt
+  // nichts, was man gerade angegeben hat. Spez. 7.1 nennt als Default bei
+  // ausgelassenem Ziel ausdrücklich den Kompetenzpfad; wurde ein Ziel benannt,
+  // ist der Individualpfad die Antwort darauf. (Spez. 7.4 hält Zieläußerung und
+  // Pfadwahl entkoppelt — das Ziel bleibt überall gespeichert und wirksam, hier
+  // wird nur das Ergebnis gezeigt, keine Pfadbindung gesetzt.)
+  const mitZiel = zielEintraege(assistent.ziel).length > 0;
   assistent = null;
-  geheZu('#/');
+  geheZu(mitZiel ? '#/pfad/individual' : '#/pfad/kompetenz');
   if (meilenstein) zeigeMeilenstein(meilenstein);
 }
 
