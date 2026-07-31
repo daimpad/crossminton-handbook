@@ -193,9 +193,30 @@ Staging-Verzeichnis `_site` liegt unter dem Repo-Wurzelverzeichnis, darum kopier
 `deploy`-Job per `npm install --no-save playwright@1.56.1` — kein
 `package.json` im Repo, `node_modules`/`_site` sind gitignored. Lokale
 Entwicklung bleibt vollständig unverändert buildfrei über
-`python3 -m http.server`; das eingecheckte `sitemap.xml` zeigt weiterhin nur
-die Startseite (Platzhalter für den lokalen Betrieb) und wird ausschließlich
-beim Deploy durch die vollständige, generierte Fassung ersetzt.
+`python3 -m http.server`.
+
+### Nachtrag: die Produktion liegt woanders
+
+Der Abschnitt oben beschreibt den GitHub-Pages-Weg — inzwischen läuft die
+Produktion aber über einen **Git-Pull auf einen eigenen Server** (Plesk/netcup)
+unter `crossminton-handbook.de`. Dort gibt es **keinen Build-Schritt**: was
+`prerender.mjs` nach `_site/` schreibt, geht als Pages-Artefakt hoch und
+erreicht die ausgelieferte Seite nie.
+
+Zwei Konsequenzen, beide umgesetzt:
+
+* **`sitemap.xml` ist vollständig eingecheckt** und wird von
+  `scripts/sitemap.mjs` erzeugt — dependency-frei, ohne Playwright und ohne
+  Server, weil die Routen nur an den Inhaltsdaten hängen. Die Routenliste teilen
+  sich beide Skripte über `scripts/routen.mjs`, damit sie nicht auseinander
+  laufen; Test [16] in `tests/engine.test.mjs` schlägt an, wenn die eingecheckte
+  Datei veraltet.
+* **`.htaccess`** liefert den SPA-Fallback, den auf Pages `404.html` übernimmt.
+  Ohne ihn beantwortet Apache jeden Deep-Link mit 404 — für Erstbesucher und
+  Crawler, während Wiederkehrer dank Service-Worker-Fallback nichts merken.
+
+Die prerenderten Snapshots gibt es damit **nur** auf dem Pages-Zweitauftritt.
+Wer sie auch auf netcup will, braucht einen Deploy-Branch mit gebautem `_site`.
 
 ### Nachtrag: zwei Unterpfad-Fehler, die erst live auffielen
 

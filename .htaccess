@@ -1,0 +1,49 @@
+# Apache-Konfiguration für die Auslieferung auf dem eigenen Server (Plesk/netcup).
+#
+# WOFÜR: Die App routet über die History API — /baustein/griff ist eine echte
+# URL, aber KEINE Datei auf der Platte. Ohne die Regel unten beantwortet Apache
+# jeden Deep-Link mit einem 404: geteilte Links, Lesezeichen, Suchtreffer und
+# der Googlebot laufen ins Leere. (Ein Besucher, der die Seite schon einmal
+# geladen hat, merkt davon nichts — der Service Worker verwirft die 404 zugunsten
+# der gecachten Hülle. Genau deshalb fällt der Fehler beim eigenen Testen nicht
+# auf, wohl aber jedem Erstbesucher.)
+#
+# Auf GitHub Pages übernimmt diese Aufgabe 404.html (Pages liest keine .htaccess,
+# die Datei ist dort schlicht wirkungslos). Beide Wege bleiben nebeneinander
+# bestehen, damit die App unter beiden Auslieferungen funktioniert.
+#
+# ANNAHME: Die App liegt im Dokumentenstamm der Domain (crossminton-handbook.de),
+# passend zu PRAEFIX = '' in index.html/404.html. Läge sie in einem Unterordner,
+# müsste RewriteBase entsprechend lauten.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Vorhandene Dateien und Verzeichnisse unverändert ausliefern —
+  #    JS, CSS, JSON, Schriften, Grafiken, die PDFs unter rules/.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2. Alles mit Dateiendung ist ein Asset, keine App-Route (die 149 Routen sind
+  #    ausnahmslos punktfrei). Fehlt die Datei, soll es ein ehrlicher 404 sein —
+  #    nicht die HTML-Hülle mit Status 200, die ein fehlendes Bild verschleiert.
+  RewriteRule \.[a-zA-Z0-9]{1,8}$ - [L]
+
+  # 3. Der Rest ist eine App-Route: die Hülle ausliefern, ohne Weiterleitung.
+  #    Status 200 unter der ursprünglichen URL — der Router liest sie beim Boot
+  #    aus location.pathname und rendert die passende Ansicht.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Die App arbeitet buildfrei mit STABILEN Dateinamen (kein Content-Hashing).
+# Würden Hülle und Service Worker lange zwischengespeichert, bekämen Besucher
+# eine neue Fassung erst nach Ablauf der Frist zu sehen. 'no-cache' verbietet
+# das Zwischenspeichern nicht, erzwingt aber die Rückfrage beim Server — der
+# antwortet bei unveränderter Datei mit 304, kostet also kaum etwas.
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|sw\.js)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

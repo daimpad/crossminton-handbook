@@ -13,7 +13,9 @@ async function holeJson(pfad) {
 // Inhaltsdateien werden zu EINEM gemeinsamen Pool gemischt (Spez. 3.1).
 // Reihenfolge = Reihenfolge hier; die erste Datei mit vokabulare ist die
 // kanonische Vokabular-Quelle (weitere Blöcke tragen keins).
-const INHALTSDATEIEN = [
+// Exportiert, damit scripts/sitemap.mjs dieselbe Liste liest, statt eine zweite
+// zu pflegen — dort werden die Dateien per readFileSync geladen (kein fetch).
+export const INHALTSDATEIEN = [
   'data/bausteine.beginner-technik.json',
   'data/bausteine.beginner-taktik.json',
   'data/bausteine.beginner-mentales.json',
