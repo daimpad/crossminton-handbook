@@ -6,6 +6,7 @@
 import { aktiviereFeedback, feedbackAktiv } from '../feedback.js';
 import { t, text } from '../i18n.js';
 import { esc, externesZiel, heroKlein } from '../oberflaeche.js';
+import { VERSION } from '../version.js';
 
 function istPlatzhalter(wert) {
   return typeof wert === 'string' && wert.trim().startsWith('[');
@@ -59,7 +60,17 @@ function creditsLizenzHtml(block) {
     block.github && block.github.ziel && !istPlatzhalter(block.github.ziel)
       ? `<p class="info-cta"><a class="knopf knopf-sekundaer info-github" href="${esc(block.github.ziel)}" target="_blank" rel="noopener noreferrer">${GITHUB_SVG} ${esc(text(block.github.label) ?? 'GitHub')}</a></p>`
       : '';
-  return `<section class="karte"><h2>${esc(text(block.titel) ?? '')}</h2>${lizenzen}${credits}${github}</section>`;
+  return `<section class="karte"><h2>${esc(text(block.titel) ?? '')}</h2>${lizenzen}${credits}${github}${versionHtml()}</section>`;
+}
+
+// Stand der ausgelieferten Fassung — bewusst die letzte, leiseste Zeile der
+// Seite. Das Datum kommt nur mit, wenn es eines gibt: lokal und in Branches, in
+// denen .github/workflows/version.yml noch nicht lief, steht in js/version.js
+// der Ruhezustand `lokal` ohne Datum (s. den Kopf der Datei).
+function versionHtml() {
+  if (!VERSION?.commit) return '';
+  const stand = VERSION.datum ? `${VERSION.commit} · ${VERSION.datum}` : VERSION.commit;
+  return `<p class="version-zeile">${esc(t('version'))} ${esc(stand)}</p>`;
 }
 
 export function renderUeber(el, daten) {

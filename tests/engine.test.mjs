@@ -19,6 +19,7 @@ import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, tr
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { sammleRouten } from '../scripts/routen.mjs';
+import { VERSION } from '../js/version.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -1179,6 +1180,28 @@ pruefe(
 pruefe(
   'keine Route trägt eine Dateiendung (sonst greift der .htaccess-Fallback nicht)',
   sitemapRouten.every((r) => !/\.[a-zA-Z0-9]{1,8}$/.test(r.pfad)),
+);
+
+console.log('\n[17] Versionsstand (wird von CI unbeaufsichtigt überschrieben)');
+
+// js/version.js schreibt .github/workflows/version.yml bei jedem Push nach main
+// neu. Die Datei liegt im Modulgraph — ein kaputter Schreibvorgang bräche damit
+// die ganze App. Darum hier der Formvertrag, den der Workflow einhalten muss.
+pruefe('js/version.js exportiert ein VERSION-Objekt', VERSION != null && typeof VERSION === 'object');
+pruefe(
+  `commit ist eine nicht-leere Zeichenkette (${VERSION?.commit})`,
+  typeof VERSION?.commit === 'string' && VERSION.commit.length > 0,
+);
+pruefe(
+  'datum ist leer oder ISO-Datum (YYYY-MM-DD)',
+  VERSION?.datum === '' || /^\d{4}-\d{2}-\d{2}$/.test(VERSION?.datum ?? ''),
+  String(VERSION?.datum),
+);
+// Der Workflow ersetzt per Regex genau diese eine Zeile — passt das Format
+// nicht mehr, schreibt er still nichts (bzw. bricht ab). Hier festgehalten.
+pruefe(
+  'die VERSION-Zeile hat die Form, die der Workflow ersetzt',
+  /export const VERSION = \{[^}]*\};/.test(readFileSync(join(wurzel, 'js/version.js'), 'utf8')),
 );
 
 setzeZurueck();

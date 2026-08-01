@@ -1,0 +1,78 @@
+# Schreibt den ausgelieferten Stand nach js/version.js und committet ihn zurück.
+#
+# WOFÜR: Die Produktion (Plesk/netcup) zieht per Git-Pull den Repo-Stand — es
+# gibt dort keinen Build-Schritt, der eine Versionsnummer einsetzen könnte. Was
+# nicht eingecheckt ist, existiert dort nicht. Also muss die Nummer VOR dem Pull
+# im Repo stehen; dieser Workflow legt sie dort ab.
+#
+# Nebeneffekt, der eigentliche Nutzen im Alltag: Die im „Über"-Reiter angezeigte
+# Nummer sagt, welcher Commit tatsächlich ausgeliefert wird — damit lässt sich
+# ohne Server-Zugriff prüfen, ob der Plesk-Pull durchgelaufen ist.
+#
+# KEINE ENDLOSSCHLEIFE: Ein Push mit dem GITHUB_TOKEN löst per GitHub-Design
+# keine weiteren Workflow-Läufe aus. `[skip ci]` im Commit steht zusätzlich als
+# sichtbarer Hinweis (und als Schutz, falls je ein anderer Token genutzt wird).
+name: Version schreiben
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+# Nie zwei Läufe gleichzeitig — sonst schreiben sie sich gegenseitig um.
+concurrency:
+  group: version-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: js/version.js aus dem ausloesenden Commit schreiben
+        run: |
+          set -euo pipefail
+          KURZ="$(git rev-parse --short "${{ github.sha }}")"
+          # Datum des Commits, nicht des Laufs — sonst wiche die Anzeige bei
+          # einem nachtraeglichen Re-Run vom tatsaechlichen Stand ab.
+          DATUM="$(git show -s --format=%cs "${{ github.sha }}")"
+          # Nur den Wert ersetzen; der erklaerende Kopf der Datei bleibt stehen.
+          python3 - "$KURZ" "$DATUM" <<'PY'
+          import re, sys
+          kurz, datum = sys.argv[1], sys.argv[2]
+          pfad = 'js/version.js'
+          quelle = open(pfad, encoding='utf-8').read()
+          neu = re.sub(
+              r"export const VERSION = \{[^}]*\};",
+              f"export const VERSION = {{ commit: '{kurz}', datum: '{datum}' }};",
+              quelle,
+          )
+          if neu == quelle:
+              raise SystemExit('VERSION-Zeile in js/version.js nicht gefunden — Format geaendert?')
+          open(pfad, 'w', encoding='utf-8').write(neu)
+          print(f'js/version.js -> {kurz} ({datum})')
+          PY
+
+      - name: Zurueckcommitten, falls veraendert
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- js/version.js; then
+            echo "js/version.js unveraendert — nichts zu tun."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/version.js
+          git commit -m "Version auf $(git rev-parse --short ${{ github.sha }}) setzen [skip ci]"
+          # Zwischenzeitliche Pushes nicht ueberfahren: neu aufsetzen und erneut
+          # versuchen, statt mit --force zu gewinnen.
+          for versuch in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "Push fehlgeschlagen (Versuch $versuch) — rebasen und erneut versuchen."
+            git pull --rebase origin main
+          done
+          echo "Push nach drei Versuchen fehlgeschlagen." >&2
+          exit 1

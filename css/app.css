@@ -710,6 +710,17 @@ a.pfad-kachel {
 
 .leise { color: var(--tinte-2); font-size: 0.9rem; }
 
+/* Stand der ausgelieferten Fassung, letzte Zeile im „Über"-Reiter. Bewusst die
+   leiseste Angabe der Seite — kleiner als .leise und im Sekundär-Ton. Kein
+   eigener Grauwert: --tinte-3 ist der Token, der dafür schon auf Kontrast
+   geprüft ist (s. den Kontrast-Fallstrick in CLAUDE.md), hell wie dunkel. */
+.version-zeile {
+  margin: 1.25rem 0 0;
+  color: var(--tinte-3);
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
 /* Nur für Screenreader (visuell versteckt) — Struktur-H1 der Startseite, aria-live-Ansagen. */
 .nur-sr {
   position: absolute;
