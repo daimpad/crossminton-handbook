@@ -4,7 +4,7 @@
 // sie füllt (Name, Lizenz, GitHub-URL) — sie werden nie erfunden oder verlinkt.
 
 import { aktiviereFeedback, feedbackAktiv } from '../feedback.js';
-import { t, text } from '../i18n.js';
+import { label, t, text } from '../i18n.js';
 import { esc, externesZiel, heroKlein } from '../oberflaeche.js';
 import { VERSION } from '../version.js';
 
@@ -34,6 +34,44 @@ function abschnittHtml(block) {
       ? `<p class="info-cta"><a class="knopf knopf-sekundaer info-github" href="${esc(block.github.ziel)}" target="_blank" rel="noopener noreferrer">${GITHUB_SVG} ${esc(text(block.github.label) ?? 'GitHub')}</a></p>`
       : '';
   return `<section class="karte"><h2>${esc(text(block.titel) ?? '')}</h2>${eintraege}${github}</section>`;
+}
+
+// Verweis auf einen Baustein MITTEN im Fließtext. Die Marke steht in der
+// Inhalts-JSON — sprachneutral, wie überall sonst die Identität:
+//
+//   [[baustein:griff]]            → Beschriftung kommt aus dem Label, also übersetzt
+//   [[baustein:umschalten|Text]]  → eigene Beschriftung, wenn der Titel im Satz klemmt
+//
+// Der ID-freie Normalfall ist der bessere: er hält die Beschriftung automatisch
+// in der aktiven Sprache und dupliziert keinen Text in die Übersetzungen.
+const BAUSTEIN_MARKE = /\[\[baustein:([a-z0-9_]+)(?:\|([^\]]*))?\]\]/g;
+
+// ERST escapen, DANN die Marken auflösen. Das ist die sichere Reihenfolge: die
+// Marke selbst trägt keine HTML-Sonderzeichen und übersteht esc() unverändert,
+// der eingesetzte Anker ist vollständig selbst gebaut. Umgekehrt (erst ersetzen,
+// dann escapen) würde der Anker gleich wieder zu Text.
+function fliesstextHtml(wert, daten) {
+  return esc(text(wert) ?? '').replace(BAUSTEIN_MARKE, (_treffer, id, eigene) => {
+    // Unbekannte ID: lieber lesbarer Text ohne Link als ein toter Verweis.
+    if (!daten?.bausteinVonId?.has(id)) return eigene || esc(label('baustein', id));
+    // `eigene` stammt aus dem bereits escapten Text — kein zweites Mal escapen.
+    const beschriftung = eigene || esc(label('baustein', id));
+    return `<a href="#/baustein/${encodeURIComponent(id)}">${beschriftung}</a>`;
+  });
+}
+
+// Erzählende Kapitel („Was es ist", „Wozu", …) als eigene Karten. Anders als
+// abschnittHtml sind das normale Absätze, keine .leise-Fußnoten — und sie dürfen
+// Baustein-Verweise tragen.
+function kapitelHtml(kapitel, daten) {
+  if (!Array.isArray(kapitel)) return '';
+  return kapitel
+    .map((k) => {
+      const absaetze = (k.absaetze || []).map((a) => `<p>${fliesstextHtml(a, daten)}</p>`).join('');
+      if (!absaetze) return '';
+      return `<section class="karte"><h2>${esc(text(k.titel) ?? '')}</h2>${absaetze}</section>`;
+    })
+    .join('');
 }
 
 // Inline-Absprung im Fließtext (Lizenzname/Credit-Name als echter Link). Nicht-
@@ -84,6 +122,7 @@ export function renderUeber(el, daten) {
   el.innerHTML = `
     ${heroKlein('fa-compass', text(u.titel) ?? t('nav_ueber'), '', 'pf-blau')}
     ${absaetze ? `<section class="karte">${absaetze}</section>` : ''}
+    ${kapitelHtml(u.kapitel, daten)}
     ${abschnittHtml(u.danksagungen)}
     ${creditsLizenzHtml(u.credits_lizenz)}
     ${links ? `<section class="karte">${links}</section>` : ''}`;
