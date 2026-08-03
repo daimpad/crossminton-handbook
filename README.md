@@ -14,7 +14,7 @@
 [![License Content: CC BY-SA 4.0](https://img.shields.io/badge/License%20(Content)-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![PWA](https://img.shields.io/badge/PWA-offline%20nutzbar-5a0fc8.svg)](#immer-dabei)
 [![Sprachen](https://img.shields.io/badge/Sprachen-de%20·%20en%20·%20fr%20·%20pl-38a4f1.svg)](#in-vier-sprachen)
-[![Bausteine](https://img.shields.io/badge/Lernbausteine-108-25c449.svg)](#das-angebot)
+[![Bausteine](https://img.shields.io/badge/Lernbausteine-108-25c449.svg)](#was-drin-ist)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-25c449.svg)](https://github.com/daimpad/crossminton-handbook/pulls)
 
 </div>
@@ -23,51 +23,109 @@
 
 ## Was ist das?
 
-Das Crossminton-Handbuch bündelt das Wissen über den Sport — Technik, Taktik, Mentales, Athletik und Ausrüstung — in einer App, die dich dort abholt, wo du stehst. Statt einem linearen Text bietet es **108 kleine, in sich geschlossene Lernbausteine**, die über weiche Verbindungen zu einem persönlichen Lernpfad zusammenwachsen.
+Crossminton ist schnell gelernt und schwer gut zu spielen. Wissen darüber gibt es reichlich — es liegt nur verstreut: in Videos, Foren, Trainerköpfen und eigener Erfahrung. Das Crossminton-Handbuch sammelt es an einem Ort und ordnet es so, dass man **dort einsteigen kann, wo man gerade steht**.
 
-Nichts ist gesperrt. Der Voraussetzungsgraph *sortiert* — er hält dich nie auf. Fehlt eine Grundlage, siehst du einen Hinweis, keine verschlossene Tür.
+Der Unterschied zu einem Lehrbuch liegt im Zuschnitt. Statt eines linearen Textes gibt es **108 kleine, in sich geschlossene Lernbausteine**. Jeder behandelt genau eine Sache — den Universalgriff, das Umschalten zwischen Angriff und Verteidigung, den Umgang mit Wind — und besteht aus einem Erklärteil plus entweder einer Übung oder einer Reflexionsaufgabe. Ein Baustein ist in wenigen Minuten gelesen und danach umzusetzen.
 
-## Das Angebot
+Diese Bausteine kennen einander: `Der Aufschlag` weiß, dass `Der Universalgriff` sinnvollerweise vorher kommt. Aus solchen Verbindungen entstehen Wege durch den Stoff, ohne dass ein Inhalt zweimal geschrieben werden müsste.
 
-**Vier Wege durch denselben Stoff.** Es gibt einen Pool an Bausteinen und mehrere Arten, ihn zu durchqueren:
+### Drei Prinzipien, die das Ganze tragen
 
-- **Kompetenzpfad** — die Leiter entlang deiner Könnensstufe. Kumulativ: 34 Bausteine für Einsteiger, 66 für Fortgeschrittene, 93 für Experten.
-- **Themenpfad** — frei nach Feld stöbern: Technik (19), Taktik (29), Mentales (19), Athletik (19), Ausrüstung (7).
-- **Individualpfad** — nur die Bausteine, die auf ein selbst gewähltes Ziel einzahlen.
-- **Trainingspfad** — 8 kuratierte Einheiten in drei Phasen (Erwärmung, Hauptteil, Ausklang), die die Übungsteile zu echten Sessions verbinden.
+**Nichts ist gesperrt.** Der Voraussetzungsgraph *sortiert*, er hält nie auf. Wer direkt beim Sprung-Smash einsteigen will, kann das — es erscheint ein Hinweis auf die fehlende Grundlage, keine verschlossene Tür. Das Handbuch traut den Lesenden zu, selbst zu entscheiden, was sie brauchen.
 
-**Dazu Querschnittsthemen**, die quer über Stufen und Domänen laufen:
+**Fortschritt hängt am Inhalt, nicht am Weg.** Ein abgehakter Baustein bleibt abgehakt, egal über welchen Pfad man ihn erreicht hat. Wer erst thematisch stöbert und später der Stufenleiter folgt, findet dort die bereits erledigten Stationen wieder.
 
-- **Umsteiger-Hinweise** — wer aus Badminton, Tennis oder Squash kommt, bekommt die entscheidenden Unterschiede genau dort, wo eine mitgebrachte Gewohnheit kollidiert. Kein zusätzliches Kapitel: der Hinweis tritt an die Stelle der Erklärung, der Übungsteil bleibt derselbe.
-- **Das Doppel** — 18 Bausteine über alle drei Stufen, vom ersten Zusammenspiel bis zum eingespielten Paar als System.
-- **Draußen spielen** — 10 Bausteine zu Wind, Sonne, Nässe, Hitze, Kälte und verschiedenen Böden, inklusive Snow-, Beach- und Blackminton.
-- **Ausrüstung** — Speeder, Schläger, Schuhe, Kleidung, Bespannung und Griffband.
+**Herkunft wird mitgedacht.** Wer aus Badminton, Tennis oder Squash kommt, bringt Technik mit — und Gewohnheiten, die im Crossminton stören. Genau an diesen Stellen tritt ein **Delta** an die Stelle der normalen Erklärung: derselbe Baustein, andere Erklärung, gleiche Übung. Kein Extrakapitel, das man zusätzlich lesen müsste, sondern die passende Erklärung an Ort und Stelle. Derzeit 24 solcher Deltas für drei Herkunftssportarten.
 
-**Und als Nachschlagewerk:**
+## Was drin ist
 
-- **Spielregeln** — 44 Regeln in 13 Abschnitten, jede mit einer Erklärung in klarer Sprache, auf Grundlage des offiziellen ICO-Regelwerks (Stand 2024).
-- **Turnier-Regularium** — was für eine Turnierstufe gilt, interaktiv gefiltert: 5 Stufen, 26 Anforderungen, dazu die Abweichungen für Doppel- und Junior-Konkurrenzen.
+### Der Baustein-Pool
+
+| Feld | Bausteine | Worum es geht |
+| --- | --- | --- |
+| **Technik** | 19 | Griff, Aufschlag, Drive, Clear, Smash, Stopp, Schnitt, Beinarbeit, Täuschung |
+| **Taktik** | 29 | Feldkontrolle, Punkte aufbauen, Gegner lesen, Matchplan, Doppel-Taktik |
+| **Mentales** | 19 | Routinen, Fehler abhaken, Druck deuten, Flow, Wettkampfzustand |
+| **Athletik** | 19 | Aufwärmen, Beweglichkeit, Schnelligkeit, Rumpf, Ausdauer, Regeneration |
+| **Ausrüstung** | 7 | Speeder, Schläger, Schuhe, Kleidung, Bespannung, Griffband |
+
+Davon tragen **44 einen Übungsteil** (etwas zum Machen) und **64 eine Reflexionsaufgabe** (etwas zum Durchdenken). Welches von beidem, hängt am Inhalt: Bewegung wird geübt, Haltung wird durchdacht.
+
+### Vier Wege durch denselben Stoff
+
+Es gibt *einen* Pool und mehrere Arten, ihn zu durchqueren. Kein Inhalt liegt doppelt vor.
+
+- **Kompetenzpfad** — die Leiter entlang der eigenen Könnensstufe, kumulativ: **34** Bausteine für Einsteiger, **66** für Fortgeschrittene, **93** für Experten. Wer fortgeschritten ist, sieht die Einsteiger-Stationen weiterhin — sie verschwinden nicht, sie sind nur meist schon abgehakt.
+- **Themenpfad** — frei nach Feld stöbern, ohne Stufenlogik.
+- **Individualpfad** — nur die Bausteine, die auf ein selbst gewähltes Ziel einzahlen („sicherer aufschlagen", „länger durchhalten", „im Doppel besser abstimmen").
+- **Trainingspfad** — **8 kuratierte Einheiten** in drei Phasen (Erwärmung, Hauptteil, Ausklang), die die Übungsteile zu echten Sessions verbinden.
+
+### Querschnittsthemen
+
+Achsen, die quer über Stufen und Felder laufen:
+
+- **Das Doppel** — **18** Bausteine über alle drei Stufen, vom ersten „Wer nimmt den Ball?" bis zum Paar, das als System agiert.
+- **Draußen spielen** — **10** Bausteine zu Wind, Sonne, Nässe, Hitze, Kälte, Dunkelheit und verschiedenen Böden, inklusive Snow-, Beach- und Blackminton.
+- **Ausrüstung** — eigenes Kapitel und zugleich Themenfeld: was der Unterschied zwischen den Speeder-Typen praktisch bedeutet, wann sich eine andere Bespannung lohnt.
+- **Umsteiger-Deltas** — die 24 herkunftsspezifischen Erklärungen für Badminton, Tennis und Squash.
+
+### Nachschlagewerke
+
+- **Spielregeln** — **44 Regeln in 13 Abschnitten** auf Grundlage des offiziellen ICO-Regelwerks (Stand 2024), jede mit einer Erklärung in klarer Sprache daneben. Verbindlich bleibt das Original; hier steht, was es im Spiel bedeutet.
+- **Turnier-Regularium** — was für eine Turnierstufe gilt, interaktiv gefiltert: **5 Stufen**, **26 Anforderungen**, dazu **2 Varianten** für Doppel- und Junior-Konkurrenzen. Beim Wechsel der Stufe wird markiert, was gegenüber der nächstniedrigeren *neu* oder *verschärft* ist — die Frage, die man beim Ausrichten tatsächlich hat.
 
 ## Werkzeuge
 
-- **Trainingsplan** — verteilt Einheiten über bis zu zwölf Wochen und achtet dabei auf Belastungswechsel und thematische Abwechslung. Export als PDF oder Kalenderdatei.
-- **KO-Turnier** — Namen eintragen, auslosen, Sieger antippen: die App baut das Bracket und hält fest, wer wie weit kam. Für den Spaßwettbewerb im Verein, kein offizielles Turniersystem.
+- **Trainingsplan** — verteilt Einheiten über bis zu zwölf Wochen und achtet dabei auf Belastungswechsel und thematische Abwechslung. Einzelne Sessions lassen sich tauschen oder streichen; Export als PDF oder Kalenderdatei.
+- **KO-Turnier** — Namen eintragen, auslosen, Sieger antippen: die App baut das Bracket, verteilt Freilose fair über die Runden und hält fest, wer wie weit kam. Für den Spaßwettbewerb im Verein.
 - **Merkliste und Suche** — Bausteine für später vormerken, Volltextsuche über alle Inhalte.
-- **Trainer-Perspektive** — wer unterrichtet, schaltet zusätzlich Vermittlungswissen und 32 typische Fehlerbilder frei: Symptom, Ursache, Korrektur.
+- **Trainer-Perspektive** — ein Schalter im Profil, der zusätzliche Ebenen freischaltet: **5 Bausteine zur Trainingsgestaltung** (vermitteln, zugänglich machen, korrigieren, Übungen aufbauen, Gruppen führen) und **32 typische Fehlerbilder**, je mit Symptom, Ursache und Korrektur, direkt beim betroffenen Baustein.
+
+## Wozu — sechs typische Situationen
+
+**„Ich habe angefangen und weiß nicht, was als Nächstes."**
+Kompetenzpfad, Stufe Einsteiger: 34 Bausteine in sinnvoller Reihenfolge, vom Griff bis zu den ersten taktischen Grundlagen. Abhaken, was sitzt.
+
+**„Ich komme vom Badminton und mache irgendetwas falsch."**
+Herkunft im Profil setzen. Überall dort, wo eine mitgebrachte Gewohnheit kollidiert — Handgelenkseinsatz, Aufschlag, Spielfeldtiefe — steht dann die Erklärung für Umsteiger statt der allgemeinen.
+
+**„Mein Aufschlag ist unsicher."**
+Individualpfad mit diesem Ziel: nur die Bausteine, die darauf einzahlen, quer durch Technik, Taktik und Mentales — statt eines kompletten Lehrgangs.
+
+**„Ich leite Dienstagabend das Training."**
+Eine der 8 Einheiten wählen und durchgehen; sie führt durch Erwärmung, Hauptteil und Ausklang mit konkreten Hinweisen je Station. Für längerfristige Planung erzeugt der Trainingsplan eine Staffel über mehrere Wochen mit sinnvollem Lastwechsel.
+
+**„In meiner Gruppe schlagen drei Leute immer ins Netz."**
+Trainer-Perspektive: die Fehlerbilder benennen Symptom, wahrscheinliche Ursache und eine Korrektur — samt Ansage, die man auf dem Platz sagen kann.
+
+**„Wir richten ein 250-Punkte-Turnier aus."**
+Turnier-Regularium auf die Stufe stellen: welche Anforderungen gelten, welche davon gegenüber der 100er-Stufe neu oder verschärft sind, und was bei einer Doppel-Konkurrenz zusätzlich abweicht.
 
 ## Für wen?
 
-Für Einsteiger, die einen klaren ersten Weg suchen. Für Umsteiger aus verwandten Rückschlagsportarten, die schnell den Unterschied verstehen wollen. Für ambitionierte Spieler, die bis in die Experten-Feinheiten arbeiten. Und für Trainerinnen und Trainer, die Inhalte weitergeben.
+**Einsteiger:innen**, die einen klaren ersten Weg suchen und nicht wissen, womit sie anfangen sollen. Der Kompetenzpfad nimmt diese Entscheidung ab, ohne zu bevormunden.
+
+**Umsteiger:innen** aus Badminton, Tennis oder Squash, die schnell verstehen wollen, was anders ist — und vor allem, welche ihrer bewährten Gewohnheiten hier gegen sie arbeiten.
+
+**Ambitionierte Spieler:innen**, die über die Grundlagen hinaus sind und an Feinheiten arbeiten: Täuschung, frühes Nehmen, Tempowechsel, Matchführung, Wettkampfzustand.
+
+**Trainerinnen und Trainer**, die Inhalte weitergeben — mit fertigen Einheiten, Fehlerbildern und dem methodischen Layer zur Trainingsgestaltung. Auch für Quereinsteiger:innen ins Trainieren gedacht, die selbst gut spielen, aber noch wenig vermittelt haben.
+
+**Vereine und Gruppen**, die einen gemeinsamen Bezugspunkt brauchen: dieselben Begriffe, dieselben Übungen, dazu Regeln und Turnierbedingungen zum Nachschlagen und ein Werkzeug für den Turnierabend.
+
+Vorkenntnisse braucht es keine. Wer nur eine Regel nachschlagen will, kann das tun, ohne sich mit dem Rest zu befassen.
 
 ## Immer dabei
 
-Die App läuft vollständig im Browser — keine Anmeldung, keine Installation nötig, keine Werbung. Einmal geladen funktioniert sie **auch ohne Internet**, also auf dem Platz, in der Halle oder unterwegs. Als PWA lässt sie sich auf dem Startbildschirm ablegen.
+Die App läuft vollständig im Browser — keine Anmeldung, keine Installation nötig, keine Werbung. Einmal geladen funktioniert sie **auch ohne Internet**, also auf dem Platz, in der Halle oder unterwegs. Als PWA lässt sie sich auf dem Startbildschirm ablegen und verhält sich dann wie eine App.
 
-Dein Fortschritt bleibt auf deinem Gerät (lokal im Browser) und wird nirgendwo hochgeladen.
+Der Fortschritt bleibt auf dem eigenen Gerät (lokal im Browser) und wird nirgendwo hochgeladen. Es gibt kein Konto, das man anlegen müsste.
+
+Dazu **63 Diagramme** — Schlagbewegungen, Feldpositionen, Laufwege, Doppel-Formationen — als Vektorgrafiken, die sich an helles und dunkles Design anpassen.
 
 ## In vier Sprachen
 
-Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick.
+Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 616 Bedienelemente und 824 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
 
 ## Technische Dokumentation
 
@@ -76,7 +134,9 @@ Alles Technische — Aufbau, Datenmodell, Architektur, Setup und die vollständi
 
 ## Mitmachen
 
-Beiträge sind willkommen — Fehler melden, übersetzen, Code beitragen. Die Details stehen im Reiter „Mitmachen" der App und in der [technischen Dokumentation](docs/TECHNICAL.md).
+Beiträge sind willkommen — Fehler melden, übersetzen, Inhalte ergänzen, Code beitragen. Die Details stehen im Reiter „Mitmachen" der App und in der [technischen Dokumentation](docs/TECHNICAL.md).
+
+Für inhaltliche Rückmeldungen gibt es einen Kommentarmodus: `crossminton-handbook.de/?feedback` schaltet ein Werkzeug frei, mit dem sich Textstellen markieren und kommentieren lassen.
 
 ## Lizenz
 
