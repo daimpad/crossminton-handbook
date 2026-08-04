@@ -1238,6 +1238,22 @@ pruefe(
   sitemapRouten.every((r) => !/\.[a-zA-Z0-9]{1,8}$/.test(r.pfad)),
 );
 
+// Die Google-Search-Console-Bestaetigung haengt an EINER Datei im Repo-Root
+// (Methode „HTML-Datei"). Verschwindet sie beim Aufräumen, verliert die Property
+// still ihre Verifizierung — Wochen später und ohne jedes Signal. Genau darum
+// hier festgehalten; kopiere() in scripts/prerender.mjs traegt sie automatisch
+// ins Artefakt, es braucht also sonst nichts.
+const SC_DATEI = 'google2ea79d8f6f2f6a37.html';
+pruefe(
+  `Search-Console-Bestaetigung liegt im Root (${SC_DATEI})`,
+  existsSync(join(wurzel, SC_DATEI)),
+);
+pruefe(
+  'ihr Inhalt ist die von Google erwartete Zeile',
+  existsSync(join(wurzel, SC_DATEI))
+    && readFileSync(join(wurzel, SC_DATEI), 'utf8').trim() === `google-site-verification: ${SC_DATEI}`,
+);
+
 console.log('\n[17] Versionsstand (wird von CI unbeaufsichtigt überschrieben)');
 
 // js/version.js schreibt .github/workflows/version.yml bei jedem Push nach main
