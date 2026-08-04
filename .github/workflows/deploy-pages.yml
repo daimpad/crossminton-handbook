@@ -107,6 +107,26 @@ jobs:
           done
           grep -q '<html lang="pl">' _site/pl/regeln/index.html \
             || { echo "pl-Snapshot traegt nicht lang=pl" >&2; exit 1; }
+          # Strukturierte Daten: muessen GUELTIGES JSON sein (ein Syntaxfehler
+          # macht den Block wertlos, ohne dass die Seite kaputt aussieht) und
+          # duerfen keine Prerender-Herkunft mehr tragen.
+          node -e '
+            const {readFileSync}=require("fs");
+            const roh=/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+            let n=0;
+            for (const f of ["baustein/griff","en/baustein/griff","fr/regeln","pl/pfad/themen"]) {
+              const h=readFileSync("_site/"+f+"/index.html","utf8");
+              if (h.includes("localhost")) { console.error(f+": localhost-Rest im Snapshot"); process.exit(1); }
+              const bloecke=[...h.matchAll(roh)].map(m=>JSON.parse(m[1]));
+              const graph=bloecke.find(b=>b["@graph"]);
+              if (!graph) { console.error(f+": kein seitenbezogenes JSON-LD"); process.exit(1); }
+              if (!graph["@graph"].some(k=>k["@type"]==="BreadcrumbList")) {
+                console.error(f+": keine BreadcrumbList"); process.exit(1);
+              }
+              n+=bloecke.length;
+            }
+            console.log("JSON-LD geprueft: "+n+" Bloecke, alle gueltig");
+          '
 
       - uses: actions/upload-artifact@v4
         with:

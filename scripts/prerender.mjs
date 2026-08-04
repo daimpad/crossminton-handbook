@@ -139,6 +139,10 @@ async function erfasseSchnappschuss(page, pfad) {
     titel: document.title,
     beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
     inhalt: document.getElementById('ansicht').innerHTML,
+    // Strukturierte Daten: vom Client erzeugt (js/seo.js), hier nur eingesammelt
+    // — nicht in Node zweitgerechnet. Die URLs darin tragen noch die
+    // localhost-Herkunft; die zieht schemaFuerAusgabe() gerade.
+    schema: document.head.querySelector('script[type="application/ld+json"][data-seite]')?.textContent || '',
     sprachAlternativen: [...document.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => ({
       hreflang: l.getAttribute('hreflang'),
       href: l.getAttribute('href'),
@@ -180,6 +184,13 @@ function alternativenHtml(basisPfad) {
     .join('\n');
 }
 
+// Die vom Client erzeugten JSON-LD-URLs zeigen auf den Prerender-Server;
+// ausgeliefert wird SITE_URL. Reiner Herkunfts-Tausch — die Ableitung selbst
+// bleibt beim Client, hier wird nichts zweitgerechnet.
+function schemaFuerAusgabe(roh) {
+  return roh.replaceAll(`http://localhost:${PORT}${PRAEFIX}`, SITE_URL);
+}
+
 function baueSnapshot(vorlage, route) {
   let html = vorlage.replace('<main id="ansicht" tabindex="-1"></main>', `<main id="ansicht" tabindex="-1">${route.inhalt}</main>`);
 
@@ -187,13 +198,23 @@ function baueSnapshot(vorlage, route) {
   // Fehlte dort der Rückverweis, wäre die Verknüpfung nicht wechselseitig, und
   // Google verwirft einseitige hreflang-Angaben.
   html = html.replace('<html lang="de">', `<html lang="${esc(route.lang || QUELLSPRACHE)}">`);
-  html = html.replace('</head>', `${alternativenHtml(route.basisPfad ?? route.pfad)}\n</head>`);
+  // Funktion als Ersatz, nicht String: ein '$&' oder '$1' im eingesetzten Text
+  // würde sonst von String.replace als Rückverweis gedeutet und verstümmelt.
+  const vorKopfEnde = (teil) => {
+    html = html.replace('</head>', () => `${teil}\n</head>`);
+  };
+  vorKopfEnde(alternativenHtml(route.basisPfad ?? route.pfad));
+  // Die Startseite trägt nur ihren WebSite-Block; seiteSchema() liefert dort
+  // nichts, der Zweig ist also für '/' ohnehin leer.
+  if (route.schema) {
+    vorKopfEnde(`  <script type="application/ld+json">${schemaFuerAusgabe(route.schema)}</script>`);
+  }
 
   // Nur die deutsche Wurzel behält ihren handgepflegten Tier-1-Kopf.
   if (route.pfad === '/') return html;
   const kanonisch = `${SITE_URL}${route.pfad}`;
   const ersetze = (muster, wert) => {
-    html = html.replace(muster, `$1${esc(wert)}$2`);
+    html = html.replace(muster, (_treffer, vor, nach) => `${vor}${esc(wert)}${nach}`);
   };
   ersetze(/(<title>)[^<]*(<\/title>)/, route.titel);
   ersetze(/(<meta name="description" content=")[^"]*(">)/, route.beschreibung);

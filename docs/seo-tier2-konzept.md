@@ -285,3 +285,57 @@ gemountet an der Wurzel:
   Ohne diese beiden externen Schritte bleibt die App unter
   `daimpad.github.io/crossminton-handbook/` erreichbar, auch wenn alle
   Repo-Werte schon auf die neue Domain zeigen.
+
+## Baustein 4 — Strukturierte Daten je Seite (umgesetzt)
+
+Bis hierher trug **jede** Seite genau denselben `WebSite`-Block aus `index.html`.
+Der beschreibt das Angebot als Ganzes und ist für die Startseite richtig — für
+596 Unterseiten sagte er nichts darüber aus, *was diese Seite ist* oder *wo sie
+im Aufbau steht*. Jetzt kommt je Route ein zweiter, seitenbezogener Block dazu.
+
+**Was ausgezeichnet wird — und was bewusst nicht:**
+
+| Knoten | Wo | Warum |
+| --- | --- | --- |
+| `BreadcrumbList` | jede Route außer den vier Startseiten | beantwortet „wo bin ich" und erscheint in Suchergebnissen als Pfadzeile |
+| `LearningResource` | die 108 Bausteine + 8 Trainingseinheiten | das ist der eigentliche Lerninhalt |
+| — | Regeln, Turnier, Über, Mitmachen, Rechtstexte, Übersichten | Nachschlagewerk, keine Lerneinheit; eine falsche Auszeichnung ist schlechter als keine |
+
+Nicht genutzt: `FAQPage` (Google beschränkt die Rich Results seit 2023 auf
+behördliche/medizinische Quellen — hier wirkungslos bis riskant) und `HowTo`
+(von Google 2023 abgekündigt). `Course` verlangt Anbieter-/Angebotsangaben, die
+es hier nicht gibt.
+
+**Die Startseiten tragen bewusst keinen eigenen Block.** Die deutsche Wurzel
+beschreibt der handgepflegte `WebSite`-Block bereits vollständig; für `/en`,
+`/fr` und `/pl` gilt dasselbe, und eine Brotkrume mit einem einzigen Eintrag
+wäre ohnehin bedeutungslos.
+
+**Eine Ableitung, zwei Verbraucher — wie bei Titel/Description.**
+`seiteSchema(daten, segmente, urlVon)` in `js/seo.js` ist rein und DOM-frei;
+`js/app.js` setzt daraus live **genau ein** wiederverwendetes
+`<script type="application/ld+json" data-seite>` (würde je Routenwechsel eins
+angehängt, behauptete die Seite bald, mehrere verschiedene Dinge zugleich zu
+sein), und `scripts/prerender.mjs` **liest es nur aus dem DOM** und tauscht die
+Herkunft (`http://localhost:8123` → `SITE_URL`). In Node wird nichts
+zweitgerechnet.
+
+**Zwei Fallstricke, die den Entwurf geprägt haben:**
+
+1. **`js/seo.js` darf `js/pfade.js` nicht importieren.** Das zöge `js/zustand.js`
+   mit — und damit hinge der Dokumentkopf am persönlichen Fortschritt: dieselbe
+   Adresse ergäbe je Besucher andere Auszeichnungen. Die Eltern-Regel in
+   `elternRouten()` ist darum ausbuchstabiert statt aus den Pfad-Funktionen
+   abgeleitet.
+2. **Nicht jede naheliegende Eltern-Route existiert.**
+   `/pfad/themen/trainingsgestaltung` gibt es nicht (die Facette ist hinter
+   `diagnose().trainer` gegated und daher 0-zählig), und Umgebungs-Bausteine sind
+   aus dem Themenpfad *herausgefiltert* — ihre Domänen-Seite listet sie gar
+   nicht. Beide bekommen darum ein anderes Zuhause (`/pfad/kompetenz/trainer`
+   bzw. `/pfad/umgebung`). Weil eine ausbuchstabierte Regel still veralten kann,
+   prüft Test [18] **jede** erzeugte Eltern-URL gegen `sammleRouten()` — dieselbe
+   Liste, aus der Sitemap und Prerender entstehen. Gegenprobe gemacht: Regel
+   entfernt → Test rot, mit Nennung der fünf toten Routen.
+
+Der Deploy-Workflow prüft zusätzlich vor dem Ausliefern, dass die Blöcke
+gültiges JSON sind und keine Prerender-Herkunft mehr tragen.

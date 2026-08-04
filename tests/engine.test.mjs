@@ -20,6 +20,7 @@ import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { VERSION } from '../js/version.js';
+import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -1258,6 +1259,107 @@ pruefe(
   'die VERSION-Zeile hat die Form, die der Workflow ersetzt',
   /export const VERSION = \{[^}]*\};/.test(readFileSync(join(wurzel, 'js/version.js'), 'utf8')),
 );
+
+console.log('\n[18] Strukturierte Daten (JSON-LD je Route)');
+
+// Ohne Diagnose rechnen — themenDomaenen() gated die Trainer-Facette, und die
+// Routenmenge unten muss dieselbe sein, die auch der Prerender sieht.
+setzeZurueck();
+
+const HERKUNFT = 'https://x.test';
+const urlVon = (segmente) => HERKUNFT + (segmente.length ? `/${segmente.map(encodeURIComponent).join('/')}` : '/');
+const alsPfad = (url) => url.slice(HERKUNFT.length);
+const schemaFuer = (segmente) => seiteSchema(daten, segmente, urlVon);
+const knotenTyp = (schema, typ) => (schema?.['@graph'] || []).find((k) => k['@type'] === typ);
+const krumenPfade = (segmente) =>
+  (knotenTyp(schemaFuer(segmente), 'BreadcrumbList')?.itemListElement || []).map((e) => alsPfad(e.item));
+
+// Die Startseite trägt den handgepflegten WebSite-Block aus index.html; ein
+// zweiter Block mit denselben Aussagen wäre nur Rauschen.
+pruefe('Startseite bekommt kein eigenes Schema', schemaFuer([]) === null);
+
+const griffSchema = schemaFuer(['baustein', 'griff']);
+pruefe('Baustein: @context + @graph gesetzt', griffSchema?.['@context'] === 'https://schema.org' && Array.isArray(griffSchema['@graph']));
+pruefe('Baustein: trägt BreadcrumbList UND LearningResource', !!knotenTyp(griffSchema, 'BreadcrumbList') && !!knotenTyp(griffSchema, 'LearningResource'));
+pruefe(
+  'Baustein: Brotkrume Start → Themenpfad → Domäne → Seite',
+  JSON.stringify(krumenPfade(['baustein', 'griff'])) === JSON.stringify(['/', '/pfad/themen', '/pfad/themen/technik', '/baustein/griff']),
+  krumenPfade(['baustein', 'griff']).join(' › '),
+);
+pruefe(
+  'Baustein: learningResourceType folgt dem Aufgabenteil',
+  daten.bausteine.every((b) => {
+    const lern = knotenTyp(schemaFuer(['baustein', b.id]), 'LearningResource');
+    return lern?.learningResourceType === (hatUebungsteil(b) ? 'exercise' : 'lesson');
+  }),
+);
+
+// Umgebungs-Bausteine sind aus dem Themenpfad HERAUSGEFILTERT — eine Brotkrume
+// auf ihre Domänen-Seite zeigte auf eine Seite, die sie gar nicht listet.
+const umgebungsBaustein = daten.bausteine.find((b) => b.typ === 'umgebungs_baustein');
+pruefe(
+  `Umgebungs-Baustein hängt an der Umgebungs-Achse (${umgebungsBaustein?.id})`,
+  krumenPfade(['baustein', umgebungsBaustein.id])[1] === '/pfad/umgebung',
+);
+// Reine Trainer-Bausteine: /pfad/themen/trainingsgestaltung ist KEINE Route.
+const trainerBaustein = daten.bausteine.find((b) => niedrigsteStufe(daten, b) === 'trainer');
+pruefe(
+  `Trainer-Baustein hängt am Trainer-Kompetenzpfad (${trainerBaustein?.id})`,
+  krumenPfade(['baustein', trainerBaustein.id])[1] === '/pfad/kompetenz/trainer',
+);
+
+pruefe('Trainingseinheit trägt eine LearningResource', !!knotenTyp(schemaFuer(['training', daten.einheiten[0].id]), 'LearningResource'));
+// Referenz- und Infoseiten sind Nachschlagewerk, keine Lerneinheit. Eine falsche
+// Auszeichnung ist schlechter als keine.
+pruefe(
+  'Referenzseiten tragen KEINE LearningResource',
+  [['regeln'], ['turnier'], ['ueber'], ['mitmachen'], ['impressum'], ['datenschutz'], ['pfad', 'themen']].every(
+    (s) => !knotenTyp(schemaFuer(s), 'LearningResource') && !!knotenTyp(schemaFuer(s), 'BreadcrumbList'),
+  ),
+);
+pruefe('Turnier-Regularium hängt unter den Regeln', krumenPfade(['turnier'])[1] === '/regeln');
+
+// DIE eigentliche Absicherung: die Eltern-Regel in js/seo.js ist ausbuchstabiert
+// (seo.js darf pfade.js nicht importieren, das zöge den Zustand mit). Läuft sie
+// je aus dem Tritt, zeigen Brotkrumen auf Seiten, die es nicht gibt — hier
+// gegen genau die Routenliste geprüft, die Sitemap und Prerender verwenden.
+const echteRouten = new Set(sammleRouten(daten).map((r) => r.pfad));
+const toteKrumen = [];
+for (const route of sammleRouten(daten)) {
+  const segmente = route.pfad.split('/').filter(Boolean).map(decodeURIComponent);
+  const pfade = krumenPfade(segmente);
+  for (const p of pfade.slice(0, -1)) {
+    if (!echteRouten.has(p)) toteKrumen.push(`${route.pfad} → ${p}`);
+  }
+}
+pruefe(
+  `jede Eltern-Brotkrume ist eine echte Route (${echteRouten.size} Routen geprüft)`,
+  toteKrumen.length === 0,
+  toteKrumen.slice(0, 5).join(', '),
+);
+
+// Positionen müssen lückenlos bei 1 beginnen, sonst verwirft Google die Liste.
+const kaputtePositionen = sammleRouten(daten)
+  .filter((r) => r.pfad !== '/')
+  .filter((r) => {
+    const segmente = r.pfad.split('/').filter(Boolean).map(decodeURIComponent);
+    const eintraege = knotenTyp(schemaFuer(segmente), 'BreadcrumbList')?.itemListElement || [];
+    return eintraege.length < 2 || eintraege.some((e, i) => e.position !== i + 1 || e['@type'] !== 'ListItem' || !e.name);
+  })
+  .map((r) => r.pfad);
+pruefe('Brotkrumen-Positionen lückenlos ab 1, jeder Eintrag benannt', kaputtePositionen.length === 0, kaputtePositionen.slice(0, 5).join(', '));
+
+// Die Titel-Zerlegung ist neu (seiteInhalt) — seiteMeta muss dasselbe liefern
+// wie zuvor, seiteName genau den Namen ohne den App-Zusatz.
+// Die Startseite trägt genau den App-Titel (kein Name davor) — daraus lässt er
+// sich ableiten, ohne den i18n-Init vorauszusetzen.
+const appTitel = seiteMeta(daten, []).titel;
+pruefe(
+  'seiteMeta hängt den App-Titel an seiteName an',
+  seiteMeta(daten, ['regeln']).titel === `${seiteName(daten, ['regeln'])} — ${appTitel}`,
+  seiteMeta(daten, ['regeln']).titel,
+);
+pruefe('Startseite hat keinen eigenen Namen', seiteName(daten, []) === null);
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

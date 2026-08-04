@@ -24,7 +24,7 @@ import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
 import { initI18n, QUELLSPRACHE, SPRACHEN, setzeSprache, sprache, t, text, ZIELSPRACHEN } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
-import { seiteMeta } from './seo.js';
+import { seiteMeta, seiteSchema } from './seo.js';
 import { einstellungen, ladeZustand, merkliste, setzeEinstellung } from './zustand.js';
 
 let daten = null;
@@ -127,6 +127,31 @@ function setzeSprachAlternativen(segmente) {
   }
 }
 
+// Strukturierte Daten je Route (js/seo.js): wo die Seite im Aufbau steht und,
+// wo es zutrifft, was sie inhaltlich ist. GENAU EIN wiederverwendetes Tag —
+// würde bei jedem Routenwechsel eins angehängt, behauptete die Seite bald,
+// mehrere verschiedene Dinge zugleich zu sein. Die Startseite bekommt keins
+// (seiteSchema liefert dort null): sie trägt den handgepflegten WebSite-Block
+// aus index.html, und der beschreibt sie bereits vollständig.
+function setzeSeitenSchema(segmente) {
+  const schema = seiteSchema(daten, segmente, (teil) => window.location.origin + routeInSprache(teil, sprache()));
+  let el = document.head.querySelector('script[type="application/ld+json"][data-seite]');
+  if (!schema) {
+    el?.remove();
+    return;
+  }
+  if (!el) {
+    el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.dataset.seite = '';
+    document.head.appendChild(el);
+  }
+  // '<' als < ausschreiben: textContent eines <script> wird NICHT als HTML
+  // geparst, ein '</script>' in einem Titel beendete das Element aber trotzdem.
+  // Gültiges JSON, und die Möglichkeit ist damit zu.
+  el.textContent = JSON.stringify(schema).replaceAll('<', '\\u003c');
+}
+
 // Die Ansichten schreiben ihre Links weiter als href="#/…" — das ist eine
 // stabile, gut testbare Schreibweise und hält den Umbau aus 13 Ansichtsdateien
 // heraus. Nach jedem Rendern werden sie hier EINMAL auf echte Pfade normalisiert;
@@ -212,6 +237,7 @@ function beschrifteRahmen(segmente) {
   document.querySelector('meta[name="description"]')?.setAttribute('content', beschreibung);
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', kanonisch);
   setzeSprachAlternativen(segmente);
+  setzeSeitenSchema(segmente);
   // Fertig-Signal: welche Route steht gerade wirklich im DOM. Nötig, weil ein
   // Sprachwechsel asynchron ist (Labels nachladen) — wer von außen zusieht, kann
   // an `lang` allein nicht erkennen, ob der Inhalt schon nachgezogen hat. Der
