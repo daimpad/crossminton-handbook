@@ -18,6 +18,7 @@
 // gepflegte Routenliste. Es läuft unverändert in Node UND im Browser; darum
 // nur relative Importe und kein Zugriff auf fetch/document/process.
 
+import { QUELLSPRACHE, SPRACHEN, ZIELSPRACHEN } from '../js/i18n.js';
 import { spielformen, themenDomaenen, untergruende, witterungen } from '../js/pfade.js';
 
 // Absolute Adresse der Produktion — der EINZIGE deploy-abhängige Wert hier.
@@ -71,3 +72,37 @@ export function sammleRouten(daten) {
   return liste;
 }
 
+
+// Dieselbe Route unter einem Sprachpräfix: Deutsch bleibt präfixlos an der
+// Wurzel, en/fr/pl bekommen '/en/…', '/fr/…', '/pl/…'. Spiegelt routeInSprache()
+// aus js/app.js — die Adressen müssen exakt dieselben sein, sonst zeigt die
+// Sitemap auf Seiten, die der Router anders auflöst.
+export function mitSprache(pfad, sprache) {
+  if (!ZIELSPRACHEN.includes(sprache)) return pfad;
+  return pfad === '/' ? `/${sprache}` : `/${sprache}${pfad}`;
+}
+
+// Alle Routen in allen Sprachen. Aus 149 sprachneutralen Routen werden damit
+// 596 indexierbare Adressen — der Inhalt liegt längst übersetzt vor, ihm fehlte
+// nur die eigene Adresse.
+//
+// Die Reihenfolge ist sprachweise gebündelt (erst alle de, dann en …), damit der
+// Prerender die Sprache je Block nur einmal wechseln muss.
+export function sammleRoutenAlleSprachen(daten) {
+  const basis = sammleRouten(daten);
+  const liste = [];
+  for (const sprache of SPRACHEN) {
+    for (const r of basis) {
+      liste.push({
+        pfad: mitSprache(r.pfad, sprache),
+        // Übersetzungen sind nicht wichtiger als das Original, aber auch nicht
+        // wertlos — die Quellsprache behält ihre Priorität, die übrigen liegen
+        // eine Stufe darunter.
+        prioritaet: sprache === QUELLSPRACHE ? r.prioritaet : Math.max(0.1, r.prioritaet - 0.1),
+        sprache,
+        basisPfad: r.pfad,
+      });
+    }
+  }
+  return liste;
+}

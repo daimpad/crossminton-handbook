@@ -18,7 +18,7 @@ import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWo
 import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
-import { sammleRouten } from '../scripts/routen.mjs';
+import { mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { VERSION } from '../js/version.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -1167,6 +1167,49 @@ pruefe(
   `jede Route trägt ein wohlgeformtes lastmod (${sitemapStand.mitLastmod}/${sitemapStand.vorhandeneRouten})`,
   sitemapStand.mitLastmod === sitemapStand.vorhandeneRouten && sitemapStand.lastmodWohlgeformt,
 );
+
+// --- Sprachfassungen ---------------------------------------------------------
+// Der Inhalt liegt vollständig in vier Sprachen vor; erst die eigene Adresse
+// macht ihn auffindbar. Aus 149 sprachneutralen Routen werden 596.
+const alleSprachRouten = sammleRoutenAlleSprachen(ladeDatenAusDateien());
+pruefe(
+  `Routen in allen vier Sprachen (${alleSprachRouten.length} = 149 × 4)`,
+  alleSprachRouten.length === 149 * 4,
+);
+pruefe(
+  'keine doppelte Adresse über die Sprachen hinweg',
+  new Set(alleSprachRouten.map((r) => r.pfad)).size === alleSprachRouten.length,
+);
+for (const s of ['de', 'en', 'fr', 'pl']) {
+  const je = alleSprachRouten.filter((r) => r.sprache === s);
+  pruefe(`${s}: 149 Routen`, je.length === 149);
+}
+// Deutsch bleibt PRÄFIXLOS — sonst änderten sich alle bestehenden Adressen und
+// die bisherige Indexierung ginge verloren.
+pruefe(
+  'deutsche Routen tragen kein Sprachpräfix',
+  alleSprachRouten.filter((r) => r.sprache === 'de').every((r) => !/^\/(en|fr|pl)(\/|$)/.test(r.pfad)),
+);
+for (const s of ['en', 'fr', 'pl']) {
+  pruefe(
+    `${s}-Routen tragen genau ein "/${s}"-Präfix`,
+    alleSprachRouten
+      .filter((r) => r.sprache === s)
+      .every((r) => r.pfad === `/${s}` || r.pfad.startsWith(`/${s}/`)),
+  );
+}
+// mitSprache() muss dieselben Adressen liefern wie routeInSprache() in
+// js/app.js — laufen die auseinander, zeigt die Sitemap auf Seiten, die der
+// Router anders auflöst. Hier die Fälle, an denen sich das entscheidet.
+for (const [pfad, s, erwartet] of [
+  ['/', 'de', '/'],
+  ['/', 'en', '/en'],
+  ['/regeln', 'de', '/regeln'],
+  ['/regeln', 'pl', '/pl/regeln'],
+  ['/baustein/griff', 'fr', '/fr/baustein/griff'],
+]) {
+  pruefe(`mitSprache('${pfad}', '${s}') → ${erwartet}`, mitSprache(pfad, s) === erwartet);
+}
 
 // Die Routenliste ist mit dem Prerender geteilt (scripts/routen.mjs) — hier nur
 // die Eigenschaften, die die Sitemap gültig machen.

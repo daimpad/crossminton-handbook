@@ -4,6 +4,13 @@
 
 export const QUELLSPRACHE = 'de';
 
+// Sprachen, die zusätzlich zur Quellsprache vollständig vorliegen. Sie sind
+// zugleich die PFAD-PRÄFIXE der App (/en/…, /fr/…, /pl/…). Deutsch bleibt
+// bewusst präfixlos an der Wurzel: die bestehenden Adressen ändern sich dadurch
+// nicht, es entstehen keine Weiterleitungen und kein Indexierungsverlust.
+export const ZIELSPRACHEN = ['en', 'fr', 'pl'];
+export const SPRACHEN = [QUELLSPRACHE, ...ZIELSPRACHEN];
+
 let aktiveSprache = QUELLSPRACHE;
 const geladen = {};
 
