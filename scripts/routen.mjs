@@ -8,6 +8,10 @@
 // über die Google die Unterseiten überhaupt findet — eine still veraltete Liste
 // wäre unsichtbar kaputt.
 //
+// Das XML selbst baut scripts/sitemap.mjs (dort liegt auch der lastmod-Teil,
+// der git braucht). Der Prerender erzeugt KEINE Sitemap mehr: die eingecheckte
+// ist die maßgebliche, er trägt sie nur unverändert ins Staging mit.
+//
 // Das Modul ist REIN und DOM-frei: es bekommt fertige `daten` herein (aus
 // ladeDaten() im Browser bzw. baueIndizes() in Node) und leitet daraus mit
 // denselben Funktionen ab, die auch die Ansichten nutzen — keine zweite,
@@ -67,19 +71,3 @@ export function sammleRouten(daten) {
   return liste;
 }
 
-function esc(text) {
-  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-export function baueSitemap(routen, siteUrl) {
-  const eintraege = routen
-    .map(
-      (r) => `  <url>
-    <loc>${esc(siteUrl + r.pfad)}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>${r.prioritaet.toFixed(1)}</priority>
-  </url>`,
-    )
-    .join('\n');
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${eintraege}\n</urlset>\n`;
-}

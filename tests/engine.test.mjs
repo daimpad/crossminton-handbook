@@ -1153,7 +1153,19 @@ pruefe(
   sitemapStand.aktuell,
   sitemapStand.aktuell
     ? ''
-    : `eingecheckt ${sitemapStand.vorhandeneRouten}, aus den Daten folgen ${sitemapStand.erwarteteRouten} — 'node scripts/sitemap.mjs' laufen lassen`,
+    : `eingecheckt ${sitemapStand.vorhandeneRouten}, aus den Daten folgen ${sitemapStand.erwarteteRouten}` +
+      (sitemapStand.fehlend.length ? ` — fehlt: ${sitemapStand.fehlend.slice(0, 3).join(', ')}` : '') +
+      (sitemapStand.ueberzaehlig.length ? ` — überzählig: ${sitemapStand.ueberzaehlig.slice(0, 3).join(', ')}` : '') +
+      ` — 'node scripts/sitemap.mjs' laufen lassen`,
+);
+// lastmod ist das einzige der drei Sitemap-Felder, das Google auswertet — aber
+// nur, solange es glaubwürdig bleibt. Der VERGLEICH der Daten gehört bewusst
+// nicht hierher (er hinkt dem Commit immer einen Schritt hinterher, s.
+// pruefeSitemapAktuell); geprüft wird, dass überhaupt eines dasteht und die Form
+// stimmt. Ein leeres oder krummes Datum wäre schlimmer als gar keines.
+pruefe(
+  `jede Route trägt ein wohlgeformtes lastmod (${sitemapStand.mitLastmod}/${sitemapStand.vorhandeneRouten})`,
+  sitemapStand.mitLastmod === sitemapStand.vorhandeneRouten && sitemapStand.lastmodWohlgeformt,
 );
 
 // Die Routenliste ist mit dem Prerender geteilt (scripts/routen.mjs) — hier nur

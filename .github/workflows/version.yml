@@ -7,11 +7,13 @@
 #
 # Nebeneffekt, der eigentliche Nutzen im Alltag: Die im „Über"-Reiter angezeigte
 # Nummer sagt, welcher Commit tatsächlich ausgeliefert wird — damit lässt sich
-# ohne Server-Zugriff prüfen, ob der Plesk-Pull durchgelaufen ist.
+# ohne Server-Zugriff prüfen, ob der Pull durchgelaufen ist.
 #
 # KEINE ENDLOSSCHLEIFE: Ein Push mit dem GITHUB_TOKEN löst per GitHub-Design
 # keine weiteren Workflow-Läufe aus. `[skip ci]` im Commit steht zusätzlich als
 # sichtbarer Hinweis (und als Schutz, falls je ein anderer Token genutzt wird).
+# Genau deshalb stempelt deploy-pages.yml den Wert ein zweites Mal in seine
+# eigene Arbeitskopie — s. scripts/version-stempel.mjs.
 name: Version schreiben
 
 on:
@@ -32,6 +34,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: js/version.js aus dem ausloesenden Commit schreiben
         run: |
           set -euo pipefail
@@ -39,22 +45,7 @@ jobs:
           # Datum des Commits, nicht des Laufs — sonst wiche die Anzeige bei
           # einem nachtraeglichen Re-Run vom tatsaechlichen Stand ab.
           DATUM="$(git show -s --format=%cs "${{ github.sha }}")"
-          # Nur den Wert ersetzen; der erklaerende Kopf der Datei bleibt stehen.
-          python3 - "$KURZ" "$DATUM" <<'PY'
-          import re, sys
-          kurz, datum = sys.argv[1], sys.argv[2]
-          pfad = 'js/version.js'
-          quelle = open(pfad, encoding='utf-8').read()
-          neu = re.sub(
-              r"export const VERSION = \{[^}]*\};",
-              f"export const VERSION = {{ commit: '{kurz}', datum: '{datum}' }};",
-              quelle,
-          )
-          if neu == quelle:
-              raise SystemExit('VERSION-Zeile in js/version.js nicht gefunden — Format geaendert?')
-          open(pfad, 'w', encoding='utf-8').write(neu)
-          print(f'js/version.js -> {kurz} ({datum})')
-          PY
+          node scripts/version-stempel.mjs "$KURZ" "$DATUM"
 
       - name: Zurueckcommitten, falls veraendert
         run: |

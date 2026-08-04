@@ -1,7 +1,7 @@
 // SEO Tier 2, Baustein 2 (docs/seo-tier2-konzept.md): erzeugt beim Deploy für
 // jede kanonische Route eine statische Snapshot-Datei (Titel/Description/
-// Canonical/Social-Vorschau + gerendertes #ansicht-HTML) sowie die vollständige
-// sitemap.xml. Läuft AUSSCHLIESSLICH im Deploy-Workflow
+// Canonical/Social-Vorschau + gerendertes #ansicht-HTML). Läuft AUSSCHLIESSLICH
+// im Deploy-Workflow
 // (.github/workflows/deploy-pages.yml) — die Laufzeit-App und der lokale
 // Betrieb (python3 -m http.server) bleiben unverändert buildfrei. Playwright
 // ist eine reine CI-Werkzeug-Abhängigkeit (per `npm install --no-save` im
@@ -23,9 +23,11 @@ import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, symlinkSync, writ
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Routenliste + Sitemap-Bau teilt sich dieses Skript mit scripts/sitemap.mjs —
-// eine Ableitung, zwei Verbraucher (s. scripts/routen.mjs).
-import { baueSitemap, SITE_URL } from './routen.mjs';
+// Die Routenliste teilt sich dieses Skript mit scripts/sitemap.mjs — eine
+// Ableitung, zwei Verbraucher (s. scripts/routen.mjs). Die sitemap.xml wird
+// hier NICHT erzeugt: die eingecheckte ist die maßgebliche (die Produktion hat
+// keinen Build-Schritt), kopiere() trägt sie unverändert ins Staging.
+import { SITE_URL } from './routen.mjs';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(REPO, process.argv[2] || '_site');
@@ -181,7 +183,9 @@ function zielDatei(pfad) {
   return join(ZIEL, pfad.replace(/^\//, ''), 'index.html');
 }
 
-// --- 5. sitemap.xml aus derselben Routenliste (löst den Tier-1-Platzhalter ab). ---
+// --- 5. Abschluss. Die sitemap.xml kommt eingecheckt aus dem Repo (kopiere()),
+// sie wird hier bewusst NICHT überschrieben: erzeugt wird sie von
+// scripts/sitemap.mjs, wo git für die lastmod-Angaben verfügbar ist. ---
 async function haupt() {
   console.log(`[prerender] Staging-Kopie → ${relative(REPO, ZIEL)}`);
   kopiere();
@@ -223,8 +227,7 @@ async function haupt() {
       throw new Error(`Laufzeitfehler während des Prerenderns:\n${fehler.join('\n')}`);
     }
 
-    writeFileSync(join(ZIEL, 'sitemap.xml'), baueSitemap(routen, SITE_URL));
-    console.log(`[prerender] ${routen.length} Snapshots + sitemap.xml geschrieben`);
+    console.log(`[prerender] ${routen.length} Snapshots geschrieben (sitemap.xml kommt eingecheckt mit)`);
   } finally {
     await browser.close();
     server.kill();
