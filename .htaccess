@@ -20,18 +20,30 @@
   RewriteEngine On
   RewriteBase /
 
-  # 1. Vorhandene Dateien und Verzeichnisse unverändert ausliefern —
+  # 1. Prerenderter Snapshot zu dieser Route? Direkt ausliefern.
+  #    MUSS vor der Verzeichnis-Regel stehen: /baustein/griff IST seit dem
+  #    Prerendering ein Verzeichnis, und für Verzeichnisse ohne Schrägstrich
+  #    schickt Apache sonst einen 301 auf /baustein/griff/. Das Canonical im
+  #    Snapshot zeigt aber auf die Fassung OHNE Schrägstrich — ausgeliefert und
+  #    kanonisiert wären dann verschiedene URLs, und genau das soll das
+  #    Prerendering ja beheben. Das `!/$` schließt die Wurzel aus.
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^(.+)$ /$1/index.html [L]
+
+  # 2. Vorhandene Dateien und Verzeichnisse unverändert ausliefern —
   #    JS, CSS, JSON, Schriften, Grafiken, die PDFs unter rules/.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 2. Alles mit Dateiendung ist ein Asset, keine App-Route (die 149 Routen sind
+  # 3. Alles mit Dateiendung ist ein Asset, keine App-Route (die 149 Routen sind
   #    ausnahmslos punktfrei). Fehlt die Datei, soll es ein ehrlicher 404 sein —
   #    nicht die HTML-Hülle mit Status 200, die ein fehlendes Bild verschleiert.
   RewriteRule \.[a-zA-Z0-9]{1,8}$ - [L]
 
-  # 3. Der Rest ist eine App-Route: die Hülle ausliefern, ohne Weiterleitung.
+  # 4. Der Rest ist eine App-Route ohne Snapshot (Suche, Profil, Merkliste …):
+  #    die Hülle ausliefern, ohne Weiterleitung.
   #    Status 200 unter der ursprünglichen URL — der Router liest sie beim Boot
   #    aus location.pathname und rendert die passende Ansicht.
   RewriteRule ^ index.html [L]
