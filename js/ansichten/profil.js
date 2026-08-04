@@ -253,9 +253,16 @@ export function renderProfil(el, daten) {
       setzeEinstellung('sprache', neu);
     } catch {
       ereignis.target.value = sprache();
+      neuRendern();
+      return;
     }
-    // Sprachwechsel muss auch Navigation/Menü/Kopf neu beschriften → globales Re-Render.
-    neuRendern();
+    // Die Sprache steckt in der URL (/en/profil), damit jede Fassung eine eigene,
+    // teilbare und indexierbare Adresse hat — also navigieren statt nur neu
+    // rendern. Der Zielpfad wird hier bewusst NICHT selbst gebaut: geheZu()
+    // reicht die Rohform an den Router, der den Präfix der inzwischen aktiven
+    // Sprache setzt. Das Neu-Beschriften von Navigation/Menü/Kopf erledigt der
+    // Router-Durchlauf mit.
+    geheZu('#/profil');
   });
 
   el.querySelector('#pf-thema').addEventListener('change', (ereignis) => {

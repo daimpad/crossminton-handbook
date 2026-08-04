@@ -22,7 +22,7 @@ import { renderTraining } from './ansichten/training.js';
 import { renderTurnier } from './ansichten/turnier.js';
 import { ladeDaten } from './daten.js';
 import { initFeedbackWennGewuenscht } from './feedback.js';
-import { initI18n, setzeSprache, sprache, t, text } from './i18n.js';
+import { initI18n, QUELLSPRACHE, SPRACHEN, setzeSprache, sprache, t, text, ZIELSPRACHEN } from './i18n.js';
 import { esc, wendeThemaAn } from './oberflaeche.js';
 import { seiteMeta } from './seo.js';
 import { einstellungen, ladeZustand, merkliste, setzeEinstellung } from './zustand.js';
@@ -49,16 +49,35 @@ const urspruenglicherKopf = {
 // <base> eingeführt: relative Pfade allein tragen verschachtelte Routen nicht.
 export const WURZEL = new URL(document.baseURI).pathname;
 
+// Präfix der aktiven Sprache — Deutsch bleibt präfixlos (s. ZIELSPRACHEN).
+function sprachPraefix(s = sprache()) {
+  return ZIELSPRACHEN.includes(s) ? s : '';
+}
+
+// Dieselbe Route unter einer anderen Sprache: '/baustein/griff' + 'en'
+// → '/en/baustein/griff'. Grundlage für den Sprachumschalter und die
+// hreflang-Angaben.
+export function routeInSprache(segmente, ziel) {
+  return WURZEL + [sprachPraefix(ziel), ...segmente].filter(Boolean).join('/');
+}
+
 // '#/baustein/griff', '/baustein/griff' oder ein bereits montagepunkt-absoluter
 // Pfad ('/crossminton-handbook/baustein/griff') → echte, korrekte URL.
-// IDEMPOTENT, und das ist der Kern: Der Klick-Interceptor reicht `url.pathname`
-// herein, und der trägt den Montagepunkt schon (die Links im DOM sind nach
-// `normalisiereLinks()` bzw. im Prerender-Schnappschuss absolut). Ohne die
-// Präfix-Prüfung käme unter Unterpfad-Deploy '/crossminton-handbook/' doppelt
-// davor — der Pfad zeigte ins Leere. Lokal an der Wurzel (WURZEL === '/') fällt
-// das nicht auf, weil das Verdoppeln dort ein No-op ist.
 function zuUrl(ziel) {
-  const roh = String(ziel ?? '').replace(/^#/, '');
+  const eingabe = String(ziel ?? '');
+  // Rohform aus den Ansichten ('#/…'): braucht Montagepunkt UND Sprachpräfix.
+  // Sie ist die EINZIGE Form, an der sich das zuverlässig festmachen lässt —
+  // ein fertiger Pfad wie '/baustein/griff' ist in der deutschen Fassung nicht
+  // von einer noch nicht präfigierten Route zu unterscheiden.
+  if (eingabe.startsWith('#/')) {
+    return WURZEL + [sprachPraefix(), eingabe.slice(2)].filter(Boolean).join('/');
+  }
+  // Alles andere ist bereits ein echter Pfad (Klick-Interceptor, Prerender-
+  // Schnappschuss) und trägt den Montagepunkt samt Präfix schon. IDEMPOTENT:
+  // ohne diese Prüfung käme unter Unterpfad-Deploy der Montagepunkt doppelt
+  // davor — der Pfad zeigte ins Leere. Lokal an der Wurzel (WURZEL === '/')
+  // fällt das nicht auf, weil das Verdoppeln dort ein No-op ist.
+  const roh = eingabe.replace(/^#/, '');
   if (roh.startsWith(WURZEL)) return roh;
   return WURZEL + roh.replace(/^\//, '');
 }
@@ -68,11 +87,44 @@ function parsePfad() {
   const roh = (pfad.startsWith(WURZEL) ? pfad.slice(WURZEL.length) : pfad.replace(/^\//, ''))
     + window.location.search;
   const [pfadTeil, queryTeil] = roh.split('?');
+  const segmente = pfadTeil.split('/').filter(Boolean);
+  // Führendes Sprachsegment abtrennen: '/en/baustein/griff' ist dieselbe Route
+  // wie '/baustein/griff', nur in einer anderen Sprache. Die URL bestimmt die
+  // Sprache — sonst zeigte dieselbe Adresse je nach gespeicherter Vorliebe
+  // verschiedene Inhalte, und genau das darf für Suchmaschinen nicht passieren.
+  const urlSprache = ZIELSPRACHEN.includes(segmente[0]) ? segmente.shift() : QUELLSPRACHE;
   return {
-    segmente: pfadTeil.split('/').filter(Boolean),
+    segmente,
     query: new URLSearchParams(queryTeil || ''),
     roh,
+    sprache: urlSprache,
   };
+}
+
+// hreflang-Angaben je Route: dieselbe Seite in allen vier Sprachen. Ohne sie
+// gälten die Fassungen als konkurrierende Dubletten statt als Übersetzungen
+// derselben Seite — Google entscheidet dann selbst, welche es zeigt, und oft
+// gar keine. `x-default` zeigt auf die deutsche Fassung als Ausgangspunkt.
+//
+// Absolute URLs sind Pflicht: relative hreflang-Angaben ignoriert Google.
+// Die Tags werden bei jedem Rendern neu gesetzt und dabei WIEDERVERWENDET
+// (nicht angehäuft) — sonst wüchse der Kopf mit jedem Routenwechsel.
+function setzeSprachAlternativen(segmente) {
+  const kopf = document.head;
+  const eintraege = [
+    ...SPRACHEN.map((s) => [s, routeInSprache(segmente, s)]),
+    ['x-default', routeInSprache(segmente, QUELLSPRACHE)],
+  ];
+  for (const [hreflang, pfad] of eintraege) {
+    let el = kopf.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`);
+    if (!el) {
+      el = document.createElement('link');
+      el.setAttribute('rel', 'alternate');
+      el.setAttribute('hreflang', hreflang);
+      kopf.appendChild(el);
+    }
+    el.setAttribute('href', window.location.origin + pfad);
+  }
 }
 
 // Die Ansichten schreiben ihre Links weiter als href="#/…" — das ist eine
@@ -149,13 +201,22 @@ function aktualisiereMerkAnzahl() {
 // Titel + Meta-Description + Canonical sind je Route eigenständig (seo.js, SEO
 // Tier 2 Baustein 2) — dieselbe Zuordnung nutzt auch der Deploy-Prerender.
 function beschrifteRahmen(segmente) {
-  const { titel, beschreibung, kanonisch } =
-    segmente.length > 0
-      ? { ...seiteMeta(daten, segmente), kanonisch: window.location.origin + window.location.pathname }
-      : urspruenglicherKopf;
+  // Die Ausnahme für den handgepflegten Tier-1-Kopf gilt nur für die DEUTSCHE
+  // Wurzel. '/en' hat nach dem Abtrennen des Sprachpräfixes ebenfalls leere
+  // Segmente, bekäme sonst also den deutschen Kopf samt Canonical auf '/'.
+  const istDeutscheWurzel = segmente.length === 0 && sprache() === QUELLSPRACHE;
+  const { titel, beschreibung, kanonisch } = istDeutscheWurzel
+    ? urspruenglicherKopf
+    : { ...seiteMeta(daten, segmente), kanonisch: window.location.origin + window.location.pathname };
   document.title = titel;
   document.querySelector('meta[name="description"]')?.setAttribute('content', beschreibung);
   document.querySelector('link[rel="canonical"]')?.setAttribute('href', kanonisch);
+  setzeSprachAlternativen(segmente);
+  // Fertig-Signal: welche Route steht gerade wirklich im DOM. Nötig, weil ein
+  // Sprachwechsel asynchron ist (Labels nachladen) — wer von außen zusieht, kann
+  // an `lang` allein nicht erkennen, ob der Inhalt schon nachgezogen hat. Der
+  // Prerender wartet darauf, bevor er einen Schnappschuss nimmt.
+  document.documentElement.dataset.route = window.location.pathname;
   document.querySelector('.marke-text').textContent = t('app_titel');
   const beschriftungen = {
     lernen: t('nav_lernen'),
@@ -268,16 +329,21 @@ function initSprachanzeige() {
     const ziel = ereignis.target.closest('[data-sprach-code]');
     if (!ziel) return;
     const neu = ziel.dataset.sprachCode;
-    if (neu !== sprache()) {
-      try {
-        await setzeSprache(neu);
-        setzeEinstellung('sprache', neu);
-      } catch {
-        /* Sprache nicht ladbar → bei der aktuellen bleiben */
-      }
-    }
     schliesse();
-    rendern();
+    if (neu === sprache()) return;
+    try {
+      await setzeSprache(neu);
+      setzeEinstellung('sprache', neu);
+    } catch {
+      /* Sprache nicht ladbar → bei der aktuellen bleiben */
+      rendern();
+      return;
+    }
+    // NAVIGIEREN, nicht nur neu rendern: die Sprache steckt in der URL, damit
+    // jede Fassung eine eigene, teilbare und indexierbare Adresse hat. Die
+    // aktuelle Route bleibt dabei erhalten — wer auf /regeln steht, landet auf
+    // /en/regeln, nicht auf der Startseite.
+    navigiere(routeInSprache(parsePfad().segmente, neu), { ersetzen: true });
   });
   document.addEventListener('click', (ereignis) => {
     if (!wurzel.contains(ereignis.target)) schliesse();
@@ -369,8 +435,20 @@ function renderFehler(el, fehler) {
 }
 
 function rendern() {
-  const { segmente, query, roh } = parsePfad();
+  const { segmente, query, roh, sprache: ausUrl } = parsePfad();
   const el = document.getElementById('ansicht');
+
+  // Sprache mit der URL abgleichen, BEVOR gerendert wird. Nötig, weil eine
+  // Navigation die Sprachgrenze überqueren kann, ohne durch den Umschalter zu
+  // gehen: der Zurück-Knopf über einen Sprachwechsel hinweg, ein Deep-Link aus
+  // einem anderen Tab, und im Prerender der Durchlauf per pushState. Ohne den
+  // Abgleich stünde englischer Inhalt unter deutscher Adresse — genau die
+  // Verwechslung, die die Sprachpräfixe verhindern sollen. Nach dem Laden ruft
+  // sich rendern() selbst erneut auf; scheitert es, bleibt die alte Sprache.
+  if (ausUrl !== sprache()) {
+    setzeSprache(ausUrl).then(rendern, () => {});
+    return;
+  }
 
   // Kein erzwungenes Onboarding: Der Erstbesuch landet auf der vollen Startseite
   // (renderHeim mit allen Kacheln), nicht auf einer Abfrage. Der Wizard bleibt
@@ -445,11 +523,30 @@ function rendern() {
   }
 }
 
+// Wer eine andere Sprache eingestellt hat und eine präfixlose Adresse aufruft,
+// wird EINMAL auf die eigene Sprachfassung umgeschrieben — die Vorliebe bleibt
+// also wirksam, ohne dass dieselbe URL für verschiedene Leute verschiedene
+// Inhalte zeigt. Ein Crawler hat keinen localStorage und bekommt an der Wurzel
+// darum immer die deutsche Fassung; die Umschreibung ist für ihn unsichtbar.
+// replaceState statt pushState: der Zurück-Knopf soll nicht in einer Schleife
+// zwischen den beiden Adressen hängen.
+function folgeSprachVorliebe() {
+  const { segmente, sprache: ausUrl } = parsePfad();
+  const gewuenscht = einstellungen().sprache;
+  if (ausUrl !== QUELLSPRACHE) return; // URL sagt schon, was gilt
+  if (!ZIELSPRACHEN.includes(gewuenscht)) return; // keine abweichende Vorliebe
+  window.history.replaceState({}, '', routeInSprache(segmente, gewuenscht));
+}
+
 async function boot() {
   ladeZustand();
   const el = document.getElementById('ansicht');
   try {
-    await initI18n(einstellungen().sprache);
+    // Die URL entscheidet, nicht die gespeicherte Vorliebe: dieselbe Adresse
+    // muss für jeden dieselbe Sprache zeigen, sonst sieht ein Crawler etwas
+    // anderes als der Mensch. Die Vorliebe wirkt nur an einer präfixlosen
+    // Adresse — s. folgeSprachVorliebe() weiter unten.
+    await initI18n(parsePfad().sprache);
     daten = await ladeDaten();
   } catch (fehler) {
     try {
@@ -461,6 +558,7 @@ async function boot() {
     return;
   }
   for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
+  folgeSprachVorliebe();
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);

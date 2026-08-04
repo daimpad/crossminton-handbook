@@ -27,7 +27,8 @@ import { fileURLToPath } from 'node:url';
 // Ableitung, zwei Verbraucher (s. scripts/routen.mjs). Die sitemap.xml wird
 // hier NICHT erzeugt: die eingecheckte ist die maßgebliche (die Produktion hat
 // keinen Build-Schritt), kopiere() trägt sie unverändert ins Staging.
-import { SITE_URL } from './routen.mjs';
+import { mitSprache, SITE_URL } from './routen.mjs';
+import { QUELLSPRACHE, SPRACHEN } from '../js/i18n.js';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(REPO, process.argv[2] || '_site');
@@ -114,26 +115,36 @@ async function ermittleRouten(page) {
     // Über document.baseURI auflösen, nicht wurzel-absolut ('/js/daten.js') —
     // der Tab läuft unter dem Produktions-Präfix, nicht unter '/'.
     const modul = (name) => import(new URL(name, document.baseURI).href);
-    const [{ ladeDaten }, { sammleRouten }] = await Promise.all([
+    const [{ ladeDaten }, { sammleRoutenAlleSprachen }] = await Promise.all([
       modul('js/daten.js'),
       modul('scripts/routen.mjs'),
     ]);
-    return sammleRouten(await ladeDaten());
+    return sammleRoutenAlleSprachen(await ladeDaten());
   });
 }
 
 async function erfasseSchnappschuss(page, pfad) {
   // Der Tab läuft unter dem Produktions-Präfix — die Route muss es mittragen,
   // sonst deutet parsePfad() sie falsch.
-  return page.evaluate((ziel) => {
-    window.history.pushState({}, '', ziel);
+  const ziel = PRAEFIX + pfad;
+  await page.evaluate((z) => {
+    window.history.pushState({}, '', z);
     window.dispatchEvent(new PopStateEvent('popstate'));
-    return {
-      titel: document.title,
-      beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-      inhalt: document.getElementById('ansicht').innerHTML,
-    };
-  }, PRAEFIX + pfad);
+  }, ziel);
+  // Auf das Fertig-Signal warten. Überquert die Navigation eine Sprachgrenze,
+  // lädt rendern() erst die Labels nach und zeichnet DANACH — ohne das Warten
+  // erfasste man die vorige Sprache unter der neuen Adresse.
+  await page.waitForFunction((z) => document.documentElement.dataset.route === z, ziel, { timeout: 15000 });
+  return page.evaluate(() => ({
+    titel: document.title,
+    beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
+    inhalt: document.getElementById('ansicht').innerHTML,
+    sprachAlternativen: [...document.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => ({
+      hreflang: l.getAttribute('hreflang'),
+      href: l.getAttribute('href'),
+    })),
+    lang: document.documentElement.lang,
+  }));
 }
 
 // Selbstprüfung gegen genau den Fehler, der Baustein 2 zunächst live brach:
@@ -159,8 +170,26 @@ function pruefeLinks(html, pfad) {
 // --- 4. Vorlage → Snapshot-Datei. Die Startseite behält ihren handgepflegten
 // Tier-1-Kopf unangetastet (schon die beste verfügbare Kopie); alle anderen
 // Routen bekommen Titel/Description/Canonical/Social-Vorschau überschrieben. ---
+// hreflang-Verweise für eine Route. Bewusst HIER gebaut und nicht aus dem Tab
+// übernommen: die Angaben des Clients tragen dessen Herkunft (localhost:8123),
+// ausgeliefert wird aber SITE_URL. Genutzt wird dieselbe mitSprache()-Regel wie
+// in der Sitemap, damit Adressen aus beiden Quellen deckungsgleich sind.
+function alternativenHtml(basisPfad) {
+  return [...SPRACHEN.map((s) => [s, mitSprache(basisPfad, s)]), ['x-default', basisPfad]]
+    .map(([h, p]) => `  <link rel="alternate" hreflang="${esc(h)}" href="${esc(SITE_URL + p)}">`)
+    .join('\n');
+}
+
 function baueSnapshot(vorlage, route) {
   let html = vorlage.replace('<main id="ansicht" tabindex="-1"></main>', `<main id="ansicht" tabindex="-1">${route.inhalt}</main>`);
+
+  // Sprache und hreflang gehören auf JEDE Seite — auch auf die deutsche Wurzel.
+  // Fehlte dort der Rückverweis, wäre die Verknüpfung nicht wechselseitig, und
+  // Google verwirft einseitige hreflang-Angaben.
+  html = html.replace('<html lang="de">', `<html lang="${esc(route.lang || QUELLSPRACHE)}">`);
+  html = html.replace('</head>', `${alternativenHtml(route.basisPfad ?? route.pfad)}\n</head>`);
+
+  // Nur die deutsche Wurzel behält ihren handgepflegten Tier-1-Kopf.
   if (route.pfad === '/') return html;
   const kanonisch = `${SITE_URL}${route.pfad}`;
   const ersetze = (muster, wert) => {

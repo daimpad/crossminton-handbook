@@ -83,16 +83,30 @@ jobs:
       - name: Ergebnis prüfen
         run: |
           set -euo pipefail
-          test -f _site/index.html      || { echo "_site/index.html fehlt"       >&2; exit 1; }
-          test -f _site/.htaccess       || { echo "_site/.htaccess fehlt"        >&2; exit 1; }
-          test -f _site/sitemap.xml     || { echo "_site/sitemap.xml fehlt"      >&2; exit 1; }
-          test -f _site/baustein/griff/index.html || { echo "Snapshot fehlt" >&2; exit 1; }
+          test -f _site/index.html   || { echo "_site/index.html fehlt"   >&2; exit 1; }
+          test -f _site/.htaccess    || { echo "_site/.htaccess fehlt"    >&2; exit 1; }
+          test -f _site/sitemap.xml  || { echo "_site/sitemap.xml fehlt"  >&2; exit 1; }
+          for f in baustein/griff en/baustein/griff fr/regeln pl/pfad/themen; do
+            test -f "_site/$f/index.html" || { echo "Snapshot fehlt: $f" >&2; exit 1; }
+          done
           anzahl="$(find _site -mindepth 2 -name index.html | wc -l)"
           echo "Snapshots: $anzahl"
-          [ "$anzahl" -ge 140 ] || { echo "Zu wenige Snapshots ($anzahl)" >&2; exit 1; }
+          [ "$anzahl" -ge 560 ] || { echo "Zu wenige Snapshots ($anzahl)" >&2; exit 1; }
+          # Jede Sprachfassung braucht ihr EIGENES Canonical — zeigten sie alle
+          # auf dieselbe Adresse, wären die Uebersetzungen wieder unsichtbar.
           grep -q 'rel="canonical" href="https://crossminton-handbook.de/baustein/griff"' \
             _site/baustein/griff/index.html \
-            || { echo "Snapshot traegt kein eigenes Canonical" >&2; exit 1; }
+            || { echo "de-Snapshot traegt kein eigenes Canonical" >&2; exit 1; }
+          grep -q 'rel="canonical" href="https://crossminton-handbook.de/en/baustein/griff"' \
+            _site/en/baustein/griff/index.html \
+            || { echo "en-Snapshot traegt kein eigenes Canonical" >&2; exit 1; }
+          # hreflang muss wechselseitig sein, sonst verwirft Google die Angaben.
+          for f in baustein/griff en/baustein/griff; do
+            n="$(grep -c 'rel="alternate" hreflang=' "_site/$f/index.html")"
+            [ "$n" -eq 5 ] || { echo "$f traegt $n hreflang-Verweise (erwartet 5)" >&2; exit 1; }
+          done
+          grep -q '<html lang="pl">' _site/pl/regeln/index.html \
+            || { echo "pl-Snapshot traegt nicht lang=pl" >&2; exit 1; }
 
       - uses: actions/upload-artifact@v4
         with:

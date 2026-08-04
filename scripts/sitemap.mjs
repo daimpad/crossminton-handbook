@@ -17,6 +17,12 @@
 // Die Routenliste selbst steht in scripts/routen.mjs — gemeinsam mit dem
 // Prerender, damit beide nicht auseinanderlaufen. Der Abgleich ist als
 // pruefeSitemapAktuell() in tests/engine.test.mjs eingehängt.
+//
+// Gelistet werden ALLE VIER SPRACHFASSUNGEN (596 statt 149 Adressen). Die
+// hreflang-Verknüpfung steht bewusst NICHT hier, sondern im <head> jeder Seite
+// (js/app.js, setzeSprachAlternativen) — Google akzeptiert beide Wege, und da
+// jede gelistete Route prerendert wird, trägt das ausgelieferte HTML die
+// Angaben ohnehin. Das hielte die Sitemap sonst um das Fünffache auf.
 
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -24,7 +30,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { baueIndizes, INHALTSDATEIEN } from '../js/daten.js';
-import { sammleRouten, SITE_URL } from './routen.mjs';
+import { sammleRoutenAlleSprachen, SITE_URL } from './routen.mjs';
 
 const WURZEL = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ZIEL = join(WURZEL, 'sitemap.xml');
@@ -119,7 +125,10 @@ function esc(text) {
 export function baueSitemap(routen, siteUrl, datumFuer = () => '') {
   const eintraege = routen
     .map((r) => {
-      const stand = datumFuer(r.pfad);
+      // Das Datum hängt am INHALT, nicht an der Sprachfassung: die Übersetzungen
+      // stehen als Zwillinge in derselben Datei wie das deutsche Original, eine
+      // Änderung trifft also ohnehin alle vier zugleich.
+      const stand = datumFuer(r.basisPfad ?? r.pfad);
       return [
         '  <url>',
         `    <loc>${esc(siteUrl + r.pfad)}</loc>`,
@@ -133,7 +142,7 @@ export function baueSitemap(routen, siteUrl, datumFuer = () => '') {
 }
 
 export function erzeugeSitemap() {
-  return baueSitemap(sammleRouten(ladeDatenAusDateien()), SITE_URL, baueDatumsIndex());
+  return baueSitemap(sammleRoutenAlleSprachen(ladeDatenAusDateien()), SITE_URL, baueDatumsIndex());
 }
 
 // Für den Engine-Test. Verglichen wird die ROUTENMENGE, nicht die Datei Byte für
