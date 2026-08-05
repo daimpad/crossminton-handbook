@@ -1,4 +1,4 @@
-// KO-Turnier-Engine: erzeugt aus einer Teilnehmerliste ein Einzel-K.-o.-Bracket,
+// KO-Turnier-Engine: erzeugt aus einer Teilnehmerliste ein K.-o.-Bracket,
 // trägt Sieger ein und lässt die nächste Runde automatisch entstehen, sobald die
 // aktuelle komplett ist. Rein funktional (kein DOM); Zufälligkeit (Auslosung) kommt
 // als bereits gemischte Liste herein — die Engine ruft nie selbst Math.random() auf
@@ -8,8 +8,48 @@
 // Regularium) — ein eigenständiges Werkzeug für ein selbst organisiertes
 // Spaßturnier: Namen eintragen, auslosen, Sieger antippen, am Ende steht fest,
 // wer gewonnen hat und wer wie weit gekommen ist (Platzierung).
+//
+// EINZEL UND DOPPEL teilen dasselbe Bracket. Ein Teilnehmer ist für die Engine
+// nichts als eine eindeutige Zeichenkette — ein Doppel-Team ist deshalb schlicht
+// ein Teilnehmer mit zwei Namen („Ada & Bea"). Freilos-Rotation, Rundenaufbau,
+// Sieger-Eintrag und Platzierung bleiben davon vollständig unberührt; hinzu
+// kommen nur die Paarbildung (bildePaare) und die Spielform als Metadatum für
+// die Beschriftung. Wer hier etwas ändert, ändert es für beide Spielformen.
 
 const MIN_TEILNEHMER = 2;
+
+export const SPIELFORMEN = ['einzel', 'doppel'];
+
+// Wie zwei Namen zu einem Team-Namen werden. Bewusst kein Label: das Zeichen
+// steht in allen vier Sprachen gleich, und der Team-Name ist zugleich die
+// IDENTITÄT im Bracket — er darf sich nicht mit der Anzeigesprache ändern,
+// sonst fände traegtSiegerEin() nach einem Sprachwechsel seinen Teilnehmer nicht
+// mehr wieder.
+export const TEAM_TRENNER = ' & ';
+
+export function teamName(einer, andere) {
+  return `${String(einer).trim()}${TEAM_TRENNER}${String(andere).trim()}`;
+}
+
+// Ein gespeichertes Turnier ohne `spielform` stammt aus der Zeit vor dem Doppel
+// und ist ein Einzel — normalisiert statt migriert (wie spielformVon in daten.js).
+export function turnierSpielform(turnier) {
+  return SPIELFORMEN.includes(turnier?.spielform) ? turnier.spielform : 'einzel';
+}
+
+// Bildet aus einer BEREITS GEMISCHTEN Namensliste Zweier-Teams (Reihenfolge =
+// Auslosung, s. mische()). Bei ungerader Anzahl bleibt die letzte Person übrig
+// und wird als `uebrig` zurückgegeben statt still verschluckt — die Ansicht
+// verhindert den Fall schon vorher, aber wer die Engine direkt nutzt, soll es
+// erfahren und nicht wundern, warum jemand fehlt.
+export function bildePaare(gemischteNamen) {
+  const namen = (gemischteNamen || []).map((n) => String(n).trim()).filter(Boolean);
+  const teams = [];
+  for (let i = 0; i + 1 < namen.length; i += 2) {
+    teams.push(teamName(namen[i], namen[i + 1]));
+  }
+  return { teams, uebrig: namen.length % 2 === 1 ? namen[namen.length - 1] : null };
+}
 
 // Fisher-Yates mit injizierter Zufallsquelle (Standard: Math.random) — bleibt
 // dadurch deterministisch testbar (Tests reichen eine feste Quelle herein).
@@ -73,9 +113,10 @@ function baueRunde(liste, hatteFreilos = new Set()) {
 }
 
 // Erzeugt ein neues Turnier. `gemischteTeilnehmer` ist die bereits ausgeloste
-// (gemischte) Namensliste — siehe mische(). Wirft bei zu wenig oder doppelten
+// (gemischte) Namensliste — siehe mische(); im Doppel sind das die Team-Namen aus
+// bildePaare() bzw. selbst eingetragene Paare. Wirft bei zu wenig oder doppelten
 // Namen (echter Programmfehler-Fall, keine Zwei-Ebenen-Logik-Frage).
-export function erzeugeTurnier(titel, gemischteTeilnehmer) {
+export function erzeugeTurnier(titel, gemischteTeilnehmer, spielform = 'einzel') {
   const teilnehmer = (gemischteTeilnehmer || []).map((n) => String(n).trim()).filter(Boolean);
   if (teilnehmer.length < MIN_TEILNEHMER) {
     throw new Error(`erzeugeTurnier: mindestens ${MIN_TEILNEHMER} Teilnehmer:innen erforderlich`);
@@ -85,6 +126,7 @@ export function erzeugeTurnier(titel, gemischteTeilnehmer) {
   }
   return {
     titel: String(titel || '').trim(),
+    spielform: SPIELFORMEN.includes(spielform) ? spielform : 'einzel',
     teilnehmer,
     runden: [baueRunde(teilnehmer)],
   };
