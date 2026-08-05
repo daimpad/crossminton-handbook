@@ -71,9 +71,21 @@ Konsolen-/Seitenfehler mitschneiden — Soll ist null.
 
 24. „3 + Mehr"-Navigation (schlanke Bottom-Bar): Mobil trägt die `.fussnav` **vier** Slots — Lernen · Training · Profil · **Mehr** (`.fussnav-mehr`/`#mehr-knopf`, `fa-bars`), einzeilig (~60px). „Mehr" öffnet dieselbe `#hauptmenue`-Lade wie der Kopf-Hamburger (der mobil ausgeblendet ist, ab ≥768px erscheint und dann die verborgene Bar ersetzt). Das Menü listet alle sechs Ziele (Lernen…Profil), dann einen `.menue-trenner` und **Impressum · Datenschutz** mit Icon (der `[data-footer]`-Beschrifter ersetzt nur `.nav-text`, zerstört das Icon nie). Prüfen: Bar zeigt genau die vier Labels; Klick auf „Mehr" setzt `aria-expanded=true` und öffnet die Lade; auf Menü-Routen (regeln/ueber/mitmachen/impressum/datenschutz) trägt „Mehr" `.aktiv`; ein Menü-Klick navigiert und schließt die Lade; Desktop (≥768px) verbirgt die Bar, der Kopf-Hamburger öffnet dasselbe vollständige (8-Punkte-)Menü. Konsole fehlerfrei.
 
+25. **Tastaturbedienung** (nur `keyboard.press`, keine Maus). Vier Fragen: (a) erreicht ein Tab-Durchlauf jedes bedienbare Element? (b) liegt etwas im Layout, das bedienbar *aussieht* (Zeigercursor, `role=button`), aber nicht im Tab-Ring? (c) ist der Fokus sichtbar? (d) **bleibt der Fokus nach einer Aktion an einer brauchbaren Stelle?** Der letzte Punkt ist der, der bricht: eine Ansicht zeichnet sich per `neuRendern()` neu und ersetzt `#ansicht` — das fokussierte Element ist danach ein anderes Objekt. `rendern()` rettet den Fokus über eine dataset-Handhabe (s. CLAUDE.md); wer eine neue Aktion baut, prüft sie hier nach. Betroffene Stellen: Baustein abhaken, Merken-FAB, Merklisten-Eintrag entfernen, Plan tauschen/entfernen, Profil „Ändern", KO-Turnier-Sieger, Turnier-Stufe. Ebenfalls durchfahren: Onboarding komplett per Leertaste+Enter (endet auf `/pfad/individual`), KO-Turnier von der Namenseingabe bis zum eingetragenen Sieger, Suche (Tippen darf den Fokus nicht kosten), Skip-Link (erster Tab, muss sichtbar werden und auf `#ansicht` führen).
+
 Engine-Logik separat und schnell: `node tests/engine.test.mjs` (kein Ersatz für den Browser-Lauf).
 
 ## Stolpersteine
+
+### Beim Messen von Fokus und Sichtbarkeit
+
+Drei Fallen haben hier schon je einen Fehlalarm erzeugt — alle drei messen das
+Werkzeug statt die App:
+
+- **`getBoundingClientRect()` taugt nicht als Sichtbarkeitsprüfung.** In einem *geschlossenen* `<details>` meldet Chromium weiter eine Box (der Inhalt wird über `content-visibility` ausgeblendet, nicht über `display:none`). Ein Größen-Filter zählt die eingeklappten Regel-Querverweise darum mit und meldet 21 Links als „per Tab nicht erreichbar", obwohl sie korrekt aus dem Tab-Ring liegen. **`el.checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true, checkOpacity: true })`** kennt den Fall. Gegenprobe, die es sofort entlarvt: `el.focus(); document.activeElement === el`.
+- **`getComputedStyle(document.activeElement)` sieht nicht ins Schatten-DOM.** Bei `<input type="date">` wandert der Fokus durch drei Segmente *und* den Kalender-Knopf; `document.activeElement` bleibt dabei immer der Host-`<input>`. Am vierten Halt meldet der Host `outline: 0px none` und `:focus-visible` = false — der Knopf zeichnet seinen Ring aber selbst (per Screenshot belegt, Chromium malt einen schwarzen Kasten). Von außen weder messbar noch bestylbar. Kein Befund, keine CSS-Regel nötig.
+- **`document.activeElement === body` mitten im Tab-Durchlauf ist normal.** Am Ende des Rings reicht Chromium den Fokus an die Browser-Oberfläche weiter. Bei 15 Elementen und 90 Tabs sind das sechs Runden und damit fünf bis sechs BODY-Treffer — kein Fokusverlust. Wer eine Runde erkennen will, darf sich nicht auf eine `id` am ersten Tab-Ziel verlassen (der Skip-Link hat keine). Besser: alle fokussierbaren Elemente vorher markieren und die *Menge* der erreichten mit der Menge der vorhandenen vergleichen.
+
 
 - Ansichten rendern nach Zustandsänderung neu → nach Klicks kurz warten (`waitForTimeout(150–200)`).
 - Hash-Routing: direkte Sprünge via `page.goto(BASIS + '#/pfad/kompetenz')` funktionieren.

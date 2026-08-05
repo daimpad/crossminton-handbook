@@ -206,10 +206,14 @@ export function renderProfil(el, daten) {
       </div>
     </section>`;
 
+  // Über neuRendern() statt direkt renderProfil(): das Ergebnis ist dasselbe
+  // (rendern() ruft für diese Route genau diese Funktion), aber der zentrale
+  // Weg gibt den Tastaturfokus danach an den Knopf zurück, der ihn ausgelöst
+  // hat. Ein direkter Aufruf ersetzt #ansicht, ohne dass jemand den Fokus rettet.
   for (const knopf of el.querySelectorAll('[data-bearbeite]')) {
     knopf.addEventListener('click', () => {
       offen = offen === knopf.dataset.bearbeite ? null : knopf.dataset.bearbeite;
-      renderProfil(el, daten);
+      neuRendern();
     });
   }
 

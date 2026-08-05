@@ -473,9 +473,69 @@ function renderFehler(el, fehler) {
   el.querySelector('#neu-laden').addEventListener('click', () => window.location.reload());
 }
 
+// Fokus über eine Zustands-Neuzeichnung retten.
+//
+// Eine Ansicht zeichnet sich neu, indem sie #ansicht komplett ersetzt. Das
+// fokussierte Element ist danach ein anderes Objekt — der Fokus fällt auf
+// <body>. Mit der Maus merkt das niemand; ohne Zeigergerät beginnt jede weitere
+// Bedienung wieder ganz oben. Beim Abhaken eines Erklärteils sind das elf Tabs
+// pro Klick, beim KO-Turnier bei 16 Teilnehmenden acht Matches je Runde.
+//
+// Die Handhabe ist bewusst KEIN Selektor-String (dann müsste jeder Attributwert
+// CSS-escaped werden, und ein Baustein-Titel mit Anführungszeichen bräche ihn),
+// sondern die dataset-Karte selbst: nach dem Zeichnen wird das Element gesucht,
+// dessen data-Attribute alle übereinstimmen. Die Aktions-Knöpfe der App tragen
+// ohnehin durchgängig welche (data-quittiere, data-index, data-ko-sieger …).
+//
+// Verschwindet das Element ganz — der eben entfernte Merklisten-Eintrag ist ja
+// weg —, greift der Platz-Ersatz: unter den gleichartigen Knöpfen (gleiches Tag,
+// gleiche data-Schlüssel) der an derselben Stelle, notfalls der letzte. Der
+// Fokus landet dann auf dem nachgerückten Nachbarn, so wie man es von jeder
+// Liste kennt, statt am Seitenanfang. Erst wenn gar keiner mehr da ist (Liste
+// leer), bleibt es beim Zurückfallen — dann gibt es auch nichts zu fokussieren.
+function fokusHandhabe() {
+  const a = document.activeElement;
+  if (!a || typeof a.closest !== 'function' || !a.closest('#ansicht')) return null;
+  const daten = { ...a.dataset };
+  if (!a.id && !Object.keys(daten).length) return null;
+  const tag = a.tagName.toLowerCase();
+  const gleichartige = geschwisterGleicherArt(a.closest('#ansicht'), tag, Object.keys(daten));
+  return { id: a.id, tag, daten, platz: gleichartige.indexOf(a) };
+}
+
+// Alle Elemente, die dieselbe Rolle spielen: gleiches Tag, exakt dieselben
+// data-Schlüssel (Werte dürfen abweichen — das sind gerade die Listenplätze).
+function geschwisterGleicherArt(wurzel, tag, schluessel) {
+  if (!wurzel || !schluessel.length) return [];
+  return [...wurzel.querySelectorAll(tag)].filter((el) => {
+    const eigene = Object.keys(el.dataset);
+    return eigene.length === schluessel.length && schluessel.every((k) => k in el.dataset);
+  });
+}
+
+function stelleFokusHer(handhabe) {
+  if (!handhabe) return;
+  const wurzel = document.getElementById('ansicht');
+  if (handhabe.id) {
+    const el = wurzel.querySelector(`[id="${handhabe.id}"]`);
+    if (el) {
+      el.focus({ preventScroll: true });
+      return;
+    }
+  }
+  const schluessel = Object.keys(handhabe.daten);
+  if (!schluessel.length) return;
+  const gleichartige = geschwisterGleicherArt(wurzel, handhabe.tag, schluessel);
+  const genau = gleichartige.find((el) => schluessel.every((k) => el.dataset[k] === handhabe.daten[k]));
+  const ziel = genau ?? gleichartige[Math.min(handhabe.platz, gleichartige.length - 1)];
+  ziel?.focus({ preventScroll: true });
+}
+
 function rendern() {
   const { segmente, query, roh, sprache: ausUrl } = parsePfad();
   const el = document.getElementById('ansicht');
+  // Vor dem Zeichnen merken — danach gibt es das Element nicht mehr.
+  const gemerkterFokus = fokusHandhabe();
 
   // Sprache mit der URL abgleichen, BEVOR gerendert wird. Nötig, weil eine
   // Navigation die Sprachgrenze überqueren kann, ohne durch den Umschalter zu
@@ -559,6 +619,11 @@ function rendern() {
     el.classList.add('einstieg');
     // Tastatur-/Screenreader-Fokus auf den neuen Inhalt lenken (nicht beim Erstaufbau).
     if (!ersterLauf) el.focus({ preventScroll: true });
+  } else {
+    // Gleiche Route, also eine Zustands-Neuzeichnung: den Fokus dorthin
+    // zurückgeben, wo er war. Bei einem Routenwechsel wäre das falsch — dort
+    // gehört er an den Anfang des neuen Inhalts (Zweig oben).
+    stelleFokusHer(gemerkterFokus);
   }
 }
 
