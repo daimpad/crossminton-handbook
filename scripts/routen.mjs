@@ -82,6 +82,24 @@ export function mitSprache(pfad, sprache) {
   return pfad === '/' ? `/${sprache}` : `/${sprache}${pfad}`;
 }
 
+// Rohe Ansichts-Links ('#/…') in einem HTML-Text auf echte Pfade ziehen —
+// dieselbe Regel, die zur Laufzeit `normalisiereLinks()` + `zuUrl()` in
+// js/app.js anwenden, nur in Node und für einen fertigen Schnappschuss.
+//
+// WARUM DAS GEBRAUCHT WIRD: scripts/prerender.mjs setzt nur den gerenderten
+// #ansicht-Inhalt in die index.html-Vorlage ein. Alles AUSSERHALB davon —
+// Kopfzeile, Menü-Lade, Bottom-Bar — stammt unverändert aus der Vorlage und
+// trug darum weiter die Rohform. Für einen Crawler sind '#/…' bloße Fragmente
+// auf dieselbe Seite: die komplette Navigation war 18 tote Enden je Seite,
+// auf allen 596 Seiten. Menschen merkten davon nichts, weil der Client die
+// Links beim Booten ohnehin normalisiert.
+//
+// Der Skip-Link 'href="#ansicht"' bleibt unberührt (kein Schrägstrich nach
+// dem '#'), ebenso bereits aufgelöste Pfade.
+export function loeseRahmenLinks(html, sprache, praefix = '') {
+  return html.replace(/href="#\/([^"]*)"/g, (_treffer, rest) => `href="${praefix}${mitSprache(`/${rest}`, sprache)}"`);
+}
+
 // Alle Routen in allen Sprachen. Aus 149 sprachneutralen Routen werden damit
 // 596 indexierbare Adressen — der Inhalt liegt längst übersetzt vor, ihm fehlte
 // nur die eigene Adresse.

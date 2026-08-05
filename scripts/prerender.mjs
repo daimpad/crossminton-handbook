@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url';
 // Ableitung, zwei Verbraucher (s. scripts/routen.mjs). Die sitemap.xml wird
 // hier NICHT erzeugt: die eingecheckte ist die maßgebliche (die Produktion hat
 // keinen Build-Schritt), kopiere() trägt sie unverändert ins Staging.
-import { mitSprache, SITE_URL } from './routen.mjs';
+import { loeseRahmenLinks, mitSprache, SITE_URL } from './routen.mjs';
 import { QUELLSPRACHE, SPRACHEN } from '../js/i18n.js';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -209,6 +209,13 @@ function baueSnapshot(vorlage, route) {
   if (route.schema) {
     vorKopfEnde(`  <script type="application/ld+json">${schemaFuerAusgabe(route.schema)}</script>`);
   }
+
+  // Kopf, Menü-Lade und Bottom-Bar stammen unverändert aus der Vorlage und
+  // tragen darum noch die Rohform '#/…'. Für einen Crawler wären das
+  // Fragment-Links auf dieselbe Seite — die komplette Navigation ein totes
+  // Ende. Hier auf echte Pfade ziehen, mit demselben Sprachpräfix wie die
+  // Seite selbst, damit ein englischer Snapshot auch englisch weiterverlinkt.
+  html = loeseRahmenLinks(html, route.sprache ?? QUELLSPRACHE, PRAEFIX);
 
   // Nur die deutsche Wurzel behält ihren handgepflegten Tier-1-Kopf.
   if (route.pfad === '/') return html;

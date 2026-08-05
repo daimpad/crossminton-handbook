@@ -18,7 +18,7 @@ import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWo
 import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
-import { mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
+import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 
@@ -1252,6 +1252,33 @@ pruefe(
   'ihr Inhalt ist die von Google erwartete Zeile',
   existsSync(join(wurzel, SC_DATEI))
     && readFileSync(join(wurzel, SC_DATEI), 'utf8').trim() === `google-site-verification: ${SC_DATEI}`,
+);
+
+// Rahmen-Links im Prerender-Schnappschuss: Kopf/Menue/Bottom-Bar stammen aus
+// der unberuehrten index.html-Vorlage und trugen die Rohform '#/…' — fuer einen
+// Crawler tote Fragment-Links, auf allen 596 Seiten. loeseRahmenLinks() zieht
+// sie auf echte Pfade; hier die Faelle, die dabei leicht kaputtgehen.
+pruefe('Rahmen-Link: #/regeln (de) → /regeln', loeseRahmenLinks('<a href="#/regeln">', 'de') === '<a href="/regeln">');
+pruefe('Rahmen-Link: #/regeln (pl) → /pl/regeln', loeseRahmenLinks('<a href="#/regeln">', 'pl') === '<a href="/pl/regeln">');
+// Die Wurzel ist der Sonderfall: leerer Rest, und en/fr/pl haben KEINEN
+// Schraegstrich am Ende ('/en', nicht '/en/') — sonst zeigte das Logo auf eine
+// Adresse, die es in der Sitemap nicht gibt.
+pruefe('Rahmen-Link: #/ (de) → /', loeseRahmenLinks('<a href="#/">', 'de') === '<a href="/">');
+pruefe('Rahmen-Link: #/ (en) → /en', loeseRahmenLinks('<a href="#/">', 'en') === '<a href="/en">');
+// Der Skip-Link ist ein ECHTES Fragment und muss eines bleiben (kein Schraegstrich).
+pruefe('Skip-Link #ansicht bleibt unberuehrt', loeseRahmenLinks('<a href="#ansicht">', 'en') === '<a href="#ansicht">');
+// Der #ansicht-Inhalt ist beim Erfassen laengst normalisiert — nicht erneut anfassen.
+pruefe('bereits aufgeloeste Pfade bleiben', loeseRahmenLinks('<a href="/en/baustein/griff">', 'en') === '<a href="/en/baustein/griff">');
+pruefe('Montagepunkt wird vorangestellt', loeseRahmenLinks('<a href="#/regeln">', 'fr', '/unterpfad') === '<a href="/unterpfad/fr/regeln">');
+// Jeder Rahmen-Link der Vorlage muss aufloesbar sein — sonst bleibt still einer
+// als Fragment zurueck. Gegen die echte index.html geprueft, nicht gegen Beispiele.
+const vorlage = readFileSync(join(wurzel, 'index.html'), 'utf8');
+const roheLinks = (vorlage.match(/href="#\/[^"]*"/g) || []).length;
+const nachAufloesung = (loeseRahmenLinks(vorlage, 'pl').match(/href="#\/[^"]*"/g) || []).length;
+pruefe(
+  `index.html: alle ${roheLinks} Rahmen-Links werden aufgeloest`,
+  roheLinks > 0 && nachAufloesung === 0,
+  `${nachAufloesung} blieben stehen`,
 );
 
 console.log('\n[17] Versionsstand (wird von CI unbeaufsichtigt überschrieben)');
