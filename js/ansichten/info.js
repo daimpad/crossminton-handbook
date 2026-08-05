@@ -170,7 +170,7 @@ export function renderMitmachen(el, daten) {
     .map(
       (moe) => `
       <section class="karte">
-        <h3>${esc(text(moe.titel) ?? '')}</h3>
+        <h2 class="karte-titel">${esc(text(moe.titel) ?? '')}</h2>
         <p>${esc(text(moe.text) ?? '')}</p>
         <p class="info-cta">${externerLink(moe.cta_ziel, text(moe.cta_label) ?? '', 'knopf knopf-primaer')}</p>
       </section>`,
@@ -183,7 +183,7 @@ export function renderMitmachen(el, daten) {
   const feedbackKarte = fb
     ? `
       <section class="karte karte-akzent">
-        <h3>${esc(text(fb.titel) ?? '')}</h3>
+        <h2 class="karte-titel">${esc(text(fb.titel) ?? '')}</h2>
         <p>${esc(text(fb.text) ?? '')}</p>
         <div id="feedback-bereich" class="info-cta">
           ${
