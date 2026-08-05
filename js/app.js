@@ -157,9 +157,22 @@ function setzeSeitenSchema(segmente) {
 // heraus. Nach jedem Rendern werden sie hier EINMAL auf echte Pfade normalisiert;
 // im DOM (und damit im späteren Prerender-Schnappschuss) stehen also nie Hashes.
 // Idempotent: bereits umgeschriebene Links tragen kein '#/' mehr.
+// Die Links IM RAHMEN (Kopfzeile, Menü-Lade, Bottom-Bar) stehen statisch in
+// index.html und überleben jedes Neu-Rendern — anders als der Inhalt von
+// #ansicht, der bei jedem Lauf frisch mit '#/…' erzeugt wird. Wechselt die
+// Sprache zur Laufzeit, müssen sie darum ERNEUT aufgelöst werden; sonst zeigt
+// die halbe Oberfläche weiter in die alte Sprache (der Inhalt war englisch,
+// die Navigation deutsch — ein Klick warf einen zurück). Weil ein fertiger
+// Pfad seine Sprache nicht mehr verrät, merkt sich der Rahmen dafür seine
+// Rohform in `data-roh`; scripts/routen.mjs schreibt sie in die Snapshots mit.
 export function normalisiereLinks(wurzelEl = document) {
   for (const a of wurzelEl.querySelectorAll('a[href^="#/"]')) {
-    a.setAttribute('href', zuUrl(a.getAttribute('href')));
+    const roh = a.getAttribute('href');
+    if (!a.closest('#ansicht')) a.dataset.roh = roh;
+    a.setAttribute('href', zuUrl(roh));
+  }
+  for (const a of wurzelEl.querySelectorAll('a[data-roh]')) {
+    a.setAttribute('href', zuUrl(a.dataset.roh));
   }
 }
 
