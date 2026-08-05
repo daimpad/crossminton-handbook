@@ -49,7 +49,9 @@ Diese Bausteine kennen einander: `Der Aufschlag` weiß, dass `Der Universalgriff
 | **Athletik** | 19 | Aufwärmen, Beweglichkeit, Schnelligkeit, Rumpf, Ausdauer, Regeneration |
 | **Ausrüstung** | 7 | Speeder, Schläger, Schuhe, Kleidung, Bespannung, Griffband |
 
-Davon tragen **44 einen Übungsteil** (etwas zum Machen) und **64 eine Reflexionsaufgabe** (etwas zum Durchdenken). Welches von beidem, hängt am Inhalt: Bewegung wird geübt, Haltung wird durchdacht.
+Das sind 93; die übrigen 15 stehen weiter unten, weil sie eine eigene Logik haben — **10 Umgebungs-Bausteine** (Draußen spielen) und **5 Trainer-Bausteine** zur Trainingsgestaltung.
+
+Von allen 108 tragen **44 einen Übungsteil** (etwas zum Machen) und **64 eine Reflexionsaufgabe** (etwas zum Durchdenken). Welches von beidem, hängt am Inhalt: Bewegung wird geübt, Haltung wird durchdacht.
 
 ### Vier Wege durch denselben Stoff
 
@@ -123,9 +125,15 @@ Der Fortschritt bleibt auf dem eigenen Gerät (lokal im Browser) und wird nirgen
 
 Dazu **63 Diagramme** — Schlagbewegungen, Feldpositionen, Laufwege, Doppel-Formationen — als Vektorgrafiken, die sich an helles und dunkles Design anpassen.
 
+### Bedienbar auch ohne Maus
+
+Die App lässt sich vollständig mit der Tastatur bedienen: jedes Bedienelement ist per Tab erreichbar, der Fokus bleibt sichtbar, und er behält seine Stelle, wenn eine Seite sich nach einer Aktion neu aufbaut — wer zehn Bausteine hintereinander abhakt, muss sich nicht zehnmal zurückarbeiten. Farben und Kontraste sind gegen WCAG AA geprüft, hell wie dunkel. Wer Bewegung nicht mag, schaltet sie im System ab (`prefers-reduced-motion`), und die App folgt.
+
 ## In vier Sprachen
 
-Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 616 Bedienelemente und 824 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
+Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 616 Bedienelemente und 850 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
+
+Jede Sprache hat eigene Adressen: Deutsch liegt an der Wurzel, die anderen unter `/en/`, `/fr/` und `/pl/`. Ein Link führt also dorthin, wo man ihn kopiert hat — und Suchmaschinen finden alle vier Fassungen.
 
 ## Technische Dokumentation
 
