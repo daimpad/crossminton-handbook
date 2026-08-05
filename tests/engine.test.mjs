@@ -13,7 +13,7 @@ import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortsch
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
-import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier } from '../js/zustand.js';
+import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier, ladeZustand, diagnose, merkliste, einstellungen, kontinuitaet, teilStatus } from '../js/zustand.js';
 import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
@@ -1289,6 +1289,93 @@ pruefe(
   roheLinks > 0 && nachAufloesung === 0,
   `${nachAufloesung} blieben stehen`,
 );
+
+console.log('\n[19] Zustand: jeder gespeicherte Stand muss ueberlebbar sein');
+
+// Was in localStorage steht, kommt von aussen und kann alles sein: ein halber
+// Schreibvorgang, ein fremdes Werkzeug, ein Stand von vor drei Feature-Runden.
+// verschmelze() muss daraus IMMER einen brauchbaren Zustand machen — sonst
+// zeigt die App einen leeren Bildschirm ohne jede Meldung. Genau das passierte
+// bei `"diagnose": null`: der kaputte Wert ersetzte das Vorgabe-Objekt, und
+// jedes diagnose().stufe warf.
+const echterSpeicher = globalThis.localStorage;
+let abgelegt = null;
+globalThis.localStorage = {
+  getItem: () => abgelegt,
+  setItem: (_k, v) => { abgelegt = v; },
+  removeItem: () => { abgelegt = null; },
+};
+
+const FORTSCHRITT_PROBE = { griff: { erklaerteil: 'erledigt' } };
+const STAENDE = [
+  ['kein Stand', null],
+  ['kaputtes JSON', '{oh nein'],
+  ['String statt Objekt', '"hallo"'],
+  ['Liste statt Objekt', '[1,2,3]'],
+  ['leeres Objekt', '{}'],
+  ['diagnose: null', JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, diagnose: null })],
+  ['einstellungen: Zahl', JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, einstellungen: 42 })],
+  ['merkliste: String', JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, merkliste: 'kein Array' })],
+  ['fortschritt: Liste', JSON.stringify({ fortschritt: [] })],
+  ['kontinuitaet: null', JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, kontinuitaet: null })],
+  ['alter Stand ohne die neuen Slices', JSON.stringify({ schemaVersion: 1, diagnose: { stufe: 'beginner' }, fortschritt: FORTSCHRITT_PROBE })],
+  ['Schema aus der Zukunft', JSON.stringify({ schemaVersion: 99, fortschritt: FORTSCHRITT_PROBE })],
+  ['unbekannte Zusatz-Schluessel', JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, aus_der_zukunft: { x: 1 } })],
+];
+
+let brauchbar = 0;
+const kaputteStaende = [];
+for (const [name, roh] of STAENDE) {
+  abgelegt = roh;
+  let ok = false;
+  try {
+    ladeZustand();
+    const d = diagnose();
+    const e = einstellungen();
+    const k = kontinuitaet();
+    ok = d !== null && typeof d === 'object' && 'stufe' in d
+      && e !== null && typeof e === 'object' && typeof e.sprache === 'string'
+      && k !== null && typeof k === 'object' && typeof k.gesamt === 'number'
+      && Array.isArray(merkliste());
+  } catch (fehler) {
+    kaputteStaende.push(`${name}: wirft ${fehler.message}`);
+  }
+  if (ok) brauchbar++;
+  else if (!kaputteStaende.some((z) => z.startsWith(name))) kaputteStaende.push(`${name}: Zustand unbrauchbar`);
+}
+pruefe(
+  `alle ${STAENDE.length} Staende ergeben einen brauchbaren Zustand`,
+  brauchbar === STAENDE.length,
+  kaputteStaende.slice(0, 4).join(' | '),
+);
+
+// Und der eigentliche Zweck: vorhandener Fortschritt darf dabei NIE verlorengehen.
+abgelegt = JSON.stringify({ fortschritt: FORTSCHRITT_PROBE, diagnose: null, merkliste: 'kaputt', einstellungen: 42 });
+ladeZustand();
+pruefe('Fortschritt ueberlebt neben kaputten Nachbar-Slices', teilStatus('griff', 'erklaerteil') === 'erledigt');
+pruefe('kaputte Nachbarn fallen auf die Vorgabe zurueck',
+  diagnose().stufe === null && einstellungen().sprache === 'de' && merkliste().length === 0);
+
+// Dokument-Slices (plan/koTurnier) sind null ODER ein Objekt. Steht dort ein
+// Fremdkoerper, lasen die Ansichten Felder darauf und die Seite blieb LEER.
+for (const [name, roh] of [
+  ['plan als String', JSON.stringify({ plan: 'nix' })],
+  ['plan als Liste', JSON.stringify({ plan: [] })],
+  ['koTurnier als Liste', JSON.stringify({ koTurnier: [] })],
+  ['koTurnier als Zahl', JSON.stringify({ koTurnier: 7 })],
+]) {
+  abgelegt = roh;
+  ladeZustand();
+  pruefe(`${name} → Accessor liefert null`, gespPlan() === null || gespKoTurnier() === null,
+    `plan=${JSON.stringify(gespPlan())} koTurnier=${JSON.stringify(gespKoTurnier())}`);
+}
+// Ein echtes Dokument kommt selbstverstaendlich durch.
+abgelegt = JSON.stringify({ plan: { startISO: '2026-01-01', sessions: [] } });
+ladeZustand();
+pruefe('ein echtes Plan-Objekt bleibt erhalten', gespPlan() !== null && Array.isArray(gespPlan().sessions));
+
+globalThis.localStorage = echterSpeicher;
+setzeZurueck();
 
 console.log('\n[17] Versionsstand (wird von CI unbeaufsichtigt überschrieben)');
 

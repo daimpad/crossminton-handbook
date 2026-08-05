@@ -28,6 +28,24 @@ function vorgabe() {
   };
 }
 
+// Darf ein gespeicherter Wert die Vorgabe ersetzen? Nur bei GLEICHER GESTALT.
+//
+// Ohne diese Prüfung überschrieb ein `"diagnose": null` im gespeicherten Zustand
+// das Vorgabe-Objekt komplett — danach warf jedes `diagnose().stufe` und die App
+// zeigte einen leeren Bildschirm ohne jede Meldung. Genau das darf hier nicht
+// passieren: was im Speicher steht, kommt von außen und kann alles sein
+// (halber Schreibvorgang, fremdes Werkzeug, künftiger Refaktor). Passt es nicht,
+// gewinnt die Vorgabe — das kostet höchstens eine Einstellung, nie die App.
+//
+// Ist die Vorgabe selbst ein Skalar oder `null` (plan, koTurnier), ist jeder
+// gespeicherte Wert zulässig: dort ist der Übergang null → Objekt der Normalfall.
+// Unbekannte Zusatz-Schlüssel (keine Vorgabe vorhanden) bleiben ebenfalls erhalten.
+function gestaltPasst(basis, wert) {
+  if (Array.isArray(basis)) return Array.isArray(wert);
+  if (basis && typeof basis === 'object') return wert != null && typeof wert === 'object' && !Array.isArray(wert);
+  return true;
+}
+
 // Tiefer Merge: gespeicherte Werte überlagern die Vorgabe rekursiv, sodass auch
 // künftige verschachtelte Default-Keys erhalten bleiben. Arrays und Skalare ersetzen.
 function tiefMerge(basis, gespeichert) {
@@ -35,7 +53,8 @@ function tiefMerge(basis, gespeichert) {
   const ergebnis = { ...basis };
   for (const [k, v] of Object.entries(gespeichert)) {
     const b = basis[k];
-    if (b && typeof b === 'object' && !Array.isArray(b) && v && typeof v === 'object' && !Array.isArray(v)) {
+    if (!gestaltPasst(b, v)) continue; // unbrauchbar — Vorgabe behalten
+    if (b && typeof b === 'object' && !Array.isArray(b)) {
       ergebnis[k] = tiefMerge(b, v);
     } else {
       ergebnis[k] = v;
@@ -142,8 +161,18 @@ export function registriereEinheitAbschluss(einheitId) {
 
 // Trainingsplan: ein generierter, danach anpassbarer Wochenplan. Rein persistent,
 // kein Fortschritt (der bleibt baustein-gebunden über die Einheiten-Referenzen).
+// Ein Dokument-Slice ist entweder `null` oder ein Objekt — nie ein String, eine
+// Zahl oder eine Liste. Was im Speicher steht, kann davon abweichen: ein alter
+// Stand mit anderer Gestalt, ein halber Schreibvorgang. Die Ansichten lesen
+// darauf direkt Felder (`plan.sessions`, `turnier.runden`), ein Fremdkoerper
+// warf dort und liess die Seite LEER zurueck. Lieber „noch keiner erstellt" —
+// beides ist in zwei Klicks neu erzeugt, ein leerer Bildschirm nicht erklaerbar.
+function alsDokument(wert) {
+  return wert && typeof wert === 'object' && !Array.isArray(wert) ? wert : null;
+}
+
 export function plan() {
-  return stelleSicher().plan;
+  return alsDokument(stelleSicher().plan);
 }
 
 export function setzePlan(neu) {
@@ -191,7 +220,7 @@ export function vergiss(bausteinId) {
 // Rein persistent, kein Fortschritt und keine Baustein-Bindung — ein eigenständiges
 // Werkzeug für ein selbst organisiertes Spaßturnier.
 export function koTurnier() {
-  return stelleSicher().koTurnier;
+  return alsDokument(stelleSicher().koTurnier);
 }
 
 export function setzeKoTurnier(neu) {

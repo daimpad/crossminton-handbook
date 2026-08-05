@@ -195,6 +195,7 @@ code { font-size: 0.85em; word-break: break-all; }
   top: 0;
   z-index: 15;
   background: var(--kopf-bg);
+  -webkit-backdrop-filter: blur(10px); /* Safari kennt es erst ab 18 unpräfigiert */
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--linie);
   padding: env(safe-area-inset-top) 1rem 0;
@@ -421,6 +422,7 @@ body.im-onboarding main { padding-bottom: 2rem; }
   position: absolute;
   inset: 0;
   background: var(--overlay);
+  -webkit-backdrop-filter: blur(4px); /* Safari kennt es erst ab 18 unpräfigiert */
   backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 300ms ease;
@@ -1521,6 +1523,7 @@ details[open] summary { margin-bottom: 0.5rem; }
   place-items: center;
   padding: 1.5rem;
   background: var(--overlay);
+  -webkit-backdrop-filter: blur(5px); /* Safari kennt es erst ab 18 unpräfigiert */
   backdrop-filter: blur(5px);
   animation: schleier-einstieg 260ms ease both;
 }
@@ -1969,13 +1972,22 @@ details[open] summary { margin-bottom: 0.5rem; }
 .plan-aktionen { margin: 0; }
 .plan-woche { margin-top: 1.1rem; }
 .plan-woche > h3 { color: var(--ueberschrift); border-bottom: 1px solid var(--linie); padding-bottom: 0.3rem; margin-bottom: 0.3rem; }
+/* Mobil gestapelt, ab Tablet dreispaltig (Datum · Inhalt · Knöpfe).
+   Die drei Spalten `auto 1fr auto` haben zusammen eine Mindestbreite, die auf
+   390px nicht hineinpasst — das Datum bricht nicht (white-space: nowrap) und
+   die beiden Knöpfe auch nicht. Die Seite dehnte sich dadurch auf 570px und
+   scrollte waagerecht, was hier nie passieren darf. Mobil steht das Datum
+   deshalb über dem Eintrag, wie in den übrigen Listen der App auch. */
 .plan-session {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr;
   gap: 0.4rem 0.9rem;
   align-items: start;
   padding: 0.7rem 0;
   border-bottom: 1px solid var(--linie);
+}
+@media (min-width: 768px) {
+  .plan-session { grid-template-columns: auto 1fr auto; }
 }
 .plan-session:last-child { border-bottom: 0; }
 .plan-session-datum { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primaer-tief); white-space: nowrap; font-size: 0.88rem; padding-top: 0.15rem; }
