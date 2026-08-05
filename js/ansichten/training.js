@@ -105,6 +105,10 @@ function renderDurchlauf(el, daten, einheit, referenzen) {
       <h1>${bausteinIcon(baustein.id, 'baustein-icon')} ${esc(label('baustein', baustein.id))}</h1>
       ${hinweis ? `<p class="einheit-hinweis">${esc(hinweis)}</p>` : ''}
       <p><a class="leise" href="#/baustein/${esc(baustein.id)}?kontext=kompetenz">${esc(t('zum_baustein'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+      <!-- Diese h2 gehört hierher, weil uebungsteilHtml() mit einer h3 beginnt
+           (.ue-titel). In der Baustein-Ansicht steht darüber die Abschnitts-h2
+           „Übungsteil"; hier fehlte sie, und die Seite sprang von h1 auf h3. -->
+      <h2 class="karte-titel">${esc(t('uebungsteil'))}</h2>
       ${uebungsteilHtml(text(baustein.uebungsteil))}
       <div class="knopf-zeile">
         <a class="knopf knopf-leise" href="#/training">${esc(t('abbrechen'))}</a>
