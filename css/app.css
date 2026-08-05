@@ -2114,6 +2114,32 @@ details[open] summary { margin-bottom: 0.5rem; }
    der erfassten Namen. */
 .ko-namen-eingabe { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: flex-end; margin: 0.8rem 0; }
 .ko-namen-eingabe .plan-feld { flex: 1 1 12rem; min-width: 0; }
+/* Zwei Namensfelder für ein festes Doppel-Team: nebeneinander, sobald Platz ist,
+   sonst untereinander — `flex-wrap` erledigt das, die Basis muss nur schmal
+   genug sein, damit auf 360px nicht waagerecht gescrollt wird. */
+.ko-team-eingabe .plan-feld { flex: 1 1 9rem; }
+/* Auswahl (Spielform, Paarbildung): der Rahmen des <fieldset> würde sich mit den
+   Karten darin doppeln — die Legende trägt die Überschrift allein. */
+.ko-wahl { border: 0; padding: 0; margin: 0 0 0.4rem; }
+.ko-wahl legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--tinte-2);
+}
+/* Hinweis auf die ungerade Spielerzahl: Ampel-Gelb = „teilweise/Hinweis", kein
+   Fehler — die Eingabe ist gültig, nur noch nicht auslosbar. */
+.ko-hinweis {
+  margin: 0.2rem 0 0.6rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-klein);
+  background: var(--signal-gelb-weich);
+  color: var(--signal-gelb-text);
+  font-size: 0.85rem;
+}
+/* Team-Namen sind lang („Ada & Bea"): umbrechen statt das Match zu dehnen. */
+.ko-match-seite { overflow-wrap: anywhere; }
 .ko-chip-zeile { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
 .ko-chip {
   display: inline-flex;

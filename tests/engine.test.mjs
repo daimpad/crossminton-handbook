@@ -15,7 +15,7 @@ import { markiereAbsolviert } from '../js/aktionen.js';
 import { bausteinIcon, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier, ladeZustand, diagnose, merkliste, einstellungen, kontinuitaet, teilStatus } from '../js/zustand.js';
 import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
-import { erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, traegtSiegerEin, turniersieger } from '../js/ko-turnier.js';
+import { TEAM_TRENNER, bildePaare, erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, teamName, traegtSiegerEin, turnierSpielform, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
@@ -1006,6 +1006,50 @@ pruefe('erzeugeTurnier: wirft bei < 2 Teilnehmer:innen', wirftZuWenig);
 let wirftDuplikat = false;
 try { erzeugeTurnier('Duplikat', ['A', 'A']); } catch { wirftDuplikat = true; }
 pruefe('erzeugeTurnier: wirft bei doppelten Namen', wirftDuplikat);
+
+// --- Doppel -----------------------------------------------------------------
+// Für das Bracket ist ein Team nichts anderes als ein Teilnehmer mit zwei Namen.
+// Getestet wird darum genau das: die Paarbildung, die Spielform als Metadatum —
+// und dass Freilos-Rotation, Rundenaufbau und Platzierung unverändert greifen.
+pruefe('teamName: verbindet zwei Namen mit dem festen Trenner', teamName('Ada', 'Bea') === `Ada${TEAM_TRENNER}Bea`);
+pruefe('teamName: trimmt beide Seiten', teamName('  Ada ', ' Bea  ') === `Ada${TEAM_TRENNER}Bea`);
+
+const paareGerade = bildePaare(['Ada', 'Bea', 'Cem', 'Dov']);
+pruefe('bildePaare (gerade): zwei Teams in Reihenfolge der Auslosung, niemand übrig',
+  gleicheListe(paareGerade.teams, [`Ada${TEAM_TRENNER}Bea`, `Cem${TEAM_TRENNER}Dov`]) && paareGerade.uebrig === null);
+const paareUngerade = bildePaare(['Ada', 'Bea', 'Cem', 'Dov', 'Eva']);
+pruefe('bildePaare (ungerade): letzte Person wird als „übrig" gemeldet, nicht still verschluckt',
+  paareUngerade.teams.length === 2 && paareUngerade.uebrig === 'Eva');
+pruefe('bildePaare: leere Liste ergibt keine Teams', bildePaare([]).teams.length === 0 && bildePaare([]).uebrig === null);
+pruefe('bildePaare: eine einzelne Person ergibt kein Team', bildePaare(['Allein']).teams.length === 0 && bildePaare(['Allein']).uebrig === 'Allein');
+
+pruefe('turnierSpielform: Turnier ohne Feld gilt als Einzel (kein Migrationsschritt)', turnierSpielform({ titel: 'alt' }) === 'einzel');
+pruefe('turnierSpielform: unbekannter Wert fällt auf Einzel zurück', turnierSpielform({ spielform: 'quatsch' }) === 'einzel');
+pruefe('turnierSpielform: Doppel wird durchgereicht', turnierSpielform({ spielform: 'doppel' }) === 'doppel');
+pruefe('erzeugeTurnier: Spielform als Vorgabe Einzel', erzeugeTurnier('E', ['A', 'B']).spielform === 'einzel');
+
+// Ein Doppel-Turnier durchspielen: vier Teams aus acht Personen, bis zum Siegerteam.
+const achtSpieler = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'];
+let saatDoppel = 0.37;
+const doppelZufall = () => { saatDoppel = (saatDoppel + 0.23) % 1; return saatDoppel; };
+const { teams: vierTeams, uebrig: keinRest } = bildePaare(mische(achtSpieler, doppelZufall));
+pruefe('Doppel-Auslosung: 8 Spieler:innen ergeben 4 Teams ohne Rest', vierTeams.length === 4 && keinRest === null);
+pruefe('Doppel-Auslosung: jede Person steckt in genau einem Team',
+  gleicheListe([...vierTeams.flatMap((tm) => tm.split(TEAM_TRENNER))].sort(), [...achtSpieler].sort()));
+let koDoppel = erzeugeTurnier('Doppel-Cup', vierTeams, 'doppel');
+pruefe('erzeugeTurnier (Doppel): Spielform gespeichert, 4 Teams, 2 Matches, keine Freilose',
+  koDoppel.spielform === 'doppel' && koDoppel.teilnehmer.length === 4 && koDoppel.runden[0].length === 2 && koDoppel.runden[0].every((m) => m.b !== null));
+for (let i = 0; i < koDoppel.runden[0].length; i++) koDoppel = traegtSiegerEin(koDoppel, 0, i, koDoppel.runden[0][i].a);
+pruefe('Doppel: komplette Runde erzeugt das Finale wie im Einzel', koDoppel.runden.length === 2 && koDoppel.runden[1].length === 1);
+koDoppel = traegtSiegerEin(koDoppel, 1, 0, koDoppel.runden[1][0].a);
+pruefe('Doppel: Siegerteam steht fest und ist ein Team-Name', istAbgeschlossen(koDoppel) && turniersieger(koDoppel).includes(TEAM_TRENNER));
+pruefe('Doppel: Platzierung listet alle 4 Teams', platzierungen(koDoppel).length === 4);
+
+// Ungerade Team-Zahl im Doppel: dieselbe Freilos-Regel wie im Einzel, nichts Eigenes.
+const dreiTeams = [teamName('A1', 'A2'), teamName('B1', 'B2'), teamName('C1', 'C2')];
+const koDreiTeams = erzeugeTurnier('Drei Teams', dreiTeams, 'doppel');
+pruefe('Doppel (3 Teams): genau ein Freilos, wie im Einzel',
+  koDreiTeams.runden[0].filter((m) => m.b === null).length === 1);
 
 // Zustand: ein aktives Turnier zur Zeit, wie der Trainingsplan.
 loescheKoTurnier();
