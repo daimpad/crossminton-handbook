@@ -96,8 +96,15 @@ export function mitSprache(pfad, sprache) {
 //
 // Der Skip-Link 'href="#ansicht"' bleibt unberührt (kein Schrägstrich nach
 // dem '#'), ebenso bereits aufgelöste Pfade.
+// `data-roh` wandert mit: der Client kann die Rahmen-Links damit bei einem
+// Sprachwechsel zur Laufzeit neu auflösen (s. normalisiereLinks() in js/app.js).
+// Ohne sie verriete ein fertiger Pfad seine Sprache nicht mehr, und ein
+// Snapshot-Besucher bliebe nach dem Umschalten mit der alten Navigation zurück.
 export function loeseRahmenLinks(html, sprache, praefix = '') {
-  return html.replace(/href="#\/([^"]*)"/g, (_treffer, rest) => `href="${praefix}${mitSprache(`/${rest}`, sprache)}"`);
+  return html.replace(
+    /href="#\/([^"]*)"/g,
+    (_treffer, rest) => `href="${praefix}${mitSprache(`/${rest}`, sprache)}" data-roh="#/${rest}"`,
+  );
 }
 
 // Alle Routen in allen Sprachen. Aus 149 sprachneutralen Routen werden damit

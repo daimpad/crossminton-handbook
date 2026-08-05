@@ -1258,18 +1258,27 @@ pruefe(
 // der unberuehrten index.html-Vorlage und trugen die Rohform '#/…' — fuer einen
 // Crawler tote Fragment-Links, auf allen 596 Seiten. loeseRahmenLinks() zieht
 // sie auf echte Pfade; hier die Faelle, die dabei leicht kaputtgehen.
-pruefe('Rahmen-Link: #/regeln (de) → /regeln', loeseRahmenLinks('<a href="#/regeln">', 'de') === '<a href="/regeln">');
-pruefe('Rahmen-Link: #/regeln (pl) → /pl/regeln', loeseRahmenLinks('<a href="#/regeln">', 'pl') === '<a href="/pl/regeln">');
+pruefe('Rahmen-Link: #/regeln (de) → /regeln', loeseRahmenLinks('<a href="#/regeln">', 'de') === '<a href="/regeln" data-roh="#/regeln">');
+pruefe('Rahmen-Link: #/regeln (pl) → /pl/regeln', loeseRahmenLinks('<a href="#/regeln">', 'pl') === '<a href="/pl/regeln" data-roh="#/regeln">');
 // Die Wurzel ist der Sonderfall: leerer Rest, und en/fr/pl haben KEINEN
 // Schraegstrich am Ende ('/en', nicht '/en/') — sonst zeigte das Logo auf eine
 // Adresse, die es in der Sitemap nicht gibt.
-pruefe('Rahmen-Link: #/ (de) → /', loeseRahmenLinks('<a href="#/">', 'de') === '<a href="/">');
-pruefe('Rahmen-Link: #/ (en) → /en', loeseRahmenLinks('<a href="#/">', 'en') === '<a href="/en">');
+pruefe('Rahmen-Link: #/ (de) → /', loeseRahmenLinks('<a href="#/">', 'de') === '<a href="/" data-roh="#/">');
+pruefe('Rahmen-Link: #/ (en) → /en', loeseRahmenLinks('<a href="#/">', 'en') === '<a href="/en" data-roh="#/">');
 // Der Skip-Link ist ein ECHTES Fragment und muss eines bleiben (kein Schraegstrich).
 pruefe('Skip-Link #ansicht bleibt unberuehrt', loeseRahmenLinks('<a href="#ansicht">', 'en') === '<a href="#ansicht">');
 // Der #ansicht-Inhalt ist beim Erfassen laengst normalisiert — nicht erneut anfassen.
 pruefe('bereits aufgeloeste Pfade bleiben', loeseRahmenLinks('<a href="/en/baustein/griff">', 'en') === '<a href="/en/baustein/griff">');
-pruefe('Montagepunkt wird vorangestellt', loeseRahmenLinks('<a href="#/regeln">', 'fr', '/unterpfad') === '<a href="/unterpfad/fr/regeln">');
+pruefe('Montagepunkt wird vorangestellt', loeseRahmenLinks('<a href="#/regeln">', 'fr', '/unterpfad') === '<a href="/unterpfad/fr/regeln" data-roh="#/regeln">');
+// Die Rohform wandert als data-roh mit: der Rahmen steht statisch in
+// index.html und ueberlebt jedes Neu-Rendern — bei einem Sprachwechsel zur
+// Laufzeit kann der Client die Links nur damit neu aufloesen (ein fertiger
+// Pfad verraet seine Sprache nicht mehr). Ohne das zeigte nach dem Umschalten
+// der Inhalt englisch, die Navigation weiter deutsch.
+pruefe(
+  'Rahmen-Link traegt seine Rohform als data-roh',
+  loeseRahmenLinks('<a href="#/training">', 'en').includes('data-roh="#/training"'),
+);
 // Jeder Rahmen-Link der Vorlage muss aufloesbar sein — sonst bleibt still einer
 // als Fragment zurueck. Gegen die echte index.html geprueft, nicht gegen Beispiele.
 const vorlage = readFileSync(join(wurzel, 'index.html'), 'utf8');
