@@ -125,7 +125,24 @@ export function renderUeber(el, daten) {
     ${kapitelHtml(u.kapitel, daten)}
     ${abschnittHtml(u.danksagungen)}
     ${creditsLizenzHtml(u.credits_lizenz)}
-    ${links ? `<section class="karte">${links}</section>` : ''}`;
+    ${links ? `<section class="karte">${links}</section>` : ''}
+    ${rechtlicheLinksHtml()}`;
+}
+
+// Impressum + Datenschutz zusätzlich ganz unten im „Über"-Reiter. Sie liegen
+// sonst NUR im „Mehr"-Menü — und dort ganz am Ende, also genau dort, wo die
+// Lade auf kurzen Viewports abschnitt. Ein zweiter Weg an der Stelle, an der
+// man rechtliche Angaben ohnehin sucht; die Menü-Einträge bleiben bestehen.
+function rechtlicheLinksHtml() {
+  // Schlichtes <p> statt <nav>: zwei Links brauchen kein eigenes Landmark, und
+  // ein aria-label dafür wäre ein unsichtbarer fünfter Übersetzungsschlüssel.
+  // Die Schwesterzeile im Menü (.menue-rechtliches) macht es genauso.
+  return `
+    <p class="info-rechtliches">
+      <a href="#/impressum">${esc(t('footer_impressum'))}</a>
+      <span aria-hidden="true">·</span>
+      <a href="#/datenschutz">${esc(t('footer_datenschutz'))}</a>
+    </p>`;
 }
 
 // Rechtstexte (Impressum / Datenschutz): schlichte Titel-+-Absätze-Ansicht aus
