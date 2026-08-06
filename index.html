@@ -5,12 +5,18 @@
   <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
        <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
        für die ausführliche Begründung (verschachtelte Routen brechen relative
-       Pfade; der Präfix ist der eine deploy-abhängige Wert, gespiegelt in
-       404.html; bei Custom Domain auf '' setzen). -->
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
   <base href="/">
   <script>
     (function () {
-      var PRAEFIX = '';
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
       var pfad = window.location.pathname;
       var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
       document.querySelector('base').setAttribute('href', wurzel);
