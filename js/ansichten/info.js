@@ -198,8 +198,8 @@ export function renderMitmachen(el, daten) {
   el.innerHTML = `
     ${heroKlein('fa-comments', text(m.titel) ?? t('nav_mitmachen'), '', 'pf-blau')}
     ${einleitung}
-    ${karten}
-    ${feedbackKarte}`;
+    ${feedbackKarte}
+    ${karten}`;
 
   el.querySelector('#feedback-start')?.addEventListener('click', async (ereignis) => {
     const knopf = ereignis.currentTarget;
