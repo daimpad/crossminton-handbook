@@ -24,6 +24,7 @@ import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
+const liesText = (pfad) => readFileSync(join(wurzel, pfad), 'utf8');
 
 const technik = liesJson('data/bausteine.beginner-technik.json');
 const taktik = liesJson('data/bausteine.beginner-taktik.json');
@@ -1543,6 +1544,34 @@ pruefe(
   seiteMeta(daten, ['regeln']).titel,
 );
 pruefe('Startseite hat keinen eigenen Namen', seiteName(daten, []) === null);
+
+console.log('\n[20] Montagepunkt: PRAEFIX muss sich selbst bestimmen');
+// Beide Deploy-Ziele bekommen DIESELBE _site aus demselben Workflow-Lauf:
+// die Custom Domain montiert an der Wurzel, GitHub Pages unter
+// /crossminton-handbook/. Ein fest codierter Präfix kann für beide nie stimmen.
+// Genau das brach live: mit PRAEFIX='' blieben auf github.io alle ~29
+// Modul-Importe an der Domain-Wurzel hängen, bekamen eine 404-HTML-Antwort und
+// wurden vom Browser als „nicht freigegebener MIME-Typ" blockiert — sichtbar
+// war nur noch das nackte HTML-Skelett. Dieser Test hält den Mechanismus fest.
+//
+// Er prüft die QUELLDATEIEN; die 596 Prerender-Snapshots erben ihn automatisch,
+// weil scripts/prerender.mjs jeden Snapshot aus index.html als Vorlage baut.
+const HOST_PRUEFUNG = "window.location.hostname === 'daimpad.github.io'";
+for (const datei of ['index.html', '404.html']) {
+  const inhalt = liesText(datei);
+  const zeile = inhalt.split('\n').find((z) => z.includes('var PRAEFIX'));
+  pruefe(`${datei}: PRAEFIX wird aus dem Hostnamen abgeleitet, nicht fest codiert`,
+    Boolean(zeile) && zeile.includes(HOST_PRUEFUNG) && zeile.includes("'/crossminton-handbook'"),
+    zeile?.trim());
+  pruefe(`${datei}: kein fest codiertes PRAEFIX = '' mehr`,
+    !inhalt.includes("var PRAEFIX = '';"));
+}
+// Die beiden Dateien müssen sich spiegeln — driften sie auseinander, greift der
+// SPA-Fallback (404.html) an einem anderen Montagepunkt als die App selbst.
+const praefixZeile = (datei) => liesText(datei).split('\n').find((z) => z.includes('var PRAEFIX')).trim().replace(/\s+/g, ' ');
+pruefe('index.html und 404.html leiten den Präfix identisch ab',
+  praefixZeile('index.html') === praefixZeile('404.html'),
+  `${praefixZeile('index.html')} vs ${praefixZeile('404.html')}`);
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);
