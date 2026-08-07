@@ -1,0 +1,371 @@
+{
+  "_meta": {
+    "beschreibung": "Beginner-Athletik/Kondition: Themenblock der Domaene 'athletik_kondition' auf Beginner-Stufe. Buchstabiert die Energetik-Faktoren (Spielziele Bereich 1) plus Belastungstoleranz didaktisch aus, rahmender Einstieg + Vorbereitung/Mobilitaet.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "dateiname_konvention": "bausteine.beginner-athletik_kondition.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Technik-Vokabular. AUSNAHME: koordinierte Erweiterung, siehe vokabular_erweiterung.",
+    "vokabular_erweiterung": {
+      "feld": "transfer_herkunft",
+      "neuer_wert": "AT",
+      "bedeutung": "Athletik-/Trainingswissenschaft (allgemein, sportartuebergreifend). Faellt unter keines der bestehenden Kuerzel (CM, BAD, TEN, SQ, BS, SP). Angesagt als koordinierte Erweiterung gemaess Modellentscheidung 2.",
+      "aktion_fuer_claude_code": "Bitte 'AT' dem transfer_herkunft-Vokabular in der kanonischen Technik-Datei hinzufuegen. Label (ausgeschrieben, uebersetzbar) fuer de: 'Athletik-/Trainingswissenschaft'. Hinweis: 'SP' (aus Mentales-Block) ebenfalls noch aufzunehmen, falls nicht geschehen."
+    },
+    "gesundheitsrahmen": "STRIKT. Allgemein gesundheitsorientiert, kein leistungsdiagnostisches Programm. KEINE praezisen Belastungsdosen, KEINE Wiederholungszahlen als Zielvorgaben, KEIN Ernaehrungs-/Gewichtsbezug, KEINE Gradzahlen/Selbstdiagnose. Bei Beschwerden Verweis auf fachliche Abklaerung statt Behandlungsanleitung.",
+    "delta_selektiv": "Nur Schulter-Baustein traegt Delta-Erwartung (crossminton-spezifische Schulterbelastung, Presov-Evidenz). Aufwaermen, Agilitaet, Ausdauer, Erholung ohne Delta.",
+    "ordnungslogik": "verstehen -> vorbereiten (Aufwaermen, Mobilitaet) -> drei konditionelle Faktoren (Antritt, Ausdauer, Erholung)."
+  },
+
+  "bausteine": [
+    {
+      "id": "warum_athletik_dein_spiel_traegt",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": ["rally_ausdauer", "wiederholte_antrittsschnelligkeit"],
+      "spielziele_hinweis": "mittelbar; rahmt die Energetik-Domaene",
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Trainingswissenschaft: konditionelle Faktoren als Voraussetzung, technisches Koennen im ganzen Spiel verfuegbar zu halten. Kein CM-spezifischer Gehalt im Rahmenbaustein.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Warum Athletik dein Spiel trägt", "en": "Why fitness carries your game", "fr": "Pourquoi la condition physique porte ton jeu", "pl": "Dlaczego przygotowanie fizyczne niesie twoją grę"},
+      "erklaerteil": {
+        "de": "Crossminton ist schnell. Kurze Antritte, viele Richtungswechsel, lange Ballwechsel — und das über einen ganzen Satz. Deine Technik mag im Training sauber sitzen. Aber wenn dir gegen Satzende die Luft ausgeht oder die Beine schwer werden, bekommst du sie nicht mehr aufs Feld.\n\nGenau dafür ist Kondition da. Sie ist kein Selbstzweck und kein Fitnessprogramm neben dem Spiel — sie ist das, was dein Können bis zum letzten Ball verfügbar hält. Ein guter Schlag im ersten Satz ist schön. Derselbe Schlag im entscheidenden Moment des dritten Satzes gewinnt Spiele.\n\nEs geht dabei nicht um Höchstleistung. Es geht um eine solide Grundlage: sich gut vorbereiten, beweglich bleiben, schnell auf den Beinen sein, durchhalten und sich wieder erholen. Diese Grundlage kann jeder aufbauen, unabhängig vom Alter oder Ausgangsniveau.\n\nDeine Technik ist das Werkzeug, deine Kondition ist die Hand, die es führt. Eine müde Hand lässt auch das beste Werkzeug fallen.\n\nIn den nächsten Bausteinen geht es der Reihe nach um Vorbereitung, Beweglichkeit, schnelle Füße, Ausdauer und Erholung — die fünf Bausteine einer tragfähigen Grundlage.",
+        "en": "Crossminton is fast. Short sprints, many changes of direction, long rallies — and all of that across a whole set. Your technique may sit cleanly in training. But when you run out of breath toward the end of a set or your legs get heavy, you can no longer get it onto the court.\n\nThat's exactly what fitness is for. It's not an end in itself and not a fitness program alongside the game — it's what keeps your skill available until the last ball. A good stroke in the first set is nice. The same stroke at the decisive moment of the third set wins matches.\n\nThis isn't about peak performance. It's about a solid foundation: preparing well, staying mobile, being quick on your feet, going the distance and recovering again. Anyone can build this foundation, regardless of age or starting level.\n\nYour technique is the tool, your fitness is the hand that guides it. A tired hand drops even the best tool.\n\nIn the next modules we'll go through preparation, mobility, fast feet, endurance and recovery in turn — the five building blocks of a sound foundation.",
+        "fr": "Le Crossminton est rapide. Des démarrages courts, de nombreux changements de direction, de longs échanges — et cela sur tout un set. Ta technique est peut-être propre à l'entraînement. Mais quand le souffle te manque en fin de set ou que les jambes deviennent lourdes, tu ne parviens plus à la mettre sur le terrain.\n\nC'est justement à cela que sert la condition physique. Elle n'est pas une fin en soi ni un programme de fitness à côté du jeu — elle est ce qui garde ton savoir-faire disponible jusqu'à la dernière balle. Un bon coup dans le premier set, c'est agréable. Le même coup au moment décisif du troisième set fait gagner des matchs.\n\nIl ne s'agit pas de performance maximale. Il s'agit d'une base solide : bien se préparer, rester mobile, être rapide sur ses appuis, tenir la distance et récupérer. Cette base, chacun peut la construire, quel que soit l'âge ou le niveau de départ.\n\nTa technique est l'outil, ta condition physique est la main qui le guide. Une main fatiguée laisse tomber même le meilleur outil.\n\nDans les prochains modules, il sera question, dans l'ordre, de la préparation, de la mobilité, des pieds rapides, de l'endurance et de la récupération — les cinq briques d'une base solide.",
+        "pl": "Crossminton jest szybki. Krótkie zrywy, wiele zmian kierunku, długie wymiany — i to przez całego seta. Twoja technika może na treningu siedzieć czysto. Ale gdy pod koniec seta braknie ci tchu albo nogi zrobią się ciężkie, nie przełożysz jej już na pole.\n\nWłaśnie po to jest przygotowanie fizyczne. Nie jest celem samym w sobie ani programem fitness obok gry — jest tym, co utrzymuje twoje umiejętności dostępnymi do ostatniej piłki. Dobre uderzenie w pierwszym secie jest miłe. To samo uderzenie w decydującym momencie trzeciego seta wygrywa mecze.\n\nNie chodzi przy tym o wyczyn. Chodzi o solidną podstawę: dobrze się przygotować, pozostać ruchomym, być szybkim na nogach, wytrwać i znów się zregenerować. Tę podstawę może zbudować każdy, niezależnie od wieku czy poziomu wyjściowego.\n\nTwoja technika to narzędzie, twoje przygotowanie fizyczne to ręka, która nim kieruje. Zmęczona ręka upuszcza nawet najlepsze narzędzie.\n\nW kolejnych modułach po kolei chodzi o przygotowanie, ruchomość, szybkie stopy, wytrzymałość i regenerację — pięć modułów nośnej podstawy."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an dein letztes längeres Spiel: Ab wann hat deine Leistung nachgelassen — und war es eher die Technik, die Konzentration oder schlicht die Kondition? Achte im nächsten Spiel bewusst darauf, wann dir zuerst die Luft, die Beine oder der Fokus ausgehen. Diese Stelle zeigt dir, wo deine Grundlage zuerst nachgibt.",
+        "en": "Think of your last longer match: from when did your performance drop off — and was it the technique, the concentration or simply the fitness? In your next match, pay deliberate attention to when your breath, legs or focus give out first. That spot shows you where your foundation gives way first.",
+        "fr": "Pense à ton dernier match un peu long : à partir de quand ta performance a-t-elle baissé — et était-ce plutôt la technique, la concentration ou simplement la condition physique ? Au prochain match, fais consciemment attention au moment où le souffle, les jambes ou le focus te lâchent en premier. Cet endroit te montre où ta base cède en premier.",
+        "pl": "Pomyśl o swoim ostatnim dłuższym meczu: od kiedy twoja forma zaczęła spadać — i czy była to raczej technika, koncentracja, czy po prostu kondycja? Zwróć w następnym meczu świadomie uwagę, kiedy najpierw braknie ci tchu, nóg albo skupienia. To miejsce pokazuje, gdzie twoja podstawa ustępuje najpierw."
+      }
+    },
+
+    {
+      "id": "richtig_aufwaermen",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Allgemeine Trainingswissenschaft: Aufwaermen zur Spielbereitschaft und Verletzungsvorbeugung (Kreislauf, Muskeltemperatur, Bewegungsvorbereitung).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Richtig aufwärmen", "en": "Warming up properly", "fr": "Bien s'échauffer", "pl": "Prawidłowa rozgrzewka"},
+      "erklaerteil": {
+        "de": "Der erste harte Antritt aus dem Stand, die erste weit gestreckte Rückhand — wenn dein Körper darauf nicht vorbereitet ist, sind das die Momente, in denen etwas zwickt. Aufwärmen sorgt dafür, dass dein Körper bereit ist, bevor das Spiel ernst wird.\n\nGutes Aufwärmen macht zwei Dinge. Es bringt den Kreislauf in Schwung und die Muskeln auf Temperatur — warme Muskeln arbeiten geschmeidiger und reißen seltener. Und es bereitet genau die Bewegungen vor, die du gleich brauchst: Ausfallschritte, Drehungen, Armschwünge.\n\nDeshalb ist ein paar Minuten Laufen allein nicht genug. Nach dem Warmwerden gehören Bewegungen dazu, die dem Spiel ähneln — lockere Ausfallschritte, Rumpfdrehungen, Armkreisen, ein paar Schattenschläge ohne Speeder. So weckst du die Muskeln, die du gleich forderst.\n\nDu würdest ein kaltes Auto nicht sofort auf die Autobahn jagen. Der Motor braucht kurz, um auf Betriebstemperatur zu kommen. Dein Körper genauso.\n\nEine Regel zum Schluss: Aufwärmen heißt warm werden, nicht müde werden. Es soll dich bereit machen, nicht auslaugen.",
+        "en": "The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. Warming up ensures your body is ready before the game gets serious.\n\nGood warming up does two things. It gets the circulation going and the muscles up to temperature — warm muscles work more smoothly and tear less often. And it prepares exactly the movements you're about to need: lunges, turns, arm swings.\n\nThat's why a few minutes of running alone isn't enough. After getting warm, movements that resemble the game belong in it — loose lunges, trunk rotations, arm circles, a few shadow strokes without a Speeder. That way you wake the muscles you're about to demand.\n\nYou wouldn't rush a cold car straight onto the motorway. The engine needs a moment to reach operating temperature. Your body just the same.\n\nA rule to finish: warming up means getting warm, not getting tired. It should make you ready, not drain you.",
+        "fr": "Le premier démarrage puissant à l'arrêt, le premier revers en pleine extension — si ton corps n'y est pas préparé, ce sont les moments où quelque chose se coince. L'échauffement fait en sorte que ton corps soit prêt avant que le jeu devienne sérieux.\n\nUn bon échauffement fait deux choses. Il met la circulation en route et amène les muscles à température — des muscles chauds travaillent plus souplement et se déchirent moins souvent. Et il prépare exactement les gestes dont tu auras besoin tout de suite : fentes, rotations, mouvements de bras.\n\nC'est pourquoi quelques minutes de course seules ne suffisent pas. Après s'être réchauffé, il faut des mouvements qui ressemblent au jeu — fentes souples, rotations du tronc, cercles de bras, quelques frappes à vide sans speeder. Ainsi tu réveilles les muscles que tu vas solliciter.\n\nTu ne lancerais pas une voiture froide directement sur l'autoroute. Le moteur a besoin d'un instant pour atteindre sa température de fonctionnement. Ton corps, de même.\n\nUne règle pour finir : s'échauffer, c'est se réchauffer, pas se fatiguer. Cela doit te rendre prêt, pas t'épuiser.",
+        "pl": "Pierwszy ostry zryw z miejsca, pierwszy szeroko wyciągnięty bekhend — jeśli twoje ciało nie jest na to przygotowane, to właśnie te momenty, w których coś strzyknie. Rozgrzewka sprawia, że twoje ciało jest gotowe, zanim gra zrobi się poważna.\n\nDobra rozgrzewka robi dwie rzeczy. Rozrusza krążenie i doprowadza mięśnie do temperatury — ciepłe mięśnie pracują bardziej gładko i rzadziej się rwą. I przygotowuje właśnie te ruchy, których zaraz potrzebujesz: wykroki, obroty, wymachy ramion.\n\nDlatego kilka minut biegu samo w sobie nie wystarczy. Po rozgrzaniu należą się ruchy podobne do gry — luźne wykroki, obroty tułowia, krążenia ramion, kilka uderzeń cienia bez speedera. Tak budzisz mięśnie, które zaraz obciążysz.\n\nNie wrzuciłbyś zimnego samochodu od razu na autostradę. Silnik potrzebuje chwili, by dojść do temperatury pracy. Twoje ciało tak samo.\n\nReguła na koniec: rozgrzewka znaczy rozgrzać się, nie zmęczyć. Ma cię przygotować, nie wyczerpać."
+      },
+      "geeignete_phase": ["erwaermung"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "niedrig",
+      "fokus": ["kondition"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Die kurze Aufwärmfolge",
+          "ziel": "Den Körper vor dem Spiel spielbereit machen — Kreislauf, Wärme, Bewegungsvorbereitung.",
+          "schritte": [
+            "Bring zuerst den Kreislauf in Schwung: ein paar Minuten lockeres Laufen, Traben oder Seilspringen, bis du leicht warm wirst.",
+            "Dann bewegte Vorbereitung: lockere Ausfallschritte nach vorn und zur Seite, Rumpfdrehungen, Arm- und Schulterkreisen.",
+            "Zum Schluss spielnah: ein paar Schattenschläge ohne Speeder — Vorhand, Rückhand, Aufschlagbewegung — und ein paar kleine Antritte."
+          ],
+          "selbstkontrolle": "Du bist gut aufgewärmt, wenn du dich leicht erwärmt und beweglich fühlst, aber noch frisch. Kommst du außer Atem oder ermüdest du, war es zu viel. Achte darauf, besonders die Schulter deines Schlagarms und die Beine einzubeziehen.",
+          "abschluss": "Diese Folge dauert nur wenige Minuten und gehört vor jedes Spiel und jedes Training. Sie ist die günstigste Versicherung gegen Verletzungen, die du hast."
+        },
+        "en": {
+          "titel": "The short warm-up sequence",
+          "ziel": "Get the body match-ready before play — circulation, warmth, movement preparation.",
+          "schritte": [
+            "First get the circulation going: a few minutes of easy running, jogging or skipping rope until you get slightly warm.",
+            "Then dynamic preparation: loose lunges forward and to the side, trunk rotations, arm and shoulder circles.",
+            "Finally, game-like: a few shadow strokes without a Speeder — forehand, backhand, serve motion — and a few small sprints."
+          ],
+          "selbstkontrolle": "You're well warmed up when you feel slightly warm and mobile, but still fresh. If you get out of breath or tire, it was too much. Make sure to include especially the shoulder of your hitting arm and the legs.",
+          "abschluss": "This sequence takes only a few minutes and belongs before every match and every training session. It's the cheapest insurance against injury you have."
+        },
+        "fr": {
+          "titel": "La courte séquence d'échauffement",
+          "ziel": "Rendre le corps prêt à jouer avant le match — circulation, chaleur, préparation du mouvement.",
+          "schritte": [
+            "Mets d'abord la circulation en route : quelques minutes de course souple, de trot ou de corde à sauter, jusqu'à te réchauffer légèrement.",
+            "Puis une préparation dynamique : fentes souples vers l'avant et sur le côté, rotations du tronc, cercles de bras et d'épaules.",
+            "Pour finir, proche du jeu : quelques frappes à vide sans speeder — coup droit, revers, geste de service — et quelques petits démarrages."
+          ],
+          "selbstkontrolle": "Tu es bien échauffé quand tu te sens légèrement réchauffé et mobile, mais encore frais. Si tu te retrouves essoufflé ou fatigué, c'était trop. Veille à inclure surtout l'épaule de ton bras de frappe et les jambes.",
+          "abschluss": "Cette séquence ne dure que quelques minutes et précède chaque match et chaque entraînement. C'est l'assurance la plus économique contre les blessures dont tu disposes."
+        },
+        "pl": {
+          "titel": "Krótka sekwencja rozgrzewki",
+          "ziel": "Przygotować ciało do gry — krążenie, ciepło, przygotowanie ruchowe.",
+          "schritte": [
+            "Najpierw rozrusz krążenie: kilka minut luźnego biegu, truchtu lub skakanki, aż lekko się rozgrzejesz.",
+            "Potem przygotowanie w ruchu: luźne wykroki w przód i w bok, obroty tułowia, krążenia ramion i barków.",
+            "Na koniec blisko gry: kilka uderzeń cienia bez speedera — forhend, bekhend, ruch serwisu — i kilka małych zrywów."
+          ],
+          "selbstkontrolle": "Jesteś dobrze rozgrzany, gdy czujesz się lekko rozgrzany i ruchomy, ale wciąż świeży. Jeśli tracisz oddech lub się męczysz, było tego za wiele. Zadbaj o to, by objąć zwłaszcza bark ramienia uderzającego i nogi.",
+          "abschluss": "Ta sekwencja trwa tylko kilka minut i należy się przed każdym meczem i każdym treningiem. To najtańsza polisa na wypadek kontuzji, jaką masz."
+        }
+      }
+    },
+
+    {
+      "id": "beweglichkeit_und_schulter",
+      "grafik": ["G-033"],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "spielziele_hinweis": "primaerer Nutzen ist Verletzungspraevention/Belastungstoleranz (der Athletik zugeordnete Faktor), im Spielziel-Vokabular nicht als eigener Faktor gefuehrt",
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "AT"],
+      "transfer_herkunft_beleg": "Einseitige Schulteradaptation im Crossminton crossminton-eigen belegt (Lukacova/Lenkova 2023: dominante Schulter geringere Innen-, hoehere Aussenrotation; GIRD bei einigen Spielern). Praeventive Beweglichkeitspflege (hintere Schulter) aus allgemeiner Trainings-/Sportmedizin.",
+      "untergrund": "halle",
+      "witterung": [],
+      "delta_erwartet": "BAD/TEN/SQ moeglich — Ueberkopf-Rueckschlagsportler bringen aehnliche Schulteradaptation mit; im Erstausbau nicht ausformuliert.",
+      "anzeigetitel": {"de": "Beweglichkeit und die Schulter", "en": "Mobility and the shoulder", "fr": "La mobilité et l'épaule", "pl": "Mobilność i bark"},
+      "erklaerteil": {
+        "de": "Beweglichkeit entscheidet, wie weit du kommst, ohne dich zu verletzen — die tiefe Rückhand, der gestreckte Ball in der Ecke. Ein beweglicher Körper erreicht mehr Bälle und hält die Belastung besser aus. Für Crossminton gilt das besonders an einer Stelle: der Schulter deines Schlagarms.\n\nDer Grund ist die einseitige Belastung. Du schlägst fast alles mit einem Arm, und der Speeder ist schwer. Untersuchungen an Crossminton-Spielern zeigen, dass sich die Schulter des Schlagarms mit der Zeit verändert — sie wird in eine Richtung beweglicher und in die andere unbeweglicher als die andere Schulter. Diese einseitige Anpassung ist normal, kann aber auf Dauer Beschwerden begünstigen, wenn man sie nicht ausgleicht.\n\nDeshalb lohnt sich zweierlei. Erstens: die Schulter des Schlagarms regelmäßig sanft beweglich halten, besonders in der Richtung, die durch das Spiel steifer wird. Zweitens: den Körper insgesamt beidseitig fordern, statt immer nur die eine Seite. Ein paar Bewegungen für die schwächere Seite gleichen die einseitige Last aus.\n\nEin Baum, der immer nur vom selben Wind gebogen wird, wächst schief. Regelmäßiges Gegensteuern hält ihn gerade.\n\nEin wichtiger Hinweis: Sanfte Beweglichkeitspflege ist Vorsorge, keine Behandlung. Wenn deine Schulter schmerzt, dich beim Spielen einschränkt oder Beschwerden bleiben, ist das ein Fall für ärztliche oder physiotherapeutische Abklärung — nicht für Selbstbehandlung.",
+        "en": "Mobility decides how far you get without injuring yourself — the deep backhand, the stretched ball in the corner. A mobile body reaches more balls and copes better with the load. For Crossminton this holds especially at one spot: the shoulder of your hitting arm.\n\nThe reason is the one-sided load. You hit almost everything with one arm, and the Speeder is heavy. Studies on Crossminton players show that the shoulder of the hitting arm changes over time — it becomes more mobile in one direction and less mobile in the other than the other shoulder. This one-sided adaptation is normal, but over the long term it can encourage complaints if you don't balance it out.\n\nSo two things are worthwhile. First: keep the shoulder of your hitting arm gently mobile on a regular basis, especially in the direction that stiffens through play. Second: challenge the body evenly on both sides, instead of always just the one. A few movements for the weaker side balance out the one-sided load.\n\nA tree that's always bent by the same wind grows crooked. Regular counter-steering keeps it straight.\n\nAn important note: gentle mobility care is prevention, not treatment. If your shoulder hurts, restricts you while playing or the complaints persist, that's a case for medical or physiotherapy assessment — not for self-treatment.",
+        "fr": "La mobilité décide jusqu'où tu vas sans te blesser — le revers profond, la balle étirée dans le coin. Un corps mobile atteint plus de balles et supporte mieux la charge. Pour le Crossminton, cela vaut particulièrement à un endroit : l'épaule de ton bras de frappe.\n\nLa raison est la charge unilatérale. Tu frappes presque tout d'un seul bras, et le speeder est lourd. Des études sur des joueurs de Crossminton montrent que l'épaule du bras de frappe se modifie avec le temps — elle devient plus mobile dans un sens et moins mobile dans l'autre que l'autre épaule. Cette adaptation unilatérale est normale, mais elle peut à la longue favoriser des douleurs si on ne la compense pas.\n\nDeux choses valent donc la peine. D'abord : garder régulièrement l'épaule du bras de frappe souplement mobile, surtout dans le sens qui se raidit avec le jeu. Ensuite : solliciter le corps des deux côtés de façon équilibrée, au lieu de toujours le même. Quelques mouvements pour le côté plus faible compensent la charge unilatérale.\n\nUn arbre toujours courbé par le même vent pousse de travers. Un contre-appui régulier le garde droit.\n\nUne remarque importante : l'entretien doux de la mobilité est de la prévention, pas un traitement. Si ton épaule fait mal, te limite en jouant ou si les douleurs persistent, c'est un cas pour un bilan médical ou de kinésithérapie — pas pour de l'auto-traitement.",
+        "pl": "Ruchomość decyduje o tym, jak daleko sięgasz, nie robiąc sobie krzywdy — głęboki bekhend, wyciągnięta piłka w narożniku. Ruchome ciało dosięga więcej piłek i lepiej znosi obciążenie. Dla crossmintona dotyczy to szczególnie jednego miejsca: barku ramienia uderzającego.\n\nPowodem jest jednostronne obciążenie. Niemal wszystko uderzasz jedną ręką, a speeder jest ciężki. Badania graczy crossmintona pokazują, że bark ramienia uderzającego zmienia się z czasem — staje się bardziej ruchomy w jednym kierunku i mniej ruchomy w drugim niż drugi bark. Ta jednostronna adaptacja jest normalna, ale na dłuższą metę może sprzyjać dolegliwościom, jeśli się jej nie wyrównuje.\n\nDlatego opłacają się dwie rzeczy. Po pierwsze: regularnie i łagodnie utrzymywać bark ramienia uderzającego ruchomym, zwłaszcza w kierunku, który przez grę robi się sztywniejszy. Po drugie: obciążać ciało całościowo obustronnie, zamiast wciąż tylko jednej strony. Kilka ruchów dla słabszej strony wyrównuje jednostronne obciążenie.\n\nDrzewo, które wiatr wygina wciąż tylko w tę samą stronę, rośnie krzywo. Regularne przeciwdziałanie trzyma je prosto.\n\nWażna uwaga: łagodna pielęgnacja ruchomości to profilaktyka, nie leczenie. Jeśli bark cię boli, ogranicza cię w grze albo dolegliwości się utrzymują, to przypadek dla lekarza lub fizjoterapeuty — nie dla samoleczenia."
+      },
+      "geeignete_phase": ["erwaermung", "ausklang"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "niedrig",
+      "fokus": ["kondition"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Schulter pflegen",
+          "ziel": "Die einseitig belastete Schlagschulter beweglich halten und die Belastung ausgleichen.",
+          "schritte": [
+            "Nach dem Spiel, wenn die Schulter warm ist: sanfte, langsame Dehnung der hinteren Schulter deines Schlagarms — den Arm locker vor dem Körper zur Gegenseite führen und dort ruhig halten.",
+            "Kreise die Schlagschulter mehrmals langsam in beide Richtungen aus.",
+            "Fordere bewusst auch die andere Seite: einige Bewegungen und lockere Schläge mit dem nicht-dominanten Arm, um die Einseitigkeit auszugleichen."
+          ],
+          "selbstkontrolle": "Die Dehnung soll ein leichtes Ziehen hinten in der Schulter sein, niemals ein Schmerz vorn oder im Gelenk. Spürst du Schmerz, lass nach. Bleib immer im sanften Bereich — Beweglichkeit gewinnt man mit Geduld, nicht mit Kraft.",
+          "abschluss": "Ein paar Minuten nach jedem Spiel genügen. Regelmäßigkeit zählt hier mehr als Intensität — die Schulter dankt es dir über Jahre."
+        },
+        "en": {
+          "titel": "Caring for the shoulder",
+          "ziel": "Keep the one-sidedly loaded hitting shoulder mobile and balance out the load.",
+          "schritte": [
+            "After play, when the shoulder is warm: a gentle, slow stretch of the rear shoulder of your hitting arm — guide the arm loosely across the front of your body to the opposite side and hold it there calmly.",
+            "Circle the hitting shoulder slowly several times in both directions.",
+            "Deliberately challenge the other side too: a few movements and loose strokes with the non-dominant arm, to balance out the one-sidedness."
+          ],
+          "selbstkontrolle": "The stretch should be a light pull at the back of the shoulder, never a pain at the front or in the joint. If you feel pain, ease off. Always stay in the gentle range — mobility is won with patience, not with force.",
+          "abschluss": "A few minutes after every match are enough. Regularity counts here more than intensity — your shoulder will thank you for years."
+        },
+        "fr": {
+          "titel": "Prendre soin de l'épaule",
+          "ziel": "Garder mobile l'épaule de frappe sollicitée unilatéralement et compenser la charge.",
+          "schritte": [
+            "Après le jeu, quand l'épaule est chaude : un étirement doux et lent de l'arrière de l'épaule de ton bras de frappe — amène le bras souplement devant le corps vers le côté opposé et tiens-le là calmement.",
+            "Fais tourner l'épaule de frappe plusieurs fois lentement dans les deux sens.",
+            "Sollicite consciemment aussi l'autre côté : quelques mouvements et frappes souples avec le bras non dominant, pour compenser l'unilatéralité."
+          ],
+          "selbstkontrolle": "L'étirement doit être un léger tiraillement à l'arrière de l'épaule, jamais une douleur à l'avant ou dans l'articulation. Si tu sens une douleur, relâche. Reste toujours dans la zone douce — la mobilité se gagne par la patience, pas par la force.",
+          "abschluss": "Quelques minutes après chaque match suffisent. La régularité compte ici plus que l'intensité — ton épaule t'en remerciera pendant des années."
+        },
+        "pl": {
+          "titel": "Zadbać o bark",
+          "ziel": "Utrzymać jednostronnie obciążony bark uderzający ruchomym i wyrównać obciążenie.",
+          "schritte": [
+            "Po grze, gdy bark jest ciepły: łagodne, powolne rozciąganie tylnej części barku ramienia uderzającego — poprowadź ramię luźno przed ciałem na przeciwną stronę i przytrzymaj tam spokojnie.",
+            "Zakręć barkiem uderzającym kilka razy powoli w obie strony.",
+            "Obciąż świadomie także drugą stronę: kilka ruchów i luźnych uderzeń ramieniem niedominującym, by wyrównać jednostronność."
+          ],
+          "selbstkontrolle": "Rozciąganie ma być lekkim ciągnięciem z tyłu w barku, nigdy bólem z przodu ani w stawie. Jeśli poczujesz ból, odpuść. Zostań zawsze w łagodnym zakresie — ruchomość zyskuje się cierpliwością, nie siłą.",
+          "abschluss": "Kilka minut po każdym meczu wystarczy. Regularność liczy się tu bardziej niż intensywność — bark odwdzięczy ci się przez lata."
+        }
+      }
+    },
+
+    {
+      "id": "schnelle_fuesse",
+      "grafik": ["G-032"],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "voraussetzungen_querverweis": "beinarbeit (Technik) — die athletische Grundlage der dort gelernten Bewegungsmuster",
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT", "BAD"],
+      "transfer_herkunft_beleg": "Agilitaet/wiederholte Antrittsschnelligkeit als konditioneller Faktor: Trainingswissenschaft. Richtungswechsel-Muster verwandt mit Badminton-Agility.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Schnelle Füße", "en": "Fast feet", "fr": "Des pieds rapides", "pl": "Szybkie stopy"},
+      "erklaerteil": {
+        "de": "Crossminton wird auf den ersten zwei Metern entschieden. Nicht der lange Sprint zählt, sondern der kurze, explosive Antritt aus dem Stand — und die Fähigkeit, ihn immer wieder abzurufen, den ganzen Satz lang. Wer eine Zehntelsekunde früher am Speeder ist, spielt ihn kontrolliert statt gehetzt.\n\nDiese Schnelligkeit ist zu einem großen Teil trainierbar. Es geht dabei weniger um Kraft als um flinke, geordnete Füße: kurze Schritte, ein guter erster Abdruck, sofortiges Umschalten in die neue Richtung. Genau das, was du im Technik-Baustein zur Beinarbeit als Split-Step und Rückkehr kennengelernt hast, bekommt hier seine athletische Grundlage.\n\nDer Schlüssel sind kleine, schnelle Kontakte statt großer, schwerfälliger Schritte. Flinke Füße bringen dich schneller in Bewegung und schneller wieder zum Stehen — und beides brauchst du in jedem Ballwechsel.\n\nDenk an einen Boxer, der auf den Fußballen tänzelt. Er steht nie schwer und flach, sondern immer leicht und bereit. Genau diese Leichtigkeit suchst du für dein Feld.\n\nSchnelle Füße baust du mit kurzen, spielerischen Übungen — nicht mit langem, zähem Lauftraining.",
+        "en": "Crossminton is decided in the first two meters. It's not the long sprint that counts, but the short, explosive start from a standstill — and the ability to call it up again and again, all set long. Whoever is at the Speeder a tenth of a second earlier plays it in control rather than rushed.\n\nThis speed is largely trainable. It's less about strength than about nimble, orderly feet: short steps, a good first push-off, immediate switching into the new direction. Exactly what you got to know in the footwork technique module as the split step and return gets its athletic foundation here.\n\nThe key is small, fast contacts instead of big, ponderous steps. Nimble feet get you moving faster and to a stop faster — and you need both in every rally.\n\nThink of a boxer bouncing on the balls of their feet. They never stand heavy and flat, but always light and ready. That's exactly the lightness you're after for your court.\n\nYou build fast feet with short, playful drills — not with long, grinding running training.",
+        "fr": "Le Crossminton se décide sur les deux premiers mètres. Ce n'est pas le long sprint qui compte, mais le démarrage court et explosif à l'arrêt — et la capacité de le rappeler encore et encore, tout un set durant. Qui est au speeder un dixième de seconde plus tôt le joue avec contrôle plutôt que dans la précipitation.\n\nCette vitesse est en grande partie entraînable. Il s'agit moins de force que de pieds vifs et ordonnés : petits pas, une bonne première poussée, bascule immédiate dans la nouvelle direction. Exactement ce que tu as découvert dans le module technique du jeu de jambes comme split-step et retour trouve ici sa base athlétique.\n\nLa clé, ce sont de petits contacts rapides plutôt que de grands pas lourds. Des pieds vifs te mettent en mouvement plus vite et t'arrêtent plus vite — et tu as besoin des deux à chaque échange.\n\nPense à un boxeur qui danse sur la plante des pieds. Il ne se tient jamais lourd et à plat, mais toujours léger et prêt. C'est exactement cette légèreté que tu cherches pour ton terrain.\n\nTu construis des pieds rapides avec de courts exercices ludiques — pas avec un long entraînement de course laborieux.",
+        "pl": "Crossminton rozstrzyga się na pierwszych dwóch metrach. Nie liczy się długi sprint, lecz krótki, eksplozywny zryw z miejsca — i zdolność, by przywoływać go raz za razem, przez całego seta. Kto jest przy speederze o dziesiątą część sekundy wcześniej, gra go kontrolowanie zamiast w pośpiechu.\n\nTa szybkość jest w dużej części do wytrenowania. Chodzi przy tym mniej o siłę, a bardziej o zwinne, uporządkowane stopy: krótkie kroki, dobre pierwsze odbicie, natychmiastowe przełączenie w nowy kierunek. Dokładnie to, co poznałeś w module technicznym o pracy nóg jako split-step i powrót, dostaje tu swoją podstawę atletyczną.\n\nKluczem są małe, szybkie kontakty zamiast dużych, ociężałych kroków. Zwinne stopy szybciej wprawiają cię w ruch i szybciej zatrzymują — a obu potrzebujesz w każdej wymianie.\n\nPomyśl o bokserze, który tańczy na przedniej części stóp. Nigdy nie stoi ciężko i płasko, lecz zawsze lekko i gotowo. Właśnie tej lekkości szukasz dla swojego pola.\n\nSzybkie stopy budujesz krótkimi, zabawowymi ćwiczeniami — nie długim, mozolnym treningiem biegowym."
+      },
+      "geeignete_phase": ["erwaermung", "hauptteil"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "hoch",
+      "fokus": ["kondition", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Antritt und Richtungswechsel",
+          "ziel": "Den kurzen, explosiven Antritt und das schnelle Umschalten üben.",
+          "schritte": [
+            "Markiere dir ein paar Punkte am Boden — die Ecken und die Mitte deines Feldes reichen.",
+            "Starte aus der Grundposition mit einem Split-Step, sprinte zu einem Punkt, tippe ihn an und kehre zur Mitte zurück.",
+            "Wechsle die Reihenfolge der Punkte, damit du in alle Richtungen antreten musst.",
+            "Baue kurze Pausen ein — es geht um explosive, saubere Antritte, nicht um Dauerlast."
+          ],
+          "selbstkontrolle": "Achte auf leichte, schnelle Füße und einen klaren ersten Abdruck. Werden die Schritte schwer und schlurfend, mach eine kurze Pause — müde Füße üben die falsche Bewegung. Qualität vor Menge.",
+          "abschluss": "Solche kurzen Antrittsübungen passen gut ans Ende des Aufwärmens oder als eigener kleiner Block. Wenige saubere Wiederholungen bringen mehr als lange, müde Serien."
+        },
+        "en": {
+          "titel": "Sprint start and change of direction",
+          "ziel": "Practice the short, explosive start and the fast switch.",
+          "schritte": [
+            "Mark a few points on the floor — the corners and the middle of your court are enough.",
+            "Start from the base position with a split step, sprint to a point, tap it and return to the middle.",
+            "Vary the order of the points so you have to start off in every direction.",
+            "Build in short breaks — it's about explosive, clean starts, not continuous load."
+          ],
+          "selbstkontrolle": "Watch for light, fast feet and a clear first push-off. If the steps get heavy and shuffling, take a short break — tired feet practice the wrong movement. Quality over quantity.",
+          "abschluss": "Short starting drills like these fit well at the end of the warm-up or as a small block of their own. A few clean repetitions do more than long, tired sets."
+        },
+        "fr": {
+          "titel": "Démarrage et changement de direction",
+          "ziel": "Travailler le démarrage court et explosif et la bascule rapide.",
+          "schritte": [
+            "Marque quelques points au sol — les coins et le milieu de ton terrain suffisent.",
+            "Pars de la position de base avec un split-step, sprinte vers un point, touche-le et reviens au milieu.",
+            "Change l'ordre des points pour devoir démarrer dans toutes les directions.",
+            "Prévois de courtes pauses — il s'agit de démarrages explosifs et propres, pas de charge continue."
+          ],
+          "selbstkontrolle": "Veille à des pieds légers et rapides et à une première poussée nette. Si les pas deviennent lourds et traînants, fais une courte pause — des pieds fatigués travaillent le mauvais geste. La qualité avant la quantité.",
+          "abschluss": "De courts exercices de démarrage comme ceux-ci trouvent bien leur place en fin d'échauffement ou comme petit bloc à part. Quelques répétitions propres apportent plus que de longues séries fatiguées."
+        },
+        "pl": {
+          "titel": "Zryw i zmiana kierunku",
+          "ziel": "Ćwiczyć krótki, eksplozywny zryw i szybkie przełączanie.",
+          "schritte": [
+            "Zaznacz sobie kilka punktów na podłożu — narożniki i środek twojego pola wystarczą.",
+            "Wystartuj z pozycji podstawowej split-stepem, sprintuj do jednego punktu, dotknij go i wróć do środka.",
+            "Zmieniaj kolejność punktów, byś musiał zrywać we wszystkich kierunkach.",
+            "Wpleć krótkie przerwy — chodzi o eksplozywne, czyste zrywy, nie o obciążenie ciągłe."
+          ],
+          "selbstkontrolle": "Zwróć uwagę na lekkie, szybkie stopy i wyraźne pierwsze odbicie. Jeśli kroki robią się ciężkie i szurające, zrób krótką przerwę — zmęczone stopy ćwiczą zły ruch. Jakość ponad ilość.",
+          "abschluss": "Takie krótkie ćwiczenia zrywu dobrze pasują na koniec rozgrzewki albo jako osobny mały blok. Kilka czystych powtórzeń daje więcej niż długie, zmęczone serie."
+        }
+      }
+    },
+
+    {
+      "id": "durchhalten",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["rally_ausdauer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Ausdauergrundlage / Ermuedungswiderstand ueber lange Ballwechsel und Saetze: allgemeine Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Durchhalten", "en": "Going the distance", "fr": "Tenir la distance", "pl": "Wytrwać"},
+      "erklaerteil": {
+        "de": "Ein Satz Crossminton ist ein Wechsel aus kurzen, intensiven Ballwechseln und kleinen Pausen dazwischen — und das viele Male hintereinander. Wer nach den ersten intensiven Ballwechseln einbricht, verliert nicht, weil er schlechter spielt — ihm geht die Kraft aus. Ausdauer heißt hier: bis zum letzten Ball dasselbe Niveau halten.\n\nDiese Ausdauer hat zwei Seiten. Die eine ist die allgemeine Grundlage — ein Herz-Kreislauf-System, das die Belastung eines ganzen Spiels trägt. Die baust du mit regelmäßiger, moderater Bewegung auf, ganz gleich ob Laufen, Radfahren oder Schwimmen. Die andere Seite ist die spielnahe Ausdauer — die Fähigkeit, kurze intensive Belastungen immer wieder abzurufen. Die trainierst du am besten, indem du spielst und dabei die intensiven Phasen bewusst durchhältst.\n\nFür den Anfang gilt eine einfache Wahrheit: Wer regelmäßig spielt und sich dabei fordert, baut schon viel Ausdauer auf. Ergänzendes lockeres Ausdauertraining hilft zusätzlich, besonders wenn dir früh die Luft ausgeht.\n\nAusdauer ist der Tank, aus dem alles andere schöpft. Ist er leer, nützt dir der beste Motor nichts.\n\nWichtig ist der Aufbau mit Geduld. Ausdauer wächst langsam und stetig. Wer zu schnell zu viel will, riskiert Überlastung statt Fortschritt.",
+        "en": "A set of Crossminton is an alternation of short, intense rallies and small breaks in between — and that many times over. Whoever collapses after the first intense rallies doesn't lose because they play worse — they run out of energy. Endurance here means: holding the same level until the last ball.\n\nThis endurance has two sides. One is the general foundation — a cardiovascular system that carries the load of a whole match. You build that with regular, moderate exercise, whether running, cycling or swimming. The other side is game-specific endurance — the ability to call up short intense loads again and again. You train that best by playing and deliberately going the distance through the intense phases.\n\nFor the start, a simple truth applies: whoever plays regularly and challenges themselves in doing so already builds a lot of endurance. Additional easy endurance training helps on top, especially if you run out of breath early.\n\nEndurance is the tank everything else draws from. If it's empty, the best engine is no use to you.\n\nWhat matters is building up with patience. Endurance grows slowly and steadily. Whoever wants too much too fast risks overload instead of progress.",
+        "fr": "Un set de Crossminton est une alternance d'échanges courts et intenses et de petites pauses entre eux — et cela de nombreuses fois de suite. Qui s'effondre après les premiers échanges intenses ne perd pas parce qu'il joue moins bien — il manque de force. L'endurance signifie ici : tenir le même niveau jusqu'à la dernière balle.\n\nCette endurance a deux faces. L'une est la base générale — un système cardio-vasculaire qui supporte la charge de tout un match. Tu la construis par un exercice régulier et modéré, que ce soit la course, le vélo ou la natation. L'autre face est l'endurance proche du jeu — la capacité de rappeler encore et encore de courtes charges intenses. Tu l'entraînes au mieux en jouant et en tenant consciemment la distance à travers les phases intenses.\n\nPour commencer, une vérité simple s'applique : qui joue régulièrement et se met au défi en jouant construit déjà beaucoup d'endurance. Un entraînement d'endurance souple en complément aide en plus, surtout si le souffle te manque tôt.\n\nL'endurance est le réservoir dans lequel tout le reste puise. S'il est vide, le meilleur moteur ne te sert à rien.\n\nCe qui compte, c'est de construire avec patience. L'endurance grandit lentement et régulièrement. Qui veut trop trop vite risque le surmenage plutôt que le progrès.",
+        "pl": "Set crossmintona to przeplatanie krótkich, intensywnych wymian i małych przerw między nimi — i to wiele razy z rzędu. Kto załamuje się po pierwszych intensywnych wymianach, przegrywa nie dlatego, że gra gorzej — kończą mu się siły. Wytrzymałość znaczy tu: do ostatniej piłki utrzymać ten sam poziom.\n\nTa wytrzymałość ma dwie strony. Jedna to ogólna podstawa — układ krążenia, który udźwignie obciążenie całego meczu. Budujesz ją regularnym, umiarkowanym ruchem, wszystko jedno czy bieganiem, jazdą na rowerze, czy pływaniem. Druga strona to wytrzymałość bliska grze — zdolność przywoływania krótkich intensywnych obciążeń raz za razem. Trenujesz ją najlepiej, grając i świadomie wytrzymując przy tym fazy intensywne.\n\nNa początek obowiązuje prosta prawda: kto regularnie gra i przy tym się wymaga od siebie, buduje już sporo wytrzymałości. Uzupełniający luźny trening wytrzymałościowy pomaga dodatkowo, zwłaszcza gdy tchu brakuje ci wcześnie.\n\nWytrzymałość to zbiornik, z którego czerpie wszystko inne. Gdy jest pusty, na nic ci najlepszy silnik.\n\nWażna jest budowa z cierpliwością. Wytrzymałość rośnie powoli i stale. Kto zbyt szybko chce zbyt wiele, ryzykuje przeciążenie zamiast postępu."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "lang",
+      "intensitaet": "mittel",
+      "fokus": ["kondition"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Grundlage aufbauen",
+          "ziel": "Eine Ausdauerbasis schaffen, die einen ganzen Satz trägt.",
+          "schritte": [
+            "Baue eine regelmäßige, lockere Ausdauergrundlage auf — eine Bewegungsform, die dir Freude macht und die du durchhältst: Laufen, Radfahren, Schwimmen.",
+            "Halte im Spiel die intensiven Ballwechsel bewusst durch, statt sie abzukürzen — spielnahe Ausdauer entsteht im Spiel selbst.",
+            "Nutze die kurzen Pausen zwischen den Ballwechseln bewusst zum kurzen Durchatmen und Sammeln."
+          ],
+          "selbstkontrolle": "Achte darauf, ob du gegen Ende eines Spiels noch dieselbe Bewegungsqualität hast wie am Anfang. Bricht sie ein, ist die Ausdauergrundlage der Ansatzpunkt. Steigere den Umfang langsam — moderate Regelmäßigkeit schlägt seltene Überanstrengung.",
+          "abschluss": "Ausdauer ist die geduldigste Baustelle: Sie zeigt sich nicht nach einer Woche, aber sie trägt nach ein paar Wochen jedes deiner Spiele."
+        },
+        "en": {
+          "titel": "Build the foundation",
+          "ziel": "Create an endurance base that carries a whole set.",
+          "schritte": [
+            "Build a regular, easy endurance base — a form of exercise you enjoy and can keep up: running, cycling, swimming.",
+            "In matches, deliberately go the distance through the intense rallies instead of cutting them short — game-specific endurance arises in play itself.",
+            "Use the short breaks between rallies deliberately for a quick breather and to regather."
+          ],
+          "selbstkontrolle": "Watch whether toward the end of a match you still have the same movement quality as at the start. If it collapses, the endurance base is the place to start. Increase the volume slowly — moderate regularity beats occasional overexertion.",
+          "abschluss": "Endurance is the most patient project: it doesn't show after a week, but after a few weeks it carries every one of your matches."
+        },
+        "fr": {
+          "titel": "Construire la base",
+          "ziel": "Créer une base d'endurance qui porte tout un set.",
+          "schritte": [
+            "Construis une base d'endurance régulière et souple — une forme d'exercice qui te plaît et que tu tiens : course, vélo, natation.",
+            "En match, tiens consciemment la distance à travers les échanges intenses au lieu de les écourter — l'endurance proche du jeu naît dans le jeu lui-même.",
+            "Utilise consciemment les courtes pauses entre les échanges pour souffler brièvement et te rassembler."
+          ],
+          "selbstkontrolle": "Observe si, vers la fin d'un match, tu as encore la même qualité de mouvement qu'au début. Si elle s'effondre, la base d'endurance est le point de départ. Augmente le volume lentement — une régularité modérée l'emporte sur un surmenage occasionnel.",
+          "abschluss": "L'endurance est le chantier le plus patient : elle ne se montre pas après une semaine, mais après quelques semaines elle porte chacun de tes matchs."
+        },
+        "pl": {
+          "titel": "Zbudować podstawę",
+          "ziel": "Stworzyć bazę wytrzymałości, która udźwignie całego seta.",
+          "schritte": [
+            "Zbuduj regularną, luźną bazę wytrzymałości — formę ruchu, która sprawia ci radość i którą wytrwasz: bieganie, jazda na rowerze, pływanie.",
+            "W grze świadomie wytrzymuj intensywne wymiany, zamiast je skracać — wytrzymałość bliska grze powstaje w samej grze.",
+            "Wykorzystuj krótkie przerwy między wymianami świadomie na krótkie złapanie oddechu i zebranie się."
+          ],
+          "selbstkontrolle": "Zwróć uwagę, czy pod koniec meczu masz jeszcze tę samą jakość ruchu co na początku. Jeśli się załamuje, punktem zaczepienia jest baza wytrzymałości. Zwiększaj objętość powoli — umiarkowana regularność bije rzadkie przeciążenie.",
+          "abschluss": "Wytrzymałość to najcierpliwszy plac budowy: nie pokazuje się po tygodniu, ale po kilku tygodniach niesie każdy twój mecz."
+        }
+      }
+    },
+
+    {
+      "id": "erholen",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["warum_athletik_dein_spiel_traegt"],
+      "spielziele": ["satz_match_regeneration"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["AT"],
+      "transfer_herkunft_beleg": "Regeneration zwischen Saetzen und Einheiten, aktive Erholung, Bedeutung von Pausen/Schlaf: allgemeine Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {"de": "Erholen", "en": "Recovering", "fr": "Récupérer", "pl": "Regeneracja"},
+      "erklaerteil": {
+        "de": "Erholung klingt nach dem, was passiert, wenn man nichts tut. Tatsächlich ist sie ein aktiver Teil deiner Kondition — und der am meisten unterschätzte. Dein Körper wird in der Erholung danach stärker, nicht im Training. Und innerhalb eines Spiels entscheidet die Erholung zwischen den Sätzen oft darüber, ob du im dritten Satz noch da bist.\n\nZwei Zeitebenen sind wichtig. Die kurze: die Pausen im Spiel selbst, zwischen den Ballwechseln und zwischen den Sätzen. Nutze sie bewusst — ruhig atmen, den Körper lockern, den Kopf sammeln. Wer in den Pausen aufgedreht bleibt, verschenkt Erholung, die er gleich braucht. Die lange: die Zeit zwischen den Trainingseinheiten. Dein Körper braucht Pausen, um sich anzupassen und stärker zu werden. Schlaf ist dabei der wichtigste Erholungsfaktor überhaupt.\n\nDaraus folgt etwas, das vielen schwerfällt: Pausen sind Teil des Trainings, kein Zeichen von Faulheit. Wer jeden Tag hart spielt und nie ruht, wird nicht stärker, nur müder — und irgendwann anfälliger für Verletzungen.\n\nErholung ist wie das Nachladen. Ein Feld, das man ohne Pause immer wieder bestellt, laugt aus. Eine Ruhephase lässt es wieder tragen.\n\nDie Kunst ist die Balance: genug Belastung, um besser zu werden, und genug Erholung, damit die Belastung wirkt.",
+        "en": "Recovery sounds like what happens when you do nothing. In fact it's an active part of your fitness — and the most underrated one. Your body gets stronger in the recovery afterwards, not in the training. And within a match, the recovery between sets often decides whether you're still there in the third set.\n\nTwo time scales matter. The short one: the breaks in the match itself, between rallies and between sets. Use them deliberately — breathe calmly, loosen the body, gather the mind. Whoever stays wound up in the breaks gives away recovery they'll need in a moment. The long one: the time between training sessions. Your body needs breaks to adapt and get stronger. Sleep is the single most important recovery factor of all.\n\nFrom this follows something many find hard: breaks are part of training, not a sign of laziness. Whoever plays hard every day and never rests doesn't get stronger, only more tired — and eventually more prone to injury.\n\nRecovery is like reloading. A field worked again and again without a break gets exhausted. A period of rest lets it bear fruit again.\n\nThe art is the balance: enough load to get better, and enough recovery for the load to take effect.",
+        "fr": "La récupération ressemble à ce qui se passe quand on ne fait rien. En réalité, c'est une partie active de ta condition physique — et la plus sous-estimée. Ton corps devient plus fort dans la récupération qui suit, pas dans l'entraînement. Et à l'intérieur d'un match, la récupération entre les sets décide souvent si tu es encore là au troisième set.\n\nDeux échelles de temps comptent. La courte : les pauses dans le match lui-même, entre les échanges et entre les sets. Utilise-les consciemment — respirer calmement, relâcher le corps, rassembler la tête. Qui reste excité pendant les pauses gâche une récupération dont il aura besoin dans un instant. La longue : le temps entre les séances d'entraînement. Ton corps a besoin de pauses pour s'adapter et devenir plus fort. Le sommeil est de loin le facteur de récupération le plus important.\n\nIl en découle quelque chose que beaucoup ont du mal à accepter : les pauses font partie de l'entraînement, ce n'est pas un signe de paresse. Qui joue dur chaque jour et ne se repose jamais ne devient pas plus fort, seulement plus fatigué — et à terme plus exposé aux blessures.\n\nLa récupération, c'est comme recharger. Un champ que l'on cultive sans cesse sans pause s'épuise. Une période de repos le fait de nouveau produire.\n\nL'art, c'est l'équilibre : assez de charge pour progresser, et assez de récupération pour que la charge fasse effet.",
+        "pl": "Regeneracja brzmi jak to, co dzieje się, gdy nic się nie robi. W rzeczywistości jest aktywną częścią twojej kondycji — i najbardziej niedocenianą. Twoje ciało staje się silniejsze w regeneracji po treningu, nie w treningu. A wewnątrz meczu regeneracja między setami często decyduje o tym, czy w trzecim secie wciąż jesteś obecny.\n\nWażne są dwie skale czasu. Krótka: przerwy w samej grze, między wymianami i między setami. Wykorzystuj je świadomie — spokojnie oddychać, rozluźnić ciało, zebrać głowę. Kto w przerwach pozostaje nakręcony, oddaje regenerację, której zaraz potrzebuje. Długa: czas między jednostkami treningowymi. Twoje ciało potrzebuje przerw, by się adaptować i stawać silniejszym. Sen jest przy tym najważniejszym czynnikiem regeneracji w ogóle.\n\nWynika z tego coś, co wielu przychodzi z trudem: przerwy są częścią treningu, nie oznaką lenistwa. Kto codziennie gra ciężko i nigdy nie odpoczywa, nie staje się silniejszy, tylko bardziej zmęczony — i z czasem bardziej podatny na kontuzje.\n\nRegeneracja jest jak ładowanie na nowo. Pole, które bez przerwy wciąż się obsiewa, jałowieje. Faza spoczynku sprawia, że znów rodzi.\n\nSztuką jest równowaga: dość obciążenia, by stawać się lepszym, i dość regeneracji, by obciążenie zadziałało."
+      },
+      "reflexionsaufgabe": {
+        "de": "Achte einmal bewusst auf deine Pausen — im Spiel und zwischen den Trainingstagen. Nutzt du die kurzen Pausen zwischen den Sätzen zum Erholen, oder bleibst du aufgedreht? Und gönnst du dir zwischen intensiven Tagen genug Ruhe und Schlaf? Beobachte, ob du dich an Tagen nach guter Erholung frischer und spielstärker fühlst. Oft ist mehr Ruhe der Fortschritt, den man am wenigsten erwartet.",
+        "en": "Pay deliberate attention to your breaks for once — in the match and between training days. Do you use the short breaks between sets to recover, or do you stay wound up? And do you allow yourself enough rest and sleep between intense days? Observe whether on days after good recovery you feel fresher and play stronger. Often more rest is the progress you least expect.",
+        "fr": "Fais une fois consciemment attention à tes pauses — en match et entre les jours d'entraînement. Utilises-tu les courtes pauses entre les sets pour récupérer, ou restes-tu excité ? Et t'accordes-tu assez de repos et de sommeil entre les journées intenses ? Observe si, les jours qui suivent une bonne récupération, tu te sens plus frais et plus performant. Souvent, plus de repos est le progrès auquel on s'attend le moins.",
+        "pl": "Zwróć raz świadomie uwagę na swoje przerwy — w grze i między dniami treningowymi. Czy wykorzystujesz krótkie przerwy między setami na regenerację, czy pozostajesz nakręcony? I czy między intensywnymi dniami dajesz sobie dość odpoczynku i snu? Obserwuj, czy w dni po dobrej regeneracji czujesz się świeższy i mocniejszy w grze. Często więcej odpoczynku to postęp, którego najmniej się oczekuje."
+      }
+    }
+  ],
+
+  "delta_bausteine": []
+}

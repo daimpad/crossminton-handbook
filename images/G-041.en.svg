@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 250" role="img" aria-label="Switching in doubles: change from the front-back attacking formation into the side-by-side defense.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .sp{fill:var(--primaer,#38a4f1)}
+    .band{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2;opacity:.5}
+    .um{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.8}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <!-- Zustand A: Angriff vorne-hinten -->
+  <rect class="linie" x="24" y="34" width="130" height="130"/>
+  <line class="band" x1="89" y1="72" x2="89" y2="126"/>
+  <circle class="sp" cx="89" cy="72"  r="10"/>
+  <circle class="sp" cx="89" cy="126" r="10"/>
+  <text class="zt" x="89" y="192">attack</text>
+  <text class="st" x="89" y="210">front–back</text>
+  <!-- Umschalt-Pfeil -->
+  <path class="um" d="M166,90 C 190,90 190,90 214,90" marker-end="url(#ah)"/>
+  <path class="um" d="M214,118 C 190,118 190,118 166,118" marker-end="url(#ah)"/>
+  <!-- Zustand B: Verteidigung nebeneinander -->
+  <rect class="linie" x="226" y="34" width="130" height="130"/>
+  <line class="band" x1="264" y1="99" x2="318" y2="99"/>
+  <circle class="sp" cx="264" cy="99" r="10"/>
+  <circle class="sp" cx="318" cy="99" r="10"/>
+  <text class="zt" x="291" y="192">defense</text>
+  <text class="st" x="291" y="210">side by side</text>
+</svg>

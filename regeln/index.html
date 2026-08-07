@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Spielregeln — Crossminton-Handbuch</title>
+  <meta name="description" content="Die offiziellen Crossminton-Spielregeln — jede Regel akkurat wiedergegeben und darunter in Klartext erklärt. Ein Nachschlagewerk, kein Lernpfad: Hier gibt es nichts abzuhaken.">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/regeln">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Spielregeln — Crossminton-Handbuch">
+  <meta property="og:description" content="Die offiziellen Crossminton-Spielregeln — jede Regel akkurat wiedergegeben und darunter in Klartext erklärt. Ein Nachschlagewerk, kein Lernpfad: Hier gibt es nichts abzuhaken.">
+  <meta property="og:url" content="https://crossminton-handbook.de/regeln">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Spielregeln — Crossminton-Handbuch">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spielregeln — Crossminton-Handbuch">
+  <meta name="twitter:description" content="Die offiziellen Crossminton-Spielregeln — jede Regel akkurat wiedergegeben und darunter in Klartext erklärt. Ein Nachschlagewerk, kein Lernpfad: Hier gibt es nichts abzuhaken.">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/regeln">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/regeln">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/regeln">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/regeln">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/regeln">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton-Handbuch","item":"https://crossminton-handbook.de/"},{"@type":"ListItem","position":2,"name":"Spielregeln","item":"https://crossminton-handbook.de/regeln"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    
+    <section class="marke-hero klein hue pf-schiefer">
+      <span class="marke-hero-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Spielregeln</h1>
+        <p class="marke-hero-untertitel">Die offiziellen Crossminton-Spielregeln — jede Regel akkurat wiedergegeben und darunter in Klartext erklärt. Ein Nachschlagewerk, kein Lernpfad: Hier gibt es nichts abzuhaken.</p>
+      </div>
+    </section>
+    <a class="karte karte-link karte-akzent" href="/turnier">
+      <h2 class="karte-titel"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Turnier-Regularium</h2>
+      <p class="leise">Welche Auflagen gelten für ein offizielles Turnier? Wähle die Kategorie — von Fun bis 1000er — und sieh, was jeweils dazukommt.</p>
+    </a>
+    <a class="karte karte-link" href="/ko-turnier">
+      <h2 class="karte-titel"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> KO-Turnier</h2>
+      <p class="leise">Ein Werkzeug, um ein eigenes Spaß-KO-Turnier abzuhalten — im Einzel oder im Doppel.</p>
+    </a>
+    
+    <aside class="regeln-quelle-box">
+      <p class="regeln-quelle-kopf"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span class="regeln-quelle-label">Quelle</span></p>
+      <p class="regeln-quelle-text">Crossminton Spielregeln · International Crossminton Organisation (ICO) · Deutscher Crossminton Verband (DCV) · Stand: ICO-Fassung 2024/dec (deutsche Wiedergabe)</p>
+      <a class="regeln-quelle-link" href="https://crossminton.de/wp-content/uploads/2021/10/Spielregeln_Crossminton.pdf" target="_blank" rel="noopener noreferrer">Regelwerk als PDF (crossminton.de) <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </aside>
+    
+    <details class="regel-abschnitt karte" open="">
+      <summary><h2>Grundbegriffe</h2></summary>
+      <p class="leise regel-einleitung">Ein paar Begriffe, die in den Regeln immer wieder vorkommen. Wer sie kennt, versteht den Rest mühelos.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel">Court, Spielfeld und Sicherheitszone</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Court besteht aus zwei Spielfeldern, die parallel zueinander in einer Entfernung von 12,80 m aufgebaut sind (9 m bei U12-Courts). Die Sicherheitszone ist die Fläche um und zwischen den Spielfeldern.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Ihr spielt nicht über ein Netz, sondern über eine Lücke. Zwischen deinem und dem gegnerischen Feld liegt ein freier Raum von 12,80 m — die Sicherheitszone. Dorthin darf der Speeder nicht gespielt werden; er muss über die Zone hinweg in das gegnerische Feld.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/spielziel_verstehen?kontext=kompetenz">Das Spielziel verstehen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Speeder und Schläger</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Ball wird Speeder genannt. Gespielt wird mit einem Schläger.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Der Speeder ist der spezielle Crossminton-Ball — schwerer und schneller als ein Federball, mit stabiler Flugbahn.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Einzel und Doppel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Einzel: ein Spieler in jedem Spielfeld. Doppel: zwei Spieler in jedem Spielfeld.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Im Einzel stehst du allein deinem Gegner gegenüber. Im Doppel teilst du dir dein Feld mit einem Partner — mit eigenen Regeln, siehe den Doppel-Abschnitt.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/doppel_grundlagen?kontext=kompetenz">Doppel — Grundlagen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Aufschläger, Rückschläger und Rallye</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Aufschläger ist die aufschlagende Partei, der Rückschläger die rückschlagende. Eine Rallye ist die Abfolge von Schlägen ab dem Aufschlag bis zu dem Moment, in dem der Speeder aus dem Spiel ist.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Jeder Ballwechsel beginnt mit einem Aufschlag und läuft, bis der Speeder den Boden berührt oder ein Fehler passiert. Diese Abfolge heißt Rallye.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Ausrüstung (Speeder &amp; Schläger)</h2></summary>
+      <p class="leise regel-einleitung">Die ICO-Fassung 2024 hat ein eigenes Ausrüstungs-Kapitel. Es legt fest, welche Speeder und Schläger regelkonform sind — der Rest der Wahl bleibt frei.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.1.1 / 1.1.2 / 1.1.5</span>Maße des Speeders</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Speeder wiegt mindestens 8 und höchstens 10 Gramm (in der Altersklasse U12: 6 bis 10 Gramm). Er ist 57 bis 63 mm hoch, der Korb misst an der breitesten Stelle 47 bis 53 mm. Die Schlagkappe ist halbkugelförmig aus Thermoplast, mit 25 bis 27 mm Durchmesser. Offizieller Matchball ist der gelbe Match Speeder; in der U12 ist der rote Fun Speeder vorgeschrieben.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Nicht jeder Speeder ist turniertauglich: Gewicht, Höhe und Kappe sind genau festgelegt. Im Wettkampf spielst du den gelben Match Speeder, bei den Jüngsten den langsameren roten Fun Speeder.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/der_speeder?kontext=kompetenz">Der Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.1.3 / 1.1.4 / 1.1.6</span>Windring, Wind und Formveränderung</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Ein Gummiring direkt unter der Schlagkappe darf das Höchstgewicht um 1 Gramm überschreiten. Bei starkem Wind darf nach Rücksprache mit dem Organisator und im Einvernehmen mit dem Oberschiedsrichter ein anderer Speeder verwendet werden. Die Form des Speeders darf sich vor und während des Matches nicht ändern; Handlungen, die sie beeinflussen könnten — etwa das Stecken in die Hosentasche — sind untersagt. An Orten mit ungewöhnlichen atmosphärischen oder klimatischen Bedingungen kann die ICO außerdem Abweichungen von den Maßen erlauben, solange Grundform und Flugeigenschaften unverändert bleiben.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Gegen Wind ist ein Windring erlaubt (er darf den Ball etwas schwerer machen), bei viel Wind auf Absprache auch ein schwererer Speeder. Was du nicht darfst: die Form des Speeders verändern — auch nicht durch die Hosentasche.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/der_speeder?kontext=kompetenz">Der Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.2</span>Maße des Schlägers</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Schläger ist höchstens 61 cm lang, der Kopf misst höchstens 650 cm² (Außenmaße). In der U12 dürfen Länge und Kopfgröße abweichen. Keine Vorrichtung ist erlaubt, die die Flugqualität des Speeders verändert, seine Beschaffenheit künstlich beeinflusst oder Gegner bzw. Partner gefährdet.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Geregelt sind nur zwei Obergrenzen — Länge und Kopf — plus ein Sicherheits- und Manipulationsverbot. Gewicht, Material, Balance, Bespannung und Griff bleiben deine freie Wahl.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/der_schlaeger?kontext=kompetenz">Der Schläger <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/baustein/deine_ausruestung?kontext=kompetenz">Deine Ausrüstung <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.3</span>Der Court</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Court besteht aus zwei Feldern von je 5,5 × 5,5 m (Außenmaße inkl. Linien), aufgebaut in einer Entfernung von 12,8 m. Die Aufschlaglinie liegt 3 m hinter der Frontlinie. Die Linien sind mindestens 2 cm und höchstens 6 cm breit, mit gleichmäßiger Breite. Für U12: zwei Felder von 4 × 4 m in 9 m Abstand, Aufschlaglinie 2 m hinter der Frontlinie.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Das Feld ist ein Quadrat von 5,5 m Seite, 12,8 m vom Gegnerfeld entfernt, mit der Aufschlaglinie 3 m hinter der Front. Für die Jüngsten ist alles etwas kleiner.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/der_speeder?kontext=kompetenz">Der Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/baustein/der_schlaeger?kontext=kompetenz">Der Schläger <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Die Wahl vor Spielbeginn</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">2.1</span>Wer wählt was</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Vor Spielbeginn wird eine Wahl durchgeführt — üblicherweise durch Werfen des Speeders; die Richtung, in die die Schlagkappe am Boden zeigt, entscheidet. Die Gewinnerpartei entscheidet entweder, ob sie zuerst aufschlägt oder rückschlägt, oder auf welcher Seite sie beginnt. Die Verliererpartei entscheidet über die verbleibende Möglichkeit.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Statt einer Münze wirfst du den Speeder: Wohin die Kappe am Boden zeigt, gewinnt die Wahl. Wer gewinnt, sucht sich eines aus — Aufschlag/Rückschlag oder Seite. Das andere bleibt dem Gegner.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">2.1.5</span>Rollen im Doppel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Im Doppel teilt die aufschlagende Partei der rückschlagenden mit, wer zuerst Aufschläger ist (Rückraumspieler). Die rückschlagende Partei entscheidet frei, wer Angriffs- und wer Rückraumspieler ist.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Schon vor dem ersten Ball legt ihr im Doppel eure Rollen fest — wer vorn als Angriffsspieler und wer hinten als Rückraumspieler beginnt.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/doppel_grundlagen?kontext=kompetenz">Doppel — Grundlagen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Punkte und Sätze</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.1</span>Best of 3</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Ein Spiel geht über Best of 3 Sätze: Zwei gewonnene Sätze sind nötig, um das Spiel zu gewinnen.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Du musst zwei Sätze gewinnen. Steht es 1:1 nach Sätzen, entscheidet der dritte.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.2 / 3.4</span>16 Punkte — und die 15:15-Regel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Die Partei, die zuerst 16 Punkte erreicht, gewinnt den Satz — mit einer Ausnahme: Beim Stand von 15:15 gewinnt die Partei, die 2 Punkte Vorsprung hat.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Normalerweise reicht, wer zuerst 16 hat. Wird es aber 15:15, musst du dich um zwei Punkte absetzen — bei 15:15 geht es also weiter, bis eine Partei zwei Punkte vorn liegt. Das macht enge Sätze besonders nervenaufreibend.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/ruhig_bleiben_wenn_es_eng_wird?kontext=kompetenz">Ruhig bleiben, wenn es eng wird <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/baustein/engen_satz_fuehren?kontext=kompetenz">Den engen Satz führen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.3</span>Rallye-Punkt-System</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Wer einen Ballwechsel gewinnt, erhält den Punkt — unabhängig davon, wer aufgeschlagen hat. Eine Partei gewinnt den Ballwechsel, wenn die andere einen Fehler macht oder der Speeder den Boden im gegnerischen Feld berührt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Jeder Ballwechsel bringt einen Punkt, egal wer serviert hat. Es gibt keinen 'Aufschlag ohne Punktchance' — jede Rallye zählt.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.5</span>Wer den nächsten Satz beginnt</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Die Partei, die einen Satz verloren hat, beginnt den folgenden Satz mit dem Aufschlag.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Kleiner Ausgleich: Verlierst du einen Satz, darfst du den nächsten aufschlagen.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Seitenwechsel</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">4.1</span>Wann die Seiten gewechselt werden</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Die Parteien wechseln die Seiten: nach dem ersten Satz; nach dem zweiten Satz, wenn es einen dritten gibt; und im dritten Satz alle 6 gespielten Punkte.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Damit niemand einen Nachteil durch Licht, Wind oder Untergrund hat, wechselt ihr die Seiten — zwischen den Sätzen und im Entscheidungssatz sogar alle 6 Punkte.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">4.2</span>Vergessener Seitenwechsel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Wurde ein Seitenwechsel versäumt, erfolgt er, sobald der Fehler bemerkt wird und der Speeder nicht im Spiel ist. Der Punktestand bleibt bestehen.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Vergesst ihr den Wechsel, holt ihr ihn einfach nach, sobald es auffällt — die Punkte bleiben, wie sie sind.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Der Aufschlag</h2></summary>
+      <p class="leise regel-einleitung">Der Aufschlag hat die genauesten Regeln im ganzen Spiel. Wer sie kennt, verschenkt keine Punkte durch ungültige Aufschläge.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.2</span>Aus der Aufschlagzone</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Aufschläger steht im hinteren Teil des Spielfelds (Aufschlagzone), ohne im Moment des Schlags mit einem Teil des Fußes die (gedachte) Aufschlaglinie zu übertreten.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Du schlägst aus dem hinteren Bereich deines Feldes auf und darfst dabei nicht nach vorn über die Aufschlaglinie treten.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/aufschlag?kontext=kompetenz">Der Aufschlag <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.3</span>Ein Fuß am Boden</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Vom Anfang bis zum Ende des Aufschlags muss ein Fuß des Aufschlägers den Boden berühren.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Du darfst beim Aufschlag nicht abspringen — ein Fuß bleibt die ganze Zeit am Boden.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.4</span>Speeder unterhalb der Schlaghand</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Im Moment des Treffens auf den Schläger muss der gesamte Speeder unterhalb der Schlaghand des Aufschlägers sein.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Das ist die zentrale Aufschlagregel: Du triffst den Speeder von unten. Der ganze Speeder ist im Treffmoment tiefer als deine Schlaghand — ein Aufschlag über Schulterhöhe ist ungültig.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/aufschlag?kontext=kompetenz">Der Aufschlag <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.5 / 5.1.1</span>Vorwärts und ohne Verzögern</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Nach Beginn des Aufschlags muss der Schläger bis zum Ende der Bewegung nach vorn geführt werden (kein Unterbrechen). Der Aufschlag darf nicht absichtlich verzögert werden, sobald beide Parteien bereit sind.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Die Aufschlagbewegung läuft in einem Zug nach vorn durch — du darfst sie nicht anhalten oder täuschen. Und wenn beide bereit sind, spielst du zügig.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.4</span>Nur wenn der Rückschläger bereit ist</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Aufschläger darf nur beginnen, wenn der Rückschläger bereit ist. Bereit ist der Rückschläger, wenn erkennbar ist, dass er den Aufschlag returnieren will.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Schlag nicht auf, solange dein Gegner noch nicht steht. Erst wenn er sichtbar bereit ist, darfst du servieren.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.6</span>Drei Aufschläge in Folge</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Jede Partei führt 3 aufeinanderfolgende Aufschläge durch, bevor die andere Partei das Aufschlagrecht erhält.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Du schlägst dreimal hintereinander auf, dann wechselt das Aufschlagrecht zum Gegner. Das gibt dem Spiel seinen Rhythmus.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/momentum_lesen_und_drehen?kontext=kompetenz">Momentum lesen und drehen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.7</span>Ab 15:15 nach jedem Punkt</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Bei einem Punktestand von 15:15 wechselt das Aufschlagrecht nach jedem Punkt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>In der Schlussphase eines engen Satzes kann sich niemand mehr über drei Aufschläge absetzen — ab 15:15 wandert das Aufschlagrecht nach jedem einzelnen Punkt.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/engen_satz_fuehren?kontext=kompetenz">Den engen Satz führen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.5</span>Nach dem Aufschlag frei</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Nach dem Aufschlag darf sich der Aufschläger aus der Aufschlagzone bewegen.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Sobald der Aufschlag raus ist, bist du frei — du bewegst dich normal im Feld und spielst die Rallye.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.1</span>Extremwetter: 30 Sekunden</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Bei extremen Wetterbedingungen muss der Aufschlag spätestens 30 Sekunden nach dem Ende des vorherigen Punkts erfolgen.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Draußen bei Wind, Hitze oder Kälte soll das Spiel nicht ins Stocken geraten: Nach jedem Punkt hast du dann höchstens 30 Sekunden bis zum nächsten Aufschlag. Diese Vorgabe kam mit der Fassung 2024 dazu.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Einzel</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">6.1 / 6.2</span>Aufschlag und Ablauf im Einzel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Aufgeschlagen wird aus dem hinteren Court (Aufschlagzone), von jeder Position darin. Während der Rallye spielen Aufschläger und Rückschläger den Speeder abwechselnd von jeder Position aus, bis er aus dem Spiel ist.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Im Einzel ist es einfach: aufschlagen aus dem hinteren Bereich, danach spielt ihr abwechselnd, wo ihr wollt, bis der Ballwechsel endet.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Doppel</h2></summary>
+      <p class="leise regel-einleitung">Das Doppel hat eigene Regeln für Rollen, Aufschlagreihenfolge und Position. Sie zu kennen, verhindert vermeidbare Punktverluste.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.1</span>Rollen im Doppel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Ein Spieler der aufschlagenden Partei schlägt aus der Aufschlagzone auf. Jeder Spieler der rückschlagenden Partei gilt als Rückschläger. Nach dem Aufschlag darf der Speeder von jedem Spieler der Partei von jeder Position gespielt werden (beachte die Positionsregel).</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Ihr teilt euch in Angriffsspieler (vorn) und Rückraumspieler (hinten). Nach dem Aufschlag darf jeder von euch den Speeder nehmen — solange ihr die Positionsregel einhaltet.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/doppel_grundlagen?kontext=kompetenz">Doppel — Grundlagen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/baustein/doppel_als_eigenes_spiel?kontext=kompetenz">Das Doppel als eigenes Spiel <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.4</span>Aufschlagreihenfolge</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Das Aufschlagrecht wechselt in fester Reihenfolge: vom Rückraumspieler der Partei A (der zu Beginn aufschlägt) zum Angriffsspieler der Partei B (der dann aufschlägt und Rückraumspieler wird), dann zum Partner von A, dann zum Partner von B, dann wieder zum ersten Aufschläger. Außerhalb dieser Reihenfolge darf niemand aufschlagen.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Der Aufschlag wandert in einer festen Kette durch alle vier Spieler: A1, dann B1, dann A2, dann B2, dann wieder A1. Wer aufschlägt, ist dabei immer der Rückraumspieler. Diese Reihenfolge müsst ihr im Kopf haben.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/aufschlag_rueckschlag_doppel?kontext=kompetenz">Aufschlag und Rückschlag im Doppel <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.5.1</span>Die Positionsregel</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Positionsfehler während der Rallye: Der Rückraumspieler setzt im Moment des Schlags einen Teil seines grundliniennäheren Fußes vor den Fuß seines Partners — oder der Angreifer setzt seinen grundliniennäheren Fuß hinter den Fuß seines Partners. Beides ist ein Positionsfehler.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Im Treffmoment muss die Reihenfolge stimmen: Der Angriffsspieler bleibt vorn, der Rückraumspieler hinten. Vertauscht ihr die Ordnung im Moment des Schlags, ist es ein Fehler.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/doppel_grundlagen?kontext=kompetenz">Doppel — Grundlagen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/baustein/das_umschalten_im_doppel?kontext=kompetenz">Das Umschalten im Doppel <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.5.2</span>Folge des Positionsfehlers</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Wird ein Positionsfehler beim Aufschlag oder während der Rallye beim Rückschlag bestraft, ist der Punkt sofort verloren, obwohl der Ballwechsel noch nicht beendet ist.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Ein Positionsfehler beendet den Ballwechsel sofort zu euren Ungunsten — der Punkt ist weg, auch wenn ihr gerade angreift. Deshalb lohnt sich die saubere Aufteilung.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.6</span>Rollen zu Satzbeginn bekannt geben</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Zu Beginn des Satzes gibt zuerst die rückschlagende Partei bekannt, wer Angriffs- und wer Rückraumspieler ist, danach die aufschlagende Partei.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Vor jedem Satz legt ihr eure Rollen offen fest, damit für alle klar ist, wer vorn und wer hinten spielt.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Fehler</h2></summary>
+      <p class="leise regel-einleitung">Ein Fehler beendet den Ballwechsel und gibt der anderen Partei den Punkt. Das sind die wichtigsten Fehlerarten.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.1</span>Ungültiger Aufschlag</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Ein Aufschlag, der nicht gemäß den Aufschlagregeln ausgeführt wird, ist ein Fehler.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Alles aus dem Aufschlag-Abschnitt gilt: falscher Stand, Sprung, Speeder zu hoch getroffen, unterbrochene Bewegung — jeder Verstoß ist ein Fehler.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.1 / 8.2.2</span>Speeder außerhalb, an Decke oder Wand</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Fehler, wenn der Speeder den Court außerhalb der Linien berührt (nicht auf oder innerhalb der Linien) oder die Decke oder Seitenwände berührt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Auf der Linie zählt als drin. Außerhalb, an der Decke oder an einer Wand ist Fehler. Anders als im Squash spielt hier keine Wand mit.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/spielziel_verstehen?kontext=kompetenz">Das Spielziel verstehen <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.3 / 8.2.4</span>Speeder berührt Spieler oder Objekt</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Fehler, wenn der Speeder einen Spieler oder dessen Kleidung berührt — einschließlich Schuhe und Socken —, oder ein Objekt bzw. eine Person außerhalb des Courts. Ausnahme: Treffen zwei Speeder in der Luft aufeinander, wird der Ballwechsel wiederholt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Trifft der Speeder dich, deine Kleidung, deine Schuhe oder Socken oder etwas außerhalb des Courts, ist der Ballwechsel verloren. Die Fassung 2024 nennt Schuhe und Socken ausdrücklich — ein Grund mehr für eng sitzende Kleidung.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/funktionskleidung?kontext=kompetenz">Funktionskleidung <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.5 / 8.2.6</span>Fangen, Werfen, Doppelberührung</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Fehler, wenn der Speeder mit dem Schläger gefangen/gestoppt und dann geworfen wird, oder wenn er von demselben Spieler zweimal berührt wird. Kein Fehler ist es, wenn der Speeder in einem Schlag gleichzeitig Rahmen und Besaitung trifft.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Du musst den Speeder sauber schlagen, nicht fangen und werfen, und nur einmal treffen. Wenn er in einem Schlag zugleich Rahmen und Saiten berührt, ist das erlaubt.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.7 / 8.2.8</span>Partner-Doppelberührung, Speeder nicht rüber</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Fehler, wenn der Speeder von einem Spieler und danach von dessen Partner berührt wird, oder wenn er den Schläger berührt und danach nicht in Richtung der anderen Court-Seite fliegt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Im Doppel darf nur einer von euch den Speeder pro Schlag berühren. Und dein Schlag muss den Speeder tatsächlich zur anderen Seite bringen.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.3</span>Behindern, Ablenken, ins Feld greifen</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Fehler, wenn ein Spieler bei laufendem Speeder den gegnerischen Court mit Schläger oder Körper betritt, den Gegner an einem ordnungsgemäßen Schlag hindert oder ihn durch Rufen oder Gestikulieren ablenkt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Bleib bei dir: nicht ins gegnerische Feld greifen, den Gegner nicht behindern und ihn nicht durch Rufen oder Gesten stören.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Wiederholungen</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">9.1</span>Was eine Wiederholung ist</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Bei einer Wiederholung ist der Aufschlag der letzten Rallye ungültig, und der zuletzt aufschlagende Spieler wiederholt den Aufschlag.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Eine Wiederholung (im Tennis 'Let') heißt: Der Ballwechsel zählt nicht, es gibt keinen Punkt, derselbe Aufschlag wird noch einmal gespielt.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">9.2</span>Wann wiederholt wird</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Wiederholung, wenn u. a.: der Aufschläger schlägt, bevor der Rückschläger bereit ist; ein Fehler gleichzeitig von beiden Seiten begangen wird; der Speeder defekt ist oder sich verformt; zwei Speeder sich in der Luft treffen; eine Linie während des Ballwechsels verschoben wird; das Spiel gestört wird; oder ein Objekt während der Rallye ins Spielfeld fällt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Immer wenn etwas Unfaires oder Unvorhergesehenes passiert, das keiner Seite anzulasten ist, wird der Ballwechsel wiederholt statt einen Punkt zu vergeben. Die Fassung 2024 nennt zusätzlich zwei kollidierende Speeder und eine im Spiel verschobene Linie.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Wann der Speeder aus dem Spiel ist</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">10</span>Ende des Ballwechsels</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Speeder ist nicht mehr im Spiel, wenn er den Boden des Courts berührt oder wenn es einen Fehler oder eine Wiederholung gibt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Der Ballwechsel endet in dem Moment, in dem der Speeder den Boden berührt oder ein Fehler bzw. eine Wiederholung eintritt. Bis dahin ist er im Spiel.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Besondere Situationen: IN, OUT und Turnierablauf</h2></summary>
+      <p class="leise regel-einleitung">Die Fassung 2024 fasst einige Sonderfälle in einem eigenen Kapitel zusammen — vor allem, wie IN und OUT genau entschieden werden.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.6.1</span>Der Kopf entscheidet</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Der Kopf (die Schlagkappe) des Speeders trifft zuerst auf. Berührt der Kopf die Linie, ist der Ball „in“. Berührt der Kopf die Linie nicht, ist der Ball „out“ — auch wenn ein anderer Teil des Speeders die Linie berührt.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Schau auf die Kappe, nicht auf den Korb: Nur wenn der Kopf die Linie trifft, zählt der Ball als drin. Streift nur der Korb die Linie, während der Kopf daneben aufkommt, ist er draußen.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">Dazu im Handbuch:</span> <a class="regel-verweis" href="/baustein/praezision_an_die_linien?kontext=kompetenz">Präzision an die Linien <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.6.2</span>Schleifspur an der Frontlinie</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Kommt der Speeder vor der Frontlinie auf und hinterlässt eine sichtbare Schleifspur, gilt er nur dann als „in“, wenn die Spur höchstens so lang ist wie der Kopf des Speeders.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Rutscht der Speeder vor der Frontlinie noch in die Linie, entscheidet die Länge der Schleifspur: Ist sie länger als der Kopf, war der erste Bodenkontakt zu weit vorn — der Ball ist draußen. Auch das ist neu in der Fassung 2024.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.1 – 11.5</span>Gruppen, K.-o.-Runde und Gleichstand (Turnier)</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>Aus jeder Gruppe erreichen die besten 2 die K.-o.-Runde. Eine Niederlage in der K.-o.-Runde bedeutet direktes Ausscheiden; es gibt kein Spiel um Platz 3. Bei Gleichstand in der Gruppe entscheiden der Reihe nach: gewonnene/verlorene Matches, dann das Satzverhältnis, dann das Punkteverhältnis, dann der direkte Vergleich, zuletzt das Los.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Nur relevant im Turnier: Die zwei Gruppenbesten kommen weiter, danach scheidet aus, wer verliert. Steht es in der Gruppe gleich, zählen zuerst Siege, dann Satz- und Punkteverhältnis.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Verständigung ohne Schiedsrichter</h2></summary>
+      <p class="leise regel-einleitung">Bei Spielen ohne Schiedsrichter zeigt ihr Entscheidungen mit einem einfachen Handzeichen der freien Hand an.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel">Die drei Handzeichen</h3>
+      <div class="regel-feld">
+        <h4>Regel</h4>
+        <p>„In“: der Zeigefinger der freien Hand zeigt nach unten. „Out“: der Zeigefinger zeigt nach oben. „Wiederholung“: Zeige- und Mittelfinger zeigen als „V“ nach oben.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Was das bedeutet</h4>
+        <p>Merke dir die Richtung: Zeigefinger nach unten heißt „drin“ (der Speeder war im Feld), nach oben heißt „aus“. Ein V mit zwei Fingern heißt „Wiederholung“. So klärt ihr Bälle fair ohne Schiedsrichter.</p>
+      </div>
+      
+    </article>
+    </details>
+    
+    <details class="regel-abschnitt karte">
+      <summary><h2>Spielfeld &amp; Handzeichen</h2></summary>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 582" role="img" aria-label="Grafik: das bemaßte Spielfeld" class="grafik-bild grafik-svg">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .zone{fill:var(--primaer,#38a4f1);opacity:.08}
+    .serve{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-dasharray:9 6}
+    .dim{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1}
+    .ext{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:.8;opacity:.7}
+    .arw{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
+    .brk{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
+    .feldtext{fill:var(--tinte,#16202b);font:700 15px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1.5px;text-anchor:middle}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1px;text-anchor:middle}
+    .acctext{fill:var(--primaer-tief,#1568ad);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .dimtext{fill:var(--tinte-3,#6b7686);font:600 12.5px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" markerWidth="8.5" markerHeight="8.5" refX="5" refY="5" orient="auto-start-reverse">
+      <path d="M3,2.6 L6.2,5 L3,7.4" class="arw"></path>
+    </marker>
+  </defs>
+
+  <rect class="zone" x="76" y="236" width="190" height="110"></rect>
+  <rect class="linie" x="76" y="46" width="190" height="190"></rect>
+  <rect class="linie" x="76" y="346" width="190" height="190"></rect>
+  <line class="serve" x1="76" y1="133" x2="266" y2="133"></line>
+  <line class="serve" x1="76" y1="449" x2="266" y2="449"></line>
+
+  <polyline class="brk" points="76,289 96,284 116,294 136,284 156,294 176,284 196,294 216,284 236,294 256,284 266,289"></polyline>
+  <polyline class="brk" points="76,298 96,293 116,303 136,293 156,303 176,293 196,303 216,293 236,303 256,293 266,298"></polyline>
+
+  <text class="feldtext" x="171" y="199">SPIELFELD</text>
+  <text class="subtext" x="171" y="93">Aufschlagzone</text>
+  <text class="acctext" x="171" y="128">Aufschlaglinie</text>
+  <text class="feldtext" x="171" y="403">SPIELFELD</text>
+  <text class="subtext" x="171" y="497">Aufschlagzone</text>
+  <text class="zonetext" x="171" y="268">PASSIERZONE</text>
+  <text class="subtext" x="171" y="315">kein Netz — der Speeder muss hinüber</text>
+
+  <line class="ext" x1="76" y1="46" x2="76" y2="26"></line>
+  <line class="ext" x1="266" y1="46" x2="266" y2="26"></line>
+  <line class="dim" x1="76" y1="30" x2="266" y2="30" marker-start="url(#arw)" marker-end="url(#arw)"></line>
+  <text class="dimtext" x="171" y="21">5,50 m</text>
+
+  <line class="ext" x1="76" y1="46" x2="46" y2="46"></line>
+  <line class="ext" x1="76" y1="236" x2="46" y2="236"></line>
+  <line class="dim" x1="50" y1="46" x2="50" y2="236" marker-start="url(#arw)" marker-end="url(#arw)"></line>
+  <text class="dimtext" x="38" y="146" transform="rotate(-90 38 146)">5,50 m</text>
+
+  <line class="ext" x1="76" y1="346" x2="46" y2="346"></line>
+  <line class="dim" x1="50" y1="236" x2="50" y2="281" marker-start="url(#arw)"></line>
+  <line class="dim" x1="50" y1="306" x2="50" y2="346" marker-end="url(#arw)"></line>
+  <polyline class="brk" points="45,281 55,285 45,290 55,294 45,298 55,302 50,306"></polyline>
+  <text class="dimtext" x="38" y="296" transform="rotate(-90 38 296)">12,80 m</text>
+
+  <line class="ext" x1="266" y1="133" x2="298" y2="133"></line>
+  <line class="ext" x1="266" y1="236" x2="298" y2="236"></line>
+  <line class="dim" x1="292" y1="133" x2="292" y2="236" marker-start="url(#arw)" marker-end="url(#arw)"></line>
+  <text class="dimtext" x="308" y="188" transform="rotate(-90 308 188)">3,00 m</text>
+</svg>
+        <figcaption class="leise">Grafik: das bemaßte Spielfeld</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <img class="grafik-bild" src="images/G-061.png" alt="Grafik: die Schiedsrichter-Handzeichen" loading="lazy">
+        <figcaption class="leise">Grafik: die Schiedsrichter-Handzeichen</figcaption>
+      </figure>
+    </details></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

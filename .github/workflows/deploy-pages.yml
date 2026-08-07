@@ -1,0 +1,179 @@
+# Baut die ausgelieferte Fassung und veröffentlicht sie an ZWEI Zielen:
+#
+#   1. Branch `deploy`  — die PRODUKTION (Plesk/netcup, crossminton-handbook.de)
+#      zieht ihn per Git-Pull. Dort gibt es keinen Build-Schritt, deshalb muss
+#      alles Fertige im Branch liegen.
+#   2. GitHub Pages     — Zweitauftritt/Fallback unter daimpad.github.io.
+#
+# Beide bekommen dasselbe `_site`: die Statik plus einen statischen Snapshot je
+# Route (Titel/Description/Canonical/Social-Vorschau + gerendertes #ansicht-HTML,
+# SEO Tier 2 Baustein 2, s. docs/seo-tier2-konzept.md).
+#
+# WARUM DER DEPLOY-BRANCH: Vorher zog die Produktion `main`, also den ROHEN
+# Repo-Stand. Damit lieferte sie für jede der 149 URLs denselben Kopf aus —
+# inklusive eines Canonical auf die Startseite. Für Crawler und Social-Vorschauen
+# (die kein JavaScript ausführen) sah die ganze Seite aus wie eine einzige.
+#
+# Playwright ist eine reine CI-Werkzeug-Abhängigkeit (`npm install --no-save`),
+# keine Repo-/Laufzeitabhängigkeit — lokale Entwicklung bleibt buildfrei über
+# `python3 -m http.server`.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # für den Push auf den deploy-Branch
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Engine-Tests gegen die Referenzdaten
+        run: node tests/engine.test.mjs
+
+  bauen:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      stand: ${{ steps.stempel.outputs.kurz }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Der Versions-Commit aus version.yml startet diesen Workflow NICHT
+      # (GITHUB_TOKEN-Pushes lösen keine Läufe aus). Ohne diesen Stempel trüge
+      # die ausgelieferte Fassung für immer die Nummer des vorigen Commits.
+      # Gestempelt wird nur in die Arbeitskopie, nichts wandert zurück nach main.
+      - name: Versionsstand in die Arbeitskopie stempeln
+        id: stempel
+        run: |
+          set -euo pipefail
+          KURZ="$(git rev-parse --short "${{ github.sha }}")"
+          DATUM="$(git show -s --format=%cs "${{ github.sha }}")"
+          node scripts/version-stempel.mjs "$KURZ" "$DATUM"
+          echo "kurz=$KURZ" >> "$GITHUB_OUTPUT"
+
+      - name: Playwright installieren (nur für den Prerender-Schritt)
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+
+      - name: Prerendern (statische Snapshots je Route)
+        run: node scripts/prerender.mjs
+
+      # Selbstprüfung, bevor irgendetwas ausgeliefert wird: liegen die Snapshots
+      # wirklich vor, und trägt einer davon ein eigenes Canonical? Genau das war
+      # der Defekt, den dieser Workflow beheben soll — lieber hier abbrechen als
+      # eine Fassung ausrollen, die aussieht wie vorher.
+      - name: Ergebnis prüfen
+        run: |
+          set -euo pipefail
+          test -f _site/index.html   || { echo "_site/index.html fehlt"   >&2; exit 1; }
+          test -f _site/.htaccess    || { echo "_site/.htaccess fehlt"    >&2; exit 1; }
+          test -f _site/sitemap.xml  || { echo "_site/sitemap.xml fehlt"  >&2; exit 1; }
+          for f in baustein/griff en/baustein/griff fr/regeln pl/pfad/themen; do
+            test -f "_site/$f/index.html" || { echo "Snapshot fehlt: $f" >&2; exit 1; }
+          done
+          anzahl="$(find _site -mindepth 2 -name index.html | wc -l)"
+          echo "Snapshots: $anzahl"
+          [ "$anzahl" -ge 560 ] || { echo "Zu wenige Snapshots ($anzahl)" >&2; exit 1; }
+          # Jede Sprachfassung braucht ihr EIGENES Canonical — zeigten sie alle
+          # auf dieselbe Adresse, wären die Uebersetzungen wieder unsichtbar.
+          grep -q 'rel="canonical" href="https://crossminton-handbook.de/baustein/griff"' \
+            _site/baustein/griff/index.html \
+            || { echo "de-Snapshot traegt kein eigenes Canonical" >&2; exit 1; }
+          grep -q 'rel="canonical" href="https://crossminton-handbook.de/en/baustein/griff"' \
+            _site/en/baustein/griff/index.html \
+            || { echo "en-Snapshot traegt kein eigenes Canonical" >&2; exit 1; }
+          # hreflang muss wechselseitig sein, sonst verwirft Google die Angaben.
+          for f in baustein/griff en/baustein/griff; do
+            n="$(grep -c 'rel="alternate" hreflang=' "_site/$f/index.html")"
+            [ "$n" -eq 5 ] || { echo "$f traegt $n hreflang-Verweise (erwartet 5)" >&2; exit 1; }
+          done
+          grep -q '<html lang="pl">' _site/pl/regeln/index.html \
+            || { echo "pl-Snapshot traegt nicht lang=pl" >&2; exit 1; }
+          # Strukturierte Daten: muessen GUELTIGES JSON sein (ein Syntaxfehler
+          # macht den Block wertlos, ohne dass die Seite kaputt aussieht) und
+          # duerfen keine Prerender-Herkunft mehr tragen.
+          node -e '
+            const {readFileSync}=require("fs");
+            const roh=/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+            let n=0;
+            for (const f of ["baustein/griff","en/baustein/griff","fr/regeln","pl/pfad/themen"]) {
+              const h=readFileSync("_site/"+f+"/index.html","utf8");
+              if (h.includes("localhost")) { console.error(f+": localhost-Rest im Snapshot"); process.exit(1); }
+              const bloecke=[...h.matchAll(roh)].map(m=>JSON.parse(m[1]));
+              const graph=bloecke.find(b=>b["@graph"]);
+              if (!graph) { console.error(f+": kein seitenbezogenes JSON-LD"); process.exit(1); }
+              if (!graph["@graph"].some(k=>k["@type"]==="BreadcrumbList")) {
+                console.error(f+": keine BreadcrumbList"); process.exit(1);
+              }
+              n+=bloecke.length;
+            }
+            console.log("JSON-LD geprueft: "+n+" Bloecke, alle gueltig");
+          '
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 1
+          include-hidden-files: true
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # --- Ziel 1: der Branch, den die Produktion zieht ------------------------
+  # Eigener Job, damit ein Fehlschlag beim Pages-Deploy die Produktion nicht
+  # aufhält (und umgekehrt). Der Branch trägt nur generierte Stände, seine
+  # Historie ist ohne Wert — deshalb wird er bei jedem Lauf frisch geschrieben.
+  produktion:
+    needs: bauen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+      - name: Auf den deploy-Branch schieben
+        run: |
+          set -euo pipefail
+          cd _site
+          git init -q -b deploy
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy von ${{ needs.bauen.outputs.stand }} (${{ github.sha }})"
+          git push -q --force \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy
+          echo "deploy-Branch aktualisiert auf ${{ needs.bauen.outputs.stand }}"
+
+  # --- Ziel 2: GitHub Pages (Zweitauftritt) --------------------------------
+  pages:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

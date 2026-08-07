@@ -1,0 +1,33 @@
+import pw from '/opt/node22/lib/node_modules/playwright/index.js';
+const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+async function seite(herkunft) {
+  const ctx = await b.newContext();
+  const z = { version: 1, einstellungen: { sprache: 'fr', thema: 'hell' }, diagnose: { herkunft } };
+  await ctx.addInitScript((zz) => localStorage.setItem('crossminton.zustand.v1', JSON.stringify(zz)), z);
+  const p = await ctx.newPage();
+  const fehler = [];
+  p.on('console', (m) => { if (m.type() === 'error') fehler.push(m.text()); });
+  await p.goto('http://localhost:8000/#/baustein/griff?kontext=kompetenz', { waitUntil: 'networkidle' });
+  await p.waitForTimeout(500);
+  const t = await p.evaluate(() => document.querySelector('article.baustein').innerText);
+  await ctx.close();
+  return { t, fehler };
+}
+const norm = await seite(null);
+const erklaerOk = norm.t.includes('prise universelle') && norm.t.includes('comme si tu lui serrais la main');
+const c1 = norm.t.includes("Saisir à l'aveugle");
+const c2 = norm.t.includes('Ta main trouve la prise universelle');
+const c3 = norm.t.includes('Prends la raquette dans la main libre');
+const c4 = norm.t.normalize('NFC').includes('Comment procéder'.normalize('NFC'));
+console.log('  c1 titel:', c1, '| c2 ziel:', c2, '| c3 schritt:', c3, '| c4 label:', c4);
+const uebungOk = c1 && c2 && c3;
+const bad = await seite('BAD');
+const deltaOk = bad.t.includes('désapprendre') && bad.t.includes('changement de prise');
+console.log('griff erklaerteil FR:', erklaerOk ? 'JA' : 'NEIN');
+console.log('griff uebungsteil FR:', uebungOk ? 'JA' : 'NEIN');
+console.log('griff BAD-Delta FR:', deltaOk ? 'JA' : 'NEIN');
+console.log('Konsolenfehler:', norm.fehler.length + bad.fehler.length);
+await b.close();
+const ok = erklaerOk && uebungOk && deltaOk && norm.fehler.length === 0 && bad.fehler.length === 0;
+console.log(ok ? '\nALLES OK' : '\nFEHLER');
+process.exit(ok ? 0 : 1);

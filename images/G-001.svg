@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Universalgriff: die Hand hält den Griff locker wie einen Händedruck, zwischen Daumen und Zeigefinger bildet sich ein klares V auf der oberen Kante des Griffs.">
+  <style>
+    .band{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:34;stroke-linecap:round;opacity:.28}
+    .kante{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:4 5;opacity:.7}
+    .hand{fill:none;stroke:var(--tinte,#16202b);stroke-linecap:round;stroke-linejoin:round}
+    .palm{stroke-width:30}
+    .finger{stroke-width:14}
+    .daumen{stroke-width:15}
+    .v{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5;stroke-linecap:round}
+    .vt{fill:var(--primaer-tief,#1568ad);font:700 22px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- Griff (Achtkant, schräg) als heller Balken mit Mittellinie -->
+  <line class="band" x1="70" y1="238" x2="246" y2="82"/>
+  <line class="kante" x1="70" y1="238" x2="246" y2="82"/>
+  <!-- Handballen/Palm entlang des Griffs -->
+  <path class="hand palm" d="M120,196 L156,164"/>
+  <!-- vier Finger, greifen über die hintere Kante, klar getrennt -->
+  <path class="hand finger" d="M139,168 L162,192"/>
+  <path class="hand finger" d="M156,152 L179,176"/>
+  <path class="hand finger" d="M173,136 L196,160"/>
+  <path class="hand finger" d="M190,120 L212,143"/>
+  <!-- Daumen auf der vorderen Kante, Spitze endet kurz vor dem Zeigefinger -->
+  <path class="hand daumen" d="M129,182 C 140,158 152,146 163,138"/>
+  <!-- V zwischen Daumenspitze und Zeigefinger, auf der oberen Kante -->
+  <path class="v" d="M168,130 L182,112 L196,132"/>
+  <text class="vt" x="182" y="100">V</text>
+  <text class="st" x="150" y="272">locker wie ein Händedruck · Daumen-V oben</text>
+</svg>

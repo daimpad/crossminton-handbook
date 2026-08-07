@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Serwis, obraz 2: rakieta trafia speedera od dołu, cały speeder jest w punkcie kontaktu wyraźnie poniżej dłoni uderzającej.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .marke{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:4 4}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m006" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="112" cy="92" r="14"/>
+  <path class="fig" d="M112,106 L116,168"/>
+  <!-- freie Hand -->
+  <path class="fig" d="M113,120 L96,138"/>
+  <!-- Schlagarm schwingt von unten nach vorn zum Treffpunkt -->
+  <path class="fig" d="M113,126 L138,150 L162,160"/>
+  <!-- Beine -->
+  <path class="fig" d="M116,168 L100,206 L92,240"/>
+  <path class="fig" d="M116,168 L136,204 L146,240"/>
+  <!-- Schläger, Kelle unterhalb der Schlaghand -->
+  <line class="schaft" x1="162" y1="160" x2="178" y2="170"/>
+  <ellipse class="kelle" cx="188" cy="176" rx="9" ry="13" transform="rotate(62 188 176)"/>
+  <!-- Speeder im Treffpunkt, klar unter der Hand (Hand-Höhe gestrichelt) -->
+  <line class="marke" x1="150" y1="160" x2="210" y2="160"/>
+  <circle class="speeder" cx="192" cy="182" r="6"/>
+  <path class="bahn" d="M200,178 L272,150" marker-end="url(#m006)"/>
+  <line class="boden" x1="78" y1="244" x2="164" y2="244"/>
+  <text class="st" x="150" y="272">punkt kontaktu poniżej dłoni</text>
+</svg>

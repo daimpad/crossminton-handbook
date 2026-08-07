@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Getting your partner in position: your own stroke sets your partner up in a better attacking position.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .sp{fill:var(--primaer,#38a4f1)}
+    .sp2{fill:var(--flaeche,#fff);stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .schlag{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .lauf{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:7 5}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .mkg{fill:var(--tinte-3,#6b7686)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mkg"/></marker>
+  </defs>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <!-- dein Schlag setzt den Punkt -->
+  <path class="schlag" d="M106,196 L106,80" marker-end="url(#ah)"/>
+  <circle class="sp" cx="106" cy="196" r="11"/>
+  <text class="st" x="106" y="222">your stroke</text>
+  <!-- Partner rückt nach vorn in Position -->
+  <path class="lauf" d="M198,196 C 190,150 176,120 170,96" marker-end="url(#ag)"/>
+  <circle class="sp2" cx="198" cy="196" r="11"/>
+  <text class="st" x="210" y="150">partner</text>
+  <text class="zt" x="150" y="272">get your partner in position</text>
+</svg>

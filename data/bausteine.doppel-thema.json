@@ -1,0 +1,556 @@
+{
+  "_meta": {
+    "beschreibung": "Doppel-Themenblock: vollstaendiges Doppel als Querschnittsthema ueber mehrere Domaenen (Taktik, Athletik, Mentales). Vertieft den Einstieg doppel_grundlagen (aus fortgeschritten-taktik). Navigierbar ueber die NEUE Dimension spielform.",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl"
+    ],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.doppel-thema.json (Themenblock, nicht stufen-/domaenengebunden benannt, da querschnittlich).",
+    "schema_erweiterung_NEUES_FELD": {
+      "feld": "spielform",
+      "art": "NEUE Metadaten-Dimension (neues Feld, nicht neuer Wert in bestehendem Feld). Zweite Feld-Erweiterung nach reflexionsaufgabe.",
+      "werte": [
+        "einzel",
+        "doppel"
+      ],
+      "default": "einzel",
+      "orthogonal_zu": "domaene — ein Doppel-Baustein traegt weiter seine fachliche Domaene UND zusaetzlich spielform:doppel.",
+      "aktion_fuer_claude_code": [
+        "1. Neues optionales Feld 'spielform' im Datenmodell einfuehren; fehlendes Feld = 'einzel' (alle bestehenden Bausteine bleiben unangetastet, gelten als einzel).",
+        "2. 'spielform' als eigene Navigationsachse anbieten (alle spielform:doppel-Bausteine als zusammenhaengendes Thema, quer ueber Domaenen).",
+        "3. Bestehenden Baustein 'doppel_grundlagen' (in bausteine.fortgeschritten-taktik.json) nachtraeglich mit spielform:'doppel' markieren — koordinierte Ein-Feld-Ergaenzung, damit der Einstieg zum Doppel-Thema gehoert.",
+        "4. Label (uebersetzbar) de: spielform -> {einzel:'Einzel', doppel:'Doppel'}."
+      ]
+    },
+    "querschnitt_domaenen": "taktik (5), athletik_kondition (1), mentales (1) — demonstriert den Nutzen der spielform-Dimension: ein Thema, mehrere Domaenen.",
+    "delta_stelle": "das_umschalten_im_doppel traegt den BAD-Delta: Badminton rotiert fliessend zwischen zwei Formationen (Front-Hinten-Angriff, Seite-an-Seite-Verteidigung); Crossminton hat feste, aufschlaggebundene Rollen plus Positionsregel.",
+    "ordnungslogik": "Rahmen -> Angriff im Paar -> Verteidigung im Paar -> Bewegung als Einheit -> Verstaendigung -> Aufschlag/Rueckschlag -> Umschalten.",
+    "hinweis_anfuehrung": "Zuruf-Beispiele in einfachen Anfuehrungszeichen ('Meins!'), um JSON-Delimiter-Kollision zu vermeiden."
+  },
+  "bausteine": [
+    {
+      "id": "doppel_als_eigenes_spiel",
+      "grafik": [
+        "G-037"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_grundlagen"
+      ],
+      "voraussetzungen_lesart": "didaktisch: vertieft den Doppel-Einstieg der Beginner-nahen Grundlagen",
+      "spielziele": [
+        "doppel_spezifische_loesungen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Doppel als eigenes Spiel mit fester Rollenteilung crossminton-eigen (ICO/DCV-Regeln); Querschnittscharakter aus Rueckschlagsport-Doppel.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Das Doppel als eigenes Spiel",
+        "en": "Doubles as its own game",
+        "fr": "Le double, un jeu à part entière",
+        "pl": "Gra podwójna jako osobna gra"
+      },
+      "erklaerteil": {
+        "de": "Im Doppel-Einstieg hast du die Grundstruktur kennengelernt: Angriffs- und Rückraumspieler, die Aufschlagreihenfolge, die Fußregel, die erste Verständigung. Dieser Themenblock geht in die Tiefe — und zeigt dir, dass das Doppel ein Spiel mit eigenen Gesetzen ist, das durch alle Bereiche deines Spiels greift.\n\nDas Besondere am Doppel ist, dass sich alles verdoppelt und zugleich halbiert. Ihr deckt die Fläche zu zweit, also muss jeder weniger Boden allein machen — aber nur, wenn ihr euch klug aufteilt. Steht ihr euch im Weg, deckt ihr in Wahrheit weniger ab als ein einzelner Spieler, der weiß, wo er hin muss.\n\nDeshalb berührt gutes Doppel mehr als Taktik. Es verlangt taktisches Zusammenspiel (wer greift an, wer sichert), abgestimmte Bewegung (als Einheit über das Feld) und ständige Verständigung (der kurze Ruf, die Absprache). Diese drei Fäden — Taktik, Bewegung, Kommunikation — laufen im Doppel zusammen. Die folgenden Bausteine nehmen sie der Reihe nach auf.\n\nEin gutes Doppel ist wie ein Tanzpaar. Zwei Menschen bewegen sich als eine Figur, jeder weiß, was der andere tut, und aus zwei einzelnen wird eine Einheit, die mehr kann als beide zusammen. Ein schlechtes Doppel ist wie zwei Tänzer zur selben Musik, die einander auf die Füße treten.\n\nWer das Doppel als eigenes Spiel begreift und nicht als Einzel mit zwei Leuten, hat den wichtigsten Schritt schon getan.",
+        "en": "In the doubles introduction you got to know the basic structure: attacking and rear-court player, the serving order, the foot rule, the first communication. This theme block goes into depth — and shows you that doubles is a game with its own laws, one that reaches through every area of your game.\n\nWhat's special about doubles is that everything doubles and halves at the same time. You cover the area as a pair, so each of you has to cover less ground alone — but only if you divide it up cleverly. If you get in each other's way, you actually cover less than a single player who knows where to go.\n\nThat's why good doubles touches more than tactics. It demands tactical interplay (who attacks, who covers), coordinated movement (as a unit across the court), and constant communication (the short call, the agreement). These three threads — tactics, movement, communication — come together in doubles. The following modules take them up one by one.\n\nA good doubles pair is like a dance couple. Two people move as one figure, each knows what the other is doing, and from two individuals a unit emerges that can do more than both together. A bad doubles pair is like two dancers to the same music who step on each other's feet.\n\nWhoever grasps doubles as its own game, and not as singles with two people, has already taken the most important step.",
+        "fr": "Dans l'introduction au double, tu as découvert la structure de base : joueur d'attaque et joueur de fond, l'ordre de service, la règle du pied, la première communication. Ce bloc thématique va en profondeur — et te montre que le double est un jeu avec ses propres lois, qui traverse tous les domaines de ton jeu.\n\nCe qui fait la particularité du double, c'est que tout double et se divise en même temps. Vous couvrez la surface à deux, donc chacun a moins de terrain à faire seul — mais seulement si vous vous répartissez intelligemment. Si vous vous gênez, vous couvrez en réalité moins qu'un joueur seul qui sait où aller.\n\nC'est pourquoi un bon double touche plus que la tactique. Il demande un jeu collectif tactique (qui attaque, qui couvre), un déplacement coordonné (comme une unité à travers le terrain) et une communication constante (le bref appel, l'entente). Ces trois fils — tactique, déplacement, communication — se rejoignent dans le double. Les modules suivants les reprennent l'un après l'autre.\n\nUn bon double est comme un couple de danseurs. Deux personnes se déplacent comme une seule figure, chacune sait ce que fait l'autre, et de deux individus naît une unité qui peut plus que les deux réunis. Un mauvais double, c'est comme deux danseurs sur la même musique qui se marchent sur les pieds.\n\nQui comprend le double comme un jeu à part entière, et non comme un simple à deux, a déjà fait le pas le plus important.",
+        "pl": "We wprowadzeniu do debla poznałeś strukturę podstawową: gracza atakującego i tylnego, kolejność serwisu, regułę stopy, pierwsze porozumienie. Ten blok tematyczny wchodzi w głąb — i pokazuje ci, że debel to gra o własnych prawach, która sięga przez wszystkie obszary twojej gry.\n\nSzczególne w deblu jest to, że wszystko się podwaja i zarazem połowi. Kryjecie powierzchnię we dwoje, więc każdy musi ogarnąć mniej terenu sam — ale tylko wtedy, gdy mądrze się dzielicie. Jeśli wchodzicie sobie w drogę, w rzeczywistości kryjecie mniej niż pojedynczy gracz, który wie, dokąd ma iść.\n\nDlatego dobry debel dotyka więcej niż taktyki. Wymaga współdziałania taktycznego (kto atakuje, kto asekuruje), zgranego ruchu (jako jedność po polu) i ciągłego porozumienia (krótki okrzyk, umowa). Te trzy nici — taktyka, ruch, komunikacja — schodzą się w deblu razem. Kolejne moduły podejmują je po kolei.\n\nDobry debel jest jak para taneczna. Dwoje ludzi porusza się jako jedna figura, każdy wie, co robi drugi, i z dwojga pojedynczych powstaje jedność, która potrafi więcej niż oboje razem. Zły debel jest jak dwoje tancerzy do tej samej muzyki, którzy nadeptują sobie na stopy.\n\nKto pojmuje debla jako osobną grę, a nie jako singiel we dwoje, zrobił już najważniejszy krok."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an dein letztes Doppel zurück: Habt ihr euch als Einheit bewegt, oder wart ihr zwei Einzelspieler auf einem Feld? Wo lagen die Lücken — in der Mitte, weil keiner ging, oder an den Seiten, weil beide zur Mitte liefen? Nimm dir für die nächsten Bausteine diese eine Frage mit: An welchem der drei Fäden — Zusammenspiel, Bewegung, Verständigung — hakt es bei euch am meisten?",
+        "en": "Think back to your last doubles match: did you move as a unit, or were you two singles players on one court? Where were the gaps — in the middle, because nobody went, or at the sides, because both ran to the middle? Take this one question with you into the next modules: which of the three threads — interplay, movement, communication — is the one you struggle with most?",
+        "fr": "Repense à ton dernier double : vous êtes-vous déplacés comme une unité, ou étiez-vous deux joueurs de simple sur un terrain ? Où se trouvaient les brèches — au centre, parce que personne n'y allait, ou sur les côtés, parce que vous couriez tous les deux vers le centre ? Emporte cette seule question dans les modules suivants : lequel des trois fils — jeu collectif, déplacement, communication — vous pose le plus de difficultés ?",
+        "pl": "Wróć myślami do swojego ostatniego debla: poruszaliście się jako jedność, czy byliście dwoma pojedynczymi graczami na jednym polu? Gdzie leżały luki — w środku, bo nikt nie szedł, czy po bokach, bo oboje biegli do środka? Weź do kolejnych modułów to jedno pytanie: na której z trzech nici — współdziałaniu, ruchu, porozumieniu — zacina się u was najbardziej?"
+      }
+    },
+    {
+      "id": "angriff_im_paar",
+      "grafik": [
+        "G-038"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel",
+        "smash_vorbereiten"
+      ],
+      "voraussetzungen_lesart": "gemischt: doppel_als_eigenes_spiel (Rahmen); smash_vorbereiten (taktisch, domaenengleich, Einzel-Angriff als Basis)",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "antwort_gegen_defensivspieler"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Angriff im Paar (Rueckraum setzt Druck, Angreifer schliesst schwache Rueckschlaege ab): Doppel-Angriffslogik (Rueckschlagsport), angewandt auf die crossminton-eigene Rollenteilung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'beide hinten, keiner schliesst vorn ab' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Angriff im Paar",
+        "en": "Attacking as a pair",
+        "fr": "L'attaque en paire",
+        "pl": "Atak w parze"
+      },
+      "erklaerteil": {
+        "de": "Im Angriff spielt euer Paar seine größte Stärke aus: Ihr könnt den Gegner unter Druck setzen und zugleich die Lücken sofort schließen. Das gelingt über die klare Aufgabenteilung zwischen hinten und vorn.\n\nDer Rückraumspieler ist der Motor des Angriffs. Von hinten setzt er die harten, tiefen Schläge — den Smash, den druckvollen Drive —, die den Gegner zwingen, den Speeder hochzuspielen oder schwach zurückzubringen. Er hält den Druck aufrecht.\n\nDer Angriffsspieler vorn ist der Vollstrecker. Er lauert auf den schwachen Rückschlag, den der Druck von hinten erzeugt, und schließt ihn kurz und hart ab, bevor der Gegner sich sortiert. Seine Aufgabe ist das Abfangen und Beenden — er steht bereit, um jede kurze, hohe Antwort sofort zu verwerten.\n\nZusammen ergibt das eine Zange: Der eine drückt, der andere schnappt zu. Solange dieser Rhythmus läuft — Druck von hinten, Abschluss von vorn —, bleibt euer Paar im Angriff und der Gegner in der Defensive.\n\nIhr seid Hammer und Amboss. Der Rückraumspieler ist der Hammer, der von hinten schlägt; der Angriffsspieler ist der Amboss vorn, an dem der schwache Ball zerbricht. Fehlt einer von beiden, verpufft der Angriff.\n\nDer häufigste Fehler ist, dass beide hinten bleiben und die kurzen Bälle des Gegners ungestraft fallen. Ohne einen Spieler vorn, der abschließt, bleibt der beste Druck von hinten wirkungslos.",
+        "en": "In attack, your pair plays out its greatest strength: you can put the opponent under pressure and close the gaps immediately at the same time. This works through the clear division of tasks between back and front.\n\nThe rear-court player is the engine of the attack. From the back they set the hard, deep strokes — the smash, the pressing drive — that force the opponent to lift the Speeder or bring it back weakly. They keep the pressure up.\n\nThe attacking player at the front is the finisher. They lie in wait for the weak return that the pressure from behind produces, and finish it short and hard before the opponent gets sorted. Their job is interception and ending it — they stand ready to put away any short, high answer immediately.\n\nTogether this makes a pincer: one presses, the other snaps shut. As long as this rhythm runs — pressure from behind, finish from the front — your pair stays in attack and the opponent on the defensive.\n\nYou are hammer and anvil. The rear-court player is the hammer that strikes from behind; the attacking player is the anvil at the front on which the weak ball breaks. If either is missing, the attack fizzles out.\n\nThe most common mistake is that both stay back and the opponent's short balls fall unpunished. Without a player at the front to finish, even the best pressure from behind stays ineffective.",
+        "fr": "À l'attaque, votre paire déploie sa plus grande force : vous pouvez mettre l'adversaire sous pression et, en même temps, refermer aussitôt les brèches. Cela réussit grâce à la répartition claire des tâches entre l'arrière et l'avant.\n\nLe joueur de fond est le moteur de l'attaque. Depuis l'arrière, il place les frappes puissantes et profondes — le smash, le drive appuyé — qui forcent l'adversaire à jouer le speeder en hauteur ou à le renvoyer faiblement. Il maintient la pression.\n\nLe joueur d'attaque à l'avant est le finisseur. Il guette le retour faible que la pression venue de l'arrière provoque, et le conclut court et sec avant que l'adversaire ne se replace. Sa tâche, c'est l'interception et la conclusion — il se tient prêt à exploiter aussitôt toute réponse courte et haute.\n\nEnsemble, cela forme une tenaille : l'un appuie, l'autre se referme. Tant que ce rythme tourne — pression depuis l'arrière, conclusion depuis l'avant —, votre paire reste à l'attaque et l'adversaire sur la défensive.\n\nVous êtes le marteau et l'enclume. Le joueur de fond est le marteau qui frappe depuis l'arrière ; le joueur d'attaque est l'enclume à l'avant sur laquelle se brise la balle faible. Si l'un des deux manque, l'attaque se dissipe.\n\nL'erreur la plus fréquente, c'est que les deux restent à l'arrière et que les balles courtes de l'adversaire tombent impunément. Sans un joueur à l'avant pour conclure, la meilleure pression venue de l'arrière reste sans effet.",
+        "pl": "W ataku wasza para gra swoją największą siłą: możecie naciskać przeciwnika i zarazem natychmiast zamykać luki. Udaje się to przez jasny podział zadań między tyłem a przodem.\n\nGracz tylny to silnik ataku. Z tyłu kładzie mocne, głębokie uderzenia — smecz, dociskowy drive —, które zmuszają przeciwnika do podbicia speedera wysoko albo słabego odesłania. Utrzymuje presję.\n\nGracz atakujący z przodu to egzekutor. Czyha na słabe odbicie, które wywołuje presja z tyłu, i kończy je krótko i mocno, zanim przeciwnik się pozbiera. Jego zadaniem jest przechwycenie i zakończenie — stoi gotów, by każdą krótką, wysoką odpowiedź od razu wykorzystać.\n\nRazem daje to obcęgi: jeden dociska, drugi zatrzaskuje. Dopóki ten rytm biegnie — presja z tyłu, zakończenie z przodu —, wasza para pozostaje w ataku, a przeciwnik w defensywie.\n\nJesteście młotem i kowadłem. Gracz tylny to młot, który uderza z tyłu; gracz atakujący to kowadło z przodu, na którym pęka słaba piłka. Brakuje jednego z dwojga, atak ulatnia się na darmo.\n\nNajczęstszym błędem jest to, że oboje zostają z tyłu i krótkie piłki przeciwnika padają bezkarnie. Bez gracza z przodu, który kończy, najlepsza presja z tyłu pozostaje bez efektu."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "hoch",
+      "fokus": ["taktik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Druck und Abschluss",
+          "ziel": "Als Paar den Angriff halten — Rückraum drückt, Angriffsspieler schließt ab.",
+          "schritte": [
+            "Stellt euch als Paar auf: einer hinten als Rückraumspieler, einer vorn als Angriffsspieler.",
+            "Der Rückraumspieler setzt tiefe, druckvolle Schläge, die der zuspielende Gegner nur hoch oder kurz zurückbringen kann.",
+            "Der Angriffsspieler vorn fängt diese schwachen Rückschläge ab und schließt sie kurz ab.",
+            "Haltet den Rhythmus über mehrere Bälle: Druck hinten, Abschluss vorn.",
+            "Wechselt nach einigen Durchgängen die Rollen."
+          ],
+          "selbstkontrolle": "Fängt der Angriffsspieler die kurzen Bälle wirklich ab, oder fallen sie ungestraft? Bleibt der Druck von hinten hoch genug, um schwache Rückschläge zu erzwingen? Der Angriff trägt nur, wenn beide Rollen zusammenarbeiten.",
+          "abschluss": "Die Zange aus Druck und Abschluss ist die Grundfigur des Doppel-Angriffs. Sitzt sie, wird euer Paar im Angriff schwer zu stoppen."
+        },
+        "en": {
+          "titel": "Pressure and finish",
+          "ziel": "Hold the attack as a pair — the rear-court player presses, the attacking player finishes.",
+          "schritte": [
+            "Set up as a pair: one at the back as rear-court player, one at the front as attacking player.",
+            "The rear-court player sets deep, pressing strokes that the feeding opponent can only bring back high or short.",
+            "The attacking player at the front intercepts these weak returns and finishes them short.",
+            "Keep the rhythm over several balls: pressure at the back, finish at the front.",
+            "Switch roles after a few rounds."
+          ],
+          "selbstkontrolle": "Does the attacking player really intercept the short balls, or do they fall unpunished? Does the pressure from behind stay high enough to force weak returns? The attack only holds when both roles work together.",
+          "abschluss": "The pincer of pressure and finish is the basic figure of the doubles attack. Once it's in place, your pair becomes hard to stop in attack."
+        },
+        "fr": {
+          "titel": "Pression et conclusion",
+          "ziel": "Tenir l'attaque en paire — le joueur de fond appuie, le joueur d'attaque conclut.",
+          "schritte": [
+            "Placez-vous en paire : l'un à l'arrière comme joueur de fond, l'autre à l'avant comme joueur d'attaque.",
+            "Le joueur de fond place des frappes profondes et appuyées que l'adversaire qui distribue ne peut renvoyer que haut ou court.",
+            "Le joueur d'attaque à l'avant intercepte ces retours faibles et les conclut court.",
+            "Tenez le rythme sur plusieurs balles : pression à l'arrière, conclusion à l'avant.",
+            "Changez les rôles après quelques passages."
+          ],
+          "selbstkontrolle": "Le joueur d'attaque intercepte-t-il vraiment les balles courtes, ou tombent-elles impunément ? La pression venue de l'arrière reste-t-elle assez forte pour forcer des retours faibles ? L'attaque ne tient que si les deux rôles coopèrent.",
+          "abschluss": "La tenaille faite de pression et de conclusion est la figure de base de l'attaque en double. Une fois en place, votre paire devient difficile à arrêter à l'attaque."
+        },
+        "pl": {
+          "titel": "Presja i zakończenie",
+          "ziel": "Jako para utrzymać atak — tył dociska, gracz atakujący kończy.",
+          "schritte": [
+            "Ustawcie się jako para: jeden z tyłu jako gracz tylny, jeden z przodu jako gracz atakujący.",
+            "Gracz tylny kładzie głębokie, dociskowe uderzenia, które podający przeciwnik może odesłać tylko wysoko lub krótko.",
+            "Gracz atakujący z przodu przechwytuje te słabe odbicia i kończy je krótko.",
+            "Trzymajcie rytm przez kilka piłek: presja z tyłu, zakończenie z przodu.",
+            "Zmieńcie po kilku rundach role."
+          ],
+          "selbstkontrolle": "Czy gracz atakujący naprawdę przechwytuje krótkie piłki, czy padają bezkarnie? Czy presja z tyłu pozostaje dość wysoka, by wymuszać słabe odbicia? Atak niesie tylko wtedy, gdy obie role współpracują.",
+          "abschluss": "Obcęgi z presji i zakończenia to figura podstawowa ataku deblowego. Gdy siedzą, wasza para staje się w ataku trudna do zatrzymania."
+        }
+      }
+    },
+    {
+      "id": "verteidigung_im_paar",
+      "grafik": [
+        "G-039"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel"
+      ],
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "antwort_gegen_angreifer"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Verteidigung im Paar (Flaeche decken, Tempo herausnehmen, in den Angriff umschalten): Doppel-Defensivlogik (Rueckschlagsport), angewandt auf die crossminton-eigene Struktur.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Verteidigung im Paar",
+        "en": "Defending as a pair",
+        "fr": "La défense en paire",
+        "pl": "Obrona w parze"
+      },
+      "erklaerteil": {
+        "de": "Wenn der Gegner angreift, wird aus eurem Paar eine Verteidigungseinheit. Jetzt geht es darum, die Fläche zu decken, das Tempo aus dem Angriff zu nehmen und den Moment abzupassen, in dem ihr selbst wieder zuschlagen könnt.\n\nDas Wichtigste in der Verteidigung ist, dass ihr die Fläche sinnvoll aufteilt und keine Lücke lasst, in die der Gegner hart hineinschlagen kann. Jeder deckt seinen Bereich, und der gefährlichste Raum — dort, wo der Gegner seinen härtesten Ball hinsetzen kann — muss abgesichert sein. Ihr steht tiefer und breiter, um Zeit zum Reagieren zu haben.\n\nIn der Verteidigung nimmst du bewusst Tempo heraus. Statt den harten Ball hart zurückzuschlagen, bringst du ihn kontrolliert zurück, kaufst dir Zeit und wartest auf den Fehler oder die schwächere Angabe des Gegners. Jeder sichere Rückschlag hält euch im Ballwechsel und zwingt den Gegner, den Angriff noch einmal aufzubauen.\n\nUnd du hältst Ausschau nach dem Umschaltmoment. Sobald der Angriff des Gegners schwächer wird — ein kürzerer Smash, ein hoher Ball —, ist das euer Signal, aus der Verteidigung in den Angriff zu wechseln. Verteidigung im Doppel ist nie nur Abwehr; sie ist das Warten auf die eigene Chance.\n\nIhr seid zusammen ein Schutzschild, das den Ansturm abfängt. Ein Schild mit einer Lücke ist wertlos — die Kunst ist, dass eure beiden Hälften lückenlos ineinandergreifen, bis der Angriff sich erschöpft.",
+        "en": "When the opponent attacks, your pair becomes a defensive unit. Now it's about covering the area, taking the speed out of the attack, and waiting for the moment when you can strike back yourselves.\n\nThe most important thing in defense is that you divide the area sensibly and leave no gap the opponent can hit hard into. Each covers their zone, and the most dangerous space — where the opponent can place their hardest ball — has to be secured. You stand deeper and wider to have time to react.\n\nIn defense you deliberately take the pace out. Instead of hitting the hard ball back hard, you bring it back under control, buy yourself time, and wait for the opponent's mistake or weaker delivery. Every safe return keeps you in the rally and forces the opponent to build the attack up again.\n\nAnd you keep a lookout for the switching moment. As soon as the opponent's attack weakens — a shorter smash, a high ball — that's your signal to switch from defense into attack. Defense in doubles is never just warding off; it's waiting for your own chance.\n\nTogether you are a shield that catches the onslaught. A shield with a gap is worthless — the art is for your two halves to interlock seamlessly until the attack exhausts itself.",
+        "fr": "Quand l'adversaire attaque, votre paire devient une unité défensive. Il s'agit maintenant de couvrir la surface, de retirer le rythme de l'attaque et de saisir le moment où vous pouvez frapper à votre tour.\n\nLe plus important en défense, c'est de vous répartir la surface judicieusement et de ne laisser aucune brèche dans laquelle l'adversaire pourrait frapper fort. Chacun couvre sa zone, et l'espace le plus dangereux — là où l'adversaire peut placer sa balle la plus dure — doit être sécurisé. Vous vous tenez plus en retrait et plus larges, pour avoir le temps de réagir.\n\nEn défense, tu retires volontairement du rythme. Au lieu de renvoyer la balle dure avec force, tu la ramènes de façon contrôlée, tu t'achètes du temps et tu attends la faute ou l'envoi plus faible de l'adversaire. Chaque retour sûr vous maintient dans l'échange et force l'adversaire à reconstruire son attaque.\n\nEt tu guettes le moment de transition. Dès que l'attaque de l'adversaire faiblit — un smash plus court, une balle haute —, c'est votre signal pour passer de la défense à l'attaque. La défense au double n'est jamais seulement de la parade ; c'est l'attente de sa propre occasion.\n\nEnsemble, vous êtes un bouclier qui encaisse l'assaut. Un bouclier avec une brèche ne vaut rien — tout l'art, c'est que vos deux moitiés s'emboîtent sans faille jusqu'à ce que l'attaque s'épuise.",
+        "pl": "Gdy przeciwnik atakuje, wasza para staje się jednostką obronną. Teraz chodzi o to, by pokryć powierzchnię, zdjąć z ataku tempo i wypatrzeć moment, w którym sami możecie znów uderzyć.\n\nNajważniejsze w obronie jest to, byście sensownie podzielili powierzchnię i nie zostawili luki, w którą przeciwnik może mocno wbić. Każdy kryje swój obszar, a najgroźniejsza przestrzeń — tam, gdzie przeciwnik może położyć swoją najmocniejszą piłkę — musi być zabezpieczona. Stoicie głębiej i szerzej, by mieć czas na reakcję.\n\nW obronie świadomie zdejmujesz tempo. Zamiast odbijać mocną piłkę mocno, odsyłasz ją kontrolowanie, kupujesz sobie czas i czekasz na błąd lub słabsze zagranie przeciwnika. Każde pewne odbicie trzyma was w wymianie i zmusza przeciwnika, by atak zbudował jeszcze raz.\n\nI wypatrujesz momentu przełączenia. Gdy tylko atak przeciwnika słabnie — krótszy smecz, wysoka piłka —, to wasz sygnał, by z obrony przejść do ataku. Obrona w deblu nigdy nie jest tylko odpieraniem; to czekanie na własną szansę.\n\nJesteście razem tarczą, która wyłapuje szturm. Tarcza z luką jest bezwartościowa — sztuką jest, by wasze dwie połowy bez luk wchodziły jedna w drugą, aż atak się wyczerpie."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["taktik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Fläche decken, Tempo nehmen",
+          "ziel": "Als Paar den Angriff abfangen, ohne Lücke, und den Umschaltmoment abpassen.",
+          "schritte": [
+            "Lasst euch als Paar von den Gegnern angreifen (harte, tiefe Bälle).",
+            "Teilt die Fläche klar auf, sodass keine Lücke für den harten Ball bleibt.",
+            "Bringt die Angriffsbälle kontrolliert zurück, statt sie hart zu erwidern — nehmt Tempo heraus.",
+            "Achtet auf den Moment, in dem der Angriff schwächer wird, und schaltet dann gemeinsam auf Angriff um.",
+            "Wechselt nach einigen Durchgängen die Angriffs- und Verteidigungsrollen der Paare."
+          ],
+          "selbstkontrolle": "Bleibt zwischen euch eine Lücke, in die der Gegner hart hineinschlägt? Nehmt ihr genug Tempo heraus, um im Ballwechsel zu bleiben? Und erkennt ihr den Moment, in dem ihr umschalten könnt? Gute Verteidigung deckt lückenlos und wartet geduldig auf die Chance.",
+          "abschluss": "Eine Verteidigung, die keine Lücke lässt und den Umschaltmoment nutzt, bringt euch aus der Bedrängnis zurück in den Angriff."
+        },
+        "en": {
+          "titel": "Cover the area, take the pace",
+          "ziel": "Catch the attack as a pair, without a gap, and wait for the switching moment.",
+          "schritte": [
+            "Have the opponents attack you as a pair (hard, deep balls).",
+            "Divide the area clearly, so no gap remains for the hard ball.",
+            "Bring the attacking balls back under control instead of answering them hard — take the pace out.",
+            "Watch for the moment the attack weakens, and then switch to attack together.",
+            "Switch the pairs' attacking and defending roles after a few rounds."
+          ],
+          "selbstkontrolle": "Does a gap stay between you that the opponent hits hard into? Do you take enough pace out to stay in the rally? And do you recognize the moment you can switch? Good defense covers seamlessly and waits patiently for the chance.",
+          "abschluss": "A defense that leaves no gap and uses the switching moment brings you out of trouble and back into attack."
+        },
+        "fr": {
+          "titel": "Couvrir la surface, retirer le rythme",
+          "ziel": "Encaisser l'attaque en paire, sans brèche, et saisir le moment de transition.",
+          "schritte": [
+            "Faites-vous attaquer en paire par les adversaires (balles dures et profondes).",
+            "Répartissez clairement la surface, de sorte qu'aucune brèche ne reste pour la balle dure.",
+            "Ramenez les balles d'attaque de façon contrôlée au lieu de les renvoyer avec force — retirez du rythme.",
+            "Guettez le moment où l'attaque faiblit, et passez alors ensemble à l'attaque.",
+            "Changez les rôles d'attaque et de défense des paires après quelques passages."
+          ],
+          "selbstkontrolle": "Reste-t-il entre vous une brèche dans laquelle l'adversaire frappe fort ? Retirez-vous assez de rythme pour rester dans l'échange ? Et reconnaissez-vous le moment où vous pouvez passer à l'attaque ? Une bonne défense couvre sans faille et attend patiemment l'occasion.",
+          "abschluss": "Une défense qui ne laisse aucune brèche et qui exploite le moment de transition vous sort de l'embarras et vous ramène à l'attaque."
+        },
+        "pl": {
+          "titel": "Kryć powierzchnię, zdejmować tempo",
+          "ziel": "Jako para wyłapać atak, bez luki, i wypatrzeć moment przełączenia.",
+          "schritte": [
+            "Niech przeciwnicy atakują was jako parę (mocne, głębokie piłki).",
+            "Podzielcie powierzchnię jasno, tak by nie zostawała luka na mocną piłkę.",
+            "Odsyłajcie piłki ataku kontrolowanie, zamiast odpowiadać mocno — zdejmujcie tempo.",
+            "Uważajcie na moment, w którym atak słabnie, i przełączcie się wtedy wspólnie na atak.",
+            "Zmieńcie po kilku rundach role ataku i obrony par."
+          ],
+          "selbstkontrolle": "Czy między wami zostaje luka, w którą przeciwnik mocno wbija? Czy zdejmujecie dość tempa, by zostać w wymianie? I czy rozpoznajecie moment, w którym możecie się przełączyć? Dobra obrona kryje bez luk i cierpliwie czeka na szansę.",
+          "abschluss": "Obrona, która nie zostawia luki i wykorzystuje moment przełączenia, wyprowadza was z opresji z powrotem do ataku."
+        }
+      }
+    },
+    {
+      "id": "bewegung_als_einheit",
+      "grafik": [
+        "G-042"
+      ],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel"
+      ],
+      "voraussetzungen_querverweis": "beinarbeit_system (fortgeschrittene Technik) — die individuelle Bewegungsgrundlage, die im Paar abgestimmt wird",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "wiederholte_antrittsschnelligkeit"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Bewegung als Einheit, Raum des Partners decken, abgestimmte Wege: Doppel-Bewegungslehre (Rueckschlagsport), athletisch als Paar-Koordination.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Bewegung als Einheit",
+        "en": "Moving as one unit",
+        "fr": "Se déplacer comme une unité",
+        "pl": "Ruch jako jedność"
+      },
+      "erklaerteil": {
+        "de": "Zwei Spieler, die sich gut bewegen, sind noch kein gutes Doppel. Erst wenn ihr euch aufeinander abgestimmt bewegt — als eine Einheit, nicht als zwei einzelne —, deckt ihr das Feld wirklich ab. Das ist die athletische Seite des Doppels.\n\nDie Grundregel lautet: Ihr seid verbunden, als hinge ein unsichtbares Band zwischen euch. Bewegt sich einer nach links, rückt der andere mit, um die entstehende Lücke zu schließen. Geht einer nach vorn zum Ball, sichert der andere hinten ab. Ihr haltet immer einen sinnvollen Abstand zueinander — nah genug, um euch zu ergänzen, weit genug, um die Fläche zu decken.\n\nDaraus folgt die wichtigste Bewegungsdisziplin im Doppel: Lauft nie beide zum selben Ball. Das ist der häufigste und teuerste Fehler. Wenn beide denselben Speeder jagen, steht die halbe Fläche offen, und der nächste Ball des Gegners landet garantiert dort. Wer den Ball nimmt, ruft ihn; der andere bleibt und deckt.\n\nDie Wege sind dabei kein Zufall. Nach jedem Schlag richtet ihr euch gemeinsam neu aus, sodass ihr wieder ausgewogen steht. Diese ständige gemeinsame Neuordnung ist Arbeit — sie kostet Kondition und Aufmerksamkeit —, aber sie ist der Unterschied zwischen einem Paar und zwei Nebeneinanderher-Spielern.\n\nIhr seid wie zwei Scheibenwischer auf einer Windschutzscheibe, die synchron laufen. Bewegen sie sich abgestimmt, bleibt keine Stelle trocken. Laufen sie gegeneinander, verkeilen sie sich und die Scheibe bleibt schmutzig.",
+        "en": "Two players who move well are not yet a good doubles pair. Only when you move in coordination with each other — as one unit, not as two individuals — do you really cover the court. That is the athletic side of doubles.\n\nThe basic rule is: you are connected, as if an invisible band hangs between you. If one moves left, the other moves along to close the gap that opens. If one goes forward to the ball, the other covers behind. You always keep a sensible distance from each other — close enough to complement one another, far enough to cover the area.\n\nFrom this follows the most important movement discipline in doubles: never both run to the same ball. That is the most common and most expensive mistake. When both chase the same Speeder, half the area stands open, and the opponent's next ball is guaranteed to land there. Whoever takes the ball calls it; the other stays and covers.\n\nThe paths are no accident here. After every stroke you realign together, so that you stand balanced again. This constant joint reordering is work — it costs fitness and attention — but it is the difference between a pair and two players running alongside each other.\n\nYou are like two windshield wipers on a windscreen running in sync. When they move in coordination, no spot stays dry. When they run against each other, they jam and the windscreen stays dirty.",
+        "fr": "Deux joueurs qui se déplacent bien ne font pas encore un bon double. Ce n'est que lorsque vous vous déplacez en coordination l'un avec l'autre — comme une unité, non comme deux individus — que vous couvrez vraiment le terrain. C'est le côté athlétique du double.\n\nLa règle de base est la suivante : vous êtes reliés, comme si un lien invisible pendait entre vous. Si l'un se déplace vers la gauche, l'autre suit pour refermer la brèche qui s'ouvre. Si l'un va vers l'avant à la balle, l'autre couvre l'arrière. Vous gardez toujours une distance judicieuse l'un par rapport à l'autre — assez proches pour vous compléter, assez éloignés pour couvrir la surface.\n\nIl en découle la discipline de déplacement la plus importante au double : ne courez jamais tous les deux vers la même balle. C'est l'erreur la plus fréquente et la plus coûteuse. Quand les deux poursuivent le même speeder, la moitié de la surface reste ouverte, et la prochaine balle de l'adversaire y atterrit à coup sûr. Celui qui prend la balle l'appelle ; l'autre reste et couvre.\n\nLes trajets ne sont pas le fruit du hasard. Après chaque frappe, vous vous replacez ensemble, de sorte à vous tenir de nouveau en équilibre. Ce replacement commun constant est un travail — il coûte de la condition et de l'attention —, mais c'est la différence entre une paire et deux joueurs qui jouent côte à côte.\n\nVous êtes comme deux essuie-glaces sur un pare-brise qui fonctionnent de façon synchrone. Quand ils bougent de façon coordonnée, aucun endroit ne reste sec. Quand ils vont l'un contre l'autre, ils se coincent et le pare-brise reste sale.",
+        "pl": "Dwoje graczy, którzy dobrze się poruszają, to jeszcze nie dobry debel. Dopiero gdy poruszacie się dostrojeni do siebie — jako jedność, nie jako dwoje pojedynczych —, naprawdę pokrywacie pole. To atletyczna strona debla.\n\nReguła podstawowa brzmi: jesteście połączeni, jakby wisiała między wami niewidzialna nić. Poruszy się jeden w lewo, drugi przesuwa się razem, by zamknąć powstającą lukę. Idzie jeden do przodu do piłki, drugi asekuruje z tyłu. Trzymacie zawsze sensowny odstęp od siebie — dość blisko, by się uzupełniać, dość daleko, by pokryć powierzchnię.\n\nWynika z tego najważniejsza dyscyplina ruchu w deblu: nigdy nie biegnijcie oboje do tej samej piłki. To najczęstszy i najdroższy błąd. Gdy oboje gonicie tego samego speedera, połowa powierzchni stoi otworem, a następna piłka przeciwnika ląduje tam z pewnością. Kto bierze piłkę, woła ją; drugi zostaje i kryje.\n\nDrogi nie są przy tym przypadkowe. Po każdym uderzeniu ustawiacie się wspólnie na nowo, tak byście znów stali wyważenie. To ciągłe wspólne przestawianie to praca — kosztuje kondycję i uwagę —, ale to różnica między parą a dwoma graczami grającymi obok siebie.\n\nJesteście jak dwie wycieraczki na przedniej szybie, które biegną synchronicznie. Poruszają się dostrojone — żadne miejsce nie zostaje suche. Biegną przeciw sobie — zakleszczają się, a szyba zostaje brudna."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["koordination", "kondition"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Am unsichtbaren Band",
+          "ziel": "Euch als Paar abgestimmt bewegen, Lücken schließen, nie beide zum selben Ball.",
+          "schritte": [
+            "Bewegt euch als Paar über das Feld und stellt euch vor, ein Band verbindet euch: Geht einer, rückt der andere mit.",
+            "Lasst euch Bälle in verschiedene Bereiche spielen und übt, dass immer einer geht und der andere die Lücke absichert.",
+            "Ruft bei jedem Ball, wer ihn nimmt, damit nie beide losgehen.",
+            "Richtet euch nach jedem Schlag gemeinsam neu aus, sodass ihr wieder ausgewogen steht.",
+            "Steigert das Tempo erst, wenn die abgestimmte Bewegung sitzt."
+          ],
+          "selbstkontrolle": "Bleibt der Abstand zwischen euch sinnvoll, oder klumpt ihr zusammen und lasst eine Hälfte offen? Lauft ihr je beide zum selben Ball? Beobachtet, ob ihr euch nach jedem Schlag als Paar neu ausrichtet. Die abgestimmte Bewegung ist anstrengend und genau deshalb ein Trainingsziel.",
+          "abschluss": "Bewegung als Einheit ist die athletische Grundlage des Doppels. Sitzt sie, deckt ihr zu zweit mehr ab als zwei einzelne Spieler je könnten."
+        },
+        "en": {
+          "titel": "On the invisible band",
+          "ziel": "Move in coordination as a pair, close gaps, never both to the same ball.",
+          "schritte": [
+            "Move across the court as a pair and imagine a band connects you: if one goes, the other moves along.",
+            "Have balls played into different areas and practice that one always goes and the other secures the gap.",
+            "Call on every ball who takes it, so that both never set off.",
+            "Realign together after every stroke, so that you stand balanced again.",
+            "Increase the pace only once the coordinated movement is in place."
+          ],
+          "selbstkontrolle": "Does the distance between you stay sensible, or do you clump together and leave one half open? Do you ever both run to the same ball? Watch whether you realign as a pair after every stroke. The coordinated movement is strenuous, and that is exactly why it's a training goal.",
+          "abschluss": "Moving as a unit is the athletic foundation of doubles. Once it's in place, the two of you cover more than two individual players ever could."
+        },
+        "fr": {
+          "titel": "Au lien invisible",
+          "ziel": "Vous déplacer en coordination en paire, refermer les brèches, jamais les deux vers la même balle.",
+          "schritte": [
+            "Déplacez-vous en paire à travers le terrain et imaginez qu'un lien vous relie : si l'un y va, l'autre suit.",
+            "Faites-vous jouer des balles dans différentes zones et travaillez à ce que toujours l'un y aille et que l'autre sécurise la brèche.",
+            "À chaque balle, criez qui la prend, pour que les deux ne partent jamais ensemble.",
+            "Replacez-vous ensemble après chaque frappe, de sorte à vous tenir de nouveau en équilibre.",
+            "N'augmentez le rythme que lorsque le déplacement coordonné est en place."
+          ],
+          "selbstkontrolle": "La distance entre vous reste-t-elle judicieuse, ou vous agglutinez-vous en laissant une moitié ouverte ? Courez-vous parfois tous les deux vers la même balle ? Observez si vous vous replacez en paire après chaque frappe. Le déplacement coordonné est fatigant, et c'est justement pour cela qu'il est un objectif d'entraînement.",
+          "abschluss": "Se déplacer comme une unité est le fondement athlétique du double. Une fois en place, vous couvrez à deux plus que deux joueurs isolés ne le pourraient jamais."
+        },
+        "pl": {
+          "titel": "Na niewidzialnej nici",
+          "ziel": "Poruszać się jako para w zgraniu, zamykać luki, nigdy oboje do tej samej piłki.",
+          "schritte": [
+            "Poruszajcie się jako para po polu i wyobraźcie sobie, że nić was łączy: idzie jeden, drugi przesuwa się razem.",
+            "Niech ktoś gra wam piłki w różne obszary i ćwiczcie, by zawsze jeden szedł, a drugi asekurował lukę.",
+            "Wołajcie przy każdej piłce, kto ją bierze, by nigdy oboje nie ruszali.",
+            "Ustawiajcie się po każdym uderzeniu wspólnie na nowo, tak byście znów stali wyważenie.",
+            "Zwiększajcie tempo dopiero, gdy zgrany ruch siedzi."
+          ],
+          "selbstkontrolle": "Czy odstęp między wami pozostaje sensowny, czy zbijacie się w kupę i zostawiacie jedną połowę otworem? Czy biegniecie czasem oboje do tej samej piłki? Obserwujcie, czy po każdym uderzeniu ustawiacie się jako para na nowo. Zgrany ruch jest męczący i właśnie dlatego to cel treningowy.",
+          "abschluss": "Ruch jako jedność to atletyczna podstawa debla. Gdy siedzi, we dwoje pokrywacie więcej, niż dwoje pojedynczych graczy kiedykolwiek mogłoby."
+        }
+      }
+    },
+    {
+      "id": "verstaendigung_im_paar",
+      "grafik": [
+        "G-043"
+      ],
+      "typ": "micro",
+      "domaene": "mentales",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel"
+      ],
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Kommunikation, Zuruf-Systeme, Partnerschaft/positive Zusammenarbeit unter Druck: Doppel-Kommunikation (Rueckschlagsport) und sportpsychologische Teamdynamik.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Verständigung im Paar",
+        "en": "Communicating as a pair",
+        "fr": "La communication en paire",
+        "pl": "Porozumienie w parze"
+      },
+      "erklaerteil": {
+        "de": "Kein Doppel funktioniert schweigend. Die Verständigung mit deinem Partner ist so wichtig wie jeder Schlag — und sie ist zugleich die mentale Seite des Doppels, denn sie entscheidet, ob ihr als Team zusammenwachst oder auseinanderfallt.\n\nDie Verständigung läuft auf drei Ebenen. Vor dem Aufschlag trefft ihr kurze Absprachen: wer welchen Bereich übernimmt, welche Taktik ihr fahrt. Während des Ballwechsels helfen kurze, klare Zurufe — 'Meins!', 'Deins!', 'Lass!' —, die in Sekundenbruchteilen klären, wer den Ball nimmt. Zwischen den Punkten gebt ihr euch kurzes Feedback und stimmt euch neu ab.\n\nEntscheidend ist, dass die Zurufe kurz, laut und eindeutig sind. Ein gemurmeltes, spätes Wort hilft nicht. Ein klares 'Meins!' im richtigen Moment verhindert, dass ihr beide zum selben Ball lauft — der teuerste Doppelfehler.\n\nDie mentale Seite geht aber tiefer als das Rufen. Im Doppel macht auch dein Partner Fehler, und wie du darauf reagierst, prägt das ganze Spiel. Ein Partner, der nach jedem Fehler den Kopf hängen lässt oder den anderen anklagt, zieht das Team nach unten. Ein Partner, der aufbaut und ruhig bleibt, hält es zusammen. Ihr gewinnt und verliert gemeinsam — diese Haltung ist die Grundlage jeder guten Partnerschaft auf dem Feld.\n\nEuer Doppel ist wie ein Ruderboot mit zwei Ruderern. Nur wenn ihr im Takt und in dieselbe Richtung zieht, läuft das Boot. Rudert einer verbittert gegen den anderen, dreht ihr euch im Kreis.",
+        "en": "No doubles works in silence. Communication with your partner is as important as every stroke — and it is at the same time the mental side of doubles, because it decides whether you grow together as a team or fall apart.\n\nCommunication runs on three levels. Before the serve you make short arrangements: who takes which area, which tactic you play. During the rally, short, clear calls help — 'Mine!', 'Yours!', 'Leave!' — which clarify in fractions of a second who takes the ball. Between points you give each other short feedback and coordinate anew.\n\nWhat's decisive is that the calls are short, loud, and unambiguous. A mumbled, late word doesn't help. A clear 'Mine!' at the right moment keeps you both from running to the same ball — the most expensive doubles mistake.\n\nBut the mental side goes deeper than calling. In doubles your partner makes mistakes too, and how you react to them shapes the whole match. A partner who hangs their head after every mistake or blames the other drags the team down. A partner who builds up and stays calm holds it together. You win and lose together — this attitude is the foundation of every good partnership on the court.\n\nYour doubles pair is like a rowing boat with two rowers. Only when you pull in time and in the same direction does the boat run. If one rows bitterly against the other, you turn in circles.",
+        "fr": "Aucun double ne fonctionne en silence. La communication avec ton partenaire est aussi importante que chaque frappe — et elle est en même temps le côté mental du double, car elle décide si vous grandissez ensemble en équipe ou si vous vous désunissez.\n\nLa communication se déroule à trois niveaux. Avant le service, vous vous mettez brièvement d'accord : qui prend quelle zone, quelle tactique vous jouez. Pendant l'échange, de brefs appels clairs aident — « À moi ! », « À toi ! », « Laisse ! » — qui règlent en une fraction de seconde qui prend la balle. Entre les points, vous vous donnez un bref retour et vous vous réaccordez.\n\nL'essentiel, c'est que les appels soient courts, forts et sans équivoque. Un mot marmonné et tardif n'aide pas. Un « À moi ! » clair au bon moment vous évite de courir tous les deux vers la même balle — la faute la plus coûteuse au double.\n\nMais le côté mental va plus loin que l'appel. Au double, ton partenaire commet des fautes lui aussi, et ta façon d'y réagir marque tout le match. Un partenaire qui baisse la tête après chaque faute ou qui accuse l'autre tire l'équipe vers le bas. Un partenaire qui encourage et reste calme la maintient soudée. Vous gagnez et perdez ensemble — cette attitude est le fondement de tout bon partenariat sur le terrain.\n\nVotre double est comme une barque à deux rameurs. Ce n'est qu'en ramant en cadence et dans la même direction que la barque avance. Si l'un rame avec amertume contre l'autre, vous tournez en rond.",
+        "pl": "Żaden debel nie działa w milczeniu. Porozumienie z partnerem jest tak samo ważne jak każde uderzenie — i jest zarazem mentalną stroną debla, bo decyduje, czy zrastacie się jako zespół, czy rozpadacie.\n\nPorozumienie biegnie na trzech poziomach. Przed serwisem robicie krótkie ustalenia: kto przejmuje który obszar, jaką taktykę gracie. W czasie wymiany pomagają krótkie, jasne okrzyki — „Moja!\", „Twoja!\", „Zostaw!\" —, które w ułamkach sekundy wyjaśniają, kto bierze piłkę. Między punktami dajecie sobie krótki feedback i dostrajacie się na nowo.\n\nDecydujące jest, by okrzyki były krótkie, głośne i jednoznaczne. Wymamrotane, spóźnione słowo nie pomaga. Jasne „Moja!\" we właściwym momencie zapobiega temu, byście oboje pobiegli do tej samej piłki — najdroższy błąd deblowy.\n\nStrona mentalna sięga jednak głębiej niż wołanie. W deblu także twój partner popełnia błędy, a to, jak na nie reagujesz, kształtuje całą grę. Partner, który po każdym błędzie zwiesza głowę albo obwinia drugiego, ciągnie zespół w dół. Partner, który podnosi i zostaje spokojny, trzyma go razem. Wygrywacie i przegrywacie wspólnie — ta postawa to podstawa każdego dobrego partnerstwa na polu.\n\nWasz debel jest jak łódź wioślarska z dwoma wioślarzami. Tylko gdy ciągniecie w rytmie i w tym samym kierunku, łódź płynie. Wiosłuje jeden zgorzkniale przeciw drugiemu — kręcicie się w kółko."
+      },
+      "reflexionsaufgabe": {
+        "de": "Sprich mit deinem Doppelpartner vor dem nächsten Spiel drei Dinge ab: klare Zurufe für die Mitte ('Meins!'/'Deins!'), wer im Zweifel den Mittelball nimmt, und dass ihr euch nach Fehlern gegenseitig aufbaut statt anzuklagen. Achte im Spiel darauf, ob ihr wirklich laut und früh genug ruft. Und beobachte dich selbst: Wie reagierst du, wenn dein Partner einen Fehler macht? Deine Reaktion prägt das Team mehr als der Fehler selbst.",
+        "en": "Before your next match, agree three things with your doubles partner: clear calls for the middle ('Mine!'/'Yours!'), who takes the middle ball in case of doubt, and that you build each other up after mistakes instead of blaming. In the match, watch whether you really call loudly and early enough. And observe yourself: how do you react when your partner makes a mistake? Your reaction shapes the team more than the mistake itself.",
+        "fr": "Avant le prochain match, mets-toi d'accord avec ton partenaire de double sur trois choses : des appels clairs pour le centre (« À moi ! » / « À toi ! »), qui prend la balle du centre en cas de doute, et le fait de vous encourager mutuellement après les fautes au lieu de vous accuser. En match, fais attention à savoir si vous criez vraiment assez fort et assez tôt. Et observe-toi toi-même : comment réagis-tu quand ton partenaire commet une faute ? Ta réaction marque l'équipe plus que la faute elle-même.",
+        "pl": "Ustal z partnerem deblowym przed następnym meczem trzy rzeczy: jasne okrzyki na środek („Moja!\"/„Twoja!\"), kto w razie wątpliwości bierze piłkę w środku, i że po błędach podnosicie się nawzajem zamiast obwiniać. Zwróć w grze uwagę, czy naprawdę wołacie dość głośno i wcześnie. I obserwuj samego siebie: jak reagujesz, gdy partner popełni błąd? Twoja reakcja kształtuje zespół bardziej niż sam błąd."
+      }
+    },
+    {
+      "id": "aufschlag_rueckschlag_doppel",
+      "grafik": [
+        "G-040"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel",
+        "aufschlag_taktisch"
+      ],
+      "voraussetzungen_lesart": "gemischt: doppel_als_eigenes_spiel (Rahmen); aufschlag_taktisch (stufenuebergreifend auf Beginner-Taktik, Einzel-Aufschlagtaktik als Basis)",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "aufschlag_rueckschlag_eroeffnung"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Aufschlag-/Rueckschlagtaktik im Doppel (Reihenfolge A1-B1-A2-B2, Zielwahl, dritter Ball) crossminton-eigen (ICO-Regeln) plus Doppel-Eroeffnungslogik aus Badminton.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Aufschlag und Rückschlag im Doppel",
+        "en": "Serve and return in doubles",
+        "fr": "Service et retour en double",
+        "pl": "Serwis i odbiór w grze podwójnej"
+      },
+      "erklaerteil": {
+        "de": "Der Aufschlag eröffnet auch im Doppel jeden Ballwechsel — aber hier ist er in ein festes System eingebettet und bietet dem Paar eigene taktische Möglichkeiten.\n\nDas Aufschlagrecht wandert im Doppel in einer festen Reihenfolge durch alle vier Spieler, und der Aufschläger ist immer der Rückraumspieler. Das heißt: Mit jedem Wechsel des Aufschlagrechts ordnen sich eure Rollen neu. Diese Reihenfolge zu kennen und im Kopf zu haben, gehört zur Doppel-Grundlage — wer durcheinanderkommt, riskiert Fehler schon vor dem ersten Schlag.\n\nTaktisch nutzt du den Aufschlag im Doppel ähnlich wie im Einzel, mit einem wichtigen Zusatz: Dein Partner vorn ist bereit, den Rückschlag zu verwerten. Ein guter Aufschlag zwingt den Gegner zu einer schwachen, hohen Antwort — und genau die fängt dein Angriffsspieler vorn ab. Der Aufschlag ist damit der erste Zug einer Zange, die sich beim dritten Ball schließt.\n\nBeim Rückschlag gilt das Gegenteil: Du willst vermeiden, dem Angriffsspieler des Gegners vorn eine leichte Beute zu liefern. Bring den Rückschlag kontrolliert zurück, möglichst tief oder in eine Lücke, statt ihn hoch und kurz an den lauernden Vollstrecker zu spielen.\n\nDer Aufschlag im Doppel ist wie das Anspiel beim Schach zu zweit — er eröffnet einen Plan, den dein Partner vollendet. Ein gedankenloser Aufschlag verschenkt diesen Vorteil, ein gezielter legt den Punkt für euer Paar auf.",
+        "en": "The serve opens every rally in doubles too — but here it is embedded in a fixed system and offers the pair its own tactical possibilities.\n\nThe right to serve travels through all four players in doubles in a fixed order, and the server is always the rear-court player. That means: with every change of the serving right, your roles reorder. Knowing this order and keeping it in your head is part of the doubles basics — whoever gets confused risks mistakes before the first stroke.\n\nTactically you use the serve in doubles much as in singles, with one important addition: your partner at the front is ready to exploit the return. A good serve forces the opponent into a weak, high answer — and that is exactly what your attacking player at the front intercepts. The serve is thus the first move of a pincer that closes on the third ball.\n\nOn the return the opposite applies: you want to avoid handing the opponent's attacking player at the front an easy prey. Bring the return back under control, as deep as possible or into a gap, instead of playing it high and short to the lurking finisher.\n\nThe serve in doubles is like the opening move in a chess game you play as a pair — it opens a plan your partner completes. A thoughtless serve gives away this advantage; a targeted one sets up the point for your pair.",
+        "fr": "Le service ouvre aussi chaque échange au double — mais ici, il est intégré dans un système fixe et offre à la paire ses propres possibilités tactiques.\n\nLe droit de service passe au double dans un ordre fixe à travers les quatre joueurs, et le serveur est toujours le joueur de fond. Cela signifie qu'à chaque changement du droit de service, vos rôles se réorganisent. Connaître cet ordre et l'avoir en tête fait partie des bases du double — qui s'embrouille risque des fautes avant même la première frappe.\n\nTactiquement, tu utilises le service au double à peu près comme en simple, avec un ajout important : ton partenaire à l'avant est prêt à exploiter le retour. Un bon service force l'adversaire à une réponse faible et haute — et c'est justement celle-là que ton joueur d'attaque intercepte à l'avant. Le service est ainsi le premier coup d'une tenaille qui se referme à la troisième balle.\n\nAu retour, c'est l'inverse : tu veux éviter d'offrir une proie facile au joueur d'attaque adverse à l'avant. Ramène le retour de façon contrôlée, aussi profond que possible ou dans une brèche, au lieu de le jouer haut et court vers le finisseur à l'affût.\n\nLe service au double, c'est comme le coup d'ouverture d'une partie d'échecs jouée à deux — il ouvre un plan que ton partenaire achève. Un service irréfléchi gaspille cet avantage ; un service ciblé prépare le point pour votre paire.",
+        "pl": "Serwis otwiera także w deblu każdą wymianę — ale tutaj jest osadzony w stałym systemie i oferuje parze własne możliwości taktyczne.\n\nPrawo serwisu wędruje w deblu w stałej kolejności przez wszystkich czterech graczy, a serwującym jest zawsze gracz tylny. To znaczy: z każdą zmianą prawa serwisu wasze role układają się na nowo. Znajomość tej kolejności i trzymanie jej w głowie należy do podstaw debla — kto się pogubi, ryzykuje błędy jeszcze przed pierwszym uderzeniem.\n\nTaktycznie wykorzystujesz serwis w deblu podobnie jak w singlu, z jednym ważnym dodatkiem: twój partner z przodu jest gotów wykorzystać odbiór. Dobry serwis zmusza przeciwnika do słabej, wysokiej odpowiedzi — a właśnie ją przechwytuje twój gracz atakujący z przodu. Serwis jest tym samym pierwszym ruchem obcęgów, które zamykają się przy trzeciej piłce.\n\nPrzy odbiorze obowiązuje odwrotność: chcesz uniknąć dostarczenia graczowi atakującemu przeciwnika z przodu łatwego łupu. Odeślij odbiór kontrolowanie, w miarę możliwości głęboko lub w lukę, zamiast grać go wysoko i krótko do czyhającego egzekutora.\n\nSerwis w deblu jest jak zagranie otwierające w szachach we dwoje — otwiera plan, który dopełnia twój partner. Bezmyślny serwis marnuje tę przewagę, celowany zakłada punkt dla waszej pary."
+      },
+      "reflexionsaufgabe": {
+        "de": "Präge dir mit deinem Partner die Aufschlagreihenfolge so ein, dass ihr sie im Spiel sicher beherrscht. Überlegt euch dann eine einfache Aufschlagtaktik: Wohin serviert der Rückraumspieler, damit der Angriffsspieler vorn den schwachen Rückschlag abfangen kann? Und beim Rückschlag: Wie vermeidet ihr, dem gegnerischen Angriffsspieler einen leichten Ball zu liefern? Beobachtet im Spiel, ob euer Aufschlag den dritten Ball tatsächlich vorbereitet.",
+        "en": "Memorize the serving order with your partner so that you have it down securely in the match. Then think up a simple serving tactic: where does the rear-court player serve so that the attacking player at the front can intercept the weak return? And on the return: how do you avoid handing the opposing attacking player an easy ball? In the match, watch whether your serve really sets up the third ball.",
+        "fr": "Mémorise l'ordre de service avec ton partenaire de façon à le maîtriser sûrement en match. Réfléchissez ensuite à une tactique de service simple : où le joueur de fond sert-il pour que le joueur d'attaque à l'avant puisse intercepter le retour faible ? Et au retour : comment évitez-vous d'offrir une balle facile au joueur d'attaque adverse ? Observez en match si votre service prépare réellement la troisième balle.",
+        "pl": "Wbij sobie z partnerem kolejność serwisu tak, byście pewnie opanowali ją w grze. Obmyślcie potem prostą taktykę serwisu: dokąd serwuje gracz tylny, by gracz atakujący z przodu mógł przechwycić słabe odbicie? A przy odbiorze: jak unikacie dostarczenia graczowi atakującemu przeciwnika łatwej piłki? Obserwujcie w grze, czy wasz serwis faktycznie przygotowuje trzecią piłkę."
+      }
+    },
+    {
+      "id": "das_umschalten_im_doppel",
+      "grafik": [
+        "G-041"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "angriff_im_paar",
+        "verteidigung_im_paar"
+      ],
+      "voraussetzungen_lesart": "didaktisch: das Umschalten verbindet die zuvor gelernten Angriffs- und Verteidigungsrollen im Paar",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Umschalten Angriff/Verteidigung im Paar; im Crossminton durch feste, aufschlaggebundene Rollen und Positionsregel gepraegt (ICO/DCV-Regeln), anders als die fliessende Badminton-Formationsrotation.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Rollen kippen ungeordnet, beide unklar' + Korrekturansage",
+      "anzeigetitel": {
+        "de": "Das Umschalten im Doppel",
+        "en": "Switching in doubles",
+        "fr": "La transition en double",
+        "pl": "Przełączanie w grze podwójnej"
+      },
+      "erklaerteil": {
+        "de": "Der Ballwechsel im Doppel wechselt ständig zwischen Angriff und Verteidigung — und wie ihr als Paar zwischen diesen Zuständen umschaltet, entscheidet, wer die Kontrolle behält. Dieser Baustein bringt die beiden Rollen aus den vorigen Bausteinen zusammen.\n\nDer Umschaltmoment ist im Doppel ein gemeinsamer. Wenn der Gegner unter euren Druck einen schwachen Ball spielt, müsst ihr beide gleichzeitig erkennen: Jetzt greifen wir an. Wenn umgekehrt der Gegner in den Angriff kommt, müsst ihr beide zugleich in die Verteidigung finden. Erkennt nur einer den Wechsel, entsteht genau die Lücke, die den Punkt kostet.\n\nIm Crossminton hat dieses Umschalten eine Besonderheit. Eure Rollen sind an den Aufschlag gebunden und durch die Positionsregel geformt — der Angriffsspieler bleibt vorn, der Rückraumspieler hinten, ihre Fußstellung zueinander ist im Treffmoment vorgegeben. Das Umschalten läuft deshalb weniger über einen freien Positionstausch als über die abgestimmte gemeinsame Bewegung und die klare Verständigung: Ihr lest die Lage zusammen und reagiert zusammen.\n\nDeshalb sind die beiden vorigen Fäden hier entscheidend: die Bewegung als Einheit, damit ihr gemeinsam die Position findet, und die Verständigung, damit ihr den Umschaltmoment zusammen ausruft. Ein kurzer Ruf im richtigen Moment — 'Angriff!' oder 'zurück!' — synchronisiert euch.\n\nEuer Umschalten ist wie das gemeinsame Wenden eines langen Bootes. Nur wenn beide zur gleichen Zeit in dieselbe Richtung steuern, dreht das Boot sauber. Zieht einer noch geradeaus, während der andere schon wendet, gerät alles ins Schlingern.",
+        "en": "The rally in doubles constantly switches between attack and defense — and how you switch as a pair between these states decides who keeps control. This module brings the two roles from the previous modules together.\n\nThe switching moment in doubles is a shared one. When the opponent plays a weak ball under your pressure, you both have to recognize at the same time: now we attack. When conversely the opponent comes into attack, you both have to find your way into defense at once. If only one recognizes the switch, exactly the gap opens that costs the point.\n\nIn Crossminton this switching has a peculiarity. Your roles are bound to the serve and shaped by the position rule — the attacking player stays at the front, the rear-court player at the back, their foot positioning relative to each other is fixed at the moment of contact. Switching therefore runs less through a free swap of positions than through coordinated joint movement and clear communication: you read the situation together and react together.\n\nThat's why the two previous threads are decisive here: moving as a unit, so that you find the position together, and communication, so that you call out the switching moment together. A short call at the right moment — 'Attack!' or 'Back!' — synchronizes you.\n\nYour switching is like turning a long boat together. Only when both steer in the same direction at the same time does the boat turn cleanly. If one still pulls straight ahead while the other is already turning, everything starts to lurch.",
+        "fr": "L'échange au double alterne sans cesse entre attaque et défense — et la façon dont vous basculez, en paire, entre ces états décide qui garde le contrôle. Ce module réunit les deux rôles des modules précédents.\n\nLe moment de transition est, au double, un moment commun. Quand l'adversaire, sous votre pression, joue une balle faible, vous devez tous les deux reconnaître en même temps : maintenant nous attaquons. Quand, à l'inverse, l'adversaire passe à l'attaque, vous devez tous les deux trouver la défense au même instant. Si un seul reconnaît le changement, c'est justement la brèche qui s'ouvre et coûte le point.\n\nAu Crossminton, cette transition a une particularité. Vos rôles sont liés au service et façonnés par la règle de position — le joueur d'attaque reste à l'avant, le joueur de fond à l'arrière, et au moment de l'impact leur position des pieds l'un par rapport à l'autre est imposée. La transition passe donc moins par un échange libre de positions que par le déplacement commun coordonné et la communication claire : vous lisez la situation ensemble et réagissez ensemble.\n\nC'est pourquoi les deux fils précédents sont ici décisifs : le déplacement comme unité, pour trouver la position ensemble, et la communication, pour crier le moment de transition ensemble. Un bref appel au bon moment — « Attaque ! » ou « Défense ! » — vous synchronise.\n\nVotre transition, c'est comme faire virer ensemble une longue barque. Ce n'est que lorsque les deux dirigent dans la même direction au même moment que la barque tourne proprement. Si l'un tire encore tout droit pendant que l'autre vire déjà, tout se met à tanguer.",
+        "pl": "Wymiana w deblu zmienia się nieustannie między atakiem a obroną — a to, jak jako para przełączacie się między tymi stanami, decyduje, kto zachowa kontrolę. Ten moduł łączy obie role z poprzednich modułów.\n\nMoment przełączenia jest w deblu wspólny. Gdy przeciwnik pod waszą presją zagra słabą piłkę, musicie oboje jednocześnie rozpoznać: teraz atakujemy. Gdy odwrotnie przeciwnik wchodzi do ataku, musicie oboje zarazem znaleźć się w obronie. Rozpozna zmianę tylko jeden — powstaje właśnie ta luka, która kosztuje punkt.\n\nW crossmintonie to przełączanie ma pewną osobliwość. Wasze role są związane z serwisem i uformowane regułą pozycji — gracz atakujący zostaje z przodu, gracz tylny z tyłu, ich ustawienie stóp względem siebie jest w chwili trafienia narzucone. Przełączanie biegnie dlatego mniej przez swobodną zamianę pozycji, a bardziej przez zgrany wspólny ruch i jasne porozumienie: czytacie sytuację razem i reagujecie razem.\n\nDlatego dwie poprzednie nici są tu decydujące: ruch jako jedność, byście wspólnie znaleźli pozycję, i porozumienie, byście moment przełączenia wywołali razem. Krótki okrzyk we właściwym momencie — „Atak!\" albo „Wracaj!\" — synchronizuje was.\n\nWasze przełączanie jest jak wspólne zawracanie długiej łodzi. Tylko gdy oboje w tym samym czasie sterują w tym samym kierunku, łódź obraca się czysto. Ciągnie jeden jeszcze prosto, gdy drugi już zawraca — wszystko zaczyna się ślizgać."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachtet in eurem nächsten Doppel die Umschaltmomente: Erkennt ihr sie gemeinsam, oder reagiert oft nur einer? Vereinbart einen kurzen Ruf für den Wechsel — etwa 'Angriff!', wenn der Gegner schwach zurückspielt, und 'zurück!', wenn ihr in die Verteidigung müsst. Achtet darauf, ob ihr durch das gemeinsame Ausrufen schneller und geschlossener umschaltet.",
+        "en": "In your next doubles match, watch the switching moments: do you recognize them together, or does often only one of you react? Agree on a short call for the switch — such as 'Attack!' when the opponent plays back weakly, and 'Back!' when you have to go into defense. Watch whether the joint calling makes you switch faster and more as a unit.",
+        "fr": "Dans votre prochain double, observez les moments de transition : les reconnaissez-vous ensemble, ou souvent un seul réagit-il ? Convenez d'un bref appel pour le changement — par exemple « Attaque ! » quand l'adversaire renvoie faiblement, et « Défense ! » quand vous devez passer en défense. Faites attention à savoir si le fait de crier ensemble vous fait basculer plus vite et plus soudés.",
+        "pl": "Obserwujcie w swoim następnym deblu momenty przełączenia: rozpoznajecie je wspólnie, czy często reaguje tylko jeden? Umówcie się na krótki okrzyk na zmianę — na przykład „Atak!\", gdy przeciwnik odgrywa słabo, i „Wracaj!\", gdy musicie do obrony. Zwróćcie uwagę, czy przez wspólne wywoływanie przełączacie się szybciej i bardziej zwarcie."
+      }
+    }
+  ],
+  "delta_bausteine": [
+    {
+      "id": "das_umschalten_im_doppel_delta_bad",
+      "typ": "delta",
+      "domaene": "taktik",
+      "spielform": "doppel",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "basis_baustein": "das_umschalten_im_doppel",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": [
+        "das_umschalten_im_doppel"
+      ],
+      "delta_buendelung": [
+        "doppel_grundlagen_delta_bad"
+      ],
+      "delta_buendelung_hinweis": "Verweist auf das Grundlagen-Doppel-Delta (feste Rollen statt fliessender Rotation) als weiche Voraussetzung. Fuehrender Punkt hier: das Umschalten laeuft nicht ueber Formationswechsel.",
+      "spielziele": [
+        "doppel_spezifische_loesungen"
+      ],
+      "transfer_herkunft": [
+        "BAD"
+      ],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "anzeigetitel": {
+        "de": "Das Umschalten im Doppel — für Umsteiger aus dem Badminton",
+        "en": "Switching in doubles — for switchers from badminton",
+        "fr": "La transition en double — pour les joueurs venant du badminton",
+        "pl": "Przełączanie w grze podwójnej — dla graczy przechodzących z badmintona"
+      },
+      "erklaerteil": {
+        "de": "Das Umschalten zwischen Angriff und Verteidigung kennst du aus dem Badminton-Doppel gut — aber dort bedeutet es etwas anderes als hier, und genau das ist die Umstellung.\n\nIm Badminton-Doppel schaltest du um, indem ihr die Formation wechselt: aus der Front-Hinten-Aufstellung im Angriff in die Seite-an-Seite-Aufstellung in der Verteidigung, fließend und je nachdem, wer gerade schlägt. Dieses ständige Rotieren zwischen zwei Formationen sitzt bei dir tief.\n\nIm Crossminton gibt es diese fließende Formationsrotation nicht. Eure Rollen sind an den Aufschlag gebunden und durch die Positionsregel geformt — der Angriffsspieler bleibt vorn, der Rückraumspieler hinten, und im Treffmoment ist ihre Fußstellung zueinander vorgegeben. Ihr schaltet innerhalb einer festeren Struktur um, statt frei zwischen zwei Formationen zu wechseln: über abgestimmte Bewegung und gemeinsame Verständigung, nicht über einen freien Positionstausch.\n\nStell dein Umschalt-Denken also um: weg vom reflexhaften Formationswechsel, hin zum gemeinsamen Lesen und Reagieren innerhalb fester, aufschlaggebundener Rollen. Die Verständigung ersetzt hier einen Teil dessen, was im Badminton die Rotation leistet.\n\nEin kleiner Test: Ertappst du dich dabei, mit deinem Partner reflexhaft in die Seite-an-Seite-Verteidigung zu rotieren oder frei die Positionen zu tauschen? Dann trägt dich noch das Badminton-Doppel. Ziel ist das gemeinsame Umschalten innerhalb der festen crossminton-eigenen Rollen.",
+        "en": "You know switching between attack and defense well from badminton doubles — but there it means something different than here, and that is exactly the adjustment.\n\nIn badminton doubles you switch by changing formation: from the front-back setup in attack to the side-by-side setup in defense, fluidly and depending on who is hitting. This constant rotation between two formations sits deep in you.\n\nIn Crossminton this fluid formation rotation doesn't exist. Your roles are bound to the serve and shaped by the position rule — the attacking player stays at the front, the rear-court player at the back, and at the moment of contact their foot positioning relative to each other is fixed. You switch within a firmer structure, instead of moving freely between two formations: through coordinated movement and shared communication, not through a free swap of positions.\n\nSo adjust your switching mindset: away from the reflexive formation change, toward reading and reacting together within fixed, serve-bound roles. Communication here replaces part of what rotation does in badminton.\n\nA small test: do you catch yourself reflexively rotating with your partner into the side-by-side defense or freely swapping positions? Then badminton doubles is still carrying you. The goal is switching together within the fixed, Crossminton-specific roles.",
+        "fr": "La transition entre attaque et défense, tu la connais bien du double de badminton — mais là-bas, elle signifie autre chose qu'ici, et c'est justement là l'adaptation.\n\nAu double de badminton, tu bascules en changeant de formation : de la disposition avant-arrière à l'attaque à la disposition côte à côte en défense, de façon fluide et selon qui frappe. Cette rotation permanente entre deux formations est ancrée profondément en toi.\n\nAu Crossminton, cette rotation fluide de formation n'existe pas. Vos rôles sont liés au service et façonnés par la règle de position — le joueur d'attaque reste à l'avant, le joueur de fond à l'arrière, et au moment de l'impact leur position des pieds l'un par rapport à l'autre est imposée. Vous basculez à l'intérieur d'une structure plus fixe, au lieu de passer librement entre deux formations : par le déplacement coordonné et la communication commune, non par un échange libre de positions.\n\nReconfigure donc ta façon de penser la transition : loin du changement de formation réflexe, vers la lecture et la réaction communes à l'intérieur de rôles fixes, liés au service. La communication remplace ici une partie de ce que la rotation assure au badminton.\n\nUn petit test : te surprends-tu à basculer par réflexe, avec ton partenaire, dans la défense côte à côte ou à échanger librement les positions ? Alors le double de badminton te porte encore. L'objectif, c'est la transition commune à l'intérieur des rôles fixes propres au Crossminton.",
+        "pl": "Przełączanie między atakiem a obroną znasz dobrze z debla badmintonowego — ale tam znaczy ono coś innego niż tutaj, i właśnie to jest przestawka.\n\nW deblu badmintonowym przełączasz się, zmieniając formację: z ustawienia przód-tył w ataku w ustawienie bok w bok w obronie, płynnie i zależnie od tego, kto akurat uderza. To ciągłe rotowanie między dwiema formacjami siedzi w tobie głęboko.\n\nW crossmintonie tej płynnej rotacji formacji nie ma. Wasze role są związane z serwisem i uformowane regułą pozycji — gracz atakujący zostaje z przodu, gracz tylny z tyłu, a w chwili trafienia ich ustawienie stóp względem siebie jest narzucone. Przełączacie się wewnątrz sztywniejszej struktury, zamiast swobodnie zmieniać między dwiema formacjami: przez zgrany ruch i wspólne porozumienie, nie przez swobodną zamianę pozycji.\n\nPrzestaw więc swoje myślenie o przełączaniu: precz od odruchowej zmiany formacji, ku wspólnemu czytaniu i reagowaniu wewnątrz stałych, związanych z serwisem ról. Porozumienie zastępuje tu część tego, co w badmintonie robi rotacja.\n\nMały test: łapiesz się z partnerem na odruchowym rotowaniu w obronę bok w bok albo na swobodnej zamianie pozycji? To znaczy, że wciąż niesie cię debel badmintonowy. Celem jest wspólne przełączanie wewnątrz stałych, crossmintonowi własnych ról."
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Soleil et éblouissement : un joueur protège ses yeux contre un soleil bas tout en suivant un speeder haut ; soleil et rayons éblouissants dans un coin, position de tête adaptée.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .sonne{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
+    .sonnef{fill:var(--primaer,#38a4f1)}
+    .blend{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-linecap:round;opacity:.6}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- tiefe Sonne oben rechts + Blendstrahlen -->
+  <circle class="sonnef" cx="256" cy="60" r="16"/>
+  <g class="sonne">
+    <line x1="256" y1="30" x2="256" y2="20"/>
+    <line x1="224" y1="60" x2="214" y2="60"/>
+    <line x1="234" y1="38" x2="227" y2="31"/>
+    <line x1="234" y1="82" x2="227" y2="89"/>
+  </g>
+  <g class="blend">
+    <line x1="240" y1="72" x2="150" y2="120"/>
+    <line x1="244" y1="84" x2="160" y2="140"/>
+    <line x1="248" y1="96" x2="176" y2="150"/>
+  </g>
+  <!-- hoher Speeder -->
+  <circle class="speeder" cx="150" cy="112" r="6"/>
+  <!-- Spieler schirmt die Augen ab -->
+  <circle class="kopf" cx="104" cy="112" r="14"/>
+  <path class="fig" d="M104,126 L106,180"/>
+  <!-- Arm zur Stirn (abschirmen) -->
+  <path class="fig" d="M104,132 L122,116 L118,100"/>
+  <!-- freier Arm -->
+  <path class="fig" d="M104,138 L86,160"/>
+  <path class="fig" d="M106,180 L92,214 L84,244"/>
+  <path class="fig" d="M106,180 L124,212 L134,242"/>
+  <line class="boden" x1="72" y1="246" x2="170" y2="246"/>
+  <text class="st" x="150" y="274">contre le soleil · protéger les yeux</text>
+</svg>

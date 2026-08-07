@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Funplay: dwóch graczy utrzymuje speedera w grze kooperacyjnie w średniej odległości — bez kortu i bez liczenia, tor lotu biegnie płasko w obu kierunkach.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schlaeger{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6;stroke-linecap:round}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
+    .pfeil{fill:var(--primaer,#38a4f1)}
+    .speeder{fill:var(--primaer-tief,#1568ad)}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:5 6;opacity:.7}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+
+  <!-- Kein Court: nur eine angedeutete Bodenlinie, bewusst ohne Feldrechteck -->
+  <line class="boden" x1="22" y1="248" x2="278" y2="248"/>
+
+  <!-- linke Figur, dem Gegenüber zugewandt -->
+  <circle class="kopf" cx="62" cy="62" r="14"/>
+  <path class="fig" d="M62,78 L62,160"/>
+  <path class="fig" d="M62,160 L46,246"/>
+  <path class="fig" d="M62,160 L80,246"/>
+  <path class="fig" d="M62,104 L96,126"/>
+  <path class="schlaeger" d="M96,126 L120,116"/>
+  <ellipse class="schlaeger" cx="128" cy="112" rx="10" ry="8"/>
+
+  <!-- rechte Figur, gespiegelt -->
+  <circle class="kopf" cx="238" cy="62" r="14"/>
+  <path class="fig" d="M238,78 L238,160"/>
+  <path class="fig" d="M238,160 L254,246"/>
+  <path class="fig" d="M238,160 L220,246"/>
+  <path class="fig" d="M238,104 L204,126"/>
+  <path class="schlaeger" d="M204,126 L180,116"/>
+  <ellipse class="schlaeger" cx="172" cy="112" rx="10" ry="8"/>
+
+  <!-- flache Bahn in beide Richtungen: kooperatives Halten, kein Gegeneinander -->
+  <path class="bahn" d="M138,100 Q150,74 162,100"/>
+  <polygon class="pfeil" points="162,100 153,93 165,90"/>
+  <path class="bahn" d="M162,130 Q150,156 138,130"/>
+  <polygon class="pfeil" points="138,130 147,137 135,140"/>
+  <circle class="speeder" cx="150" cy="80" r="5"/>
+
+  <text class="st" x="150" y="284">utrzymać razem · kontrola przed siłą</text>
+</svg>

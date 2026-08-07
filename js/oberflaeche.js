@@ -1,0 +1,485 @@
+// Kleine Oberflächen-Helfer, die alle Ansichten teilen: Escaping, Absätze,
+// Fortschrittsbalken, Status-Punkte, Überlagerungen und das Neu-Rendern-Signal.
+
+import { label, sprache, t } from './i18n.js';
+
+export function esc(wert) {
+  return String(wert ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+// Nur echte externe Ziele (http/https/mailto) als Absprung zulassen — nie javascript:/data:.
+export function externesZiel(ziel) {
+  return /^(https?:|mailto:)/i.test(String(ziel ?? '').trim()) ? ziel : null;
+}
+
+// Erklärtexte trennen Absätze mit Leerzeilen.
+export function absaetze(text) {
+  return String(text ?? '')
+    .split(/\n\s*\n/)
+    .map((absatz) => `<p>${esc(absatz.trim())}</p>`)
+    .join('');
+}
+
+export function balkenHtml(projektion, beschriftung = '') {
+  const prozent = Math.round(projektion.quote * 100);
+  const textZeile = beschriftung || t('bausteine_erledigt', { a: projektion.absolviert, b: projektion.gesamt });
+  return `
+    <div class="fortschritt-zeile">
+      <div class="balken" role="progressbar" aria-valuenow="${prozent}" aria-valuemin="0" aria-valuemax="100" aria-label="${esc(textZeile)}">
+        <div class="balken-fuellung" style="width:${prozent}%"></div>
+      </div>
+      <span class="leise">${esc(textZeile)}</span>
+    </div>`;
+}
+
+// Fortschritts-Ring (SVG-Donut) für Kennzahlen, bei denen der Anteil im
+// Vordergrund steht (Profil-Gesamt, Kompetenz-Karte). Rein darstellend über
+// stroke-dasharray; die Zugänglichkeit trägt role=progressbar + aria-Werte.
+export function ringHtml(projektion, { groesse = 76, staerke = 8, beschriftung = '' } = {}) {
+  const prozent = Math.round(projektion.quote * 100);
+  const r = (groesse - staerke) / 2;
+  const umfang = 2 * Math.PI * r;
+  const gefuellt = (prozent / 100) * umfang;
+  const mitte = groesse / 2;
+  const textZeile = beschriftung || t('bausteine_erledigt', { a: projektion.absolviert, b: projektion.gesamt });
+  return `
+    <div class="ring" role="progressbar" aria-valuenow="${prozent}" aria-valuemin="0" aria-valuemax="100" aria-label="${esc(textZeile)}">
+      <svg width="${groesse}" height="${groesse}" viewBox="0 0 ${groesse} ${groesse}" aria-hidden="true">
+        <circle class="ring-spur" cx="${mitte}" cy="${mitte}" r="${r}" fill="none" stroke-width="${staerke}"></circle>
+        <circle class="ring-wert" cx="${mitte}" cy="${mitte}" r="${r}" fill="none" stroke-width="${staerke}" stroke-linecap="round"
+          stroke-dasharray="${gefuellt.toFixed(2)} ${(umfang - gefuellt).toFixed(2)}"></circle>
+      </svg>
+      <span class="ring-text">${prozent}<span class="ring-prozent">%</span></span>
+    </div>`;
+}
+
+// Leerer Zustand mit ruhigem Icon statt nacktem Satz. Die Zwei-Ebenen-Logik
+// sperrt nie — das sind echte Leermengen (z. B. ein Faktor ohne Beleg auf der
+// Stufe), kein Fehlerfall. `aktionHtml` ist optionales, bereits gebautes HTML
+// (ein CTA-Knopf/-Link), damit ein Leer-Zustand nicht in eine Sackgasse führt,
+// sondern einen Ausweg anbietet.
+export function leerHtml(nachricht, icon = 'fa-compass', aktionHtml = '') {
+  return `
+    <div class="karte leer-zustand">
+      <i class="fa-solid ${icon}" aria-hidden="true"></i>
+      <p class="leise">${esc(nachricht)}</p>
+      ${aktionHtml ? `<div class="knopf-zeile leer-aktion">${aktionHtml}</div>` : ''}
+    </div>`;
+}
+
+// Häufiger Ausweg aus einem Leer-Zustand: „Kapitel entdecken" führt in den
+// Themenpfad, „Suche" ins Suchfeld. Gibt fertiges Knopf-HTML für leerHtml zurück.
+export function entdeckenAktion() {
+  return `
+    <a class="knopf knopf-primaer" href="#/pfad/themen">${esc(t('kapitel_entdecken'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    <a class="knopf knopf-leise" href="#/suche">${esc(t('nav_suche'))}</a>`;
+}
+
+// Marken-Hero im Layout des OG-Bilds (Speeder links, Text rechts, Akzentleiste
+// unten). Groß auf der Startseite; die obersten Landingpages nutzen die kleine
+// Variante heroKlein(icon, titel, untertitel). Alle Farben aus Tokens —
+// hell/dunkel kippen automatisch mit.
+// extra ist optionales Inline-HTML unter dem Hero-Text (Startseite: die Einstiegs-CTAs).
+export function markeHeroGross(extra = '') {
+  // Die Themen-Schlagworte stehen als Chip-Reihe oben rechts im Hero (statt als
+  // Fließtext unter dem Untertitel). Der „ · "-getrennte Label-String wird in
+  // einzelne Chips zerlegt.
+  const chips = String(t('hero_themen'))
+    .split(/\s*·\s*/)
+    .filter(Boolean)
+    .map((wort) => `<span class="chip">${esc(wort)}</span>`)
+    .join('');
+  return `
+    <section class="marke-hero">
+      <img class="marke-hero-bild" src="assets/images/speeder.svg" alt="" width="96" height="96">
+      <div class="marke-hero-text">
+        ${chips ? `<div class="marke-hero-chips">${chips}</div>` : ''}
+        <h1>${esc(t('app_titel'))}</h1>
+        <p class="marke-hero-untertitel">${esc(t('hero_untertitel'))}</p>
+        ${extra}
+      </div>
+    </section>`;
+}
+
+// hue (z. B. 'pf-teal') färbt Icon-Medaille + eine leichte Tönung des Hero passend
+// zur Startseiten-Kachel des Pfades; meta ist optionales Inline-HTML (z. B. ein
+// Stufen-Chip) neben dem Titel. Ohne hue bleibt der Hero neutral-blau wie bisher.
+export function heroKlein(icon, titel, untertitel = '', hue = '', meta = '') {
+  const klassen = `marke-hero klein${hue ? ` hue ${hue}` : ''}`;
+  return `
+    <section class="${klassen}">
+      <span class="marke-hero-icon"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>${esc(titel)}${meta}</h1>
+        ${untertitel ? `<p class="marke-hero-untertitel">${esc(untertitel)}</p>` : ''}
+      </div>
+    </section>`;
+}
+
+export function statusPunktHtml(station) {
+  const { erklaerteil, uebungsteil, reflexionsaufgabe, absolviert } = station.status;
+  let klasse = 'offen';
+  let beschriftung = t('status_offen');
+  let glyph = '';
+  if (absolviert) {
+    klasse = 'voll';
+    beschriftung = t('status_absolviert');
+    glyph = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+  } else if (erklaerteil === 'erledigt' || uebungsteil === 'erledigt' || reflexionsaufgabe === 'erledigt') {
+    klasse = 'teil';
+    beschriftung = t('status_teilweise');
+    glyph = '<i class="fa-solid fa-minus" aria-hidden="true"></i>';
+  }
+  // Form/Icon zusätzlich zur Ampelfarbe — nicht allein über Farbe unterscheidbar (Farbfehlsicht).
+  return `<span class="status-punkt status-${klasse}" role="img" aria-label="${esc(beschriftung)}" title="${esc(beschriftung)}">${glyph}</span>`;
+}
+
+let vorherigerFokus = null;
+
+function fokussierbare(wurzel) {
+  return [...wurzel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+}
+
+// Tastatur im Dialog: Esc schließt, Tab bleibt im Dialog gefangen (Fokusfalle).
+function dialogTasten(ereignis) {
+  const dialog = document.querySelector('#dialog-wurzel .ueberlagerung');
+  if (!dialog) return;
+  if (ereignis.key === 'Escape') { schliesseUeberlagerung(); return; }
+  if (ereignis.key !== 'Tab') return;
+  const ziele = fokussierbare(dialog);
+  if (ziele.length === 0) { ereignis.preventDefault(); return; }
+  const erst = ziele[0];
+  const letzt = ziele[ziele.length - 1];
+  if (ereignis.shiftKey && document.activeElement === erst) { letzt.focus(); ereignis.preventDefault(); }
+  else if (!ereignis.shiftKey && document.activeElement === letzt) { erst.focus(); ereignis.preventDefault(); }
+}
+
+export function zeigeUeberlagerung(innenHtml) {
+  const wurzel = document.getElementById('dialog-wurzel');
+  vorherigerFokus = document.activeElement;
+  wurzel.innerHTML = `<div class="ueberlagerung" role="dialog" aria-modal="true" tabindex="-1">${innenHtml}</div>`;
+  const dialog = wurzel.querySelector('.ueberlagerung');
+  const titel = dialog.querySelector('h1, h2, h3');
+  if (titel) { titel.id = titel.id || 'dialog-titel'; dialog.setAttribute('aria-labelledby', titel.id); }
+  document.addEventListener('keydown', dialogTasten, true);
+  (dialog.querySelector('[data-schliessen]') || dialog).focus();
+}
+
+export function schliesseUeberlagerung() {
+  const wurzel = document.getElementById('dialog-wurzel');
+  document.removeEventListener('keydown', dialogTasten, true);
+  if (wurzel) wurzel.innerHTML = '';
+  if (vorherigerFokus && typeof vorherigerFokus.focus === 'function') vorherigerFokus.focus();
+  vorherigerFokus = null;
+}
+
+// In eine aria-live-Region ansagen (Screenreader-Rückmeldung, visuell versteckt).
+export function melde(mitteilung) {
+  const region = document.getElementById('ansage');
+  if (!region) return;
+  region.textContent = '';
+  requestAnimationFrame(() => { region.textContent = String(mitteilung ?? ''); });
+}
+
+// Kurze, sich selbst schließende Rückmeldung (z. B. „Link kopiert", „Gemerkt").
+// Visuell unten eingeblendet; die role=status-Region (index.html) sagt sie auch
+// Screenreadern höflich an. Idempotent — ein laufender Timer wird zurückgesetzt.
+let toastZeitgeber = null;
+export function zeigeToast(nachricht) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = String(nachricht ?? '');
+  toast.classList.add('toast-sichtbar');
+  if (toastZeitgeber) clearTimeout(toastZeitgeber);
+  toastZeitgeber = setTimeout(() => toast.classList.remove('toast-sichtbar'), 2600);
+}
+
+// Einen Link teilen: bevorzugt die native Teilen-Auswahl (Web Share API, v. a.
+// mobil), sonst in die Zwischenablage kopieren und quittieren. Bricht die Person
+// die native Auswahl ab, passiert bewusst nichts. Fehlt auch die Zwischenablage
+// (unsicherer Kontext), wird der Link zum manuellen Kopieren angezeigt.
+export async function teileLink(url, titel = '') {
+  if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+    try {
+      await navigator.share({ title: titel || undefined, url });
+    } catch {
+      /* Abbruch/keine Freigabe — nichts weiter tun */
+    }
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    zeigeToast(t('link_kopiert'));
+  } catch {
+    zeigeUeberlagerung(`
+      <div class="teilen-karte">
+        <h2>${esc(t('teilen'))}</h2>
+        <p class="leise">${esc(t('link_manuell'))}</p>
+        <input class="teilen-feld" type="text" readonly value="${esc(url)}" aria-label="${esc(t('teilen'))}">
+        <button class="knopf knopf-primaer" data-schliessen>${esc(t('schliessen'))}</button>
+      </div>`);
+    const feld = document.querySelector('#dialog-wurzel .teilen-feld');
+    if (feld) { feld.focus(); feld.select(); }
+    document.querySelector('#dialog-wurzel [data-schliessen]')?.addEventListener('click', schliesseUeberlagerung);
+  }
+}
+
+// Sequenzabschluss-Gratifikation (Spez. 8.3): würdigend, aber zurückhaltend.
+export function zeigeMeilenstein(meilenstein) {
+  const istKompetenz = meilenstein.art === 'kompetenz';
+  const textZeile = istKompetenz
+    ? t('meilenstein_kompetenz', { pfad: `${t('pfad_kompetenz')} (${label('kompetenzstufe', meilenstein.stufe)})` })
+    : t('meilenstein_individual');
+  zeigeUeberlagerung(`
+    <div class="meilenstein-karte">
+      <p class="meilenstein-zeichen" aria-hidden="true"><i class="fa-solid fa-medal"></i></p>
+      <h2>${esc(t('meilenstein_titel'))}</h2>
+      <p>${esc(textZeile)}</p>
+      <p class="leise">${esc(t('meilenstein_weiter'))}</p>
+      <button class="knopf knopf-primaer" data-schliessen>${esc(t('weiter'))}</button>
+    </div>`);
+  document.querySelector('#dialog-wurzel [data-schliessen]').addEventListener('click', () => {
+    schliesseUeberlagerung();
+    neuRendern();
+  });
+}
+
+// Ansichten stoßen ein Neu-Rendern an, ohne app.js zu importieren (kein Zyklus).
+export function neuRendern() {
+  window.dispatchEvent(new CustomEvent('app:rendern'));
+}
+
+// Programmatisch navigieren (statt location.hash zu setzen — der Router läuft über
+// die History API). Läuft wie neuRendern() über ein Ereignis, damit die Ansichten
+// den Router nicht importieren müssen (js/app.js importiert sie ja bereits).
+// `ziel` in der gewohnten Schreibweise: '#/pfad/themen' oder '/pfad/themen'.
+export function geheZu(ziel) {
+  window.dispatchEvent(new CustomEvent('app:gehe-zu', { detail: { ziel } }));
+}
+
+// Thema (hell/dunkel/auto) auf das Wurzelelement anwenden. 'auto' entfernt die
+// Markierung und folgt dem OS (prefers-color-scheme); hell/dunkel erzwingen.
+// Hält die Browser-Leiste (theme-color) am effektiven Modus. Das Boot-Skript in
+// index.html macht dasselbe vor dem ersten Anstrich (kein Flackern); dies hier
+// ist der Laufzeit-Weg beim Umschalten im Profil.
+export function wendeThemaAn(thema) {
+  const wurzel = document.documentElement;
+  if (thema === 'hell' || thema === 'dunkel') wurzel.dataset.theme = thema;
+  else delete wurzel.dataset.theme;
+  const dunkel =
+    thema === 'dunkel' ||
+    (thema !== 'hell' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+  // Optionale Mithörer (z. B. der Feedback-Kommentator) folgen dem Thema.
+  window.dispatchEvent(new CustomEvent('app:thema', { detail: thema }));
+}
+
+// Sichtbare Baustein-Icons (Font Awesome, immer farbig): Körper, Hand, Schläger,
+// Wege. Neue Bausteine ohne Eintrag bekommen schlicht kein Icon — kein Fehlerfall.
+const BAUSTEIN_ICONS = {
+  grundposition: 'fa-person',
+  griff: 'fa-hand',
+  aufschlag: 'fa-baseball',
+  vorhand_drive: 'fa-table-tennis-paddle-ball',
+  rueckhand: 'fa-hand-back-fist',
+  beinarbeit: 'fa-shoe-prints',
+  // Taktik
+  spielziel_verstehen: 'fa-bullseye',
+  zentrale_position: 'fa-crosshairs',
+  laenge_tiefe: 'fa-ruler-horizontal',
+  rueckhand_des_gegners: 'fa-user-slash',
+  aufschlag_taktisch: 'fa-chess',
+  fehler_vermeiden: 'fa-shield-halved',
+  // Mentales
+  warum_der_kopf_mitspielt: 'fa-brain',
+  routine_vor_dem_aufschlag: 'fa-list-check',
+  ruhig_bleiben_wenn_es_eng_wird: 'fa-wind',
+  den_fehler_abhaken: 'fa-arrow-rotate-left',
+  bei_der_sache_bleiben: 'fa-eye',
+  // Athletik / Kondition
+  warum_athletik_dein_spiel_traegt: 'fa-heart-pulse',
+  richtig_aufwaermen: 'fa-fire',
+  beweglichkeit_und_schulter: 'fa-child-reaching',
+  schnelle_fuesse: 'fa-shoe-prints',
+  durchhalten: 'fa-gauge-high',
+  erholen: 'fa-bed',
+  // Fortgeschritten-Technik
+  handgelenk_peitsche: 'fa-bolt',
+  ueberkopf_clear: 'fa-arrow-up-long',
+  smash: 'fa-hammer',
+  kurzes_spiel_stopp: 'fa-feather',
+  schnitt_spin: 'fa-arrows-spin',
+  beinarbeit_system: 'fa-shoe-prints',
+  // Fortgeschritten-Taktik
+  umschalten: 'fa-right-left',
+  punkt_aufbauen: 'fa-layer-group',
+  smash_vorbereiten: 'fa-bomb',
+  gegner_lesen_muster: 'fa-magnifying-glass',
+  doppel_grundlagen: 'fa-users',
+  engen_satz_fuehren: 'fa-flag-checkered',
+  // Fortgeschritten-Mentales
+  vom_werkzeug_zum_system: 'fa-toolbox',
+  selbstgespraech_steuern: 'fa-comment-dots',
+  sich_das_spiel_vorstellen: 'fa-film',
+  momentum_lesen_und_drehen: 'fa-water',
+  ueber_das_match_stabil_bleiben: 'fa-anchor',
+  // Fortgeschritten-Athletik / Kondition
+  gezielt_trainieren: 'fa-chart-line',
+  explosivitaet: 'fa-rocket',
+  rumpfstabilitaet: 'fa-tree',
+  intervallausdauer: 'fa-stopwatch',
+  belastung_steuern_regenerieren: 'fa-scale-balanced',
+  // Doppel-Thema (Querschnitt über Domänen, spielform:doppel)
+  doppel_als_eigenes_spiel: 'fa-people-group',
+  angriff_im_paar: 'fa-hand-fist',
+  verteidigung_im_paar: 'fa-shield',
+  bewegung_als_einheit: 'fa-people-arrows',
+  verstaendigung_im_paar: 'fa-comments',
+  aufschlag_rueckschlag_doppel: 'fa-repeat',
+  das_umschalten_im_doppel: 'fa-rotate',
+  // Experte-Technik (Feinschliff, Täuschung) — herkunftsneutral
+  taeuschung: 'fa-chess',
+  frueh_nehmen: 'fa-bolt',
+  tempo_rhythmus_wechsel: 'fa-gauge-high',
+  sprung_smash: 'fa-hammer',
+  praezision_an_die_linien: 'fa-crosshairs',
+  konstanz_unter_hoechstdruck: 'fa-anchor',
+  // Experte-Taktik (Matchstrategie, Scouting) — herkunftsneutral
+  der_matchplan: 'fa-list-check',
+  gegner_typen_gegenrezepte: 'fa-magnifying-glass',
+  dem_gegner_aufzwingen: 'fa-hand-fist',
+  schwaeche_systematisch_angreifen: 'fa-bullseye',
+  matchverlauf_steuern: 'fa-water',
+  entscheidender_punkt: 'fa-flag-checkered',
+  // Trainer-Trainingsgestaltung (Vermittlung, Trainer-Ebene)
+  was_gutes_vermitteln_ausmacht: 'fa-lightbulb',
+  inhalt_zugaenglich_machen: 'fa-feather',
+  fehler_erkennen_korrigieren: 'fa-stethoscope',
+  uebungen_aufbauen: 'fa-layer-group',
+  gruppe_fuehren: 'fa-users',
+  // Doppel-Beginner (spielform:doppel, erstes Zusammenspiel)
+  erste_schritte_doppel: 'fa-handshake',
+  wer_nimmt_den_ball: 'fa-hand',
+  aufschlag_im_doppel_einfach: 'fa-baseball',
+  sich_absprechen: 'fa-comments',
+  einander_platz_lassen: 'fa-people-arrows',
+  // Doppel-Experte (Paar als System)
+  paar_als_system: 'fa-people-group',
+  gegnerisches_paar_lesen: 'fa-magnifying-glass',
+  partner_in_position_bringen: 'fa-compass',
+  nahtlos_umschalten: 'fa-right-left',
+  blindes_verstaendnis: 'fa-link',
+  // Experte-Mentales (Wettkampfzustand, Flow, Druck) — herkunftsneutral
+  optimaler_wettkampfzustand: 'fa-star',
+  in_den_flow_finden: 'fa-infinity',
+  druck_als_herausforderung: 'fa-mountain',
+  gelassen_bei_unfairness: 'fa-scale-balanced',
+  mentale_staerke_entwickeln: 'fa-seedling',
+  // Experte-Athletik / Kondition (Formaufbau, Reaktivkraft) — herkunftsneutral
+  form_ueber_die_saison: 'fa-chart-line',
+  reaktivkraft_bodenkontakt: 'fa-bolt',
+  bewegungsoekonomie: 'fa-feather',
+  antizipative_schnelligkeit: 'fa-forward',
+  langfristig_belastbar: 'fa-heart-pulse',
+  // Outdoor / Umgebung (umgebungs_baustein)
+  draussen_spielen: 'fa-tree',
+  wind_lesen_nutzen: 'fa-wind',
+  sonne_blendung: 'fa-sun',
+  naesse_sicherer_stand: 'fa-water',
+  hitze: 'fa-fire',
+  verschiedene_boeden: 'fa-layer-group',
+  // Spielmodi (Umgebungs-Varianten) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  spielarten_ueberblick: 'fa-compass',
+  snowminton: 'fa-mountain',
+  beachminton: 'fa-sun',
+  blackminton: 'fa-eye',
+  // Spielformen (typ modus_baustein) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  funplay: 'fa-handshake',
+  mehrfeld: 'fa-people-arrows',
+  // Ausrüstung (eigene Domäne) — bestehende Glyphen (FA-Subset), keine neuen Codepoints
+  deine_ausruestung: 'fa-toolbox',
+  der_speeder: 'fa-baseball',
+  der_schlaeger: 'fa-table-tennis-paddle-ball',
+  schuhe_finden: 'fa-shoe-prints',
+  funktionskleidung: 'fa-layer-group',
+  die_bespannung: 'fa-gauge-high',
+  griff_und_griffband: 'fa-hand',
+};
+
+export function bausteinIcon(bausteinId, klasse = '') {
+  const icon = BAUSTEIN_ICONS[bausteinId];
+  return icon ? `<i class="fa-solid ${icon} ${klasse}" aria-hidden="true"></i>` : '';
+}
+
+// ── Grafiken: PNG-Platzhalter mit optionalem Inline-SVG (theme-fähige Diagramme) ──
+// Diagramm-Grafiken (Feld, Positionen, Flugbahnen) liegen zusätzlich als SVG vor. Das
+// SVG liest die CI-Tokens (var(--tinte)/var(--primaer) …) und kippt daher mit dem Theme;
+// KI-Illustrationen bleiben PNG. Beide Dateien existieren stets — das PNG ist der sofort
+// sichtbare Fallback, das SVG die progressive Aufwertung nach dem Rendern.
+export const SVG_GRAFIKEN = new Set([
+  'G-001', 'G-002', 'G-003', 'G-004', 'G-005', 'G-006', 'G-007', 'G-008', 'G-009', 'G-010',
+  'G-011', 'G-012', 'G-013', 'G-014', 'G-015', 'G-016', 'G-017', 'G-018', 'G-019', 'G-020',
+  'G-021', 'G-022', 'G-023', 'G-024', 'G-025', 'G-026', 'G-027', 'G-028', 'G-029', 'G-030',
+  'G-031', 'G-032', 'G-033', 'G-034', 'G-035', 'G-036', 'G-037', 'G-038', 'G-039', 'G-040',
+  'G-041', 'G-042', 'G-043', 'G-044', 'G-045', 'G-046', 'G-047', 'G-048', 'G-049', 'G-050',
+  'G-051', 'G-052', 'G-053', 'G-054', 'G-055', 'G-056', 'G-057', 'G-058', 'G-059', 'G-060',
+  'G-061', 'G-062', 'G-063',
+]);
+
+// Sprachen mit übersetzten Diagramm-Grafiken (nur die Diagramm-SVGs tragen Text;
+// je Nummer liegen dann G-XXX.<sprache>.svg UND .png neben der deutschen Basis).
+// Vollständig für en/fr/pl; erweiterbar, sobald weitere Grafik-Sprachen folgen.
+export const GRAFIK_SPRACHEN = new Set(['en', 'fr', 'pl']);
+
+export function grafikFigurHtml(id) {
+  const beschriftung = label('grafik', id);
+  const svgDiagramm = SVG_GRAFIKEN.has(id);
+  // Nur texttragende Diagramme haben Sprachvarianten; KI-Illustrationen bleiben
+  // sprachneutral. Ohne passende Variante fällt es auf die deutsche Basis zurück.
+  const variante = svgDiagramm && GRAFIK_SPRACHEN.has(sprache()) ? `.${sprache()}` : '';
+  const svgHaken = svgDiagramm ? ` data-grafik-svg="images/${esc(id)}${variante}.svg"` : '';
+  return `
+      <figure class="grafik-platzhalter"${svgHaken}>
+        <img class="grafik-bild" src="images/${esc(id)}${variante}.png" alt="${esc(beschriftung)}" loading="lazy" />
+        <figcaption class="leise">${esc(beschriftung)}</figcaption>
+      </figure>`;
+}
+
+const svgZwischenspeicher = new Map();
+// Nach dem Rendern aufrufen: ersetzt das PNG durch das Inline-SVG (theme-fähig). Scheitert
+// der Abruf (offline vor dem ersten SWR-Caching), bleibt das PNG stehen. Idempotent.
+export async function verbessereGrafiken(wurzel) {
+  if (!wurzel || typeof fetch !== 'function' || typeof document === 'undefined') return;
+  for (const figur of wurzel.querySelectorAll('figure[data-grafik-svg]')) {
+    const url = figur.getAttribute('data-grafik-svg');
+    figur.removeAttribute('data-grafik-svg');
+    try {
+      let markup = svgZwischenspeicher.get(url);
+      if (markup == null) {
+        const antwort = await fetch(url);
+        if (!antwort.ok) throw new Error(String(antwort.status));
+        markup = await antwort.text();
+        svgZwischenspeicher.set(url, markup);
+      }
+      const bild = figur.querySelector('img.grafik-bild');
+      const gestell = document.createElement('div');
+      gestell.innerHTML = markup;
+      const svg = gestell.querySelector('svg');
+      if (bild && svg) {
+        svg.setAttribute('class', 'grafik-bild grafik-svg');
+        // Übersetzten Alt-Text als Zugänglichkeitsnamen übernehmen (bei text-freien
+        // Piktogrammen trägt das Inline-SVG sonst nur die deutsche aria-label).
+        const alt = bild.getAttribute('alt');
+        if (alt) svg.setAttribute('aria-label', alt);
+        bild.replaceWith(svg);
+      }
+    } catch {
+      /* PNG bleibt als Fallback stehen */
+    }
+  }
+}

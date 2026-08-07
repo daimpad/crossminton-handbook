@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The multi-court set-up: several matches are arranged around a shared centre so that the flight paths of the speeders cross in the middle — the risk is raised there.">
+  <style>
+    .feld{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .eigen{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3}
+    .zone{fill:var(--primaer,#38a4f1);opacity:.08}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
+    .fremd{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:6 5;opacity:.75}
+    .achtung{fill:none;stroke:var(--primaer-tief,#1568ad);stroke-width:2.4;stroke-dasharray:4 4}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+
+  <!-- gemeinsames Zentrum: hier kreuzen sich die Bahnen -->
+  <circle class="zone" cx="150" cy="140" r="46"/>
+  <circle class="achtung" cx="150" cy="140" r="46"/>
+
+  <!-- eigenes Match: oben und unten, eigene Bahn durchgezogen -->
+  <rect class="eigen" x="112" y="26" width="76" height="52"/>
+  <rect class="eigen" x="112" y="202" width="76" height="52"/>
+  <path class="bahn" d="M150,78 L150,202"/>
+
+  <!-- fremde Matches links und rechts, ihre Bahnen queren gestrichelt -->
+  <rect class="feld" x="20" y="114" width="52" height="52"/>
+  <rect class="feld" x="228" y="114" width="52" height="52"/>
+  <path class="fremd" d="M72,140 L228,140"/>
+
+  <!-- zwei weitere querende Bahnen (Diagonalen) -->
+  <path class="fremd" d="M64,72 L236,208"/>
+  <path class="fremd" d="M236,72 L64,208"/>
+
+  <text class="st" x="150" y="284">the paths cross in the centre</text>
+</svg>
