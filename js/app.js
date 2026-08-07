@@ -381,8 +381,11 @@ function initSprachanzeige() {
     // NAVIGIEREN, nicht nur neu rendern: die Sprache steckt in der URL, damit
     // jede Fassung eine eigene, teilbare und indexierbare Adresse hat. Die
     // aktuelle Route bleibt dabei erhalten — wer auf /regeln steht, landet auf
-    // /en/regeln, nicht auf der Startseite.
-    navigiere(routeInSprache(parsePfad().segmente, neu), { ersetzen: true });
+    // /en/regeln, nicht auf der Startseite. Die Query muss ausdrücklich mit:
+    // routeInSprache() baut nur aus den Segmenten, und `?kontext=` steckt da
+    // nicht drin — ohne sie verlöre ein Sprachwechsel auf einer Baustein-Seite
+    // den Rückweg „Zur Liste" (und die Fußnavigation ihre Sequenz).
+    navigiere(routeInSprache(parsePfad().segmente, neu) + window.location.search, { ersetzen: true });
   });
   document.addEventListener('click', (ereignis) => {
     if (!wurzel.contains(ereignis.target)) schliesse();
@@ -634,12 +637,18 @@ function rendern() {
 // darum immer die deutsche Fassung; die Umschreibung ist für ihn unsichtbar.
 // replaceState statt pushState: der Zurück-Knopf soll nicht in einer Schleife
 // zwischen den beiden Adressen hängen.
+//
+// Die Query muss ausdrücklich mitgeführt werden — routeInSprache() baut allein
+// aus den Segmenten, `?kontext=` steckt da nicht drin. Ohne sie verlor ein
+// geteilter Deep-Link seinen Rückweg, sobald die empfangende Person eine andere
+// Sprache eingestellt hatte. Der Hash ist an dieser Stelle bereits aufgelöst
+// (der Alt-Link-Umschreiber in boot() läuft davor) und darf nicht mehr auftauchen.
 function folgeSprachVorliebe() {
   const { segmente, sprache: ausUrl } = parsePfad();
   const gewuenscht = einstellungen().sprache;
   if (ausUrl !== QUELLSPRACHE) return; // URL sagt schon, was gilt
   if (!ZIELSPRACHEN.includes(gewuenscht)) return; // keine abweichende Vorliebe
-  window.history.replaceState({}, '', routeInSprache(segmente, gewuenscht));
+  window.history.replaceState({}, '', routeInSprache(segmente, gewuenscht) + window.location.search);
 }
 
 async function boot() {
@@ -662,6 +671,19 @@ async function boot() {
     return;
   }
   for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
+  // Altbestand: vor Tier 2 geteilte Links tragen '#/…' (die Teilen-Funktion gab
+  // sie so aus). Einmal auf den echten Pfad umschreiben, damit sie weiter tragen.
+  //
+  // MUSS VOR folgeSprachVorliebe() LAUFEN. Die schreibt eine präfixlose Adresse
+  // auf die eingestellte Sprache um — und weil sie die URL aus den Segmenten neu
+  // baut, fällt ein noch nicht aufgelöster Hash dabei weg. Stand der Umschreiber
+  // danach, landete '/#/baustein/griff' bei jemandem mit englischer Voreinstellung
+  // auf '/en' statt auf dem Baustein: der geteilte Link war schlicht verloren.
+  // In dieser Reihenfolge wird erst '/baustein/griff' daraus, dann '/en/baustein/griff'.
+  if (/^#\//.test(window.location.hash)) {
+    const ziel = window.location.hash.replace(/^#\/?/, '');
+    window.history.replaceState({}, '', zuUrl(ziel));
+  }
   folgeSprachVorliebe();
 
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
@@ -729,12 +751,6 @@ async function boot() {
   });
   // Merk-Zähler ohne Neu-Rendern nachziehen (Umschalten aus der Baustein-Ansicht).
   window.addEventListener('app:merk', aktualisiereMerkAnzahl);
-  // Altbestand: vor Tier 2 geteilte Links tragen '#/…' (die Teilen-Funktion gab
-  // sie so aus). Einmal auf den echten Pfad umschreiben, damit sie weiter tragen.
-  if (/^#\//.test(window.location.hash)) {
-    const ziel = window.location.hash.replace(/^#\/?/, '');
-    window.history.replaceState({}, '', zuUrl(ziel));
-  }
   rendern();
 
   // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft
