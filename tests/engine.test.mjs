@@ -1573,6 +1573,48 @@ pruefe('index.html und 404.html leiten den Präfix identisch ab',
   praefixZeile('index.html') === praefixZeile('404.html'),
   `${praefixZeile('index.html')} vs ${praefixZeile('404.html')}`);
 
+console.log('\n[21] Sprachpräfix darf Query und Hash nicht verschlucken');
+// routeInSprache() baut die Adresse ALLEIN aus den Segmenten. Für hreflang und
+// JSON-LD ist das richtig (eine kanonische Alternative trägt keinen Sitzungs-
+// zustand), für eine NAVIGATION aber nicht: `?kontext=` ist der Rückweg „Zur
+// Liste", und ein Alt-Link trägt seine Route im Hash. Drei Stellen liefen darauf
+// auf — alle drei am selben Muster, alle drei nur sichtbar, wenn eine von der
+// URL abweichende Sprache eingestellt war (darum fiel es nie auf):
+//   • folgeSprachVorliebe()  → geteilter Deep-Link verlor seinen Rückweg
+//   • Sprachumschalter im Kopf → dito, beim Umschalten auf einer Baustein-Seite
+//   • Reihenfolge in boot()  → '/#/baustein/griff' landete auf '/en' statt auf
+//     dem Baustein: folgeSprachVorliebe() baute die URL neu, BEVOR der
+//     Alt-Link-Umschreiber den Hash überhaupt gelesen hatte.
+// Browser-Laufzeit, also kein Engine-Test möglich — geprüft wird die Quelle.
+const appQuelle = liesText('js/app.js');
+
+const zeileMit = (nadel) => appQuelle.split('\n').find((z) => z.includes(nadel))?.trim() ?? '';
+
+const vorliebeZeile = zeileMit("routeInSprache(segmente, gewuenscht)");
+pruefe('folgeSprachVorliebe() führt die Query mit',
+  vorliebeZeile.includes('window.location.search'), vorliebeZeile);
+
+const umschalterZeile = zeileMit('routeInSprache(parsePfad().segmente, neu)');
+pruefe('Sprachumschalter im Kopf führt die Query mit',
+  umschalterZeile.includes('window.location.search'), umschalterZeile);
+
+// Reihenfolge in boot(): der Alt-Link-Umschreiber MUSS vor folgeSprachVorliebe()
+// stehen. Beide sind eindeutige Vorkommen, ein Positionsvergleich genügt.
+const posHash = appQuelle.indexOf('window.location.hash.replace');
+const posVorliebe = appQuelle.indexOf('folgeSprachVorliebe();');
+pruefe('Alt-Link-Umschreiber steht vor folgeSprachVorliebe()',
+  posHash > -1 && posVorliebe > -1 && posHash < posVorliebe,
+  `Hash bei ${posHash}, Vorliebe bei ${posVorliebe}`);
+
+// Gegenprobe zur Abgrenzung: hreflang und JSON-LD dürfen die Query gerade NICHT
+// tragen — sonst zeigten die Alternativen auf zustandsbehaftete Adressen.
+const hreflangBlock = appQuelle.slice(
+  appQuelle.indexOf('function setzeSprachAlternativen'),
+  appQuelle.indexOf('function setzeSeitenSchema'),
+);
+pruefe('hreflang-Alternativen tragen bewusst KEINE Query',
+  !hreflangBlock.includes('location.search'));
+
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);
 process.exit(fehler === 0 ? 0 : 1);
