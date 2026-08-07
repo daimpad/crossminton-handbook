@@ -3,7 +3,7 @@
 // Prüft Datenvalidierung, Pfad-Traversierungen, Modifikator, Zwei-Ebenen-Logik,
 // Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
 
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -534,6 +534,18 @@ pruefe('„verschärft" real belegt: Mindest-Teilnehmerzahl ändert Text von 100
 pruefe('Turnier-Regularium verunreinigt den Baustein-Pool nicht (108 Bausteine, Regularium separat)', daten.bausteine.length === 108 && !tr.anforderungen.some((a) => daten.bausteinVonId.has(a.id)));
 pruefe('Anforderungen tragen keinen Fortschritt/keine Voraussetzungen/Deltas (reiner Referenzinhalt)', tr.anforderungen.every((a) => a.voraussetzungen === undefined && a.uebungsteil === undefined && a.delta === undefined && a.status === undefined));
 pruefe('Meta trägt Quelle + Stand + verlinkte Dokumente (rules/…)', typeof tr.meta.quelle?.de === 'string' && tr.meta.quelle.de !== '' && typeof tr.meta.stand?.de === 'string' && (tr.meta.dokumente || []).length >= 1 && tr.meta.dokumente.every((d) => typeof d.pfad === 'string' && d.pfad.startsWith('rules/')));
+// Jeder Verweis muss auf eine echte DATEI zeigen, nicht auf ein Verzeichnis.
+// Ein Eintrag zeigte auf `rules/` — dort liegt kein index.html: auf GitHub Pages
+// ein sicherer 404, auf Apache je nach `Options Indexes` bestenfalls eine nackte
+// Verzeichnisliste. Der Präfix-Test allein ließ das durch, weil 'rules/' ihn erfüllt.
+{
+  const tote = (tr.meta.dokumente || []).map((d) => d.pfad).filter((p) => {
+    const voll = join(wurzel, p);
+    return !existsSync(voll) || !statSync(voll).isFile();
+  });
+  pruefe('jedes verlinkte Turnier-Dokument ist eine existierende Datei (kein Verzeichnis)', tote.length === 0, tote.join(', '));
+}
+pruefe('alle Turnier-Dokumenttitel sind in en/fr/pl übersetzt', (tr.meta.dokumente || []).every((d) => ['de', 'en', 'fr', 'pl'].every((s) => typeof d.titel?.[s] === 'string' && d.titel[s] !== '' && (!d.hinweis || (typeof d.hinweis[s] === 'string' && d.hinweis[s] !== '')))));
 pruefe('Turnier-UI-Labels (de) vollständig', ['turnier_titel', 'turnier_kachel_text', 'turnier_frage', 'turnier_konkurrenz', 'turnier_einzel', 'turnier_auflagen_fuer', 'turnier_davon', 'turnier_neu', 'turnier_verschaerft', 'turnier_pflicht', 'turnier_empfehlung', 'turnier_basis', 'turnier_ggue', 'turnier_wie_zuvor', 'turnier_variante_titel', 'turnier_dokumente', 'turnier_quelle', 'turnier_stand', 'turnier_leer'].every((k) => typeof labelsDe.ui[k] === 'string' && labelsDe.ui[k] !== ''));
 pruefe('saubere Referenzdaten: keine Turnier-Warnung im echten Bestand', !daten.warnungen.some((w) => w.includes('Turnier')));
 pruefe('kaputte Turnier-Daten erzeugen eine Warnung (unbekannte Stufe, nie sperrend)', (() => {
