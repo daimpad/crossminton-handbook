@@ -6,7 +6,7 @@ Technischer Überblick zum Crossminton-Handbuch. Die verbindliche, vollständige
 
 Die App ist eine inhaltsgetriebene, statische Web-App: Der gesamte Lernstoff liegt in versionierten JSON-Dateien, die Oberfläche rendert daraus Pfade, Bausteine und Reiter. **Kein Build-Schritt, keine Server-Komponente, keine npm-Laufzeitabhängigkeiten** — ES-Module direkt im Browser. Fortschritt lebt in `localStorage`; ein Konto gibt es nicht.
 
-Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (616 UI-Labels, 850 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
+Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (641 UI-Labels, 857 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
 
 ## Datenmodell: der Baustein
 
