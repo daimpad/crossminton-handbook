@@ -135,6 +135,20 @@ async function erfasseSchnappschuss(page, pfad) {
   // lädt rendern() erst die Labels nach und zeichnet DANACH — ohne das Warten
   // erfasste man die vorige Sprache unter der neuen Adresse.
   await page.waitForFunction((z) => document.documentElement.dataset.route === z, ziel, { timeout: 15000 });
+  // Zweites Warten: die Grafiken reicht verbessereGrafiken() NACH dem Zeichnen
+  // nach (jedes SVG wird einzeln geholt), dataset.route steht schon davor. Ohne
+  // das erfasste der Schnappschuss einen zufälligen Zwischenstand — auf
+  // /baustein/aufschlag lag die erste Grafik als Inline-SVG vor, die zweite noch
+  // als PNG. Kurzer Deckel und verschlucktes Zeitüberschreiten: scheitert ein
+  // Abruf, bleibt das PNG stehen (gültiger Zustand), der Deploy läuft weiter.
+  await page
+    .waitForFunction(
+      () => [...document.querySelectorAll('#ansicht figure.grafik-platzhalter')]
+        .every((figur) => figur.querySelector('svg.grafik-svg')),
+      null,
+      { timeout: 5000 },
+    )
+    .catch(() => {});
   return page.evaluate(() => ({
     titel: document.title,
     beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',

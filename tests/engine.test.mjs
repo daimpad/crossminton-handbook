@@ -12,7 +12,7 @@ import { individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielfo
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
-import { bausteinIcon, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
+import { bausteinIcon, begrenzeStil, GRAFIK_SPRACHEN, SVG_GRAFIKEN } from '../js/oberflaeche.js';
 import { plan as gespPlan, registriereEinheitAbschluss, setzeDiagnose, setzePlan, setzeTeilStatus, setzeZurueck, loeschePlan, koTurnier as gespKoTurnier, setzeKoTurnier, loescheKoTurnier, ladeZustand, diagnose, merkliste, einstellungen, kontinuitaet, teilStatus } from '../js/zustand.js';
 import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWochen, planbareEinheiten, planAlsIcal } from '../js/plan.js';
 import { TEAM_TRENNER, bildePaare, erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, teamName, traegtSiegerEin, turnierSpielform, turniersieger } from '../js/ko-turnier.js';
@@ -1626,6 +1626,68 @@ const hreflangBlock = appQuelle.slice(
 );
 pruefe('hreflang-Alternativen tragen bewusst KEINE Query',
   !hreflangBlock.includes('location.search'));
+
+// ---------------------------------------------------------------------------
+console.log('\n[22] Inline-SVG: Stilregeln muessen bei ihrer Grafik bleiben');
+// Ein Inline-SVG ist kein abgeschlossener Raum: sein <style> gehoert zum
+// Dokument. Zwei Grafiken auf einer Seite belegen dieselben Klassennamen
+// (.st/.mk/.bahn) — ohne Eingrenzung gewinnt die spaetere fuer beide. Gemessen
+// hat das auf /baustein/aufschlag eine Markierung von --tinte-3 auf --primaer
+// umgefaerbt. begrenzeStil() ist der textliche Teil der Behebung.
+pruefe('einfache Regel wird verankert',
+  begrenzeStil('.mk{fill:red}', 'g1') === '#g1 .mk{fill:red}',
+  begrenzeStil('.mk{fill:red}', 'g1'));
+pruefe('jeder Selektor einer Liste wird einzeln verankert',
+  begrenzeStil('.a,.b{fill:red}', 'g1') === '#g1 .a,#g1 .b{fill:red}',
+  begrenzeStil('.a,.b{fill:red}', 'g1'));
+pruefe('mehrere Regeln, auch mit Umbruch',
+  begrenzeStil('.a{x:1}\n.b{y:2}', 'g7') === '#g7 .a{x:1}\n#g7 .b{y:2}',
+  JSON.stringify(begrenzeStil('.a{x:1}\n.b{y:2}', 'g7')));
+pruefe('zusammengesetzter Selektor bleibt zusammen',
+  begrenzeStil('.a .b{x:1}', 'g1') === '#g1 .a .b{x:1}',
+  begrenzeStil('.a .b{x:1}', 'g1'));
+pruefe('ohne Bereich unveraendert', begrenzeStil('.a{x:1}', '') === '.a{x:1}');
+pruefe('leere Eingabe unveraendert', begrenzeStil('', 'g1') === '');
+
+// Die Voraussetzung der Behebung: die Stilbloecke der Grafiken bleiben schlicht.
+// Eine At-Regel oder ein Kommentar wuerde den textlichen Ansatz brechen — dann
+// braeuchte es einen echten Parser. Darum hier festhalten, statt es zu hoffen.
+{
+  const svgDateien = readdirSync(new URL('../images/', import.meta.url))
+    .filter((n) => /^G-\d{3}(\.\w\w)?\.svg$/.test(n));
+  const heikel = [];
+  let stilBloecke = 0;
+  for (const name of svgDateien) {
+    const quelle = readFileSync(new URL(`../images/${name}`, import.meta.url), 'utf8');
+    for (const block of quelle.match(/<style[^>]*>[\s\S]*?<\/style>/g) ?? []) {
+      stilBloecke += 1;
+      if (/@[a-z-]+/i.test(block)) heikel.push(`${name}: At-Regel`);
+      if (block.includes('/*')) heikel.push(`${name}: Kommentar`);
+      // Element- oder ID-Selektoren wuerden dokumentweit greifen bzw. mit der
+      // Bereichs-ID kollidieren; die Grafiken nutzen ausschliesslich Klassen.
+      for (const regel of block.replace(/<\/?style[^>]*>/g, '').matchAll(/([^{}]+)\{[^{}]*\}/g)) {
+        for (const sel of regel[1].split(',')) {
+          const roh = sel.trim();
+          if (roh && !/^[.\w\s.-]*$/.test(roh)) heikel.push(`${name}: Selektor "${roh}"`);
+          if (roh && !roh.startsWith('.')) heikel.push(`${name}: kein Klassenselektor "${roh}"`);
+        }
+      }
+    }
+  }
+  pruefe(`Stilbloecke der ${svgDateien.length} Grafik-SVGs sind schlicht (${stilBloecke} Bloecke)`,
+    heikel.length === 0, heikel.slice(0, 5).join('; '));
+}
+
+// Und die Verdrahtung: verbessereGrafiken() muss vereinzele() auch wirklich rufen.
+{
+  const quelle = readFileSync(new URL('../js/oberflaeche.js', import.meta.url), 'utf8');
+  const block = quelle.slice(quelle.indexOf('export async function verbessereGrafiken'));
+  // Auf den STATEMENT-Anfang pruefen, nicht auf blosses Vorkommen: ein
+  // auskommentierter Aufruf enthaelt den Text ebenfalls (in der Gegenprobe
+  // blieb der Test dadurch zunaechst gruen, obwohl die Behebung aus war).
+  pruefe('verbessereGrafiken() vereinzelt jedes eingefuegte SVG',
+    /^\s*vereinzele\(svg, gestell\);\s*$/m.test(block));
+}
 
 setzeZurueck();
 console.log(`\n${laufend} Prüfungen, ${fehler} Fehler`);

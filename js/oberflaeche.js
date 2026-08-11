@@ -451,6 +451,77 @@ export function grafikFigurHtml(id) {
 }
 
 const svgZwischenspeicher = new Map();
+
+// Fortlaufende Nummer für die Bereichsgrenze je eingefügtem SVG (s. vereinzele).
+let grafikBereich = 0;
+
+// Ein Inline-SVG ist KEIN abgeschlossener Raum: sein <style>-Block gehört zum
+// Dokument, nicht zur Grafik, und seine IDs liegen im Dokument-Namensraum. Zwei
+// Grafiken auf einer Seite reden also mit denselben Namen durcheinander — beide
+// nutzen `.st`, `.mk`, `.bahn`, beide definieren `id="mp"`. Wer später im
+// Dokument steht, gewinnt bei gleicher Spezifität für BEIDE.
+//
+// Gemessen war das kein theoretisches Risiko: auf `/baustein/aufschlag` zeichnete
+// G-005 seine Markierung in `--primaer` statt `--tinte-3`, weil G-006 dieselbe
+// Klasse anders belegt — die Hauptfarbe ist hier Akzent, nicht Flächenfarbe, die
+// Grafik behauptete also eine Betonung, die sie nicht meint. Auf
+// `/baustein/tempo_rhythmus_wechsel` erbte G-018 die dünnere Bahn von G-019.
+//
+// Darum bekommt jedes eingefügte SVG eine eigene Bereichs-ID: die Stilregeln
+// werden darauf eingeschränkt (`.mk` → `#g7 .mk`), die inneren IDs bekommen den
+// Bereich als Präfix und alle `url(#…)`-Verweise ziehen mit. Die Dateien selbst
+// bleiben unangetastet — sie sind einzeln geöffnet weiterhin gültig, und die
+// PNG-Renders (einzeln erzeugt) waren nie betroffen.
+function vereinzele(svg, gestell) {
+  const bereich = `g-svg-${++grafikBereich}`;
+  svg.id = bereich;
+
+  const umbenannt = new Map();
+  for (const el of gestell.querySelectorAll('[id]')) {
+    if (el === svg) continue;
+    umbenannt.set(el.id, `${bereich}-${el.id}`);
+    el.id = `${bereich}-${el.id}`;
+  }
+  if (umbenannt.size) {
+    for (const el of gestell.querySelectorAll('*')) {
+      for (const attribut of el.attributes) {
+        if (!attribut.value.includes('url(#')) continue;
+        attribut.value = attribut.value.replace(/url\(#([^)]+)\)/g, (ganz, id) =>
+          (umbenannt.has(id) ? `url(#${umbenannt.get(id)})` : ganz));
+      }
+    }
+  }
+
+  for (const stil of svg.querySelectorAll('style')) {
+    stil.textContent = begrenzeStil(stil.textContent, bereich);
+  }
+}
+
+// Jeden Selektor eines Stilblocks an einer Bereichs-ID verankern (`.mk` →
+// `#g-svg-7 .mk`). Getrennt und exportiert, weil das der heikle, rein textliche
+// Teil von vereinzele() ist und sich so ohne DOM prüfen lässt.
+//
+// Die Stilblöcke der Grafiken sind bewusst schlicht — ausschließlich
+// Klassenselektoren, keine At-Regeln, keine Kommentare (geprüft über alle 268
+// Dateien). Auf mehr ist das hier nicht ausgelegt: eine At-Regel bräuchte einen
+// echten Parser. Wer einer Grafik eine `@media`-Regel gibt, muss das hier
+// mitziehen — die Grafiken kippen ihr Thema über Tokens, brauchen also keine.
+export function begrenzeStil(css, bereich) {
+  if (!css || !bereich) return css;
+  return css.replace(/([^{}]+)(\{[^{}]*\})/g, (ganz, selektoren, rumpf) => {
+    // Der führende Weißraum gehört zur Trennung der Regeln, nicht zum Selektor —
+    // ohne ihn klebten die Regeln aneinander (gültig, aber unlesbar im DOM).
+    const fuehrend = selektoren.match(/^\s*/)[0];
+    const eingegrenzt = selektoren
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((s) => `#${bereich} ${s}`)
+      .join(',');
+    return eingegrenzt ? fuehrend + eingegrenzt + rumpf : ganz;
+  });
+}
+
 // Nach dem Rendern aufrufen: ersetzt das PNG durch das Inline-SVG (theme-fähig). Scheitert
 // der Abruf (offline vor dem ersten SWR-Caching), bleibt das PNG stehen. Idempotent.
 export async function verbessereGrafiken(wurzel) {
@@ -472,6 +543,7 @@ export async function verbessereGrafiken(wurzel) {
       const svg = gestell.querySelector('svg');
       if (bild && svg) {
         svg.setAttribute('class', 'grafik-bild grafik-svg');
+        vereinzele(svg, gestell);
         // Übersetzten Alt-Text als Zugänglichkeitsnamen übernehmen (bei text-freien
         // Piktogrammen trägt das Inline-SVG sonst nur die deutsche aria-label).
         const alt = bild.getAttribute('alt');
