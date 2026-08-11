@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 340" role="img" aria-label="Profile of a Speeder with the dimensions in millimetres: overall height 60, head 26, collar 30 and skirt opening 50 — each with the permitted ICO tolerance window in blue.">
+  <style>
+    .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    .kappe{fill:var(--speeder-kappe,#e2402a)}
+    .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    .pfeil{fill:var(--tinte-3,#6b7686)}
+    .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+    <marker id="mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+  </defs>
+
+  <path class="korbflaeche" d="M103.5,129 L57,234 L207,234 L160.5,129 Z"/>
+  <path class="stiel" d="M114.3,129 L85.5,234"/>
+  <path class="stiel" d="M123.5,129 L109.5,234"/>
+  <path class="stiel" d="M140.6,129 L154.5,234"/>
+  <path class="stiel" d="M149.7,129 L178.5,234"/>
+  <path class="achse" d="M132,40 L132,250"/>
+
+  <!-- Schlagkappe oben -->
+  <path class="kappe" d="M93,99 L93,74 A39,20 0 0 1 171,74 L171,99 Z"/>
+  <path class="kappenlinie" d="M112,70 A22,11 0 0 1 152,70"/>
+
+  <!-- Kragen: geschlossener Zylinder zwischen Kappe und Korb -->
+  <path class="kontur" d="M87,99 L87,129 M177,99 L177,129"/>
+  <path class="kontur" d="M87,99 L177,99"/>
+
+  <!-- Korb: setzt am Endring an und laeuft bis zum wellenfoermigen Rand -->
+  <path class="kontur" d="M87,129 L103.5,129 L57,234"/>
+  <path class="kontur" d="M177,129 L160.5,129 L207,234"/>
+  <path class="kontur" d="M57,234 q 18.75,9 37.5,0 q 18.75,-9 37.5,0 q 18.75,9 37.5,0 q 18.75,-9 37.5,0"/>
+
+  <!-- Konuswinkel: Bogen um den rechnerischen Scheitel, liegt auf beiden Flanken
+       auf. Die duenn gestrichelten Verlaengerungen zeigen, worauf er sich bezieht. -->
+  <path class="hilfslinie" d="M132,64.6 L103.5,129 M132,64.6 L160.5,129"/>
+  <path class="masz" d="M89.9,159.7 A104,104 0 0 1 174.1,159.7" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="132" y="151.7">47.8°</text>
+
+  <!-- Gesamthoehe rechts -->
+  <path class="hilfslinie" d="M171,54 L254,54"/>
+  <path class="hilfslinie" d="M207,234 L254,234"/>
+  <path class="masz" d="M248,54 L248,234" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="272" y="141">60</text>
+  <text class="ico" x="272" y="155">57–63</text>
+
+  <!-- Kappendurchmesser oben -->
+  <path class="masz" d="M93,38 L171,38" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="132" y="28">⌀ 26</text>
+  <text class="ico" x="132" y="15">ICO 25–27</text>
+
+  <!-- Korbdurchmesser unten -->
+  <path class="masz" d="M57,262 L207,262" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="132" y="280">⌀ 50</text>
+  <text class="ico" x="132" y="293">ICO 47–53</text>
+
+  <!-- Kragen -->
+  <path class="masz" d="M87,114 L52,114"/>
+  <text class="teilr" x="48" y="111">Collar</text>
+  <text class="teilr" x="48" y="124">⌀ 30</text>
+
+  <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
+  <path class="hilfslinie" d="M103.5,129 L26,129"/>
+  <path class="hilfslinie" d="M57,234 L26,234"/>
+  <path class="masz" d="M32,129 L32,234" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="14" y="178.5">35</text>
+  <text class="teil" x="2" y="191.5">Skirt</text>
+
+  <text class="st" x="150" y="326">Dimensions in mm · ICO window in blue</text>
+</svg>

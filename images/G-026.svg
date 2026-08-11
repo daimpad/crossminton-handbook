@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Die Rückhand des Gegners: den Speeder gezielt in die Rückhand-Ecke des Gegners spielen.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .ziel{fill:var(--primaer,#38a4f1);opacity:.14}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .traj{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .marker{fill:var(--primaer,#38a4f1)}
+    .gegner{fill:var(--tinte-3,#6b7686)}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="marker"/></marker></defs>
+
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <circle class="ziel" cx="88" cy="80" r="30"/>
+  <circle class="ring" cx="88" cy="80" r="30"/>
+
+  <!-- Gegner steht leicht zur Vorhand, die Rückhand-Ecke bleibt offen -->
+  <circle class="gegner" cx="176" cy="150" r="9"/>
+  <text class="subtext" x="176" y="176">Gegner</text>
+
+  <path class="traj" d="M150,286 C 120,240 96,150 89,112" marker-end="url(#ah)"/>
+  <text class="zonetext" x="88" y="84">Rückhand</text>
+</svg>

@@ -1,0 +1,291 @@
+{
+  "_meta": {
+    "beschreibung": "Experten-Athletik/Kondition: hoechste athletische Ebene. Formaufbau ueber die Saison, Reaktivkraft, Bewegungsoekonomie, antizipative Schnelligkeit, langfristige Belastbarkeit. Herkunftsneutral — KEINE Cross-Sport-Deltas.",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl",
+      "ja"
+    ],
+    "stand": "Erstausbau-Erweiterung — vervollstaendigt die Experten-Stufe ueber alle vier Spieler-Domaenen.",
+    "dateiname_konvention": "bausteine.experte-athletik_kondition.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer.",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Fortgeschritten- und teils Beginner-Athletikblock, plus intern.",
+    "gesundheitsrahmen": "STRIKT eingehalten. KEINE Dosierungen, Wiederholungszahlen, Satz-/Umfangsangaben, Ernaehrungshinweise oder Gradwerte. Inhalte bleiben qualitativ (Bewegungsqualitaet, Prinzip, Wahrnehmung). Programmiernahes (konkreter Trainingsplan, Periodisierungsplan, Plyometrie-Umfang) und alles zu Verletzung, Schmerz, Ueberlastung wird ausdruecklich an qualifizierte Anleitung verwiesen (Trainer, Trainingswissenschaft, Physiotherapie, Sportmedizin).",
+    "innere_struktur": "1 uebungsteil (Reaktivkraft, rein qualitaets-/technikorientiert, ohne Dosierung), 4 reflexionsaufgabe.",
+    "ordnungslogik": "Form ueber die Saison -> Reaktivkraft -> Bewegungsoekonomie -> antizipative Schnelligkeit -> langfristig belastbar."
+  },
+  "bausteine": [
+    {
+      "id": "form_ueber_die_saison",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "gezielt_trainieren",
+        "belastung_steuern_regenerieren"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): weitet das gezielte Trainieren und die Belastungssteuerung auf die Zeitachse einer Saison aus",
+      "spielziele": [
+        "satz_match_regeneration",
+        "rally_ausdauer"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT"
+      ],
+      "transfer_herkunft_beleg": "Periodisierung als strukturierte Variation zur Leistungsspitze in wichtigen Phasen und zur langfristigen Entwicklung: Trainingswissenschaft. Bewusst nur Prinzip-/Awareness-Ebene; die konkrete Planung wird an qualifizierte Anleitung verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Form über die Saison planen",
+        "en": "Planning form across the season",
+        "fr": "Planifier sa forme sur la saison",
+        "pl": "Planowanie formy na sezon"
+      },
+      "erklaerteil": {
+        "de": "Auf Expertenniveau ist Form nichts Zufälliges. Wer über eine Saison konstant spielen und zu den wichtigen Turnieren in Bestform sein will, denkt in längeren Zeiträumen als der einzelnen Trainingseinheit. Dieser Baustein macht dich mit dem Prinzip vertraut — die konkrete Planung gehört in qualifizierte Hände.\n\nDer Grundgedanke ist, dass sich Form nicht dauerhaft auf höchstem Niveau halten lässt. Es gibt Phasen, in denen du eine Grundlage aufbaust, Phasen intensiver Arbeit und Phasen, in denen du bewusst zurücknimmst, damit der Körper die Anpassung leisten kann. Diese geplante Abwechslung sorgt dafür, dass die Spitze dann kommt, wenn du sie brauchst.\n\nBesonders wichtig ist die Phase vor einem wichtigen Wettkampf. Wer bis zuletzt hart arbeitet, geht müde ins Turnier. Wer die Belastung rechtzeitig zurücknimmt, kommt frisch und leistungsfähig an. Dieses bewusste Zurücknehmen vor dem Höhepunkt ist eines der Kennzeichen erfahrener Athleten.\n\nHier ist die wichtige Grenze: Ein guter Saisonplan ist individuell und gehört in die Hände qualifizierter Anleitung — eines Trainers oder einer Fachperson der Trainingswissenschaft. Dieser Baustein will dich für das Prinzip sensibilisieren, nicht einen Plan vorgeben. Deine Aufgabe ist, in längeren Bögen zu denken und die Planung mit fachkundiger Begleitung anzugehen.\n\nDeine Form über die Saison ist wie das Wachstum in einem Garten über das Jahr. Es gibt Zeiten des Säens, des Wachsens und der Ernte — und niemand erntet das ganze Jahr. Wer alles gleichzeitig will, bekommt nichts zur rechten Zeit.",
+        "en": "At expert level, form is nothing accidental. Whoever wants to play consistently across a season and be in top form for the important tournaments thinks in longer time frames than the single training session. This module familiarizes you with the principle — the concrete planning belongs in qualified hands.\n\nThe basic idea is that form can't be held permanently at the highest level. There are phases in which you build a foundation, phases of intensive work, and phases in which you deliberately pull back so the body can accomplish the adaptation. This planned alternation ensures that the peak comes when you need it.\n\nThe phase before an important competition is especially important. Whoever works hard until the very end goes into the tournament tired. Whoever pulls the load back in time arrives fresh and capable. This deliberate pulling back before the peak is one of the marks of experienced athletes.\n\nHere is the important boundary: a good season plan is individual and belongs in the hands of qualified guidance — a coach or a specialist in sports science. This module wants to sensitize you to the principle, not prescribe a plan. Your task is to think in longer arcs and to approach the planning with expert support.\n\nYour form across the season is like the growth in a garden over the year. There are times of sowing, of growing, and of harvesting — and nobody harvests all year round. Whoever wants everything at once gets nothing at the right time.",
+        "fr": "Au niveau expert, la forme n'a rien d'un hasard. Qui veut jouer avec constance sur une saison et être au top pour les tournois importants pense en périodes plus longues que la seule séance d'entraînement. Ce module te familiarise avec le principe — la planification concrète appartient à des mains qualifiées.\n\nL'idée de base, c'est que la forme ne peut pas se maintenir en permanence au plus haut niveau. Il y a des phases où tu construis une base, des phases de travail intensif et des phases où tu réduis volontairement, pour que le corps puisse réaliser l'adaptation. Cette alternance planifiée fait que le pic arrive quand tu en as besoin.\n\nLa phase avant une compétition importante est particulièrement importante. Qui travaille dur jusqu'au bout arrive fatigué au tournoi. Qui réduit la charge à temps arrive frais et performant. Cette réduction volontaire avant le sommet est l'une des marques des athlètes expérimentés.\n\nVoici la limite importante : un bon plan de saison est individuel et appartient aux mains d'un encadrement qualifié — un entraîneur ou un spécialiste des sciences de l'entraînement. Ce module veut te sensibiliser au principe, pas te prescrire un plan. Ta tâche, c'est de penser en arcs plus longs et d'aborder la planification avec un accompagnement compétent.\n\nTa forme sur la saison, c'est comme la croissance dans un jardin au fil de l'année. Il y a des temps pour semer, pour faire pousser et pour récolter — et personne ne récolte toute l'année. Qui veut tout en même temps n'obtient rien au bon moment.",
+        "pl": "Na poziomie eksperckim forma nie jest niczym przypadkowym. Kto chce grać stabilnie przez sezon i być na ważne turnieje w szczytowej formie, myśli w dłuższych odcinkach czasu niż pojedyncza jednostka treningowa. Ten moduł zaznajamia cię z zasadą — konkretne planowanie należy do wykwalifikowanych rąk.\n\nMyśl przewodnia jest taka, że formy nie da się trwale utrzymać na najwyższym poziomie. Są fazy, w których budujesz podstawę, fazy intensywnej pracy i fazy, w których świadomie się cofasz, by ciało mogło dokonać adaptacji. Ta zaplanowana przemiana sprawia, że szczyt przychodzi wtedy, gdy go potrzebujesz.\n\nSzczególnie ważna jest faza przed ważnymi zawodami. Kto pracuje ciężko do ostatniej chwili, wchodzi na turniej zmęczony. Kto w porę zredukuje obciążenie, dociera świeży i sprawny. To świadome cofnięcie przed szczytem to jeden ze znaków rozpoznawczych doświadczonych sportowców.\n\nTu ważna granica: dobry plan sezonu jest indywidualny i należy do rąk wykwalifikowanego prowadzenia — trenera lub specjalisty nauk o treningu. Ten moduł chce cię uwrażliwić na zasadę, nie narzucić plan. Twoim zadaniem jest myśleć w dłuższych łukach i podejść do planowania z fachowym towarzyszeniem.\n\nTwoja forma na przestrzeni sezonu jest jak wzrost w ogrodzie na przestrzeni roku. Są czasy siania, wzrostu i zbioru — i nikt nie zbiera przez cały rok. Kto chce wszystkiego naraz, nie dostaje niczego we właściwym czasie."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über deine Saison in längeren Bögen nach: Wann sind deine wichtigsten Turniere, und arbeitest du bisher gleichmäßig durch oder planst du bewusst Aufbau- und Erholungsphasen? Beobachte, ob du zu den wichtigen Terminen frisch oder müde ankommst. Wenn du deine Form gezielter über die Saison steuern willst, ist der nächste Schritt, das mit einem Trainer oder einer Fachperson der Trainingswissenschaft zu planen — dieser Baustein ersetzt diese Begleitung nicht, sondern legt sie dir nahe.",
+        "en": "Think about your season in longer arcs: when are your most important tournaments, and do you so far work through evenly or deliberately plan build-up and recovery phases? Watch whether you arrive fresh or tired at the important dates. If you want to steer your form across the season more deliberately, the next step is to plan it with a coach or a specialist in sports science — this module doesn't replace that support but points you toward it.",
+        "fr": "Réfléchis à ta saison en arcs plus longs : quand sont tes tournois les plus importants, et travailles-tu jusqu'ici de façon uniforme ou planifies-tu volontairement des phases de construction et de récupération ? Observe si tu arrives frais ou fatigué aux échéances importantes. Si tu veux piloter ta forme sur la saison de façon plus ciblée, l'étape suivante est de le planifier avec un entraîneur ou un spécialiste des sciences de l'entraînement — ce module ne remplace pas cet accompagnement, il te le recommande.",
+        "pl": "Pomyśl o swoim sezonie w dłuższych łukach: kiedy są twoje najważniejsze turnieje i czy dotąd pracujesz równomiernie, czy świadomie planujesz fazy budowy i regeneracji? Obserwuj, czy na ważne terminy docierasz świeży czy zmęczony. Jeśli chcesz sterować formą bardziej celowo na przestrzeni sezonu, następnym krokiem jest zaplanować to z trenerem lub specjalistą nauk o treningu — ten moduł nie zastępuje tego towarzyszenia, lecz je zaleca."
+      }
+    },
+    {
+      "id": "reaktivkraft_bodenkontakt",
+      "grafik": [
+        "G-035"
+      ],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "explosivitaet",
+        "schnelle_fuesse"
+      ],
+      "voraussetzungen_lesart": "motorisch (stufenuebergreifend): baut auf Explosivitaet und schnellen Fuessen auf",
+      "spielziele": [
+        "wiederholte_antrittsschnelligkeit"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT"
+      ],
+      "transfer_herkunft_beleg": "Dehnungs-Verkuerzungs-Zyklus: Sehnen speichern in der exzentrischen Phase elastische Energie und geben sie konzentrisch ab; kurzer, schneller Bodenkontakt (Reaktivkraft) macht Bewegung effizienter: Trainingswissenschaft. Qualitativ gehalten; strukturierte Plyometrie wird an qualifizierte Anleitung verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'schwerer, langer Bodenkontakt / harte Landung' + Korrekturansage (Qualitaet, nicht Umfang)",
+      "anzeigetitel": {
+        "de": "Reaktivkraft — der schnelle Bodenkontakt",
+        "en": "Reactive strength — fast ground contact",
+        "fr": "Force réactive — le contact au sol rapide",
+        "pl": "Siła reaktywna — szybki kontakt z podłożem"
+      },
+      "erklaerteil": {
+        "de": "Was einen Experten athletisch auszeichnet, ist oft die Schnelligkeit des Bodenkontakts, nicht die rohe Kraft. Reaktivkraft ist die Fähigkeit, den Boden nur kurz zu berühren und sofort wieder abzudrücken — federnd statt schwer. Sie steckt hinter jedem schnellen Richtungswechsel und jedem explosiven Antritt.\n\nDahinter steht ein einfaches Prinzip: Deine Sehnen wirken wie Federn. Wenn du landest, spannen sie sich und speichern Energie; drückst du sofort wieder ab, geben sie diese Energie zurück und verstärken deine Bewegung. Je kürzer der Bodenkontakt, desto mehr von dieser gespeicherten Energie nutzt du. Ein langer, schwerer Kontakt lässt sie ungenutzt verpuffen.\n\nDeshalb geht es bei der Reaktivkraft um Qualität, nicht um Menge. Der Kontakt soll sich leicht und federnd anfühlen, wie ein Ball, der vom Boden abspringt. Die Landung bleibt dabei immer weich und kontrolliert — Federung entsteht aus Elastizität, nicht aus Härte.\n\nEine klare Grenze: Strukturiertes Reaktivkrafttraining mit Sprüngen gehört in qualifizierte Hände. Der Aufbau, die Belastung und die Auswahl der Übungen sind eine Sache für Trainer oder Trainingswissenschaft — gerade weil Sprungbelastung ohne guten Aufbau die Gelenke fordert. Hier geht es allein um das Gefühl für den kurzen, federnden Kontakt in Bewegungen, die du ohnehin spielst.\n\nStell dir vor, der Boden wäre heiß und du willst so wenig wie möglich darauf stehen. Genau dieses kurze, leichte Abspringen ist Reaktivkraft.",
+        "en": "What marks an expert athletically is often the speed of the ground contact, not raw strength. Reactive strength is the ability to touch the ground only briefly and push off again at once — springy instead of heavy. It's behind every fast change of direction and every explosive start.\n\nBehind it stands a simple principle: your tendons act like springs. When you land, they tension and store energy; if you push off again immediately, they return this energy and amplify your movement. The shorter the ground contact, the more of this stored energy you use. A long, heavy contact lets it fizzle out unused.\n\nThat's why reactive strength is about quality, not quantity. The contact should feel light and springy, like a ball bouncing off the ground. The landing always stays soft and controlled — spring comes from elasticity, not from hardness.\n\nA clear boundary: structured reactive-strength training with jumps belongs in qualified hands. The build-up, the load, and the choice of exercises are a matter for a coach or sports science — precisely because jump loading without a good build-up stresses the joints. Here it's solely about the feel for the short, springy contact in movements you play anyway.\n\nImagine the ground were hot and you want to stand on it as little as possible. Exactly this short, light bouncing off is reactive strength.",
+        "fr": "Ce qui distingue un expert sur le plan athlétique, c'est souvent la rapidité du contact au sol, pas la force brute. La force réactive, c'est la capacité de ne toucher le sol que brièvement et de repousser aussitôt — élastique plutôt que lourd. Elle se cache derrière chaque changement de direction rapide et chaque démarrage explosif.\n\nDerrière elle se tient un principe simple : tes tendons agissent comme des ressorts. Quand tu retombes, ils se tendent et stockent de l'énergie ; si tu repousses aussitôt, ils restituent cette énergie et amplifient ton mouvement. Plus le contact au sol est court, plus tu utilises de cette énergie stockée. Un contact long et lourd la laisse se dissiper, inutilisée.\n\nC'est pourquoi la force réactive est affaire de qualité, pas de quantité. Le contact doit se sentir léger et élastique, comme une balle qui rebondit du sol. La réception reste toujours souple et contrôlée — l'élasticité vient de la souplesse, pas de la dureté.\n\nUne limite claire : un entraînement structuré de force réactive avec des sauts appartient à des mains qualifiées. La construction, la charge et le choix des exercices sont l'affaire d'un entraîneur ou des sciences de l'entraînement — justement parce que la charge de saut, sans bonne construction, sollicite les articulations. Ici, il s'agit seulement de la sensation du contact court et élastique dans des mouvements que tu joues de toute façon.\n\nImagine que le sol soit brûlant et que tu veuilles y rester le moins possible. C'est exactement ce rebond court et léger qui est la force réactive.",
+        "pl": "To, co wyróżnia eksperta atletycznie, to często szybkość kontaktu z podłożem, nie surowa siła. Siła reaktywna to zdolność, by dotknąć podłoża tylko krótko i natychmiast znów się odbić — sprężyście zamiast ciężko. Tkwi za każdą szybką zmianą kierunku i każdym eksplozywnym zrywem.\n\nZa tym stoi prosta zasada: twoje ścięgna działają jak sprężyny. Gdy lądujesz, napinają się i magazynują energię; odbijasz się natychmiast, oddają tę energię i wzmacniają twój ruch. Im krótszy kontakt z podłożem, tym więcej tej zmagazynowanej energii wykorzystujesz. Długi, ciężki kontakt pozwala jej ujść na darmo.\n\nDlatego przy sile reaktywnej chodzi o jakość, nie o ilość. Kontakt ma się czuć lekko i sprężyście, jak piłka, która odbija się od podłoża. Lądowanie pozostaje przy tym zawsze miękkie i kontrolowane — sprężystość powstaje z elastyczności, nie z twardości.\n\nJasna granica: strukturalny trening siły reaktywnej ze skokami należy do wykwalifikowanych rąk. Budowa, obciążenie i dobór ćwiczeń to sprawa dla trenera lub nauk o treningu — właśnie dlatego, że obciążenie skokowe bez dobrej budowy obciąża stawy. Tu chodzi wyłącznie o czucie krótkiego, sprężystego kontaktu w ruchach, które i tak grasz.\n\nWyobraź sobie, że podłoże jest gorące i chcesz stać na nim jak najkrócej. Właśnie to krótkie, lekkie odbicie to siła reaktywna."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "hoch",
+      "fokus": ["kondition", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Kurz und federnd",
+          "ziel": "Ein Gefühl für den kurzen, elastischen Bodenkontakt in vertrauten Bewegungen entwickeln — Qualität, nicht Umfang.",
+          "schritte": [
+            "Spiele deine gewohnte Beinarbeit und achte bewusst auf die Länge des Bodenkontakts: Wie kurz kannst du ihn halten?",
+            "Bei kleinen Ausgleichshüpfern und Richtungswechseln: stell dir den Boden als heiß vor, den du sofort wieder verlässt.",
+            "Achte darauf, dass die Landung dabei immer weich und leise bleibt — federnd, nicht hart.",
+            "Höre auf das Geräusch: ein leiser Kontakt ist meist ein elastischer.",
+            "Beende die Übung, sobald die Bewegung schwer oder die Landung hart wird — Qualität geht vor Fortsetzung."
+          ],
+          "selbstkontrolle": "Fühlt sich dein Bodenkontakt leicht und federnd an oder schwer und lang? Bleibt die Landung weich und leise? Wenn die Federung nachlässt oder die Landung hart wird, ist die Übung für heute vorbei. Für strukturiertes Sprungtraining wende dich an qualifizierte Anleitung.",
+          "abschluss": "Reaktivkraft ist der leichte, kurze Bodenkontakt, der deine Bewegung effizienter macht. Sie wächst über die Qualität des Kontakts — der geplante Aufbau gehört in fachkundige Hände."
+        },
+        "en": {
+          "titel": "Short and springy",
+          "ziel": "Develop a feel for the short, elastic ground contact in familiar movements — quality, not volume.",
+          "schritte": [
+            "Play your usual footwork and pay deliberate attention to the length of the ground contact: how short can you keep it?",
+            "On small adjustment hops and changes of direction: imagine the ground as hot, which you leave again at once.",
+            "Make sure the landing always stays soft and quiet — springy, not hard.",
+            "Listen to the sound: a quiet contact is usually an elastic one.",
+            "End the exercise as soon as the movement gets heavy or the landing gets hard — quality comes before continuation."
+          ],
+          "selbstkontrolle": "Does your ground contact feel light and springy or heavy and long? Does the landing stay soft and quiet? If the spring fades or the landing gets hard, the exercise is over for today. For structured jump training, turn to qualified guidance.",
+          "abschluss": "Reactive strength is the light, short ground contact that makes your movement more efficient. It grows through the quality of the contact — the planned build-up belongs in expert hands."
+        },
+        "fr": {
+          "titel": "Court et élastique",
+          "ziel": "Développer une sensation du contact au sol court et élastique dans des mouvements familiers — la qualité, pas le volume.",
+          "schritte": [
+            "Joue ton jeu de jambes habituel et fais consciemment attention à la durée du contact au sol : jusqu'à quel point peux-tu le raccourcir ?",
+            "Sur les petits sautillements d'ajustement et les changements de direction : imagine le sol brûlant, que tu quittes aussitôt.",
+            "Veille à ce que la réception reste toujours souple et silencieuse — élastique, pas dure.",
+            "Écoute le bruit : un contact silencieux est le plus souvent un contact élastique.",
+            "Arrête l'exercice dès que le mouvement devient lourd ou la réception dure — la qualité prime sur la poursuite."
+          ],
+          "selbstkontrolle": "Ton contact au sol se sent-il léger et élastique, ou lourd et long ? La réception reste-t-elle souple et silencieuse ? Si l'élasticité faiblit ou que la réception devient dure, l'exercice est terminé pour aujourd'hui. Pour un entraînement de saut structuré, adresse-toi à un encadrement qualifié.",
+          "abschluss": "La force réactive, c'est le contact au sol léger et court qui rend ton mouvement plus efficace. Elle grandit par la qualité du contact — la construction planifiée appartient à des mains compétentes."
+        },
+        "pl": {
+          "titel": "Krótko i sprężyście",
+          "ziel": "Rozwinąć czucie krótkiego, elastycznego kontaktu z podłożem w znanych ruchach — jakość, nie objętość.",
+          "schritte": [
+            "Graj swoją zwykłą pracę nóg i zwracaj świadomie uwagę na długość kontaktu z podłożem: jak krótko potrafisz go utrzymać?",
+            "Przy małych podskokach wyrównawczych i zmianach kierunku: wyobraź sobie podłoże jako gorące, które natychmiast znów opuszczasz.",
+            "Zadbaj o to, by lądowanie pozostawało przy tym zawsze miękkie i ciche — sprężyste, nie twarde.",
+            "Wsłuchaj się w dźwięk: cichy kontakt jest przeważnie elastyczny.",
+            "Zakończ ćwiczenie, gdy tylko ruch robi się ciężki lub lądowanie twarde — jakość przed kontynuacją."
+          ],
+          "selbstkontrolle": "Czy twój kontakt z podłożem czuje się lekko i sprężyście, czy ciężko i długo? Czy lądowanie pozostaje miękkie i ciche? Jeśli sprężystość słabnie lub lądowanie robi się twarde, ćwiczenie na dziś skończone. Do strukturalnego treningu skoków zwróć się do wykwalifikowanego prowadzenia.",
+          "abschluss": "Siła reaktywna to lekki, krótki kontakt z podłożem, który czyni twój ruch bardziej efektywnym. Rośnie przez jakość kontaktu — zaplanowana budowa należy do fachowych rąk."
+        }
+      }
+    },
+    {
+      "id": "bewegungsoekonomie",
+      "grafik": [
+        "G-036"
+      ],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "schnelle_fuesse",
+        "durchhalten"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): verbindet effiziente Fussarbeit mit dem Durchhalten ueber die Distanz",
+      "spielziele": [
+        "rally_ausdauer",
+        "wiederholte_antrittsschnelligkeit"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT"
+      ],
+      "transfer_herkunft_beleg": "Bewegungsoekonomie: effiziente Umsetzung von Aufwand in Bewegung, weniger Energieverlust; Effizienz haengt eng mit der Nutzung elastischer Energie zusammen: Trainingswissenschaft.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Bewegungsökonomie — effizient statt hektisch",
+        "en": "Movement economy — efficient, not frantic",
+        "fr": "Économie de mouvement — efficace plutôt qu'agité",
+        "pl": "Ekonomia ruchu — efektywnie zamiast nerwowo"
+      },
+      "erklaerteil": {
+        "de": "Erfahrene Spieler wirken oft mühelos, während weniger geübte um dieselben Bälle hektisch rennen. Der Unterschied ist die Bewegungsökonomie: mit möglichst wenig Aufwand dorthin kommen, wo du hin musst. Wer ökonomisch spielt, bleibt länger frisch und ist am Ende des Matches noch da.\n\nÖkonomie beginnt mit dem Weglassen überflüssiger Bewegung. Jeder unnötige Schritt, jedes zu weite Ausholen, jede hektische Korrektur kostet Kraft. Der Experte bewegt sich in klaren, direkten Wegen zum Ball und zurück, ohne Zappeln, ohne Umwege. Ruhe in der Bewegung ist ein Zeichen von Effizienz, nicht von Langsamkeit.\n\nEin zweiter Teil ist die gute Ausgangsposition. Wer nach jedem Schlag zügig in eine zentrale, ausbalancierte Position zurückkehrt, hat kürzere Wege zum nächsten Ball. Ökonomie entsteht auch dadurch, dass du gar nicht erst weit laufen musst, weil du klug stehst.\n\nUnd sie hängt eng mit der Reaktivkraft zusammen: Wer die federnde Energie seiner Sehnen nutzt, bewegt sich mit weniger muskulärem Aufwand. Effiziente Bewegung fühlt sich leicht an, weil sie die kostenlose elastische Energie mitnutzt, statt alles aus reiner Muskelkraft zu holen.\n\nEin erfahrener Läufer gleitet über die Strecke, ein Anfänger stampft. Beide kommen an, aber der eine hat am Ende noch Reserven, der andere ist leer. Im Crossminton entscheidet diese Reserve oft den dritten Satz.",
+        "en": "Experienced players often seem effortless, while less practiced ones run hectically for the same balls. The difference is movement economy: getting to where you need to go with as little effort as possible. Whoever plays economically stays fresh longer and is still there at the end of the match.\n\nEconomy begins with leaving out superfluous movement. Every unnecessary step, every backswing that's too wide, every hectic correction costs strength. The expert moves in clear, direct paths to the ball and back, without fidgeting, without detours. Calm in movement is a sign of efficiency, not of slowness.\n\nA second part is the good starting position. Whoever returns briskly to a central, balanced position after every stroke has shorter paths to the next ball. Economy also comes from not having to run far in the first place, because you stand cleverly.\n\nAnd it's closely connected to reactive strength: whoever uses the springy energy of their tendons moves with less muscular effort. Efficient movement feels light because it also uses the free elastic energy, instead of getting everything from pure muscle power.\n\nAn experienced runner glides over the course, a beginner stomps. Both arrive, but one still has reserves at the end, the other is empty. In Crossminton this reserve often decides the third set.",
+        "fr": "Les joueurs expérimentés paraissent souvent sans effort, tandis que les moins aguerris courent frénétiquement après les mêmes balles. La différence, c'est l'économie de mouvement : arriver là où tu dois aller avec le moins d'effort possible. Qui joue avec économie reste frais plus longtemps et est encore là à la fin du match.\n\nL'économie commence par supprimer le mouvement superflu. Chaque pas inutile, chaque armé trop ample, chaque correction frénétique coûte des forces. L'expert se déplace par des trajets clairs et directs vers la balle et en revient, sans gesticuler, sans détours. Le calme dans le mouvement est un signe d'efficacité, pas de lenteur.\n\nUne deuxième partie, c'est la bonne position de départ. Qui revient promptement à une position centrale et équilibrée après chaque frappe a des trajets plus courts vers la balle suivante. L'économie vient aussi de ne pas avoir à courir loin d'emblée, parce que tu te places intelligemment.\n\nEt elle est étroitement liée à la force réactive : qui utilise l'énergie élastique de ses tendons se déplace avec moins d'effort musculaire. Un mouvement efficace se sent léger parce qu'il tire aussi parti de l'énergie élastique gratuite, au lieu de tout puiser dans la seule force musculaire.\n\nUn coureur expérimenté glisse sur le parcours, un débutant martèle le sol. Tous deux arrivent, mais l'un a encore des réserves à la fin, l'autre est à sec. Au Crossminton, cette réserve décide souvent le troisième set.",
+        "pl": "Doświadczeni gracze wydają się często bez wysiłku, podczas gdy mniej wyćwiczeni nerwowo biegają za tymi samymi piłkami. Różnicą jest ekonomia ruchu: dotrzeć tam, dokąd musisz, jak najmniejszym nakładem. Kto gra ekonomicznie, pozostaje dłużej świeży i pod koniec meczu wciąż jest obecny.\n\nEkonomia zaczyna się od pomijania zbędnego ruchu. Każdy niepotrzebny krok, każdy zbyt szeroki zamach, każda nerwowa korekta kosztuje siły. Ekspert porusza się jasnymi, bezpośrednimi drogami do piłki i z powrotem, bez wiercenia się, bez okrężnych dróg. Spokój w ruchu to znak efektywności, nie powolności.\n\nDrugą częścią jest dobra pozycja wyjściowa. Kto po każdym uderzeniu sprawnie wraca do centralnej, wyważonej pozycji, ma krótsze drogi do następnej piłki. Ekonomia powstaje także dzięki temu, że w ogóle nie musisz daleko biec, bo mądrze stoisz.\n\nI wiąże się ściśle z siłą reaktywną: kto wykorzystuje sprężystą energię swoich ścięgien, porusza się mniejszym nakładem mięśniowym. Efektywny ruch czuje się lekko, bo wykorzystuje darmową energię elastyczną, zamiast czerpać wszystko z czystej siły mięśni.\n\nDoświadczony biegacz sunie po trasie, początkujący tupie. Oboje docierają, ale jeden ma na końcu jeszcze rezerwy, drugi jest pusty. W crossmintonie ta rezerwa często rozstrzyga trzeciego seta."
+      },
+      "reflexionsaufgabe": {
+        "de": "Beobachte dich im nächsten Training: Wo verschwendest du Bewegung — durch unnötige Schritte, hektisches Zappeln, zu weite Wege, weil du nicht in die Position zurückkehrst? Nimm dir einen einzigen Punkt vor: etwa nach jedem Schlag ruhig und zügig in eine zentrale Position zurückzukehren. Achte darauf, ob du dich am Ende eines Matches frischer fühlst, wenn deine Bewegung ruhiger und direkter wird.",
+        "en": "Watch yourself in your next training: where do you waste movement — through unnecessary steps, hectic fidgeting, paths that are too long because you don't return to position? Pick a single point: for example, returning calmly and briskly to a central position after every stroke. Watch whether you feel fresher at the end of a match when your movement becomes calmer and more direct.",
+        "fr": "Observe-toi au prochain entraînement : où gaspilles-tu du mouvement — par des pas inutiles, une agitation frénétique, des trajets trop longs parce que tu ne reviens pas en position ? Fixe-toi un seul point : par exemple, revenir calmement et promptement à une position centrale après chaque frappe. Fais attention à savoir si tu te sens plus frais à la fin d'un match quand ton mouvement devient plus calme et plus direct.",
+        "pl": "Obserwuj się na następnym treningu: gdzie marnujesz ruch — przez niepotrzebne kroki, nerwowe wiercenie, zbyt długie drogi, bo nie wracasz na pozycję? Postanów sobie jeden jedyny punkt: na przykład po każdym uderzeniu spokojnie i sprawnie wracać do pozycji centralnej. Zwróć uwagę, czy pod koniec meczu czujesz się świeższy, gdy twój ruch robi się spokojniejszy i bardziej bezpośredni."
+      }
+    },
+    {
+      "id": "antizipative_schnelligkeit",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "schnelle_fuesse"
+      ],
+      "voraussetzungen_lesart": "motorisch/wahrnehmungsbezogen (stufenuebergreifend): verbindet schnelle Fuesse mit dem fruehen Lesen",
+      "spielziele": [
+        "wiederholte_antrittsschnelligkeit",
+        "fruehe_flugbahnlesung",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT",
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Antizipation als fruehes Extrahieren von Bewegungsinformation aus der Koerpersprache des Gegners (Start deutlich vor dem Treffmoment); Reaktionsschnelligkeit ist trainierbar: Trainingswissenschaft und Wahrnehmungspsychologie im Sport.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Antizipative Schnelligkeit — der frühe Start",
+        "en": "Anticipatory speed — the early start",
+        "fr": "Vitesse d'anticipation — le départ précoce",
+        "pl": "Szybkość antycypacyjna — wczesny start"
+      },
+      "erklaerteil": {
+        "de": "Die schnellsten Spieler sind nicht immer die, die am schnellsten laufen — es sind oft die, die am frühesten starten. Antizipative Schnelligkeit verbindet deine körperliche Schnelligkeit mit dem frühen Lesen: Du bist eher am Ball, weil du eher losläufst.\n\nDer Schlüssel liegt darin, dass gute Spieler schon auf die Anzeichen vor dem Ball reagieren, statt auf den Ball selbst zu warten. Die Körperhaltung des Gegners, seine Ausholbewegung, die Stellung seines Schlägers verraten oft schon, wohin der Ball geht — lange bevor er ihn trifft. Wer diese Zeichen liest, startet einen Sekundenbruchteil früher. Über ein ganzes Match summiert sich dieser Vorsprung zu einem enormen Unterschied.\n\nDieses frühe Lesen ist eine trainierbare Fähigkeit, keine angeborene Gabe. Je öfter du bewusst auf die Vorbereitung des Gegners achtest statt nur auf den Ball, desto besser wird deine Vorhersage. Mit der Zeit geschieht das von allein — du „ahnst“, wohin der Ball kommt, weil dein Blick die richtigen Zeichen gelernt hat.\n\nAthletisch zahlt sich das doppelt aus: Der frühe Start macht dich effektiv schneller, ohne dass du schneller laufen musst. Und er verbindet sich mit der Technik des frühen Nehmens — wer früh startet, kann den Ball früher treffen und dem Gegner Zeit stehlen.\n\nAntizipation ist wie das Lesen der Wolken vor dem Regen. Wer den Himmel liest, ist im Trockenen, bevor der erste Tropfen fällt. Wer auf den Regen wartet, wird nass — auch wenn er schnell rennt.",
+        "en": "The fastest players are not always the ones who run fastest — they are often the ones who start earliest. Anticipatory speed connects your physical speed with early reading: you're at the ball sooner because you set off sooner.\n\nThe key lies in good players reacting to the signs before the ball, instead of waiting for the ball itself. The opponent's body posture, their backswing, the position of their racket often reveal where the ball is going — long before they hit it. Whoever reads these signs starts a fraction of a second earlier. Over an entire match this head start adds up to an enormous difference.\n\nThis early reading is a trainable skill, not an innate gift. The more often you deliberately watch the opponent's preparation instead of only the ball, the better your prediction becomes. Over time it happens on its own — you \"sense\" where the ball is coming, because your eye has learned the right signs.\n\nAthletically it pays off twice: the early start makes you effectively faster without your having to run faster. And it combines with the technique of taking it early — whoever starts early can meet the ball earlier and steal time from the opponent.\n\nAnticipation is like reading the clouds before the rain. Whoever reads the sky is in the dry before the first drop falls. Whoever waits for the rain gets wet — even if they run fast.",
+        "fr": "Les joueurs les plus rapides ne sont pas toujours ceux qui courent le plus vite — ce sont souvent ceux qui partent le plus tôt. La vitesse d'anticipation relie ta rapidité physique à la lecture précoce : tu es plus tôt sur la balle parce que tu pars plus tôt.\n\nLa clé réside dans le fait que les bons joueurs réagissent déjà aux signes avant la balle, au lieu d'attendre la balle elle-même. La posture de l'adversaire, son armé, la position de sa raquette révèlent souvent déjà où va la balle — bien avant qu'il ne la frappe. Qui lit ces signes part une fraction de seconde plus tôt. Sur tout un match, cette avance s'additionne en une différence énorme.\n\nCette lecture précoce est une aptitude qui se travaille, pas un don inné. Plus tu observes consciemment la préparation de l'adversaire au lieu de la seule balle, meilleure devient ta prédiction. Avec le temps, cela se fait de soi-même — tu « pressens » où la balle arrive, parce que ton regard a appris les bons signes.\n\nSur le plan athlétique, cela paie doublement : le départ précoce te rend effectivement plus rapide sans que tu aies à courir plus vite. Et il se combine avec la technique de la prise précoce — qui part tôt peut frapper la balle plus tôt et voler du temps à l'adversaire.\n\nL'anticipation, c'est comme lire les nuages avant la pluie. Qui lit le ciel est au sec avant que la première goutte ne tombe. Qui attend la pluie se fait tremper — même s'il court vite.",
+        "pl": "Najszybsi gracze nie zawsze są tymi, którzy najszybciej biegają — to często ci, którzy najwcześniej startują. Szybkość antycypacyjna łączy twoją fizyczną szybkość z wczesnym czytaniem: jesteś prędzej przy piłce, bo prędzej ruszasz.\n\nKlucz tkwi w tym, że dobrzy gracze reagują już na oznaki przed piłką, zamiast czekać na samą piłkę. Postawa ciała przeciwnika, jego zamach, ustawienie jego rakiety często już zdradzają, dokąd idzie piłka — na długo zanim ją trafi. Kto czyta te znaki, startuje o ułamek sekundy wcześniej. Na przestrzeni całego meczu ta przewaga sumuje się do ogromnej różnicy.\n\nTo wczesne czytanie to zdolność do wytrenowania, nie wrodzony dar. Im częściej świadomie zwracasz uwagę na przygotowanie przeciwnika zamiast tylko na piłkę, tym lepsza staje się twoja przepowiednia. Z czasem dzieje się to samo — „przeczuwasz\", dokąd przyjdzie piłka, bo twój wzrok nauczył się właściwych znaków.\n\nAtletycznie opłaca się to podwójnie: wczesny start czyni cię efektywnie szybszym, bez tego, byś musiał szybciej biec. I łączy się z techniką wczesnego przyjmowania — kto wcześnie startuje, może wcześniej trafić piłkę i ukraść przeciwnikowi czas.\n\nAntycypacja jest jak czytanie chmur przed deszczem. Kto czyta niebo, jest w suchym, zanim spadnie pierwsza kropla. Kto czeka na deszcz, moknie — nawet jeśli szybko biega."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm dir im nächsten Match vor, bewusst auch die Vorbereitung deines Gegners zu beobachten, nicht nur den Ball: seine Körperhaltung, seine Ausholbewegung, die Stellung des Schlägers. Verraten sie dir früh, wohin der Ball geht? Achte darauf, ob du früher losläufst, wenn du diese Zeichen liest — und ob du dadurch entspannter und rechtzeitiger am Ball bist, ohne schneller zu rennen.",
+        "en": "In your next match, resolve to deliberately watch your opponent's preparation too, not just the ball: their body posture, their backswing, the position of the racket. Do they reveal early where the ball is going? Watch whether you set off earlier when you read these signs — and whether you're thereby at the ball more relaxed and more in time, without running faster.",
+        "fr": "Propose-toi, au prochain match, d'observer consciemment aussi la préparation de ton adversaire, pas seulement la balle : sa posture, son armé, la position de la raquette. Te révèlent-ils tôt où va la balle ? Fais attention à savoir si tu pars plus tôt quand tu lis ces signes — et si tu es ainsi plus détendu et plus à temps sur la balle, sans courir plus vite.",
+        "pl": "Postanów sobie w następnym meczu świadomie obserwować także przygotowanie przeciwnika, nie tylko piłkę: jego postawę ciała, jego zamach, ustawienie rakiety. Czy zdradzają ci wcześnie, dokąd idzie piłka? Zwróć uwagę, czy ruszasz wcześniej, gdy czytasz te znaki — i czy dzięki temu jesteś spokojniej i w porę przy piłce, nie biegnąc szybciej."
+      }
+    },
+    {
+      "id": "langfristig_belastbar",
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "belastung_steuern_regenerieren",
+        "erholen"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): fasst Belastungssteuerung und Erholung zur langfristigen Belastbarkeit zusammen",
+      "spielziele": [
+        "satz_match_regeneration"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "AT"
+      ],
+      "transfer_herkunft_beleg": "Langfristige Belastbarkeit und Verletzungsvorbeugung durch Bewegungsqualitaet und Belastungsmanagement; Ermuedung zeigt sich u. a. in nachlassender Reaktivkraft: Trainingswissenschaft. Verletzung/Schmerz/Ueberlastung ausdruecklich an Sportmedizin/Physiotherapie verwiesen.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Langfristig gesund und belastbar bleiben",
+        "en": "Staying healthy and resilient long-term",
+        "fr": "Rester sain et résistant sur la durée",
+        "pl": "Zdrowie i wytrzymałość na długo"
+      },
+      "erklaerteil": {
+        "de": "Die größte athletische Leistung nützt nichts, wenn der Körper sie nicht über die Jahre trägt. Langfristige Belastbarkeit — gesund zu bleiben und über eine Saison und darüber hinaus leistungsfähig — ist die stille Grundlage jeder Expertenkarriere. Hier gilt der Gesundheitsgedanke besonders streng.\n\nDer erste Grundsatz ist, auf den Körper zu hören. Erfahrene Athleten kennen den Unterschied zwischen normaler Trainingsmüdigkeit und einem Warnsignal. Anhaltende Erschöpfung, Bewegungen, die schwerer werden, ein Nachlassen der federnden Schnelligkeit — das sind Zeichen, die Aufmerksamkeit verlangen, nicht Härte gegen sich selbst.\n\nDer zweite Grundsatz ist, dass Bewegungsqualität schützt. Sauberes, ökonomisches Bewegen belastet Gelenke und Sehnen weniger als hektisches, unkontrolliertes. Vieles, was du in dieser App über Technik und Bewegung gelernt hast, dient auch deiner Gesundheit.\n\nUnd hier die klare, wichtige Grenze: Alles, was mit Schmerz, Verletzung, anhaltender Überlastung oder dem konkreten Aufbau von Belastung zu tun hat, gehört in fachkundige Hände — Sportmedizin, Physiotherapie, qualifizierte Trainingsbegleitung. Diese App gibt dir keine Behandlungshinweise, keine Belastungsvorgaben und keine Diagnosen. Sie ermutigt dich, bei solchen Fragen die richtige Fachperson aufzusuchen. Das ist ein Zeichen von Erfahrung, nicht von Schwäche.\n\nEin Instrument, das man pflegt, klingt ein Leben lang; eines, das man überlastet, reißt. Dein Körper ist dein Instrument — wer ihn achtsam behandelt und im Zweifel den Fachmann fragt, spielt am längsten.",
+        "en": "The greatest athletic performance is of no use if the body doesn't carry it over the years. Long-term resilience — staying healthy and capable across a season and beyond — is the quiet foundation of every expert career. Here the health principle applies especially strictly.\n\nThe first principle is to listen to the body. Experienced athletes know the difference between normal training fatigue and a warning signal. Persistent exhaustion, movements that get heavier, a fading of the springy speed — these are signs that demand attention, not harshness toward yourself.\n\nThe second principle is that movement quality protects. Clean, economical movement stresses joints and tendons less than hectic, uncontrolled movement. Much of what you've learned in this app about technique and movement also serves your health.\n\nAnd here the clear, important boundary: anything to do with pain, injury, persistent overload, or the concrete build-up of load belongs in expert hands — sports medicine, physiotherapy, qualified training support. This app gives you no treatment advice, no load prescriptions, and no diagnoses. It encourages you to seek out the right specialist for such questions. That is a sign of experience, not of weakness.\n\nAn instrument that is cared for sounds for a lifetime; one that is overstrained snaps. Your body is your instrument — whoever treats it mindfully and, when in doubt, asks the expert plays the longest.",
+        "fr": "La plus grande performance athlétique ne sert à rien si le corps ne la porte pas au fil des ans. La résistance à long terme — rester sain et performant sur une saison et au-delà — est le fondement silencieux de toute carrière d'expert. Ici, le principe de santé s'applique avec une rigueur particulière.\n\nLe premier principe, c'est d'écouter le corps. Les athlètes expérimentés connaissent la différence entre une fatigue d'entraînement normale et un signal d'alarme. Un épuisement persistant, des mouvements qui s'alourdissent, un déclin de la vitesse élastique — ce sont des signes qui demandent de l'attention, pas de la dureté envers soi-même.\n\nLe deuxième principe, c'est que la qualité de mouvement protège. Un mouvement propre et économe sollicite moins les articulations et les tendons qu'un mouvement frénétique et incontrôlé. Une grande partie de ce que tu as appris dans cette app sur la technique et le mouvement sert aussi ta santé.\n\nEt voici la limite claire et importante : tout ce qui touche à la douleur, à la blessure, à la surcharge persistante ou à la construction concrète de la charge appartient à des mains compétentes — médecine du sport, physiothérapie, accompagnement d'entraînement qualifié. Cette app ne te donne aucun conseil de traitement, aucune consigne de charge et aucun diagnostic. Elle t'encourage à consulter le bon spécialiste pour de telles questions. C'est un signe d'expérience, pas de faiblesse.\n\nUn instrument qu'on entretient sonne toute une vie ; un qu'on surmène se rompt. Ton corps est ton instrument — qui le traite avec soin et, en cas de doute, demande au spécialiste joue le plus longtemps.",
+        "pl": "Największa forma atletyczna nic nie da, jeśli ciało nie udźwignie jej przez lata. Długoterminowa wytrzymałość — pozostać zdrowym i sprawnym przez sezon i dłużej — to cicha podstawa każdej kariery eksperckiej. Tu myśl o zdrowiu obowiązuje szczególnie surowo.\n\nPierwsza zasada to słuchać ciała. Doświadczeni sportowcy znają różnicę między normalnym zmęczeniem treningowym a sygnałem ostrzegawczym. Utrzymujące się wyczerpanie, ruchy, które robią się cięższe, słabnięcie sprężystej szybkości — to znaki, które wymagają uwagi, nie twardości wobec siebie.\n\nDruga zasada to, że jakość ruchu chroni. Czyste, ekonomiczne poruszanie obciąża stawy i ścięgna mniej niż nerwowe, niekontrolowane. Wiele z tego, czego nauczyłeś się w tej aplikacji o technice i ruchu, służy także twojemu zdrowiu.\n\nA tu jasna, ważna granica: wszystko, co ma związek z bólem, kontuzją, utrzymującym się przeciążeniem lub konkretną budową obciążenia, należy do fachowych rąk — medycyny sportowej, fizjoterapii, wykwalifikowanego towarzyszenia treningowego. Ta aplikacja nie daje ci wskazówek leczniczych, żadnych zaleceń obciążenia ani diagnoz. Zachęca cię, byś przy takich pytaniach zwrócił się do właściwego specjalisty. To znak doświadczenia, nie słabości.\n\nInstrument, który się pielęgnuje, brzmi przez całe życie; taki, który się przeciąża, pęka. Twoje ciało to twój instrument — kto obchodzi się z nim uważnie i w razie wątpliwości pyta fachowca, gra najdłużej."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk ehrlich über deine Belastbarkeit nach: Hörst du auf die Warnsignale deines Körpers, oder spielst du sie regelmäßig weg? Kennst du den Unterschied zwischen normaler Müdigkeit und einem Zeichen, das Aufmerksamkeit verlangt? Nimm dir vor, bei anhaltender Erschöpfung, Schmerz oder Überlastung die passende Fachperson aufzusuchen, statt härter zu trainieren — Sportmedizin, Physiotherapie oder qualifizierte Trainingsbegleitung. Langfristige Gesundheit ist die Grundlage, auf der alles andere steht.",
+        "en": "Think honestly about your resilience: do you listen to your body's warning signals, or do you regularly play them away? Do you know the difference between normal fatigue and a sign that demands attention? Resolve, with persistent exhaustion, pain, or overload, to seek out the appropriate specialist instead of training harder — sports medicine, physiotherapy, or qualified training support. Long-term health is the foundation on which everything else stands.",
+        "fr": "Réfléchis honnêtement à ta résistance : écoutes-tu les signaux d'alarme de ton corps, ou les fais-tu régulièrement taire en jouant ? Connais-tu la différence entre une fatigue normale et un signe qui demande de l'attention ? Propose-toi, en cas d'épuisement persistant, de douleur ou de surcharge, de consulter le spécialiste adapté au lieu de t'entraîner plus dur — médecine du sport, physiothérapie ou accompagnement d'entraînement qualifié. La santé à long terme est le fondement sur lequel tout le reste repose.",
+        "pl": "Pomyśl szczerze o swojej wytrzymałości: słuchasz sygnałów ostrzegawczych swojego ciała, czy regularnie je przegrywasz? Znasz różnicę między normalnym zmęczeniem a znakiem, który wymaga uwagi? Postanów sobie przy utrzymującym się wyczerpaniu, bólu lub przeciążeniu zwrócić się do właściwego specjalisty, zamiast trenować twardziej — medycyny sportowej, fizjoterapii lub wykwalifikowanego towarzyszenia treningowego. Długoterminowe zdrowie to podstawa, na której stoi wszystko inne."
+      }
+    }
+  ],
+  "delta_bausteine": []
+}

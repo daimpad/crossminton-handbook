@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jeu de jambes : centre et split-step — Manuel de Crossminton</title>
+  <meta name="description" content="Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souve …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/fr/baustein/beinarbeit">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Jeu de jambes : centre et split-step — Manuel de Crossminton">
+  <meta property="og:description" content="Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souve …">
+  <meta property="og:url" content="https://crossminton-handbook.de/fr/baustein/beinarbeit">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jeu de jambes : centre et split-step — Manuel de Crossminton">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jeu de jambes : centre et split-step — Manuel de Crossminton">
+  <meta name="twitter:description" content="Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souve …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/beinarbeit">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/beinarbeit">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/beinarbeit">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/beinarbeit">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/beinarbeit">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Manuel de Crossminton","item":"https://crossminton-handbook.de/fr"},{"@type":"ListItem","position":2,"name":"Parcours thématique","item":"https://crossminton-handbook.de/fr/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technique","item":"https://crossminton-handbook.de/fr/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"Jeu de jambes : centre et split-step","item":"https://crossminton-handbook.de/fr/baustein/beinarbeit"}]},{"@type":"LearningResource","name":"Jeu de jambes : centre et split-step","description":"Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souve …","url":"https://crossminton-handbook.de/fr/baustein/beinarbeit","inLanguage":"fr","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Débutant","about":[{"@type":"Thing","name":"Technique"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/fr" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/fr/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-shoe-prints " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Jeu de jambes : centre et split-step</h1>
+        <p class="marke-hero-untertitel">Technique · Débutant</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommandé avant : <a href="/fr/baustein/grundposition?kontext=kompetenz">La position de base</a>, <a href="/fr/baustein/vorhand_drive?kontext=kompetenz">Le drive de coup droit</a>, <a href="/fr/baustein/rueckhand?kontext=kompetenz">Le revers</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explication</h2><span class="chip chip-rot">à faire</span></div>
+      
+      
+      <p>Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souvent plus que la frappe elle-même — il t'amène à temps là où le speeder arrive.</p><p>Tout tourne autour d'un lieu et d'un instant.</p><p>Le lieu, c'est le milieu de ton terrain — la position centrale. De là, tu atteins chaque coin le plus vite. Après chaque frappe, tu y reviens. Ton jeu y gagne un rythme : sortir vers la balle, frapper, revenir au centre. Encore et encore.</p><p>L'instant, c'est le split-step — un petit bond élastique, juste avant que ton adversaire frappe le speeder. Tu atterris légèrement sur la plante des deux pieds, et c'est de cet atterrissage que tu pars dans toutes les directions. Le split-step transforme ta disponibilité calme en mouvement dirigé. Sans lui, tu es planté au sol et tu perds le premier pas.</p><p>Ensemble, les deux forment un cycle : tu attends au centre, tu te charges avec le split-step, tu pars vers la balle, tu frappes, tu reviens. Ce cycle est le fondement de ta mobilité sur le terrain.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Jeu de jambes, image 1 : le split-step" class="grafik-bild grafik-svg" id="g-svg-143">
+  <style>
+    #g-svg-143 .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-143 .kopf{fill:var(--tinte,#16202b)}
+    #g-svg-143 .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    #g-svg-143 .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    #g-svg-143 .hopf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
+    #g-svg-143 .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    #g-svg-143 .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-143-m007" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="var(--primaer,#38a4f1)"></path></marker></defs>
+  <!-- kleiner Hüpfer: Aufwärtspfeil -->
+  <path class="hopf" d="M150,48 L150,30" marker-end="url(#g-svg-143-m007)"></path>
+  <circle class="kopf" cx="150" cy="72" r="15"></circle>
+  <path class="fig" d="M150,96 L150,158"></path>
+  <path class="fig" d="M150,112 L124,122 L138,150"></path>
+  <path class="fig" d="M150,112 L176,122 L162,150"></path>
+  <!-- Beine gebeugt, Füße schulterbreit, auf den Ballen -->
+  <path class="fig" d="M150,158 L122,190 L118,220"></path>
+  <path class="fig" d="M150,158 L178,190 L182,220"></path>
+  <line class="schaft" x1="150" y1="150" x2="150" y2="180"></line>
+  <ellipse class="kelle" cx="150" cy="196" rx="11" ry="15"></ellipse>
+  <!-- kurze Feder-Linien unter den Füßen -->
+  <path class="hopf" d="M104,232 L128,232"></path>
+  <path class="hopf" d="M172,232 L196,232"></path>
+  <line class="boden" x1="98" y1="244" x2="202" y2="244"></line>
+  <text class="st" x="150" y="270">petit saut élastique · sur l'avant des pieds</text>
+</svg>
+        <figcaption class="leise">Jeu de jambes, image 1 : le split-step</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Jeu de jambes, image 2 : le cycle de déplacement" class="grafik-bild grafik-svg" id="g-svg-144">
+  <style>
+    #g-svg-144 .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-144 .kopf{fill:var(--tinte,#16202b)}
+    #g-svg-144 .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    #g-svg-144 .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    #g-svg-144 .speeder{fill:var(--primaer,#38a4f1)}
+    #g-svg-144 .zur{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:6 5;stroke-linecap:round}
+    #g-svg-144 .basis{fill:var(--primaer,#38a4f1)}
+    #g-svg-144 .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.8;opacity:.5}
+    #g-svg-144 .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    #g-svg-144 .mk{fill:var(--tinte-3,#6b7686)}
+    #g-svg-144 .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-144-m008" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"></path></marker></defs>
+  <!-- zentrale Basis -->
+  <circle class="ring" cx="88" cy="210" r="15"></circle>
+  <circle class="basis" cx="88" cy="210" r="7"></circle>
+  <!-- Ausfallschritt-Figur zur Ecke -->
+  <circle class="kopf" cx="140" cy="104" r="14"></circle>
+  <path class="fig" d="M140,118 L156,164"></path>
+  <!-- vorderes Bein gebeugt (Ausfall) -->
+  <path class="fig" d="M156,164 L184,192 L200,222"></path>
+  <!-- hinteres Bein gestreckt -->
+  <path class="fig" d="M156,164 L124,196 L104,220"></path>
+  <!-- Schlagarm nach unten-vorn -->
+  <path class="fig" d="M142,126 L166,146 L188,164"></path>
+  <!-- freier Arm -->
+  <path class="fig" d="M140,130 L120,144"></path>
+  <line class="schaft" x1="188" y1="164" x2="202" y2="176"></line>
+  <ellipse class="kelle" cx="210" cy="184" rx="9" ry="13" transform="rotate(50 210 184)"></ellipse>
+  <circle class="speeder" cx="214" cy="196" r="6"></circle>
+  <!-- gebogener Rückweg zur Mitte -->
+  <path class="zur" d="M196,224 C 150,242 110,238 96,222" marker-end="url(#g-svg-144-m008)"></path>
+  <line class="boden" x1="72" y1="238" x2="228" y2="238"></line>
+  <text class="st" x="150" y="266">fente vers le coin — retour au centre</text>
+</svg>
+        <figcaption class="leise">Jeu de jambes, image 2 : le cycle de déplacement</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="beinarbeit" aria-pressed="false">
+      Cocher comme lu
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Exercice</h2><span class="chip chip-rot">à faire</span></div>
+        
+        <h3 class="ue-titel">Faire tourner le cycle</h3><div class="ue-block"><h4>Objectif</h4><p>Le cycle de déplacement est acquis dans son ensemble — sans speeder, comme pur jeu de jambes.</p></div><div class="ue-block"><h4>Comment procéder</h4><ol class="schrittliste"><li>Place-toi en position centrale de ton terrain, en position de base.</li><li>Fais un petit split-step — bond élastique, atterrissage sur la plante des deux pieds.</li><li>Depuis l'atterrissage, élance-toi vers un coin de ton terrain et esquisse-y une frappe.</li><li>Reviens à la position centrale.</li><li>Répète, à chaque fois vers un autre coin.</li></ol></div><div class="ue-block"><h4>Auto-contrôle</h4><p>Observe deux choses : le départ vient-il directement du split-step, ou y a-t-il une pause entre les deux ? Et reviens-tu de façon fiable à la position centrale, ou restes-tu dans le coin après la frappe ? Le cycle ne porte que lorsque les deux tournent rond.</p></div><div class="ue-block"><h4>Conclusion</h4><p>Ce déplacement à vide installe le rythme avant qu'un speeder mette la pression. Une fois le cycle acquis, l'adaptation à la vraie balle vient presque toute seule — les trajets restent les mêmes, seule la cible se déplace alors.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="beinarbeit" aria-pressed="false">
+      Cocher comme fait
+    </button></div>
+      </section>
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Objectifs de jeu</dt><dd>Vitesse de démarrage répétée, Endurance d'échange</dd>
+        
+        
+        
+        <dt>Prérequis</dt><dd><a href="/fr/baustein/grundposition?kontext=kompetenz">La position de base</a>, <a href="/fr/baustein/vorhand_drive?kontext=kompetenz">Le drive de coup droit</a>, <a href="/fr/baustein/rueckhand?kontext=kompetenz">Le revers</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Navigation entre modules">
+      <div class="fussnav-seite">
+        
+      </div>
+      <div class="fussnav-seite fussnav-rechts">
+        
+        <a class="knopf knopf-sekundaer baustein-zur-liste" href="/fr/pfad/kompetenz">Vers la liste</a>
+      </div>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Partager" title="Partager">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Enregistrer" title="Enregistrer">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/fr/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/fr/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/fr/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/fr/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/fr/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/fr/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/fr/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/fr/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/fr/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/fr/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/fr/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/fr/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/fr/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/fr/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

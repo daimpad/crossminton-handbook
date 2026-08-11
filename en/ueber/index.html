@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>About this app — Crossminton Handbook</title>
+  <meta name="description" content="This app is a learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/en/ueber">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="About this app — Crossminton Handbook">
+  <meta property="og:description" content="This app is a learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.">
+  <meta property="og:url" content="https://crossminton-handbook.de/en/ueber">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="About this app — Crossminton Handbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About this app — Crossminton Handbook">
+  <meta name="twitter:description" content="This app is a learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/ueber">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/ueber">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/ueber">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/ueber">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/ueber">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton Handbook","item":"https://crossminton-handbook.de/en"},{"@type":"ListItem","position":2,"name":"About this app","item":"https://crossminton-handbook.de/en/ueber"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/en" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/en/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    
+    <section class="marke-hero klein hue pf-blau">
+      <span class="marke-hero-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>About this app</h1>
+        
+      </div>
+    </section>
+    <section class="karte"><p>This app is a learning tool for Crossminton. It teaches the game in small, building modules — from your first strokes to fine-tuning at expert level.</p><p>You choose your own way through the material: by skill level, by personal goal, by topic or as a guided training session. If you come from another racket sport, you get targeted notes on where familiar movements differ in Crossminton. There's also a dedicated doubles topic and a Rules tab with the official rules of play.</p><p>The content is kept factual and rests on established fundamentals from training theory and sports science. The app aims to guide you toward practicing on your own, not to keep you busy.</p></section>
+    <section class="karte"><h2>What this handbook is</h2><p>Crossminton is quick to learn and hard to play well. There is plenty of knowledge about it — it is just scattered: in videos, forums, coaches' heads and personal experience. This handbook gathers it in one place and arranges it so you can start where you actually are.</p><p>What sets it apart from a textbook is the cut. Instead of one linear text there are 108 small, self-contained modules. Each covers exactly one thing — <a href="/en/baustein/griff">The universal grip</a>, <a href="/en/baustein/umschalten">switching between attack and defense</a>, <a href="/en/baustein/wind_lesen_nutzen">reading the wind</a> — and consists of an explanation plus either an exercise or a reflection task. A module takes a few minutes to read and can be applied on court right after.</p><p>These modules know each other: <a href="/en/baustein/aufschlag">The serve</a> knows that <a href="/en/baustein/griff">The universal grip</a> sensibly comes first. Such connections create different routes through the same material, without any content having to be written twice.</p><p>Nothing is locked. The prerequisite graph sorts, it never blocks. If you want to start straight at <a href="/en/baustein/sprung_smash">the jump smash</a>, you can — you get a note about the missing foundation, not a closed door.</p><p>Progress is tied to content, not to the route. A module you have ticked off stays ticked off, no matter which path took you there. If you browse by topic first and follow the skill ladder later, you will find your completed stations already there.</p><p>Your background is taken into account. If you come from badminton, tennis or squash, you bring technique with you — and habits that get in the way here. Exactly at those points a dedicated explanation replaces the general one: same module, different explanation, same exercise. Not an extra chapter, but the right explanation right where you are.</p></section><section class="karte"><h2>What is inside</h2><p>The material spans five fields: technique, tactics, mental game, athletics and equipment — 108 modules in total. 44 of them carry an exercise, 64 a reflection task. Which of the two depends on the content: movement is practised, attitude is thought through.</p><p>Four routes lead through this single pool. The skill path is the ladder along your level and works cumulatively: 34 modules for beginners, 66 for advanced players, 93 for experts. The topic path lets you browse freely by field. The goal path filters on a goal you choose yourself. The training path bundles eight curated sessions into three phases each.</p><p>Running across these are their own axes: doubles across all three levels, from the first “<a href="/en/baustein/wer_nimmt_den_ball">Who takes the ball</a>?” to a pair that acts as one — and outdoor play with wind, sun, wet ground, heat and different surfaces, all the way to <a href="/en/baustein/snowminton">snowminton</a>, <a href="/en/baustein/beachminton">beachminton</a> and <a href="/en/baustein/blackminton">blackminton</a>.</p><p>For reference there are 44 rules in 13 sections, each with a plain-language explanation alongside, plus a tournament regulation covering five tournament levels: it shows what a level binds you to, and what is new or stricter compared to the next level down.</p></section><section class="karte"><h2>What it is good for</h2><p>As a way in: if you have started and do not know what comes next, the skill path gives you a sensible order — from <a href="/en/baustein/griff">the universal grip</a> to the first tactical basics.</p><p>As a translation aid when switching sports: people coming from a related racket sport often play technically cleanly and still wrongly. With your background set, the fitting explanation appears wherever a habit you brought along collides.</p><p>As a focused tool: if you have a specific weakness, the goal path gives you only the modules that pay into it — across technique, tactics and the mental game, instead of a full course.</p><p>As session preparation: one of the eight sessions guides you through warm-up, main part and cool-down with concrete notes for each station. For longer-term planning, the training plan generates a series across several weeks with a sensible load rhythm.</p><p>As a correction aid: when the same mistakes keep coming back in a group, the fault patterns name the symptom, the likely cause and a correction — including a cue you can actually say on court.</p><p>And as a reference: for the rules question during a match, and for the question of what binds you when hosting a tournament.</p></section><section class="karte"><h2>Who it is for</h2><p>For beginners looking for a clear first route who do not know where to start. The skill path takes that decision off your hands without patronising you.</p><p>For players switching over from badminton, tennis or squash who want to understand quickly what is different — and above all which of their proven habits work against them here.</p><p>For ambitious players who are past the basics and work on the finer points: <a href="/en/baustein/taeuschung">deception</a>, <a href="/en/baustein/frueh_nehmen">taking the Speeder early</a>, changes of pace, <a href="/en/baustein/der_matchplan">the game plan</a> and <a href="/en/baustein/optimaler_wettkampfzustand">competitive state</a>.</p><p>For coaches passing content on — with ready-made sessions, fault patterns and a methodical part on session design. Explicitly also meant for people new to coaching who play well themselves but have taught little so far.</p><p>For clubs and groups that need a shared reference point: the same terms, the same exercises, plus rules and tournament conditions to look up.</p><p>No prior knowledge is required. If you only want to look up a rule, you can do that without engaging with the rest.</p></section>
+    <section class="karte"><h2>Thanks and sources</h2><p class="leise">The rules of play are taken from the official Crossminton rules of the International Crossminton Organisation (ICO), represented in Germany by the Deutscher Crossminton Verband (DCV); the rendering is reconciled with the ICO version 2024/dec.</p><p class="leise">The subject-matter fundamentals draw on literature and materials from Crossminton, training science and sport psychology, as well as transfer experience from related racket sports.</p><p class="leise">The following people contributed to the content: XXX. Thanks to everyone who helped test and improve it.</p></section>
+    <section class="karte"><h2>License and credits</h2><p class="leise">Software: <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT License</a></p><p class="leise">Content and text: <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International (CC BY 4.0)</a></p><p class="leise">Credits: <a href="https://paderta.com" target="_blank" rel="noopener noreferrer">Damian Paderta</a> · <a href="https://nozilla.de" target="_blank" rel="noopener noreferrer">nozilla | bits &amp; bytes mit ❤</a></p><p class="info-cta"><a class="knopf knopf-sekundaer info-github" href="https://github.com/daimpad/crossminton-handbook/" target="_blank" rel="noopener noreferrer"><svg class="github-logo" viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg> Source code and contributions: see GitHub</a></p><p class="version-zeile">Version fb4d3da · 2026-08-11</p></section>
+    
+    
+    <p class="info-rechtliches">
+      <a href="/en/impressum">Legal notice</a>
+      <span aria-hidden="true">·</span>
+      <a href="/en/datenschutz">Privacy</a>
+    </p></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/en/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/en/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/en/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/en/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/en/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/en/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/en/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/en/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/en/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/en/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/en/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/en/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/en/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

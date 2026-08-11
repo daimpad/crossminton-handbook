@@ -1,0 +1,352 @@
+{
+  "_meta": {
+    "beschreibung": "Experten-Doppel: hoechste Doppel-Ebene, aufbauend auf dem Fortgeschritten-Doppel (doppel-thema). Das Paar als System, gegnerisches Paar lesen, Partner in Position bringen, nahtloses Umschalten, blindes Verstaendnis. Alle spielform: doppel. Herkunftsneutral — keine Deltas.",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl",
+      "ja"
+    ],
+    "stand": "Erstausbau-Erweiterung — Doppel-Ausbau nach oben. Vervollstaendigt das Doppel ueber alle drei Stufen.",
+    "dateiname_konvention": "bausteine.doppel-experte.json (Doppel-Thema, Experten-Stufe).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+    "spielform": "Alle Bausteine spielform: doppel. Belegt doppel_spezifische_loesungen (Bereich 6) auf Experten-Ebene.",
+    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer (siehe 11.5).",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf das Fortgeschritten-Doppel (doppel-thema) und die fortgeschrittene Taktik, plus intern.",
+    "innere_struktur": "2 uebungsteil (partner_in_position_bringen, nahtlos_umschalten), 3 reflexionsaufgabe.",
+    "ordnungslogik": "paar_als_system -> gegnerisches_paar_lesen -> partner_in_position_bringen -> nahtlos_umschalten -> blindes_verstaendnis."
+  },
+  "bausteine": [
+    {
+      "id": "paar_als_system",
+      "grafik": [
+        "G-049"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "spielform": "doppel",
+      "voraussetzungen": [
+        "doppel_als_eigenes_spiel"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das Doppel-Grundverstaendnis zum abgestimmten System aus",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "umschaltloesung"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Das Paar als System: vorab abgesprochene Muster, sich ergaenzende Staerken, als eine Einheit denken und bewegen (das Bild des unsichtbaren Seils): Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {
+        "de": "Das Paar als System",
+        "en": "The pair as a system",
+        "fr": "La paire comme système",
+        "pl": "Para jako system"
+      },
+      "erklaerteil": {
+        "de": "Auf Expertenniveau sind zwei gute Einzelspieler noch lange kein gutes Doppel. Der Unterschied ist das System: ein Paar, das als abgestimmte Einheit denkt, sich ergänzt und vorab weiß, was es tut. Zwei Spieler, die nur nebeneinander ihr bestes Einzel spielen, verlieren gegen ein echtes Team.\n\nDer Kern ist, die Stärken beider zu bündeln. Vielleicht hat einer den härteren Angriff, der andere die bessere Übersicht am Netz; einer ist der ruhige Pol, der andere der Antreiber. Ein gutes System teilt die Rollen so, dass sich die Stärken ergänzen und die Schwächen gegenseitig gedeckt werden. Ihr spielt wegen eurer Unterschiede zusammen, nicht trotz ihnen.\n\nDazu gehören vorab abgesprochene Muster. Erfahrene Paare haben Standardabläufe, die sie ohne Worte abrufen: bestimmte Aufschlagvarianten mit fester Anschlussbewegung, feste Reaktionen auf typische Situationen. Diese Muster nehmen im schnellen Spiel die Entscheidungslast und sorgen dafür, dass ihr in denselben Bahnen denkt.\n\nAm Ende bewegt sich das System als eine Einheit. Das Bild vom unsichtbaren Seil gilt hier in Vollendung: Jede Bewegung des einen löst die passende Antwort des anderen aus, bis das Paar wie ein einziger Organismus über beide Felder wirkt.\n\nEin Spitzendoppel ist wie ein eingespieltes Musik-Duo. Beide kennen das Stück, jeder hat seine Stimme, und im Zusammenspiel entsteht etwas, das keiner allein hervorbringt.",
+        "en": "At expert level, two good singles players are far from being a good doubles pair. The difference is the system: a pair that thinks as a coordinated unit, complements each other, and knows in advance what it's doing. Two players who merely play their best singles alongside each other lose to a real team.\n\nThe core is to bundle the strengths of both. Maybe one has the harder attack, the other the better overview at the net; one is the calm pole, the other the driver. A good system divides the roles so that the strengths complement each other and the weaknesses are mutually covered. You play together because of your differences, not despite them.\n\nPart of this is patterns agreed in advance. Experienced pairs have standard sequences they call up without words: certain serve variations with a fixed follow-up movement, fixed reactions to typical situations. These patterns take the decision load off in fast play and ensure that you think along the same lines.\n\nIn the end the system moves as one unit. The image of the invisible rope applies here in its fullest: every movement of one triggers the matching answer of the other, until the pair works like a single organism across both courts.\n\nA top doubles pair is like a well-rehearsed music duo. Both know the piece, each has their voice, and in the interplay something arises that neither produces alone.",
+        "fr": "Au niveau expert, deux bons joueurs de simple sont encore loin de faire un bon double. La différence, c'est le système : une paire qui pense comme une unité coordonnée, se complète et sait d'avance ce qu'elle fait. Deux joueurs qui se contentent de jouer leur meilleur simple côte à côte perdent contre une vraie équipe.\n\nL'essentiel, c'est de rassembler les forces des deux. Peut-être l'un a-t-il l'attaque la plus puissante, l'autre la meilleure vue d'ensemble au filet ; l'un est le pôle calme, l'autre le moteur. Un bon système répartit les rôles de sorte que les forces se complètent et que les faiblesses se couvrent mutuellement. Vous jouez ensemble à cause de vos différences, pas malgré elles.\n\nCela passe par des schémas convenus d'avance. Les paires expérimentées ont des enchaînements standard qu'elles convoquent sans mots : certaines variantes de service avec un mouvement de suite fixe, des réactions fixes à des situations typiques. Ces schémas retirent la charge de décision dans le jeu rapide et font que vous pensez dans les mêmes voies.\n\nAu bout du compte, le système se déplace comme une unité. L'image de la corde invisible vaut ici dans sa plénitude : chaque mouvement de l'un déclenche la réponse adaptée de l'autre, jusqu'à ce que la paire agisse comme un seul organisme sur les deux terrains.\n\nUn double de haut niveau, c'est comme un duo musical bien rodé. Tous deux connaissent le morceau, chacun a sa voix, et de l'interaction naît quelque chose qu'aucun ne produit seul.",
+        "pl": "Na poziomie eksperckim dwoje dobrych pojedynczych graczy to jeszcze daleko nie dobry debel. Różnicą jest system: para, która myśli jako zgrana jedność, uzupełnia się i z góry wie, co robi. Dwoje graczy, którzy tylko obok siebie grają swój najlepszy singiel, przegrywa z prawdziwym zespołem.\n\nRdzeniem jest połączenie sił obojga. Może jeden ma mocniejszy atak, drugi lepszy ogląd z przodu; jeden jest spokojnym biegunem, drugi motorem. Dobry system dzieli role tak, że siły się uzupełniają, a słabości są nawzajem kryte. Gracie razem z powodu waszych różnic, nie mimo nich.\n\nNależą do tego z góry ustalone wzorce. Doświadczone pary mają standardowe przebiegi, które przywołują bez słów: określone warianty serwisu ze stałym ruchem następczym, stałe reakcje na typowe sytuacje. Te wzorce zdejmują w szybkiej grze ciężar decyzji i sprawiają, że myślicie tymi samymi torami.\n\nNa końcu system porusza się jako jedność. Obraz niewidzialnej liny obowiązuje tu w pełni: każdy ruch jednego wyzwala odpowiednią odpowiedź drugiego, aż para działa na oba pola jak jeden organizm.\n\nDebel na najwyższym poziomie jest jak zgrany duet muzyczny. Oboje znają utwór, każdy ma swój głos, a we współgraniu powstaje coś, czego nikt sam nie stworzy."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über dein Doppel als System nach: Was sind die Stärken von dir und deinem Partner, und ergänzen sie sich, oder spielt ihr zwei Einzel nebeneinander? Habt ihr vorab abgesprochene Muster, die ihr ohne Worte abruft? Nimm dir vor, mit deinem Partner ein, zwei feste Abläufe zu vereinbaren und die Rollen so zu teilen, dass sich eure Stärken bündeln.",
+        "en": "Think about your doubles pair as a system: what are the strengths of you and your partner, and do they complement each other, or do you play two singles alongside each other? Do you have patterns agreed in advance that you call up without words? Resolve to agree one or two fixed sequences with your partner and to divide the roles so that your strengths bundle together.",
+        "fr": "Réfléchis à ton double comme à un système : quelles sont les forces de toi et de ton partenaire, et se complètent-elles, ou jouez-vous deux simples côte à côte ? Avez-vous des schémas convenus d'avance que vous convoquez sans mots ? Propose-toi de convenir avec ton partenaire d'un ou deux enchaînements fixes et de répartir les rôles de sorte que vos forces se rassemblent.",
+        "pl": "Pomyśl o swoim deblu jako o systemie: jakie są siły twoje i twojego partnera i czy się uzupełniają, czy gracie dwa single obok siebie? Macie z góry ustalone wzorce, które przywołujecie bez słów? Postanów sobie ustalić z partnerem jeden, dwa stałe przebiegi i podzielić role tak, by wasze siły się połączyły."
+      }
+    },
+    {
+      "id": "gegnerisches_paar_lesen",
+      "grafik": [
+        "G-050"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "spielform": "doppel",
+      "voraussetzungen": [
+        "paar_als_system",
+        "gegner_lesen_muster"
+      ],
+      "voraussetzungen_lesart": "gemischt: paar_als_system (intra); gegner_lesen_muster (stufenuebergreifend, Gegner-Lesen als Basis)",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "gegner_muster_lesen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Das gegnerische Paar lesen: den schwaecheren Gegner angreifen und die Luecke/Mitte zwischen beiden als Unsicherheitszone nutzen (testet ihre Absprache): Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {
+        "de": "Das gegnerische Paar lesen",
+        "en": "Reading the opposing pair",
+        "fr": "Lire la paire adverse",
+        "pl": "Czytanie pary przeciwników"
+      },
+      "erklaerteil": {
+        "de": "Ein gegnerisches Paar hat Schwachstellen, die ein einzelner Gegner nicht hat — und der Experte findet und nutzt sie. Wer das gegnerische Duo liest, greift genau dorthin an, wo es dem Paar am meisten schadet, nicht irgendwohin.\n\nDie erste Schwachstelle ist der schwächere der beiden. Fast immer ist einer verwundbarer — schwächer in der Verteidigung, langsamer, nervöser. Ein kluges Paar erkennt das früh und lenkt einen Großteil der Bälle gezielt auf diesen Spieler, bis er unter der Dauerlast Fehler macht oder aus der Position gerät.\n\nDie zweite, oft noch wirksamere Schwachstelle ist die Lücke zwischen beiden — die Mitte. Ein Ball, der genau zwischen die beiden Gegner fällt, erzeugt eine Unsicherheitszone: Beide zögern kurz, weil keiner sicher ist, ob es sein Ball ist. Dieses Zögern testet ihre Absprache und kostet sie den entscheidenden Moment. Gegen ein Paar in der Seite-an-Seite-Verteidigung ist der Ball in die Mitte besonders stark.\n\nBeides zusammen ergibt den Plan: Belaste den schwächeren Gegner und suche die Naht zwischen beiden. So spielst du gegen ihre Abstimmung, nicht gegen zwei einzelne Spieler.\n\nEin gegnerisches Paar ist wie eine Mauer aus zwei Steinen. Du schlägst in die Fuge dazwischen, nicht gegen den festen Stein — dort hält die Mauer am wenigsten.",
+        "en": "An opposing pair has weak points a single opponent doesn't have — and the expert finds and uses them. Whoever reads the opposing duo attacks exactly where it harms the pair most, not just anywhere.\n\nThe first weak point is the weaker of the two. Almost always one is more vulnerable — weaker in defense, slower, more nervous. A clever pair recognizes this early and directs a large share of the balls deliberately at this player, until they make errors under the constant load or get out of position.\n\nThe second, often even more effective weak point is the gap between the two — the middle. A ball that falls exactly between the two opponents creates a zone of uncertainty: both hesitate briefly, because neither is sure whether it's their ball. This hesitation tests their arrangement and costs them the decisive moment. Against a pair in the side-by-side defense, the ball into the middle is especially strong.\n\nThe two together make the plan: load the weaker opponent and look for the seam between them. That way you play against their coordination, not against two individual players.\n\nAn opposing pair is like a wall of two stones. You strike into the joint between them, not against the solid stone — that's where the wall holds least.",
+        "fr": "Une paire adverse a des points faibles qu'un adversaire seul n'a pas — et l'expert les trouve et les exploite. Qui lit le duo adverse attaque exactement là où cela nuit le plus à la paire, pas n'importe où.\n\nLe premier point faible, c'est le plus faible des deux. Presque toujours, l'un est plus vulnérable — plus faible en défense, plus lent, plus nerveux. Une paire habile le reconnaît tôt et dirige une grande partie des balles de façon ciblée sur ce joueur, jusqu'à ce qu'il commette des fautes sous la charge continue ou sorte de sa position.\n\nLe deuxième point faible, souvent encore plus efficace, c'est la brèche entre les deux — le centre. Une balle qui tombe exactement entre les deux adversaires crée une zone d'incertitude : tous deux hésitent brièvement, parce qu'aucun n'est sûr que c'est sa balle. Cette hésitation met à l'épreuve leur entente et leur coûte le moment décisif. Contre une paire en défense côte à côte, la balle au centre est particulièrement forte.\n\nLes deux ensemble font le plan : charge l'adversaire le plus faible et cherche la jointure entre les deux. Ainsi, tu joues contre leur coordination, pas contre deux joueurs isolés.\n\nUne paire adverse, c'est comme un mur de deux pierres. Tu frappes dans le joint entre elles, pas contre la pierre solide — c'est là que le mur tient le moins.",
+        "pl": "Para przeciwników ma słabe punkty, których pojedynczy przeciwnik nie ma — a ekspert je znajduje i wykorzystuje. Kto czyta duet przeciwników, atakuje dokładnie tam, gdzie parze szkodzi to najbardziej, nie gdziekolwiek.\n\nPierwszym słabym punktem jest słabszy z dwojga. Niemal zawsze jeden jest bardziej wrażliwy — słabszy w obronie, wolniejszy, bardziej nerwowy. Mądra para rozpoznaje to wcześnie i kieruje większość piłek celowo na tego gracza, aż pod ciągłym obciążeniem popełni błędy albo wypadnie z pozycji.\n\nDrugim, często jeszcze skuteczniejszym słabym punktem jest luka między obojgiem — środek. Piłka, która pada dokładnie między dwoje przeciwników, tworzy strefę niepewności: oboje krótko wahają się, bo żaden nie jest pewien, czy to jego piłka. To wahanie testuje ich uzgodnienie i kosztuje ich decydujący moment. Przeciw parze w obronie bok w bok piłka w środek jest szczególnie mocna.\n\nOboje razem daje plan: obciąż słabszego przeciwnika i szukaj szwu między obojgiem. Tak grasz przeciw ich zgraniu, nie przeciw dwóm pojedynczym graczom.\n\nPara przeciwników jest jak mur z dwóch kamieni. Uderzasz w fugę pomiędzy, nie w twardy kamień — tam mur trzyma najsłabiej."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an ein starkes gegnerisches Paar: Wer von beiden war der verwundbarere, und hast du ihn gezielt belastet? Und hast du die Lücke zwischen beiden gesucht, oder nur auf die Spieler selbst gespielt? Nimm dir vor, im nächsten Doppel früh den schwächeren Gegner zu bestimmen und bewusst die Mitte zwischen beiden anzuspielen, besonders wenn sie Seite an Seite verteidigen.",
+        "en": "Think of a strong opposing pair: which of the two was the more vulnerable, and did you deliberately load them? And did you look for the gap between the two, or only play at the players themselves? Resolve in your next doubles match to determine the weaker opponent early and deliberately play into the middle between the two, especially when they defend side by side.",
+        "fr": "Pense à une paire adverse forte : lequel des deux était le plus vulnérable, et l'as-tu chargé de façon ciblée ? Et as-tu cherché la brèche entre les deux, ou n'as-tu joué que sur les joueurs eux-mêmes ? Propose-toi, au prochain double, de déterminer tôt l'adversaire le plus faible et de jouer volontairement le centre entre les deux, surtout quand ils défendent côte à côte.",
+        "pl": "Pomyśl o mocnej parze przeciwników: który z dwojga był bardziej wrażliwy i czy obciążałeś go celowo? I czy szukałeś luki między obojgiem, czy grałeś tylko na samych graczy? Postanów sobie w następnym deblu wcześnie określić słabszego przeciwnika i świadomie zagrywać w środek między obojgiem, zwłaszcza gdy bronią bok w bok."
+      }
+    },
+    {
+      "id": "partner_in_position_bringen",
+      "grafik": [
+        "G-051"
+      ],
+      "typ": "micro",
+      "domaene": "taktik",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "spielform": "doppel",
+      "voraussetzungen": [
+        "angriff_im_paar",
+        "paar_als_system"
+      ],
+      "voraussetzungen_lesart": "gemischt: angriff_im_paar (stufenuebergreifend, Angriffsformation); paar_als_system (intra)",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "aufschlag_rueckschlag_eroeffnung"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Den Partner in Position bringen: Aufschlag/Spiel so anlegen, dass ein schwacher Return erzwungen und der Partner zum Angriff aufgebaut wird; nach dem Aufschlag ans Netz nachruecken: Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {
+        "de": "Den Partner in Position bringen",
+        "en": "Putting your partner in position",
+        "fr": "Mettre son partenaire en position",
+        "pl": "Ustawić partnera w pozycji"
+      },
+      "erklaerteil": {
+        "de": "Im Spitzendoppel spielst du oft dafür, deinen Partner in die perfekte Angriffsposition zu bringen, nicht für deinen eigenen Punktgewinn. Dieses uneigennützige Aufbauen ist ein Kennzeichen reifer Doppelspieler: Der beste Schlag ist manchmal der, der dem Partner den Punkt vorbereitet.\n\nDer Grundgedanke ist, einen schwachen Ball des Gegners zu erzwingen, den dein Partner verwerten kann. Ein tiefer, präziser Aufschlag oder ein flacher, druckvoller Ball zwingt den Gegner in die Defensive und zu einem hohen, kurzen Return — genau die Vorlage, die dein hinterer Partner in einen Angriff verwandelt.\n\nDabei greift die Rollenteilung von Angriffs- und Rückraumspieler. Der Rückraumspieler baut mit druckvollen Bällen auf und schließt ab; der vordere Angriffsspieler lauert am Netz, um den schwachen Return sofort abzufangen. Nach deinem eigenen Aufschlag rückst du selbst nach vorn, um kurze Rückschläge früh wegzunehmen und deinem Partner den Rücken freizuhalten.\n\nDas verlangt, den Punkt zwei Züge im Voraus zu denken: „wie erzwinge ich die Vorlage, die mein Partner verwandelt\", nicht „wie gewinne ich diesen Ball\". Wer so spielt, macht aus zwei Spielern eine Angriffsmaschine.\n\nDu bist der Vorbereiter, der die Flanke schlägt, damit der Partner den Ball nur noch verwandeln muss. Das Tor schießt er — aber ohne deine Vorlage gäbe es keins.",
+        "en": "In top doubles you often play to bring your partner into the perfect attacking position, not for your own point. This selfless building is a mark of mature doubles players: the best stroke is sometimes the one that sets up the point for the partner.\n\nThe basic idea is to force a weak ball from the opponent that your partner can exploit. A deep, precise serve or a flat, pressing ball forces the opponent onto the defensive and into a high, short return — exactly the setup your rear partner turns into an attack.\n\nHere the role division of attacking and rear-court player takes effect. The rear-court player builds with pressing balls and finishes; the front attacking player lurks at the net to intercept the weak return at once. After your own serve you move forward yourself, to take short returns early and keep your partner's back free.\n\nThis demands thinking the point two moves ahead: \"how do I force the setup my partner converts,\" not \"how do I win this ball.\" Whoever plays like this turns two players into an attacking machine.\n\nYou are the provider who delivers the cross, so the partner only has to convert the ball. They score the goal — but without your assist there would be none.",
+        "fr": "Dans le double de haut niveau, tu joues souvent pour amener ton partenaire dans la position d'attaque parfaite, pas pour ton propre gain de point. Cette construction altruiste est une marque des joueurs de double mûrs : la meilleure frappe est parfois celle qui prépare le point au partenaire.\n\nL'idée de base, c'est de forcer une balle faible de l'adversaire que ton partenaire peut exploiter. Un service profond et précis, ou une balle tendue et appuyée, force l'adversaire sur la défensive et à un retour haut et court — exactement la passe que ton partenaire de fond transforme en attaque.\n\nIci intervient la répartition des rôles entre joueur d'attaque et joueur de fond. Le joueur de fond construit avec des balles appuyées et conclut ; le joueur d'attaque à l'avant guette au filet pour intercepter aussitôt le retour faible. Après ton propre service, tu avances toi-même pour retirer tôt les retours courts et couvrir les arrières de ton partenaire.\n\nCela exige de penser le point deux coups à l'avance : « comment je force la passe que mon partenaire transforme », pas « comment je gagne cette balle ». Qui joue ainsi fait de deux joueurs une machine d'attaque.\n\nTu es le passeur qui centre, pour que le partenaire n'ait plus qu'à transformer la balle. C'est lui qui marque le but — mais sans ta passe, il n'y en aurait aucun.",
+        "pl": "W deblu na najwyższym poziomie często grasz po to, by ustawić partnera w idealnej pozycji ataku, nie dla własnego zdobycia punktu. To bezinteresowne budowanie to znak rozpoznawczy dojrzałych deblistów: najlepsze uderzenie to czasem to, które przygotowuje punkt partnerowi.\n\nMyślą przewodnią jest wymusić słabą piłkę przeciwnika, którą partner może wykorzystać. Głęboki, precyzyjny serwis albo płaska, dociskowa piłka zmusza przeciwnika do defensywy i wysokiego, krótkiego returnu — dokładnie tej podania, którą twój tylny partner zamienia w atak.\n\nPrzy tym działa podział ról gracza atakującego i tylnego. Gracz tylny buduje dociskowymi piłkami i kończy; przedni gracz atakujący czyha z przodu, by natychmiast przechwycić słaby return. Po własnym serwisie sam wysuwasz się do przodu, by wcześnie zdejmować krótkie odbicia i osłaniać partnerowi plecy.\n\nTo wymaga myślenia o punkcie dwa ruchy naprzód: „jak wymuszę podanie, które partner zamieni\", nie „jak wygram tę piłkę\". Kto tak gra, robi z dwojga graczy maszynę atakującą.\n\nJesteś przygotowującym, który dośrodkowuje, by partner musiał już tylko zamienić piłkę. Bramkę strzela on — ale bez twojego podania nie byłoby jej."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["taktik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Vorlage legen",
+          "ziel": "Bälle so anlegen, dass der Partner in die Angriffsposition kommt.",
+          "schritte": [
+            "Spielt zu viert und gebt dem hinteren Spieler die Aufgabe, mit druckvollen, tiefen Bällen einen hohen, kurzen Return zu erzwingen.",
+            "Der vordere Angriffsspieler lauert am Netz und fängt den schwachen Return sofort ab.",
+            "Übt den Aufschlag als Vorlage: tief und präzise, sodass der Gegner nur schwach zurückspielen kann.",
+            "Nach dem eigenen Aufschlag rückt der Server nach vorn, um kurze Rückschläge früh wegzunehmen.",
+            "Denkt jeden Ballwechsel als Vorbereitung: Welcher Ball bringt den Partner in Position?"
+          ],
+          "selbstkontrolle": "Spielst du, um selbst den Punkt zu machen, oder um deinen Partner in Position zu bringen? Erzwingt dein Aufbau einen schwachen Return, den der Partner verwerten kann? Denkst du den Punkt zwei Züge voraus? Gutes Doppel heißt oft, die Vorlage zu legen statt selbst abzuschließen.",
+          "abschluss": "Den Partner in Position zu bringen macht aus zwei Spielern ein Angriffssystem. Wer uneigennützig aufbaut, gewinnt als Paar mehr Punkte als jeder für sich."
+        },
+        "en": {
+          "titel": "Laying the setup",
+          "ziel": "Set up balls so that the partner comes into attacking position.",
+          "schritte": [
+            "Play two-on-two and give the rear player the task of forcing a high, short return with pressing, deep balls.",
+            "The front attacking player lurks at the net and intercepts the weak return at once.",
+            "Practice the serve as a setup: deep and precise, so the opponent can only return weakly.",
+            "After their own serve, the server moves forward to take short returns early.",
+            "Think of every rally as preparation: which ball brings the partner into position?"
+          ],
+          "selbstkontrolle": "Do you play to make the point yourself, or to bring your partner into position? Does your build-up force a weak return the partner can exploit? Do you think the point two moves ahead? Good doubles often means laying the setup instead of finishing yourself.",
+          "abschluss": "Bringing your partner into position turns two players into an attacking system. Whoever builds selflessly wins more points as a pair than each does alone."
+        },
+        "fr": {
+          "titel": "Donner la passe",
+          "ziel": "Placer les balles de sorte que le partenaire arrive en position d'attaque.",
+          "schritte": [
+            "Jouez à quatre et donnez au joueur arrière la tâche de forcer un retour haut et court avec des balles appuyées et profondes.",
+            "Le joueur d'attaque à l'avant guette au filet et intercepte aussitôt le retour faible.",
+            "Travaillez le service comme une passe : profond et précis, de sorte que l'adversaire ne puisse renvoyer que faiblement.",
+            "Après son propre service, le serveur avance pour retirer tôt les retours courts.",
+            "Pensez chaque échange comme une préparation : quelle balle amène le partenaire en position ?"
+          ],
+          "selbstkontrolle": "Joues-tu pour marquer le point toi-même, ou pour amener ton partenaire en position ? Ta construction force-t-elle un retour faible que le partenaire peut exploiter ? Penses-tu le point deux coups à l'avance ? Un bon double, c'est souvent donner la passe au lieu de conclure soi-même.",
+          "abschluss": "Amener son partenaire en position fait de deux joueurs un système d'attaque. Qui construit de façon altruiste gagne, en paire, plus de points que chacun pour soi."
+        },
+        "pl": {
+          "titel": "Zagrać podanie",
+          "ziel": "Zakładać piłki tak, by partner wchodził w pozycję ataku.",
+          "schritte": [
+            "Grajcie we czworo i dajcie tylnemu graczowi zadanie, by dociskowymi, głębokimi piłkami wymusić wysoki, krótki return.",
+            "Przedni gracz atakujący czyha z przodu i natychmiast przechwytuje słaby return.",
+            "Ćwiczcie serwis jako podanie: głęboko i precyzyjnie, tak by przeciwnik mógł odegrać tylko słabo.",
+            "Po własnym serwisie serwujący wysuwa się do przodu, by wcześnie zdejmować krótkie odbicia.",
+            "Myślcie o każdej wymianie jako o przygotowaniu: która piłka ustawia partnera w pozycji?"
+          ],
+          "selbstkontrolle": "Czy grasz, by samemu zdobyć punkt, czy by ustawić partnera w pozycji? Czy twoja budowa wymusza słaby return, który partner może wykorzystać? Czy myślisz o punkcie dwa ruchy naprzód? Dobry debel to często zagrać podanie, zamiast samemu kończyć.",
+          "abschluss": "Ustawienie partnera w pozycji robi z dwojga graczy system atakujący. Kto buduje bezinteresownie, zdobywa jako para więcej punktów niż każdy dla siebie."
+        }
+      }
+    },
+    {
+      "id": "nahtlos_umschalten",
+      "grafik": [
+        "G-052"
+      ],
+      "typ": "micro",
+      "domaene": "athletik_kondition",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "spielform": "doppel",
+      "voraussetzungen": [
+        "das_umschalten_im_doppel",
+        "bewegung_als_einheit"
+      ],
+      "voraussetzungen_lesart": "gemischt (beide stufenuebergreifend): das taktische Umschalten und die Bewegung als Einheit werden zur nahtlosen, schnellen Rotation zusammengefuehrt",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "umschaltmoment_erkennen",
+        "wiederholte_antrittsschnelligkeit"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Nahtloses Umschalten zwischen Angriff (vorn-hinten) und Verteidigung (Seite an Seite), schnell und weitgehend wortlos unter Druck, koordiniert wie am Seil: Rueckschlagsport-Doppel (Badminton).",
+      "anzeigetitel": {
+        "de": "Nahtlos umschalten",
+        "en": "Switching seamlessly",
+        "fr": "Basculer sans rupture",
+        "pl": "Płynne przełączanie"
+      },
+      "erklaerteil": {
+        "de": "Ein Doppel wechselt ständig zwischen zwei Formationen: dem Angriff vorn-hinten und der Verteidigung Seite an Seite. Auf Expertenniveau geschieht dieser Wechsel nahtlos — schnell, flüssig und fast ohne Worte. Wer stockt oder zögert, öffnet dem Gegner genau in diesem Moment die Lücke.\n\nDer Auslöser ist einfach: Wer den Speeder nach unten schlägt, greift an; wer ihn hochspielen muss, verteidigt. Spielt ihr einen harten Ball nach unten, rückt einer ans Netz und ihr steht vorn-hinten. Müsst ihr einen Ball hochnehmen, dreht ihr sofort in die Seite-an-Seite-Verteidigung, um die Breite abzudecken. Dieses Lesen der Situation muss in Sekundenbruchteilen geschehen.\n\nDas Nahtlose entsteht durch die eingespielte Rotation. Rückt einer nach vorn, füllt der andere automatisch den hinteren Raum; dreht einer zur Seite, deckt der andere die andere Hälfte. Auf höchstem Niveau braucht das kaum noch Worte — die Bewegung des einen ist das Signal für den anderen. Das unsichtbare Seil zieht in Echtzeit.\n\nDamit das unter Druck trägt, muss die Rotation tief eingeübt sein. Im Match ist keine Zeit zum Nachdenken; der Wechsel läuft automatisch, weil ihr ihn hundertfach zusammen gespielt habt.\n\nEin Spitzendoppel wechselt die Formation wie eine Drehtür — beide Flügel bewegen sich zugleich, der eine gibt den Raum frei, den der andere einnimmt, ohne Stocken.",
+        "en": "A doubles pair constantly switches between two formations: the front-back attack and the side-by-side defense. At expert level this switch happens seamlessly — fast, fluid, and almost without words. Whoever stalls or hesitates opens the gap for the opponent in exactly that moment.\n\nThe trigger is simple: whoever hits the Speeder downward attacks; whoever has to lift it defends. If you play a hard ball downward, one of you moves to the net and you stand front-back. If you have to take a ball up high, you turn immediately into the side-by-side defense to cover the width. This reading of the situation has to happen in fractions of a second.\n\nThe seamlessness comes from the well-rehearsed rotation. If one moves forward, the other automatically fills the rear space; if one turns to the side, the other covers the other half. At the highest level this hardly needs words anymore — the movement of one is the signal for the other. The invisible rope pulls in real time.\n\nFor this to hold under pressure, the rotation has to be deeply practiced. In a match there's no time to think; the switch runs automatically, because you've played it a hundred times together.\n\nA top doubles pair changes formation like a revolving door — both wings move at the same time, one frees the space the other takes, without stalling.",
+        "fr": "Un double alterne sans cesse entre deux formations : l'attaque avant-arrière et la défense côte à côte. Au niveau expert, ce changement se fait sans rupture — vite, avec fluidité et presque sans mots. Qui hésite ou tarde ouvre à l'adversaire, à ce moment précis, la brèche.\n\nLe déclencheur est simple : qui frappe le speeder vers le bas attaque ; qui doit le jouer en hauteur défend. Si vous jouez une balle dure vers le bas, l'un avance au filet et vous vous tenez avant-arrière. Si vous devez reprendre une balle en hauteur, vous tournez aussitôt dans la défense côte à côte pour couvrir la largeur. Cette lecture de la situation doit se faire en une fraction de seconde.\n\nLe caractère sans rupture vient de la rotation bien rodée. Si l'un avance, l'autre remplit automatiquement l'espace arrière ; si l'un tourne sur le côté, l'autre couvre l'autre moitié. Au plus haut niveau, cela ne demande presque plus de mots — le mouvement de l'un est le signal pour l'autre. La corde invisible tire en temps réel.\n\nPour que cela tienne sous pression, la rotation doit être profondément travaillée. En match, il n'y a pas le temps de réfléchir ; le changement se fait automatiquement, parce que vous l'avez joué cent fois ensemble.\n\nUn double de haut niveau change de formation comme une porte tambour — les deux battants bougent en même temps, l'un libère l'espace que l'autre occupe, sans accroc.",
+        "pl": "Debel zmienia się nieustannie między dwiema formacjami: atakiem przód-tył i obroną bok w bok. Na poziomie eksperckim ta zmiana dzieje się płynnie — szybko, gładko i niemal bez słów. Kto się zatnie lub zawaha, otwiera przeciwnikowi lukę właśnie w tym momencie.\n\nWyzwalacz jest prosty: kto bije speedera w dół, atakuje; kto musi go podbić wysoko, broni. Gracie mocną piłkę w dół, jeden wysuwa się do przodu i stoicie przód-tył. Musicie podbić piłkę wysoko, natychmiast obracacie się w obronę bok w bok, by pokryć szerokość. To czytanie sytuacji musi dziać się w ułamkach sekundy.\n\nPłynność powstaje przez zgraną rotację. Wysuwa się jeden do przodu, drugi automatycznie wypełnia tylną przestrzeń; obraca się jeden w bok, drugi kryje drugą połowę. Na najwyższym poziomie ledwie potrzebuje to jeszcze słów — ruch jednego jest sygnałem dla drugiego. Niewidzialna lina ciągnie w czasie rzeczywistym.\n\nBy to niosło pod presją, rotacja musi być głęboko wyćwiczona. W meczu nie ma czasu na namysł; zmiana biegnie automatycznie, bo zagraliście ją razem setki razy.\n\nDebel na najwyższym poziomie zmienia formację jak drzwi obrotowe — oba skrzydła poruszają się jednocześnie, jedno zwalnia przestrzeń, którą zajmuje drugie, bez zacięcia."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "hoch",
+      "fokus": ["koordination", "kondition"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Angriff und Verteidigung drehen",
+          "ziel": "Schnell und flüssig zwischen Angriffs- und Verteidigungsformation wechseln.",
+          "schritte": [
+            "Spielt zu viert und macht euch die Regel klar: Ball nach unten = Angriff (vorn-hinten), Ball nach oben = Verteidigung (Seite an Seite).",
+            "Übt den Wechsel von Verteidigung zu Angriff: einer rückt nach vorn, der andere füllt den hinteren Raum.",
+            "Übt den Wechsel von Angriff zu Verteidigung: der vordere dreht zur Seite, der hintere deckt die andere Hälfte.",
+            "Reduziert nach und nach die Worte, bis die Bewegung des einen das Signal für den anderen ist.",
+            "Steigert das Tempo, bis der Wechsel auch unter Druck flüssig gelingt."
+          ],
+          "selbstkontrolle": "Läuft euer Wechsel flüssig, oder stockt ihr und lasst Lücken? Füllt der Partner automatisch den Raum, den du verlässt? Braucht ihr noch viele Worte, oder liest einer die Bewegung des anderen? Nahtlos wird das Umschalten nur durch viel gemeinsame Übung.",
+          "abschluss": "Das nahtlose Umschalten hält euch immer in der richtigen Formation. Wer flüssig und wortlos rotiert, lässt dem Gegner keine Lücke im Wechsel."
+        },
+        "en": {
+          "titel": "Rotating attack and defense",
+          "ziel": "Switch quickly and fluidly between the attacking and defending formation.",
+          "schritte": [
+            "Play two-on-two and make the rule clear to yourselves: ball down = attack (front-back), ball up = defense (side by side).",
+            "Practice the switch from defense to attack: one moves forward, the other fills the rear space.",
+            "Practice the switch from attack to defense: the front one turns to the side, the rear one covers the other half.",
+            "Gradually reduce the words, until the movement of one is the signal for the other.",
+            "Increase the pace until the switch works fluidly even under pressure."
+          ],
+          "selbstkontrolle": "Does your switch run fluidly, or do you stall and leave gaps? Does the partner automatically fill the space you leave? Do you still need many words, or does one read the other's movement? Switching only becomes seamless through a lot of joint practice.",
+          "abschluss": "Seamless switching always keeps you in the right formation. Whoever rotates fluidly and wordlessly leaves the opponent no gap in the switch."
+        },
+        "fr": {
+          "titel": "Faire tourner attaque et défense",
+          "ziel": "Basculer vite et avec fluidité entre la formation d'attaque et celle de défense.",
+          "schritte": [
+            "Jouez à quatre et clarifiez la règle : balle vers le bas = attaque (avant-arrière), balle vers le haut = défense (côte à côte).",
+            "Travaillez le passage de la défense à l'attaque : l'un avance, l'autre remplit l'espace arrière.",
+            "Travaillez le passage de l'attaque à la défense : celui de devant tourne sur le côté, celui de derrière couvre l'autre moitié.",
+            "Réduisez peu à peu les mots, jusqu'à ce que le mouvement de l'un soit le signal pour l'autre.",
+            "Augmentez le rythme jusqu'à ce que le changement se fasse avec fluidité, même sous pression."
+          ],
+          "selbstkontrolle": "Votre changement se fait-il avec fluidité, ou hésitez-vous en laissant des brèches ? Le partenaire remplit-il automatiquement l'espace que tu quittes ? Vous faut-il encore beaucoup de mots, ou l'un lit-il le mouvement de l'autre ? La bascule ne devient sans rupture que par beaucoup de travail commun.",
+          "abschluss": "La bascule sans rupture vous maintient toujours dans la bonne formation. Qui tourne avec fluidité et sans mots ne laisse à l'adversaire aucune brèche dans le changement."
+        },
+        "pl": {
+          "titel": "Obracać atak i obronę",
+          "ziel": "Szybko i płynnie zmieniać między formacją ataku a obrony.",
+          "schritte": [
+            "Grajcie we czworo i uświadomcie sobie regułę: piłka w dół = atak (przód-tył), piłka w górę = obrona (bok w bok).",
+            "Ćwiczcie zmianę z obrony w atak: jeden wysuwa się do przodu, drugi wypełnia tylną przestrzeń.",
+            "Ćwiczcie zmianę z ataku w obronę: przedni obraca się w bok, tylny kryje drugą połowę.",
+            "Redukujcie stopniowo słowa, aż ruch jednego będzie sygnałem dla drugiego.",
+            "Zwiększajcie tempo, aż zmiana udaje się płynnie także pod presją."
+          ],
+          "selbstkontrolle": "Czy wasza zmiana biegnie płynnie, czy zacinacie się i zostawiacie luki? Czy partner automatycznie wypełnia przestrzeń, którą opuszczasz? Czy potrzebujecie jeszcze wielu słów, czy jeden czyta ruch drugiego? Płynne przełączanie powstaje tylko przez dużo wspólnego ćwiczenia.",
+          "abschluss": "Płynne przełączanie trzyma was zawsze we właściwej formacji. Kto rotuje płynnie i bez słów, nie zostawia przeciwnikowi luki w zmianie."
+        }
+      }
+    },
+    {
+      "id": "blindes_verstaendnis",
+      "grafik": [
+        "G-053"
+      ],
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "spielform": "doppel",
+      "voraussetzungen": [
+        "verstaendigung_im_paar",
+        "paar_als_system"
+      ],
+      "voraussetzungen_lesart": "gemischt: verstaendigung_im_paar (stufenuebergreifend, Kommunikation als Basis); paar_als_system (intra)",
+      "spielziele": [
+        "doppel_spezifische_loesungen",
+        "fruehe_flugbahnlesung"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Blindes Verstaendnis: Antizipation und Vertrauen, die Bewegung des Partners lesen, nonverbale Abstimmung, durch gemeinsames Spielen ueber Zeit gewachsen: Rueckschlagsport-Doppel und Sportpsychologie.",
+      "anzeigetitel": {
+        "de": "Blindes Verständnis",
+        "en": "Blind understanding",
+        "fr": "L'entente aveugle",
+        "pl": "Ślepe porozumienie"
+      },
+      "erklaerteil": {
+        "de": "Die höchste Stufe des Doppelspiels braucht kaum noch Worte. Eingespielte Paare entwickeln ein blindes Verständnis: Sie ahnen, was der andere tut, bevor er es tut, und decken einander, ohne hinzusehen. Dieses Verständnis ist die stille Krönung des gemeinsamen Spiels.\n\nSein Kern ist die Antizipation des Partners. Du liest auch die Bewegung deines Partners, nicht nur Gegner und Speeder: Wohin er startet, welchen Ball er nimmt, welchen Raum er verlässt. Aus dieser Lesung heraus füllst du automatisch die Lücke, die er öffnet — noch bevor ein Wort fallen könnte.\n\nDas Fundament dieses Verständnisses ist Vertrauen. Du verlässt dich darauf, dass dein Partner seinen Ball nimmt, und musst nicht kontrollierend hinsehen. Dieses Vertrauen befreit dich, dich auf deine eigene Aufgabe zu konzentrieren. Ein Paar, das sich vertraut, spielt ruhiger und schneller als eines, das sich ständig absichert.\n\nBlindes Verständnis lässt sich nicht erzwingen — es wächst durch gemeinsames Spielen über die Zeit. Je öfter ihr zusammen spielt, desto mehr verinnerlicht ihr die Muster und Reaktionen des anderen, bis die Abstimmung wortlos geschieht. Es ist der Ertrag geduldiger gemeinsamer Arbeit.\n\nEin eingespieltes Doppel ist wie zwei Hände derselben Person. Sie müssen sich nicht absprechen — die eine weiß, was die andere tut, und sie greifen wie selbstverständlich ineinander.",
+        "en": "The highest level of doubles hardly needs words anymore. Well-rehearsed pairs develop a blind understanding: they sense what the other does before they do it, and cover each other without looking. This understanding is the quiet crowning of shared play.\n\nIts core is the anticipation of the partner. You read your partner's movement too, not just opponent and Speeder: where they set off, which ball they take, which space they leave. Out of this reading you automatically fill the gap they open — before a word could even be spoken.\n\nThe foundation of this understanding is trust. You rely on your partner taking their ball, and don't have to look over controllingly. This trust frees you to concentrate on your own task. A pair that trusts each other plays calmer and faster than one that constantly hedges.\n\nBlind understanding can't be forced — it grows through playing together over time. The more often you play together, the more you internalize each other's patterns and reactions, until the coordination happens wordlessly. It is the yield of patient shared work.\n\nA well-rehearsed doubles pair is like two hands of the same person. They don't have to consult each other — one knows what the other does, and they interlock as a matter of course.",
+        "fr": "Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre fait avant qu'il ne le fasse, et se couvrent sans regarder. Cette entente est le couronnement silencieux du jeu commun.\n\nSon cœur, c'est l'anticipation du partenaire. Tu lis aussi le mouvement de ton partenaire, pas seulement l'adversaire et le speeder : vers où il part, quelle balle il prend, quel espace il quitte. À partir de cette lecture, tu combles automatiquement la brèche qu'il ouvre — avant même qu'un mot ne puisse être dit.\n\nLe fondement de cette entente, c'est la confiance. Tu comptes sur le fait que ton partenaire prend sa balle, et tu n'as pas à regarder pour contrôler. Cette confiance te libère pour te concentrer sur ta propre tâche. Une paire qui se fait confiance joue plus calmement et plus vite qu'une qui se rassure sans cesse.\n\nL'entente aveugle ne se force pas — elle grandit en jouant ensemble au fil du temps. Plus vous jouez souvent ensemble, plus vous intériorisez les schémas et les réactions de l'autre, jusqu'à ce que la coordination se fasse sans mots. C'est le fruit d'un travail commun patient.\n\nUn double bien rodé, c'est comme deux mains d'une même personne. Elles n'ont pas à se concerter — l'une sait ce que fait l'autre, et elles s'emboîtent comme une évidence.",
+        "pl": "Najwyższy stopień gry deblowej ledwie potrzebuje jeszcze słów. Zgrane pary rozwijają ślepe porozumienie: przeczuwają, co zrobi drugi, zanim to zrobi, i kryją się nawzajem, nie patrząc. To porozumienie to ciche zwieńczenie wspólnej gry.\n\nJego rdzeniem jest antycypacja partnera. Czytasz także ruch swojego partnera, nie tylko przeciwnika i speedera: dokąd startuje, którą piłkę bierze, którą przestrzeń opuszcza. Z tego czytania automatycznie wypełniasz lukę, którą otwiera — jeszcze zanim mogłoby paść słowo.\n\nFundamentem tego porozumienia jest zaufanie. Polegasz na tym, że partner weźmie swoją piłkę, i nie musisz kontrolująco patrzeć. To zaufanie uwalnia cię, byś skupił się na własnym zadaniu. Para, która sobie ufa, gra spokojniej i szybciej niż taka, która stale się asekuruje.\n\nŚlepego porozumienia nie da się wymusić — rośnie przez wspólne granie z czasem. Im częściej gracie razem, tym bardziej uwewnętrzniacie wzorce i reakcje drugiego, aż zgranie dzieje się bez słów. To plon cierpliwej wspólnej pracy.\n\nZgrany debel jest jak dwie ręce tej samej osoby. Nie muszą się umawiać — jedna wie, co robi druga, i splatają się jak coś oczywistego."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk über die Abstimmung mit deinem festen Partner nach: Ahnst du seine Bewegungen, oder musst du ständig hinsehen und dich absichern? Vertraust du darauf, dass er seinen Ball nimmt? Blindes Verständnis wächst nur durch gemeinsames Spielen — nimm dir vor, mit einem festen Partner regelmäßig zu spielen und bewusst darauf zu achten, seine Bewegung zu lesen und ihm zu vertrauen, statt zu kontrollieren.",
+        "en": "Think about the coordination with your regular partner: do you sense their movements, or do you constantly have to look over and hedge? Do you trust them to take their ball? Blind understanding only grows through playing together — resolve to play regularly with a regular partner and to deliberately focus on reading their movement and trusting them, instead of controlling.",
+        "fr": "Réfléchis à l'entente avec ton partenaire attitré : pressens-tu ses mouvements, ou dois-tu sans cesse regarder et te rassurer ? Comptes-tu sur le fait qu'il prend sa balle ? L'entente aveugle ne grandit qu'en jouant ensemble — propose-toi de jouer régulièrement avec un partenaire attitré et de veiller consciemment à lire son mouvement et à lui faire confiance, au lieu de contrôler.",
+        "pl": "Pomyśl o zgraniu ze swoim stałym partnerem: przeczuwasz jego ruchy, czy musisz stale patrzeć i się asekurować? Ufasz, że weźmie swoją piłkę? Ślepe porozumienie rośnie tylko przez wspólne granie — postanów sobie grać regularnie ze stałym partnerem i świadomie zwracać uwagę na czytanie jego ruchu i ufanie mu, zamiast kontrolować."
+      }
+    }
+  ],
+  "delta_bausteine": []
+}

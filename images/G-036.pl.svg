@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Ekonomia ruchu: po lewej gracz, który porusza się efektywnie — gładka, krótka droga; po prawej blado nerwowa wersja z wieloma rozproszonymi dodatkowymi liniami ruchu.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .figh{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;opacity:.45}
+    .kopfh{fill:var(--tinte-3,#6b7686);opacity:.45}
+    .glatt{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-linecap:round}
+    .hektik{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-linecap:round;opacity:.6}
+    .trenn{fill:none;stroke:var(--linie,#e2e8ee);stroke-width:2;stroke-dasharray:4 6}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m036" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <!-- effizient (links) -->
+  <circle class="kopf" cx="76" cy="86" r="12"/>
+  <path class="fig" d="M76,98 L76,146"/>
+  <path class="fig" d="M76,110 L58,126"/>
+  <path class="fig" d="M76,110 L94,126"/>
+  <path class="fig" d="M76,146 L62,178 L58,208"/>
+  <path class="fig" d="M76,146 L90,178 L94,208"/>
+  <path class="glatt" d="M46,222 C 70,214 96,214 118,222" marker-end="url(#m036)"/>
+  <!-- Trennlinie -->
+  <line class="trenn" x1="150" y1="60" x2="150" y2="214"/>
+  <!-- hektisch (rechts, blass) -->
+  <circle class="kopfh" cx="220" cy="86" r="12"/>
+  <path class="figh" d="M220,98 L224,146"/>
+  <path class="figh" d="M221,110 L202,122"/>
+  <path class="figh" d="M221,110 L240,120"/>
+  <path class="figh" d="M224,146 L206,176 L200,208"/>
+  <path class="figh" d="M224,146 L242,176 L250,208"/>
+  <!-- verstreute Hektik-Linien -->
+  <path class="hektik" d="M186,120 L200,112"/>
+  <path class="hektik" d="M250,116 L266,110"/>
+  <path class="hektik" d="M184,160 L198,168"/>
+  <path class="hektik" d="M252,164 L268,158"/>
+  <path class="hektik" d="M200,196 L188,206"/>
+  <path class="hektik" d="M248,198 L262,208"/>
+  <line class="boden" x1="40" y1="222" x2="124" y2="222"/>
+  <line class="boden" x1="182" y1="222" x2="266" y2="222"/>
+  <text class="st" x="150" y="256">efektywnie zamiast nerwowo</text>
+</svg>

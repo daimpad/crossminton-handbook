@@ -1,0 +1,231 @@
+{
+  "_meta": {
+    "beschreibung": "Experten-Mentales: hoechste mentale Ebene. Wettkampfzustand, Flow, Druck als Herausforderung deuten, Gelassenheit, langfristige mentale Entwicklung. Herkunftsneutral — KEINE Cross-Sport-Deltas.",
+    "quellsprache": "de",
+    "zielsprachen": [
+      "en",
+      "fr",
+      "pl",
+      "ja"
+    ],
+    "stand": "Erstausbau-Erweiterung",
+    "dateiname_konvention": "bausteine.experte-mentales.json",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Keine Erweiterung.",
+    "kein_delta_grundsatz": "Wie die gesamte Experten-Stufe: herkunftsneutral, delta_bausteine leer.",
+    "stufenuebergreifende_voraussetzungen": "verweist stufenuebergreifend auf den Fortgeschritten-Mentalblock und teils auf den Beginner-Mentalblock, plus intern.",
+    "wellbeing_grenze": "STRIKT leistungsbezogen und ressourcenorientiert. Nervositaet/Erregung werden als normale, nutzbare Leistungsenergie gerahmt, nicht als klinisches Thema. Kein diagnostisches/therapeutisches Terrain; fuer darueber Hinausgehendes bleibt der Baustein bei spielbezogener Bewaeltigung.",
+    "innere_struktur": "durchgehend reflexionsaufgabe.",
+    "ordnungslogik": "optimaler Wettkampfzustand -> Flow -> Druck als Herausforderung -> Gelassenheit bei Unfairness -> mentale Entwicklung."
+  },
+  "bausteine": [
+    {
+      "id": "optimaler_wettkampfzustand",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "vom_werkzeug_zum_system"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut das mentale System zur Wettkampfsteuerung aus",
+      "spielziele": [
+        "vorbereitende_selbststeuerung",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Individueller optimaler Erregungszustand (Zone optimalen Funktionierens) und Vorstartroutine; Wettkampfnervositaet als nutzbare Energie umdeuten: Sportpsychologie (IZOF/Hanin, Vorstartroutinen).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Der optimale Wettkampfzustand",
+        "en": "The optimal competitive state",
+        "fr": "L'état de compétition optimal",
+        "pl": "Optymalny stan startowy"
+      },
+      "erklaerteil": {
+        "de": "Jeder Spieler hat einen Zustand, in dem er am besten spielt: genau richtig aktiviert, weder zu angespannt noch zu flau. Diesen optimalen Wettkampfzustand kennenzulernen und bewusst herzustellen, ist eine der feinsten mentalen Fertigkeiten des Experten.\n\nDas Besondere: Dieser Punkt ist bei jedem anders. Der eine spielt am besten hochgespannt und voller Energie, der andere ruhig und gelassen. Zu viel Anspannung macht hektisch und verkrampft, zu wenig macht müde und unkonzentriert. Deine Aufgabe ist, deinen eigenen optimalen Punkt zu finden — durch Beobachtung: Wie hast du dich gefühlt, als du besonders gut gespielt hast?\n\nDas wichtigste Werkzeug, um diesen Zustand herzustellen, ist eine feste Vorstartroutine. Eine gleichbleibende Abfolge vor dem Match — Aufwärmen, ein paar Atemzüge, eine kurze Vorstellung, die vertrauten Formeln — schaltet dich in den Wettkampfmodus. Sie wirkt doppelt: Sie nimmt dir Entscheidungen ab und gibt Sicherheit, weil sie schon oft funktioniert hat.\n\nUnd hier ein Umdenken, das viel verändert: Nervosität vor einem wichtigen Match ist kein Feind. Das Herzklopfen, die Anspannung — das ist Energie, die dein Körper bereitstellt, um Höchstleistung zu ermöglichen. Wer die Nervosität als positives Zeichen deutet und ihre Energie nutzt, statt gegen sie zu kämpfen, spielt besser.\n\nDein Wettkampfzustand ist wie die Betriebstemperatur eines Motors. Zu kalt läuft er nicht rund, zu heiß überhitzt er. Die Vorstartroutine bringt dich auf genau die Temperatur, bei der du am besten läufst.",
+        "en": "Every player has a state in which they play best: activated just right, neither too tense nor too flat. Getting to know this optimal competition state and producing it deliberately is one of the finest mental skills of the expert.\n\nThe special thing: this point is different for everyone. One plays best highly charged and full of energy, another calm and composed. Too much tension makes you hectic and cramped, too little makes you tired and unfocused. Your task is to find your own optimal point — through observation: how did you feel when you played particularly well?\n\nThe most important tool for producing this state is a fixed pre-match routine. A consistent sequence before the match — warming up, a few breaths, a short visualization, the familiar phrases — switches you into competition mode. It works twice over: it takes decisions off your hands and gives security, because it has already worked many times.\n\nAnd here a rethink that changes a lot: nervousness before an important match is not an enemy. The pounding heart, the tension — that is energy your body provides to make peak performance possible. Whoever reads the nervousness as a positive sign and uses its energy, instead of fighting against it, plays better.\n\nYour competition state is like the operating temperature of an engine. Too cold and it doesn't run smoothly, too hot and it overheats. The pre-match routine brings you to exactly the temperature at which you run best.",
+        "fr": "Chaque joueur a un état dans lequel il joue le mieux : activé juste comme il faut, ni trop tendu ni trop mou. Apprendre à connaître cet état de compétition optimal et le produire volontairement est l'une des aptitudes mentales les plus fines de l'expert.\n\nLa particularité : ce point est différent pour chacun. L'un joue le mieux très tendu et plein d'énergie, l'autre calme et posé. Trop de tension rend fébrile et crispé, trop peu rend fatigué et déconcentré. Ta tâche, c'est de trouver ton propre point optimal — par l'observation : comment t'es-tu senti quand tu as particulièrement bien joué ?\n\nL'outil le plus important pour produire cet état, c'est une routine d'avant-match fixe. Une suite constante avant le match — s'échauffer, quelques respirations, une brève imagerie, les formules familières — te fait basculer en mode compétition. Elle agit doublement : elle te décharge de décisions et donne de l'assurance, parce qu'elle a déjà fonctionné souvent.\n\nEt voici un changement de regard qui change beaucoup : la nervosité avant un match important n'est pas une ennemie. Le cœur qui bat, la tension — c'est de l'énergie que ton corps met à disposition pour rendre possible la performance maximale. Qui interprète la nervosité comme un signe positif et en utilise l'énergie, au lieu de lutter contre elle, joue mieux.\n\nTon état de compétition, c'est comme la température de fonctionnement d'un moteur. Trop froid, il ne tourne pas rond ; trop chaud, il surchauffe. La routine d'avant-match t'amène exactement à la température à laquelle tu fonctionnes le mieux.",
+        "pl": "Każdy gracz ma stan, w którym gra najlepiej: akurat właściwie pobudzony, ani zbyt spięty, ani zbyt ospały. Poznanie tego optymalnego stanu startowego i świadome jego wywoływanie to jedna z najsubtelniejszych umiejętności mentalnych eksperta.\n\nSzczególne jest to: ten punkt jest u każdego inny. Jeden gra najlepiej mocno napięty i pełen energii, drugi spokojny i opanowany. Za dużo napięcia czyni nerwowym i spiętym, za mało czyni zmęczonym i nieskupionym. Twoim zadaniem jest znaleźć swój własny optymalny punkt — przez obserwację: jak się czułeś, gdy grałeś szczególnie dobrze?\n\nNajważniejszym narzędziem, by wywołać ten stan, jest stała rutyna przedstartowa. Niezmienna sekwencja przed meczem — rozgrzewka, kilka oddechów, krótkie wyobrażenie, znajome formuły — przełącza cię w tryb startowy. Działa podwójnie: odbiera ci decyzje i daje pewność, bo już wiele razy zadziałała.\n\nA tu zmiana myślenia, która wiele zmienia: zdenerwowanie przed ważnym meczem nie jest wrogiem. Kołatanie serca, napięcie — to energia, którą twoje ciało udostępnia, by umożliwić najwyższą formę. Kto odczytuje zdenerwowanie jako pozytywny znak i wykorzystuje jego energię, zamiast z nim walczyć, gra lepiej.\n\nTwój stan startowy jest jak temperatura pracy silnika. Za zimny nie chodzi równo, za gorący się przegrzewa. Rutyna przedstartowa doprowadza cię dokładnie do temperatury, w której chodzisz najlepiej."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an zwei, drei deiner besten Spiele zurück: Wie hast du dich davor und dabei gefühlt — eher ruhig oder eher hochgespannt? Das ist ein Hinweis auf deinen optimalen Zustand. Baue dir daraus eine feste Vorstartroutine, die dich dorthin bringt (z. B. Aufwärmen, ein paar bewusste Atemzüge, eine kurze Vorstellung, deine Formeln). Und übe die Umdeutung: Wenn du das nächste Mal vor einem wichtigen Match nervös bist, sag dir, dass diese Energie dir hilft — und nutze sie.",
+        "en": "Think back to two or three of your best matches: how did you feel before and during them — rather calm or rather highly charged? That is a clue to your optimal state. Build a fixed pre-match routine from it that brings you there (e.g. warming up, a few deliberate breaths, a short visualization, your phrases). And practice the reframing: the next time you're nervous before an important match, tell yourself that this energy helps you — and use it.",
+        "fr": "Repense à deux ou trois de tes meilleurs matchs : comment t'es-tu senti avant et pendant — plutôt calme ou plutôt très tendu ? C'est un indice sur ton état optimal. Construis-en une routine d'avant-match fixe qui t'y amène (p. ex. échauffement, quelques respirations conscientes, une brève imagerie, tes formules). Et travaille le recadrage : la prochaine fois que tu es nerveux avant un match important, dis-toi que cette énergie t'aide — et utilise-la.",
+        "pl": "Wróć myślami do dwóch, trzech swoich najlepszych meczów: jak się przed nimi i w ich trakcie czułeś — raczej spokojnie czy raczej mocno napięty? To wskazówka co do twojego optymalnego stanu. Zbuduj sobie z tego stałą rutynę przedstartową, która cię tam doprowadza (np. rozgrzewka, kilka świadomych oddechów, krótkie wyobrażenie, twoje formuły). I ćwicz przeformułowanie: gdy następnym razem przed ważnym meczem będziesz zdenerwowany, powiedz sobie, że ta energia ci pomaga — i wykorzystaj ją."
+      }
+    },
+    {
+      "id": "in_den_flow_finden",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "optimaler_wettkampfzustand",
+        "bei_der_sache_bleiben"
+      ],
+      "voraussetzungen_lesart": "gemischt: optimaler_wettkampfzustand (intra); bei_der_sache_bleiben (stufenuebergreifend auf Beginner-Mentales)",
+      "spielziele": [
+        "konzentrationskonstanz",
+        "vorbereitende_selbststeuerung"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Flow als Zustand optimaler Passung von Anforderung und Koennen; nicht erzwingbar, aber die Bedingungen sind herstellbar; Ueberdenken stoert den Flow: Sportpsychologie (Csikszentmihalyi; Flow-/Clutch-Forschung).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "In den Flow finden",
+        "en": "Finding your flow",
+        "fr": "Entrer dans le flow",
+        "pl": "Wejść w flow"
+      },
+      "erklaerteil": {
+        "de": "Manchmal spielst du wie von selbst. Die Schläge gelingen ohne Nachdenken, die Zeit scheint langsamer, du bist ganz im Spiel versunken. Dieser Zustand heißt Flow, und er bringt oft deine besten Leistungen hervor. Der Experte lernt, ihn einzuladen.\n\nFlow entsteht, wenn die Anforderung genau zu deinem Können passt. Ist der Gegner zu leicht, wird es langweilig; ist er überwältigend, entsteht Druck. Dazwischen, wo die Aufgabe dich genau richtig fordert, öffnet sich das Tor zum Flow. Deshalb erleben Experten den Flow oft in engen, gleichwertigen Matches.\n\nDu kannst den Flow nicht auf Kommando herbeizwingen — aber du kannst seine Bedingungen schaffen. Klare, einfache Ziele im Moment. Volle Aufmerksamkeit auf den nächsten Ball, nicht auf das Ergebnis. Deine Vorstartroutine, die dich beruhigt und fokussiert. Und die Abwesenheit von Angst und Selbstzweifel, die den Flow zuverlässig zerstören.\n\nDas Wichtigste, wenn der Flow da ist: Störe ihn nicht durch Nachdenken. Sobald du anfängst, deine Technik bewusst zu analysieren — „wie halte ich noch mal den Schläger“ —, reißt der Faden. Im Flow vertraust du deinem Körper und lässt ihn machen. Das bewusste Steuern gehört in die Übung, nicht in den Flow.\n\nFlow ist wie eine Strömung, die dich trägt, sobald du aufhörst, gegen sie anzukämpfen. Du kannst ihn nicht schieben, aber du kannst die Ufer so formen, dass er von allein strömt. Und wenn er strömt, stellst du dich nicht mitten hinein, um ihn zu untersuchen.",
+        "en": "Sometimes you play as if by itself. The strokes succeed without thinking, time seems slower, you are completely absorbed in the game. This state is called flow, and it often brings out your best performances. The expert learns to invite it.\n\nFlow arises when the demand fits your ability exactly. If the opponent is too easy, it gets boring; if they are overwhelming, pressure arises. In between, where the task challenges you just right, the gate to flow opens. That's why experts often experience flow in close, evenly matched games.\n\nYou can't force flow on command — but you can create its conditions. Clear, simple goals in the moment. Full attention on the next ball, not on the result. Your pre-match routine, which calms and focuses you. And the absence of fear and self-doubt, which reliably destroy flow.\n\nThe most important thing when flow is there: don't disturb it by thinking. As soon as you start to analyze your technique consciously — \"how do I hold the racket again\" — the thread snaps. In flow you trust your body and let it work. Conscious control belongs in practice, not in flow.\n\nFlow is like a current that carries you as soon as you stop fighting against it. You can't push it, but you can shape the banks so that it flows on its own. And when it flows, you don't step into the middle of it to examine it.",
+        "fr": "Parfois, tu joues comme tout seul. Les frappes réussissent sans réfléchir, le temps semble plus lent, tu es entièrement absorbé par le jeu. Cet état s'appelle le flow, et il fait souvent naître tes meilleures performances. L'expert apprend à l'inviter.\n\nLe flow naît quand l'exigence correspond exactement à ton niveau. Si l'adversaire est trop faible, cela devient ennuyeux ; s'il est écrasant, la pression apparaît. Entre les deux, là où la tâche te sollicite juste comme il faut, s'ouvre la porte du flow. C'est pourquoi les experts vivent souvent le flow dans des matchs serrés et équilibrés.\n\nTu ne peux pas forcer le flow sur commande — mais tu peux en créer les conditions. Des objectifs clairs et simples dans l'instant. Toute l'attention sur la balle suivante, pas sur le résultat. Ta routine d'avant-match, qui te calme et te concentre. Et l'absence de peur et de doute de soi, qui détruisent le flow de façon fiable.\n\nLe plus important quand le flow est là : ne le perturbe pas en réfléchissant. Dès que tu commences à analyser consciemment ta technique — « comment je tiens la raquette, déjà » —, le fil se rompt. Dans le flow, tu fais confiance à ton corps et le laisses faire. Le pilotage conscient a sa place à l'entraînement, pas dans le flow.\n\nLe flow est comme un courant qui te porte dès que tu cesses de lutter contre lui. Tu ne peux pas le pousser, mais tu peux façonner les berges pour qu'il coule de lui-même. Et quand il coule, tu ne te places pas en plein milieu pour l'examiner.",
+        "pl": "Czasem grasz jak sam z siebie. Uderzenia udają się bez namysłu, czas wydaje się wolniejszy, jesteś całkiem zatopiony w grze. Ten stan nazywa się flow i przynosi często twoje najlepsze wyniki. Ekspert uczy się go zapraszać.\n\nFlow powstaje, gdy wymaganie dokładnie pasuje do twoich umiejętności. Jest przeciwnik zbyt łatwy, robi się nudno; jest przytłaczający, powstaje presja. Pomiędzy, gdzie zadanie stawia ci akurat właściwe wyzwanie, otwiera się brama do flow. Dlatego eksperci przeżywają flow często w wyrównanych, równorzędnych meczach.\n\nFlow nie możesz wymusić na komendę — ale możesz stworzyć jego warunki. Jasne, proste cele w danym momencie. Pełna uwaga na następnej piłce, nie na wyniku. Twoja rutyna przedstartowa, która cię uspokaja i skupia. I nieobecność lęku i zwątpienia w siebie, które niezawodnie niszczą flow.\n\nNajważniejsze, gdy flow się pojawi: nie zakłócaj go namysłem. Gdy tylko zaczniesz świadomie analizować swoją technikę — „jak to ja trzymam rakietę\" —, nić się rwie. We flow ufasz swojemu ciału i pozwalasz mu działać. Świadome sterowanie należy do ćwiczenia, nie do flow.\n\nFlow jest jak nurt, który cię niesie, gdy tylko przestajesz z nim walczyć. Nie możesz go pchać, ale możesz uformować brzegi tak, by płynął sam. A gdy płynie, nie stajesz w jego środku, by go badać."
+      },
+      "reflexionsaufgabe": {
+        "de": "Erinnere dich an einen Moment, in dem du im Flow warst — alles lief wie von selbst. Was waren die Umstände? Meist ist es ein Gegner auf Augenhöhe und volle Präsenz beim Spiel. Nimm dir vor, im nächsten fordernden Match die Bedingungen zu schaffen: ein einfaches Ziel für den Moment, volle Aufmerksamkeit auf den nächsten Ball, kein Grübeln über das Ergebnis. Und wenn es zu laufen beginnt: analysiere nicht, sondern lass es laufen.",
+        "en": "Remember a moment when you were in flow — everything ran as if by itself. What were the circumstances? Usually it's an opponent on your level and full presence in the game. Resolve to create the conditions in your next demanding match: a simple goal for the moment, full attention on the next ball, no brooding about the result. And when it starts to flow: don't analyze, just let it run.",
+        "fr": "Souviens-toi d'un moment où tu étais dans le flow — tout se faisait comme tout seul. Quelles étaient les circonstances ? Le plus souvent, c'est un adversaire à ta hauteur et une présence totale au jeu. Propose-toi, au prochain match exigeant, d'en créer les conditions : un objectif simple pour l'instant, toute l'attention sur la balle suivante, pas de rumination sur le résultat. Et quand ça commence à couler : n'analyse pas, laisse couler.",
+        "pl": "Przypomnij sobie moment, w którym byłeś we flow — wszystko szło jak samo z siebie. Jakie były okoliczności? Przeważnie to przeciwnik na twoim poziomie i pełna obecność w grze. Postanów sobie w następnym wymagającym meczu stworzyć te warunki: prosty cel na dany moment, pełna uwaga na następnej piłce, żadnego rozmyślania o wyniku. A gdy zacznie iść: nie analizuj, lecz daj temu płynąć."
+      }
+    },
+    {
+      "id": "druck_als_herausforderung",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "ueber_das_match_stabil_bleiben"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): baut die Match-Robustheit zur Drucksteuerung im entscheidenden Moment aus",
+      "spielziele": [
+        "nervenstaerke_enger_satz",
+        "fehler_resilienz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP",
+        "CM"
+      ],
+      "transfer_herkunft_beleg": "Umdeutung von Druck als Herausforderung statt Bedrohung (Selbstwirksamkeit, Kontrolle, Annaeherungsziele); bewusstes 'Hochschalten' im entscheidenden Moment (Clutch): Sportpsychologie (Challenge-/Threat-Theorie, Flow-/Clutch-Modell). CM: der entscheidende Punkt / die 15:15-Zuspitzung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Druck als Herausforderung deuten",
+        "en": "Reframing pressure as a challenge",
+        "fr": "Voir la pression comme un défi",
+        "pl": "Presję traktować jako wyzwanie"
+      },
+      "erklaerteil": {
+        "de": "Der entscheidende Punkt, der Matchball, das enge Ende — hier trennt sich der Experte vom guten Spieler durch die Art, wie er den Druck deutet, nicht durch bessere Schläge. Und diese Deutung kannst du bewusst steuern.\n\nDerselbe Moment kann als Bedrohung oder als Herausforderung erlebt werden. Als Bedrohung: „Ich darf jetzt bloß nicht verlieren“ — der Blick auf die Gefahr, der lähmt, verkrampft und Kraft raubt. Als Herausforderung: „Jetzt kommt mein Moment, das kann ich“ — der Blick auf die Chance, der Energie freisetzt und den Körper leistungsfähiger macht. Den Unterschied macht deine Deutung, nicht die Situation.\n\nDrei Dinge fördern die Deutung als Herausforderung. Das Vertrauen in dein Können — du hast diese Situation schon gemeistert. Das Gefühl von Kontrolle — du richtest den Blick auf das, was du steuern kannst, deinen nächsten Ball, statt auf das Ergebnis. Und ein Ziel, das nach vorn gerichtet ist — „ich spiele jetzt mein Muster“, nicht „ich vermeide den Fehler“.\n\nHinzu kommt das bewusste Hochschalten. Anders als der Flow, der von selbst kommt, ist das Spiel im entscheidenden Moment oft eine bewusste Entscheidung: Du erkennst „jetzt ist es soweit“, setzt dir ein klares Ziel und schaltest Anstrengung und Intensität eine Stufe höher. Es ist ein Schalter, den du bewusst umlegst.\n\nDruck ist wie Wind für einen Segler. Wer ihn als Bedrohung fürchtet, wird umgeworfen. Wer ihn als Herausforderung nutzt, segelt gerade dann am schnellsten. Der Wind bleibt derselbe — es zählt, wie du die Segel setzt.",
+        "en": "The decisive point, the match point, the tight ending — here the expert separates from the good player through the way they read the pressure, not through better strokes. And you can steer this reading deliberately.\n\nThe same moment can be experienced as a threat or as a challenge. As a threat: \"I just must not lose now\" — the eye on the danger, which paralyzes, cramps, and drains strength. As a challenge: \"Now comes my moment, I can do this\" — the eye on the chance, which releases energy and makes the body more capable. The difference is made by your reading, not by the situation.\n\nThree things foster the reading as a challenge. The trust in your ability — you have already mastered this situation. The feeling of control — you turn your eye to what you can steer, your next ball, instead of to the result. And a goal directed forward — \"I'll play my pattern now,\" not \"I'll avoid the error.\"\n\nAdded to this is deliberate gearing up. Unlike flow, which comes on its own, playing in the decisive moment is often a conscious decision: you recognize \"now it's time,\" set yourself a clear goal, and shift effort and intensity up a level. It's a switch you flip deliberately.\n\nPressure is like wind for a sailor. Whoever fears it as a threat gets knocked over. Whoever uses it as a challenge sails fastest precisely then. The wind stays the same — what counts is how you set the sails.",
+        "fr": "Le point décisif, la balle de match, la fin serrée — c'est ici que l'expert se distingue du bon joueur par la façon dont il interprète la pression, pas par de meilleures frappes. Et cette interprétation, tu peux la piloter volontairement.\n\nLe même moment peut être vécu comme une menace ou comme un défi. Comme une menace : « surtout, il ne faut pas que je perde maintenant » — le regard sur le danger, qui paralyse, crispe et vide de forces. Comme un défi : « c'est mon moment, j'en suis capable » — le regard sur l'occasion, qui libère de l'énergie et rend le corps plus performant. La différence tient à ton interprétation, pas à la situation.\n\nTrois choses favorisent l'interprétation en défi. La confiance en ton niveau — tu as déjà maîtrisé cette situation. Le sentiment de contrôle — tu diriges le regard sur ce que tu peux piloter, ta balle suivante, au lieu du résultat. Et un objectif tourné vers l'avant — « je joue maintenant mon schéma », pas « j'évite la faute ».\n\nS'y ajoute la montée en régime consciente. Contrairement au flow, qui vient de lui-même, jouer au moment décisif est souvent une décision consciente : tu reconnais « ça y est, c'est le moment », tu te fixes un objectif clair et tu montes l'effort et l'intensité d'un cran. C'est un interrupteur que tu actionnes volontairement.\n\nLa pression est comme le vent pour un marin. Qui la craint comme une menace se fait renverser. Qui l'utilise comme un défi navigue justement alors le plus vite. Le vent reste le même — ce qui compte, c'est la façon dont tu règles tes voiles.",
+        "pl": "Decydujący punkt, piłka meczowa, ciasna końcówka — tu ekspert odróżnia się od dobrego gracza sposobem, w jaki odczytuje presję, nie lepszymi uderzeniami. A tę interpretację możesz świadomie sterować.\n\nTen sam moment można przeżyć jako zagrożenie albo jako wyzwanie. Jako zagrożenie: „byle teraz nie przegrać\" — spojrzenie na niebezpieczeństwo, które paraliżuje, spina i odbiera siły. Jako wyzwanie: „teraz nadchodzi mój moment, potrafię to\" — spojrzenie na szansę, które uwalnia energię i czyni ciało sprawniejszym. Różnicę robi twoja interpretacja, nie sytuacja.\n\nTrzy rzeczy sprzyjają odczytaniu jako wyzwanie. Zaufanie do twoich umiejętności — tę sytuację już opanowałeś. Poczucie kontroli — kierujesz spojrzenie na to, czym możesz sterować, na swoją następną piłkę, zamiast na wynik. I cel skierowany do przodu — „gram teraz swój wzorzec\", nie „unikam błędu\".\n\nDo tego dochodzi świadome przełączenie na wyższy bieg. Inaczej niż flow, który przychodzi sam, gra w decydującym momencie jest często świadomą decyzją: rozpoznajesz „teraz nadszedł czas\", stawiasz sobie jasny cel i przełączasz wysiłek i intensywność o stopień wyżej. To przełącznik, który świadomie przestawiasz.\n\nPresja jest jak wiatr dla żeglarza. Kto boi się jej jak zagrożenia, zostaje wywrócony. Kto wykorzystuje ją jak wyzwanie, płynie właśnie wtedy najszybciej. Wiatr pozostaje ten sam — liczy się, jak ustawisz żagle."
+      },
+      "reflexionsaufgabe": {
+        "de": "Denk an einen entscheidenden Punkt zurück, den du verloren hast: Hast du ihn als Bedrohung erlebt („bloß nicht verlieren“) oder als Herausforderung („jetzt zeige ich es“)? Übe für den nächsten wichtigen Moment die bewusste Umdeutung: Richte den Blick auf das, was du kontrollierst (deinen nächsten Ball), setz dir ein Ziel nach vorn (dein verlässliches Muster spielen), und deute den Druck als dein Zeichen, jetzt eine Stufe hochzuschalten.",
+        "en": "Think back to a decisive point you lost: did you experience it as a threat (\"just don't lose\") or as a challenge (\"now I'll show it\")? For the next important moment, practice the deliberate reframing: turn your eye to what you control (your next ball), set yourself a goal directed forward (play your reliable pattern), and read the pressure as your sign to gear up a level now.",
+        "fr": "Repense à un point décisif que tu as perdu : l'as-tu vécu comme une menace (« surtout ne pas perdre ») ou comme un défi (« maintenant je vais le montrer ») ? Travaille pour le prochain moment important le recadrage conscient : dirige le regard sur ce que tu contrôles (ta balle suivante), fixe-toi un objectif vers l'avant (jouer ton schéma fiable), et interprète la pression comme ton signal pour monter d'un cran maintenant.",
+        "pl": "Wróć myślami do decydującego punktu, który przegrałeś: przeżyłeś go jako zagrożenie („byle nie przegrać\") czy jako wyzwanie („teraz to pokażę\")? Ćwicz na następny ważny moment świadome przeformułowanie: skieruj spojrzenie na to, co kontrolujesz (swoją następną piłkę), postaw sobie cel do przodu (grać swój niezawodny wzorzec), a presję odczytaj jako swój znak, by teraz przełączyć o stopień wyżej."
+      }
+    },
+    {
+      "id": "gelassen_bei_unfairness",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "den_fehler_abhaken"
+      ],
+      "voraussetzungen_lesart": "didaktisch (stufenuebergreifend): weitet das Abhaken vom eigenen Fehler auf aeussere Stoerungen aus",
+      "spielziele": [
+        "fehler_resilienz",
+        "konzentrationskonstanz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Gelassenheit bei ungerechten Entscheidungen, Pech und gegnerischer Provokation; Fokus auf das Kontrollierbare: Sportpsychologie (Kontrollfokus, emotionale Selbstregulation).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Gelassen bleiben, wenn es unfair läuft",
+        "en": "Staying composed when things get unfair",
+        "fr": "Rester serein face à l'injustice",
+        "pl": "Zachować spokój, gdy gra jest nie fair"
+      },
+      "erklaerteil": {
+        "de": "Nicht alles im Spiel ist gerecht. Ein Ball, der knapp im Aus war und trotzdem zählt. Ein Gegner, der auf Zeit spielt oder provoziert. Eine Serie von Pech. Der Experte zeichnet sich dadurch aus, dass ihn solche Dinge nicht aus der Bahn werfen.\n\nDer Schlüssel ist eine einfache Unterscheidung: Es gibt Dinge, die du kontrollierst, und Dinge, die du nicht kontrollierst. Eine strittige Entscheidung, das Verhalten des Gegners, das Glück — all das liegt außerhalb deiner Kontrolle. Deine Reaktion darauf, dein nächster Ball, deine Konzentration — das liegt in deiner Hand. Wer seine Energie an das Unkontrollierbare verschwendet, nimmt sie vom Kontrollierbaren weg.\n\nBesonders die Provokation eines Gegners ist eine Falle. Wer sich ärgern lässt, spielt genau das Spiel, das der Gegner will — er verliert die Konzentration und trifft schlechtere Entscheidungen. Die stärkste Antwort auf Provokation ist die ungestörte Fortsetzung des eigenen Spiels. Deine Gelassenheit ist zugleich deine Waffe.\n\nDas heißt nicht, dass dich Ungerechtigkeit nicht berühren darf. Aber du hakst sie ab wie einen eigenen Fehler — kurz zur Kenntnis nehmen, dann bewusst den Blick auf den nächsten Ball richten. Die Abhak-Geste, die du aus dem Einsteiger-Bereich kennst, hilft auch hier.\n\nUngerechtigkeit ist wie schlechtes Wetter auf einer Wanderung. Du kannst es nicht ändern, und dich darüber zu empören bringt dich keinen Schritt weiter. Wer den Kopf senkt und weitergeht, kommt an; wer stehen bleibt und schimpft, verliert nur Zeit.",
+        "en": "Not everything in the game is fair. A ball that was just out and counts anyway. An opponent who plays for time or provokes. A run of bad luck. The expert is marked by the fact that such things don't throw them off track.\n\nThe key is a simple distinction: there are things you control, and things you don't control. A disputed call, the opponent's behavior, luck — all of that lies outside your control. Your reaction to it, your next ball, your concentration — that lies in your hands. Whoever wastes their energy on the uncontrollable takes it away from the controllable.\n\nAn opponent's provocation especially is a trap. Whoever lets themselves get annoyed plays exactly the game the opponent wants — they lose concentration and make worse decisions. The strongest answer to provocation is the undisturbed continuation of your own game. Your composure is at the same time your weapon.\n\nThat doesn't mean injustice isn't allowed to touch you. But you tick it off like your own mistake — take brief note, then deliberately turn your eye to the next ball. The tick-off gesture you know from the beginner area helps here too.\n\nInjustice is like bad weather on a hike. You can't change it, and getting indignant about it doesn't bring you a step further. Whoever lowers their head and walks on arrives; whoever stops and grumbles only loses time.",
+        "fr": "Tout n'est pas juste dans le jeu. Une balle qui était de peu dehors et qui compte quand même. Un adversaire qui joue la montre ou qui provoque. Une série de malchance. L'expert se distingue par le fait que de telles choses ne le font pas sortir de sa trajectoire.\n\nLa clé, c'est une distinction simple : il y a des choses que tu contrôles, et des choses que tu ne contrôles pas. Une décision litigieuse, le comportement de l'adversaire, la chance — tout cela est hors de ton contrôle. Ta réaction, ta balle suivante, ta concentration — cela est entre tes mains. Qui gaspille son énergie sur l'incontrôlable la retire du contrôlable.\n\nLa provocation d'un adversaire, surtout, est un piège. Qui se laisse agacer joue exactement le jeu que l'adversaire veut — il perd la concentration et prend de moins bonnes décisions. La réponse la plus forte à la provocation, c'est la poursuite imperturbable de son propre jeu. Ta sérénité est en même temps ton arme.\n\nCela ne veut pas dire que l'injustice n'a pas le droit de te toucher. Mais tu tournes la page comme sur ta propre faute — en prendre brièvement acte, puis diriger volontairement le regard sur la balle suivante. Le geste pour tourner la page, que tu connais du niveau débutant, aide ici aussi.\n\nL'injustice est comme le mauvais temps lors d'une randonnée. Tu ne peux pas le changer, et t'en indigner ne te fait pas avancer d'un pas. Qui baisse la tête et continue arrive ; qui s'arrête et rouspète ne perd que du temps.",
+        "pl": "Nie wszystko w grze jest sprawiedliwe. Piłka, która ledwie była na aucie, a mimo to się liczy. Przeciwnik, który gra na czas albo prowokuje. Seria pecha. Ekspert wyróżnia się tym, że takie rzeczy nie wytrącają go z toru.\n\nKluczem jest proste rozróżnienie: są rzeczy, które kontrolujesz, i rzeczy, których nie kontrolujesz. Sporna decyzja, zachowanie przeciwnika, szczęście — wszystko to leży poza twoją kontrolą. Twoja reakcja na to, twoja następna piłka, twoja koncentracja — to leży w twojej ręce. Kto trwoni energię na to, co niekontrolowalne, odbiera ją temu, co kontrolowalne.\n\nSzczególnie prowokacja przeciwnika jest pułapką. Kto da się zezłościć, gra dokładnie tę grę, której chce przeciwnik — traci koncentrację i podejmuje gorsze decyzje. Najmocniejszą odpowiedzią na prowokację jest niezakłócone kontynuowanie własnej gry. Twój spokój jest zarazem twoją bronią.\n\nTo nie znaczy, że niesprawiedliwość nie może cię poruszać. Ale odhaczasz ją jak własny błąd — krótko przyjąć do wiadomości, potem świadomie skierować spojrzenie na następną piłkę. Gest odhaczenia, który znasz z części dla początkujących, pomaga i tutaj.\n\nNiesprawiedliwość jest jak zła pogoda na wędrówce. Nie możesz jej zmienić, a oburzanie się na nią nie posuwa cię ani o krok. Kto opuszcza głowę i idzie dalej, dociera; kto staje i przeklina, traci tylko czas."
+      },
+      "reflexionsaufgabe": {
+        "de": "Erinnere dich an ein Match, in dem dich eine ungerechte Entscheidung oder ein provozierender Gegner aus der Ruhe gebracht hat. Wie viel Energie hat dich der Ärger gekostet? Übe die Unterscheidung: Was davon konntest du kontrollieren, was nicht? Nimm dir vor, beim nächsten Mal Unkontrollierbares kurz abzuhaken — mit deiner Abhak-Geste — und die Energie sofort auf deinen nächsten Ball zu lenken. Gegen Provokation ist dein ruhiges Weiterspielen die beste Antwort.",
+        "en": "Remember a match in which an unfair call or a provoking opponent unsettled you. How much energy did the annoyance cost you? Practice the distinction: what of it could you control, what not? Resolve next time to tick off the uncontrollable briefly — with your tick-off gesture — and to steer the energy immediately to your next ball. Against provocation, your calm continuation of play is the best answer.",
+        "fr": "Souviens-toi d'un match où une décision injuste ou un adversaire provocateur t'a fait perdre ton calme. Combien d'énergie l'agacement t'a-t-il coûté ? Travaille la distinction : qu'est-ce que tu pouvais contrôler là-dedans, et quoi non ? Propose-toi, la prochaine fois, de tourner brièvement la page sur l'incontrôlable — avec ton geste pour tourner la page — et de diriger aussitôt l'énergie sur ta balle suivante. Contre la provocation, continuer à jouer calmement est la meilleure réponse.",
+        "pl": "Przypomnij sobie mecz, w którym niesprawiedliwa decyzja lub prowokujący przeciwnik wytrącił cię ze spokoju. Ile energii kosztowała cię złość? Ćwicz rozróżnienie: co z tego mogłeś kontrolować, a czego nie? Postanów sobie następnym razem to, co niekontrolowalne, krótko odhaczyć — swoim gestem odhaczenia — i skierować energię natychmiast na swoją następną piłkę. Przeciw prowokacji twoja spokojna dalsza gra to najlepsza odpowiedź."
+      }
+    },
+    {
+      "id": "mentale_staerke_entwickeln",
+      "typ": "micro",
+      "domaene": "mentales",
+      "kompetenzstufe": [
+        "experte"
+      ],
+      "voraussetzungen": [
+        "druck_als_herausforderung",
+        "gelassen_bei_unfairness"
+      ],
+      "voraussetzungen_lesart": "didaktisch: fasst die Experten-Mentalfertigkeiten zur langfristigen Entwicklung zusammen",
+      "spielziele": [
+        "vorbereitende_selbststeuerung",
+        "fehler_resilienz"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "SP"
+      ],
+      "transfer_herkunft_beleg": "Langfristige Entwicklung des mentalen Spiels, Selbstwahrnehmung, persoenlicher mentaler Werkzeugkasten, Wachstumshaltung: Sportpsychologie (Mental Skills Training als fortlaufender Prozess).",
+      "untergrund": "halle",
+      "witterung": [],
+      "anzeigetitel": {
+        "de": "Die eigene mentale Stärke entwickeln",
+        "en": "Developing your mental strength",
+        "fr": "Développer sa force mentale",
+        "pl": "Rozwijanie własnej siły mentalnej"
+      },
+      "erklaerteil": {
+        "de": "Mentale Stärke ist kein fester Zustand, den man einmal erreicht und dann besitzt. Sie ist eine Fähigkeit, die ein Leben lang wächst. Der reife Experte behandelt sein mentales Spiel wie sein technisches: als etwas, das er bewusst und fortlaufend weiterentwickelt.\n\nDer erste Schritt ist die Selbstwahrnehmung. Du kennst inzwischen deine mentalen Stärken und deine wunden Punkte: Vielleicht bist du im Aufbau geduldig, verlierst aber bei knappen Ständen die Ruhe. Vielleicht spielst du befreit, wenn du führst, und verkrampfst im Rückstand. Diese ehrliche Selbstkenntnis ist die Grundlage jeder Weiterentwicklung.\n\nDaraus baust du deinen persönlichen mentalen Werkzeugkasten. Über die Zeit hast du gelernt, welche Werkzeuge bei dir wirken — die eine Atemtechnik, die eine Formel, die eine Routine. Nicht jedes Werkzeug wirkt bei jedem gleich; deins sind die, die dir verlässlich helfen. Der Experte kennt seinen Kasten und greift im richtigen Moment zum passenden Werkzeug.\n\nUnd über allem steht die Wachstumshaltung. Auch die besten Spieler haben mentale Rückschläge — verlorene Nervenschlachten, Matches, die sie aus der Hand gaben. Der Unterschied ist, dass sie diese als Lernstoff behandeln, nicht als Urteil. Jedes schwere Match ist eine Gelegenheit, den nächsten Schritt in deiner mentalen Entwicklung zu machen.\n\nMentale Stärke wächst mit jeder überstandenen Probe — jedes schwere Match härtet dich ein Stück. Du lernst, was bei dir gedeiht, jätest, was schadet, und siehst zu, wie das Ganze mit der Zeit wächst. Kein Garten ist je fertig — und genau das macht ihn lebendig.",
+        "en": "Mental strength is not a fixed state you reach once and then possess. It is an ability that grows for a lifetime. The mature expert treats their mental game like their technical one: as something they develop consciously and continuously.\n\nThe first step is self-awareness. By now you know your mental strengths and your sore points: maybe you're patient in building the point but lose your calm at close scores. Maybe you play freely when you lead and cramp up when behind. This honest self-knowledge is the foundation of all further development.\n\nFrom it you build your personal mental toolbox. Over time you've learned which tools work for you — the one breathing technique, the one phrase, the one routine. Not every tool works the same for everyone; yours are the ones that reliably help you. The expert knows their box and reaches for the right tool at the right moment.\n\nAnd above all stands the growth mindset. Even the best players have mental setbacks — lost battles of nerves, matches they gave away. The difference is that they treat these as learning material, not as a verdict. Every hard match is an opportunity to take the next step in your mental development.\n\nMental strength grows with every trial you get through — every hard match toughens you a little. You learn what thrives in you, weed out what harms, and watch the whole thing grow over time. No garden is ever finished — and that is exactly what makes it alive.",
+        "fr": "La force mentale n'est pas un état figé qu'on atteint une fois et qu'on possède ensuite. C'est une aptitude qui grandit toute une vie. L'expert mûr traite son jeu mental comme son jeu technique : comme quelque chose qu'il développe consciemment et en continu.\n\nLa première étape, c'est la conscience de soi. Tu connais désormais tes forces mentales et tes points sensibles : peut-être es-tu patient dans la construction, mais perds-tu ton calme sur les scores serrés. Peut-être joues-tu libéré quand tu mènes et te crispes-tu mené au score. Cette connaissance honnête de soi est le fondement de tout développement.\n\nDe là, tu construis ta boîte à outils mentale personnelle. Avec le temps, tu as appris quels outils agissent chez toi — telle technique de respiration, telle formule, telle routine. Chaque outil n'agit pas pareil chez tout le monde ; les tiens sont ceux qui t'aident de façon fiable. L'expert connaît sa boîte et saisit le bon outil au bon moment.\n\nEt par-dessus tout se tient l'état d'esprit de croissance. Même les meilleurs joueurs ont des revers mentaux — des batailles de nerfs perdues, des matchs qu'ils ont laissés filer. La différence, c'est qu'ils les traitent comme matière à apprendre, pas comme un verdict. Chaque match difficile est une occasion de faire le pas suivant dans ton développement mental.\n\nLa force mentale grandit à chaque épreuve surmontée — chaque match difficile t'endurcit un peu. Tu apprends ce qui prospère en toi, tu arraches ce qui nuit, et tu regardes l'ensemble grandir avec le temps. Aucun jardin n'est jamais achevé — et c'est justement ce qui le rend vivant.",
+        "pl": "Siła mentalna to nie stały stan, który raz się osiąga i potem posiada. To zdolność, która rośnie przez całe życie. Dojrzały ekspert traktuje swoją grę mentalną jak techniczną: jako coś, co świadomie i na bieżąco rozwija.\n\nPierwszym krokiem jest samoświadomość. Znasz już swoje mentalne siły i swoje czułe punkty: może w budowie jesteś cierpliwy, ale przy ciasnych stanach tracisz spokój. Może grasz swobodnie, gdy prowadzisz, i spinasz się na stracie. Ta szczera samowiedza to podstawa każdego rozwoju.\n\nZ niej budujesz swoją osobistą skrzynkę narzędzi mentalnych. Z czasem nauczyłeś się, które narzędzia u ciebie działają — ta jedna technika oddechu, ta jedna formuła, ta jedna rutyna. Nie każde narzędzie działa u każdego tak samo; twoje to te, które ci niezawodnie pomagają. Ekspert zna swoją skrzynkę i sięga we właściwym momencie po odpowiednie narzędzie.\n\nA nad wszystkim stoi postawa wzrostu. Także najlepsi gracze mają mentalne porażki — przegrane bitwy nerwów, mecze, które wypuścili z rąk. Różnica jest w tym, że traktują je jako materiał do nauki, nie jako wyrok. Każdy trudny mecz to okazja, by zrobić następny krok w swoim rozwoju mentalnym.\n\nSiła mentalna rośnie z każdą przetrwaną próbą — każdy trudny mecz hartuje cię o kawałek. Uczysz się, co u ciebie się rozwija, plewisz to, co szkodzi, i patrzysz, jak całość z czasem rośnie. Żaden ogród nigdy nie jest gotowy — i właśnie to czyni go żywym."
+      },
+      "reflexionsaufgabe": {
+        "de": "Nimm dir Zeit für eine ehrliche Bestandsaufnahme deines mentalen Spiels: Was ist deine größte mentale Stärke, was dein wundester Punkt? Und welche mentalen Werkzeuge (Atemtechnik, Formel, Routine, Umdeutung) helfen dir verlässlich — dein persönlicher Werkzeugkasten? Nimm dir vor, an einem einzigen mentalen Punkt über die nächste Saison bewusst zu arbeiten, und behandle Rückschläge dabei als Lernstoff, nicht als Urteil über dich.",
+        "en": "Take time for an honest inventory of your mental game: what is your biggest mental strength, what your sorest point? And which mental tools (breathing technique, phrase, routine, reframing) reliably help you — your personal toolbox? Resolve to work deliberately on a single mental point over the next season, and treat setbacks along the way as learning material, not as a verdict on you.",
+        "fr": "Prends le temps d'un bilan honnête de ton jeu mental : quelle est ta plus grande force mentale, quel est ton point le plus sensible ? Et quels outils mentaux (technique de respiration, formule, routine, recadrage) t'aident de façon fiable — ta boîte à outils personnelle ? Propose-toi de travailler consciemment un seul point mental sur la prochaine saison, et traite les revers en chemin comme matière à apprendre, pas comme un verdict sur toi.",
+        "pl": "Poświęć czas na szczery bilans swojej gry mentalnej: jaka jest twoja największa siła mentalna, a jaki najbardziej czuły punkt? I które narzędzia mentalne (technika oddechu, formuła, rutyna, przeformułowanie) pomagają ci niezawodnie — twoja osobista skrzynka narzędzi? Postanów sobie pracować nad jednym jedynym punktem mentalnym przez najbliższy sezon, a porażki traktuj przy tym jako materiał do nauki, nie jako wyrok o tobie."
+      }
+    }
+  ],
+  "delta_bausteine": []
+}

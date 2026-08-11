@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "beschreibung": "Spielformen-Block: die Varianten, die das Spiel SELBST veraendern (Funplay/Freestyle, Mehrfeldanordnung). Aktiviert den Baustein-Typ 'modus_baustein' — Geschwister von 'umgebungs_baustein', aber anders verankert: Umgebungs-Varianten aendern nur die Umgebung (Untergrund/Licht/Temperatur) und sind darum aus dem Stufen-Ladder gefiltert, Spielformen aendern die Spielweise und bleiben regulaere Pool-Bausteine mit Domaene, Stufe und Voraussetzung.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau — zwei Spielformen (Spez. 13.2).",
+    "dateiname_konvention": "bausteine.modus-thema.json (Querschnitt-Thema, analog zum Outdoor- und Spielmodi-Thema).",
+    "kein_eigenes_vokabular": "Nutzt kanonisches Vokabular. Belegt erstmals baustein_typ 'modus_baustein'.",
+    "kein_delta_grundsatz": "Die Spielformen sind crossminton-eigen — kein Herkunftskonflikt, keine Cross-Sport-Deltas.",
+    "typ_verankerung": "Anders als 'umgebungs_baustein' NICHT typ-gefiltert: beide tragen eine fachliche Domaene, eine Kompetenzstufe und eine echte Voraussetzung und erscheinen darum regulaer im Kompetenz-, Themen- und Individualpfad (Spez. 13.2: 'im Pool, mit Voraussetzungen und Achsen-Verzahnung').",
+    "abgrenzung": "Funplay ist die kooperative Spielweise ohne Zaehlung; die Mehrfeldanordnung ist eine Freizeit-Aufstellung mehrerer Matches um ein gemeinsames Zentrum. Beide lassen das Regelwerk unberuehrt — sie ersetzen es nur situativ durch eine andere Zielsetzung bzw. Aufstellung.",
+    "sicherheitsrahmen": "Die Mehrfeldanordnung traegt einen Sicherheitshinweis (gekreuzte Flugbahnen im Zentrum: erhoehtes Kollisions- und Trefferrisiko, Uebersicht und Ruecksicht vor Tempo).",
+    "grafiken": "G-062 (funplay) und G-063 (mehrfeld) — hand gezeichnetes, theme-faehiges SVG mit en/fr/pl-Varianten wie der uebrige Grafik-Bestand. Die mitgelieferten spielmodi-*.svg des Uebergabepakets waren hart gefaerbt und im Dunkelmodus unbrauchbar.",
+    "ordnungslogik": "funplay (Beginner-Einstieg, Technik) -> mehrfeld (Fortgeschritten, Mentales)."
+  },
+  "bausteine": [
+    {
+      "id": "funplay",
+      "typ": "modus_baustein",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["vorhand_drive"],
+      "voraussetzungen_lesart": "didaktisch: ein Grundschlag genuegt, um miteinander zu spielen",
+      "spielziele": ["konstanz_unter_wiederholung", "tempo_haertedosierung"],
+      "vermittlungsziele": [],
+      "witterung": [],
+      "transfer_herkunft": ["CM"],
+      "querverweis": ["in_den_flow_finden"],
+      "geeignete_phase": ["erwaermung", "hauptteil", "ausklang"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "niedrig",
+      "fokus": ["technik"],
+      "grafik": ["G-062"],
+      "anzeigetitel": {
+        "de": "Funplay: gemeinsam halten",
+        "en": "Funplay: keeping it up together",
+        "fr": "Funplay : tenir l'échange ensemble",
+        "pl": "Funplay: utrzymać wymianę razem"
+      },
+      "erklaerteil": {
+        "de": "Funplay — auch Freestyle genannt — ist die kooperative Spielweise: Das Ziel ist, den Speeder gemeinsam so lange wie möglich im Spiel zu halten, statt Punkte zu erzielen. Kein Court, keine Zählung, kein Gegeneinander. Zwei spielen sich den Ball zu und versuchen, ihn spielbar zu halten.\n\nGerade weil der Ball gehalten und nicht ins gegnerische Feld durchgesetzt werden soll, tritt Kontrolle vor Kraft. Das macht Funplay zur idealen Übungsform für Ballgefühl und Konstanz — und zum niedrigschwelligen Einstieg, weil kein Fehler dich einen Punkt kostet. Es ist zugleich der natürliche Weg in den gemeinsamen Rhythmus, den man auch Flow nennt.",
+        "en": "Funplay — also called freestyle — is the cooperative way of playing: the aim is to keep the speeder going together for as long as possible instead of scoring points. No court, no scoring, no opposition. Two people play to each other and try to keep the speeder playable.\n\nPrecisely because the speeder is meant to be kept up rather than forced into the opposing square, control comes before power. That makes funplay the ideal practice form for touch and consistency — and a low-threshold way in, because no mistake costs you a point. It is also the natural route into the shared rhythm people call flow.",
+        "fr": "Le funplay — aussi appelé freestyle — est la manière coopérative de jouer : le but est de garder le speeder en jeu ensemble le plus longtemps possible, au lieu de marquer des points. Pas de court, pas de score, pas d'opposition. Deux personnes se renvoient le speeder et cherchent à le garder jouable.\n\nJustement parce qu'il s'agit de garder le speeder en jeu et non de l'imposer dans le carré adverse, le contrôle passe avant la puissance. Cela fait du funplay la forme d'entraînement idéale pour le toucher et la régularité — et une porte d'entrée accessible, puisqu'aucune faute ne te coûte de point. C'est aussi le chemin naturel vers le rythme commun que l'on appelle le flow.",
+        "pl": "Funplay — nazywany też freestyle — to kooperacyjny sposób gry: celem jest wspólne utrzymanie speedera w grze jak najdłużej, zamiast zdobywania punktów. Bez kortu, bez liczenia, bez rywalizacji. Dwie osoby podają sobie speedera i starają się utrzymać go w grze.\n\nWłaśnie dlatego, że speedera trzeba utrzymać, a nie przebić na pole przeciwnika, kontrola wyprzedza siłę. To czyni funplay idealną formą ćwiczenia czucia lotki i regularności — a także łatwym wejściem w grę, bo żaden błąd nie kosztuje cię punktu. To zarazem naturalna droga do wspólnego rytmu, który nazywa się flow."
+      },
+      "uebungsteil": {
+        "de": {
+          "titel": "Gemeinsam halten",
+          "ziel": "Möglichst viele Kontakte am Stück — Kontrolle statt Kraft.",
+          "schritte": [
+            "Stellt euch auf mittlere Distanz gegenüber, ohne Court.",
+            "Spielt den Speeder flach und ruhig hin und her.",
+            "Haltet den Ball spielbar und spielt ihn eurem Gegenüber gut zu — gewinnen ist hier nicht das Ziel.",
+            "Zählt gemeinsam die Kontakte am Stück.",
+            "Läuft es stabil, vergrößert ihr die Distanz oder spielt bewusst flacher."
+          ],
+          "selbstkontrolle": "Wie viele Kontakte schafft ihr ohne Bodenkontakt? Bleibt die Bahn flach und ruhig, oder wird sie mit der Zeit hektisch?",
+          "abschluss": "Ihr haltet den Speeder mehrere Ballwechsel am Stück flach im Spiel, ohne dass er den Boden berührt."
+        },
+        "en": {
+          "titel": "Keeping it up together",
+          "ziel": "As many contacts in a row as possible — control instead of power.",
+          "schritte": [
+            "Stand opposite each other at medium distance, without a court.",
+            "Play the speeder back and forth, flat and calm.",
+            "Keep it playable and feed your partner well — winning is not the aim here.",
+            "Count the contacts in a row together.",
+            "Once it runs steadily, increase the distance or play deliberately flatter."
+          ],
+          "selbstkontrolle": "How many contacts do you manage without the speeder touching the ground? Does the flight stay flat and calm, or does it get hectic over time?",
+          "abschluss": "You keep the speeder flat and in play for several rallies in a row without it touching the ground."
+        },
+        "fr": {
+          "titel": "Tenir l'échange ensemble",
+          "ziel": "Le plus de contacts d'affilée possible — le contrôle plutôt que la puissance.",
+          "schritte": [
+            "Placez-vous face à face à distance moyenne, sans court.",
+            "Échangez le speeder à plat et calmement.",
+            "Gardez-le jouable et donnez une bonne balle à ton partenaire — gagner n'est pas le but ici.",
+            "Comptez ensemble les contacts d'affilée.",
+            "Quand c'est stable, augmentez la distance ou jouez volontairement plus à plat."
+          ],
+          "selbstkontrolle": "Combien de contacts réussissez-vous sans que le speeder touche le sol ? La trajectoire reste-t-elle plate et calme, ou devient-elle fébrile avec le temps ?",
+          "abschluss": "Vous gardez le speeder à plat et en jeu pendant plusieurs échanges d'affilée sans qu'il touche le sol."
+        },
+        "pl": {
+          "titel": "Utrzymać wymianę razem",
+          "ziel": "Jak najwięcej kontaktów z rzędu — kontrola zamiast siły.",
+          "schritte": [
+            "Stańcie naprzeciwko siebie w średniej odległości, bez kortu.",
+            "Odbijajcie speedera płasko i spokojnie.",
+            "Utrzymuj go w grze i podawaj partnerowi dobrze — wygrana nie jest tu celem.",
+            "Liczcie razem kontakty z rzędu.",
+            "Gdy idzie stabilnie, zwiększcie odległość albo grajcie świadomie płaszczej."
+          ],
+          "selbstkontrolle": "Ile kontaktów uda wam się bez dotknięcia podłoża? Czy tor lotu pozostaje płaski i spokojny, czy z czasem robi się nerwowy?",
+          "abschluss": "Utrzymujecie speedera płasko w grze przez kilka wymian z rzędu, bez dotknięcia podłoża."
+        }
+      }
+    },
+    {
+      "id": "mehrfeld",
+      "typ": "modus_baustein",
+      "domaene": "mentales",
+      "kompetenzstufe": ["fortgeschritten"],
+      "voraussetzungen": ["bei_der_sache_bleiben"],
+      "voraussetzungen_lesart": "didaktisch: geteilte Aufmerksamkeit setzt eine stabile Grundkonzentration voraus",
+      "spielziele": ["konzentrationskonstanz", "fruehe_flugbahnlesung"],
+      "vermittlungsziele": [],
+      "witterung": [],
+      "transfer_herkunft": ["CM"],
+      "grafik": ["G-063"],
+      "anzeigetitel": {
+        "de": "Mehrfeldanordnung",
+        "en": "Multi-court set-up",
+        "fr": "Disposition multi-terrains",
+        "pl": "Układ wielu pól"
+      },
+      "erklaerteil": {
+        "de": "Die Mehrfeldanordnung ist eine Freizeitform: Mehrere Matches werden um ein gemeinsames Zentrum aufgebaut, sodass sich die Flugbahnen der Speeder kreuzen. Das fügt eine ganz eigene Schwierigkeit hinzu — und ein reales Risiko.\n\nDer Reiz liegt in der Wahrnehmung: In der Peripherie fliegen fremde Speeder, und deine Aufgabe ist, deinen eigenen Ball verlässlich von ihnen zu trennen. Das fordert die Aufmerksamkeitssteuerung stärker als jedes normale Spiel. Zugleich gilt der wichtigste Hinweis der Sicherheit: Wo sich die Bahnen kreuzen, im Zentrum, ist das Kollisions- und Trefferrisiko erhöht. Diese Form lebt von Übersicht und Rücksicht, nicht von maximalem Tempo.",
+        "en": "The multi-court set-up is a recreational form: several matches are arranged around a shared centre so that the flight paths of the speeders cross. That adds a difficulty all of its own — and a real risk.\n\nThe appeal lies in perception: other people's speeders fly through your periphery, and your job is to reliably separate your own from them. This demands more of your attention control than any ordinary match. At the same time the most important note belongs to safety: where the paths cross, in the centre, the risk of collisions and of being hit is raised. This form thrives on overview and consideration, not on maximum pace.",
+        "fr": "La disposition multi-terrains est une forme de loisir : plusieurs matchs sont installés autour d'un centre commun, si bien que les trajectoires des speeders se croisent. Cela ajoute une difficulté bien particulière — et un risque réel.\n\nL'intérêt tient à la perception : des speeders étrangers volent dans ta périphérie, et ta tâche est de distinguer le tien des autres de façon fiable. Cela sollicite le pilotage de l'attention plus que n'importe quel match ordinaire. En même temps, l'essentiel relève de la sécurité : là où les trajectoires se croisent, au centre, le risque de collision et de coup est accru. Cette forme vit de vue d'ensemble et d'égards, pas de vitesse maximale.",
+        "pl": "Układ wielu pól to forma rekreacyjna: kilka meczów ustawia się wokół wspólnego środka, tak że tory lotu speederów się krzyżują. To dodaje całkiem własną trudność — i realne ryzyko.\n\nUrok tkwi w percepcji: na obrzeżach latają cudze speedery, a twoim zadaniem jest niezawodnie odróżnić własnego. To wymaga sterowania uwagą bardziej niż jakikolwiek zwykły mecz. Zarazem najważniejsza uwaga dotyczy bezpieczeństwa: tam, gdzie tory się krzyżują, w środku, ryzyko zderzenia i trafienia jest podwyższone. Ta forma żyje z rozeznania i wzajemnych względów, nie z maksymalnego tempa."
+      },
+      "reflexionsaufgabe": {
+        "de": "Wenn du das nächste Mal in einer Mehrfeldanordnung spielst: Woran erkennst du deinen eigenen Speeder inmitten der anderen — an Richtung, Höhe, Farbe? Nimm dir vor, deine Aufmerksamkeit bewusst auf deinen Ball zu bündeln und die fremden nur am Rand wahrzunehmen. Und behalte das Zentrum im Blick: Wo sich Bahnen kreuzen, entscheidet Rücksicht über Sicherheit.",
+        "en": "Next time you play in a multi-court set-up: what tells your own speeder apart from the others — direction, height, colour? Set out to focus your attention deliberately on your own speeder and to register the others only at the edge. And keep an eye on the centre: where paths cross, consideration decides safety.",
+        "fr": "La prochaine fois que tu joues dans une disposition multi-terrains : à quoi reconnais-tu ton propre speeder parmi les autres — à la direction, à la hauteur, à la couleur ? Propose-toi de concentrer volontairement ton attention sur ton speeder et de ne percevoir les autres qu'en périphérie. Et garde le centre à l'œil : là où les trajectoires se croisent, ce sont les égards qui décident de la sécurité.",
+        "pl": "Gdy następnym razem zagrasz w układzie wielu pól: po czym rozpoznajesz własnego speedera wśród innych — po kierunku, wysokości, kolorze? Postanów świadomie skupić uwagę na własnym speederze, a cudze rejestrować tylko na obrzeżach. I miej na oku środek: tam, gdzie tory się krzyżują, o bezpieczeństwie decydują wzajemne względy."
+      }
+    }
+  ]
+}

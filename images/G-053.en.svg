@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blind understanding: two doubles partners move in perfect anticipation without looking at each other — mirrored, parallel movement arrows and a shared-awareness band.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .pfeil{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-linecap:round}
+    .band{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-dasharray:3 5;opacity:.7}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m053" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <!-- Partner A -->
+  <circle class="kopf" cx="102" cy="82" r="14"/>
+  <path class="fig" d="M102,98 L108,150"/>
+  <path class="fig" d="M103,106 L82,128"/>
+  <path class="fig" d="M103,106 L124,126"/>
+  <path class="fig" d="M108,150 L92,186 L86,222"/>
+  <path class="fig" d="M108,150 L128,182 L138,214"/>
+  <!-- Partner B, gespiegelt gleichgerichtet -->
+  <circle class="kopf" cx="182" cy="82" r="14"/>
+  <path class="fig" d="M182,98 L188,150"/>
+  <path class="fig" d="M183,106 L162,128"/>
+  <path class="fig" d="M183,106 L204,126"/>
+  <path class="fig" d="M188,150 L172,186 L166,222"/>
+  <path class="fig" d="M188,150 L208,182 L218,214"/>
+  <!-- gleichgerichtete Bewegungspfeile -->
+  <path class="pfeil" d="M78,238 L118,238" marker-end="url(#m053)"/>
+  <path class="pfeil" d="M158,238 L198,238" marker-end="url(#m053)"/>
+  <!-- gemeinsames Wahrnehmungsband -->
+  <path class="band" d="M116,70 C 140,58 160,58 184,70"/>
+  <line class="boden" x1="66" y1="252" x2="234" y2="252"/>
+  <text class="st" x="150" y="278">blind understanding · without looking</text>
+</svg>

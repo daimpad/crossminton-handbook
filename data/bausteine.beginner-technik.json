@@ -1,0 +1,627 @@
+{
+  "_meta": {
+    "beschreibung": "Referenz-Inhaltsdaten: vollständiger Beginner-Technikpfad als Testdaten für die Pfad-Engine. Zeigt das Metadaten-Schema in Anwendung.",
+    "quellsprache": "de",
+    "zielsprachen": ["en", "fr", "pl"],
+    "stand": "Erstausbau",
+    "hinweis": "Texte pro Sprache; im Erstausbau nur 'de' befüllt. Sprachneutrale Identität (id, kuerzel, faktor-ids) getrennt von sprachabhängiger Beschriftung (labels[sprache], text[sprache])."
+  },
+
+  "vokabulare": {
+    "domaene": ["technik", "taktik", "trainingsgestaltung", "mentales", "athletik_kondition", "ausruestung"],
+    "kompetenzstufe": ["beginner", "fortgeschritten", "experte", "trainer"],
+    "spielform": ["einzel", "doppel"],
+    "baustein_typ": ["micro", "vertiefung", "delta", "fehlerbild", "umgebungs_baustein", "modus_baustein"],
+    "transfer_herkunft": ["CM", "BAD", "TEN", "SQ", "BS", "SP", "AT"],
+    "untergrund": ["halle", "sand", "rasen", "asche", "kunstrasen", "schnee"],
+    "witterung": ["wind", "sonne_blendung", "naesse", "hitze", "kaelte", "dunkelheit"],
+    "abschluss_status_zustandsraum": ["offen", "erledigt", "beherrscht_INAKTIV"],
+
+    "trainings_metadaten": {
+      "_ordnung": "Zuarbeit fuer den Trainingsplan: Sequenzierung, Zeitbudget, Lastverteilung, Abwechslung. Bewusst Klassen statt Minuten (Gesundheitsrahmen).",
+      "geeignete_phase": ["erwaermung", "hauptteil", "ausklang"],
+      "dauer_klasse": ["kurz", "mittel", "lang"],
+      "intensitaet": ["niedrig", "mittel", "hoch"],
+      "fokus": ["technik", "taktik", "kondition", "koordination", "mental"]
+    },
+
+    "spielziele": {
+      "_ordnung": "primaer: limitierender Faktor; sekundaere Facette: Spielsituation",
+      "energetik": ["rally_ausdauer", "wiederholte_antrittsschnelligkeit", "satz_match_regeneration"],
+      "praezision_kontrolle": ["treffsicherheit_im_ziel", "laengen_tiefensteuerung", "tempo_haertedosierung", "konstanz_unter_wiederholung"],
+      "wahrnehmung_antizipation": ["fruehe_flugbahnlesung", "gegner_muster_lesen", "umschaltmoment_erkennen"],
+      "psychoregulation": ["nervenstaerke_enger_satz", "fehler_resilienz", "konzentrationskonstanz", "vorbereitende_selbststeuerung"],
+      "umgebungsanpassung": ["windspiel", "untergrundwechsel", "licht_und_sicht", "temperatur"],
+      "technisch_taktisches_repertoire": ["antwort_gegen_angreifer", "antwort_gegen_defensivspieler", "umschaltloesung", "aufschlag_rueckschlag_eroeffnung", "doppel_spezifische_loesungen"]
+    },
+
+    "vermittlungsziele": {
+      "_ordnung": "primaer: Vermittlungstaetigkeit; sekundaere Facette: Lernphase; Adressatengruppe als spaeterer Modifikator",
+      "vermitteln_zugaenglichmachen": ["bewegungskern_herausarbeiten", "demonstrieren_modell_geben", "in_bilder_analogien_uebersetzen"],
+      "diagnostizieren_korrigieren": ["fehlerbild_erkennen", "ursache_von_symptom_trennen", "korrekturansage_geben"],
+      "progression_lernprozess_steuern": ["uebungsreihe_sequenzieren", "schwierigkeit_dosieren", "lernphasen_uebergang_gestalten"],
+      "gruppe_setting_fuehren": ["heterogene_gruppe_organisieren", "einheit_strukturieren", "raum_material_organisieren", "motivation_sicherheit_halten"]
+    }
+  },
+
+  "bausteine": [
+    {
+      "id": "grundposition",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": [],
+      "spielziele": ["wiederholte_antrittsschnelligkeit"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'bleibt nach Schlag in der Ecke stehen / keine Rueckkehr' + Korrekturansage",
+      "grafik": ["G-002"],
+      "erklaerteil": {
+        "de": "Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus startest du in jede Richtung.\n\nDenk an einen Torwart vor dem Elfmeter: leicht geladen, wach, sprungbereit. Genau diese Spannung suchst du. Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper, die Schultern bleiben entspannt.\n\nDas ist aktive Bereitschaft, keine Ruhestellung. Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung als jede aufrechte Haltung. Wer flach auf den Fersen steht, verliert den ersten Schritt.",
+        "en": "Between two strokes there's a moment when you have to be ready for anything. That moment has a posture — the base position. From it you set off in any direction.\n\nThink of a goalkeeper facing a penalty: lightly loaded, alert, ready to spring. That's exactly the tension you're after. Feet a little more than shoulder-width apart, knees slightly bent, your weight shifted forward onto the balls of your feet — your heels barely touch the floor. Hold the racket loosely in front of your body, shoulders relaxed.\n\nThis is active readiness, not a resting stance. The low, slightly forward-leaning stance gets you moving faster than any upright posture. Stand flat on your heels and you lose the first step.",
+        "fr": "Entre deux frappes, il y a un instant où tu dois être prêt à tout. Cet instant a une posture — la position de base. C'est d'elle que tu pars dans toutes les directions.\n\nPense à un gardien face à un penalty : légèrement chargé, en éveil, prêt à bondir. C'est exactement cette tension que tu cherches. Les pieds un peu plus larges que les épaules, les genoux légèrement fléchis, le poids porté vers l'avant sur la plante des pieds — les talons touchent à peine le sol. Tu tiens la raquette souplement devant toi, les épaules restent détendues.\n\nC'est une disponibilité active, pas une position de repos. L'appui bas, légèrement penché vers l'avant, te met en mouvement plus vite que n'importe quelle posture droite. Qui reste à plat sur les talons perd le premier pas.",
+        "pl": "Między dwoma uderzeniami jest moment, w którym musisz być gotowy na wszystko. Ten moment ma swoją postawę — pozycję podstawową. Z niej ruszasz w każdą stronę.\n\nPomyśl o bramkarzu przed rzutem karnym: lekko naprężony, czujny, gotowy do skoku. Właśnie tego napięcia szukasz. Stopy nieco szerzej niż na szerokość barków, kolana lekko ugięte, ciężar przeniesiony do przodu na przednią część stóp — pięty ledwie dotykają podłoża. Rakietę trzymasz luźno przed ciałem, barki pozostają rozluźnione.\n\nTo aktywna gotowość, nie postawa spoczynkowa. Niska, lekko pochylona do przodu postawa rusza cię szybciej niż jakakolwiek wyprostowana sylwetka. Kto stoi płasko na piętach, traci pierwszy krok."
+      },
+      "geeignete_phase": ["erwaermung", "hauptteil"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "niedrig",
+      "fokus": ["technik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Laden und losstarten",
+          "ziel": "Deine Grundposition macht dich tatsächlich schneller — nicht nur gut aussehen.",
+          "schritte": [
+            "Nimm die Grundposition ein: Füße etwas mehr als schulterbreit, Knie leicht gebeugt, Gewicht auf die Fußballen, Schläger locker vor dem Körper.",
+            "Wähle eine Richtung — vor, zurück, links oder rechts.",
+            "Starte explosiv einen einzigen Schritt in diese Richtung.",
+            "Kehre in die Grundposition zurück.",
+            "Wiederhole, jedes Mal in eine andere Richtung."
+          ],
+          "selbstkontrolle": "Wie leicht kommt der erste Schritt? Wenn du dich abstoßen kannst, ohne dich vorher aufzurichten, stimmt die Haltung. Musst du dich erst hochdrücken oder das Gewicht verlagern, standest du zu passiv — zu aufrecht, zu flach auf den Fersen.",
+          "abschluss": "Die Grundposition ist dein Startblock. Ob sie funktioniert, merkst du erst in der Bewegung."
+        },
+        "en": {
+          "titel": "Load and launch",
+          "ziel": "Your base position actually makes you faster — not just look good.",
+          "schritte": [
+            "Take the base position: feet a little more than shoulder-width apart, knees slightly bent, weight on the balls of your feet, racket loose in front of your body.",
+            "Pick a direction — forward, back, left or right.",
+            "Explode into a single step in that direction.",
+            "Return to the base position.",
+            "Repeat, each time in a different direction."
+          ],
+          "selbstkontrolle": "How easily does the first step come? If you can push off without straightening up first, your posture is right. If you have to push yourself up or shift your weight first, you were standing too passively — too upright, too flat on your heels.",
+          "abschluss": "The base position is your starting block. Whether it works, you only notice once you're moving."
+        },
+        "fr": {
+          "titel": "Se charger et s'élancer",
+          "ziel": "Ta position de base te rend vraiment plus rapide — pas seulement plus élégant.",
+          "schritte": [
+            "Prends la position de base : pieds un peu plus larges que les épaules, genoux légèrement fléchis, poids sur la plante des pieds, raquette souple devant toi.",
+            "Choisis une direction — avant, arrière, gauche ou droite.",
+            "Élance-toi de façon explosive d'un seul pas dans cette direction.",
+            "Reviens à la position de base.",
+            "Répète, à chaque fois dans une autre direction."
+          ],
+          "selbstkontrolle": "Le premier pas vient-il facilement ? Si tu peux t'élancer sans te redresser d'abord, la posture est bonne. Si tu dois d'abord te relever ou déplacer ton poids, tu étais trop passif — trop droit, trop à plat sur les talons.",
+          "abschluss": "La position de base est ton bloc de départ. Tu ne sais si elle fonctionne qu'une fois en mouvement."
+        },
+        "pl": {
+          "titel": "Naładuj się i wystartuj",
+          "ziel": "Twoja pozycja podstawowa faktycznie cię przyspiesza — a nie tylko dobrze wygląda.",
+          "schritte": [
+            "Przyjmij pozycję podstawową: stopy nieco szerzej niż na szerokość barków, kolana lekko ugięte, ciężar na przedniej części stóp, rakieta luźno przed ciałem.",
+            "Wybierz kierunek — w przód, w tył, w lewo lub w prawo.",
+            "Wystartuj eksplozywnie jednym krokiem w tym kierunku.",
+            "Wróć do pozycji podstawowej.",
+            "Powtarzaj, za każdym razem w inny kierunek."
+          ],
+          "selbstkontrolle": "Jak łatwo wychodzi pierwszy krok? Jeśli możesz się odepchnąć, nie prostując się wcześniej, postawa jest dobra. Jeśli musisz się najpierw podnieść lub przenieść ciężar, stoisz zbyt biernie — w postawie zbyt wyprostowanej, zbyt płasko na piętach.",
+          "abschluss": "Pozycja podstawowa to twój blok startowy. Czy działa, poznasz dopiero w ruchu."
+        }
+      }
+    },
+
+    {
+      "id": "griff",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["grundposition"],
+      "spielziele": ["tempo_haertedosierung", "konstanz_unter_wiederholung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Griff zu fest' + Korrekturansage",
+      "grafik": ["G-001"],
+      "erklaerteil": {
+        "de": "Im Crossminton hältst du den Schläger für jeden Schlag gleich. Kein Umgreifen, keine Varianten für Vor- und Rückhand. Ein Griff für alles — deshalb Universalgriff.\n\nDas klingt unspektakulär, ist aber der Grund, warum du im schnellen Spiel überhaupt mitkommst. Der Speeder ist schneller unterwegs, als du umgreifen könntest. Wer nach dem passenden Griff sucht, kommt zu spät.\n\nSo findest du ihn: Halte den Schläger mit der freien Hand vor dich, die Kante zeigt zum Boden. Jetzt greif zu, als würdest du dem Griff die Hand geben. Zwischen Daumen und Zeigefinger bildet sich ein leichtes „V\". Mehr ist es nicht.\n\nZwei Dinge entscheiden über gut oder schlecht:\n\nDer Druck. Halte locker, nicht verkrampft — etwa so fest, wie du eine Hand schüttelst, ohne sie zu quetschen. Ein zu fester Griff nimmt dir das Gefühl und ermüdet den Unterarm. Fest wird es erst im Moment des Treffens, danach löst du wieder.\n\nDas Handgelenk. Am Anfang hältst du es ruhig und gerade. Die Kraft kommt aus Arm, Schulter und Beinen. Das fühlt sich zunächst an wie ein Tennisschlag, und das ist genau richtig. Erst wenn der Griff sitzt und die Schläge sauber kommen, darf das Handgelenk mitarbeiten und am Ende zuschnappen wie eine Peitsche. Diese Peitsche kommt später — jetzt baust du das Fundament.",
+        "en": "In Crossminton you hold the racket the same way for every stroke. No re-gripping, no variants for forehand and backhand. One grip for everything — hence the universal grip.\n\nThat sounds unremarkable, but it's the reason you can keep up in the fast game at all. The Speeder travels faster than you could ever re-grip. Anyone hunting for the right grip arrives too late.\n\nHere's how to find it: hold the racket in front of you with your free hand, the edge pointing to the floor. Now grab it as if you were shaking hands with the grip. A slight \"V\" forms between thumb and index finger. That's all there is to it.\n\nTwo things decide between good and bad:\n\nThe pressure. Hold it loosely, not tensely — about as firmly as you shake someone's hand without crushing it. Too tight a grip robs you of feel and tires your forearm. It only firms up at the moment of contact, and afterwards you release again.\n\nThe wrist. At the start you keep it quiet and straight. The power comes from arm, shoulder and legs. At first this feels like a tennis stroke, and that's exactly right. Only once the grip is secure and your strokes come cleanly may the wrist join in and, at the end, snap like a whip. That whip comes later — for now you're building the foundation.",
+        "fr": "Au Crossminton, tu tiens la raquette de la même manière pour chaque frappe. Pas de changement de prise, pas de variantes pour le coup droit et le revers. Une seule prise pour tout — d'où le nom de prise universelle.\n\nCela paraît anodin, mais c'est la raison pour laquelle tu arrives à suivre dans le jeu rapide. Le speeder va plus vite que tu ne pourrais changer de prise. Qui cherche la bonne prise arrive trop tard.\n\nVoici comment la trouver : tiens la raquette devant toi avec la main libre, la tranche vers le sol. Maintenant, saisis-la comme si tu lui serrais la main. Un léger « V » se forme entre le pouce et l'index. Ce n'est rien de plus.\n\nDeux choses font la différence entre bon et mauvais :\n\nLa pression. Tiens souplement, sans crispation — à peu près aussi fermement que tu serres une main sans l'écraser. Une prise trop serrée t'enlève le toucher et fatigue l'avant-bras. Ça ne se raffermit qu'au moment de la frappe, puis tu relâches à nouveau.\n\nLe poignet. Au début, tu le gardes calme et droit. La force vient du bras, de l'épaule et des jambes. Au début, cela ressemble à une frappe de tennis, et c'est exactement ce qu'il faut. Ce n'est qu'une fois la prise acquise et les frappes propres que le poignet peut participer et, à la fin, claquer comme un fouet. Ce fouet viendra plus tard — pour l'instant, tu bâtis les fondations.",
+        "pl": "W crossmintonie trzymasz rakietę tak samo do każdego uderzenia. Żadnej zmiany chwytu, żadnych wariantów na forhend i bekhend. Jeden chwyt do wszystkiego — dlatego chwyt uniwersalny.\n\nBrzmi to niepozornie, ale to właśnie powód, dla którego w ogóle nadążasz w szybkiej grze. Speeder leci szybciej, niż zdołasz zmienić chwyt. Kto szuka odpowiedniego chwytu, spóźnia się.\n\nTak go znajdziesz: przytrzymaj rakietę wolną ręką przed sobą, krawędź skierowana do podłoża. Teraz chwyć rakietę tak, jakbyś podawał jej rękę. Między kciukiem a palcem wskazującym tworzy się lekkie „V”. Nic więcej.\n\nO tym, czy jest dobrze czy źle, decydują dwie rzeczy:\n\nNacisk. Trzymaj luźno, bez spinania — mniej więcej tak mocno, jak ściskasz czyjąś dłoń, nie zgniatając jej. Zbyt mocny chwyt odbiera ci czucie i męczy przedramię. Mocno robi się dopiero w chwili kontaktu, potem znów rozluźniasz.\n\nNadgarstek. Na początku trzymasz go spokojnie i prosto. Siła płynie z ramienia, barku i nóg. Z początku przypomina to uderzenie tenisowe i tak właśnie ma być. Dopiero gdy chwyt jest opanowany, a uderzenia wychodzą czysto, nadgarstek może włączyć się do pracy i na końcu strzelić jak bat. Ten bat przyjdzie później — teraz budujesz fundament."
+      },
+      "geeignete_phase": ["erwaermung", "hauptteil"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "niedrig",
+      "fokus": ["technik"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Blind greifen",
+          "ziel": "Deine Hand findet den Universalgriff von allein — ohne hinzuschauen, ohne nachzudenken.",
+          "schritte": [
+            "Nimm den Schläger in die freie Hand, Kante zum Boden.",
+            "Greif zu wie zum Handschlag, bilde das „V\" zwischen Daumen und Zeigefinger.",
+            "Schau kurz hin: Stimmt die V-Stellung? Ist der Druck locker?",
+            "Leg den Schläger wieder ab — oder gib ihn ganz aus der Hand.",
+            "Wiederhole. Zehn Mal mit Kontrollblick."
+          ],
+          "steigerung": "Schließ die Augen. Greif zu, ohne hinzusehen. Erst danach prüfst du, ob das „V\" sitzt. Triffst du es zehnmal hintereinander blind, sitzt der Griff.",
+          "selbstkontrolle": "Im Spiel hast du keine Zeit, deinen Griff zu kontrollieren. Er muss von selbst stimmen, sobald du den Schläger führst.",
+          "naechste_stufe": "Sitzt der Griff blind, nimmst du ihn mit in die erste Schlagbewegung. Dort prüfst du, ob er auch hält, wenn der Arm arbeitet — das kommt im Vorhand-Grundschlag."
+        },
+        "en": {
+          "titel": "Grip it blind",
+          "ziel": "Your hand finds the universal grip on its own — without looking, without thinking.",
+          "schritte": [
+            "Take the racket in your free hand, edge to the floor.",
+            "Grab it as for a handshake, forming the \"V\" between thumb and index finger.",
+            "Glance down: is the V right? Is the pressure loose?",
+            "Put the racket down again — or let go of it entirely.",
+            "Repeat. Ten times with a checking glance."
+          ],
+          "steigerung": "Close your eyes. Grab it without looking. Only afterwards check whether the \"V\" is right. Get it ten times in a row blind and the grip is set.",
+          "selbstkontrolle": "In a match you have no time to check your grip. It has to be right on its own, the moment you handle the racket.",
+          "naechste_stufe": "Once the grip holds blind, you take it into your first hitting motion. There you check whether it holds when the arm works too — that comes in the forehand drive."
+        },
+        "fr": {
+          "titel": "Saisir à l'aveugle",
+          "ziel": "Ta main trouve la prise universelle toute seule — sans regarder, sans réfléchir.",
+          "schritte": [
+            "Prends la raquette dans la main libre, tranche vers le sol.",
+            "Saisis comme pour une poignée de main, forme le « V » entre le pouce et l'index.",
+            "Jette un œil : le V est-il correct ? La pression est-elle souple ?",
+            "Repose la raquette — ou lâche-la complètement.",
+            "Répète. Dix fois avec un coup d'œil de contrôle."
+          ],
+          "steigerung": "Ferme les yeux. Saisis sans regarder. Ce n'est qu'ensuite que tu vérifies si le « V » est bon. Si tu le réussis dix fois de suite à l'aveugle, la prise est acquise.",
+          "selbstkontrolle": "En match, tu n'as pas le temps de contrôler ta prise. Elle doit être bonne d'elle-même dès que tu manies la raquette.",
+          "naechste_stufe": "Une fois la prise acquise à l'aveugle, tu l'emportes dans le premier geste de frappe. Là, tu vérifies si elle tient aussi quand le bras travaille — ce sera dans le drive de coup droit."
+        },
+        "pl": {
+          "titel": "Chwyt na ślepo",
+          "ziel": "Twoja ręka sama znajduje chwyt uniwersalny — bez patrzenia, bez zastanawiania się.",
+          "schritte": [
+            "Weź rakietę w wolną rękę, krawędź do podłoża.",
+            "Chwyć jak do uścisku dłoni, utwórz „V” między kciukiem a palcem wskazującym.",
+            "Spójrz na chwilę: czy ułożenie V jest dobre? Czy nacisk jest luźny?",
+            "Odłóż rakietę — albo wypuść ją całkiem z ręki.",
+            "Powtórz. Dziesięć razy z kontrolnym spojrzeniem."
+          ],
+          "steigerung": "Zamknij oczy. Chwyć, nie patrząc. Dopiero potem sprawdź, czy „V” jest na miejscu. Jeśli trafisz je dziesięć razy z rzędu na ślepo, chwyt jest opanowany.",
+          "selbstkontrolle": "W grze nie masz czasu, by kontrolować chwyt. Musi być dobry sam z siebie, gdy tylko bierzesz rakietę do ręki.",
+          "naechste_stufe": "Gdy chwyt siedzi na ślepo, przenosisz go do pierwszego ruchu uderzenia. Tam sprawdzasz, czy utrzyma się także wtedy, gdy pracuje ramię — to przychodzi przy podstawowym uderzeniu forhendem."
+        }
+      }
+    },
+
+    {
+      "id": "aufschlag",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["griff", "grundposition"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "laengen_tiefensteuerung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'Treffpunkt zu hoch / Aufschlag ungueltig' + Korrekturansage",
+      "grafik": ["G-005", "G-006"],
+      "erklaerteil": {
+        "de": "Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand. Genau das macht ihn zum idealen ersten Schlag.\n\nDu hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn und triffst ihn im Fallen. Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben. Ein Aufschlag über Schulterhöhe ist kein gültiger Aufschlag.\n\nDazu zwei Bedingungen, die den Aufschlag gültig machen: Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone deines Feldes. Solange du diese beiden einhältst, zählt dein Aufschlag.\n\nFür den ersten Kontakt darfst du es dir leichter machen: Lass den Speeder aus Hüfthöhe fallen und triff ihn tief, knapp bevor er den Boden erreicht. So gewöhnst du dich an den Fallzeitpunkt. Sitzt das Timing, hebst du den Treffpunkt an — bis er dort liegt, wo die Regel ihn verlangt: unterhalb der Schlaghand.",
+        "en": "The serve opens every rally. It's the only stroke you prepare in complete calm — no opponent puts you under pressure, the Speeder rests in your hand alone. That's exactly what makes it the ideal first stroke.\n\nYou hold the Speeder out in front of you and let it drop. As it falls, you bring the racket forward from below and hit it on the way down. The decisive point: at the moment of contact the whole Speeder is below your hitting hand. This one requirement shapes the entire motion — you hit from below, not from above. A serve above shoulder height is not a valid serve.\n\nOn top of that, two conditions make the serve legal: one foot stays on the floor throughout the motion, and you hit from the rear zone of your court. As long as you keep to both, your serve counts.\n\nFor your first attempts you may make it easier on yourself: drop the Speeder from hip height and hit it low, just before it reaches the floor. That way you get used to the timing of the drop. Once the timing sits, you raise the contact point — until it's where the rule demands it: below your hitting hand.",
+        "fr": "Le service ouvre chaque échange. C'est la seule frappe que tu prépares en toute tranquillité — aucun adversaire ne te met sous pression, le speeder repose dans ta seule main. C'est précisément ce qui en fait la frappe idéale pour commencer.\n\nTu tiens le speeder librement devant toi et tu le laisses tomber. Pendant qu'il descend, tu amènes la raquette du bas vers l'avant et tu le frappes dans sa chute. Le point décisif : au moment de la frappe, tout le speeder est en dessous de ta main. Cette seule exigence façonne tout le geste — tu frappes par en dessous, pas par en haut. Un service au-dessus de l'épaule n'est pas un service valable.\n\nÀ cela s'ajoutent deux conditions qui rendent le service valable : un pied reste au sol pendant le geste, et tu frappes depuis la zone arrière de ton terrain. Tant que tu respectes ces deux points, ton service compte.\n\nPour les premiers contacts, tu peux te faciliter la tâche : laisse tomber le speeder à hauteur de hanche et frappe-le bas, juste avant qu'il touche le sol. Ainsi tu t'habitues au moment de la chute. Une fois le timing en place, tu remontes le point de frappe — jusqu'à ce qu'il soit là où la règle l'exige : en dessous de la main.",
+        "pl": "Serwis otwiera każdą wymianę. To jedyne uderzenie, które przygotowujesz w zupełnym spokoju — żaden przeciwnik cię nie naciska, speeder spoczywa wyłącznie w twojej dłoni. Właśnie to czyni go idealnym pierwszym uderzeniem.\n\nTrzymasz speedera swobodnie przed sobą i wypuszczasz go. Gdy opada, prowadzisz rakietę od dołu do przodu i trafiasz go w locie. Punkt decydujący: w chwili kontaktu cały speeder znajduje się poniżej twojej dłoni uderzającej. Ten jeden wymóg kształtuje cały ruch — uderzasz od dołu, nie od góry. Serwis powyżej wysokości barku nie jest ważnym serwisem.\n\nDo tego dwa warunki, które czynią serwis ważnym: jedna stopa pozostaje podczas ruchu na podłożu, a uderzasz z tylnej strefy swojego pola. Dopóki ich przestrzegasz, twój serwis się liczy.\n\nPrzy pierwszym kontakcie możesz sobie ułatwić: wypuść speedera z wysokości bioder i trafiaj go nisko, tuż zanim dotknie podłoża. Tak przyzwyczaisz się do momentu opadania. Gdy timing jest opanowany, podnosisz punkt kontaktu — aż znajdzie się tam, gdzie wymaga tego reguła: poniżej dłoni uderzającej."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "niedrig",
+      "fokus": ["technik"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Fallen lesen, dann treffen",
+          "ziel": "Den Moment finden, in dem du den fallenden Speeder sauber triffst.",
+          "schritte_teil1": [
+            "Halte den Speeder frei vor dir, etwa auf Hüfthöhe.",
+            "Lass ihn fallen und schlag noch nicht — schau nur zu, wie er sinkt.",
+            "Wiederhole ein paar Mal, bis du ein Gefühl dafür hast, wie schnell und wohin er fällt."
+          ],
+          "schritte_teil2": [
+            "Lass den Speeder wieder fallen.",
+            "Führe den Schläger von unten nach vorn und triff ihn tief, kurz bevor er den Boden erreicht.",
+            "Kümmere dich noch nicht um ein Ziel — es zählt allein, dass du ihn sauber triffst."
+          ],
+          "selbstkontrolle": "Triffst du den Speeder gleichmäßig, oder mal zu früh, mal zu spät? Streut der Treffmoment, gib dem Fallen noch etwas mehr Aufmerksamkeit, bevor du schlägst.",
+          "abschluss": "Der Aufschlag gelingt über das Timing, nicht über Kraft. Sobald du den Fallpunkt zuverlässig triffst, kommt das Zielen fast von allein — den Treffpunkt hebst du später an, das Ziel setzt du dir später."
+        },
+        "en": {
+          "titel": "Read the drop, then hit",
+          "ziel": "Find the moment when you cleanly hit the falling Speeder.",
+          "schritte_teil1": [
+            "Hold the Speeder out in front of you, about hip height.",
+            "Let it drop and don't hit yet — just watch it fall.",
+            "Repeat a few times until you get a feel for how fast and where it falls."
+          ],
+          "schritte_teil2": [
+            "Let the Speeder drop again.",
+            "Bring the racket forward from below and hit it low, just before it reaches the floor.",
+            "Don't worry about a target yet — all that counts is hitting it cleanly."
+          ],
+          "selbstkontrolle": "Do you hit the Speeder consistently, or sometimes too early, sometimes too late? If the contact moment scatters, give the drop a little more attention before you hit.",
+          "abschluss": "The serve succeeds through timing, not power. Once you hit the drop point reliably, aiming almost takes care of itself — you raise the contact point later, and you set yourself a target later."
+        },
+        "fr": {
+          "titel": "Lire la chute, puis frapper",
+          "ziel": "Trouver le moment où tu frappes proprement le speeder qui tombe.",
+          "schritte_teil1": [
+            "Tiens le speeder librement devant toi, à peu près à hauteur de hanche.",
+            "Laisse-le tomber et ne frappe pas encore — regarde seulement comment il descend.",
+            "Répète quelques fois, jusqu'à sentir à quelle vitesse et où il tombe."
+          ],
+          "schritte_teil2": [
+            "Laisse de nouveau tomber le speeder.",
+            "Amène la raquette du bas vers l'avant et frappe-le bas, juste avant qu'il atteigne le sol.",
+            "Ne te soucie pas encore d'une cible — seul compte le fait de le frapper proprement."
+          ],
+          "selbstkontrolle": "Frappes-tu le speeder de façon régulière, ou tantôt trop tôt, tantôt trop tard ? Si le moment de frappe est dispersé, accorde un peu plus d'attention à la chute avant de frapper.",
+          "abschluss": "Le service réussit par le timing, pas par la force. Dès que tu frappes le point de chute de façon fiable, viser vient presque tout seul — tu remonteras le point de frappe plus tard, et tu te fixeras une cible plus tard."
+        },
+        "pl": {
+          "titel": "Odczytaj opadanie, potem trafiaj",
+          "ziel": "Znaleźć moment, w którym czysto trafiasz opadającego speedera.",
+          "schritte_teil1": [
+            "Trzymaj speedera swobodnie przed sobą, mniej więcej na wysokości bioder.",
+            "Wypuść go i jeszcze nie uderzaj — tylko patrz, jak opada.",
+            "Powtórz kilka razy, aż wyczujesz, jak szybko i dokąd opada."
+          ],
+          "schritte_teil2": [
+            "Znów wypuść speedera.",
+            "Poprowadź rakietę od dołu do przodu i trafiaj go nisko, tuż zanim dotknie podłoża.",
+            "Nie przejmuj się jeszcze celem — liczy się tylko to, że trafiasz go czysto."
+          ],
+          "selbstkontrolle": "Czy trafiasz speedera równo, czy raz za wcześnie, raz za późno? Jeśli moment kontaktu się waha, poświęć opadaniu jeszcze trochę więcej uwagi, zanim uderzysz.",
+          "abschluss": "Serwis udaje się dzięki timingowi, nie sile. Gdy tylko niezawodnie trafiasz punkt opadania, celowanie przychodzi niemal samo — punkt kontaktu podniesiesz później, cel wyznaczysz sobie później."
+        }
+      }
+    },
+
+    {
+      "id": "vorhand_drive",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["griff", "grundposition", "aufschlag"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel", "konstanz_unter_wiederholung"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'zu grosser Ausholschwung / smash-artig' + Korrekturansage",
+      "grafik": ["G-003"],
+      "erklaerteil": {
+        "de": "Der Vorhand-Drive ist dein Brot-und-Butter-Schlag. Flach, direkt, auf deiner Schlägerseite gespielt — der Schlag, den du im Spiel am häufigsten brauchst.\n\nStell dir vor, du wischst mit dem Schläger etwas von einem Tisch in Hüfthöhe zur Seite. Genau dieser Bewegung folgst du: Das Gewicht wandert auf den vorderen Fuß, der Oberkörper dreht in Schlagrichtung, und der Arm bringt den Schläger nach vorn. Du triffst den Speeder vor deinem Körper, nicht neben dir und nicht hinter dir.\n\nDer ganze Schlag ist eine einzige, flüssige Bewegung — Gewicht, Drehung, Schlag gehen ineinander über. Die Kraft kommt aus dieser Kette, aus Beinen und Rumpf, nicht aus einem großen Ausholen mit dem Arm.\n\nUnd hier lösen wir ein, was beim Griff angekündigt war: Noch hältst du das Handgelenk ruhig und schlägst kompakt. Das Zuschnappen des Handgelenks — die Peitsche, die dem Schlag später Tempo gibt — kommt, sobald diese Grundbewegung sitzt. Erst der saubere Bogen, dann die Beschleunigung.",
+        "en": "The forehand drive is your bread-and-butter stroke. Flat, direct, played on your racket side — the stroke you need most often in a match.\n\nPicture wiping something off a table at hip height with the racket. That's exactly the motion you follow: your weight moves onto the front foot, your upper body turns in the direction of the shot, and your arm brings the racket forward. You hit the Speeder in front of your body, not beside you and not behind you.\n\nThe whole stroke is a single, flowing motion — weight, rotation and hit blend into one another. The power comes from this chain, from legs and trunk, not from a big backswing of the arm.\n\nAnd here we deliver on what the grip promised: for now you keep the wrist quiet and hit compactly. The snap of the wrist — the whip that gives the shot its pace later — comes once this basic motion is in place. First the clean arc, then the acceleration.",
+        "fr": "Le drive de coup droit est ta frappe de base, celle du quotidien. Plate, directe, jouée du côté de ta raquette — la frappe dont tu as le plus souvent besoin en match.\n\nImagine que tu balaies quelque chose d'une table à hauteur de hanche avec la raquette. C'est exactement ce geste que tu suis : le poids passe sur le pied avant, le buste tourne dans la direction de la frappe, et le bras amène la raquette vers l'avant. Tu frappes le speeder devant ton corps, ni à côté de toi ni derrière toi.\n\nToute la frappe est un geste unique et fluide — poids, rotation et frappe s'enchaînent. La force vient de cette chaîne, des jambes et du tronc, pas d'un grand armé du bras.\n\nEt ici, nous tenons la promesse faite à propos de la prise : pour l'instant, tu gardes le poignet calme et tu frappes de façon compacte. Le claquement du poignet — le fouet qui donnera plus tard de la vitesse à la frappe — viendra une fois ce geste de base acquis. D'abord l'arc propre, ensuite l'accélération.",
+        "pl": "Drive forhendowy to twoje uderzenie chleba powszedniego. Płaskie, bezpośrednie, grane po stronie rakiety — uderzenie, którego w grze potrzebujesz najczęściej.\n\nWyobraź sobie, że rakietą strącasz coś ze stołu na wysokości bioder w bok. Właśnie ten ruch powtarzasz: ciężar przechodzi na przednią nogę, tułów obraca się w kierunku uderzenia, a ramię wyprowadza rakietę do przodu. Trafiasz speedera przed ciałem, nie obok siebie i nie za sobą.\n\nCałe uderzenie to jeden, płynny ruch — ciężar, obrót, uderzenie przechodzą jedno w drugie. Siła płynie z tego łańcucha, z nóg i tułowia, nie z szerokiego zamachu ramieniem.\n\nI tu spełniamy to, co zapowiedzieliśmy przy chwycie: na razie trzymasz nadgarstek spokojnie i uderzasz zwięźle. Strzelenie nadgarstka — bat, który nada uderzeniu tempo później — przyjdzie, gdy ten podstawowy ruch będzie opanowany. Najpierw czysty łuk, potem przyspieszenie."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["technik"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Bogen einschleifen",
+          "ziel": "Die Schlagbewegung sitzt als flüssige Kette, bevor ein Speeder ins Spiel kommt.",
+          "schritte": [
+            "Nimm die Grundposition ein, Universalgriff.",
+            "Verlagere das Gewicht auf den vorderen Fuß, drehe den Oberkörper in Schlagrichtung.",
+            "Führe den Schläger in einem kompakten Bogen nach vorn, als wischst du etwas in Hüfthöhe zur Seite.",
+            "Halte den gedachten Treffpunkt klar vor deinem Körper.",
+            "Kehre in die Grundposition zurück und wiederhole."
+          ],
+          "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Tempo kommt später, zuerst der saubere Bogen.",
+          "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        },
+        "en": {
+          "titel": "Groove the arc",
+          "ziel": "The hitting motion sits as a flowing chain before a Speeder comes into play.",
+          "schritte": [
+            "Take the base position, universal grip.",
+            "Shift your weight onto the front foot, turn your upper body in the direction of the shot.",
+            "Bring the racket forward in a compact arc, as if wiping something aside at hip height.",
+            "Keep the imagined contact point clearly in front of your body.",
+            "Return to the base position and repeat."
+          ],
+          "selbstkontrolle": "Watch whether weight, rotation and hit blend into one another. If the motion stalls, slow it down until it flows. Pace comes later, the clean arc comes first.",
+          "naechste_stufe": "Once the motion sits, you bring a Speeder in — toss it up to yourself briefly, let it drop to hip height and hit it in the arc in front of your body. Now you check whether the chain holds with real contact too."
+        },
+        "fr": {
+          "titel": "Ancrer l'arc",
+          "ziel": "Le geste de frappe est acquis comme une chaîne fluide, avant qu'un speeder entre en jeu.",
+          "schritte": [
+            "Prends la position de base, prise universelle.",
+            "Déplace le poids sur le pied avant, tourne le buste dans la direction de la frappe.",
+            "Amène la raquette vers l'avant dans un arc compact, comme si tu balayais quelque chose sur le côté à hauteur de hanche.",
+            "Garde le point de frappe imaginé nettement devant ton corps.",
+            "Reviens à la position de base et répète."
+          ],
+          "selbstkontrolle": "Observe si le poids, la rotation et la frappe s'enchaînent. Si le geste se bloque, ralentis-le jusqu'à ce qu'il coule. La vitesse vient plus tard, d'abord l'arc propre.",
+          "naechste_stufe": "Une fois le geste acquis, tu y intègres un speeder — lance-le-toi brièvement, laisse-le tomber à hauteur de hanche et frappe-le dans l'arc devant ton corps. Là, tu vérifies si la chaîne tient aussi avec un vrai contact."
+        },
+        "pl": {
+          "titel": "Wyszlifować łuk ruchu",
+          "ziel": "Ruch uderzenia siedzi jako płynny łańcuch, zanim do gry wejdzie speeder.",
+          "schritte": [
+            "Przyjmij pozycję podstawową, chwyt uniwersalny.",
+            "Przenieś ciężar na przednią nogę, obróć tułów w kierunku uderzenia.",
+            "Poprowadź rakietę zwięzłym łukiem do przodu, jakbyś strącał coś w bok na wysokości bioder.",
+            "Utrzymuj wyobrażony punkt kontaktu wyraźnie przed ciałem.",
+            "Wróć do pozycji podstawowej i powtórz."
+          ],
+          "selbstkontrolle": "Zwróć uwagę, czy ciężar, obrót i uderzenie przechodzą jedno w drugie. Jeśli ruch się zacina, zwolnij go, aż popłynie. Tempo przyjdzie później, najpierw czysty łuk.",
+          "naechste_stufe": "Gdy ruch siedzi, wprowadzasz speedera — podrzuć go sobie krótko, pozwól mu opaść na wysokość bioder i trafiaj go łukiem przed ciałem. Teraz sprawdzasz, czy łańcuch utrzyma się także przy prawdziwym kontakcie."
+        }
+      }
+    },
+
+    {
+      "id": "rueckhand",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["vorhand_drive", "griff", "grundposition"],
+      "spielziele": ["tempo_haertedosierung", "treffsicherheit_im_ziel", "antwort_gegen_angreifer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM"],
+      "transfer_herkunft_beleg": "Bewegungskern (Spiegelung Vorhand): Gossen-Systematik. Motivationsrahmen (Rueckhand als Angriffsziel): Lenkova et al. 2023. Beide CM; Belege in Quellendokumentation, nicht in sichtbarer Kennzeichnung.",
+      "untergrund": "halle",
+      "witterung": [],
+      "relational_selbsttragend": true,
+      "trainer_layer_offen": "Fehlerbild 'Rueckhand ausweichend mit Vorhand umlaufen' + Korrekturansage",
+      "grafik": ["G-004"],
+      "erklaerteil": {
+        "de": "Die Rückhand spielst du auf der Seite deines Körpers, die dem Schläger abgewandt ist — dort, wo der Handrücken nach vorn zeigt. Sie ist das Gegenstück zur Vorhand und folgt demselben Prinzip, nur spiegelverkehrt.\n\nWenn du die Vorhand schon kennst, hilft dir dieses Bild: Alles, was dort nach der einen Seite lief, läuft hier zur anderen. Das Gewicht wandert auf den Fuß deiner Schlagseite, der Oberkörper dreht auf, und der Schläger kommt vor dem Körper nach vorn. Du triffst den Speeder auch hier vor deinem Körper, im Zugriff deines Schlagarms.\n\nUnd falls die Vorhand gerade nicht präsent ist: Stell dich seitlich zum Ziel, den Schläger führst du dicht am Körper vorbei nach vorn und öffnest die Bewegung zum Treffpunkt hin. Der Schlag bleibt kompakt, das Handgelenk zunächst ruhig — genau wie bei der Vorhand baust du erst den sauberen Bogen, bevor Tempo dazukommt.\n\nEin Grund, warum die Rückhand sitzen muss: Im Spiel wird sie gezielt angespielt. Viele Aufschläge und Angriffe suchen die Rückhandseite, weil sie bei den meisten die schwächere ist. Eine verlässliche Rückhand nimmt dir genau diese Angriffsfläche.",
+        "en": "You play the backhand on the side of your body turned away from the racket — where the back of your hand points forward. It's the counterpart to the forehand and follows the same principle, just mirrored.\n\nIf you already know the forehand, this image helps: everything that ran to one side there runs to the other here. Your weight moves onto the foot on your hitting side, your upper body opens up, and the racket comes forward in front of your body. Here too you hit the Speeder in front of you, within reach of your hitting arm.\n\nAnd in case the forehand isn't fresh in your mind: stand side-on to the target, guide the racket forward close past your body and open the motion out toward the contact point. The stroke stays compact, the wrist quiet at first — just as with the forehand, you build the clean arc before pace comes in.\n\nOne reason the backhand has to be solid: in a match it's deliberately targeted. Many serves and attacks seek out the backhand side, because for most people it's the weaker one. A reliable backhand takes exactly that opening away from your opponent.",
+        "fr": "Le revers se joue du côté de ton corps opposé à la raquette — là où le dos de la main pointe vers l'avant. C'est le pendant du coup droit et il suit le même principe, simplement en miroir.\n\nSi tu connais déjà le coup droit, cette image t'aide : tout ce qui allait d'un côté là-bas va de l'autre côté ici. Le poids passe sur le pied de ton côté de frappe, le buste s'ouvre, et la raquette vient vers l'avant devant le corps. Ici aussi, tu frappes le speeder devant toi, à portée de ton bras de frappe.\n\nEt si le coup droit n'est pas frais dans ta tête : place-toi de côté par rapport à la cible, guide la raquette vers l'avant tout près du corps et ouvre le geste vers le point de frappe. La frappe reste compacte, le poignet d'abord calme — comme pour le coup droit, tu construis l'arc propre avant que la vitesse s'ajoute.\n\nUne raison pour laquelle le revers doit être solide : en match, il est visé délibérément. Beaucoup de services et d'attaques cherchent le côté revers, parce que c'est le plus faible chez la plupart. Un revers fiable retire justement cette surface d'attaque à ton adversaire.",
+        "pl": "Bekhend grasz po tej stronie ciała, która jest odwrócona od rakiety — tam, gdzie wierzch dłoni wskazuje do przodu. To odpowiednik forhendu i podlega tej samej zasadzie, tylko lustrzanie odwróconej.\n\nJeśli forhend już znasz, pomoże ci ten obraz: wszystko, co tam biegło w jedną stronę, tutaj biegnie w drugą. Ciężar przechodzi na nogę po twojej stronie uderzenia, tułów się otwiera, a rakieta wychodzi przed ciałem do przodu. Speedera także tutaj trafiasz przed ciałem, w zasięgu ramienia uderzającego.\n\nA gdyby forhend nie był akurat w pamięci: ustaw się bokiem do celu, rakietę prowadzisz blisko ciała do przodu i otwierasz ruch w stronę punktu kontaktu. Uderzenie pozostaje zwięzłe, nadgarstek na razie spokojny — tak samo jak przy forhendzie najpierw budujesz czysty łuk, zanim dojdzie tempo.\n\nJeden powód, dla którego bekhend musi być opanowany: w grze jest celowo rozgrywany. Wiele serwisów i ataków szuka strony bekhendowej, bo u większości jest ona słabsza. Niezawodny bekhend odbiera ci właśnie tę powierzchnię do ataku."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["technik"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Den gespiegelten Bogen einschleifen",
+          "ziel": "Die Rückhandbewegung sitzt als flüssige Kette, bevor ein Speeder ins Spiel kommt.",
+          "schritte": [
+            "Nimm die Grundposition ein, Universalgriff.",
+            "Verlagere das Gewicht auf den Fuß deiner Schlagseite, drehe den Oberkörper auf.",
+            "Führe den Schläger dicht am Körper vorbei nach vorn und öffne die Bewegung zum Treffpunkt hin.",
+            "Halte den gedachten Treffpunkt klar vor deinem Körper.",
+            "Kehre in die Grundposition zurück und wiederhole."
+          ],
+          "selbstkontrolle": "Achte darauf, ob Gewicht, Drehung und Schlag ineinander übergehen. Stockt die Bewegung, mach sie langsamer, bis sie fließt. Die Rückhand fühlt sich anfangs ungewohnter an als die Vorhand — das legt sich mit den Wiederholungen.",
+          "naechste_stufe": "Sitzt die Bewegung, bringst du einen Speeder hinein — wirf ihn dir selbst kurz an, lass ihn auf Hüfthöhe fallen und triff ihn im Bogen vor dem Körper. Jetzt prüfst du, ob die Kette auch mit echtem Treffkontakt hält."
+        },
+        "en": {
+          "titel": "Groove the mirrored arc",
+          "ziel": "The backhand motion sits as a flowing chain before a Speeder comes into play.",
+          "schritte": [
+            "Take the base position, universal grip.",
+            "Shift your weight onto the foot on your hitting side, open up your upper body.",
+            "Guide the racket forward close past your body and open the motion out toward the contact point.",
+            "Keep the imagined contact point clearly in front of your body.",
+            "Return to the base position and repeat."
+          ],
+          "selbstkontrolle": "Watch whether weight, rotation and hit blend into one another. If the motion stalls, slow it down until it flows. The backhand feels more unfamiliar than the forehand at first — that settles with the repetitions.",
+          "naechste_stufe": "Once the motion sits, you bring a Speeder in — toss it up to yourself briefly, let it drop to hip height and hit it in the arc in front of your body. Now you check whether the chain holds with real contact too."
+        },
+        "fr": {
+          "titel": "Ancrer l'arc en miroir",
+          "ziel": "Le geste de revers est acquis comme une chaîne fluide, avant qu'un speeder entre en jeu.",
+          "schritte": [
+            "Prends la position de base, prise universelle.",
+            "Déplace le poids sur le pied de ton côté de frappe, ouvre le buste.",
+            "Guide la raquette vers l'avant tout près du corps et ouvre le geste vers le point de frappe.",
+            "Garde le point de frappe imaginé nettement devant ton corps.",
+            "Reviens à la position de base et répète."
+          ],
+          "selbstkontrolle": "Observe si le poids, la rotation et la frappe s'enchaînent. Si le geste se bloque, ralentis-le jusqu'à ce qu'il coule. Le revers semble d'abord plus inhabituel que le coup droit — cela s'estompe avec les répétitions.",
+          "naechste_stufe": "Une fois le geste acquis, tu y intègres un speeder — lance-le-toi brièvement, laisse-le tomber à hauteur de hanche et frappe-le dans l'arc devant ton corps. Là, tu vérifies si la chaîne tient aussi avec un vrai contact."
+        },
+        "pl": {
+          "titel": "Wyszlifować lustrzany łuk",
+          "ziel": "Ruch bekhendu siedzi jako płynny łańcuch, zanim do gry wejdzie speeder.",
+          "schritte": [
+            "Przyjmij pozycję podstawową, chwyt uniwersalny.",
+            "Przenieś ciężar na nogę po stronie uderzenia, otwórz tułów.",
+            "Poprowadź rakietę blisko ciała do przodu i otwórz ruch w stronę punktu kontaktu.",
+            "Utrzymuj wyobrażony punkt kontaktu wyraźnie przed ciałem.",
+            "Wróć do pozycji podstawowej i powtórz."
+          ],
+          "selbstkontrolle": "Zwróć uwagę, czy ciężar, obrót i uderzenie przechodzą jedno w drugie. Jeśli ruch się zacina, zwolnij go, aż popłynie. Bekhend z początku wydaje się mniej naturalny niż forhend — to mija z powtórzeniami.",
+          "naechste_stufe": "Gdy ruch siedzi, wprowadzasz speedera — podrzuć go sobie krótko, pozwól mu opaść na wysokość bioder i trafiaj go łukiem przed ciałem. Teraz sprawdzasz, czy łańcuch utrzyma się także przy prawdziwym kontakcie."
+        }
+      }
+    },
+
+    {
+      "id": "beinarbeit",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "voraussetzungen": ["grundposition", "vorhand_drive", "rueckhand"],
+      "voraussetzungen_lesart": "grundposition = motorisches Aufbauen; vorhand_drive + rueckhand = didaktisches Sinnstiften (Bewegung zum Ball braucht einen zu spielenden Schlag als Zweck)",
+      "spielziele": ["wiederholte_antrittsschnelligkeit", "rally_ausdauer"],
+      "vermittlungsziele": [],
+      "transfer_herkunft": ["CM", "BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'bleibt nach Schlag in der Ecke stehen' + Korrekturansage",
+      "grafik": ["G-007", "G-008"],
+      "hinweis_hoehere_stufen": "Vollstaendiges Beinarbeit-System (Chasse, Lunge, Scherensprung, Block-Sprung, Double-Hop, zonenspezifische Wege) als getrennte Fortgeschrittenen-/Experten-Bausteine. Dort Delta erwartet (netzlose Feldgeometrie weicht von Badminton ab).",
+      "erklaerteil": {
+        "de": "Bisher ging es darum, wie du schlägst. Jetzt geht es darum, wie du rechtzeitig dorthin kommst, wo der Speeder ankommt. Gute Beinarbeit entscheidet oft mehr als der Schlag selbst — sie bringt dich rechtzeitig dorthin, wo der Speeder ankommt.\n\nAlles dreht sich um einen Ort und einen Moment.\n\nDer Ort ist die Mitte deines Feldes — die zentrale Position. Von hier erreichst du jede Ecke am schnellsten. Nach jedem Schlag kehrst du dorthin zurück. Dein Spiel bekommt dadurch einen Rhythmus: raus zum Ball, Schlag, zurück ins Zentrum. Immer wieder.\n\nDer Moment ist der Split-Step — ein kleiner, federnder Hüpfer, kurz bevor dein Gegner den Speeder trifft. Du landest leicht auf beiden Fußballen, und genau aus dieser Landung heraus startest du in jede Richtung. Der Split-Step verwandelt deine ruhige Bereitschaft in gerichtete Bewegung. Ohne ihn stehst du fest am Boden und verlierst den ersten Schritt.\n\nZusammen ergeben beide einen Kreislauf: Du wartest zentral, lädst dich mit dem Split-Step, startest zum Ball, schlägst, kehrst zurück. Dieser Kreislauf ist das Fundament deiner Beweglichkeit im Feld.",
+        "en": "So far it's been about how you hit. Now it's about how you get to where the Speeder lands in time. Good footwork often decides more than the stroke itself — it gets you to where the Speeder arrives in time.\n\nEverything revolves around one place and one moment.\n\nThe place is the middle of your court — the central position. From here you reach every corner fastest. After every stroke you return to it. This gives your game a rhythm: out to the ball, hit, back to the center. Again and again.\n\nThe moment is the split step — a small, springy hop just before your opponent hits the Speeder. You land lightly on the balls of both feet, and from that landing you set off in any direction. The split step turns your quiet readiness into directed movement. Without it you're planted on the floor and lose the first step.\n\nTogether the two form a cycle: you wait centrally, load with the split step, set off to the ball, hit, return. This cycle is the foundation of your mobility on the court.",
+        "fr": "Jusqu'ici, il s'agissait de comment tu frappes. Maintenant, il s'agit de comment tu arrives à temps là où le speeder atterrit. Un bon jeu de jambes décide souvent plus que la frappe elle-même — il t'amène à temps là où le speeder arrive.\n\nTout tourne autour d'un lieu et d'un instant.\n\nLe lieu, c'est le milieu de ton terrain — la position centrale. De là, tu atteins chaque coin le plus vite. Après chaque frappe, tu y reviens. Ton jeu y gagne un rythme : sortir vers la balle, frapper, revenir au centre. Encore et encore.\n\nL'instant, c'est le split-step — un petit bond élastique, juste avant que ton adversaire frappe le speeder. Tu atterris légèrement sur la plante des deux pieds, et c'est de cet atterrissage que tu pars dans toutes les directions. Le split-step transforme ta disponibilité calme en mouvement dirigé. Sans lui, tu es planté au sol et tu perds le premier pas.\n\nEnsemble, les deux forment un cycle : tu attends au centre, tu te charges avec le split-step, tu pars vers la balle, tu frappes, tu reviens. Ce cycle est le fondement de ta mobilité sur le terrain.",
+        "pl": "Do tej pory chodziło o to, jak uderzasz. Teraz chodzi o to, jak w porę docierasz tam, gdzie ląduje speeder. Dobra praca nóg często decyduje bardziej niż samo uderzenie — to ona w porę dostawia cię tam, gdzie ląduje speeder.\n\nWszystko kręci się wokół jednego miejsca i jednego momentu.\n\nMiejsce to środek twojego pola — pozycja centralna. Stąd najszybciej dosięgasz każdego narożnika. Po każdym uderzeniu tam wracasz. Twoja gra zyskuje przez to rytm: wyjście do piłki, uderzenie, powrót do środka. Wciąż od nowa.\n\nMoment to split-step — mały, sprężysty podskok tuż przed tym, jak przeciwnik trafia speedera. Lądujesz lekko na przedniej części obu stóp i właśnie z tego lądowania ruszasz w każdą stronę. Split-step zamienia twoją spokojną gotowość w ukierunkowany ruch. Bez niego stoisz przyklejony do podłoża i tracisz pierwszy krok.\n\nRazem tworzą obieg: czekasz centralnie, ładujesz się split-stepem, ruszasz do piłki, uderzasz, wracasz. Ten obieg to fundament twojej ruchliwości na polu."
+      },
+      "geeignete_phase": ["erwaermung", "hauptteil"],
+      "dauer_klasse": "kurz",
+      "intensitaet": "mittel",
+      "fokus": ["technik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Den Kreislauf laufen",
+          "ziel": "Der Bewegungszyklus sitzt als Ganzes — ohne Speeder, als reine Fußarbeit.",
+          "schritte": [
+            "Stell dich in die zentrale Position deines Feldes, in die Grundhaltung.",
+            "Mach einen kleinen Split-Step — federnder Hüpfer, Landung auf beiden Fußballen.",
+            "Starte aus der Landung heraus zu einer Ecke deines Feldes und deute dort einen Schlag an.",
+            "Kehre in die zentrale Position zurück.",
+            "Wiederhole, jedes Mal in eine andere Ecke."
+          ],
+          "selbstkontrolle": "Achte auf zwei Dinge: Kommt der Start unmittelbar aus dem Split-Step, oder liegt eine Pause dazwischen? Und findest du zuverlässig in die zentrale Position zurück, oder bleibst du nach dem Schlag in der Ecke stehen? Der Kreislauf trägt erst, wenn beides rund läuft.",
+          "abschluss": "Diese Schattenbewegung baut den Rhythmus ein, bevor ein Speeder Druck macht. Sitzt der Kreislauf, kommt die Anpassung an den echten Ball fast von allein — die Wege bleiben dieselben, nur das Ziel bewegt sich dann."
+        },
+        "en": {
+          "titel": "Run the cycle",
+          "ziel": "The movement cycle sits as a whole — without a Speeder, as pure footwork.",
+          "schritte": [
+            "Stand in the central position of your court, in the ready stance.",
+            "Do a small split step — springy hop, landing on the balls of both feet.",
+            "From the landing, set off to a corner of your court and mime a stroke there.",
+            "Return to the central position.",
+            "Repeat, each time to a different corner."
+          ],
+          "selbstkontrolle": "Watch two things: does the start come straight out of the split step, or is there a pause in between? And do you reliably find your way back to the central position, or do you stay in the corner after the stroke? The cycle only holds once both run smoothly.",
+          "abschluss": "This shadow drill builds in the rhythm before a Speeder adds pressure. Once the cycle sits, adapting to the real ball almost takes care of itself — the paths stay the same, only the target then moves."
+        },
+        "fr": {
+          "titel": "Faire tourner le cycle",
+          "ziel": "Le cycle de déplacement est acquis dans son ensemble — sans speeder, comme pur jeu de jambes.",
+          "schritte": [
+            "Place-toi en position centrale de ton terrain, en position de base.",
+            "Fais un petit split-step — bond élastique, atterrissage sur la plante des deux pieds.",
+            "Depuis l'atterrissage, élance-toi vers un coin de ton terrain et esquisse-y une frappe.",
+            "Reviens à la position centrale.",
+            "Répète, à chaque fois vers un autre coin."
+          ],
+          "selbstkontrolle": "Observe deux choses : le départ vient-il directement du split-step, ou y a-t-il une pause entre les deux ? Et reviens-tu de façon fiable à la position centrale, ou restes-tu dans le coin après la frappe ? Le cycle ne porte que lorsque les deux tournent rond.",
+          "abschluss": "Ce déplacement à vide installe le rythme avant qu'un speeder mette la pression. Une fois le cycle acquis, l'adaptation à la vraie balle vient presque toute seule — les trajets restent les mêmes, seule la cible se déplace alors."
+        },
+        "pl": {
+          "titel": "Przebiegnij obieg",
+          "ziel": "Cykl ruchu siedzi jako całość — bez speedera, jako czysta praca nóg.",
+          "schritte": [
+            "Ustaw się w pozycji centralnej swojego pola, w postawie podstawowej.",
+            "Zrób mały split-step — sprężysty podskok, lądowanie na przedniej części obu stóp.",
+            "Z lądowania ruszaj do jednego narożnika swojego pola i zaznacz tam uderzenie.",
+            "Wróć do pozycji centralnej.",
+            "Powtarzaj, za każdym razem do innego narożnika."
+          ],
+          "selbstkontrolle": "Zwróć uwagę na dwie rzeczy: czy start wychodzi bezpośrednio ze split-stepu, czy jest między nimi przerwa? I czy niezawodnie wracasz do pozycji centralnej, czy po uderzeniu zostajesz w narożniku? Obieg zaczyna nieść dopiero wtedy, gdy oba elementy działają płynnie.",
+          "abschluss": "Ten ruch cienia wbudowuje rytm, zanim speeder zacznie naciskać. Gdy obieg siedzi, dostosowanie do prawdziwej piłki przychodzi niemal samo — drogi pozostają te same, porusza się tylko cel."
+        }
+      }
+    }
+  ],
+
+  "delta_bausteine": [
+    {
+      "id": "griff_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "griff",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["griff"],
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Du kannst bereits greifen. Der Handschlag-Griff, das „V\" zwischen Daumen und Zeigefinger — alles vertraut. Du musst hier nichts Neues lernen.\n\nDu musst etwas verlernen: das Umgreifen.\n\nIm Badminton wechselst du ständig — Vorhandgriff, Rückhandgriff, Daumen umgelegt, je nach Schlag. Dieser Wechsel sitzt bei dir tief, und genau er wird dir im Crossminton im Weg stehen. Hier gibt es keinen Wechsel. Ein Griff, jeder Schlag.\n\nDas fühlt sich anfangs falsch an. Deine Hand will umgreifen, besonders auf der Rückhand — sie hat es tausendmal getan. Lass sie nicht. Halte den Universalgriff auch dann, wenn dein Badminton-Reflex nach dem Daumen verlangt.\n\nEin kleiner Test: Spiel ein paar Rückhände und beobachte deinen Daumen. Wandert er? Dann greifst du noch um. Ziel ist, dass die Hand ruhig bleibt.\n\nNebenbei: Der Speeder ist schwerer als ein Federball, der Schläger kürzer und dicker bespannt. Dein Griff darf deshalb eine Spur fester sein als gewohnt, und das Handgelenk bleibt am Anfang ruhiger. Aber das ist Feinabstimmung — die eine Sache, die zählt, ist der Verzicht aufs Umgreifen.",
+        "en": "You can already grip. The handshake grip, the \"V\" between thumb and index finger — all familiar. There's nothing new to learn here.\n\nThere's something to unlearn: re-gripping.\n\nIn badminton you switch constantly — forehand grip, backhand grip, thumb laid on, depending on the shot. That switch sits deep in you, and it's exactly what will get in your way in Crossminton. Here there's no switch. One grip, every stroke.\n\nAt first this feels wrong. Your hand wants to re-grip, especially on the backhand — it has done it a thousand times. Don't let it. Hold the universal grip even when your badminton reflex calls for the thumb.\n\nA quick test: play a few backhands and watch your thumb. Does it wander? Then you're still re-gripping. The goal is for the hand to stay quiet.\n\nBy the way: the Speeder is heavier than a shuttlecock, the racket shorter and strung thicker. Your grip may therefore be a touch firmer than you're used to, and the wrist stays quieter at the start. But that's fine-tuning — the one thing that counts is dropping the re-grip.",
+        "fr": "Tu sais déjà saisir. La prise en poignée de main, le « V » entre le pouce et l'index — tout est familier. Tu n'as rien de nouveau à apprendre ici.\n\nTu dois désapprendre quelque chose : le changement de prise.\n\nAu badminton, tu changes sans cesse — prise de coup droit, prise de revers, pouce posé, selon la frappe. Ce changement est ancré profondément en toi, et c'est justement lui qui te gênera au Crossminton. Ici, pas de changement. Une prise, chaque frappe.\n\nAu début, cela semble faux. Ta main veut changer de prise, surtout en revers — elle l'a fait mille fois. Ne la laisse pas faire. Garde la prise universelle même quand ton réflexe de badminton réclame le pouce.\n\nUn petit test : joue quelques revers et observe ton pouce. Se déplace-t-il ? Alors tu changes encore de prise. L'objectif est que la main reste calme.\n\nAu passage : le speeder est plus lourd qu'un volant, la raquette plus courte et au cordage plus épais. Ta prise peut donc être un cran plus ferme que d'habitude, et le poignet reste plus calme au début. Mais ça, c'est du réglage fin — la seule chose qui compte, c'est de renoncer au changement de prise.",
+        "pl": "Chwytać już umiesz. Chwyt jak przy uścisku dłoni, „V” między kciukiem a palcem wskazującym — wszystko znajome. Nie musisz się tu uczyć niczego nowego.\n\nMusisz coś oduczyć: zmiany chwytu.\n\nW badmintonie zmieniasz nieustannie — chwyt forhendowy, chwyt bekhendowy, kciuk przełożony, zależnie od uderzenia. Ta zmiana siedzi w tobie głęboko i to właśnie ona będzie ci w crossmintonie przeszkadzać. Tutaj nie ma zmiany. Jeden chwyt, każde uderzenie.\n\nZ początku wydaje się to błędne. Twoja ręka chce zmienić chwyt, zwłaszcza na bekhendzie — robiła to tysiące razy. Nie pozwól jej. Trzymaj chwyt uniwersalny także wtedy, gdy twój badmintonowy odruch domaga się kciuka.\n\nMały test: zagraj kilka bekhendów i obserwuj kciuk. Wędruje? To znaczy, że wciąż zmieniasz chwyt. Celem jest, by ręka pozostała spokojna.\n\nNa marginesie: speeder jest cięższy niż lotka, rakieta krótsza i grubiej naciągnięta. Twój chwyt może być dlatego odrobinę mocniejszy niż zwykle, a nadgarstek na początku spokojniejszy. Ale to dostrajanie — jedyna rzecz, która się liczy, to rezygnacja ze zmiany chwytu."
+      }
+    },
+    {
+      "id": "aufschlag_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "aufschlag",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["aufschlag"],
+      "spielziele": ["aufschlag_rueckschlag_eroeffnung", "laengen_tiefensteuerung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Die Bewegung kennst du: Speeder fallen lassen, von unten treffen. Motorisch musst du nichts umlernen.\n\nWas sich ändert, ist dein Ziel. Im Badminton hebst du den Aufschlag über das Netz — knapp drüber, kontrolliert, in ein nahes Feld. Diese Vorstellung sitzt bei dir. Im Crossminton gibt es kein Netz, das du überwinden musst. An seiner Stelle liegt die neutrale Zone zwischen den Feldern, und die überbrückst du mit Weite statt mit Höhe.\n\nDein Aufschlag geht also flacher und weiter, als dein Badminton-Reflex es will. Nicht anheben, sondern nach vorn durch die Zone tragen — bis tief ins gegnerische Feld.\n\nEin kleiner Test: Beobachte die Flugkurve deines Aufschlags. Steigt der Speeder erst hoch und fällt dann kurz dahinter? Dann spielst du noch über ein Netz, das nicht da ist. Ziel ist eine flache, lange Bahn.",
+        "en": "You know the motion: drop the Speeder, hit it from below. Nothing to relearn physically.\n\nWhat changes is your target. In badminton you lift the serve over the net — just over, controlled, into a nearby area. That picture sits in you. In Crossminton there's no net to clear. In its place lies the neutral zone between the courts, and you bridge it with distance rather than height.\n\nSo your serve goes flatter and farther than your badminton reflex wants. Don't lift it, carry it forward through the zone — deep into your opponent's court.\n\nA quick test: watch the flight path of your serve. Does the Speeder first rise high and then drop just behind? Then you're still playing over a net that isn't there. The goal is a flat, long trajectory.",
+        "fr": "Tu connais le geste : laisser tomber le speeder, frapper par en dessous. Sur le plan moteur, rien à réapprendre.\n\nCe qui change, c'est ta cible. Au badminton, tu lèves le service par-dessus le filet — juste au-dessus, contrôlé, dans une zone proche. Cette image est ancrée en toi. Au Crossminton, il n'y a pas de filet à franchir. À sa place se trouve la zone neutre entre les terrains, et tu la franchis par la distance plutôt que par la hauteur.\n\nTon service part donc plus plat et plus loin que ne le veut ton réflexe de badminton. Ne le lève pas, porte-le vers l'avant à travers la zone — jusqu'au fond du terrain adverse.\n\nUn petit test : observe la trajectoire de ton service. Le speeder monte-t-il d'abord haut pour retomber juste derrière ? Alors tu joues encore par-dessus un filet qui n'est pas là. L'objectif est une trajectoire plate et longue.",
+        "pl": "Ruch znasz: wypuścić speedera, trafić od dołu. Motorycznie nie musisz się niczego uczyć na nowo.\n\nZmienia się twój cel. W badmintonie unosisz serwis nad siatkę — tuż nad nią, kontrolowanie, w bliskie pole. To wyobrażenie w tobie siedzi. W crossmintonie nie ma siatki, którą trzeba pokonać. Na jej miejscu leży strefa neutralna między polami, a tę pokonujesz odległością, nie wysokością.\n\nTwój serwis idzie więc płaściej i dalej, niż chce tego twój badmintonowy odruch. Nie unosić, lecz nieść do przodu przez strefę — aż głęboko w pole przeciwnika.\n\nMały test: obserwuj tor lotu swojego serwisu. Czy speeder najpierw wznosi się wysoko i opada tuż za nią? To znaczy, że wciąż grasz nad siatką, której nie ma. Celem jest płaski, długi tor."
+      }
+    },
+    {
+      "id": "vorhand_drive_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "vorhand_drive",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["vorhand_drive"],
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Den Drive kennst du. Treffpunkt vor dem Körper, Gewicht nach vorn, Rotation in Schlagrichtung — das alles bringst du mit.\n\nEine Sache verlagert sich: woher die Kraft kommt. Im Badminton spielst du den Drive stark aus Handgelenk und Fingern, und der flexible Schläger schnappt dabei mit. Dein Gerät hier ist anders — kürzer, steifer, mit strafferer Bespannung, und der Speeder ist doppelt so schwer wie ein Federball. Der Schläger gibt kaum nach, also trägt das Handgelenk allein den Schlag nicht mehr.\n\nNimm den Handgelenksimpuls deshalb zunächst zurück. Deine Kraft kommt jetzt aus einem kompakteren, festeren Schlag — mehr aus Rumpf und Arm, mit einem klaren Zupacken im Griff am Treffpunkt. Das fühlt sich anfangs weniger elegant an als dein Badminton-Drive, überträgt die Energie am steifen Gerät aber sauberer.\n\nDas Handgelenk bleibt nicht für immer außen vor. Sitzt der kompakte Schlag, baust du es dosiert wieder ein — dieselbe Peitsche, die auch die anderen Spieler später lernen, nur an dein Gerät angepasst.\n\nEin kleiner Test: Spiel ein paar Drives und achte auf deinen Unterarm. Bleibt er locker und der Schlag trotzdem kraftvoll? Dann trägt der Körper den Schlag. Kommt die Kraft spürbar nur aus dem Handgelenk, nimm es noch etwas zurück.",
+        "en": "You know the drive. Contact point in front of the body, weight forward, rotation in the direction of the shot — all of that you bring with you.\n\nOne thing shifts: where the power comes from. In badminton you play the drive largely from wrist and fingers, and the flexible racket snaps along with it. Your gear here is different — shorter, stiffer, with tighter stringing, and the Speeder is twice as heavy as a shuttlecock. The racket barely gives, so the wrist alone no longer carries the shot.\n\nSo pull the wrist impulse back at first. Your power now comes from a more compact, firmer stroke — more from trunk and arm, with a clear grab in the grip at the contact point. At first this feels less elegant than your badminton drive, but it transfers the energy more cleanly on the stiff gear.\n\nThe wrist isn't left out forever. Once the compact stroke sits, you build it back in measured doses — the same whip the other players learn later, just adapted to your gear.\n\nA quick test: play a few drives and pay attention to your forearm. Does it stay loose while the shot is still powerful? Then your body carries the shot. If the power noticeably comes only from the wrist, pull it back a little more.",
+        "fr": "Tu connais le drive. Point de frappe devant le corps, poids vers l'avant, rotation dans la direction de la frappe — tout cela, tu l'apportes avec toi.\n\nUne chose se déplace : d'où vient la force. Au badminton, tu joues le drive surtout depuis le poignet et les doigts, et la raquette flexible claque avec. Ton matériel ici est différent — plus court, plus rigide, au cordage plus tendu, et le speeder est deux fois plus lourd qu'un volant. La raquette ne fléchit presque pas, donc le poignet seul ne porte plus la frappe.\n\nRetiens donc d'abord l'impulsion du poignet. Ta force vient maintenant d'une frappe plus compacte et plus ferme — davantage du tronc et du bras, avec un serrage net dans la prise au point de frappe. Au début, cela semble moins élégant que ton drive de badminton, mais cela transmet mieux l'énergie sur ce matériel rigide.\n\nLe poignet n'est pas écarté pour toujours. Une fois la frappe compacte acquise, tu le réintègres à doses mesurées — le même fouet que les autres joueurs apprennent plus tard, simplement adapté à ton matériel.\n\nUn petit test : joue quelques drives et fais attention à ton avant-bras. Reste-t-il souple alors que la frappe est puissante ? Alors le corps porte la frappe. Si la force vient sensiblement du seul poignet, retiens-le encore un peu.",
+        "pl": "Drive znasz. Punkt kontaktu przed ciałem, ciężar do przodu, rotacja w kierunku uderzenia — to wszystko już masz.\n\nJedna rzecz się przesuwa: skąd bierze się siła. W badmintonie grasz drive’a mocno z nadgarstka i palców, a elastyczna rakieta przy tym dokłada swój strzał. Twój sprzęt tutaj jest inny — krótszy, sztywniejszy, z mocniejszym naciągiem, a speeder jest dwa razy cięższy niż lotka. Rakieta prawie nie ustępuje, więc sam nadgarstek nie niesie już uderzenia.\n\nDlatego na początku cofnij impuls z nadgarstka. Twoja siła płynie teraz ze zwięźlejszego, mocniejszego uderzenia — bardziej z tułowia i ramienia, z wyraźnym zaciśnięciem chwytu w punkcie kontaktu. Z początku wydaje się to mniej eleganckie niż twój badmintonowy drive, ale na sztywnym sprzęcie przenosi energię czyściej.\n\nNadgarstek nie zostaje wyłączony na zawsze. Gdy zwięzłe uderzenie siedzi, wbudowujesz go z powrotem w odpowiedniej dawce — ten sam bat, którego pozostali gracze uczą się później, tylko dopasowany do twojego sprzętu.\n\nMały test: zagraj kilka drive’ów i zwróć uwagę na przedramię. Pozostaje luźne, a uderzenie mimo to mocne? To znaczy, że uderzenie niesie ciało. Jeśli siła wyczuwalnie płynie tylko z nadgarstka, cofnij go jeszcze trochę."
+      }
+    },
+    {
+      "id": "rueckhand_delta_bad",
+      "typ": "delta",
+      "domaene": "technik",
+      "kompetenzstufe": ["beginner"],
+      "basis_baustein": "rueckhand",
+      "ersetzt_bei_herkunft": "BAD",
+      "voraussetzungen": ["rueckhand"],
+      "delta_buendelung": ["griff_delta_bad", "vorhand_drive_delta_bad"],
+      "delta_buendelung_hinweis": "Verweise auf andere Deltas als weiche Voraussetzung (Lektuereempfehlung), nicht als harte Abhaengigkeit. Fuehrender Punkt: Daumenwechsel. Nachgeordnet: Kraftumgewichtung (Verweis auf vorhand_drive_delta_bad).",
+      "spielziele": ["tempo_haertedosierung"],
+      "transfer_herkunft": ["BAD"],
+      "untergrund": "halle",
+      "witterung": [],
+      "eigener_uebungsteil": false,
+      "erklaerteil": {
+        "de": "Auf der Rückhand sitzt deine Badminton-Gewohnheit am tiefsten. Dort drehst du gewohnt in den Daumengriff — Daumen auf die breite Griffseite, der die Kraft über den Hebel erzeugt. Genau dieser Wechsel entfällt hier. Du bleibst im Universalgriff, auch auf der Rückhand, ohne den Daumen umzulegen.\n\nDas ist derselbe Verzicht, den du schon beim Griff kennengelernt hast — auf der Rückhand wird er nur besonders spürbar, weil dein Reflex hier am stärksten nach dem Daumen verlangt.\n\nDazu kommt, wie bei der Vorhand, die veränderte Kraftquelle: Am steifen Gerät kommt die Kraft aus dem kompakteren Körperschlag, nicht aus dem Daumen- oder Handgelenksimpuls. Die Einzelheiten dazu findest du im Vorhand-Hinweis.\n\nEin kleiner Test: Spiel ein paar Rückhände und achte auf deinen Daumen. Legt er sich um, greifst du noch nach dem Badminton-Muster. Ziel ist, dass er ruhig an seiner Universalgriff-Position bleibt.",
+        "en": "On the backhand your badminton habit sits deepest. There you're used to turning into the thumb grip — thumb on the broad side of the handle, generating power through leverage. It's exactly this switch that falls away here. You stay in the universal grip, on the backhand too, without laying the thumb on.\n\nIt's the same thing to drop that you already met with the grip — on the backhand it's just especially noticeable, because your reflex here calls for the thumb most strongly.\n\nOn top of that, as with the forehand, comes the changed power source: on the stiff gear the power comes from the more compact body stroke, not from a thumb or wrist impulse. You'll find the details in the forehand note.\n\nA quick test: play a few backhands and watch your thumb. If it lays itself on, you're still gripping by the badminton pattern. The goal is for it to stay quietly in its universal-grip position.",
+        "fr": "C'est en revers que ton habitude de badminton est la plus ancrée. Là, tu tournes d'ordinaire vers la prise du pouce — le pouce sur le côté large du manche, qui crée la force par le levier. C'est justement ce changement qui disparaît ici. Tu restes en prise universelle, en revers aussi, sans poser le pouce.\n\nC'est le même renoncement que tu as déjà rencontré avec la prise — en revers, il est simplement particulièrement sensible, car ton réflexe réclame ici le pouce le plus fortement.\n\nÀ cela s'ajoute, comme pour le coup droit, la source de force modifiée : sur ce matériel rigide, la force vient de la frappe du corps plus compacte, pas d'une impulsion du pouce ou du poignet. Tu trouveras les détails dans la note du coup droit.\n\nUn petit test : joue quelques revers et observe ton pouce. S'il se pose, tu saisis encore selon le schéma du badminton. L'objectif est qu'il reste calmement à sa position de prise universelle.",
+        "pl": "Na bekhendzie twój badmintonowy nawyk siedzi najgłębiej. Tam zwykle obracasz dłoń w chwyt kciukowy — kciuk na szeroką stronę rączki, co wytwarza siłę przez dźwignię. Właśnie ta zmiana tutaj odpada. Pozostajesz w chwycie uniwersalnym, także na bekhendzie, bez przekładania kciuka.\n\nTo ta sama rezygnacja, którą już znasz z chwytu — na bekhendzie staje się tylko szczególnie odczuwalna, bo twój odruch najsilniej domaga się tu kciuka.\n\nDo tego dochodzi, jak przy forhendzie, zmienione źródło siły: na sztywnym sprzęcie siła płynie ze zwięźlejszego uderzenia całym ciałem, nie z impulsu kciuka czy nadgarstka. Szczegóły znajdziesz we wskazówce do forhendu.\n\nMały test: zagraj kilka bekhendów i zwróć uwagę na kciuk. Jeśli się przekłada, wciąż chwytasz według badmintonowego wzorca. Celem jest, by pozostawał spokojnie na swojej pozycji chwytu uniwersalnego."
+      }
+    }
+  ]
+}

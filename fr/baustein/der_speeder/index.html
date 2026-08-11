@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Le speeder — Manuel de Crossminton</title>
+  <meta name="description" content="Le speeder est la balle du Crossminton — et la raison même de l'existence du sport. À l'origine, il y a eu la recherche d'une balle qui vole aussi par vent, là …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/fr/baustein/der_speeder">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Le speeder — Manuel de Crossminton">
+  <meta property="og:description" content="Le speeder est la balle du Crossminton — et la raison même de l'existence du sport. À l'origine, il y a eu la recherche d'une balle qui vole aussi par vent, là …">
+  <meta property="og:url" content="https://crossminton-handbook.de/fr/baustein/der_speeder">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Le speeder — Manuel de Crossminton">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Le speeder — Manuel de Crossminton">
+  <meta name="twitter:description" content="Le speeder est la balle du Crossminton — et la raison même de l'existence du sport. À l'origine, il y a eu la recherche d'une balle qui vole aussi par vent, là …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/der_speeder">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/der_speeder">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/der_speeder">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/der_speeder">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/der_speeder">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Manuel de Crossminton","item":"https://crossminton-handbook.de/fr"},{"@type":"ListItem","position":2,"name":"Parcours thématique","item":"https://crossminton-handbook.de/fr/pfad/themen"},{"@type":"ListItem","position":3,"name":"Équipement","item":"https://crossminton-handbook.de/fr/pfad/themen/ausruestung"},{"@type":"ListItem","position":4,"name":"Le speeder","item":"https://crossminton-handbook.de/fr/baustein/der_speeder"}]},{"@type":"LearningResource","name":"Le speeder","description":"Le speeder est la balle du Crossminton — et la raison même de l'existence du sport. À l'origine, il y a eu la recherche d'une balle qui vole aussi par vent, là …","url":"https://crossminton-handbook.de/fr/baustein/der_speeder","inLanguage":"fr","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"lesson","educationalLevel":"Débutant","about":[{"@type":"Thing","name":"Équipement"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/fr" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/fr/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-schiefer baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-baseball " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Le speeder</h1>
+        <p class="marke-hero-untertitel">Équipement · Débutant</p>
+      </div>
+    </section>
+      
+      
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explication</h2><span class="chip chip-rot">à faire</span></div>
+      
+      
+      <p>Le speeder est la balle du Crossminton — et la raison même de l'existence du sport. À l'origine, il y a eu la recherche d'une balle qui vole aussi par vent, là où un volant dérive depuis longtemps. La réponse est construite plus courte, plus lourde et plus étroite qu'un volant : la jupe raccourcie oppose moins de résistance à l'air, le poids plus élevé apporte plus d'inertie. Ensemble, cela donne une trajectoire plate, rapide et longue qui reste stable. Un speeder pèse entre 8 et 10 grammes, environ trois fois plus qu'un volant, et il est étanche et résistant à la déchirure.</p><p>Il existe en plusieurs types, et pour ton jeu, l'essentiel est d'attraper le bon. Le Fun Speeder rouge est le plus léger et le plus lent : idéal pour débuter, pour les enfants et pour l'entraînement — dans la catégorie U12, il est même obligatoire. Le Match Speeder jaune est la balle de compétition officielle ; on joue avec dans toutes les autres catégories. Le Cross Speeder est le plus lourd et vole le plus loin, pensé pour les longues distances et le vent. Le Night Speeder porte une coiffe transparente pour un bâton lumineux et rend le jeu possible dans l'obscurité. Le Heli est particulièrement stable au vent et conçu pour les courtes distances.</p><p>Les indications de distance et de vitesse des fabricants varient fortement selon la source — prends-les comme un ordre de grandeur, pas comme une mesure. Ce qui est établi, c'est l'ordre : Fun le plus lent, Match au milieu, Cross le plus rapide et le plus lointain.</p><p>Par vent, tu as trois niveaux. Le speeder lui-même est conçu pour être jouable jusqu'à environ force 4 — c'est là son véritable but. Si cela ne suffit pas, tu glisses un anneau de vent sous la coiffe : il augmente le poids, et plus de masse à surface égale rend la trajectoire plus inerte face au vent latéral, donc plus stable. Une idée reçue répandue veut que l'anneau réduise la résistance à l'air. C'est faux : il laisse la forme inchangée et n'augmente que le poids. Ce n'est que si cela ne suffit toujours pas que tu prends un type plus lourd comme le Cross — en compétition toutefois, uniquement après accord avec l'organisateur et en entente avec le juge-arbitre.</p><p>Deux règles à connaître. La forme du speeder ne doit pas changer — le glisser entre-temps dans la poche du pantalon est expressément interdit. Et tu ne dois pas continuer à jouer volontairement un speeder visiblement endommagé ; s'il se déforme pendant l'échange, le point est rejoué. Vérifie donc tes speeders après chaque match et écarte les abîmés.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 340" role="img" aria-label="Speeder de profil avec les cotes ICO en millimètres" class="grafik-bild grafik-svg" id="g-svg-153">
+  <style>
+    #g-svg-153 .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    #g-svg-153 .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    #g-svg-153 .kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-153 .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    #g-svg-153 .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    #g-svg-153 .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    #g-svg-153 .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    #g-svg-153 .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    #g-svg-153 .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    #g-svg-153 .pfeil{fill:var(--tinte-3,#6b7686)}
+    #g-svg-153 .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-153 .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-153 .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    #g-svg-153 .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    #g-svg-153 .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g-svg-153-mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+    <marker id="g-svg-153-mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+  </defs>
+
+  <path class="korbflaeche" d="M103.5,129 L57,234 L207,234 L160.5,129 Z"></path>
+  <path class="stiel" d="M114.3,129 L85.5,234"></path>
+  <path class="stiel" d="M123.5,129 L109.5,234"></path>
+  <path class="stiel" d="M140.6,129 L154.5,234"></path>
+  <path class="stiel" d="M149.7,129 L178.5,234"></path>
+  <path class="achse" d="M132,40 L132,250"></path>
+
+  <!-- Schlagkappe oben -->
+  <path class="kappe" d="M93,99 L93,74 A39,20 0 0 1 171,74 L171,99 Z"></path>
+  <path class="kappenlinie" d="M112,70 A22,11 0 0 1 152,70"></path>
+
+  <!-- Kragen: geschlossener Zylinder zwischen Kappe und Korb -->
+  <path class="kontur" d="M87,99 L87,129 M177,99 L177,129"></path>
+  <path class="kontur" d="M87,99 L177,99"></path>
+
+  <!-- Korb: setzt am Endring an und laeuft bis zum wellenfoermigen Rand -->
+  <path class="kontur" d="M87,129 L103.5,129 L57,234"></path>
+  <path class="kontur" d="M177,129 L160.5,129 L207,234"></path>
+  <path class="kontur" d="M57,234 q 18.75,9 37.5,0 q 18.75,-9 37.5,0 q 18.75,9 37.5,0 q 18.75,-9 37.5,0"></path>
+
+  <!-- Konuswinkel: Bogen um den rechnerischen Scheitel, liegt auf beiden Flanken
+       auf. Die duenn gestrichelten Verlaengerungen zeigen, worauf er sich bezieht. -->
+  <path class="hilfslinie" d="M132,64.6 L103.5,129 M132,64.6 L160.5,129"></path>
+  <path class="masz" d="M89.9,159.7 A104,104 0 0 1 174.1,159.7" marker-start="url(#g-svg-153-mp2)" marker-end="url(#g-svg-153-mp)"></path>
+  <text class="maszzahl" x="132" y="151.7">47,8°</text>
+
+  <!-- Gesamthoehe rechts -->
+  <path class="hilfslinie" d="M171,54 L254,54"></path>
+  <path class="hilfslinie" d="M207,234 L254,234"></path>
+  <path class="masz" d="M248,54 L248,234" marker-start="url(#g-svg-153-mp2)" marker-end="url(#g-svg-153-mp)"></path>
+  <text class="maszzahl" x="272" y="141">60</text>
+  <text class="ico" x="272" y="155">57–63</text>
+
+  <!-- Kappendurchmesser oben -->
+  <path class="masz" d="M93,38 L171,38" marker-start="url(#g-svg-153-mp2)" marker-end="url(#g-svg-153-mp)"></path>
+  <text class="maszzahl" x="132" y="28">⌀ 26</text>
+  <text class="ico" x="132" y="15">ICO 25–27</text>
+
+  <!-- Korbdurchmesser unten -->
+  <path class="masz" d="M57,262 L207,262" marker-start="url(#g-svg-153-mp2)" marker-end="url(#g-svg-153-mp)"></path>
+  <text class="maszzahl" x="132" y="280">⌀ 50</text>
+  <text class="ico" x="132" y="293">ICO 47–53</text>
+
+  <!-- Kragen -->
+  <path class="masz" d="M87,114 L52,114"></path>
+  <text class="teilr" x="48" y="111">Collerette</text>
+  <text class="teilr" x="48" y="124">⌀ 30</text>
+
+  <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
+  <path class="hilfslinie" d="M103.5,129 L26,129"></path>
+  <path class="hilfslinie" d="M57,234 L26,234"></path>
+  <path class="masz" d="M32,129 L32,234" marker-start="url(#g-svg-153-mp2)" marker-end="url(#g-svg-153-mp)"></path>
+  <text class="maszzahl" x="14" y="178.5">35</text>
+  <text class="teil" x="2" y="191.5">Jupe</text>
+
+  <text class="st" x="150" y="326">Cotes en mm · fenêtre ICO en bleu</text>
+</svg>
+        <figcaption class="leise">Speeder de profil avec les cotes ICO en millimètres</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 340" role="img" aria-label="Coupe longitudinale du speeder : paroi, bagues et tête" class="grafik-bild grafik-svg" id="g-svg-154">
+  <style>
+    #g-svg-154 .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    #g-svg-154 .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    #g-svg-154 .kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-154 .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    #g-svg-154 .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    #g-svg-154 .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    #g-svg-154 .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    #g-svg-154 .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    #g-svg-154 .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    #g-svg-154 .pfeil{fill:var(--tinte-3,#6b7686)}
+    #g-svg-154 .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-154 .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-154 .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    #g-svg-154 .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    #g-svg-154 .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g-svg-154-mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+    <marker id="g-svg-154-mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+  </defs>
+
+  <path class="achse" d="M168,40 L168,250"></path>
+
+  <!-- geschnittene Korbwand links und rechts (Band mit Wandstaerke) -->
+  <path class="schnitt" d="M139.5,129 L93,234 L104,234 L147.5,129 Z"></path>
+  <path class="schnitt" d="M196.5,129 L243,234 L232,234 L188.5,129 Z"></path>
+  <path class="kontur" d="M139.5,129 L93,234 M147.5,129 L104,234"></path>
+  <path class="kontur" d="M196.5,129 L243,234 M188.5,129 L232,234"></path>
+
+  <!-- Oeffnungsrand nach innen gebogen -->
+  <path class="kontur" d="M93,234 q 2,-11 11,-2"></path>
+  <path class="kontur" d="M243,234 q -2,-11 -11,-2"></path>
+
+  <!-- Querrippe: verbindet die Stiele auf halber Korbhoehe -->
+  <path class="kontur" d="M110,181.5 L226,181.5"></path>
+
+  <!-- Kragen mit Pressring, darin der Endring -->
+  <path class="schnitt" d="M123,99 L213,99 L213,129 L123,129 Z"></path>
+  <path class="kontur" d="M123,99 L123,129 M213,99 L213,129 M123,129 L213,129"></path>
+  <path class="kontur" d="M140,99 L140,129 M196,99 L196,129"></path>
+
+  <!-- Schlagkappe im Schnitt, mit Loch an der Spitze -->
+  <path class="kappe" d="M129,99 L129,74 A39,20 0 0 1 207,74 L207,99 Z"></path>
+  <!-- Loch an der Spitze: kleine Kerbe, kein Schlitz durch die ganze Kappe -->
+  <path class="schnitt" d="M162,56 L174,56 L174,70 L162,70 Z"></path>
+  <path class="kontur" d="M162,56 L162,70 M174,56 L174,70"></path>
+
+  <path class="masz" d="M168,52 L214,34"></path>
+  <text class="teil" x="232" y="30">Trou ⌀ 4</text>
+  <path class="masz" d="M202,109 L246,103"></path>
+  <text class="teil" x="250" y="107">Bague d'extrémité ⌀ 19</text>
+  <path class="masz" d="M213,123 L246,145"></path>
+  <text class="teil" x="250" y="149">Bague de serrage</text>
+  <path class="masz" d="M218,181.5 L246,193.5"></path>
+  <text class="teil" x="250" y="197.5">Nervure transversale</text>
+
+  <path class="masz" d="M111,163 L74,151"></path>
+  <text class="teil" x="6" y="155">Nervure</text>
+  <path class="masz" d="M97,232 L92,252"></path>
+  <text class="teil" x="6" y="266">Bord d'ouverture,</text>
+  <text class="teil" x="6" y="279">recourbé vers l'intérieur</text>
+
+  <text class="st" x="180" y="326">Coupe : paroi, bague, tête</text>
+</svg>
+        <figcaption class="leise">Coupe longitudinale du speeder : paroi, bagues et tête</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Vue de dessus dans l'ouverture de la jupe : 16 nervures" class="grafik-bild grafik-svg" id="g-svg-155">
+  <style>
+    #g-svg-155 .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    #g-svg-155 .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    #g-svg-155 .kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-155 .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    #g-svg-155 .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    #g-svg-155 .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    #g-svg-155 .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    #g-svg-155 .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    #g-svg-155 .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    #g-svg-155 .pfeil{fill:var(--tinte-3,#6b7686)}
+    #g-svg-155 .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-155 .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-155 .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    #g-svg-155 .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    #g-svg-155 .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g-svg-155-mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+    <marker id="g-svg-155-mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"></path>
+    </marker>
+  </defs>
+
+  <circle class="korbflaeche" cx="146" cy="136" r="84"></circle>
+  <path class="stiel" d="M176.0,136.0 L230.0,136.0"></path>
+  <path class="stiel" d="M173.7,147.5 L223.6,168.1"></path>
+  <path class="stiel" d="M167.2,157.2 L205.4,195.4"></path>
+  <path class="stiel" d="M157.5,163.7 L178.1,213.6"></path>
+  <path class="stiel" d="M146.0,166.0 L146.0,220.0"></path>
+  <path class="stiel" d="M134.5,163.7 L113.9,213.6"></path>
+  <path class="stiel" d="M124.8,157.2 L86.6,195.4"></path>
+  <path class="stiel" d="M118.3,147.5 L68.4,168.1"></path>
+  <path class="stiel" d="M116.0,136.0 L62.0,136.0"></path>
+  <path class="stiel" d="M118.3,124.5 L68.4,103.9"></path>
+  <path class="stiel" d="M124.8,114.8 L86.6,76.6"></path>
+  <path class="stiel" d="M134.5,108.3 L113.9,58.4"></path>
+  <path class="stiel" d="M146.0,106.0 L146.0,52.0"></path>
+  <path class="stiel" d="M157.5,108.3 L178.1,58.4"></path>
+  <path class="stiel" d="M167.2,114.8 L205.4,76.6"></path>
+  <path class="stiel" d="M173.7,124.5 L223.6,103.9"></path>
+  <path class="kontur" d="M230.0,136.0 Q220.5,150.8 223.6,168.1"></path>
+  <path class="kontur" d="M223.6,168.1 Q209.2,178.2 205.4,195.4"></path>
+  <path class="kontur" d="M205.4,195.4 Q188.2,199.2 178.1,213.6"></path>
+  <path class="kontur" d="M178.1,213.6 Q160.8,210.5 146.0,220.0"></path>
+  <path class="kontur" d="M146.0,220.0 Q131.2,210.5 113.9,213.6"></path>
+  <path class="kontur" d="M113.9,213.6 Q103.8,199.2 86.6,195.4"></path>
+  <path class="kontur" d="M86.6,195.4 Q82.8,178.2 68.4,168.1"></path>
+  <path class="kontur" d="M68.4,168.1 Q71.5,150.8 62.0,136.0"></path>
+  <path class="kontur" d="M62.0,136.0 Q71.5,121.2 68.4,103.9"></path>
+  <path class="kontur" d="M68.4,103.9 Q82.8,93.8 86.6,76.6"></path>
+  <path class="kontur" d="M86.6,76.6 Q103.8,72.8 113.9,58.4"></path>
+  <path class="kontur" d="M113.9,58.4 Q131.2,61.5 146.0,52.0"></path>
+  <path class="kontur" d="M146.0,52.0 Q160.8,61.5 178.1,58.4"></path>
+  <path class="kontur" d="M178.1,58.4 Q188.2,72.8 205.4,76.6"></path>
+  <path class="kontur" d="M205.4,76.6 Q209.2,93.8 223.6,103.9"></path>
+  <path class="kontur" d="M223.6,103.9 Q220.5,121.2 230.0,136.0"></path>
+  <circle class="kappe" cx="146" cy="136" r="30"></circle>
+  <circle class="kappenlinie" cx="146" cy="136" r="21"></circle>
+
+  <path class="masz" d="M167.4,84.3 A56,56 0 0 1 185.6,96.4" marker-start="url(#g-svg-155-mp2)" marker-end="url(#g-svg-155-mp)"></path>
+  <path class="masz" d="M208.0,102.0 L242,84.0"></path>
+  <text class="teil" x="246" y="88">22,5°</text>
+
+  <path class="masz" d="M62,34 L230,34" marker-start="url(#g-svg-155-mp2)" marker-end="url(#g-svg-155-mp)"></path>
+  <text class="maszzahl" x="146" y="26">⌀ 50</text>
+
+  <path class="masz" d="M120,152 L190,210"></path>
+  <text class="teil" x="194" y="214">Tête</text>
+  <text class="teil" x="194" y="227">derrière</text>
+
+  <text class="st" x="150" y="288">16 nervures · pas de 22,5°</text>
+</svg>
+        <figcaption class="leise">Vue de dessus dans l'ouverture de la jupe : 16 nervures</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="der_speeder" aria-pressed="false">
+      Cocher comme lu
+    </button></div>
+    </section>
+      
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Tâche de réflexion</h2><span class="chip chip-rot">à faire</span></div>
+        <p>Regarde tes speeders : quel type as-tu dans ton sac — rouge (Fun) ou jaune (Match) ? Convient-il à ce que tu joues le plus souvent ? Tourne-en chacun dans la main et vérifie s'il y a des fissures et des bosses ; les speeders abîmés volent de façon imprévisible et doivent être écartés. Et si tu joues dehors : as-tu une réponse au vent sur toi — un anneau de vent ou un speeder plus lourd ?</p>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="reflexionsaufgabe" data-baustein="der_speeder" aria-pressed="false">
+      Cocher comme retenu
+    </button></div>
+      </section>
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        
+        
+        
+        
+        
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Navigation entre modules">
+      <div class="fussnav-seite">
+        
+      </div>
+      <div class="fussnav-seite fussnav-rechts">
+        
+        <a class="knopf knopf-sekundaer baustein-zur-liste" href="/fr/pfad/kompetenz">Vers la liste</a>
+      </div>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Partager" title="Partager">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Enregistrer" title="Enregistrer">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/fr/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/fr/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/fr/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/fr/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/fr/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/fr/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/fr/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/fr/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/fr/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/fr/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/fr/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/fr/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/fr/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/fr/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

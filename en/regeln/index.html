@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rules of play — Crossminton Handbook</title>
+  <meta name="description" content="The official Crossminton rules of play — each rule reproduced accurately and explained in plain language below. A reference, not a learning path: there's nothing to check off here.">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/en/regeln">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Rules of play — Crossminton Handbook">
+  <meta property="og:description" content="The official Crossminton rules of play — each rule reproduced accurately and explained in plain language below. A reference, not a learning path: there's nothing to check off here.">
+  <meta property="og:url" content="https://crossminton-handbook.de/en/regeln">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rules of play — Crossminton Handbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rules of play — Crossminton Handbook">
+  <meta name="twitter:description" content="The official Crossminton rules of play — each rule reproduced accurately and explained in plain language below. A reference, not a learning path: there's nothing to check off here.">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/regeln">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/regeln">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/regeln">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/regeln">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/regeln">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton Handbook","item":"https://crossminton-handbook.de/en"},{"@type":"ListItem","position":2,"name":"Rules of play","item":"https://crossminton-handbook.de/en/regeln"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/en" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/en/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    
+    <section class="marke-hero klein hue pf-schiefer">
+      <span class="marke-hero-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Rules of play</h1>
+        <p class="marke-hero-untertitel">The official Crossminton rules of play — each rule reproduced accurately and explained in plain language below. A reference, not a learning path: there's nothing to check off here.</p>
+      </div>
+    </section>
+    <a class="karte karte-link karte-akzent" href="/en/turnier">
+      <h2 class="karte-titel"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Tournament regulations</h2>
+      <p class="leise">Which requirements apply to an official tournament? Choose the category — from Fun to 1000 — and see what's added at each.</p>
+    </a>
+    <a class="karte karte-link" href="/en/ko-turnier">
+      <h2 class="karte-titel"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> Knockout tournament</h2>
+      <p class="leise">A tool for running your own fun knockout tournament — singles or doubles.</p>
+    </a>
+    
+    <aside class="regeln-quelle-box">
+      <p class="regeln-quelle-kopf"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span class="regeln-quelle-label">Source</span></p>
+      <p class="regeln-quelle-text">Crossminton Spielregeln · International Crossminton Organisation (ICO) · Deutscher Crossminton Verband (DCV) · As of: ICO-Fassung 2024/dec (deutsche Wiedergabe)</p>
+      <a class="regeln-quelle-link" href="https://crossminton.de/wp-content/uploads/2021/10/Spielregeln_Crossminton.pdf" target="_blank" rel="noopener noreferrer">Rulebook as PDF (crossminton.de) <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </aside>
+    
+    <details class="regel-abschnitt karte" open="">
+      <summary><h2>Basic terms</h2></summary>
+      <p class="leise regel-einleitung">A few terms that keep coming up in the rules. Once you know them, the rest is easy to follow.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel">Court, playing field and safety zone</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The court consists of two playing fields set up parallel to each other at a distance of 12.80 m (9 m for U12 courts). The safety zone is the area around and between the playing fields.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You don't play over a net but over a gap. Between your field and your opponent's lies an open space of 12.80 m — the safety zone. The Speeder must not be played into it; it has to travel across the zone into the opponent's field.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/spielziel_verstehen?kontext=kompetenz">Understanding the objective of the game <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Speeder and racket</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The ball is called the Speeder. It is played with a racket.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>The Speeder is the special Crossminton ball — heavier and faster than a shuttlecock, with a stable flight path.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Singles and doubles</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Singles: one player in each field. Doubles: two players in each field.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>In singles you face your opponent alone. In doubles you share your field with a partner — with its own rules, see the doubles section.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/doppel_grundlagen?kontext=kompetenz">Doubles — basics <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel">Server, returner and rally</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The server is the serving side, the returner the receiving side. A rally is the sequence of strokes from the serve until the moment the Speeder is out of play.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Every rally begins with a serve and runs until the Speeder touches the ground or a fault occurs. This sequence is called a rally.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Equipment (Speeder &amp; racket)</h2></summary>
+      <p class="leise regel-einleitung">The ICO 2024 version has its own equipment chapter. It defines which Speeders and rackets are rule-compliant — the rest of the choice is up to you.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.1.1 / 1.1.2 / 1.1.5</span>Speeder dimensions</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The Speeder weighs at least 8 and at most 10 grams (in the U12 age group: 6 to 10 grams). It is 57 to 63 mm tall, and the basket measures 47 to 53 mm at its widest point. The head is a hemispherical thermoplastic cap, 25 to 27 mm in diameter. The official match ball is the yellow Match Speeder; in U12 the red Fun Speeder is mandatory.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Not every Speeder is tournament-legal: weight, height and cap are precisely defined. In competition you play the yellow Match Speeder, and for the youngest players the slower red Fun Speeder.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/der_speeder?kontext=kompetenz">The Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.1.3 / 1.1.4 / 1.1.6</span>Wind ring, wind and change of shape</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A rubber ring directly under the head may exceed the maximum weight by 1 gram. In strong wind, another Speeder may be used after consulting the organizer and with the agreement of the head referee. The shape of the Speeder must not change before or during the match; actions that could affect it — such as putting it in a trouser pocket — are prohibited. In places with unusual atmospheric or climatic conditions the ICO may also permit deviations from the measurements, as long as the basic shape and flight characteristics remain unchanged.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Against wind a wind ring is allowed (it may make the ball a little heavier), and in a lot of wind, by arrangement, a heavier Speeder too. What you may not do: change the Speeder's shape — not even via your trouser pocket.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/der_speeder?kontext=kompetenz">The Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.2</span>Racket dimensions</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The racket is at most 61 cm long, and the head measures at most 650 cm² (outer dimensions). In U12, length and head size may differ. No device is permitted that alters the flight quality of the Speeder, artificially influences its properties, or endangers opponents or partners.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Only two upper limits are regulated — length and head — plus a safety and tampering ban. Weight, material, balance, string tension and grip remain your free choice.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/der_schlaeger?kontext=kompetenz">The racket <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/en/baustein/deine_ausruestung?kontext=kompetenz">Your equipment <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">1.3</span>The court</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The court consists of two squares of 5.5 × 5.5 m each (outer dimensions including the lines), set up at a distance of 12.8 m. The service line lies 3 m behind the front line. The lines are at least 2 cm and at most 6 cm wide, of even width. For U12: two squares of 4 × 4 m at a distance of 9 m, service line 2 m behind the front line.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>The square measures 5.5 m per side and sits 12.8 m from the opposing square, with the service line 3 m behind the front. For the youngest players everything is a little smaller.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/der_speeder?kontext=kompetenz">The Speeder <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/en/baustein/der_schlaeger?kontext=kompetenz">The racket <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>The choice before the game starts</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">2.1</span>Who chooses what</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Before the game starts a choice is made — usually by tossing the Speeder; the direction the head points on the ground decides. The winning side decides either whether to serve or receive first, or which side to start on. The losing side decides the remaining option.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Instead of a coin you toss the Speeder: whichever way the cap points on the ground wins the choice. The winner picks one — serve/receive or side. The other is left to the opponent.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">2.1.5</span>Roles in doubles</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>In doubles the serving side tells the receiving side who serves first (the backcourt player). The receiving side decides freely who is the attacking player and who is the backcourt player.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Even before the first ball, in doubles you set your roles — who starts up front as the attacking player and who at the back as the backcourt player.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/doppel_grundlagen?kontext=kompetenz">Doubles — basics <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Points and sets</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.1</span>Best of 3</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A match is played best of 3 sets: two sets won are needed to win the match.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You have to win two sets. If it's 1:1 in sets, the third decides.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.2 / 3.4</span>16 points — and the 15:15 rule</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The side that reaches 16 points first wins the set — with one exception: at 15:15 the side that is 2 points ahead wins.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Normally whoever reaches 16 first is enough. But if it becomes 15:15, you have to pull ahead by two points — so at 15:15 play continues until one side leads by two. That makes close sets especially nerve-racking.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/ruhig_bleiben_wenn_es_eng_wird?kontext=kompetenz">Staying calm when it gets tight <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/en/baustein/engen_satz_fuehren?kontext=kompetenz">Leading a close set <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.3</span>Rally point system</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Whoever wins a rally gets the point — regardless of who served. A side wins the rally when the other makes a fault or the Speeder touches the ground in the opponent's field.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Every rally produces a point, no matter who served. There is no 'serve without a chance to score' — every rally counts.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">3.5</span>Who begins the next set</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The side that lost a set begins the following set with the serve.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>A small compensation: if you lose a set, you get to serve the next one.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Change of ends</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">4.1</span>When to change ends</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The sides change ends: after the first set; after the second set if there is a third; and in the third set every 6 points played.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>So that no one is disadvantaged by light, wind or surface, you change ends — between sets and, in the deciding set, even every 6 points.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">4.2</span>A forgotten change of ends</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>If a change of ends was missed, it takes place as soon as the mistake is noticed and the Speeder is not in play. The score stands.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>If you forget the change, you simply make it up as soon as it's noticed — the points stay as they are.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>The serve</h2></summary>
+      <p class="leise regel-einleitung">The serve has the most precise rules in the whole game. Knowing them means you don't give away points through invalid serves.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.2</span>From the serving zone</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The server stands in the rear part of the field (the serving zone), without any part of the foot crossing the (imaginary) serve line at the moment of the stroke.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You serve from the rear area of your field and must not step forward over the serve line while doing so.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/aufschlag?kontext=kompetenz">The serve <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.3</span>One foot on the ground</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>From the beginning to the end of the serve, one foot of the server must touch the ground.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You may not jump on the serve — one foot stays on the ground the whole time.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.4</span>Speeder below the racket hand</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>At the moment of contact with the racket, the entire Speeder must be below the server's racket hand.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>This is the central serving rule: you hit the Speeder from below. At contact the whole Speeder is lower than your racket hand — a serve above shoulder height is invalid.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/aufschlag?kontext=kompetenz">The serve <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.5 / 5.1.1</span>Forward and without delay</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Once the serve has begun, the racket must be carried forward to the end of the motion (no interruption). The serve must not be deliberately delayed once both sides are ready.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>The serving motion runs forward in one continuous move — you may not stop or fake it. And once both are ready, you serve promptly.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.4</span>Only when the returner is ready</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The server may only begin when the returner is ready. The returner is ready when it is apparent that they intend to return the serve.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Don't serve while your opponent isn't set. Only when they are visibly ready may you serve.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.6</span>Three serves in a row</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Each side performs 3 consecutive serves before the other side gets the right to serve.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You serve three times in a row, then the right to serve passes to the opponent. That gives the game its rhythm.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/momentum_lesen_und_drehen?kontext=kompetenz">Reading and turning momentum <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.7</span>From 15:15 after every point</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>At a score of 15:15, the right to serve changes after every point.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>In the closing phase of a tight set no one can pull ahead over three serves anymore — from 15:15 the right to serve moves after every single point.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/engen_satz_fuehren?kontext=kompetenz">Leading a close set <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.5</span>Free after the serve</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>After the serve, the server may move out of the serving zone.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>As soon as the serve is out, you're free — you move normally in the field and play the rally.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">5.1.1</span>Extreme weather: 30 seconds</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>In extreme weather conditions, the serve must be made no later than 30 seconds after the end of the previous point.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Outdoors in wind, heat or cold, the game shouldn't stall: after each point you then have at most 30 seconds until the next serve. This requirement was added with the 2024 version.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Singles</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">6.1 / 6.2</span>Serve and flow in singles</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The serve is made from the rear court (the serving zone), from any position within it. During the rally, server and returner play the Speeder alternately from any position until it is out of play.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>In singles it's simple: serve from the rear area, then you play alternately wherever you like until the rally ends.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Doubles</h2></summary>
+      <p class="leise regel-einleitung">Doubles has its own rules for roles, serving order and position. Knowing them prevents avoidable lost points.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.1</span>Roles in doubles</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>One player of the serving side serves from the serving zone. Every player of the receiving side counts as a returner. After the serve, the Speeder may be played by any player of the side from any position (mind the position rule).</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You split into an attacking player (front) and a backcourt player (back). After the serve either of you may take the Speeder — as long as you keep to the position rule.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/doppel_grundlagen?kontext=kompetenz">Doubles — basics <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/en/baustein/doppel_als_eigenes_spiel?kontext=kompetenz">Doubles as its own game <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.4</span>Serving order</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The right to serve changes in a fixed order: from the backcourt player of side A (who serves at the start) to the attacking player of side B (who then serves and becomes the backcourt player), then to A's partner, then to B's partner, then back to the first server. No one may serve outside this order.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>The serve moves in a fixed chain through all four players: A1, then B1, then A2, then B2, then back to A1. Whoever serves is always the backcourt player. You need to keep this order in your head.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/aufschlag_rueckschlag_doppel?kontext=kompetenz">Serve and return in doubles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.5.1</span>The position rule</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>Position fault during the rally: at the moment of the stroke the backcourt player places part of their baseline-nearer foot ahead of their partner's foot — or the attacker places their baseline-nearer foot behind their partner's foot. Both are a position fault.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>At contact the order must be right: the attacking player stays in front, the backcourt player behind. If you swap the order at the moment of the stroke, it's a fault.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/doppel_grundlagen?kontext=kompetenz">Doubles — basics <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a> <a class="regel-verweis" href="/en/baustein/das_umschalten_im_doppel?kontext=kompetenz">Switching in doubles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.5.2</span>Consequence of the position fault</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>If a position fault is penalized on the serve or during the rally on the return, the point is lost immediately, even though the rally is not yet over.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>A position fault ends the rally immediately against you — the point is gone, even if you're on the attack. That's why a clean division of roles pays off.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">7.6</span>Announcing roles at the start of the set</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>At the start of the set, the receiving side first announces who is the attacking player and who is the backcourt player, then the serving side does so.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Before each set you openly set your roles, so it's clear to everyone who plays in front and who at the back.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Faults</h2></summary>
+      <p class="leise regel-einleitung">A fault ends the rally and gives the other side the point. These are the most important kinds of fault.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.1</span>Invalid serve</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A serve that is not performed according to the serving rules is a fault.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Everything from the serve section applies: wrong stance, a jump, the Speeder hit too high, an interrupted motion — every violation is a fault.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.1 / 8.2.2</span>Speeder out, on the ceiling or a wall</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A fault when the Speeder touches the court outside the lines (not on or inside the lines) or touches the ceiling or side walls.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>On the line counts as in. Outside, on the ceiling or on a wall is a fault. Unlike in squash, no wall is in play here.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/spielziel_verstehen?kontext=kompetenz">Understanding the objective of the game <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.3 / 8.2.4</span>Speeder touches a player or object</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A fault when the Speeder touches a player or their clothing — including shoes and socks — or an object or person outside the court. Exception: if two speeders meet in mid-air, the rally is replayed as a let.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>If the Speeder hits you, your clothing, your shoes or socks, or something outside the court, the rally is lost. The 2024 version names shoes and socks explicitly — one more reason for close-fitting clothing.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/funktionskleidung?kontext=kompetenz">Functional clothing <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.5 / 8.2.6</span>Catching, throwing, double touch</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A fault when the Speeder is caught/stopped with the racket and then thrown, or when it is touched twice by the same player. It is not a fault if the Speeder hits the frame and strings at the same time in a single stroke.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>You must hit the Speeder cleanly, not catch and throw it, and touch it only once. If it touches frame and strings together in a single stroke, that's allowed.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.2.7 / 8.2.8</span>Partner double touch, Speeder not over</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A fault when the Speeder is touched by one player and then by their partner, or when it touches the racket and then does not fly toward the other side of the court.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>In doubles only one of you may touch the Speeder per stroke. And your stroke must actually get the Speeder to the other side.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">8.3</span>Obstructing, distracting, reaching into the field</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A fault when, with the Speeder in play, a player enters the opponent's court with racket or body, prevents the opponent from making a proper stroke, or distracts them by shouting or gesturing.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Stay on your side: don't reach into the opponent's field, don't obstruct the opponent, and don't disturb them by shouting or gesturing.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Lets</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">9.1</span>What a let is</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>In a let, the serve of the last rally is invalid, and the player who served last repeats the serve.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>A let (the same term tennis uses) means: the rally does not count, there is no point, and the same serve is played again.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">9.2</span>When a let is played</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>A let is played when, among other things: the server strikes before the returner is ready; a fault is committed by both sides at once; the Speeder is defective or deforms; two Speeders meet in the air; a line is moved during the rally; play is disturbed; or an object falls into the field during the rally.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Whenever something unfair or unforeseen happens that can't be blamed on either side, the rally is replayed instead of awarding a point. The 2024 version additionally names two colliding Speeders and a line moved during play.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>When the Speeder is out of play</h2></summary>
+      
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">10</span>End of the rally</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The Speeder is no longer in play when it touches the ground of the court or when there is a fault or a let.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>The rally ends the moment the Speeder touches the ground or a fault or let occurs. Until then it is in play.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Special situations: in, out and tournament procedure</h2></summary>
+      <p class="leise regel-einleitung">The 2024 version gathers a few special cases into a chapter of their own — above all how in and out are decided exactly.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.6.1</span>The head decides</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The head (the cap) of the Speeder lands first. If the head touches the line, the ball is "in". If the head does not touch the line, the ball is "out" — even if another part of the Speeder touches the line.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Look at the cap, not the basket: only if the head hits the line does the ball count as in. If only the basket grazes the line while the head lands beside it, it's out.</p>
+      </div>
+      <p class="regel-verweise"><span class="regel-verweise-titel">In the handbook:</span> <a class="regel-verweis" href="/en/baustein/praezision_an_die_linien?kontext=kompetenz">Precision to the lines <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.6.2</span>Skid mark at the front line</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>If the Speeder lands in front of the front line and leaves a visible skid mark, it counts as "in" only if the mark is at most as long as the head of the Speeder.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>If the Speeder skids into the line from in front of it, the length of the skid mark decides: if it's longer than the head, the first ground contact was too far forward — the ball is out. This too is new in the 2024 version.</p>
+      </div>
+      
+    </article>
+    <article class="regel-karte">
+      <h3 class="regel-titel"><span class="regel-nummer">11.1 – 11.5</span>Groups, knockout round and ties (tournament)</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>The best 2 from each group reach the knockout round. A defeat in the knockout round means immediate elimination; there is no play-off for third place. If a group is tied, the following decide in order: matches won/lost, then the set ratio, then the point ratio, then the head-to-head result, and finally the drawing of lots.</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Only relevant at a tournament: the top two in a group go through, after that whoever loses is out. If a group is tied, wins count first, then the set and point ratios.</p>
+      </div>
+      
+    </article>
+    </details>
+    <details class="regel-abschnitt karte">
+      <summary><h2>Communicating without a referee</h2></summary>
+      <p class="leise regel-einleitung">In matches without a referee, you signal decisions with a simple hand sign of the free hand.</p>
+      
+    <article class="regel-karte">
+      <h3 class="regel-titel">The three hand signals</h3>
+      <div class="regel-feld">
+        <h4>Rule</h4>
+        <p>"In": the index finger of the free hand points down. "Out": the index finger points up. "Let": index and middle finger point up as a "V".</p>
+      </div>
+      <div class="regel-feld regel-erklaerung">
+        <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> What this means</h4>
+        <p>Remember the direction: index finger down means "in" (the Speeder was in the field), up means "out". A V with two fingers means "let". That's how you settle balls fairly without a referee.</p>
+      </div>
+      
+    </article>
+    </details>
+    
+    <details class="regel-abschnitt karte">
+      <summary><h2>Court &amp; hand signals</h2></summary>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 582" role="img" aria-label="Graphic: the dimensioned court" class="grafik-bild grafik-svg" id="g-svg-68">
+  <style>
+    #g-svg-68 .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    #g-svg-68 .zone{fill:var(--primaer,#38a4f1);opacity:.08}
+    #g-svg-68 .serve{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-dasharray:9 6}
+    #g-svg-68 .dim{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1}
+    #g-svg-68 .ext{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:.8;opacity:.7}
+    #g-svg-68 .arw{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
+    #g-svg-68 .brk{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
+    #g-svg-68 .feldtext{fill:var(--tinte,#16202b);font:700 15px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1.5px;text-anchor:middle}
+    #g-svg-68 .zonetext{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1px;text-anchor:middle}
+    #g-svg-68 .acctext{fill:var(--primaer-tief,#1568ad);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    #g-svg-68 .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    #g-svg-68 .dimtext{fill:var(--tinte-3,#6b7686);font:600 12.5px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g-svg-68-arw" viewBox="0 0 10 10" markerWidth="8.5" markerHeight="8.5" refX="5" refY="5" orient="auto-start-reverse">
+      <path d="M3,2.6 L6.2,5 L3,7.4" class="arw"></path>
+    </marker>
+  </defs>
+
+  <rect class="zone" x="76" y="236" width="190" height="110"></rect>
+  <rect class="linie" x="76" y="46" width="190" height="190"></rect>
+  <rect class="linie" x="76" y="346" width="190" height="190"></rect>
+  <line class="serve" x1="76" y1="133" x2="266" y2="133"></line>
+  <line class="serve" x1="76" y1="449" x2="266" y2="449"></line>
+
+  <polyline class="brk" points="76,289 96,284 116,294 136,284 156,294 176,284 196,294 216,284 236,294 256,284 266,289"></polyline>
+  <polyline class="brk" points="76,298 96,293 116,303 136,293 156,303 176,293 196,303 216,293 236,303 256,293 266,298"></polyline>
+
+  <text class="feldtext" x="171" y="199">PLAYING FIELD</text>
+  <text class="subtext" x="171" y="93">serving zone</text>
+  <text class="acctext" x="171" y="128">serve line</text>
+  <text class="feldtext" x="171" y="403">PLAYING FIELD</text>
+  <text class="subtext" x="171" y="497">serving zone</text>
+  <text class="zonetext" x="171" y="268">NEUTRAL ZONE</text>
+  <text class="subtext" x="171" y="315">no net — the Speeder must cross over</text>
+
+  <line class="ext" x1="76" y1="46" x2="76" y2="26"></line>
+  <line class="ext" x1="266" y1="46" x2="266" y2="26"></line>
+  <line class="dim" x1="76" y1="30" x2="266" y2="30" marker-start="url(#g-svg-68-arw)" marker-end="url(#g-svg-68-arw)"></line>
+  <text class="dimtext" x="171" y="21">5.50 m</text>
+
+  <line class="ext" x1="76" y1="46" x2="46" y2="46"></line>
+  <line class="ext" x1="76" y1="236" x2="46" y2="236"></line>
+  <line class="dim" x1="50" y1="46" x2="50" y2="236" marker-start="url(#g-svg-68-arw)" marker-end="url(#g-svg-68-arw)"></line>
+  <text class="dimtext" x="38" y="146" transform="rotate(-90 38 146)">5.50 m</text>
+
+  <line class="ext" x1="76" y1="346" x2="46" y2="346"></line>
+  <line class="dim" x1="50" y1="236" x2="50" y2="281" marker-start="url(#g-svg-68-arw)"></line>
+  <line class="dim" x1="50" y1="306" x2="50" y2="346" marker-end="url(#g-svg-68-arw)"></line>
+  <polyline class="brk" points="45,281 55,285 45,290 55,294 45,298 55,302 50,306"></polyline>
+  <text class="dimtext" x="38" y="296" transform="rotate(-90 38 296)">12.80 m</text>
+
+  <line class="ext" x1="266" y1="133" x2="298" y2="133"></line>
+  <line class="ext" x1="266" y1="236" x2="298" y2="236"></line>
+  <line class="dim" x1="292" y1="133" x2="292" y2="236" marker-start="url(#g-svg-68-arw)" marker-end="url(#g-svg-68-arw)"></line>
+  <text class="dimtext" x="308" y="188" transform="rotate(-90 308 188)">3.00 m</text>
+</svg>
+        <figcaption class="leise">Graphic: the dimensioned court</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Graphic: the referee hand signals" class="grafik-bild grafik-svg" id="g-svg-69">
+  <style>
+    #g-svg-69 .sym{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6;stroke-linecap:round}
+    #g-svg-69 .ink{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linecap:round}
+    #g-svg-69 .mk{fill:var(--primaer,#38a4f1)}
+    #g-svg-69 .dot{fill:var(--primaer,#38a4f1)}
+    #g-svg-69 .foot{fill:var(--tinte,#16202b);opacity:.6}
+    #g-svg-69 .cap{fill:var(--tinte-2,#5a6675);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-69 .rahmen{fill:none;stroke:var(--linie-stark,#dae3ee);stroke-width:1.2}
+  </style>
+  <defs><marker id="g-svg-69-ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"></path></marker></defs>
+
+  <!-- IN -->
+  <rect class="rahmen" x="12" y="20" width="104" height="112" rx="10"></rect>
+  <line class="sym" x1="64" y1="44" x2="64" y2="86" marker-end="url(#g-svg-69-ah)"></line>
+  <circle class="dot" cx="64" cy="96" r="5"></circle>
+  <text class="cap" x="64" y="120">IN — in the field</text>
+
+  <!-- OUT -->
+  <rect class="rahmen" x="128" y="20" width="104" height="112" rx="10"></rect>
+  <line class="ink" x1="170" y1="46" x2="170" y2="96"></line>
+  <line class="sym" x1="176" y1="72" x2="214" y2="72" marker-end="url(#g-svg-69-ah)"></line>
+  <text class="cap" x="180" y="120">OUT — beside it</text>
+
+  <!-- Auszeit (T) -->
+  <rect class="rahmen" x="244" y="20" width="104" height="112" rx="10"></rect>
+  <line class="sym" x1="274" y1="52" x2="322" y2="52"></line>
+  <line class="sym" x1="298" y1="52" x2="298" y2="96"></line>
+  <text class="cap" x="296" y="120">Timeout (T)</text>
+
+  <!-- Wiederholung -->
+  <rect class="rahmen" x="12" y="150" width="104" height="112" rx="10"></rect>
+  <path class="sym" d="M64,182 A 20 20 0 1 1 47,216" marker-end="url(#g-svg-69-ah)"></path>
+  <text class="cap" x="64" y="250">Let</text>
+
+  <!-- Seitenwechsel -->
+  <rect class="rahmen" x="128" y="150" width="104" height="112" rx="10"></rect>
+  <line class="sym" x1="158" y1="192" x2="204" y2="192" marker-end="url(#g-svg-69-ah)"></line>
+  <line class="sym" x1="202" y1="214" x2="156" y2="214" marker-end="url(#g-svg-69-ah)"></line>
+  <text class="cap" x="180" y="250">Change of ends</text>
+
+  <!-- Aufschlagfehler -->
+  <rect class="rahmen" x="244" y="150" width="104" height="112" rx="10"></rect>
+  <line class="ink" x1="266" y1="204" x2="330" y2="204"></line>
+  <ellipse class="foot" cx="292" cy="198" rx="7" ry="13"></ellipse>
+  <ellipse class="foot" cx="306" cy="206" rx="7" ry="13"></ellipse>
+  <text class="cap" x="296" y="250">Serve fault</text>
+</svg>
+        <figcaption class="leise">Graphic: the referee hand signals</figcaption>
+      </figure>
+    </details></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/en/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/en/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/en/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/en/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/en/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/en/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/en/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/en/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/en/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/en/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/en/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/en/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/en/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>
