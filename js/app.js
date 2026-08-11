@@ -537,6 +537,21 @@ function stelleFokusHer(handhabe) {
 function rendern() {
   const { segmente, query, roh, sprache: ausUrl } = parsePfad();
   const el = document.getElementById('ansicht');
+
+  // Die Navigation hängt schon, die Daten sind aber noch unterwegs (s.
+  // verdrahteNavigation). Dann ist die URL bereits richtig — gezeichnet wird
+  // gleich vom abschließenden rendern()-Aufruf in boot(), das genau diese Route
+  // nimmt. Bis dahin nur die Rückmeldung setzen: der prerenderte Schnappschuss
+  // zeigt jetzt den falschen Inhalt, und ein Klick, der scheinbar nichts tut,
+  // ist schlimmer als ein sichtbares „lädt".
+  if (!daten) {
+    document.body.classList.add('app-laedt');
+    el.setAttribute('aria-busy', 'true');
+    return;
+  }
+  document.body.classList.remove('app-laedt');
+  el.removeAttribute('aria-busy');
+
   // Vor dem Zeichnen merken — danach gibt es das Element nicht mehr.
   const gemerkterFokus = fokusHandhabe();
 
@@ -651,41 +666,22 @@ function folgeSprachVorliebe() {
   window.history.replaceState({}, '', routeInSprache(segmente, gewuenscht) + window.location.search);
 }
 
-async function boot() {
-  ladeZustand();
-  const el = document.getElementById('ansicht');
-  try {
-    // Die URL entscheidet, nicht die gespeicherte Vorliebe: dieselbe Adresse
-    // muss für jeden dieselbe Sprache zeigen, sonst sieht ein Crawler etwas
-    // anderes als der Mensch. Die Vorliebe wirkt nur an einer präfixlosen
-    // Adresse — s. folgeSprachVorliebe() weiter unten.
-    await initI18n(parsePfad().sprache);
-    daten = await ladeDaten();
-  } catch (fehler) {
-    try {
-      await initI18n('de');
-    } catch {
-      // Ohne Labels bleibt nur die nackte Fehlermeldung — t() fällt auf Schlüssel zurück.
-    }
-    renderFehler(el, fehler);
-    return;
-  }
-  for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
-  // Altbestand: vor Tier 2 geteilte Links tragen '#/…' (die Teilen-Funktion gab
-  // sie so aus). Einmal auf den echten Pfad umschreiben, damit sie weiter tragen.
-  //
-  // MUSS VOR folgeSprachVorliebe() LAUFEN. Die schreibt eine präfixlose Adresse
-  // auf die eingestellte Sprache um — und weil sie die URL aus den Segmenten neu
-  // baut, fällt ein noch nicht aufgelöster Hash dabei weg. Stand der Umschreiber
-  // danach, landete '/#/baustein/griff' bei jemandem mit englischer Voreinstellung
-  // auf '/en' statt auf dem Baustein: der geteilte Link war schlicht verloren.
-  // In dieser Reihenfolge wird erst '/baustein/griff' daraus, dann '/en/baustein/griff'.
-  if (/^#\//.test(window.location.hash)) {
-    const ziel = window.location.hash.replace(/^#\/?/, '');
-    window.history.replaceState({}, '', zuUrl(ziel));
-  }
-  folgeSprachVorliebe();
-
+// Navigation und Rahmen-Bedienung verdrahten — VOR dem Laden der Daten.
+//
+// Der prerenderte Schnappschuss malt die vollständige Seite sofort; sie SIEHT
+// fertig aus. Hing der Klick-Interceptor erst hinter `await ladeDaten()` (28
+// JSON-Dateien, zusammen rund 1,5 MB), war sie es aber sekundenlang nicht:
+// gemessen 0,3 s ungedrosselt, 3,0 s auf DSL, 9,0 s auf schnellem 3G, 37,6 s auf
+// langsamem. Ein Klick in diesem Fenster war kein SPA-Wechsel, sondern ein
+// voller Seiten-Neuladevorgang — auf derselben langsamen Leitung nochmals
+// Sekunden, in denen sichtbar nichts geschieht.
+//
+// Nichts hier braucht `daten`: der Interceptor schiebt nur die Route in die
+// History, `rendern()` steigt ohne Daten früh aus (und zeigt den Ladebalken).
+// Der abschließende rendern()-Aufruf in boot() zeichnet dann genau die Route,
+// auf der die Person inzwischen steht. Einzige Ausnahme ist
+// initSprachanzeige() — die liest daten.appInfo und bleibt darum hinten.
+function verdrahteNavigation(el) {
   document.getElementById('hamburger').addEventListener('click', oeffneMenue);
   document.getElementById('mehr-knopf')?.addEventListener('click', oeffneMenue);
   // Skip-Link: Fokus auf den Inhalt lenken, OHNE den Hash zu ändern — der Router
@@ -696,7 +692,6 @@ async function boot() {
     el.focus();
     el.scrollIntoView();
   });
-  initSprachanzeige();
   // Navigierende Menüpunkte UND die Knopfleisten-Links (Profil/Suche) schließen das
   // Menü; der Theme-Zyklus-Knopf (ein <button>) bleibt bewusst außen vor.
   for (const element of document.querySelectorAll('[data-menue-zu], .menue-punkt, .menue-mini, a.menue-knopf')) {
@@ -751,6 +746,46 @@ async function boot() {
   });
   // Merk-Zähler ohne Neu-Rendern nachziehen (Umschalten aus der Baustein-Ansicht).
   window.addEventListener('app:merk', aktualisiereMerkAnzahl);
+}
+
+async function boot() {
+  ladeZustand();
+  const el = document.getElementById('ansicht');
+  // Zuerst bedienbar machen, dann laden (s. verdrahteNavigation).
+  verdrahteNavigation(el);
+  try {
+    // Die URL entscheidet, nicht die gespeicherte Vorliebe: dieselbe Adresse
+    // muss für jeden dieselbe Sprache zeigen, sonst sieht ein Crawler etwas
+    // anderes als der Mensch. Die Vorliebe wirkt nur an einer präfixlosen
+    // Adresse — s. folgeSprachVorliebe() weiter unten.
+    await initI18n(parsePfad().sprache);
+    daten = await ladeDaten();
+  } catch (fehler) {
+    try {
+      await initI18n('de');
+    } catch {
+      // Ohne Labels bleibt nur die nackte Fehlermeldung — t() fällt auf Schlüssel zurück.
+    }
+    renderFehler(el, fehler);
+    return;
+  }
+  for (const warnung of daten.warnungen) console.warn('[daten]', warnung);
+  // Altbestand: vor Tier 2 geteilte Links tragen '#/…' (die Teilen-Funktion gab
+  // sie so aus). Einmal auf den echten Pfad umschreiben, damit sie weiter tragen.
+  //
+  // MUSS VOR folgeSprachVorliebe() LAUFEN. Die schreibt eine präfixlose Adresse
+  // auf die eingestellte Sprache um — und weil sie die URL aus den Segmenten neu
+  // baut, fällt ein noch nicht aufgelöster Hash dabei weg. Stand der Umschreiber
+  // danach, landete '/#/baustein/griff' bei jemandem mit englischer Voreinstellung
+  // auf '/en' statt auf dem Baustein: der geteilte Link war schlicht verloren.
+  // In dieser Reihenfolge wird erst '/baustein/griff' daraus, dann '/en/baustein/griff'.
+  if (/^#\//.test(window.location.hash)) {
+    const ziel = window.location.hash.replace(/^#\/?/, '');
+    window.history.replaceState({}, '', zuUrl(ziel));
+  }
+  folgeSprachVorliebe();
+
+  initSprachanzeige(); // braucht als Einzige daten.appInfo — der Rest hängt schon
   rendern();
 
   // Feedback-Modus (nur bei ?feedback in der URL): Kommentator nachladen. Läuft
