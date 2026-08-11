@@ -8,11 +8,11 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 
 **Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
 
-**Alle 61 Grafiken sind hand-gezeichnetes, theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG** — auch die Figur-/Griff-/Szene-Motive als **abstrakte Piktogramme** (klare Rundkappen-Strichfiguren, CI-Tokens, kurze Caption). Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
+**Alle 67 Grafiken sind hand-gezeichnetes, theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG** — auch die Figur-/Griff-/Szene-Motive als **abstrakte Piktogramme** (klare Rundkappen-Strichfiguren, CI-Tokens, kurze Caption). Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
 
-- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 61 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
-- **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.en.svg`/`.en.png`** (nur `<text>`+`aria-label` englisch, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. fr/pl fallen sauber auf de zurück.
-- **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` erzeugt den en-Zwilling aus der Übersetzungsmap → en-`.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
+- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 67 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
+- **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
+- **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap → deren `.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
@@ -25,7 +25,7 @@ Bewusst **ohne Leitgrafik** bleiben:
 - **Abstrakte Taktik** — `fehler_vermeiden`, `umschalten`, `gegner_lesen_muster`, `doppel_grundlagen`, `engen_satz_fuehren`, `der_matchplan`, `dem_gegner_aufzwingen`, `matchverlauf_steuern`, `entscheidender_punkt`.
 - **Konditionelle Athletik** — `warum_athletik_dein_spiel_traegt`, `richtig_aufwaermen`, `durchhalten`, `erholen`, `gezielt_trainieren`, `rumpfstabilitaet`, `intervallausdauer`, `belastung_steuern_regenerieren`, `form_ueber_die_saison`, `antizipative_schnelligkeit`, `langfristig_belastbar` — Belastungs-/Regenerationsthemen ohne sinnvolles Einzelbild (Gesundheitsrahmen).
 - **Trainer-Trainingsgestaltung** — Meta-Ebene, kein Lernbild.
-- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht, Nummernkreis ab G-062). Der Grafik-Test bleibt bis dahin bei 55/59.
+- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht, Nummernkreis ab G-062). Der Grafik-Test zählt aktuell 59 Bausteine mit Grafik und 65 Referenzen.
 
 Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer Durchgang vorgesehen.
 
@@ -319,12 +319,13 @@ Sprachvarianten.
 **Maßstab 3 Einheiten je mm**, Schlagkappe oben wie in Tafel B der Vorlage:
 Gesamthöhe 60 mm = 180 u, Korb ⌀50 = r75, Kragen ⌀30 = r45, Schlagkappe ⌀26 = r39.
 
-**Nicht bemaßt ist der Konuswinkel.** Mit den 47,8° der Vorlage wäre der Korb erst nach
-22,6 mm auf ⌀50 und die Silhouette sähe nicht mehr nach Speeder aus; die gezeichnete
-natürliche Form trägt rund 31°. Die Vorlage nennt ihre Werte selbst ausdrücklich als
-Näherung („am Realobjekt zu vermessen"), darum lieber die Zahl weglassen als sie an eine
-Geometrie schreiben, die sie nicht einhält. Bemaßt ist, was zusammenpasst **und**
-ICO-relevant ist: die drei Durchmesser, die Gesamthöhe, der Endring, die Teilung.
+**Der Konuswinkel 47,8° bezieht sich auf den Endring ⌀19, nicht auf den Kragen ⌀30.**
+Über die Korblänge 35 mm ergibt ⌀19 → ⌀50 exakt `2·atan(15,5/35) = 47,8°`; vom Kragen aus
+wären es nur 31,9°. Damit ist die Vorlage in sich stimmig. Die Geometrie hält den Wert
+ein, statt ihn bloß anzuschreiben: Kappe 15 mm (⌀26), Kragen 10 mm (⌀30), dann setzen die
+Längsstiele am Endring ⌀19 an, und der Konus läuft über 35 mm auf ⌀50. Bemaßt wird über
+den rechnerischen **Konus-Scheitel** — der Bogen liegt auf beiden Flanken auf, ist also
+nachrechenbar statt dekorativ.
 
 **Farben sind die Originalfarben des Typs MATCH** (gelber Korb, rote Schlagkappe) und
 laufen über **eigene Tokens** `--speeder-korb` / `--speeder-kappe` / `--speeder-kappe-tief`
@@ -340,7 +341,8 @@ Caption: „Schlagkappe, Kragen und Korb".
 
 **G-065** · `images/G-065.svg` · `der_speeder` · Profil mit den ICO-Maßen — die
 eigentliche Lehr-Aussage: Gesamthöhe 60 (57–63), Korb ⌀50 (47–53), Schlagkappe ⌀26
-(25–27), Kragen ⌀30. Das Toleranzfenster steht in `--primaer-tief` unter dem Nennmaß.
+(25–27), Kragen ⌀30, Korblänge 35 und der Konuswinkel 47,8° über den Scheitel. Das
+Toleranzfenster steht in `--primaer-tief` unter dem Nennmaß.
 Caption: „Maße in mm · blau das ICO-Fenster".
 
 **G-066** · `images/G-066.svg` · `der_speeder` · Längsschnitt, als einziger **360 breit**
