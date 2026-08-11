@@ -25,11 +25,11 @@
     </marker>
   </defs>
 
-  <path class="korbflaeche" d="M87,124 L57,234 L207,234 L177,124 Z"/>
-  <path class="stiel" d="M104.1,124 L85.5,234"/>
-  <path class="stiel" d="M118.5,124 L109.5,234"/>
-  <path class="stiel" d="M145.5,124 L154.5,234"/>
-  <path class="stiel" d="M159.9,124 L178.5,234"/>
+  <path class="korbflaeche" d="M103.5,129 L57,234 L207,234 L160.5,129 Z"/>
+  <path class="stiel" d="M114.3,129 L85.5,234"/>
+  <path class="stiel" d="M123.5,129 L109.5,234"/>
+  <path class="stiel" d="M140.6,129 L154.5,234"/>
+  <path class="stiel" d="M149.7,129 L178.5,234"/>
   <path class="achse" d="M132,40 L132,250"/>
 
   <!-- Schlagkappe oben -->
@@ -37,13 +37,19 @@
   <path class="kappenlinie" d="M112,70 A22,11 0 0 1 152,70"/>
 
   <!-- Kragen: geschlossener Zylinder zwischen Kappe und Korb -->
-  <path class="kontur" d="M87,99 L87,124 M177,99 L177,124"/>
+  <path class="kontur" d="M87,99 L87,129 M177,99 L177,129"/>
   <path class="kontur" d="M87,99 L177,99"/>
 
-  <!-- Korb bis zum wellenfoermigen Rand -->
-  <path class="kontur" d="M87,124 L57,234"/>
-  <path class="kontur" d="M177,124 L207,234"/>
+  <!-- Korb: setzt am Endring an und laeuft bis zum wellenfoermigen Rand -->
+  <path class="kontur" d="M87,129 L103.5,129 L57,234"/>
+  <path class="kontur" d="M177,129 L160.5,129 L207,234"/>
   <path class="kontur" d="M57,234 q 18.75,9 37.5,0 q 18.75,-9 37.5,0 q 18.75,9 37.5,0 q 18.75,-9 37.5,0"/>
+
+  <!-- Konuswinkel: Bogen um den rechnerischen Scheitel, liegt auf beiden Flanken
+       auf. Die duenn gestrichelten Verlaengerungen zeigen, worauf er sich bezieht. -->
+  <path class="hilfslinie" d="M132,64.6 L103.5,129 M132,64.6 L160.5,129"/>
+  <path class="masz" d="M89.9,159.7 A104,104 0 0 1 174.1,159.7" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="132" y="151.7">47,8°</text>
 
   <!-- Gesamthoehe rechts -->
   <path class="hilfslinie" d="M171,54 L254,54"/>
@@ -63,9 +69,16 @@
   <text class="ico" x="132" y="293">ICO 47–53</text>
 
   <!-- Kragen -->
-  <path class="masz" d="M87,111.5 L46,111.5"/>
-  <text class="teilr" x="42" y="108.5">Collerette</text>
-  <text class="teilr" x="42" y="121.5">⌀ 30</text>
+  <path class="masz" d="M87,114 L52,114"/>
+  <text class="teilr" x="48" y="111">Collerette</text>
+  <text class="teilr" x="48" y="124">⌀ 30</text>
+
+  <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
+  <path class="hilfslinie" d="M103.5,129 L26,129"/>
+  <path class="hilfslinie" d="M57,234 L26,234"/>
+  <path class="masz" d="M32,129 L32,234" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="14" y="178.5">35</text>
+  <text class="teil" x="2" y="191.5">Jupe</text>
 
   <text class="st" x="150" y="326">Cotes en mm · fenêtre ICO en bleu</text>
 </svg>

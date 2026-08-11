@@ -9,13 +9,16 @@
 // MASSSTAB 3 Einheiten je mm:
 //   Gesamthoehe 60 mm = 180 u   Korb ⌀50 = r75   Kragen ⌀30 = r45   Kappe ⌀26 = r39
 //
-// BEWUSST NICHT BEMASST: der Konuswinkel. Mit 47,8 Grad waere der Korb erst nach
-// 22,6 mm auf ⌀50 und die Silhouette saehe nicht mehr nach Speeder aus; eine
-// natuerliche Form traegt rund 31 Grad. Die Vorlage nennt ihre Werte selbst
-// ausdruecklich als Naeherung ("am Realobjekt zu vermessen"), darum lieber die
-// Zahl weglassen als sie an eine Geometrie schreiben, die sie nicht einhaelt.
-// Bemasst ist, was zusammenpasst UND ICO-relevant ist: die drei Durchmesser,
-// die Gesamthoehe, der Endring und die Teilung.
+// KONUSWINKEL 47,8 Grad: Der Bezug ist der ENDRING ⌀19, nicht der Kragen ⌀30.
+// Ueber die Korblaenge 35 mm ergibt ⌀19 → ⌀50 exakt 2*atan(15,5/35) = 47,8 Grad;
+// vom Kragen aus waeren es nur 31,9. Damit ist die Vorlage in sich stimmig, und
+// die Geometrie hier haelt den Wert ein, statt ihn bloss anzuschreiben:
+//   Kappe   54 →  99 (45 u = 15 mm), r39 (⌀26)
+//   Kragen  99 → 129 (30 u = 10 mm), r45 (⌀30)
+//   Endring     bei 129,             r28,5 (⌀19)  ← hier setzen die Stiele an
+//   Konus  129 → 234 (105 u = 35 mm), r28,5 → r75 (⌀50)  = 47,8 Grad
+// Der Winkel wird ueber den rechnerischen Konus-SCHEITEL bemasst (der Bogen
+// liegt auf beiden Flanken auf) — so, wie ein Kegelwinkel bemasst gehoert.
 //
 // FARBEN: Originalfarben des Typs MATCH — gelber Korb, rote Schlagkappe. Sie
 // laufen ueber EIGENE Tokens (--speeder-korb / --speeder-kappe) und nicht ueber
@@ -70,8 +73,20 @@ ${inhalt}
 
 // Gemeinsame Silhouette: Kappe oben, Korboeffnung unten.
 const MX = 132;
-const Y_KAPPE_OBEN = 54, Y_KRAGEN_OBEN = 99, Y_KRAGEN_UNTEN = 124, Y_RAND = 234;
-const R_KAPPE = 39, R_KRAGEN = 45, R_RAND = 75;
+const Y_KAPPE_OBEN = 54, Y_KRAGEN_OBEN = 99, Y_KRAGEN_UNTEN = 129, Y_RAND = 234;
+const R_KAPPE = 39, R_KRAGEN = 45, R_ENDRING = 28.5, R_RAND = 75;
+
+// Rechnerischer Scheitel des Konus: dort schneiden sich die verlaengerten
+// Flanken. Von hier aus wird der Oeffnungswinkel bemasst.
+const KONUS_STEIGUNG = (R_RAND - R_ENDRING) / (Y_RAND - Y_KRAGEN_UNTEN);
+const Y_SCHEITEL = Y_KRAGEN_UNTEN - R_ENDRING / KONUS_STEIGUNG;
+const KONUS_WINKEL = 2 * Math.atan(KONUS_STEIGUNG); // = 47,8 Grad
+// Bogen so weit unten, dass er frei vor dem Korb liegt und nicht die Kappe kreuzt.
+const BOGEN_R = 104;
+const bogenPunkt = (vorzeichen) => [
+  MX + vorzeichen * BOGEN_R * Math.sin(KONUS_WINKEL / 2),
+  Y_SCHEITEL + BOGEN_R * Math.cos(KONUS_WINKEL / 2),
+];
 
 // Wellenrand am unteren Korbrand (vier Bögen über die volle Breite)
 const welleUnten = (mx, y, r) => {
@@ -121,10 +136,11 @@ ${stiele.join('\n')}
 // Profil mit den ICO-Massen: die eigentliche Lehr-Aussage des Blattes.
 {
   const stiele = [-0.62, -0.3, 0.3, 0.62].map((f) => {
-    const oben = MX + f * R_KRAGEN, unten = MX + f * R_RAND;
+    const oben = MX + f * R_ENDRING, unten = MX + f * R_RAND;
     return `  <path class="stiel" d="M${oben.toFixed(1)},${Y_KRAGEN_UNTEN} L${unten.toFixed(1)},${Y_RAND}"/>`;
   });
-  const inhalt = `  <path class="korbflaeche" d="M${MX - R_KRAGEN},${Y_KRAGEN_UNTEN} L${MX - R_RAND},${Y_RAND} L${MX + R_RAND},${Y_RAND} L${MX + R_KRAGEN},${Y_KRAGEN_UNTEN} Z"/>
+  const [bx, by] = bogenPunkt(1);
+  const inhalt = `  <path class="korbflaeche" d="M${MX - R_ENDRING},${Y_KRAGEN_UNTEN} L${MX - R_RAND},${Y_RAND} L${MX + R_RAND},${Y_RAND} L${MX + R_ENDRING},${Y_KRAGEN_UNTEN} Z"/>
 ${stiele.join('\n')}
   <path class="achse" d="M${MX},40 L${MX},250"/>
 
@@ -136,10 +152,16 @@ ${stiele.join('\n')}
   <path class="kontur" d="M${MX - R_KRAGEN},${Y_KRAGEN_OBEN} L${MX - R_KRAGEN},${Y_KRAGEN_UNTEN} M${MX + R_KRAGEN},${Y_KRAGEN_OBEN} L${MX + R_KRAGEN},${Y_KRAGEN_UNTEN}"/>
   <path class="kontur" d="M${MX - R_KRAGEN},${Y_KRAGEN_OBEN} L${MX + R_KRAGEN},${Y_KRAGEN_OBEN}"/>
 
-  <!-- Korb bis zum wellenfoermigen Rand -->
-  <path class="kontur" d="M${MX - R_KRAGEN},${Y_KRAGEN_UNTEN} L${MX - R_RAND},${Y_RAND}"/>
-  <path class="kontur" d="M${MX + R_KRAGEN},${Y_KRAGEN_UNTEN} L${MX + R_RAND},${Y_RAND}"/>
+  <!-- Korb: setzt am Endring an und laeuft bis zum wellenfoermigen Rand -->
+  <path class="kontur" d="M${MX - R_KRAGEN},${Y_KRAGEN_UNTEN} L${MX - R_ENDRING},${Y_KRAGEN_UNTEN} L${MX - R_RAND},${Y_RAND}"/>
+  <path class="kontur" d="M${MX + R_KRAGEN},${Y_KRAGEN_UNTEN} L${MX + R_ENDRING},${Y_KRAGEN_UNTEN} L${MX + R_RAND},${Y_RAND}"/>
   <path class="kontur" d="${welleUnten(MX, Y_RAND, R_RAND)}"/>
+
+  <!-- Konuswinkel: Bogen um den rechnerischen Scheitel, liegt auf beiden Flanken
+       auf. Die duenn gestrichelten Verlaengerungen zeigen, worauf er sich bezieht. -->
+  <path class="hilfslinie" d="M${MX},${Y_SCHEITEL.toFixed(1)} L${MX - R_ENDRING},${Y_KRAGEN_UNTEN} M${MX},${Y_SCHEITEL.toFixed(1)} L${MX + R_ENDRING},${Y_KRAGEN_UNTEN}"/>
+  <path class="masz" d="M${(2 * MX - bx).toFixed(1)},${by.toFixed(1)} A${BOGEN_R},${BOGEN_R} 0 0 1 ${bx.toFixed(1)},${by.toFixed(1)}" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="${MX}" y="${(by - 8).toFixed(1)}">47,8°</text>
 
   <!-- Gesamthoehe rechts -->
   <path class="hilfslinie" d="M${MX + R_KAPPE},${Y_KAPPE_OBEN} L254,${Y_KAPPE_OBEN}"/>
@@ -159,9 +181,16 @@ ${stiele.join('\n')}
   <text class="ico" x="${MX}" y="293">ICO 47–53</text>
 
   <!-- Kragen -->
-  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L46,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
-  <text class="teilr" x="42" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
-  <text class="teilr" x="42" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
+  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L52,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
+  <text class="teilr" x="48" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
+  <text class="teilr" x="48" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
+
+  <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
+  <path class="hilfslinie" d="M${MX - R_ENDRING},${Y_KRAGEN_UNTEN} L26,${Y_KRAGEN_UNTEN}"/>
+  <path class="hilfslinie" d="M${MX - R_RAND},${Y_RAND} L26,${Y_RAND}"/>
+  <path class="masz" d="M32,${Y_KRAGEN_UNTEN} L32,${Y_RAND}" marker-start="url(#mp2)" marker-end="url(#mp)"/>
+  <text class="maszzahl" x="14" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 - 3}">35</text>
+  <text class="teil" x="2" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 10}">Korb</text>
 
   <text class="st" x="150" y="326">Maße in mm · blau das ICO-Fenster</text>`;
   writeFileSync(`${ZIEL}/G-065.svg`, svg(340,
@@ -174,15 +203,15 @@ ${stiele.join('\n')}
 // und gerastert, damit es als Schnitt lesbar ist statt als zweite Aussenansicht.
 {
   const W = 8;
-  const rk = R_KRAGEN, rr = R_RAND;
+  const rk = R_KRAGEN, re = R_ENDRING, rr = R_RAND;
   const MX = 168; // eigene Mittelachse: breitere Tafel, linke Label-Spalte
   const inhalt = `  <path class="achse" d="M${MX},40 L${MX},250"/>
 
   <!-- geschnittene Korbwand links und rechts (Band mit Wandstaerke) -->
-  <path class="schnitt" d="M${MX - rk},${Y_KRAGEN_UNTEN} L${MX - rr},${Y_RAND} L${MX - rr + W + 3},${Y_RAND} L${MX - rk + W},${Y_KRAGEN_UNTEN} Z"/>
-  <path class="schnitt" d="M${MX + rk},${Y_KRAGEN_UNTEN} L${MX + rr},${Y_RAND} L${MX + rr - W - 3},${Y_RAND} L${MX + rk - W},${Y_KRAGEN_UNTEN} Z"/>
-  <path class="kontur" d="M${MX - rk},${Y_KRAGEN_UNTEN} L${MX - rr},${Y_RAND} M${MX - rk + W},${Y_KRAGEN_UNTEN} L${MX - rr + W + 3},${Y_RAND}"/>
-  <path class="kontur" d="M${MX + rk},${Y_KRAGEN_UNTEN} L${MX + rr},${Y_RAND} M${MX + rk - W},${Y_KRAGEN_UNTEN} L${MX + rr - W - 3},${Y_RAND}"/>
+  <path class="schnitt" d="M${MX - re},${Y_KRAGEN_UNTEN} L${MX - rr},${Y_RAND} L${MX - rr + W + 3},${Y_RAND} L${MX - re + W},${Y_KRAGEN_UNTEN} Z"/>
+  <path class="schnitt" d="M${MX + re},${Y_KRAGEN_UNTEN} L${MX + rr},${Y_RAND} L${MX + rr - W - 3},${Y_RAND} L${MX + re - W},${Y_KRAGEN_UNTEN} Z"/>
+  <path class="kontur" d="M${MX - re},${Y_KRAGEN_UNTEN} L${MX - rr},${Y_RAND} M${MX - re + W},${Y_KRAGEN_UNTEN} L${MX - rr + W + 3},${Y_RAND}"/>
+  <path class="kontur" d="M${MX + re},${Y_KRAGEN_UNTEN} L${MX + rr},${Y_RAND} M${MX + re - W},${Y_KRAGEN_UNTEN} L${MX + rr - W - 3},${Y_RAND}"/>
 
   <!-- Oeffnungsrand nach innen gebogen -->
   <path class="kontur" d="M${MX - rr},${Y_RAND} q 2,-11 ${W + 3},-2"/>

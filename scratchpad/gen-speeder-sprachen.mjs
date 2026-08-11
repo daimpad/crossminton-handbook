@@ -33,6 +33,10 @@ const KARTE = {
     },
     text: {
       'Kragen': { en: 'Collar', fr: 'Collerette', pl: 'Kołnierz' },
+      'Korb': { en: 'Skirt', fr: 'Jupe', pl: 'Spódniczka' },
+      // Muss ausdruecklich in die Karte: der Zahlen-Filter unten wuerde "47,8°"
+      // als sprachneutral durchwinken — im Englischen steht dort aber ein Punkt.
+      '47,8°': { en: '47.8°', fr: '47,8°', pl: '47,8°' },
       'Maße in mm · blau das ICO-Fenster': {
         en: 'Dimensions in mm · ICO window in blue',
         fr: 'Cotes en mm · fenêtre ICO en bleu',
