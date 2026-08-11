@@ -131,7 +131,7 @@ Die App lässt sich vollständig mit der Tastatur bedienen: jedes Bedienelement 
 
 ## In vier Sprachen
 
-Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 641 Bedienelemente und 857 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
+Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 645 Bedienelemente und 857 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
 
 Jede Sprache hat eigene Adressen: Deutsch liegt an der Wurzel, die anderen unter `/en/`, `/fr/` und `/pl/`. Ein Link führt also dorthin, wo man ihn kopiert hat — und Suchmaschinen finden alle vier Fassungen.
 
