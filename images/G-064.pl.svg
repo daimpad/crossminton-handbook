@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Widok perspektywiczny speedera: u góry główka jako ciężarek, pod nią kołnierz, a przy nim otwarta spódniczka z podłużnych żeber.">
+  <style>
+    .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    .kappe{fill:var(--speeder-kappe,#e2402a)}
+    .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    .pfeil{fill:var(--tinte-3,#6b7686)}
+    .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+    <marker id="mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+  </defs>
+
+  <!-- Korbmantel zwischen Kragen und Oeffnung -->
+  <path class="korbflaeche" d="M88,118 L54,236 A74,24 0 0 0 202,236 L168,118 A40,13 0 0 1 88,118 Z"/>
+  <path class="stiel" d="M88.0,118.0 L54.0,236.0"/>
+  <path class="stiel" d="M93.4,111.5 L63.9,224.0"/>
+  <path class="stiel" d="M108.0,106.7 L91.0,215.2"/>
+  <path class="stiel" d="M128.0,105.0 L128.0,212.0"/>
+  <path class="stiel" d="M148.0,106.7 L165.0,215.2"/>
+  <path class="stiel" d="M162.6,111.5 L192.1,224.0"/>
+  <path class="stiel" d="M168.0,118.0 L202.0,236.0"/>
+  <path class="stiel" d="M162.6,124.5 L192.1,248.0"/>
+  <path class="stiel" d="M148.0,129.3 L165.0,256.8"/>
+  <path class="stiel" d="M128.0,131.0 L128.0,260.0"/>
+  <path class="stiel" d="M108.0,129.3 L91.0,256.8"/>
+  <path class="stiel" d="M93.4,124.5 L63.9,248.0"/>
+  <path class="stiel" d="M88.0,118.0 L54.0,236.0"/>
+  <ellipse class="kontur" cx="128" cy="236" rx="74" ry="24"/>
+  <path class="kontur" d="M88,118 L54,236"/>
+  <path class="kontur" d="M168,118 L202,236"/>
+
+  <!-- Schlagkappe oben: das kennzeichnende Teil, darum in der Hauptfarbe -->
+  <path class="kappe" d="M88,118 L94,72 A34,26 0 0 1 162,72 L168,118 A40,13 0 0 1 88,118 Z"/>
+  <path class="kappenlinie" d="M109,76 A21,10 0 0 1 147,76"/>
+  <ellipse class="kontur" cx="128" cy="118" rx="40" ry="13"/>
+
+  <path class="masz" d="M158,74 L214,74"/>
+  <path class="masz" d="M174,122 L214,140"/>
+  <path class="masz" d="M182,190 L214,196"/>
+  <text class="teil" x="218" y="78">Główka</text>
+  <text class="teil" x="218" y="144">Kołnierz</text>
+  <text class="teil" x="218" y="200">Spódniczka</text>
+
+  <text class="st" x="150" y="284">Główka, kołnierz i spódniczka</text>
+</svg>

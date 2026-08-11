@@ -34,6 +34,15 @@
   --signal-gelb: #f2d93b;
   --signal-gelb-text: #6f6104;
   --signal-gelb-weich: #fbf5d3;
+  /* Speeder-Produktfarben (Typ MATCH: gelber Korb, rote Schlagkappe).
+     BEWUSST EIGENE TOKENS statt --signal-gelb/-rot: die Ampel bedeutet in dieser
+     App einen Zustand (offen / Hinweis / erledigt). Am Speeder ist Gelb und Rot
+     dagegen eine Sacheigenschaft des Balls, keine Statusaussage — beides über
+     denselben Token laufen zu lassen, hiesse die Ampel zu verwässern.
+     Gelesen nur von den Konstruktionsgrafiken G-064…G-067. */
+  --speeder-korb: #f0c400;
+  --speeder-kappe: #e2402a;
+  --speeder-kappe-tief: #a82412;
   /* Flächen & Tinte — ruhige, leicht kühle Neutrale. */
   --hintergrund: #f2f6fc;
   --hintergrund-2: #eaf1fa;
@@ -89,6 +98,7 @@
     --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
     --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
     --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
+    --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
     --hintergrund: #0f151c;
     --hintergrund-2: #131c26;
     --flaeche: #18232f;
@@ -126,6 +136,7 @@
   --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
   --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
   --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
+  --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
   --hintergrund: #0f151c;
   --hintergrund-2: #131c26;
   --flaeche: #18232f;

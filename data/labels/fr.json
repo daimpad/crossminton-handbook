@@ -543,7 +543,11 @@
     "G-060": "Schéma : le terrain coté",
     "G-061": "Schéma : les signaux de l'arbitre",
     "G-062": "Schéma : funplay — tenir l’échange ensemble",
-    "G-063": "Schéma : la disposition multi-terrains"
+    "G-063": "Schéma : la disposition multi-terrains",
+    "G-064": "Speeder : tête, collerette et jupe",
+    "G-065": "Speeder de profil avec les cotes ICO en millimètres",
+    "G-066": "Coupe longitudinale du speeder : paroi, bagues et tête",
+    "G-067": "Vue de dessus dans l'ouverture de la jupe : 16 nervures"
   },
   "vokabeln": {
     "domaene": {

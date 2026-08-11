@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 340" role="img" aria-label="Längsschnitt durch einen Speeder: das Loch mit 4 Millimetern in der Schlagkappe, der Endring mit 19 Millimetern, der Pressring am Kragen, die Querrippe zwischen den Längsstielen und der nach innen gebogene Öffnungsrand.">
+  <style>
+    .kontur{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+    .schnitt{fill:var(--tinte,#16202b);opacity:.14}
+    .kappe{fill:var(--speeder-kappe,#e2402a)}
+    .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
+    .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
+    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
+    .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    .pfeil{fill:var(--tinte-3,#6b7686)}
+    .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
+    .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
+    .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+    <marker id="mp2" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="pfeil"/>
+    </marker>
+  </defs>
+
+  <path class="achse" d="M168,40 L168,250"/>
+
+  <!-- geschnittene Korbwand links und rechts (Band mit Wandstaerke) -->
+  <path class="schnitt" d="M123,124 L93,234 L104,234 L131,124 Z"/>
+  <path class="schnitt" d="M213,124 L243,234 L232,234 L205,124 Z"/>
+  <path class="kontur" d="M123,124 L93,234 M131,124 L104,234"/>
+  <path class="kontur" d="M213,124 L243,234 M205,124 L232,234"/>
+
+  <!-- Oeffnungsrand nach innen gebogen -->
+  <path class="kontur" d="M93,234 q 2,-11 11,-2"/>
+  <path class="kontur" d="M243,234 q -2,-11 -11,-2"/>
+
+  <!-- Querrippe: verbindet die Stiele auf halber Korbhoehe -->
+  <path class="kontur" d="M110,179 L226,179"/>
+
+  <!-- Kragen mit Pressring, darin der Endring -->
+  <path class="schnitt" d="M123,99 L213,99 L213,124 L123,124 Z"/>
+  <path class="kontur" d="M123,99 L123,124 M213,99 L213,124 M123,124 L213,124"/>
+  <path class="kontur" d="M140,99 L140,124 M196,99 L196,124"/>
+
+  <!-- Schlagkappe im Schnitt, mit Loch an der Spitze -->
+  <path class="kappe" d="M129,99 L129,74 A39,20 0 0 1 207,74 L207,99 Z"/>
+  <!-- Loch an der Spitze: kleine Kerbe, kein Schlitz durch die ganze Kappe -->
+  <path class="schnitt" d="M162,56 L174,56 L174,70 L162,70 Z"/>
+  <path class="kontur" d="M162,56 L162,70 M174,56 L174,70"/>
+
+  <path class="masz" d="M168,52 L214,34"/>
+  <text class="teil" x="232" y="30">Loch ⌀ 4</text>
+  <path class="masz" d="M202,109 L246,103"/>
+  <text class="teil" x="250" y="107">Endring ⌀ 19</text>
+  <path class="masz" d="M213,118 L246,140"/>
+  <text class="teil" x="250" y="144">Pressring</text>
+  <path class="masz" d="M218,179 L246,191"/>
+  <text class="teil" x="250" y="195">Querrippe</text>
+
+  <path class="masz" d="M111,158 L74,146"/>
+  <text class="teil" x="6" y="150">Längsstiel</text>
+  <path class="masz" d="M97,232 L92,252"/>
+  <text class="teil" x="6" y="266">Öffnungsrand,</text>
+  <text class="teil" x="6" y="279">nach innen gebogen</text>
+
+  <text class="st" x="180" y="326">Längsschnitt: Wand, Ring, Schlagkappe</text>
+</svg>

@@ -725,13 +725,13 @@ pruefe('alle sichtbaren IDs tragen ein de-Label', fehlend.length === 0, fehlend.
 
 console.log('\n[10] Grafiksystem (G-XXX-Nummernkreis + Platzhalter-Dateien)');
 const grafikRefs = [...daten.bausteine, ...daten.deltas].flatMap((b) => b.grafik || []);
-const alleG = Array.from({ length: 63 }, (_, i) => `G-${String(i + 1).padStart(3, '0')}`);
+const alleG = Array.from({ length: 67 }, (_, i) => `G-${String(i + 1).padStart(3, '0')}`);
 pruefe('alle Baustein-Grafiken folgen dem G-XXX-Schema', grafikRefs.length > 0 && grafikRefs.every((g) => /^G-\d{3}$/.test(g)));
-pruefe('57 Bausteine tragen eine Grafik, 61 G-Referenzen (4 Zwei-Bild-Sequenzen)', daten.bausteine.filter((b) => (b.grafik || []).length > 0).length === 57 && grafikRefs.length === 61);
+pruefe('59 Bausteine tragen eine Grafik, 65 G-Referenzen (4 Zwei-Bild-Sequenzen + die 3-teilige Speeder-Konstruktionszeichnung)', daten.bausteine.filter((b) => (b.grafik || []).length > 0).length === 59 && grafikRefs.length === 65);
 pruefe('Sequenz-Bausteine tragen zwei Grafiken (aufschlag/beinarbeit/taeuschung/tempo_rhythmus_wechsel)', ['aufschlag', 'beinarbeit', 'taeuschung', 'tempo_rhythmus_wechsel'].every((id) => (daten.bausteinVonId.get(id).grafik || []).length === 2));
 pruefe('Deltas tragen keine eigene Grafik (nur Basis-Bausteine)', daten.deltas.every((d) => !(d.grafik && d.grafik.length)));
 pruefe('jede referenzierte G-XXX hat eine Platzhalter-Datei images/G-XXX.png', [...new Set(grafikRefs)].every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
-pruefe('alle 63 Grafiken G-001..G-063 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
+pruefe('alle 67 Grafiken G-001..G-067 existieren als Datei', alleG.every((g) => existsSync(join(wurzel, 'images', `${g}.png`))));
 pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein', labelsDe.grafiken['G-060'] && labelsDe.grafiken['G-061'] && !grafikRefs.includes('G-060') && !grafikRefs.includes('G-061'));
 pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
 pruefe('SVG_GRAFIKEN: jede Diagramm-Grafik hat .svg UND .png (Inline-SVG + PNG-Fallback)', SVG_GRAFIKEN.size >= 3 && [...SVG_GRAFIKEN].every((g) => existsSync(join(wurzel, 'images', `${g}.svg`)) && existsSync(join(wurzel, 'images', `${g}.png`))));

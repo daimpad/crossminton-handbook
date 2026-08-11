@@ -2,7 +2,7 @@
 
 Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-XXX` steht für genau ein Bild und entspricht einer Platzhalter-Datei `G-XXX.png` in diesem Ordner. Sobald ein Bild erzeugt ist, ersetzt es den gleichnamigen Platzhalter — die Zuordnung Baustein ↔ Nummer ↔ Datei ↔ Prompt bleibt dabei stabil.
 
-**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063).
+**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–067).
 
 **Gemeinsamer Stil** (jedem Prompt voranstellen): illustrative, reduced vector-style drawing, clean flat lines, minimal detail, limited flat colour palette, no background or plain white background, easily abstractable, instructional sports-diagram aesthetic. Keine Fotorealistik, keine Marken/Logos.
 
@@ -17,7 +17,7 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 
 ## Abdeckung (Audit)
 
-Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor** und zwei **Referenzgrafiken** im Regeln-Reiter.
+Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor**, zwei **Referenzgrafiken** im Regeln-Reiter und die **Speeder-Konstruktionszeichnung** in der Ausrüstung.
 
 Bewusst **ohne Leitgrafik** bleiben:
 
@@ -303,3 +303,52 @@ links/rechts in `--tinte`, deren Bahnen gestrichelt queren, plus zwei querende D
 Das gemeinsame Zentrum ist als gestrichelter Kreis mit leichter Tönung markiert.
 Caption: „im Zentrum kreuzen sich die Bahnen" — die Zentrum-Beschriftung steht bewusst
 **nicht** im Bild (die kreuzenden Bahnen schneiden sie unlesbar).
+
+## Ausrüstung (G-064–067)
+
+Die Speeder-Konstruktionszeichnung — die **erste Bebilderung der Ausrüstungs-Domäne**,
+die zuvor über alle sieben Bausteine bildlos war. Vorlage war eine vierteilige
+Konstruktionszeichnung (A perspektivisch, B Profil, C Längsschnitt, D Draufsicht).
+
+**Bewusst vier eigenständige Grafiken statt einer 2×2-Tafel.** Die Vorlage ordnet ihre
+Tafeln zweispaltig an; das ist auf einem Telefon unlesbar. Als vier Figuren stapelt die
+App sie von sich aus einspaltig (`.grafik-platzhalter` ist `width:100%`), also ohne
+CSS-Ausnahme responsiv — und jede Tafel trägt ihre eigene Beschriftung und
+Sprachvarianten.
+
+**Maßstab 3 Einheiten je mm**, Schlagkappe oben wie in Tafel B der Vorlage:
+Gesamthöhe 60 mm = 180 u, Korb ⌀50 = r75, Kragen ⌀30 = r45, Schlagkappe ⌀26 = r39.
+
+**Nicht bemaßt ist der Konuswinkel.** Mit den 47,8° der Vorlage wäre der Korb erst nach
+22,6 mm auf ⌀50 und die Silhouette sähe nicht mehr nach Speeder aus; die gezeichnete
+natürliche Form trägt rund 31°. Die Vorlage nennt ihre Werte selbst ausdrücklich als
+Näherung („am Realobjekt zu vermessen"), darum lieber die Zahl weglassen als sie an eine
+Geometrie schreiben, die sie nicht einhält. Bemaßt ist, was zusammenpasst **und**
+ICO-relevant ist: die drei Durchmesser, die Gesamthöhe, der Endring, die Teilung.
+
+**Farben sind die Originalfarben des Typs MATCH** (gelber Korb, rote Schlagkappe) und
+laufen über **eigene Tokens** `--speeder-korb` / `--speeder-kappe` / `--speeder-kappe-tief`
+in `css/app.css`, NICHT über `--signal-gelb`/`--signal-rot`. Die Ampel bedeutet in dieser
+App einen Zustand (offen / Hinweis / erledigt); am Speeder ist die Farbe eine
+Sacheigenschaft des Balls. Beides auf denselben Token zu legen hieße die Ampel zu
+verwässern. Hell/Dunkel kippen über die Tokens mit wie überall.
+
+**G-064** · `images/G-064.svg` · `deine_ausruestung` · Perspektivische Übersicht,
+bewusst **unbemaßt** (wie Tafel A der Vorlage): Schlagkappe oben, Kragen als Ellipse,
+darunter der geöffnete Korb aus Längsstielen. Drei Verweise benennen die Baugruppen.
+Caption: „Schlagkappe, Kragen und Korb".
+
+**G-065** · `images/G-065.svg` · `der_speeder` · Profil mit den ICO-Maßen — die
+eigentliche Lehr-Aussage: Gesamthöhe 60 (57–63), Korb ⌀50 (47–53), Schlagkappe ⌀26
+(25–27), Kragen ⌀30. Das Toleranzfenster steht in `--primaer-tief` unter dem Nennmaß.
+Caption: „Maße in mm · blau das ICO-Fenster".
+
+**G-066** · `images/G-066.svg` · `der_speeder` · Längsschnitt, als einziger **360 breit**
+(die linke Beschriftungsspalte passt bei 300 nicht). Die Korbwand ist als Band mit
+Wandstärke gerastert, damit es als Schnitt lesbar bleibt und nicht als zweite
+Außenansicht: Loch ⌀4 in der Kappe, Endring ⌀19, Pressring am Kragen, Querrippe,
+Öffnungsrand nach innen gebogen. Caption: „Längsschnitt: Wand, Ring, Schlagkappe".
+
+**G-067** · `images/G-067.svg` · `der_speeder` · Draufsicht in die Korböffnung:
+16 Längsstiele im Winkelabstand 22,5°, der wellenförmige Rand als Bogenkette zwischen
+den Stielen, die Schlagkappe dahinter. Caption: „16 Längsstiele · Teilung 22,5°".
