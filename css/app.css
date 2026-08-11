@@ -1122,6 +1122,30 @@ input[type='radio'], input[type='checkbox'] {
   font-size: 0.9rem;
 }
 
+/* Ladebalken: erscheint NUR, wenn jemand navigiert, bevor die Daten da sind
+   (s. verdrahteNavigation in js/app.js). Beim normalen Erstaufbau bleibt er aus —
+   rendern() läuft dort erst, wenn geladen ist. Ohne Text, damit er keine
+   Übersetzung braucht; unter prefers-reduced-motion steht er still. */
+body.app-laedt::after {
+  content: '';
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 60;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--primaer) 45%, var(--primaer) 55%, transparent);
+  background-size: 45% 100%;
+  background-repeat: no-repeat;
+  animation: app-laedt-lauf 1.1s ease-in-out infinite;
+}
+@keyframes app-laedt-lauf {
+  0%   { background-position: -50% 0; }
+  100% { background-position: 150% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.app-laedt::after { animation: none; background: var(--primaer); }
+}
+
 .grafik-platzhalter { margin: 0.9rem 0; }
 
 .grafik-bild {
