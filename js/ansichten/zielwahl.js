@@ -33,11 +33,11 @@ export function zielwahlHtml(daten, aktuellesZiel, { mitVermittlungszielen = fal
   const aktiv = new Set(zielEintraege(aktuellesZiel).map((e) => `${e.dimension}::${e.faktor}`));
   let html = `
     <div class="zielwahl">
-      <h3 class="ziel-dimension">${esc(t('spielziele_gruppe'))}</h3>
+      <h2 class="ziel-dimension">${esc(t('spielziele_gruppe'))}</h2>
       ${bereichsGruppen(daten.vokabulare.spielziele, 'spielziele', 'spielziel_bereich', 'spielziel_faktor', aktiv)}`;
   if (mitVermittlungszielen) {
     html += `
-      <h3 class="ziel-dimension">${esc(t('vermittlungsziele_gruppe'))}</h3>
+      <h2 class="ziel-dimension">${esc(t('vermittlungsziele_gruppe'))}</h2>
       ${bereichsGruppen(daten.vokabulare.vermittlungsziele, 'vermittlungsziele', 'vermittlungsziel_bereich', 'vermittlungsziel_faktor', aktiv)}`;
   }
   return `${html}</div>`;
