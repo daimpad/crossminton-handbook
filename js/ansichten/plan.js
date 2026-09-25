@@ -92,8 +92,8 @@ function sessionHtml(daten, session, index) {
         <a class="leise plan-session-link" href="#/training/${esc(session.einheit)}">${esc(t('einheit_starten'))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
       </div>
       <div class="plan-session-knoepfe">
-        <button class="knopf knopf-leise plan-tausch" data-index="${index}" aria-label="${esc(t('plan_tauschen'))}" title="${esc(t('plan_tauschen'))}"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button>
-        <button class="knopf knopf-leise plan-entfernen" data-index="${index}" aria-label="${esc(t('plan_entfernen'))}" title="${esc(t('plan_entfernen'))}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <button class="knopf knopf-leise plan-tausch" data-index="${index}" data-aktion="tausch" aria-label="${esc(t('plan_tauschen'))}" title="${esc(t('plan_tauschen'))}"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button>
+        <button class="knopf knopf-leise plan-entfernen" data-index="${index}" data-aktion="entfernen" aria-label="${esc(t('plan_entfernen'))}" title="${esc(t('plan_entfernen'))}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
     </div>`;
 }

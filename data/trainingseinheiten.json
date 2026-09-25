@@ -128,10 +128,10 @@
     "pl": "Być w porę przy speederze — pozycja podstawowa, zryw, powrót"
    },
    "beschreibung": {
-    "de": "Die Bewegungs-Einheit für Einsteiger: die zentrale Position, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege.",
-    "en": "The movement session for beginners: the central position, quick feet and the movement cycle, rounded off with mobility care.",
-    "fr": "La séance de déplacement pour débutants : la position centrale, les pieds rapides et le cycle de déplacement, clôturée par un entretien de la mobilité.",
-    "pl": "Jednostka ruchowa dla początkujących: pozycja centralna, szybkie stopy i obieg ruchu, zakończona pielęgnacją ruchomości."
+    "de": "Die Bewegungs-Einheit für Einsteiger: die Grundposition, schnelle Füße und der Bewegungskreislauf, abgeschlossen mit Beweglichkeitspflege.",
+    "en": "The movement session for beginners: the base position, quick feet and the movement cycle, rounded off with mobility care.",
+    "fr": "La séance de déplacement pour débutants : la position de base, les pieds rapides et le cycle de déplacement, clôturée par un entretien de la mobilité.",
+    "pl": "Jednostka ruchowa dla początkujących: pozycja podstawowa, szybkie stopy i obieg ruchu, zakończona pielęgnacją ruchomości."
    },
    "phasen": {
     "erwaermung": [
@@ -471,10 +471,10 @@
      {
       "baustein": "sprung_smash",
       "hinweis": {
-       "de": "Den harten Abschluss aus dem Sprung setzen — mit dem in der Datei hinterlegten Gesundheitshinweis zur Sprungbelastung.",
+       "de": "Den harten Abschluss aus dem Sprung setzen — mit dem im Baustein hinterlegten Gesundheitshinweis zur Sprungbelastung.",
        "en": "Land the hard finish out of the jump — with the health note on jump loading noted in the module.",
        "fr": "Placer la conclusion puissante en sautant — avec la note de santé sur la charge de saut indiquée dans le module.",
-       "pl": "Kłaść mocne zakończenie z wyskoku — z zapisaną w pliku wskazówką zdrowotną co do obciążenia skokowego."
+       "pl": "Kłaść mocne zakończenie z wyskoku — z zapisaną w module wskazówką zdrowotną co do obciążenia skokowego."
       }
      },
      {

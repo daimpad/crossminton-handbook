@@ -234,7 +234,11 @@ export function renderProfil(el, daten) {
         setzeDiagnose({ ziel: null });
       }
       offen = null;
-      renderProfil(el, daten);
+      // Über neuRendern() (Fokusrettung in rendern()), nicht direkt renderProfil().
+      // Der Übernehmen-Knopf existiert danach nicht mehr — der Fokus gehört auf
+      // den „Ändern"-Knopf desselben Feldes, sonst fiele er auf <body> zurück.
+      neuRendern();
+      document.querySelector(`#ansicht [data-bearbeite="${art === 'ziel-entfernen' ? 'ziel' : art}"]`)?.focus({ preventScroll: true });
     });
   }
 
@@ -247,7 +251,7 @@ export function renderProfil(el, daten) {
       meilenstein = ergebnis.meilenstein ?? meilenstein;
     }
     if (meilenstein) zeigeMeilenstein(meilenstein);
-    else renderProfil(el, daten);
+    else neuRendern();
   });
 
   el.querySelector('#pf-sprache').addEventListener('change', async (ereignis) => {
