@@ -979,7 +979,10 @@ input[type='radio'], input[type='checkbox'] {
   padding: 0 0.3rem;
 }
 
-.ziel-dimension { margin-top: 1rem; }
+/* Semantisch h2 (unter der h1 von Onboarding/Individualpfad wäre eine h3 ein
+   Rangsprung; im Profil steht sie unter einer h2 — dort ist h2 → h2 eine
+   Geschwister-Ebene). Die Klasse hält die ruhigere h3-Optik, wie .karte-titel. */
+.ziel-dimension { margin-top: 1rem; font-size: 1.05rem; letter-spacing: -0.005em; }
 
 /* Große Schirme: die Ziel-Checkboxen zweispaltig, damit die Liste nicht so lang wird.
    Die Legende (Bereichstitel) spannt beide Spalten. */
