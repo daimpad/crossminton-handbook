@@ -183,7 +183,8 @@ export function renderProfil(el, daten) {
         <label for="pf-sprache">${esc(t('sprache'))}</label>
         <select id="pf-sprache">${sprachOptionen}</select>
       </div>
-      ${sprache() !== 'de' ? `<p class="leise">${esc(t('uebersetzung_fehlt'))}</p>` : ''}
+      <!-- Der frühere Hinweis „Übersetzungen folgen" (uebersetzung_fehlt) entfällt: Labels UND Inhalt
+           sind in en/fr/pl vollständig. Der Schlüssel bleibt der Strukturgleichheit wegen erhalten. -->
       <div class="profil-zeile">
         <label for="pf-thema">${esc(t('thema'))}</label>
         <select id="pf-thema">${themaOptionen}</select>

@@ -327,22 +327,22 @@
       "erklaerteil": {
         "de": {
           "symptom": "Der Überkopfball fällt zu kurz oder wird unsauber getroffen.",
-          "ursache": "Der Speeder wird zu tief und zu weit vorn getroffen, ohne Seitstellung und Streckung.",
+          "ursache": "Der Speeder wird zu tief und hinter dem Körper getroffen, ohne Seitstellung und Streckung.",
           "korrektur": "„Dreh dich seitlich und triff den Speeder gestreckt am höchsten Punkt über der Schulter.“"
         },
         "en": {
           "symptom": "The overhead shot falls short or is struck untidily.",
-          "ursache": "The Speeder is met too low and too far in front, without turning side-on and without extension.",
+          "ursache": "The Speeder is met too low and behind the body, without turning side-on and without extension.",
           "korrektur": "Cue: \"Turn side-on and meet the Speeder fully extended at the highest point above your shoulder.\""
         },
         "fr": {
           "symptom": "La balle au-dessus de la tête tombe court ou est frappée sans netteté.",
-          "ursache": "Le speeder est frappé trop bas et trop en avant, sans placement de profil ni extension.",
+          "ursache": "Le speeder est frappé trop bas et derrière le corps, sans placement de profil ni extension.",
           "korrektur": "Consigne : « Place-toi de profil et frappe le speeder en extension, au point le plus haut au-dessus de l'épaule. »"
         },
         "pl": {
           "symptom": "Piłka nad głową pada zbyt krótko albo jest trafiona nieczysto.",
-          "ursache": "Speeder jest trafiany zbyt nisko i zbyt z przodu, bez ustawienia bokiem i bez wyprostu.",
+          "ursache": "Speeder jest trafiany zbyt nisko i za ciałem, bez ustawienia bokiem i bez wyprostu.",
           "korrektur": "Wskazówka: „Obróć się bokiem i trafiaj speedera w wyproście, w najwyższym punkcie nad barkiem.\""
         }
       }
@@ -545,22 +545,22 @@
         "de": {
           "symptom": "Der Spieler antwortet auf jeden Ball einzeln; eine erkennbare Folge über mehrere Schläge entsteht nie.",
           "ursache": "Es fehlt der Plan über den einzelnen Schlag hinaus — der Wechsel aus langen und kurzen Bällen wird nicht als Werkzeug genutzt.",
-          "korrektur": "Gib ihm ein Muster mit. Ansage: „Erst tief nach hinten treiben, dann kurz vor die Frontlinie — zwei Schläge, ein Plan.“"
+          "korrektur": "Gib ihm ein Muster mit. Ansage: „Erst tief nach hinten treiben, dann kurz hinter die Frontlinie — zwei Schläge, ein Plan.“"
         },
         "en": {
           "symptom": "The player answers each ball on its own; a recognisable sequence across several shots never forms.",
           "ursache": "The plan beyond the single shot is missing — the alternation of long and short balls is not used as a tool.",
-          "korrektur": "Give them a pattern. Cue: \"First drive them deep, then short in front of the front line — two shots, one plan.\""
+          "korrektur": "Give them a pattern. Cue: \"First drive them deep, then short just inside the front line — two shots, one plan.\""
         },
         "fr": {
           "symptom": "Le joueur répond à chaque balle isolément ; aucune séquence reconnaissable sur plusieurs frappes ne se forme.",
           "ursache": "Le plan au-delà de la frappe isolée manque — l'alternance de balles longues et courtes n'est pas utilisée comme outil.",
-          "korrektur": "Donne-lui un schéma. Consigne : « D'abord le repousser au fond, puis court devant la ligne avant — deux frappes, un plan. »"
+          "korrektur": "Donne-lui un schéma. Consigne : « D'abord le repousser au fond, puis court juste derrière la ligne avant — deux frappes, un plan. »"
         },
         "pl": {
           "symptom": "Gracz odpowiada na każdą piłkę osobno; rozpoznawalna sekwencja przez kilka uderzeń nigdy nie powstaje.",
           "ursache": "Brakuje planu wykraczającego poza pojedyncze uderzenie — zmiana piłek długich i krótkich nie jest używana jako narzędzie.",
-          "korrektur": "Daj mu schemat. Wskazówka: „Najpierw wypchnij go głęboko do tyłu, potem krótko przed linię przednią — dwa uderzenia, jeden plan.“"
+          "korrektur": "Daj mu schemat. Wskazówka: „Najpierw wypchnij go głęboko do tyłu, potem krótko za linię przednią — dwa uderzenia, jeden plan.“"
         }
       }
     },
@@ -793,22 +793,22 @@
         "de": {
           "symptom": "Der Spieler kommt ständig einen Schritt zu spät, obwohl er schnell genug läuft.",
           "ursache": "Der Speeder wird abgewartet und tief genommen, statt am frühesten und höchsten Punkt — die gestohlene Zeit fehlt.",
-          "korrektur": "Zieh den Treffpunkt vor. Ansage: „Geh dem Speeder entgegen und nimm ihn im Steigen, nicht im Fallen.“"
+          "korrektur": "Zieh den Treffpunkt vor. Ansage: „Geh dem Speeder entgegen und nimm ihn am höchsten Punkt, nicht im Fallen.“"
         },
         "en": {
           "symptom": "The player is constantly a step late although they move fast enough.",
           "ursache": "The Speeder is waited for and taken low instead of at the earliest, highest point — the stolen time is missing.",
-          "korrektur": "Move the contact point forward. Cue: \"Step towards the Speeder and take it on the rise, not on the way down.\""
+          "korrektur": "Move the contact point forward. Cue: \"Step towards the Speeder and take it at the highest point, not on the way down.\""
         },
         "fr": {
           "symptom": "Le joueur arrive sans cesse un pas trop tard, bien qu'il se déplace assez vite.",
           "ursache": "Le speeder est attendu et pris bas au lieu du point le plus tôt et le plus haut — le temps volé manque.",
-          "korrektur": "Avance le point d'impact. Consigne : « Va au-devant du speeder et prends-le à la montée, pas à la descente. »"
+          "korrektur": "Avance le point d'impact. Consigne : « Va au-devant du speeder et prends-le au point le plus haut, pas à la descente. »"
         },
         "pl": {
           "symptom": "Gracz stale przychodzi krok za późno, choć porusza się wystarczająco szybko.",
           "ursache": "Speeder jest wyczekiwany i brany nisko, a nie w najwcześniejszym i najwyższym punkcie — brakuje skradzionego czasu.",
-          "korrektur": "Przesuń punkt trafienia do przodu. Wskazówka: „Wyjdź speederowi naprzeciw i bierz go we wznoszeniu, nie w opadaniu.“"
+          "korrektur": "Przesuń punkt trafienia do przodu. Wskazówka: „Wyjdź speederowi naprzeciw i bierz go w najwyższym punkcie, nie w opadaniu.“"
         }
       }
     },
