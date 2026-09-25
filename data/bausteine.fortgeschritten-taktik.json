@@ -216,7 +216,7 @@
           "schritte": [
             "Spiele mit einem Partner, der dir Bälle zuspielt.",
             "Beginne mit einem tiefen Clear, der den Partner nach hinten treibt.",
-            "Warte auf seinen Rückschlag: Kommt er hoch und kurz, greife mit dem Smash an. Kommt er tief, baue weiter auf.",
+            "Warte auf seinen Rückschlag: Kommt er hoch und kurz, greife mit dem Smash an. Kommt er flach, baue weiter auf.",
             "Übe bewusst beide Entscheidungen — abschließen und halten.",
             "Kehre nach jedem Smash sofort in die zentrale Position zurück."
           ],
@@ -328,7 +328,7 @@
       "spielziele": [
         "doppel_spezifische_loesungen"
       ],
-      "spielziele_hinweis": "ERSTE Aktivierung des Faktors doppel_spezifische_loesungen (Bereich 6, war beobachtungsbeduerftig markiert).",
+      "spielziele_hinweis": "Aktivierung des Faktors doppel_spezifische_loesungen auf Fortgeschritten-Stufe; erste Aktivierung inzwischen im Beginner-Doppel (erste_schritte_doppel).",
       "vermittlungsziele": [],
       "transfer_herkunft": [
         "CM",

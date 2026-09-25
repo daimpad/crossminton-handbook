@@ -55,7 +55,7 @@
             "Läuft es stabil, vergrößert ihr die Distanz oder spielt bewusst flacher."
           ],
           "selbstkontrolle": "Wie viele Kontakte schafft ihr ohne Bodenkontakt? Bleibt die Bahn flach und ruhig, oder wird sie mit der Zeit hektisch?",
-          "abschluss": "Ihr haltet den Speeder mehrere Ballwechsel am Stück flach im Spiel, ohne dass er den Boden berührt."
+          "abschluss": "Ihr haltet den Speeder viele Kontakte am Stück flach im Spiel, ohne dass er den Boden berührt."
         },
         "en": {
           "titel": "Keeping it up together",
@@ -68,7 +68,7 @@
             "Once it runs steadily, increase the distance or play deliberately flatter."
           ],
           "selbstkontrolle": "How many contacts do you manage without the speeder touching the ground? Does the flight stay flat and calm, or does it get hectic over time?",
-          "abschluss": "You keep the speeder flat and in play for several rallies in a row without it touching the ground."
+          "abschluss": "You keep the Speeder flat and in play for many contacts in a row without it touching the ground."
         },
         "fr": {
           "titel": "Tenir l'échange ensemble",
@@ -81,7 +81,7 @@
             "Quand c'est stable, augmentez la distance ou jouez volontairement plus à plat."
           ],
           "selbstkontrolle": "Combien de contacts réussissez-vous sans que le speeder touche le sol ? La trajectoire reste-t-elle plate et calme, ou devient-elle fébrile avec le temps ?",
-          "abschluss": "Vous gardez le speeder à plat et en jeu pendant plusieurs échanges d'affilée sans qu'il touche le sol."
+          "abschluss": "Vous gardez le speeder à plat et en jeu pendant de nombreux contacts d'affilée sans qu'il touche le sol."
         },
         "pl": {
           "titel": "Utrzymać wymianę razem",
@@ -94,7 +94,7 @@
             "Gdy idzie stabilnie, zwiększcie odległość albo grajcie świadomie płaszczej."
           ],
           "selbstkontrolle": "Ile kontaktów uda wam się bez dotknięcia podłoża? Czy tor lotu pozostaje płaski i spokojny, czy z czasem robi się nerwowy?",
-          "abschluss": "Utrzymujecie speedera płasko w grze przez kilka wymian z rzędu, bez dotknięcia podłoża."
+          "abschluss": "Utrzymujecie speedera płasko w grze przez wiele kontaktów z rzędu, bez dotknięcia podłoża."
         }
       }
     },

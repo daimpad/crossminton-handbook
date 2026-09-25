@@ -183,7 +183,8 @@ export function renderProfil(el, daten) {
         <label for="pf-sprache">${esc(t('sprache'))}</label>
         <select id="pf-sprache">${sprachOptionen}</select>
       </div>
-      ${sprache() !== 'de' ? `<p class="leise">${esc(t('uebersetzung_fehlt'))}</p>` : ''}
+      <!-- Der frühere Hinweis „Übersetzungen folgen" (uebersetzung_fehlt) entfällt: Labels UND Inhalt
+           sind in en/fr/pl vollständig. Der Schlüssel bleibt der Strukturgleichheit wegen erhalten. -->
       <div class="profil-zeile">
         <label for="pf-thema">${esc(t('thema'))}</label>
         <select id="pf-thema">${themaOptionen}</select>
@@ -234,7 +235,11 @@ export function renderProfil(el, daten) {
         setzeDiagnose({ ziel: null });
       }
       offen = null;
-      renderProfil(el, daten);
+      // Über neuRendern() (Fokusrettung in rendern()), nicht direkt renderProfil().
+      // Der Übernehmen-Knopf existiert danach nicht mehr — der Fokus gehört auf
+      // den „Ändern"-Knopf desselben Feldes, sonst fiele er auf <body> zurück.
+      neuRendern();
+      document.querySelector(`#ansicht [data-bearbeite="${art === 'ziel-entfernen' ? 'ziel' : art}"]`)?.focus({ preventScroll: true });
     });
   }
 
@@ -247,7 +252,7 @@ export function renderProfil(el, daten) {
       meilenstein = ergebnis.meilenstein ?? meilenstein;
     }
     if (meilenstein) zeigeMeilenstein(meilenstein);
-    else renderProfil(el, daten);
+    else neuRendern();
   });
 
   el.querySelector('#pf-sprache').addEventListener('change', async (ereignis) => {
