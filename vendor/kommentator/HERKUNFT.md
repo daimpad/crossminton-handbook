@@ -28,8 +28,8 @@ git -C /tmp/kommentator log --oneline <hier eingetragener Stand>..origin/main \
 
 Dann die drei Dateien byte-genau übernehmen und **diese Tabelle nachziehen**.
 
-Zwei Dinge dabei prüfen, weil das Quell-Repo auch ein WordPress-Plugin enthält,
-das uns nichts angeht:
+Drei Dinge dabei prüfen, weil das Quell-Repo auch ein WordPress-Plugin enthält,
+das uns nichts angeht, und weil die Oberfläche übersetzt wird:
 
 1. **Kommen neue Vorgaben (Defaults) hinzu, die nach außen wirken?** Beim Stand
    `6c6c302` kam ein `webhook` dazu, über den Kommentare an eine zentrale
@@ -40,6 +40,13 @@ das uns nichts angeht:
 2. **Nutzt neues CSS `--k-*`-Variablen, die `css/feedback.css` nicht setzt?**
    Nicht überschriebene Variablen fallen auf die Vendor-Werte zurück und brechen
    dann aus der App-CI aus.
+3. **Bringt `TEXTE` neue oder umbenannte Schlüssel mit?** Die Oberfläche wird
+   über `options.texte` übersetzt (`js/feedback.js`, Label-Gruppe
+   `kommentator`). Ein neuer Text erschiene sonst in allen Sprachen deutsch.
+   `node tests/engine.test.mjs` schlägt in Abschnitt [23] an und nennt den
+   Schlüssel: übersetzen (de/en/fr/pl) oder begründet in
+   `KOMMENTATOR_OHNE_UEBERSETZUNG` aufnehmen.
 
 Die vendorte Datei selbst wird **nie** angefasst — Anpassungen laufen
-ausschließlich über die `--k-*`-Überschreibungen in `css/feedback.css`.
+ausschließlich über die `--k-*`-Überschreibungen in `css/feedback.css` und
+die Texte in `data/labels/<sprache>.json`.

@@ -679,5 +679,69 @@
     "experte_tempo_und_konstanz": "Pace and consistency",
     "outdoor_wind_und_boden": "Wind and surface",
     "doppel_beginner_zusammenspiel": "First teamwork in doubles"
+  },
+  "kommentator": {
+    "notizenKopf": "Notes",
+    "leer": "No comments yet. Highlight a passage to get started.",
+    "kommentarPlatzhalter": "Comment…",
+    "abbrechen": "Cancel",
+    "speichern": "Save",
+    "bearbeiten": "edit",
+    "loeschen": "delete",
+    "ladenBtn": "Load comments",
+    "ladenTitel": "Read and merge exported comment files",
+    "herunterladenJson": "Comments (JSON)",
+    "herunterladenMd": "Notes (Markdown)",
+    "druckenBtn": "Save as PDF / print",
+    "emailBtn": "Send by email",
+    "emailIntro": "Here are my comments",
+    "emailAnhangHinweis": "(Please attach the file that was just downloaded.)",
+    "downloadKopf": "Download",
+    "keineNotizen": "No comments of your own.",
+    "quelleLabel": "Source:",
+    "exportiertLabel": "Exported:",
+    "titel": "Comment tool",
+    "autorLabel": "Author:",
+    "einKommentar": " comment",
+    "mehrereKommentare": " comments",
+    "leseFehler": "Could not read file: ",
+    "markierungAria": "Comment",
+    "von": "by",
+    "hilfeAria": "Show help",
+    "hilfeTitel": "How it works",
+    "hilfeSchliessen": "Close",
+    "hilfeSchritte": {
+      "markieren": {
+        "titel": "Highlight",
+        "text": "Select a passage with the mouse or by touch to comment on it."
+      },
+      "verbinden": {
+        "titel": "Connect",
+        "text": "Clicking a highlight or a note emphasizes both together."
+      },
+      "bearbeiten": {
+        "titel": "Edit",
+        "text": "Your own notes can be changed with “edit” and “delete”."
+      },
+      "herunterladen": {
+        "titel": "Download",
+        "text": "“Comments (JSON)” saves your own comments as a file. “Send by email” downloads it as well and opens a prepared email to the project."
+      },
+      "zusammenfuehren": {
+        "titel": "Merge",
+        "text": "“Load comments” reads exported files and merges them (without duplicates)."
+      }
+    },
+    "hilfeHinweis": "Comments exist only in this browser tab: reloading or closing it discards them, so download or email them first. Exports also store the page URL and title, so it stays clear which page the comments belong to.",
+    "menuAria": "Open comment menu",
+    "menuTitel": "Comments",
+    "elementBtn": "Comment on an element",
+    "elementBtnAktiv": "Stop selecting elements",
+    "elementAria": "Toggle element selection",
+    "elementLabel": "Element",
+    "punktBtn": "Pin a point",
+    "punktBtnAktiv": "Stop pinning",
+    "punktAria": "Toggle point mode",
+    "punktLabel": "Point"
   }
 }

@@ -6,6 +6,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 import { aufgabenTeile, baueIndizes, deltaFuer, einheitReferenzen, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
 import { heimatKontext, individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
@@ -21,6 +22,7 @@ import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mj
 import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
+import { KOMMENTATOR_HILFE, KOMMENTATOR_OHNE_UEBERSETZUNG, KOMMENTATOR_TEXTE, kommentatorTexte } from '../js/feedback.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -1733,6 +1735,58 @@ pruefe('leere Eingabe unveraendert', begrenzeStil('', 'g1') === '');
   // blieb der Test dadurch zunaechst gruen, obwohl die Behebung aus war).
   pruefe('verbessereGrafiken() vereinzelt jedes eingefuegte SVG',
     /^\s*vereinzele\(svg, gestell\);\s*$/m.test(block));
+}
+
+console.log('\n[23] Kommentator: jeder sichtbare Text in allen vier Sprachen');
+// Der Kommentator (vendor/kommentator) bringt deutsche Standardtexte mit, die
+// App reicht ihre Übersetzungen über options.texte hinein (js/feedback.js). Fehlt
+// dort ein Schlüssel, erscheint er in JEDER Sprache deutsch — so sah der ganze
+// Kommentator aus, bevor die Texte übergeben wurden. Die Standardtexte kommen
+// aus der vendorten Datei selbst: bringt eine Aktualisierung neue Texte mit,
+// fällt das hier auf statt erst im Browser.
+{
+  const sandkasten = {};
+  sandkasten.window = sandkasten;
+  vm.runInNewContext(readFileSync(new URL('../vendor/kommentator/kommentare.js', import.meta.url), 'utf8'), sandkasten);
+  const TEXTE = sandkasten.Kommentare.TEXTE;
+  const vendorSchluessel = Object.keys(TEXTE);
+  const ohne = Object.keys(KOMMENTATOR_OHNE_UEBERSETZUNG);
+  const zuordnungen = (k) => [KOMMENTATOR_TEXTE.includes(k), k === 'hilfeSchritte', ohne.includes(k)].filter(Boolean).length;
+  pruefe(`jeder der ${vendorSchluessel.length} Kommentator-Texte ist übersetzt oder begründet ausgenommen, genau einmal`,
+    vendorSchluessel.every((k) => zuordnungen(k) === 1),
+    vendorSchluessel.filter((k) => zuordnungen(k) !== 1).join(', '));
+  const unbekannt = [...KOMMENTATOR_TEXTE, ...ohne].filter((k) => !vendorSchluessel.includes(k));
+  pruefe('keine Schlüssel, die der Kommentator nicht kennt', unbekannt.length === 0, unbekannt.join(', '));
+  pruefe(`so viele Hilfe-Schritte wie beim Kommentator (${TEXTE.hilfeSchritte.length})`,
+    KOMMENTATOR_HILFE.length === TEXTE.hilfeSchritte.length);
+
+  const erwartet = [...KOMMENTATOR_TEXTE, 'hilfeSchritte'].sort();
+  for (const sprache of ['de', 'en', 'fr', 'pl']) {
+    const gruppe = liesJson(`data/labels/${sprache}.json`).kommentator || {};
+    pruefe(`${sprache}: Label-Gruppe "kommentator" trägt genau die übergebenen Schlüssel`,
+      gleicheListe(Object.keys(gruppe).sort(), erwartet)
+      && gleicheListe(Object.keys(gruppe.hilfeSchritte || {}), KOMMENTATOR_HILFE));
+    const texte = kommentatorTexte((pfad) => pfad.split('.').reduce((o, k) => o?.[k], gruppe));
+    const leer = KOMMENTATOR_TEXTE.filter((k) => typeof texte[k] !== 'string' || texte[k].trim() === '');
+    texte.hilfeSchritte.forEach(([titel, text], i) => {
+      if (typeof titel !== 'string' || !titel.trim() || typeof text !== 'string' || !text.trim()) leer.push(`hilfeSchritte.${KOMMENTATOR_HILFE[i]}`);
+    });
+    pruefe(`${sprache}: alle Kommentator-Texte befüllt`, leer.length === 0, leer.join(', '));
+    // Der Kommentator setzt „Zahl + Text" und „Text + Dateiname" ohne eigenes Leerzeichen.
+    pruefe(`${sprache}: Zähl- und Lesefehler-Text tragen ihr Leerzeichen selbst`,
+      texte.einKommentar.startsWith(' ') && texte.mehrereKommentare.startsWith(' ') && texte.leseFehler.endsWith(' '));
+  }
+
+  // Ein Sprachwechsel bei laufendem Kommentator: setzeSprache() meldet ihn,
+  // feedback.js baut darauf neu auf. Browser-Laufzeit, darum nur die Verdrahtung.
+  const i18nQuelle = readFileSync(new URL('../js/i18n.js', import.meta.url), 'utf8');
+  const feedbackQuelle = readFileSync(new URL('../js/feedback.js', import.meta.url), 'utf8');
+  pruefe('setzeSprache() meldet einen Wechsel als app:sprache',
+    /^\s*window\.dispatchEvent\(new CustomEvent\('app:sprache'/m.test(i18nQuelle));
+  pruefe('feedback.js baut den Kommentator bei app:sprache neu auf',
+    /^\s*window\.addEventListener\('app:sprache'/m.test(feedbackQuelle) && /^\s*neuAufbauen\(\);\s*$/m.test(feedbackQuelle));
+  pruefe('feedback.js übergibt die übersetzten Texte an den Kommentator',
+    /^\s*texte: kommentatorTexte\(\),\s*$/m.test(feedbackQuelle));
 }
 
 setzeZurueck();
