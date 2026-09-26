@@ -88,6 +88,7 @@ Konwencje: standardowa polszczyzna, forma bezpośrednia (zwracanie się przez �
 | Zentrale Position | pozycja centralna |
 | Beinarbeit | praca nóg |
 | Griff / Universalgriff | chwyt / chwyt uniwersalny |
+| Griff (Bauteil am Schläger), Griffstärke | rączka, grubość rączki |
 | Griffband | owijka |
 | Bespannung | naciąg |
 | Schläger | rakieta |
