@@ -1,0 +1,133 @@
+// Die indexierbaren Routen der App — EINE Ableitung, zwei Verbraucher.
+//
+//   • scripts/sitemap.mjs   (Node, dependency-frei) → schreibt sitemap.xml
+//   • scripts/prerender.mjs (im Browser-Tab)        → Snapshots je Route
+//
+// Beide lesen dieselbe Liste, damit sie nicht auseinanderlaufen. Das ist keine
+// Bequemlichkeit: die Sitemap ist in der Produktion (netcup) die einzige Spur,
+// über die Google die Unterseiten überhaupt findet — eine still veraltete Liste
+// wäre unsichtbar kaputt.
+//
+// Das XML selbst baut scripts/sitemap.mjs (dort liegt auch der lastmod-Teil,
+// der git braucht). Der Prerender erzeugt KEINE Sitemap mehr: die eingecheckte
+// ist die maßgebliche, er trägt sie nur unverändert ins Staging mit.
+//
+// Das Modul ist REIN und DOM-frei: es bekommt fertige `daten` herein (aus
+// ladeDaten() im Browser bzw. baueIndizes() in Node) und leitet daraus mit
+// denselben Funktionen ab, die auch die Ansichten nutzen — keine zweite,
+// gepflegte Routenliste. Es läuft unverändert in Node UND im Browser; darum
+// nur relative Importe und kein Zugriff auf fetch/document/process.
+
+import { QUELLSPRACHE, SPRACHEN, ZIELSPRACHEN } from '../js/i18n.js';
+import { spielformen, themenDomaenen, untergruende, witterungen } from '../js/pfade.js';
+
+// Absolute Adresse der Produktion — der EINZIGE deploy-abhängige Wert hier.
+// prerender.mjs leitet daraus zusätzlich seinen Montagepunkt ab (PRAEFIX), die
+// Sitemap ihre <loc>-Einträge. Bei einem Umzug genau diese Zeile ändern
+// (dazu index.html/404.html, robots.txt und CNAME — s. CLAUDE.md).
+export const SITE_URL = 'https://crossminton-handbook.de';
+
+// Indexierbar ist, was ohne persönlichen Zustand eine echte, eigenständige Seite
+// ergibt (Zwei-Ebenen-Logik: nichts ist gesperrt). Bewusst NICHT enthalten:
+// /onboarding, /pfad/individual, /plan, /suche, /profil, /merkliste, /ko-turnier
+// — sie zeigen ohne localStorage nur ein leeres Formular oder eine rein
+// interaktive Ansicht, also keinen indexierbaren Inhalt.
+export function sammleRouten(daten) {
+  const liste = [];
+  const fuege = (pfad, prioritaet) => liste.push({ pfad, prioritaet });
+
+  fuege('/', 1.0);
+
+  fuege('/pfad/kompetenz', 0.8);
+  for (const stufe of [...daten.koennensOrdnung, 'trainer']) {
+    fuege(`/pfad/kompetenz/${encodeURIComponent(stufe)}`, 0.8);
+  }
+
+  fuege('/pfad/themen', 0.8);
+  for (const eintrag of themenDomaenen(daten)) {
+    if (eintrag.anzahl > 0) fuege(`/pfad/themen/${encodeURIComponent(eintrag.domaene)}`, 0.7);
+  }
+
+  for (const eintrag of spielformen(daten)) {
+    if (eintrag.anzahl > 0) fuege(`/pfad/spielform/${encodeURIComponent(eintrag.spielform)}`, 0.7);
+  }
+
+  fuege('/pfad/umgebung', 0.7);
+  for (const eintrag of witterungen(daten)) fuege(`/pfad/witterung/${encodeURIComponent(eintrag.witterung)}`, 0.6);
+  for (const eintrag of untergruende(daten)) fuege(`/pfad/untergrund/${encodeURIComponent(eintrag.untergrund)}`, 0.6);
+
+  fuege('/training', 0.8);
+  for (const einheit of daten.einheiten) fuege(`/training/${encodeURIComponent(einheit.id)}`, 0.6);
+
+  fuege('/regeln', 0.8);
+  fuege('/turnier', 0.7);
+  fuege('/ausruestung', 0.8);
+  fuege('/ueber', 0.5);
+  fuege('/mitmachen', 0.5);
+  fuege('/impressum', 0.2);
+  fuege('/datenschutz', 0.2);
+
+  for (const baustein of daten.bausteine) fuege(`/baustein/${encodeURIComponent(baustein.id)}`, 0.7);
+
+  return liste;
+}
+
+
+// Dieselbe Route unter einem Sprachpräfix: Deutsch bleibt präfixlos an der
+// Wurzel, en/fr/pl bekommen '/en/…', '/fr/…', '/pl/…'. Spiegelt routeInSprache()
+// aus js/app.js — die Adressen müssen exakt dieselben sein, sonst zeigt die
+// Sitemap auf Seiten, die der Router anders auflöst.
+export function mitSprache(pfad, sprache) {
+  if (!ZIELSPRACHEN.includes(sprache)) return pfad;
+  return pfad === '/' ? `/${sprache}` : `/${sprache}${pfad}`;
+}
+
+// Rohe Ansichts-Links ('#/…') in einem HTML-Text auf echte Pfade ziehen —
+// dieselbe Regel, die zur Laufzeit `normalisiereLinks()` + `zuUrl()` in
+// js/app.js anwenden, nur in Node und für einen fertigen Schnappschuss.
+//
+// WARUM DAS GEBRAUCHT WIRD: scripts/prerender.mjs setzt nur den gerenderten
+// #ansicht-Inhalt in die index.html-Vorlage ein. Alles AUSSERHALB davon —
+// Kopfzeile, Menü-Lade, Bottom-Bar — stammt unverändert aus der Vorlage und
+// trug darum weiter die Rohform. Für einen Crawler sind '#/…' bloße Fragmente
+// auf dieselbe Seite: die komplette Navigation war 18 tote Enden je Seite,
+// auf allen 596 Seiten. Menschen merkten davon nichts, weil der Client die
+// Links beim Booten ohnehin normalisiert.
+//
+// Der Skip-Link 'href="#ansicht"' bleibt unberührt (kein Schrägstrich nach
+// dem '#'), ebenso bereits aufgelöste Pfade.
+// `data-roh` wandert mit: der Client kann die Rahmen-Links damit bei einem
+// Sprachwechsel zur Laufzeit neu auflösen (s. normalisiereLinks() in js/app.js).
+// Ohne sie verriete ein fertiger Pfad seine Sprache nicht mehr, und ein
+// Snapshot-Besucher bliebe nach dem Umschalten mit der alten Navigation zurück.
+export function loeseRahmenLinks(html, sprache, praefix = '') {
+  return html.replace(
+    /href="#\/([^"]*)"/g,
+    (_treffer, rest) => `href="${praefix}${mitSprache(`/${rest}`, sprache)}" data-roh="#/${rest}"`,
+  );
+}
+
+// Alle Routen in allen Sprachen. Aus 149 sprachneutralen Routen werden damit
+// 596 indexierbare Adressen — der Inhalt liegt längst übersetzt vor, ihm fehlte
+// nur die eigene Adresse.
+//
+// Die Reihenfolge ist sprachweise gebündelt (erst alle de, dann en …), damit der
+// Prerender die Sprache je Block nur einmal wechseln muss.
+export function sammleRoutenAlleSprachen(daten) {
+  const basis = sammleRouten(daten);
+  const liste = [];
+  for (const sprache of SPRACHEN) {
+    for (const r of basis) {
+      liste.push({
+        pfad: mitSprache(r.pfad, sprache),
+        // Übersetzungen sind nicht wichtiger als das Original, aber auch nicht
+        // wertlos — die Quellsprache behält ihre Priorität, die übrigen liegen
+        // eine Stufe darunter.
+        prioritaet: sprache === QUELLSPRACHE ? r.prioritaet : Math.max(0.1, r.prioritaet - 0.1),
+        sprache,
+        basisPfad: r.pfad,
+      });
+    }
+  }
+  return liste;
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Zmiana tempa, obraz 2: niemal identyczne przygotowanie, teraz powolne, wysokie, miękkie uderzenie z łagodnym łukiem — celowe złamanie rytmu.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m019" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="98" cy="98" r="14"/>
+  <path class="fig" d="M98,112 L108,172"/>
+  <path class="fig" d="M100,120 L128,122 L158,120"/>
+  <path class="fig" d="M100,126 L82,150"/>
+  <path class="fig" d="M108,172 L94,208 L84,240"/>
+  <path class="fig" d="M108,172 L132,204 L148,236"/>
+  <line class="schaft" x1="158" y1="120" x2="176" y2="114"/>
+  <ellipse class="kelle" cx="186" cy="110" rx="10" ry="14" transform="rotate(74 186 110)"/>
+  <!-- sanfter, hoher Bogen -->
+  <path class="bahn" d="M196,108 C 226,58 262,64 278,150" marker-end="url(#m019)"/>
+  <line class="boden" x1="72" y1="244" x2="190" y2="244"/>
+  <text class="st" x="150" y="272">złamany rytm · wysoko i miękko</text>
+</svg>

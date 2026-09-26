@@ -1,0 +1,55 @@
+import { insertFr } from './fr-insert.mjs';
+
+const FR = {
+  paar_als_system: {
+    t: "La paire comme système",
+    e: "Au niveau expert, deux bons joueurs de simple sont encore loin de faire un bon double. La différence, c'est le système : une paire qui pense comme une unité coordonnée, se complète et sait d'avance ce qu'elle fait. Deux joueurs qui se contentent de jouer leur meilleur simple côte à côte perdent contre une vraie équipe.\n\nL'essentiel, c'est de rassembler les forces des deux. Peut-être l'un a-t-il l'attaque la plus puissante, l'autre la meilleure vue d'ensemble au filet ; l'un est le pôle calme, l'autre le moteur. Un bon système répartit les rôles de sorte que les forces se complètent et que les faiblesses se couvrent mutuellement. Vous jouez ensemble à cause de vos différences, pas malgré elles.\n\nCela passe par des schémas convenus d'avance. Les paires expérimentées ont des enchaînements standard qu'elles convoquent sans mots : certaines variantes de service avec un mouvement de suite fixe, des réactions fixes à des situations typiques. Ces schémas retirent la charge de décision dans le jeu rapide et font que vous pensez dans les mêmes voies.\n\nAu bout du compte, le système se déplace comme une unité. L'image de la corde invisible vaut ici dans sa plénitude : chaque mouvement de l'un déclenche la réponse adaptée de l'autre, jusqu'à ce que la paire agisse comme un seul organisme sur les deux terrains.\n\nUn double de haut niveau, c'est comme un duo musical bien rodé. Tous deux connaissent le morceau, chacun a sa voix, et de l'interaction naît quelque chose qu'aucun ne produit seul.",
+    r: "Réfléchis à ton double comme à un système : quelles sont les forces de toi et de ton partenaire, et se complètent-elles, ou jouez-vous deux simples côte à côte ? Avez-vous des schémas convenus d'avance que vous convoquez sans mots ? Propose-toi de convenir avec ton partenaire d'un ou deux enchaînements fixes et de répartir les rôles de sorte que vos forces se rassemblent."
+  },
+  gegnerisches_paar_lesen: {
+    t: "Lire la paire adverse",
+    e: "Une paire adverse a des points faibles qu'un adversaire seul n'a pas — et l'expert les trouve et les exploite. Qui lit le duo adverse attaque exactement là où cela nuit le plus à la paire, pas n'importe où.\n\nLe premier point faible, c'est le plus faible des deux. Presque toujours, l'un est plus vulnérable — plus faible en défense, plus lent, plus nerveux. Une paire habile le reconnaît tôt et dirige une grande partie des balles de façon ciblée sur ce joueur, jusqu'à ce qu'il commette des fautes sous la charge continue ou sorte de sa position.\n\nLe deuxième point faible, souvent encore plus efficace, c'est la brèche entre les deux — le centre. Une balle qui tombe exactement entre les deux adversaires crée une zone d'incertitude : tous deux hésitent brièvement, parce qu'aucun n'est sûr que c'est sa balle. Cette hésitation met à l'épreuve leur entente et leur coûte le moment décisif. Contre une paire en défense côte à côte, la balle au centre est particulièrement forte.\n\nLes deux ensemble font le plan : charge l'adversaire le plus faible et cherche la jointure entre les deux. Ainsi, tu joues contre leur coordination, pas contre deux joueurs isolés.\n\nUne paire adverse, c'est comme un mur de deux pierres. Tu frappes dans le joint entre elles, pas contre la pierre solide — c'est là que le mur tient le moins.",
+    r: "Pense à une paire adverse forte : lequel des deux était le plus vulnérable, et l'as-tu chargé de façon ciblée ? Et as-tu cherché la brèche entre les deux, ou n'as-tu joué que sur les joueurs eux-mêmes ? Propose-toi, au prochain double, de déterminer tôt l'adversaire le plus faible et de jouer volontairement le centre entre les deux, surtout quand ils défendent côte à côte."
+  },
+  partner_in_position_bringen: {
+    t: "Mettre son partenaire en position",
+    e: "Dans le double de haut niveau, tu joues souvent pour amener ton partenaire dans la position d'attaque parfaite, pas pour ton propre gain de point. Cette construction altruiste est une marque des joueurs de double mûrs : la meilleure frappe est parfois celle qui prépare le point au partenaire.\n\nL'idée de base, c'est de forcer une balle faible de l'adversaire que ton partenaire peut exploiter. Un service profond et précis, ou une balle tendue et appuyée, force l'adversaire sur la défensive et à un retour haut et court — exactement la passe que ton partenaire de fond transforme en attaque.\n\nIci intervient la répartition des rôles entre joueur d'attaque et joueur de fond. Le joueur de fond construit avec des balles appuyées et conclut ; le joueur d'attaque à l'avant guette au filet pour intercepter aussitôt le retour faible. Après ton propre service, tu avances toi-même pour retirer tôt les retours courts et couvrir les arrières de ton partenaire.\n\nCela exige de penser le point deux coups à l'avance : « comment je force la passe que mon partenaire transforme », pas « comment je gagne cette balle ». Qui joue ainsi fait de deux joueurs une machine d'attaque.\n\nTu es le passeur qui centre, pour que le partenaire n'ait plus qu'à transformer la balle. C'est lui qui marque le but — mais sans ta passe, il n'y en aurait aucun.",
+    u: {
+      titel: "Donner la passe",
+      ziel: "Placer les balles de sorte que le partenaire arrive en position d'attaque.",
+      schritte: [
+        "Jouez à quatre et donnez au joueur arrière la tâche de forcer un retour haut et court avec des balles appuyées et profondes.",
+        "Le joueur d'attaque à l'avant guette au filet et intercepte aussitôt le retour faible.",
+        "Travaillez le service comme une passe : profond et précis, de sorte que l'adversaire ne puisse renvoyer que faiblement.",
+        "Après son propre service, le serveur avance pour retirer tôt les retours courts.",
+        "Pensez chaque échange comme une préparation : quelle balle amène le partenaire en position ?"
+      ],
+      selbstkontrolle: "Joues-tu pour marquer le point toi-même, ou pour amener ton partenaire en position ? Ta construction force-t-elle un retour faible que le partenaire peut exploiter ? Penses-tu le point deux coups à l'avance ? Un bon double, c'est souvent donner la passe au lieu de conclure soi-même.",
+      abschluss: "Amener son partenaire en position fait de deux joueurs un système d'attaque. Qui construit de façon altruiste gagne, en paire, plus de points que chacun pour soi."
+    }
+  },
+  nahtlos_umschalten: {
+    t: "Basculer sans rupture",
+    e: "Un double alterne sans cesse entre deux formations : l'attaque avant-arrière et la défense côte à côte. Au niveau expert, ce changement se fait sans rupture — vite, avec fluidité et presque sans mots. Qui hésite ou tarde ouvre à l'adversaire, à ce moment précis, la brèche.\n\nLe déclencheur est simple : qui frappe le speeder vers le bas attaque ; qui doit le jouer en hauteur défend. Si vous jouez une balle dure vers le bas, l'un avance au filet et vous vous tenez avant-arrière. Si vous devez reprendre une balle en hauteur, vous tournez aussitôt dans la défense côte à côte pour couvrir la largeur. Cette lecture de la situation doit se faire en une fraction de seconde.\n\nLe caractère sans rupture vient de la rotation bien rodée. Si l'un avance, l'autre remplit automatiquement l'espace arrière ; si l'un tourne sur le côté, l'autre couvre l'autre moitié. Au plus haut niveau, cela ne demande presque plus de mots — le mouvement de l'un est le signal pour l'autre. La corde invisible tire en temps réel.\n\nPour que cela tienne sous pression, la rotation doit être profondément travaillée. En match, il n'y a pas le temps de réfléchir ; le changement se fait automatiquement, parce que vous l'avez joué cent fois ensemble.\n\nUn double de haut niveau change de formation comme une porte tambour — les deux battants bougent en même temps, l'un libère l'espace que l'autre occupe, sans accroc.",
+    u: {
+      titel: "Faire tourner attaque et défense",
+      ziel: "Basculer vite et avec fluidité entre la formation d'attaque et celle de défense.",
+      schritte: [
+        "Jouez à quatre et clarifiez la règle : balle vers le bas = attaque (avant-arrière), balle vers le haut = défense (côte à côte).",
+        "Travaillez le passage de la défense à l'attaque : l'un avance, l'autre remplit l'espace arrière.",
+        "Travaillez le passage de l'attaque à la défense : celui de devant tourne sur le côté, celui de derrière couvre l'autre moitié.",
+        "Réduisez peu à peu les mots, jusqu'à ce que le mouvement de l'un soit le signal pour l'autre.",
+        "Augmentez le rythme jusqu'à ce que le changement se fasse avec fluidité, même sous pression."
+      ],
+      selbstkontrolle: "Votre changement se fait-il avec fluidité, ou hésitez-vous en laissant des brèches ? Le partenaire remplit-il automatiquement l'espace que tu quittes ? Vous faut-il encore beaucoup de mots, ou l'un lit-il le mouvement de l'autre ? La bascule ne devient sans rupture que par beaucoup de travail commun.",
+      abschluss: "La bascule sans rupture vous maintient toujours dans la bonne formation. Qui tourne avec fluidité et sans mots ne laisse à l'adversaire aucune brèche dans le changement."
+    }
+  },
+  blindes_verstaendnis: {
+    t: "L'entente aveugle",
+    e: "Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre fait avant qu'il ne le fasse, et se couvrent sans regarder. Cette entente est le couronnement silencieux du jeu commun.\n\nSon cœur, c'est l'anticipation du partenaire. Tu lis aussi le mouvement de ton partenaire, pas seulement l'adversaire et le speeder : vers où il part, quelle balle il prend, quel espace il quitte. À partir de cette lecture, tu combles automatiquement la brèche qu'il ouvre — avant même qu'un mot ne puisse être dit.\n\nLe fondement de cette entente, c'est la confiance. Tu comptes sur le fait que ton partenaire prend sa balle, et tu n'as pas à regarder pour contrôler. Cette confiance te libère pour te concentrer sur ta propre tâche. Une paire qui se fait confiance joue plus calmement et plus vite qu'une qui se rassure sans cesse.\n\nL'entente aveugle ne se force pas — elle grandit en jouant ensemble au fil du temps. Plus vous jouez souvent ensemble, plus vous intériorisez les schémas et les réactions de l'autre, jusqu'à ce que la coordination se fasse sans mots. C'est le fruit d'un travail commun patient.\n\nUn double bien rodé, c'est comme deux mains d'une même personne. Elles n'ont pas à se concerter — l'une sait ce que fait l'autre, et elles s'emboîtent comme une évidence.",
+    r: "Réfléchis à l'entente avec ton partenaire attitré : pressens-tu ses mouvements, ou dois-tu sans cesse regarder et te rassurer ? Comptes-tu sur le fait qu'il prend sa balle ? L'entente aveugle ne grandit qu'en jouant ensemble — propose-toi de jouer régulièrement avec un partenaire attitré et de veiller consciemment à lire son mouvement et à lui faire confiance, au lieu de contrôler."
+  }
+};
+
+insertFr('data/bausteine.doppel-experte.json', FR);

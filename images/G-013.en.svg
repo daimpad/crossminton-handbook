@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The slice: the angled racket face brushes across the speeder instead of hitting it straight; curved motion lines show the cutting path and the resulting spin.">
+  <style>
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:8;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:7}
+    .saite{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.6;opacity:.5}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .streif{fill:none;stroke:var(--tinte,#16202b);stroke-width:3.4;stroke-linecap:round}
+    .spin{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-linecap:round}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="m013" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="var(--tinte,#16202b)"/></marker>
+    <marker id="m013s" viewBox="0 0 10 10" markerWidth="6.5" markerHeight="6.5" refX="6" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="var(--tinte-3,#6b7686)"/></marker>
+  </defs>
+  <!-- angeschrägte Schlagfläche -->
+  <g transform="rotate(24 150 150)">
+    <ellipse class="kelle" cx="150" cy="150" rx="46" ry="62"/>
+    <line class="saite" x1="120" y1="150" x2="180" y2="150"/>
+    <line class="saite" x1="126" y1="126" x2="174" y2="126"/>
+    <line class="saite" x1="126" y1="174" x2="174" y2="174"/>
+    <line class="saite" x1="150" y1="94" x2="150" y2="206"/>
+    <line class="saite" x1="128" y1="110" x2="128" y2="190"/>
+    <line class="saite" x1="172" y1="110" x2="172" y2="190"/>
+    <line class="schaft" x1="150" y1="212" x2="150" y2="252"/>
+  </g>
+  <!-- Speeder am Kontaktpunkt -->
+  <circle class="speeder" cx="150" cy="120" r="8"/>
+  <!-- streifende, schneidende Bahn quer über die Fläche -->
+  <path class="streif" d="M108,150 C 130,120 168,112 200,104" marker-end="url(#m013)"/>
+  <!-- Rotation des Speeders -->
+  <path class="spin" d="M164,112 C 176,108 178,122 168,128" marker-end="url(#m013s)"/>
+  <text class="st" x="150" y="282">the face brushes · cut and spin</text>
+</svg>

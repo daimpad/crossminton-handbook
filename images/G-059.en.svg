@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Different surfaces: sand, grass, clay and artificial turf each demand different footwork.">
+  <style>
+    .rahmen{fill:none;stroke:var(--tinte,#16202b);stroke-width:2}
+    .s1{fill:var(--primaer,#38a4f1);opacity:.10}
+    .s2{fill:var(--primaer,#38a4f1);opacity:.18}
+    .s3{fill:var(--tinte-3,#6b7686);opacity:.14}
+    .s4{fill:var(--tinte-3,#6b7686);opacity:.22}
+    .fuss{fill:var(--tinte,#16202b);opacity:.55}
+    .lab{fill:var(--tinte,#16202b);font:700 13px/1 system-ui,sans-serif;text-anchor:middle}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <g>
+    <rect class="s1" x="26" y="34" width="112" height="90" rx="9"/><rect class="rahmen" x="26" y="34" width="112" height="90" rx="9"/>
+    <ellipse class="fuss" cx="75" cy="72" rx="6" ry="11"/><ellipse class="fuss" cx="90" cy="80" rx="6" ry="11"/>
+    <text class="lab" x="82" y="112">Sand</text>
+  </g>
+  <g>
+    <rect class="s2" x="162" y="34" width="112" height="90" rx="9"/><rect class="rahmen" x="162" y="34" width="112" height="90" rx="9"/>
+    <ellipse class="fuss" cx="211" cy="72" rx="6" ry="11"/><ellipse class="fuss" cx="226" cy="80" rx="6" ry="11"/>
+    <text class="lab" x="218" y="112">Grass</text>
+  </g>
+  <g>
+    <rect class="s3" x="26" y="146" width="112" height="90" rx="9"/><rect class="rahmen" x="26" y="146" width="112" height="90" rx="9"/>
+    <ellipse class="fuss" cx="75" cy="184" rx="6" ry="11"/><ellipse class="fuss" cx="90" cy="192" rx="6" ry="11"/>
+    <text class="lab" x="82" y="224">Clay</text>
+  </g>
+  <g>
+    <rect class="s4" x="162" y="146" width="112" height="90" rx="9"/><rect class="rahmen" x="162" y="146" width="112" height="90" rx="9"/>
+    <ellipse class="fuss" cx="211" cy="184" rx="6" ry="11"/><ellipse class="fuss" cx="226" cy="192" rx="6" ry="11"/>
+    <text class="lab" x="218" y="224">Artificial turf</text>
+  </g>
+  <text class="zt" x="150" y="270">each surface — its own footwork</text>
+</svg>

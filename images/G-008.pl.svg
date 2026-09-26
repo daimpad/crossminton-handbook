@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Praca nóg, obraz 2: obieg ruchu — wykrokiem w róg zagrać speedera i łukiem wrócić do pozycji centralnej pośrodku.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .zur{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:6 5;stroke-linecap:round}
+    .basis{fill:var(--primaer,#38a4f1)}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.8;opacity:.5}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--tinte-3,#6b7686)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m008" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <!-- zentrale Basis -->
+  <circle class="ring" cx="88" cy="210" r="15"/>
+  <circle class="basis" cx="88" cy="210" r="7"/>
+  <!-- Ausfallschritt-Figur zur Ecke -->
+  <circle class="kopf" cx="140" cy="104" r="14"/>
+  <path class="fig" d="M140,118 L156,164"/>
+  <!-- vorderes Bein gebeugt (Ausfall) -->
+  <path class="fig" d="M156,164 L184,192 L200,222"/>
+  <!-- hinteres Bein gestreckt -->
+  <path class="fig" d="M156,164 L124,196 L104,220"/>
+  <!-- Schlagarm nach unten-vorn -->
+  <path class="fig" d="M142,126 L166,146 L188,164"/>
+  <!-- freier Arm -->
+  <path class="fig" d="M140,130 L120,144"/>
+  <line class="schaft" x1="188" y1="164" x2="202" y2="176"/>
+  <ellipse class="kelle" cx="210" cy="184" rx="9" ry="13" transform="rotate(50 210 184)"/>
+  <circle class="speeder" cx="214" cy="196" r="6"/>
+  <!-- gebogener Rückweg zur Mitte -->
+  <path class="zur" d="M196,224 C 150,242 110,238 96,222" marker-end="url(#m008)"/>
+  <line class="boden" x1="72" y1="238" x2="228" y2="238"/>
+  <text class="st" x="150" y="266">wykrok w róg — powrót do środka</text>
+</svg>

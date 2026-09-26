@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="L'entente dans la paire : deux partenaires de double vus de dos, qui se coordonnent entre les points — l'un donne un signe de la main caché derrière le dos.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .signal{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6;stroke-linecap:round}
+    .blick{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:3 5}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- Partner A (links, von hinten) -->
+  <circle class="kopf" cx="104" cy="80" r="14"/>
+  <path class="fig" d="M104,96 L104,150"/>
+  <path class="fig" d="M104,104 L80,132"/>
+  <path class="fig" d="M104,150 L89,188 L87,226"/>
+  <path class="fig" d="M104,150 L119,188 L121,226"/>
+  <!-- Partner B (rechts, von hinten) -->
+  <circle class="kopf" cx="196" cy="80" r="14"/>
+  <path class="fig" d="M196,96 L196,150"/>
+  <path class="fig" d="M196,104 L220,132"/>
+  <path class="fig" d="M196,150 L181,188 L179,226"/>
+  <path class="fig" d="M196,150 L211,188 L213,226"/>
+  <!-- B gibt hinter dem Rücken ein Handzeichen (zwei Finger) -->
+  <path class="fig" d="M196,108 L168,140 L150,150"/>
+  <path class="signal" d="M150,150 L142,132"/>
+  <path class="signal" d="M150,150 L156,130"/>
+  <!-- kurzer Blickkontakt -->
+  <path class="blick" d="M120,78 C 140,66 160,66 180,78"/>
+  <line class="boden" x1="70" y1="230" x2="230" y2="230"/>
+  <text class="st" x="150" y="258">signe de la main caché · entente</text>
+</svg>

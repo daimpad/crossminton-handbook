@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Płynnie przełączać: para przechodzi płynnie między atakiem a obroną — porządek przód-tył zostaje.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .sp{fill:var(--primaer,#38a4f1)}
+    .spg{fill:var(--flaeche,#fff);stroke:var(--primaer,#38a4f1);stroke-width:2.4;opacity:.9}
+    .rot{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="3.5" refY="5" orient="auto"><path d="M9,1 L1,5 L9,9 Z" class="mk"/></marker>
+  </defs>
+  <text class="st" x="150" y="32">przód</text>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <!-- Angriff (gefuellt): vorn dicht auf, hinten Druck. Verteidigung (hohl): beide tiefer und breiter. Die Ordnung vorn/hinten bleibt. -->
+  <path class="rot" d="M141,88 L109,114" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+  <path class="rot" d="M160,167 L190,189" marker-start="url(#ahr)" marker-end="url(#ah)"/>
+  <circle class="sp"  cx="150" cy="80"  r="10"/>
+  <circle class="sp"  cx="150" cy="160" r="10"/>
+  <circle class="spg" cx="100" cy="122" r="10"/>
+  <circle class="spg" cx="200" cy="196" r="10"/>
+  <text class="st" x="196" y="84">Atak</text>
+  <text class="st" x="98" y="148">Obrona</text>
+  <text class="zt" x="150" y="272">płynnie przełączać</text>
+</svg>

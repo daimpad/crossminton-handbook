@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Heat: a player paces themselves in the heat, the sun high overhead, a water bottle nearby, a calm and measured posture.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .sonne{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-linecap:round}
+    .sonnef{fill:var(--primaer,#38a4f1)}
+    .flasche{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .wasser{fill:var(--primaer,#38a4f1);opacity:.35}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- Sonne hoch über dem Kopf -->
+  <circle class="sonnef" cx="140" cy="42" r="18"/>
+  <g class="sonne">
+    <line x1="140" y1="8" x2="140" y2="16"/>
+    <line x1="106" y1="42" x2="114" y2="42"/>
+    <line x1="174" y1="42" x2="166" y2="42"/>
+    <line x1="116" y1="18" x2="121" y2="24"/>
+    <line x1="164" y1="18" x2="159" y2="24"/>
+    <line x1="116" y1="66" x2="121" y2="60"/>
+    <line x1="164" y1="66" x2="159" y2="60"/>
+  </g>
+  <!-- Spieler, ruhig -->
+  <circle class="kopf" cx="130" cy="102" r="14"/>
+  <path class="fig" d="M130,116 L130,172"/>
+  <path class="fig" d="M130,128 L110,154"/>
+  <path class="fig" d="M130,128 L150,154"/>
+  <path class="fig" d="M130,172 L114,208 L108,242"/>
+  <path class="fig" d="M130,172 L146,208 L152,242"/>
+  <!-- Wasserflasche daneben -->
+  <path class="flasche" d="M212,150 L206,160 L206,224 L238,224 L238,160 L232,150 Z"/>
+  <line class="flasche" x1="217" y1="150" x2="217" y2="140"/>
+  <line class="flasche" x1="227" y1="150" x2="227" y2="140"/>
+  <rect class="wasser" x="206" y="186" width="32" height="38"/>
+  <line class="boden" x1="90" y1="246" x2="250" y2="246"/>
+  <text class="st" x="150" y="274">heat · ease the pace, drink</text>
+</svg>

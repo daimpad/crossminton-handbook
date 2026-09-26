@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Who takes the ball: of two partners, one takes the central Speeder while the other leaves the space.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .sp{fill:var(--primaer,#38a4f1)}
+    .spw{fill:var(--tinte-3,#6b7686);opacity:.65}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .ball{fill:var(--tinte,#16202b)}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .pfg{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .mkg{fill:var(--tinte-3,#6b7686)}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mkg"/></marker>
+  </defs>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <!-- ankommender Speeder in die Mitte -->
+  <path class="pfg" d="M150,60 L150,104" marker-end="url(#ahg)"/>
+  <circle class="ball" cx="150" cy="56" r="5"/>
+  <!-- links nimmt (Ring), rechts lässt (blass) -->
+  <path class="pf" d="M104,168 L138,124" marker-end="url(#ah)"/>
+  <circle class="sp" cx="100" cy="174" r="11"/>
+  <circle class="ring" cx="100" cy="174" r="16"/>
+  <circle class="spw" cx="204" cy="174" r="11"/>
+  <text class="zt" x="86"  y="210">take</text>
+  <text class="st" x="212" y="210">leave</text>
+  <text class="zt" x="150" y="272">who takes the ball?</text>
+</svg>

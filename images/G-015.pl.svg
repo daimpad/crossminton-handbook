@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Brać speedera wcześnie: kontakt w najwyższym, najwcześniejszym punkcie wyraźnie przed i nad ciałem; blady niższy punkt kontaktu pokazuje, gdzie trafiłby wolniejszy gracz.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .geist{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;opacity:.7}
+    .zeit{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:2 5;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--tinte-3,#6b7686)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m015" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="104" cy="98" r="14"/>
+  <path class="fig" d="M104,112 L110,172"/>
+  <!-- Schlagarm früh und hoch nach vorn -->
+  <path class="fig" d="M105,120 L132,104 L162,92"/>
+  <path class="fig" d="M105,126 L86,150"/>
+  <path class="fig" d="M110,172 L96,208 L86,240"/>
+  <path class="fig" d="M110,172 L134,204 L150,238"/>
+  <!-- Schläger am frühen, hohen Treffpunkt -->
+  <line class="schaft" x1="162" y1="92" x2="178" y2="84"/>
+  <ellipse class="kelle" cx="188" cy="80" rx="10" ry="13" transform="rotate(66 188 80)"/>
+  <circle class="speeder" cx="184" cy="92" r="6"/>
+  <!-- blasser, tieferer Treffpunkt + Zeitgewinn-Pfeil -->
+  <circle class="geist" cx="196" cy="150" r="6"/>
+  <path class="zeit" d="M196,142 L188,102" marker-end="url(#m015)"/>
+  <line class="boden" x1="74" y1="244" x2="190" y2="244"/>
+  <text class="st" x="150" y="272">wcześnie i wysoko — skradziony czas</text>
+</svg>

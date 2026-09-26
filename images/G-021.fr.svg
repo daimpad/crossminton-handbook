@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Précision sur les lignes : le speeder atterrit exactement sur une ligne de coin, au bord extrême du terrain ; des zones cibles serrées dans les coins et une flèche fine montrent le placement au point près, avec une marge minimale.">
+  <style>
+    .feld{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.6}
+    .zone{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.8;stroke-dasharray:4 4}
+    .ziel{fill:var(--primaer,#38a4f1)}
+    .rand{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-dasharray:2 6;stroke-linecap:round}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m021" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <rect class="feld" x="54" y="44" width="192" height="192"/>
+  <!-- enge Zielzonen in den Ecken -->
+  <circle class="zone" cx="54" cy="44" r="15"/>
+  <circle class="zone" cx="246" cy="44" r="15"/>
+  <circle class="zone" cx="54" cy="236" r="15"/>
+  <circle class="zone" cx="246" cy="236" r="15"/>
+  <!-- Speeder genau auf der Ecklinie -->
+  <circle class="ziel" cx="246" cy="60" r="6"/>
+  <circle class="rand" cx="246" cy="60" r="12"/>
+  <!-- dünner Pfeil, genau an den Rand gefädelt -->
+  <path class="bahn" d="M120,190 L238,66" marker-end="url(#m021)"/>
+  <text class="st" x="150" y="264">pile sur la ligne · marge minimale</text>
+</svg>
