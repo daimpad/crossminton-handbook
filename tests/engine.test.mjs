@@ -8,7 +8,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { aufgabenTeile, baueIndizes, deltaFuer, einheitReferenzen, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, niedrigsteStufe, spielformVon, untergrundVon } from '../js/daten.js';
-import { individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
+import { heimatKontext, individualpfad, kompetenzpfad, merklisteStationen, sequenzFuer, spielformen, spielformpfad, stationImKontext, themenDomaenen, themenpfad, trainingsuebersicht, umgebungspfad, untergruende, witterungen } from '../js/pfade.js';
 import { bausteinAbsolviert, globaleProjektion, projektion } from '../js/fortschritt.js';
 import { bausteinText, normalisiere, sucheBausteine } from '../js/suche.js';
 import { markiereAbsolviert } from '../js/aktionen.js';
@@ -88,8 +88,10 @@ const athletikKette = ['warum_athletik_dein_spiel_traegt', 'richtig_aufwaermen',
 // angehängt (Taktik 3, Mentales 1, Athletik 1); Ausrüstung (eigene Domäne, sortiert
 // zuletzt) als Schluss-Block (Übersicht + Speeder/Schläger/Schuhe/Kleidung) → 33 Bausteine.
 const erwarteteKette = [...technikKette, 'funplay', ...taktikKette, 'erste_schritte_doppel', 'wer_nimmt_den_ball', 'aufschlag_im_doppel_einfach', ...mentalesKette, 'sich_absprechen', ...athletikKette, 'einander_platz_lassen', 'deine_ausruestung', 'der_speeder', 'der_schlaeger', 'schuhe_finden', 'funktionskleidung'];
-// Fortgeschritten-Technik (Kraftquelle → Überkopf → Finesse → Beinarbeit-System).
-const fgTechnikKette = ['handgelenk_peitsche', 'ueberkopf_clear', 'smash', 'kurzes_spiel_stopp', 'schnitt_spin', 'beinarbeit_system'];
+// Fortgeschritten-Technik (Kraftquelle → Beinarbeit-System → Überkopf → Finesse).
+// Clear und Stopp tragen beinarbeit_system als weiche Voraussetzung: dessen
+// Abschluss sagt, nur wer rechtzeitig richtig steht, spiele Clear, Smash, Stopp sauber.
+const fgTechnikKette = ['handgelenk_peitsche', 'beinarbeit_system', 'ueberkopf_clear', 'smash', 'kurzes_spiel_stopp', 'schnitt_spin'];
 // Fortgeschritten-Taktik: Umschalten (Rahmen) → Punkt aufbauen → Smash vorbereiten
 // → Gegner lesen → Doppel → engen Satz führen. Gemischte weiche Voraussetzungen
 // über Stufen- UND Domänengrenze (punkt_aufbauen → fortgeschrittene Technik).
@@ -104,7 +106,8 @@ const fgAthletikKette = ['gezielt_trainieren', 'explosivitaet', 'rumpfstabilitae
 // (Pool-Reihenfolge); auf der Spielform-Achse bilden sie EIN Thema. `doppelTaktikKette`
 // = die fünf Taktik-Doppel-Bausteine; die Athletik-/Mentales-Doppel je einer.
 const doppelTaktikKette = ['doppel_als_eigenes_spiel', 'angriff_im_paar', 'verteidigung_im_paar', 'aufschlag_rueckschlag_doppel', 'das_umschalten_im_doppel'];
-// Spielform-Achse (Erzählreihenfolge): Einstieg doppel_grundlagen + Querschnitt, quer über Taktik/Athletik/Mentales.
+// Fortgeschritten-Doppel auf der Spielform-Achse (Pool-/Erzählreihenfolge innerhalb der Stufe):
+// Einstieg doppel_grundlagen + Querschnitt, quer über Taktik/Athletik/Mentales.
 const doppelThemaKette = ['doppel_grundlagen', 'doppel_als_eigenes_spiel', 'angriff_im_paar', 'verteidigung_im_paar', 'bewegung_als_einheit', 'verstaendigung_im_paar', 'aufschlag_rueckschlag_doppel', 'das_umschalten_im_doppel'];
 // Experte-Technik (dritte Könnensstufe, herkunftsneutral): Täuschung (Rahmen) →
 // früh nehmen → Tempo/Rhythmus → Sprung-Smash → Präzision → Konstanz. Weiche
@@ -160,7 +163,15 @@ console.log('\n[2b] Kompetenzpfad über zwei Stufen (kumulativ)');
 const pfadBeginner = kompetenzpfad(daten, 'beginner');
 const pfadFg = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Beginner sieht keine Fortgeschritten-Bausteine', pfadBeginner.stationen.every((s) => ![...fgTechnikKette, ...fgTaktikKette].includes(s.baustein.id)));
-pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten je Domäne (Doppel-Querschnitt hängt an seine Domäne an) (66)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...doppelTaktikKette, ...fgMentalesKette, 'verstaendigung_im_paar', 'mehrfeld', ...fgAthletikKette, 'bewegung_als_einheit', 'die_bespannung', 'griff_und_griffband']));
+// das_umschalten_im_doppel (Taktik) trägt bewegung_als_einheit (Athletik) und
+// verstaendigung_im_paar (Mentales) als weiche Voraussetzungen — sein Erklärteil
+// nennt sie „die beiden vorigen Fäden". Die Kante ordnet es darum hinter beide.
+pruefe('Fortgeschritten kumulativ = Beginner-Block + Fortgeschritten je Domäne (Doppel-Querschnitt hängt an seine Domäne an) (66)', gleicheListe(pfadFg.stationen.map((s) => s.baustein.id), [...erwarteteKette, ...fgTechnikKette, ...fgTaktikKette, ...doppelTaktikKette.filter((id) => id !== 'das_umschalten_im_doppel'), ...fgMentalesKette, 'verstaendigung_im_paar', 'mehrfeld', ...fgAthletikKette, 'bewegung_als_einheit', 'das_umschalten_im_doppel', 'die_bespannung', 'griff_und_griffband']));
+pruefe('„Das Umschalten im Doppel" steht hinter seinen beiden angekündigten Fäden', (() => {
+  const ids = pfadFg.stationen.map((s) => s.baustein.id);
+  const u = ids.indexOf('das_umschalten_im_doppel');
+  return u > ids.indexOf('bewegung_als_einheit') && u > ids.indexOf('verstaendigung_im_paar');
+})());
 pruefe('Beginner-Bausteine bleiben an ihrer niedrigsten Stufe (Block vorn)', pfadFg.stationen.slice(0, 28).every((s) => niedrigsteStufe(daten, s.baustein) === 'beginner'));
 pruefe('Fortgeschritten-Block folgt geschlossen hinten', pfadFg.stationen.slice(34).every((s) => niedrigsteStufe(daten, s.baustein) === 'fortgeschritten'));
 pruefe('stufenübergreifende weiche Voraussetzung: handgelenk_peitsche ← vorhand_drive (Beginner)', (() => {
@@ -236,7 +247,7 @@ const pfadFgTen = kompetenzpfad(daten, 'fortgeschritten');
 pruefe('Herkunft TEN blendet genau das TEN-Delta ein (BAD ignoriert)', pfadFgTen.stationen.find((s) => s.baustein.id === 'griff').delta?.id === 'griff_delta_ten');
 pruefe('kumulativer TEN-Pfad zeigt genau die 8 Tennis-Deltas (6 Technik + 2 Taktik)', (() => {
   const mitDelta = pfadFgTen.stationen.filter((s) => s.delta).map((s) => s.baustein.id);
-  return mitDelta.length === 8 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'spielziel_verstehen', 'ueberkopf_clear', 'beinarbeit_system', 'aufschlag_rueckschlag_doppel']);
+  return mitDelta.length === 8 && gleicheListe(mitDelta, ['griff', 'aufschlag', 'vorhand_drive', 'rueckhand', 'spielziel_verstehen', 'beinarbeit_system', 'ueberkopf_clear', 'aufschlag_rueckschlag_doppel']);
 })());
 pruefe('Taktik-Baustein spielziel_verstehen trägt bei TEN das Passierzone-Delta', pfadFgTen.stationen.find((s) => s.baustein.id === 'spielziel_verstehen').delta?.id === 'spielziel_verstehen_delta_ten');
 pruefe('positiver Transfer ueberkopf_clear trägt das TEN-Delta (strukturell wie die abbauenden)', pfadFgTen.stationen.find((s) => s.baustein.id === 'ueberkopf_clear').delta?.id === 'ueberkopf_clear_delta_ten');
@@ -345,6 +356,19 @@ pruefe('Nachbarn im Kompetenzpfad stimmen', imKontext.vorherige.baustein.id === 
 pruefe('Delta im Kompetenz-Kontext aktiv', imKontext.station.delta?.id === 'griff_delta_bad');
 pruefe('gleicher Baustein im Themen-Kontext ohne Delta', stationImKontext(daten, 'griff', 'themen:technik').station.delta === null);
 pruefe('sequenzFuer versteht kompetenz:trainer (die 5 Trainer-Trainingsgestaltungs-Bausteine)', sequenzFuer(daten, 'kompetenz:trainer').stationen.length === 5);
+// „Siehe auch" (querverweis) und Suche verlinken im Heimat-Kontext des ZIELS.
+pruefe('heimatKontext: Umgebung → umgebung, Doppel → spielform:doppel, sonst kompetenz',
+  heimatKontext(daten.bausteinVonId.get('blackminton')) === 'umgebung' &&
+  heimatKontext(daten.bausteinVonId.get('doppel_grundlagen')) === 'spielform:doppel' &&
+  heimatKontext(daten.bausteinVonId.get('griff')) === 'kompetenz');
+const querverweise = daten.bausteine.flatMap((b) => (b.querverweis || []).map((ziel) => [b.id, ziel]));
+pruefe('querverweis ist bei mindestens 10 Bausteinen gepflegt', new Set(querverweise.map(([von]) => von)).size >= 10);
+pruefe('jeder querverweis eines Bausteins löst auf (sonst fiele er in „Siehe auch" still weg)', querverweise.every(([, ziel]) => daten.bausteinVonId.has(ziel)), querverweise.filter(([, ziel]) => !daten.bausteinVonId.has(ziel)));
+pruefe('jedes Ziel liegt in seiner eigenen Heimat-Sequenz (Umgebung/Doppel) oder im Pool', querverweise.every(([, ziel]) => {
+  const b = daten.bausteinVonId.get(ziel);
+  const k = heimatKontext(b);
+  return k === 'kompetenz' || sequenzFuer(daten, k).stationen.some((s) => s.baustein.id === ziel);
+}));
 
 console.log('\n[7a] Merkliste (Wiedervorlage, baustein-gebunden)');
 const merkStationen = merklisteStationen(daten, ['aufschlag', 'griff']);
@@ -442,7 +466,10 @@ setzeZurueck();
 pruefe('spielform fehlt = einzel (Alt-Bausteine unangetastet)', spielformVon(daten.bausteinVonId.get('griff')) === 'einzel');
 pruefe('doppel_grundlagen nachträglich als spielform:doppel markiert', spielformVon(daten.bausteinVonId.get('doppel_grundlagen')) === 'doppel');
 pruefe('spielformen() bietet nur doppel als eigene Achse (einzel ist Default, kein Thema)', gleicheListe(spielformen(daten).map((s) => s.spielform), ['doppel']) && spielformen(daten)[0].anzahl === 18);
-pruefe('Spielform-Achse doppel: 18 Bausteine über alle drei Stufen als ein Thema (Erzählreihenfolge)', gleicheListe(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.id), ['doppel_grundlagen', ...doppelBeginnerKette, ...doppelThemaKette.slice(1), ...doppelExperteKette]));
+// Die Achse wird als Aufbau gelesen: Stufe primär (Beginner → Fortgeschritten →
+// Experte), darin Pool-/Erzählreihenfolge. Vorher führte doppel_grundlagen vor dem
+// ganzen Beginner-Doppel, nur weil seine Datei im Pool früher liegt.
+pruefe('Spielform-Achse doppel: 18 Bausteine über alle drei Stufen, nach Stufe geordnet', gleicheListe(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.id), [...doppelBeginnerKette, ...doppelThemaKette, ...doppelExperteKette]));
 pruefe('Doppel-Thema queert drei Domänen (Taktik, Athletik, Mentales)', (() => {
   const domaenen = new Set(spielformpfad(daten, 'doppel').stationen.map((s) => s.baustein.domaene));
   return domaenen.has('taktik') && domaenen.has('athletik_kondition') && domaenen.has('mentales');
@@ -689,6 +716,25 @@ pruefe('Experte kumulativ: alle acht Einheiten, erstmals zwei Experten-Einheiten
   return alle.length === 8 && gleicheListe(experten, ['experte_praezision_und_taeuschung', 'experte_tempo_und_konstanz']);
 })());
 pruefe('alle 8 Einheiten: jede Referenz löst auf einen Baustein mit Übungsteil auf', trainingsuebersicht(daten).every((u) => u.referenzen.length > 0 && u.referenzen.every((r) => hatUebungsteil(r.baustein))));
+// Die Übersicht nummeriert; die Nummer soll einen Aufbau zeigen. Stufe primär,
+// innerhalb der Stufe Dateireihenfolge — das Beginner-Doppel stand vorher als Nr. 8.
+pruefe('Einheiten-Übersicht nach Stufe geordnet (Beginner → Fortgeschritten → Experte), innerhalb stabil', (() => {
+  const alle = trainingsuebersicht(daten).map((u) => u.einheit);
+  const raenge = alle.map((e) => daten.koennensOrdnung.indexOf(e.kompetenzstufe));
+  const beginner = alle.filter((e) => e.kompetenzstufe === 'beginner').map((e) => e.id);
+  return raenge.every((r, i) => i === 0 || raenge[i - 1] <= r)
+    && gleicheListe(beginner, ['beginner_erste_schlaege', 'beginner_bewegung_und_position', 'doppel_beginner_zusammenspiel']);
+})());
+// Aufwärm-Logik der Experten-Einheiten (Gesundheitsrahmen): erst allgemein warm
+// werden, Explosives danach, Dehnen erst nach dem Spiel.
+pruefe('Experten-Einheiten beginnen mit „Richtig aufwärmen"; Dehnfolge im Ausklang; Reaktivkraft vor dem Sprung-Smash', (() => {
+  const e = (id) => daten.einheiten.find((x) => x.id === id).phasen;
+  const pt = e('experte_praezision_und_taeuschung'); const tk = e('experte_tempo_und_konstanz');
+  const haupt = tk.hauptteil.map((r) => r.baustein);
+  return pt.erwaermung[0].baustein === 'richtig_aufwaermen' && tk.erwaermung[0].baustein === 'richtig_aufwaermen'
+    && pt.ausklang.some((r) => r.baustein === 'beweglichkeit_und_schulter') && !pt.erwaermung.some((r) => r.baustein === 'beweglichkeit_und_schulter')
+    && haupt.indexOf('reaktivkraft_bodenkontakt') < haupt.indexOf('sprung_smash');
+})());
 setzeDiagnose({ stufe: 'beginner' });
 registriereEinheitAbschluss('beginner_erste_schlaege');
 registriereEinheitAbschluss('beginner_erste_schlaege');

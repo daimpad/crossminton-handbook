@@ -476,9 +476,11 @@
       ],
       "voraussetzungen": [
         "angriff_im_paar",
-        "verteidigung_im_paar"
+        "verteidigung_im_paar",
+        "bewegung_als_einheit",
+        "verstaendigung_im_paar"
       ],
-      "voraussetzungen_lesart": "didaktisch: das Umschalten verbindet die zuvor gelernten Angriffs- und Verteidigungsrollen im Paar",
+      "voraussetzungen_lesart": "didaktisch: das Umschalten verbindet die zuvor gelernten Angriffs- und Verteidigungsrollen im Paar; der Erklaerteil greift ausdruecklich auf die beiden vorigen Faeden zurueck (Bewegung als Einheit, Verstaendigung)",
       "spielziele": [
         "doppel_spezifische_loesungen",
         "umschaltmoment_erkennen"

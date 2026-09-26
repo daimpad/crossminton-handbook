@@ -45,16 +45,32 @@ function umgebungsBaustein(baustein) {
   return baustein.typ === 'umgebungs_baustein';
 }
 
+// Rang der niedrigsten Könnensstufe eines Bausteins; reine Trainer-Bausteine und
+// Unbekanntes sortieren hinter die Stufen (nie davor, nie verborgen).
+function stufenRang(daten) {
+  return (b) => {
+    const idx = daten.koennensOrdnung.indexOf(niedrigsteStufe(daten, b));
+    return idx === -1 ? daten.koennensOrdnung.length : idx;
+  };
+}
+
 // Kompetenzpfad (kann über Stufen kumulieren): Stufe primär, damit sich
 // Stufen-Blöcke bilden (Beginner-Block, dann Fortgeschritten-Block), darin
 // Domäne und Pool-Reihenfolge (Spez. 6.1 „innerhalb einer Stufe").
 function kompetenzVergleicher(daten) {
   const standard = standardVergleicher(daten);
-  const stufenIdx = (b) => {
-    const idx = daten.koennensOrdnung.indexOf(niedrigsteStufe(daten, b));
-    return idx === -1 ? daten.koennensOrdnung.length : idx;
-  };
-  return (a, b) => stufenIdx(a) - stufenIdx(b) || standard(a, b);
+  const rang = stufenRang(daten);
+  return (a, b) => rang(a) - rang(b) || standard(a, b);
+}
+
+// Spielform-Achse: Stufe primär (Beginner → Fortgeschritten → Experte), darin die
+// Pool-/Erzählreihenfolge — bewusst NICHT nach Domäne blockiert. Die Achse wird als
+// Aufbau gelesen; ohne Stufenordnung stand „Doppel-Grundlagen" (Fortgeschritten)
+// vor dem ganzen Beginner-Doppel, nur weil seine Datei im Pool früher liegt.
+function stufenPoolVergleicher(daten) {
+  const rang = stufenRang(daten);
+  const pool = poolVergleicher(daten);
+  return (a, b) => rang(a) - rang(b) || pool(a, b);
 }
 
 // Ziele normalisieren: erlaubt sind null, ein Einzelziel {dimension, faktor},
@@ -174,7 +190,7 @@ export function spielformpfad(daten, spielform) {
     art: 'spielform',
     spielform,
     herkunft,
-    stationen: zuStationen(daten, menge, poolVergleicher(daten), herkunft),
+    stationen: zuStationen(daten, menge, stufenPoolVergleicher(daten), herkunft),
   };
 }
 
@@ -246,10 +262,18 @@ export function individualpfad(daten, ziel = diagnose().ziel) {
 // Kompetenzpfad): ein Beginner sieht Beginner-Einheiten, ein Fortgeschrittener
 // Beginner + Fortgeschritten. Ohne bekannte Stufe wird nicht gefiltert (nie verbergen).
 // Jede Einheit wird zur geordneten, aufgelösten Referenzliste (Phase + Hinweis + Baustein).
+// Geordnet nach Stufe (Beginner zuerst), innerhalb der Stufe in Dateireihenfolge:
+// Die Übersicht nummeriert, und die Nummer soll einen Aufbau zeigen — vorher stand
+// das Beginner-Doppel als letzte Einheit hinter den Experten-Einheiten.
 export function trainingsuebersicht(daten) {
   const zaehler = kontinuitaet().jeEinheit;
   const zielIndex = daten.koennensOrdnung.indexOf(diagnose().stufe);
-  return daten.einheiten
+  const rang = (einheit) => {
+    const idx = daten.koennensOrdnung.indexOf(einheit.kompetenzstufe);
+    return idx === -1 ? daten.koennensOrdnung.length : idx;
+  };
+  return [...daten.einheiten]
+    .sort((a, b) => rang(a) - rang(b))
     .filter((einheit) => {
       if (zielIndex < 0 || !einheit.kompetenzstufe) return true;
       const eigenerIndex = daten.koennensOrdnung.indexOf(einheit.kompetenzstufe);
@@ -292,6 +316,17 @@ export function sequenzFuer(daten, kontext) {
   if (art === 'individual') return individualpfad(daten);
   if (art === 'merkliste') return { art: 'merkliste', stationen: merklisteStationen(daten, merkliste()) };
   return kompetenzpfad(daten, parameter || diagnose().stufe);
+}
+
+// Der Kontext, in dem ein Baustein zu Hause ist: Umgebungs-Bausteine auf der
+// Umgebungs-Achse (aus dem Kompetenzpfad herausgefiltert), Doppel auf der
+// Spielform-Achse, alles andere im Kompetenzpfad. Gebraucht, wo ein Link NICHT
+// aus einer Sequenz heraus führt (Suche, „Siehe auch"): Trüge er den Kontext der
+// Herkunft, liefe die Fußnavigation in einer Reihe weiter, in der das Ziel fehlt.
+export function heimatKontext(baustein) {
+  if (baustein.typ === 'umgebungs_baustein') return 'umgebung';
+  if (spielformVon(baustein) === 'doppel') return 'spielform:doppel';
+  return 'kompetenz';
 }
 
 // Station für die Baustein-Ansicht, inkl. Nachbarn im gewählten Pfadkontext.

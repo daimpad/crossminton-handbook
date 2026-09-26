@@ -7,7 +7,7 @@ import { schalteTeil } from '../aktionen.js';
 import { domaenenVon, fehlerbilderFuer, hatReflexionsaufgabe, hatUebungsteil, untergrundVon, witterungVon } from '../daten.js';
 import { label, t, text } from '../i18n.js';
 import { absaetze, bausteinIcon, esc, grafikFigurHtml, neuRendern, teileLink, verbessereGrafiken, zeigeMeilenstein, zeigeToast } from '../oberflaeche.js';
-import { stationImKontext } from '../pfade.js';
+import { heimatKontext, stationImKontext } from '../pfade.js';
 import { diagnose, istGemerkt, schalteMerken } from '../zustand.js';
 
 // Der Kontext kommt roh aus der URL (?kontext=…) — sein Parameter-Teil wird hier
@@ -148,6 +148,21 @@ function einordnungHtml(baustein) {
         ${zeile(t('meta_voraussetzungen'), voraussetzungen)}
       </dl>
     </details>`;
+}
+
+// „Siehe auch": die Verzahnung aus dem Feld `querverweis` — Dokumentation, keine
+// Voraussetzung und keine Kante. Nur auflösbare IDs; ein toter Verweis fällt weg
+// (pruefeDaten meldet ihn). Jeder Absprung trägt den Heimat-Kontext des ZIELS.
+function sieheAuchHtml(daten, baustein) {
+  const links = (baustein.querverweis || [])
+    .map((id) => daten.bausteinVonId.get(id))
+    .filter(Boolean)
+    .map(
+      (ziel) =>
+        `<a href="#/baustein/${esc(ziel.id)}?kontext=${encodeURIComponent(heimatKontext(ziel))}">${esc(label('baustein', ziel.id))}</a>`,
+    );
+  if (links.length === 0) return '';
+  return `<p class="siehe-auch"><span class="siehe-auch-titel">${esc(t('siehe_auch'))}:</span> ${links.join(', ')}</p>`;
 }
 
 // Domänen-Hue für den Baustein-Hero (analog zu den Startseiten-Kacheln): färbt
@@ -306,6 +321,7 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
       ${reflexionsSektion}
       ${trainerLayerHtml(daten, b)}
       ${abschlussZeile}
+      ${sieheAuchHtml(daten, b)}
       ${einordnungHtml(b)}
       ${fussNavigation}
     </article>

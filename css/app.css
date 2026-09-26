@@ -1364,6 +1364,9 @@ details[open] summary { margin-bottom: 0.5rem; }
 
 .regel-verweise { margin: 0.7rem 0 0; font-size: 0.9rem; }
 .regel-verweise-titel { color: var(--tinte-2); }
+/* „Siehe auch" unter den Aufgabenteilen einer Baustein-Seite (Feld querverweis). */
+.siehe-auch { margin: 1.2rem 0 0; font-size: 0.95rem; }
+.siehe-auch-titel { color: var(--tinte-2); }
 .regel-verweis { display: inline-flex; align-items: center; gap: 0.3rem; margin-right: 0.6rem; white-space: nowrap; }
 .regel-verweis .fa-arrow-right { font-size: 0.75em; }
 

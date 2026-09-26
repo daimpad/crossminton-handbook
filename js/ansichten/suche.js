@@ -4,10 +4,10 @@
 // (Themen-Vorschläge) statt einer leeren Fläche; ohne Treffer ein Ausweg-CTA.
 // Die Suchlogik liegt DOM-frei in js/suche.js (testbar); hier nur Darstellung.
 
-import { domaenenVon, spielformVon } from '../daten.js';
+import { domaenenVon } from '../daten.js';
 import { label, t } from '../i18n.js';
 import { bausteinIcon, esc, heroKlein, leerHtml } from '../oberflaeche.js';
-import { themenDomaenen } from '../pfade.js';
+import { heimatKontext, themenDomaenen } from '../pfade.js';
 import { sucheBausteine } from '../suche.js';
 
 // Anfrage überlebt ein Neu-Rendern (wie der Turnier-Reiter): Modul-State, kein
@@ -22,14 +22,6 @@ const DOMAENE_HUE = {
   ausruestung: 'pf-schiefer',
   trainingsgestaltung: 'pf-magenta',
 };
-
-// In-Kontext-Rückweg passend zum Baustein: Outdoor bleibt in der Umgebungs-Achse,
-// Doppel in der Spielform-Achse, sonst der Kompetenzpfad (Deep-Link-tauglich).
-function kontextFuer(baustein) {
-  if (baustein.typ === 'umgebungs_baustein') return 'umgebung';
-  if (spielformVon(baustein) === 'doppel') return 'spielform:doppel';
-  return 'kompetenz';
-}
 
 // Treffer-Terme im (escapten) Ausschnitt markieren. Ein kombinierter Ausdruck
 // in einem Durchgang — so entstehen keine verschachtelten <mark> bei Überlappung.
@@ -52,7 +44,7 @@ function metaZeile(baustein) {
 function trefferKarte(treffer, terme) {
   const b = treffer.baustein;
   const hue = DOMAENE_HUE[domaenenVon(b)[0]] || 'pf-blau';
-  const kontext = kontextFuer(b);
+  const kontext = heimatKontext(b);
   return `
     <a class="karte karte-link such-treffer ${hue}" href="#/baustein/${esc(b.id)}?kontext=${encodeURIComponent(kontext)}">
       <span class="such-medaille">${bausteinIcon(b.id) || '<i class="fa-solid fa-feather" aria-hidden="true"></i>'}</span>
