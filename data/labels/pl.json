@@ -678,5 +678,69 @@
     "experte_tempo_und_konstanz": "Tempo i stałość",
     "outdoor_wind_und_boden": "Wiatr i podłoże",
     "doppel_beginner_zusammenspiel": "Pierwsza współpraca w grze podwójnej"
+  },
+  "kommentator": {
+    "notizenKopf": "Notatki",
+    "leer": "Nie ma jeszcze komentarzy. Zaznacz fragment tekstu, aby zacząć.",
+    "kommentarPlatzhalter": "Komentarz…",
+    "abbrechen": "Anuluj",
+    "speichern": "Zapisz",
+    "bearbeiten": "edytuj",
+    "loeschen": "usuń",
+    "ladenBtn": "Wczytaj komentarze",
+    "ladenTitel": "Wczytaj i scal wyeksportowane pliki z komentarzami",
+    "herunterladenJson": "Komentarze (JSON)",
+    "herunterladenMd": "Notatki (Markdown)",
+    "druckenBtn": "Jako PDF / drukuj",
+    "emailBtn": "Wyślij e-mailem",
+    "emailIntro": "Oto moje komentarze",
+    "emailAnhangHinweis": "(Dołącz plik, który właśnie został pobrany.)",
+    "downloadKopf": "Pobierz",
+    "keineNotizen": "Brak własnych komentarzy.",
+    "quelleLabel": "Źródło:",
+    "exportiertLabel": "Wyeksportowano:",
+    "titel": "Narzędzie do komentowania",
+    "autorLabel": "Autor:",
+    "einKommentar": " kom.",
+    "mehrereKommentare": " kom.",
+    "leseFehler": "Nie udało się odczytać pliku: ",
+    "markierungAria": "Komentarz",
+    "von": "autorstwa",
+    "hilfeAria": "Pokaż pomoc",
+    "hilfeTitel": "Jak to działa",
+    "hilfeSchliessen": "Zamknij",
+    "hilfeSchritte": {
+      "markieren": {
+        "titel": "Zaznaczanie",
+        "text": "Zaznacz fragment tekstu myszą lub dotykiem, aby go skomentować."
+      },
+      "verbinden": {
+        "titel": "Łączenie",
+        "text": "Kliknięcie zaznaczenia albo notatki wyróżnia jednocześnie zaznaczenie i notatkę."
+      },
+      "bearbeiten": {
+        "titel": "Edycja",
+        "text": "Własne notatki zmienisz przyciskami „edytuj” i „usuń”."
+      },
+      "herunterladen": {
+        "titel": "Pobieranie",
+        "text": "„Komentarze (JSON)” zapisuje twoje komentarze w pliku. „Wyślij e-mailem” również go pobiera i otwiera przygotowaną wiadomość e-mail do projektu."
+      },
+      "zusammenfuehren": {
+        "titel": "Scalanie",
+        "text": "„Wczytaj komentarze” wczytuje wyeksportowane pliki i scala je (bez duplikatów)."
+      }
+    },
+    "hilfeHinweis": "Komentarze istnieją tylko w tej karcie przeglądarki: odświeżenie lub zamknięcie strony je usuwa, więc wcześniej je pobierz albo wyślij e-mailem. Eksport zapisuje też adres URL i tytuł strony, żeby było jasne, do której strony należą komentarze.",
+    "menuAria": "Otwórz menu komentarzy",
+    "menuTitel": "Komentarze",
+    "elementBtn": "Skomentuj element",
+    "elementBtnAktiv": "Zakończ wybieranie elementu",
+    "elementAria": "Przełącz wybieranie elementu",
+    "elementLabel": "Element",
+    "punktBtn": "Przypnij punkt",
+    "punktBtnAktiv": "Zakończ przypinanie",
+    "punktAria": "Przełącz tryb punktu",
+    "punktLabel": "Punkt"
   }
 }

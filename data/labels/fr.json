@@ -678,5 +678,69 @@
     "experte_tempo_und_konstanz": "Rythme et constance",
     "outdoor_wind_und_boden": "Vent et surface",
     "doppel_beginner_zusammenspiel": "Premier jeu collectif en double"
+  },
+  "kommentator": {
+    "notizenKopf": "Notes",
+    "leer": "Pas encore de commentaires. Surligne un passage pour commencer.",
+    "kommentarPlatzhalter": "Commentaire…",
+    "abbrechen": "Annuler",
+    "speichern": "Enregistrer",
+    "bearbeiten": "modifier",
+    "loeschen": "supprimer",
+    "ladenBtn": "Charger des commentaires",
+    "ladenTitel": "Lire et fusionner des fichiers de commentaires exportés",
+    "herunterladenJson": "Commentaires (JSON)",
+    "herunterladenMd": "Notes (Markdown)",
+    "druckenBtn": "PDF / imprimer",
+    "emailBtn": "Envoyer par e-mail",
+    "emailIntro": "Voici mes commentaires",
+    "emailAnhangHinweis": "(Pense à joindre le fichier qui vient d'être téléchargé.)",
+    "downloadKopf": "Télécharger",
+    "keineNotizen": "Aucun commentaire de ta part.",
+    "quelleLabel": "Source :",
+    "exportiertLabel": "Exporté :",
+    "titel": "Outil de commentaire",
+    "autorLabel": "Auteur·rice :",
+    "einKommentar": " commentaire",
+    "mehrereKommentare": " commentaires",
+    "leseFehler": "Impossible de lire le fichier : ",
+    "markierungAria": "Commentaire",
+    "von": "par",
+    "hilfeAria": "Afficher l'aide",
+    "hilfeTitel": "Comment ça marche",
+    "hilfeSchliessen": "Fermer",
+    "hilfeSchritte": {
+      "markieren": {
+        "titel": "Surligner",
+        "text": "Sélectionne un passage à la souris ou au doigt pour le commenter."
+      },
+      "verbinden": {
+        "titel": "Relier",
+        "text": "Un clic sur un surlignage ou sur une note les met en évidence ensemble."
+      },
+      "bearbeiten": {
+        "titel": "Modifier",
+        "text": "Tes propres notes se modifient avec « modifier » et « supprimer »."
+      },
+      "herunterladen": {
+        "titel": "Télécharger",
+        "text": "« Commentaires (JSON) » enregistre tes commentaires dans un fichier. « Envoyer par e-mail » le télécharge aussi et ouvre un e-mail préparé pour le projet."
+      },
+      "zusammenfuehren": {
+        "titel": "Fusionner",
+        "text": "« Charger des commentaires » lit des fichiers exportés et les fusionne (sans doublons)."
+      }
+    },
+    "hilfeHinweis": "Les commentaires n'existent que dans cet onglet : recharger ou fermer la page les efface, alors télécharge-les ou envoie-les par e-mail avant. L'export enregistre aussi l'URL et le titre de la page, pour qu'on sache à quelle page appartiennent les commentaires.",
+    "menuAria": "Ouvrir le menu des commentaires",
+    "menuTitel": "Commentaires",
+    "elementBtn": "Commenter un élément",
+    "elementBtnAktiv": "Terminer la sélection d'élément",
+    "elementAria": "Activer ou désactiver la sélection d'élément",
+    "elementLabel": "Élément",
+    "punktBtn": "Épingler un point",
+    "punktBtnAktiv": "Terminer l'épinglage",
+    "punktAria": "Activer ou désactiver le mode point",
+    "punktLabel": "Point"
   }
 }

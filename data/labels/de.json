@@ -679,5 +679,69 @@
     "experte_tempo_und_konstanz": "Tempo und Konstanz",
     "outdoor_wind_und_boden": "Wind und Boden",
     "doppel_beginner_zusammenspiel": "Erstes Zusammenspiel im Doppel"
+  },
+  "kommentator": {
+    "notizenKopf": "Notizen",
+    "leer": "Noch keine Kommentare. Markiere eine Textstelle, um zu beginnen.",
+    "kommentarPlatzhalter": "Kommentar…",
+    "abbrechen": "Abbrechen",
+    "speichern": "Speichern",
+    "bearbeiten": "bearbeiten",
+    "loeschen": "löschen",
+    "ladenBtn": "Kommentare laden",
+    "ladenTitel": "Exportierte Kommentar-Dateien einlesen und zusammenführen",
+    "herunterladenJson": "Kommentare (JSON)",
+    "herunterladenMd": "Notizen (Markdown)",
+    "druckenBtn": "Als PDF / drucken",
+    "emailBtn": "Per E-Mail senden",
+    "emailIntro": "Anbei meine Kommentare",
+    "emailAnhangHinweis": "(Bitte die soeben heruntergeladene Datei anhängen.)",
+    "downloadKopf": "Herunterladen",
+    "keineNotizen": "Keine eigenen Kommentare.",
+    "quelleLabel": "Quelle:",
+    "exportiertLabel": "Exportiert:",
+    "titel": "Kommentar-Tool",
+    "autorLabel": "Autor:in:",
+    "einKommentar": " Kommentar",
+    "mehrereKommentare": " Kommentare",
+    "leseFehler": "Datei konnte nicht gelesen werden: ",
+    "markierungAria": "Kommentar",
+    "von": "von",
+    "hilfeAria": "Hilfe anzeigen",
+    "hilfeTitel": "So funktioniert’s",
+    "hilfeSchliessen": "Schließen",
+    "hilfeSchritte": {
+      "markieren": {
+        "titel": "Markieren",
+        "text": "Textstelle mit der Maus oder per Touch markieren, um sie zu kommentieren."
+      },
+      "verbinden": {
+        "titel": "Verbinden",
+        "text": "Klick auf eine Markierung oder eine Notiz hebt beide gemeinsam hervor."
+      },
+      "bearbeiten": {
+        "titel": "Bearbeiten",
+        "text": "Eigene Notizen lassen sich über „bearbeiten“ und „löschen“ ändern."
+      },
+      "herunterladen": {
+        "titel": "Herunterladen",
+        "text": "„Kommentare (JSON)“ speichert die eigenen Kommentare als Datei. „Per E-Mail senden“ lädt sie ebenfalls herunter und öffnet eine vorbereitete E-Mail an das Projekt."
+      },
+      "zusammenfuehren": {
+        "titel": "Zusammenführen",
+        "text": "„Kommentare laden“ liest exportierte Dateien ein und führt sie zusammen (ohne Duplikate)."
+      }
+    },
+    "hilfeHinweis": "Die Kommentare liegen nur in diesem Browser-Tab: Neu laden oder Schließen verwirft sie, darum vorher herunterladen oder per E-Mail senden. Beim Export werden die Seiten-URL und der Seitentitel mitgespeichert, damit erkennbar bleibt, zu welcher Seite die Kommentare gehören.",
+    "menuAria": "Kommentar-Menü öffnen",
+    "menuTitel": "Kommentator",
+    "elementBtn": "Element kommentieren",
+    "elementBtnAktiv": "Element-Auswahl beenden",
+    "elementAria": "Element-Auswahl umschalten",
+    "elementLabel": "Element",
+    "punktBtn": "Punkt anheften",
+    "punktBtnAktiv": "Anheften beenden",
+    "punktAria": "Punkt-Modus umschalten",
+    "punktLabel": "Punkt"
   }
 }

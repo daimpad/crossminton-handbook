@@ -39,10 +39,16 @@ export function sprache() {
   return aktiveSprache;
 }
 
+// Meldet einen echten Wechsel als 'app:sprache' — für Oberflächen außerhalb des
+// Render-Zyklus, die ihre Texte selbst halten (der Kommentator, js/feedback.js).
 export async function setzeSprache(neu) {
   await ladeLabels(neu);
+  const vorher = aktiveSprache;
   aktiveSprache = neu;
   if (typeof document !== 'undefined') document.documentElement.lang = neu;
+  if (vorher !== neu && typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('app:sprache', { detail: { sprache: neu } }));
+  }
 }
 
 function holePfad(wurzel, pfad) {
@@ -83,10 +89,12 @@ const LABEL_PFADE = {
   spielziel_faktor: (id) => ['spielziele', 'faktoren', id],
   vermittlungsziel_bereich: (id) => ['vermittlungsziele', 'bereiche', id],
   vermittlungsziel_faktor: (id) => ['vermittlungsziele', 'faktoren', id],
+  // Schlüssel wie im Kommentator; verschachtelte als Punktpfad ('hilfeSchritte.markieren.titel').
+  kommentator: (schluessel) => ['kommentator', ...String(schluessel).split('.')],
 };
 
 // Sichtbares Label zu einer sprachneutralen ID.
-// Gruppen: baustein, grafik, einheit, spielziel_*, vermittlungsziel_* oder ein Vokabularname
+// Gruppen: baustein, grafik, einheit, spielziel_*, vermittlungsziel_*, kommentator oder ein Vokabularname
 // (domaene, kompetenzstufe, baustein_typ, transfer_herkunft, untergrund, witterung, abschluss_status).
 export function label(gruppe, id) {
   const bau = LABEL_PFADE[gruppe];
