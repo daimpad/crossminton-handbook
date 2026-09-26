@@ -94,7 +94,7 @@
        "de": "Der Brot-und-Butter-Schlag; hier liegt der Schwerpunkt der Einheit.",
        "en": "The bread-and-butter stroke; this is where the session's focus lies.",
        "fr": "La frappe de base par excellence ; c'est là qu'est l'axe de la séance.",
-       "pl": "Uderzenie chleba powszedniego; tu leży nacisk jednostki."
+       "pl": "Podstawowe uderzenie, na którym opiera się gra; tu leży nacisk jednostki."
       }
      }
     ],
@@ -313,7 +313,7 @@
        "de": "Zuerst die abgestimmte Bewegung — sie trägt Angriff wie Verteidigung.",
        "en": "First the coordinated movement — it carries both attack and defense.",
        "fr": "D'abord le déplacement coordonné — il porte aussi bien l'attaque que la défense.",
-       "pl": "Najpierw zgrany ruch — niesie atak jak i obronę."
+       "pl": "Najpierw zgrany ruch — niesie zarówno atak, jak i obronę."
       }
      },
      {
@@ -404,10 +404,10 @@
      {
       "baustein": "praezision_an_die_linien",
       "hinweis": {
-       "de": "Der Schwerpunkt: die getäuschten Bälle präzise an die Linien setzen, wo sie am meisten wehtun.",
+       "de": "Der Schwerpunkt: die mit Täuschung gespielten Bälle präzise an die Linien setzen, wo sie am meisten wehtun.",
        "en": "The focus: place the disguised balls precisely on the lines, where they hurt the most.",
        "fr": "L'axe : placer les balles feintées avec précision sur les lignes, là où elles font le plus mal.",
-       "pl": "Nacisk: zwiedzione piłki precyzyjnie kłaść przy liniach, gdzie bolą najbardziej."
+       "pl": "Nacisk: zagrane ze zwodem piłki precyzyjnie kłaść przy liniach, gdzie bolą najbardziej."
       }
      }
     ],
@@ -415,10 +415,10 @@
      {
       "baustein": "dem_gegner_aufzwingen",
       "hinweis": {
-       "de": "Anwendung in der Partie: mit früh genommenen, getäuschten und präzisen Bällen dem Gegner dein Spiel aufzwingen.",
+       "de": "Anwendung in der Partie: mit früh genommenen, verschleierten und präzisen Bällen dem Gegner dein Spiel aufzwingen.",
        "en": "Application in the match: impose your game on the opponent with early-taken, disguised and precise balls.",
        "fr": "Application en partie : imposer ton jeu à l'adversaire avec des balles prises tôt, feintées et précises.",
-       "pl": "Zastosowanie w partii: wcześnie przyjętymi, zwiedzionymi i precyzyjnymi piłkami narzucać przeciwnikowi swoją grę."
+       "pl": "Zastosowanie w partii: wcześnie przyjętymi, zagranymi ze zwodem i precyzyjnymi piłkami narzucać przeciwnikowi swoją grę."
       }
      }
     ]
@@ -443,7 +443,7 @@
    "beschreibung": {
     "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: das Tempo bewusst wechseln, explosiv vom Boden abdrücken und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck.",
     "en": "An expert session for rhythm and resilience: change the pace deliberately, push off the ground explosively and land the hard stroke out of the jump — rounded off with holding quality under the greatest pressure.",
-    "fr": "Une séance experte pour le rythme et la résistance : changer le tempo volontairement, se détendre du sol de façon explosive et placer la frappe puissante en sautant — clôturée par le maintien de la qualité sous la pression maximale.",
+    "fr": "Une séance experte pour le rythme et la résistance : changer le tempo volontairement, pousser sur le sol de façon explosive et placer la frappe puissante en sautant — clôturée par le maintien de la qualité sous la pression maximale.",
     "pl": "Jednostka ekspercka na rytm i wytrzymałość: świadomie zmieniać tempo, eksplozywnie odbijać się od podłoża i kłaść mocne uderzenie z wyskoku — zakończona utrzymaniem jakości pod najwyższą presją."
    },
    "phasen": {
@@ -517,7 +517,7 @@
     "pl": "Nastawić się na zewnątrz na wiatr i podłoże"
    },
    "beschreibung": {
-    "de": "Eine Outdoor-Einheit für das Spiel im Freien: die Fußarbeit auf wechselndem Boden anpassen, den Wind lesen und nutzen — und die Längensteuerung anwenden, die draußen über Gewinn und Verlust entscheidet.",
+    "de": "Eine Outdoor-Einheit für das Spiel im Freien: die Fußarbeit auf wechselndem Boden anpassen, den Wind lesen und nutzen — und die Längensteuerung anwenden, die draußen über Sieg und Niederlage entscheidet.",
     "en": "An outdoor session for playing in the open: adapt your footwork to changing ground, read and use the wind — and apply the length control that decides between winning and losing outdoors.",
     "fr": "Une séance en plein air pour le jeu dehors : adapter le jeu de jambes au sol changeant, lire et exploiter le vent — et appliquer le contrôle de la longueur qui, dehors, décide entre gagner et perdre.",
     "pl": "Jednostka plenerowa do gry na dworze: dostosować pracę nóg do zmiennego podłoża, czytać i wykorzystywać wiatr — i stosować sterowanie długością, które na zewnątrz decyduje o wygranej i porażce."

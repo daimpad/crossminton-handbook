@@ -54,17 +54,17 @@
         "en": {
           "symptom": "The first step comes late and heavily; between shots the player looks upright and settled.",
           "ursache": "The weight sits on the heels, the knees are almost straight, the body stands tall instead of ready.",
-          "korrektur": "Get them lower: Cue: \"Bend the knees loosely, weight on the balls of your feet, always stay slightly in motion.\""
+          "korrektur": "Get them lower. Cue: \"Bend the knees loosely, weight on the balls of your feet, always stay slightly in motion.\""
         },
         "fr": {
           "symptom": "Le premier pas arrive tard et lourdement ; entre les frappes, le joueur paraît redressé et posé.",
           "ursache": "Le poids repose sur les talons, les genoux sont presque tendus, le corps est droit au lieu d'être prêt.",
-          "korrektur": "Fais-le descendre : Consigne : « Fléchis les genoux souplement, le poids sur la plante des pieds, reste toujours légèrement en mouvement. »"
+          "korrektur": "Fais-le descendre. Consigne : « Fléchis les genoux souplement, le poids sur la plante des pieds, reste toujours légèrement en mouvement. »"
         },
         "pl": {
           "symptom": "Pierwszy krok przychodzi późno i ciężko; między uderzeniami gracz wygląda wyprostowany i spokojny.",
           "ursache": "Ciężar spoczywa na piętach, kolana są niemal wyprostowane, ciało stoi w pionie zamiast w gotowości.",
-          "korrektur": "Obniż go: Wskazówka: „Ugnij luźno kolana, ciężar na śródstopiu, zostań zawsze lekko w ruchu.\""
+          "korrektur": "Obniż go. Wskazówka: „Ugnij luźno kolana, ciężar na śródstopiu, zostań zawsze lekko w ruchu.\""
         }
       }
     },
@@ -79,23 +79,23 @@
       "erklaerteil": {
         "de": {
           "symptom": "Der Schläger verdreht sich im Treffmoment; der Spieler hält ihn sichtbar fest umklammert.",
-          "ursache": "Der Griff ist zu fest — oft, weil er zu dünn ist —, sodass die Hand ständig gegen das Verdrehen arbeitet.",
+          "ursache": "Der Griff ist zu fest — oft, weil der Schlägergriff zu dünn ist —, sodass die Hand ständig gegen das Verdrehen arbeitet.",
           "korrektur": "„Halt den Schläger so locker, dass ich ihn dir fast herausziehen könnte.“ Prüfe zusätzlich die Griffstärke."
         },
         "en": {
           "symptom": "The racket twists at the moment of contact; the player is visibly clamping it tight.",
-          "ursache": "The grip is too tight — often because it is too thin — so the hand works constantly against the twisting.",
+          "ursache": "The grip is too tight — often because the handle is too thin — so the hand works constantly against the twisting.",
           "korrektur": "Cue: \"Hold the racket so loosely that I could almost pull it out of your hand.\" Check the grip size as well."
         },
         "fr": {
           "symptom": "La raquette pivote au moment de la frappe ; le joueur la serre visiblement.",
-          "ursache": "La prise est trop ferme — souvent parce qu'elle est trop fine —, si bien que la main lutte en permanence contre la rotation.",
+          "ursache": "La prise est trop ferme — souvent parce que le manche est trop fin —, si bien que la main lutte en permanence contre la rotation.",
           "korrektur": "Consigne : « Tiens la raquette si souplement que je pourrais presque te la retirer de la main. » Vérifie aussi la taille du manche."
         },
         "pl": {
           "symptom": "Rakieta przekręca się w chwili trafienia; gracz wyraźnie kurczowo ją zaciska.",
-          "ursache": "Chwyt jest zbyt mocny — często dlatego, że jest zbyt cienki — więc ręka stale pracuje przeciw przekręcaniu.",
-          "korrektur": "Wskazówka: „Trzymaj rakietę tak luźno, żebym mógł ci ją niemal wyciągnąć z ręki.\" Sprawdź też grubość chwytu."
+          "ursache": "Chwyt jest zbyt mocny — często dlatego, że rączka rakiety jest zbyt cienka — więc ręka stale pracuje przeciw przekręcaniu.",
+          "korrektur": "Wskazówka: „Trzymaj rakietę tak luźno, żebym mógł ci ją niemal wyciągnąć z ręki.\" Sprawdź też grubość rączki."
         }
       }
     },
@@ -212,7 +212,7 @@
           "korrektur": "Cue: \"Accelerate late and out of the whole body, and meet the Speeder in front of you.\""
         },
         "fr": {
-          "symptom": "Le drive part trop haut ou arrive sans rythme.",
+          "symptom": "Le drive part trop haut ou arrive sans vitesse.",
           "ursache": "La frappe vient du seul bras ; la chaîne jambes-tronc et l'accélération tardive manquent.",
           "korrektur": "Consigne : « Accélère tard et avec tout le corps, et frappe le speeder devant toi. »"
         },
@@ -305,7 +305,7 @@
           "korrektur": "Cue: \"Keep the wrist loose and let it snap only at the last moment — like a whip.\""
         },
         "fr": {
-          "symptom": "Malgré un grand mouvement, aucun rythme n'arrive dans le speeder.",
+          "symptom": "Malgré un grand mouvement, le speeder ne prend aucune vitesse.",
           "ursache": "Le poignet est tendu tout du long ; le claquement tardif juste avant le point d'impact manque.",
           "korrektur": "Consigne : « Garde le poignet souple et ne le fais claquer qu'au dernier moment — comme un fouet. »"
         },
@@ -400,7 +400,7 @@
         "fr": {
           "symptom": "L'amorti tombe dans la zone neutre ou reste haut, en balle d'attaque confortable.",
           "ursache": "Trop ou trop peu de poignet ; la face de raquette est trop ouverte.",
-          "korrektur": "Consigne : « Retire complètement le rythme et pose le speeder doucement juste derrière la zone. »"
+          "korrektur": "Consigne : « Enlève toute la vitesse et pose le speeder doucement juste derrière la zone. »"
         },
         "pl": {
           "symptom": "Skrót pada w strefie neutralnej albo stoi wysoko jako wygodna piłka do ataku.",
@@ -419,22 +419,22 @@
       "transfer_herkunft": ["CM"],
       "erklaerteil": {
         "de": {
-          "symptom": "Der Ball ist zwar angeschnitten, verliert aber die Kontrolle und geht ins Aus.",
+          "symptom": "Der Ball ist zwar angeschnitten, aber unkontrolliert und geht ins Aus.",
           "ursache": "Der Schnitt ist zu steil, die Fläche zu offen, der Vorwärtsanteil fehlt.",
           "korrektur": "„Streif den Speeder flacher an und nimm etwas Vorwärtsbewegung mit.“"
         },
         "en": {
-          "symptom": "The Speeder does carry slice, but loses control and goes out.",
+          "symptom": "The Speeder does carry slice, but is uncontrolled and goes out.",
           "ursache": "The cut is too steep, the face too open, the forward component is missing.",
-          "korrektur": "Cue: \"Brush the Speeder more flatly and take a little forward movement with you.\""
+          "korrektur": "Cue: \"Brush the Speeder more flatly and add a little forward movement.\""
         },
         "fr": {
-          "symptom": "Le speeder est bien coupé, mais perd le contrôle et sort.",
+          "symptom": "Le speeder est bien coupé, mais n'est pas contrôlé et sort.",
           "ursache": "La coupe est trop prononcée, la face trop ouverte, la composante vers l'avant manque.",
           "korrektur": "Consigne : « Effleure le speeder plus à plat et emporte un peu de mouvement vers l'avant. »"
         },
         "pl": {
-          "symptom": "Speeder wprawdzie ma podcięcie, ale traci kontrolę i wychodzi na aut.",
+          "symptom": "Speeder wprawdzie ma podcięcie, ale jest niekontrolowany i wychodzi na aut.",
           "ursache": "Podcięcie jest zbyt strome, płaszczyzna zbyt otwarta, brakuje składowej do przodu.",
           "korrektur": "Wskazówka: „Muśnij speedera bardziej płasko i zabierz trochę ruchu do przodu.\""
         }
@@ -456,8 +456,8 @@
         },
         "en": {
           "symptom": "In certain corners the player is regularly too late.",
-          "ursache": "The wrong step type is chosen for the zone in question; the transitions are unpractised.",
-          "korrektur": "Cue: \"Assign each corner its step and practise the transitions there deliberately.\""
+          "ursache": "The wrong step type is chosen for the zone in question; the transitions are unpracticed.",
+          "korrektur": "Cue: \"Assign each corner its step and practice the transitions there deliberately.\""
         },
         "fr": {
           "symptom": "Dans certains coins, le joueur arrive régulièrement trop tard.",
@@ -548,7 +548,7 @@
           "korrektur": "Gib ihm ein Muster mit. Ansage: „Erst tief nach hinten treiben, dann kurz hinter die Frontlinie — zwei Schläge, ein Plan.“"
         },
         "en": {
-          "symptom": "The player answers each ball on its own; a recognisable sequence across several shots never forms.",
+          "symptom": "The player answers each ball on its own; a recognizable sequence across several shots never forms.",
           "ursache": "The plan beyond the single shot is missing — the alternation of long and short balls is not used as a tool.",
           "korrektur": "Give them a pattern. Cue: \"First drive them deep, then short just inside the front line — two shots, one plan.\""
         },
@@ -591,7 +591,7 @@
         "pl": {
           "symptom": "Smecz przychodzi z biegu albo z głębi i pada na aucie — albo sam wpędza gracza w kłopoty.",
           "ursache": "Uderzenie jest szukane, a nie przygotowane: brakuje wcześniejszej piłki napierającej, która zmusza przeciwnika do podbicia.",
-          "korrektur": "Wymagaj najpierw przygotowania. Wskazówka: „Wypchnij go głęboko do tyłu i smecz dopiero, gdy musi podbić speedera.“"
+          "korrektur": "Wymagaj najpierw przygotowania. Wskazówka: „Wypchnij go głęboko do tyłu i smecz dopiero, gdy musi podbić speedera.\""
         }
       }
     },
@@ -730,7 +730,7 @@
       "erklaerteil": {
         "de": {
           "symptom": "Der Spieler findet die Schwäche des Gegners, nutzt sie zwei Punkte lang und verliert sie danach aus den Augen.",
-          "ursache": "Es fehlt die Systematik: die Erkenntnis wird nicht über den Satz gehalten, sondern durch den nächsten Einfall verdrängt.",
+          "ursache": "Es fehlt die Systematik: die Erkenntnis wird nicht über den ganzen Satz durchgehalten, der nächste Einfall verdrängt sie.",
           "korrektur": "Mach die Schwäche zum Auftrag. Ansage: „Diese Ecke bleibt bis zum Satzende dein Ziel — mindestens jeder dritte Ball geht dorthin.“"
         },
         "en": {
@@ -858,7 +858,7 @@
           "korrektur": "Hol das Tempo aus dem Ablauf, nicht aus dem Schlag. Ansage: „Gleiche Bewegung wie im Training — locker greifen, einmal ausatmen, dann spielen.“"
         },
         "en": {
-          "symptom": "In the tight points the movement turns hectic, the grip tightens, the practised precision collapses.",
+          "symptom": "In the tight points the movement turns hectic, the grip tightens, the practiced precision collapses.",
           "ursache": "The pressure reaches the technique: pace and tension rise although the stroke should stay the same.",
           "korrektur": "Take the speed out of the routine, not the stroke. Cue: \"Same movement as in practice — loose grip, one breath out, then play.\""
         },
@@ -890,7 +890,7 @@
         },
         "en": {
           "symptom": "Both partners run to the same ball and get in each other’s way; balls drop between them.",
-          "ursache": "The split into attacker and back-space player is not set — each plays their own singles on half the area.",
+          "ursache": "The split into attacker and rear-court player is not set — each plays their own singles on half the area.",
           "korrektur": "Assign the roles explicitly. Cue: \"You in front, you at the back — say who has which role before the serve.\""
         },
         "fr": {
@@ -948,11 +948,11 @@
         "de": {
           "symptom": "Einer greift schon an, während der andere noch verteidigt; zwischen den beiden reißt eine Lücke auf.",
           "ursache": "Der Umschaltmoment wird nicht gemeinsam erkannt — jeder entscheidet für sich, wann Angriff und wann Verteidigung gilt.",
-          "korrektur": "Mach das Umschalten hörbar. Ansage: „Wer den schwachen Ball sieht, ruft „Angriff!“ — dann rücken beide gemeinsam.“"
+          "korrektur": "Mach das Umschalten hörbar. Ansage: „Wer den schwachen Ball sieht, ruft ‚Angriff!‘ — dann rücken beide gemeinsam.“"
         },
         "en": {
           "symptom": "One is already attacking while the other still defends; a gap opens between them.",
-          "ursache": "The switching moment is not recognised together — each decides alone when it is attack and when defence.",
+          "ursache": "The switching moment is not recognized together — each decides alone when it is attack and when defense.",
           "korrektur": "Make the switch audible. Cue: \"Whoever sees the weak ball calls 'Attack!' — then you both move up together.\""
         },
         "fr": {
@@ -963,7 +963,7 @@
         "pl": {
           "symptom": "Jeden już atakuje, gdy drugi jeszcze się broni; między nimi otwiera się luka.",
           "ursache": "Moment przełączenia nie jest rozpoznawany wspólnie — każdy sam decyduje, kiedy jest atak, a kiedy obrona.",
-          "korrektur": "Uczyń przełączenie słyszalnym. Wskazówka: „Kto widzi słabą piłkę, woła „Atak!“ — wtedy wysuwacie się oboje razem.“"
+          "korrektur": "Uczyń przełączenie słyszalnym. Wskazówka: „Kto widzi słabą piłkę, woła «Atak!» — wtedy wysuwacie się oboje razem.“"
         }
       }
     },
@@ -982,7 +982,7 @@
           "korrektur": "Kürze die Bodenzeit. Ansage: „Leise landen und sofort wieder weg — der Boden ist heiß.“"
         },
         "en": {
-          "symptom": "The landing is loud and the foot stays on the ground for a long time; the next start gets going only heavily.",
+          "symptom": "The landing is loud and the foot stays on the ground for a long time; the next push-off starts sluggishly.",
           "ursache": "The player sinks into the landing instead of pushing off springily — the tendons store no energy.",
           "korrektur": "Shorten the ground time. Cue: \"Land quietly and leave at once — the ground is hot.\""
         },

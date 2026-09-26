@@ -14,8 +14,11 @@ const page = await ctx.newPage();
 for (const id of ids) {
   const svgPfad = resolve('images', `${id}.svg`);
   const svg = readFileSync(svgPfad, 'utf8');
+  // Groesse aus der viewBox: ohne width/height liefe das SVG auf die volle
+  // Fensterbreite, und das PNG kaeme in 2560 statt 600 Pixeln heraus.
+  const [, , vbBreite, vbHoehe] = (svg.match(/viewBox="([^"]+)"/)?.[1] || '0 0 300 300').split(/[\s,]+/).map(Number);
   await page.setContent(
-    `<!doctype html><meta charset="utf8"><body style="margin:0">${svg}</body>`,
+    `<!doctype html><meta charset="utf8"><style>svg{display:block;width:${vbBreite}px;height:${vbHoehe}px}</style><body style="margin:0">${svg}</body>`,
     { waitUntil: 'networkidle' },
   );
   const el = await page.$('svg');

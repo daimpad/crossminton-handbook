@@ -193,7 +193,7 @@ Top-down diagram of one square showing the doubles attacking formation: one play
 
 **G-039** · `images/G-039.png` · `verteidigung_im_paar` · Fortgeschritten  
 *Leitgrafik: Verteidigung im Paar*  
-Top-down diagram of one square showing the doubles defensive formation: the two players positioned side by side, each covering one half of the square, sharing the width. Distinct markers; a dashed line dividing the two covered halves.
+Top-down diagram of one square (front line at the top) showing the Crossminton doubles defence: both players have dropped deeper and spread wider, but the front/back order holds (position rule 7.5.1) — one in the shaded front zone, one in the back zone, a dashed line between the two covered areas. No side-by-side formation (that is the badminton habit the BAD deltas tell players to drop).
 
 **G-040** · `images/G-040.png` · `aufschlag_rueckschlag_doppel` · Fortgeschritten  
 *Leitgrafik: Aufschlag und Rückschlag im Doppel*  
@@ -201,7 +201,7 @@ Top-down diagram of both squares illustrating the doubles serve rotation: four p
 
 **G-041** · `images/G-041.png` · `das_umschalten_im_doppel` · Fortgeschritten  
 *Leitgrafik: Das Umschalten im Doppel*  
-Top-down diagram showing the transition between formations in doubles: on one side the front-back attacking stagger, transforming via curved rotation arrows into the side-by-side defensive formation, illustrating the switch between attack and defense. Two small formation states linked by rotation arrows.
+Top-down diagram showing the switch between attack and defence in Crossminton doubles: on the left the front-back attacking stagger, on the right the defence with both players deeper and wider in a diagonal stagger — the front/back order is kept (position rule 7.5.1), there is no side-by-side rotation. Two small states linked by switching arrows.
 
 **G-042** · `images/G-042.png` · `bewegung_als_einheit` · Fortgeschritten  
 *Leitgrafik: Bewegung als Einheit*  
@@ -245,7 +245,7 @@ Top-down diagram of one square where one partner's shot (arrow) sets up the othe
 
 **G-052** · `images/G-052.png` · `nahtlos_umschalten` · Experte  
 *Leitgrafik: Nahtlos umschalten*  
-Top-down diagram showing a smooth, seamless transition of a doubles pair between attacking front-back and defensive side-by-side formations, fluid rotation arrows with no gap. Illustrates seamless switching.
+Top-down diagram of one square ("front" marked above the top edge): the attacking positions (solid — front player close up, rear player pushing) and the defending positions (hollow — both deeper and wider), each linked by a double-headed arrow. Both move at once and the front/back order stays. Illustrates seamless switching within the fixed Crossminton roles.
 
 **G-053** · `images/G-053.png` · `blindes_verstaendnis` · Experte  
 *Leitgrafik: Blindes Verständnis*  
