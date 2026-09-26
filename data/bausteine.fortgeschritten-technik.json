@@ -13,7 +13,7 @@
     "stufenuebergreifende_voraussetzungen": "ERSTE stufenuebergreifende weiche Kanten: fortgeschrittene Bausteine verweisen per 'voraussetzungen' auf Beginner-Bausteine (handgelenk_peitsche -> vorhand_drive; beinarbeit_system -> beinarbeit). Weiche Kanten, sperren nie; das Modell traegt sie bereits.",
     "geloester_faden": "Der Handgelenks-Schnapp ('Peitsche') wurde im Beginner-Pfad dreimal angekuendigt und vertagt (griff, vorhand_drive). handgelenk_peitsche loest ihn ein.",
     "delta_stelle": "beinarbeit_system traegt den zentralen BAD-Delta: netzlose Quadrat-Geometrie vs. netzorientierte Sechs-Zonen-Logik des Badminton.",
-    "ordnungslogik": "Kraftquelle (Handgelenk) -> Ueberkopf-Familie (Clear, Smash) -> Finesse (Stopp, Schnitt) -> vollstaendiges Beinarbeit-System.",
+    "ordnungslogik": "Kraftquelle (Handgelenk) -> vollstaendiges Beinarbeit-System (Grundlage fuer Clear, Smash und Stopp, weiche Kanten) -> Ueberkopf-Familie (Clear, Smash) -> Finesse (Stopp, Schnitt).",
     "baustein_typ": "durchgehend 'micro' (bewusste Entscheidung; 'vertiefung' bleibt reserviert)."
   },
   "bausteine": [
@@ -113,6 +113,111 @@
       }
     },
     {
+      "id": "beinarbeit_system",
+      "typ": "micro",
+      "domaene": "technik",
+      "kompetenzstufe": [
+        "fortgeschritten"
+      ],
+      "voraussetzungen": [
+        "beinarbeit"
+      ],
+      "voraussetzungen_lesart": "motorisches Aufbauen (stufenuebergreifend): das vollstaendige System baut auf dem Beginner-Grundzyklus (zentrale Position, Split-Step, Rueckkehr) auf",
+      "spielziele": [
+        "wiederholte_antrittsschnelligkeit",
+        "rally_ausdauer",
+        "umschaltmoment_erkennen"
+      ],
+      "vermittlungsziele": [],
+      "transfer_herkunft": [
+        "CM",
+        "BAD"
+      ],
+      "transfer_herkunft_beleg": "Vollstaendiges Schrittsystem (Chasse, Ausfallschritt, Scherensprung, Block-Sprung, Rueckkehrschritt) crossminton-eigen belegt (Gossen-Footwork-Skript). Chasse/Lunge verwandt mit Badminton.",
+      "untergrund": "halle",
+      "witterung": [],
+      "trainer_layer_offen": "Fehlerbild 'falscher Schritttyp fuer die Zone / kreuzt die Fuesse beim Chasse' + Korrekturansage",
+      "grafik": [
+        "G-014"
+      ],
+      "erklaerteil": {
+        "de": "Im Einsteiger-Bereich hast du den Grundzyklus gelernt: zentrale Position, Split-Step, raus zum Ball, zurück zur Mitte. Jetzt füllst du diesen Zyklus mit den einzelnen Schritttypen, die jede Zone deines Feldes am schnellsten erreichbar machen. Das ist das vollständige Beinarbeit-System.\n\nVier Schritttypen tragen es. Der Chassé ist ein seitliches Nachstellen, bei dem die Füße einander nie überkreuzen — du bleibst im Gleichgewicht und bereitest damit oft den nächsten Schritt vor. Der Ausfallschritt ist der am häufigsten genutzte Schritt: ein tiefer, explosiver Ausfall in eine Ecke, mit dem schlagseitigen Fuß voran, der dich stabil und weit an den Speeder bringt. Der Scherensprung bringt dich an hohe Speeder tief im hinteren Bereich — du springst ab, wechselst in der Luft die Beinstellung und kommst schlagbereit wieder auf. Der Block-Sprung fängt schnelle Bälle von der Seite ab, wenn keine Zeit für einen ganzen Schritt bleibt.\n\nEntscheidend ist, dass du für jede Zone den passenden Schritt wählst — und nach jedem Schlag mit einem sauberen Rückkehrschritt in die zentrale Position zurückfindest. Der Rückkehrschritt ist der unscheinbarste und wichtigste: Er stellt den Zyklus jedes Mal neu her.\n\nDenk an einen Fechter. Seine Füße stehen nie zufällig — jeder Schritt hat eine Form und einen Zweck, und er kehrt nach jedem Angriff sofort in die Grundstellung zurück. Genau diese Ökonomie suchst du für dein Feld.\n\nDieses System läuft irgendwann unbewusst. Am Anfang wählst du den Schritt bewusst; mit der Zeit wählt dein Körper ihn selbst — und dann bist du überall rechtzeitig.",
+        "en": "At beginner level you learned the basic cycle: central position, split step, out to the ball, back to the middle. Now you fill this cycle with the individual step types that make each zone of your court reachable fastest. That's the complete footwork system.\n\nFour step types carry it. The chassé is a sideways shuffle in which the feet never cross — you stay in balance and often use it to prepare the next step. The lunge is the most-used step: a deep, explosive lunge into a corner, hitting-side foot leading, that gets you to the Speeder stable and far. The scissor jump gets you to high Speeders deep in the rear area — you push off, switch leg position in the air and land ready to hit again. The block jump intercepts fast balls from the side when there's no time for a full step.\n\nWhat's decisive is that you choose the right step for each zone — and after every stroke find your way back to the central position with a clean recovery step. The recovery step is the most inconspicuous and the most important: it re-establishes the cycle each time.\n\nThink of a fencer. Their feet never stand at random — every step has a form and a purpose, and after every attack they return immediately to the base stance. That's exactly the economy you're after for your court.\n\nAt some point this system runs unconsciously. At first you choose the step deliberately; over time your body chooses it itself — and then you're everywhere in time.",
+        "fr": "Au niveau débutant, tu as appris le cycle de base : position centrale, split-step, aller vers la balle, revenir au centre. Maintenant, tu remplis ce cycle avec les différents types de pas qui rendent chaque zone de ton terrain accessible le plus vite possible. C'est le système complet de jeu de jambes.\n\nQuatre types de pas le portent. Le chassé est un pas chassé latéral où les pieds ne se croisent jamais — tu restes en équilibre et prépares souvent ainsi le pas suivant. La fente est le pas le plus utilisé : une fente profonde et explosive dans un coin, le pied du côté de la frappe devant, qui te mène au speeder de façon stable et loin. Le saut en ciseaux te mène aux speeders hauts, loin dans la zone arrière — tu décolles, changes la position des jambes en l'air et retombes de nouveau prêt à frapper. Le saut bloc intercepte les balles rapides venant du côté, quand il ne reste pas de temps pour un pas entier.\n\nL'essentiel, c'est que tu choisisses le pas adapté à chaque zone — et qu'après chaque frappe tu retrouves la position centrale par un pas de retour propre. Le pas de retour est le plus discret et le plus important : il rétablit le cycle à chaque fois.\n\nPense à un escrimeur. Ses pieds ne sont jamais placés au hasard — chaque pas a une forme et un but, et après chaque attaque il revient aussitôt à la position de garde. C'est exactement cette économie que tu recherches pour ton terrain.\n\nÀ un moment, ce système tourne inconsciemment. Au début, tu choisis le pas consciemment ; avec le temps, ton corps le choisit lui-même — et alors tu es partout à temps.",
+        "pl": "Z części dla początkujących znasz już cykl podstawowy: pozycja centralna, split-step, wyjście do piłki, powrót do środka. Teraz wypełniasz ten cykl poszczególnymi typami kroków, które czynią każdą strefę twojego pola najszybciej osiągalną. To pełny system pracy nóg.\n\nNiosą go cztery typy kroków. Chassé to boczny krok dostawny, w którym stopy nigdy się nie krzyżują — pozostajesz w równowadze i często przygotowujesz nim następny krok. Wykrok to najczęściej używany krok: głęboki, eksplozywny wypad w narożnik, stopą po stronie uderzenia w przód, który doprowadza cię stabilnie i daleko do speedera. Skok nożycowy doprowadza cię do wysokich speederów głęboko w tylnym obszarze — odbijasz się, zmieniasz w powietrzu ustawienie nóg i wracasz na ziemię gotów do uderzenia. Skok blokujący przechwytuje szybkie piłki z boku, gdy nie ma czasu na cały krok.\n\nDecydujące jest, by dla każdej strefy wybierać odpowiedni krok — i po każdym uderzeniu czystym krokiem powrotnym wracać do pozycji centralnej. Krok powrotny jest najniepozorniejszy i najważniejszy: za każdym razem od nowa odtwarza cykl.\n\nPomyśl o szermierzu. Jego stopy nigdy nie stają przypadkowo — każdy krok ma formę i cel, a po każdym ataku natychmiast wraca do postawy podstawowej. Właśnie tej ekonomii szukasz dla swojego pola.\n\nZ czasem ten system działa nieświadomie. Na początku wybierasz krok świadomie; z czasem ciało wybiera go samo — i wtedy wszędzie jesteś w porę."
+      },
+      "geeignete_phase": ["hauptteil"],
+      "dauer_klasse": "mittel",
+      "intensitaet": "mittel",
+      "fokus": ["technik", "koordination"],
+      "uebungsteil": {
+        "de": {
+          "titel": "Die Schritte den Zonen zuordnen",
+          "ziel": "Für jede Zone des Feldes den passenden Schritttyp abrufen und sauber zurückkehren.",
+          "schritte_teil1": [
+            "Übe die Schritttypen zunächst einzeln, ohne Speeder: den Chassé seitlich, den Ausfallschritt in die vorderen Ecken, den Scherensprung nach hinten, den Block-Sprung zur Seite.",
+            "Achte beim Chassé darauf, dass die Füße einander nie überkreuzen.",
+            "Kehre nach jedem Schritt mit einem Rückkehrschritt in die zentrale Position zurück."
+          ],
+          "schritte_teil2": [
+            "Lass dir jetzt Speeder in verschiedene Zonen zuwerfen.",
+            "Wähle für jede Zone den passenden Schritt, spiele den Speeder und kehre zurück.",
+            "Erhöhe das Tempo erst, wenn die Zuordnung Schritt-zu-Zone sitzt."
+          ],
+          "selbstkontrolle": "Wählst du für jede Zone den passenden Schritt, oder läufst du überall mit denselben Schritten hin? Und findest du nach jedem Ball zuverlässig in die zentrale Position zurück? Das System trägt erst, wenn Schrittwahl und Rückkehr rund laufen.",
+          "abschluss": "Das Beinarbeit-System ist die Grundlage aller fortgeschrittenen Schläge — nur wer rechtzeitig und richtig steht, kann Clear, Smash und Stopp sauber spielen."
+        },
+        "en": {
+          "titel": "Assign the steps to the zones",
+          "ziel": "Call up the right step type for each zone of the court and recover cleanly.",
+          "schritte_teil1": [
+            "First practice the step types individually, without a Speeder: the chassé sideways, the lunge into the front corners, the scissor jump to the back, the block jump to the side.",
+            "With the chassé, make sure the feet never cross.",
+            "After each step, return to the central position with a recovery step."
+          ],
+          "schritte_teil2": [
+            "Now have Speeders thrown to you into different zones.",
+            "Choose the right step for each zone, play the Speeder and return.",
+            "Only increase the pace once the step-to-zone assignment is in place."
+          ],
+          "selbstkontrolle": "Do you choose the right step for each zone, or do you go everywhere with the same steps? And do you reliably find your way back to the central position after every ball? The system only holds once step choice and recovery run smoothly.",
+          "abschluss": "The footwork system is the foundation of all advanced strokes — only someone who stands in time and in the right place can play clear, smash and drop cleanly."
+        },
+        "fr": {
+          "titel": "Associer les pas aux zones",
+          "ziel": "Mobiliser le type de pas adapté à chaque zone du terrain et revenir proprement.",
+          "schritte_teil1": [
+            "Travaille d'abord les types de pas séparément, sans speeder : le chassé sur le côté, la fente dans les coins avant, le saut en ciseaux vers l'arrière, le saut bloc sur le côté.",
+            "Au chassé, veille à ce que les pieds ne se croisent jamais.",
+            "Après chaque pas, reviens à la position centrale par un pas de retour."
+          ],
+          "schritte_teil2": [
+            "Fais-toi maintenant lancer des speeders dans différentes zones.",
+            "Choisis pour chaque zone le pas adapté, joue le speeder et reviens.",
+            "N'augmente le rythme que lorsque l'association pas-à-zone est en place."
+          ],
+          "selbstkontrolle": "Choisis-tu pour chaque zone le pas adapté, ou vas-tu partout avec les mêmes pas ? Et retrouves-tu de façon fiable la position centrale après chaque balle ? Le système ne tient que lorsque le choix du pas et le retour tournent rond.",
+          "abschluss": "Le système de jeu de jambes est le fondement de toutes les frappes avancées — seul celui qui est placé à temps et correctement peut jouer proprement le dégagement, le smash et l'amorti."
+        },
+        "pl": {
+          "titel": "Przypisać kroki do stref",
+          "ziel": "Dla każdej strefy pola przywołać odpowiedni typ kroku i czysto wrócić.",
+          "schritte_teil1": [
+            "Ćwicz typy kroków najpierw pojedynczo, bez speedera: chassé w bok, wykrok w przednie narożniki, skok nożycowy w tył, skok blokujący w bok.",
+            "Zwróć uwagę przy chassé, by stopy nigdy się nie krzyżowały.",
+            "Wróć po każdym kroku krokiem powrotnym do pozycji centralnej."
+          ],
+          "schritte_teil2": [
+            "Niech ktoś teraz dorzuca ci speedery w różne strefy.",
+            "Wybierz dla każdej strefy odpowiedni krok, zagraj speedera i wróć.",
+            "Zwiększaj tempo dopiero, gdy przypisanie krok-do-strefy siedzi."
+          ],
+          "selbstkontrolle": "Czy dla każdej strefy wybierasz odpowiedni krok, czy wszędzie biegniesz tymi samymi krokami? I czy po każdej piłce niezawodnie wracasz do pozycji centralnej? System sprawdza się dopiero wtedy, gdy wybór kroku i powrót działają płynnie.",
+          "abschluss": "System pracy nóg to podstawa wszystkich zaawansowanych uderzeń — tylko kto w porę i dobrze stoi, może czysto zagrać clear, smecz i skrót."
+        }
+      }
+    },
+    {
       "id": "ueberkopf_clear",
       "typ": "micro",
       "domaene": "technik",
@@ -120,7 +225,8 @@
         "fortgeschritten"
       ],
       "voraussetzungen": [
-        "handgelenk_peitsche"
+        "handgelenk_peitsche",
+        "beinarbeit_system"
       ],
       "spielziele": [
         "laengen_tiefensteuerung",
@@ -312,7 +418,8 @@
         "fortgeschritten"
       ],
       "voraussetzungen": [
-        "handgelenk_peitsche"
+        "handgelenk_peitsche",
+        "beinarbeit_system"
       ],
       "spielziele": [
         "laengen_tiefensteuerung",
@@ -492,111 +599,6 @@
           "abschluss": "Podcięcie to urozmaicenie na szczególne momenty. Oszczędnie i celowo użyte wybija przeciwnika z rytmu."
         }
       }
-    },
-    {
-      "id": "beinarbeit_system",
-      "typ": "micro",
-      "domaene": "technik",
-      "kompetenzstufe": [
-        "fortgeschritten"
-      ],
-      "voraussetzungen": [
-        "beinarbeit"
-      ],
-      "voraussetzungen_lesart": "motorisches Aufbauen (stufenuebergreifend): das vollstaendige System baut auf dem Beginner-Grundzyklus (zentrale Position, Split-Step, Rueckkehr) auf",
-      "spielziele": [
-        "wiederholte_antrittsschnelligkeit",
-        "rally_ausdauer",
-        "umschaltmoment_erkennen"
-      ],
-      "vermittlungsziele": [],
-      "transfer_herkunft": [
-        "CM",
-        "BAD"
-      ],
-      "transfer_herkunft_beleg": "Vollstaendiges Schrittsystem (Chasse, Ausfallschritt, Scherensprung, Block-Sprung, Rueckkehrschritt) crossminton-eigen belegt (Gossen-Footwork-Skript). Chasse/Lunge verwandt mit Badminton.",
-      "untergrund": "halle",
-      "witterung": [],
-      "trainer_layer_offen": "Fehlerbild 'falscher Schritttyp fuer die Zone / kreuzt die Fuesse beim Chasse' + Korrekturansage",
-      "grafik": [
-        "G-014"
-      ],
-      "erklaerteil": {
-        "de": "Im Einsteiger-Bereich hast du den Grundzyklus gelernt: zentrale Position, Split-Step, raus zum Ball, zurück zur Mitte. Jetzt füllst du diesen Zyklus mit den einzelnen Schritttypen, die jede Zone deines Feldes am schnellsten erreichbar machen. Das ist das vollständige Beinarbeit-System.\n\nVier Schritttypen tragen es. Der Chassé ist ein seitliches Nachstellen, bei dem die Füße einander nie überkreuzen — du bleibst im Gleichgewicht und bereitest damit oft den nächsten Schritt vor. Der Ausfallschritt ist der am häufigsten genutzte Schritt: ein tiefer, explosiver Ausfall in eine Ecke, mit dem schlagseitigen Fuß voran, der dich stabil und weit an den Speeder bringt. Der Scherensprung bringt dich an hohe Speeder tief im hinteren Bereich — du springst ab, wechselst in der Luft die Beinstellung und kommst schlagbereit wieder auf. Der Block-Sprung fängt schnelle Bälle von der Seite ab, wenn keine Zeit für einen ganzen Schritt bleibt.\n\nEntscheidend ist, dass du für jede Zone den passenden Schritt wählst — und nach jedem Schlag mit einem sauberen Rückkehrschritt in die zentrale Position zurückfindest. Der Rückkehrschritt ist der unscheinbarste und wichtigste: Er stellt den Zyklus jedes Mal neu her.\n\nDenk an einen Fechter. Seine Füße stehen nie zufällig — jeder Schritt hat eine Form und einen Zweck, und er kehrt nach jedem Angriff sofort in die Grundstellung zurück. Genau diese Ökonomie suchst du für dein Feld.\n\nDieses System läuft irgendwann unbewusst. Am Anfang wählst du den Schritt bewusst; mit der Zeit wählt dein Körper ihn selbst — und dann bist du überall rechtzeitig.",
-        "en": "At beginner level you learned the basic cycle: central position, split step, out to the ball, back to the middle. Now you fill this cycle with the individual step types that make each zone of your court reachable fastest. That's the complete footwork system.\n\nFour step types carry it. The chassé is a sideways shuffle in which the feet never cross — you stay in balance and often use it to prepare the next step. The lunge is the most-used step: a deep, explosive lunge into a corner, hitting-side foot leading, that gets you to the Speeder stable and far. The scissor jump gets you to high Speeders deep in the rear area — you push off, switch leg position in the air and land ready to hit again. The block jump intercepts fast balls from the side when there's no time for a full step.\n\nWhat's decisive is that you choose the right step for each zone — and after every stroke find your way back to the central position with a clean recovery step. The recovery step is the most inconspicuous and the most important: it re-establishes the cycle each time.\n\nThink of a fencer. Their feet never stand at random — every step has a form and a purpose, and after every attack they return immediately to the base stance. That's exactly the economy you're after for your court.\n\nAt some point this system runs unconsciously. At first you choose the step deliberately; over time your body chooses it itself — and then you're everywhere in time.",
-        "fr": "Au niveau débutant, tu as appris le cycle de base : position centrale, split-step, aller vers la balle, revenir au centre. Maintenant, tu remplis ce cycle avec les différents types de pas qui rendent chaque zone de ton terrain accessible le plus vite possible. C'est le système complet de jeu de jambes.\n\nQuatre types de pas le portent. Le chassé est un pas chassé latéral où les pieds ne se croisent jamais — tu restes en équilibre et prépares souvent ainsi le pas suivant. La fente est le pas le plus utilisé : une fente profonde et explosive dans un coin, le pied du côté de la frappe devant, qui te mène au speeder de façon stable et loin. Le saut en ciseaux te mène aux speeders hauts, loin dans la zone arrière — tu décolles, changes la position des jambes en l'air et retombes de nouveau prêt à frapper. Le saut bloc intercepte les balles rapides venant du côté, quand il ne reste pas de temps pour un pas entier.\n\nL'essentiel, c'est que tu choisisses le pas adapté à chaque zone — et qu'après chaque frappe tu retrouves la position centrale par un pas de retour propre. Le pas de retour est le plus discret et le plus important : il rétablit le cycle à chaque fois.\n\nPense à un escrimeur. Ses pieds ne sont jamais placés au hasard — chaque pas a une forme et un but, et après chaque attaque il revient aussitôt à la position de garde. C'est exactement cette économie que tu recherches pour ton terrain.\n\nÀ un moment, ce système tourne inconsciemment. Au début, tu choisis le pas consciemment ; avec le temps, ton corps le choisit lui-même — et alors tu es partout à temps.",
-        "pl": "Z części dla początkujących znasz już cykl podstawowy: pozycja centralna, split-step, wyjście do piłki, powrót do środka. Teraz wypełniasz ten cykl poszczególnymi typami kroków, które czynią każdą strefę twojego pola najszybciej osiągalną. To pełny system pracy nóg.\n\nNiosą go cztery typy kroków. Chassé to boczny krok dostawny, w którym stopy nigdy się nie krzyżują — pozostajesz w równowadze i często przygotowujesz nim następny krok. Wykrok to najczęściej używany krok: głęboki, eksplozywny wypad w narożnik, stopą po stronie uderzenia w przód, który doprowadza cię stabilnie i daleko do speedera. Skok nożycowy doprowadza cię do wysokich speederów głęboko w tylnym obszarze — odbijasz się, zmieniasz w powietrzu ustawienie nóg i wracasz na ziemię gotów do uderzenia. Skok blokujący przechwytuje szybkie piłki z boku, gdy nie ma czasu na cały krok.\n\nDecydujące jest, by dla każdej strefy wybierać odpowiedni krok — i po każdym uderzeniu czystym krokiem powrotnym wracać do pozycji centralnej. Krok powrotny jest najniepozorniejszy i najważniejszy: za każdym razem od nowa odtwarza cykl.\n\nPomyśl o szermierzu. Jego stopy nigdy nie stają przypadkowo — każdy krok ma formę i cel, a po każdym ataku natychmiast wraca do postawy podstawowej. Właśnie tej ekonomii szukasz dla swojego pola.\n\nZ czasem ten system działa nieświadomie. Na początku wybierasz krok świadomie; z czasem ciało wybiera go samo — i wtedy wszędzie jesteś w porę."
-      },
-      "geeignete_phase": ["hauptteil"],
-      "dauer_klasse": "mittel",
-      "intensitaet": "mittel",
-      "fokus": ["technik", "koordination"],
-      "uebungsteil": {
-        "de": {
-          "titel": "Die Schritte den Zonen zuordnen",
-          "ziel": "Für jede Zone des Feldes den passenden Schritttyp abrufen und sauber zurückkehren.",
-          "schritte_teil1": [
-            "Übe die Schritttypen zunächst einzeln, ohne Speeder: den Chassé seitlich, den Ausfallschritt in die vorderen Ecken, den Scherensprung nach hinten, den Block-Sprung zur Seite.",
-            "Achte beim Chassé darauf, dass die Füße einander nie überkreuzen.",
-            "Kehre nach jedem Schritt mit einem Rückkehrschritt in die zentrale Position zurück."
-          ],
-          "schritte_teil2": [
-            "Lass dir jetzt Speeder in verschiedene Zonen zuwerfen.",
-            "Wähle für jede Zone den passenden Schritt, spiele den Speeder und kehre zurück.",
-            "Erhöhe das Tempo erst, wenn die Zuordnung Schritt-zu-Zone sitzt."
-          ],
-          "selbstkontrolle": "Wählst du für jede Zone den passenden Schritt, oder läufst du überall mit denselben Schritten hin? Und findest du nach jedem Ball zuverlässig in die zentrale Position zurück? Das System trägt erst, wenn Schrittwahl und Rückkehr rund laufen.",
-          "abschluss": "Das Beinarbeit-System ist die Grundlage aller fortgeschrittenen Schläge — nur wer rechtzeitig und richtig steht, kann Clear, Smash und Stopp sauber spielen."
-        },
-        "en": {
-          "titel": "Assign the steps to the zones",
-          "ziel": "Call up the right step type for each zone of the court and recover cleanly.",
-          "schritte_teil1": [
-            "First practice the step types individually, without a Speeder: the chassé sideways, the lunge into the front corners, the scissor jump to the back, the block jump to the side.",
-            "With the chassé, make sure the feet never cross.",
-            "After each step, return to the central position with a recovery step."
-          ],
-          "schritte_teil2": [
-            "Now have Speeders thrown to you into different zones.",
-            "Choose the right step for each zone, play the Speeder and return.",
-            "Only increase the pace once the step-to-zone assignment is in place."
-          ],
-          "selbstkontrolle": "Do you choose the right step for each zone, or do you go everywhere with the same steps? And do you reliably find your way back to the central position after every ball? The system only holds once step choice and recovery run smoothly.",
-          "abschluss": "The footwork system is the foundation of all advanced strokes — only someone who stands in time and in the right place can play clear, smash and drop cleanly."
-        },
-        "fr": {
-          "titel": "Associer les pas aux zones",
-          "ziel": "Mobiliser le type de pas adapté à chaque zone du terrain et revenir proprement.",
-          "schritte_teil1": [
-            "Travaille d'abord les types de pas séparément, sans speeder : le chassé sur le côté, la fente dans les coins avant, le saut en ciseaux vers l'arrière, le saut bloc sur le côté.",
-            "Au chassé, veille à ce que les pieds ne se croisent jamais.",
-            "Après chaque pas, reviens à la position centrale par un pas de retour."
-          ],
-          "schritte_teil2": [
-            "Fais-toi maintenant lancer des speeders dans différentes zones.",
-            "Choisis pour chaque zone le pas adapté, joue le speeder et reviens.",
-            "N'augmente le rythme que lorsque l'association pas-à-zone est en place."
-          ],
-          "selbstkontrolle": "Choisis-tu pour chaque zone le pas adapté, ou vas-tu partout avec les mêmes pas ? Et retrouves-tu de façon fiable la position centrale après chaque balle ? Le système ne tient que lorsque le choix du pas et le retour tournent rond.",
-          "abschluss": "Le système de jeu de jambes est le fondement de toutes les frappes avancées — seul celui qui est placé à temps et correctement peut jouer proprement le dégagement, le smash et l'amorti."
-        },
-        "pl": {
-          "titel": "Przypisać kroki do stref",
-          "ziel": "Dla każdej strefy pola przywołać odpowiedni typ kroku i czysto wrócić.",
-          "schritte_teil1": [
-            "Ćwicz typy kroków najpierw pojedynczo, bez speedera: chassé w bok, wykrok w przednie narożniki, skok nożycowy w tył, skok blokujący w bok.",
-            "Zwróć uwagę przy chassé, by stopy nigdy się nie krzyżowały.",
-            "Wróć po każdym kroku krokiem powrotnym do pozycji centralnej."
-          ],
-          "schritte_teil2": [
-            "Niech ktoś teraz dorzuca ci speedery w różne strefy.",
-            "Wybierz dla każdej strefy odpowiedni krok, zagraj speedera i wróć.",
-            "Zwiększaj tempo dopiero, gdy przypisanie krok-do-strefy siedzi."
-          ],
-          "selbstkontrolle": "Czy dla każdej strefy wybierasz odpowiedni krok, czy wszędzie biegniesz tymi samymi krokami? I czy po każdej piłce niezawodnie wracasz do pozycji centralnej? System sprawdza się dopiero wtedy, gdy wybór kroku i powrót działają płynnie.",
-          "abschluss": "System pracy nóg to podstawa wszystkich zaawansowanych uderzeń — tylko kto w porę i dobrze stoi, może czysto zagrać clear, smecz i skrót."
-        }
-      }
     }
   ],
   "delta_bausteine": [
@@ -700,7 +702,7 @@
         "pl": "System pracy nóg — dla graczy przechodzących z badmintona"
       },
       "erklaerteil": {
-        "de": "Die einzelnen Schritte kennst du: Chassé und Ausfallschritt sind im Badminton wie hier zu Hause, der Scherensprung ist dir von den hohen Bällen vertraut. Die Schritttypen musst du kaum umlernen.\n\nWas du umlernst, ist ihre Ordnung im Raum — und das ist der größte Unterschied überhaupt. Deine Badminton-Beinarbeit ist um das Netz herum gebaut. Du denkst in einem vorderen und einem hinteren Bereich, dein Zentrum liegt nah an der kurzen Aufschlaglinie, und du bist immer zum Netz ausgerichtet. Diese ganze Landkarte gibt es hier nicht.\n\nDein Feld ist ein Quadrat ohne Netz, und du verteidigst es aus seiner Mitte heraus — nach allen vier Ecken gleich. Es gibt vier gleichwertige Ecken um ein symmetrisches Zentrum, kein Vorn und Hinten im Netzsinn. Der Block-Sprung fängt hier schnelle Bälle von der Seite ab, nicht einen Netzangriff. Und deine Rückkehr führt in die Mitte des Quadrats, nicht an eine netznahe Position.\n\nRichte deine innere Landkarte also neu aus: weg vom netzorientierten Vorn-Hinten, hin zum symmetrischen Quadrat mit vier gleichen Ecken. Die Beine können die Schritte schon — sie müssen nur lernen, in dieser neuen Geometrie zu denken.\n\nEin kleiner Test: Ertappst du dich dabei, dich nach einem Schlag netzorientiert nach vorn auszurichten oder ein „hinten\" zu bevorzugen? Dann trägt dich noch die Badminton-Landkarte. Ziel ist das gleichmäßige Decken aller vier Ecken aus der Quadratmitte.",
+        "de": "Die einzelnen Schritte kennst du: Chassé und Ausfallschritt sind im Badminton wie hier zu Hause, der Scherensprung ist dir von den hohen Bällen vertraut. Die Schritttypen musst du kaum umlernen.\n\nWas du umlernst, ist ihre Ordnung im Raum — und das ist der größte Unterschied überhaupt. Deine Badminton-Beinarbeit ist um das Netz herum gebaut. Du denkst in einem vorderen und einem hinteren Bereich, dein Zentrum liegt nah an der kurzen Aufschlaglinie, und du bist immer zum Netz ausgerichtet. Diese ganze Landkarte gibt es hier nicht.\n\nDein Feld ist ein Quadrat ohne Netz, und du verteidigst es aus seiner Mitte heraus — nach allen vier Ecken gleich. Es gibt vier gleichwertige Ecken um ein symmetrisches Zentrum, kein Vorn und Hinten im Netzsinn. Der Block-Sprung fängt hier schnelle Bälle von der Seite ab, nicht einen Netzangriff. Und deine Rückkehr führt in die Mitte des Quadrats, nicht an eine netznahe Position.\n\nRichte deine innere Landkarte also neu aus: weg vom netzorientierten Vorn-Hinten, hin zum symmetrischen Quadrat mit vier gleichen Ecken. Die Beine können die Schritte schon — sie müssen nur lernen, in dieser neuen Geometrie zu denken.\n\nEin kleiner Test: Ertappst du dich dabei, dich nach einem Schlag netzorientiert nach vorn auszurichten oder ein „hinten“ zu bevorzugen? Dann trägt dich noch die Badminton-Landkarte. Ziel ist das gleichmäßige Decken aller vier Ecken aus der Quadratmitte.",
         "en": "You know the individual steps: the chassé and lunge are as at home in badminton as here, the scissor jump is familiar to you from the high balls. You have almost nothing to relearn about the step types.\n\nWhat you do relearn is their order in space — and that's the biggest difference of all. Your badminton footwork is built around the net. You think in a front and a back area, your center lies near the short service line, and you're always oriented to the net. This whole map doesn't exist here.\n\nYour court is a square without a net, and you defend it from its middle — to all four corners equally. There are four equal corners around a symmetrical center, no front and back in the net sense. The block jump here intercepts fast balls from the side, not a net attack. And your recovery leads to the middle of the square, not to a net-side position.\n\nSo reorient your inner map: away from the net-oriented front-back, toward the symmetrical square with four equal corners. The legs already know the steps — they just have to learn to think in this new geometry.\n\nA quick test: do you catch yourself orienting forward net-style after a stroke, or favoring a \"back\"? Then the badminton map is still carrying you. The goal is covering all four corners evenly from the middle of the square.",
         "fr": "Les pas eux-mêmes, tu les connais : le chassé et la fente sont chez eux au badminton comme ici, le saut en ciseaux t'est familier grâce aux balles hautes. Les types de pas, tu n'as presque rien à réapprendre.\n\nCe que tu réapprends, c'est leur ordre dans l'espace — et c'est la plus grande différence de toutes. Ton jeu de jambes de badminton est construit autour du filet. Tu penses en une zone avant et une zone arrière, ton centre se situe près de la ligne de service court, et tu es toujours orienté vers le filet. Toute cette carte n'existe pas ici.\n\nTon terrain est un carré sans filet, et tu le défends depuis son centre — vers les quatre coins de façon égale. Il y a quatre coins équivalents autour d'un centre symétrique, pas d'avant ni d'arrière au sens du filet. Le saut bloc intercepte ici les balles rapides venant du côté, pas une attaque au filet. Et ton retour te ramène au centre du carré, pas à une position proche du filet.\n\nRéoriente donc ta carte intérieure : loin de l'avant-arrière orienté vers le filet, vers le carré symétrique aux quatre coins égaux. Les jambes savent déjà faire les pas — elles doivent seulement apprendre à penser dans cette nouvelle géométrie.\n\nUn petit test : te surprends-tu, après une frappe, à t'orienter vers l'avant comme au filet ou à privilégier un « arrière » ? Alors la carte du badminton te porte encore. L'objectif, c'est de couvrir les quatre coins de façon uniforme depuis le centre du carré.",
         "pl": "Poszczególne kroki znasz: chassé i wykrok są w badmintonie jak tutaj u siebie, skok nożycowy jest ci znany z wysokich piłek. Typów kroków ledwie musisz się uczyć na nowo.\n\nCo przeuczasz, to ich porządek w przestrzeni — i to największa różnica w ogóle. Twoja badmintonowa praca nóg jest zbudowana wokół siatki. Myślisz w przednim i tylnym obszarze, twoje centrum leży blisko krótkiej linii serwisowej, i zawsze ustawiasz się przodem do siatki. Całej tej mapy tutaj nie ma.\n\nTwoje pole to kwadrat bez siatki, i bronisz go z jego środka — na wszystkie cztery narożniki równo. Są cztery równorzędne narożniki wokół symetrycznego centrum, nie ma przodu i tyłu w sensie siatki. Skok blokujący przechwytuje tu szybkie piłki z boku, nie atak przy siatce. A twój powrót prowadzi w środek kwadratu, nie na pozycję przy siatce.\n\nUstaw więc swoją wewnętrzną mapę na nowo: od zorientowanego na siatkę przodu-tyłu ku symetrycznemu kwadratowi z czterema równymi narożnikami. Nogi już umieją kroki — muszą się tylko nauczyć myśleć w tej nowej geometrii.\n\nMały test: łapiesz się na tym, że po uderzeniu ustawiasz się jak przy siatce do przodu albo faworyzujesz „tył\"? To znaczy, że wciąż niesie cię badmintonowa mapa. Celem jest równomierne krycie wszystkich czterech narożników ze środka kwadratu."

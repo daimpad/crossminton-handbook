@@ -373,12 +373,12 @@
    "phasen": {
     "erwaermung": [
      {
-      "baustein": "beweglichkeit_und_schulter",
+      "baustein": "richtig_aufwaermen",
       "hinweis": {
-       "de": "Schulter und Rumpf wecken — die Basis für saubere Überkopf- und Täuschungsbewegungen.",
-       "en": "Wake up the shoulder and trunk — the basis for clean overhead and deception movements.",
-       "fr": "Réveiller l'épaule et le tronc — la base de mouvements propres au-dessus de la tête et de feinte.",
-       "pl": "Obudzić bark i tułów — baza dla czystych ruchów nad głową i zwodów."
+       "de": "Warm werden und dabei Schulter und Rumpf wecken — die Basis für saubere Überkopf- und Täuschungsbewegungen.",
+       "en": "Warm up and wake up the shoulder and trunk as you go — the basis for clean overhead and deception movements.",
+       "fr": "S'échauffer en réveillant l'épaule et le tronc — la base de mouvements propres au-dessus de la tête et de feinte.",
+       "pl": "Rozgrzać się, budząc przy tym bark i tułów — baza dla czystych ruchów nad głową i zwodów."
       }
      }
     ],
@@ -420,6 +420,15 @@
        "fr": "Application en partie : imposer ton jeu à l'adversaire avec des balles prises tôt, feintées et précises.",
        "pl": "Zastosowanie w partii: wcześnie przyjętymi, zagranymi ze zwodem i precyzyjnymi piłkami narzucać przeciwnikowi swoją grę."
       }
+     },
+     {
+      "baustein": "beweglichkeit_und_schulter",
+      "hinweis": {
+       "de": "Zum Schluss, solange die Schulter warm ist: die Schlagschulter sanft dehnen und die einseitige Belastung ausgleichen.",
+       "en": "To finish, while the shoulder is still warm: gently stretch the hitting shoulder and balance out the one-sided load.",
+       "fr": "Pour finir, tant que l'épaule est encore chaude : étirer doucement l'épaule de frappe et compenser la charge unilatérale.",
+       "pl": "Na koniec, póki bark jest jeszcze ciepły: łagodnie rozciągnąć bark uderzający i wyrównać jednostronne obciążenie."
+      }
      }
     ]
    }
@@ -441,24 +450,42 @@
     "pl": "Zmieniać tempo i pozostać stałym pod presją"
    },
    "beschreibung": {
-    "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: das Tempo bewusst wechseln, explosiv vom Boden abdrücken und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck.",
-    "en": "An expert session for rhythm and resilience: change the pace deliberately, push off the ground explosively and land the hard stroke out of the jump — rounded off with holding quality under the greatest pressure.",
-    "fr": "Une séance experte pour le rythme et la résistance : changer le tempo volontairement, pousser sur le sol de façon explosive et placer la frappe puissante en sautant — clôturée par le maintien de la qualité sous la pression maximale.",
-    "pl": "Jednostka ekspercka na rytm i wytrzymałość: świadomie zmieniać tempo, eksplozywnie odbijać się od podłoża i kłaść mocne uderzenie z wyskoku — zakończona utrzymaniem jakości pod najwyższą presją."
+    "de": "Eine Experten-Einheit für Rhythmus und Belastbarkeit: explosiv vom Boden abdrücken, das Tempo bewusst wechseln und den harten Schlag aus dem Sprung setzen — abgeschlossen mit dem Halten der Qualität unter höchstem Druck.",
+    "en": "An expert session for rhythm and resilience: push off the ground explosively, change the pace deliberately and land the hard stroke out of the jump — rounded off with holding quality under the greatest pressure.",
+    "fr": "Une séance experte pour le rythme et la résistance : pousser sur le sol de façon explosive, changer le tempo volontairement et placer la frappe puissante en sautant — clôturée par le maintien de la qualité sous la pression maximale.",
+    "pl": "Jednostka ekspercka na rytm i wytrzymałość: eksplozywnie odbijać się od podłoża, świadomie zmieniać tempo i kłaść mocne uderzenie z wyskoku — zakończona utrzymaniem jakości pod najwyższą presją."
    },
    "phasen": {
     "erwaermung": [
      {
+      "baustein": "richtig_aufwaermen",
+      "hinweis": {
+       "de": "Zuerst allgemein warm werden: Kreislauf, Muskeltemperatur und bewegte Vorbereitung, bevor explosive Arbeit folgt.",
+       "en": "First warm up in general: circulation, muscle temperature and dynamic preparation before any explosive work follows.",
+       "fr": "D'abord s'échauffer de façon générale : circulation, température musculaire et préparation en mouvement, avant tout travail explosif.",
+       "pl": "Najpierw rozgrzać się ogólnie: krążenie, temperatura mięśni i przygotowanie w ruchu, zanim przyjdzie praca eksplozywna."
+      }
+     },
+     {
       "baustein": "schnelle_fuesse",
       "hinweis": {
-       "de": "Fußarbeit auf Betriebstemperatur bringen — Antritt und Bodenkontakt für die folgende Reaktivarbeit vorbereiten.",
-       "en": "Bring the footwork up to operating temperature — prepare the first step and ground contact for the reactive work to follow.",
-       "fr": "Amener le jeu de jambes à température de service — préparer le démarrage et le contact au sol pour le travail réactif qui suit.",
-       "pl": "Doprowadzić pracę nóg do temperatury pracy — przygotować zryw i kontakt z podłożem do następującej pracy reaktywnej."
+       "de": "Zum Ende des Aufwärmens die Füße auf Tempo bringen — Antritt und Bodenkontakt für die folgende Reaktivarbeit vorbereiten.",
+       "en": "To round off the warm-up, bring the feet up to speed — prepare the first step and ground contact for the reactive work to follow.",
+       "fr": "Pour clore l'échauffement, mettre les appuis en vitesse — préparer le démarrage et le contact au sol pour le travail réactif qui suit.",
+       "pl": "Na zakończenie rozgrzewki rozpędzić pracę nóg — przygotować zryw i kontakt z podłożem do następującej pracy reaktywnej."
       }
      }
     ],
     "hauptteil": [
+     {
+      "baustein": "reaktivkraft_bodenkontakt",
+      "hinweis": {
+       "de": "Den explosiven, kurzen Bodenkontakt schulen, der Tempowechsel und Sprung erst trägt.",
+       "en": "Train the explosive, short ground contact that makes the pace changes and the jump possible.",
+       "fr": "Travailler le contact au sol court et explosif qui porte les changements de tempo et le saut.",
+       "pl": "Szkolić eksplozywny, krótki kontakt z podłożem, który dopiero niesie zmianę tempa i wyskok."
+      }
+     },
      {
       "baustein": "tempo_rhythmus_wechsel",
       "hinweis": {
@@ -475,15 +502,6 @@
        "en": "Land the hard finish out of the jump — with the health note on jump loading noted in the module.",
        "fr": "Placer la conclusion puissante en sautant — avec la note de santé sur la charge de saut indiquée dans le module.",
        "pl": "Kłaść mocne zakończenie z wyskoku — z zapisaną w module wskazówką zdrowotną co do obciążenia skokowego."
-      }
-     },
-     {
-      "baustein": "reaktivkraft_bodenkontakt",
-      "hinweis": {
-       "de": "Den explosiven, kurzen Bodenkontakt schulen, der Tempowechsel und Sprung erst trägt.",
-       "en": "Train the explosive, short ground contact that makes the pace changes and the jump possible.",
-       "fr": "Travailler le contact au sol court et explosif qui porte les changements de tempo et le saut.",
-       "pl": "Szkolić eksplozywny, krótki kontakt z podłożem, który dopiero niesie zmianę tempa i wyskok."
       }
      }
     ],

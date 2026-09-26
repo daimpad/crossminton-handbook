@@ -259,6 +259,11 @@ function pruefeDaten(daten) {
     for (const v of b.voraussetzungen || []) {
       if (!daten.bausteinVonId.has(v)) w.push(`${b.id}: Voraussetzung "${v}" existiert nicht`);
     }
+    // `querverweis` ist Dokumentation (keine Kante), wird aber als „Siehe auch"
+    // angezeigt; ein toter Verweis fiele dort nur still weg, darum hier melden.
+    for (const q of b.querverweis || []) {
+      if (!daten.bausteinVonId.has(q)) w.push(`${b.id}: querverweis "${q}" existiert nicht`);
+    }
     for (const z of b.spielziele || []) {
       if (!daten.spielzielBereichVonFaktor.has(z)) w.push(`${b.id}: unbekanntes Spielziel "${z}"`);
     }

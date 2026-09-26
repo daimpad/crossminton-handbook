@@ -76,10 +76,15 @@ def texts(b):
     for k in ("erklaerteil", "reflexionsaufgabe"):
         if isinstance(b.get(k), dict) and "de" in b[k]: out.append(b[k]["de"])
     u = b.get("uebungsteil", {}).get("de") if isinstance(b.get("uebungsteil"), dict) else None
-    if isinstance(u, dict):
-        for k in ("ziel", "abschluss", "selbstkontrolle"): 
-            if u.get(k): out.append(u[k])
-        out += [s for s in u.get("schritte", []) if isinstance(s, str)]
+    # Den Uebungsteil vollstaendig einsammeln (auch titel, steigerung, naechste_stufe
+    # und schritte_teil1/_teil2 — beinarbeit_system lief an einer Feldliste vorbei).
+    def alle(o):
+        if isinstance(o, str): out.append(o)
+        elif isinstance(o, dict):
+            for v in o.values(): alle(v)
+        elif isinstance(o, list):
+            for v in o: alle(v)
+    if isinstance(u, dict): alle(u)
     return out
 
 # ---------------------------------------------------------------- checks
@@ -148,12 +153,16 @@ def check_delta(fn, dd):
 # keine Antithese, und bleibt erlaubt.
 ANTITHESE = re.compile(r"\b(?:[Nn]icht(?!\s+nur\b)|[Kk]ein(?:e|en|em|er|es)?|[Nn]ie)\b[^.;:!?]{0,80}?,?\s+sondern\b")
 BILD_FORMEL = re.compile(r"\bEin Bild\b[^.!?]{0,40}:")
+# Deutsche Zitate schliessen mit “ (U+201C), nie mit dem geraden Zeichen: „so“.
+ZITAT_GERADE = re.compile(r'„[^„“”"]*"')
 
 def pruefe_sprachregeln(fn, bid, t):
     if BILD_FORMEL.search(t):
         err(fn, bid, "Sprachregel: 'Ein Bild:'-Formel gefunden")
     if ANTITHESE.search(t):
         err(fn, bid, "Sprachregel: 'nicht/kein …, sondern …'-Antithese gefunden")
+    if ZITAT_GERADE.search(t):
+        err(fn, bid, 'Sprachregel: Zitat „…" mit geradem Schlusszeichen statt “')
 
 def check_language(fn, b):
     bid = b.get("id", "?")
