@@ -142,13 +142,23 @@ def check_delta(fn, dd):
     if dd.get("ersetzt_bei_herkunft") not in ALLOW["herkunft"]:
         err(fn, did, f"unbekannte ersetzt_bei_herkunft: {dd.get('ersetzt_bei_herkunft')}")
 
+# Spez. 12.1. Die Muster sind bewusst weiter als der Wortlaut: frueher rutschten
+# „Nicht …, sondern" (gross), „keinen …, sondern", „nie …, sondern" und die
+# Formel „Ein Bild dazu …:" durch. „nicht nur …, sondern auch" ist additiv,
+# keine Antithese, und bleibt erlaubt.
+ANTITHESE = re.compile(r"\b(?:[Nn]icht(?!\s+nur\b)|[Kk]ein(?:e|en|em|er|es)?|[Nn]ie)\b[^.;:!?]{0,80}?,?\s+sondern\b")
+BILD_FORMEL = re.compile(r"\bEin Bild\b[^.!?]{0,40}:")
+
+def pruefe_sprachregeln(fn, bid, t):
+    if BILD_FORMEL.search(t):
+        err(fn, bid, "Sprachregel: 'Ein Bild:'-Formel gefunden")
+    if ANTITHESE.search(t):
+        err(fn, bid, "Sprachregel: 'nicht/kein …, sondern …'-Antithese gefunden")
+
 def check_language(fn, b):
     bid = b.get("id", "?")
     for t in texts(b):
-        if "Ein Bild:" in t:
-            err(fn, bid, "Sprachregel: 'Ein Bild:'-Formel gefunden")
-        if re.search(r"(?:nicht|kein[e]?)[ ,][^;:]{1,70}, sondern", t):
-            err(fn, bid, "Sprachregel: 'nicht/kein …, sondern …'-Antithese gefunden")
+        pruefe_sprachregeln(fn, bid, t)
         for bad, good in (("Tempo-Management", "Tempo-Steuerung"),
                           ("punktstandabhängig", "je nach Spielstand")):
             if bad in t: err(fn, bid, f"Glossar-Verstoss: '{bad}' -> '{good}'")
@@ -196,8 +206,11 @@ if fb:
         elif not pool[ref][1].get("trainer_layer_offen"):
             warn("fehlerbilder.json", eid, f"Basisbaustein '{ref}' hat keinen trainer_layer_offen-Marker")
         for feld in ("symptom", "ursache", "korrektur"):
-            if not (e.get("erklaerteil", {}).get("de", {}) or {}).get(feld):
+            wert = (e.get("erklaerteil", {}).get("de", {}) or {}).get(feld)
+            if not wert:
                 err("fehlerbilder.json", eid, f"erklaerteil.de.{feld} fehlt")
+            else:
+                pruefe_sprachregeln("fehlerbilder.json", eid, wert)
 
 # reine JSON-Ladepruefung fuer restliche Dateien
 for extra in ("regeln.json", "app-info.json"):

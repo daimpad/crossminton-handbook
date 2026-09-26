@@ -324,9 +324,9 @@ Geprüft wird:
 - **Voraussetzungen** lösen auf — keine Kante zeigt auf eine unbekannte ID.
 - **Delta-Integrität**: `basis_baustein` existiert; **keine** Kante auf einen Experten-Baustein (Herkunftsneutralität, 11.5); keine doppelte `(Basis, Herkunft)`-Kante; `eigener_uebungsteil: false`; gültige `ersetzt_bei_herkunft`.
 - **Trainingseinheiten**: jede Referenz zeigt auf einen existierenden Baustein **mit** `uebungsteil` (6.4).
-- **Sprachregeln**: keine „Ein Bild:"-Formel, keine „nicht/kein …, sondern …"-Antithese, Glossar-Treue (u. a. Aufbauschläge, Tempo-Steuerung).
+- **Sprachregeln**: keine „Ein Bild:"-Formel, keine „nicht/kein …, sondern …"-Antithese, Glossar-Treue (u. a. Aufbauschläge, Tempo-Steuerung). Geprüft über Muster, die auch „Nicht …", „keinen …", „nie …, sondern" und „Ein Bild dazu …:" erfassen („nicht nur …, sondern auch" bleibt erlaubt), in Bausteinen, Deltas und den drei Feldern jedes Fehlerbilds.
 
-Stand gegen den aktuellen Korpus: **95 Bausteine, 24 Deltas, 19 Baustein-Dateien, 0 Fehler**. Ein Negativtest (absichtlich injizierte Fehler: unbekannte Domäne, ins Leere zeigende Voraussetzung, „Ein Bild:", Antithese) bestätigt, dass alle vier gemeldet werden und der Exit-Code auf 1 springt. Das Skript eignet sich als CI-Schritt: bei jedem Commit ausgeführt, meldet es Bruchstellen vor dem Erreichen der App.
+Stand gegen den aktuellen Korpus: **108 Bausteine, 24 Deltas, 23 Baustein-Dateien, 32 Fehlerbilder, 0 Fehler**. Ein Negativtest (absichtlich injizierte Fehler: unbekannte Domäne, ins Leere zeigende Voraussetzung, „Ein Bild:", Antithese) bestätigt, dass alle vier gemeldet werden und der Exit-Code auf 1 springt. Das Skript eignet sich als CI-Schritt: bei jedem Commit ausgeführt, meldet es Bruchstellen vor dem Erreichen der App.
 
 ### 12.2 Manifest (`MANIFEST.md`)
 
