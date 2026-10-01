@@ -1918,6 +1918,28 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   pruefe('Auslastung liegt zwischen 0 und 100 %', [std, ko8].every((r) => r.auslastung > 0 && r.auslastung <= 1 + 1e-9));
   pruefe('Engpass: viele Felder im K.-o. → Rundenfolge', sim.simuliere({ felder: 16 }).engpass === 'runden');
   pruefe('Engpass: ein Feld jeder gegen jeden → Felder', sim.simuliere({ felder: 1, modus: 'rr', maenner: 8, frauen: 0 }).engpass === 'felder');
+  // Gemessen statt geschätzt: im Standard (sechs Felder) wartet Runde 1 auf
+  // Felder — acht sparen eine ganze Welle. Bei fünf Einträgen jeder gegen jeden
+  // passen nur zwei Matches gleichzeitig, mehr Felder ändern nichts.
+  pruefe('Engpass im Standard-Szenario: Felder (acht Felder sparen eine Welle)',
+    sim.simuliere({}).engpass === 'felder' && sim.simuliere({ felder: 8 }).engpass === 'runden'
+    && sim.simuliere({ felder: 8 }).gesamt.typ < sim.simuliere({}).gesamt.typ - 40);
+  const rr5 = { modus: 'rr', maenner: 5, frauen: 0, satz: 'zeit', minuten: 10 };
+  pruefe('Engpass bei ungerader Zahl jeder gegen jeden: Runden (n Wellen, mehr Felder ändern nichts)',
+    sim.simuliere({ ...rr5, felder: 2 }).engpass === 'runden'
+    && sim.simuliere({ ...rr5, felder: 2 }).gesamt.typ === sim.simuliere({ ...rr5, felder: 16 }).gesamt.typ);
+  // Wartezeiten steigen und fallen mit der Feldzahl — gesucht wird der Reihe
+  // nach die ERSTE Zahl über der eingestellten, die sie in den Rahmen bringt.
+  const wartFall = { form: 'doppel', modus: 'rr', maenner: 10, frauen: 31, punkte: 6, saetze: 2, puffer: 5 };
+  const wart = sim.simuliere({ ...wartFall, felder: 10 });
+  const imRahmen = (f) => {
+    const w = sim.simuliere({ ...wartFall, felder: f }).warten;
+    return w.mittel <= sim.WARTEN_HINWEIS.mittel && w.laengste <= sim.WARTEN_HINWEIS.laengste;
+  };
+  pruefe('Felder gegen lange Wartezeiten: erste passende Zahl über der eingestellten',
+    wart.langesWarten && wart.felderFuerWarten > 10 && imRahmen(wart.felderFuerWarten)
+    && Array.from({ length: wart.felderFuerWarten - 11 }, (_, i) => 11 + i).every((f) => !imRahmen(f)),
+    String(wart.felderFuerWarten));
   // Jeder gegen jeden 12 + 8 im Zeitspiel: 94 Matches à 8 + 5 min — mit zwei
   // Feldern gut 10 h, die längste Kette (11 Spiele) aber nur 138 min.
   const engpassFall = { modus: 'rr', maenner: 12, frauen: 8, satz: 'zeit', halle: 360 };
@@ -1937,6 +1959,23 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
     sim.simuliere({ modus: 'rr', maenner: 12, frauen: 8 }).ketteZuLang === true && sim.simuliere({}).ketteZuLang === false);
   const zuViele = sim.simuliere({ maenner: 64, frauen: 64 });
   pruefe('Zu viele Matches für 16 Felder ist kein Ketten-Grund', zuViele.felderNoetig === null && zuViele.ketteZuLang === false);
+  // Ungerade Zahl jeder gegen jeden: je Runde setzt jemand aus, es sind n Wellen,
+  // nicht n−1. Sieben Personen: 6 Spiele je Person (288 min) passen in 300 min,
+  // die 7 Wellen (337 min) nicht — der Grund ist trotzdem die Kette.
+  const rr7 = sim.simuliere({ modus: 'rr', maenner: 7, frauen: 0, halle: 300 });
+  pruefe('Ungerade Zahl jeder gegen jeden: n Wellen zählen zur Kette',
+    rr7.felderNoetig === null && rr7.ketteZuLang === true && rr7.engpass === 'runden');
+  const ko24 = sim.simuliere({ maenner: 24, frauen: 0, halle: 240 });
+  pruefe('K.-o. 24 auf sechs Feldern: Engpass Felder, acht reichen', ko24.engpass === 'felder' && ko24.felderNoetig === 8);
+  // Wer allein in seiner Konkurrenz steht oder ohne Partner:in bleibt, spielt 0.
+  const allein = sim.simuliere({ modus: 'rr', maenner: 8, frauen: 1 });
+  const ohnePartner = sim.simuliere({ form: 'doppel', wertung: 'offen', modus: 'rr', maenner: 33, frauen: 0 });
+  pruefe('Spiele pro Person: Ausgeschlossene zählen mit 0',
+    allein.spieleJePerson.min === 0 && allein.spieleJePerson.max === 7 && Math.abs(allein.spieleJePerson.mittel - 56 / 9) < 1e-9
+    && ohnePartner.spieleJePerson.min === 0 && ohnePartner.spieleJePerson.max === 15);
+  const vieleKurze = sim.simuliere({ modus: 'rr', maenner: 24, frauen: 24, satz: 'zeit', minuten: 6, puffer: 3, halle: 240 });
+  pruefe('Kette passt, 16 Felder reichen trotzdem nicht → Grund „zu viele Matches"',
+    vieleKurze.felderNoetig === null && vieleKurze.ketteZuLang === false);
   pruefe('Ohne Teilnehmende: keine Matches, keine Fehler', sim.simuliere({ maenner: 0, frauen: 0 }).matchZahl === 0);
   pruefe('Eine Person allein ergibt keine Matches', sim.simuliere({ maenner: 1, frauen: 0 }).matchZahl === 0);
   pruefe('Gleiche Eingabe, gleicher Plan', JSON.stringify(sim.simuliere(szenario)) === JSON.stringify(sim.simuliere(szenario)));

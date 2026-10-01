@@ -71,13 +71,16 @@ function rundenKurz(eintrag) {
 function reglerHtml(name, beschriftung, { einheit = '', hinweis = '' } = {}) {
   const g = GRENZEN[name];
   const wert = einstellungen[name];
+  // Das Zahlenfeld nennt die Einheit mit („Spielzeit je Match min"), sonst
+  // hörte man nur die nackte Zahl.
+  const beschriftetVon = einheit ? `ts-${name}-titel ts-${name}-einheit` : `ts-${name}-titel`;
   return `
     <div class="ts-regler">
       <label class="ts-regler-titel" id="ts-${esc(name)}-titel" for="ts-${esc(name)}">${esc(beschriftung)}</label>
       <div class="ts-regler-zeile">
-        <input type="range" id="ts-${esc(name)}" data-regler="${esc(name)}" min="${esc(g.min)}" max="${esc(g.max)}" step="${esc(g.schritt)}" value="${esc(wert)}">
-        <input type="number" class="ts-zahl" data-zahl="${esc(name)}" min="${esc(g.min)}" max="${esc(g.max)}" step="${esc(g.schritt)}" value="${esc(wert)}" inputmode="numeric" aria-labelledby="ts-${esc(name)}-titel">
-        ${einheit ? `<span class="ts-einheit" aria-hidden="true">${esc(einheit)}</span>` : ''}
+        <input type="range" id="ts-${esc(name)}" data-regler="${esc(name)}" min="${esc(g.min)}" max="${esc(g.max)}" step="${esc(g.schritt)}" value="${esc(wert)}"${einheit ? ` data-einheit="${esc(einheit)}"` : ''}>
+        <input type="number" class="ts-zahl" data-zahl="${esc(name)}" min="${esc(g.min)}" max="${esc(g.max)}" step="${esc(g.schritt)}" value="${esc(wert)}" inputmode="numeric" aria-labelledby="${esc(beschriftetVon)}">
+        ${einheit ? `<span class="ts-einheit" id="ts-${esc(name)}-einheit">${esc(einheit)}</span>` : ''}
       </div>
       ${hinweis ? `<p class="ts-feldhinweis">${esc(hinweis)}</p>` : ''}
     </div>`;
@@ -195,22 +198,51 @@ function aktualisiereSteuerung(form) {
     absatz.textContent = HINWEISE[name] ? HINWEISE[name](e[name]) : '';
     absatz.hidden = !HINWEISE[name];
   }
-  for (const regler of form.querySelectorAll('[data-regler]')) regler.value = String(e[regler.dataset.regler]);
+  for (const regler of form.querySelectorAll('[data-regler]')) {
+    regler.value = String(e[regler.dataset.regler]);
+    // Ein Regler nennt sonst nur die nackte Zahl („8"), die Hallenzeit gar in
+    // Minuten („360") — vorgelesen wird der Wert mit Einheit.
+    const vorlesen = regler.dataset.regler === 'halle'
+      ? dauerText(e.halle)
+      : regler.dataset.einheit ? `${e[regler.dataset.regler]} ${regler.dataset.einheit}` : '';
+    if (vorlesen) regler.setAttribute('aria-valuetext', vorlesen);
+  }
   for (const feld of form.querySelectorAll('[data-zahl]')) {
     // Ein Feld, in das gerade getippt wird, nicht überschreiben — „1" auf dem
     // Weg zu „16" wäre sonst sofort auf das Minimum geklemmt.
     if (document.activeElement !== feld) feld.value = String(e[feld.dataset.zahl]);
   }
+  // <output> ist eine Live-Region: nur schreiben, wenn sich der Text ändert —
+  // sonst sagte der Screenreader die Hallenzeit bei jedem Schritt JEDES Reglers an.
   const halle = form.querySelector('#ts-halle-wert');
-  if (halle) halle.textContent = hallenzeitText();
+  const halleText = hallenzeitText();
+  if (halle && halle.textContent !== halleText) halle.textContent = halleText;
+  const start = form.querySelector('#ts-start');
+  if (start && document.activeElement !== start && start.value !== e.start) start.value = e.start;
 }
 
 // ---------- Ergebnis ----------
 
-function statusHtml(r) {
-  if (r.matchZahl === 0) {
-    return `<div class="ts-meldung ts-meldung-info"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><p>${esc(t('ts_leer'))}</p></div>`;
+function meldungenHtml(meldungen) {
+  return meldungen.map(([farbe, icon, satz]) => `
+      <div class="ts-meldung ts-meldung-${esc(farbe)}">
+        <i class="fa-solid ${esc(icon)}" aria-hidden="true"></i><p>${esc(satz)}</p>
+      </div>`).join('');
+}
+
+// Wer nicht mitspielt, und warum: auch im Leerzustand, denn genau dort erklärt
+// es, weshalb noch kein Match entsteht (im Doppel zählen Paare, nicht Personen).
+function teilnahmeHinweise(r) {
+  const hinweise = [];
+  if (r.uebrig > 0) hinweise.push(['gelb', 'fa-user-group', t('ts_uebrig_hinweis', { n: r.uebrig })]);
+  for (const k of r.konkurrenzen) {
+    if (k.eintraege === 1) hinweise.push(['gelb', 'fa-circle-info', t('ts_einzeln_hinweis', { konkurrenz: konkurrenzName(k.id) })]);
   }
+  return hinweise;
+}
+
+function statusHtml(r) {
+  if (r.matchZahl === 0) return meldungenHtml([['info', 'fa-circle-info', t('ts_leer')], ...teilnahmeHinweise(r)]);
   const e = r.einstellungen;
   const meldungen = [];
   if (r.passtInHalle) {
@@ -231,19 +263,11 @@ function statusHtml(r) {
       : t('ts_warten_ohne_felder');
     meldungen.push(['gelb', 'fa-hourglass-half', `${t('ts_warten', { mittel: dauerText(r.warten.mittel), laengste: dauerText(r.warten.laengste) })} ${rat}`]);
   }
-  if (r.uebrig > 0) meldungen.push(['gelb', 'fa-user-group', t('ts_uebrig_hinweis', { n: r.uebrig })]);
-  for (const k of r.konkurrenzen) {
-    if (k.eintraege === 1) meldungen.push(['gelb', 'fa-circle-info', t('ts_einzeln_hinweis', { konkurrenz: konkurrenzName(k.id) })]);
-  }
+  meldungen.push(...teilnahmeHinweise(r));
   const engpass = r.engpass
     ? `<p class="ts-engpass"><span class="chip">${esc(t(`ts_engpass_${r.engpass}`))}</span> ${esc(t(`ts_engpass_${r.engpass}_text`))}</p>`
     : '';
-  return `
-    ${meldungen.map(([farbe, icon, satz]) => `
-      <div class="ts-meldung ts-meldung-${esc(farbe)}">
-        <i class="fa-solid ${esc(icon)}" aria-hidden="true"></i><p>${esc(satz)}</p>
-      </div>`).join('')}
-    ${engpass}`;
+  return `${meldungenHtml(meldungen)}${engpass}`;
 }
 
 function kennzahl(icon, titel, wert, zeilen, extra = '') {
@@ -281,10 +305,24 @@ function kennzahlenHtml(r) {
     </div>`;
 }
 
-// Achsen-Schritt: höchstens acht Beschriftungen, auf runde Zeitspannen.
+// Achsen-Schritt: so viele Beschriftungen, wie nebeneinander passen. Über
+// Mitternacht hinaus trägt jede den Tag mit („09:00 (Tag 2)") und ist gut
+// doppelt so breit — eine feste Höchstzahl ließ sie dann ineinanderlaufen.
+// Gerechnet wird mit der Mindestbreite der Spur (dem Telefon); der Abstand
+// zweier Marken muss anderthalb Beschriftungen fassen, weil die erste und die
+// letzte bündig statt mittig sitzen.
+const ACHSE_ZEICHEN_PX = 7;
+const ACHSE_RAND_PX = 10;
 function achsenSchritt(spanne) {
   const schritte = [15, 30, 60, 120, 180, 240, 360, 720, 1440, 2880, 7200, 14400, 43200];
-  return schritte.find((s) => spanne / s <= 8) ?? Math.ceil(spanne / 8 / 1440) * 1440;
+  const breite = (m) => uhrText(m).length * ACHSE_ZEICHEN_PX + ACHSE_RAND_PX;
+  const passt = (s) => {
+    const stellen = Math.ceil(spanne / s);
+    let breiteste = 0;
+    for (let i = 0; i <= stellen; i++) breiteste = Math.max(breiteste, breite(i * s));
+    return SPUR_MIN_PX / stellen >= breiteste * 1.5;
+  };
+  return schritte.find((s) => passt(s)) ?? Math.ceil(spanne / 2 / 1440) * 1440;
 }
 
 function zeitleisteHtml(r) {
@@ -337,7 +375,7 @@ function zeitleisteHtml(r) {
 
   const halleLinks = pos(e.halle);
   const ueberzeit = e.halle < spanne
-    ? `<div class="ts-ueberzeit${r.passtInHalle ? '' : ' ts-ueberzeit-aktiv'}" style="left:${esc(prozent(halleLinks))}">
+    ? `<div class="ts-ueberzeit${r.passtInHalle ? '' : ' ts-ueberzeit-aktiv'}${halleLinks > 70 ? ' ts-hallenende-links' : ''}" style="left:${esc(prozent(halleLinks))}">
         <span class="ts-hallenende">${esc(t('ts_hallenende', { uhr: uhrText(e.halle) }))}</span>
       </div>`
     : '';
@@ -414,7 +452,7 @@ function ablaufHtml(r) {
           <tbody>
             ${gezeigt.map((a) => `
               <tr${a.ende > r.einstellungen.halle + 0.01 ? ' class="ts-zeile-ueber"' : ''}>
-                <td>${esc(`${uhrText(a.start)}–${uhrText(a.ende)}`)}</td>
+                <td>${esc(`${uhrText(a.start)}–${uhrText(a.ende)}`)}${a.ende > r.einstellungen.halle + 0.01 ? ` <span class="chip chip-rot ts-chip-ueber">${esc(t('ts_legende_ueber'))}</span>` : ''}</td>
                 <td>${esc(t('ts_feld', { n: a.feld + 1 }))}</td>
                 <td>${esc(konkurrenzName(a.konkurrenz))}</td>
                 <td>${esc(rundenTitel(a))}</td>
@@ -465,7 +503,9 @@ function liveHtml(r) {
 
 function bilanzText(r) {
   const zahl = zahlFormat();
-  const teile = [t('ts_personen', { n: zahl.format(r.personen) })];
+  // Alle Eingetragenen, auch wer ohne Partner:in bleibt — die Summe soll zu den
+  // beiden Reglern passen; wer übrig ist, steht gleich daneben.
+  const teile = [t('ts_personen', { n: zahl.format(r.einstellungen.maenner + r.einstellungen.frauen) })];
   if (r.einstellungen.form === 'doppel') {
     const paare = r.konkurrenzen.reduce((s, k) => s + k.eintraege, 0);
     teile.push(t('ts_paare', { n: zahl.format(paare) }));
@@ -522,13 +562,47 @@ function planeAdresse() {
   schreibZeitgeber = setTimeout(schreibeAdresse, 400);
 }
 
+// Die Query gehört nicht dem Simulator allein: ?feedback (Kommentator) und
+// fremde Parameter bleiben stehen, ersetzt werden nur die eigenen Schlüssel.
+// Fremde Teile wandern unverändert mit — URLSearchParams schriebe „feedback"
+// als „feedback=" und kodierte fremde Werte um.
+const EIGENE_SCHLUESSEL = new Set(Object.keys(STANDARD));
+function queryMitSzenario(szenario) {
+  const schluesselVon = (teil) => {
+    try {
+      return decodeURIComponent(teil.split('=')[0].replace(/\+/g, ' '));
+    } catch {
+      return null; // kaputt kodiert: kein eigener Schlüssel, bleibt stehen
+    }
+  };
+  const fremde = window.location.search.replace(/^\?/, '').split('&')
+    .filter((teil) => teil && !EIGENE_SCHLUESSEL.has(schluesselVon(teil)));
+  return [...fremde, ...(szenario ? [szenario] : [])].join('&');
+}
+
 function schreibeAdresse() {
   clearTimeout(schreibZeitgeber);
   schreibZeitgeber = null;
   // Wer kurz nach dem Ziehen die Seite wechselt, darf das Szenario nicht an die
   // Adresse der neuen Seite gehängt bekommen.
-  if (!document.getElementById('ts-form')) return;
-  ersetzeQuery(zuQuery(einstellungen));
+  if (!document.getElementById('ts-form') || !/\/turniersimulator$/.test(window.location.pathname)) return;
+  ersetzeQuery(queryMitSzenario(zuQuery(einstellungen)));
+}
+
+// Ein ausstehender Schreibvorgang gehört zu dem Verlaufseintrag, auf dem gezogen
+// wurde. Zurück/Vor verlässt ihn — dann verfällt er, statt das Szenario in den
+// angesteuerten Eintrag zu schreiben. Der Sprachwechsel dagegen bleibt auf der
+// Seite und liest gleich die Adresse: dort wird vorher geschrieben (app:sprache
+// kommt, bevor der Umschalter die Query übernimmt). Beide Lauscher hängen beim
+// Laden des Moduls, also vor dem popstate-Lauscher des Routers.
+if (typeof window !== 'undefined') {
+  window.addEventListener('popstate', () => {
+    clearTimeout(schreibZeitgeber);
+    schreibZeitgeber = null;
+  });
+  window.addEventListener('app:sprache', () => {
+    if (schreibZeitgeber) schreibeAdresse();
+  });
 }
 
 function planeAnsage(el) {
@@ -558,7 +632,16 @@ function uebernimm(name, wert) {
   einstellungen = ausQuery({ ...einstellungen, [name]: wert });
 }
 
+// Jedes Zeichnen bekommt eine Nummer. Ein Feld, das beim Neuzeichnen noch den
+// Fokus hat, feuert beim Entfernen sein ausstehendes change-Ereignis — der
+// Lauscher des ALTEN Formulars schriebe dann in das gerade geladene Szenario
+// (gemessen: Zurück während des Tippens trug den getippten Wert in den
+// angesteuerten Verlaufseintrag). Lauscher eines älteren Zeichnens schweigen.
+let zeichnung = 0;
+
 export function renderTurniersimulator(el) {
+  const nummer = ++zeichnung;
+  const aktuell = () => nummer === zeichnung;
   // Ein noch ausstehender Adress-Schreibvorgang gewinnt gegen die Adresse: wer
   // gerade gezogen hat und sofort die Sprache wechselt, nähme sonst den alten
   // Stand mit. Ohne ausstehenden Vorgang ist die Adresse die Quelle.
@@ -579,6 +662,7 @@ export function renderTurniersimulator(el) {
 
   form.addEventListener('submit', (ereignis) => ereignis.preventDefault());
   form.addEventListener('input', (ereignis) => {
+    if (!aktuell()) return;
     const feld = ereignis.target;
     if (feld.dataset.regler) {
       uebernimm(feld.dataset.regler, feld.value);
@@ -599,12 +683,18 @@ export function renderTurniersimulator(el) {
   });
   // Nach dem Tippen (Verlassen/Enter) zeigt das Zahlenfeld den gültigen Wert.
   form.addEventListener('change', (ereignis) => {
+    if (!aktuell()) return;
     const feld = ereignis.target;
     if (feld.dataset.zahl) {
-      uebernimm(feld.dataset.zahl, feld.value);
+      // Ein geleertes Feld bekommt den letzten gültigen Wert zurück — nicht den
+      // Standard, das verstellte sonst still Plan und Link.
+      if (feld.value !== '') uebernimm(feld.dataset.zahl, feld.value);
       feld.value = String(einstellungen[feld.dataset.zahl]);
       aktualisiereSteuerung(form);
       planeNeuberechnung(el);
+    } else if (feld.id === 'ts-start' && !/^\d{2}:\d{2}$/.test(feld.value)) {
+      // Ebenso die geleerte Uhrzeit: sie zeigt wieder, womit gerechnet wird.
+      feld.value = einstellungen.start;
     }
   });
 
@@ -616,7 +706,7 @@ export function renderTurniersimulator(el) {
     clearTimeout(schreibZeitgeber);
     schreibZeitgeber = null;
     einstellungen = { ...STANDARD };
-    ersetzeQuery('');
+    ersetzeQuery(queryMitSzenario(''));
     neuRendern();
   });
 }
