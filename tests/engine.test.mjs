@@ -1930,6 +1930,13 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   pruefe('Längste Kette über der Hallenzeit → keine Feldzahl hilft (12 jeder gegen jeden, 2 Gewinnsätze)',
     sim.simuliere({ modus: 'rr', maenner: 12, frauen: 8 }).felderNoetig === null);
   pruefe('Unmöglich in der Hallenzeit → keine Feldzahl', sim.simuliere({ modus: 'rr', maenner: 64, frauen: 64, wertung: 'offen' }).felderNoetig === null);
+  // Zwei verschiedene Gründe, warum auch 16 Felder nicht reichen — die Ansicht
+  // nennt nur den zutreffenden: die Kette eigener Spiele selbst ist zu lang,
+  // oder es sind schlicht zu viele Matches (K.-o. 64 + 64: Kette 4 h 48 min).
+  pruefe('Grund „Kette zu lang" nur, wenn die Kette die Hallenzeit überschreitet',
+    sim.simuliere({ modus: 'rr', maenner: 12, frauen: 8 }).ketteZuLang === true && sim.simuliere({}).ketteZuLang === false);
+  const zuViele = sim.simuliere({ maenner: 64, frauen: 64 });
+  pruefe('Zu viele Matches für 16 Felder ist kein Ketten-Grund', zuViele.felderNoetig === null && zuViele.ketteZuLang === false);
   pruefe('Ohne Teilnehmende: keine Matches, keine Fehler', sim.simuliere({ maenner: 0, frauen: 0 }).matchZahl === 0);
   pruefe('Eine Person allein ergibt keine Matches', sim.simuliere({ maenner: 1, frauen: 0 }).matchZahl === 0);
   pruefe('Gleiche Eingabe, gleicher Plan', JSON.stringify(sim.simuliere(szenario)) === JSON.stringify(sim.simuliere(szenario)));

@@ -219,7 +219,10 @@ function statusHtml(r) {
   } else {
     let rat;
     if (r.felderNoetig !== null) rat = t('ts_status_felder_noetig', { n: r.felderNoetig });
-    else rat = t(e.modus === 'rr' ? 'ts_status_keine_feldzahl_rr' : 'ts_status_keine_feldzahl_ko', { n: GRENZEN.felder.max });
+    // Warum auch die Höchstzahl an Feldern nicht reicht: entweder ist schon die
+    // Kette eigener Spiele länger als die Hallenzeit, oder es sind schlicht zu
+    // viele Matches. Nur der zutreffende Grund wird genannt.
+    else rat = t(`ts_status_keine_feldzahl_${r.ketteZuLang ? '' : 'menge_'}${e.modus === 'rr' ? 'rr' : 'ko'}`, { n: GRENZEN.felder.max });
     meldungen.push(['rot', 'fa-triangle-exclamation', `${t('ts_status_zu_lang', { dauer: dauerText(r.gesamt.typ), zuviel: dauerText(r.gesamt.typ - e.halle) })} ${rat}`]);
   }
   if (r.langesWarten) {
@@ -435,8 +438,11 @@ function annahmenHtml(r) {
           anteil: prozent.format(ANNAHMEN.verliererAnteil), punkte: e.punkte,
           satzpunkte: zahl.format(Math.round(e.punkte * (1 + ANNAHMEN.verliererAnteil))),
         }),
-        t('ts_annahmen_saetze', { chance: prozent.format(ANNAHMEN.satzchanceFavorit), saetze: e.saetze, mittel: zahl.format(erwarteteSaetze(e.saetze)) }),
       ];
+  // Bei einem Gewinnsatz gibt es genau einen Satz — da ist nichts zu erklären.
+  if (e.satz !== 'zeit' && e.saetze > 1) {
+    absaetze.push(t('ts_annahmen_saetze', { chance: prozent.format(ANNAHMEN.satzchanceFavorit), saetze: e.saetze, mittel: zahl.format(erwarteteSaetze(e.saetze)) }));
+  }
   absaetze.push(t('ts_annahmen_planung'));
   if (e.modus === 'ko') absaetze.push(t('ts_annahmen_ko'));
   return `

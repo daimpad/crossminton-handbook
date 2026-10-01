@@ -498,6 +498,10 @@ export function simuliere(einstellungen) {
   const engpass = matches.length ? (arbeitJeFeld >= kette ? 'felder' : 'runden') : null;
 
   const passtInHalle = gesamt.typ <= e.halle;
+  // Ist schon die Kette allein länger als die Hallenzeit, hilft keine Feldzahl —
+  // das ist ein anderer Grund als „zu viele Matches für 16 Felder" und braucht
+  // darum einen anderen Hinweis.
+  const ketteZuLang = kette > e.halle;
   const felderNoetig = matches.length
     ? kleinsteFeldzahl(matches, dauer.typ, e.puffer, (p) => dauerVon(p, dauer.typ) <= e.halle)
     : null;
@@ -544,6 +548,7 @@ export function simuliere(einstellungen) {
     engpass,
     passtInHalle,
     felderNoetig,
+    ketteZuLang,
     langesWarten,
     felderFuerWarten,
   };
