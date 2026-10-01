@@ -417,15 +417,21 @@ function wartezeiten(matches, plan, dauer) {
 }
 
 // Spiele je Person: jeder gegen jeden n−1 für alle; im K.-o. im Mittel
-// 2(n−1)/n, mindestens eins, höchstens so viele wie Runden.
-function spieleJePerson(liste, modus) {
+// 2(n−1)/n, mindestens eins, höchstens so viele wie Runden. Wer allein in
+// seiner Konkurrenz steht oder ohne Partner:in bleibt, spielt gar nicht und
+// zählt mit 0 — sonst stünde „für alle gleich" da, obwohl jemand zusieht.
+function spieleJePerson(liste, modus, uebrig = 0) {
   let summe = 0;
   let personen = 0;
   let min = Infinity;
   let max = 0;
   for (const k of liste) {
-    if (k.eintraege < 2) continue;
     const p = k.eintraege * k.personenJeEintrag;
+    if (k.eintraege < 2) {
+      personen += p;
+      min = 0;
+      continue;
+    }
     if (modus === 'rr') {
       summe += (k.eintraege - 1) * p;
       min = Math.min(min, k.eintraege - 1);
@@ -437,24 +443,42 @@ function spieleJePerson(liste, modus) {
     }
     personen += p;
   }
+  if (uebrig > 0) {
+    personen += uebrig;
+    min = 0;
+  }
   return personen ? { mittel: summe / personen, min, max } : { mittel: 0, min: 0, max: 0 };
 }
+
+// So viele Felder gelten als „unbegrenzt": mehr als die Hälfte der höchstens
+// 128 Einträge einer offenen Konkurrenz kann nie gleichzeitig spielen. Mit so
+// vielen Feldern zeigt dieselbe Planung, was die Kette eigener Spiele allein
+// erzwingt — eine gemessene Größe statt einer geschätzten Untergrenze.
+const FELDER_UNBEGRENZT = 64;
 
 // Kleinste Feldzahl (bis zur Obergrenze), mit der `bedingung` gilt. Sucht binär:
 // mehr Felder machen ein Turnier praktisch nie länger. Wo die Listenplanung
 // davon im Einzelfall abweicht, ist das Ergebnis eine passende, nicht zwingend
 // die kleinstmögliche Zahl — gemeldet wird aber nur eine Zahl, die passt.
-function kleinsteFeldzahl(matches, dauer, puffer, bedingung) {
+// NUR für die Gesamtdauer: Wartezeiten steigen und fallen mit der Feldzahl,
+// dort sucht `ersteFeldzahlAb` der Reihe nach.
+function kleinsteFeldzahl(planMit, bedingung) {
   let unten = GRENZEN.felder.min;
   let oben = GRENZEN.felder.max;
-  const passt = (f) => bedingung(verteile(matches, f, dauer, puffer));
-  if (!passt(oben)) return null;
+  if (!bedingung(planMit(oben))) return null;
   while (unten < oben) {
     const mitte = Math.floor((unten + oben) / 2);
-    if (passt(mitte)) oben = mitte;
+    if (bedingung(planMit(mitte))) oben = mitte;
     else unten = mitte + 1;
   }
   return unten;
+}
+
+// Erste Feldzahl über `ab` (bis zur Obergrenze), mit der `bedingung` gilt —
+// der Reihe nach, weil die Bedingung nicht mit der Feldzahl wächst.
+function ersteFeldzahlAb(ab, planMit, bedingung) {
+  for (let f = ab + 1; f <= GRENZEN.felder.max; f++) if (bedingung(planMit(f))) return f;
+  return null;
 }
 
 // Die ganze Simulation: Konkurrenzen, Matches, Zeitplan (typisch, schnell,
@@ -469,7 +493,14 @@ export function simuliere(einstellungen) {
     schnell: matchDauer(e, sek.schnell),
     langsam: matchDauer(e, sek.langsam),
   };
-  const plan = verteile(matches, e.felder, dauer.typ, e.puffer);
+  // Jede Feldzahl wird höchstens einmal geplant — Gesamtdauer, Engpass, nötige
+  // Felder und die Felder gegen lange Wartezeiten fragen teils dieselben Zahlen.
+  const plaene = new Map();
+  const planMit = (f) => {
+    if (!plaene.has(f)) plaene.set(f, verteile(matches, f, dauer.typ, e.puffer));
+    return plaene.get(f);
+  };
+  const plan = planMit(e.felder);
   const gesamt = {
     typ: dauerVon(plan, dauer.typ),
     schnell: e.satz === 'zeit' ? null : dauerVon(verteile(matches, e.felder, dauer.schnell, e.puffer), dauer.schnell),
@@ -484,30 +515,29 @@ export function simuliere(einstellungen) {
   const auslastung = gesamt.typ > 0 ? belegt / (e.felder * gesamt.typ) : 0;
   const warten = wartezeiten(matches, plan, dauer.typ);
 
-  // Engpass: Reichte die Feldzahl, ginge es nicht schneller als die längste
-  // Kette eigener Spiele (Runden bzw. n−1 Spiele hintereinander). Liegt die
-  // Arbeit je Feld darüber, sind die Felder der Engpass, sonst die Rundenfolge.
+  // Engpass und Kette werden GEMESSEN, nicht geschätzt: dieselbe Planung mit so
+  // vielen Feldern, dass nie ein Match auf ein Feld wartet, zeigt die Dauer, die
+  // allein die Kette eigener Spiele erzwingt (Runden im K.-o., jede Person ihre
+  // Spiele nacheinander im Jeder gegen jeden — bei ungerader Zahl sind das n
+  // Wellen, nicht n−1). Zwei Schätzungen gegeneinander zu halten lag daneben:
+  // im Standard-Szenario hieß es „mehr Felder helfen kaum", obwohl acht statt
+  // sechs Felder eine ganze Welle sparen. Felder sind der Engpass, wenn mehr von
+  // ihnen mindestens ein halbes Match einsparen würden.
   const takt = dauer.typ + e.puffer;
-  let kette = 0;
-  for (const k of liste) {
-    if (k.eintraege < 2) continue;
-    const schritte = e.modus === 'rr' ? k.eintraege - 1 : Math.ceil(Math.log2(k.eintraege));
-    kette = Math.max(kette, schritte * takt - e.puffer);
-  }
-  const arbeitJeFeld = matches.length ? (matches.length * takt) / e.felder - e.puffer : 0;
-  const engpass = matches.length ? (arbeitJeFeld >= kette ? 'felder' : 'runden') : null;
+  const unbegrenzt = matches.length ? dauerVon(planMit(Math.max(e.felder, FELDER_UNBEGRENZT)), dauer.typ) : 0;
+  const engpass = matches.length ? (gesamt.typ - unbegrenzt >= takt / 2 ? 'felder' : 'runden') : null;
 
   const passtInHalle = gesamt.typ <= e.halle;
-  // Ist schon die Kette allein länger als die Hallenzeit, hilft keine Feldzahl —
-  // das ist ein anderer Grund als „zu viele Matches für 16 Felder" und braucht
-  // darum einen anderen Hinweis.
-  const ketteZuLang = kette > e.halle;
+  // Passt es nicht einmal mit unbegrenzt vielen Feldern, ist die Kette selbst zu
+  // lang — ein anderer Grund als „zu viele Matches für 16 Felder", und die
+  // Ansicht nennt nur den zutreffenden.
+  const ketteZuLang = unbegrenzt > e.halle;
   const felderNoetig = matches.length
-    ? kleinsteFeldzahl(matches, dauer.typ, e.puffer, (p) => dauerVon(p, dauer.typ) <= e.halle)
+    ? kleinsteFeldzahl(planMit, (p) => dauerVon(p, dauer.typ) <= e.halle)
     : null;
   const langesWarten = warten.mittel > WARTEN_HINWEIS.mittel || warten.laengste > WARTEN_HINWEIS.laengste;
   const felderFuerWarten = langesWarten && matches.length
-    ? kleinsteFeldzahl(matches, dauer.typ, e.puffer, (p) => {
+    ? ersteFeldzahlAb(e.felder, planMit, (p) => {
         const w = wartezeiten(matches, p, dauer.typ);
         return w.mittel <= WARTEN_HINWEIS.mittel && w.laengste <= WARTEN_HINWEIS.laengste;
       })
@@ -543,7 +573,7 @@ export function simuliere(einstellungen) {
     ablauf,
     gesamt,
     auslastung,
-    spieleJePerson: spieleJePerson(liste, e.modus),
+    spieleJePerson: spieleJePerson(liste, e.modus, uebrig),
     warten,
     engpass,
     passtInHalle,

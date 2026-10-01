@@ -2380,7 +2380,29 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
   text-align: center;
   transition: background var(--uebergang), border-color var(--uebergang), color var(--uebergang);
 }
-.ts-segment-option input:checked + span { border-color: var(--primaer-tief); background: var(--primaer-weich); color: var(--primaer-tief); }
+/* Gewählt: nicht nur über die Farbe (SC 1.4.1) — doppelt so starker Rand, ein
+   Häkchen und kräftigere Schrift. Das Häkchen trägt leeren Alternativtext; den
+   Zustand sagt das Radio selbst an. */
+.ts-segment-option input:checked + span {
+  border-color: var(--primaer-tief);
+  box-shadow: inset 0 0 0 1px var(--primaer-tief);
+  background: var(--primaer-weich);
+  color: var(--primaer-tief);
+  font-weight: 700;
+}
+.ts-segment-option input:checked + span::before {
+  content: '\f00c';
+  content: '\f00c' / '';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.78em;
+  margin-right: 0.4rem;
+}
+/* Erzwungene Farben (Windows-Kontrastmodus) ersetzen Rand und Fläche — dort
+   trägt die Systemfarbe Highlight den gewählten Zustand. */
+@media (forced-colors: active) {
+  .ts-segment-option input:checked + span { forced-color-adjust: none; background: Highlight; color: HighlightText; border-color: Highlight; }
+}
 .ts-segment-option input:focus-visible + span { outline: 2px solid var(--fokus); outline-offset: 2px; }
 
 /* Meldungen nach Ampel: Rot = Hallenzeit überzogen, Gelb = Hinweis, Grün = passt. */
@@ -2471,6 +2493,9 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
   white-space: nowrap;
 }
 .ts-ueberzeit-aktiv .ts-hallenende { color: var(--signal-rot-text); }
+/* Liegt das Hallenende weit rechts, steht die Beschriftung links der Linie —
+   sonst ragte sie aus der Spur und erzwänge einen waagerechten Scrollbalken. */
+.ts-hallenende-links .ts-hallenende { left: auto; right: calc(100% + 0.3rem); }
 .ts-balken {
   position: absolute;
   top: 0.28rem;
@@ -2492,8 +2517,11 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
 .ts-art-offen { background: var(--pf-teal-weich); border-color: var(--pf-teal); }
 .ts-art-mixed { background: var(--pf-violett-weich); border-color: var(--pf-violett); }
 .ts-balken-belegt { background: var(--pf-schiefer-weich); border-color: var(--pf-schiefer); }
-.ts-balken.ts-ueber, .ts-ueber-muster { border: 2px solid var(--signal-rot); }
-.ts-ueber-muster { background: var(--signal-rot-weich); }
+/* Überzeit: ein roter Streifen am Fuß des Balkens. Rand und Fläche bleiben die
+   der Konkurrenz — sonst wären gerade die Matches, die verlegt werden müssen,
+   nicht mehr zuzuordnen. */
+.ts-balken.ts-ueber, .ts-ueber-muster { box-shadow: inset 0 -0.3rem 0 var(--signal-rot); }
+.ts-ueber-muster { background: var(--flaeche-2); }
 
 .ts-konkurrenzen { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
 .ts-konkurrenzen li {
@@ -2513,6 +2541,7 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
 .ts-tabelle th { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--linie-stark); color: var(--tinte-2); font-weight: 600; }
 .ts-tabelle td { padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--linie); }
 .ts-zeile-ueber td { color: var(--signal-rot-text); }
+.ts-chip-ueber { font-size: 0.72rem; padding-block: 0.05rem; white-space: nowrap; }
 .ts-annahmen p { max-width: 64ch; }
 
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */

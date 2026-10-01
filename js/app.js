@@ -557,6 +557,12 @@ function rendern() {
 
   // Vor dem Zeichnen merken — danach gibt es das Element nicht mehr.
   const gemerkterFokus = fokusHandhabe();
+  // Ebenso VOR dem Zeichnen entscheiden, ob die Route gewechselt hat: eine
+  // Ansicht darf beim Zeichnen ihre Query nachschreiben (der Turniersimulator
+  // sein Szenario, über app:ersetze-query) — verglichen danach, hielte der
+  // Router das für einen Seitenwechsel.
+  const routeGewechselt = roh !== letzteRoute;
+  const ersterLauf = letzteRoute === null;
 
   // Sprache mit der URL abgleichen, BEVOR gerendert wird. Nötig, weil eine
   // Navigation die Sprachgrenze überqueren kann, ohne durch den Umschalter zu
@@ -631,10 +637,10 @@ function rendern() {
   // Lauf noch Hashes trägt).
   normalisiereLinks(document);
   aktualisiereNavigation(segmente);
-  if (roh !== letzteRoute) {
-    const ersterLauf = letzteRoute === null;
+  // Den Stand NACH dem Zeichnen merken, samt einer dabei nachgeschriebenen Query.
+  letzteRoute = parsePfad().roh;
+  if (routeGewechselt) {
     window.scrollTo(0, 0);
-    letzteRoute = roh;
     zaehleAufruf(window.location.pathname);
     // Einstiegs-Übergang nur bei Routenwechsel, nicht bei Zustands-Neuzeichnung.
     el.classList.remove('einstieg');
