@@ -2398,12 +2398,16 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
   font-size: 0.78em;
   margin-right: 0.4rem;
 }
+.ts-segment-option input:focus-visible + span { outline: 2px solid var(--fokus); outline-offset: 2px; }
 /* Erzwungene Farben (Windows-Kontrastmodus) ersetzen Rand und Fläche — dort
-   trägt die Systemfarbe Highlight den gewählten Zustand. */
+   trägt die Systemfarbe Highlight den gewählten Zustand. forced-color-adjust:
+   none nimmt dem gewählten Segment aber auch den automatisch angepassten
+   Fokusring; der bekäme sonst die App-Farbe auf dem System-Hintergrund (2,4:1).
+   Darum auch er in einer Systemfarbe — und diese Regel NACH der allgemeinen. */
 @media (forced-colors: active) {
   .ts-segment-option input:checked + span { forced-color-adjust: none; background: Highlight; color: HighlightText; border-color: Highlight; }
+  .ts-segment-option input:focus-visible + span { outline-color: CanvasText; }
 }
-.ts-segment-option input:focus-visible + span { outline: 2px solid var(--fokus); outline-offset: 2px; }
 
 /* Meldungen nach Ampel: Rot = Hallenzeit überzogen, Gelb = Hinweis, Grün = passt. */
 .ts-meldung {
@@ -2517,10 +2521,14 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
 .ts-art-offen { background: var(--pf-teal-weich); border-color: var(--pf-teal); }
 .ts-art-mixed { background: var(--pf-violett-weich); border-color: var(--pf-violett); }
 .ts-balken-belegt { background: var(--pf-schiefer-weich); border-color: var(--pf-schiefer); }
-/* Überzeit: ein roter Streifen am Fuß des Balkens. Rand und Fläche bleiben die
-   der Konkurrenz — sonst wären gerade die Matches, die verlegt werden müssen,
-   nicht mehr zuzuordnen. */
-.ts-balken.ts-ueber, .ts-ueber-muster { box-shadow: inset 0 -0.3rem 0 var(--signal-rot); }
+/* Überzeit: ein roter Streifen am Fuß des Balkens. Die übrigen Ränder und die
+   Fläche bleiben die der Konkurrenz — sonst wären gerade die Matches, die
+   verlegt werden müssen, nicht mehr zuzuordnen. Als RAND, nicht als Schatten:
+   ein inset-Schatten malt nur in die Innenfläche, und dichte Pläne haben 2 px
+   breite Balken ohne Innenfläche (752 von 780 Überzeit-Balken blieben dort
+   unmarkiert); im Kontrastmodus fällt ein Schatten zudem ganz weg, ein Rand
+   bleibt als dicke Unterkante stehen. */
+.ts-balken.ts-ueber, .ts-ueber-muster { border-bottom: 0.3rem solid var(--signal-rot); }
 .ts-ueber-muster { background: var(--flaeche-2); }
 
 .ts-konkurrenzen { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
@@ -2541,7 +2549,9 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
 .ts-tabelle th { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--linie-stark); color: var(--tinte-2); font-weight: 600; }
 .ts-tabelle td { padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--linie); }
 .ts-zeile-ueber td { color: var(--signal-rot-text); }
-.ts-chip-ueber { font-size: 0.72rem; padding-block: 0.05rem; white-space: nowrap; }
+/* Unter der Uhrzeit und umbrechend: ein nicht umbrechender Chip machte die
+   Zeit-Spalte so breit, dass auf dem Telefon die Runden-Spalte aus dem Bild lief. */
+.ts-chip-ueber { display: block; width: fit-content; margin-top: 0.15rem; font-size: 0.72rem; padding-block: 0.05rem; white-space: normal; }
 .ts-annahmen p { max-width: 64ch; }
 
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */

@@ -521,11 +521,19 @@ export function simuliere(einstellungen) {
   // Spiele nacheinander im Jeder gegen jeden — bei ungerader Zahl sind das n
   // Wellen, nicht n−1). Zwei Schätzungen gegeneinander zu halten lag daneben:
   // im Standard-Szenario hieß es „mehr Felder helfen kaum", obwohl acht statt
-  // sechs Felder eine ganze Welle sparen. Felder sind der Engpass, wenn mehr von
-  // ihnen mindestens ein halbes Match einsparen würden.
+  // sechs Felder eine ganze Welle sparen.
+  // Felder sind der Engpass, wenn mehr von ihnen mindestens ein halbes Match
+  // einsparen würden — gemessen an der Höchstzahl, die der Simulator zulässt.
+  // Gegen unbegrenzt viele gemessen, versprach „mehr Felder verkürzen das
+  // Turnier" eine Ersparnis, die erst ab 17 Feldern eintritt (K.-o. mit 49
+  // Einträgen: 11 bis 16 Felder dauern gleich lang). Nur wer schon die
+  // Höchstzahl eingestellt hat, wird gegen unbegrenzt viele gemessen.
   const takt = dauer.typ + e.puffer;
   const unbegrenzt = matches.length ? dauerVon(planMit(Math.max(e.felder, FELDER_UNBEGRENZT)), dauer.typ) : 0;
-  const engpass = matches.length ? (gesamt.typ - unbegrenzt >= takt / 2 ? 'felder' : 'runden') : null;
+  const bestenfalls = matches.length && e.felder < GRENZEN.felder.max
+    ? dauerVon(planMit(GRENZEN.felder.max), dauer.typ)
+    : unbegrenzt;
+  const engpass = matches.length ? (gesamt.typ - bestenfalls >= takt / 2 ? 'felder' : 'runden') : null;
 
   const passtInHalle = gesamt.typ <= e.halle;
   // Passt es nicht einmal mit unbegrenzt vielen Feldern, ist die Kette selbst zu
