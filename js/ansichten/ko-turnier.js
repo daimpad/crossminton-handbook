@@ -149,7 +149,11 @@ function setupHtml() {
 function zeichneSetup(el, fokusNachAdd = false) {
   el.innerHTML = `
     ${heroKlein('fa-flag-checkered', t('ko_turnier_titel'), t('ko_turnier_untertitel'), 'pf-indigo')}
-    ${setupHtml()}`;
+    ${setupHtml()}
+    <a class="karte karte-link" href="#/turniersimulator">
+      <h2 class="karte-titel"><i class="fa-solid fa-chart-gantt" aria-hidden="true"></i> ${esc(t('ts_titel'))}</h2>
+      <p class="leise">${esc(t('ts_kachel_text'))}</p>
+    </a>`;
 
   el.querySelector('#ko-titel')?.addEventListener('input', (ereignis) => {
     entwurfTitel = ereignis.target.value;

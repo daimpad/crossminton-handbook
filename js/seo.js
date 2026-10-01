@@ -85,6 +85,7 @@ function seiteInhalt(daten, segmente) {
     return { name: t('turnier_titel'), beschreibung: einleitung || standard.beschreibung };
   }
   if (a === 'ausruestung') return { name: label('domaene', 'ausruestung'), beschreibung: t('ausruestung_intro') };
+  if (a === 'turniersimulator') return { name: t('ts_titel'), beschreibung: t('ts_beschreibung') };
 
   // `daten.appInfo` ist immer ein Objekt (baueIndizes baut es unbedingt) — nullbar
   // sind die Abschnitte darin. Fehlt einer, warnt pruefeDaten nur (nie sperrend),

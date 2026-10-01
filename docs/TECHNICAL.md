@@ -59,7 +59,7 @@ Darüber liegen orthogonale Achsen: `spielform` (Doppel über alle drei Stufen, 
 ## Routing, SEO und Auslieferung
 
 - **History-API-Routing**, kein Hash. Ansichten schreiben intern `href="#/…"`; `normalisiereLinks()` zieht das nach jedem Rendern auf echte Pfade. Der Montagepunkt kommt aus `document.baseURI`.
-- **Sprache in der URL:** Deutsch präfixlos an der Wurzel, die anderen unter `/en/`, `/fr/`, `/pl/`. Die URL entscheidet, nicht die gespeicherte Vorliebe — sonst zeigte dieselbe Adresse je Besucher anderen Inhalt. Ergibt 596 indexierbare Adressen; `sitemap.xml` ist eingecheckt und wird von `scripts/sitemap.mjs` erzeugt.
+- **Sprache in der URL:** Deutsch präfixlos an der Wurzel, die anderen unter `/en/`, `/fr/`, `/pl/`. Die URL entscheidet, nicht die gespeicherte Vorliebe — sonst zeigte dieselbe Adresse je Besucher anderen Inhalt. Ergibt 600 indexierbare Adressen; `sitemap.xml` ist eingecheckt und wird von `scripts/sitemap.mjs` erzeugt.
 - **Titel, Beschreibung, Canonical und JSON-LD** leitet `js/seo.js` je Route aus denselben Funktionen ab, die die Ansicht schon für ihre Überschrift nutzt — keine zweite gepflegte Textliste.
 - **Deploy-Prerendering:** `scripts/prerender.mjs` bootet die App einmal in einem Playwright-Tab und legt je Route einen statischen Schnappschuss ab, damit Crawler und Social-Vorschauen ohne JavaScript echten Inhalt sehen. Playwright ist eine reine CI-Werkzeug-Abhängigkeit; lokal bleibt alles buildfrei.
 - **Produktion** läuft auf einem eigenen Server unter `crossminton-handbook.de` und zieht den Branch `deploy` per Git-Pull — **dort gibt es keinen Build-Schritt**, was nicht eingecheckt ist, existiert nicht. `.htaccess` ist der SPA-Fallback für Apache, `404.html` derselbe für GitHub Pages (Zweitauftritt).
@@ -74,7 +74,7 @@ Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht rendert zuerst
 
 Fortschritt ist **baustein-gebunden**, nie pfad-gebunden: ein in einer Einheit quittierter Übungsteil gilt pool-weit als erledigt. Der Zustand liegt versioniert in `localStorage` (`js/zustand.js`, einziger Zugriffspunkt) und übersteht auch beschädigte oder fremde Stände — ein unbrauchbarer Wert kann die Vorgabe nicht ersetzen.
 
-Darüber hinaus rein clientseitig: **Trainingsplan** (`js/plan.js`, deterministisch, mit PDF- und `.ics`-Export), **KO-Turnier** (`js/ko-turnier.js`), **Volltextsuche** (`js/suche.js`), **Merkliste**.
+Darüber hinaus rein clientseitig: **Trainingsplan** (`js/plan.js`, deterministisch, mit PDF- und `.ics`-Export), **KO-Turnier** (`js/ko-turnier.js`), **Turniersimulator** (`js/turniersimulator.js`, deterministische Planung mit Gantt-Zeitleiste, Szenario in der URL), **Volltextsuche** (`js/suche.js`), **Merkliste**.
 
 **Offline** über einen buildfreien Service Worker (`sw.js`, klassisches Skript): die App-Hülle wird vorgeladen, Navigationen laufen netz-zuerst mit gecachter Hülle als Fallback, alles andere stale-while-revalidate. Bei einer neuen Kern-Datei muss sie in `SHELL` aufgenommen **und** der `CACHE`-Name erhöht werden.
 
@@ -110,7 +110,7 @@ Der Loader muss `untergrund` sowohl als String (Altwert `"halle"`) wie als Liste
 ├── css/                           ← app.css, schriften.css, feedback.css
 ├── js/
 │   ├── daten.js graph.js          ← Daten: Indizes + Konsistenzprüfung
-│   ├── pfade.js fortschritt.js aktionen.js plan.js ko-turnier.js suche.js
+│   ├── pfade.js fortschritt.js aktionen.js plan.js ko-turnier.js turniersimulator.js suche.js
 │   │                              ← Engine: rein, DOM-frei, testbar
 │   ├── zustand.js                 ← einziger localStorage-Zugriff
 │   ├── i18n.js seo.js oberflaeche.js analytics.js version.js

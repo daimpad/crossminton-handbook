@@ -11,6 +11,7 @@ import { renderBaustein } from './ansichten/baustein.js';
 import { renderHeim } from './ansichten/heim.js';
 import { renderMitmachen, renderRechtstext, renderUeber } from './ansichten/info.js';
 import { renderKoTurnier } from './ansichten/ko-turnier.js';
+import { renderTurniersimulator } from './ansichten/turniersimulator.js';
 import { renderMerkliste } from './ansichten/merkliste.js';
 import { renderOnboarding } from './ansichten/onboarding.js';
 import { renderPlan } from './ansichten/plan.js';
@@ -197,6 +198,7 @@ function aktualisiereNavigation(segmente) {
     profil: 'profil',
     merkliste: 'merkliste',
     'ko-turnier': 'ko-turnier',
+    turniersimulator: 'turniersimulator',
     suche: 'suche',
   };
   // Der Kompetenzpfad hat einen eigenen Menüpunkt — beide Pfad-Routen teilen
@@ -215,7 +217,7 @@ function aktualisiereNavigation(segmente) {
     else verweis.removeAttribute('aria-current');
   }
   // Der Bar-Knopf „Mehr" spiegelt die im Menü liegenden Ziele (inkl. Rechtstexte).
-  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'merkliste', 'ko-turnier', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
+  const imMehr = ['suche', 'regeln', 'turnier', 'ausruestung', 'merkliste', 'ko-turnier', 'turniersimulator', 'ueber', 'mitmachen', 'impressum', 'datenschutz'].includes(segmente[0]);
   const mehr = document.querySelector('.fussnav-mehr');
   if (mehr) {
     mehr.classList.toggle('aktiv', imMehr);
@@ -265,6 +267,7 @@ function beschrifteRahmen(segmente) {
     ausruestung: t('nav_ausruestung'),
     merkliste: t('nav_merkliste'),
     'ko-turnier': t('nav_ko_turnier'),
+    turniersimulator: t('nav_turniersimulator'),
     suche: t('nav_suche'),
     ueber: t('nav_ueber'),
     mitmachen: t('nav_mitmachen'),
@@ -617,6 +620,8 @@ function rendern() {
     renderMerkliste(el, daten);
   } else if (segmente[0] === 'ko-turnier') {
     renderKoTurnier(el, daten);
+  } else if (segmente[0] === 'turniersimulator') {
+    renderTurniersimulator(el, daten);
   } else {
     renderHeim(el, daten);
   }
@@ -714,6 +719,18 @@ function verdrahteNavigation(el) {
   window.addEventListener('popstate', rendern);
   window.addEventListener('app:rendern', rendern);
   window.addEventListener('app:gehe-zu', (ereignis) => navigiere(ereignis.detail?.ziel ?? '/'));
+  // Eine Ansicht hält ihren Zustand in der Adresse (der Turniersimulator sein
+  // teilbares Szenario). replaceState allein reichte nicht: die Route samt Query
+  // ist der Schlüssel, an dem rendern() einen Seitenwechsel erkennt — das
+  // nächste Neu-Zeichnen (Sprachwechsel, Thema) sprang sonst nach oben, setzte
+  // den Fokus neu und zählte einen Aufruf. Darum zieht der Router hier mit.
+  window.addEventListener('app:ersetze-query', (ereignis) => {
+    const query = String(ereignis.detail?.query ?? '').replace(/^\?/, '');
+    const ziel = window.location.pathname + (query ? `?${query}` : '');
+    if (ziel === window.location.pathname + window.location.search) return;
+    window.history.replaceState(window.history.state, '', ziel);
+    letzteRoute = parsePfad().roh;
+  });
   // Interne Links abfangen und über die History navigieren, statt die Seite neu
   // zu laden. Fremde Ziele, neue Tabs (Modifier/Mittelklick), Downloads und
   // target=_blank bleiben unangetastet.

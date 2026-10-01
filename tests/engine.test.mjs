@@ -23,6 +23,7 @@ import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } 
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 import { KOMMENTATOR_HILFE, KOMMENTATOR_OHNE_UEBERSETZUNG, KOMMENTATOR_TEXTE, kommentatorTexte } from '../js/feedback.js';
+import * as sim from '../js/turniersimulator.js';
 
 const wurzel = join(dirname(fileURLToPath(import.meta.url)), '..');
 const liesJson = (pfad) => JSON.parse(readFileSync(join(wurzel, pfad), 'utf8'));
@@ -1276,11 +1277,11 @@ pruefe(
 
 // --- Sprachfassungen ---------------------------------------------------------
 // Der Inhalt liegt vollständig in vier Sprachen vor; erst die eigene Adresse
-// macht ihn auffindbar. Aus 149 sprachneutralen Routen werden 596.
+// macht ihn auffindbar. Aus 150 sprachneutralen Routen werden 600.
 const alleSprachRouten = sammleRoutenAlleSprachen(ladeDatenAusDateien());
 pruefe(
-  `Routen in allen vier Sprachen (${alleSprachRouten.length} = 149 × 4)`,
-  alleSprachRouten.length === 149 * 4,
+  `Routen in allen vier Sprachen (${alleSprachRouten.length} = 150 × 4)`,
+  alleSprachRouten.length === 150 * 4,
 );
 pruefe(
   'keine doppelte Adresse über die Sprachen hinweg',
@@ -1288,7 +1289,7 @@ pruefe(
 );
 for (const s of ['de', 'en', 'fr', 'pl']) {
   const je = alleSprachRouten.filter((r) => r.sprache === s);
-  pruefe(`${s}: 149 Routen`, je.length === 149);
+  pruefe(`${s}: 150 Routen`, je.length === 150);
 }
 // Deutsch bleibt PRÄFIXLOS — sonst änderten sich alle bestehenden Adressen und
 // die bisherige Indexierung ginge verloren.
@@ -1787,6 +1788,162 @@ console.log('\n[23] Kommentator: jeder sichtbare Text in allen vier Sprachen');
     /^\s*window\.addEventListener\('app:sprache'/m.test(feedbackQuelle) && /^\s*neuAufbauen\(\);\s*$/m.test(feedbackQuelle));
   pruefe('feedback.js übergibt die übersetzten Texte an den Kommentator',
     /^\s*texte: kommentatorTexte\(\),\s*$/m.test(feedbackQuelle));
+}
+
+console.log('\n[24] Turniersimulator (Rechenkern)');
+// Planungswerkzeug, kein Lerninhalt: rechnet aus Feldern, Teilnehmenden, Modus
+// und Match-Begrenzung einen Zeitplan je Feld. Die Einstellungen kommen aus der
+// Adresse, sind also ungeprüfte Eingabe — normalisiere() muss alles abfangen.
+{
+  const S = sim.STANDARD;
+  pruefe('Standard-Szenario ergibt eine leere Adresse', sim.zuQuery(S) === '');
+  const roh = sim.ausQuery(new URLSearchParams('felder=99&form=doppel&wertung=mixed&start=25:00&halle=100&maenner=%22%3E%3Cimg&frauen=-4&modus=x&punkte=16.4'));
+  pruefe('Adresse wird begrenzt und bereinigt', roh.felder === 16 && roh.form === 'doppel' && roh.wertung === 'mixed'
+    && roh.start === S.start && roh.halle === 105 && roh.maenner === S.maenner && roh.frauen === 0 && roh.modus === S.modus && roh.punkte === 16,
+    JSON.stringify(roh));
+  pruefe('Mixed gibt es nur im Doppel', sim.normalisiere({ form: 'einzel', wertung: 'mixed' }).wertung === 'getrennt');
+  const szenario = { felder: 9, form: 'doppel', maenner: 21, frauen: 13, wertung: 'offen', modus: 'rr', satz: 'zeit', saetze: 3, punkte: 11, minuten: 6, halle: 285, start: '07:45', puffer: 3 };
+  const zurueck = sim.ausQuery(new URLSearchParams(sim.zuQuery(szenario)));
+  pruefe('Adresse und Szenario sind umkehrbar', JSON.stringify(zurueck) === JSON.stringify(sim.normalisiere(szenario)), sim.zuQuery(szenario));
+  pruefe('Adresse trägt nur URL-sichere Zeichen', /^[a-zA-Z0-9=&%]*$/.test(sim.zuQuery(szenario)), sim.zuQuery(szenario));
+
+  // Zeitmodell: 40 s je Punkt, Verlierer 70 % der Gewinnpunkte, Satzchance 70 %.
+  pruefe('erwartete Sätze: 1 / 2,42 / 3,8946', sim.erwarteteSaetze(1) === 1 && Math.abs(sim.erwarteteSaetze(2) - 2.42) < 1e-9
+    && Math.abs(sim.erwarteteSaetze(3) - 3.8946) < 1e-9);
+  const standardDauer = (2.42 * 16 * 1.7 * 40) / 60;
+  pruefe('Matchdauer bis 16 über zwei Gewinnsätze ≈ 43,9 min', Math.abs(sim.matchDauer(S) - standardDauer) < 1e-9, String(sim.matchDauer(S)));
+  pruefe('Zeitspiel dauert genau die eingestellte Zeit', sim.matchDauer({ satz: 'zeit', minuten: 7 }) === 7);
+
+  // Konkurrenzen
+  const k1 = sim.konkurrenzen({ form: 'einzel', maenner: 16, frauen: 8, wertung: 'getrennt' });
+  pruefe('Einzel getrennt: Herren 16, Damen 8', k1.liste.map((k) => `${k.id}:${k.eintraege}`).join(',') === 'herren_einzel:16,damen_einzel:8' && k1.personen === 24 && k1.uebrig === 0);
+  const k2 = sim.konkurrenzen({ form: 'doppel', maenner: 17, frauen: 8, wertung: 'getrennt' });
+  pruefe('Doppel getrennt: 8 + 4 Paare, eine Person übrig', k2.liste.map((k) => k.eintraege).join(',') === '8,4' && k2.uebrig === 1 && k2.personen === 24);
+  const k3 = sim.konkurrenzen({ form: 'doppel', maenner: 10, frauen: 7, wertung: 'mixed' });
+  pruefe('Mixed: 7 Paare, drei übrig', k3.liste.length === 1 && k3.liste[0].eintraege === 7 && k3.uebrig === 3);
+  const k4 = sim.konkurrenzen({ form: 'doppel', maenner: 9, frauen: 4, wertung: 'offen' });
+  pruefe('Offenes Doppel: 6 Paare, eine Person übrig', k4.liste[0].id === 'offen_doppel' && k4.liste[0].eintraege === 6 && k4.uebrig === 1);
+  pruefe('ohne Frauen gibt es keine Damen-Konkurrenz', sim.konkurrenzen({ frauen: 0 }).liste.every((k) => k.art !== 'damen'));
+
+  // Jeder gegen jeden: jedes Paar genau einmal, Runden disjunkt
+  let rrOk = true;
+  for (let n = 2; n <= 13; n++) {
+    const runden = sim.rundenJederGegenJeden(n);
+    const paare = new Set();
+    for (const runde of runden) {
+      const inRunde = new Set();
+      for (const [a, b] of runde) {
+        if (inRunde.has(a) || inRunde.has(b)) rrOk = false;
+        inRunde.add(a); inRunde.add(b);
+        paare.add(`${Math.min(a, b)}-${Math.max(a, b)}`);
+      }
+    }
+    if (paare.size !== (n * (n - 1)) / 2 || runden.length !== (n % 2 ? n : n - 1)) rrOk = false;
+  }
+  pruefe('Kreismethode: jedes Paar genau einmal, keine Doppelbelegung je Runde (n = 2…13)', rrOk);
+
+  // K.-o.: n−1 Matches, ⌈log2 n⌉ Runden, nie zwei Freilose gegeneinander
+  let koOk = true;
+  for (let n = 2; n <= 70; n++) {
+    const { runden } = sim.bracketKo(n);
+    const matches = runden.flat().filter((x) => x.match).length;
+    if (matches !== n - 1 || runden.length !== Math.ceil(Math.log2(n))) koOk = false;
+  }
+  pruefe('K.-o.: n−1 Matches in ⌈log2 n⌉ Runden (n = 2…70)', koOk);
+  pruefe('Setzliste 8: 1-8, 4-5, 2-7, 3-6', sim.setzReihenfolge(8).join(',') === '1,8,4,5,2,7,3,6');
+
+  // Von Hand nachgerechnet (Dauer 10, Wechselzeit 5)
+  const plane = (modus, n, felder) => {
+    const liste = [{ id: 'x', art: 'offen', eintraege: n, personenJeEintrag: 1 }];
+    const matches = sim.erzeugeMatches(liste, modus);
+    return { matches, plan: sim.verteile(matches, felder, 10, 5) };
+  };
+  const ende = ({ plan }) => Math.max(...plan.start) + 10;
+  pruefe('K.-o. 8 auf 4 Feldern: 0, 15, 30 → Ende nach 40 min', ende(plane('ko', 8, 4)) === 40);
+  pruefe('Jeder gegen jeden 4 auf 2 Feldern: drei Wellen → 40 min', ende(plane('rr', 4, 2)) === 40);
+  const ko5 = plane('ko', 5, 2);
+  const freilosDuell = ko5.matches.findIndex((m) => m.runde === 1 && m.quellen.every((q) => q.match === undefined));
+  pruefe('K.-o. 5: das Duell zweier Freilos-Plätze beginnt sofort', freilosDuell >= 0 && ko5.plan.start[freilosDuell] === 0 && ende(ko5) === 40);
+
+  // Invarianten über viele Szenarien: kein Feld, keine Person doppelt belegt,
+  // Wechselzeit eingehalten, K.-o.-Zubringer fertig, untere Schranken gehalten.
+  const fehlerListe = [];
+  for (const modus of ['rr', 'ko']) {
+    for (const n of [2, 3, 5, 8, 11, 16, 23]) {
+      for (const felder of [1, 2, 3, 6, 16]) {
+        for (const puffer of [0, 4]) {
+          const dauer = 12;
+          const liste = [{ id: 'a', art: 'herren', eintraege: n, personenJeEintrag: 1 }, { id: 'b', art: 'damen', eintraege: Math.max(2, n - 3), personenJeEintrag: 1 }];
+          const matches = sim.erzeugeMatches(liste, modus);
+          const plan = sim.verteile(matches, felder, dauer, puffer);
+          const name = `${modus} n=${n} f=${felder} p=${puffer}`;
+          if (plan.start.length !== matches.length || plan.start.some((x) => !Number.isFinite(x))) fehlerListe.push(`${name}: nicht alles geplant`);
+          const jeFeld = new Map();
+          const jeEintrag = new Map();
+          matches.forEach((m, i) => {
+            if (!jeFeld.has(plan.feld[i])) jeFeld.set(plan.feld[i], []);
+            jeFeld.get(plan.feld[i]).push(plan.start[i]);
+            for (const q of m.quellen) {
+              if (q.match !== undefined) {
+                if (plan.start[i] < plan.start[q.match] + dauer + puffer - 1e-9) fehlerListe.push(`${name}: Zubringer nicht fertig`);
+              } else {
+                if (!jeEintrag.has(q.p)) jeEintrag.set(q.p, []);
+                jeEintrag.get(q.p).push(plan.start[i]);
+              }
+            }
+          });
+          for (const reihe of [...jeFeld.values(), ...jeEintrag.values()]) {
+            reihe.sort((x, y) => x - y);
+            for (let i = 1; i < reihe.length; i++) if (reihe[i] < reihe[i - 1] + dauer + puffer - 1e-9) fehlerListe.push(`${name}: Überschneidung`);
+          }
+          const gesamt = Math.max(...plan.start) + dauer;
+          const arbeit = (matches.length * (dauer + puffer)) / felder - puffer;
+          if (gesamt < arbeit - 1e-6) fehlerListe.push(`${name}: schneller als die Arbeit je Feld`);
+        }
+      }
+    }
+  }
+  pruefe('Planung hält Feld, Person, Wechselzeit und Zubringer ein (140 Szenarien)', fehlerListe.length === 0, [...new Set(fehlerListe)].slice(0, 4).join('; '));
+
+  // Kennzahlen
+  const std = sim.simuliere(S);
+  pruefe('Standard: 22 Matches (15 + 7), Ende rund 4 h, passt in 6 h', std.matchZahl === 22 && std.passtInHalle
+    && std.gesamt.typ > 200 && std.gesamt.typ < 300, `${std.matchZahl} / ${std.gesamt.typ}`);
+  pruefe('Spanne: schnell < typisch < langsam', std.gesamt.schnell < std.gesamt.typ && std.gesamt.typ < std.gesamt.langsam);
+  pruefe('Zeitspiel hat keine Spanne', sim.simuliere({ satz: 'zeit' }).gesamt.schnell === null);
+  pruefe('Spiele je Person im K.-o.: Ø 2(n−1)/n, 1 bis Rundenzahl', Math.abs(std.spieleJePerson.mittel - (16 * 30 / 16 + 8 * 14 / 8) / 24) < 1e-9
+    && std.spieleJePerson.min === 1 && std.spieleJePerson.max === 4);
+  const ko8 = sim.simuliere({ maenner: 8, frauen: 0, felder: 4, satz: 'zeit', minuten: 10, puffer: 5 });
+  pruefe('K.-o. 8: Wartezeit zwischen den Spielen genau die Wechselzeit', ko8.warten.mittel === 5 && ko8.warten.laengste === 5, JSON.stringify(ko8.warten));
+  pruefe('Auslastung liegt zwischen 0 und 100 %', [std, ko8].every((r) => r.auslastung > 0 && r.auslastung <= 1 + 1e-9));
+  pruefe('Engpass: viele Felder im K.-o. → Rundenfolge', sim.simuliere({ felder: 16 }).engpass === 'runden');
+  pruefe('Engpass: ein Feld jeder gegen jeden → Felder', sim.simuliere({ felder: 1, modus: 'rr', maenner: 8, frauen: 0 }).engpass === 'felder');
+  // Jeder gegen jeden 12 + 8 im Zeitspiel: 94 Matches à 8 + 5 min — mit zwei
+  // Feldern gut 10 h, die längste Kette (11 Spiele) aber nur 138 min.
+  const engpassFall = { modus: 'rr', maenner: 12, frauen: 8, satz: 'zeit', halle: 360 };
+  const eng = sim.simuliere({ ...engpassFall, felder: 2 });
+  pruefe('Überzogene Hallenzeit wird erkannt', !eng.passtInHalle && eng.gesamt.typ > 360);
+  const noetig = eng.felderNoetig;
+  pruefe('Felder für die Hallenzeit: mit dieser Zahl passt es, mit einem weniger nicht',
+    noetig !== null && noetig > 2 && sim.simuliere({ ...engpassFall, felder: noetig }).passtInHalle
+    && !sim.simuliere({ ...engpassFall, felder: noetig - 1 }).passtInHalle, String(noetig));
+  pruefe('Längste Kette über der Hallenzeit → keine Feldzahl hilft (12 jeder gegen jeden, 2 Gewinnsätze)',
+    sim.simuliere({ modus: 'rr', maenner: 12, frauen: 8 }).felderNoetig === null);
+  pruefe('Unmöglich in der Hallenzeit → keine Feldzahl', sim.simuliere({ modus: 'rr', maenner: 64, frauen: 64, wertung: 'offen' }).felderNoetig === null);
+  pruefe('Ohne Teilnehmende: keine Matches, keine Fehler', sim.simuliere({ maenner: 0, frauen: 0 }).matchZahl === 0);
+  pruefe('Eine Person allein ergibt keine Matches', sim.simuliere({ maenner: 1, frauen: 0 }).matchZahl === 0);
+  pruefe('Gleiche Eingabe, gleicher Plan', JSON.stringify(sim.simuliere(szenario)) === JSON.stringify(sim.simuliere(szenario)));
+  pruefe('Ablauf je Feld zeitlich sortiert', std.ablauf.every((a, i, l) => i === 0 || l[i - 1].feld < a.feld || l[i - 1].start <= a.start));
+
+  // Zeitangaben
+  pruefe('Uhrzeit über Mitternacht zählt den Tag mit', JSON.stringify(sim.uhrzeit('22:30', 120)) === '{"text":"00:30","tag":1}');
+  pruefe('Stunden und Minuten', JSON.stringify(sim.stundenMinuten(263.9)) === '{"h":4,"m":24}');
+
+  // Live-Regler: auch der größte Fall (128 jeder gegen jeden) muss zügig rechnen.
+  const t0 = performance.now();
+  sim.simuliere({ modus: 'rr', maenner: 64, frauen: 64, wertung: 'offen', felder: 16 });
+  const ms = performance.now() - t0;
+  pruefe(`größter Fall (8128 Matches) rechnet in ${Math.round(ms)} ms (Grenze 1500)`, ms < 1500);
 }
 
 setzeZurueck();

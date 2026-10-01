@@ -98,6 +98,10 @@ export function renderRegeln(el, daten) {
       <h2 class="karte-titel"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i> ${esc(t('ko_turnier_titel'))}</h2>
       <p class="leise">${esc(t('ko_turnier_kachel_text'))}</p>
     </a>
+    <a class="karte karte-link" href="#/turniersimulator">
+      <h2 class="karte-titel"><i class="fa-solid fa-chart-gantt" aria-hidden="true"></i> ${esc(t('ts_titel'))}</h2>
+      <p class="leise">${esc(t('ts_kachel_text'))}</p>
+    </a>
     ${quelleHtml(regeln.meta.quelle)}
     ${abschnitte || `<div class="karte"><p class="leise">${esc(t('nicht_gefunden'))}</p></div>`}
     ${referenzgrafikenHtml()}`;

@@ -61,6 +61,9 @@ export function sammleRouten(daten) {
 
   fuege('/regeln', 0.8);
   fuege('/turnier', 0.7);
+  // Ohne Adress-Parameter zeigt der Simulator ein vollständiges Standard-Szenario
+  // — also eine echte Seite, anders als das leere KO-Turnier-Formular.
+  fuege('/turniersimulator', 0.6);
   fuege('/ausruestung', 0.8);
   fuege('/ueber', 0.5);
   fuege('/mitmachen', 0.5);
