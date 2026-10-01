@@ -80,6 +80,7 @@ Achsen, die quer über Stufen und Felder laufen:
 
 - **Trainingsplan** — verteilt Einheiten über bis zu zwölf Wochen und achtet dabei auf Belastungswechsel und thematische Abwechslung. Einzelne Sessions lassen sich tauschen oder streichen; Export als PDF oder Kalenderdatei.
 - **KO-Turnier** — Namen eintragen, auslosen, Sieger antippen: die App baut das Bracket, verteilt Freilose fair über die Runden und hält fest, wer wie weit kam. Für den Spaßwettbewerb im Verein.
+- **Turniersimulator** — Felder, Teilnehmende, Modus und Matchlänge einstellen und sofort sehen, wie lange ein Turnier dauert, wie die Felder belegt sind, ob die Hallenzeit reicht und wo der Engpass liegt. Das Szenario steckt im Link und lässt sich teilen.
 - **Merkliste und Suche** — Bausteine für später vormerken, Volltextsuche über alle Inhalte.
 - **Trainer-Perspektive** — ein Schalter im Profil, der zusätzliche Ebenen freischaltet: **5 Bausteine zur Trainingsgestaltung** (vermitteln, zugänglich machen, korrigieren, Übungen aufbauen, Gruppen führen) und **32 typische Fehlerbilder**, je mit Symptom, Ursache und Korrektur, direkt beim betroffenen Baustein.
 

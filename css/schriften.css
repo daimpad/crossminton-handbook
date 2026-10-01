@@ -156,3 +156,12 @@
 .fa-calendar-days::before { content: '\f073'; }
 .fa-calendar-plus::before { content: '\f271'; }
 .fa-print::before { content: '\f02f'; }
+/* Ergänzt für den Turniersimulator (Zeitleiste, Kennzahlen, Meldungen). */
+.fa-chart-gantt::before { content: '\e0e4'; }
+.fa-circle-check::before { content: '\f058'; }
+.fa-circle-info::before { content: '\f05a'; }
+.fa-clock::before { content: '\f017'; }
+.fa-hourglass-half::before { content: '\f252'; }
+.fa-share-nodes::before { content: '\f1e0'; }
+.fa-table-cells::before { content: '\f00a'; }
+.fa-user-group::before { content: '\f500'; }

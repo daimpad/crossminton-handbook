@@ -261,6 +261,13 @@ export function geheZu(ziel) {
   window.dispatchEvent(new CustomEvent('app:gehe-zu', { detail: { ziel } }));
 }
 
+// Die Query der aktuellen Adresse ersetzen, ohne Navigation und ohne neuen
+// Verlaufseintrag (ein teilbarer Zustand wie das Simulator-Szenario). Läuft
+// über den Router, damit er die neue Adresse als dieselbe Route kennt.
+export function ersetzeQuery(query) {
+  window.dispatchEvent(new CustomEvent('app:ersetze-query', { detail: { query } }));
+}
+
 // Thema (hell/dunkel/auto) auf das Wurzelelement anwenden. 'auto' entfernt die
 // Markierung und folgt dem OS (prefers-color-scheme); hell/dunkel erzwingen.
 // Hält die Browser-Leiste (theme-color) am effektiven Modus. Das Boot-Skript in

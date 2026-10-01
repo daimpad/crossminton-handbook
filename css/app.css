@@ -2280,6 +2280,241 @@ button.ko-match-seite:hover { border-color: var(--primaer); }
 .ko-match-freilos .ko-match-seite { flex: 0 1 auto; cursor: default; }
 .ko-match-freilos { justify-content: space-between; }
 
+/* ---------- Turniersimulator (Planungswerkzeug, kein Lerninhalt) ---------- */
+/* Alles über Tokens: die Konkurrenz-Farben leihen sich die Kachel-Hues (--pf-*),
+   NIE die Ampel — Rot/Gelb/Grün tragen hier wie überall einen Zustand (Hallenzeit
+   überzogen, Hinweis, passt), keine Zuordnung. */
+.ts-intro { color: var(--tinte-2); margin: 0 0 1rem; }
+.ts-eingaben .karte-titel { margin: 1.4rem 0 0.8rem; }
+.ts-eingaben > .karte-titel:first-of-type { margin-top: 0.3rem; }
+
+/* Live-Zusammenfassung: bleibt beim Bedienen der Regler sichtbar, damit man die
+   Wirkung sieht, ohne zum Ergebnis zu scrollen. top = Höhe der Kopfzeile, von
+   der Ansicht gemessen (--kopf-hoehe); der Ersatzwert gilt nur bis dahin. */
+.ts-live {
+  position: sticky;
+  top: var(--kopf-hoehe, calc(4.6rem + env(safe-area-inset-top)));
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.8rem;
+  margin: -0.35rem -0.35rem 0.4rem;
+  padding: 0.4rem 0.65rem;
+  background: var(--flaeche-2);
+  border: 1px solid var(--linie-stark);
+  border-radius: var(--radius-klein);
+  box-shadow: var(--schatten-weich);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ts-live:empty { display: none; }
+/* Rückwärts mit Tab scrollt der Browser ein Feld nur bis an den oberen Rand —
+   dort läge es unter Kopfzeile und Live-Leiste (SC 2.4.11). Der Abstand hält
+   es darunter; er gilt nur, solange der Simulator zu sehen ist. */
+html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem); }
+.ts-live-wert { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.ts-regler { margin: 0 0 0.95rem; min-width: 0; }
+.ts-regler-titel { display: block; font-size: 0.82rem; font-weight: 600; color: var(--tinte-2); margin-bottom: 0.25rem; }
+.ts-regler-zeile { display: flex; align-items: center; gap: 0.6rem; }
+/* Regler: --primaer-tief statt --primaer, sonst verfehlen Daumen und gefüllte
+   Spur auf weißer Karte die 3:1 für Bedienelemente (WCAG 1.4.11). Das Token
+   trägt in beiden Themen die gegen die Fläche lesbare Variante. */
+.ts-regler-zeile input[type='range'] {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 2rem;
+  margin: 0;
+  accent-color: var(--primaer-tief);
+  cursor: pointer;
+}
+.ts-zahl, .ts-uhr {
+  font: inherit;
+  color: var(--tinte);
+  background: var(--flaeche);
+  border: 1px solid var(--linie-feld);
+  border-radius: var(--radius-klein);
+  padding: 0.4rem 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+.ts-zahl { width: 4.4rem; flex: none; text-align: right; }
+.ts-uhr { min-height: 2.6rem; }
+.ts-einheit { flex: none; color: var(--tinte-2); font-size: 0.85rem; }
+.ts-feldhinweis { display: block; margin: 0.3rem 0 0; font-size: 0.82rem; color: var(--tinte-2); }
+.ts-paar { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0 1.1rem; }
+.ts-bilanz { margin: -0.35rem 0 1rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ts-matchdauer { margin: 0.2rem 0 0; padding: 0.55rem 0.7rem; border-radius: var(--radius-klein); background: var(--flaeche-2); font-size: 0.88rem; }
+.ts-matchdauer:empty { display: none; }
+.ts-aktionen { justify-content: flex-start; margin-top: 1.1rem; }
+
+/* Auswahl als Segmente (Spielform, Konkurrenzen, Modus …): das eigentliche
+   Radio liegt unsichtbar über seiner Beschriftung — bedienbar mit Maus, Touch
+   und Pfeiltasten, der Fokusring sitzt sichtbar auf der Beschriftung. */
+.ts-segment { border: 0; padding: 0; margin: 0 0 0.95rem; min-width: 0; }
+.ts-segment legend { padding: 0; margin-bottom: 0.3rem; font-size: 0.82rem; font-weight: 600; color: var(--tinte-2); }
+.ts-segment-reihe { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ts-segment-option { position: relative; flex: 1 1 auto; }
+.ts-segment-option[hidden] { display: none; }
+.ts-segment-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.ts-segment-option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--linie-feld);
+  border-radius: var(--radius-klein);
+  background: var(--flaeche);
+  color: var(--tinte);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: background var(--uebergang), border-color var(--uebergang), color var(--uebergang);
+}
+.ts-segment-option input:checked + span { border-color: var(--primaer-tief); background: var(--primaer-weich); color: var(--primaer-tief); }
+.ts-segment-option input:focus-visible + span { outline: 2px solid var(--fokus); outline-offset: 2px; }
+
+/* Meldungen nach Ampel: Rot = Hallenzeit überzogen, Gelb = Hinweis, Grün = passt. */
+.ts-meldung {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.75rem 0.9rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  color: var(--tinte-2);
+}
+.ts-meldung p { margin: 0; }
+.ts-meldung .fa-solid { color: inherit; margin-top: 0.2rem; }
+.ts-meldung-gruen { background: var(--signal-gruen-weich); border-color: var(--signal-gruen); color: var(--signal-gruen-text); }
+.ts-meldung-rot { background: var(--signal-rot-weich); border-color: var(--signal-rot); color: var(--signal-rot-text); }
+.ts-meldung-gelb { background: var(--signal-gelb-weich); border-color: var(--signal-gelb); color: var(--signal-gelb-text); }
+.ts-engpass { margin: 0.1rem 0 1rem; font-size: 0.9rem; color: var(--tinte-2); }
+.ts-engpass .chip { margin-right: 0.3rem; font-weight: 600; }
+
+/* Kennzahlen-Karten: mobil zweispaltig, ab Tablet dreispaltig. */
+.ts-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; margin: 0.4rem 0 1.05rem; }
+@media (min-width: 48rem) { .ts-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ts-kpi {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten-karte);
+  padding: 0.85rem 0.95rem;
+  min-width: 0;
+}
+.ts-kpi-titel { display: flex; align-items: center; gap: 0.4rem; margin: 0 0 0.3rem; font-size: 0.8rem; font-weight: 600; color: var(--tinte-2); }
+.ts-kpi-wert { margin: 0; font-size: clamp(1.2rem, 5vw, 1.5rem); font-weight: 700; line-height: 1.15; color: var(--tinte); font-variant-numeric: tabular-nums; }
+.ts-kpi-text { margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--tinte-2); }
+.ts-meter { height: 0.45rem; margin: 0.45rem 0 0.1rem; border-radius: 999px; background: var(--flaeche-2); border: 1px solid var(--linie-stark); overflow: hidden; }
+.ts-meter span { display: block; height: 100%; background: var(--primaer-tief); }
+
+/* Zeitleiste (Gantt): je Feld eine Spur, jeder Balken ein Match. Die Spur hat
+   eine Mindestbreite — auf dem Telefon scrollt die Karte waagerecht, die Seite
+   selbst nie. Die Feldnamen bleiben beim Scrollen stehen. */
+.ts-legende { margin: 0.5rem 0 0.2rem; }
+.ts-legende .chip { display: inline-flex; align-items: center; gap: 0.35rem; }
+.ts-legende-farbe { display: inline-block; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; border: 1px solid var(--linie-stark); }
+.ts-zeitleiste { margin: 0.7rem 0 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* Mindestbreite 34rem (Spur 29,4rem): passt auf dem Desktop in die 44rem-Spalte,
+   scrollt nur auf dem Telefon. Die Ansicht rechnet mit derselben Spurbreite. */
+.ts-gantt { min-width: 34rem; padding-bottom: 1.5rem; }
+.ts-zeile { position: relative; z-index: 1; display: flex; align-items: stretch; }
+.ts-zeile-name {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  flex: 0 0 4.6rem;
+  display: flex;
+  align-items: center;
+  padding-right: 0.4rem;
+  background: var(--flaeche);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--tinte-2);
+}
+.ts-spur { position: relative; flex: 1 1 auto; height: 1.95rem; border-bottom: 1px solid var(--linie); }
+.ts-achse { position: relative; flex: 1 1 auto; height: 1.45rem; border-bottom: 1px solid var(--linie-stark); }
+.ts-achse-marke {
+  position: absolute;
+  bottom: 0.2rem;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  color: var(--tinte-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ts-achse-marke:first-child { transform: none; }
+.ts-achse-marke:last-child { transform: translateX(-100%); }
+.ts-zeilen { position: relative; }
+.ts-overlay { position: absolute; top: 0; bottom: 0; left: 4.6rem; right: 0; z-index: 0; pointer-events: none; }
+.ts-ueberzeit { position: absolute; top: 0; bottom: 0; right: 0; border-left: 2px dashed var(--tinte-3); }
+.ts-ueberzeit-aktiv { border-left: 2px solid var(--signal-rot); background: var(--signal-rot-weich); }
+.ts-hallenende {
+  position: absolute;
+  bottom: -1.35rem;
+  left: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--tinte-2);
+  white-space: nowrap;
+}
+.ts-ueberzeit-aktiv .ts-hallenende { color: var(--signal-rot-text); }
+.ts-balken {
+  position: absolute;
+  top: 0.28rem;
+  bottom: 0.28rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 1px solid var(--linie-stark);
+  border-radius: 5px;
+  background: var(--flaeche-2);
+  color: var(--tinte);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+.ts-art-herren { background: var(--pf-indigo-weich); border-color: var(--pf-indigo); }
+.ts-art-damen { background: var(--pf-magenta-weich); border-color: var(--pf-magenta); }
+.ts-art-offen { background: var(--pf-teal-weich); border-color: var(--pf-teal); }
+.ts-art-mixed { background: var(--pf-violett-weich); border-color: var(--pf-violett); }
+.ts-balken-belegt { background: var(--pf-schiefer-weich); border-color: var(--pf-schiefer); }
+.ts-balken.ts-ueber, .ts-ueber-muster { border: 2px solid var(--signal-rot); }
+.ts-ueber-muster { background: var(--signal-rot-weich); }
+
+.ts-konkurrenzen { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.ts-konkurrenzen li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--linie);
+}
+.ts-konkurrenzen li:last-child { border-bottom: 0; padding-bottom: 0; }
+.ts-konkurrenz-name { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; }
+
+.ts-tabelle-rahmen { overflow-x: auto; margin-top: 0.4rem; }
+.ts-tabelle { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.ts-tabelle th { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--linie-stark); color: var(--tinte-2); font-weight: 600; }
+.ts-tabelle td { padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--linie); }
+.ts-zeile-ueber td { color: var(--signal-rot-text); }
+.ts-annahmen p { max-width: 64ch; }
+
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */
 /* Der Primär-Button trägt im Dunkeln dunklen Text auf dem hellen Marken-Blau;
    der Willkommens-Hero behält einen tiefen Blauverlauf (weißer Text bleibt lesbar). */
@@ -2295,7 +2530,9 @@ button.ko-match-seite:hover { border-color: var(--primaer); }
 /* Druckansicht = „Als PDF": nur der Plan, ohne Navigation, Formular und Knöpfe. */
 @media print {
   .kopf, .fussnav, .menue, .sprach-anzeige, .fab-leiste, .toast,
-  .plan-konfig, .plan-aktionen, .plan-session-knoepfe, .plan-session-link { display: none !important; }
+  .plan-konfig, .plan-aktionen, .plan-session-knoepfe, .plan-session-link,
+  .ts-aktionen, .ts-live { display: none !important; }
+  .ts-zeitleiste { overflow: visible; }
   body { background: #fff; }
   main { padding: 0; max-width: none; }
   .karte { box-shadow: none; border: 1px solid #ccc; margin: 0 0 0.6rem; }
