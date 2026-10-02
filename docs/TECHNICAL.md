@@ -6,7 +6,7 @@ Technischer Überblick zum Crossminton-Handbuch. Die verbindliche, vollständige
 
 Die App ist eine inhaltsgetriebene, statische Web-App: Der gesamte Lernstoff liegt in versionierten JSON-Dateien, die Oberfläche rendert daraus Pfade, Bausteine und Reiter. **Kein Build-Schritt, keine Server-Komponente, keine npm-Laufzeitabhängigkeiten** — ES-Module direkt im Browser. Fortschritt lebt in `localStorage`; ein Konto gibt es nicht.
 
-Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (825 UI-Labels, 863 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
+Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (838 UI-Labels, 863 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
 
 ## Datenmodell: der Baustein
 
@@ -61,7 +61,7 @@ Darüber liegen orthogonale Achsen: `spielform` (Doppel über alle drei Stufen, 
 - **History-API-Routing**, kein Hash. Ansichten schreiben intern `href="#/…"`; `normalisiereLinks()` zieht das nach jedem Rendern auf echte Pfade. Der Montagepunkt kommt aus `document.baseURI`.
 - **Sprache in der URL:** Deutsch präfixlos an der Wurzel, die anderen unter `/en/`, `/fr/`, `/pl/`. Die URL entscheidet, nicht die gespeicherte Vorliebe — sonst zeigte dieselbe Adresse je Besucher anderen Inhalt. Ergibt 600 indexierbare Adressen; `sitemap.xml` ist eingecheckt und wird von `scripts/sitemap.mjs` erzeugt.
 - **Titel, Beschreibung, Canonical und JSON-LD** leitet `js/seo.js` je Route aus denselben Funktionen ab, die die Ansicht schon für ihre Überschrift nutzt — keine zweite gepflegte Textliste.
-- **Deploy-Prerendering:** `scripts/prerender.mjs` bootet die App einmal in einem Playwright-Tab und legt je Route einen statischen Schnappschuss ab, damit Crawler und Social-Vorschauen ohne JavaScript echten Inhalt sehen. Playwright ist eine reine CI-Werkzeug-Abhängigkeit; lokal bleibt alles buildfrei.
+- **Deploy-Prerendering:** `scripts/prerender.mjs` bootet die App einmal in einem Playwright-Tab und legt je Route einen statischen Schnappschuss ab, damit Crawler und Social-Vorschauen ohne JavaScript echten Inhalt sehen. Playwright ist eine reine CI-Werkzeug-Abhängigkeit; lokal bleibt alles buildfrei. Entwicklerdateien (`scratchpad/`, `tests/`, `scripts/`, `docs/`, `CLAUDE.md` …, Liste in `scripts/auslieferung.mjs`) nimmt der Prerender nach dem Erfassen wieder heraus, sie gehen nicht mit in die Auslieferung.
 - **Produktion** läuft auf einem eigenen Server unter `crossminton-handbook.de` und zieht den Branch `deploy` per Git-Pull — **dort gibt es keinen Build-Schritt**, was nicht eingecheckt ist, existiert nicht. `.htaccess` ist der SPA-Fallback für Apache, `404.html` derselbe für GitHub Pages (Zweitauftritt).
 
 ## Grafiksystem
@@ -74,7 +74,7 @@ Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht rendert zuerst
 
 Fortschritt ist **baustein-gebunden**, nie pfad-gebunden: ein in einer Einheit quittierter Übungsteil gilt pool-weit als erledigt. Der Zustand liegt versioniert in `localStorage` (`js/zustand.js`, einziger Zugriffspunkt) und übersteht auch beschädigte oder fremde Stände — ein unbrauchbarer Wert kann die Vorgabe nicht ersetzen.
 
-Darüber hinaus rein clientseitig: **Trainingsplan** (`js/plan.js`, deterministisch, mit PDF- und `.ics`-Export), **KO-Turnier** (`js/ko-turnier.js`), **Turniersimulator** (`js/turniersimulator.js`, deterministische Planung mit Gantt-Zeitleiste, Szenario in der URL), **Volltextsuche** (`js/suche.js`), **Merkliste**.
+Darüber hinaus rein clientseitig: **Trainingsplan** (`js/plan.js`, deterministisch, mit PDF- und `.ics`-Export), **KO-Turnier** (`js/ko-turnier.js`), **Turniersimulator** (`js/turniersimulator.js`, deterministische Planung mit Gantt-Zeitleiste für jeder gegen jeden, Gruppen + K.-o. und K.-o., Szenario in der URL, Druckansicht), **Volltextsuche** (`js/suche.js`), **Merkliste**.
 
 **Offline** über einen buildfreien Service Worker (`sw.js`, klassisches Skript): die App-Hülle wird vorgeladen, Navigationen laufen netz-zuerst mit gecachter Hülle als Fallback, alles andere stale-while-revalidate. Bei einer neuen Kern-Datei muss sie in `SHELL` aufgenommen **und** der `CACHE`-Name erhöht werden.
 
@@ -123,7 +123,7 @@ Der Loader muss `untergrund` sowohl als String (Altwert `"halle"`) wie als Liste
 │   └── labels/{de,en,fr,pl}.json  ← sichtbare Beschriftungen
 ├── images/                        ← G-001…G-063 als .svg/.png je Sprache
 ├── docs/                          ← TECHNICAL.md, Spezifikation, ci.md, Glossare
-├── scripts/                       ← sitemap.mjs prerender.mjs routen.mjs i18n-*.mjs
+├── scripts/                       ← sitemap.mjs prerender.mjs routen.mjs auslieferung.mjs i18n-*.mjs
 ├── vendor/                        ← lokal eingecheckte Fremdbibliotheken
 ├── rules/                         ← Original-PDFs (Regeln, Turnier)
 └── tests/engine.test.mjs          ← dependency-freie Engine-Tests

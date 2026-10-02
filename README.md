@@ -80,7 +80,7 @@ Achsen, die quer über Stufen und Felder laufen:
 
 - **Trainingsplan** — verteilt Einheiten über bis zu zwölf Wochen und achtet dabei auf Belastungswechsel und thematische Abwechslung. Einzelne Sessions lassen sich tauschen oder streichen; Export als PDF oder Kalenderdatei.
 - **KO-Turnier** — Namen eintragen, auslosen, Sieger antippen: die App baut das Bracket, verteilt Freilose fair über die Runden und hält fest, wer wie weit kam. Für den Spaßwettbewerb im Verein.
-- **Turniersimulator** — Felder, Teilnehmende, Modus und Matchlänge einstellen und sofort sehen, wie lange ein Turnier dauert, wie die Felder belegt sind, ob die Hallenzeit reicht und wo der Engpass liegt. Das Szenario steckt im Link und lässt sich teilen.
+- **Turniersimulator** — Felder, Teilnehmende, Modus und Matchlänge einstellen und sofort sehen, wie lange ein Turnier dauert, wie die Felder belegt sind, ob die Hallenzeit reicht und wo der Engpass liegt. Drei Turniermodi: jeder gegen jeden, Gruppen mit anschließender K.-o.-Runde nach ICO-Regel 11 und reines K.-o.-System. Das Szenario steckt im Link, lässt sich teilen und als Spielplan drucken.
 - **Merkliste und Suche** — Bausteine für später vormerken, Volltextsuche über alle Inhalte.
 - **Trainer-Perspektive** — ein Schalter im Profil, der zusätzliche Ebenen freischaltet: **5 Bausteine zur Trainingsgestaltung** (vermitteln, zugänglich machen, korrigieren, Übungen aufbauen, Gruppen führen) und **32 typische Fehlerbilder**, je mit Symptom, Ursache und Korrektur, direkt beim betroffenen Baustein.
 
@@ -132,7 +132,7 @@ Die App lässt sich vollständig mit der Tastatur bedienen: jedes Bedienelement 
 
 ## In vier Sprachen
 
-Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 825 Bedienelemente und 863 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 63 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
+Oberfläche **und** Inhalte liegen vollständig auf **Deutsch, Englisch, Französisch und Polnisch** vor — 838 Bedienelemente und 863 Inhaltsknoten, jeweils zu 100 %, inklusive der Beschriftungen in allen 67 Diagrammen. Umschaltbar mit einem Klick, ohne Neuladen.
 
 Jede Sprache hat eigene Adressen: Deutsch liegt an der Wurzel, die anderen unter `/en/`, `/fr/` und `/pl/`. Ein Link führt also dorthin, wo man ihn kopiert hat — und Suchmaschinen finden alle vier Fassungen.
 

@@ -28,6 +28,7 @@ import { fileURLToPath } from 'node:url';
 // hier NICHT erzeugt: die eingecheckte ist die maßgebliche (die Produktion hat
 // keinen Build-Schritt), kopiere() trägt sie unverändert ins Staging.
 import { loeseRahmenLinks, mitSprache, SITE_URL } from './routen.mjs';
+import { NUR_ENTWICKLUNG } from './auslieferung.mjs';
 import { QUELLSPRACHE, SPRACHEN } from '../js/i18n.js';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -55,10 +56,12 @@ function esc(wert) {
 }
 
 // --- 1. Staging-Verzeichnis: vollständige Kopie der Statik (kein Build). ---
-// Nur Entwickler-/VCS-Beiwerk bleibt draußen — alles, was heute schon über
-// `path: .` mit hochgeladen wird, bleibt es auch über den Umweg. Kopiert wird
-// EINTRAG FÜR EINTRAG (nicht die Wurzel als Ganzes) — ZIEL liegt selbst unter
-// REPO, und Node verweigert ein rekursives cp() in eine eigene Unterverzeichnis.
+// Nur VCS-Beiwerk und die Ausgabe selbst bleiben draußen. Die Entwicklerdateien
+// (scripts/auslieferung.mjs) kommen zunächst mit, weil der Prerender-Tab
+// scripts/routen.mjs lädt, und werden nach dem Erfassen entfernt
+// (entferneEntwicklerdateien). Kopiert wird EINTRAG FÜR EINTRAG (nicht die
+// Wurzel als Ganzes) — ZIEL liegt selbst unter REPO, und Node verweigert ein
+// rekursives cp() in eine eigene Unterverzeichnis.
 const AUSSCHLUSS = new Set(['.git', 'node_modules', relative(REPO, ZIEL).split('/')[0]]);
 function kopiere() {
   mkdirSync(ZIEL, { recursive: true });
@@ -66,6 +69,10 @@ function kopiere() {
     if (AUSSCHLUSS.has(eintrag)) continue;
     cpSync(join(REPO, eintrag), join(ZIEL, eintrag), { recursive: true });
   }
+}
+
+function entferneEntwicklerdateien() {
+  for (const eintrag of NUR_ENTWICKLUNG) rmSync(join(ZIEL, eintrag), { recursive: true, force: true });
 }
 
 // Damit der Prerender-Tab unter dem PRODUKTIONS-Präfix lädt (und nicht unter '/'),
@@ -304,6 +311,8 @@ async function haupt() {
     server.kill();
     praefixSymlink(false); // darf nie ins Pages-Artefakt gelangen
   }
+  entferneEntwicklerdateien();
+  console.log(`[prerender] ${NUR_ENTWICKLUNG.length} Entwicklereinträge aus der Auslieferung genommen`);
 }
 
 haupt().catch((fehler) => {

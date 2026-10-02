@@ -721,6 +721,22 @@ function verdrahteNavigation(el) {
   window.addEventListener('keydown', (ereignis) => {
     if (ereignis.key === 'Escape') schliesseMenue();
   });
+  // Gedruckt wird immer hell: die dunklen Tokens ergäben helle Schrift auf
+  // weißem Papier (gemessen am Trainingsplan und am Turniersimulator). Nur das
+  // Attribut kippt kurz, die gespeicherte Wahl bleibt; afterprint stellt es
+  // wieder her — auch nach Strg+P, nicht nur nach einem Druck-Knopf.
+  let themaVorDruck = null; // null: gerade wird nicht gedruckt
+  window.addEventListener('beforeprint', () => {
+    if (themaVorDruck !== null) return;
+    themaVorDruck = document.documentElement.dataset.theme ?? '';
+    document.documentElement.dataset.theme = 'hell';
+  });
+  window.addEventListener('afterprint', () => {
+    if (themaVorDruck === null) return;
+    if (themaVorDruck) document.documentElement.dataset.theme = themaVorDruck;
+    else delete document.documentElement.dataset.theme;
+    themaVorDruck = null;
+  });
 
   window.addEventListener('popstate', rendern);
   window.addEventListener('app:rendern', rendern);
