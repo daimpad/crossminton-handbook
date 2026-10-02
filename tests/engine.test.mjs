@@ -1940,6 +1940,12 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
     wart.langesWarten && wart.felderFuerWarten > 10 && imRahmen(wart.felderFuerWarten)
     && Array.from({ length: wart.felderFuerWarten - 11 }, (_, i) => 11 + i).every((f) => !imRahmen(f)),
     String(wart.felderFuerWarten));
+  // Unterhalb liegt die Antwort vor einer Lücke: 8 passt, 9 und 10 nicht, 11
+  // wieder. Eine Binärsuche ab einem Feld landete bei 11 — der Reihe nach ist
+  // es 8, von jedem Startpunkt darunter.
+  const vonUnten = [1, 3, 5, 7].map((f) => sim.simuliere({ ...wartFall, felder: f }).felderFuerWarten);
+  pruefe('Felder gegen lange Wartezeiten: Lücke in der Feldzahl wird nicht übersprungen',
+    vonUnten.every((n) => n === 8) && imRahmen(8) && [2, 3, 4, 5, 6, 7, 9, 10].every((f) => !imRahmen(f)), vonUnten.join(','));
   // Jeder gegen jeden 12 + 8 im Zeitspiel: 94 Matches à 8 + 5 min — mit zwei
   // Feldern gut 10 h, die längste Kette (11 Spiele) aber nur 138 min.
   const engpassFall = { modus: 'rr', maenner: 12, frauen: 8, satz: 'zeit', halle: 360 };
@@ -1965,6 +1971,14 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   const rr7 = sim.simuliere({ modus: 'rr', maenner: 7, frauen: 0, halle: 300 });
   pruefe('Ungerade Zahl jeder gegen jeden: n Wellen zählen zur Kette',
     rr7.felderNoetig === null && rr7.ketteZuLang === true && rr7.engpass === 'runden');
+  // K.-o. mit 49 Einträgen: Runde 1 hat 17 Matches, erst 17 Felder sparen eine
+  // Welle. Innerhalb der zulässigen 16 helfen mehr Felder also nicht — der
+  // Engpass darf nicht „Felder" heißen; bei 16 Feldern schon, denn dort wartet
+  // ein Match tatsächlich auf ein freies Feld.
+  const ko49 = (felder) => sim.simuliere({ maenner: 49, frauen: 0, felder });
+  pruefe('Engpass misst an der Höchstzahl der Felder (K.-o. 49: 11–15 Rundenfolge, 16 Felder)',
+    [11, 12, 13, 14, 15].every((f) => ko49(f).engpass === 'runden') && ko49(16).engpass === 'felder'
+    && ko49(11).gesamt.typ === ko49(16).gesamt.typ);
   const ko24 = sim.simuliere({ maenner: 24, frauen: 0, halle: 240 });
   pruefe('K.-o. 24 auf sechs Feldern: Engpass Felder, acht reichen', ko24.engpass === 'felder' && ko24.felderNoetig === 8);
   // Wer allein in seiner Konkurrenz steht oder ohne Partner:in bleibt, spielt 0.
@@ -1972,7 +1986,8 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   const ohnePartner = sim.simuliere({ form: 'doppel', wertung: 'offen', modus: 'rr', maenner: 33, frauen: 0 });
   pruefe('Spiele pro Person: Ausgeschlossene zählen mit 0',
     allein.spieleJePerson.min === 0 && allein.spieleJePerson.max === 7 && Math.abs(allein.spieleJePerson.mittel - 56 / 9) < 1e-9
-    && ohnePartner.spieleJePerson.min === 0 && ohnePartner.spieleJePerson.max === 15);
+    && ohnePartner.spieleJePerson.min === 0 && ohnePartner.spieleJePerson.max === 15
+    && Math.abs(ohnePartner.spieleJePerson.mittel - 480 / 33) < 1e-9); // 16 Paare × 2 Personen × 15 Spiele / 33
   const vieleKurze = sim.simuliere({ modus: 'rr', maenner: 24, frauen: 24, satz: 'zeit', minuten: 6, puffer: 3, halle: 240 });
   pruefe('Kette passt, 16 Felder reichen trotzdem nicht → Grund „zu viele Matches"',
     vieleKurze.felderNoetig === null && vieleKurze.ketteZuLang === false);

@@ -251,9 +251,12 @@ function statusHtml(r) {
   } else {
     let rat;
     if (r.felderNoetig !== null) rat = t('ts_status_felder_noetig', { n: r.felderNoetig });
-    // Warum auch die Höchstzahl an Feldern nicht reicht: entweder ist schon die
-    // Kette eigener Spiele länger als die Hallenzeit, oder es sind schlicht zu
-    // viele Matches. Nur der zutreffende Grund wird genannt.
+    // Warum auch die Höchstzahl an Feldern nicht reicht: schon ein einzelnes
+    // Match ist länger als die Hallenzeit, oder die Kette eigener Spiele ist es,
+    // oder es sind schlicht zu viele Matches. Nur der zutreffende Grund wird
+    // genannt — beim einzelnen Match gibt es keine Kette, und das K.-o.-System
+    // änderte nichts.
+    else if (r.matchDauer.typ > e.halle) rat = t('ts_status_match_zu_lang');
     else rat = t(`ts_status_keine_feldzahl_${r.ketteZuLang ? '' : 'menge_'}${e.modus === 'rr' ? 'rr' : 'ko'}`, { n: GRENZEN.felder.max });
     meldungen.push(['rot', 'fa-triangle-exclamation', `${t('ts_status_zu_lang', { dauer: dauerText(r.gesamt.typ), zuviel: dauerText(r.gesamt.typ - e.halle) })} ${rat}`]);
   }
@@ -374,9 +377,16 @@ function zeitleisteHtml(r) {
   }
 
   const halleLinks = pos(e.halle);
+  // Die Beschriftung steht rechts der Linie, wenn sie dort in die Spur passt,
+  // sonst links. Ein fester Prozentwert reichte nicht: über Mitternacht und auf
+  // Französisch ist sie gut doppelt so breit („Fin du créneau 02:15 (jour 2)").
+  // Geschätzt wie die Achsen-Beschriftung, an der Mindestbreite der Spur.
+  const halleText = t('ts_hallenende', { uhr: uhrText(e.halle) });
+  const halleBreite = halleText.length * ACHSE_ZEICHEN_PX + ACHSE_RAND_PX;
+  const halleLinksDavon = ((100 - halleLinks) / 100) * SPUR_MIN_PX < halleBreite;
   const ueberzeit = e.halle < spanne
-    ? `<div class="ts-ueberzeit${r.passtInHalle ? '' : ' ts-ueberzeit-aktiv'}${halleLinks > 70 ? ' ts-hallenende-links' : ''}" style="left:${esc(prozent(halleLinks))}">
-        <span class="ts-hallenende">${esc(t('ts_hallenende', { uhr: uhrText(e.halle) }))}</span>
+    ? `<div class="ts-ueberzeit${r.passtInHalle ? '' : ' ts-ueberzeit-aktiv'}${halleLinksDavon ? ' ts-hallenende-links' : ''}" style="left:${esc(prozent(halleLinks))}">
+        <span class="ts-hallenende">${esc(halleText)}</span>
       </div>`
     : '';
 
@@ -580,12 +590,23 @@ function queryMitSzenario(szenario) {
   return [...fremde, ...(szenario ? [szenario] : [])].join('&');
 }
 
+// Steht der Simulator (noch) in der Adresse? Geprüft wird das Pfadsegment, nicht
+// das Pfadende: ausgeliefert wird die Seite auch als „/turniersimulator/" (das
+// Verzeichnis ihres Snapshots, auf GitHub Pages nach einer 301), und dort schrieb
+// ein Vergleich auf das Ende nie — der geteilte Link trug den alten Stand, ein
+// Sprachwechsel nahm jede Änderung zurück.
+function simulatorInAdresse() {
+  return window.location.pathname.split('/').includes('turniersimulator');
+}
+
 function schreibeAdresse() {
   clearTimeout(schreibZeitgeber);
   schreibZeitgeber = null;
   // Wer kurz nach dem Ziehen die Seite wechselt, darf das Szenario nicht an die
-  // Adresse der neuen Seite gehängt bekommen.
-  if (!document.getElementById('ts-form') || !/\/turniersimulator$/.test(window.location.pathname)) return;
+  // Adresse der neuen Seite gehängt bekommen — auch nicht, während ein
+  // Sprachwechsel noch lädt und das alte Formular schon unter der neuen
+  // Adresse steht.
+  if (!document.getElementById('ts-form') || !simulatorInAdresse()) return;
   ersetzeQuery(queryMitSzenario(zuQuery(einstellungen)));
 }
 
