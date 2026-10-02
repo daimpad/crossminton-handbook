@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Zwód, obraz 1: celowo neutralne, identyczne przygotowanie, które nic nie zdradza — pełny zamach do tyłu, spokojne ciało, żadnego zdecydowanego uderzenia.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .frage{fill:var(--tinte-3,#6b7686);font:700 30px/1 system-ui,sans-serif;text-anchor:middle;opacity:.55}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <circle class="kopf" cx="118" cy="98" r="14"/>
+  <path class="fig" d="M118,112 L124,172"/>
+  <!-- voller Rückschwung, Schläger hinten oben -->
+  <path class="fig" d="M119,120 L100,102 L82,86"/>
+  <path class="fig" d="M120,126 L138,148"/>
+  <path class="fig" d="M124,172 L108,208 L98,240"/>
+  <path class="fig" d="M124,172 L146,206 L160,238"/>
+  <!-- Schläger im Rückschwung -->
+  <line class="schaft" x1="82" y1="86" x2="70" y2="72"/>
+  <ellipse class="kelle" cx="62" cy="64" rx="9" ry="13" transform="rotate(48 62 64)"/>
+  <!-- mehrdeutig: Fragezeichen -->
+  <text class="frage" x="196" y="120">?</text>
+  <line class="boden" x1="86" y1="244" x2="176" y2="244"/>
+  <text class="st" x="150" y="272">to samo przygotowanie — nic nie zdradzić</text>
+</svg>

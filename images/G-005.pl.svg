@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Serwis, obraz 1: wolna ręka upuszcza speedera na wysokości bioder, ramię uderzające jest nisko, gotowe do zamachu od dołu do przodu.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .speeder{fill:var(--primaer,#38a4f1)}
+    .fall{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:2 6;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--tinte-3,#6b7686)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m005" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="118" cy="92" r="14"/>
+  <path class="fig" d="M118,106 L120,168"/>
+  <!-- freie Hand hält/lässt los auf Hüfthöhe -->
+  <path class="fig" d="M119,120 L146,140"/>
+  <!-- Schlagarm tief, bereit von unten -->
+  <path class="fig" d="M118,126 L98,158 L112,180"/>
+  <!-- Beine ruhig -->
+  <path class="fig" d="M120,168 L104,206 L96,240"/>
+  <path class="fig" d="M120,168 L140,204 L150,240"/>
+  <!-- Schläger tief -->
+  <line class="schaft" x1="112" y1="180" x2="126" y2="196"/>
+  <ellipse class="kelle" cx="134" cy="204" rx="9" ry="13" transform="rotate(45 134 204)"/>
+  <!-- Speeder fällt von der freien Hand -->
+  <circle class="speeder" cx="150" cy="146" r="6"/>
+  <path class="fall" d="M150,154 L150,182" marker-end="url(#m005)"/>
+  <line class="boden" x1="82" y1="244" x2="164" y2="244"/>
+  <text class="st" x="150" y="272">speeder spada na wysokość bioder</text>
+</svg>

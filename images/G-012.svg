@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Stopp: große Vorbereitung, aber weicher, abgebremster Kontakt — der Speeder überquert knapp die neutrale Zone und fällt kurz hinter die vordere Linie.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .linie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:3 5}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m012" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="96" cy="98" r="14"/>
+  <path class="fig" d="M96,112 L106,172"/>
+  <!-- große Vorbereitung, Arm gehoben -->
+  <path class="fig" d="M97,120 L120,100 L146,110"/>
+  <path class="fig" d="M99,126 L82,150"/>
+  <path class="fig" d="M106,172 L90,208 L80,240"/>
+  <path class="fig" d="M106,172 L130,204 L146,236"/>
+  <!-- Schläger, weicher Kontakt -->
+  <line class="schaft" x1="146" y1="110" x2="162" y2="106"/>
+  <ellipse class="kelle" cx="172" cy="104" rx="10" ry="14" transform="rotate(78 172 104)"/>
+  <!-- kurze, weiche Flugbahn: knapp über die Zone, fällt kurz -->
+  <path class="bahn" d="M184,104 C 210,92 228,104 236,150" marker-end="url(#m012)"/>
+  <!-- vordere Linie -->
+  <line class="linie" x1="222" y1="150" x2="222" y2="244"/>
+  <line class="boden" x1="66" y1="244" x2="256" y2="244"/>
+  <text class="st" x="150" y="272">kurz und weich · fällt knapp hinter die Linie</text>
+</svg>

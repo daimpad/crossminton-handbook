@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Tempowechsel, Bild 1: ein schneller, harter Schlag mit deutlicher Bewegungsunschärfe und flacher, schneller Flugbahn — hohes Tempo.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.6;stroke-dasharray:2 7;stroke-linecap:round}
+    .wisch{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-linecap:round;opacity:.55}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m018" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="98" cy="98" r="14"/>
+  <path class="fig" d="M98,112 L108,172"/>
+  <path class="fig" d="M100,120 L128,124 L160,128"/>
+  <path class="fig" d="M100,126 L82,150"/>
+  <path class="fig" d="M108,172 L94,208 L84,240"/>
+  <path class="fig" d="M108,172 L132,204 L148,236"/>
+  <line class="schaft" x1="160" y1="128" x2="178" y2="126"/>
+  <ellipse class="kelle" cx="188" cy="125" rx="10" ry="14" transform="rotate(84 188 125)"/>
+  <!-- Bewegungsunschärfe hinter dem Schläger -->
+  <path class="wisch" d="M128,120 L150,120"/>
+  <path class="wisch" d="M132,132 L156,132"/>
+  <!-- flache, schnelle Flugbahn -->
+  <path class="bahn" d="M200,124 L282,120" marker-end="url(#m018)"/>
+  <line class="boden" x1="72" y1="244" x2="190" y2="244"/>
+  <text class="st" x="150" y="272">hohes Tempo · flach und schnell</text>
+</svg>

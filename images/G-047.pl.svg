@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Uzgadniać się: dwóch partnerów debla od tyłu uzgadnia się między punktami krótkim gestem, rozluźniona postawa — prosta komunikacja jako para.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .cue{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6;stroke-dasharray:3 5;stroke-linecap:round}
+    .punkt{fill:var(--primaer,#38a4f1)}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:5 6}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <!-- Partner A -->
+  <circle class="kopf" cx="106" cy="86" r="14"/>
+  <path class="fig" d="M106,102 L106,156"/>
+  <path class="fig" d="M106,110 L128,136"/>
+  <path class="fig" d="M106,110 L84,136"/>
+  <path class="fig" d="M106,156 L91,192 L89,228"/>
+  <path class="fig" d="M106,156 L121,192 L123,228"/>
+  <!-- Partner B -->
+  <circle class="kopf" cx="194" cy="86" r="14"/>
+  <path class="fig" d="M194,102 L194,156"/>
+  <path class="fig" d="M194,110 L172,136"/>
+  <path class="fig" d="M194,110 L216,136"/>
+  <path class="fig" d="M194,156 L179,192 L177,228"/>
+  <path class="fig" d="M194,156 L209,192 L211,228"/>
+  <!-- kurze Absprache zwischen den Köpfen -->
+  <path class="cue" d="M122,74 C 140,60 160,60 178,74"/>
+  <circle class="punkt" cx="142" cy="62" r="3"/>
+  <circle class="punkt" cx="150" cy="58" r="3"/>
+  <circle class="punkt" cx="158" cy="62" r="3"/>
+  <line class="boden" x1="72" y1="232" x2="228" y2="232"/>
+  <text class="st" x="150" y="260">krótkie uzgodnienie · jako para</text>
+</svg>

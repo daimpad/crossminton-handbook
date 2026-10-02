@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Opponent types and counter-recipes: a fitting answer for attackers, defenders and slow opponents.">
+  <style>
+    .karte{fill:var(--primaer,#38a4f1);opacity:.06}
+    .rahmen{fill:none;stroke:var(--linie-stark,#dae3ee);stroke-width:1.4}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .typ{fill:var(--tinte,#16202b);font:700 13px/1 system-ui,sans-serif}
+    .rez{fill:var(--primaer-tief,#1568ad);font:600 12px/1 system-ui,sans-serif}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <g>
+    <rect class="karte"  x="20" y="34"  width="260" height="66" rx="10"/>
+    <rect class="rahmen" x="20" y="34"  width="260" height="66" rx="10"/>
+    <text class="typ" x="36" y="62">attacker</text>
+    <line class="pf" x1="120" y1="67" x2="150" y2="67" marker-end="url(#ah)"/>
+    <text class="rez" x="162" y="72">take the pace off</text>
+  </g>
+  <g>
+    <rect class="karte"  x="20" y="117" width="260" height="66" rx="10"/>
+    <rect class="rahmen" x="20" y="117" width="260" height="66" rx="10"/>
+    <text class="typ" x="36" y="145">defender</text>
+    <line class="pf" x1="120" y1="150" x2="150" y2="150" marker-end="url(#ah)"/>
+    <text class="rez" x="162" y="155">corner to corner</text>
+  </g>
+  <g>
+    <rect class="karte"  x="20" y="200" width="260" height="66" rx="10"/>
+    <rect class="rahmen" x="20" y="200" width="260" height="66" rx="10"/>
+    <text class="typ" x="36" y="228">slow</text>
+    <line class="pf" x1="120" y1="233" x2="150" y2="233" marker-end="url(#ah)"/>
+    <text class="rez" x="162" y="238">wide angles</text>
+  </g>
+</svg>

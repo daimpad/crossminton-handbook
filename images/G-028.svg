@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Den Punkt aufbauen: den Gegner mit mehreren Schlägen von Ecke zu Ecke bewegen, bis eine Öffnung entsteht.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .oeff{fill:var(--primaer,#38a4f1);opacity:.15}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .badge{fill:var(--tinte,#16202b)}
+    .bt{fill:var(--flaeche,#fff);font:700 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <path class="pf" d="M150,286 L92,86"   marker-end="url(#ah)"/>
+  <path class="pf" d="M150,286 L206,90"  marker-end="url(#ah)"/>
+  <path class="pf" d="M150,286 L96,196"  marker-end="url(#ah)"/>
+  <circle class="oeff" cx="210" cy="196" r="24"/>
+  <circle class="ring" cx="210" cy="196" r="24"/>
+  <g><circle class="badge" cx="90"  cy="78"  r="12"/><text class="bt" x="90"  y="82">1</text></g>
+  <g><circle class="badge" cx="210" cy="80"  r="12"/><text class="bt" x="210" y="84">2</text></g>
+  <g><circle class="badge" cx="90"  cy="196" r="12"/><text class="bt" x="90"  y="200">3</text></g>
+  <text class="zt" x="210" y="200">offen</text>
+  <text class="zt" x="150" y="272">Punkt aufbauen → Öffnung</text>
+</svg>

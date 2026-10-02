@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Feinte, image 2 : la même préparation, d'où bifurquent deux frappes différentes — un drive plat et rapide et un amorti court et doux ; le choix ne se fait qu'au dernier moment.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
+    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
+    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m017" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="104" cy="98" r="14"/>
+  <path class="fig" d="M104,112 L112,172"/>
+  <!-- gleiche Vorbereitung wie Bild 1, Schläger poised vorn -->
+  <path class="fig" d="M105,120 L128,108 L152,110"/>
+  <path class="fig" d="M105,126 L86,150"/>
+  <path class="fig" d="M112,172 L96,208 L86,240"/>
+  <path class="fig" d="M112,172 L136,206 L150,238"/>
+  <line class="schaft" x1="152" y1="110" x2="168" y2="106"/>
+  <ellipse class="kelle" cx="178" cy="104" rx="10" ry="13" transform="rotate(78 178 104)"/>
+  <!-- zwei abzweigende Möglichkeiten -->
+  <path class="bahn" d="M190,102 L276,92" marker-end="url(#m017)"/>
+  <path class="bahn" d="M190,108 C 214,110 226,124 230,158" marker-end="url(#m017)"/>
+  <line class="boden" x1="74" y1="244" x2="176" y2="244"/>
+  <text class="st" x="150" y="272">une préparation, deux options</text>
+</svg>

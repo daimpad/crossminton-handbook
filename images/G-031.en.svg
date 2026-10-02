@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Attacking a weakness systematically: play the Speeder again and again into the same weak corner of the opponent.">
+  <style>
+    .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .ziel{fill:var(--primaer,#38a4f1);opacity:.15}
+    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .traj{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.5}
+    .oeffnen{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:7 5}
+    .marker{fill:var(--primaer,#38a4f1)}
+    .gegner{fill:var(--tinte-3,#6b7686)}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="marker"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="gegner"/></marker>
+  </defs>
+
+  <rect class="linie" x="52" y="42" width="196" height="196"/>
+  <circle class="ziel" cx="86" cy="80" r="32"/>
+  <circle class="ring" cx="86" cy="80" r="32"/>
+
+  <!-- eine Öffnungs-Ecke, dann immer wieder auf die Schwäche -->
+  <path class="oeffnen" d="M150,288 C 190,230 214,150 214,116" marker-end="url(#ahg)"/>
+  <path class="traj" d="M150,288 C 118,236 96,150 90,116" marker-end="url(#ah)"/>
+  <path class="traj" d="M150,288 C 126,244 100,160 84,116" marker-end="url(#ah)"/>
+
+  <circle class="gegner" cx="150" cy="150" r="8"/>
+  <text class="zonetext" x="86"  y="84">weakness</text>
+  <text class="subtext"  x="212" y="150">open up</text>
+</svg>

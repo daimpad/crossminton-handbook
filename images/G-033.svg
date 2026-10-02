@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Beweglichkeit und die Schulter: eine sanfte Schulter- und Rumpfmobilisation, ein Arm kreist entlang eines gebogenen Bewegungsbogens über die Schulter, entspannte aufrechte Haltung.">
+  <style>
+    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+    .kopf{fill:var(--tinte,#16202b)}
+    .kreis{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:3 6;stroke-linecap:round}
+    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
+    .mk{fill:var(--primaer,#38a4f1)}
+    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="m033" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
+  <circle class="kopf" cx="150" cy="70" r="15"/>
+  <path class="fig" d="M150,94 L150,158"/>
+  <!-- ruhiger Arm -->
+  <path class="fig" d="M150,108 L126,132"/>
+  <!-- kreisender Arm über die Schulter -->
+  <path class="fig" d="M150,108 L176,108 L188,86"/>
+  <!-- Beine, aufrecht -->
+  <path class="fig" d="M150,158 L132,196 L128,232"/>
+  <path class="fig" d="M150,158 L168,196 L172,232"/>
+  <!-- Bewegungsbogen des kreisenden Arms -->
+  <path class="kreis" d="M188,86 C 214,96 216,140 190,150" marker-end="url(#m033)"/>
+  <line class="boden" x1="108" y1="236" x2="192" y2="236"/>
+  <text class="st" x="150" y="264">sanfte Schulterkreise · Beweglichkeit</text>
+</svg>
