@@ -50,15 +50,27 @@ function konkurrenzName(id) {
   return t(`ts_konkurrenz_${id}`);
 }
 
+// Gruppen heißen wie auf jedem Turnierplan A, B, C … und nach Z weiter mit AA,
+// AB — bei 128 Einträgen in Dreiergruppen sind es 42.
+function gruppenBuchstabe(nr) {
+  let text = '';
+  for (let n = nr + 1; n > 0; n = Math.floor((n - 1) / 26)) text = String.fromCharCode(65 + ((n - 1) % 26)) + text;
+  return text;
+}
+
 function rundenTitel(eintrag) {
+  if (eintrag.phase === 'gruppe') return t('ts_gruppe_runde', { g: gruppenBuchstabe(eintrag.gruppeNr), n: eintrag.runde + 1 });
   if (eintrag.rundenGroesse) {
     const schluessel = rundenName(eintrag.rundenGroesse);
     if (schluessel) return t(`ko_turnier_${schluessel}`);
   }
+  // Nach einer Gruppenphase hieße „Runde 1" zweierlei — dort ist es die K.-o.-Runde.
+  if (einstellungen.modus === 'gruppen') return t('ts_ko_runde_n', { n: eintrag.runde + 1 });
   return t('ko_turnier_runde_n', { n: eintrag.runde + 1 });
 }
 
 function rundenKurz(eintrag) {
+  if (eintrag.phase === 'gruppe') return gruppenBuchstabe(eintrag.gruppeNr);
   if (eintrag.rundenGroesse) {
     const schluessel = rundenName(eintrag.rundenGroesse);
     if (schluessel) return t(`ts_${schluessel}_kurz`);
@@ -143,8 +155,12 @@ function formularHtml() {
       <h2 class="karte-titel">${esc(t('ts_gruppe_modus'))}</h2>
       ${segmentHtml('modus', t('ts_modus'), [
         { wert: 'rr', titel: t('ts_modus_rr') },
+        { wert: 'gruppen', titel: t('ts_modus_gruppen') },
         { wert: 'ko', titel: t('ts_modus_ko') },
       ])}
+      <div data-nur-modus="gruppen">
+        ${reglerHtml('gruppe', t('ts_gruppengroesse'), { hinweis: t('ts_gruppengroesse_hinweis') })}
+      </div>
       ${segmentHtml('satz', t('ts_begrenzung'), [
         { wert: 'punkte', titel: t('ts_nach_punkten') },
         { wert: 'zeit', titel: t('ts_zeitspiel') },
@@ -180,6 +196,7 @@ function formularHtml() {
 
       <div class="knopf-zeile ts-aktionen">
         <button type="button" class="knopf knopf-sekundaer" id="ts-teilen"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> ${esc(t('ts_teilen'))}</button>
+        <button type="button" class="knopf knopf-sekundaer" id="ts-drucken"><i class="fa-solid fa-print" aria-hidden="true"></i> ${esc(t('ts_drucken'))}</button>
         <button type="button" class="knopf knopf-leise" id="ts-zuruecksetzen"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i> ${esc(t('ts_zuruecksetzen'))}</button>
       </div>
     </form>`;
@@ -190,6 +207,7 @@ function formularHtml() {
 function aktualisiereSteuerung(form) {
   const e = einstellungen;
   for (const gruppe of form.querySelectorAll('[data-nur-satz]')) gruppe.hidden = gruppe.dataset.nurSatz !== e.satz;
+  for (const gruppe of form.querySelectorAll('[data-nur-modus]')) gruppe.hidden = gruppe.dataset.nurModus !== e.modus;
   const mixed = form.querySelector('[data-gruppe="wertung"] [data-option="mixed"]');
   if (mixed) mixed.hidden = e.form !== 'doppel';
   for (const radio of form.querySelectorAll('[data-wahl]')) radio.checked = String(e[radio.dataset.wahl]) === radio.value;
@@ -257,7 +275,7 @@ function statusHtml(r) {
     // genannt — beim einzelnen Match gibt es keine Kette, und das K.-o.-System
     // änderte nichts.
     else if (r.matchDauer.typ > e.halle) rat = t('ts_status_match_zu_lang');
-    else rat = t(`ts_status_keine_feldzahl_${r.ketteZuLang ? '' : 'menge_'}${e.modus === 'rr' ? 'rr' : 'ko'}`, { n: GRENZEN.felder.max });
+    else rat = t(`ts_status_keine_feldzahl_${r.ketteZuLang ? '' : 'menge_'}${e.modus}`, { n: GRENZEN.felder.max });
     meldungen.push(['rot', 'fa-triangle-exclamation', `${t('ts_status_zu_lang', { dauer: dauerText(r.gesamt.typ), zuviel: dauerText(r.gesamt.typ - e.halle) })} ${rat}`]);
   }
   if (r.langesWarten) {
@@ -435,6 +453,7 @@ function konkurrenzenHtml(r) {
             <span class="ts-konkurrenz-name"><span class="ts-legende-farbe ts-art-${esc(k.art)}" aria-hidden="true"></span>${esc(konkurrenzName(k.id))}</span>
             <span class="chip-zeile">
               <span class="chip">${esc(t(doppel ? 'ts_eintraege_paare' : 'ts_eintraege_personen', { n: zahl.format(k.eintraege) }))}</span>
+              ${k.gruppen ? `<span class="chip">${esc(t('ts_gruppen_n', { n: zahl.format(k.gruppen) }))}</span>` : ''}
               <span class="chip">${esc(t('ts_matches_n', { n: zahl.format(k.matches) }))}</span>
               <span class="chip">${esc(t('ts_runden_n', { n: zahl.format(k.runden) }))}</span>
             </span>
@@ -473,6 +492,38 @@ function ablaufHtml(r) {
     </details>`;
 }
 
+// Nur auf Papier: das Formular fehlt dort, also stehen die Einstellungen als
+// Eckdaten oben, dazu der Link, mit dem sich das Szenario wieder öffnen lässt
+// (beim Drucken nachgetragen, s. beforeprint).
+function druckKopfHtml(r) {
+  const e = r.einstellungen;
+  const minuten = (n) => `${n} ${t('ts_einheit_min')}`;
+  const zeilen = [
+    [t('ts_felder'), e.felder],
+    [t('ts_spielform'), t(e.form === 'doppel' ? 'ts_doppel' : 'ts_einzel')],
+    [t('ts_maenner'), e.maenner],
+    [t('ts_frauen'), e.frauen],
+    [t('ts_wertung'), t(`ts_wertung_${e.wertung}`)],
+    [t('ts_modus'), t(`ts_modus_${e.modus}`)],
+    ...(e.modus === 'gruppen' ? [[t('ts_gruppengroesse'), e.gruppe]] : []),
+    [t('ts_begrenzung'), t(e.satz === 'zeit' ? 'ts_zeitspiel' : 'ts_nach_punkten')],
+    ...(e.satz === 'zeit'
+      ? [[t('ts_spielzeit'), minuten(e.minuten)]]
+      : [[t('ts_gewinnsaetze'), e.saetze], [t('ts_punkte'), e.punkte]]),
+    [t('ts_puffer'), minuten(e.puffer)],
+    [t('ts_beginn'), e.start],
+    [t('ts_hallenzeit'), hallenzeitText()],
+  ];
+  return `
+    <section class="karte ts-druck-kopf">
+      <h2 class="karte-titel">${esc(t('ts_druck_eckdaten'))}</h2>
+      <dl class="ts-druck-eckdaten">
+        ${zeilen.map(([titel, wert]) => `<div><dt>${esc(titel)}</dt><dd>${esc(wert)}</dd></div>`).join('')}
+      </dl>
+      <p class="ts-druck-link">${esc(t('ts_druck_link'))}: <span data-druck-link>${esc(window.location.href)}</span></p>
+    </section>`;
+}
+
 function annahmenHtml(r) {
   const e = r.einstellungen;
   const zahl = zahlFormat();
@@ -493,6 +544,7 @@ function annahmenHtml(r) {
   }
   absaetze.push(t('ts_annahmen_planung'));
   if (e.modus === 'ko') absaetze.push(t('ts_annahmen_ko'));
+  if (e.modus === 'gruppen') absaetze.push(t('ts_annahmen_gruppen'));
   return `
     <details class="regel-abschnitt karte ts-annahmen" data-aufklapp="annahmen">
       <summary><h2>${esc(t('ts_annahmen'))}</h2></summary>
@@ -546,7 +598,7 @@ function zeichneErgebnis(el) {
     // Aufgeklappte Abschnitte bleiben offen — wer die Ablauf-Tabelle liest und
     // dabei einen Regler zieht, soll sie nicht jedes Mal neu öffnen müssen.
     for (const d of ziel.querySelectorAll('details[data-aufklapp]')) offeneAbschnitte[d.dataset.aufklapp] = d.open;
-    ziel.innerHTML = `${statusHtml(r)}${kennzahlenHtml(r)}${zeitleisteHtml(r)}${konkurrenzenHtml(r)}${ablaufHtml(r)}${annahmenHtml(r)}`;
+    ziel.innerHTML = `${druckKopfHtml(r)}${statusHtml(r)}${kennzahlenHtml(r)}${zeitleisteHtml(r)}${konkurrenzenHtml(r)}${ablaufHtml(r)}${annahmenHtml(r)}`;
     for (const d of ziel.querySelectorAll('details[data-aufklapp]')) d.open = Boolean(offeneAbschnitte[d.dataset.aufklapp]);
   }
   const live = el.querySelector('#ts-live');
@@ -623,6 +675,33 @@ if (typeof window !== 'undefined') {
   });
   window.addEventListener('app:sprache', () => {
     if (schreibZeitgeber) schreibeAdresse();
+  });
+  // Drucken (Knopf oder Strg+P): Spielplan und Annahmen gehören aufs Papier,
+  // ein geschlossenes <details> druckt der Browser aber nicht mit. Aufgeklappt
+  // wird nur für den Druck, afterprint stellt den vorigen Zustand wieder her.
+  // Der Link wird vorher geschrieben, sonst stünde ein Stand von vor dem
+  // letzten Ziehen auf dem Papier.
+  let vorDruck = null;
+  window.addEventListener('beforeprint', () => {
+    const ergebnis = document.getElementById('ts-ergebnis');
+    if (!ergebnis || vorDruck) return;
+    if (schreibZeitgeber) schreibeAdresse();
+    const link = ergebnis.querySelector('[data-druck-link]');
+    if (link) link.textContent = window.location.href;
+    vorDruck = {};
+    for (const d of ergebnis.querySelectorAll('details[data-aufklapp]')) {
+      vorDruck[d.dataset.aufklapp] = d.open;
+      d.open = true;
+    }
+  });
+  window.addEventListener('afterprint', () => {
+    if (!vorDruck) return;
+    // Über den Schlüssel, nicht über das Element: zeichnet der Simulator
+    // währenddessen neu (ein gerade gezogener Regler), sind es schon andere.
+    for (const d of document.querySelectorAll('#ts-ergebnis details[data-aufklapp]')) {
+      if (d.dataset.aufklapp in vorDruck) d.open = vorDruck[d.dataset.aufklapp];
+    }
+    vorDruck = null;
   });
 }
 
@@ -723,6 +802,7 @@ export function renderTurniersimulator(el) {
     schreibeAdresse();
     teileLink(window.location.href, t('ts_titel'));
   });
+  el.querySelector('#ts-drucken').addEventListener('click', () => window.print());
   el.querySelector('#ts-zuruecksetzen').addEventListener('click', () => {
     clearTimeout(schreibZeitgeber);
     schreibZeitgeber = null;

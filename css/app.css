@@ -2553,6 +2553,13 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
    Zeit-Spalte so breit, dass auf dem Telefon die Runden-Spalte aus dem Bild lief. */
 .ts-chip-ueber { display: block; width: fit-content; margin-top: 0.15rem; font-size: 0.72rem; padding-block: 0.05rem; white-space: normal; }
 .ts-annahmen p { max-width: 64ch; }
+/* Eckdaten nur auf Papier: dort fehlt das Formular (s. @media print). */
+.ts-druck-kopf { display: none; }
+.ts-druck-eckdaten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; margin: 0.2rem 0 0.7rem; }
+.ts-druck-eckdaten div { display: flex; justify-content: space-between; gap: 0.6rem; padding: 0.2rem 0; border-bottom: 1px solid var(--linie); }
+.ts-druck-eckdaten dt { color: var(--tinte-2); }
+.ts-druck-eckdaten dd { margin: 0; font-weight: 600; text-align: right; }
+.ts-druck-link { font-size: 0.8rem; color: var(--tinte-2); margin: 0; overflow-wrap: anywhere; }
 
 /* ---------- Dunkelmodus-Feinschliff (was Tokens allein nicht abdecken) ---------- */
 /* Der Primär-Button trägt im Dunkeln dunklen Text auf dem hellen Marken-Blau;
@@ -2572,6 +2579,16 @@ html:has(.ts-live) { scroll-padding-top: calc(var(--kopf-hoehe, 4.6rem) + 5rem);
   .plan-konfig, .plan-aktionen, .plan-session-knoepfe, .plan-session-link,
   .ts-aktionen, .ts-live { display: none !important; }
   .ts-zeitleiste { overflow: visible; }
+  /* Turniersimulator: statt des Formulars die Eckdaten; Farben (Konkurrenzen,
+     Überzeit, Ampel) sind hier Inhalt und werden mitgedruckt. */
+  .ts-eingaben, .ts-intro { display: none !important; }
+  .ts-druck-kopf { display: block; }
+  .ts-ergebnis, .ts-ergebnis * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ts-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ts-kpi { box-shadow: none; }
+  .ts-druck-kopf, .ts-meldung, .ts-kpi, .ts-zeitleiste-karte, .ts-konkurrenzen li, .ts-tabelle tr { break-inside: avoid; }
+  .ts-tabelle-rahmen { overflow: visible; }
+  .regel-abschnitt > summary::before { display: none; }
   body { background: #fff; }
   main { padding: 0; max-width: none; }
   .karte { box-shadow: none; border: 1px solid #ccc; margin: 0 0 0.6rem; }

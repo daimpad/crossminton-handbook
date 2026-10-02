@@ -127,6 +127,18 @@ jobs:
             }
             console.log("JSON-LD geprueft: "+n+" Bloecke, alle gueltig");
           '
+          # Entwicklerdateien gehoeren nicht in die Auslieferung (Liste in
+          # scripts/auslieferung.mjs), die Laufzeitdateien daneben schon.
+          node --input-type=module -e '
+            import { existsSync } from "node:fs";
+            import { NUR_ENTWICKLUNG } from "./scripts/auslieferung.mjs";
+            const drin = NUR_ENTWICKLUNG.filter((e) => existsSync("_site/" + e));
+            if (drin.length) { console.error("Entwicklerdateien in der Auslieferung: " + drin.join(", ")); process.exit(1); }
+            for (const f of ["404.html", "sw.js", "robots.txt", "manifest.json", "LICENSE", "assets/fonts/fa-solid-900.woff2", "vendor/goatcounter/count.js", "js/version.js"]) {
+              if (!existsSync("_site/" + f)) { console.error("Laufzeitdatei fehlt: " + f); process.exit(1); }
+            }
+            console.log("Auslieferung ohne Entwicklerdateien (" + NUR_ENTWICKLUNG.length + " Eintraege geprueft)");
+          '
 
       - uses: actions/upload-artifact@v4
         with:

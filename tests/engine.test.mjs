@@ -4,7 +4,7 @@
 // Projektionen, Kontinuität und die Vollständigkeit der de-Labels.
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
@@ -20,6 +20,7 @@ import { TEAM_TRENNER, bildePaare, erzeugeTurnier, istAbgeschlossen, mische, pla
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
+import { NUR_ENTWICKLUNG } from '../scripts/auslieferung.mjs';
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 import { KOMMENTATOR_HILFE, KOMMENTATOR_OHNE_UEBERSETZUNG, KOMMENTATOR_TEXTE, kommentatorTexte } from '../js/feedback.js';
@@ -1866,26 +1867,33 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   pruefe('K.-o. 5: das Duell zweier Freilos-Plätze beginnt sofort', freilosDuell >= 0 && ko5.plan.start[freilosDuell] === 0 && ende(ko5) === 40);
 
   // Invarianten über viele Szenarien: kein Feld, keine Person doppelt belegt,
-  // Wechselzeit eingehalten, K.-o.-Zubringer fertig, untere Schranken gehalten.
+  // Wechselzeit eingehalten, K.-o.-Zubringer fertig, bei Gruppen + K.-o. alle
+  // Gruppen der Konkurrenz vor ihrer K.-o.-Runde, untere Schranken gehalten.
   const fehlerListe = [];
-  for (const modus of ['rr', 'ko']) {
+  for (const modus of ['rr', 'ko', 'gruppen']) {
     for (const n of [2, 3, 5, 8, 11, 16, 23]) {
       for (const felder of [1, 2, 3, 6, 16]) {
         for (const puffer of [0, 4]) {
           const dauer = 12;
           const liste = [{ id: 'a', art: 'herren', eintraege: n, personenJeEintrag: 1 }, { id: 'b', art: 'damen', eintraege: Math.max(2, n - 3), personenJeEintrag: 1 }];
-          const matches = sim.erzeugeMatches(liste, modus);
+          const matches = sim.erzeugeMatches(liste, modus, 3 + (n % 3));
           const plan = sim.verteile(matches, felder, dauer, puffer);
           const name = `${modus} n=${n} f=${felder} p=${puffer}`;
           if (plan.start.length !== matches.length || plan.start.some((x) => !Number.isFinite(x))) fehlerListe.push(`${name}: nicht alles geplant`);
           const jeFeld = new Map();
           const jeEintrag = new Map();
+          const gruppenEnde = new Map();
+          matches.forEach((m, i) => {
+            if (m.phase === 'gruppe') gruppenEnde.set(m.k, Math.max(gruppenEnde.get(m.k) ?? 0, plan.start[i] + dauer));
+          });
           matches.forEach((m, i) => {
             if (!jeFeld.has(plan.feld[i])) jeFeld.set(plan.feld[i], []);
             jeFeld.get(plan.feld[i]).push(plan.start[i]);
             for (const q of m.quellen) {
               if (q.match !== undefined) {
                 if (plan.start[i] < plan.start[q.match] + dauer + puffer - 1e-9) fehlerListe.push(`${name}: Zubringer nicht fertig`);
+              } else if (q.quali) {
+                if (q.k !== m.k || plan.start[i] < gruppenEnde.get(q.k) + puffer - 1e-9) fehlerListe.push(`${name}: K.-o. vor dem Ende der Gruppen`);
               } else {
                 if (!jeEintrag.has(q.p)) jeEintrag.set(q.p, []);
                 jeEintrag.get(q.p).push(plan.start[i]);
@@ -1903,7 +1911,59 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
       }
     }
   }
-  pruefe('Planung hält Feld, Person, Wechselzeit und Zubringer ein (140 Szenarien)', fehlerListe.length === 0, [...new Set(fehlerListe)].slice(0, 4).join('; '));
+  pruefe('Planung hält Feld, Person, Wechselzeit, Zubringer und Gruppenende ein (210 Szenarien)', fehlerListe.length === 0, [...new Set(fehlerListe)].slice(0, 4).join('; '));
+
+  // Gruppen + K.-o. (ICO 11): Einteilung, Zahlen, Kette, Spiele, Wartezeit
+  let einteilungOk = true;
+  for (let n = 2; n <= 128; n++) {
+    for (let g = sim.GRENZEN.gruppe.min; g <= sim.GRENZEN.gruppe.max; g++) {
+      const gr = sim.gruppenEinteilung(n, g);
+      const summe = gr.reduce((s, x) => s + x, 0);
+      if (summe !== n || Math.max(...gr) - Math.min(...gr) > 1 || gr.some((x, i) => i && x > gr[i - 1])) einteilungOk = false;
+      if (n >= 3 && Math.min(...gr) < 3) einteilungOk = false;
+    }
+  }
+  pruefe('Gruppeneinteilung: Summe stimmt, Größen gleichmäßig, keine unter drei (n = 2…128, Größe 3…8)', einteilungOk);
+  pruefe('Gruppeneinteilung: 10/4 → 4,3,3 · 13/4 → 5,4,4 · 5/4 → 5 · 6/4 → 3,3 · 2 → 2',
+    [[10, 4, '4,3,3'], [13, 4, '5,4,4'], [5, 4, '5'], [6, 4, '3,3'], [2, 4, '2'], [24, 3, '3,3,3,3,3,3,3,3']]
+      .every(([n, g, soll]) => sim.gruppenEinteilung(n, g).join(',') === soll));
+  pruefe('Gruppengröße wird begrenzt, die Adresse trägt sie nur abweichend',
+    sim.normalisiere({ gruppe: 2 }).gruppe === 3 && sim.normalisiere({ gruppe: 99 }).gruppe === 8 && sim.normalisiere({ gruppe: '4.4' }).gruppe === 4
+    && sim.zuQuery({ modus: 'gruppen' }) === 'modus=gruppen' && sim.zuQuery({ modus: 'gruppen', gruppe: 5 }) === 'modus=gruppen&gruppe=5');
+  const gk = (n, extra = {}) => sim.simuliere({ modus: 'gruppen', maenner: n, frauen: 0, ...extra });
+  pruefe('Gruppen + K.-o.: 16 → 4 Gruppen, 24 + 7 Matches · 12 → 18 + 5 · 20 → 30 + 9',
+    gk(16).matchZahl === 31 && gk(16).konkurrenzen[0].gruppen === 4 && gk(12).matchZahl === 23 && gk(20).matchZahl === 39);
+  pruefe('Gruppen + K.-o.: eine Gruppe, dann das Finale der beiden Besten (4 → 6 + 1)',
+    gk(4).matchZahl === 7 && gk(4).konkurrenzen[0].runden === 4);
+  pruefe('Gruppen + K.-o.: zwei Einträge spielen einmal, ohne Finale', gk(2).matchZahl === 1 && gk(2).spieleJePerson.max === 1);
+  // Mit genug Feldern läuft jede Runde parallel: drei Gruppenrunden, dann drei
+  // K.-o.-Runden, dazwischen jeweils die Wechselzeit.
+  const gk16 = gk(16, { felder: 16, satz: 'zeit', minuten: 10, puffer: 5 });
+  pruefe('Gruppen + K.-o. 16 mit genug Feldern: sechs Runden → 6 × 10 + 5 × 5 = 85 min', gk16.gesamt.typ === 85, String(gk16.gesamt.typ));
+  pruefe('Gruppen + K.-o. 16: Wartezeit überall genau die Wechselzeit, auch vor dem ersten K.-o.-Spiel',
+    gk16.warten.mittel === 5 && gk16.warten.laengste === 5, JSON.stringify(gk16.warten));
+  pruefe('Spiele je Person 16: Ø 62/16, 3 bis 6', JSON.stringify(gk(16).spieleJePerson) === JSON.stringify({ mittel: 62 / 16, min: 3, max: 6 }));
+  // 20 → fünf Gruppen, zehn Gruppenbeste: sechs Freilose, darunter der beste
+  // Zweite. Am meisten spielt ein Zweiter ohne Freilos: 3 + 4.
+  pruefe('Spiele je Person 20: Ø 78/20, 3 bis 7 (Freilos zählt nicht mit)', JSON.stringify(gk(20).spieleJePerson) === JSON.stringify({ mittel: 78 / 20, min: 3, max: 7 }));
+  // 21 → Gruppen 5,4,4,4,4: beide Besten der Fünfergruppe haben ein Freilos,
+  // also spielen sie höchstens 4 + 3, nicht 4 + 4.
+  pruefe('Spiele je Person 21: Freilose der großen Gruppe → Ø 86/21, 3 bis 7',
+    JSON.stringify(gk(21).spieleJePerson) === JSON.stringify({ mittel: 86 / 21, min: 3, max: 7 }), JSON.stringify(gk(21).spieleJePerson));
+  pruefe('Spiele je Person 3: eine Dreiergruppe, dann das Finale → Ø 8/3, 2 bis 3',
+    Math.abs(gk(3).spieleJePerson.mittel - 8 / 3) < 1e-9 && gk(3).spieleJePerson.min === 2 && gk(3).spieleJePerson.max === 3);
+  const dreiModi = ['ko', 'gruppen', 'rr'].map((modus) => sim.simuliere({ modus }));
+  pruefe('Standard: K.-o. < Gruppen + K.-o. < jeder gegen jeden (Matches und Dauer)',
+    dreiModi[0].matchZahl < dreiModi[1].matchZahl && dreiModi[1].matchZahl < dreiModi[2].matchZahl
+    && dreiModi[0].gesamt.typ < dreiModi[1].gesamt.typ && dreiModi[1].gesamt.typ < dreiModi[2].gesamt.typ,
+    dreiModi.map((r) => `${r.matchZahl}/${Math.round(r.gesamt.typ)}`).join(' · '));
+  const gkDoppel = sim.simuliere({ modus: 'gruppen', form: 'doppel', wertung: 'mixed', maenner: 21, frauen: 18 });
+  pruefe('Gruppen + K.-o. im Mixed: 18 Paare → 5 Gruppen (4,4,4,3,3), 24 + 9 Matches',
+    gkDoppel.konkurrenzen[0].gruppen === 5 && gkDoppel.matchZahl === 33 && gkDoppel.uebrig === 3);
+  const gkAblauf = gk(16).ablauf;
+  pruefe('Ablauf kennt Gruppe und K.-o.-Runde', gkAblauf.filter((a) => a.phase === 'gruppe').length === 24
+    && gkAblauf.filter((a) => a.phase === 'ko').length === 7 && gkAblauf.some((a) => a.phase === 'ko' && a.rundenGroesse === 1)
+    && new Set(gkAblauf.filter((a) => a.phase === 'gruppe').map((a) => a.gruppeNr)).size === 4);
 
   // Kennzahlen
   const std = sim.simuliere(S);
@@ -2005,6 +2065,50 @@ console.log('\n[24] Turniersimulator (Rechenkern)');
   sim.simuliere({ modus: 'rr', maenner: 64, frauen: 64, wertung: 'offen', felder: 16 });
   const ms = performance.now() - t0;
   pruefe(`größter Fall (8128 Matches) rechnet in ${Math.round(ms)} ms (Grenze 1500)`, ms < 1500);
+}
+
+console.log('\n[25] Auslieferung: Entwicklerdateien bleiben draußen, nichts Benötigtes fällt weg');
+// scripts/prerender.mjs nimmt NUR_ENTWICKLUNG nach dem Erfassen aus _site. Ein
+// Tippfehler in der Liste ließe einen Eintrag still durch; ein Laufzeitverweis
+// in einen dieser Einträge bräche die Produktion, ohne dass es lokal auffiele —
+// im Repo liegt ja alles.
+{
+  const fehlt = NUR_ENTWICKLUNG.filter((e) => !existsSync(join(wurzel, e)));
+  pruefe('jeder Entwicklereintrag existiert im Repo', fehlt.length === 0, fehlt.join(', '));
+  const laufzeit = ['index.html', '404.html', '.htaccess', '.nojekyll', 'CNAME', 'LICENSE', 'sw.js', 'robots.txt', 'sitemap.xml', 'manifest.json', 'assets', 'css', 'data', 'images', 'js', 'rules', 'vendor'];
+  pruefe('keine Laufzeitdatei steht auf der Liste', laufzeit.every((p) => !NUR_ENTWICKLUNG.includes(p)));
+
+  // Jeden Verweis, der zur Laufzeit geladen wird, auf seinen obersten Eintrag
+  // zurückführen. Pfade in Zeichenketten gelten ab der Wurzel (WURZEL/<base>),
+  // Modul-Importe relativ zur importierenden Datei.
+  const verweise = new Map();
+  const merke = (pfad, quelle) => {
+    const oben = normalize(pfad).split(/[\\/]/)[0];
+    if (!verweise.has(oben)) verweise.set(oben, `${quelle}: ${pfad}`);
+  };
+  const DATEIPFAD = /['"`]((?:[\w.-]+\/)+[\w.-]+\.(?:js|mjs|css|json|svg|png|webp|woff2|pdf|html|txt|xml))['"`]/g;
+  const ohneKommentare = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/.*$/gm, '$1');
+  for (const [, p] of liesText('sw.js').match(/const SHELL = \[([\s\S]*?)\];/)[1].matchAll(/'([^']+)'/g)) merke(p, 'sw.js');
+  for (const datei of ['index.html', '404.html']) {
+    for (const [, p] of liesText(datei).matchAll(DATEIPFAD)) if (!/^(https?:|\/)/.test(p)) merke(p, datei);
+  }
+  for (const icon of liesJson('manifest.json').icons ?? []) merke(icon.src, 'manifest.json');
+  for (const d of turnierregeln._meta?.dokumente ?? []) if (d.pfad) merke(d.pfad, 'turnierregeln.json');
+  const jsDateien = (ordner) => readdirSync(join(wurzel, ordner)).flatMap((name) => {
+    const pfad = `${ordner}/${name}`;
+    if (statSync(join(wurzel, pfad)).isDirectory()) return jsDateien(pfad);
+    return pfad.endsWith('.js') ? [pfad] : [];
+  });
+  for (const datei of jsDateien('js')) {
+    const text = ohneKommentare(liesText(datei));
+    for (const [, p] of text.matchAll(/(?:from|import\()\s*['"](\.{1,2}\/[^'"]+)['"]/g)) merke(join(dirname(datei), p), datei);
+    for (const [, p] of text.matchAll(DATEIPFAD)) if (!p.startsWith('.')) merke(p, datei);
+  }
+  const verboten = [...verweise].filter(([oben]) => NUR_ENTWICKLUNG.includes(oben));
+  pruefe(`kein Laufzeitverweis zeigt in einen Entwicklereintrag (${verweise.size} oberste Einträge erreicht)`,
+    verboten.length === 0, verboten.map(([, fund]) => fund).join(' | '));
+  pruefe('die Suche erreicht die Laufzeitordner', ['js', 'css', 'data', 'assets', 'vendor', 'rules'].every((o) => verweise.has(o)),
+    [...verweise.keys()].join(', '));
 }
 
 setzeZurueck();

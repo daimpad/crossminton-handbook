@@ -21,6 +21,7 @@ export const GRENZEN = {
   felder: { min: 1, max: 16, schritt: 1 },
   maenner: { min: 0, max: 64, schritt: 1 },
   frauen: { min: 0, max: 64, schritt: 1 },
+  gruppe: { min: 3, max: 8, schritt: 1 },
   saetze: { min: 1, max: 3, schritt: 1 },
   punkte: { min: 4, max: 21, schritt: 1 },
   minuten: { min: 4, max: 12, schritt: 1 },
@@ -33,7 +34,7 @@ export const GRENZEN = {
 export const AUSWAHL = {
   form: ['einzel', 'doppel'],
   wertung: ['getrennt', 'offen', 'mixed'],
-  modus: ['ko', 'rr'],
+  modus: ['ko', 'rr', 'gruppen'],
   satz: ['punkte', 'zeit'],
 };
 
@@ -46,6 +47,8 @@ export const STANDARD = Object.freeze({
   frauen: 8,
   wertung: 'getrennt',
   modus: 'ko',
+  // Richtwert für Gruppen + K.-o.: Vierergruppen sind auf Turnieren üblich.
+  gruppe: 4,
   satz: 'punkte',
   saetze: 2,
   punkte: 16,
@@ -57,7 +60,7 @@ export const STANDARD = Object.freeze({
 
 // Reihenfolge der Schlüssel in der Adresse — fest, damit derselbe Plan immer
 // denselben Link ergibt.
-const QUERY_REIHENFOLGE = ['felder', 'form', 'maenner', 'frauen', 'wertung', 'modus', 'satz', 'saetze', 'punkte', 'minuten', 'halle', 'start', 'puffer'];
+const QUERY_REIHENFOLGE = ['felder', 'form', 'maenner', 'frauen', 'wertung', 'modus', 'gruppe', 'satz', 'saetze', 'punkte', 'minuten', 'halle', 'start', 'puffer'];
 
 const UHRZEIT = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
@@ -235,64 +238,145 @@ export function bracketKo(n) {
   return { runden, groesse };
 }
 
+// Gruppen + K.-o. (ICO-Regel 11): so viele Gruppen, dass sie im Mittel die
+// Zielgröße haben — aber keine kleiner als drei, denn aus einer Zweiergruppe
+// kämen beide weiter, sie entschiede nichts. Die Größen unterscheiden sich um
+// höchstens eins, die größeren stehen vorn. Unter drei Einträgen bleibt es bei
+// einer Gruppe.
+export function gruppenEinteilung(eintraege, ziel = STANDARD.gruppe) {
+  if (eintraege < 2) return [];
+  const anzahl = Math.max(1, Math.min(Math.round(eintraege / ziel), Math.floor(eintraege / 3)));
+  const basis = Math.floor(eintraege / anzahl);
+  const rest = eintraege % anzahl;
+  return Array.from({ length: anzahl }, (_, i) => basis + (i < rest ? 1 : 0));
+}
+
+// Aus jeder Gruppe kommen die besten zwei weiter (ICO 11) — aus einer
+// Zweiergruppe nur der Sieger, sonst wäre die Gruppe bedeutungslos.
+function weiterAus(groesse) {
+  return Math.min(2, groesse - 1);
+}
+
+// Runden der Gruppenphase: die längste Gruppe bestimmt sie (bei ungerader Größe
+// setzt je Runde jemand aus, das sind n Runden statt n−1).
+function gruppenRundenZahl(groessen) {
+  return groessen.reduce((r, g) => Math.max(r, g % 2 ? g : g - 1), 0);
+}
+
+// Der K.-o.-Baum der Gruppenbesten: Setzplatz 1 bis G sind die Gruppensieger in
+// Gruppenreihenfolge, danach die Zweiten — Freilose gehen damit zuerst an die
+// Sieger. Wer genau auf wen trifft, ändert an der Zeit nichts.
+function gruppenKo(groessen) {
+  const weiter = groessen.reduce((s, g) => s + weiterAus(g), 0);
+  return weiter >= 2 ? bracketKo(weiter) : { runden: [], groesse: 0 };
+}
+
 // Alle Matches aller Konkurrenzen als flache Liste in Planungs-Reihenfolge.
-// Quellen sind {eintrag} oder {match: index}. `rang` verteilt die Konkurrenzen
-// gleichmäßig über den Tag (Rundenanteil statt Rundennummer), damit eine kleine
-// Konkurrenz nicht früh fertig ist, während die große allein weiterläuft.
-export function erzeugeMatches(konkurrenzListe, modus) {
+// Quellen sind {eintrag}, {match: index} oder — bei Gruppen + K.-o. — {quali}:
+// ein Gruppenbester, der erst feststeht, wenn alle Gruppen seiner Konkurrenz
+// gespielt sind. `rang` verteilt die Konkurrenzen gleichmäßig über den Tag
+// (Rundenanteil statt Rundennummer), damit eine kleine Konkurrenz nicht früh
+// fertig ist, während die große allein weiterläuft.
+export function erzeugeMatches(konkurrenzListe, modus, gruppe = STANDARD.gruppe) {
   const matches = [];
   let versatz = 0;
+  let gruppenZaehler = 0;
+
+  // Ein K.-o.-Baum; `quelle(s)` macht aus Setzplatz s (0-basiert) die Quelle
+  // eines Matches der ersten Runde, `vorher` Runden gehen ihm voraus.
+  const koBaum = (ki, { runden, groesse }, quelle, vorher, phase) => {
+    const gesamt = vorher + runden.length;
+    const index = new Map();
+    runden.forEach((ebene, ri) => {
+      ebene.forEach((knoten, nr) => {
+        if (!knoten.match) return;
+        const quellen = knoten.quellen.map((q) => {
+          if (q.eintrag !== undefined) return quelle(q.eintrag);
+          if (!q.match) return quelle(q.durch.eintrag);
+          return { match: index.get(q) };
+        });
+        // Index VOR dem Sortieren; unten auf die Planungs-Reihenfolge umgeschrieben.
+        index.set(knoten, matches.length);
+        matches.push({
+          k: ki, phase, runde: ri, rundenZahl: runden.length, nr, rundenGroesse: groesse / 2 ** (ri + 1),
+          quellen,
+          rang: (vorher + ri + 0.5) / gesamt,
+        });
+      });
+    });
+  };
+
   konkurrenzListe.forEach((k, ki) => {
     // Globale Nummer je Eintrag (über alle Konkurrenzen), damit die Planung
     // Verfügbarkeiten in einem schlichten Zahlenfeld führen kann.
     const basis = versatz;
     versatz += k.eintraege;
+    const eintrag = (e) => ({ eintrag: e, p: basis + e });
     if (modus === 'rr') {
       const runden = rundenJederGegenJeden(k.eintraege);
       runden.forEach((paare, ri) => {
         paare.forEach(([a, b], nr) => {
           matches.push({
-            k: ki, runde: ri, rundenZahl: runden.length, nr, rundenGroesse: null,
-            quellen: [{ eintrag: a, p: basis + a }, { eintrag: b, p: basis + b }],
+            k: ki, phase: 'rr', runde: ri, rundenZahl: runden.length, nr, rundenGroesse: null,
+            quellen: [eintrag(a), eintrag(b)],
             rang: (ri + 0.5) / runden.length,
           });
         });
       });
       return;
     }
-    const { runden, groesse } = bracketKo(k.eintraege);
-    const index = new Map();
-    runden.forEach((ebene, ri) => {
-      ebene.forEach((knoten, nr) => {
-        if (!knoten.match) return;
-        const quellen = knoten.quellen.map((q) => {
-          if (q.eintrag !== undefined) return { eintrag: q.eintrag, p: basis + q.eintrag };
-          if (!q.match) return { eintrag: q.durch.eintrag, p: basis + q.durch.eintrag };
-          return { match: index.get(q) };
-        });
-        // Index VOR dem Sortieren; unten auf die Planungs-Reihenfolge umgeschrieben.
-        index.set(knoten, matches.length);
-        matches.push({
-          k: ki, runde: ri, rundenZahl: runden.length, nr, rundenGroesse: groesse / 2 ** (ri + 1),
-          quellen,
-          rang: (ri + 0.5) / runden.length,
+    if (modus !== 'gruppen') {
+      koBaum(ki, bracketKo(k.eintraege), eintrag, 0, 'ko');
+      return;
+    }
+    // Gruppen + K.-o.: erst jede Gruppe jeder gegen jeden, dann der K.-o.-Baum
+    // der Gruppenbesten. Runde r aller Gruppen steht vor Runde r+1 — so spielt
+    // auch ein Turnier: alle Gruppen Runde für Runde.
+    const groessen = gruppenEinteilung(k.eintraege, gruppe);
+    const ko = gruppenKo(groessen);
+    const gruppenRunden = gruppenRundenZahl(groessen);
+    const gesamt = gruppenRunden + ko.runden.length;
+    const ersteGruppe = gruppenZaehler;
+    let erster = 0;
+    groessen.forEach((groesse, gi) => {
+      const id = gruppenZaehler++;
+      const versatzGruppe = erster;
+      rundenJederGegenJeden(groesse).forEach((paare, ri) => {
+        paare.forEach(([a, b], nr) => {
+          matches.push({
+            k: ki, phase: 'gruppe', gruppe: id, gruppeNr: gi, runde: ri, rundenZahl: gruppenRunden, nr, rundenGroesse: null,
+            quellen: [eintrag(versatzGruppe + a), eintrag(versatzGruppe + b)],
+            rang: (ri + 0.5) / gesamt,
+          });
         });
       });
+      erster += groesse;
     });
+    const quali = (s) => {
+      const gi = s < groessen.length ? s : s - groessen.length;
+      return { quali: true, k: ki, gruppe: ersteGruppe + gi };
+    };
+    koBaum(ki, ko, quali, gruppenRunden, 'ko');
   });
-  // Stabile Planungs-Reihenfolge: Rundenanteil, dann Konkurrenz, dann Position.
+  // Stabile Planungs-Reihenfolge: Rundenanteil, dann Konkurrenz, Runde, Gruppe,
+  // Position.
   const reihenfolge = matches.map((m, i) => i).sort((x, y) => {
     const a = matches[x];
     const b = matches[y];
-    return a.rang - b.rang || a.k - b.k || a.runde - b.runde || a.nr - b.nr || x - y;
+    return a.rang - b.rang || a.k - b.k || a.runde - b.runde || (a.gruppe ?? 0) - (b.gruppe ?? 0) || a.nr - b.nr || x - y;
   });
   const neuerIndex = new Map(reihenfolge.map((alt, neu) => [alt, neu]));
   const liste = reihenfolge.map((alt) => {
     const m = matches[alt];
-    return {
-      k: m.k, runde: m.runde, rundenZahl: m.rundenZahl, nr: m.nr, rundenGroesse: m.rundenGroesse,
+    const kopie = {
+      k: m.k, phase: m.phase, runde: m.runde, rundenZahl: m.rundenZahl, nr: m.nr, rundenGroesse: m.rundenGroesse,
       quellen: m.quellen.map((q) => (q.match !== undefined ? { match: neuerIndex.get(q.match) } : q)),
     };
+    if (m.phase === 'gruppe') {
+      kopie.gruppe = m.gruppe;
+      kopie.gruppeNr = m.gruppeNr;
+    }
+    return kopie;
   });
   liste.eintraege = versatz;
   return liste;
@@ -305,7 +389,10 @@ export function erzeugeMatches(konkurrenzListe, modus) {
 // bei Gleichstand das nächste in Planungs-Reihenfolge. Ein Match kann erst
 // beginnen, wenn beide Seiten ihr letztes Match beendet und die Wechselzeit
 // hinter sich haben; im K.-o. heißt das: wenn beide Zubringer-Matches fertig
-// sind. Zwischen zwei Matches auf einem Feld liegt ebenfalls die Wechselzeit.
+// sind. Bei Gruppen + K.-o. beginnt die K.-o.-Runde einer Konkurrenz erst, wenn
+// alle ihre Gruppenspiele beendet sind — vorher steht nicht fest, wer
+// weiterkommt. Zwischen zwei Matches auf einem Feld liegt ebenfalls die
+// Wechselzeit.
 //
 // Betrachtet werden nur die nächsten FENSTER offenen Matches — sonst wüchse der
 // Aufwand quadratisch, und bei über 8000 Matches (128 Einträge jeder gegen
@@ -323,6 +410,13 @@ export function verteile(matches, felder, dauer, puffer) {
   const start = new Float64Array(n);
   const feld = new Int16Array(n);
   let kopf = 0;
+  // Je Konkurrenz: wie viele Gruppenspiele noch offen sind und wann das letzte
+  // geplante endet (nur bei Gruppen + K.-o. belegt).
+  let konkurrenzZahl = 0;
+  for (const m of matches) konkurrenzZahl = Math.max(konkurrenzZahl, (m.k ?? 0) + 1);
+  const gruppenOffen = new Int32Array(konkurrenzZahl);
+  const gruppenEnde = new Float64Array(konkurrenzZahl);
+  for (const m of matches) if (m.phase === 'gruppe') gruppenOffen[m.k]++;
 
   const bereitAb = (m) => {
     let t = 0;
@@ -330,6 +424,9 @@ export function verteile(matches, felder, dauer, puffer) {
       if (q.match !== undefined) {
         if (!geplant[q.match]) return Infinity;
         t = Math.max(t, start[q.match] + dauer + puffer);
+      } else if (q.quali) {
+        if (gruppenOffen[q.k]) return Infinity;
+        t = Math.max(t, gruppenEnde[q.k] + puffer);
       } else {
         t = Math.max(t, bereitEintrag[q.p]);
       }
@@ -354,8 +451,9 @@ export function verteile(matches, felder, dauer, puffer) {
         if (s === jetzt) break;
       }
     }
-    // Das erste offene Match hat nie einen ungeplanten Zubringer (Zubringer
-    // stehen in der Reihenfolge immer davor) — es gibt also stets einen Kandidaten.
+    // Das erste offene Match hat nie einen ungeplanten Zubringer (Zubringer und
+    // die Gruppenspiele vor einer K.-o.-Runde stehen in der Reihenfolge immer
+    // davor) — es gibt also stets einen Kandidaten.
     const m = matches[bester];
     geplant[bester] = 1;
     start[bester] = besterStart;
@@ -363,6 +461,10 @@ export function verteile(matches, felder, dauer, puffer) {
     frei[f] = besterStart + dauer + puffer;
     for (const q of m.quellen) {
       if (q.eintrag !== undefined) bereitEintrag[q.p] = besterStart + dauer + puffer;
+    }
+    if (m.phase === 'gruppe') {
+      gruppenOffen[m.k]--;
+      gruppenEnde[m.k] = Math.max(gruppenEnde[m.k], besterStart + dauer);
     }
   }
   return { start: Array.from(start), feld: Array.from(feld) };
@@ -391,11 +493,19 @@ export const WARTEN_HINWEIS = Object.freeze({ mittel: 45, laengste: 90 });
 function wartezeiten(matches, plan, dauer) {
   const luecken = [];
   const jeEintrag = new Map();
+  // Gruppen + K.-o.: wer weiterkommt, steht erst nach der Gruppe fest — gezählt
+  // wird darum ab dem letzten Spiel der eigenen Gruppe.
+  const gruppenSchluss = new Map();
+  matches.forEach((m, i) => {
+    if (m.phase === 'gruppe') gruppenSchluss.set(m.gruppe, Math.max(gruppenSchluss.get(m.gruppe) ?? 0, plan.start[i] + dauer));
+  });
   matches.forEach((m, i) => {
     for (const q of m.quellen) {
       if (q.match !== undefined) {
         // K.-o.: wer das Zubringer-Match gewinnt, wartet bis zu diesem Match.
         luecken.push(plan.start[i] - (plan.start[q.match] + dauer));
+      } else if (q.quali) {
+        luecken.push(plan.start[i] - gruppenSchluss.get(q.gruppe));
       } else {
         if (!jeEintrag.has(q.p)) jeEintrag.set(q.p, []);
         jeEintrag.get(q.p).push(plan.start[i]);
@@ -417,10 +527,12 @@ function wartezeiten(matches, plan, dauer) {
 }
 
 // Spiele je Person: jeder gegen jeden n−1 für alle; im K.-o. im Mittel
-// 2(n−1)/n, mindestens eins, höchstens so viele wie Runden. Wer allein in
-// seiner Konkurrenz steht oder ohne Partner:in bleibt, spielt gar nicht und
-// zählt mit 0 — sonst stünde „für alle gleich" da, obwohl jemand zusieht.
-function spieleJePerson(liste, modus, uebrig = 0) {
+// 2(n−1)/n, mindestens eins, höchstens so viele wie Runden. Bei Gruppen + K.-o.
+// spielt jede:r die eigene Gruppe, die Gruppenbesten dazu bis zu allen
+// K.-o.-Runden — außer wer ein Freilos hat. Wer allein in seiner Konkurrenz
+// steht oder ohne Partner:in bleibt, spielt gar nicht und zählt mit 0 — sonst
+// stünde „für alle gleich" da, obwohl jemand zusieht.
+function spieleJePerson(liste, modus, uebrig = 0, gruppe = STANDARD.gruppe) {
   let summe = 0;
   let personen = 0;
   let min = Infinity;
@@ -436,6 +548,20 @@ function spieleJePerson(liste, modus, uebrig = 0) {
       summe += (k.eintraege - 1) * p;
       min = Math.min(min, k.eintraege - 1);
       max = Math.max(max, k.eintraege - 1);
+    } else if (modus === 'gruppen') {
+      const groessen = gruppenEinteilung(k.eintraege, gruppe);
+      const ko = gruppenKo(groessen);
+      const weiter = groessen.reduce((s, g) => s + weiterAus(g), 0);
+      const eintragsSpiele = groessen.reduce((s, g) => s + g * (g - 1), 0) + (ko.runden.length ? 2 * (weiter - 1) : 0);
+      summe += eintragsSpiele * k.personenJeEintrag;
+      min = Math.min(min, Math.min(...groessen) - 1);
+      // Am meisten spielt, wer aus einer großen Gruppe ohne Freilos ins Finale kommt.
+      const freilos = new Set((ko.runden[0] ?? []).filter((knoten) => !knoten.match).map((knoten) => knoten.durch.eintrag));
+      for (let s = 0; s < (ko.runden.length ? weiter : 0); s++) {
+        const groesse = groessen[s < groessen.length ? s : s - groessen.length];
+        max = Math.max(max, groesse - 1 + ko.runden.length - (freilos.has(s) ? 1 : 0));
+      }
+      max = Math.max(max, Math.max(...groessen) - 1);
     } else {
       summe += ((2 * (k.eintraege - 1)) / k.eintraege) * p;
       min = Math.min(min, 1);
@@ -486,7 +612,7 @@ function ersteFeldzahlAb(ab, planMit, bedingung) {
 export function simuliere(einstellungen) {
   const e = normalisiere(einstellungen);
   const { liste, uebrig, personen } = konkurrenzen(e);
-  const matches = erzeugeMatches(liste, e.modus);
+  const matches = erzeugeMatches(liste, e.modus, e.gruppe);
   const sek = ANNAHMEN.sekundenJePunkt;
   const dauer = {
     typ: matchDauer(e, sek.typ),
@@ -561,6 +687,8 @@ export function simuliere(einstellungen) {
       ende: plan.start[i] + dauer.typ,
       konkurrenz: liste[m.k].id,
       art: liste[m.k].art,
+      phase: m.phase,
+      gruppeNr: m.gruppeNr ?? null,
       runde: m.runde,
       rundenZahl: m.rundenZahl,
       rundenGroesse: m.rundenGroesse,
@@ -569,11 +697,16 @@ export function simuliere(einstellungen) {
 
   return {
     einstellungen: e,
-    konkurrenzen: liste.map((k, ki) => ({
-      ...k,
-      matches: matchesJeKonkurrenz[ki],
-      runden: k.eintraege < 2 ? 0 : e.modus === 'rr' ? (k.eintraege % 2 ? k.eintraege : k.eintraege - 1) : Math.ceil(Math.log2(k.eintraege)),
-    })),
+    konkurrenzen: liste.map((k, ki) => {
+      const groessen = e.modus === 'gruppen' ? gruppenEinteilung(k.eintraege, e.gruppe) : [];
+      let runden = 0;
+      if (k.eintraege >= 2) {
+        if (e.modus === 'rr') runden = k.eintraege % 2 ? k.eintraege : k.eintraege - 1;
+        else if (e.modus === 'gruppen') runden = gruppenRundenZahl(groessen) + gruppenKo(groessen).runden.length;
+        else runden = Math.ceil(Math.log2(k.eintraege));
+      }
+      return { ...k, matches: matchesJeKonkurrenz[ki], runden, gruppen: groessen.length };
+    }),
     uebrig,
     personen,
     matchDauer: dauer,
@@ -581,7 +714,7 @@ export function simuliere(einstellungen) {
     ablauf,
     gesamt,
     auslastung,
-    spieleJePerson: spieleJePerson(liste, e.modus, uebrig),
+    spieleJePerson: spieleJePerson(liste, e.modus, uebrig, e.gruppe),
     warten,
     engpass,
     passtInHalle,
