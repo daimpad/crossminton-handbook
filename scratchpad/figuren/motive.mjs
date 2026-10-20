@@ -11,6 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { figur, datei, buehne, schlaeger3d, kreis, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len, P } from './figur.mjs';
 import { speeder, schatten, spur, spurKurve, pfeil, druck, feld, feldProfil, sprechblase, winkel, huetchen } from './bauteile.mjs';
 import { G001, G009 } from './hand.mjs';
+import { G035 } from './bein.mjs';
 import { TEXTE, SPRACHEN } from './texte.mjs';
 
 const HIER = dirname(fileURLToPath(import.meta.url));
@@ -1323,14 +1324,14 @@ function sonneUmriss(c, r) {
 // Schreiben
 // ---------------------------------------------------------------------------
 export function baue(id, sprache) {
-  const bau = MOTIVE[id] ?? { 'G-001': G001, 'G-009': G009 }[id];
+  const bau = MOTIVE[id] ?? { 'G-001': G001, 'G-009': G009, 'G-035': G035 }[id];
   if (!bau) throw new Error(`unbekanntes Motiv ${id}`);
   return bau(TEXTE[id][sprache]);
 }
 // Motive, an denen noch gezeichnet wird: nicht ausgeliefert, nicht im Gate, nie nach images/
 // geschrieben (nur mit --ziel in einen Arbeitsordner). Fertig = aus dieser Menge streichen.
 export const IN_ARBEIT = new Set([]);
-const ALLE = () => [...Object.keys(MOTIVE), ...(G001 ? ['G-001'] : []), ...(G009 ? ['G-009'] : [])].filter((id) => TEXTE[id]).sort();
+const ALLE = () => [...Object.keys(MOTIVE), ...(G001 ? ['G-001'] : []), ...(G009 ? ['G-009'] : []), ...(G035 ? ['G-035'] : [])].filter((id) => TEXTE[id]).sort();
 export const IDS = () => ALLE().filter((id) => !IN_ARBEIT.has(id));
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

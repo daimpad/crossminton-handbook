@@ -17,7 +17,6 @@ const M = {
   'G-029': { aria: "Préparer le smash : pousser bas, forcer l'adversaire à la balle haute, puis conclure raide.", texts: ['1', "pousser bas", '2', '3', "pousser → haut → smash"] },
   'G-030': { aria: "Types d'adversaires et contre-mesures : contre l'attaquant, le défenseur et l'adversaire lent, une réponse adaptée à chacun.", texts: ['Attaquant', "retirer du rythme", 'Défenseur', "coin à coin", 'Lent', "angles larges"] },
   'G-031': { aria: "Attaquer une faiblesse systématiquement : jouer le speeder encore et encore dans le même coin faible de l'adversaire.", texts: ['faiblesse', 'ouvrir'] },
-  'G-035': { aria: "Force réactive : le contact au sol court et élastique du pied et de la jambe — temps de contact minimal, suggéré par un petit arc de compression et une flèche de rebond rapide.", texts: ["contact au sol court · rebond rapide"] },
   'G-037': { aria: "Le double comme jeu à part : deux contre deux, chaque paire partage un terrain.", texts: ["paire adverse", "2 contre 2", "votre paire"] },
   'G-038': { aria: "Attaque en paire : un joueur devant, le partenaire derrière — la formation d'attaque avant-arrière.", texts: ['Attaque', 'avant', 'arrière', "Attaque : avant–arrière"] },
   'G-039': { aria: "Défense en paire : les deux se placent plus en retrait et plus écartés, l'un devant, l'autre derrière — chacun couvre sa zone.", texts: ["avant", "arrière", "Défense : en retrait, écartés"] },
