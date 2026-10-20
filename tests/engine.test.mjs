@@ -21,6 +21,8 @@ import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { NUR_ENTWICKLUNG } from '../scripts/auslieferung.mjs';
+import { pruefeGrafiken } from '../scripts/grafik-gate.mjs';
+import { baue as baueFigurenmotiv, IDS as figurenIds } from '../scratchpad/figuren/motive.mjs';
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
 import { KOMMENTATOR_HILFE, KOMMENTATOR_OHNE_UEBERSETZUNG, KOMMENTATOR_TEXTE, kommentatorTexte } from '../js/feedback.js';
@@ -2109,6 +2111,19 @@ console.log('\n[25] Auslieferung: Entwicklerdateien bleiben draußen, nichts Ben
     verboten.length === 0, verboten.map(([, fund]) => fund).join(' | '));
   pruefe('die Suche erreicht die Laufzeitordner', ['js', 'css', 'data', 'assets', 'vendor', 'rules'].every((o) => verweise.has(o)),
     [...verweise.keys()].join(', '));
+}
+
+console.log('\n[26] Personengrafiken: statisches Gate (scripts/grafik-gate.mjs)');
+// Die Personengrafiken entstehen in scratchpad/figuren/ und tragen data-quelle="figuren". Für sie
+// gelten strengere Regeln als für den Altbestand: nur s-Klassen, nur zugelassene Tokens mit dem
+// Hellwert als Fallback, vier Sprachen mit gleicher Geometrie, PNG in doppelter Größe aus genau
+// diesem SVG-Stand — und die Datei muss dem Generator entsprechen, Handänderungen fallen auf.
+{
+  const { ids, fehler: befunde, warnungen } = await pruefeGrafiken({ erzeuge: (id, s) => baueFigurenmotiv(id, s).datei });
+  pruefe(`jedes Figurenmotiv liegt als generierte Grafik vor (${ids.length})`,
+    JSON.stringify(ids) === JSON.stringify(figurenIds()), `${ids.join(',')} ≠ ${figurenIds().join(',')}`);
+  pruefe(`${ids.length} Grafiken × 4 Sprachen bestehen das Gate`, befunde.length === 0, befunde.slice(0, 6).join(' | '));
+  for (const w of warnungen) console.log(`  Hinweis: ${w}`);
 }
 
 setzeZurueck();

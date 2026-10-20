@@ -1,30 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Strzał nadgarstka: przedramię pozostaje spokojne, nadgarstek jest odchylony do tyłu i strzela do przodu — wygięty łuk ruchu i lekkie rozmycie główki rakiety pokazują przyspieszenie.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Ruch nadgarstka w zbliżeniu: blado zamach z odchylonym nadgarstkiem, wyraźnie moment uderzenia. Przedramię się wkręciło, nadgarstek strzelił do przodu, a speeder odlatuje.">
   <style>
-    .arm{fill:none;stroke:var(--tinte,#16202b);stroke-width:18;stroke-linecap:round}
-    .gelenk{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:6}
-    .geist{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:5;stroke-linecap:round;opacity:.4}
-    .geistk{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:4;opacity:.4}
-    .snap{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:3 6;stroke-linecap:round}
-    .blur{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-linecap:round;opacity:.5}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-gk{fill:var(--tinte-3,#656f7e);opacity:.3}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-gr{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;opacity:.45}
+    .s-gsch{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.2;opacity:.45;stroke-linecap:round}
+    .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    .s-bahn2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-dasharray:6 5;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-griff{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round}
+    .s-band{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.3;opacity:.4}
+    .s-rr2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:4.4}
+    .s-rh2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:6;stroke-linecap:round}
+    .s-rot{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linecap:round}
+    .s-x3{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round}
+    .s-tempo{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2;stroke-linecap:round;opacity:.5}
+    .s-ag0{stop-color:var(--tinte,#16202b);stop-opacity:1}
+    .s-ag1{stop-color:var(--tinte,#16202b);stop-opacity:0}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m009" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="var(--primaer,#38a4f1)"/></marker></defs>
-  <!-- ruhiger Unterarm -->
-  <path class="arm" d="M60,236 L138,150"/>
-  <circle class="gelenk" cx="138" cy="150" r="11"/>
-  <!-- zurückgelegtes (gecocktes) Handgelenk: blasser Schläger -->
-  <path class="geist" d="M138,150 L110,96"/>
-  <ellipse class="geistk" cx="104" cy="84" rx="9" ry="14" transform="rotate(28 104 84)"/>
-  <!-- nach vorn geschnappter Schläger -->
-  <path class="schaft" d="M138,150 L172,100"/>
-  <ellipse class="kelle" cx="180" cy="88" rx="10" ry="15" transform="rotate(-32 180 88)"/>
-  <!-- Schnapp-Bogen von gecockt nach vorn -->
-  <path class="snap" d="M112,92 C 146,66 168,70 180,84" marker-end="url(#m009)"/>
-  <!-- Unschärfe am Kopf -->
-  <path class="blur" d="M164,96 C 172,90 180,86 190,84"/>
-  <path class="blur" d="M170,104 C 178,98 186,94 196,92"/>
-  <line x1="52" y1="248" x2="150" y2="248" stroke="var(--tinte-3,#6b7686)" stroke-width="2.6" stroke-dasharray="5 6" fill="none"/>
-  <text class="st" x="150" y="274">nadgarstek strzela · przedramię spokojne</text>
+  <defs><linearGradient id="u009" gradientUnits="userSpaceOnUse" x1="-92" y1="11" x2="-126" y2="17"><stop offset="0" class="s-ag0"/><stop offset="1" class="s-ag1"/></linearGradient><marker id="p009" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker><marker id="p009b" viewBox="0 0 10 10" markerWidth="3.6" markerHeight="3.6" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker></defs>
+  <g transform="translate(104 204) rotate(-86) scale(0.82) translate(44 -4)">
+  <path class="s-gsch" d="M-58,0 L82,0"/><ellipse class="s-gr" cx="140" cy="0" rx="58" ry="17"/>
+  <g class="s-gk"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"/><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"/></g><g class="s-gk"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"/><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"/></g><g class="s-gk"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"/><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"/></g><g class="s-gk"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"/><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"/><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"/></g><g class="s-gk"><path d="M-50,-4C-48.2,-7.3 -42.6,-7.8 -38,-8.5C-33.4,-9.2 -29.2,-8.5 -25,-8C-20.8,-7.4 -18.3,-6.6 -15,-5.5C-11.7,-4.4 -9.6,-3.6 -7,-2C-4.4,-0.3 -0.6,1.8 -1,3.5C-1.4,5.2 -5.3,6 -9,7.5C-12.7,9 -16.4,10.6 -21,11.5C-25.6,12.4 -29,12.9 -34,12.5C-38.9,12.1 -45.1,12.5 -48,9.5C-50.9,6.5 -51.8,-0.7 -50,-4Z"/><path d="M-31.4,0.8L-16.8,-5.3A5.6,5.6 0 0 0 -20.4,-15.9L-35.7,-12.1A6.8,6.8 0 1 0 -31.4,0.8Z"/><path d="M-17.2,-5.2L-5.9,-9.1A5,5 0 0 0 -8.6,-18.7L-20.3,-16A5.6,5.6 0 1 0 -17.2,-5.2Z"/><path d="M-6.8,-8.8L1.6,-10A4.6,4.6 0 0 0 0.8,-19.2L-7.7,-18.8A5,5 0 1 0 -6.8,-8.8Z"/></g>
+  </g>
+  <path class="s-bahn" d="M134.7,29.7 A177,177 0 0 1 249,102.5" marker-end="url(#p009)"/>
+  <path class="s-tempo" d="M225.9,101.7 A159.1,159.1 0 0 1 238.9,119.7M212,113.3 A141,141 0 0 1 223.6,129.3M198.2,124.9 A123,123 0 0 1 208.3,138.8"/>
+  <g transform="translate(104 204) rotate(-28) scale(0.82) translate(44 -4)">
+  <path fill="url(#u009)" d="M-45.8,-8.9L-130.1,2.6A15.5,15.5 0 1 0 -125,33.2L-41.5,16.8A13,13 0 0 0 -45.8,-8.9Z"/>
+  <ellipse class="s-rf" cx="140" cy="0" rx="58" ry="9"/><path class="s-rs" d="M98.5,-6L181.5,-6M87.5,-3L192.5,-3M84.3,0L195.7,0M87.5,3L192.5,3M98.5,6L181.5,6M96.5,-5.6L96.5,5.6M111,-7.3L111,7.3M125.5,-8.2L125.5,8.2M140,-8.5L140,8.5M154.5,-8.2L154.5,8.2M169,-7.3L169,7.3M183.5,-5.6L183.5,5.6"/><ellipse class="s-rr2" cx="140" cy="0" rx="58" ry="9"/><path class="s-rh2" d="M60,0 L86,-4.95 M60,0 L86,4.95"/><path class="s-rsch2" d="M30,0 L60,0"/><path class="s-griff" d="M-58,-11.6 L30,-10 L30,10 L-58,11.6 Q-65,0 -58,-11.6Z"/><path class="s-band" d="M-52,10L-44,-10M-42,10L-34,-10M-32,10L-24,-10M-22,10L-14,-10M-12,10L-4,-10M-2,10L6,-10M8,10L16,-10M18,10L26,-10"/>
+  <g class="s-x3"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"/><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"/></g><g class="s-k"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"/><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"/></g><g class="s-x3"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"/><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"/></g><g class="s-k"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"/><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"/></g><g class="s-x3"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"/><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"/></g><g class="s-k"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"/><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"/></g><g class="s-x3"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"/><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"/><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"/></g><g class="s-k"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"/><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"/><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"/></g><g class="s-k"><path d="M-50,-4C-48.2,-7.3 -42.6,-7.8 -38,-8.5C-33.4,-9.2 -29.2,-8.5 -25,-8C-20.8,-7.4 -18.3,-6.6 -15,-5.5C-11.7,-4.4 -9.6,-3.6 -7,-2C-4.4,-0.3 -0.6,1.8 -1,3.5C-1.4,5.2 -5.3,6 -9,7.5C-12.7,9 -16.4,10.6 -21,11.5C-25.6,12.4 -29,12.9 -34,12.5C-38.9,12.1 -45.1,12.5 -48,9.5C-50.9,6.5 -51.8,-0.7 -50,-4Z"/><path d="M-31.4,0.8L-16.8,-5.3A5.6,5.6 0 0 0 -20.4,-15.9L-35.7,-12.1A6.8,6.8 0 1 0 -31.4,0.8Z"/><path d="M-17.2,-5.2L-5.9,-9.1A5,5 0 0 0 -8.6,-18.7L-20.3,-16A5.6,5.6 0 1 0 -17.2,-5.2Z"/><path d="M-6.8,-8.8L1.6,-10A4.6,4.6 0 0 0 0.8,-19.2L-7.7,-18.8A5,5 0 1 0 -6.8,-8.8Z"/></g>
+  </g>
+  <path class="s-rot" d="M68.2,222.9L66.8,219.9L65.9,217.2L65.6,214.9L66,213.3L66.9,212.3L68.3,212.1L70.2,212.6L72.5,213.9L75,215.8L77.5,218.2L80,221L82.3,224.1L84.2,227.2L85.7,230.3L86.6,233L87,235.3L86.7,237L85.8,238L84.4,238.3L82.6,237.9" marker-end="url(#p009b)"/>
+  <path class="s-bahn2" d="M247.9,153.3L262,179.7" marker-end="url(#p009)"/>
+  <path class="s-korb" d="M238.9,142.2L231.7,134.7Q235.8,130.5 241.6,129.4L243.7,139.6Z"/><path class="s-kappe" d="M239.1,143.9a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/>
+  <text class="st" x="150" y="274">strzał późno · przedramię się wkręca</text>
 </svg>

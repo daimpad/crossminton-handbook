@@ -1,29 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Universalgriff: die Hand hält den Griff locker wie einen Händedruck, zwischen Daumen und Zeigefinger bildet sich ein klares V auf der oberen Kante des Griffs.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Der Universalgriff: die rechte Hand hält den Griff locker wie zum Handschlag, die Schlagfläche steht hochkant, und zwischen Daumen und Zeigefinger liegt ein V auf der oberen Kante des Griffs.">
   <style>
-    .band{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:34;stroke-linecap:round;opacity:.28}
-    .kante{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:4 5;opacity:.7}
-    .hand{fill:none;stroke:var(--tinte,#16202b);stroke-linecap:round;stroke-linejoin:round}
-    .palm{stroke-width:30}
-    .finger{stroke-width:14}
-    .daumen{stroke-width:15}
-    .v{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5;stroke-linecap:round}
-    .vt{fill:var(--primaer-tief,#1568ad);font:700 22px/1 system-ui,sans-serif;text-anchor:middle}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-griff{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round}
+    .s-band{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.3;opacity:.4}
+    .s-rr2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:4.4}
+    .s-rh2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:6;stroke-linecap:round}
+    .s-v{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .s-lt{fill:var(--primaer-tief,#1568ad);font:700 18px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-x3{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round}
+    .s-ag0{stop-color:var(--tinte,#16202b);stop-opacity:1}
+    .s-ag1{stop-color:var(--tinte,#16202b);stop-opacity:0}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <!-- Griff (Achtkant, schräg) als heller Balken mit Mittellinie -->
-  <line class="band" x1="70" y1="238" x2="246" y2="82"/>
-  <line class="kante" x1="70" y1="238" x2="246" y2="82"/>
-  <!-- Handballen/Palm entlang des Griffs -->
-  <path class="hand palm" d="M120,196 L156,164"/>
-  <!-- vier Finger, greifen über die hintere Kante, klar getrennt -->
-  <path class="hand finger" d="M139,168 L162,192"/>
-  <path class="hand finger" d="M156,152 L179,176"/>
-  <path class="hand finger" d="M173,136 L196,160"/>
-  <path class="hand finger" d="M190,120 L212,143"/>
-  <!-- Daumen auf der vorderen Kante, Spitze endet kurz vor dem Zeigefinger -->
-  <path class="hand daumen" d="M129,182 C 140,158 152,146 163,138"/>
-  <!-- V zwischen Daumenspitze und Zeigefinger, auf der oberen Kante -->
-  <path class="v" d="M168,130 L182,112 L196,132"/>
-  <text class="vt" x="182" y="100">V</text>
-  <text class="st" x="150" y="272">locker wie ein Händedruck · Daumen-V oben</text>
+  <defs><linearGradient id="u001" gradientUnits="userSpaceOnUse" x1="-48" y1="5" x2="-78" y2="9"><stop offset="0" class="s-ag0"/><stop offset="1" class="s-ag1"/></linearGradient></defs>
+  <g transform="translate(140 166) rotate(-36) scale(1.55)">
+  <ellipse class="s-rf" cx="140" cy="0" rx="58" ry="14"/><path class="s-rs" d="M98.5,-9.3L181.5,-9.3M87.5,-4.7L192.5,-4.7M84.3,0L195.7,0M87.5,4.7L192.5,4.7M98.5,9.3L181.5,9.3M96.5,-8.7L96.5,8.7M111,-11.4L111,11.4M125.5,-12.7L125.5,12.7M140,-13.2L140,13.2M154.5,-12.7L154.5,12.7M169,-11.4L169,11.4M183.5,-8.7L183.5,8.7"/><ellipse class="s-rr2" cx="140" cy="0" rx="58" ry="14"/><path class="s-rh2" d="M60,0 L86,-7.700000000000001 M60,0 L86,7.700000000000001"/><path class="s-rsch2" d="M26,0 L60,0"/><path class="s-griff" d="M-54,-11.6 L26,-10 L26,10 L-54,11.6 Q-61,0 -54,-11.6Z"/><path class="s-band" d="M-48,10L-40,-10M-38,10L-30,-10M-28,10L-20,-10M-18,10L-10,-10M-8,10L0,-10M2,10L10,-10M12,10L20,-10"/>
+  <path fill="url(#u001)" d="M-45.7,-8.9L-81.9,-4.1A14.2,14.2 0 1 0 -77.2,23.9L-41.4,16.7A13,13 0 0 0 -45.7,-8.9Z"/>
+  <g class="s-x3"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"/><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"/></g><g class="s-k"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"/><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"/></g><g class="s-x3"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"/><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"/></g><g class="s-k"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"/><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"/></g><g class="s-x3"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"/><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"/></g><g class="s-k"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"/><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"/></g><g class="s-x3"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"/><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"/><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"/></g><g class="s-k"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"/><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"/><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"/></g><g class="s-k"><path d="M-50,-4C-48.2,-7.3 -42.6,-7.8 -38,-8.5C-33.4,-9.2 -29.2,-8.5 -25,-8C-20.8,-7.4 -18.3,-6.6 -15,-5.5C-11.7,-4.4 -9.6,-3.6 -7,-2C-4.4,-0.3 -0.6,1.8 -1,3.5C-1.4,5.2 -5.3,6 -9,7.5C-12.7,9 -16.4,10.6 -21,11.5C-25.6,12.4 -29,12.9 -34,12.5C-38.9,12.1 -45.1,12.5 -48,9.5C-50.9,6.5 -51.8,-0.7 -50,-4Z"/><path d="M-31.4,0.8L-16.8,-5.3A5.6,5.6 0 0 0 -20.4,-15.9L-35.7,-12.1A6.8,6.8 0 1 0 -31.4,0.8Z"/><path d="M-17.2,-5.2L-5.9,-9.1A5,5 0 0 0 -8.6,-18.7L-20.3,-16A5.6,5.6 0 1 0 -17.2,-5.2Z"/><path d="M-6.8,-8.8L1.6,-10A4.6,4.6 0 0 0 0.8,-19.2L-7.7,-18.8A5,5 0 1 0 -6.8,-8.8Z"/></g>
+  </g>
+  <path class="s-v" d="M131.5,153L118,171.3L147,157.1"/>
+  <text class="s-lt" x="133.2" y="125">V</text>
+  <text class="st" x="150" y="272">locker wie ein Handschlag · V oben</text>
 </svg>

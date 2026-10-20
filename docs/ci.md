@@ -47,6 +47,19 @@ Für Text wird die abgedunkelte (hell) bzw. aufgehellte (dunkel) Variante `--sig
 | Linie | `#e9eef6` | `#273543` | `--linie` |
 | Linie stark | `#dae3ee` | `#3a4b5e` | `--linie-stark` |
 
+### Grafik-Tokens
+
+Gelesen nur von den Grafiken in `images/`. Die Personengrafiken (`scratchpad/figuren/`) nutzen als Akzent `--primaer-dunkel`, denn `--primaer` erreicht auf `--flaeche-2` nur 2,48:1, `--primaer-dunkel` dagegen 3,36:1 hell und 6,92:1 dunkel (WCAG 1.4.11).
+
+| Rolle | Hell | Dunkel | Variable |
+| --- | --- | --- | --- |
+| Speeder-Korb | `#f0c400` | `#ffd84d` | `--speeder-korb` |
+| Speeder-Kappe | `#e2402a` | `#ff6a52` | `--speeder-kappe` |
+| Speeder-Kappe tief | `#a82412` | `#ffa593` | `--speeder-kappe-tief` |
+| Bodenschatten | `#16202b2e` | `#00000066` | `--schatten-boden` |
+
+Die Speeder-Farben sind eine Sacheigenschaft des Balls und laufen darum nicht über die Signalfarben.
+
 ## Typografie
 
 - **Schrift:** [Rubik](https://fonts.google.com/specimen/Rubik) — lokal gehostet (kein CDN), Schnitte 400/500/700, Latin + Latin-Ext. Fallback: System-Sans.

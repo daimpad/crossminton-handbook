@@ -4,8 +4,8 @@ import pw from '/opt/node22/lib/node_modules/playwright/index.js';
 import { readFileSync } from 'node:fs';
 const [aus, repo, proto, ...ids] = process.argv.slice(2);
 const SP = [['Heute', (id) => `${repo}/images/${id}.svg`], ['A · Dynamische Silhouette', (id) => `${proto}/silhouette/${id}.svg`], ['B · Klare Linie', (id) => `${proto}/linie/${id}.svg`], ['C · Geometrisch-modular', (id) => `${proto}/geometrisch/${id}.svg`]];
-const HELL = ':root{--primaer:#38a4f1;--primaer-tief:#1568ad;--primaer-weich:#e8f3fe;--tinte:#16202b;--tinte-2:#5a6675;--tinte-3:#656f7e;--flaeche:#fff;--flaeche-2:#f1f5fb;--linie:#e3e8ef;--speeder-korb:#f0c400;--speeder-kappe:#e2402a;--speeder-kappe-tief:#a82412}';
-const DUNKEL = ':root{--primaer:#4fb0f4;--primaer-tief:#9acdf8;--primaer-weich:#143247;--tinte:#e8eef5;--tinte-2:#a2b2c4;--tinte-3:#8795a6;--flaeche:#18232f;--flaeche-2:#1f2c3a;--linie:#2c3a4a;--speeder-korb:#ffd84d;--speeder-kappe:#ff6a52;--speeder-kappe-tief:#ffa593}';
+const HELL = ':root{--primaer:#38a4f1;--primaer-dunkel:#1e8bd6;--schatten-boden:#16202b2e;--primaer-tief:#1568ad;--primaer-weich:#e8f3fe;--tinte:#16202b;--tinte-2:#5a6675;--tinte-3:#656f7e;--flaeche:#fff;--flaeche-2:#f1f5fb;--linie:#e3e8ef;--speeder-korb:#f0c400;--speeder-kappe:#e2402a;--speeder-kappe-tief:#a82412}';
+const DUNKEL = ':root{--primaer:#4fb0f4;--primaer-dunkel:#6bbdf6;--schatten-boden:#00000066;--primaer-tief:#9acdf8;--primaer-weich:#143247;--tinte:#e8eef5;--tinte-2:#a2b2c4;--tinte-3:#8795a6;--flaeche:#18232f;--flaeche-2:#1f2c3a;--linie:#2c3a4a;--speeder-korb:#ffd84d;--speeder-kappe:#ff6a52;--speeder-kappe-tief:#ffa593}';
 const b = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const p = await (await b.newContext({ viewport: { width: 1240, height: 800 } })).newPage();
 for (const [name, tok, bg, ink] of [['hell', HELL, '#fff', '#16202b'], ['dunkel', DUNKEL, '#18232f', '#e8eef5']]) {

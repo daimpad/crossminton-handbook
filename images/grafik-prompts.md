@@ -13,6 +13,7 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 - Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 67 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
 - **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
 - **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap → deren `.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
+- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), der Hand-Nahaufnahme (`hand.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053**; die übrigen 23 Personengrafiken folgen in Wellen.
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
@@ -36,10 +37,12 @@ Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer
 **G-001** · `images/G-001.png` · `griff` · Beginner  
 *Leitgrafik: der Universalgriff mit V-Stellung*  
 Close-up of a hand holding a crossminton racket handle in a neutral universal grip, viewed from above and slightly to the side so the top of the hand is visible. The grip resembles a relaxed handshake; a clear V-shape is formed between thumb and index finger, aligned with the top edge of the handle. Fingers relaxed, not clenched. Focus on the hand and upper handle; the rest of the racket fades out or is cropped.
+*Generiert (Pilot): Schrägansicht von oben hinten auf die rechte Hand, Griff steigt nach rechts oben, Kopf hochkant angeschnitten. Durch die Kerbe zwischen Daumen und Zeigefinger scheint die obere Griffkante, der Akzent liegt auf ihren Kanten — das V, Spitze zum Griffende.*
 
 **G-002** · `images/G-002.png` · `grundposition` · Beginner  
 *Leitgrafik: die Grundposition*  
 A single player shown from the front in the crossminton ready position: feet slightly more than shoulder-width apart, knees bent, weight forward on the balls of the feet, heels barely touching the ground, torso slightly inclined forward, racket held loosely in front of the body, shoulders relaxed. Alert, spring-loaded posture. Full figure, centered.
+*Generiert (Pilot): Dreiviertelansicht, Knie gebeugt, leicht vorgeneigt, Fersen knapp gelöst; Akzentmarken unter beiden Fußballen.*
 
 **G-003** · `images/G-003.png` · `vorhand_drive` · Beginner  
 *Leitgrafik: der Vorhand-Drive*  
@@ -48,6 +51,7 @@ A single player from the side hitting a forehand drive in crossminton. Weight sh
 **G-004** · `images/G-004.png` · `rueckhand` · Beginner  
 *Leitgrafik: die Rückhand*  
 A single player from the side hitting a backhand in crossminton, mirrored to the non-racket side of the body. Weight shifted onto the racket-side foot, torso opening toward the hitting direction, racket guided close past the body and meeting the speeder in front of the body. Compact swing.
+*Generiert (Pilot): Rückhand auf der Nicht-Schlägerseite, rechter Fuß vorn, Treffpunkt vor dem Körper, Schwungspur von der linken Hüfte, flache Bahn nach links.*
 
 **G-005** · `images/G-005.png` · `aufschlag` · Beginner  
 *Aufschlag, Bild 1: der Speeder fällt*  
@@ -64,14 +68,17 @@ A single player from the front in the central position of the square, performing
 **G-008** · `images/G-008.png` · `beinarbeit` · Beginner  
 *Beinarbeit, Bild 2: der Bewegungskreislauf*  
 A single player from a slightly elevated angle showing the movement cycle in one square: a lunge step reaching toward one corner to play the speeder, with a curved arrow indicating the return path back to the central position in the middle of the square.
+*Generiert (Pilot): Feld in Perspektive, Ausfallschritt in die vordere Ecke, blass die Bereitschaft in der Mitte, Hinweg durchgezogen, Rückweg gestrichelt zur Mittenmarke.*
 
 **G-009** · `images/G-009.png` · `handgelenk_peitsche` · Fortgeschritten  
 *Leitgrafik: der Handgelenk-Schnapp*  
 Close-up of a forearm, wrist and racket head from the side, showing the whip-like wrist action of an advanced crossminton stroke. The wrist is first laid back (cocked), then snaps forward; depict the snap with a curved motion arc and a slight blur at the racket head to convey speed. The forearm stays relatively quiet while wrist and racket head accelerate. Loose, relaxed grip. Focus on wrist and racket head; forearm entering from the edge of the frame.
+*Generiert (Pilot): Unterarm von links unten, dieselbe Hand wie G-001. Blass die Ausholphase mit zurückgelegtem Handgelenk und offener Fläche, kräftig der Treffmoment mit hochkant stehender Fläche; Pfeil um den Unterarm (Eindrehen), Bahn des Kopfs mit Pfeil vor dem Kopf, Speeder geht ab. Anders als der Prompt oben verlangt der Bausteintext das Eindrehen des Unterarms — die Caption sagt darum „Unterarm dreht ein“.*
 
 **G-010** · `images/G-010.png` · `ueberkopf_clear` · Fortgeschritten  
 *Leitgrafik: der Überkopfschlag*  
 A single player from the side hitting an overhead clear in crossminton. Full upward extension: contact point high above and slightly in front of the head, hitting arm stretched up, body elongated, clear forward follow-through. A curved trajectory arrow shows a high, deep arc travelling far into the back of the opposite square. Powerful but controlled posture.
+*Generiert (Pilot): seitlich gestellt, voll gestreckt, Treffpunkt hoch und leicht vor dem Körper; zwei Bahnen verlassen das Bild, defensiv hoch und weit, offensiv flacher (mit Legende).*
 
 **G-011** · `images/G-011.png` · `smash` · Fortgeschritten  
 *Leitgrafik: der Smash*  
@@ -112,6 +119,7 @@ The same player from the side with a near-identical preparation, now hitting a s
 **G-020** · `images/G-020.png` · `sprung_smash` · Experte  
 *Leitgrafik: Der Sprung-Smash*  
 A single player in the air at the apex of a jump, hitting a jump smash in crossminton. Elevated contact point high above the head, steep downward trajectory arrow toward the opposite square, athletic airborne posture with the hitting arm extended. Controlled elevation; body balanced for a soft landing.
+*Generiert (Pilot): Treffen im höchsten Punkt, Beine in Schrittstellung, steile Bahn nach unten; blass daneben die weiche Landung auf beiden Ballen, gepunktet der Weg des Schwerpunkts.*
 
 **G-021** · `images/G-021.png` · `praezision_an_die_linien` · Experte  
 *Leitgrafik: Präzision an die Linien*  
@@ -210,6 +218,7 @@ Top-down diagram of one square showing the two doubles partners moving together 
 **G-043** · `images/G-043.png` · `verstaendigung_im_paar` · Fortgeschritten  
 *Leitgrafik: Verständigung im Paar*  
 A pair of crossminton doubles partners shown from behind, communicating between points — one giving a discreet hand signal behind the back, with brief eye contact or a short cue suggested by a small signal motif. Conveys coordination and communication as a pair. Clean instructional style.
+*Generiert (Pilot): Profil, beide Partner hintereinander (Rückraum hinten, Angriff vorn — Regel 7.4/7.5.1). Der Rückraumspieler ruft „Meiner!“ und holt aus, der Angriffsspieler lässt den Speeder vorbei. Das frühere Motiv (verdecktes Handzeichen) widersprach dem Bausteintext, der auf kurze, laute Zurufe setzt.*
 
 **G-044** · `images/G-044.png` · `erste_schritte_doppel` · Beginner  
 *Leitgrafik: Erste Schritte im Doppel*  
@@ -250,6 +259,7 @@ Top-down diagram of one square ("front" marked above the top edge): the attackin
 **G-053** · `images/G-053.png` · `blindes_verstaendnis` · Experte  
 *Leitgrafik: Blindes Verständnis*  
 Two doubles partners moving in perfect anticipation without looking at each other, mirrored coordinated movement arrows and a subtle shared-awareness motif. Illustrates blind, instinctive understanding.
+*Generiert (Pilot): hintereinander, beide mit Blick nach vorn; der Angriffsspieler startet zum kurzen Ball, der Rückraumspieler rückt im selben Augenblick in die frei werdende Mitte nach, blass die Ausgangslage.*
 
 ## Outdoor (G-054–059)
 

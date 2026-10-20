@@ -5,16 +5,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-001': { aria: "La prise universelle : la main tient le manche de façon lâche comme une poignée de main, entre le pouce et l'index se forme un V net sur l'arête supérieure du manche.", texts: ['V', "comme une poignée de main · V en haut"] },
-  'G-002': { aria: "La position de base : pieds un peu plus larges que les épaules, genoux fléchis, poids sur l'avant des pieds, raquette tenue de façon lâche devant le corps.", texts: ["genoux fléchis · poids sur l'avant des pieds"] },
   'G-003': { aria: "Le drive de coup droit : poids sur le pied avant, buste tourné vers la direction de frappe, point de frappe compact et à plat nettement devant le corps.", texts: ["à plat et direct · devant le corps"] },
-  'G-004': { aria: "Le revers : poids sur le pied côté raquette, buste s'ouvrant vers la direction de frappe, la raquette menée tout près du corps et rencontrant le speeder devant.", texts: ["tout près du corps · frappe devant"] },
   'G-005': { aria: "Service, image 1 : la main libre laisse tomber le speeder à hauteur de hanche, le bras de frappe est bas, prêt à s'élancer vers l'avant par en dessous.", texts: ["le speeder tombe à hauteur de hanche"] },
   'G-006': { aria: "Service, image 2 : la raquette frappe le speeder par en dessous, tout le speeder est au point de frappe nettement sous la main de frappe.", texts: ["frappe sous la main de frappe"] },
   'G-007': { aria: "Jeu de jambes, image 1 : le split-step — un petit saut élastique, réception sur l'avant des deux pieds, genoux fléchis, prêt à repousser dans toutes les directions.", texts: ["petit saut élastique · sur l'avant des pieds"] },
-  'G-008': { aria: "Jeu de jambes, image 2 : le cycle de déplacement — d'une fente dans le coin jouer le speeder et revenir par un trajet courbe à la position centrale au milieu.", texts: ["fente vers le coin — retour au centre"] },
-  'G-009': { aria: "Le coup de poignet : l'avant-bras reste calme, le poignet est armé en arrière puis fouette vers l'avant — un arc de mouvement courbe et un léger flou à la tête de raquette montrent l'accélération.", texts: ["le poignet fouette · l'avant-bras reste calme"] },
-  'G-010': { aria: "Le dégagement au-dessus de la tête : point de frappe haut au-dessus de la tête, bras de frappe tendu, la trajectoire décrit un arc haut et profond loin dans le terrain adverse.", texts: ["point de frappe haut · arc profond au fond"] },
   'G-011': { aria: "Le smash : point de frappe haut au-dessus et devant la tête, frappe agressive vers le bas, la trajectoire file raide et droit dans le terrain adverse.", texts: ["point de frappe haut · raide vers le bas"] },
   'G-012': { aria: "L'amorti : grande préparation, mais contact doux et freiné — le speeder franchit de justesse la zone neutre et tombe juste derrière la ligne avant.", texts: ["court et doux · tombe juste derrière la ligne"] },
   'G-013': { aria: "La coupe : la surface de frappe inclinée effleure le speeder sur le côté au lieu de le frapper droit ; des lignes de mouvement courbes montrent la trajectoire coupante et la rotation qui en résulte.", texts: ["la surface effleure · coupe et rotation"] },
@@ -24,7 +18,6 @@ const M = {
   'G-017': { aria: "Feinte, image 2 : la même préparation, d'où bifurquent deux frappes différentes — un drive plat et rapide et un amorti court et doux ; le choix ne se fait qu'au dernier moment.", texts: ["une préparation, deux options"] },
   'G-018': { aria: "Changement de rythme, image 1 : une frappe rapide et puissante avec un net flou de mouvement et une trajectoire plate et rapide — tempo élevé.", texts: ["tempo élevé · plat et rapide"] },
   'G-019': { aria: "Changement de rythme, image 2 : une préparation presque identique, maintenant une frappe lente, haute et douce avec un arc léger — une rupture volontaire dans le rythme.", texts: ["rythme brisé · haut et doux"] },
-  'G-020': { aria: "Le smash sauté : le joueur frappe au point le plus haut du saut, pieds décollés du sol, avec une trajectoire raide vers le bas dans le terrain adverse.", texts: ["en sautant · raide vers le bas"] },
   'G-021': { aria: "Précision sur les lignes : le speeder atterrit exactement sur une ligne de coin, au bord extrême du terrain ; des zones cibles serrées dans les coins et une flèche fine montrent le placement au point près, avec une marge minimale.", texts: ["pile sur la ligne · marge minimale"] },
   'G-022': { aria: "Constance sous pression maximale : une frappe propre et équilibrée avec une posture calme — base stable, tête calme, accompagnement contrôlé, reproductible de façon fiable.", texts: ["calme et reproductible · sous pression"] },
   'G-023': { aria: "Le but du jeu : jouer le speeder par-dessus la zone neutre dans le terrain adverse.", texts: ["terrain adverse", "ZONE NEUTRE", "ton terrain"] },
@@ -47,7 +40,6 @@ const M = {
   'G-040': { aria: "Service et renvoi en double : le droit de servir passe dans un ordre fixe à travers les quatre joueurs.", texts: ['1', '2', '3', '4', 'Service', "à tour de rôle : 1 → 2 → 3 → 4"] },
   'G-041': { aria: "Le changement dans le double : passer de l'attaque avant-arrière à la défense — les deux reculent et s'écartent, l'ordre avant-arrière reste.", texts: ["Attaque", "avant–arrière", "Défense", "en retrait, écartés"] },
   'G-042': { aria: "Le déplacement comme une unité : les deux partenaires se déplacent ensemble dans la même direction, à distance constante.", texts: ["se déplacer ensemble — la distance tient"] },
-  'G-043': { aria: "L'entente dans la paire : deux partenaires de double vus de dos, qui se coordonnent entre les points — l'un donne un signe de la main caché derrière le dos.", texts: ["signe de la main caché · entente"] },
   'G-044': { aria: "Premiers pas en double : deux partenaires côte à côte à distance confortable.", texts: ["distance confortable", "premiers pas à deux"] },
   'G-045': { aria: "Qui prend la balle : de deux partenaires, l'un prend le speeder central, l'autre lui laisse la place.", texts: ['prendre', 'laisser', "qui prend la balle ?"] },
   'G-046': { aria: "Service en double, simple : depuis un ordre fixe, l'un sert par-dessus la zone neutre.", texts: ['1', "paire adverse", "votre paire", 'Service'] },
@@ -57,7 +49,6 @@ const M = {
   'G-050': { aria: "Lire la paire adverse : reconnaître la brèche entre les deux adversaires et la jouer.", texts: ['adversaires', 'brèche'] },
   'G-051': { aria: "Mettre le partenaire en position : sa propre frappe place le partenaire dans une meilleure position d'attaque.", texts: ["ta frappe", 'partenaire', "mettre le partenaire en position"] },
   'G-052': { aria: "Basculer sans rupture : la paire alterne avec fluidité entre attaque et défense — l'ordre avant-arrière reste.", texts: ["avant", "Attaque", "Défense", "basculer sans rupture"] },
-  'G-053': { aria: "L'entente aveugle : deux partenaires de double se déplacent en parfaite anticipation, sans se regarder — des flèches de mouvement parallèles et en miroir et une bande de perception commune.", texts: ["entente aveugle · sans se regarder"] },
   'G-054': { aria: "Jouer dehors : un joueur sur un terrain sans filet sous le ciel ouvert, avec une surface simple, posture détendue et adaptable.", texts: ["jouer dehors · terrain ouvert"] },
   'G-055': { aria: "Lire et exploiter le vent : le vent décale le speeder sur le côté, c'est pourquoi tu vises volontairement contre la dérive.", texts: ['Vent →', 'cible', "viser contre la dérive"] },
   'G-056': { aria: "Soleil et éblouissement : un joueur protège ses yeux contre un soleil bas tout en suivant un speeder haut ; soleil et rayons éblouissants dans un coin, position de tête adaptée.", texts: ["contre le soleil · protéger les yeux"] },
@@ -79,6 +70,9 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 let n = 0;
 for (const [id, { aria, texts }] of Object.entries(M)) {
   const de = readFileSync(resolve('images', `${id}.svg`), 'utf8');
+  // Personengrafiken entstehen in scratchpad/figuren/ (motive.mjs + texte.mjs) samt allen vier
+  // Sprachen; dieses Skript würde ihre Übersetzung mit veralteten Texten überschreiben.
+  if (de.includes('data-quelle="figuren"')) { console.error(`${id} ist generiert (scratchpad/figuren/) — Eintrag aus der Map entfernen`); process.exit(1); }
   let i = 0;
   let fr = de.replace(/(<text\b[^>]*>)([^<]*)(<\/text>)/g, (m, open, _inhalt, close) => {
     if (i >= texts.length) { console.error('zu viele <text> in', id); process.exit(1); }

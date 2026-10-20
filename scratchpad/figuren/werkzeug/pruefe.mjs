@@ -5,7 +5,7 @@
 // node pruefe.mjs <datei.svg> […]
 import { readFileSync } from 'node:fs';
 let fehler = 0;
-const ERLAUBT = new Set(['--tinte', '--tinte-2', '--tinte-3', '--primaer', '--primaer-tief', '--primaer-weich', '--flaeche', '--flaeche-2', '--linie', '--speeder-korb', '--speeder-kappe', '--speeder-kappe-tief']);
+const ERLAUBT = new Set(['--tinte', '--tinte-2', '--tinte-3', '--primaer', '--primaer-dunkel', '--primaer-tief', '--primaer-weich', '--schatten-boden', '--flaeche', '--flaeche-2', '--linie', '--speeder-korb', '--speeder-kappe', '--speeder-kappe-tief']);
 for (const d of process.argv.slice(2)) {
   const q = readFileSync(d, 'utf8'); const p = [];
   if (!/viewBox="[^"]+"/.test(q)) p.push('keine viewBox');
