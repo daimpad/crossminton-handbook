@@ -196,10 +196,39 @@ export function figur(pose) {
     const [H0, K, A] = glied(HG[s], b, [P.oberschenkel, P.unterschenkel], becken);
     const fd = norm(becken.w(b.fuss ?? [0, -0.1, 1]));
     const ferse = add(add(A, [0, -0.17, 0]), mul(fd, -0.14));
-    const spitze = add(ferse, mul(fd, P.fuss));
-    beine[s] = { H: H0, K, A, ferse, spitze, fd };
+    // Bei gehobener Ferse liegen die Zehen flach auf, der Fuß knickt im Ballen. Ein gerader Fuß
+    // bohrte die Zehenspitze unter den Ballen — sie setzte den Boden, und der flache andere Fuß
+    // schwebte (Prüfung Welle 4). In der Luft bleibt der Fuß gestreckt (Sprung: Spitzen nach unten).
+    const ballen = add(ferse, mul(fd, P.fuss * 0.68));
+    const gehoben = fd[1] < -0.15 && (pose.art ?? 'stehend') !== 'luft';
+    const zehen = gehoben ? norm([fd[0], 0, fd[2]]) : fd;
+    const spitze = add(ballen, mul(zehen, P.fuss * 0.32));
+    beine[s] = { H: H0, K, A, ferse, ballen, spitze, fd };
   }
-  const sohle = Math.min(...['R', 'L'].flatMap((s) => [beine[s].ferse[1] - P.rFerse, beine[s].spitze[1] - P.rSpitze]));
+  const unterseite = (b) => Math.min(b.ferse[1] - P.rFerse, b.ballen[1] - P.rBallen, b.spitze[1] - P.rSpitze);
+  // Bodenkontakt erzwingen: wer nicht springt, steht mit beiden Füßen am Boden. Ein Fuß über der
+  // Sohle wird abgesenkt, das Knie dazu per Zwei-Gelenk-Kette in seiner Beugerichtung neu gesetzt
+  // (Hüfte und Fußstellung bleiben). Reicht das Bein nicht, bleibt es — die Prüfung unten meldet es.
+  // Ein bewusst gehobener Fuß (Schritt) steht in frei_fuss.
+  // Reicht das schwebende Bein nicht (schon gestreckt), wird statt dessen der tiefere Fuß angehoben:
+  // sein Knie beugt sich etwas mehr.
+  const versetze = (s, d) => {
+    const b = beine[s], A2 = add(b.A, [0, -d, 0]), zu = sub(A2, b.H), l = len(zu), l1 = P.oberschenkel, l2 = P.unterschenkel;
+    if (l > l1 + l2 - 1e-3 || l < Math.abs(l1 - l2) + 1e-3) return false;
+    const u = norm(zu), bug = sub(b.K, b.H), v = norm(sub(bug, mul(u, dot(bug, u))));
+    const ca = (l1 * l1 + l * l - l2 * l2) / (2 * l1 * l), sa = Math.sqrt(Math.max(0, 1 - ca * ca));
+    const um = (p) => add(p, [0, -d, 0]);
+    beine[s] = { ...b, K: add(b.H, add(mul(u, l1 * ca), mul(v, l1 * sa))), A: A2, ferse: um(b.ferse), ballen: um(b.ballen), spitze: um(b.spitze) };
+    return true;
+  };
+  let korrektur = null;
+  if ((pose.art ?? 'stehend') !== 'luft') {
+    const frei = pose.frei_fuss ?? [];
+    const [hoch, tief] = unterseite(beine.R) > unterseite(beine.L) ? ['R', 'L'] : ['L', 'R'];
+    const d = unterseite(beine[hoch]) - unterseite(beine[tief]);
+    if (d > 0.02 && !frei.includes(hoch)) korrektur = versetze(hoch, d) ? { fuss: hoch, d } : versetze(tief, -d) ? { fuss: tief, d: -d } : null;
+  }
+  const sohle = Math.min(unterseite(beine.R), unterseite(beine.L));
   const hebe = -sohle + (pose.heben ?? 0);
   const [ox, oy] = pose.ort;
   const proj = (v) => { const q = cam.p(add(v, [0, hebe, 0])); return [ox + q[0], oy + q[1]]; };
@@ -226,7 +255,7 @@ export function figur(pose) {
     return { teile, hand, G2, W2, S2, E2 };
   };
   const beinFormen = (b) => {
-    const H2 = proj(b.H), K2 = proj(b.K), A2 = proj(b.A), F2 = proj(b.ferse), T2 = proj(b.spitze), B2 = proj(lerp(b.ferse, b.spitze, 0.68));
+    const H2 = proj(b.H), K2 = proj(b.K), A2 = proj(b.A), F2 = proj(b.ferse), T2 = proj(b.spitze), B2 = proj(b.ballen);
     return [
       ...bauch(H2, P.rHuefte * H * g, K2, P.rKnie * H * g, 0.36, P.rOberschenkelBauch * H * g, 0.05, vornBecken),
       ...bauch(K2, P.rKnie * H * g, A2, P.rKnoechel * H * g, 0.3, P.rWade * H * g, -0.06, vornBecken),
@@ -318,6 +347,17 @@ export function figur(pose) {
     const schief = dot(norm(oben.w(sch.achse)), norm(oben.w(sch.flaeche ?? [0, 0, 1])));
     if (Math.abs(schief) > 0.2) warnungen.push(`Schlägerfläche steht schief zur Achse (achse·flaeche ${f(schief)})`);
   }
+  // Bodenkontakt: wer nicht springt, steht mit beiden Füßen am Boden. Der tiefste Punkt bestimmt den
+  // Boden; liegt die Sohle des anderen Fußes mehr als 0,1 H darüber, schwebt er (G-036, Prüfung
+  // Welle 4: im Ausfallschritt setzte der Ballen des hinteren Fußes den Boden, der vordere hing).
+  // Ein Bein, das bewusst in der Luft ist (Schritt, Nachziehen), meldet die Pose mit frei: ['L'].
+  if ((pose.art ?? 'stehend') !== 'luft') {
+    for (const s of ['R', 'L']) {
+      if ((pose.frei_fuss ?? []).includes(s)) continue;
+      const unten = unterseite(beine[s]);
+      if (unten - sohle > 0.1) warnungen.push(`Bodenkontakt: Fuß ${s} schwebt ${f(unten - sohle)} H`);
+    }
+  }
   // Schwerpunkt grob: zwischen Hüfte und Halsansatz, näher an der Hüfte (Beine und Rumpf).
   const fussX = ['R', 'L'].flatMap((s) => [proj(beine[s].ferse)[0], proj(beine[s].spitze)[0]]);
   const sx = lerp(proj(HM), proj(N), 0.3)[0];
@@ -329,16 +369,16 @@ export function figur(pose) {
     // Kontur: alle Teile einmal dick in --tinte-3 gestrichen, darüber dieselben Teile in der
     // Hintergrundfarbe gefüllt — übrig bleibt nur der äußere Umriss, ohne innere Überlappungen.
     svg: pose.geist === 'kontur'
-      ? schichten.join('\n  ') + '\n  ' + schichten.join('\n  ').replaceAll('class="s-gu"', 'class="s-gi"')
+      ? schichten.join('\n  ') + '\n  ' + schichten.filter((x) => x.startsWith('<g class="s-gu">')).join('\n  ').replaceAll('class="s-gu"', 'class="s-gi"')
       : schichten.join('\n  '),
-    H, proj, warnungen,
+    H, proj, warnungen, korrektur,
     punkte: {
       kopf: kopfM, hals: proj(N), huefte: proj(HM), kopfRadius: kopfR2,
       handR: arme.R && proj(arme.R.griff), handL: arme.L && proj(arme.L.griff),
       handgelenkR: arme.R && proj(arme.R.W), handgelenkL: arme.L && proj(arme.L.W),
       ellbogenR: arme.R && proj(arme.R.E), ellbogenL: arme.L && proj(arme.L.E),
       schulterR: proj(S.R), schulterL: proj(S.L), knieR: proj(beine.R.K), knieL: proj(beine.L.K),
-      ballenR: proj(lerp(beine.R.ferse, beine.R.spitze, 0.68)), ballenL: proj(lerp(beine.L.ferse, beine.L.spitze, 0.68)),
+      ballenR: proj(beine.R.ballen), ballenL: proj(beine.L.ballen),
       fersR: proj(beine.R.ferse), fersL: proj(beine.L.ferse), spitzeR: proj(beine.R.spitze), spitzeL: proj(beine.L.spitze),
       schlaegerKopf: sch && proj(add(arme[sch.hand].griff, mul(norm(oben.w(sch.achse)), 1.62))),
       schlaegerNormale: sch && (() => {
@@ -402,7 +442,7 @@ export const STIL = {
   's-f': 'fill:var(--tinte-2,#5a6675)',
   's-gk': 'fill:var(--tinte-3,#656f7e);opacity:.3',
   's-gf': 'fill:var(--tinte-3,#656f7e);opacity:.2',
-  's-gu': 'fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:3.2;stroke-linejoin:round',
+  's-gu': 'fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:3.8;stroke-linejoin:round',
   's-gi': 'fill:var(--flaeche-2,#f1f5fb)',
   's-x': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round',
   's-rf': 'fill:var(--primaer,#38a4f1);opacity:.14',
@@ -462,6 +502,7 @@ export const STIL = {
   's-strich': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.2;stroke-linecap:round',
   's-bruch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
   's-hilf': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.4;stroke-dasharray:5 4',
+  's-zone': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
   's-luecke': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:8',
   's-fern': 'opacity:.55',
   's-schnitt': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.2;stroke-linecap:round',
