@@ -5,20 +5,15 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-003': { aria: "Le drive de coup droit : poids sur le pied avant, buste tourné vers la direction de frappe, point de frappe compact et à plat nettement devant le corps.", texts: ["à plat et direct · devant le corps"] },
   'G-005': { aria: "Service, image 1 : la main libre laisse tomber le speeder à hauteur de hanche, le bras de frappe est bas, prêt à s'élancer vers l'avant par en dessous.", texts: ["le speeder tombe à hauteur de hanche"] },
   'G-006': { aria: "Service, image 2 : la raquette frappe le speeder par en dessous, tout le speeder est au point de frappe nettement sous la main de frappe.", texts: ["frappe sous la main de frappe"] },
   'G-011': { aria: "Le smash : point de frappe haut au-dessus et devant la tête, frappe agressive vers le bas, la trajectoire file raide et droit dans le terrain adverse.", texts: ["point de frappe haut · raide vers le bas"] },
-  'G-012': { aria: "L'amorti : grande préparation, mais contact doux et freiné — le speeder franchit de justesse la zone neutre et tombe juste derrière la ligne avant.", texts: ["court et doux · tombe juste derrière la ligne"] },
   'G-013': { aria: "La coupe : la surface de frappe inclinée effleure le speeder sur le côté au lieu de le frapper droit ; des lignes de mouvement courbes montrent la trajectoire coupante et la rotation qui en résulte.", texts: ["la surface effleure · coupe et rotation"] },
   'G-014': { aria: "Le système de jeu de jambes : s'élancer de la base centrale vers les coins et revenir aussitôt au centre.", texts: ['Base', "vers le coin — retour au centre"] },
   'G-015': { aria: "Prendre le speeder tôt : contact au point le plus haut et le plus précoce, nettement devant et au-dessus du corps ; un point de frappe plus bas et pâle montre où un joueur plus lent aurait frappé.", texts: ["tôt et haut — du temps volé"] },
   'G-016': { aria: "Feinte, image 1 : une préparation volontairement neutre et identique qui ne révèle rien — armé complet, corps posé, aucune frappe décidée.", texts: ['?', "même préparation — ne rien révéler"] },
   'G-017': { aria: "Feinte, image 2 : la même préparation, d'où bifurquent deux frappes différentes — un drive plat et rapide et un amorti court et doux ; le choix ne se fait qu'au dernier moment.", texts: ["une préparation, deux options"] },
-  'G-018': { aria: "Changement de rythme, image 1 : une frappe rapide et puissante avec un net flou de mouvement et une trajectoire plate et rapide — tempo élevé.", texts: ["tempo élevé · plat et rapide"] },
-  'G-019': { aria: "Changement de rythme, image 2 : une préparation presque identique, maintenant une frappe lente, haute et douce avec un arc léger — une rupture volontaire dans le rythme.", texts: ["rythme brisé · haut et doux"] },
   'G-021': { aria: "Précision sur les lignes : le speeder atterrit exactement sur une ligne de coin, au bord extrême du terrain ; des zones cibles serrées dans les coins et une flèche fine montrent le placement au point près, avec une marge minimale.", texts: ["pile sur la ligne · marge minimale"] },
-  'G-022': { aria: "Constance sous pression maximale : une frappe propre et équilibrée avec une posture calme — base stable, tête calme, accompagnement contrôlé, reproductible de façon fiable.", texts: ["calme et reproductible · sous pression"] },
   'G-023': { aria: "Le but du jeu : jouer le speeder par-dessus la zone neutre dans le terrain adverse.", texts: ["terrain adverse", "ZONE NEUTRE", "ton terrain"] },
   'G-024': { aria: "Position centrale : depuis le milieu du terrain, les trajets vers les quatre coins sont aussi courts.", texts: ['Centre', "aussi vite vers chaque coin"] },
   'G-025': { aria: "Longueur et profondeur : jouer une balle courte à la ligne avant ou une balle profonde à la ligne de fond.", texts: ["profond — à la ligne de fond", "court — à la ligne avant"] },

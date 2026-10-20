@@ -1,29 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Konstanz unter Höchstdruck: ein sauberer, ausbalancierter Schlag mit ruhiger Haltung — stabile Basis, ruhiger Kopf, kontrolliertes Ausschwingen, verlässlich wiederholbar.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Konstanz unter Höchstdruck: beim Stand von 15:15 spielt die Spielerin einen ruhigen, lehrbuchhaften Vorhand-Drive aus stabiler Basis, beide Knie gebeugt, der Griff locker. Drei fast deckungsgleiche Bahnen enden in derselben engen Zielmarke: der Schlag kommt verlässlich wieder.">
   <style>
-    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-    .kopf{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
-    .lot{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2;stroke-dasharray:3 5;opacity:.7}
-    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
-    .mk{fill:var(--primaer,#38a4f1)}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-f{fill:var(--tinte-2,#5a6675)}
+    .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    .s-bahnz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-tafel{fill:var(--flaeche,#ffffff);stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    .s-zahl{fill:var(--tinte,#16202b);font:800 15px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-ring{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m022" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
-  <circle class="kopf" cx="120" cy="92" r="14"/>
-  <path class="fig" d="M120,106 L120,168"/>
-  <!-- ausbalancierter Schlag vor dem Körper -->
-  <path class="fig" d="M120,116 L146,124 L172,126"/>
-  <path class="fig" d="M120,122 L100,146"/>
-  <!-- stabile, symmetrische Basis -->
-  <path class="fig" d="M120,168 L100,204 L92,240"/>
-  <path class="fig" d="M120,168 L140,204 L148,240"/>
-  <!-- Lot durch den Körperschwerpunkt (Balance) -->
-  <line class="lot" x1="120" y1="70" x2="120" y2="244"/>
-  <line class="schaft" x1="172" y1="126" x2="188" y2="124"/>
-  <ellipse class="kelle" cx="198" cy="123" rx="10" ry="14" transform="rotate(84 198 123)"/>
-  <path class="bahn" d="M210,122 L280,118" marker-end="url(#m022)"/>
-  <line class="boden" x1="80" y1="244" x2="164" y2="244"/>
-  <text class="st" x="150" y="272">ruhig und wiederholbar · unter Druck</text>
+  <rect class="s-tafel" x="220" y="18" width="62" height="28" rx="6"/><text class="s-zahl" x="251" y="37">15:15</text>
+  <ellipse class="s-schw" cx="80" cy="247" rx="54" ry="5.5"/><ellipse class="s-sch" cx="80" cy="247" rx="34.6" ry="3.4"/>
+  <g class="s-f"><path d="M69.7,158.7L78.8,171.6A7.4,7.4 0 1 0 90.7,162.9L81.2,150.3A7.1,7.1 0 0 0 69.7,158.7Z"/><path d="M78.8,171.6L94,193A5.2,5.2 0 0 0 102.9,187.8L91.4,164.2A7.4,7.4 0 1 0 78.8,171.6Z"/><path d="M93.2,188.8L90.2,200.6A5.9,5.9 0 1 0 101.7,202.8L103.3,190.7A5.2,5.2 0 0 0 93.2,188.8Z"/><path d="M90,202.5L92,230.5A3,3 0 0 0 97.9,230.7L101.7,202.8A5.9,5.9 0 1 0 90,202.5Z"/><path d="M93,228L89.4,231.2A3.7,3.7 0 1 0 94.9,236L97.5,231.9A3,3 0 0 0 93,228Z"/><path d="M91.6,237.6L107.3,238.2A3.5,3.5 0 0 0 107.6,231.3L92,230.3A3.7,3.7 0 1 0 91.6,237.6Z"/><path d="M107.7,238.1L114.9,237.5A2.4,2.4 0 0 0 115.2,232.7L108,231.3A3.5,3.5 0 1 0 107.7,238.1Z"/></g>
+  <g class="s-f"><path d="M78.2,110.1L102.9,126A3.7,3.7 0 0 0 107.3,120.1L85.1,100.9A5.8,5.8 0 1 0 78.2,110.1Z"/><path d="M104.2,126.5L109.6,127.5A4.3,4.3 0 1 0 110.2,119.1L104.7,119.2A3.7,3.7 0 0 0 104.2,126.5Z"/><path d="M110.6,127.6L123.4,126.8A2.5,2.5 0 0 0 123.7,121.7L111.2,119.1A4.3,4.3 0 1 0 110.6,127.6Z"/></g>
+  <g class="s-f"><path d="M122.4,126.6L124.7,127.4A3.5,3.5 0 1 0 124.5,121L122.3,121.9A2.5,2.5 0 0 0 122.4,126.6Z"/><path d="M126.9,127.3L130.5,126A2.1,2.1 0 0 0 130.5,122.1L126.8,121A3.3,3.3 0 1 0 126.9,127.3Z"/></g>
+  <g class="s-k"><path d="M84,98.8C86.3,99.9 86.3,101 87.6,103.3C88.9,105.6 89.9,106.2 90.4,110.3C91,114.4 91.6,117.7 90.4,123.8C89.3,129.9 86.3,134.2 84.6,140.8C82.9,147.4 83,151.7 81.8,156.7C80.5,161.7 79.9,163 78.3,165.8C76.8,168.6 75.7,169.8 74.1,170.7C72.5,171.7 71.6,171.6 70.4,170.3C69.1,169.1 68.5,167.7 67.9,164.7C67.3,161.7 67,160.3 67.5,155.2C67.9,150.1 69.6,146 70.1,139.3C70.7,132.6 70.1,127.9 70.2,121.7C70.3,115.5 70.2,112.3 70.7,108.2C71.1,104.2 71.4,103.7 72.5,101.7C73.6,99.6 73.8,98.6 76.1,98C78.4,97.4 81.7,97.8 84,98.8Z"/><path d="M66,154.2L59.9,167.7A7.4,7.4 0 1 0 73.3,173.6L79.1,160A7.1,7.1 0 0 0 66,154.2Z"/><path d="M59.9,167.6L48.1,192.6A5.2,5.2 0 0 0 57,197.8L72.6,174.9A7.4,7.4 0 1 0 59.9,167.6Z"/><path d="M48.3,192.2L42,203.1A5.9,5.9 0 1 0 52.4,208.5L57.5,196.9A5.2,5.2 0 0 0 48.3,192.2Z"/><path d="M41.3,204.8L35.3,231.8A3,3 0 0 0 40.9,233.7L52.4,208.5A5.9,5.9 0 1 0 41.3,204.8Z"/><path d="M36.7,229.8L34,231.4A3.7,3.7 0 1 0 38.7,236.8L40.6,234.2A3,3 0 0 0 36.7,229.8Z"/><path d="M33.7,237.7L45.7,245.8A3.5,3.5 0 0 0 49.7,240.1L37.9,231.6A3.7,3.7 0 1 0 33.7,237.7Z"/><path d="M46.1,246L52.2,249A2.4,2.4 0 0 0 54.9,245.1L50,240.4A3.5,3.5 0 1 0 46.1,246Z"/></g>
+  <g class="s-k"><ellipse cx="85.8" cy="85.2" rx="9.2" ry="11.5" transform="rotate(18.1 85.8 85.2)"/><path d="M85.9,97.1L88.5,97.3A3,3 0 0 0 91.5,95.7L92.7,93.4A6.9,6.9 0 1 0 85.9,97.1Z"/></g>
+  <g class="s-x"><path d="M70.7,114.8L91.9,137.7A3.7,3.7 0 0 0 97.6,133.1L79.6,107.6A5.8,5.8 0 1 0 70.7,114.8Z"/><path d="M92.7,138.4L99.4,142.3A4.3,4.3 0 1 0 103.1,134.7L95.9,131.8A3.7,3.7 0 0 0 92.7,138.4Z"/><path d="M100.1,142.6L117,148.9A2.5,2.5 0 0 0 119.2,144.4L103.8,135A4.3,4.3 0 1 0 100.1,142.6Z"/><path d="M116.5,148.7L120,150.9A3.9,3.9 0 1 0 121.9,143.8L117.7,144A2.5,2.5 0 0 0 116.5,148.7Z"/></g>
+  <g class="s-k"><path d="M70.7,114.8L91.9,137.7A3.7,3.7 0 0 0 97.6,133.1L79.6,107.6A5.8,5.8 0 1 0 70.7,114.8Z"/><path d="M92.7,138.4L99.4,142.3A4.3,4.3 0 1 0 103.1,134.7L95.9,131.8A3.7,3.7 0 0 0 92.7,138.4Z"/><path d="M100.1,142.6L117,148.9A2.5,2.5 0 0 0 119.2,144.4L103.8,135A4.3,4.3 0 1 0 100.1,142.6Z"/></g>
+  <path class="s-rf" d="M155.5,131.2C155.5,131.6 155.4,132.1 155.3,132.6C155.2,133.1 155,133.6 154.8,134.1C154.6,134.6 154.4,135.1 154.2,135.7C153.9,136.2 153.6,136.7 153.3,137.2C153,137.7 152.7,138.2 152.3,138.7C151.9,139.2 151.5,139.7 151.1,140.1C150.7,140.6 150.3,141 149.9,141.4C149.4,141.9 149,142.3 148.5,142.6C148,143 147.6,143.3 147.1,143.6C146.6,143.9 146.1,144.2 145.7,144.4C145.2,144.7 144.7,144.9 144.3,145C143.8,145.2 143.4,145.3 142.9,145.4C142.5,145.5 142.1,145.5 141.7,145.5C141.3,145.5 140.9,145.4 140.5,145.4C140.2,145.3 139.8,145.2 139.5,145C139.2,144.8 139,144.6 138.7,144.4C138.5,144.2 138.3,143.9 138.1,143.6C137.9,143.3 137.8,143 137.7,142.6C137.6,142.2 137.5,141.8 137.5,141.4C137.4,141 137.4,140.6 137.5,140.1C137.5,139.6 137.6,139.2 137.7,138.7C137.8,138.2 138,137.7 138.2,137.2C138.4,136.7 138.6,136.1 138.8,135.6C139.1,135.1 139.4,134.6 139.7,134.1C140,133.6 140.4,133.1 140.7,132.6C141.1,132.1 141.5,131.6 141.9,131.1C142.3,130.7 142.7,130.2 143.2,129.8C143.6,129.4 144.1,129 144.5,128.7C145,128.3 145.4,128 145.9,127.6C146.4,127.3 146.9,127.1 147.3,126.8C147.8,126.6 148.3,126.4 148.7,126.3C149.2,126.1 149.7,126 150.1,125.9C150.5,125.8 150.9,125.8 151.3,125.8C151.7,125.8 152.1,125.8 152.5,125.9C152.8,126 153.2,126.1 153.5,126.3C153.8,126.4 154.1,126.6 154.3,126.9C154.5,127.1 154.7,127.4 154.9,127.7C155.1,128 155.2,128.3 155.3,128.7C155.4,129 155.5,129.4 155.5,129.9C155.6,130.3 155.6,130.7 155.5,131.2Z"/><path class="s-rh" d="M138.4,136.3L136.9,140.4L137.7,143.3"/><path class="s-rsch" d="M128.8,144.4L136.9,140.4"/><path class="s-rr" d="M155.5,131.2C155.5,131.6 155.4,132.1 155.3,132.6C155.2,133.1 155,133.6 154.8,134.1C154.6,134.6 154.4,135.1 154.2,135.7C153.9,136.2 153.6,136.7 153.3,137.2C153,137.7 152.7,138.2 152.3,138.7C151.9,139.2 151.5,139.7 151.1,140.1C150.7,140.6 150.3,141 149.9,141.4C149.4,141.9 149,142.3 148.5,142.6C148,143 147.6,143.3 147.1,143.6C146.6,143.9 146.1,144.2 145.7,144.4C145.2,144.7 144.7,144.9 144.3,145C143.8,145.2 143.4,145.3 142.9,145.4C142.5,145.5 142.1,145.5 141.7,145.5C141.3,145.5 140.9,145.4 140.5,145.4C140.2,145.3 139.8,145.2 139.5,145C139.2,144.8 139,144.6 138.7,144.4C138.5,144.2 138.3,143.9 138.1,143.6C137.9,143.3 137.8,143 137.7,142.6C137.6,142.2 137.5,141.8 137.5,141.4C137.4,141 137.4,140.6 137.5,140.1C137.5,139.6 137.6,139.2 137.7,138.7C137.8,138.2 138,137.7 138.2,137.2C138.4,136.7 138.6,136.1 138.8,135.6C139.1,135.1 139.4,134.6 139.7,134.1C140,133.6 140.4,133.1 140.7,132.6C141.1,132.1 141.5,131.6 141.9,131.1C142.3,130.7 142.7,130.2 143.2,129.8C143.6,129.4 144.1,129 144.5,128.7C145,128.3 145.4,128 145.9,127.6C146.4,127.3 146.9,127.1 147.3,126.8C147.8,126.6 148.3,126.4 148.7,126.3C149.2,126.1 149.7,126 150.1,125.9C150.5,125.8 150.9,125.8 151.3,125.8C151.7,125.8 152.1,125.8 152.5,125.9C152.8,126 153.2,126.1 153.5,126.3C153.8,126.4 154.1,126.6 154.3,126.9C154.5,127.1 154.7,127.4 154.9,127.7C155.1,128 155.2,128.3 155.3,128.7C155.4,129 155.5,129.4 155.5,129.9C155.6,130.3 155.6,130.7 155.5,131.2Z"/><path class="s-rg" d="M117.6,149.9L128.8,144.4"/>
+  <g class="s-k"><path d="M116.5,148.7L120,150.9A3.9,3.9 0 1 0 121.9,143.8L117.7,144A2.5,2.5 0 0 0 116.5,148.7Z"/></g>
+  <path class="s-korb" d="M168.5,138.3L158.5,141.2Q156.7,135.6 158.5,130L168.5,132.9Z"/><path class="s-kappe" d="M168.1,135.6a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/>
+  <path class="s-bahnz" d="M180.5,135.6 Q 220.3,106.6 259,129.6"/><path class="s-bahnz" d="M180.5,135.6 Q 220.3,128.6 259,129.6"/><path class="s-bahn" d="M180.5,135.6 Q 220.3,117.6 259,129.6"/>
+  <circle class="s-ring" cx="272" cy="129.6" r="11"/><circle class="s-mk" cx="272" cy="129.6" r="3.4"/>
+  <text class="st" x="150" y="274">ruhig und wiederholbar · unter Druck</text>
 </svg>
