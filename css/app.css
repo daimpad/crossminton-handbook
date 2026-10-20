@@ -1171,8 +1171,9 @@ body.app-laedt::after {
    Leere, kein Zerren, in jeder Engine gleich. Die Zeichnung wird dabei nicht
    kleiner — sie war schon vorher auf 26rem Höhe gedeckelt.
    Voraussetzung: die Grafiken bleiben nahe quadratisch (Seitenverhältnisse
-   heute 1,00 / 1,06 / 0,88). Ein ausgesprochen hohes Format bräuchte eine
-   eigene Regel, sonst würde es zu groß. */
+   heute 1,00 / 1,06 / 1,10 / 0,88; die 1,10 ist G-036 mit zwei Bildhälften).
+   Ein ausgesprochen hohes Format bräuchte eine eigene Regel, sonst würde es
+   zu groß. */
 .grafik-bild {
   display: block;
   width: 100%;

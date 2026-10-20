@@ -634,10 +634,11 @@ export const MOTIVE = {
   // kurzer Pfeil über dem Oberarm die Zugrichtung. Kein Schmerzsymbol.
   'G-033': (t) => {
     const basis = {
-      ort: [150, 246], H: 24, blick: -12, kamera: 14, art: 'stehend',
-      beinR: { ober: [0.14, -1, 0.07], unter: [0.03, -1, -0.07], fuss: [0.2, -0.04, 1] },
-      beinL: { ober: [-0.14, -1, 0.07], unter: [-0.03, -1, -0.07], fuss: [-0.2, -0.04, 1] },
-      armR: { ober: [-0.95, -0.04, 0.3], unter: [-0.96, 0.02, -0.05], hand: [-0.95, -0.1, -0.05], vor: true },
+      ort: [150, 246], H: 24, blick: -12, kamera: 14, art: 'stehend', koerper: 'b',
+      beinR: { ober: [0.14, -1, 0.07], unter: [0.03, -1, -0.07], fuss: [0, -0.04, 1] },
+      beinL: { ober: [-0.14, -1, 0.07], unter: [-0.03, -1, -0.07], fuss: [0, -0.04, 1] },
+      // knapp unter Schulterhöhe (Dossier): der Ellbogen liegt frei unter der linken Schulter
+      armR: { ober: [-0.95, -0.12, 0.3], unter: [-0.96, -0.06, -0.05], hand: [-0.95, -0.14, -0.05], vor: true },
       armL: { ober: [-0.1, -1, 0.1], unter: [0, -1, 0.2], art: 'faust', vor: true },
     };
     const probe = figur(basis);
@@ -647,13 +648,17 @@ export const MOTIVE = {
     const fg = figur({ ...basis, armL: { ...armZiel(probe, 'L', ziel, mul(o.U, -1)), art: 'faust', vor: true } });
     const b = fg.welt.becken, fuss = fg.welt.beine.R;
     const boden = fuss.ferse[1] - P.rFerse;
-    const griff = add([fuss.ferse[0], boden, fuss.ferse[2]], add(mul(b.R, 0.7), mul(b.F, -0.25)));
+    // mit Lücke neben dem Schuh, sonst verschmolz das Griffende mit der Schuhspitze
+    const griff = add([fuss.ferse[0], boden, fuss.ferse[2]], add(mul(b.R, 0.95), mul(b.F, -0.25)));
     const schl = schlaeger3d({ griff, achse: norm(add(mul(b.F, 1), mul(b.R, 0.45))), flaeche: [0, 1, 0], proj: fg.proj, H: fg.H });
     const sR = fg.punkte.schulterR;
     // Zugpfeil über dem Unterarm, rechts neben dem Kopf, eine Strichbreite Abstand: der Arm wird
     // sanft Richtung linke Schulter gezogen (am Schulterende läse er sich als Stoß in die Schulter)
     const hR = fg.punkte.handR;
-    const zug0 = add(hR, [-26, -13]), zug1 = add(hR, [-8, -13]);
+    const zug0 = add(hR, [-22, -16]), zug1 = add(hR, [-6, -16]);
+    // Zone des leichten Ziehens: ein dünner Bogen in --tinte-3 an der Rückseite der rechten Schulter
+    // (eine Sichel mit Deckkraft .18 erreichte nur 1,2:1 und verschwand als Miniatur)
+    const zone = [215, 240, 265, 290].map((g) => add(sR, [Math.sin((g * Math.PI) / 180) * 14, Math.cos((g * Math.PI) / 180) * 14]));
     return {
       figuren: [fg], zeichen: [],
       datei: datei({
@@ -663,7 +668,7 @@ export const MOTIVE = {
           schatten([150, fg.punkte.boden + 1], 46, 5.5),
           schl,
           fg.svg,
-          spur({ c: sR, r: 11, von: 215, bis: 300, breite: 9 }),
+          `<path class="s-zone" d="M${pt(zone[0])} A 14 14 0 0 0 ${pt(zone[3])}"/>`,
           `<path class="s-rot" d="M${pt(zug0)} L${pt(zug1)}" marker-end="url(#p033)"/>`,
         ].join('\n  '),
       }),
@@ -677,20 +682,22 @@ export const MOTIVE = {
   // Kästen, Hürden oder Tiefsprünge (Gesundheitsrahmen: Prinzip, keine Dosierung).
   'G-034': (t) => {
     const y = 250, H = 21, kam = 8;
-    const ein = figur({ ort: [66, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
+    // enger gesetzt (Dossier: leicht überlappend) — weit auseinander las sich die Folge als Weitsprung
+    const ein = figur({ ort: [80, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
       neig: 35, kopf: { neig: -24 },
       beinR: { ober: [0.12, -0.6, 0.8], unter: [0.02, -1, -0.25], fuss: [0.15, -0.04, 1] },
       beinL: { ober: [-0.12, -0.6, 0.8], unter: [-0.02, -1, -0.25], fuss: [-0.15, -0.04, 1] },
       armR: { ober: [0.12, -1, -0.12], unter: [0.06, -1, -0.2] },
       armL: { ober: [-0.12, -1, -0.12], unter: [-0.06, -1, -0.2], art: 'offen' } });
-    const ab = figur({ ort: [150, y], H, blick: 90, kamera: kam, art: 'luft', heben: 0.22,
+    const ab = figur({ ort: [156, y], H, blick: 90, kamera: kam, art: 'luft', heben: 0.22,
       neig: 10, kopf: { neig: -14 },
       beinR: { ober: [0.1, -1, -0.17], unter: [0.04, -1, -0.17], fuss: [0.08, -1, 0.42] },
       beinL: { ober: [-0.1, -1, -0.17], unter: [-0.04, -1, -0.17], fuss: [-0.08, -1, 0.42] },
       armR: { ober: [0.18, 0.55, 0.82], unter: [0.1, 0.75, 0.66], vor: true },
       armL: { ober: [-0.18, 0.55, 0.82], unter: [-0.1, 0.75, 0.66], art: 'offen' },
-      schlaeger: { hand: 'R', achse: [0, 1, 0.15], flaeche: [0, -0.15, 1] } });
-    const lan = figur({ ort: [232, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
+      // Fläche 30–40° zur Betrachterin gedreht: hochkant las sich der Schläger als Stab
+      schlaeger: { hand: 'R', achse: [0, 1, 0.15], flaeche: [0.55, -0.1, 0.83] } });
+    const lan = figur({ ort: [224, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
       neig: 20, kopf: { neig: -12 },
       beinR: { ober: [0.12, -0.85, 0.55], unter: [0.02, -1, -0.3], fuss: [0.15, -0.3, 1] },
       beinL: { ober: [-0.12, -0.85, 0.55], unter: [-0.02, -1, -0.3], fuss: [-0.15, -0.3, 1] },
@@ -699,10 +706,13 @@ export const MOTIVE = {
     const schlEin = geistSchlaeger(ein, [0.1, -0.85, -0.5], [0, 0.5, -0.85]);
     const schlLan = geistSchlaeger(lan, [0.05, 1, 0.05], [0, -0.05, 1]);
     const h1 = ein.punkte.huefte, h2 = ab.punkte.huefte, h3 = lan.punkte.huefte;
-    // Schwerpunkt: aus dem Einfedern kurz tiefer, dann ein flacher Bogen über den Absprung
-    const bahn = `M${pt(add(h1, [-14, -6]))} Q ${pt(add(h1, [-2, 9]))} ${pt(add(h1, [14, 2]))} Q ${pt([h2[0], h2[1] - 30])} ${pt(add(h3, [-6, -2]))}`;
+    // Schwerpunkt: beginnt in der Kontur, aus dem Einfedern kurz tiefer, steigt durch den Absprung
+    // weiter (er ist der Moment direkt nach dem Abheben) und hat den Scheitel erst danach
+    const scheitel = [(h2[0] + h3[0]) / 2 - 6, h2[1] - 14];
+    const bahn = `M${pt(add(h1, [-2, 2]))} Q ${pt(add(h1, [8, 10]))} ${pt(add(h1, [18, 2]))} C ${pt([h2[0] - 18, h2[1] + 4])} ${pt([h2[0] + 4, scheitel[1] - 2])} ${pt(scheitel)} S ${pt([h3[0] - 4, h3[1] - 16])} ${pt(add(h3, [-2, 0]))}`;
     // vordehnen ↓, sofort strecken ↑ — neben der Konturphase, nicht auf ihr
-    const dp = add(h1, [-46, -2]), halb = (r) => `M${f(dp[0])},${f(dp[1] + r * 2)}L${f(dp[0])},${f(dp[1] + r * 13)}`;
+    // vor den Knien des Einfederns, zwischen Phase 1 und 2: dort liest er sich nicht als Schläger auf und ab
+    const dp = [(Math.max(ein.punkte.spitzeR[0], ein.punkte.knieR[0]) + ab.punkte.fersR[0]) / 2, ein.punkte.knieR[1] + 6], halb = (r) => `M${f(dp[0])},${f(dp[1] + r * 2)}L${f(dp[0])},${f(dp[1] + r * 13)}`;
     // Dämpfungsbogen unter den Ballen der Landung
     const b1 = lan.punkte.ballenR, b2 = lan.punkte.ballenL, bm = lerp(b1, b2, 0.5);
     const daempf = `M${f(bm[0] - 16)},${f(y + 6)} Q ${f(bm[0])},${f(y + 13)} ${f(bm[0] + 16)},${f(y + 6)}`;
@@ -713,9 +723,10 @@ export const MOTIVE = {
         defs: pfeil('p034'),
         inhalt: [
           `<path class="s-boden" d="M8,${y + 0.5}L292,${y + 0.5}"/>`,
-          schatten([150, y + 1], 28, 3.5),
+          schatten([156, y + 1], 28, 3.5),
           `<path class="s-bahng" d="${bahn}"/>`,
-          ein.svg, schlEin, lan.svg, schlLan,
+          // Schläger vor den Konturen: deren Füllung deckt den Griff in der Hand ab
+          schlEin, ein.svg, schlLan, lan.svg,
           ab.svg,
           `<path class="s-rot" d="${halb(-1)}" marker-end="url(#p034)"/>`, `<path class="s-rot" d="${halb(1)}" marker-end="url(#p034)"/>`,
           `<path class="s-rot" d="${daempf}"/>`,
@@ -732,60 +743,71 @@ export const MOTIVE = {
   // vordere Bein, holt weit aus, der freie Arm fuchtelt — das Knie bleibt aber hinter der
   // Fußspitze, auch im Gegenbeispiel (Gesundheitsrahmen).
   'G-036': (t) => {
-    // 330 breit: zwei Felder zu 165 — Startphase, Ausfallschritt und Treffpunkt brauchen bei H = 20
-    // mehr als 150 Einheiten (der Schläger ragte sonst ins rechte Feld)
+    // 330 breit: zwei Bildhälften zu 165 — Startphase, Ausfallschritt und Treffpunkt brauchen bei
+    // H = 20 mehr als 150 Einheiten (der Schläger ragte sonst in die rechte Hälfte)
     const y = 226, H = 20, kam = 7, breite = 165;
     const lunge = {
       blick: 90, kamera: kam, H, art: 'dynamisch', neig: 10, kopf: { neig: -6 },
-      beinR: { ober: [0.08, -0.55, 0.83], unter: [0.02, -1, 0], fuss: [0.1, -0.04, 1] },
+      beinR: { ober: [0.08, -0.62, 0.78], unter: [0.02, -1, 0], fuss: [0.1, -0.04, 1] },
       beinL: { ober: [-0.1, -0.75, -0.65], unter: [-0.05, -0.8, -0.6], fuss: [-0.1, -0.55, 0.83] },
-      armR: { ober: [0.12, -0.25, 0.97], unter: [0.05, 0.05, 1], vor: true },
-      armL: { ober: [-0.1, -0.75, -0.65], unter: [-0.05, -0.6, -0.8], art: 'offen' },
-      schlaeger: { hand: 'R', achse: [0.1, 0.8, 0.6], flaeche: [0, -0.6, 0.8] },
+      // Schläger wie im Drive: Fläche zum Ziel, Treffpunkt vor dem vorderen Fuß (als Degen geführt
+      // stand die Fläche hochkant und die Normale zeigte 47° nach unten)
+      armR: POSEN.drive.armR, schlaeger: POSEN.drive.schlaeger,
+      armL: { ober: [-0.1, -0.9, -0.4], unter: [-0.05, -0.85, -0.5], art: 'offen' },
     };
     const hektisch = {
       blick: 90, kamera: kam, H, art: 'dynamisch', neig: 42, kopf: { neig: -18 }, geist: 'kontur',
       beinR: { ober: [0.08, -0.55, 0.83], unter: [0.02, -1, 0.08], fuss: [0.1, -0.04, 1] },
-      beinL: { ober: [-0.06, -0.9, -0.42], unter: [-0.03, -0.45, -0.9], fuss: [-0.05, -0.9, 0.4] },
+      beinL: { ober: [-0.06, -0.95, -0.3], unter: [-0.03, -0.5, -0.87], fuss: [-0.05, -0.9, 0.4] },
       armR: { ober: [0.2, 0.25, -0.95], unter: [0.1, 0.6, -0.8] },
-      armL: { ober: [-0.3, 0.85, 0.35], unter: [-0.2, 0.95, -0.15], art: 'offen' },
+      // der freie Arm fliegt nach hinten weg: nach oben gerissen verschmolz er im Umriss mit dem
+      // Kopf, nach vorn ragte er durch den Speeder aus dem Bild
+      armL: { ober: [-0.4, 0.2, -0.9], unter: [-0.3, -0.6, -0.75], art: 'offen' },
     };
+    // Start: Grundposition als Kontur, ohne Schläger (der ragte als Stab neben den Schlagarm);
+    // die Mittelmarke liegt unter ihren Füßen
     const panel = (x0, eff) => {
-      const start = x0 + 22;
-      const ghost = figur({ ...POSEN.bereit, ort: [start, y], H, blick: 90, kamera: kam, geist: 'kontur' });
-      const fg = figur({ ...(eff ? lunge : hektisch), ort: [start + 38, y] });
-      const ziel = eff ? add(fg.punkte.schlaegerKopf, [8, 0]) : null;
-      return { start, ghost, fg, ziel };
+      const start = x0 + 17;
+      const ghost = figur({ ...POSEN.bereit, schlaeger: undefined, ort: [start, y], H, blick: 90, kamera: kam, geist: 'kontur' });
+      const gp = ghost.punkte, mitte = (gp.fersR[0] + gp.spitzeR[0] + gp.fersL[0] + gp.spitzeL[0]) / 4;
+      // links steht der hintere Fuß auf der Mitte (ein Schritt nach vorn), rechts ist die Figur in
+      // kleinen Schritten zu weit gestolpert — der Speeder hängt ungetroffen vor ihr
+      const pose = eff ? lunge : hektisch, probe = figur({ ...pose, ort: [start, y] });
+      const ox = eff ? start + (mitte + 2 - probe.punkte.ballenL[0]) : start + 80;
+      const fg = figur({ ...pose, ort: [ox, y] });
+      return { start, mitte, ghost, fg };
     };
     const L = panel(0, true), R = panel(breite, false);
     const schlR = geistSchlaeger(R.fg, [0.1, 0.4, -0.92], [0, 0.92, 0.4]);
-    // Ziel rechts an derselben Stelle wie links (gleiche Aufgabe)
-    const zielR = add(L.ziel, [breite, 0]);
-    // Ziel und Speeder bleiben im eigenen Feld (mindestens 10 Einheiten vor der Trennlinie)
-    if (L.ziel[0] + 14 > breite) L.fg.warnungen.push(`Speeder links ragt an die Trennlinie (${f(L.ziel[0])})`);
+    // derselbe Speeder in beiden Hälften, Kappe voran auf die Bespannung zu
+    const zielL = add(L.fg.punkte.schlaegerKopf, [8, 0]), zielR = add(zielL, [breite, 0]);
+    if (zielL[0] + 17 > breite) L.fg.warnungen.push(`Speeder links ragt an die Trennlinie (${f(zielL[0])})`);
     const marke = (x) => `<ellipse class="s-basis" cx="${f(x)}" cy="${f(y + 1)}" rx="9" ry="2.6"/>`;
-    const abdruck = (x, dy, kls) => `<ellipse class="${kls}" cx="${f(x)}" cy="${f(y + 1 + dy)}" rx="4.6" ry="1.6"/>`;
+    const abdruck = (x, dy) => `<ellipse class="s-mkg" cx="${f(x)}" cy="${f(y + 1 + dy)}" rx="4.6" ry="1.6"/>`;
+    // links ein einziger direkter Ausfallschritt: Weg hin glatt, zurück gestrichelt zur Mitte
     const vorneL = L.fg.punkte.ballenR[0];
-    const spurL = [lerp([L.start, 0], [vorneL, 0], 0.45)[0], vorneL].map((x) => abdruck(x, 0, 's-druck')).join('');
-    const zick = [0.16, 0.32, 0.48, 0.64, 0.8, 1.08].map((t0, i) => abdruck(R.start + t0 * (zielR[0] - R.start), i % 2 ? 3.2 : -2.2, 's-mkg')).join('');
-    const hin = `M${f(L.start + 8)},${f(y + 12)}L${f(vorneL - 6)},${f(y + 12)}`;
-    const zurueck = `M${f(vorneL - 10)},${f(y + 21)}L${f(L.start + 4)},${f(y + 21)}`;
+    const hin = `M${f(L.mitte + 8)},${f(y + 12)}L${f(vorneL - 4)},${f(y + 12)}`;
+    const zurueck = `M${f(vorneL - 8)},${f(y + 21)}L${f(L.mitte + 4)},${f(y + 21)}`;
+    // rechts fünf kleine Schritte im Zickzack auf dem ganzen zurückgelegten Weg bis zum vorderen Fuß
+    // (zwischen den Beinen sichtbar) — die Spur endet an der Figur, nicht vor ihr
+    const vorneR = R.fg.punkte.fersR[0];
+    const zick = [0, 1, 2, 3, 4].map((i) => abdruck(lerp([R.mitte + 16, 0], [vorneR - 10, 0], i / 4)[0], i % 2 ? 3.2 : -2.2)).join('');
     return {
       figuren: [L.fg, R.fg], zeichen: [],
       datei: datei({
         aria: t.aria, caption: t.cap, captionY: 274, breite: 2 * breite,
         defs: pfeil('p036', 's-mkg', 3.8),
         inhalt: [
-          `<path class="s-linie" d="M${breite},34L${breite},${y + 26}"/>`,
+          `<path class="s-bahnz" d="M${breite},34L${breite},${y + 26}"/>`,
           `<path class="s-boden" d="M6,${y + 0.5}L${breite - 8},${y + 0.5}M${breite + 8},${y + 0.5}L${2 * breite - 6},${y + 0.5}"/>`,
-          marke(L.start), marke(R.start),
-          spurL, zick,
+          marke(L.mitte), marke(R.mitte),
+          zick,
           `<path class="s-wegv" d="${hin}" marker-end="url(#p036)"/>`,
           `<path class="s-wegg" d="${zurueck}" marker-end="url(#p036)"/>`,
           L.ghost.svg, R.ghost.svg,
-          R.fg.svg, schlR,
+          schlR, R.fg.svg,
           L.fg.svg,
-          speeder({ p: L.ziel, winkel: 270 }), speeder({ p: zielR, winkel: 270 }),
+          speeder({ p: zielL, winkel: 270 }), speeder({ p: zielR, winkel: 270 }),
         ].join('\n  '),
       }),
     };
