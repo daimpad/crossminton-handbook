@@ -450,9 +450,13 @@ export function grafikFigurHtml(id) {
   // sprachneutral. Ohne passende Variante fällt es auf die deutsche Basis zurück.
   const variante = svgDiagramm && GRAFIK_SPRACHEN.has(sprache()) ? `.${sprache()}` : '';
   const svgHaken = svgDiagramm ? ` data-grafik-svg="images/${esc(id)}${variante}.svg"` : '';
+  // Das PNG ist nur noch Rückfall: es lädt erst, wenn das SVG scheitert (tauscheGrafik). Vorher
+  // kam es immer mit, rund viermal so groß wie das SVG, und war fast nie zu sehen.
+  const png = `images/${id}${variante}.png`;
+  const quelle = svgDiagramm ? ` data-png="${esc(png)}"` : ` src="${esc(png)}"`;
   return `
       <figure class="grafik-platzhalter"${svgHaken}>
-        <img class="grafik-bild" src="images/${esc(id)}${variante}.png" alt="${esc(beschriftung)}" loading="lazy" />
+        <img class="grafik-bild"${quelle} alt="${esc(beschriftung)}" loading="lazy" />
         <figcaption class="leise">${esc(beschriftung)}</figcaption>
       </figure>`;
 }
@@ -529,12 +533,20 @@ export function begrenzeStil(css, bereich) {
   });
 }
 
-// Nach dem Rendern aufrufen: ersetzt das PNG durch das Inline-SVG (theme-fähig). Scheitert
-// der Abruf (offline vor dem ersten SWR-Caching), bleibt das PNG stehen. Idempotent.
+// Nach dem Rendern aufrufen: setzt an die Stelle des Platzhalters das Inline-SVG (theme-fähig).
+// Scheitert der Abruf (offline vor dem ersten SWR-Caching), lädt das PNG als Rückfall. Idempotent.
 // Die Grafiken einer Seite laden parallel — der Reihe nach kam jede erst nach der vorigen.
 export async function verbessereGrafiken(wurzel) {
-  if (!wurzel || typeof fetch !== 'function' || typeof document === 'undefined') return;
-  await Promise.all([...wurzel.querySelectorAll('figure[data-grafik-svg]')].map(tauscheGrafik));
+  if (!wurzel || typeof document === 'undefined') return;
+  const figuren = [...wurzel.querySelectorAll('figure[data-grafik-svg]')];
+  if (typeof fetch !== 'function') { figuren.forEach(pngRueckfall); return; }
+  await Promise.all(figuren.map(tauscheGrafik));
+}
+
+function pngRueckfall(figur) {
+  figur.removeAttribute('data-grafik-svg');
+  const bild = figur.querySelector('img.grafik-bild[data-png]');
+  if (bild && !bild.getAttribute('src')) bild.setAttribute('src', bild.dataset.png);
 }
 
 async function tauscheGrafik(figur) {
@@ -552,7 +564,8 @@ async function tauscheGrafik(figur) {
     const gestell = document.createElement('div');
     gestell.innerHTML = markup;
     const svg = gestell.querySelector('svg');
-    if (bild && svg) {
+    if (!svg) throw new Error('kein SVG');
+    if (bild) {
       svg.setAttribute('class', 'grafik-bild grafik-svg');
       vereinzele(svg, gestell);
       // Seitenverhältnis für die Deckelung der längeren Seite (css/app.css, .grafik-bild)
@@ -567,6 +580,6 @@ async function tauscheGrafik(figur) {
       bild.replaceWith(svg);
     }
   } catch {
-    /* PNG bleibt als Fallback stehen */
+    pngRueckfall(figur);
   }
 }

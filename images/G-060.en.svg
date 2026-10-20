@@ -34,7 +34,7 @@
   <text class="feldtext" x="171" y="403">PLAYING FIELD</text>
   <text class="subtext"  x="171" y="497">serving zone</text>
   <text class="zonetext" x="171" y="268">NEUTRAL ZONE</text>
-  <text class="subtext"  x="171" y="315">no net — the Speeder must cross over</text>
+  <text class="subtext"  x="171" y="320">no net — the Speeder must cross over</text>
 
   <line class="ext" x1="76"  y1="46" x2="76"  y2="26"/>
   <line class="ext" x1="266" y1="46" x2="266" y2="26"/>

@@ -5,7 +5,7 @@
     .kappe{fill:var(--speeder-kappe,#e2402a)}
     .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
     .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
-    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .korbflaeche{fill:var(--speeder-korb-flaeche,#f1e7b5)}
     .masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .hilfslinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
     .achse{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
@@ -14,6 +14,7 @@
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
     .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilk{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -25,7 +26,7 @@
     </marker>
   </defs>
 
-  <circle class="korbflaeche" cx="146" cy="136" r="84"/>
+  <path class="korbflaeche" d="M230.0,136.0 Q220.5,150.8 223.6,168.1 Q209.2,178.2 205.4,195.4 Q188.2,199.2 178.1,213.6 Q160.8,210.5 146.0,220.0 Q131.2,210.5 113.9,213.6 Q103.8,199.2 86.6,195.4 Q82.8,178.2 68.4,168.1 Q71.5,150.8 62.0,136.0 Q71.5,121.2 68.4,103.9 Q82.8,93.8 86.6,76.6 Q103.8,72.8 113.9,58.4 Q131.2,61.5 146.0,52.0 Q160.8,61.5 178.1,58.4 Q188.2,72.8 205.4,76.6 Q209.2,93.8 223.6,103.9 Q220.5,121.2 230.0,136.0 Z"/>
   <path class="stiel" d="M176.0,136.0 L230.0,136.0"/>
   <path class="stiel" d="M173.7,147.5 L223.6,168.1"/>
   <path class="stiel" d="M167.2,157.2 L205.4,195.4"/>

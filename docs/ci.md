@@ -63,7 +63,7 @@ Die 67 Grafiken in `images/` sind Inline-SVG und lesen dieselben Tokens wie die 
 | Freistellungsrand, Füllung von Umrissfiguren, Halo hinter Linien und Beschriftungen | `--flaeche-2` |
 | Halo hinter Beschriftungen in einer hellen Zone (Passierzone, Zielzone) | `--primaer-weich` |
 | Bodenschatten | `--schatten-boden` |
-| Speeder | `--speeder-korb`, `--speeder-kappe`, `--speeder-kappe-tief` |
+| Speeder | `--speeder-korb`, `--speeder-korb-flaeche`, `--speeder-kappe`, `--speeder-kappe-tief` |
 
 - **Die Hauptfarbe trägt genau ein Element** je Bild, Hilfslinien bekommen sie nie. In den Personengrafiken ist das `--primaer-dunkel`, denn `--primaer` erreicht auf `--flaeche-2` hell nur 2,48:1; die älteren Diagramme nutzen `--primaer` weiter für ihre Bahnen und Pfeile.
 - **Ampelfarben sind tabu.** Rot, Gelb und Grün bedeuten in der App einen Zustand (offen, Hinweis, erledigt), in einer Grafik würden sie ihn behaupten.
@@ -88,7 +88,7 @@ Jedes Element, das eine Aussage trägt, erreicht hell und dunkel mindestens **3:
 - Der helle Korb trägt seinen Kontrast über die Kontur, nie über die Fläche.
 - Zwei Paare unter 3:1 lassen sich nicht über ein anderes Token lösen: `--tinte-2` gegen `--tinte` (hell 2,82:1, dunkel 1,85:1) und Blasses über Deckkraft (ein Speeder mit 40 % kam hell auf 1,2:1). Getrennt wird dort mit einer Naht oder einem Halo in `--flaeche-2`, ein gedachter Gegenstand steht als deckender Umriss.
 - Keine Linie läuft durch eine Beschriftung: der Text wird versetzt oder bekommt einen Halo (`paint-order: stroke`, Breite 4–5) in der Farbe seines Grundes. `scratchpad/textgrenzen.mjs` meldet jede Kreuzung ohne Halo.
-- Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 268 Dateien).
+- Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 268 Dateien). Mit DejaVu Sans, der breitesten Schrift, die `system-ui` treffen kann, läuft ebenfalls nichts über den Rand (`textgrenzen.mjs --dejavu`).
 
 ### Die Speeder-Ausnahme
 
@@ -101,15 +101,16 @@ Gelesen nur von den Grafiken in `images/`, je hell und in beiden Dunkel-Blöcken
 | Rolle | Hell | Dunkel | Variable |
 | --- | --- | --- | --- |
 | Speeder-Korb | `#f0c400` | `#ffd84d` | `--speeder-korb` |
+| Speeder-Korbfläche (Konstruktionszeichnung) | `#f1e7b5` | `#b3901e` | `--speeder-korb-flaeche` |
 | Speeder-Kappe | `#e2402a` | `#ff6a52` | `--speeder-kappe` |
 | Speeder-Kappe tief | `#a82412` | `#ffa593` | `--speeder-kappe-tief` |
 | Bodenschatten | `#16202b2e` | `#00000066` | `--schatten-boden` |
 
-`--schatten-boden` ist ein eigenes Token, weil ein Verlauf über `--tinte` im Dunkeln zum Lichthof wurde.
+`--schatten-boden` ist ein eigenes Token, weil ein Verlauf über `--tinte` im Dunkeln zum Lichthof wurde. `--speeder-korb-flaeche` ebenso, weil der Korb mit Deckkraft über dem dunklen Grund Oliv ergab — eine Fläche, die in beiden Themen gelb lesen soll, braucht einen deckenden Wert je Thema.
 
 ### PNG-Fallback
 
-Zu jedem SVG liegt ein PNG in doppelter viewBox-Größe, gerendert mit den Hellwerten. Es steht da, bis das SVG geladen ist, offline auch dauerhaft. Jedes PNG steht auf deckendem `--flaeche-2`. Im Dunkelmodus erscheint es darum als helle, lesbare Kachel; transparent stünden dunkle Linien auf dunklem Grund, und was mit `--flaeche-2` freistellt (Freistellungsrand der Figuren, Halo hinter den Beschriftungen der Speeder-Tafeln), als heller Saum.
+Zu jedem SVG liegt ein PNG in doppelter viewBox-Größe, gerendert mit den Hellwerten. Es lädt nur, wenn das SVG nicht zu holen ist (offline vor dem ersten Abruf, Netzfehler); bis das SVG da ist, hält die Ansicht den Platz frei. Jedes PNG steht auf deckendem `--flaeche-2`. Im Dunkelmodus erscheint es darum als helle, lesbare Kachel; transparent stünden dunkle Linien auf dunklem Grund, und was mit `--flaeche-2` freistellt (Freistellungsrand der Figuren, Halo hinter den Beschriftungen der Speeder-Tafeln), als heller Saum.
 
 ## Typografie
 

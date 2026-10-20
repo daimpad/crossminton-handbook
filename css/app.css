@@ -42,6 +42,8 @@
      Gelesen von den Konstruktionsgrafiken G-064…G-067 und vom Speeder in den
      Personengrafiken (scratchpad/figuren/). */
   --speeder-korb: #f0c400;
+  /* Korbfläche der Konstruktionszeichnung, deckend: 28 % Gelb über dem dunklen Grund ergab Oliv. */
+  --speeder-korb-flaeche: #f1e7b5;
   --speeder-kappe: #e2402a;
   --speeder-kappe-tief: #a82412;
   /* Bodenschatten der Personengrafiken: hell ein Tinte-Hauch, dunkel ein Schwarz-Hauch.
@@ -103,7 +105,7 @@
     --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
     --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
     --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
-    --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
+    --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593; --speeder-korb-flaeche: #b3901e;
     --schatten-boden: #00000066;
     --hintergrund: #0f151c;
     --hintergrund-2: #131c26;
@@ -142,7 +144,7 @@
   --signal-rot: #ff5a44; --signal-rot-text: #ff9a8c; --signal-rot-weich: #3a1a15;
   --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
   --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
-  --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
+  --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593; --speeder-korb-flaeche: #b3901e;
   --schatten-boden: #00000066;
   --hintergrund: #0f151c;
   --hintergrund-2: #131c26;
@@ -1186,6 +1188,11 @@ body.app-laedt::after {
 }
 
 .grafik-platzhalter figcaption { margin-top: 0.3rem; text-align: center; }
+
+/* Platzhalter, solange das SVG lädt: das <img> hat noch keine Quelle (das PNG kommt nur als
+   Rückfall). Quadratisch reserviert, weil fast alle Grafiken quadratisch sind, und unsichtbar,
+   sonst stünde der Alt-Text kurz in der Box. */
+img.grafik-bild:not([src]) { aspect-ratio: 1; visibility: hidden; }
 
 .ue-block { margin-bottom: 0.9rem; }
 .ue-block h4 { margin-bottom: 0.25rem; }

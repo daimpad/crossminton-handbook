@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const args = process.argv.slice(2); const dunkel = args.includes('--dunkel');
 const [aus, datei, x, y, b, h] = args.filter((a) => a !== '--dunkel');
 const T = dunkel
-  ? ':root{--primaer:#4fb0f4;--primaer-dunkel:#6bbdf6;--schatten-boden:#00000066;--primaer-tief:#9acdf8;--primaer-weich:#143247;--tinte:#e8eef5;--tinte-2:#a2b2c4;--tinte-3:#8795a6;--flaeche:#18232f;--flaeche-2:#1f2c3a;--speeder-korb:#ffd84d;--speeder-kappe:#ff6a52;--speeder-kappe-tief:#ffa593}'
+  ? ':root{--primaer:#4fb0f4;--primaer-dunkel:#6bbdf6;--schatten-boden:#00000066;--primaer-tief:#9acdf8;--primaer-weich:#143247;--tinte:#e8eef5;--tinte-2:#a2b2c4;--tinte-3:#8795a6;--flaeche:#18232f;--flaeche-2:#1f2c3a;--speeder-korb:#ffd84d;--speeder-kappe:#ff6a52;--speeder-kappe-tief:#ffa593;--speeder-korb-flaeche:#b3901e}'
   : '';
 const svg = readFileSync(datei, 'utf8').replace(/viewBox="[^"]*"/, `viewBox="${x} ${y} ${b} ${h}"`);
 const br = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
