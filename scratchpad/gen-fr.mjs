@@ -5,8 +5,6 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-005': { aria: "Service, image 1 : la main libre laisse tomber le speeder à hauteur de hanche, le bras de frappe est bas, prêt à s'élancer vers l'avant par en dessous.", texts: ["le speeder tombe à hauteur de hanche"] },
-  'G-006': { aria: "Service, image 2 : la raquette frappe le speeder par en dessous, tout le speeder est au point de frappe nettement sous la main de frappe.", texts: ["frappe sous la main de frappe"] },
   'G-011': { aria: "Le smash : point de frappe haut au-dessus et devant la tête, frappe agressive vers le bas, la trajectoire file raide et droit dans le terrain adverse.", texts: ["point de frappe haut · raide vers le bas"] },
   'G-013': { aria: "La coupe : la surface de frappe inclinée effleure le speeder sur le côté au lieu de le frapper droit ; des lignes de mouvement courbes montrent la trajectoire coupante et la rotation qui en résulte.", texts: ["la surface effleure · coupe et rotation"] },
   'G-014': { aria: "Le système de jeu de jambes : s'élancer de la base centrale vers les coins et revenir aussitôt au centre.", texts: ['Base', "vers le coin — retour au centre"] },

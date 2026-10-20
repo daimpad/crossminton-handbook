@@ -1,33 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Serve, image 2: the racket meets the speeder from below; at contact the whole speeder is clearly below the level of the racket hand.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Serve, image 2: the same view at contact. The weight has moved onto the front foot, the back heel lifts, the ball of the foot stays on the floor. The racket arm has swung forward from behind and below, the racket points diagonally down, the face slightly open to the front. The whole Speeder is below the dashed line at the height of the hitting hand; the trajectory rises flat and long out of the picture.">
   <style>
-    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-    .kopf{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
-    .speeder{fill:var(--primaer,#38a4f1)}
-    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round}
-    .marke{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:4 4}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
-    .mk{fill:var(--primaer,#38a4f1)}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-f{fill:var(--tinte-2,#5a6675)}
+    .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    .s-spur{fill:var(--primaer-dunkel,#1e8bd6);opacity:.18}
+    .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.75;stroke-linecap:round}
+    .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    .s-hilf{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.4;stroke-dasharray:5 4}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m006" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
-  <circle class="kopf" cx="112" cy="92" r="14"/>
-  <path class="fig" d="M112,106 L116,168"/>
-  <!-- freie Hand -->
-  <path class="fig" d="M113,120 L96,138"/>
-  <!-- Schlagarm schwingt von unten nach vorn zum Treffpunkt -->
-  <path class="fig" d="M113,126 L138,150 L162,160"/>
-  <!-- Beine -->
-  <path class="fig" d="M116,168 L100,206 L92,240"/>
-  <path class="fig" d="M116,168 L136,204 L146,240"/>
-  <!-- Schläger, Kelle unterhalb der Schlaghand -->
-  <line class="schaft" x1="162" y1="160" x2="178" y2="170"/>
-  <ellipse class="kelle" cx="188" cy="176" rx="9" ry="13" transform="rotate(62 188 176)"/>
-  <!-- Speeder im Treffpunkt, klar unter der Hand (Hand-Höhe gestrichelt) -->
-  <line class="marke" x1="150" y1="160" x2="210" y2="160"/>
-  <circle class="speeder" cx="192" cy="182" r="6"/>
-  <path class="bahn" d="M200,178 L272,150" marker-end="url(#m006)"/>
-  <line class="boden" x1="78" y1="244" x2="164" y2="244"/>
-  <text class="st" x="150" y="272">contact below the racket hand</text>
+  <defs><marker id="p006" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker></defs>
+  <path class="s-boden" d="M18,244.5L284,244.5"/><path class="s-linie" d="M178.1,239.5L178.1,249.5"/>
+  <ellipse class="s-schw" cx="139.4" cy="245" rx="52" ry="5.5"/><ellipse class="s-sch" cx="139.4" cy="245" rx="33.3" ry="3.4"/>
+  <path class="s-spur" d="M81.9,203.1L84.1,205.1L86.3,206.9L88.6,208.6L91,210.2L93.5,211.6L96.1,213L98.7,214.2L101.4,215.3L104.3,216.2L107.2,217.1L110.2,217.8L113.3,218.3L116.5,218.8L119.7,219L123.1,219.2L126.6,219.2L130.1,219.1L133.7,218.8L137.5,218.4L141.3,217.9L145.1,217.2L149.1,216.4L153.2,215.4L157.3,214.3L161.5,213.1L165.8,211.7L170.2,210.2L174.7,208.5L169.7,197.6L165.7,199.6L161.8,201.5L157.9,203.3L154.1,205L150.3,206.5L146.7,207.9L143.1,209.1L139.5,210.2L136.1,211.2L132.7,212L129.4,212.7L126.1,213.2L122.9,213.6L119.8,213.9L116.7,214L113.7,214L110.7,213.9L107.9,213.6L105,213.1L102.3,212.5L99.6,211.8L96.9,210.9L94.4,209.9L91.9,208.7L89.4,207.4L87.1,205.9L84.8,204.2L82.6,202.4Z"/>
+  <path class="s-hilf" d="M108.5,168.1L206.2,168.1"/>
+  <g class="s-f"><path d="M132.8,150.9L135.8,166.4A7.7,7.7 0 1 0 150.9,163.3L147.4,147.9A7.4,7.4 0 0 0 132.8,150.9Z"/><path d="M135.8,166.3L140.6,193.2A5.4,5.4 0 0 0 151.3,192.2L151,164.9A7.7,7.7 0 1 0 135.8,166.3Z"/><path d="M140.7,191.1L138,203.5A6.1,6.1 0 1 0 150.1,205.4L151.3,192.8A5.4,5.4 0 0 0 140.7,191.1Z"/><path d="M137.9,205.4L140.8,234.6A3.1,3.1 0 0 0 147,234.6L150,205.4A6.1,6.1 0 1 0 137.9,205.4Z"/><path d="M141.9,231.9L138.1,235.2A3.8,3.8 0 1 0 143.8,240.2L146.5,236A3.1,3.1 0 0 0 141.9,231.9Z"/><path d="M140.4,241.9L156.4,242.8A3.6,3.6 0 0 0 156.9,235.7L140.9,234.3A3.8,3.8 0 1 0 140.4,241.9Z"/><path d="M156.9,242.8L164.3,242.3A2.5,2.5 0 0 0 164.7,237.3L157.4,235.7A3.6,3.6 0 1 0 156.9,242.8Z"/></g>
+  <g class="s-f"><path d="M146.8,97.3L138.5,122.6A3.8,3.8 0 0 0 145.6,125.5L157.8,101.9A6,6 0 1 0 146.8,97.3Z"/><path d="M140.6,120.3L134.3,123.2A4.4,4.4 0 1 0 138.6,130.9L144.3,126.9A3.8,3.8 0 0 0 140.6,120.3Z"/><path d="M133.5,123.6L120.5,133.1A2.6,2.6 0 0 0 123.1,137.6L137.9,131.3A4.4,4.4 0 1 0 133.5,123.6Z"/></g>
+  <g class="s-f"><path d="M121.6,132.6L117,133.4A3.6,3.6 0 1 0 119.7,140L123.5,137.4A2.6,2.6 0 0 0 121.6,132.6Z"/><path d="M115.8,134L109.7,137.8A2.2,2.2 0 0 0 111.3,141.8L118.4,140.4A3.5,3.5 0 1 0 115.8,134Z"/></g>
+  <g class="s-k"><path d="M153.9,93.2C156.6,94.6 156.8,95.8 158.2,98.4C159.5,100.9 160.7,101.7 160.9,106C161,110.3 161,113.7 158.9,119.8C156.9,125.9 153.2,130 150.7,136.6C148.2,143.2 148.3,147.7 146.5,152.7C144.7,157.7 143.8,159 141.8,161.7C139.8,164.4 138.4,165.5 136.4,166.2C134.4,167 133.3,166.7 131.8,165.3C130.4,163.9 129.7,162.3 129.2,159.1C128.8,155.9 128.5,154.4 129.4,149.2C130.4,144 132.8,139.9 133.9,133.1C135,126.2 134.5,121.3 135,114.9C135.5,108.5 135.5,105 136.5,101C137.5,96.9 138.2,96.5 139.9,94.6C141.6,92.7 142.2,91.7 145,91.4C147.9,91.1 151.3,91.9 153.9,93.2Z"/><path d="M127.7,149.3L121.9,163.6A7.7,7.7 0 1 0 136.2,169.2L141.6,154.8A7.4,7.4 0 0 0 127.7,149.3Z"/><path d="M122,163.5L110.9,189.7A5.4,5.4 0 0 0 120.5,194.6L135.5,170.5A7.7,7.7 0 1 0 122,163.5Z"/><path d="M111.5,188.6L104,199.3A6.1,6.1 0 1 0 114.3,205.8L120.6,194.4A5.4,5.4 0 0 0 111.5,188.6Z"/><path d="M103.1,200.9L94.3,227.8A3.1,3.1 0 0 0 100,230.4L114.2,205.9A6.1,6.1 0 1 0 103.1,200.9Z"/><path d="M95.7,226.1L92.9,227.7A3.8,3.8 0 1 0 98.1,233.2L99.9,230.5A3.1,3.1 0 0 0 95.7,226.1Z"/><path d="M92.7,234.2L104.4,242.6A3.6,3.6 0 0 0 108.7,236.8L97.2,228A3.8,3.8 0 1 0 92.7,234.2Z"/><path d="M104.8,242.8L110.8,245.9A2.5,2.5 0 0 0 113.8,241.9L109.1,237.1A3.6,3.6 0 1 0 104.8,242.8Z"/></g>
+  <g class="s-k"><ellipse cx="159.2" cy="81.4" rx="9.6" ry="12" transform="rotate(36 159.2 81.4)"/><path d="M155.5,93.2L158,94.3A3.1,3.1 0 0 0 161.4,93.6L163.4,91.7A7.2,7.2 0 1 0 155.5,93.2Z"/></g>
+  <g class="s-x"><path d="M134.8,106.3L142.4,138.8A3.8,3.8 0 0 0 150,137.6L146.6,104.3A6,6 0 1 0 134.8,106.3Z"/><path d="M142.5,139.1L145,147A4.4,4.4 0 1 0 153.2,143.8L149.6,136.3A3.8,3.8 0 0 0 142.5,139.1Z"/><path d="M145.3,147.7L154,165A2.6,2.6 0 0 0 158.9,163L153.5,144.5A4.4,4.4 0 1 0 145.3,147.7Z"/><path d="M153.8,164.1L154.4,168.7A4.1,4.1 0 1 0 161.4,165.3L158.3,162A2.6,2.6 0 0 0 153.8,164.1Z"/></g>
+  <g class="s-k"><path d="M134.8,106.3L142.4,138.8A3.8,3.8 0 0 0 150,137.6L146.6,104.3A6,6 0 1 0 134.8,106.3Z"/><path d="M142.5,139.1L145,147A4.4,4.4 0 1 0 153.2,143.8L149.6,136.3A3.8,3.8 0 0 0 142.5,139.1Z"/><path d="M145.3,147.7L154,165A2.6,2.6 0 0 0 158.9,163L153.5,144.5A4.4,4.4 0 1 0 145.3,147.7Z"/></g>
+  <path class="s-rf" d="M182.8,211.9C182.5,212.2 182.2,212.4 181.9,212.6C181.6,212.8 181.3,213 180.9,213.1C180.6,213.2 180.2,213.2 179.8,213.2C179.4,213.2 179,213.1 178.6,213C178.2,212.9 177.8,212.7 177.3,212.5C176.9,212.3 176.5,212 176,211.7C175.6,211.3 175.2,211 174.8,210.6C174.3,210.1 173.9,209.7 173.5,209.2C173.1,208.7 172.7,208.2 172.3,207.6C171.9,207 171.6,206.4 171.2,205.8C170.9,205.2 170.6,204.5 170.3,203.9C170,203.2 169.7,202.6 169.5,201.9C169.2,201.2 169,200.5 168.8,199.8C168.6,199.1 168.5,198.4 168.3,197.8C168.2,197.1 168.1,196.4 168,195.7C168,195.1 168,194.5 168,193.9C168,193.2 168,192.7 168.1,192.1C168.2,191.6 168.3,191 168.4,190.6C168.6,190.1 168.7,189.6 168.9,189.2C169.1,188.8 169.4,188.5 169.6,188.2C169.9,187.9 170.2,187.6 170.5,187.4C170.8,187.2 171.1,187.1 171.5,187C171.8,186.9 172.2,186.8 172.6,186.9C173,186.9 173.4,186.9 173.8,187.1C174.2,187.2 174.7,187.3 175.1,187.6C175.5,187.8 175.9,188.1 176.4,188.4C176.8,188.7 177.2,189.1 177.7,189.5C178.1,189.9 178.5,190.4 178.9,190.9C179.3,191.4 179.7,191.9 180.1,192.5C180.5,193 180.8,193.6 181.2,194.3C181.5,194.9 181.8,195.5 182.1,196.2C182.4,196.8 182.7,197.5 183,198.2C183.2,198.9 183.4,199.6 183.6,200.3C183.8,200.9 184,201.6 184.1,202.3C184.2,203 184.3,203.7 184.4,204.3C184.4,205 184.5,205.6 184.4,206.2C184.4,206.8 184.4,207.4 184.3,208C184.2,208.5 184.1,209 184,209.5C183.9,210 183.7,210.4 183.5,210.8C183.3,211.2 183,211.6 182.8,211.9Z"/><path class="s-rs" d="M173.4,187.6L184,206.7M170.1,189L182.3,211M168.4,193.4L179,212.5M176.8,189.6L169,198.7M180.7,194.8L171.7,205.3M183.4,201.4L175.6,210.5"/><path class="s-rh" d="M172,186.6L169.2,187.4L168,191.2"/><path class="s-rsch" d="M163.3,176.7L169.2,187.4"/><path class="s-rr" d="M182.8,211.9C182.5,212.2 182.2,212.4 181.9,212.6C181.6,212.8 181.3,213 180.9,213.1C180.6,213.2 180.2,213.2 179.8,213.2C179.4,213.2 179,213.1 178.6,213C178.2,212.9 177.8,212.7 177.3,212.5C176.9,212.3 176.5,212 176,211.7C175.6,211.3 175.2,211 174.8,210.6C174.3,210.1 173.9,209.7 173.5,209.2C173.1,208.7 172.7,208.2 172.3,207.6C171.9,207 171.6,206.4 171.2,205.8C170.9,205.2 170.6,204.5 170.3,203.9C170,203.2 169.7,202.6 169.5,201.9C169.2,201.2 169,200.5 168.8,199.8C168.6,199.1 168.5,198.4 168.3,197.8C168.2,197.1 168.1,196.4 168,195.7C168,195.1 168,194.5 168,193.9C168,193.2 168,192.7 168.1,192.1C168.2,191.6 168.3,191 168.4,190.6C168.6,190.1 168.7,189.6 168.9,189.2C169.1,188.8 169.4,188.5 169.6,188.2C169.9,187.9 170.2,187.6 170.5,187.4C170.8,187.2 171.1,187.1 171.5,187C171.8,186.9 172.2,186.8 172.6,186.9C173,186.9 173.4,186.9 173.8,187.1C174.2,187.2 174.7,187.3 175.1,187.6C175.5,187.8 175.9,188.1 176.4,188.4C176.8,188.7 177.2,189.1 177.7,189.5C178.1,189.9 178.5,190.4 178.9,190.9C179.3,191.4 179.7,191.9 180.1,192.5C180.5,193 180.8,193.6 181.2,194.3C181.5,194.9 181.8,195.5 182.1,196.2C182.4,196.8 182.7,197.5 183,198.2C183.2,198.9 183.4,199.6 183.6,200.3C183.8,200.9 184,201.6 184.1,202.3C184.2,203 184.3,203.7 184.4,204.3C184.4,205 184.5,205.6 184.4,206.2C184.4,206.8 184.4,207.4 184.3,208C184.2,208.5 184.1,209 184,209.5C183.9,210 183.7,210.4 183.5,210.8C183.3,211.2 183,211.6 182.8,211.9Z"/><path class="s-rg" d="M155.2,162.1L163.3,176.7"/>
+  <g class="s-k"><path d="M153.8,164.1L154.4,168.7A4.1,4.1 0 1 0 161.4,165.3L158.3,162A2.6,2.6 0 0 0 153.8,164.1Z"/></g>
+  <path class="s-korb" d="M179.5,194.6L176.6,184.6Q182.2,182.8 187.8,184.6L184.9,194.6Z"/><path class="s-kappe" d="M178.4,198a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/>
+  <path class="s-bahn" d="M188.2,197 Q 258.2,173 296,157" marker-end="url(#p006)"/>
+  <text class="st" x="150" y="274">contact below the hitting hand</text>
 </svg>

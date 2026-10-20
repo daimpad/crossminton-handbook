@@ -1,16 +1,4 @@
 {
- "G-005": {
-  "aria": "Aufschlag, Bild 1: die freie Hand lässt den Speeder auf Hüfthöhe fallen, der Schlagarm ist tief bereit, von unten nach vorn zu schwingen.",
-  "texts": [
-   "Speeder fällt auf Hüfthöhe"
-  ]
- },
- "G-006": {
-  "aria": "Aufschlag, Bild 2: der Schläger trifft den Speeder von unten, der ganze Speeder ist im Treffpunkt klar unterhalb der Schlaghand.",
-  "texts": [
-   "Treffpunkt unterhalb der Schlaghand"
-  ]
- },
  "G-011": {
   "aria": "Der Smash: hoher Treffpunkt über und vor dem Kopf, aggressiver Schlag nach unten, die Flugbahn führt steil und gerade ins gegnerische Feld.",
   "texts": [

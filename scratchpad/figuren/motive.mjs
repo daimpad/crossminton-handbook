@@ -54,6 +54,27 @@ POSEN.split = {
   beinL: { ober: [-0.5, -0.75, 1.0], unter: [-0.1, -1, -0.45], fuss: [-0.16, -0.42, 1] },
   armL: { ober: [-0.35, -1, 0.4], unter: [0.4, 0.3, 0.9], hand: [0.5, 0.4, 0.75], art: 'offen' },
 };
+// Unterhand-Aufschlag (Rechtshänder, Ziel = F), Dossiers G-005/G-006. Bild 1: eben losgelassen, am
+// Ende des Ausholens — linker Fuß vorn, beide flach, Gewicht hinten; der Schlagarm hängt wie ein
+// Pendel nach hinten unten, der Schläger hinter dem Bein (nichts vor dem Schritt). Bild 2: Treffmoment,
+// Gewicht vorn, hintere Ferse oben, Arm fast gestreckt nach vorn, Schläger 40° nach unten, Fläche
+// leicht offen nach vorn.
+POSEN.aufschlagAus = {
+  neig: 8, kopf: { neig: 20 }, art: 'stehend',
+  beinL: { ober: [-0.12, -1, 0.32], unter: [0, -1, 0.02], fuss: [-0.12, -0.04, 1] },
+  beinR: { ober: [0.12, -1, -0.18], unter: [0.04, -1, -0.24], fuss: [0.25, -0.04, 1] },
+  armR: { ober: [0.1, -1, -0.22], unter: [0.05, -1, -0.32], hand: [0.04, -1, -0.36] },
+  armL: { ober: [-0.1, -0.9, 0.42], unter: [0.05, -0.55, 0.83], hand: [0.05, -0.75, 0.66], art: 'offen' },
+  schlaeger: { hand: 'R', achse: [0.12, -0.9, -0.42], flaeche: [0.5, 0.42, -0.75] },
+};
+POSEN.aufschlagTreff = {
+  neig: 12, kopf: { neig: 24 }, art: 'dynamisch',
+  beinL: { ober: [-0.12, -1, 0.1], unter: [0, -1, -0.05], fuss: [-0.12, -0.04, 1] },
+  beinR: { ober: [0.12, -1, -0.45], unter: [0.04, -1, -0.5], fuss: [0.3, -0.45, 0.85] },
+  armR: { ober: [0.15, -0.9, 0.42], unter: [0.1, -0.8, 0.6], hand: [0.1, -0.75, 0.66], vor: true },
+  armL: { ober: [-0.35, -0.85, -0.25], unter: [-0.2, -0.55, -0.6], hand: [-0.1, -0.5, -0.7], art: 'offen' },
+  schlaeger: { hand: 'R', achse: [0.3, -0.62, 0.72], flaeche: [-0.85, 0.16, 0.49] },
+};
 const REPO = resolve(HIER, '..', '..');
 
 // Früherer Schläger an der Schlaghand einer Figur, in Körperrahmen-Richtungen (Ausholen, Schwungweg).
@@ -69,6 +90,14 @@ const geistSchlaeger = (fg, achse, flaeche) => {
 // Taktleiste: kleine Speeder auf einer Linie — gleichmäßig (schneller Takt) oder mit Lücke (Taktbruch)
 const taktleiste = (xs, y) => `<path class="s-boden" d="M${f(xs[0] - 16)},${f(y + 5)}L${f(xs[xs.length - 1] + 16)},${f(y + 5)}"/>` +
   xs.map((x) => speeder({ p: [x, y], winkel: 90, s: 0.62 })).join('');
+
+// Gemeinsame Bühne der Aufschlag-Sequenz: dieselbe Kamera und derselbe Boden in Bild 1 und 2.
+const AUFSCHLAG = { ort: [126, 244], H: 24, blick: 72, kamera: 9 };
+// Bodenlinie mit der Aufschlaglinie als Marke knapp vor dem vorderen Fuß aus Bild 1
+const aufschlagBoden = (fg) => {
+  const y = fg.punkte.boden + 0.5, x = fg.punkte.spitzeL[0] + 14;
+  return `<path class="s-boden" d="M18,${f(y)}L284,${f(y)}"/><path class="s-linie" d="M${f(x)},${f(y - 5)}L${f(x)},${f(y + 5)}"/>`;
+};
 
 export const MOTIVE = {
   // Grundposition: Dreiviertelansicht, tief und leicht nach vorn geneigt, Fersen knapp gelöst,
@@ -507,6 +536,65 @@ export const MOTIVE = {
   // Rückhand: Dreiviertelansicht von schräg vorn, Ziel nach LINKS (die Brust zur Betrachterin,
   // der Schlagarm quert sichtbar vor dem Körper). Gewicht auf dem rechten Fuß vorn, Ellbogen auf
   // Brusthöhe statt abgesackt (das wäre das Fehlerbild), Handrücken zum Ziel, freier Arm hinten.
+  // Aufschlag, Bild 1: der Speeder fällt. Seitlich, Ziel rechts. Die freie Hand hat ihn auf Hüfthöhe
+  // vor dem Körper eben losgelassen, er fällt Kappe voran senkrecht (kurzer Fallweg). Ein dünner
+  // Bogenpfeil an der Schlägerkopfbahn zeigt den kommenden Schwung von hinten unten nach vorn. Am
+  // Boden die Aufschlaglinie als Marke vor dem vorderen Fuß — beide Füße dahinter (Regel 5.1.2).
+  'G-005': (t) => {
+    const fg = figur({ ...POSEN.aufschlagAus, ort: AUFSCHLAG.ort, H: AUFSCHLAG.H, blick: AUFSCHLAG.blick, kamera: AUFSCHLAG.kamera });
+    const hand = fg.punkte.handL, sp = add(hand, [3, 15]), k = fg.punkte.schlaegerKopf;
+    const bogen = `M${pt(add(k, [6, 10]))} Q ${pt([k[0] + 40, k[1] + 34])} ${pt(add(sp, [-6, 40]))}`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        defs: pfeil('p005') + pfeil('q005', 's-mkg', 4),
+        inhalt: [
+          aufschlagBoden(fg),
+          schatten([AUFSCHLAG.ort[0] + 2, fg.punkte.boden + 1], 52, 5.5),
+          `<path class="s-bahnz" d="${bogen}" marker-end="url(#q005)"/>`,
+          fg.svg,
+          speeder({ p: sp, winkel: 0 }),
+          `<path class="s-bahn" d="M${pt(add(sp, [0, 11]))} L${pt(add(sp, [0, 30]))}" marker-end="url(#p005)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Aufschlag, Bild 2: Treffmoment, dieselbe Kamera. Das Gewicht ist vorn, der vordere Fuß bleibt
+  // stehen (die Figur rückt um genau so viel nach vorn). Eine gestrichelte Linie auf Höhe der
+  // Schlaghand beginnt hinter der Hand und reicht über den Speeder hinaus — der GANZE Speeder liegt
+  // darunter (Regel 5.1.4). Er fällt noch Kappe voran auf die Bespannung; die Bahn startet flach
+  // (15–20°) und läuft lang aus dem Bild (kein steiler Anstieg, vgl. BAD-Delta).
+  'G-006': (t) => {
+    const ref = figur({ ...POSEN.aufschlagAus, ort: AUFSCHLAG.ort, H: AUFSCHLAG.H, blick: AUFSCHLAG.blick, kamera: AUFSCHLAG.kamera });
+    const probe = figur({ ...POSEN.aufschlagTreff, ort: AUFSCHLAG.ort, H: AUFSCHLAG.H, blick: AUFSCHLAG.blick, kamera: AUFSCHLAG.kamera });
+    const dx = ref.punkte.spitzeL[0] - probe.punkte.spitzeL[0];
+    const fg = figur({ ...POSEN.aufschlagTreff, ort: [AUFSCHLAG.ort[0] + dx, AUFSCHLAG.ort[1]], H: AUFSCHLAG.H, blick: AUFSCHLAG.blick, kamera: AUFSCHLAG.kamera });
+    const hand = fg.punkte.handR, k = fg.punkte.schlaegerKopf;
+    const kappe = add(k, [6, -2]), sp = add(kappe, [0, -3.4]);
+    const start = add(kappe, [6, -1]);
+    const bahn = `M${pt(start)} Q ${pt(add(start, [70, -24]))} 296,${f(start[1] - 40)}`;
+    // beginnt links neben dem Körper (verdeckt hinter ihm), damit sie nicht als verlängerter Arm wirkt
+    const linie = `M${f(hand[0] - 50)},${f(hand[1])}L${f(sp[0] + 24)},${f(hand[1])}`;
+    // Schwungweg aus Bild 1: vom Schlägerkopf hinter dem Bein unten durch bis zum Treffpunkt
+    const weg = spurKurve({ p0: add(ref.punkte.schlaegerKopf, [4, 6]), c: [ref.punkte.schlaegerKopf[0] + 34, k[1] + 30], p1: add(k, [-4, 3]), breite: 12 });
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        defs: pfeil('p006'),
+        inhalt: [
+          aufschlagBoden(ref),
+          schatten([AUFSCHLAG.ort[0] + dx + 2, fg.punkte.boden + 1], 52, 5.5),
+          weg,
+          `<path class="s-hilf" d="${linie}"/>`,
+          fg.svg,
+          speeder({ p: sp, winkel: 0 }),
+          `<path class="s-bahn" d="${bahn}" marker-end="url(#p006)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
   'G-004': (t) => {
     const fg = figur({
       ort: [168, 244], H: 24, blick: -28, kamera: 9, neig: 14, seit: 10, schulter: -14, kopf: { dreh: -46, neig: 10 }, art: 'dynamisch',

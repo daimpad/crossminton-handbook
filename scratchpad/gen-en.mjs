@@ -4,8 +4,6 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-005': { cap: 'speeder drops at hip height', aria: 'Serve, image 1: the non-racket hand releases the speeder at hip height; the racket arm is low, ready to swing forward from below.' },
-  'G-006': { cap: 'contact below the racket hand', aria: 'Serve, image 2: the racket meets the speeder from below; at contact the whole speeder is clearly below the level of the racket hand.' },
   'G-011': { cap: 'high contact · steeply downward', aria: 'The smash: high contact point above and in front of the head, an aggressive downward swing, the trajectory running steeply and straight into the opposite court.' },
   'G-013': { cap: 'the face brushes · cut and spin', aria: 'The slice: the angled racket face brushes across the speeder instead of hitting it straight; curved motion lines show the cutting path and the resulting spin.' },
   'G-015': { cap: 'early and high — stolen time', aria: 'Taking the speeder early: contact at the highest, earliest point clearly in front of and above the body; a faint lower contact point shows where a slower player would have hit.' },

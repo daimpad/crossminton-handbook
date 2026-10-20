@@ -5,8 +5,6 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-005': { aria: 'Serwis, obraz 1: wolna ręka upuszcza speedera na wysokości bioder, ramię uderzające jest nisko, gotowe do zamachu od dołu do przodu.', texts: ['speeder spada na wysokość bioder'] },
-  'G-006': { aria: 'Serwis, obraz 2: rakieta trafia speedera od dołu, cały speeder jest w punkcie kontaktu wyraźnie poniżej dłoni uderzającej.', texts: ['punkt kontaktu poniżej dłoni'] },
   'G-011': { aria: 'Smecz: wysoki punkt kontaktu nad i przed głową, agresywne uderzenie w dół, tor lotu prowadzi stromo i prosto w pole przeciwnika.', texts: ['wysoki kontakt · stromo w dół'] },
   'G-013': { aria: 'Podcięcie: ukośna powierzchnia rakiety muska speedera z boku zamiast trafić go prosto; wygięte linie ruchu pokazują tnący tor i powstającą rotację.', texts: ['powierzchnia muska · podcięcie i rotacja'] },
   'G-014': { aria: 'System pracy nóg: wyrywać się z centralnej bazy w rogi i natychmiast wracać do środka.', texts: ['Baza', 'w róg — powrót do środka'] },

@@ -452,6 +452,7 @@ export const STIL = {
   's-ring': `fill:none;stroke:${AKZ};stroke-width:2.4`,
   's-strich': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.2;stroke-linecap:round',
   's-bruch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
+  's-hilf': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.4;stroke-dasharray:5 4',
   's-luecke': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:8',
   's-fern': 'opacity:.55',
   's-schnitt': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.2;stroke-linecap:round',
