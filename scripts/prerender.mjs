@@ -146,8 +146,11 @@ async function erfasseSchnappschuss(page, pfad) {
   // nach (jedes SVG wird einzeln geholt), dataset.route steht schon davor. Ohne
   // das erfasste der Schnappschuss einen zufälligen Zwischenstand — auf
   // /baustein/aufschlag lag die erste Grafik als Inline-SVG vor, die zweite noch
-  // als PNG. Kurzer Deckel und verschlucktes Zeitüberschreiten: scheitert ein
-  // Abruf, bleibt das PNG stehen (gültiger Zustand), der Deploy läuft weiter.
+  // als Platzhalter. Kurzer Deckel und verschlucktes Zeitüberschreiten, damit der
+  // Deploy weiterläuft. Scheitert ein Abruf, setzt die App das PNG selbst ein;
+  // läuft nur die Zeit ab, steht noch der Platzhalter ohne Quelle da (das PNG lädt
+  // seit dem Umbau nur als Rückfall) — dann setzt der Schnappschuss das PNG ein,
+  // sonst trüge er eine unsichtbare, leere Grafik.
   await page
     .waitForFunction(
       () => [...document.querySelectorAll('#ansicht figure.grafik-platzhalter')]
@@ -155,7 +158,11 @@ async function erfasseSchnappschuss(page, pfad) {
       null,
       { timeout: 5000 },
     )
-    .catch(() => {});
+    .catch(() => page.evaluate(() => {
+      for (const bild of document.querySelectorAll('#ansicht img.grafik-bild[data-png]:not([src])')) {
+        bild.setAttribute('src', bild.dataset.png);
+      }
+    }));
   return page.evaluate(() => ({
     titel: document.title,
     beschreibung: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',

@@ -27,6 +27,11 @@
   #    Snapshot zeigt aber auf die Fassung OHNE Schrägstrich — ausgeliefert und
   #    kanonisiert wären dann verschiedene URLs, und genau das soll das
   #    Prerendering ja beheben. Das `!/$` schließt die Wurzel aus.
+  #    ACHTUNG: Allein reicht die Regel nicht. mod_dir schickt den Schrägstrich-301
+  #    trotzdem (DirectorySlash), weil die Anfrage auf ein Verzeichnis zeigt — in
+  #    der Produktion übernimmt das eine nginx-Anweisung (docs/plesk-nginx.md).
+  #    `DirectorySlash Off` hier hülfe auch, verlangt aber AllowOverride Indexes;
+  #    ohne die Erlaubnis antwortete die ganze Seite mit 500.
   RewriteCond %{REQUEST_URI} !/$
   RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
   RewriteRule ^(.+)$ /$1/index.html [L]
@@ -61,7 +66,8 @@
   # Die Grafiken behalten ihren Namen, wenn sie neu gezeichnet werden (G-XXX ist die
   # Identität, nie umbenennen). Ohne Rückfrage sähe ein Besucher die alte Zeichnung,
   # bis der Browser-Cache abläuft. Achtung: In der Produktion liefert nginx statische
-  # Dateien direkt aus, dort erreicht diese Regel (wie die für sw.js) heute niemanden.
+  # Dateien direkt aus, dort erreicht diese Regel (wie die für sw.js) niemanden; die
+  # Kopfzeile setzt dort eine nginx-Anweisung (docs/plesk-nginx.md).
   <FilesMatch "^G-\d{3}(\.[a-z]{2})?\.(svg|png)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
