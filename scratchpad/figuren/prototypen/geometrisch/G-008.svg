@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Beinarbeit, Bild 2: der Bewegungskreislauf — mit einem Ausfallschritt in die Ecke den Speeder spielen und auf gebogenem Weg zurück zur zentralen Position in der Mitte.">
+  <style>
+    .gm-nah{fill:var(--tinte,#16202b)}
+    .gm-fern{fill:var(--tinte-3,#656f7e)}
+    .gm-fuge{stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round;paint-order:stroke}
+    .gm-naht{stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.8;stroke-linejoin:round;paint-order:stroke}
+    .gm-griff{fill:var(--primaer-tief,#1568ad)}
+    .gm-schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .gm-rahmen{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer,#38a4f1);stroke-width:4.2}
+    .gm-saite{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.1;opacity:.5}
+    .gm-korb{fill:var(--speeder-korb,#f0c400)}
+    .gm-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .gm-kragen{fill:var(--speeder-kappe-tief,#a82412)}
+    .gm-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round;opacity:.45}
+    .gm-schatten{fill:var(--tinte-3,#656f7e);opacity:.16}
+    .gm-zur{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round;stroke-dasharray:9 7}
+    .gm-zurspitze{fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-linejoin:round}
+    .gm-feld{fill:var(--tinte-3,#656f7e);opacity:.09}
+    .gm-feldlinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;opacity:.5;stroke-linejoin:round}
+    .gm-akzent{fill:var(--primaer,#38a4f1)}
+    .gm-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <path class="gm-feld" d="M4,222L122,190L240,222L122,254Z"/><path class="gm-feldlinie" d="M4,222L122,190L240,222L122,254Z"/><circle class="gm-ring" cx="122" cy="222" r="13"/><ellipse class="gm-akzent" cx="122" cy="222" rx="6" ry="4"/><path class="gm-zur" d="M222,242C200,262 160,262 134,236"/><path class="gm-zurspitze" d="M130.9,238.8L134.2,230L140,236.4Z"/><g><path class="gm-fern gm-fuge" d="M202.1,121.2L185.1,143.1A4.6,4.6 0 0 0 192.4,148.8L209.4,126.9A4.6,4.6 0 0 0 202.1,121.2Z"/><path class="gm-fern gm-naht" d="M185.4,143.2L169.2,162.5A4.4,4.4 0 0 0 175.9,168.1L192.1,148.8A4.4,4.4 0 0 0 185.4,143.2Z"/><path class="gm-fern gm-naht" d="M172.3,159.8L168.3,157.5A4.6,4.6 0 0 0 163.7,165.5L167.7,167.8A4.6,4.6 0 0 0 172.3,159.8Z"/><path class="gm-fern gm-fuge" d="M185.7,158.4L157.9,183.9A6.3,6.3 0 0 0 166.4,193.2L194.3,167.6A6.3,6.3 0 0 0 185.7,158.4Z"/><path class="gm-fern gm-naht" d="M158.3,184.1L130.2,208.1A5.9,5.9 0 0 0 137.8,217L165.9,193A5.9,5.9 0 0 0 158.3,184.1Z"/><path class="gm-fern gm-naht" d="M135.6,206.3L151,219.8A3.5,3.5 0 0 1 146.8,225.4L129.6,214.4A5,5 0 0 1 135.6,206.3Z"/><path class="gm-nah gm-fuge" d="M185.9,167.8L214.7,192.3A6.3,6.3 0 0 0 222.9,182.7L194.1,158.2A6.3,6.3 0 0 0 185.9,167.8Z"/><path class="gm-nah gm-naht" d="M212.9,187.4L212.5,224.4A5.9,5.9 0 0 0 224.2,224.5L224.6,187.6A5.9,5.9 0 0 0 212.9,187.4Z"/><path class="gm-nah gm-naht" d="M217,218L236.5,221A3.5,3.5 0 0 1 236,228L216.3,228A5,5 0 0 1 217,218Z"/><path class="gm-nah gm-fuge" d="M201.7,116.1L214.2,121.1A5.9,5.9 0 0 1 217.3,129L199.6,167.2A6.3,6.3 0 0 1 191.5,170.4L183.7,167.3A6.3,6.3 0 0 1 180.2,159.4L193.9,119.6A5.9,5.9 0 0 1 201.7,116.1Z"/><circle class="gm-nah gm-fuge" cx="207.9" cy="103.7" r="11.8"/><path class="gm-nah gm-fuge" d="M201.6,126.1L213.6,151A4.6,4.6 0 0 0 222,147L209.9,122A4.6,4.6 0 0 0 201.6,126.1Z"/><path class="gm-nah gm-naht" d="M213.9,151.1L225.8,173.3A4.4,4.4 0 0 0 233.5,169.2L221.7,147A4.4,4.4 0 0 0 213.9,151.1Z"/><path class="gm-schaft" d="M242.6,163.6L249,159.6M249,159.6L255.5,160.3M249,159.6L251.2,153.4"/><ellipse class="gm-rahmen" cx="263.3" cy="150.6" rx="11.8" ry="7.4" transform="rotate(-32 263.3,150.6)"/><path class="gm-saite" d="M254,152.1L268.7,142.9M254.6,156.1L272,145.2M257.9,158.4L272.6,149.2M255.7,149.6L260.9,157.9M260.2,145.7L266.4,155.6M265.7,143.4L270.9,151.7"/><path class="gm-griff gm-fuge" d="M230.7,174.6L244.2,166.1A3,3 0 0 0 241,161L227.5,169.5A3,3 0 0 0 230.7,174.6Z"/><path class="gm-nah gm-naht" d="M234.4,174L238.5,171.8A4.6,4.6 0 0 0 234.1,163.6L230.1,165.8A4.6,4.6 0 0 0 234.4,174Z"/></g><g><path class="gm-korb gm-fuge" d="M277,132.3L286.4,125.3Q290.3,131 290.9,137.8L279.2,138.4Z"/><path class="gm-kragen" d="M275.5,132.7L277.9,139.1A1.5,1.5 0 0 0 280.7,138.1L278.4,131.6A1.5,1.5 0 0 0 275.5,132.7Z"/><circle class="gm-kappe gm-fuge" cx="275.3" cy="136.4" r="4.4"/></g>
+  <text class="st" x="150" y="270">zur Ecke ausfallen — zurück zur Mitte</text>
+</svg>

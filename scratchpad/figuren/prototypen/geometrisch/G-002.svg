@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Die Grundposition: Füße etwas mehr als schulterbreit, Knie gebeugt, Gewicht auf den Fußballen, Schläger locker vor dem Körper.">
+  <style>
+    .gm-nah{fill:var(--tinte,#16202b)}
+    .gm-fern{fill:var(--tinte-3,#656f7e)}
+    .gm-fuge{stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round;paint-order:stroke}
+    .gm-naht{stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.8;stroke-linejoin:round;paint-order:stroke}
+    .gm-griff{fill:var(--primaer-tief,#1568ad)}
+    .gm-schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .gm-rahmen{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer,#38a4f1);stroke-width:4.2}
+    .gm-saite{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.1;opacity:.5}
+    .gm-korb{fill:var(--speeder-korb,#f0c400)}
+    .gm-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .gm-kragen{fill:var(--speeder-kappe-tief,#a82412)}
+    .gm-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round;opacity:.45}
+    .gm-schatten{fill:var(--tinte-3,#656f7e);opacity:.16}
+    .gm-akzent{fill:var(--primaer,#38a4f1)}
+    .gm-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <path class="gm-boden" d="M82,239.5H218"/><g><path class="gm-nah gm-fuge" d="M134.8,151.1L109.4,180.3A7.5,7.5 0 0 0 120.7,190.1L146.2,160.9A7.5,7.5 0 0 0 134.8,151.1Z"/><path class="gm-nah gm-naht" d="M108.1,184.5L104.1,228.4A7,7 0 0 0 117.9,229.6L122,185.8A7,7 0 0 0 108.1,184.5Z"/><path class="gm-nah gm-fuge" d="M113.1,237.5L103.6,237.7A4.2,4.2 0 0 1 101.9,229.6L110.7,226A6,6 0 0 1 113.1,237.5Z"/><path class="gm-nah gm-fuge" d="M153.8,160.9L179.3,190.1A7.5,7.5 0 0 0 190.6,180.3L165.2,151.1A7.5,7.5 0 0 0 153.8,160.9Z"/><path class="gm-nah gm-naht" d="M178,185.8L182.1,229.6A7,7 0 0 0 195.9,228.4L191.9,184.5A7,7 0 0 0 178,185.8Z"/><path class="gm-nah gm-fuge" d="M189.3,226L198.1,229.6A4.2,4.2 0 0 1 196.4,237.7L186.9,237.5A6,6 0 0 1 189.3,226Z"/><path class="gm-nah gm-fuge" d="M136,103L164,103A7,7 0 0 1 171,110.6L167,156.6A7.5,7.5 0 0 1 159.5,163.5L140.5,163.5A7.5,7.5 0 0 1 133,156.6L129,110.6A7,7 0 0 1 136,103Z"/><circle class="gm-nah gm-fuge" cx="150" cy="84.5" r="14"/><path class="gm-nah gm-fuge" d="M125.5,110.3L127.3,143.3A5.5,5.5 0 0 0 138.3,142.6L136.5,109.7A5.5,5.5 0 0 0 125.5,110.3Z"/><path class="gm-nah gm-fuge" d="M163.5,110.6L166.8,143.4A5.5,5.5 0 0 0 177.8,142.3L174.5,109.4A5.5,5.5 0 0 0 163.5,110.6Z"/><path class="gm-nah gm-naht" d="M128.4,145.8L141.6,165.9A5.2,5.2 0 0 0 150.4,160.1L137.2,140.1A5.2,5.2 0 0 0 128.4,145.8Z"/><path class="gm-schaft" d="M151.9,146.6L153.5,137.7M153.5,137.7L160.5,132.9M153.5,137.7L148.6,130.8"/><ellipse class="gm-rahmen" cx="157" cy="118" rx="14" ry="11" transform="rotate(-80 157,118)"/><path class="gm-saite" d="M149.7,127.5L153.4,106.6M154.8,130.3L159.1,105.7M160.5,129.4L164.2,108.5M147.9,123.5L163.7,126.3M147.6,116.4L166.3,119.7M150.3,109.7L166.1,112.5"/><path class="gm-griff gm-fuge" d="M152.2,165.9L155.5,147.2A3.6,3.6 0 0 0 148.4,146L145.1,164.7A3.6,3.6 0 0 0 152.2,165.9Z"/><path class="gm-nah gm-naht" d="M152.5,163.9L156,159.6A5.5,5.5 0 0 0 147.6,152.6L144,156.8A5.5,5.5 0 0 0 152.5,163.9Z"/><path class="gm-nah gm-naht" d="M167.7,140.4L156.4,161.5A5.2,5.2 0 0 0 165.6,166.5L176.9,145.3A5.2,5.2 0 0 0 167.7,140.4Z"/><path class="gm-nah gm-naht" d="M163,157.8L159.4,153.6A5.5,5.5 0 0 0 151,160.6L154.5,164.9A5.5,5.5 0 0 0 163,157.8Z"/></g>
+  <text class="st" x="150" y="264">Knie gebeugt · Gewicht auf den Fußballen</text>
+</svg>

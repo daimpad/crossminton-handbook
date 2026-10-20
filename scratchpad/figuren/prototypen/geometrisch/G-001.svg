@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Universalgriff: die Hand hält den Griff locker wie einen Händedruck, zwischen Daumen und Zeigefinger bildet sich ein klares V auf der oberen Kante des Griffs.">
+  <style>
+    .gm-nah{fill:var(--tinte,#16202b)}
+    .gm-fern{fill:var(--tinte-3,#656f7e)}
+    .gm-fuge{stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round;paint-order:stroke}
+    .gm-naht{stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.8;stroke-linejoin:round;paint-order:stroke}
+    .gm-griff{fill:var(--primaer-tief,#1568ad)}
+    .gm-schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .gm-rahmen{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer,#38a4f1);stroke-width:4.2}
+    .gm-saite{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.1;opacity:.5}
+    .gm-korb{fill:var(--speeder-korb,#f0c400)}
+    .gm-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .gm-kragen{fill:var(--speeder-kappe-tief,#a82412)}
+    .gm-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round;opacity:.45}
+    .gm-schatten{fill:var(--tinte-3,#656f7e);opacity:.16}
+    .gm-akzent{fill:var(--primaer,#38a4f1)}
+    .gm-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .gm-band{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer,#38a4f1);stroke-width:3}.gm-wickel{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2;opacity:.35;stroke-linecap:round}.gm-kante{fill:none;stroke:var(--primaer-tief,#1568ad);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:6 5}.gm-v{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.gm-stopp{stop-color:var(--tinte,#16202b)}.gm-stopp-aus{stop-opacity:0}.gm-vt{fill:var(--primaer-tief,#1568ad);font:700 22px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><linearGradient id="gm001-arm" gradientUnits="userSpaceOnUse" x1="122.9" y1="180.1" x2="82.9" y2="236.1"><stop class="gm-stopp" offset=".45"/><stop class="gm-stopp gm-stopp-aus" offset="1"/></linearGradient></defs><path class="gm-schaft" d="M218.1,90L256.2,70.9M256.2,70.9L266.2,55.9M256.2,70.9L274.2,71.9"/><ellipse class="gm-rahmen" cx="300.2" cy="48.9" rx="35.8" ry="28.0" transform="rotate(-26.6 300.2,48.9)"/><path class="gm-band gm-fuge" d="M68.8,182.1L225.1,104A15.7,15.7 0 0 0 211.1,75.9L54.8,154.1A15.7,15.7 0 0 0 68.8,182.1Z"/><path class="gm-wickel" d="M62.6,152.1L85.1,172.1M80.6,143L103.1,163.1M100.6,133L123.2,153.1M120.7,123L143.2,143M140.7,113L163.2,133M160.7,103L183.3,123M180.8,93L203.3,113M198.8,83.9L221.3,104"/><path class="gm-griff gm-fuge" d="M64.1,187.6L74.1,182.6A18.5,18.5 0 0 0 57.6,149.6L47.5,154.6A18.5,18.5 0 0 0 64.1,187.6Z"/><path class="gm-kante" d="M67.8,165.1L216.1,91"/><path class="gm-fern gm-naht" d="M139.8,105.5L126.3,96A6.7,6.7 0 0 0 118.6,107L132.1,116.5A6.7,6.7 0 0 0 139.8,105.5Z"/><path class="gm-fern gm-naht" d="M124.1,114.4L111.1,105.9A6.7,6.7 0 0 0 103.7,117.1L116.7,125.6A6.7,6.7 0 0 0 124.1,114.4Z"/><path class="gm-fern gm-naht" d="M108.4,123.3L95.8,115.7A6.7,6.7 0 0 0 88.9,127.3L101.4,134.8A6.7,6.7 0 0 0 108.4,123.3Z"/><path fill="url(#gm001-arm)" d="M107.9,169.4L67.9,225.4A18.5,18.5 0 0 0 98,246.9L138,190.9A18.5,18.5 0 0 0 107.9,169.4Z"/><path class="gm-nah gm-fuge" d="M87.7,122.6L145.5,98.7A9,9 0 0 1 157.6,104.5L166.2,134.2A10.1,10.1 0 0 1 164,143.7L128.6,183.5A15.7,15.7 0 0 1 103.3,180.8L81.2,141.6A13.4,13.4 0 0 1 87.7,122.6Z"/><path class="gm-nah gm-naht" d="M152,110.8L165,91.7A6.7,6.7 0 0 0 153.9,84.2L140.9,103.2A6.7,6.7 0 0 0 152,110.8Z"/><path class="gm-nah gm-naht" d="M160.1,94.2L179.2,92.2A6.3,6.3 0 0 0 177.9,79.7L158.8,81.7A6.3,6.3 0 0 0 160.1,94.2Z"/><path class="gm-nah gm-fuge" d="M156.2,145.1L181.3,130.1A8.3,8.3 0 0 0 172.8,115.9L147.7,130.9A8.3,8.3 0 0 0 156.2,145.1Z"/><path class="gm-nah gm-naht" d="M182.2,128.3L200.7,110.3A7.4,7.4 0 0 0 190.4,99.7L171.9,117.7A7.4,7.4 0 0 0 182.2,128.3Z"/><path class="gm-v" d="M191.5,86.9L168.5,111L207.1,103"/><text class="gm-vt" x="208.1" y="72.9">V</text>
+  <text class="st" x="150" y="272">locker wie ein Händedruck · Daumen-V oben</text>
+</svg>
