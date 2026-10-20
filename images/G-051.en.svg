@@ -8,7 +8,7 @@
     .mk{fill:var(--primaer,#38a4f1)}
     .mkg{fill:var(--tinte-3,#656f7e)}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
-    .st{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5;stroke-linejoin:round}
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>

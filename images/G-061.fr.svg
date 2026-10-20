@@ -5,7 +5,7 @@
     .mk{fill:var(--primaer,#38a4f1)}
     .dot{fill:var(--primaer,#38a4f1)}
     .foot{fill:var(--tinte,#16202b);opacity:.6}
-    .cap{fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif;text-anchor:middle}
+    .cap{fill:var(--tinte-2,#5a6675);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
     .rahmen{fill:none;stroke:var(--linie-stark,#dae3ee);stroke-width:1.2}
   </style>
   <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
@@ -37,7 +37,7 @@
   <rect class="rahmen" x="128" y="150" width="104" height="112" rx="10"/>
   <line class="sym" x1="158" y1="192" x2="204" y2="192" marker-end="url(#ah)"/>
   <line class="sym" x1="202" y1="214" x2="156" y2="214" marker-end="url(#ah)"/>
-  <text class="cap" x="180" y="250">changement de côtés</text>
+  <text class="cap" x="180" y="250">changement de côté</text>
 
   <!-- Aufschlagfehler -->
   <rect class="rahmen" x="244" y="150" width="104" height="112" rx="10"/>

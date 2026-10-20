@@ -7,7 +7,7 @@
     .mk{fill:var(--primaer,#38a4f1)}
     .mkg{fill:var(--tinte-3,#656f7e)}
     .s-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
-    .zt{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,sans-serif;text-anchor:middle}
+    .zt{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:5;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -26,5 +26,5 @@
   <path class="traj" d="M150,440 C 118,330 104,180 128,120" marker-end="url(#ah)"/>
   <circle class="s-ring" cx="188" cy="110" r="12"/>
   <text class="st" x="200" y="92">Target</text>
-  <text class="zt" x="150" y="290">aim against the drift</text>
+  <text class="zt" x="150" y="300">aim against the drift</text>
 </svg>

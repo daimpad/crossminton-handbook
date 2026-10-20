@@ -23,6 +23,6 @@
   <path class="zur" d="M212,184 C 188,164 178,156 162,146" marker-end="url(#ag)"/>
   <circle class="s-ring" cx="150" cy="140" r="17"/>
   <circle class="basis" cx="150" cy="140" r="8"/>
-  <text class="st" x="150" y="120">Basis</text>
+  <text class="st" x="150" y="116">Basis</text>
   <text class="zt" x="150" y="272">raus zur Ecke — zurück zur Mitte</text>
 </svg>

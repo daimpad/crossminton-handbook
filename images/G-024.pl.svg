@@ -27,6 +27,6 @@
   <circle class="eckpkt" cx="228" cy="218" r="3.5"/>
 
   <circle class="marker" cx="150" cy="140" r="8"/>
-  <text class="zonetext" x="150" y="128">Środek</text>
+  <text class="zonetext" x="150" y="108">Środek</text>
   <text class="subtext"  x="150" y="272">jednakowo szybko do każdego rogu</text>
 </svg>
