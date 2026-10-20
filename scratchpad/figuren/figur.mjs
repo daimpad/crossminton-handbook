@@ -481,6 +481,7 @@ export const STIL = {
   's-druck': `fill:${AKZ}`,
   's-blase': 'fill:var(--flaeche,#ffffff);stroke:var(--tinte,#16202b);stroke-width:2;stroke-linejoin:round',
   's-ruf': 'fill:var(--tinte,#16202b);font:800 15px/1 system-ui,sans-serif;text-anchor:middle',
+  's-zeile': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:3;stroke-linecap:round',
   's-schall': `fill:none;stroke:${AKZ};stroke-width:2.2;stroke-linecap:round`,
   's-lab': 'fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif',
   's-griff': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round',

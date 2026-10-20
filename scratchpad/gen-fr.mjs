@@ -31,7 +31,6 @@ const M = {
   'G-044': { aria: "Premiers pas en double : deux partenaires côte à côte à distance confortable.", texts: ["distance confortable", "premiers pas à deux"] },
   'G-045': { aria: "Qui prend la balle : de deux partenaires, l'un prend le speeder central, l'autre lui laisse la place.", texts: ['prendre', 'laisser', "qui prend la balle ?"] },
   'G-046': { aria: "Service en double, simple : depuis un ordre fixe, l'un sert par-dessus la zone neutre.", texts: ['1', "paire adverse", "votre paire", 'Service'] },
-  'G-047': { aria: "Se mettre d'accord : deux partenaires de double vus de dos se concertent entre les points d'un geste simple, posture détendue — communication de base en paire.", texts: ["se concerter brièvement · en paire"] },
   'G-048': { aria: "Se laisser de la place : les deux partenaires gardent une distance claire et ne se gênent pas.", texts: ['distance', "se laisser de la place"] },
   'G-049': { aria: "La paire comme système : les deux partenaires couvrent ensemble tout le terrain, liés et coordonnés.", texts: ["comme un système — tout le terrain"] },
   'G-050': { aria: "Lire la paire adverse : reconnaître la brèche entre les deux adversaires et la jouer.", texts: ['adversaires', 'brèche'] },

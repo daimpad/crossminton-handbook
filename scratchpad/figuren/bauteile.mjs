@@ -69,7 +69,9 @@ export function feldProfil({ y, x0, x1, marken = [] }) {
 }
 
 // Sprechblase mit Spitze zum Sprecher; Text wird über `text` (escaped vom Aufrufer) gesetzt.
-export function sprechblase({ c, b, h, spitze, text, schall = true }) {
+// Statt Text nimmt `zeilen` abstrakte Zeilen (Liste relativer Längen): ein sprachneutraler Satz,
+// wo der Wortlaut nicht die Aussage ist.
+export function sprechblase({ c, b, h, spitze, text = '', schall = true, zeilen = null }) {
   const [x, y] = c, r = h / 2;
   const links = x - b / 2, rechts = x + b / 2, oben = y - h / 2, unten = y + h / 2;
   const sx = Math.max(links + r, Math.min(rechts - r, spitze[0] + (x - spitze[0]) * 0.55));
@@ -82,8 +84,11 @@ export function sprechblase({ c, b, h, spitze, text, schall = true }) {
       s += `M${pt(a)}L${pt(add(a, mul(u, l)))}`;
     }
   }
-  return `<path class="s-blase" d="${d}"/>` + (s ? `<path class="s-schall" d="${s}"/>` : '') +
-    `<text class="s-ruf" x="${f(x)}" y="${f(y + 5.2)}">${text}</text>`;
+  const x0 = links + r * 0.8, lang = b - r * 1.6, abstand = Math.min(8, (h - 10) / Math.max(1, (zeilen?.length ?? 1) - 1));
+  const inhalt = zeilen
+    ? `<path class="s-zeile" d="${zeilen.map((w, i) => { const yy = y + (i - (zeilen.length - 1) / 2) * abstand; return `M${f(x0)},${f(yy)}L${f(x0 + lang * w)},${f(yy)}`; }).join('')}"/>`
+    : `<text class="s-ruf" x="${f(x)}" y="${f(y + 5.2)}">${text}</text>`;
+  return `<path class="s-blase" d="${d}"/>` + (s ? `<path class="s-schall" d="${s}"/>` : '') + inhalt;
 }
 
 // Gebogene Bahn als kubische Kurve, optional mit Pfeil

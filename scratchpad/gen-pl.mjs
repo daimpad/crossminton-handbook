@@ -31,7 +31,6 @@ const M = {
   'G-044': { aria: 'Pierwsze kroki w deblu: dwóch partnerów obok siebie w wygodnym odstępie.', texts: ['wygodny odstęp', 'pierwsze kroki we dwoje'] },
   'G-045': { aria: 'Kto bierze piłkę: z dwóch partnerów jeden bierze środkowego speedera, drugi zostawia mu miejsce.', texts: ['brać', 'zostawić', 'kto bierze piłkę?'] },
   'G-046': { aria: 'Serwis w deblu, prosty: z ustalonej kolejności jeden serwuje nad strefą neutralną.', texts: ['1', 'para przeciwna', 'wasza para', 'Serwis'] },
-  'G-047': { aria: 'Uzgadniać się: dwóch partnerów debla od tyłu uzgadnia się między punktami krótkim gestem, rozluźniona postawa — prosta komunikacja jako para.', texts: ['krótkie uzgodnienie · jako para'] },
   'G-048': { aria: 'Zostawiać sobie miejsce: obaj partnerzy trzymają wyraźny odstęp i nie wchodzą sobie w drogę.', texts: ['odstęp', 'zostawiać sobie miejsce'] },
   'G-049': { aria: 'Para jako system: obaj partnerzy wspólnie kryją całe pole, połączeni i skoordynowani.', texts: ['jako jeden system — całe pole'] },
   'G-050': { aria: 'Czytać parę przeciwną: rozpoznać lukę między dwoma przeciwnikami i ją rozegrać.', texts: ['przeciwnicy', 'luka'] },
