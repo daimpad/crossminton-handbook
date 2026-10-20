@@ -4,11 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-011': { cap: 'high contact · steeply downward', aria: 'The smash: high contact point above and in front of the head, an aggressive downward swing, the trajectory running steeply and straight into the opposite court.' },
   'G-013': { cap: 'the face brushes · cut and spin', aria: 'The slice: the angled racket face brushes across the speeder instead of hitting it straight; curved motion lines show the cutting path and the resulting spin.' },
-  'G-015': { cap: 'early and high — stolen time', aria: 'Taking the speeder early: contact at the highest, earliest point clearly in front of and above the body; a faint lower contact point shows where a slower player would have hit.' },
-  'G-016': { cap: 'same preparation — give nothing away', aria: 'Deception, image 1: a deliberately neutral, identical preparation that gives nothing away — full backswing, poised body, no committed shot.' },
-  'G-017': { cap: 'one preparation, two options', aria: 'Deception, image 2: the same preparation, with two different shots branching from it — a flat fast drive and a short soft drop; the choice is made only at the last moment.' },
   'G-021': { cap: 'right onto the line · minimal margin', aria: 'Precision to the lines: the speeder lands exactly on a corner line at the very edge of the court; tight target zones and a thin arrow show pinpoint placement with minimal margin.' },
   'G-035': { cap: 'short ground contact · fast rebound', aria: 'Reactive strength: the short, springy ground contact of foot and lower leg — minimal contact time, shown by a small compression arc and a fast rebound arrow.' },
   'G-054': { cap: 'playing outdoors · open court', aria: 'Playing outdoors: a player on a court without a net under open sky with a simple ground surface, a relaxed, adaptable stance.' },

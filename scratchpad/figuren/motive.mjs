@@ -48,6 +48,18 @@ POSEN.driveRuhig = {
   beinL: { ober: [-0.12, -1, 0.62], unter: [0, -1, -0.08], fuss: [-0.12, -0.04, 1] },
   beinR: { ober: [0.2, -1, -0.2], unter: [0.04, -1, -0.85], fuss: [0.3, -0.55, 0.8] },
 };
+// Täuschung (G-016/G-017), Ende der Ausholbewegung: Seitstellung, Brust gut zur Hälfte zum
+// Betrachter, Kopf im Profil zum Speeder. Hinteres Bein trägt (Knie ~145°), vorderes fast gestreckt;
+// Schlagarm mit hohem Ellbogen seitlich nach hinten, Unterarm senkrecht, Schläger Kante voraus
+// hinter dem Kopf; freier Arm gestreckt nach vorn oben zum Speeder.
+POSEN.taeuschungAus = {
+  H: 21, blick: 30, kamera: 6, neig: -6, seit: 10, kopf: { dreh: 52, neig: -24 }, art: 'dynamisch', koerper: 'b',
+  beinR: { ober: [0.12, -1, 0.05], unter: [0.04, -1, -0.28], fuss: [0.1, -0.05, 1] },
+  beinL: { ober: [-0.6, -1, 0], unter: [-0.18, -1, 0], fuss: [-0.7, -0.05, 0.7] },
+  armR: { ober: [0.92, 0.12, -0.35], unter: [0.04, 1, -0.12], hand: [0, 1, -0.15] },
+  armL: { ober: [-0.75, 0.62, 0.12], unter: [-0.72, 0.66, 0.1], art: 'offen' },
+  schlaeger: { hand: 'R', achse: [-0.75, 0.6, -0.3], flaeche: [0.64, 0.76, -0.09] },
+};
 POSEN.split = {
   ...POSEN.bereit, neig: 30, kopf: { neig: -28 },
   beinR: { ober: [0.5, -0.75, 1.0], unter: [0.1, -1, -0.45], fuss: [0.3, -0.42, 1] },
@@ -423,11 +435,160 @@ export const MOTIVE = {
           schatten([92, 253], 46, 5),
           spur({ c: s, r, von: w + 70, bis: w + 4, breite: 13 }),
           fg.svg,
-          speeder({ p: add(k, [12, -6]), winkel: 72 }),
+          // Kappe voran entlang der steigenden Bahn (Starttangente rund 15° über der Waagerechten)
+          speeder({ p: add(k, [12, -6]), winkel: 105 }),
           `<path class="s-bahn" d="M${pt(start)} C 178,${f(start[1] - 44)} 248,0 296,30" marker-end="url(#p010)"/>`,
           `<path class="s-bahn2" d="M${pt(add(start, [2, 4]))} C 196,${f(start[1] - 10)} 252,38 296,56" marker-end="url(#q010)"/>`,
           `<path class="s-bahn" d="M190,222 L212,222"/><text class="s-lab" x="218" y="225.5">${esc(t.def)}</text>`,
           `<path class="s-bahn2" d="M190,238 L212,238"/><text class="s-lab" x="218" y="241.5">${esc(t.off)}</text>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Smash: dieselbe Kamera, derselbe Maßstab und dieselbe Figur wie G-010, damit beide als Paar
+  // lesbar sind. Der Treffpunkt liegt sichtbar weiter vorn (Arm etwa 25° vor der Senkrechten, vor
+  // dem Kopf über der vorderen Schulter), die Fläche ist geschlossen, der Rumpf klappt nach vorn,
+  // das Gewicht ist vorn. Die Bahn läuft lang nach vorn unten aus dem Bild: bei 12,8 m neutraler
+  // Zone landet ein Smash nie vor der eigenen Figur (Fehlerbild fb_smash_treffpunkt).
+  'G-011': (t) => {
+    const fg = figur({
+      ort: [82, 252], H: 21, blick: 50, kamera: 6, neig: 11, seit: -14, kopf: { neig: -32, dreh: -6 }, art: 'dynamisch',
+      beinR: { ober: [0.08, -1, -0.62], unter: [0, -1, -0.72], fuss: [0, -0.9, 1] },
+      beinL: { ober: [-0.04, -1, 0.5], unter: [0, -1, -0.02], fuss: [-0.08, -0.06, 1] },
+      armR: { ober: [0.75, 0.68, 0.35], unter: [0.35, 0.8, 0.5], hand: [0.3, 0.8, 0.52], vor: true },
+      // freier Arm eng am Körper, der Unterarm waagerecht vor dem Bauch
+      armL: { ober: [-0.2, -0.85, 0.5], unter: [0.9, 0.05, 0.45], art: 'faust' },
+      schlaeger: { hand: 'R', achse: [0.15, 0.85, 0.5], flaeche: [-0.92, -0.07, 0.39] },
+    });
+    const k = fg.punkte.schlaegerKopf, s = fg.punkte.schulterR;
+    const r = len(sub(k, s)), w = winkel2d(sub(k, s));
+    const start = add(k, [18, 5]);
+    // Bahn 18° unter der Waagerechten bis zum Bildrand; dazu zwei dünne Varianten (Winkel und Ziel
+    // wechseln, sagt der Text)
+    const bahn = (grad) => { const tan = Math.tan((grad * Math.PI) / 180); return `M${pt(start)} L296,${f(start[1] + (296 - start[0]) * tan)}`; };
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 272,
+        defs: pfeil('p011'),
+        inhalt: [
+          schatten([96, 253], 46, 5),
+          spur({ c: s, r, von: w + 80, bis: w + 4, breite: 13 }),
+          fg.svg,
+          // Kappe voran in Abflugrichtung, 18° nach unten (wie die Bahn)
+          speeder({ p: add(k, [13, 3]), winkel: 72 }),
+          `<path class="s-bahn" d="${bahn(18)}" marker-end="url(#p011)"/>`,
+          `<path class="s-bahng" d="${bahn(11)}"/>`, `<path class="s-bahng" d="${bahn(26)}"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Früh nehmen: Seitansicht, Treffmoment am Ende eines Schritts in den Ball hinein (schlagseitiger
+  // Fuß vorn), kompakter Schlag. Die ankommende Bahn sinkt von rechts oben durch den frühen
+  // Treffpunkt weiter bis zum späten Punkt neben der Hüfte (blasser Speeder); die Strecke dazwischen
+  // ist die gestohlene Zeit. Die abgehende Bahn läuft flach nach rechts aus dem Bild.
+  'G-015': (t) => {
+    const boden = 250;
+    const fg = figur({
+      ort: [92, boden], H: 21, blick: 90, kamera: 6, neig: 12, kopf: { neig: -22 }, art: 'dynamisch',
+      // Schritt so lang, dass beide Füße von selbst aufsetzen (hinteres Knie fast gestreckt)
+      beinR: { ober: [0.05, -1, 0.6], unter: [0, -1, 0.12], fuss: [0.05, -0.05, 1] },
+      beinL: { ober: [-0.05, -1, -0.55], unter: [0, -1, -0.7], fuss: [0, -0.7, 1] },
+      // kompakt: Ellbogen leicht gebeugt (~150°), Treffpunkt hoch vor dem Kopf
+      armR: { ober: [0.12, 0.75, 0.68], unter: [0.06, 0.97, 0.25], hand: [0.05, 0.92, 0.39], vor: true },
+      armL: { ober: [-0.3, -0.8, 0.45], unter: [-0.1, -0.45, 0.9], art: 'faust' },
+      schlaeger: { hand: 'R', achse: [0.05, 0.92, 0.39], flaeche: [0.3, -0.38, 0.88] },
+    });
+    const p = fg.punkte, k = p.schlaegerKopf;
+    const frueh = add(k, [13, -2]);
+    // später Punkt: tiefer und näher am Körper, vor der Schulter (hinter dem Körper wäre er verdeckt)
+    const spaet = [p.schulterR[0] + 36, p.schulterR[1] + 16];
+    const quelle = [298, 18];
+    // Parabel durch Quelle, frühen und späten Punkt (früh bei t = 0,5)
+    const c = sub(mul(frueh, 2), mul(add(quelle, spaet), 0.5));
+    // Tangente am Ende der Parabel = Flugrichtung im späten Punkt
+    const spTangente = sub(spaet, c);
+    const ab = add(frueh, [6, 3]);
+    // Doppelpfeil der gestohlenen Zeit: parallel zur Bahn zwischen beiden Punkten, nach außen versetzt
+    const ein = norm(sub(spaet, frueh)), quer = [ein[1], -ein[0]];
+    const z1 = add(add(frueh, mul(ein, 8)), mul(quer, 11)), z2 = add(add(spaet, mul(ein, -8)), mul(quer, 11));
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        defs: pfeil('p015') + pfeil('g015', 's-mkg', 3.6),
+        inhalt: [
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          schatten([104, boden + 1], 48, 5),
+          `<path class="s-bahng" d="M${pt(quelle)} Q ${pt(c)} ${pt(spaet)}"/>`,
+          speeder({ p: spaet, winkel: winkel2d(spTangente), kontur: true }),
+          fg.svg,
+          // Kappe voran in Abflugrichtung (die abgehende Bahn fällt rund 20°)
+          speeder({ p: frueh, winkel: 70 }),
+          `<path class="s-bahn" d="M${pt(ab)} L296,${f(ab[1] + 38)}" marker-end="url(#p015)"/>`,
+          `<path class="s-wegv" d="M${pt(z1)}L${pt(z2)}" marker-start="url(#g015)" marker-end="url(#g015)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Täuschung: eine Vorlage für beide Bilder. Dreiviertelansicht von vorn, Rechtshänder in
+  // Seitstellung zum Ziel rechts, die linke Schulter zeigt zum Ziel. Bild 1 ist das Ende der
+  // Ausholbewegung (Bogenspannung): Ellbogen hoch, Unterarm senkrecht, Schläger hinter dem Kopf,
+  // Gewicht hinten, freier Arm zum ankommenden Speeder. Nichts verrät den Schlag.
+  'G-016': (t) => {
+    const boden = 252, fg = figur({ ...POSEN.taeuschungAus, ort: [128, boden] });
+    const sp = [222, 56], quelle = [298, 10];
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 276,
+        inhalt: [
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          schatten([132, boden + 1], 50, 5),
+          `<path class="s-bahng" d="M${pt(quelle)} Q 262,14 ${pt(add(sp, [8, -7]))}"/>`,
+          fg.svg,
+          speeder({ p: sp, winkel: 312 }),
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Täuschung, Bild 2: dieselbe Figur, die Ausholposition aus Bild 1 deckungsgleich als Geist. Im
+  // Treffmoment drehen Hüfte und Schultern zum Ziel, das Gewicht wandert nach vorn; die Fläche ist
+  // neutral. Erst ab dem Speeder trennen sich die Wege: der harte Schlag flach und lang aus dem Bild,
+  // der Stopp in dieselbe Richtung, der früh an Höhe verliert. Auch er überbrückt die neutrale Zone
+  // und fällt erst am Bildrand, nie in Reichweite des Spielers. Der Kreis markiert die Entscheidung.
+  'G-017': (t) => {
+    const boden = 252, ort = [128, boden];
+    // Umriss statt blass: die Ausholposition trägt die Aussage „eine Vorbereitung“
+    const geist = figur({ ...POSEN.taeuschungAus, ort, geist: 'kontur' });
+    // Gewicht nach vorn: die Hüfte rückt 12 vor, beide Füße bleiben, wo sie in Bild 1 standen
+    const fg = figur({
+      ...POSEN.taeuschungAus, ort: add(ort, [12, 0]), blick: 44, schulter: 10, neig: 4, seit: -4, kopf: { dreh: 14, neig: -26 },
+      beinR: { ober: [0.3, -1, -0.5], unter: [0.04, -1, -0.35], fuss: [0.15, -0.7, 1] },
+      beinL: { ober: [-0.3, -1, 0.1], unter: [-0.08, -1, 0.05], fuss: [-0.7, -0.05, 0.7] },
+      armR: { ober: [0.9, 0.9, 0.35], unter: [0.45, 0.95, 0.45], hand: [0.45, 0.95, 0.45], vor: true },
+      armL: { ober: [-0.25, -0.6, 0.7], unter: [0.75, 0.15, 0.5], art: 'faust' },
+      schlaeger: { hand: 'R', achse: [0.36, 0.95, 0.5], flaeche: [-0.92, 0.16, 0.36] },
+    });
+    const k = fg.punkte.schlaegerKopf, sp = add(k, [12, 0]), gabel = add(sp, [7, 0]);
+    const hart = `M${pt(gabel)} L296,${f(gabel[1] + 30)}`;
+    // Stopp: verliert früh an Höhe, verlässt das Bild aber im Flug — er fällt erst jenseits der
+    // 12,8 m langen neutralen Zone, nicht in Reichweite vor dem Spieler
+    const stopp = `M${pt(gabel)} C ${f(gabel[0] + 55)},${f(gabel[1] + 4)} ${f(gabel[0] + 110)},${f(gabel[1] + 22)} 294,${f(gabel[1] + 82)}`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 276,
+        defs: pfeil('p017') + pfeil('q017', 's-mk', 3.6),
+        inhalt: [
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          schatten([138, boden + 1], 50, 5),
+          geist.svg,
+          fg.svg,
+          speeder({ p: sp, winkel: 80 }),
+          `<path class="s-hart" d="${hart}" marker-end="url(#p017)"/>`,
+          `<path class="s-bahn" d="${stopp}" marker-end="url(#q017)"/>`,
+          `<circle class="s-gabel" cx="${f(gabel[0])}" cy="${f(gabel[1])}" r="7.5"/>`,
         ].join('\n  '),
       }),
     };

@@ -5,12 +5,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-011': { aria: "Le smash : point de frappe haut au-dessus et devant la tête, frappe agressive vers le bas, la trajectoire file raide et droit dans le terrain adverse.", texts: ["point de frappe haut · raide vers le bas"] },
   'G-013': { aria: "La coupe : la surface de frappe inclinée effleure le speeder sur le côté au lieu de le frapper droit ; des lignes de mouvement courbes montrent la trajectoire coupante et la rotation qui en résulte.", texts: ["la surface effleure · coupe et rotation"] },
   'G-014': { aria: "Le système de jeu de jambes : s'élancer de la base centrale vers les coins et revenir aussitôt au centre.", texts: ['Base', "vers le coin — retour au centre"] },
-  'G-015': { aria: "Prendre le speeder tôt : contact au point le plus haut et le plus précoce, nettement devant et au-dessus du corps ; un point de frappe plus bas et pâle montre où un joueur plus lent aurait frappé.", texts: ["tôt et haut — du temps volé"] },
-  'G-016': { aria: "Feinte, image 1 : une préparation volontairement neutre et identique qui ne révèle rien — armé complet, corps posé, aucune frappe décidée.", texts: ['?', "même préparation — ne rien révéler"] },
-  'G-017': { aria: "Feinte, image 2 : la même préparation, d'où bifurquent deux frappes différentes — un drive plat et rapide et un amorti court et doux ; le choix ne se fait qu'au dernier moment.", texts: ["une préparation, deux options"] },
   'G-021': { aria: "Précision sur les lignes : le speeder atterrit exactement sur une ligne de coin, au bord extrême du terrain ; des zones cibles serrées dans les coins et une flèche fine montrent le placement au point près, avec une marge minimale.", texts: ["pile sur la ligne · marge minimale"] },
   'G-023': { aria: "Le but du jeu : jouer le speeder par-dessus la zone neutre dans le terrain adverse.", texts: ["terrain adverse", "ZONE NEUTRE", "ton terrain"] },
   'G-024': { aria: "Position centrale : depuis le milieu du terrain, les trajets vers les quatre coins sont aussi courts.", texts: ['Centre', "aussi vite vers chaque coin"] },
