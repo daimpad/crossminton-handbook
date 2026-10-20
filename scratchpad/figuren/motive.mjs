@@ -435,7 +435,8 @@ export const MOTIVE = {
           schatten([92, 253], 46, 5),
           spur({ c: s, r, von: w + 70, bis: w + 4, breite: 13 }),
           fg.svg,
-          speeder({ p: add(k, [12, -6]), winkel: 72 }),
+          // Kappe voran entlang der steigenden Bahn (Starttangente rund 15° über der Waagerechten)
+          speeder({ p: add(k, [12, -6]), winkel: 105 }),
           `<path class="s-bahn" d="M${pt(start)} C 178,${f(start[1] - 44)} 248,0 296,30" marker-end="url(#p010)"/>`,
           `<path class="s-bahn2" d="M${pt(add(start, [2, 4]))} C 196,${f(start[1] - 10)} 252,38 296,56" marker-end="url(#q010)"/>`,
           `<path class="s-bahn" d="M190,222 L212,222"/><text class="s-lab" x="218" y="225.5">${esc(t.def)}</text>`,
@@ -451,11 +452,12 @@ export const MOTIVE = {
   // Zone landet ein Smash nie vor der eigenen Figur (Fehlerbild fb_smash_treffpunkt).
   'G-011': (t) => {
     const fg = figur({
-      ort: [82, 252], H: 21, blick: 50, kamera: 6, neig: 16, seit: -14, kopf: { neig: -26, dreh: -6 }, art: 'dynamisch',
+      ort: [82, 252], H: 21, blick: 50, kamera: 6, neig: 11, seit: -14, kopf: { neig: -32, dreh: -6 }, art: 'dynamisch',
       beinR: { ober: [0.08, -1, -0.62], unter: [0, -1, -0.72], fuss: [0, -0.9, 1] },
       beinL: { ober: [-0.04, -1, 0.5], unter: [0, -1, -0.02], fuss: [-0.08, -0.06, 1] },
       armR: { ober: [0.75, 0.68, 0.35], unter: [0.35, 0.8, 0.5], hand: [0.3, 0.8, 0.52], vor: true },
-      armL: { ober: [-0.2, -0.85, 0.6], unter: [0.85, -0.1, 0.5], art: 'faust' },
+      // freier Arm eng am Körper, der Unterarm waagerecht vor dem Bauch
+      armL: { ober: [-0.2, -0.85, 0.5], unter: [0.9, 0.05, 0.45], art: 'faust' },
       schlaeger: { hand: 'R', achse: [0.15, 0.85, 0.5], flaeche: [-0.92, -0.07, 0.39] },
     });
     const k = fg.punkte.schlaegerKopf, s = fg.punkte.schulterR;
@@ -473,7 +475,8 @@ export const MOTIVE = {
           schatten([96, 253], 46, 5),
           spur({ c: s, r, von: w + 80, bis: w + 4, breite: 13 }),
           fg.svg,
-          speeder({ p: add(k, [13, 3]), winkel: 108 }),
+          // Kappe voran in Abflugrichtung, 18° nach unten (wie die Bahn)
+          speeder({ p: add(k, [13, 3]), winkel: 72 }),
           `<path class="s-bahn" d="${bahn(18)}" marker-end="url(#p011)"/>`,
           `<path class="s-bahng" d="${bahn(11)}"/>`, `<path class="s-bahng" d="${bahn(26)}"/>`,
         ].join('\n  '),
@@ -488,11 +491,13 @@ export const MOTIVE = {
     const boden = 250;
     const fg = figur({
       ort: [92, boden], H: 21, blick: 90, kamera: 6, neig: 12, kopf: { neig: -22 }, art: 'dynamisch',
-      beinR: { ober: [0.05, -1, 0.85], unter: [0, -1, 0.12], fuss: [0.05, -0.05, 1] },
-      beinL: { ober: [-0.05, -1, -0.45], unter: [0, -1, -0.55], fuss: [0, -0.7, 1] },
-      armR: { ober: [0.12, 0.6, 0.8], unter: [0.08, 0.78, 0.62], hand: [0.06, 0.82, 0.57], vor: true },
+      // Schritt so lang, dass beide Füße von selbst aufsetzen (hinteres Knie fast gestreckt)
+      beinR: { ober: [0.05, -1, 0.6], unter: [0, -1, 0.12], fuss: [0.05, -0.05, 1] },
+      beinL: { ober: [-0.05, -1, -0.55], unter: [0, -1, -0.7], fuss: [0, -0.7, 1] },
+      // kompakt: Ellbogen leicht gebeugt (~150°), Treffpunkt hoch vor dem Kopf
+      armR: { ober: [0.12, 0.75, 0.68], unter: [0.06, 0.97, 0.25], hand: [0.05, 0.92, 0.39], vor: true },
       armL: { ober: [-0.3, -0.8, 0.45], unter: [-0.1, -0.45, 0.9], art: 'faust' },
-      schlaeger: { hand: 'R', achse: [0.05, 0.82, 0.57], flaeche: [0.6, -0.42, 0.62] },
+      schlaeger: { hand: 'R', achse: [0.05, 0.92, 0.39], flaeche: [0.3, -0.38, 0.88] },
     });
     const p = fg.punkte, k = p.schlaegerKopf;
     const frueh = add(k, [13, -2]);
@@ -501,7 +506,8 @@ export const MOTIVE = {
     const quelle = [298, 18];
     // Parabel durch Quelle, frühen und späten Punkt (früh bei t = 0,5)
     const c = sub(mul(frueh, 2), mul(add(quelle, spaet), 0.5));
-    const anTangente = sub(frueh, c), spTangente = sub(spaet, c);
+    // Tangente am Ende der Parabel = Flugrichtung im späten Punkt
+    const spTangente = sub(spaet, c);
     const ab = add(frueh, [6, 3]);
     // Doppelpfeil der gestohlenen Zeit: parallel zur Bahn zwischen beiden Punkten, nach außen versetzt
     const ein = norm(sub(spaet, frueh)), quer = [ein[1], -ein[0]];
@@ -515,9 +521,10 @@ export const MOTIVE = {
           `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
           schatten([104, boden + 1], 48, 5),
           `<path class="s-bahng" d="M${pt(quelle)} Q ${pt(c)} ${pt(spaet)}"/>`,
-          `<g class="s-geistsp">${speeder({ p: spaet, winkel: winkel2d(spTangente) })}</g>`,
+          speeder({ p: spaet, winkel: winkel2d(spTangente), kontur: true }),
           fg.svg,
-          speeder({ p: frueh, winkel: winkel2d(anTangente) }),
+          // Kappe voran in Abflugrichtung (die abgehende Bahn fällt rund 20°)
+          speeder({ p: frueh, winkel: 70 }),
           `<path class="s-bahn" d="M${pt(ab)} L296,${f(ab[1] + 38)}" marker-end="url(#p015)"/>`,
           `<path class="s-wegv" d="M${pt(z1)}L${pt(z2)}" marker-start="url(#g015)" marker-end="url(#g015)"/>`,
         ].join('\n  '),
@@ -552,18 +559,22 @@ export const MOTIVE = {
   // und fällt erst am Bildrand, nie in Reichweite des Spielers. Der Kreis markiert die Entscheidung.
   'G-017': (t) => {
     const boden = 252, ort = [128, boden];
-    const geist = figur({ ...POSEN.taeuschungAus, ort, geist: true });
+    // Umriss statt blass: die Ausholposition trägt die Aussage „eine Vorbereitung“
+    const geist = figur({ ...POSEN.taeuschungAus, ort, geist: 'kontur' });
+    // Gewicht nach vorn: die Hüfte rückt 12 vor, beide Füße bleiben, wo sie in Bild 1 standen
     const fg = figur({
-      ...POSEN.taeuschungAus, ort, blick: 44, schulter: 10, neig: 4, seit: -4, kopf: { dreh: 14, neig: -26 },
-      beinR: { ober: [0.18, -1, 0.02], unter: [0.04, -1, -0.32], fuss: [0.15, -0.7, 1] },
-      beinL: { ober: [-0.48, -1, 0.02], unter: [-0.06, -1, 0.04], fuss: [-0.7, -0.05, 0.7] },
+      ...POSEN.taeuschungAus, ort: add(ort, [12, 0]), blick: 44, schulter: 10, neig: 4, seit: -4, kopf: { dreh: 14, neig: -26 },
+      beinR: { ober: [0.3, -1, -0.5], unter: [0.04, -1, -0.35], fuss: [0.15, -0.7, 1] },
+      beinL: { ober: [-0.3, -1, 0.1], unter: [-0.08, -1, 0.05], fuss: [-0.7, -0.05, 0.7] },
       armR: { ober: [0.9, 0.9, 0.35], unter: [0.45, 0.95, 0.45], hand: [0.45, 0.95, 0.45], vor: true },
       armL: { ober: [-0.25, -0.6, 0.7], unter: [0.75, 0.15, 0.5], art: 'faust' },
       schlaeger: { hand: 'R', achse: [0.36, 0.95, 0.5], flaeche: [-0.92, 0.16, 0.36] },
     });
     const k = fg.punkte.schlaegerKopf, sp = add(k, [12, 0]), gabel = add(sp, [7, 0]);
     const hart = `M${pt(gabel)} L296,${f(gabel[1] + 30)}`;
-    const stopp = `M${pt(gabel)} C ${f(gabel[0] + 50)},${f(gabel[1] + 6)} ${f(gabel[0] + 96)},${f(gabel[1] + 30)} 292,${f(gabel[1] + 150)}`;
+    // Stopp: verliert früh an Höhe, verlässt das Bild aber im Flug — er fällt erst jenseits der
+    // 12,8 m langen neutralen Zone, nicht in Reichweite vor dem Spieler
+    const stopp = `M${pt(gabel)} C ${f(gabel[0] + 55)},${f(gabel[1] + 4)} ${f(gabel[0] + 110)},${f(gabel[1] + 22)} 294,${f(gabel[1] + 82)}`;
     return {
       figuren: [fg], zeichen: [],
       datei: datei({
@@ -571,10 +582,10 @@ export const MOTIVE = {
         defs: pfeil('p017') + pfeil('q017', 's-mk', 3.6),
         inhalt: [
           `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
-          schatten([134, boden + 1], 50, 5),
+          schatten([138, boden + 1], 50, 5),
           geist.svg,
           fg.svg,
-          speeder({ p: sp, winkel: 96 }),
+          speeder({ p: sp, winkel: 80 }),
           `<path class="s-hart" d="${hart}" marker-end="url(#p017)"/>`,
           `<path class="s-bahn" d="${stopp}" marker-end="url(#q017)"/>`,
           `<circle class="s-gabel" cx="${f(gabel[0])}" cy="${f(gabel[1])}" r="7.5"/>`,

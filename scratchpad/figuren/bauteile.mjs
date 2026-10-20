@@ -4,13 +4,16 @@ import { add, sub, mul, dir, kreis, pt, f, norm } from './figur.mjs';
 
 // Speeder: Schlagkappe voran, Korb dahinter, bewusst gut doppelt so groß wie maßstäblich.
 // winkel = Flugrichtung (2D, 0 = unten, 90 = rechts, 180 = oben).
-export function speeder({ p, winkel, s = 1 }) {
+// kontur: ein gedachter Speeder (früherer/späterer Ort) als deckender Umriss in --tinte-3 auf
+// --flaeche-2 — eine Deckkraft-Absenkung erreichte keine 3:1 und ließ Linien durch den Korb scheinen.
+export function speeder({ p, winkel, s = 1, kontur = false }) {
   const u = dir(winkel), n = [-u[1], u[0]];
   const kopf = add(p, mul(u, 3.4 * s));
   const k1 = add(p, mul(n, 2.7 * s)), k2 = add(p, mul(n, -2.7 * s));
   const o = add(p, mul(u, -10 * s)), o1 = add(o, mul(n, 5.6 * s)), o2 = add(o, mul(n, -5.6 * s));
-  return `<path class="s-korb" d="M${pt(k1)}L${pt(o1)}Q${pt(add(o, mul(u, -1.8 * s)))} ${pt(o2)}L${pt(k2)}Z"/>` +
-    `<path class="s-kappe" d="${kreis(kopf, 3.8 * s)}"/>`;
+  const [kk, kp] = kontur ? ['s-spk', 's-spk'] : ['s-korb', 's-kappe'];
+  return `<path class="${kk}" d="M${pt(k1)}L${pt(o1)}Q${pt(add(o, mul(u, -1.8 * s)))} ${pt(o2)}L${pt(k2)}Z"/>` +
+    `<path class="${kp}" d="${kreis(kopf, 3.8 * s)}"/>`;
 }
 
 // Bodenschatten: zwei flache Ellipsen in --schatten-boden (das Token ist hell ein Tinte-Hauch,

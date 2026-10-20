@@ -484,7 +484,7 @@ export const STIL = {
   's-blick': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-dasharray:.1 5;stroke-linecap:round',
   's-mk': `fill:${AKZ}`,
   's-mkg': 'fill:var(--tinte-3,#656f7e)',
-  's-geistsp': 'opacity:.4',
+  's-spk': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linejoin:round',
   's-hart': `fill:none;stroke:${AKZ};stroke-width:3.2;stroke-linecap:round`,
   's-gabel': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:1.8',
   's-feld': 'fill:var(--tinte-3,#656f7e);opacity:.07',
