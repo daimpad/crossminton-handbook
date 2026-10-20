@@ -52,8 +52,9 @@ export function faust({ geist = false } = {}) {
 export function schlaeger({ griffVon = -58, griffBis = 30, kopfMitte = 150, kopfL = 62, kopfB = 24, geist = false }) {
   const g = G;
   if (geist) {
-    return `<path class="s-gsch" d="M${griffVon},0 L${kopfMitte - kopfL},0"/>` +
-      `<ellipse class="s-gr" cx="${kopfMitte}" cy="0" rx="${kopfL}" ry="${kopfB}"/>`;
+    // Die Ausholphase trägt hier allein die Aussage: volle Kontur mit 3:1 statt blasser Begleitlinie
+    return `<path class="s-zsch" d="M${griffVon},0 L${kopfMitte - kopfL},0"/>` +
+      `<ellipse class="s-zr" cx="${kopfMitte}" cy="0" rx="${kopfL}" ry="${kopfB}"/>`;
   }
   const griff = `<path class="s-griff" d="M${griffVon},${-g - 1.6} L${griffBis},${-g} L${griffBis},${g} L${griffVon},${g + 1.6} Q${griffVon - 7},0 ${griffVon},${-g - 1.6}Z"/>`;
   let band = '';
