@@ -40,7 +40,7 @@ const STIL = `  <style>
     .hilfslinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
     .achse{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
     .pfeil{fill:var(--tinte-3,#656f7e)}
-    .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
     .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}

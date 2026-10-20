@@ -8,7 +8,7 @@
     .marker{fill:var(--primaer,#38a4f1)}
     .gegner{fill:var(--tinte-3,#656f7e)}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
-    .subtext{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:end}
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="marker"/></marker>
@@ -26,5 +26,5 @@
 
   <circle class="gegner" cx="150" cy="150" r="8"/>
   <text class="zonetext" x="86"  y="84">Schwäche</text>
-  <text class="subtext"  x="212" y="150">öffnen</text>
+  <text class="subtext"  x="204" y="150">öffnen</text>
 </svg>

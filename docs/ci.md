@@ -61,6 +61,7 @@ Die 67 Grafiken in `images/` sind Inline-SVG und lesen dieselben Tokens wie die 
 | Akzent: das eine didaktische Element und sein Werkzeug (Schläger, Flugbahn, Feder, Treffpunkt) | `--primaer-dunkel` |
 | Ortsmarke am Boden, Schirm, Griff-Fläche in Nahaufnahmen (mit Rand in `--primaer-dunkel`) | `--primaer-weich` |
 | Freistellungsrand, Füllung von Umrissfiguren, Halo hinter Linien und Beschriftungen | `--flaeche-2` |
+| Halo hinter Beschriftungen in einer hellen Zone (Passierzone, Zielzone) | `--primaer-weich` |
 | Bodenschatten | `--schatten-boden` |
 | Speeder | `--speeder-korb`, `--speeder-kappe`, `--speeder-kappe-tief` |
 
@@ -86,6 +87,7 @@ Jedes Element, das eine Aussage trägt, erreicht hell und dunkel mindestens **3:
 
 - Der helle Korb trägt seinen Kontrast über die Kontur, nie über die Fläche.
 - Zwei Paare unter 3:1 lassen sich nicht über ein anderes Token lösen: `--tinte-2` gegen `--tinte` (hell 2,82:1, dunkel 1,85:1) und Blasses über Deckkraft (ein Speeder mit 40 % kam hell auf 1,2:1). Getrennt wird dort mit einer Naht oder einem Halo in `--flaeche-2`, ein gedachter Gegenstand steht als deckender Umriss.
+- Keine Linie läuft durch eine Beschriftung: der Text wird versetzt oder bekommt einen Halo (`paint-order: stroke`, Breite 4–5) in der Farbe seines Grundes. `scratchpad/textgrenzen.mjs` meldet jede Kreuzung ohne Halo.
 - Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 268 Dateien).
 
 ### Die Speeder-Ausnahme
