@@ -322,6 +322,17 @@ export function figur(pose) {
   for (const s of reihenfolge) if (arme[s] && !vorRumpf(s)) zeichneArm(s, false);
   schichten.push(gruppe(KN, [rumpf, ...['R', 'L'].filter((s) => s !== fern).flatMap((s) => beinFormen(beine[s]))]));
   schichten.push(`<g class="${KN}">${kopf}</g>`);
+  // Schildmütze (G-056: ein Schirm an der Kappe mindert die Blendung): Kuppe über der oberen
+  // Kopfhälfte, der Schirm setzt an der Stirnkante an und zeigt in Blickrichtung des Kopfes.
+  // In --tinte-2, damit sie sich vom Kopf abhebt.
+  if (pose.muetze && !pose.geist) {
+    const rx = (P.kopfB / 2) * H * 1.08, ry = (P.kopfH / 2) * H * 1.06, w = rad(kopfW);
+    const um = (x, y) => [kopfM[0] + x * Math.cos(w) - y * Math.sin(w), kopfM[1] + x * Math.sin(w) + y * Math.cos(w)];
+    let d = '';
+    for (let i = 0; i <= 16; i++) { const t = Math.PI + (i / 16) * Math.PI; d += `${i ? 'L' : 'M'}${pt(um(rx * Math.cos(t), ry * Math.sin(t) - 0.06 * ry))}`; }
+    const s1 = proj(add(KM, kopfR.w([0, 0.08, 0.3]))), s2 = proj(add(KM, kopfR.w([0, 0.04, 0.7])));
+    schichten.push(`<g class="s-muetze"><path d="${d}Z"/><path d="${kapsel(s1, 0.1 * H, s2, 0.05 * H)}"/></g>`);
+  }
   for (const s of reihenfolge) if (arme[s] && vorRumpf(s)) zeichneArm(s, true);
 
   // Prüfdaten für das Gate: Kollision eines nahen Arms mit dem Kopf, Balance je Posenart.
@@ -485,6 +496,22 @@ export const STIL = {
   's-mk': `fill:${AKZ}`,
   's-mkg': 'fill:var(--tinte-3,#656f7e)',
   's-spk': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linejoin:round',
+  // Draußen (Welle 7): Umgebung als Umriss in --tinte-3, Wasser in den Primär-Tönen, die Fahne als
+  // einziger gefüllter Akzent (--primaer-dunkel: 3:1 auf --flaeche-2)
+  's-sonne': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
+  's-blende': 'fill:var(--tinte-3,#656f7e);opacity:.13',
+  's-wind': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round',
+  's-gras': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.4;stroke-linecap:round',
+  's-stange': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.4;stroke-linecap:round',
+  's-fahne': 'fill:var(--primaer-dunkel,#1e8bd6)',
+  's-schirm': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round',
+  's-bank': 'fill:var(--tinte-3,#656f7e)',
+  's-flimmer': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round',
+  's-pfuetze': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.2',
+  's-spiegel': 'fill:none;stroke:var(--flaeche,#ffffff);stroke-width:1.4;stroke-linecap:round',
+  's-profil': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round',
+  's-muetze': 'fill:var(--tinte-2,#5a6675)',
+  's-regen': 'fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linecap:round',
   's-hart': `fill:none;stroke:${AKZ};stroke-width:3.2;stroke-linecap:round`,
   's-gabel': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:1.8',
   's-feld': 'fill:var(--tinte-3,#656f7e);opacity:.07',

@@ -8,7 +8,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { figur, datei, buehne, schlaeger3d, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len, P } from './figur.mjs';
+import { figur, datei, buehne, schlaeger3d, kreis, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len, P } from './figur.mjs';
 import { speeder, schatten, spur, spurKurve, pfeil, druck, feld, feldProfil, sprechblase, winkel, huetchen } from './bauteile.mjs';
 import { G001, G009 } from './hand.mjs';
 import { TEXTE, SPRACHEN } from './texte.mjs';
@@ -1085,7 +1085,206 @@ export const MOTIVE = {
       }),
     };
   },
+  // Draußen spielen: erhöhte Rückansicht entlang der Spielrichtung. Zwei Felder ohne Netz, dazwischen
+  // die 12,8 m lange Passierzone — auch verkürzt länger als ein Feld. Der Spieler im nahen Feld
+  // liest die Fahne am Mast hinter dem fernen Feld, dort steht das Gegenüber; Sonne, Wind und Bäume
+  // sagen „draußen“. z in Metern, die Felder sind gegenüber den Figuren stilisiert (M Einheiten je
+  // Meter), wie in G-008/G-032.
+  'G-054': (t) => {
+    const A = 10, M = 60, MX = 162, hz = 50, zSp = 1.5;
+    const s = (z) => A / (A + z);
+    const nahY = hz + (250 - hz) / s(zSp);
+    const b = buehne({ horizont: hz, nahY, mitteX: MX, H0: 22 / s(zSp), abstand: A });
+    const q = (m, z) => b.boden(MX + m * M, z);
+    const zCut = A / ((258 - hz) / (nahY - hz)) - A; // das nahe Feld endet über der Caption
+    const nahZ1 = 3.2, fernZ0 = nahZ1 + 12.8, fernZ1 = fernZ0 + 5.5;
+    const poly = (pts) => `M${pts.map(pt).join('L')}Z`;
+    const nah = [q(-2.75, zCut), q(2.75, zCut), q(2.75, nahZ1), q(-2.75, nahZ1)];
+    const fern = [q(-2.75, fernZ0), q(2.75, fernZ0), q(2.75, fernZ1), q(-2.75, fernZ1)];
+    const st = b.stelle(MX - 1.2 * M, zSp);
+    // Dreiviertel von hinten, aufrecht und locker, der Schläger seitlich; der Kopf zur Fahne gedreht
+    const fg = figur({
+      ort: st.ort, H: st.H, blick: 150, kamera: 14, neig: 8, kopf: { neig: -6, dreh: -34 }, art: 'stehend',
+      beinR: { ober: [0.2, -1, 0.05], unter: [0.03, -1, -0.06], fuss: [0.2, -0.05, 1] },
+      beinL: { ober: [-0.2, -1, 0.05], unter: [-0.03, -1, -0.06], fuss: [-0.2, -0.05, 1] },
+      armR: { ober: [0.3, -1, 0.1], unter: [0.25, -0.55, 0.8], hand: [0.25, -0.4, 0.9] },
+      armL: { ober: [-0.2, -1, 0.05], unter: [-0.1, -0.9, 0.35], art: 'offen' },
+      schlaeger: { hand: 'R', achse: [0.45, -0.2, 0.87], flaeche: [0.89, 0.1, -0.44] },
+    });
+    const gs = b.stelle(MX + 0.3 * M, fernZ0 + 2.6);
+    const geg = figur({ ...POSEN.bereit, ort: gs.ort, H: gs.H, blick: 8, kamera: 14 });
+    // Hoher Mast rechts hinter dem fernen Feld, die Fahne weht nach links (Wind von rechts): der
+    // Blick geht über das Gegenüber hinweg, das Tuch liegt im Bild statt am Rand
+    const fz = fernZ1 + 1, fb = q(3.6, fz), top = [fb[0], fb[1] - 6 * M * s(fz)];
+    const w = 1.7 * M * s(fz), hh = 1.05 * M * s(fz);
+    const tuch = `M${pt(top)}Q${f(top[0] - w * 0.5)},${f(top[1] - hh * 0.3)} ${f(top[0] - w)},${f(top[1] + hh * 0.2)}` +
+      `L${f(top[0] - w * 0.94)},${f(top[1] + hh * 0.9)}Q${f(top[0] - w * 0.45)},${f(top[1] + hh * 0.75)} ${f(top[0])},${f(top[1] + hh)}Z`;
+    const wind = [[250, 22], [262, 36], [244, 50]].map(([x, y]) => `M${x},${y}q10,-4.5 20,0t20,0`).join('');
+    const baum = (x, r) => `M${f(x)},${f(hz)}L${f(x)},${f(hz - r * 1.2)}${kreis([x, hz - r * 1.9], r)}`;
+    const gras = (m, z, k0 = 1) => {
+      const p = q(m, z), k = 0.16 * M * s(z) * k0;
+      return `M${f(p[0] - k)},${f(p[1])}l${f(k * 0.4)},${f(-k * 1.4)}M${f(p[0])},${f(p[1])}l0,${f(-k * 1.9)}M${f(p[0] + k)},${f(p[1])}l${f(-k * 0.3)},${f(-k * 1.3)}`;
+    };
+    return {
+      figuren: [fg, geg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        inhalt: [
+          `<path class="s-boden" d="M8,${f(hz)}L292,${f(hz)}"/>`,
+          sonneUmriss([40, 32], 9),
+          `<path class="s-sonne" d="${baum(98, 7)}${baum(114, 5)}${baum(134, 6)}"/>`,
+          `<path class="s-wind" d="${wind}"/>`,
+          `<path class="s-feld" d="${poly(nah)}${poly(fern)}"/>`,
+          `<path class="s-linie" d="M${pt(nah[0])}L${pt(nah[3])}L${pt(nah[2])}L${pt(nah[1])}${poly(fern)}"/>`,
+          `<path class="s-gras" d="${gras(-4, nahZ1 + 4)}${gras(4.6, nahZ1 + 1.5)}${gras(-3.6, fernZ0 - 1, 0.9)}${gras(-4.4, zCut + 0.4, 1.1)}${gras(5.2, fernZ0 + 2)}"/>`,
+          `<path class="s-stange" d="M${pt(fb)}L${pt(top)}"/><path class="s-fahne" d="${tuch}"/>`,
+          geg.svg,
+          schatten([st.ort[0] + 2, st.ort[1] + 1], 34, 4.4),
+          fg.svg,
+          `<path class="s-blick" d="M${pt(add(fg.punkte.kopf, [8, -2]))}L${pt(add(top, [-w * 0.55, hh * 0.6]))}"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Sonne und Blendung: Profil, Überkopf-Vorbereitung mit Schildmütze. Die Sonne steht rechts, ein
+  // blasser Keil zeigt die Blendung bis zu den Augen. Die Flugbahn kommt von rechts, läuft an der
+  // Sonne vorbei und ist im Blendbereich nur blass gepunktet; danach ist der Speeder wieder voll da.
+  // Der Kopf ist über den Keil hinweg zum Speeder gerichtet.
+  'G-056': (t) => {
+    const boden = 252;
+    const fg = figur({
+      ort: [96, boden], H: 21, blick: 72, kamera: 6, neig: -4, seit: -14, kopf: { neig: -44, dreh: -10 }, art: 'dynamisch', muetze: true,
+      beinR: { ober: [0.08, -1, -0.42], unter: [0, -1, -0.7], fuss: [0, -0.9, 1] },
+      beinL: { ober: [-0.04, -1, 0.42], unter: [0, -1, 0.08], fuss: [-0.08, -0.06, 1] },
+      // Schlagarm hoch und zurück (hinter dem Kopf vorbei), der Schläger hinter der Schulter
+      armR: { ober: [0.5, 0.7, -0.5], unter: [0.05, 1, 0.2], hand: [0.05, 1, 0.2] },
+      armL: { ober: [-0.15, -0.75, 1], unter: [0.95, 0.25, 0.25], art: 'faust' },
+      schlaeger: { hand: 'R', achse: [0, 0.8, -0.6], flaeche: [1, 0, 0] },
+    });
+    const sonne = [256, 58], r = 13;
+    const spitze = add(fg.punkte.kopf, [6, -4]);
+    const ach = norm(sub(spitze, sonne)), quer = [-ach[1], ach[0]];
+    const k1 = add(sonne, mul(quer, r + 14)), k2 = add(sonne, mul(quer, -(r + 14)));
+    // Bahn: quadratische Bézierkurve von rechts unten über die Sonne zum Speeder
+    const sp = [140, 34], A = [298, 206], C = [222, -52];
+    const bez = (u) => [0, 1].map((i) => (1 - u) ** 2 * A[i] + 2 * (1 - u) * u * C[i] + u * u * sp[i]);
+    const zug = (u0, u1, n = 24) => Array.from({ length: n + 1 }, (_, i) => `${i ? 'L' : 'M'}${pt(bez(u0 + ((u1 - u0) * i) / n))}`).join('');
+    const seite = (a, b, c) => Math.sign((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]));
+    const geblendet = (x) => (x[0] > spitze[0] && seite(spitze, k1, x) !== seite(spitze, k2, x)) || len(sub(x, sonne)) < 30;
+    const drin = Array.from({ length: 201 }, (_, i) => i / 200).filter((u) => geblendet(bez(u)));
+    const u0 = Math.min(...drin), u1 = Math.max(...drin);
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        inhalt: [
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          `<path class="s-blende" d="M${pt(k1)}L${pt(spitze)}L${pt(k2)}Z"/>`,
+          sonneUmriss(sonne, r),
+          schatten([104, boden + 1], 40, 4.5),
+          fg.svg,
+          `<path class="s-bahn" d="${zug(0, u0)}"/><path class="s-bahng" d="${zug(u0, u1)}"/><path class="s-bahn" d="${zug(u1, 0.93)}"/>`,
+          // Kappe voran entlang der sinkenden Bahn
+          speeder({ p: sp, winkel: winkel2d(sub(sp, C)) }),
+          `<path class="s-blick" d="M${pt(add(fg.punkte.kopf, [10, -14]))}L${pt(add(sp, [-3, 6]))}"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Nässe und sicherer Stand: Profil, ein kurzer, kontrollierter Schritt über nassen Boden, leicht in
+  // den Knien, der Schläger vor dem Körper. Unter dem Boden die Schrittfolge (zwei gleich kurze
+  // Schritte davor), vor der Figur eine Pfütze, auf die sie nicht tritt; leichter Regen, ein Schuhprofil.
+  'G-057': (t) => {
+    const boden = 240;
+    const fg = figur({
+      ort: [150, boden], H: 22, blick: 90, kamera: 7, neig: 6, kopf: { neig: -2 }, art: 'dynamisch', koerper: 'b',
+      beinR: { ober: [0.08, -1, 0.5], unter: [0.02, -1, -0.12], fuss: [0.06, -0.04, 1] },
+      beinL: { ober: [-0.08, -1, -0.12], unter: [0, -1, -0.8], fuss: [0, -0.5, 1] },
+      armR: { ober: [0.3, -0.85, 0.42], unter: [0.1, 0.45, 0.9], hand: [0.05, 0.6, 0.8] },
+      armL: { ober: [-0.75, -0.6, -0.1], unter: [-0.5, -0.75, 0.1], art: 'offen' },
+      schlaeger: { hand: 'R', achse: [0.02, 0.75, 0.66], flaeche: [0.85, -0.35, 0.38] },
+    });
+    const p = fg.punkte;
+    // Sohlenprofil: Zickzack knapp über der Sohlenkante des vorderen Fußes
+    const a = add(p.fersR, [1, -1.6]), b = add(p.spitzeR, [-2, -1.6]);
+    const profil = Array.from({ length: 7 }, (_, i) => `${i ? 'L' : 'M'}${pt(add(lerp(a, b, i / 6), [0, i % 2 ? -2.2 : 0]))}`).join('');
+    const pfuetze = (cx, rx) => `<ellipse class="s-pfuetze" cx="${f(cx)}" cy="${boden + 3}" rx="${f(rx)}" ry="${f(rx * 0.16)}"/>` +
+      `<path class="s-spiegel" d="M${f(cx - rx * 0.45)},${boden + 2.6}L${f(cx - rx * 0.1)},${boden + 2.6}M${f(cx + rx * 0.15)},${boden + 3.6}L${f(cx + rx * 0.4)},${boden + 3.6}"/>`;
+    // Schrittfolge unter der Bodenlinie: der aktuelle kurze Schritt kräftig, die zwei davor gleich
+    // lang und gestrichelt — kurze Schritte im Takt statt eines langen Satzes
+    const von = p.ballenL[0], bis = p.ballenR[0] - 4, l = bis - von;
+    const folge = [2, 1].map((i) => `<path class="s-wegg" d="M${f(von - i * (l + 8))},${boden + 14}L${f(bis - i * (l + 8))},${boden + 14}" marker-end="url(#p057)"/>`).join('');
+    const regen = [[214, 40], [236, 28], [258, 46], [226, 70], [250, 84], [272, 64]].map(([x, y]) => `M${x},${y}l-4,10`).join('');
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        defs: pfeil('p057', 's-mkg', 3.8),
+        inhalt: [
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          `<path class="s-regen" d="${regen}"/>`,
+          pfuetze(p.spitzeR[0] + 46, 26),
+          schatten([150, boden + 1], 36, 4),
+          fg.svg,
+          `<path class="s-profil" d="${profil}"/>`,
+          folge,
+          `<path class="s-wegv" d="M${f(von)},${boden + 14}L${f(bis)},${boden + 14}" marker-end="url(#p057)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Hitze: die Sonne hoch, über dem Feld flimmert die Luft. Der Spieler sitzt in der Pause auf
+  // einer Bank im Schatten eines Sonnenschirms, die Unterarme auf den Oberschenkeln, der Schläger
+  // lehnt am Bankende. Keine Trinkflasche: die App gibt keine Trinkvorgaben (Gesundheitsrahmen).
+  'G-058': (t) => {
+    const boden = 244, H = 23;
+    const fg = figur({
+      ort: [118, boden], H, blick: 64, kamera: 8, neig: 10, kopf: { neig: 16 }, art: 'dynamisch', koerper: 'a',
+      beinR: { ober: [0.12, -0.05, 1], unter: [0.02, -1, 0.08], fuss: [0.1, -0.05, 1] },
+      beinL: { ober: [-0.1, -0.05, 1], unter: [-0.02, -1, 0.14], fuss: [-0.05, -0.05, 1] },
+      armR: { ober: [0.12, -0.9, 0.45], unter: [0, -0.25, 1], art: 'faust' },
+      // der hintere Arm stützt sich neben der Hüfte auf die Bank, verdeckt vom Rumpf
+      armL: { ober: [-0.2, -1, -0.2], unter: [0, -1, 0.1], art: 'faust' },
+    });
+    const p = fg.punkte;
+    const sitz = p.huefte[1] + 0.34 * H, bx0 = p.huefte[0] - 40, bx1 = p.huefte[0] + 34;
+    const brett = (x0, y0, x1, y1) => `M${f(x0)},${f(y0)}L${f(x1)},${f(y0)}L${f(x1)},${f(y1)}L${f(x0)},${f(y1)}Z`;
+    const bank = brett(bx0, sitz, bx1, sitz + 5) + brett(bx0 + 6, sitz + 5, bx0 + 10, boden) + brett(bx1 - 10, sitz + 5, bx1 - 6, boden);
+    // Sonnenschirm: Stange hinter der Bank, flache Kuppel; sein Schatten liegt als ruhige Fläche am Boden
+    const sx = p.huefte[0] - 18, dachY = 70;
+    const kuppel = `M${f(sx - 74)},${dachY + 14} Q ${f(sx)},${dachY - 34} ${f(sx + 74)},${dachY + 14} Q ${f(sx + 37)},${dachY + 6} ${f(sx)},${dachY + 14} Q ${f(sx - 37)},${dachY + 6} ${f(sx - 74)},${dachY + 14}Z`;
+    const flimmer = [232, 252, 272].map((x) => `M${x},${boden - 8} q 5,-8 0,-16 q -5,-8 0,-16 q 5,-8 0,-16`).join('');
+    // Schläger lehnt am linken Bankende, der Kopf oben
+    const schl = schlaeger3d({ griff: [0, 0, 0], achse: [0, 1, 0], flaeche: [0, 0, 1], proj: (v) => [bx0 - 6 + v[0] * H + v[1] * H * 0.14, boden - 3 - v[1] * H], H });
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        inhalt: [
+          `<ellipse class="s-sch" cx="${f(sx + 4)}" cy="${boden + 2}" rx="78" ry="7"/>`,
+          `<path class="s-boden" d="M8,${boden + 0.5}L292,${boden + 0.5}"/>`,
+          `<path class="s-linie" d="M206,${boden + 0.5}L292,${boden + 0.5}M206,${boden - 2.5}L206,${boden + 3.5}"/>`,
+          `<path class="s-flimmer" d="${flimmer}"/>`,
+          sonneUmriss([258, 46], 14),
+          `<path class="s-stange" d="M${f(sx)},${boden}L${f(sx)},${dachY - 6}"/><path class="s-schirm" d="${kuppel}"/>`,
+          schl,
+          `<path class="s-bank" d="${bank}"/>`,
+          fg.svg,
+        ].join('\n  '),
+      }),
+    };
+  },
 };
+
+// Sonne als Umriss mit acht Strahlen (Draußen-Motive): ein Zeichen für die Bedingung, kein Licht.
+function sonneUmriss(c, r) {
+  let d = kreis(c, r);
+  for (let i = 0; i < 8; i++) {
+    const w = (i * Math.PI) / 4, u = [Math.cos(w), Math.sin(w)];
+    d += `M${pt(add(c, mul(u, r + 4)))}L${pt(add(c, mul(u, r + 10)))}`;
+  }
+  return `<path class="s-sonne" d="${d}"/>`;
+}
 
 // ---------------------------------------------------------------------------
 // Schreiben
