@@ -8,7 +8,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { figur, datei, buehne, schlaeger3d, add, sub, mul, lerp, norm, f, pt, winkel2d, esc, len } from './figur.mjs';
+import { figur, datei, buehne, schlaeger3d, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len } from './figur.mjs';
 import { speeder, schatten, spur, spurKurve, pfeil, druck, feld, feldProfil, sprechblase, winkel, huetchen } from './bauteile.mjs';
 import { G001, G009 } from './hand.mjs';
 import { TEXTE, SPRACHEN } from './texte.mjs';
@@ -39,7 +39,14 @@ POSEN.drive = {
   beinR: { ober: [0.2, -1, -0.62], unter: [0.04, -1, -0.62], fuss: [0.3, -0.55, 0.8] },
   armR: { ober: [0.25, -0.65, 0.75], unter: [0.15, -0.3, 1], hand: [0.15, -0.1, 1], vor: true },
   armL: { ober: [-0.45, -0.55, 0.75], unter: [0.6, 0.15, 0.8], hand: [0.7, 0.2, 0.6], art: 'offen' },
-  schlaeger: { hand: 'R', achse: [0.5, 0.5, 0.7], flaeche: [-0.17, 0, 0.98] },
+  schlaeger: { hand: 'R', achse: [0.7, 0.55, 0.45], flaeche: [-0.45, 0, 0.7] },
+};
+// Ruhiger Drive: dieselbe Schlagstellung, weniger Vorlage, beide Knie sichtbar gebeugt (das
+// hintere stand im harten Drive fast gestreckt) — für Konstanz (G-022) und Funplay (G-062).
+POSEN.driveRuhig = {
+  ...POSEN.drive, neig: 6,
+  beinL: { ober: [-0.12, -1, 0.62], unter: [0, -1, -0.08], fuss: [-0.12, -0.04, 1] },
+  beinR: { ober: [0.2, -1, -0.2], unter: [0.04, -1, -0.85], fuss: [0.3, -0.55, 0.8] },
 };
 POSEN.split = {
   ...POSEN.bereit, neig: 30, kopf: { neig: -28 },
@@ -51,9 +58,14 @@ const REPO = resolve(HIER, '..', '..');
 
 // Früherer Schläger an der Schlaghand einer Figur, in Körperrahmen-Richtungen (Ausholen, Schwungweg).
 // Er trägt die Aussage allein, darum als volle Kontur mit 3:1, nicht blass.
-const geistSchlaeger = (fg, achse, flaeche) => schlaeger3d({
-  griff: fg.welt.arme.R.griff, achse: norm(fg.welt.oben.w(achse)), flaeche: norm(fg.welt.oben.w(flaeche)), proj: fg.proj, H: fg.H, geist: 'kontur',
-});
+// Wie in figur(): flaeche muss senkrecht zur achse stehen, sonst zeichnet schlaeger3d eine andere Fläche.
+const geistSchlaeger = (fg, achse, flaeche) => {
+  const schief = dot(norm(achse), norm(flaeche));
+  if (Math.abs(schief) > 0.2) fg.warnungen.push(`Geisterschläger: Fläche schief zur Achse (${f(schief)})`);
+  return schlaeger3d({
+    griff: fg.welt.arme.R.griff, achse: norm(fg.welt.oben.w(achse)), flaeche: norm(fg.welt.oben.w(flaeche)), proj: fg.proj, H: fg.H, geist: 'kontur',
+  });
+};
 // Taktleiste: kleine Speeder auf einer Linie — gleichmäßig (schneller Takt) oder mit Lücke (Taktbruch)
 const taktleiste = (xs, y) => `<path class="s-boden" d="M${f(xs[0] - 16)},${f(y + 5)}L${f(xs[xs.length - 1] + 16)},${f(y + 5)}"/>` +
   xs.map((x) => speeder({ p: [x, y], winkel: 90, s: 0.62 })).join('');
@@ -143,7 +155,10 @@ export const MOTIVE = {
   // Bogen auf Hüfthöhe (kein großes Ausholen, vgl. TEN-Delta), Treffpunkt vor dem Körper, die
   // Bahn beginnt am Speeder und verlässt das Bild flach nach rechts.
   'G-003': (t) => {
-    const fg = figur({ ...POSEN.drive, ort: [108, 246], H: 24, blick: 80, kamera: 9 });
+    // Gewicht auf dem vorderen Fuß: vorderes Bein steiler, Hüfte näher über der vorderen Ferse
+    const fg = figur({ ...POSEN.drive, ort: [108, 246], H: 24, blick: 80, kamera: 9,
+      beinL: { ober: [-0.12, -1, 0.5], unter: [0, -1, 0.04], fuss: [-0.12, -0.04, 1] },
+      beinR: { ober: [0.2, -1, -0.78], unter: [0.04, -1, -0.5], fuss: [0.3, -0.55, 0.8] } });
     const k = fg.punkte.schlaegerKopf, h = fg.punkte.huefte;
     // Speeder knapp vor der Fläche, Kappe voran: eben getroffen und schon unterwegs
     const sp = add(k, [24, 0]);
@@ -162,15 +177,17 @@ export const MOTIVE = {
       }),
     };
   },
-  // Tempowechsel, Bild 1: der gewohnte schnelle Takt. Harter Drive im Durchschwung, langer
-  // Schwungweg als Spur (keine Speedlines, Leitfaden; gedrehte Geisterschläger an der Hand lasen
-  // sich als Gekritzel), flache schnelle Bahn; die Taktleiste darunter gleichmäßig. Körper bis
-  // zum Handgelenk deckungsgleich mit G-019.
+  // Tempowechsel, Bild 1: der gewohnte schnelle Takt. Harter Drive im Durchschwung: der Arm ist
+  // über den Treffpunkt hinaus nach vorn gezogen, die Spur beginnt hinter der Hüfte wie in G-019
+  // und läuft an der Stelle des Treffpunkts vorbei weiter (keine Speedlines, Leitfaden). Der
+  // Speeder ist schon weit voraus, die Bahn flach; die Taktleiste darunter gleichmäßig. Beine und
+  // Rumpf deckungsgleich mit G-019, nur Schlagarm und Schläger unterscheiden sich.
   'G-018': (t) => {
     const fg = figur({ ...POSEN.drive, ort: [100, 236], H: 22, blick: 80, kamera: 9,
-      schlaeger: { hand: 'R', achse: [-0.05, 0.42, 1], flaeche: [-0.95, 0.05, 0.1] } });
-    const k = fg.punkte.schlaegerKopf, h = fg.punkte.huefte, sp = add(k, [30, -1]);
-    // langer Schwungweg: von hinter der Hüfte bis in den Durchschwung
+      armR: { ober: [0.3, -0.5, 0.85], unter: [0.1, -0.1, 1], hand: [0.05, 0, 1], vor: true },
+      schlaeger: { hand: 'R', achse: [0.62, 0.55, 0.56], flaeche: [-0.67, 0, 0.74] } });
+    const k = fg.punkte.schlaegerKopf, h = fg.punkte.huefte, sp = add(k, [40, -2]);
+    // langer Schwungweg: von hinter der Hüfte durch den Treffpunkt bis in den Durchschwung
     const weg = spurKurve({ p0: add(h, [-46, 4]), c: add(h, [4, 26]), p1: add(k, [-6, 6]), breite: 13 });
     return {
       figuren: [fg], zeichen: [],
@@ -188,15 +205,17 @@ export const MOTIVE = {
       }),
     };
   },
-  // Tempowechsel, Bild 2: gleiche Bewegung, erst im Treffpunkt das Tempo herausgenommen. Die Hand
-  // bleibt stehen, die Fläche öffnet nach oben, der Ausschwung endet kurz; die Bahn steigt weich
-  // und verlässt das Bild oben rechts. Die Taktleiste bricht: drei eng, Lücke, einer.
+  // Tempowechsel, Bild 2: gleiche Bewegung, erst im Treffpunkt das Tempo herausgenommen. Die Spur
+  // beginnt hinter der Hüfte wie in G-018 (gleiche Vorbereitung) und endet am Schläger: die Hand
+  // bleibt stehen, die Fläche ist sichtbar nach oben geöffnet. Die Bahn steigt weich und verlässt
+  // das Bild oben rechts. Die Taktleiste: derselbe Grundtakt wie in G-018, dann die Lücke.
   'G-019': (t) => {
     const fg = figur({ ...POSEN.drive, ort: [100, 236], H: 22, blick: 80, kamera: 9,
-      schlaeger: { hand: 'R', achse: [0.55, 0.62, 0.55], flaeche: [-0.25, 0.75, 0.6] } });
+      // Schläger wie im Drive, nur die Fläche um die Achse ~40° nach oben gedreht
+      schlaeger: { hand: 'R', achse: [0.7, 0.55, 0.45], flaeche: [-0.71, 0.53, 0.45] } });
     const k = fg.punkte.schlaegerKopf, h = fg.punkte.huefte, sp = add(k, [20, -16]);
-    // kurzer Weg: dieselbe Vorbereitung, aber im Treffpunkt abgebremst
-    const weg = spurKurve({ p0: add(h, [8, 14]), c: add(h, [26, 18]), p1: add(k, [-4, 6]), breite: 10 });
+    // dieselbe Vorbereitung, im Treffpunkt abgebremst: die Spur endet am Schlägerkopf
+    const weg = spurKurve({ p0: add(h, [-46, 4]), c: add(h, [4, 26]), p1: add(k, [-6, 6]), breite: 13 });
     return {
       figuren: [fg], zeichen: [],
       datei: datei({
@@ -206,9 +225,10 @@ export const MOTIVE = {
           schatten([106, 237], 54, 5.5),
           weg,
           fg.svg,
-          speeder({ p: sp, winkel: 135 }),
+          // Kappe voran entlang des Bahnanfangs (Tangente zum ersten Kontrollpunkt)
+          speeder({ p: sp, winkel: winkel2d([41, -61]) }),
           `<path class="s-bahn" d="M${pt(add(sp, [9, -9]))} C ${f(sp[0] + 50)},${f(sp[1] - 70)} 250,16 296,20" marker-end="url(#p019)"/>`,
-          taktleiste([112, 130, 148, 202], 254),
+          taktleiste([112, 142, 172, 232], 254),
         ].join('\n  '),
       }),
     };
@@ -217,14 +237,17 @@ export const MOTIVE = {
   // beide Knie gebeugt, Rumpf ruhig; drei fast deckungsgleiche Bahnen enden in EINER engen
   // Zielmarke (Wiederholbarkeit), die Tafel „15:15“ ist der Druck (Regel 3.2/3.4).
   'G-022': (t) => {
-    const fg = figur({ ...POSEN.drive, ort: [74, 246], H: 23, blick: 80, kamera: 9, neig: 6,
-      beinL: { ober: [-0.12, -1, 0.62], unter: [0, -1, -0.08], fuss: [-0.12, -0.04, 1] },
-      beinR: { ober: [0.2, -1, -0.5], unter: [0.04, -1, -0.38], fuss: [0.3, -0.45, 0.8] } });
+    const fg = figur({ ...POSEN.driveRuhig, ort: [74, 246], H: 23, blick: 80, kamera: 9 });
     const k = fg.punkte.schlaegerKopf, sp = add(k, [22, 0]);
     const ziel = [272, sp[1] - 6];
-    // drei fast deckungsgleiche Bahnen: in der Mitte leicht gefächert, am Ziel wieder beisammen
-    const bahnen = [[-11, 's-bahnz'], [11, 's-bahnz'], [0, 's-bahn']].map(([d, kls]) =>
+    // drei fast deckungsgleiche Bahnen, alle gepunktet wie jede Flugbahn (durchgezogen lasen sich
+    // die grauen als Bogen und Sehne); in der Mitte nur leicht gefächert, am Ziel wieder beisammen
+    const bahnen = [[-8, 's-bahng'], [8, 's-bahng'], [0, 's-bahn']].map(([d, kls]) =>
       `<path class="${kls}" d="M${pt(add(sp, [12, 0]))} Q ${f((sp[0] + ziel[0]) / 2)},${f(sp[1] - 18 + d)} ${pt(add(ziel, [-13, 0]))}"/>`).join('');
+    // Bruchzeichen über dem Bündel: das Ziel liegt im Feld gegenüber, nicht zwei Meter vor ihr
+    const bx = ziel[0] - 36, by = ziel[1] - 5;
+    const bruch = `<path class="s-luecke" d="M${f(bx - 2.5)},${f(by - 10)}L${f(bx + 2.5)},${f(by + 10)}"/>` +
+      `<path class="s-bruch" d="M${f(bx - 7)},${f(by - 10)}L${f(bx - 2)},${f(by + 10)}M${f(bx + 2)},${f(by - 10)}L${f(bx + 7)},${f(by + 10)}"/>`;
     return {
       figuren: [fg], zeichen: [],
       datei: datei({
@@ -234,20 +257,22 @@ export const MOTIVE = {
           schatten([80, 247], 54, 5.5),
           fg.svg,
           speeder({ p: sp, winkel: 90 }),
-          bahnen,
+          bahnen, bruch,
           `<circle class="s-ring" cx="${f(ziel[0])}" cy="${f(ziel[1])}" r="11"/><circle class="s-mk" cx="${f(ziel[0])}" cy="${f(ziel[1])}" r="3.4"/>`,
         ].join('\n  '),
       }),
     };
   },
-  // Funplay: zwei Spielende auf mittlerer Distanz, ohne Feld (nur Bodenlinie). Links der Drive im
-  // Treffmoment, rechts die Partnerin in Bereitschaft. Hin flach und ruhig, zurück gestrichelt;
-  // darüber eine Strichliste als sprachneutraler Kontaktzähler („zählt die Kontakte am Stück“).
+  // Funplay: zwei Spielende auf mittlerer Distanz, ohne Feld (nur Bodenlinie). Die Distanz passt
+  // im Figurmaßstab nicht ins Bild, darum ist die Bodenlinie in der Mitte gebrochen wie in G-012.
+  // Links ein ruhiger Drive im Treffmoment (Kontrolle vor Kraft, nicht die Pose des harten Drives),
+  // rechts die Partnerin in Bereitschaft. Hin flach und ruhig, zurück gestrichelt; darüber eine
+  // Strichliste als sprachneutraler Kontaktzähler („zählt die Kontakte am Stück“).
   'G-062': (t) => {
-    const links = figur({ ...POSEN.drive, ort: [52, 246], H: 20, blick: 80, kamera: 8 });
+    const links = figur({ ...POSEN.driveRuhig, ort: [44, 246], H: 20, blick: 80, kamera: 8 });
     // Fläche zum Betrachter gedreht: auf der Kante läse sich der Schläger in dieser Ansicht als Strich
-    const rechts = figur({ ...POSEN.bereit, ort: [258, 246], H: 20, blick: -66, kamera: 8, koerper: 'b',
-      schlaeger: { ...POSEN.bereit.schlaeger, flaeche: [-0.9, -0.1, 0.45] } });
+    const rechts = figur({ ...POSEN.bereit, ort: [266, 246], H: 20, blick: -66, kamera: 8, koerper: 'b',
+      schlaeger: { ...POSEN.bereit.schlaeger, flaeche: [-0.86, -0.42, 0.31] } });
     const a = links.punkte.schlaegerKopf, b = rechts.punkte.schlaegerKopf;
     const scheitel = Math.min(a[1], b[1]) - 30;
     const hin = [add(a, [12, -2]), [(a[0] + b[0]) / 2, scheitel], add(b, [-10, -4])];
@@ -267,8 +292,9 @@ export const MOTIVE = {
         aria: t.aria, caption: t.cap, captionY: 274,
         defs: pfeil('p062') + pfeil('q062', 's-mk', 3.6),
         inhalt: [
-          `<path class="s-boden" d="M8,246.5L292,246.5"/>`,
-          schatten([56, 247], 44, 4.5), schatten([258, 247], 40, 4.5),
+          `<path class="s-boden" d="M4,246.5L144,246.5M156,246.5L296,246.5"/>`,
+          `<path class="s-bruch" d="M141,252.5L147,240.5M153,252.5L159,240.5"/>`,
+          schatten([48, 247], 44, 4.5), schatten([266, 247], 40, 4.5),
           `<path class="s-strich" d="${strich}"/>`,
           links.svg, rechts.svg,
           `<path class="s-bahn" d="M${pt(hin[0])} Q ${pt(hin[1])} ${pt(hin[2])}" marker-end="url(#p062)"/>`,
@@ -286,18 +312,19 @@ export const MOTIVE = {
   // knapp hinter seiner Frontlinie.
   'G-012': (t) => {
     const y = 232;
-    const fg = figur({ ...POSEN.drive, ort: [70, y], H: 20, blick: 84, kamera: 7, neig: 10,
+    const fg = figur({ ...POSEN.drive, ort: [84, y], H: 20, blick: 84, kamera: 7, neig: 10,
       armR: { ober: [0.25, -0.7, 0.7], unter: [0.12, -0.35, 1], hand: [0.12, -0.15, 1], vor: true },
-      schlaeger: { hand: 'R', achse: [0.55, 0.35, 0.75], flaeche: [-0.25, 0.45, 0.85] } });
+      schlaeger: { hand: 'R', achse: [0.75, 0.6, 0.12], flaeche: [-0.45, 0.4, 0.8] } });
     // Ausholstellung als blasse Figur am selben Ort: deckungsgleich bis auf Arm und Schläger, nur
     // die sind zu sehen. Der Schläger trägt die Aussage und bekommt die volle Kontur (3:1).
-    const ausPose = { ...POSEN.drive, ort: [70, y], H: 20, blick: 84, kamera: 7, neig: 10, geist: true,
-      armR: { ober: [0.55, -0.8, -0.35], unter: [0.35, -0.2, -0.9], hand: [0.3, -0.1, -0.95] }, schlaeger: undefined };
+    const ausPose = { ...POSEN.drive, ort: [84, y], H: 20, blick: 84, kamera: 7, neig: 10, geist: true,
+      armR: { ober: [0.45, -0.9, -0.3], unter: [0.3, -0.45, -0.85], hand: [0.3, -0.35, -0.9] }, schlaeger: undefined };
     const ausFig = figur(ausPose);
-    const aus = ausFig.svg + geistSchlaeger(ausFig, [0.45, 0.75, -0.5], [0.3, 0, 0.95]);
+    // ausgeholt auf Hüft- bis Brusthöhe wie der Drive (G-003), nicht auf Kopfhöhe
+    const aus = ausFig.svg + geistSchlaeger(ausFig, [0.45, 0.05, -0.9], [0.84, 0.33, 0.44]);
     const gegner = figur({ ...POSEN.bereit, ort: [266, y], H: 15, blick: -84, kamera: 7, koerper: 'b', neig: 20,
-      schlaeger: { ...POSEN.bereit.schlaeger, flaeche: [-0.9, -0.1, 0.45] } });
-    const k = fg.punkte.schlaegerKopf, sp = add(k, [14, -6]);
+      schlaeger: { ...POSEN.bereit.schlaeger, flaeche: [-0.86, -0.42, 0.31] } });
+    const k = fg.punkte.schlaegerKopf, sp = add(k, [22, -10]);
     const vorn = 196, ziel = [212, y];
     const linieEigen = 124, bruch = 158;
     // asymmetrisch: lange flache Steigung, Scheitel über der Zone, dann steiler Fall auf den Boden
@@ -314,7 +341,7 @@ export const MOTIVE = {
           `<path class="s-bruch" d="${bruchZ}"/>`,
           `<text class="s-lab" x="${bruch}" y="${y + 20}" text-anchor="middle">${esc(t.zone)}</text>`,
           `<ellipse class="s-basis" cx="${f(ziel[0])}" cy="${y}" rx="15" ry="3.2"/>`,
-          schatten([74, y + 1], 46, 4.5), schatten([266, y + 1], 30, 3.5),
+          schatten([88, y + 1], 46, 4.5), schatten([266, y + 1], 30, 3.5),
           `<g class="s-fern">${gegner.svg}</g>`,
           aus,
           fg.svg,
@@ -409,7 +436,7 @@ export const MOTIVE = {
       beinL: { ober: [-0.1, -1, -0.42], unter: [0, -1, -0.5], fuss: [0, -0.7, 1] },
       armR: { ober: [0.28, -0.25, 1], unter: [0.08, 0.35, 1], hand: [0.05, 0.5, 1] },
       armL: { ober: [-0.4, -0.6, -0.3], unter: [-0.2, -0.4, 0.5], art: 'offen' },
-      schlaeger: { hand: 'R', achse: [0.02, 0.6, 1], flaeche: [0.25, 0.1, 1] },
+      schlaeger: { hand: 'R', achse: [0.02, 0.6, 1], flaeche: [0.48, -0.757, 0.444] },
     });
     const vorn = figur({
       ...POSEN.bereit, ort: [232, boden], H: 21, blick: 76, kamera: 8, koerper: 'a', schulter: -18,
@@ -487,7 +514,7 @@ export const MOTIVE = {
       beinL: { ober: [-0.38, -1, -0.25], unter: [-0.2, -1, -0.35], fuss: [-0.25, -0.7, 0.7] },
       armR: { ober: [0.9, -0.65, 0.55], unter: [1, -0.5, 0.3], hand: [1, -0.4, 0.2], vor: true },
       armL: { ober: [-0.6, -0.9, -0.55], unter: [-0.35, -1, -0.3], art: 'offen' },
-      schlaeger: { hand: 'R', achse: [1, 0.12, 0.12], flaeche: [1, 0, 0.35] },
+      schlaeger: { hand: 'R', achse: [1, 0.12, 0.12], flaeche: [-0.05, -0.469, 0.882] },
     });
     const k = fg.punkte.schlaegerKopf, s = fg.punkte.schulterR;
     const r = len(sub(k, s)), w = winkel2d(sub(k, s));

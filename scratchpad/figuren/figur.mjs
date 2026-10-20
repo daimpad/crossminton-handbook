@@ -310,6 +310,12 @@ export function figur(pose) {
       if (vor > 0.05 && !nachgezogen) warnungen.push(`Gesundheitsrahmen: Knie ${s} ${f(vor)} H vor der Fußspitze`);
     }
   }
+  // Schlagfläche: flaeche muss senkrecht zur achse stehen, sonst zeichnet schlaeger3d eine andere
+  // Fläche als gemeint (die Fläche zeigte zur Betrachterin statt zum Ziel, Prüfung Welle 2).
+  if (sch) {
+    const schief = dot(norm(oben.w(sch.achse)), norm(oben.w(sch.flaeche ?? [0, 0, 1])));
+    if (Math.abs(schief) > 0.2) warnungen.push(`Schlägerfläche steht schief zur Achse (achse·flaeche ${f(schief)})`);
+  }
   // Schwerpunkt grob: zwischen Hüfte und Halsansatz, näher an der Hüfte (Beine und Rumpf).
   const fussX = ['R', 'L'].flatMap((s) => [proj(beine[s].ferse)[0], proj(beine[s].spitze)[0]]);
   const sx = lerp(proj(HM), proj(N), 0.3)[0];
@@ -328,7 +334,10 @@ export function figur(pose) {
       ballenR: proj(lerp(beine.R.ferse, beine.R.spitze, 0.68)), ballenL: proj(lerp(beine.L.ferse, beine.L.spitze, 0.68)),
       fersR: proj(beine.R.ferse), fersL: proj(beine.L.ferse), spitzeR: proj(beine.R.spitze), spitzeL: proj(beine.L.spitze),
       schlaegerKopf: sch && proj(add(arme[sch.hand].griff, mul(norm(oben.w(sch.achse)), 1.62))),
-      schlaegerNormale: sch && sub(proj(add(arme[sch.hand].griff, norm(oben.w(sch.flaeche ?? [0, 0, 1])))), proj(arme[sch.hand].griff)),
+      schlaegerNormale: sch && (() => {
+        const ac = norm(oben.w(sch.achse)), q = norm(cross(norm(oben.w(sch.flaeche ?? [0, 0, 1])), ac));
+        return sub(proj(add(arme[sch.hand].griff, norm(cross(ac, q)))), proj(arme[sch.hand].griff));
+      })(),
       boden: oy, sohle: oy - (pose.heben ?? 0) * H,
     },
     welt: { arme, beine, oben, becken },
@@ -350,7 +359,10 @@ export function schlaeger3d({ griff, achse, flaeche, proj, H, geist = false }) {
     return glatt(ps, 0.5);
   };
   let saiten = '';
-  const sichtbar = Math.abs(flaeche[2]);
+  // Sichtbarkeit an der GEZEICHNETEN Normale messen: flaeche ist nur die Wunschrichtung, gezeichnet
+  // wird die Ebene aus achse und quer. Lag flaeche schief zur achse, fehlte die Bespannung genau
+  // dann, wenn man frontal auf die Fläche sah (Prüfung Welle 2).
+  const sichtbar = Math.abs(norm(cross(achse, quer))[2]);
   if (sichtbar > 0.35 && !geist) {
     for (const q of [-0.5, 0, 0.5]) { const h = a * Math.sqrt(1 - q * q) * 0.93; saiten += `M${pt(proj(add(mitte, add(mul(quer, q * b), mul(achse, -h)))))}L${pt(proj(add(mitte, add(mul(quer, q * b), mul(achse, h)))))}`; }
     for (const q of [-0.5, 0, 0.5]) { const w = b * Math.sqrt(1 - q * q) * 0.91; saiten += `M${pt(proj(add(mitte, add(mul(achse, q * a), mul(quer, -w)))))}L${pt(proj(add(mitte, add(mul(achse, q * a), mul(quer, w)))))}`; }
@@ -440,6 +452,7 @@ export const STIL = {
   's-ring': `fill:none;stroke:${AKZ};stroke-width:2.4`,
   's-strich': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.2;stroke-linecap:round',
   's-bruch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
+  's-luecke': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:8',
   's-fern': 'opacity:.55',
   's-schnitt': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.2;stroke-linecap:round',
   's-ag0': 'stop-color:var(--tinte,#16202b);stop-opacity:1',
