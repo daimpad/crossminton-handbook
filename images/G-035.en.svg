@@ -1,22 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Reactive strength: the short, springy ground contact of foot and lower leg — minimal contact time, shown by a small compression arc and a fast rebound arrow.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Reactive strength, the short ground contact: a close-up of a leg from the side at the lowest point of contact. The knee is slightly bent, the shoe touches the ground only with the forefoot, and the heel hovers just above it. The Achilles tendon is drawn as a spring. In outline, the foot arrives from the upper left and leaves the ground towards the upper right; the two arrows form a narrow V.">
   <style>
-    .bein{fill:none;stroke:var(--tinte,#16202b);stroke-width:20;stroke-linecap:round}
-    .fuss{fill:none;stroke:var(--tinte,#16202b);stroke-width:16;stroke-linecap:round}
-    .komp{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-linecap:round}
-    .rueck{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4.2;stroke-linecap:round}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:3;stroke-dasharray:6 6}
-    .mk{fill:var(--primaer,#38a4f1)}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-wegv{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round}
+    .s-mkg{fill:var(--tinte-3,#656f7e)}
+    .s-sohle{fill:var(--tinte-2,#5a6675)}
+    .s-sehne{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+    .s-sehnex{fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:6;stroke-linejoin:round;stroke-linecap:round}
+    .s-konturu{fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:3.2;stroke-linejoin:round}
+    .s-konturf{fill:var(--flaeche-2,#f1f5fb)}
+    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
+    .s-x3{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round}
+    .s-ag0{stop-color:var(--tinte,#16202b);stop-opacity:1}
+    .s-ag1{stop-color:var(--tinte,#16202b);stop-opacity:0}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m035" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
-  <!-- Unterschenkel -->
-  <path class="bein" d="M150,70 L150,196"/>
-  <!-- Fuß auf dem Ballen, kurzer Kontakt -->
-  <path class="fuss" d="M150,196 L188,206"/>
-  <!-- Rückfederungspfeil nach oben -->
-  <path class="rueck" d="M118,190 L118,86" marker-end="url(#m035)"/>
-  <!-- Kompressionsbogen am Bodenkontakt -->
-  <path class="komp" d="M150,222 C 168,214 186,216 200,224"/>
-  <line class="boden" x1="96" y1="230" x2="230" y2="230"/>
-  <text class="st" x="150" y="262">short ground contact · fast rebound</text>
+  <defs><linearGradient id="o035" gradientUnits="userSpaceOnUse" x1="143" y1="116" x2="130" y2="34"><stop offset="0" class="s-ag0"/><stop offset="0.5" class="s-ag0"/><stop offset="1" class="s-ag1"/></linearGradient><marker id="g035" viewBox="0 0 10 10" markerWidth="3.8" markerHeight="3.8" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"/></marker></defs>
+  <path class="s-linie" d="M8,232.8L292,232.8"/>
+  <g class="s-konturu"><path d="M116.4,145.6C115.7,146.6 112.9,150.3 110.1,150.3C107.3,150.3 97.8,147.5 92.7,145.9C87.6,144.3 71.7,138.7 66.1,136.6C60.5,134.5 47.5,129.6 44.5,128.1C41.5,126.6 40.7,125.9 40.5,123.6C40.3,121.3 42.3,111.7 43.2,108.8C44.1,105.9 46.2,100 47.8,98.6C49.4,97.2 54.4,96.6 56.5,96.7C58.6,96.8 64.1,98.4 66.1,99.6C68.1,100.8 71.5,105 73.5,107.1C75.5,109.2 80.7,115.3 83.2,117.8C85.7,120.3 92.2,126.2 95,128.4C97.8,130.6 104.8,135.1 107.3,136.7C109.8,138.3 115.2,141 116.3,142C117.4,143 117.1,144.6 116.4,145.6Z"/><path d="M64.7,106.9L78.5,79.5A9.4,9.4 0 1 0 61.5,71.5L49.1,99.5A8.6,8.6 0 0 0 64.7,106.9Z"/></g>
+  <g class="s-konturu"><path d="M230.4,152.4C229.4,153.1 225.8,155.8 223.1,155.1C220.4,154.4 212,149.1 207.5,146.1C203,143.1 189.3,133.3 184.5,129.8C179.7,126.3 168.5,118 166.1,115.7C163.7,113.4 163,112.5 163.5,110.3C164,108.1 168.5,99.4 170.1,96.8C171.7,94.2 175.4,89.2 177.3,88.3C179.2,87.4 184.3,88.1 186.3,88.8C188.3,89.5 193.1,92.5 194.7,94.2C196.3,95.9 198.4,100.9 199.7,103.5C201,106.1 204.4,113.3 206.1,116.4C207.8,119.5 212.4,127 214.5,129.9C216.6,132.8 222.1,139.1 224.1,141.3C226.1,143.5 230.6,147.6 231.3,148.9C232,150.2 231.4,151.7 230.4,152.4Z"/><path d="M191.3,100.8L212.1,78.4A9.4,9.4 0 1 0 198,66L178.4,89.5A8.6,8.6 0 0 0 191.3,100.8Z"/></g>
+  <g class="s-konturf"><path d="M116.4,145.6C115.7,146.6 112.9,150.3 110.1,150.3C107.3,150.3 97.8,147.5 92.7,145.9C87.6,144.3 71.7,138.7 66.1,136.6C60.5,134.5 47.5,129.6 44.5,128.1C41.5,126.6 40.7,125.9 40.5,123.6C40.3,121.3 42.3,111.7 43.2,108.8C44.1,105.9 46.2,100 47.8,98.6C49.4,97.2 54.4,96.6 56.5,96.7C58.6,96.8 64.1,98.4 66.1,99.6C68.1,100.8 71.5,105 73.5,107.1C75.5,109.2 80.7,115.3 83.2,117.8C85.7,120.3 92.2,126.2 95,128.4C97.8,130.6 104.8,135.1 107.3,136.7C109.8,138.3 115.2,141 116.3,142C117.4,143 117.1,144.6 116.4,145.6Z"/><path d="M64.7,106.9L78.5,79.5A9.4,9.4 0 1 0 61.5,71.5L49.1,99.5A8.6,8.6 0 0 0 64.7,106.9Z"/></g>
+  <g class="s-konturf"><path d="M230.4,152.4C229.4,153.1 225.8,155.8 223.1,155.1C220.4,154.4 212,149.1 207.5,146.1C203,143.1 189.3,133.3 184.5,129.8C179.7,126.3 168.5,118 166.1,115.7C163.7,113.4 163,112.5 163.5,110.3C164,108.1 168.5,99.4 170.1,96.8C171.7,94.2 175.4,89.2 177.3,88.3C179.2,87.4 184.3,88.1 186.3,88.8C188.3,89.5 193.1,92.5 194.7,94.2C196.3,95.9 198.4,100.9 199.7,103.5C201,106.1 204.4,113.3 206.1,116.4C207.8,119.5 212.4,127 214.5,129.9C216.6,132.8 222.1,139.1 224.1,141.3C226.1,143.5 230.6,147.6 231.3,148.9C232,150.2 231.4,151.7 230.4,152.4Z"/><path d="M191.3,100.8L212.1,78.4A9.4,9.4 0 1 0 198,66L178.4,89.5A8.6,8.6 0 0 0 191.3,100.8Z"/></g>
+  <path class="s-wegv" d="M63,119L103,159" marker-end="url(#g035)"/>
+  <path class="s-wegv" d="M139,183L177,109" marker-end="url(#g035)"/>
+  <path fill="url(#o035)" d="M155.9,114.6L146.9,32.2A17,17 0 1 0 113.4,37.5L130.3,118.7A13,13 0 0 0 155.9,114.6Z"/>
+  <g class="s-k"><path d="M155.6,120.7L158,114.5A12.8,12.8 0 0 0 135.2,103.1L131.6,108.7A13.5,13.5 0 1 0 155.6,120.7Z"/><path d="M131.3,201.4L155,119.5A12.5,12.5 0 1 0 130.7,113.6L114.6,197.4A8.6,8.6 0 0 0 131.3,201.4Z"/><path d="M116,180C113.5,177.5 112,167.8 111,162C110,156.2 109.6,150.3 110,145C110.4,139.7 111.5,134.2 113.5,130C115.5,125.8 118.9,121.2 122,120C125.1,118.8 130.3,118 132,123C133.7,128 133,141 132,150C131,159 128.7,172 126,177C123.3,182 118.5,182.5 116,180Z"/></g>
+  <path class="s-x3" d="M113,219.6C112.2,218.1 111,210.6 111,208C111,205.4 111.8,198.8 113,197C114.2,195.3 118.9,193.4 121,193C123.1,192.6 128.8,192.8 131,193.5C133.2,194.2 137.6,197.4 140,199C142.5,200.6 149,205.2 152,207C155,208.8 162.7,213 166,214.5C169.3,216 177.2,218.6 180,219.5C182.8,220.4 188.7,221.7 190,222.5C191.3,223.3 191.5,225.4 191,226C190.5,226.6 188.7,227.3 186,227.4C183.3,227.5 173.4,227.4 168,227C162.6,226.6 145.8,224.7 140,224C134.2,223.3 121.2,221.5 118,221C114.9,220.5 113.8,221.1 113,219.6Z"/>
+  <path class="s-k" d="M113,219.6C112.2,218.1 111,210.6 111,208C111,205.4 111.8,198.8 113,197C114.2,195.3 118.9,193.4 121,193C123.1,192.6 128.8,192.8 131,193.5C133.2,194.2 137.6,197.4 140,199C142.5,200.6 149,205.2 152,207C155,208.8 162.7,213 166,214.5C169.3,216 177.2,218.6 180,219.5C182.8,220.4 188.7,221.7 190,222.5C191.3,223.3 191.5,225.4 191,226C190.5,226.6 188.7,227.3 186,227.4C183.3,227.5 173.4,227.4 168,227C162.6,226.6 145.8,224.7 140,224C134.2,223.3 121.2,221.5 118,221C114.9,220.5 113.8,221.1 113,219.6Z"/>
+  <path class="s-sohle" d="M190,229C189.4,229.7 188.6,231.7 186,232C183.4,232.4 173.4,232.3 168,232C162.6,231.7 146,230.1 140,229.4C134.1,228.7 120.3,227.1 117,226.4C113.7,225.7 112.5,223.8 112,223C111.5,222.2 112.3,219.8 113,219.6C113.7,219.4 114.9,220.5 118,221C121.2,221.5 134.2,223.3 140,224C145.8,224.7 162.6,226.6 168,227C173.4,227.4 183.3,227.5 186,227.4C188.7,227.3 190.5,225.8 191,226C191.5,226.2 190.6,228.3 190,229Z"/>
+  <path class="s-sehnex" d="M113.5,176L110.1,177.4L115.9,181.9L109.1,184.6L114.9,189.1L108.1,191.9L113.9,196.4L107.1,199.1L112.9,203.6L109.5,205"/>
+  <path class="s-sehne" d="M113.5,176L110.1,177.4L115.9,181.9L109.1,184.6L114.9,189.1L108.1,191.9L113.9,196.4L107.1,199.1L112.9,203.6L109.5,205"/>
+  <text class="st" x="150" y="272">short contact · springy instead of heavy</text>
 </svg>

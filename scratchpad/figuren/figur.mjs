@@ -508,6 +508,13 @@ export const STIL = {
   's-bank': 'fill:var(--tinte-3,#656f7e)',
   's-flimmer': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round',
   's-muetze': 'fill:var(--tinte-2,#5a6675)',
+  // Nahaufnahme Bein (G-035): Sohle eine Stufe heller als der Schuh, Achillessehne als Feder im
+  // Akzent mit Freistellung, Anflug/Abflug als deckender Umriss
+  's-sohle': 'fill:var(--tinte-2,#5a6675)',
+  's-sehne': `fill:none;stroke:${AKZ};stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round`,
+  's-sehnex': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:6;stroke-linejoin:round;stroke-linecap:round',
+  's-konturu': 'fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:3.2;stroke-linejoin:round',
+  's-konturf': 'fill:var(--flaeche-2,#f1f5fb)',
   's-wasser': 'fill:var(--primaer-dunkel,#1e8bd6);opacity:.22',
   's-regenring': 'fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.3;stroke-linecap:round',
   's-regen': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round',
