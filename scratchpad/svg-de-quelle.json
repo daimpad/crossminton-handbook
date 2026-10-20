@@ -1,10 +1,4 @@
 {
- "G-011": {
-  "aria": "Der Smash: hoher Treffpunkt über und vor dem Kopf, aggressiver Schlag nach unten, die Flugbahn führt steil und gerade ins gegnerische Feld.",
-  "texts": [
-   "hoher Treffpunkt · steil nach unten"
-  ]
- },
  "G-013": {
   "aria": "Der Schnitt: die angeschrägte Schlagfläche streift den Speeder seitlich statt ihn gerade zu treffen; gebogene Bewegungslinien zeigen die schneidende Bahn und die entstehende Rotation.",
   "texts": [
@@ -16,25 +10,6 @@
   "texts": [
    "Basis",
    "raus zur Ecke — zurück zur Mitte"
-  ]
- },
- "G-015": {
-  "aria": "Den Speeder früh nehmen: Kontakt am höchsten, frühesten Punkt klar vor und über dem Körper; ein blasser tieferer Treffpunkt zeigt, wo ein langsamerer Spieler getroffen hätte.",
-  "texts": [
-   "früh und hoch — gestohlene Zeit"
-  ]
- },
- "G-016": {
-  "aria": "Täuschung, Bild 1: eine bewusst neutrale, identische Vorbereitung, die nichts verrät — voller Rückschwung, ruhiger Körper, kein festgelegter Schlag.",
-  "texts": [
-   "?",
-   "gleiche Vorbereitung — nichts verraten"
-  ]
- },
- "G-017": {
-  "aria": "Täuschung, Bild 2: dieselbe Vorbereitung, aus der zwei verschiedene Schläge abzweigen — ein flacher, schneller Drive und ein kurzer, weicher Stopp; die Wahl fällt erst im letzten Moment.",
-  "texts": [
-   "eine Vorbereitung, zwei Möglichkeiten"
   ]
  },
  "G-021": {

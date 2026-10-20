@@ -5,12 +5,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-011': { aria: 'Smecz: wysoki punkt kontaktu nad i przed głową, agresywne uderzenie w dół, tor lotu prowadzi stromo i prosto w pole przeciwnika.', texts: ['wysoki kontakt · stromo w dół'] },
   'G-013': { aria: 'Podcięcie: ukośna powierzchnia rakiety muska speedera z boku zamiast trafić go prosto; wygięte linie ruchu pokazują tnący tor i powstającą rotację.', texts: ['powierzchnia muska · podcięcie i rotacja'] },
   'G-014': { aria: 'System pracy nóg: wyrywać się z centralnej bazy w rogi i natychmiast wracać do środka.', texts: ['Baza', 'w róg — powrót do środka'] },
-  'G-015': { aria: 'Brać speedera wcześnie: kontakt w najwyższym, najwcześniejszym punkcie wyraźnie przed i nad ciałem; blady niższy punkt kontaktu pokazuje, gdzie trafiłby wolniejszy gracz.', texts: ['wcześnie i wysoko — skradziony czas'] },
-  'G-016': { aria: 'Zwód, obraz 1: celowo neutralne, identyczne przygotowanie, które nic nie zdradza — pełny zamach do tyłu, spokojne ciało, żadnego zdecydowanego uderzenia.', texts: ['?', 'to samo przygotowanie — nic nie zdradzić'] },
-  'G-017': { aria: 'Zwód, obraz 2: to samo przygotowanie, z którego odgałęziają się dwa różne uderzenia — płaski, szybki drive i krótki, miękki skrót; wybór zapada dopiero w ostatniej chwili.', texts: ['jedno przygotowanie, dwie możliwości'] },
   'G-021': { aria: 'Precyzja przy liniach: speeder ląduje dokładnie na linii narożnej na skrajnym brzegu pola; ciasne strefy celu w rogach i cienka strzałka pokazują umiejscowienie co do punktu z minimalnym marginesem.', texts: ['dokładnie na linię · minimalny margines'] },
   'G-023': { aria: 'Cel gry: zagrać speedera nad strefą neutralną w pole przeciwnika.', texts: ['pole przeciwnika', 'STREFA NEUTRALNA', 'twoje pole'] },
   'G-024': { aria: 'Pozycja centralna: ze środka pola drogi do wszystkich czterech rogów są jednakowo krótkie.', texts: ['Środek', 'jednakowo szybko do każdego rogu'] },

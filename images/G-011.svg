@@ -1,29 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Smash: hoher Treffpunkt über und vor dem Kopf, aggressiver Schlag nach unten, die Flugbahn führt steil und gerade ins gegnerische Feld.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Der Smash: derselbe Spieler wie beim Überkopf-Clear, aber der Treffpunkt liegt weiter vorn, vor dem Kopf über der vorderen Schulter. Die Schlagfläche ist geschlossen, der Oberkörper klappt nach vorn, das Gewicht liegt auf dem vorderen Bein. Die Flugbahn führt lang nach vorn unten ins gegnerische Feld, zwei dünne Linien daneben zeigen andere Winkel.">
   <style>
-    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-    .kopf{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
-    .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-dasharray:2 7;stroke-linecap:round}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
-    .mk{fill:var(--primaer,#38a4f1)}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-f{fill:var(--tinte-2,#5a6675)}
+    .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    .s-spur{fill:var(--primaer-dunkel,#1e8bd6);opacity:.18}
+    .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    .s-bahng{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:.1 5.5;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m011" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
-  <circle class="kopf" cx="100" cy="100" r="14"/>
-  <path class="fig" d="M100,114 L110,174"/>
-  <!-- Schlagarm hoch, Treffpunkt über/vor dem Kopf -->
-  <path class="fig" d="M101,122 L124,92 L146,66"/>
-  <!-- freier Arm -->
-  <path class="fig" d="M103,128 L84,150"/>
-  <!-- Beine, Körper treibt nach vorn -->
-  <path class="fig" d="M110,174 L94,208 L84,240"/>
-  <path class="fig" d="M110,174 L134,204 L150,236"/>
-  <!-- Schläger am hohen Treffpunkt -->
-  <line class="schaft" x1="146" y1="66" x2="160" y2="52"/>
-  <ellipse class="kelle" cx="166" cy="44" rx="10" ry="14" transform="rotate(44 166 44)"/>
-  <!-- steile, gerade Flugbahn nach unten -->
-  <path class="bahn" d="M172,52 L252,204" marker-end="url(#m011)"/>
-  <line class="boden" x1="72" y1="244" x2="190" y2="244"/>
-  <text class="st" x="150" y="272">hoher Treffpunkt · steil nach unten</text>
+  <defs><marker id="p011" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker></defs>
+  <ellipse class="s-schw" cx="96" cy="253" rx="46" ry="5"/><ellipse class="s-sch" cx="96" cy="253" rx="29.4" ry="3.1"/>
+  <path class="s-spur" d="M37.8,86L39.9,83.7L42.2,81.4L44.5,79.3L47,77.3L49.5,75.3L52.1,73.5L54.8,71.8L57.6,70.2L60.5,68.8L63.4,67.5L66.4,66.3L69.5,65.3L72.6,64.4L75.7,63.6L78.9,63L82.1,62.5L85.3,62.2L88.6,62.1L91.8,62L95.1,62.2L98.4,62.5L101.6,62.9L104.8,63.5L108,64.3L111.2,65.2L114.4,66.2L117.4,67.4L120.5,68.8L114.4,80.3L112.2,78.7L109.8,77.2L107.4,75.8L104.9,74.5L102.3,73.3L99.7,72.3L97,71.4L94.2,70.6L91.4,70L88.5,69.5L85.6,69.2L82.6,69L79.7,69L76.7,69.1L73.7,69.4L70.7,69.8L67.8,70.4L64.8,71.1L61.9,72L59,73L56.2,74.2L53.4,75.6L50.7,77.1L48.1,78.7L45.5,80.5L43.1,82.4L40.7,84.5L38.5,86.7Z"/>
+  <g class="s-f"><path d="M81.3,177.3L87.9,189.7A6.7,6.7 0 1 0 99.7,183.2L92.7,171A6.5,6.5 0 0 0 81.3,177.3Z"/><path d="M88,189.8L99.6,210.6A4.7,4.7 0 0 0 108.2,206.7L100.2,184.3A6.7,6.7 0 1 0 88,189.8Z"/><path d="M99.1,207.2L96.6,218A5.4,5.4 0 1 0 107.1,219.8L108.4,208.8A4.7,4.7 0 0 0 99.1,207.2Z"/><path d="M96.5,219.5L97.9,245.2A2.7,2.7 0 0 0 103.3,245.4L107.1,220A5.4,5.4 0 1 0 96.5,219.5Z"/><path d="M98.7,243.1L95.9,245.8A3.4,3.4 0 1 0 101.2,249.8L103,246.3A2.7,2.7 0 0 0 98.7,243.1Z"/><path d="M97.8,251.6L109.5,253.1A3.2,3.2 0 0 0 110.4,246.8L98.8,244.9A3.4,3.4 0 1 0 97.8,251.6Z"/><path d="M109.9,253.1L115.4,252.9A2.2,2.2 0 0 0 116,248.6L110.8,246.9A3.2,3.2 0 1 0 109.9,253.1Z"/></g>
+  <g class="s-f"><path d="M102,137.3L110.8,165.2A3.4,3.4 0 0 0 117.3,163.6L112.2,134.9A5.3,5.3 0 1 0 102,137.3Z"/><path d="M112.8,161L111.4,161.5A3.9,3.9 0 1 0 116.2,167L116.9,165.8A3.4,3.4 0 0 0 112.8,161Z"/><path d="M109.2,163.7L108,166.6A2.3,2.3 0 0 0 110.7,169.7L113.8,168.9A3.9,3.9 0 1 0 109.2,163.7Z"/></g>
+  <g class="s-f"><path d="M105.9,168.1a3.6,3.6 0 1 0 7.1,0a3.6,3.6 0 1 0 -7.1,0Z"/></g>
+  <g class="s-k"><path d="M105.8,126.8C108.7,128.8 109.5,130.1 111,132.9C112.5,135.6 113.9,136.6 113.3,140.4C112.7,144.2 111.3,146.8 108.1,151.7C104.9,156.6 100.7,159.5 97.5,164.9C94.3,170.3 94.4,174.6 92.2,178.8C89.9,183 88.8,183.9 86.3,185.8C83.8,187.8 82.1,188.5 79.7,188.6C77.3,188.7 75.9,188.2 74.2,186.5C72.6,184.8 71.9,183.2 71.5,180.1C71.1,177 70.9,175.6 72.4,171.1C73.9,166.6 77.1,163.6 78.9,157.6C80.6,151.7 80,146.9 81,141.2C81.9,135.4 81.9,132.2 83.6,128.9C85.2,125.5 86.6,125.5 89.3,124.4C91.9,123.3 93.5,122.8 96.8,123.3C100.1,123.8 103,124.9 105.8,126.8Z"/><path d="M71.2,172.6L65.5,183.9A6.7,6.7 0 1 0 77.7,189.7L82.9,178.2A6.5,6.5 0 0 0 71.2,172.6Z"/><path d="M65.5,184L55.4,205A4.7,4.7 0 0 0 63.5,209.8L77,190.8A6.7,6.7 0 1 0 65.5,184Z"/><path d="M56,204.1L49.5,212.3A5.4,5.4 0 1 0 58.2,218.4L63.7,209.5A4.7,4.7 0 0 0 56,204.1Z"/><path d="M48.7,213.6L40.4,234.8A2.7,2.7 0 0 0 45.2,237.3L58.1,218.6A5.4,5.4 0 1 0 48.7,213.6Z"/><path d="M41.8,233.3L39.9,234.2A3.4,3.4 0 1 0 44.1,239L45.2,237.2A2.7,2.7 0 0 0 41.8,233.3Z"/><path d="M38.6,239.4L46.9,249.4A3.2,3.2 0 0 0 51.9,245.5L43.9,235.2A3.4,3.4 0 1 0 38.6,239.4Z"/><path d="M49.7,250.6L54.7,250.1A2.2,2.2 0 0 0 55.1,245.8L50.2,244.4A3.2,3.2 0 1 0 49.7,250.6Z"/></g>
+  <g class="s-k"><ellipse cx="102.9" cy="111.8" rx="8.4" ry="10.5" transform="rotate(3.3 102.9 111.8)"/><path d="M97.8,115.7a6.3,6.3 0 1 0 12.6,0a6.3,6.3 0 1 0 -12.6,0Z"/></g>
+  <g class="s-x"><path d="M93,130.8L93.2,113.6A3.4,3.4 0 0 0 86.5,112.9L82.7,129.6A5.3,5.3 0 1 0 93,130.8Z"/><path d="M92.3,115.8L96,111.6A3.9,3.9 0 1 0 89.8,107.1L86.9,111.9A3.4,3.4 0 0 0 92.3,115.8Z"/><path d="M96.5,111L102.9,99.6A2.3,2.3 0 0 0 99.1,96.9L90.3,106.4A3.9,3.9 0 1 0 96.5,111Z"/><path d="M101.9,100.5L104.6,99A3.6,3.6 0 1 0 99.5,94.8L98.6,97.8A2.3,2.3 0 0 0 101.9,100.5Z"/></g>
+  <g class="s-k"><path d="M93,130.8L93.2,113.6A3.4,3.4 0 0 0 86.5,112.9L82.7,129.6A5.3,5.3 0 1 0 93,130.8Z"/><path d="M92.3,115.8L96,111.6A3.9,3.9 0 1 0 89.8,107.1L86.9,111.9A3.4,3.4 0 0 0 92.3,115.8Z"/><path d="M96.5,111L102.9,99.6A2.3,2.3 0 0 0 99.1,96.9L90.3,106.4A3.9,3.9 0 1 0 96.5,111Z"/></g>
+  <path class="s-rf" d="M130.4,65.8C130.5,66.2 130.6,66.5 130.6,66.9C130.6,67.3 130.6,67.8 130.6,68.2C130.5,68.7 130.5,69.1 130.3,69.6C130.2,70.1 130.1,70.6 130,71.1C129.8,71.7 129.6,72.2 129.4,72.7C129.2,73.3 128.9,73.8 128.7,74.3C128.4,74.9 128.1,75.4 127.8,76C127.5,76.5 127.2,77 126.8,77.5C126.5,78 126.1,78.5 125.7,79C125.4,79.5 125,79.9 124.6,80.3C124.2,80.8 123.8,81.2 123.4,81.5C123,81.9 122.6,82.2 122.2,82.5C121.8,82.8 121.4,83.1 121,83.3C120.7,83.5 120.3,83.7 119.9,83.9C119.6,84 119.2,84.1 118.9,84.2C118.5,84.3 118.2,84.3 117.9,84.3C117.6,84.3 117.3,84.2 117.1,84.1C116.9,84 116.6,83.8 116.4,83.7C116.2,83.5 116.1,83.2 115.9,83C115.8,82.7 115.7,82.4 115.6,82.1C115.5,81.7 115.4,81.4 115.4,81C115.4,80.6 115.4,80.2 115.4,79.7C115.5,79.3 115.6,78.8 115.7,78.3C115.8,77.8 115.9,77.3 116.1,76.8C116.2,76.3 116.4,75.7 116.6,75.2C116.8,74.7 117.1,74.1 117.4,73.6C117.6,73 117.9,72.5 118.2,72C118.5,71.4 118.9,70.9 119.2,70.4C119.5,69.9 119.9,69.4 120.3,68.9C120.6,68.5 121,68 121.4,67.6C121.8,67.2 122.2,66.8 122.6,66.4C123,66 123.4,65.7 123.8,65.4C124.2,65.1 124.6,64.8 125,64.6C125.4,64.4 125.7,64.2 126.1,64C126.5,63.9 126.8,63.8 127.1,63.7C127.5,63.7 127.8,63.6 128.1,63.7C128.4,63.7 128.7,63.7 128.9,63.8C129.2,63.9 129.4,64.1 129.6,64.3C129.8,64.5 130,64.7 130.1,65C130.2,65.2 130.4,65.5 130.4,65.8Z"/><path class="s-rs" d="M116.2,77.3L128.2,64.2M116.1,81.5L129.9,66.4M117.8,83.7L129.8,70.6M118,73L120.5,83M121.6,68.2L124.4,79.8M125.5,64.9L128,74.9"/><path class="s-rh" d="M115.4,79L115.1,82.6L116.7,84.1"/><path class="s-rsch" d="M108.4,89.9L115.1,82.6"/><path class="s-rr" d="M130.4,65.8C130.5,66.2 130.6,66.5 130.6,66.9C130.6,67.3 130.6,67.8 130.6,68.2C130.5,68.7 130.5,69.1 130.3,69.6C130.2,70.1 130.1,70.6 130,71.1C129.8,71.7 129.6,72.2 129.4,72.7C129.2,73.3 128.9,73.8 128.7,74.3C128.4,74.9 128.1,75.4 127.8,76C127.5,76.5 127.2,77 126.8,77.5C126.5,78 126.1,78.5 125.7,79C125.4,79.5 125,79.9 124.6,80.3C124.2,80.8 123.8,81.2 123.4,81.5C123,81.9 122.6,82.2 122.2,82.5C121.8,82.8 121.4,83.1 121,83.3C120.7,83.5 120.3,83.7 119.9,83.9C119.6,84 119.2,84.1 118.9,84.2C118.5,84.3 118.2,84.3 117.9,84.3C117.6,84.3 117.3,84.2 117.1,84.1C116.9,84 116.6,83.8 116.4,83.7C116.2,83.5 116.1,83.2 115.9,83C115.8,82.7 115.7,82.4 115.6,82.1C115.5,81.7 115.4,81.4 115.4,81C115.4,80.6 115.4,80.2 115.4,79.7C115.5,79.3 115.6,78.8 115.7,78.3C115.8,77.8 115.9,77.3 116.1,76.8C116.2,76.3 116.4,75.7 116.6,75.2C116.8,74.7 117.1,74.1 117.4,73.6C117.6,73 117.9,72.5 118.2,72C118.5,71.4 118.9,70.9 119.2,70.4C119.5,69.9 119.9,69.4 120.3,68.9C120.6,68.5 121,68 121.4,67.6C121.8,67.2 122.2,66.8 122.6,66.4C123,66 123.4,65.7 123.8,65.4C124.2,65.1 124.6,64.8 125,64.6C125.4,64.4 125.7,64.2 126.1,64C126.5,63.9 126.8,63.8 127.1,63.7C127.5,63.7 127.8,63.6 128.1,63.7C128.4,63.7 128.7,63.7 128.9,63.8C129.2,63.9 129.4,64.1 129.6,64.3C129.8,64.5 130,64.7 130.1,65C130.2,65.2 130.4,65.5 130.4,65.8Z"/><path class="s-rg" d="M99.2,99.9L108.4,89.9"/>
+  <g class="s-k"><path d="M101.9,100.5L104.6,99A3.6,3.6 0 1 0 99.5,94.8L98.6,97.8A2.3,2.3 0 0 0 101.9,100.5Z"/></g>
+  <path class="s-korb" d="M136.8,79.5L128.2,85.4Q124.8,80.6 124.8,74.7L135.2,74.4Z"/><path class="s-kappe" d="M135.4,75.9a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/>
+  <path class="s-bahn" d="M141,79 L296,129.3" marker-end="url(#p011)"/>
+  <path class="s-bahng" d="M141,79 L296,109.1"/>
+  <path class="s-bahng" d="M141,79 L296,154.6"/>
+  <text class="st" x="150" y="272">vor dem Kopf treffen · nach vorn unten</text>
 </svg>

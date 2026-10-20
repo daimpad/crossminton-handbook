@@ -1,31 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Den Speeder früh nehmen: Kontakt am höchsten, frühesten Punkt klar vor und über dem Körper; ein blasser tieferer Treffpunkt zeigt, wo ein langsamerer Spieler getroffen hätte.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Den Speeder früh nehmen: Der Spieler schreitet in den Ball hinein, der schlagseitige Fuß vorn, und trifft kompakt am höchsten Punkt klar vor und über dem Körper. Die ankommende Flugbahn sinkt von rechts oben durch diesen frühen Treffpunkt weiter bis neben die Hüfte, wo ein blasser Speeder den späten Treffpunkt zeigt; die Strecke dazwischen ist die Zeit, die dem Gegner fehlt. Der Speeder geht flach nach vorn zurück.">
   <style>
-    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-    .kopf{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
-    .speeder{fill:var(--primaer,#38a4f1)}
-    .geist{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;opacity:.7}
-    .zeit{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.4;stroke-dasharray:2 5;stroke-linecap:round}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
-    .mk{fill:var(--tinte-3,#6b7686)}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-f{fill:var(--tinte-2,#5a6675)}
+    .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    .s-bahng{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:.1 5.5;stroke-linecap:round}
+    .s-wegv{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-mkg{fill:var(--tinte-3,#656f7e)}
+    .s-geistsp{opacity:.4}
+    .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <defs><marker id="m015" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
-  <circle class="kopf" cx="104" cy="98" r="14"/>
-  <path class="fig" d="M104,112 L110,172"/>
-  <!-- Schlagarm früh und hoch nach vorn -->
-  <path class="fig" d="M105,120 L132,104 L162,92"/>
-  <path class="fig" d="M105,126 L86,150"/>
-  <path class="fig" d="M110,172 L96,208 L86,240"/>
-  <path class="fig" d="M110,172 L134,204 L150,238"/>
-  <!-- Schläger am frühen, hohen Treffpunkt -->
-  <line class="schaft" x1="162" y1="92" x2="178" y2="84"/>
-  <ellipse class="kelle" cx="188" cy="80" rx="10" ry="13" transform="rotate(66 188 80)"/>
-  <circle class="speeder" cx="184" cy="92" r="6"/>
-  <!-- blasser, tieferer Treffpunkt + Zeitgewinn-Pfeil -->
-  <circle class="geist" cx="196" cy="150" r="6"/>
-  <path class="zeit" d="M196,142 L188,102" marker-end="url(#m015)"/>
-  <line class="boden" x1="74" y1="244" x2="190" y2="244"/>
-  <text class="st" x="150" y="272">früh und hoch — gestohlene Zeit</text>
+  <defs><marker id="p015" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker><marker id="g015" viewBox="0 0 10 10" markerWidth="3.6" markerHeight="3.6" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"/></marker></defs>
+  <path class="s-boden" d="M8,250.5L292,250.5"/>
+  <ellipse class="s-schw" cx="104" cy="251" rx="48" ry="5"/><ellipse class="s-sch" cx="104" cy="251" rx="30.7" ry="3.1"/>
+  <path class="s-bahng" d="M298,18 Q 155.7,75.6 136.4,150.8"/>
+  <g class="s-geistsp"><path class="s-korb" d="M133.8,150.1L133.5,139.7Q139.4,139.3 144.3,142.5L139,151.4Z"/><path class="s-kappe" d="M131.8,154.1a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/></g>
+  <g class="s-f"><path d="M85.5,175.3L84.9,188.9A6.7,6.7 0 1 0 98.3,189.3L98.5,175.7A6.5,6.5 0 0 0 85.5,175.3Z"/><path d="M84.9,188.7L83.2,213A4.7,4.7 0 0 0 92.5,214.4L98.1,190.7A6.7,6.7 0 1 0 84.9,188.7Z"/><path d="M85.5,209.2L74.9,215.5A5.4,5.4 0 1 0 80.9,224.4L90.7,217.1A4.7,4.7 0 0 0 85.5,209.2Z"/><path d="M73.9,216.3L56.1,233.9A2.7,2.7 0 0 0 59.5,238.1L80.6,224.6A5.4,5.4 0 1 0 73.9,216.3Z"/><path d="M56.9,233.4L54.2,234.7A3.4,3.4 0 1 0 58.2,239.9L60.1,237.6A2.7,2.7 0 0 0 56.9,233.4Z"/><path d="M53.8,240.5L65.6,248.5A3.2,3.2 0 0 0 69.2,243.3L57.6,235A3.4,3.4 0 1 0 53.8,240.5Z"/><path d="M67.8,249L74.4,248.1A2.2,2.2 0 0 0 74.4,243.7L67.8,242.7A3.2,3.2 0 1 0 67.8,249Z"/></g>
+  <g class="s-f"><path d="M95.6,133.2L105.6,158.1A3.4,3.4 0 0 0 112,156L105.5,130A5.3,5.3 0 1 0 95.6,133.2Z"/><path d="M106.5,159.3L111.8,164.1A3.9,3.9 0 1 0 116.6,158L110.6,154A3.4,3.4 0 0 0 106.5,159.3Z"/><path d="M112.4,164.5L126.5,173.6A2.3,2.3 0 0 0 129.3,169.9L117.1,158.4A3.9,3.9 0 1 0 112.4,164.5Z"/></g>
+  <g class="s-f"><path d="M125.8,172.9L128,176.2A3.6,3.6 0 1 0 132.2,170.8L128.5,169.4A2.3,2.3 0 0 0 125.8,172.9Z"/></g>
+  <g class="s-k"><path d="M106.4,125C108.2,126.2 107.8,127.1 108.5,129.3C109.3,131.5 110,132.1 110.1,136C110.2,139.8 110.7,142.9 109.2,148.4C107.6,153.9 104.7,157.6 102.5,163.5C100.3,169.3 99.8,173.3 98.2,177.7C96.5,182.2 95.9,183.3 94.3,185.8C92.7,188.2 91.7,189.3 90.4,190C89,190.7 88.3,190.6 87.5,189.4C86.7,188.2 86.4,186.9 86.3,184.1C86.2,181.3 86.1,180 87.1,175.4C88,170.8 89.7,167.1 91,161C92.3,154.9 92.5,150.7 93.3,145C94.2,139.4 94.6,136.4 95.3,132.8C96,129.2 96.1,128.7 97,126.8C97.9,125 98,124 99.8,123.6C101.7,123.3 104.7,123.9 106.4,125Z"/><path d="M87.2,181.7L97.2,192.4A6.7,6.7 0 1 0 106.9,183.2L96.7,172.7A6.5,6.5 0 0 0 87.2,181.7Z"/><path d="M97.2,192.5L113.7,210A4.7,4.7 0 0 0 121.1,204.2L107.7,184.2A6.7,6.7 0 1 0 97.2,192.5Z"/><path d="M112.4,206.6L111.9,217.6A5.4,5.4 0 1 0 122.6,217.5L121.9,206.5A4.7,4.7 0 0 0 112.4,206.6Z"/><path d="M112.1,219.3L119,244.4A2.7,2.7 0 0 0 124.3,243.5L122.6,217.5A5.4,5.4 0 1 0 112.1,219.3Z"/><path d="M119.8,241.7L116.5,244.6A3.4,3.4 0 1 0 121.5,248.9L123.9,245.2A2.7,2.7 0 0 0 119.8,241.7Z"/><path d="M118.5,250.5L132.8,251A3.2,3.2 0 0 0 133.1,244.8L118.9,243.8A3.4,3.4 0 1 0 118.5,250.5Z"/><path d="M133.2,251L139.8,250.5A2.2,2.2 0 0 0 140,246.1L133.5,244.8A3.2,3.2 0 1 0 133.2,251Z"/></g>
+  <g class="s-k"><ellipse cx="102" cy="111" rx="8.4" ry="10.5" transform="rotate(-10.1 102 111)"/><path d="M107.3,120.5L109.5,119.5A2.7,2.7 0 0 0 111.2,117L111.1,114.6A6.3,6.3 0 1 0 107.3,120.5Z"/></g>
+  <g class="s-x"><path d="M102.9,139.4L128.5,125.9A3.4,3.4 0 0 0 125.7,119.8L98.6,129.8A5.3,5.3 0 1 0 102.9,139.4Z"/><path d="M128.8,125.7L134.7,121.6A3.9,3.9 0 1 0 129.9,115.5L124.6,120.5A3.4,3.4 0 0 0 128.8,125.7Z"/><path d="M135.2,121.2L147.2,109.4A2.3,2.3 0 0 0 144.4,105.8L130.4,115.1A3.9,3.9 0 1 0 135.2,121.2Z"/><path d="M146.6,109.9L150.2,108.2A3.6,3.6 0 1 0 145.6,103.2L143.6,106.6A2.3,2.3 0 0 0 146.6,109.9Z"/></g>
+  <g class="s-k"><path d="M102.9,139.4L128.5,125.9A3.4,3.4 0 0 0 125.7,119.8L98.6,129.8A5.3,5.3 0 1 0 102.9,139.4Z"/><path d="M128.8,125.7L134.7,121.6A3.9,3.9 0 1 0 129.9,115.5L124.6,120.5A3.4,3.4 0 0 0 128.8,125.7Z"/><path d="M135.2,121.2L147.2,109.4A2.3,2.3 0 0 0 144.4,105.8L130.4,115.1A3.9,3.9 0 1 0 135.2,121.2Z"/></g>
+  <path class="s-rf" d="M182.6,73.5C182.4,73.3 182.2,73.2 181.9,73.1C181.6,73 181.2,72.9 180.9,72.9C180.5,72.9 180.1,72.9 179.7,73C179.3,73 178.9,73.1 178.4,73.2C177.9,73.4 177.5,73.5 177,73.7C176.5,73.9 176,74.2 175.4,74.4C174.9,74.7 174.4,75 173.9,75.3C173.3,75.6 172.8,76 172.3,76.3C171.8,76.7 171.2,77.1 170.7,77.5C170.2,77.9 169.7,78.4 169.2,78.8C168.8,79.2 168.3,79.7 167.9,80.2C167.4,80.6 167,81.1 166.6,81.6C166.2,82.1 165.9,82.5 165.5,83C165.2,83.5 164.9,83.9 164.7,84.4C164.4,84.9 164.2,85.3 164,85.7C163.8,86.2 163.7,86.6 163.6,87C163.5,87.4 163.4,87.8 163.4,88.1C163.4,88.5 163.4,88.8 163.4,89.1C163.5,89.4 163.6,89.6 163.7,89.9C163.9,90.1 164.1,90.3 164.3,90.5C164.5,90.7 164.8,90.8 165.1,90.9C165.4,91 165.7,91 166,91.1C166.4,91.1 166.8,91.1 167.2,91C167.6,91 168.1,90.9 168.5,90.7C169,90.6 169.5,90.4 170,90.2C170.4,90.1 171,89.8 171.5,89.6C172,89.3 172.5,89 173,88.7C173.6,88.4 174.1,88 174.6,87.6C175.2,87.3 175.7,86.9 176.2,86.5C176.7,86 177.2,85.6 177.7,85.2C178.2,84.7 178.6,84.3 179.1,83.8C179.5,83.3 179.9,82.9 180.3,82.4C180.7,81.9 181.1,81.4 181.4,81C181.7,80.5 182,80 182.3,79.6C182.5,79.1 182.7,78.7 182.9,78.2C183.1,77.8 183.3,77.4 183.4,77C183.5,76.6 183.5,76.2 183.5,75.9C183.6,75.5 183.5,75.2 183.5,74.9C183.4,74.6 183.3,74.3 183.2,74.1C183,73.9 182.9,73.7 182.6,73.5Z"/><path class="s-rs" d="M168.2,90.4L183,76.7M164.9,89.9L182,74.1M164,87.2L178.7,73.5M172.2,88.7L165.6,83.7M177.3,84.9L169.6,79.1M181.4,80.2L174.7,75.2"/><path class="s-rh" d="M166.5,91.3L163.7,91.1L163.2,88.7"/><path class="s-rsch" d="M155.4,98.7L163.7,91.1"/><path class="s-rr" d="M182.6,73.5C182.4,73.3 182.2,73.2 181.9,73.1C181.6,73 181.2,72.9 180.9,72.9C180.5,72.9 180.1,72.9 179.7,73C179.3,73 178.9,73.1 178.4,73.2C177.9,73.4 177.5,73.5 177,73.7C176.5,73.9 176,74.2 175.4,74.4C174.9,74.7 174.4,75 173.9,75.3C173.3,75.6 172.8,76 172.3,76.3C171.8,76.7 171.2,77.1 170.7,77.5C170.2,77.9 169.7,78.4 169.2,78.8C168.8,79.2 168.3,79.7 167.9,80.2C167.4,80.6 167,81.1 166.6,81.6C166.2,82.1 165.9,82.5 165.5,83C165.2,83.5 164.9,83.9 164.7,84.4C164.4,84.9 164.2,85.3 164,85.7C163.8,86.2 163.7,86.6 163.6,87C163.5,87.4 163.4,87.8 163.4,88.1C163.4,88.5 163.4,88.8 163.4,89.1C163.5,89.4 163.6,89.6 163.7,89.9C163.9,90.1 164.1,90.3 164.3,90.5C164.5,90.7 164.8,90.8 165.1,90.9C165.4,91 165.7,91 166,91.1C166.4,91.1 166.8,91.1 167.2,91C167.6,91 168.1,90.9 168.5,90.7C169,90.6 169.5,90.4 170,90.2C170.4,90.1 171,89.8 171.5,89.6C172,89.3 172.5,89 173,88.7C173.6,88.4 174.1,88 174.6,87.6C175.2,87.3 175.7,86.9 176.2,86.5C176.7,86 177.2,85.6 177.7,85.2C178.2,84.7 178.6,84.3 179.1,83.8C179.5,83.3 179.9,82.9 180.3,82.4C180.7,81.9 181.1,81.4 181.4,81C181.7,80.5 182,80 182.3,79.6C182.5,79.1 182.7,78.7 182.9,78.2C183.1,77.8 183.3,77.4 183.4,77C183.5,76.6 183.5,76.2 183.5,75.9C183.6,75.5 183.5,75.2 183.5,74.9C183.4,74.6 183.3,74.3 183.2,74.1C183,73.9 182.9,73.7 182.6,73.5Z"/><path class="s-rg" d="M144.1,109.2L155.4,98.7"/>
+  <g class="s-k"><path d="M146.6,109.9L150.2,108.2A3.6,3.6 0 1 0 145.6,103.2L143.6,106.6A2.3,2.3 0 0 0 146.6,109.9Z"/></g>
+  <path class="s-korb" d="M186.1,82.7L175.8,84.1Q174.8,78.3 177.4,73L186.8,77.3Z"/><path class="s-kappe" d="M186,80.5a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"/>
+  <path class="s-bahn" d="M192.5,83 L296,121" marker-end="url(#p015)"/>
+  <path class="s-wegv" d="M190.8,92.9L150,150.6" marker-start="url(#g015)" marker-end="url(#g015)"/>
+  <text class="st" x="150" y="274">früh und hoch — gestohlene Zeit</text>
 </svg>
