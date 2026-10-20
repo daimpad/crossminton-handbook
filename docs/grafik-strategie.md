@@ -324,6 +324,11 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
    - G-022: beide Knie gebeugt, drei gepunktete Bahnen statt Bogen und Sehne, ein Bruchzeichen vor dem Ziel. G-062: Bruchzeichen für die mittlere Distanz und ein ruhiger Drive statt der Pose des harten Drives. G-012: Speeder frei vom Schläger, Ausholen auf Hüfthöhe.
    - Texte: „drive de coup droit“ und „drive forhendowy“ wie in Labels und Bausteinen, „Speeder“ im Englischen groß.
 
+   **Welle 3** (Aufschlag: G-005, G-006), Bögen in `docs/grafik-strategie/welle3-hell.png` und `welle3-dunkel.png`. Die Prüfung gab beide mit Änderung frei:
+   - **Das Dossier verlangte Unvereinbares.** „Schläger 30–45° unter der Waagerechten“ und „Fläche 15–20° geöffnet zum Ziel“ gehen in der Seitenansicht nicht zusammen: liegt die Normale in der Zielebene, steht der Schaft auf dem Schirm bei 90° minus Öffnungswinkel. Der erste Entwurf drehte darum die Fläche seitlich weg (59° neben dem Ziel, offenes Oval). Die Fläche hat Vorrang: der Schläger hängt jetzt steil wie ein Pendel, die Normale zeigt 22° über der Waagerechten zum Ziel. Das Dossier ist entsprechend korrigiert.
+   - **Eine Sequenz prüft sich selbst.** G-006 vergleicht im Modell, ob der hintere Ballen stehen bleibt und ob der Treffpunkt auf dem Fallweg aus G-005 liegt (±2), und warnt sonst — vorher rutschte der hintere Fuß 9 Einheiten zurück und der Speeder wurde 8 Einheiten vor seinem Fallweg getroffen.
+   - Bild 1 trägt das Gewicht jetzt sichtbar hinten, der Speeder hat Luft unter den Fingern, der Bogenpfeil kreuzt kein Schienbein mehr; in Bild 2 liegt die Kappe vor der Fläche statt auf dem Rahmen, die Bahn flacht ab, der Schatten verdeckt die Aufschlaglinie nicht.
+
    **Wenn der Pilot nicht überzeugt,** gibt es höchstens eine Nachbesserungsrunde. Danach entscheidet die Projektverantwortliche zwischen drei Wegen:
    - Richtung C an denselben neun Motiven, Generator und Gate bleiben dabei nutzbar;
    - Richtung A nur für Ganzfiguren, die Nahaufnahmen bleiben schematisch;
