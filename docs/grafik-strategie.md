@@ -306,6 +306,10 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
 
    **Abnahme:** Die Projektverantwortliche bekommt je Pilotgrafik einen Bogen mit alt und neu, hell und dunkel, groß und als 150-px-Miniatur. Dazu kommen Bildschirmfotos der echten Baustein-Seiten auf Telefon und Desktop. Je Grafik lautet das Urteil *freigegeben*, *freigegeben mit Änderung* oder *abgelehnt*. Der Pilot gilt als bestanden, wenn keine Grafik abgelehnt ist und die Änderungswünsche in einer Runde umsetzbar sind. Eine Vorschau über `deploy-pages.yml` ist ausgeschlossen, denn dieser Workflow veröffentlicht in die Produktion.
 
+   **Stand:** Fundament und Pilot sind umgesetzt, alle neun Grafiken liegen in vier Sprachen vor und bestehen beide Gates. Abweichend vom Plan oben geht der Pilot nach bestandenem Gate direkt live, denn die Projektverantwortliche hat das automatische Mergen freigegeben; die Abnahme entscheidet danach, ob eine Grafik bleibt, nachgebessert oder zurückgenommen wird. Die Bögen alt gegen neu liegen in `docs/grafik-strategie/pilot-hell.png` und `pilot-dunkel.png`. Die Serie in Wellen beginnt erst nach der Abnahme. Zwei Erkenntnisse aus dem Pilot:
+   - **G-001** zeigt die Hand schräg von oben hinten. Eine Draufsicht aus Sicht der Spielerin machte das V zwar zum aufrechten Buchstaben, die Hand las sich aber als Klumpen ohne Finger. Den Ausschlag gab, den Daumen mit dem Handrücken zu einer Fläche zu verschmelzen, statt ihn freizustellen: genau der Freistellungsrand machte ihn zur „Wurst“. Das V ist jetzt eine echte Kerbe, durch die die obere Griffkante scheint.
+   - **Caption-Breite** misst das Gate mit Liberation Sans. Der Container löst `system-ui` auf DejaVu Sans auf, die gut 10 % breiter läuft als die Systemschriften der Geräte; damit fielen sieben von neun Grafiken durch, obwohl sie auf jedem Gerät passen.
+
    **Wenn der Pilot nicht überzeugt,** gibt es höchstens eine Nachbesserungsrunde. Danach entscheidet die Projektverantwortliche zwischen drei Wegen:
    - Richtung C an denselben neun Motiven, Generator und Gate bleiben dabei nutzbar;
    - Richtung A nur für Ganzfiguren, die Nahaufnahmen bleiben schematisch;

@@ -39,10 +39,15 @@
      App einen Zustand (offen / Hinweis / erledigt). Am Speeder ist Gelb und Rot
      dagegen eine Sacheigenschaft des Balls, keine Statusaussage — beides über
      denselben Token laufen zu lassen, hiesse die Ampel zu verwässern.
-     Gelesen nur von den Konstruktionsgrafiken G-064…G-067. */
+     Gelesen von den Konstruktionsgrafiken G-064…G-067 und vom Speeder in den
+     Personengrafiken (scratchpad/figuren/). */
   --speeder-korb: #f0c400;
   --speeder-kappe: #e2402a;
   --speeder-kappe-tief: #a82412;
+  /* Bodenschatten der Personengrafiken: hell ein Tinte-Hauch, dunkel ein Schwarz-Hauch.
+     Ein Verlauf über --tinte wurde im Dunkelmodus zum hellen Lichthof, darum ein eigenes
+     Token mit Alpha statt der Tinte. */
+  --schatten-boden: #16202b2e;
   /* Flächen & Tinte — ruhige, leicht kühle Neutrale. */
   --hintergrund: #f2f6fc;
   --hintergrund-2: #eaf1fa;
@@ -99,6 +104,7 @@
     --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
     --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
     --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
+    --schatten-boden: #00000066;
     --hintergrund: #0f151c;
     --hintergrund-2: #131c26;
     --flaeche: #18232f;
@@ -137,6 +143,7 @@
   --signal-gruen: #33cf5a; --signal-gruen-text: #7fe39a; --signal-gruen-weich: #12301f;
   --signal-gelb: #f2d93b; --signal-gelb-text: #e2ce74; --signal-gelb-weich: #322f10;
   --speeder-korb: #ffd84d; --speeder-kappe: #ff6a52; --speeder-kappe-tief: #ffa593;
+  --schatten-boden: #00000066;
   --hintergrund: #0f151c;
   --hintergrund-2: #131c26;
   --flaeche: #18232f;

@@ -58,4 +58,10 @@
   <FilesMatch "^(index\.html|sw\.js)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
+  # Die Grafiken behalten ihren Namen, wenn sie neu gezeichnet werden (G-XXX ist die
+  # Identität, nie umbenennen). Ohne Rückfrage sähe ein Besucher die alte Zeichnung,
+  # bis der Browser-Cache abläuft.
+  <FilesMatch "^G-\d{3}(\.[a-z]{2})?\.(svg|png)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
 </IfModule>

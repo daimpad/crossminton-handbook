@@ -5,16 +5,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-001': { aria: 'Chwyt uniwersalny: dłoń trzyma rączkę luźno jak uścisk dłoni, między kciukiem a palcem wskazującym tworzy się wyraźne V na górnej krawędzi rączki.', texts: ['V', 'luźno jak uścisk dłoni · V kciuka u góry'] },
-  'G-002': { aria: 'Pozycja podstawowa: stopy nieco szerzej niż na szerokość barków, kolana ugięte, ciężar na przodostopiu, rakieta luźno przed ciałem.', texts: ['kolana ugięte · ciężar na przodostopiu'] },
   'G-003': { aria: 'Drive forhendowy: ciężar na przedniej stopie, tułów obrócony w kierunku uderzenia, zwarty, płaski punkt kontaktu wyraźnie przed ciałem.', texts: ['płasko i bezpośrednio · przed ciałem'] },
-  'G-004': { aria: 'Bekhend: ciężar na stopie po stronie rakiety, tułów otwiera się w kierunku uderzenia, rakieta prowadzona blisko ciała do przodu i trafia speedera z przodu.', texts: ['blisko ciała · punkt kontaktu z przodu'] },
   'G-005': { aria: 'Serwis, obraz 1: wolna ręka upuszcza speedera na wysokości bioder, ramię uderzające jest nisko, gotowe do zamachu od dołu do przodu.', texts: ['speeder spada na wysokość bioder'] },
   'G-006': { aria: 'Serwis, obraz 2: rakieta trafia speedera od dołu, cały speeder jest w punkcie kontaktu wyraźnie poniżej dłoni uderzającej.', texts: ['punkt kontaktu poniżej dłoni'] },
   'G-007': { aria: 'Praca nóg, obraz 1: split-step — mały sprężysty podskok, lądowanie na przodostopiu obu stóp, kolana ugięte, gotowe do odbicia w każdym kierunku.', texts: ['mały sprężysty podskok · na przodostopie'] },
-  'G-008': { aria: 'Praca nóg, obraz 2: obieg ruchu — wykrokiem w róg zagrać speedera i łukiem wrócić do pozycji centralnej pośrodku.', texts: ['wykrok w róg — powrót do środka'] },
-  'G-009': { aria: 'Strzał nadgarstka: przedramię pozostaje spokojne, nadgarstek jest odchylony do tyłu i strzela do przodu — wygięty łuk ruchu i lekkie rozmycie główki rakiety pokazują przyspieszenie.', texts: ['nadgarstek strzela · przedramię spokojne'] },
-  'G-010': { aria: 'Uderzenie nad głową: wysoki punkt kontaktu nad głową, wyprostowane ramię uderzające, tor lotu ciągnie wysokim, głębokim łukiem daleko w pole przeciwnika.', texts: ['wysoki kontakt · głęboki łuk w pole'] },
   'G-011': { aria: 'Smecz: wysoki punkt kontaktu nad i przed głową, agresywne uderzenie w dół, tor lotu prowadzi stromo i prosto w pole przeciwnika.', texts: ['wysoki kontakt · stromo w dół'] },
   'G-012': { aria: 'Skrót: duży zamach, ale miękki, wyhamowany kontakt — speeder ledwo przekracza strefę neutralną i spada tuż za przednią linią.', texts: ['krótko i miękko · tuż za linią'] },
   'G-013': { aria: 'Podcięcie: ukośna powierzchnia rakiety muska speedera z boku zamiast trafić go prosto; wygięte linie ruchu pokazują tnący tor i powstającą rotację.', texts: ['powierzchnia muska · podcięcie i rotacja'] },
@@ -24,7 +18,6 @@ const M = {
   'G-017': { aria: 'Zwód, obraz 2: to samo przygotowanie, z którego odgałęziają się dwa różne uderzenia — płaski, szybki drive i krótki, miękki skrót; wybór zapada dopiero w ostatniej chwili.', texts: ['jedno przygotowanie, dwie możliwości'] },
   'G-018': { aria: 'Zmiana tempa, obraz 1: szybkie, mocne uderzenie z wyraźnym rozmyciem ruchu i płaskim, szybkim torem lotu — wysokie tempo.', texts: ['wysokie tempo · płasko i szybko'] },
   'G-019': { aria: 'Zmiana tempa, obraz 2: niemal identyczne przygotowanie, teraz powolne, wysokie, miękkie uderzenie z łagodnym łukiem — celowe złamanie rytmu.', texts: ['złamany rytm · wysoko i miękko'] },
-  'G-020': { aria: 'Smecz z wyskoku: gracz trafia w najwyższym punkcie wyskoku, stopy oderwane od podłoża, ze stromym torem lotu w dół w pole przeciwnika.', texts: ['z wyskoku · stromo w dół'] },
   'G-021': { aria: 'Precyzja przy liniach: speeder ląduje dokładnie na linii narożnej na skrajnym brzegu pola; ciasne strefy celu w rogach i cienka strzałka pokazują umiejscowienie co do punktu z minimalnym marginesem.', texts: ['dokładnie na linię · minimalny margines'] },
   'G-022': { aria: 'Stałość pod najwyższą presją: czyste, zrównoważone uderzenie ze spokojną postawą — stabilna baza, spokojna główka, kontrolowane wyprowadzenie, niezawodnie powtarzalne.', texts: ['spokojnie i powtarzalnie · pod presją'] },
   'G-023': { aria: 'Cel gry: zagrać speedera nad strefą neutralną w pole przeciwnika.', texts: ['pole przeciwnika', 'STREFA NEUTRALNA', 'twoje pole'] },
@@ -47,7 +40,6 @@ const M = {
   'G-040': { aria: 'Serwis i odbiór w deblu: prawo serwisu wędruje w ustalonej kolejności przez wszystkich czterech graczy.', texts: ['1', '2', '3', '4', 'Serwis', 'po kolei: 1 → 2 → 3 → 4'] },
   'G-041': { aria: "Przełączanie w deblu: przejść z ataku przód-tył do obrony — para cofa się i rozstawia szerzej, porządek przód-tył zostaje.", texts: ["Atak", "przód–tył", "Obrona", "głębiej i szerzej"] },
   'G-042': { aria: 'Ruch jako jedność: obaj partnerzy przesuwają się wspólnie w tym samym kierunku, z niezmiennym odstępem.', texts: ['wspólne przesunięcie — odstęp trzyma'] },
-  'G-043': { aria: 'Porozumienie w parze: dwóch partnerów debla od tyłu, którzy dogadują się między punktami — jeden daje za plecami ukryty znak ręką.', texts: ['ukryty znak ręką · porozumienie'] },
   'G-044': { aria: 'Pierwsze kroki w deblu: dwóch partnerów obok siebie w wygodnym odstępie.', texts: ['wygodny odstęp', 'pierwsze kroki we dwoje'] },
   'G-045': { aria: 'Kto bierze piłkę: z dwóch partnerów jeden bierze środkowego speedera, drugi zostawia mu miejsce.', texts: ['brać', 'zostawić', 'kto bierze piłkę?'] },
   'G-046': { aria: 'Serwis w deblu, prosty: z ustalonej kolejności jeden serwuje nad strefą neutralną.', texts: ['1', 'para przeciwna', 'wasza para', 'Serwis'] },
@@ -57,7 +49,6 @@ const M = {
   'G-050': { aria: 'Czytać parę przeciwną: rozpoznać lukę między dwoma przeciwnikami i ją rozegrać.', texts: ['przeciwnicy', 'luka'] },
   'G-051': { aria: 'Ustawić partnera w pozycji: własne uderzenie stawia partnera w lepszej pozycji do ataku.', texts: ['twoje uderzenie', 'partner', 'ustawić partnera w pozycji'] },
   'G-052': { aria: "Płynnie przełączać: para przechodzi płynnie między atakiem a obroną — porządek przód-tył zostaje.", texts: ["przód", "Atak", "Obrona", "płynnie przełączać"] },
-  'G-053': { aria: 'Ślepe porozumienie: dwóch partnerów debla porusza się w doskonałej antycypacji, nie patrząc na siebie — odbite, jednakowo skierowane strzałki ruchu i wspólne pasmo percepcji.', texts: ['ślepe porozumienie · bez patrzenia'] },
   'G-054': { aria: 'Grać na dworze: gracz na polu bez siatki pod otwartym niebem z prostym podłożem, rozluźniona, elastyczna postawa.', texts: ['gra na dworze · otwarte pole'] },
   'G-055': { aria: 'Czytać i wykorzystać wiatr: wiatr znosi speedera na bok, dlatego celujesz świadomie pod znoszenie.', texts: ['Wiatr →', 'cel', 'celować pod znoszenie'] },
   'G-056': { aria: 'Słońce i oślepienie: gracz osłania oczy przed niskim słońcem, śledząc wysokiego speedera; słońce i oślepiające promienie w rogu, dostosowana postawa głowy.', texts: ['pod słońce · osłonić oczy'] },
@@ -78,6 +69,9 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 let n = 0;
 for (const [id, { aria, texts }] of Object.entries(M)) {
   const de = readFileSync(resolve('images', `${id}.svg`), 'utf8');
+  // Personengrafiken entstehen in scratchpad/figuren/ (motive.mjs + texte.mjs) samt allen vier
+  // Sprachen; dieses Skript würde ihre Übersetzung mit veralteten Texten überschreiben.
+  if (de.includes('data-quelle="figuren"')) { console.error(`${id} ist generiert (scratchpad/figuren/) — Eintrag aus der Map entfernen`); process.exit(1); }
   let i = 0;
   let pl = de.replace(/(<text\b[^>]*>)([^<]*)(<\/text>)/g, (m, open, _inhalt, close) => {
     if (i >= texts.length) { console.error('zu viele <text> in', id); process.exit(1); }
