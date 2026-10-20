@@ -539,7 +539,8 @@ export const MOTIVE = {
           land.svg,
           `<path class="s-blick" d="M${pt(add(sp, [12, 6]))} Q ${f(sp[0] + 70)},${f(sp[1] - 20)} ${pt(add(land.punkte.huefte, [-4, -8]))}"/>`,
           fg.svg,
-          speeder({ p: add(k, [11, 3]), winkel: 125 }),
+          // Kappe voran entlang der Bahn (Steigung 0,62 ≈ 58° im dir()-Maß), nicht quer dazu
+          speeder({ p: add(k, [11, 3]), winkel: 58 }),
           `<path class="s-bahn" d="M${pt(start)} L296,${f(start[1] + 0.62 * (296 - start[0]))}" marker-end="url(#p020)"/>`,
         ].join('\n  '),
       }),

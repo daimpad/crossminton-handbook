@@ -312,6 +312,12 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
 
    **Abnahme des Piloten:** G-002, G-004, G-008, G-010, G-043 und G-053 freigegeben, G-001, G-009 und G-020 freigegeben mit Änderung. Umgesetzt: in G-001 liegt der Daumen flacher und der Unterarm bleibt länger satt, bevor er ausläuft; G-009 zeigt die Ausholphase nur noch über den blassen Schläger, die Geisterhand lag hinter der kräftigen Hand; in G-020 trifft der Schlagarm vor dem Kopf statt ihn zu schneiden. Danach Welle 1 mit G-007 und G-032, Bögen in `docs/grafik-strategie/welle1-hell.png` und `welle1-dunkel.png`.
 
+   **Prüfung von Welle 1** (unabhängig, zwei Runden): G-007, G-032, G-001 und G-009 freigegeben, G-020 freigegeben mit Änderung. Gefunden und behoben:
+   - Die Ausgangspose für G-007 hatte einen Kniewinkel von 81,5° und das Knie vor der Fußspitze, beides gegen den Gesundheitsrahmen. Seitdem misst `figur.mjs` beides an jeder Pose mit Bodenkontakt, und das gemessene Gate wertet die Warnung als Fehler.
+   - In G-007 lasen sich die Diagonalpfeile als Klammern, weil ein Pfad beide Spitzen trug; jeder Pfeil ist jetzt ein eigener Pfad.
+   - In G-032 stimmten Maßstab, Hütchen und Spur nicht zusammen; der Rückweg ist jetzt gestrichelt und grau.
+   - In G-020 flog der Speeder quer zur Bahn. Er fliegt jetzt Kappe voran entlang der Bahn, wie überall sonst.
+
    **Wenn der Pilot nicht überzeugt,** gibt es höchstens eine Nachbesserungsrunde. Danach entscheidet die Projektverantwortliche zwischen drei Wegen:
    - Richtung C an denselben neun Motiven, Generator und Gate bleiben dabei nutzbar;
    - Richtung A nur für Ganzfiguren, die Nahaufnahmen bleiben schematisch;
