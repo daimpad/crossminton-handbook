@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Der Überkopfschlag: hoher Treffpunkt über dem Kopf, gestreckter Schlagarm, die Flugbahn zieht in hohem, tiefem Bogen weit ins gegnerische Feld.">
+  <style>
+    .gm-nah{fill:var(--tinte,#16202b)}
+    .gm-fern{fill:var(--tinte-3,#656f7e)}
+    .gm-fuge{stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round;paint-order:stroke}
+    .gm-naht{stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.8;stroke-linejoin:round;paint-order:stroke}
+    .gm-griff{fill:var(--primaer-tief,#1568ad)}
+    .gm-schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .gm-rahmen{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer,#38a4f1);stroke-width:4.2}
+    .gm-saite{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.1;opacity:.5}
+    .gm-korb{fill:var(--speeder-korb,#f0c400)}
+    .gm-kappe{fill:var(--speeder-kappe,#e2402a)}
+    .gm-kragen{fill:var(--speeder-kappe-tief,#a82412)}
+    .gm-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round;opacity:.45}
+    .gm-schatten{fill:var(--tinte-3,#656f7e);opacity:.16}
+    .gm-bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:.1 8}
+    .gm-spitze{fill:var(--primaer,#38a4f1);stroke:var(--primaer,#38a4f1);stroke-width:2;stroke-linejoin:round}
+    .gm-akzent{fill:var(--primaer,#38a4f1)}
+    .gm-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <path class="gm-boden" d="M58,244H190"/><path class="gm-bahn" d="M174.7,40.8C220.7,0.8 258,30 266,196"/><path class="gm-spitze" d="M266.3,200.2L261.4,192.1L270,191.5Z"/><g><path class="gm-fern gm-fuge" d="M101.8,122.5L97.6,150.6A4.7,4.7 0 0 0 106.9,152L111.2,123.9A4.7,4.7 0 0 0 101.8,122.5Z"/><path class="gm-fern gm-naht" d="M102.5,155.8L128.2,154.5A4.5,4.5 0 0 0 127.8,145.5L102,146.8A4.5,4.5 0 0 0 102.5,155.8Z"/><path class="gm-fern gm-naht" d="M133.6,150.7L136.6,147.1A4.7,4.7 0 0 0 129.4,141L126.3,144.7A4.7,4.7 0 0 0 133.6,150.7Z"/><path class="gm-fern gm-fuge" d="M104.9,168.2L118.3,204.5A6.5,6.5 0 0 0 130.4,200.1L117.1,163.8A6.5,6.5 0 0 0 104.9,168.2Z"/><path class="gm-fern gm-naht" d="M118.5,203.5L126.1,240.6A6,6 0 0 0 137.8,238.2L130.3,201.1A6,6 0 0 0 118.5,203.5Z"/><path class="gm-fern gm-naht" d="M130.6,232.7L150.6,235.8A3.6,3.6 0 0 1 150,243L129.8,243A5.2,5.2 0 0 1 130.6,232.7Z"/><path class="gm-nah gm-fuge" d="M104.6,166.8L109.4,205.2A6.5,6.5 0 0 0 122.2,203.6L117.4,165.2A6.5,6.5 0 0 0 104.6,166.8Z"/><path class="gm-nah gm-naht" d="M112.4,199.4L81,220.6A6,6 0 0 0 87.7,230.5L119.1,209.4A6,6 0 0 0 112.4,199.4Z"/><path class="gm-nah gm-naht" d="M87.3,220L99,237.4A3.6,3.6 0 0 1 93.3,241.8L79.2,226.4A5.2,5.2 0 0 1 87.3,220Z"/><path class="gm-nah gm-fuge" d="M99,118L112.7,116.5A6,6 0 0 1 119.4,122.2L121.7,165.2A6.5,6.5 0 0 1 116,172L107.4,172.9A6.5,6.5 0 0 1 100.4,167.4L93.7,124.9A6,6 0 0 1 99,118Z"/><circle class="gm-nah gm-fuge" cx="100" cy="103.2" r="12"/><path class="gm-nah gm-fuge" d="M110.3,126L126.9,103A4.7,4.7 0 0 0 119.3,97.5L102.7,120.5A4.7,4.7 0 0 0 110.3,126Z"/><path class="gm-nah gm-naht" d="M127.3,101.8L136.2,77.5A4.5,4.5 0 0 0 127.8,74.5L118.9,98.7A4.5,4.5 0 0 0 127.3,101.8Z"/><path class="gm-schaft" d="M138.9,62.2L142.8,55.5M142.8,55.5L149.9,53.6M142.8,55.5L140.9,48.4"/><ellipse class="gm-rahmen" cx="151.4" cy="40.6" rx="12" ry="9.5" transform="rotate(-60 151.4,40.6)"/><path class="gm-saite" d="M142.8,46L151.8,30.5M146.1,49.7L156.7,31.5M151,50.7L160,35.2M142.6,42.5L154.2,49.2M144.5,36.6L158.3,44.6M148.6,32.1L160.2,38.7"/><path class="gm-griff gm-fuge" d="M133.4,77.9L141.6,63.8A3.1,3.1 0 0 0 136.2,60.7L128.1,74.8A3.1,3.1 0 0 0 133.4,77.9Z"/><path class="gm-nah gm-naht" d="M137.5,74.8L139.1,70.3A4.7,4.7 0 0 0 130.2,67.1L128.6,71.6A4.7,4.7 0 0 0 137.5,74.8Z"/></g><g><path class="gm-korb gm-fuge" d="M164.7,50L155.9,58.7Q151.1,53.4 149.4,46.4L161.5,44Z"/><path class="gm-kragen" d="M166.2,49.4L162.8,43.1A1.6,1.6 0 0 0 160,44.6L163.3,50.9A1.6,1.6 0 0 0 166.2,49.4Z"/><circle class="gm-kappe gm-fuge" cx="165.9" cy="45.5" r="4.6"/></g>
+  <text class="st" x="150" y="270">hoher Treffpunkt · tiefer Bogen ins Feld</text>
+</svg>

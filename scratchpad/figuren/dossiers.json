@@ -1,0 +1,1569 @@
+{
+ "grafiken": [
+  {
+   "id": "G-001",
+   "baustein": "griff (bausteine.beginner-technik.json, Beginner)",
+   "motiv": "Nahaufnahme ohne Schlägerkopf: grauer, schräg ansteigender Griffbalken mit gestrichelter Mittellinie, darauf eine schwarze Hand aus einem kurzen dicken Handballen-Strich, vier gleich langen, parallelen Fingerbalken quer zum Griff und einem gebogenen Daumen. Über dem Zeigefinger schwebt ein blauer Winkel mit der Spitze nach oben (Λ), darüber ein großes blaues „V“. Caption: „locker wie ein Händedruck · Daumen-V oben“.",
+   "didaktischer_kern": "Ein Griff für alles, locker wie ein Handschlag: Schläger mit der Kante zum Boden, zwischen Daumen und Zeigefinger ein leichtes V. Beleg: „Halte den Schläger mit der freien Hand vor dich, die Kante zeigt zum Boden. Jetzt greif zu, als würdest du dem Griff die Hand geben. Zwischen Daumen und Zeigefinger bildet sich ein leichtes ‚V‘.“ und „Halte locker, nicht verkrampft“.",
+   "soll_pose": "Nahaufnahme. Blick von schräg oben und hinten auf den Handrücken einer RECHTEN Hand, so wie die Spielerin die eigene Hand sieht. Ausschnitt: Griffende unten links, Schaft oben rechts. Am oberen rechten Bildrand ist der Rahmenansatz des Kopfes angeschnitten und steht HOCHKANT (obere und untere Rahmenkante sichtbar, Schlagfläche senkrecht). So wird „Kante zum Boden“ ablesbar. Der Griff steigt mit 35–40° an, hat ein leicht verdicktes Griffende und 2–3 schräge Griffband-Wicklungen. Hand: Der Griff liegt diagonal in der Handfläche, von der Zeigefingerwurzel zum Kleinfingerballen; der Handballen sitzt am Griffende. Die Knöchelreihe läuft SCHRÄG über den Griff, der Zeigefingerknöchel liegt am weitesten zum Kopf hin. Mittel-, Ring- und Kleinfinger liegen gerundet und eng nebeneinander um den Griff; ihre Fingerspitzen lugen unten hervor und stehen nicht über. Der Zeigefinger ist leicht abgespreizt Richtung Kopf (Abzugsfinger), sein Mittelglied gebeugt. Der Daumen kommt von der Gegenseite schräg um den Griff, seine Spitze liegt neben dem Mittelglied des Mittelfingers. Er liegt weder längs auf dem Griff noch auf dem Zeigefinger. Das V ist die Hautfalte zwischen Daumen und Zeigefinger. Sie liegt auf der oberen Griffkante; ihre Spitze sitzt an der Daumenwurzel und zeigt zum Griffende bzw. zur Spielerin, die Öffnung zeigt zum Schlägerkopf. Das Handgelenk ist gerade, ein Stück Unterarm tritt unten links aus dem Bild. „Locker“ zeigt sich in entspannten Fingergliedern ohne Faust: Fingerspitzen liegen nur an, kein Pressen.",
+   "figuren": "keine Ganzfigur; eine rechte Hand mit kurzem Unterarmansatz",
+   "requisiten": [
+    "Schlägergriff mit Griffband und verdicktem Griffende",
+    "angeschnittener Rahmen-/Kopfansatz hochkant"
+   ],
+   "bewegungszeichen": "Keine Bewegungszeichen. Nötig ist nur der V-Akzent, und zwar direkt auf der Kontur: Innenkante des Daumens und Außenkante des Zeigefingers in --primaer, ein kleines „V“ daneben. Der schwebende Winkel und die durchgehende gestrichelte Griffmittellinie fallen weg; höchstens bleibt ein kurzes Kantenstück dort, wo das V aufliegt.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Die Hand liest sich als Rechen oder Gabel: vier gleich dicke, gerade Balken mit Rundkappen, ohne Fingerglieder. Sie ragen über den Griff hinaus, und die schwarze Masse wirkt wie ein Handschuhklumpen.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Das V ist als schwebender, nach oben spitzer Winkel (Λ) neben dem Zeigefinger gezeichnet und nicht als Hautfalte zwischen Daumen und Zeigefinger. Der Buchstabe „V“ steht dabei über einem umgekehrten V, beides widerspricht sich.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Die Finger stehen senkrecht zum Griff wie beim Faust- oder Hammergriff und laufen nicht schräg durch die Handfläche. Es gibt kein Handgelenk und keinen Unterarm, die Hand endet im Nichts.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Ohne Schlägerkopf bleibt die zentrale Findungshilfe „Kante zum Boden“ (senkrechte Schlagfläche) unsichtbar. Aus dem Bild lässt sich die Ausrichtung des Griffs nicht ableiten.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "„Locker“ ist nicht dargestellt. Die gleichförmigen Fingerbalken vermitteln eher Umklammern, also genau die Fehlerbilder fb_griff_umklammern und griff_fehler_zu_fest.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Die Caption hat 43 Zeichen und läuft im PNG über beide Ränder (das erste „l“ und das letzte „n“ sind angeschnitten). Der Text sagt „Handschlag“, die Caption „Händedruck“. Vorschlag: „locker wie ein Handschlag · V oben“.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Hand-Nahaufnahme",
+   "sequenz_mit": "",
+   "caption_de": "locker wie ein Händedruck · Daumen-V oben",
+   "caption_ok": true
+  },
+  {
+   "id": "G-002",
+   "baustein": "grundposition (bausteine.beginner-technik.json, Beginner)",
+   "motiv": "Frontale Strichfigur mit senkrechtem Rumpf. Die Arme bilden eine Raute mit seitlich abstehenden Ellbogen, die Hände treffen sich vor dem Unterleib. Der Schläger hängt senkrecht, Kopf nach unten, zwischen den Oberschenkeln. Die Beine stehen breit, die Knie sind nach außen geknickt. Keine Füße, gestrichelte Bodenlinie.",
+   "didaktischer_kern": "Aktive Bereitschaft wie ein Torwart vor dem Elfmeter: tief und leicht nach vorn geneigt, Gewicht auf den Fußballen, Schläger locker vor dem Körper. Beleg: „Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper“ sowie „Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung“.",
+   "soll_pose": "Dreiviertelansicht von vorn: Figur ca. 30° aus der Frontalen zur Schlägerseite gedreht, Kamera auf Hüfthöhe. So sind Standbreite UND Vorneigung lesbar. Kopf aufrecht, Blick geradeaus zum Gegner. Füße parallel bis leicht ausgedreht, Abstand ca. 1,2-fache Schulterbreite, beide auf gleicher Höhe. Die Fersen sind knapp gelöst (ein sichtbarer Spalt), das Gewicht liegt über den Ballen. Knie leicht gebeugt (20–30°) und über den Fußspitzen, nicht nach außen. Hüfte leicht gebeugt, Rumpf gerade mit 10–15° Vorneigung. Schultern tief und entspannt; Schulter- und Hüftbreite sind sichtbar. Schlagarm rechts: Oberarm locker am Körper, Ellbogen 90–100° gebeugt, Hand auf Höhe Bauchnabel bis untere Brust, etwa eine Unterarmlänge vor dem Körper, mittig bis leicht zur Rückhandseite. Schläger im Universalgriff, Kopf nach OBEN, 45–60° über der Waagerechten schräg nach vorn oben, Schlagfläche nach vorn. Die freie Hand liegt locker auf gleicher Höhe neben dem Schlägerhals und berührt ihn höchstens leicht, der Ellbogen ist gebeugt. Statische Pose, der Ruhepunkt zwischen zwei Schlägen, aber sichtbar „geladen“.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder",
+   "requisiten": [
+    "Schläger"
+   ],
+   "bewegungszeichen": "Keine Pfeile, die Pose ist statisch. Nötig ist ein sichtbarer Spalt unter den Fersen oder ein kleiner Bodenschatten nur unter den Ballen. Die Bodenlinie wird durchgezogen und liegt genau auf Fußhöhe; die Strichelung entfällt.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Schläger hängt mit dem Kopf nach unten zwischen den Oberschenkeln, der Schaft beginnt im Schritt. Das ergibt eine unfreiwillig anzügliche Lesart und ist der stärkste „seltsam“-Effekt der Reihe.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Es gibt keine Füße. Fußballen und Fersen, also Kernaussage UND Caption, sind damit nicht darstellbar. Frontal und mit senkrechtem Rumpf fehlt außerdem das „leicht nach vorn geneigt“.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Ein herabhängender Schläger ist passiv, das Gegenteil von aktiver Bereitschaft. Die Hände berühren den Schaft nicht einmal: sie liegen bei x 138 und 162, der Schaft bei 150.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Die Rautenarme mit abstehenden Ellbogen wirken wie Hände in den Hüften. Arme und Beine entspringen je einem einzigen Punkt; ohne Schulter- und Hüftbreite ist „mehr als schulterbreit“ nicht beurteilbar. Die Knie sind nach außen geknickt (Grätschstellung).",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Figur ist geometrisch fast identisch mit G-007. Beide Bilder unterscheiden sich nur durch den Pfeil.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Bereitschaft",
+   "sequenz_mit": "",
+   "caption_de": "Knie gebeugt · Gewicht auf den Fußballen",
+   "caption_ok": true
+  },
+  {
+   "id": "G-003",
+   "baustein": "vorhand_drive (bausteine.beginner-technik.json, Beginner)",
+   "motiv": "Seitliche Figur mit Blick nach rechts. Der Schlagarm ist gestreckt und waagerecht auf Schulter- bzw. Brusthöhe, der Schläger liegt als Oval in seiner Verlängerung. Ein flacher, gepunkteter Pfeil zeigt nach rechts. Der freie Arm hängt nach hinten unten. Schrittstellung, Rumpf minimal nach hinten geneigt. Kein Speeder.",
+   "didaktischer_kern": "Gewicht auf den vorderen Fuß, Oberkörper in Schlagrichtung gedreht, kompakter flacher Bogen, Treffpunkt vor dem Körper. Beleg: „Das Gewicht wandert auf den vorderen Fuß, der Oberkörper dreht in Schlagrichtung, und der Arm bringt den Schläger nach vorn. Du triffst den Speeder vor deinem Körper, nicht neben dir und nicht hinter dir.“ Dazu das Bild „etwas von einem Tisch in Hüfthöhe zur Seite wischen“ und „nicht aus einem großen Ausholen mit dem Arm“.",
+   "soll_pose": "Dreiviertel-Seitenansicht von schräg vorn auf der Schlägerseite: Kamera ca. 30° aus der reinen Seitenansicht Richtung Ziel gedreht, Ziel und Flugrichtung nach rechts. Rechtshänder im Treffmoment. Linker Fuß vorn zum Ziel, rechter hinten, Schrittweite ca. 1,3-fache Schulterbreite. Vorderes Knie ca. 30° gebeugt und über dem Fuß; die Hüfte steht über dem vorderen Fuß, das Gewicht ist klar vorn. Hintere Ferse angehoben, hinteres Bein fast gestreckt auf dem Ballen. Rumpf 5–10° VOR geneigt, Hüfte und Schultern zum Ziel aufgedreht: die Brust zeigt schräg zum Ziel, die rechte Schulter ist nach vorn gekommen. Blick auf den Treffpunkt. Schlagarm: Ellbogen leicht gebeugt (130–150°), Hand auf Hüft- bis Taillenhöhe ca. 30–40 cm vor der vorderen Hüfte. Das Handgelenk ist ruhig und gerade (Beginner, noch keine Peitsche). Der Schläger zeigt seitlich vor dem Körper etwa in Verlängerung des Unterarms, der Kopf leicht über Handhöhe. Die Schlagfläche steht senkrecht zum Ziel und erscheint in dieser Ansicht als schmales Hochoval, nicht als offenes Oval. Der Speeder liegt mit der Kappe an der Besaitung, auf Hüfthöhe etwa über der vorderen Fußspitze. Der freie Arm ist angewinkelt vor dem Körper auf Brusthöhe zur Balance und hängt nicht nach hinten. Phase: Treffmoment am Ende eines kurzen, flachen Bogens.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb)"
+   ],
+   "bewegungszeichen": "Nötig: eine kurze Schlägerkopfbahn als flacher Bogen auf Hüfthöhe von seitlich hinten nach vorn (ca. 90°, ausdrücklich KEIN großer Ausholbogen, vgl. TEN-Delta), dazu eine gerade, flache Flugbahn vom Speeder nach rechts aus dem Bild. Optional ein kleiner Drehpfeil an der Hüfte. Der Pfeil beginnt am Speeder, nicht am Schlägerrand.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Treffpunkt liegt auf Schulter- bzw. Brusthöhe mit gestrecktem Arm. Der Text verlangt Hüfthöhe („Tisch in Hüfthöhe“, „auf Hüfthöhe fallen lassen“) und einen kompakten Bogen.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Gewichtsverlagerung ist nicht ablesbar: Die Hüfte steht mittig zwischen den Füßen, keine Ferse ist angehoben. Der Rumpf neigt sich leicht nach HINTEN (Schulter bei x 104, Hüfte bei x 110). In der reinen Seitenansicht bleibt die Rumpfdrehung unsichtbar.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Schlägerkopf ist ein offenes, liegendes Oval: Die Schlagfläche zeigt zur Betrachterin statt zum Ziel.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Am Treffpunkt fehlt der Speeder. „Vor dem Körper“ wird nur über die Lage des Schlägers behauptet.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Gestreckter Arm und waagerechter Schläger wirken wie Degenstoß oder Angel bzw. wie an der Leine gezogen. Die Figur ist steif, alle Gelenke sind harte Knicke.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der freie Arm hängt kraftlos nach hinten. Ohne Füße und ohne Tönung für vorn und hinten ist nicht erkennbar, welches Bein vorn steht.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Grundschlag seitlich",
+   "sequenz_mit": "G-004",
+   "caption_de": "flach und direkt · vor dem Körper",
+   "caption_ok": true
+  },
+  {
+   "id": "G-004",
+   "baustein": "rueckhand (bausteine.beginner-technik.json, Beginner)",
+   "motiv": "Fast deckungsgleiche Kopie von G-003: gleicher Kopf, Rumpf und gleiche Beine, nur um 2 Einheiten verschoben. Der Schlagarm hat einen abgesackten Ellbogen und einen waagerechten Unterarm. Gleiches liegendes Schlägeroval, gleicher flacher Pfeil nach rechts, freier Arm kurz nach hinten.",
+   "didaktischer_kern": "Die Rückhand ist die gespiegelte Vorhand: seitlich zum Ziel, Gewicht auf dem Fuß der Schlagseite, Schläger dicht am Körper vorbei nach vorn. Treffpunkt vor dem Körper mit dem Handrücken zum Ziel, ohne Umgreifen. Beleg: „Die Rückhand spielst du auf der Seite deines Körpers, die dem Schläger abgewandt ist — dort, wo der Handrücken nach vorn zeigt.“, „Das Gewicht wandert auf den Fuß deiner Schlagseite“ und „Stell dich seitlich zum Ziel, den Schläger führst du dicht am Körper vorbei nach vorn und öffnest die Bewegung zum Treffpunkt hin.“",
+   "soll_pose": "Dreiviertelansicht von schräg vorn auf der Rückhandseite, bewusst SPIEGELBILDLICH zu G-003: Ziel und Flugrichtung nach LINKS. Nur so zeigt die Brust zur Betrachterin und der Schlagarm quert sichtbar vor dem Körper (mit Ziel rechts sähe man den Rücken). Rechtshänder im Treffmoment. Rechter Fuß (Schlagseite) vorn zum Ziel, linker hinten, Schrittweite ca. 1,3-fache Schulterbreite. Rechtes Knie ca. 30° gebeugt über dem Fuß, das Gewicht liegt rechts; linke Ferse angehoben. Rumpf seitlich zum Ziel, die rechte Schulter zeigt zum Ziel, leicht vorgeneigt; er beginnt sich zum Treffpunkt hin zu öffnen. Kopf zum Treffpunkt gedreht, Blick über die rechte Schulter. Schlagarm: kommt von der linken Hüfte dicht am Bauch vorbei. Im Treffmoment ist der Ellbogen auf Brusthöhe und NICHT abgesackt, der Arm fast gestreckt (150–160°). Die Hand ist auf Hüft- bis Taillenhöhe vor dem rechten Fuß, der Handrücken zeigt zum Ziel, das Handgelenk ist gerade. Universalgriff, also kein Daumen längs auf dem Griff. Der Schläger liegt in Verlängerung des Unterarms seitlich vor dem Körper, der Kopf auf Handhöhe oder leicht darüber, die Schlagfläche senkrecht zum Ziel. Der Speeder liegt mit der Kappe an der Besaitung vor dem rechten Fuß. Der freie linke Arm schwingt gegengleich nach hinten unten aus: er öffnet die Brust und gibt Balance. Einhändig.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb)"
+   ],
+   "bewegungszeichen": "Nötig ist die Schlägerkopfbahn als kurzer Bogen von der linken Hüfte dicht am Körper vorbei nach vorn: Das „eng am Körper vorbei“ muss die Bahn zeigen. Dazu eine flache, gerade Flugbahn nach links aus dem Bild. Optional ein blasses Geisterbild der Ausholphase: Schläger an der linken Hüfte, Ellbogen vorn.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Das Bild ist von G-003 praktisch nicht zu unterscheiden: Beine, Kopf und Rumpf sind koordinatengleich, die Bahn ist dieselbe. Weder Seitenwechsel noch Handrücken noch „am Körper vorbei“ sind sichtbar.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Ellbogen sackt unter Schulter- und Handhöhe ab (Ellbogen y 138, Schulter 120, Hand 134). Die Zeichnung zeigt damit das Fehlerbild fb_rueckhand_ellenbogen („Nimm den Ellenbogen höher“).",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "In einer Seitenansicht mit Ziel rechts läge die Rückhand eines Rechtshänders auf der abgewandten Körperseite. Gezeichnet ist sie trotzdem auf der vorderen Seite; die Ansicht taugt für die Rückhand nicht.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Schlägerkopf ist ein offenes Oval, die Fläche zeigt zur Betrachterin. Am Treffpunkt fehlt der Speeder.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der Armknick (Ellbogen nach unten, Unterarm waagerecht nach vorn) wirkt wie eine Tasse halten. Der freie Arm ist ein kurzer Stummel nach hinten.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Gleiche Steifheit und Proportionen wie G-003 (gedrungene Beine, großer Kopf).",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Grundschlag seitlich (gespiegelt)",
+   "sequenz_mit": "G-003",
+   "caption_de": "eng am Körper vorbei · Treffpunkt vorn",
+   "caption_ok": true
+  },
+  {
+   "id": "G-005",
+   "baustein": "aufschlag (bausteine.beginner-technik.json, Beginner) — Bild 1 von 2",
+   "motiv": "Seitliche Figur mit Blick nach rechts, aufrecht und mit gestreckten Beinen. Der freie Arm ist eine starre Linie schräg nach vorn unten, davor ein blauer Punkt (Speeder) mit kurzem gestricheltem Fallpfeil. Der Schlagarm hat den Ellbogen nach hinten, der Schläger liegt vor den Oberschenkeln, der Kopf in Schritt- und Kniehöhe überkreuzt das vordere Bein.",
+   "didaktischer_kern": "Den Speeder frei vor dem Körper aus Hüfthöhe fallen lassen, der Schlagarm ist tief hinten bereit, von unten nach vorn zu schwingen. Beleg: „Du hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn“ und „Lass den Speeder aus Hüfthöhe fallen“. Nebenbedingungen aus dem Text: „Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone“.",
+   "soll_pose": "Reine Seitenansicht, Blick- und Schlagrichtung nach rechts, Rechtshänder von seiner rechten Seite gesehen (Schlagarm vorn im Bild). Phase: unmittelbar nach dem Loslassen am Ende der Ausholbewegung. Linker Fuß vorn, rechter hinten, Schrittweite etwa Schulterbreite. Beide Füße flach am Boden, das Gewicht überwiegend hinten. Knie leicht gebeugt (15–20°), Rumpf aufrecht mit ca. 10° Vorneigung, Blick auf den Speeder. Freier linker Arm nach vorn gestreckt, Ellbogen leicht gebeugt; die Hand ist offen (Finger lösen sich gerade), auf Hüfthöhe 30–40 cm vor dem Körper. Der Speeder hängt ca. eine Speederlänge unter der Hand, Kappe nach unten, Korb oben, und fällt senkrecht. Schlagarm rechts: hängt locker nach hinten unten ausgeholt wie ein Pendel, Ellbogen fast gestreckt, die Hand etwa auf Höhe des hinteren Oberschenkels HINTER der Körperlinie. Der Schläger zeigt nach hinten unten, sein Kopf liegt hinter dem rechten Bein auf Knie- bis Schienbeinhöhe, die Schlagfläche ist nach hinten oben geöffnet. Vor dem Schritt liegt nichts. Optional am Boden: kurzes Stück Aufschlaglinie vor dem vorderen Fuß, beide Füße dahinter.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb, Kappe nach unten)",
+    "optional: Aufschlaglinie als Bodenmarke"
+   ],
+   "bewegungszeichen": "Nötig: ein kurzer gepunkteter Fallweg unter dem Speeder mit kleiner Pfeilspitze nach unten. Dazu ein dünner Bogenpfeil an der Schlägerkopfbahn von hinten unten nach vorn, der die kommende Schwungrichtung andeutet. Die Bodenlinie wird durchgezogen, nicht gestrichelt.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Schlägerkopf liegt vor den Oberschenkeln im Schrittbereich und überschneidet das vordere Bein. Das wirkt seltsam und unaufgeräumt.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Phase ist unklar: Der Schläger zeigt schon nach vorn unten, er ist also weder ausgeholt noch im Schwung.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Speeder ist ein blauer Punkt in derselben Farbe wie der Schläger. Kappe und Korb, also die Fallorientierung (Kappe nach unten), sind nicht erkennbar.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Gültigkeitsbedingungen aus dem Text, „ein Fuß am Boden“ und „hintere Zone“, lassen sich ohne Füße und ohne Linie nicht zeigen.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der freie Arm hat keinen Ellbogen und ist eine starre Linie. Beine durchgestreckt, Rumpf senkrecht: Die Figur wirkt wie abgestellt, nicht bereit.",
+     "schwere": 1
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Caption „Speeder fällt auf Hüfthöhe“ ist mehrdeutig (fällt er bis auf Hüfthöhe?). Der Text sagt „aus Hüfthöhe fallen“. Vorschlag: „aus Hüfthöhe fallen lassen“.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Unterhand-Aufschlag",
+   "sequenz_mit": "G-006",
+   "caption_de": "Speeder fällt auf Hüfthöhe",
+   "caption_ok": false
+  },
+  {
+   "id": "G-006",
+   "baustein": "aufschlag (bausteine.beginner-technik.json, Beginner) — Bild 2 von 2",
+   "motiv": "Gleiche Figur wie G-005, um 6 Einheiten nach hinten versetzt. Der Schlagarm ist mit hochgezogenem Ellbogenknick nach vorn geschwungen, der Schläger zeigt nach vorn unten. Ein blauer Punkt klebt am unteren Rand des Schlägerovals. Eine gestrichelte Waagerechte liegt auf Handhöhe, ein ansteigender gepunkteter Pfeil zeigt nach rechts oben.",
+   "didaktischer_kern": "Im Treffmoment ist der GANZE Speeder unterhalb der Schlaghand: Getroffen wird von unten, der Schwung geht nach vorn. Beleg: „Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben.“ Ebenso Regel 5.1.4 in regeln.json.",
+   "soll_pose": "Kamera, Maßstab, Bodenlinie und Figur exakt wie in G-005 (Folgebild); Treffmoment. Das Gewicht ist vom hinteren auf den vorderen linken Fuß verlagert, die Hüfte steht knapp hinter oder über dem vorderen Fuß. Die Figur rückt also gegenüber G-005 leicht nach VORN. Beide Füße am Boden: Die hintere Ferse darf sich heben, der Ballen bleibt unten, und mindestens ein Fuß steht sichtbar flach. Knie leicht gebeugt, Rumpf leicht vorgeneigt, Blick auf den Treffpunkt. Schlagarm von hinten unten nach vorn geschwungen und fast gestreckt; die Hand ist auf Hüfthöhe knapp vor der vorderen Hüfte, das Handgelenk ruhig. Der Schläger zeigt 30–45° unter der Waagerechten schräg nach vorn unten, der Kopf liegt vor und unter der Hand. Die Schlagfläche zeigt nach vorn und ist nur leicht geöffnet (ca. 15–20°, nicht steil nach oben, vgl. fb_aufschlag_treffpunkt). Der Speeder liegt vollständig, Kappe UND oberer Korbrand, unterhalb der Handlinie; die Kappe sitzt an der Besaitung auf Oberschenkel- bis Hüfthöhe vor dem Körper. Der freie Arm ist zur Seite bzw. nach hinten aus der Schlagbahn genommen und leicht gebeugt.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder (dieselbe Figur wie G-005)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb)",
+    "optional: Aufschlaglinie als Bodenmarke"
+   ],
+   "bewegungszeichen": "Nötig ist eine waagerechte Referenzlinie auf Höhe der Schlaghand, gestrichelt in tinte-3. Sie beginnt hinter der Hand und reicht über den Speeder hinaus, damit sie nicht als verlängerter Arm wirkt; der Speeder liegt klar darunter. Die Flugbahn ist ein flacher, langer, leicht ansteigender Bogen (Start 15–20°), der rechts aus dem Bild läuft, also kein steiler Aufstieg (BAD-Delta: „flache, lange Bahn“). Optional ein sehr blasses Geisterbild der Ausholposition aus G-005.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Speeder ist ein Punkt, der den Schlägerrahmen überlappt. Ohne Korb lässt sich „der GANZE Speeder unterhalb der Hand“, die Kernaussage, nicht prüfen.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Schlagfläche ist ein offenes Oval und zeigt zur Betrachterin. Der Flächenwinkel (Fehlerbild: Fläche zu steil nach oben) ist nicht ablesbar.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Gegenüber G-005 gibt es keine Gewichtsverlagerung: Die Figur rückt sogar nach HINTEN (Kopf x 118 → 112), die Beine sind gestreckt und identisch.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Die Figur ist steif und aufrecht, der Ellbogenknick wirkt hochgezogen. Schläger und Speeder verschmelzen zu einer Form.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Handhöhen-Linie beginnt direkt an der Hand und liest sich wie ein verlängerter Arm.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Unterhand-Aufschlag",
+   "sequenz_mit": "G-005",
+   "caption_de": "Treffpunkt unterhalb der Schlaghand",
+   "caption_ok": true
+  },
+  {
+   "id": "G-007",
+   "baustein": "beinarbeit (bausteine.beginner-technik.json, Beginner) — Bild 1 von 2",
+   "motiv": "Frontale Figur wie G-002: Rautenarme, der Schläger hängt mit dem Kopf nach unten zwischen den Beinen. Die Figur schwebt 24 Einheiten über dem Boden; über dem Kopf ein großer blauer Pfeil nach oben, unter den Füßen zwei blaue Querstriche.",
+   "didaktischer_kern": "Der Split-Step: ein kleiner, federnder Hüpfer kurz bevor der Gegner trifft. Die Landung auf beiden Fußballen mit gebeugten Knien macht den Start in jede Richtung möglich. Beleg: „Der Moment ist der Split-Step — ein kleiner, federnder Hüpfer, kurz bevor dein Gegner den Speeder trifft. Du landest leicht auf beiden Fußballen, und genau aus dieser Landung heraus startest du in jede Richtung.“",
+   "soll_pose": "Frontalansicht aus Richtung Gegner, alternativ leichte Dreiviertelansicht wie G-002, Kamera auf Hüfthöhe. Phase: die LANDUNG, also der Bodenkontakt, nicht der Flug. Beide Füße landen gleichzeitig auf den Ballen, die Fersen sind deutlich vom Boden. Die Standbreite ist etwas breiter als in G-002 (1,3- bis 1,5-fache Schulterbreite), Fußspitzen leicht ausgedreht. Die Knie sind tiefer gebeugt als in der Grundposition (35–45°) und stehen über den Fußspitzen. Hüfte zurück, Rumpf gerade mit ca. 15° Vorneigung, Kopf aufrecht, Blick nach vorn zum Gegner. Schläger wie in G-002: Hand vor dem Körper auf Brust- bis Bauchhöhe, Kopf nach oben vorn. Der freie Arm ist leicht seitlich zur Balance, der Ellbogen gebeugt. Insgesamt kompakter und geladener als G-002; der Unterschied muss auf einen Blick sichtbar sein.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder; optional ein winziges Gegner-Symbol im Hintergrund im Schlagmoment",
+   "requisiten": [
+    "Schläger"
+   ],
+   "bewegungszeichen": "Der kleine Federweg wird gezeigt statt eines hohen Sprungs: entweder ein sehr blasses Geisterbild der Figur 6–8 Einheiten höher oder ein kurzer Auf-ab-Doppelpfeil neben der Figur. Dazu kurze Feder- bzw. Aufprallstriche nur unter den Fußballen und vier kleine Richtungschevrons um die Füße (vor, zurück, links, rechts) für „in jede Richtung“. Der große Pfeil über dem Kopf und die blauen Querstriche fallen weg.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Wie in G-002 hängt der Schläger mit dem Kopf nach unten zwischen den Beinen; das ergibt dieselbe unglückliche Lesart.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Gezeigt ist der Flug (Füße 24 Einheiten über dem Boden, großer Pfeil nach oben) statt der Landung, auf die es ankommt. „Klein“ wird durch den großen Pfeil konterkariert.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Figur ist geometrisch fast gleich G-002; Split-Step und Grundposition sind nur am Pfeil zu unterscheiden.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Ohne Füße ist „auf beiden Fußballen“ nicht darstellbar. Die blauen Striche unter den Füßen wirken wie Skier oder Schatten.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "„In jede Richtung“ und das Timing (kurz bevor der Gegner trifft) sind nicht angedeutet.",
+     "schwere": 1
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Kopf schwebt mit sichtbarem Spalt über dem Rumpf (Kopfunterkante y 87, Rumpfkappe y 89).",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Bereitschaft",
+   "sequenz_mit": "G-008",
+   "caption_de": "kleiner federnder Hüpfer · auf die Ballen",
+   "caption_ok": true
+  },
+  {
+   "id": "G-008",
+   "baustein": "beinarbeit (bausteine.beginner-technik.json, Beginner) — Bild 2 von 2",
+   "motiv": "Seitliche Figur im Ausfallschritt nach rechts. Der Rumpf ist nach hinten geneigt, der Schläger tief vorn, ein Speeder-Punkt klebt am Rahmen. Links hängt ein blauer Punkt mit Ring auf Kniehöhe (die zentrale Position), am Boden läuft ein gestrichelter Rückwegbogen. Beide Füße schweben über der gestrichelten Bodenlinie.",
+   "didaktischer_kern": "Der Kreislauf: aus der zentralen Position zum Ball, schlagen, zurück in die Mitte, immer wieder. Beleg: „Der Ort ist die Mitte deines Feldes — die zentrale Position. Von hier erreichst du jede Ecke am schnellsten. Nach jedem Schlag kehrst du dorthin zurück.“ und „Du wartest zentral, lädst dich mit dem Split-Step, startest zum Ball, schlägst, kehrst zurück.“",
+   "soll_pose": "Erhöhte Schrägansicht mit ca. 30–40° Aufsicht auf EIN Feld (5,5 × 5,5 m) in Perspektive; die Frontlinie zur neutralen Zone liegt hinten bzw. oben im Bild. Die zentrale Position ist eine flache Bodenmarke in der Feldmitte (Ellipse in der Bodenebene). Die Figur steht im Ausfallschritt in der vorderen Vorhand-Ecke. Das rechte Bein (Schlägerbein) ist vorn, der Fuß zeigt zur Ecke, die Ferse setzt zuerst auf. Das vordere Knie ist ca. 90° gebeugt und steht ÜBER dem Sprunggelenk, nicht über der Fußspitze; der Oberschenkel ist nahezu waagerecht. Das hintere Bein ist lang, das Knie fast gestreckt bis leicht gebeugt, der Fuß auf Ballen bzw. Innenkante. Der Rumpf ist aufrecht bis höchstens 20° nach VORN geneigt, nie nach hinten. Der Kopf steht über dem vorderen Knie, der Blick geht auf den Speeder. Der Schlagarm ist nach vorn unten zur Ecke gestreckt, der Schläger in Verlängerung, sein Kopf tief vor dem vorderen Fuß. Der Speeder ist knapp über dem Boden vor der Schlagfläche und klebt nicht am Rahmen. Der freie Arm ist als Gegengewicht nach hinten gestreckt. Optional steht eine sehr blasse Geisterfigur in Split-Step-Haltung in der Mitte als Start und Ziel des Kreislaufs.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder; optional eine blasse Geisterfigur derselben Person in der Feldmitte",
+   "requisiten": [
+    "Spielfeld (Quadrat mit Linien, perspektivisch)",
+    "zentrale Position als Bodenmarke",
+    "Schläger",
+    "Speeder (Kappe und Korb)"
+   ],
+   "bewegungszeichen": "Zwei Bodenpfeile in der Bodenebene bilden einen geschlossenen Kreislauf: der Hinweg Mitte → Ecke durchgezogen in tinte-3, der Rückweg Ecke → Mitte gebogen und gestrichelt. Optional kleine Phasenziffern 1–4 (Split-Step, Start, Schlag, zurück). Die gestrichelte Bodenlinie fällt weg, die Feldlinien ersetzen sie. Abgrenzung zu G-014 (Fächer in alle Richtungen): hier nur EINE Ecke, dafür der geschlossene Kreis.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Die zentrale Position ist ein Kreis, der links auf Kniehöhe in der Luft hängt. Als Bodenort kann er in einer Seitenansicht so nicht liegen; er liest sich als Ball oder Zielscheibe. Das Feld, also Mitte gegen Ecke, fehlt ganz.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Im Ausfallschritt ist der Rumpf ca. 19° nach HINTEN geneigt (Kopf x 140, Hüfte x 156): Die Figur scheint rückwärts zu kippen. Die Hüfte ist kaum abgesenkt, der vordere Oberschenkel 45° geneigt; ein echter Ausfall ist das nicht.",
+     "schwere": 3
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Beide Füße schweben ca. 16 Einheiten über der Bodenlinie. Bodenlinie und Rückweg sind beide gestrichelt und überlagern sich unten im Bild.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Speeder-Punkt klebt am Schlägerrahmen; Schläger und Speeder lesen sich zusammen als Babyrassel oder Schnuller.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Split-Step-Phase und „jede Ecke“ sind nicht angedeutet; die Verbindung zu G-007 fehlt.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Ausfallschritt",
+   "sequenz_mit": "G-007",
+   "caption_de": "zur Ecke ausfallen — zurück zur Mitte",
+   "caption_ok": true
+  },
+  {
+   "id": "G-009",
+   "baustein": "handgelenk_peitsche (bausteine.fortgeschritten-technik.json, Fortgeschritten)",
+   "motiv": "Ein dicker schwarzer Balken (Unterarm) steht schräg auf einer gestrichelten Bodenlinie und endet in einem schwarzen Gelenkpunkt. Von dort gehen ein grauer Geisterschläger nach hinten oben und ein blauer Schläger nach vorn oben ab. Ein gepunkteter Bogen endet mit seiner Pfeilspitze IM Schlägerkopf, zwei hellblaue Unschärfestriche liegen rechts am Kopf. Keine Hand, kein Speeder.",
+   "didaktischer_kern": "Die Peitsche: Das Handgelenk ist locker gehalten und zurückgelegt. Spät, kurz vor dem Treffpunkt, dreht der Unterarm ein und das Handgelenk schnappt nach vorn; dieser letzte Schnapp beschleunigt den Schlägerkopf. Beleg: „im letzten Moment vor dem Treffen dreht der Unterarm ein und das Handgelenk schnappt nach vorn“, „Der Schnapp kommt spät — kurz vor dem Treffpunkt, nicht früher“ und „Ein verkrampftes Handgelenk kann nicht schnappen.“",
+   "soll_pose": "Nahaufnahme in Seitenansicht leicht von oben, Ausschnitt Unterarm, Hand und Schläger. Der rechte Unterarm tritt vom linken unteren Bildrand ins Bild (Ellbogen außerhalb) und steigt mit 30–40° an. Die Hand hält den Schläger im Universalgriff, Handrücken sichtbar, Finger locker, V oben; es ist dieselbe Handzeichnung wie in G-001. Phase 1 (Geist, blass): Das Handgelenk ist zurückgelegt (ca. 50–60° Streckung), der Schlägerkopf zeigt nach hinten oben, die Fläche ist geöffnet. Phase 2 (kräftig, Treffmoment): Der Unterarm ist um seine Längsachse eingedreht (Pronation, der Handrücken dreht nach außen oben), das Handgelenk neutral bis leicht gebeugt. Der Schläger steht in Verlängerung des Unterarms oder leicht darüber hinaus, die Schlagfläche zeigt zum Ziel, am Treffpunkt sitzt der Speeder mit der Kappe an der Besaitung. Die Lage des Unterarms ist in beiden Phasen fast gleich, nur die Rotation ändert sich. So bleibt lesbar, dass der Schnapp aus Rotation und Handgelenk kommt, nicht aus großem Ausholen.",
+   "figuren": "keine Ganzfigur; rechter Unterarm mit Hand, zwei Phasen (Geist und Treffmoment)",
+   "requisiten": [
+    "Schläger (zweimal: blass und kräftig)",
+    "Speeder am Treffpunkt"
+   ],
+   "bewegungszeichen": "Nötig: ein Rotationspfeil um den Unterarm kurz vor dem Handgelenk (Pronation) und eine gebogene Bahn des Schlägerkopfs von der Geisterposition zum Treffpunkt. Die Pfeilspitze endet VOR dem Kopf, nicht darin. Speedlines stehen HINTER dem Kopf, auf der Seite, von der er kommt. Dazu ein kurzer Flugpfeil des Speeders nach vorn. Die Bodenlinie fällt weg, eine Nahaufnahme hat keinen Boden.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Caption „Unterarm bleibt ruhig“ widerspricht dem Bausteintext („dreht der Unterarm ein“) und dem BAD-Delta („Die Peitsche bleibt — aber sie kommt jetzt stärker aus dem eindrehenden Unterarm“). Die Zeichnung zeigt nur ein Scharnierklappen im Handgelenk ohne Pronation. Vorschlag: „spät schnappen · Unterarm dreht ein“.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Es gibt keinen Treffpunkt und keinen Speeder. Die Kernbotschaft „spät, im Treffmoment“ ist im Bild nicht verankert.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Eine Hand fehlt: Der Schaft wächst aus einem Kugelgelenk, ein lockerer Griff ist nicht darstellbar. Das Ganze wirkt wie Scheibenwischer oder Metronom.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Der Unterarm „steht“ auf einer Bodenlinie und beginnt mit einer Rundkappe im Bild statt am Bildrand. Die Pfeilspitze liegt im Schlägerkopf, und die Unschärfestriche sitzen auf der falschen, vorderen Seite.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Die Caption hat 44 Zeichen und ist im PNG an beiden Rändern abgeschnitten („H“ und „g“), ebenso in G-009.fr.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Hand-Nahaufnahme",
+   "sequenz_mit": "",
+   "caption_de": "Handgelenk schnappt · Unterarm bleibt ruhig",
+   "caption_ok": false
+  },
+  {
+   "id": "G-010",
+   "baustein": "ueberkopf_clear (bausteine.fortgeschritten-technik.json, Fortgeschritten)",
+   "motiv": "Seitliche Figur mit Blick nach rechts. Der Schlagarm ist schräg nach vorn oben gestreckt und überschneidet dabei den Kopf, der Schläger steht weit vorn oben. Der freie Arm hängt nach hinten, Schrittstellung. Ein gepunkteter Bogen steigt über den Schläger und fällt fast senkrecht etwa eine Körperhöhe vor der Figur herab.",
+   "didaktischer_kern": "Oben und früh treffen: seitlich gestellt, ganz gestreckt, Treffpunkt am höchsten Punkt leicht vor dem Körper; der Speeder geht weit und tief ins gegnerische Feld. Beleg: „Dann streckst du dich nach oben und triffst den Speeder so hoch wie möglich, leicht vor dem Körper.“ und „Der hohe Treffpunkt ist die halbe Miete.“ Der Text unterscheidet zwei Ausprägungen: „Den defensiven Clear schlägst du hoch und weit … Den offensiven Clear schlägst du flacher und schneller“.",
+   "soll_pose": "Reine Seitenansicht, Ziel nach rechts, Rechtshänder von seiner rechten Seite (Schlagarm vorn im Bild); Treffmoment. Schrittstellung: linker Fuß vorn zum Ziel, flach, Knie leicht gebeugt; rechter Fuß hinten mit angehobener Ferse im Abdruck vom Ballen. Das Gewicht wandert gerade vom hinteren aufs vordere Bein. Der Körper ist lang gestreckt, Hüfte und Rumpf aufrecht (0–5° Rücklage zulässig), die rechte Schulter steht hoch. Schlagarm fast gestreckt (Ellbogen 160–170°). Der Oberarm läuft NEBEN dem Kopf und setzt an der Schulter hinter bzw. unter dem Kopf an; er überdeckt den Kopf nicht. Die Hand steht über der Schlagschulter; Arm und Schläger bilden nahezu eine Linie, nur 10–15° vor der Senkrechten (leicht vor dem Körper, nicht weit vorn). Der Unterarm ist eingedreht, die Schlagfläche zeigt nach vorn und leicht nach oben. Der Speeder sitzt mit der Kappe an der Besaitung am höchsten Punkt. Kopf aufrecht, Blick nach oben auf den Treffpunkt. Der freie linke Arm, der eben noch zum Speeder gezeigt hat, ist angewinkelt vor Brust bzw. Bauch gezogen und hängt nicht nach hinten.",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder; optional ein blasses Geisterbild der Ausholphase",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb)"
+   ],
+   "bewegungszeichen": "Nötig sind zwei Flugbahnen vom Treffpunkt nach rechts aus dem Bild. Der defensive Clear ist ein höherer, weiter Bogen, der offensive Clear deutlich flacher und fast gestreckt. Beide verlassen das Bild noch in der Luft: Die Landung liegt weit außerhalb, jenseits der 12,8 m langen neutralen Zone. Die beiden Bahnen werden sprachneutral über Strichstärke bzw. Strichart unterschieden. Optional ein blasses Geisterbild der Ausholphase: seitlich gestellt, freier Arm zeigt nach oben, Schläger hinter dem Rücken.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Flugbahn steigt und fällt fast senkrecht etwa eine Körperhöhe vor der Figur: ein Badminton-Lob, der im Crossminton in der neutralen Zone landen würde. Bausteintext und die BAD/TEN-Deltas verlangen die weite, eher flachere Bahn tief ins gegnerische Feld; zwischen den Feldern liegen 12,8 m (Regel 1.3).",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der Schlagarm entspringt im Kopf bzw. Hals: Die Armlinie schneidet den Kopfkreis, der Arm wächst sichtbar aus dem Ohr.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Treffpunkt liegt ca. 45° vor dem Körper statt „so hoch wie möglich, leicht vor dem Körper“ (Fehlerbild: „am höchsten Punkt über der Schulter“). Die Schlagfläche ist als offenes Oval in der Bildebene gezeichnet.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die zwei Ausprägungen aus dem Text (defensiv und offensiv) fehlen. Der freie Arm hängt nach hinten statt eingezogen zu sein, und weder Streckung noch Abdruck vom hinteren Fuß sind sichtbar.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Der vordere Fuß schwebt über der Bodenlinie. Die Caption „tiefer Bogen“ ist mehrdeutig, man kann sie als niedrigen Bogen lesen. Vorschlag: „hoch treffen · weit ins hintere Feld“.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Überkopf",
+   "sequenz_mit": "G-011",
+   "caption_de": "hoher Treffpunkt · tiefer Bogen ins Feld",
+   "caption_ok": false
+  },
+  {
+   "id": "G-011",
+   "baustein": "smash (bausteine.fortgeschritten-technik.json, Fortgeschritten)",
+   "motiv": "Praktisch dieselbe Figur wie G-010; Arm und Schläger sind nur um wenige Einheiten verschoben, auch hier schneidet der Arm den Kopf. Eine gerade, gepunktete Bahn fällt mit ca. 62° nach rechts unten und endet rund 1,5 Körperlängen vor der Figur.",
+   "didaktischer_kern": "Der Smash wächst aus dem Überkopfschlag: etwas weiter vorn treffen und kontrolliert nach vorn unten ins gegnerische Feld schlagen, platziert und wiederholbar statt maximal hart. Beleg: „dieselbe Vorbereitung, aber du triffst noch etwas weiter vorn und schlägst steil nach unten ins gegnerische Feld“, „Tatsächlich gewinnt der wiederholbare Smash, nicht der schnellste.“ Dazu die Korrektur aus fb_smash_treffpunkt: „Triff etwas vor dem Kopf und schlag klar nach vorn-unten ins Feld.“",
+   "soll_pose": "Kamera, Maßstab und Figur wie in G-010, damit beide als Paar lesbar sind; Treffmoment. Der Treffpunkt liegt SICHTBAR weiter vorn als in G-010: Arm und Schläger stehen 25–35° vor der Senkrechten, der Kontakt liegt vor dem Kopf über der vorderen Schulter. Die Schlagfläche ist geschlossen und zeigt 15–25° unter der Waagerechten nach vorn unten. Der Rumpf beginnt aus der Hüfte nach vorn unten zu klappen (10–15° Vorlage), die Schultern drehen zum Ziel, Kopf und Blick bleiben am Treffpunkt. Das Gewicht wandert kräftig nach vorn: Der hintere rechte Fuß steht nur noch auf dem Ballen im Abdruck, das vordere Knie ist ca. 30° gebeugt und belastet. Beide Füße bleiben am Boden, denn der Sprung-Smash ist ein eigener Experten-Baustein. Der freie Arm ist eng vor den Bauch gezogen. Die Haltung ist kontrolliert und ausbalanciert, kein wildes Draufhauen (Text: „Hammer, der einen Nagel trifft“).",
+   "figuren": "1 Spielerin oder Spieler, Rechtshänder (dieselbe Figur wie G-010)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (Kappe und Korb, Kappe in Flugrichtung)"
+   ],
+   "bewegungszeichen": "Nötig ist eine gerade Flugbahn nach vorn unten. Im Bild liegt sie ca. 15–20° unter der Waagerechten: bewusst steiler als real (etwa 10°), aber deutlich flacher als heute. Sie läuft rechts unten aus dem Bild und endet NICHT vor der Figur am Boden. Optional: ein dezenter Fächer aus 2–3 dünnen Linien mit verschiedenen Winkeln für die Variation, die der Text verlangt; ein blasses Geisterbild des Durchschwungs zur linken Hüfte; ein kleiner Rückkehrpfeil am Boden („zurück in die zentrale Position“).",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die 62°-Bahn endet rund 1,5 m vor der Figur; so landet der Smash in der neutralen Zone. Das ist genau das Fehlerbild fb_smash_treffpunkt („landet in der neutralen Zone“) und die Warnung im TEN-Delta zum Überkopf. Bei 12,8 m zwischen den Feldern ist der Smash nach vorn unten gerichtet, aber lang.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Figur ist mit G-010 praktisch identisch. „Noch etwas weiter vorn“, die Vorlage des Körpers und die geschlossene Fläche fehlen; nur der Pfeil unterscheidet Clear und Smash.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der Schlagarm schneidet den Kopfkreis wie in G-010.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Der Körper treibt nicht nach vorn unten: Rumpf aufrecht, Beine statisch, der freie Arm hängt nach hinten.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Caption „steil nach unten“ lädt zu genau diesem Fehlbild ein. Vorschlag: „vor dem Kopf treffen · nach vorn-unten“.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "S",
+   "pose_familie": "Überkopf",
+   "sequenz_mit": "G-010",
+   "caption_de": "hoher Treffpunkt · steil nach unten",
+   "caption_ok": false
+  },
+  {
+   "id": "G-012",
+   "baustein": "kurzes_spiel_stopp (data/bausteine.fortgeschritten-technik.json, Fortgeschritten, Technik)",
+   "motiv": "Eine Strichfigur in Seitansicht. Der Schlagarm ist mit hochgezogenem Ellbogen etwa auf Kopfhöhe nach vorn geführt, der Schläger liegt waagerecht. Die gepunktete Bahn steigt kurz an und fällt rund 1,2 m (Figurenmaßstab) vor dem Spieler steil ab; die Pfeilspitze endet in Brusthöhe in der Luft. Eine senkrechte gestrichelte Linie ragt vom Boden auf (im Quelltext als „vordere Linie“ kommentiert). Dazu eine gestrichelte Bodenlinie. Es gibt weder Speeder noch Gegner noch Passierzone.",
+   "didaktischer_kern": "Gleiche Vorbereitung wie beim harten Drive, erst im letzten Moment ein weicher, abgebremster Kontakt: Der Speeder überbrückt gerade eben die Passierzone und fällt knapp hinter der Frontlinie vor einem tief stehenden Gegner herunter. Beleg: „Du bereitest den Stopp genauso vor wie einen harten Drive oder Clear — gleiche Stellung, gleicher Ausholweg. Erst im letzten Moment nimmst du das Tempo heraus“ sowie „fällt knapp hinter der neutralen Zone in den vorderen Bereich des gegnerischen Feldes. Er fängt einen Gegner aus, der weit hinten steht“.",
+   "soll_pose": "SZENE: Seitansicht quer zur Spielrichtung, Spielrichtung nach rechts, gestauchter Court. Links das eigene Feld mit dem Spieler in der hinteren Hälfte. In der Mitte die Passierzone mit Bruchzeichen und Maß „12,8 m“. Rechts das gegnerische Feld; seine Frontlinie ist nur ein kurzer Strich AUF dem Boden, nie eine senkrechte Linie. Die Zielzone liegt am Boden 30–80 cm hinter der Frontlinie, also im Feld (Regel 11.6.2: vor der Linie aufkommen und schleifen gilt nur bei Spur ≤ Kopflänge). SPIELER (Rechtshänder, rechte Körperseite zum Betrachter, Kopf im Profil nach rechts, Blick auf den Treffpunkt): Moment des Treffens. Schrittstellung: linker (ferner) Fuß vorn zum Ziel, rechter Fuß hinten, Schrittweite etwa 1,3 Schulterbreiten. Gewicht etwa 70 % vorn, vorderes Knie ca. 150°, hinteres Knie ca. 160° mit leicht angehobener Ferse. Rumpf 10° nach vorn geneigt, Kopf über bis leicht vor der Hüfte (nie dahinter). Schultern und Hüfte in Schlagrichtung aufgedreht, die Brust zeigt schräg nach vorn-rechts. Schlagarm: Treffpunkt vor dem vorderen Fuß, zwischen Hüft- und Brusthöhe (wie im Text von vorhand_drive bzw. G-003). Ellbogen ca. 150° und unter Schulterhöhe, Handgelenk ruhig, Griff locker. Schläger etwa waagerecht nach vorn, Schlagfläche 20–30° nach oben geöffnet. Ausschwung abgebremst: Der Schlägerkopf endet höchstens eine Kopflänge hinter dem Treffpunkt. Freier Arm vorn-seitlich auf Brusthöhe, Ellbogen ca. 100°, zur Balance. Geisterphase: blasser Schläger mit Unterarm in voller Drive-Ausholposition hinter der Hüfte, Schlägerkopf auf Hüft-/Brusthöhe. Das ist exakt der Ausholweg des harten Drives. GEGNER (rechts, deutlich kleiner/blasser): steht tief an seiner Grundlinie in Bereitschaftshaltung, Gewicht hinten, Blick nach links. Er erwartet den harten Schlag. FLUGBAHN: asymmetrisch; lange, flache Steigung über die Passierzone, Scheitel über der Passierzone, dann steiler Fall. Die Pfeilspitze sitzt AM BODEN in der Zielzone. Speeder im Treffpunkt auf der Bespannung, die Kappe zeigt in Flugrichtung.",
+   "figuren": "2: der Stoppspieler (volle Größe, links/vorn) und der Gegner (deutlich kleiner bzw. blasser, tief an seiner Grundlinie, rechts)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (im Treffpunkt, optional am Aufkommpunkt)",
+    "Bodenmarke Frontlinie des gegnerischen Feldes",
+    "Zielzone am Boden",
+    "Bruchzeichen mit Maß 12,8 m für die Passierzone"
+   ],
+   "bewegungszeichen": "Nötig: eine Flugbahn (--primaer, gepunktet, asymmetrisch) mit der Pfeilspitze am Boden; ein Geisterschläger der Ausholbewegung (--tinte-3, ca. 35 % Deckkraft); ein kurzer Ausschwungbogen, der sichtbar früh endet. Weg muss: die senkrechte gestrichelte Linie (wirkt wie ein Netz) und die in der Luft endende Pfeilspitze. Bodenlinie durchgehend, beide Füße stehen exakt darauf; Court-Linien nur als Bodenmarken.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die senkrecht vom Boden aufragende gestrichelte „vordere Linie“ liest sich als Netz oder Pfosten. Crossminton hat kein Netz, Linien sind Bodenmarken; das Bild bedient damit genau das Badminton-Muster, vor dem das Repo warnt.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Falscher Maßstab: Der Speeder fällt etwa 1,2 m vor dem Spieler, ein badmintonhafter Netzstopp. Passierzone (12,8 m), gegnerisches Feld und der tief stehende Gegner, den der Stopp „ausfängt“, fehlen.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die laut aria-label behauptete „große Vorbereitung, aber weicher, abgebremster Kontakt“ ist nicht zu sehen. Das Einzelbild zeigt weder Ausholphase noch abgebremsten Ausschwung; der Kontrast Vorbereitung/Kontakt fehlt.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Treffpunkt auf Kopfhöhe mit hochgezogenem Ellbogen (Ellbogen höher als Schulter und Hand). Laut Übungsteil wird der Stopp „wie ein normaler Drive“ vorbereitet, und der Drive liegt im Handbuch in Hüfthöhe.",
+     "schwere": 1
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Rumpf ca. 8° nach hinten geneigt (Kopf hinter der Hüfte), Beine als fast gestreckter Zirkel ohne Gewichtstransfer. Der freie Arm ist ein Stummel halb so lang wie der Schlagarm (29 gegen 58 Einheiten), Füße fehlen; ein Fuß versinkt in der Bodenlinie, der andere schwebt.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Schläger als leerer Ring mit Stiel (Kopf ca. 2/3 der Länge) wirkt wie eine Lupe. Kein Speeder; die Bahn beginnt im Nichts und endet in der Luft.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Caption mit 46 Zeichen genau am Limit, im PNG fast randbündig; PNG-Fallback 2560×2560 statt 600×600.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Seitstand-Drive (Vorhand, Treffpunkt Hüft-/Brusthöhe)",
+   "sequenz_mit": "",
+   "caption_de": "kurz und weich · fällt knapp hinter die Linie",
+   "caption_ok": true
+  },
+  {
+   "id": "G-015",
+   "baustein": "frueh_nehmen (data/bausteine.experte-technik.json, Experte, Technik)",
+   "motiv": "Eine Strichfigur in Seitansicht und Schrittstellung. Der Schlagarm ist steif durchgestreckt schräg nach vorn-oben (ca. 26° über der Waagerechten, Hand etwa auf Kopfhöhe). Der Speeder ist ein blauer Punkt am unteren Rand des Schlägerrahmens. Ein blasser Kreis liegt tiefer UND weiter vorn als der Treffpunkt, ein grauer gepunkteter Pfeil führt von dort zum Treffpunkt. Eine ankommende Flugbahn fehlt.",
+   "didaktischer_kern": "Auf derselben ankommenden Flugbahn liegt der frühe Treffpunkt höher und weiter vorn als der späte; die Strecke dazwischen ist die dem Gegner gestohlene Zeit. Beleg: „am höchsten und frühesten Punkt, statt ihn sinken zu lassen“, „Du nimmst einen Ball, den der Gegner erst hinter dir erwartet, schon vorn aus der Luft“, „den kompakten Schlag, der ohne langes Ausholen sofort ausgeführt ist“.",
+   "soll_pose": "Seitansicht, Rechtshänder, rechte Körperseite zum Betrachter, Blick nach rechts-oben dem Speeder entgegen. PHASE: Treffmoment am Ende eines Schritts nach vorn, also in den Ball hinein. BEINE: Schrittstellung, der schlagseitige (rechte, nahe) Fuß vorn (beinarbeit_system: „mit dem schlagseitigen Fuß voran“), Schrittlänge etwa 0,8 Beinlängen. Vorderes Knie ca. 140° und über dem Sprunggelenk; hinteres Bein fast gestreckt (ca. 165°), Ferse angehoben (Abdruck). RUMPF: 10–15° nach vorn geneigt, Kopf vor der Hüfte. SCHLAGARM (kompakt): Oberarm 30–40° über der Waagerechten nach vorn, Ellbogen ca. 150° (fast gestreckt, nicht durchgedrückt), Hand über Stirnhöhe. Treffpunkt etwa eine Schlägerlänge vor und eine Kopfhöhe über dem Kopf, klar vor der vorderen Fußspitze. Schläger in Verlängerung des Unterarms, 50–60° über der Waagerechten; Schlagfläche zum Ziel, leicht geschlossen (nach vorn-unten). FREIER ARM: seitlich vorn-unten (ca. 45°), Ellbogen ca. 110°, zur Balance. Ausholen höchstens bis knapp hinter den Kopf, kein großer Rückschwung. FLUGBAHN: Die ankommende Bahn des Gegners kommt von rechts oben und sinkt; sie läuft durch den frühen Treffpunkt weiter abwärts bis zum späten Punkt neben bzw. hinter der Hüfte (Hüft- bis Schulterhöhe). Dort ein blasser Geister-Speeder, optional ein blasser Geisterschläger. Die abgehende Bahn läuft flach-abwärts nach rechts aus dem Bild.",
+   "figuren": "1: der Spieler",
+   "requisiten": [
+    "Schläger",
+    "Speeder (voll im frühen Treffpunkt, Kappe zur Bespannung)",
+    "Geister-Speeder am späten Treffpunkt"
+   ],
+   "bewegungszeichen": "Nötig: ankommende Flugbahn (--tinte-3, gepunktet) durch beide Punkte; zwischen frühem und spätem Punkt entlang der Bahn eine Klammer bzw. ein Doppelpfeil (--tinte-3) für den Zeitgewinn; die abgehende Bahn in --primaer, die aus dem Bild läuft; optional ein kurzer Geisterbogen für den kompakten Ausholweg. Weg: der heutige Pfeil von vorn-unten zum Treffpunkt. Bodenlinie durchgehend, Füße darauf.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Der blasse „spätere“ Treffpunkt liegt tiefer UND weiter vorn (x 196 gegen 184) als der echte. Auf einer ankommenden, sinkenden Bahn liegt der spätere Punkt aber tiefer und näher am oder hinter dem Körper. Das Bild behauptet damit die umgekehrte Zeitrichtung.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Ohne ankommende Flugbahn ist „früh“ nicht lesbar, nur „höher“. Das im Text betonte Abfangen „vorn statt hinter dir“ fehlt ganz.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Schlagarm als starrer, durchgestreckter Zeigestock ohne Kompaktheit. Rumpf leicht zurückgeneigt, Beine im Standard-Zirkelschritt ohne Bewegung nach vorn, freier Arm als Stummel, keine Füße.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Speeder ist ein blauer Punkt, der den Schlägerrahmen überlappt statt auf der Bespannung zu sitzen; der Lupen-Schläger dominiert.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Überkopf / Hochpunkt-Abfangen (kompakt, Schritt nach vorn)",
+   "sequenz_mit": "",
+   "caption_de": "früh und hoch — gestohlene Zeit",
+   "caption_ok": true
+  },
+  {
+   "id": "G-016",
+   "baustein": "taeuschung (data/bausteine.experte-technik.json, Experte, Technik; Bild 1 von 2)",
+   "motiv": "Eine Figur, Blick nach rechts. Der Schlagarm ist gestreckt schräg nach hinten-oben (ca. 45°), der Schläger ragt darüber hinaus nach hinten oben. Der Arm verläuft über den Kopf und verschmilzt mit ihm zu einem Klumpen. Der freie Arm zeigt als Stummel nach vorn-unten; die Beine stehen im Zirkelschritt. Vor der Figur schwebt ein großes, halbtransparentes graues Fragezeichen.",
+   "didaktischer_kern": "Eine voll ausgeführte, neutrale Vorbereitung, die keinen Schlag verrät; dein Pokerface. Beleg: „Ob du hart schlägst, kurz stoppst oder lang spielst — dein Anlauf, deine Ausholbewegung, deine Körperhaltung sind identisch“ und „Die Täuschung ist ein Pokerface“; dazu die Übung „aus dem hinteren Feld … mit bewusst identischer Vorbereitung“.",
+   "soll_pose": "Dreiviertel-Ansicht von vorn: Rechtshänder in Seitstellung zum Ziel (rechts). Die Brust ist ca. 60° zum Betrachter gedreht, die linke Schulter zeigt zum Ziel; der Kopf ist ins Profil nach rechts-oben gedreht, der Blick ruht auf dem Speeder. PHASE: Ende der Ausholbewegung, unmittelbar vor dem Vorschwung (Bogenspannung, „Trophäenposition“). BEINE: Fußabstand ca. 1,3 Schulterbreiten. Linker Fuß vorn zum Ziel, Spitze ca. 45° zum Ziel gedreht; rechter Fuß hinten quer zur Spielrichtung. Gewicht ca. 70 % auf dem hinteren Bein, hinteres Knie ca. 145°, vorderes Knie ca. 165°. RUMPF: Hüfte seitlich, Oberkörper leicht nach hinten gebogen (ca. 10°). Die Schulterachse fällt zum Schlagarm hin um ca. 15° ab: freie Schulter oben, Schlagschulter tiefer. SCHLAGARM: Oberarm etwa waagerecht bis leicht darüber, seitlich nach hinten; Ellbogen hoch auf bzw. über Schulterhöhe, Ellbogenwinkel ca. 90°. Unterarm senkrecht bis leicht nach hinten, Schlägerkopf oben hinter dem Kopf, Kante voraus. Der ganze Arm bleibt mindestens eine Strichbreite vom Kopf entfernt und kreuzt ihn nie. FREIER ARM: gestreckt nach vorn-oben (ca. 60° über der Waagerechten) zum ankommenden Speeder, Hand offen. GESICHT: ruhig, neutral. SPEEDER: oben rechts vor dem Spieler, sinkend, Kappe zum Spieler. Kein Hinweis auf einen bestimmten Schlag.",
+   "figuren": "1: der Spieler (dieselbe Vorlage wie G-017)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (ankommend, hoch vorn)"
+   ],
+   "bewegungszeichen": "Nur die ankommende Flugbahn (--tinte-3, gepunktet) bis zum Speeder. Das Fragezeichen fällt weg: Die Neutralität trägt die Pose, sie wird nicht behauptet. Keine Ansätze von Schlagbahnen (das ist Aufgabe von G-017). Bodenlinie durchgehend, Füße darauf.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Vorbereitung in G-016 (Überkopf, Schläger hinten oben) ist eine andere als in G-017 (Arm waagerecht vorn auf Kopfhöhe). Die Folge widerlegt damit ihre eigene Aussage „gleiche Vorbereitung“, und der Katalog verlangt ausdrücklich „the same player and identical preparation“.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der Schlagarm läuft über den Kopf und verschmilzt mit ihm (gemessen: Abstand zum Kopfmittelpunkt 15 E. bei Kopfradius 14 plus halber Strichbreite 7). Der Arm ist völlig gestreckt nach hinten-oben wie beim Speerwurf oder Winken, ohne hohen Ellbogen und ohne Schlägerfall; das Schultergelenk sitzt unter dem Kinn.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der freie Arm ist ein Stummel nach vorn-unten. Bei der Überkopf-Vorbereitung zeigt er zum Speeder (so steht es auch im Text von ueberkopf_clear).",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Das schwebende Fragezeichen ist ein Clip-Art-Effekt; es behauptet Mehrdeutigkeit, statt sie über die Pose zu zeigen.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Kein Speeder, keine erkennbare Seitstellung zum Ziel; es bleibt unklar, wohin geschlagen wird.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Überkopf-Vorbereitung (Bogenspannung)",
+   "sequenz_mit": "G-017",
+   "caption_de": "gleiche Vorbereitung — nichts verraten",
+   "caption_ok": true
+  },
+  {
+   "id": "G-017",
+   "baustein": "taeuschung (data/bausteine.experte-technik.json, Experte, Technik; Bild 2 von 2)",
+   "motiv": "Eine Figur mit waagerecht nach vorn geführtem Arm auf Kopfhöhe, der Ellbogen ist über Schulter und Hand hochgezogen, der Schläger liegt flach. Zwei Bahnen zweigen ab: eine flach und leicht ansteigend nach rechts aus dem Bild, eine kurz gebogen nach unten, die in Hüfthöhe etwa 1 m vor dem Spieler in der Luft endet.",
+   "didaktischer_kern": "Aus genau der Vorbereitung von Bild 1 entstehen erst im Treffpunkt zwei verschiedene Schläge; die Entscheidung fällt im letzten Moment. Beleg: „Erst im allerletzten Moment vor dem Treffen entscheidest du, welcher Schlag es wird“ und „Beim getäuschten Stopp holst du zunächst schnell aus wie für einen harten Schlag und nimmst erst kurz vor dem Kontakt das Tempo heraus“.",
+   "soll_pose": "Dieselbe Figur wie G-016 aus derselben Vorlage: gleiche Dreiviertel-Ansicht von vorn, Rechtshänder, Seitstellung zum Ziel rechts. Die G-016-Pose steht als blasse Geisterphase (--tinte-3, ca. 30–35 %) deckungsgleich im Bild. Darüber die volle Figur im Treffmoment: Gewicht wandert auf den vorderen (linken) Fuß (ca. 60 % vorn), hintere Ferse hebt sich, Hüfte und Schultern drehen zum Ziel auf. Rumpf aus der Bogenspannung nach vorn gekommen, aufrecht bis 5° vor. Schlagarm nahezu gestreckt (Ellbogen ca. 165°), Oberarm ca. 15° vor der Senkrechten; Treffpunkt über und knapp vor der Schlagschulter. Schlagfläche im Treffpunkt neutral zum Ziel; sie darf noch nichts verraten. Freier Arm vor der Brust eingezogen, Ellbogen ca. 90°. Blick am Treffpunkt. Speeder auf der Bespannung. ZWEIGE ab dem Speeder: (1) harter Schlag, flach bis leicht abwärts, schnell und lang, verlässt das Bild am rechten Rand; (2) Stopp, startet in dieselbe Richtung, verliert früh an Höhe und fällt steil. Vor dem Aufkommen ein Bruchzeichen „≈ 12,8 m“, oder er verlässt fallend den rechten Rand; er landet nie in Reichweite des Spielers. Ein kleiner Kreis am Gabelpunkt markiert den Entscheidungsmoment. Optional ein dritter, sehr blasser Zweig für den Clear (hoch und lang), dann aber die Caption anpassen.",
+   "figuren": "1: der Spieler (voll), dazu als Geisterphase dieselbe Figur in der G-016-Vorbereitung",
+   "requisiten": [
+    "Schläger",
+    "Speeder (im Treffpunkt)",
+    "Bruchzeichen 12,8 m"
+   ],
+   "bewegungszeichen": "Nötig: zwei Flugbahnen in --primaer, deutlich unterschieden: hart = dichter, kräftiger Strich; Stopp = locker gepunktet, dünner. Dazu der Gabelpunkt-Kreis und die Geisterphase der Vorbereitung. Weg: der heutige, leicht ansteigende harte Zweig (liest sich als Clear) und der Stopp, der neben dem Spieler landet. Bodenlinie durchgehend, Füße darauf.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Pose weicht von G-016 ab, das Bild zeigt sogar einen Kontakt auf Kopfhöhe statt einer Vorbereitung. Der Kern „identische Vorbereitung, späte Entscheidung“ ist so nicht zu sehen.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Stopp-Zweig fällt etwa 1 m vor dem Spieler (Badminton-Netzmaß); im Crossminton muss auch der Stopp die 12,8-m-Passierzone überbrücken. Der harte Zweig steigt leicht an und wirkt eher wie ein Clear.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Ellbogen über Schulter und Hand hochgezogen, Rumpf zurückgeneigt, freier Arm als Stummel, Zirkelbeine, keine Füße. Dasselbe Grundskelett wie G-012, G-015, G-018, G-019.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Beide Zweige im gleichen Strich, sie unterscheiden sich nur in der Form. Kein Speeder am Gabelpunkt.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Überkopf (Vorbereitung → Treffmoment)",
+   "sequenz_mit": "G-016",
+   "caption_de": "eine Vorbereitung, zwei Möglichkeiten",
+   "caption_ok": true
+  },
+  {
+   "id": "G-018",
+   "baustein": "tempo_rhythmus_wechsel (data/bausteine.experte-technik.json, Experte, Technik; Bild 1 von 2)",
+   "motiv": "Eine Strichfigur in Seitansicht mit steif waagerecht auf Schulterhöhe nach vorn gestrecktem Arm und waagerechtem Schläger. Zwei graue „Wischlinien“ liegen direkt auf dem Arm. Eine flache gepunktete Bahn läuft nach rechts aus dem Bild.",
+   "didaktischer_kern": "Bild 1 setzt den gewohnten schnellen, gleichmäßigen Takt, gegen den Bild 2 bricht; die Vorbereitung bleibt dabei gleich. Beleg: „Nach mehreren schnellen, harten Bällen kommt plötzlich ein langsamer, hoher — der Gegner, auf Tempo eingestellt, ist überrascht“ und „Halte deine Vorbereitung dabei gleich, damit der Wechsel nicht angekündigt wird“.",
+   "soll_pose": "Seitansicht, Rechtshänder, rechte Körperseite zum Betrachter, Blick nach rechts zum Treffpunkt. PHASE: unmittelbar nach dem Treffen, im Durchschwung eines harten Vorhand-Drives. BEINE: Schrittstellung, linker Fuß vorn, ca. 1,3 Schulterbreiten. Gewicht ca. 75 % vorn, vorderes Knie ca. 145°; hinteres Bein mit angehobener Ferse, der Fuß dreht auf dem Ballen ein. RUMPF: 10° vor; Hüfte und Schultern in Schlagrichtung aufgedreht, die Brust zeigt schräg nach vorn zum Betrachter. Kopf ruhig über dem vorderen Knie. SCHLAGARM: Treffpunkt vor dem vorderen Fuß auf Brusthöhe. Im Bild hat der Arm den Treffpunkt eben passiert, gestreckt (ca. 160°), die Hand liegt ca. 20 cm hinter dem Treffpunkt in Schwungrichtung. Der Schläger schwingt über die Körpermitte nach vorn-links durch; die Schlagfläche stand im Treffpunkt senkrecht zum Ziel. FREIER ARM: vorn auf Brusthöhe angewinkelt, wird zur Brust gezogen. Der Körper bis zum Handgelenk ist deckungsgleich mit G-019.",
+   "figuren": "1: der Spieler (gleiche Vorlage wie G-019)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (kurz nach dem Treffpunkt, Kappe in Flugrichtung)"
+   ],
+   "bewegungszeichen": "Nötig: ein langer Schwungbogen des Schlägerkopfs mit 2–3 blassen Geisterschlägern hinter dem Treffpunkt (langer Weg = hohes Tempo). Speedlines nur HINTER dem Schlägerkopf, mindestens eine Strichbreite vom Arm entfernt. Die Flugbahn (--primaer) flach und kaum fallend, aus dem Bild rechts. NEU: eine Taktleiste unter der Figur mit vier gleich weit gesetzten kleinen Speeder-Icons (gleichmäßiger, schneller Takt), Gegenstück zur Leiste in G-019. Weg: die Wischlinien auf dem Arm. Bodenlinie durchgehend.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Die beiden Wischlinien liegen direkt auf dem Arm (y 120/132 im 14er-Armstrich). Sie lesen sich als Streifen oder Ärmelmuster, nicht als Bewegung.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Steifer Zeigearm auf Schulterhöhe ohne Durchschwung und ohne Rumpfdrehung, Rumpf zurückgeneigt, Zirkelbeine, freier Arm als Stummel, keine Füße.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Rhythmus und „mehrere schnelle Bälle“ sind im Einzelbild nicht darstellbar: Es zeigt nur einen schnellen Schlag, nicht den Takt, der danach gebrochen wird.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Kein Speeder. Treffpunkt auf Schulterhöhe statt der Drive-Höhe, die das Handbuch sonst zeigt (G-003, vorhand_drive: Hüfthöhe).",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Seitstand-Drive (Vorhand, Durchschwung)",
+   "sequenz_mit": "G-019",
+   "caption_de": "hohes Tempo · flach und schnell",
+   "caption_ok": true
+  },
+  {
+   "id": "G-019",
+   "baustein": "tempo_rhythmus_wechsel (data/bausteine.experte-technik.json, Experte, Technik; Bild 2 von 2)",
+   "motiv": "Dieselbe Figur wie G-018, der Schläger ist nur ca. 10° nach oben gekippt. Ein hoher, sanfter gepunkteter Bogen endet in Brusthöhe in der Luft.",
+   "didaktischer_kern": "Gleiche Vorbereitung, erst im letzten Moment das Tempo herausnehmen: Erst der Speeder verrät den Taktbruch. Beleg: „Erst der Speeder verrät, dass du das Tempo gebrochen hast — dann ist es zu spät“ und „Du bewegst dich schnell zum Ball, wie für einen harten Schlag, und nimmst dann im letzten Moment das Tempo heraus“.",
+   "soll_pose": "Beine, Rumpf, Kopf, freier Arm und Schlagarm bis zum Handgelenk deckungsgleich mit G-018 bis zum Treffpunkt; dieselbe Vorlage, dieselbe Seitansicht, Rechtshänder, Blick nach rechts. UNTERSCHIED nur am Schläger und im Ausschwung: Die Hand bleibt am Treffpunkt stehen, der Ausschwung ist abgebremst und endet höchstens eine Kopflänge hinter dem Treffpunkt. Die Schlagfläche ist 35–45° nach oben geöffnet und deutlich anders als in G-018, der Griff locker. Die Gewichtsverteilung bleibt wie in G-018: Die schnelle Bewegung zum Ball ist dieselbe.",
+   "figuren": "1: der Spieler (gleiche Vorlage wie G-018)",
+   "requisiten": [
+    "Schläger",
+    "Speeder (kurz nach dem Treffpunkt, Kappe in Flugrichtung)"
+   ],
+   "bewegungszeichen": "Nötig: ein einziger kurzer Geisterschläger (kurzer Weg = langsam). Die Flugbahn (--primaer) steigt steil-weich, hoher Scheitel, fällt am rechten Rand steil (asymmetrische Speederkurve) oder verlässt das Bild oben rechts. Taktleiste wie in G-018, aber drei Icons eng, dann eine deutliche Lücke, dann ein Icon: der gebrochene Takt. Weg: die in der Luft endende Pfeilspitze in Brusthöhe. Bodenlinie durchgehend.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Der Unterschied zu G-018 liegt fast nur im Pfeil; abgebremster Kontakt und geöffnete Schlagfläche sind nicht erkennbar (Schlägerwinkel nur ca. 10° anders). Ohne den vorangehenden Takt ist der „Bruch“ kaum lesbar.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Wie G-018: steifer Zeigearm, zurückgeneigter Rumpf, Zirkelbeine, freier Arm als Stummel, keine Füße.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Bogen endet in Brusthöhe in der Luft, es gibt keinen Speeder.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "S",
+   "pose_familie": "Seitstand-Drive (Vorhand, abgebremster Kontakt)",
+   "sequenz_mit": "G-018",
+   "caption_de": "gebrochener Rhythmus · hoch und weich",
+   "caption_ok": true
+  },
+  {
+   "id": "G-020",
+   "baustein": "sprung_smash (data/bausteine.experte-technik.json, Experte, Technik)",
+   "motiv": "Eine Figur in der Luft, der Schlagarm gestreckt ca. 41° vor der Senkrechten nach vorn-oben (Armgeometrie identisch mit G-011). Beide Knie sind symmetrisch stark angewinkelt, als säße die Figur auf einem unsichtbaren Stuhl. Unter den Füßen schweben zwei graue Striche in der Luft. Eine steile Bahn endet etwa in Kniehöhe ca. 1,5 m vor dem Spieler.",
+   "didaktischer_kern": "Höhe schafft Winkel: Treffen im Scheitelpunkt des Sprungs erlaubt einen steileren Smash, und die weiche, kontrollierte Landung zählt mehr als die Höhe. Beleg: „Je höher du triffst, desto steiler kannst du den Speeder nach unten schlagen“, „triffst im höchsten Punkt des Sprungs … und kommst schlagbereit wieder auf“, „Die weiche, kontrollierte Landung ist wichtiger als die Sprunghöhe“.",
+   "soll_pose": "Seitansicht (leichte Dreiviertel von vorn möglich), Rechtshänder, Spielrichtung rechts, Blick nach oben-vorn zum Treffpunkt. PHASE: Scheitelpunkt des Sprungs, Treffmoment. HÖHE: Fußspitzen 25–30 cm (etwa eine halbe Unterschenkellänge) über dem Boden; eine flache Schattenellipse auf dem Boden genau unter dem Körperschwerpunkt zeigt die Höhe. RUMPF: aus der Bogenspannung kommend fast senkrecht, 5–10° nach vorn eingerollt, Hüfte unter den Schultern. SCHLAGARM: nahezu gestreckt (Ellbogen ca. 165°), Oberarm 15–20° vor der Senkrechten. Treffpunkt über und knapp vor der Schlagschulter, Hand deutlich über dem Kopf. Der Schlägerkopf ist vor dem Handgelenk nach vorn gekippt (Peitsche), Schlagfläche 10–20° nach unten geschlossen. FREIER ARM: vor der Brust eingezogen, Ellbogen ca. 90°. BEINE (Schere, nicht symmetrisch): schlagseitiges rechtes Bein hinten, Knie ca. 100°, Unterschenkel nach hinten; linkes Bein vorn, Oberschenkel 20–30° vor der Senkrechten, Knie ca. 130°, Fußspitze nach unten, zur Landung vorbereitet. GEISTERPHASE LANDUNG (blass, rechts vor dem Absprungort): beidbeinig, hüftbreit, Ballen zuerst, Knie ca. 130° und über den Fußspitzen, Hüfte zurück, Rumpf 15° vor, Schläger vor dem Körper (schlagbereit). Knie nie unter 90°.",
+   "figuren": "1: der Spieler (voll im Scheitelpunkt), dazu dieselbe Figur blass in der Landung",
+   "requisiten": [
+    "Schläger",
+    "Speeder (im Treffpunkt)",
+    "Schattenellipse am Boden"
+   ],
+   "bewegungszeichen": "Nötig: die Smash-Bahn (--primaer) vom Treffpunkt nach rechts unten, die das Bild am rechten Rand verlässt (Richtung gegnerisches Feld über 12,8 m, keine Landung vor den Füßen). Optional eine blasse, flachere Vergleichslinie aus Stand-Treffhöhe, die zeigt, dass die Höhe den Winkel schafft. Ein kurzer gepunkteter Bogen des Schwerpunkts vom Scheitel zur Landungsgeisterphase. Weg: die zwei schwebenden grauen Striche unter den Füßen (wirken wie Stufen). Bodenlinie durchgehend.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Bahn endet etwa 1,5 m vor dem Spieler. Der Crossminton-Smash fliegt über die 12,8-m-Passierzone; der Winkelgewinn ist relativ (steiler als vom Boden), nicht nahezu senkrecht vor die eigenen Füße.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Beide Beine symmetrisch ca. 55° angewinkelt, die Figur „sitzt“. Der Treffpunkt liegt ca. 41° vor der Senkrechten (Strecken nach vorn statt Überkopf). Der freie Arm ist ein Stummel nach hinten-unten, der Rumpf leicht zurückgeneigt.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die weiche Landung, die der Text über die Sprunghöhe stellt, fehlt ganz. „Höhe schafft Winkel“ ist ohne Vergleich nicht ablesbar.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Zwei graue Striche schweben unter den Füßen und wirken wie Stufen oder eine Schwebeplattform. Die Pose ist G-011 mit hochgezogenen Beinen; Lupen-Schläger, kein Speeder.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "L",
+   "pose_familie": "Sprung (Überkopf in der Luft, Schere) mit Landung",
+   "sequenz_mit": "",
+   "caption_de": "im Sprung · steil nach unten",
+   "caption_ok": true
+  },
+  {
+   "id": "G-022",
+   "baustein": "konstanz_unter_hoechstdruck (data/bausteine.experte-technik.json, Experte, Technik)",
+   "motiv": "Eine Figur mit symmetrischem, frontalem A-Stand und fast gestreckten Beinen; der Schlagarm ist seitlich waagerecht gestreckt wie in einer Seitansicht. Eine hellblaue gestrichelte Lotlinie läuft durch Kopf, Rumpf und zwischen den Beinen. Dazu eine flache Bahn nach rechts.",
+   "didaktischer_kern": "Derselbe saubere, ruhige Schlag kommt auch unter Druck verlässlich wieder: Wiederholbarkeit und die Wahl des sichersten Schlags statt Spektakel. Beleg: „Ein Schlag, den du tausendfach sauber gespielt hast, läuft auch unter Druck von allein“, „Unter Höchstdruck wählst du den Schlag, den du am sichersten beherrschst“, „Achte auf einen lockeren Griff — Verkrampfung ist das erste Zeichen von Druck“.",
+   "soll_pose": "Seitansicht, Rechtshänder, rechte Körperseite zum Betrachter, Spielrichtung rechts, Blick fest auf den Treffpunkt. PHASE: Treffmoment eines bewusst unspektakulären, lehrbuchhaften Vorhand-Drives (des verlässlichsten Schlags). BEINE: Schrittstellung, linker Fuß vorn, ca. 1,3 Schulterbreiten, beide Knie gebeugt (ca. 145°). Gewicht mittig bis leicht vorn (ca. 60 % vorn); vorderer Fuß flach, hinterer auf dem Ballen. Die Basis ist sichtbar stabil. RUMPF: aufrecht bis 5–10° vor, Schwerpunkt über der Mitte der Standfläche, Schultern entspannt tief, Kopf ruhig über bis knapp vor der Hüfte. SCHLAGARM: Treffpunkt vor der vorderen Hüfte auf Hüft- bis Brusthöhe, Ellbogen ca. 150°, Handgelenk neutral, Griff locker (bei gezeichneter Hand die Finger nicht gekrallt). Schläger waagerecht, Schlagfläche senkrecht zum Ziel. FREIER ARM: vorn auf Brusthöhe, ruhig angewinkelt (ca. 100°). Kein Ausfallschritt, kein Sprung, keine Extremlage: die Ruhe ist die Aussage.",
+   "figuren": "1: der Spieler",
+   "requisiten": [
+    "Schläger",
+    "Speeder (im Treffpunkt)",
+    "kleine Anzeigetafel „15:15“ (Regel 3.2/3.4: enger Satzstand als Druckmarker)",
+    "eine enge Zielmarke rechts"
+   ],
+   "bewegungszeichen": "Nötig: drei nahezu deckungsgleiche, dünne Flugbahnen (eine kräftig in --primaer, zwei blass), die in EINER engen Zielmarke enden; das zeigt Wiederholbarkeit. Optional ein kurzer, ruhiger Ausschwungbogen. Lot weglassen, oder nur als kurzer blasser Strich vom Becken zum Boden zwischen den Füßen, neben der Figur, nie durch Kopf oder Rumpf. Bodenlinie durchgehend, Füße darauf.",
+   "maengel": [
+    {
+     "art": "anatomie",
+     "beschreibung": "Mischansicht: Beine frontal-symmetrisch gespreizt, Arm in Seitansicht. Steife, fast gestreckte Knie, Rumpf als starrer Pfahl, freier Arm als Stummel; die Füße versinken 3 E. in der Bodenlinie.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Die blaue Lotlinie läuft durch Kopf und Rumpf; die Figur wirkt aufgespießt. Die Akzentfarbe ist für eine Hilfslinie verbraucht.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "„Unter Druck“ und „wiederholbar“ sind nicht dargestellt: kein Druckmoment, keine Wiederholung. Das im aria-label genannte „kontrollierte Ausschwingen“ ist nicht sichtbar.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Kein Speeder; Treffpunkt auf Schulterhöhe statt Drive-Höhe.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Seitstand-Drive (Vorhand, Treffmoment, ruhig)",
+   "sequenz_mit": "",
+   "caption_de": "ruhig und wiederholbar · unter Druck",
+   "caption_ok": true
+  },
+  {
+   "id": "G-032",
+   "baustein": "schnelle_fuesse (data/bausteine.beginner-athletik_kondition.json, Beginner, Athletik)",
+   "motiv": "Eine frontale Figur mit senkrechtem Rumpf; beide Hände halten vor dem Schritt den Schaft, der Schläger hängt senkrecht nach unten zwischen den Knien. Der Kopf schwebt mit Lücke über dem Rumpf, die Beine sind gespreizt, die Knie nach außen gestellt. Neben den Füßen je zwei blaue waagerechte Striche, die Füße schweben ca. 9 E. über der Bodenlinie. Das Bild ist nahezu deckungsgleich mit G-002 und G-007.",
+   "didaktischer_kern": "Leicht und bereit auf den Fußballen: aus dem Split-Step in kurzen, schnellen Schritten zu einem Punkt und zurück. Beleg: „Crossminton wird auf den ersten zwei Metern entschieden … der kurze, explosive Antritt aus dem Stand“, „kleine, schnelle Kontakte statt großer, schwerfälliger Schritte“, „ein Boxer, der auf den Fußballen tänzelt“; Übung: „Starte aus der Grundposition mit einem Split-Step, sprinte zu einem Punkt, tippe ihn an und kehre zur Mitte zurück“.",
+   "soll_pose": "Dreiviertel-Ansicht von vorn, Kamera leicht erhöht (20–25°), damit Boden und Markierungen sichtbar sind. Die Figur steht in der Mitte eines angedeuteten Feldes. PHASE: Landung des Split-Steps, unmittelbar vor dem Antritt. FÜSSE: etwas mehr als schulterbreit, Spitzen 10–15° nach außen, Gewicht auf den Ballen, Fersen sichtbar 2–3 cm angehoben. KNIE: ca. 135° gebeugt, über den Fußspitzen ausgerichtet (nicht nach innen oder außen geknickt). HÜFTE/RUMPF: Hüfte leicht zurück, Rumpf ca. 20° nach vorn geneigt, Rücken gerade; Kopf aufrecht, Blick nach vorn zum Gegner. SCHLÄGER: in der RECHTEN Hand, locker vor dem Körper auf Bauch- bis Brusthöhe, Schlägerkopf OBEN (45–60° über der Waagerechten), Ellbogen ca. 90°, vor dem Körper (Text von grundposition: „Den Schläger hältst du locker vor dem Körper“). FREIER ARM: links leicht vorn-seitlich angewinkelt zur Balance. Muss sich klar von G-002 (ruhige Grundposition) unterscheiden: hier geladener Moment mit Bewegungsziel.",
+   "figuren": "1: der Spieler",
+   "requisiten": [
+    "Schläger",
+    "4 kleine Hütchen oder Bodenmarken an den Ecken, optional eine Mittelmarke",
+    "angedeutete Feldfläche in Perspektive"
+   ],
+   "bewegungszeichen": "Nötig: ein kurzer Antrittspfeil von der Figur zu einer Eckmarke und ein gestrichelter Rückwegpfeil zur Mitte (Hin und zurück aus dem Übungsteil); unter den Ballen 2–3 kleine Kontakttupfen bzw. Bögen für kurze, schnelle Bodenkontakte. Weg: die waagerechten blauen Striche (wirken wie seitliches Rutschen oder Skier). Kein Bein schwebt; beide Ballen stehen auf dem Boden.",
+   "maengel": [
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der Schläger hängt senkrecht aus dem Schritt zwischen den Knien; die Lesart ist unfreiwillig anzüglich. Das ist der auffälligste „seltsame“ Eindruck des Bildes (identisch in G-002 und G-007).",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Falsche Schlägerhaltung: In der Grundposition liegt der Schläger locker vor dem Körper in der Schlaghand mit dem Kopf oben, nicht beidhändig nach unten hängend.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Rumpf senkrecht ohne Vorlage, Knie nach außen gestellt, Unterschenkel fast gestreckt. Ohne Füße ist „auf den Ballen“ nicht zeigbar; der Kopf schwebt mit Lücke, die Füße schweben 9 E. über dem Boden.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Das Bild zeigt einen Stand, keinen Antritt und keinen Richtungswechsel. Markierungen und „hin und zurück“ aus dem Übungsteil fehlen; es ist eine Dublette von G-002/G-007 ohne eigene Aussage.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Bereitschaft / Split-Step-Landung (Dreiviertel von vorn)",
+   "sequenz_mit": "",
+   "caption_de": "schnelle, leichte Füße auf den Ballen",
+   "caption_ok": true
+  },
+  {
+   "id": "G-033",
+   "baustein": "beweglichkeit_und_schulter (data/bausteine.beginner-athletik_kondition.json, Beginner, Athletik)",
+   "motiv": "Eine frontal stehende Figur, ein Arm in „Torpfosten“-Stellung (Oberarm waagerecht seitlich, Unterarm senkrecht nach oben). Ein gepunkteter Bogen führt vom Handgelenk seitlich nach außen und unten bis Hüfthöhe. Der andere Arm ist ein kurzer Stummel schräg nach unten. Der Kopf schwebt mit Lücke, die Füße versinken in der Bodenlinie; kein Schläger.",
+   "didaktischer_kern": "Die einseitig belastete Schlagschulter nach dem Spiel sanft hinten dehnen, in der Richtung, die durch das Spiel steifer wird; dazu die Gegenseite fordern. Beleg: „sie wird in eine Richtung beweglicher und in die andere unbeweglicher“, Übung: „sanfte, langsame Dehnung der hinteren Schulter deines Schlagarms — den Arm locker vor dem Körper zur Gegenseite führen und dort ruhig halten“, Selbstkontrolle: „ein leichtes Ziehen hinten in der Schulter, niemals ein Schmerz vorn oder im Gelenk“.",
+   "soll_pose": "Frontalansicht bis leichte Dreiviertel-Ansicht von vorn, stehend, aufrecht, entspannt. FÜSSE: hüftbreit, parallel, flach am Boden. KNIE: locker, nicht durchgedrückt (ca. 170°). BECKEN/RUMPF: neutral, Brust zum Betrachter; der Rumpf dreht NICHT mit. SCHLAGARM (rechts): waagerecht bis leicht unter Schulterhöhe quer vor der Brust zur linken Seite geführt, Ellbogen ca. 160° (nicht durchgedrückt), Hand locker; der Unterarm endet etwa vor der linken Schulter. LINKER ARM: Die linke Hand fasst den rechten Oberarm knapp oberhalb des Ellbogens, nie am Unterarm oder Handgelenk, und zieht sanft zur linken Schulter; linker Ellbogen ca. 90° nach unten. SCHULTERN: beide tief, die rechte NICHT hochgezogen. KOPF: neutral, Blick geradeaus, Gesicht entspannt. KONTEXT: Der Schläger liegt neben dem rechten Fuß am Boden; das zeigt „nach dem Spiel“ und macht den Schlagarm eindeutig.",
+   "figuren": "1: der Spieler",
+   "requisiten": [
+    "Schläger (liegt am Boden neben dem rechten Fuß)"
+   ],
+   "bewegungszeichen": "Nötig: ein kleiner, weicher Halbmond bzw. Bogen (dünn, --tinte-3 oder zart --primaer) an der Rückseite der rechten Schulter als Zone des leichten Ziehens; ein kurzer, dünner Zugpfeil am Oberarm in Richtung linke Schulter. Weg: der Kreisbogen. Kein Schmerz-Symbol, keine Blitze. Füße exakt auf der Bodenlinie.",
+   "maengel": [
+    {
+     "art": "anatomie",
+     "beschreibung": "Der gezeichnete Bewegungsbogen ist nicht ausführbar: Bei waagerechtem Oberarm müsste der Unterarm in der Frontalebene von oben über seitlich nach unten schwingen, der Ellbogen würde dabei um bis zu 90° überstreckt. Ein Schulterkreis hätte sein Zentrum im Schultergelenk, nicht neben dem Ellbogen. Für einen Gesundheits-Baustein ist das heikel.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Das Bild zeigt nicht die im Übungsteil zuerst und genau beschriebene Dehnung der hinteren Schulter (Arm quer vor den Körper), also gerade die „steifere Richtung“. Die gezeigte Torpfosten-/Außenrotationsstellung ist eine andere Belastung. Caption-Vorschlag: „hintere Schulter sanft dehnen“.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Arme ungleich lang (ruhiger Arm 34 gegen 51 E.), der ruhige Arm endet auf Taillenhöhe. Das Schultergelenk sitzt 10 E. unter dem Halsansatz, der Kopf schwebt mit Lücke, die Füße versinken 3 E. in der Bodenlinie.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Schlagarm ist nicht kenntlich (kein Schläger, kein Bezug „nach dem Spiel“), obwohl der Text gerade auf die Einseitigkeit zielt.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Stand-frontal (Dehnung/Mobilisation)",
+   "sequenz_mit": "",
+   "caption_de": "sanfte Schulterkreise · Beweglichkeit",
+   "caption_ok": false
+  },
+  {
+   "id": "G-034",
+   "baustein": "explosivitaet (data/bausteine.fortgeschritten-athletik_kondition.json, Fortgeschritten, Athletik)",
+   "motiv": "Eine Figur in Seitansicht und Schrittstellung, der Rumpf ca. 13° nach HINTEN geneigt (Kopf hinter der Hüfte). Ein Arm ist ein kurzer Strich nach vorn, der andere zeigt nach unten-hinten, beide ohne Ellbogen. Das hintere Bein ist fast gestreckt, das vordere leicht gebeugt. Ein dicker blauer Pfeil läuft vom hinteren Fuß quer durch den vorderen Oberschenkel nach rechts oben.",
+   "didaktischer_kern": "Die Feder: kurz einfedern (vordehnen), sofort explosiv strecken und weich, kontrolliert landen. Beleg: „Ein Muskel, der kurz vorgedehnt wird und sich sofort zusammenzieht — wie bei einem federnden Sprung —, erzeugt mehr Kraft als aus dem Stand“ und „eine weiche, kontrollierte Landung ist wichtiger als große Höhe“; Reflexion: „Achte selbst vor allem auf eines: eine weiche, kontrollierte Landung bei allem, was du springst“.",
+   "soll_pose": "Seitansicht, eine Figur (Rechtshänder, Blick nach rechts) als Bewegungsfolge in drei Phasen von links nach rechts, leicht überlappend; ein Sprung nach oben mit kleinem Vorwärtsanteil wie zum hohen Ball. PHASE 1, Einfedern (Geist, --tinte-3, ca. 35 %): Füße hüftbreit parallel, Knie ca. 115° (nie unter 90°) und über den Zehen, Hüfte ca. 100° gebeugt, Rumpf ca. 35° vor, Rücken gerade, Arme nach hinten-unten geschwungen. PHASE 2, Absprung (volle Figur, Moment direkt nach dem Bodenverlassen): Hüft-, Knie- und Sprunggelenk gestreckt (Dreifachstreckung), Fußspitzen zeigen nach unten, ca. 5 cm über dem Boden. Die Körperlinie Fuß–Hüfte–Schulter–Kopf ist annähernd gerade und ca. 10° nach vorn geneigt (nie nach hinten). Beide Arme kräftig nach vorn-oben geschwungen; der Schläger in der rechten Hand zeigt mit dem Kopf nach oben, ohne Schlagbewegung. Blick nach vorn-oben. PHASE 3, Landung (Geist): beidbeinig, hüftbreit, Ballen zuerst, Knie ca. 130° und über den Fußspitzen (nicht nach innen), Hüfte zurück, Rumpf ca. 20° vor, Arme vorn zur Balance, Schläger vor dem Körper (schlagbereit). Keine Kästen, Hürden oder Tiefsprünge (Gesundheitsrahmen: Prinzip zeigen, keine Plyometrie-Dosierung).",
+   "figuren": "1: der Spieler in drei Phasen (eine volle, zwei blasse Geisterphasen)",
+   "requisiten": [
+    "Schläger (optional, in der rechten Hand, Kopf oben)"
+   ],
+   "bewegungszeichen": "Nötig: eine dünne, gepunktete Schwerpunktbahn (Hüfte) von Phase 1 zu Phase 3 mit kleiner Senke am Start (einfedern) und flachem Bogen; an Phase 1 ein kurzer Doppelpfeil ↓↑ für „vordehnen, sofort strecken“; unter den Füßen von Phase 3 ein kleiner Dämpfungsbogen. Pfeile nie durch den Körper, mindestens eine Strichbreite Abstand. Weg: der dicke Abdruckpfeil durch den Oberschenkel. Bodenlinie durchgehend, Füße in Phase 1 und 3 darauf.",
+   "maengel": [
+    {
+     "art": "anatomie",
+     "beschreibung": "Beim explosiven Abdruck nach vorn ist der Rumpf ca. 13° nach hinten geneigt (Kopf hinter der Hüfte); die Figur würde nach hinten kippen. Die Arme sind Einzelstriche ohne Ellbogen und kürzer als ein Unterarm plus Oberarm (30/33 E.).",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Weder die Feder (Vordehnung, dann Streckung) noch die weiche Landung, die beiden Kernaussagen des Textes, sind dargestellt; das Bild zeigt eine Schrittstellung mit Pfeil. Caption ggf. ergänzen, etwa „einfedern, explosiv strecken, weich landen“.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Der dicke Abdruckpfeil durchquert den vorderen Oberschenkel. Pfeilrichtung (ca. 53° nach vorn-oben) und Körperachse (nach hinten) widersprechen sich.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Das Abdruckbein steht nicht in Dreifachstreckung (Hüfte gebeugt, Fuß flach). Der im Katalog genannte Abdruck „toward one corner“ hat keinen Raumbezug.",
+     "schwere": 1
+    },
+    {
+     "art": "technik",
+     "beschreibung": "PNG-Fallback 2560×2560.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "L",
+   "pose_familie": "Sprung (Einfedern – Absprung – Landung)",
+   "sequenz_mit": "",
+   "caption_de": "explosiv abdrücken · Sprungkraft",
+   "caption_ok": true
+  },
+  {
+   "id": "G-035",
+   "baustein": "reaktivkraft_bodenkontakt (bausteine.experte-athletik_kondition.json, Experte, Übungsteil „Kurz und federnd“)",
+   "motiv": "Ein senkrechter, 20 Einheiten dicker schwarzer Balken (Unterschenkel) mit einem nach rechts abknickenden Haken (Fuß), links daneben ein losgelöster blauer Pfeil senkrecht nach oben, unter dem Fuß ein grauer, nach oben gewölbter Bogen, darunter eine gestrichelte Bodenlinie. Der Fuß endet rund 16 Einheiten über dem Boden. Ein Knie, eine Ferse oder ein Schuh sind nicht zu sehen. Die Caption ist im PNG links und rechts abgeschnitten.",
+   "didaktischer_kern": "Den Boden nur kurz berühren und sofort federnd wieder abdrücken, weil die Sehne wie eine Feder Energie speichert und zurückgibt. Belege: „Reaktivkraft ist die Fähigkeit, den Boden nur kurz zu berühren und sofort wieder abzudrücken — federnd statt schwer.“ / „Deine Sehnen wirken wie Federn … Je kürzer der Bodenkontakt, desto mehr von dieser gespeicherten Energie nutzt du.“ / „Die Landung bleibt dabei immer weich und kontrolliert.“",
+   "soll_pose": "Streng seitliche Nahaufnahme (Sagittalansicht) des rechten Beins von der Oberschenkelmitte bis zu den Zehen, Zehen zeigen nach rechts. Phase: tiefster Punkt des Bodenkontakts (Umkehrpunkt von Einfedern zu Abdruck). Knie leicht gebeugt (ca. 20°), Schienbein ca. 10–15° nach vorn geneigt, Sprunggelenk leicht dorsalflektiert. Der Bodenkontakt liegt NUR am Vorfuß bzw. Ballen, die Ferse schwebt etwa eine Fingerbreite über dem Boden und setzt nicht auf. Der Fuß steckt in einem einfachen Sportschuh-Umriss mit erkennbarer Sohle, die Sohle liegt am Ballen sichtbar AUF der durchgezogenen Bodenlinie. Wadenmuskel als weicher Bauch angedeutet, die Achillessehne von der Wade zur Ferse als hervorgehobenes Federelement in --primaer (kurze Zickzack- oder Spiralfeder). Bewegung als Geisterphasen: links oben ein blasser Fuß im Anflug, rechts oben ein blasser Fuß beim Verlassen. Dazwischen beschreibt das Sprunggelenk eine enge V-Bahn, deren Spitze im Kontaktpunkt liegt, mit einem Pfeil hinein und einem hinaus (die Enge des V trägt die Aussage „kurz“). Darstellungen von Tiefsprüngen, Kästen oder Hürden vermeiden (Gesundheitsrahmen: hier geht es nur um das Gefühl in Bewegungen, die man ohnehin spielt).",
+   "figuren": "keine ganze Figur; Ausschnitt eines Beins (Oberschenkelmitte bis Zehen) eines Spielers bzw. einer Spielerin",
+   "requisiten": [
+    "Sportschuh-Umriss mit Sohle",
+    "Bodenlinie (durchgezogen, Hallenboden)"
+   ],
+   "bewegungszeichen": "Nötig: zwei blasse Geisterfüße (Anflug, Abflug), enge V-Bahn des Sprunggelenks mit Pfeil hinein und hinaus, Sehnenfeder. Optional: eine winzige Klammer am Kontaktpunkt als Zeichen für die kurze Kontaktzeit. Weg sollen der losgelöste senkrechte Pfeil neben dem Bein (er suggeriert einen hohen Sprung statt eines kurzen Kontakts) und der gewölbte „Kompressionsbogen“ (er liest sich als Hügel oder Lächeln). Die Bodenlinie durchziehen statt stricheln, denn auf ihr findet der Kontakt statt.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Der Fuß berührt den Boden nicht: Fußende bei y≈214, Bodenlinie bei y=230, dazwischen nur der Bogen. Ein Bild über Bodenkontakt zeigt also keinen Bodenkontakt.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Der Unterschenkel ist ein senkrechter Balken ohne Knie, Ferse und Sprunggelenk, der Fuß ein Haken. Das „L“ wirkt wie ein Buchstabe oder Hockeyschläger. Die Feder, also Wade und Achillessehne, die der Text ins Zentrum stellt, fehlt ganz.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Der Rückfederungspfeil steht losgelöst links neben dem Bein und zeigt lang und senkrecht nach oben. Er behauptet einen hohen Sprung, der Text meint einen kurzen, leichten Kontakt. Der nach oben gewölbte Bogen liest sich nicht als Einfedern.",
+     "schwere": 2
+    },
+    {
+     "art": "technik",
+     "beschreibung": "Die Caption „kurzer Bodenkontakt · schnelle Rückfederung“ ist breiter als die 300er-viewBox und im PNG an beiden Rändern abgeschnitten (sichtbar „…urzer … Rückfederun…“).",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Strichstärke 20 gegen 3er-Hilfslinien, die obere Bildhälfte ist leer, das Ganze wirkt wie ein Platzhalter-Icon. Es gibt keinen Bezug zu Schuh oder Spielbewegung, obwohl der Text betont, es gehe um „Bewegungen, die du ohnehin spielst“.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Bodenkontakt-Nahaufnahme (Landung/Abdruck)",
+   "sequenz_mit": "",
+   "caption_de": "kurzer Kontakt · federnd abspringen",
+   "caption_ok": false
+  },
+  {
+   "id": "G-036",
+   "baustein": "bewegungsoekonomie (bausteine.experte-athletik_kondition.json, Experte, Reflexionsaufgabe)",
+   "motiv": "Zwei Panels, durch eine fast unsichtbare gestrichelte Linie getrennt. Links steht eine schwarze Strichfigur still in A-Pose, unter ihren Füßen ein blauer Bogenpfeil auf bzw. unter der Bodenlinie. Rechts eine blasse graue Figur in leicht verdrehter Stellung mit sechs kurzen „Zitterstrichen“ um den Körper. Beide ohne Schläger. Wo sich die halbtransparenten Segmente überlagern, entstehen dunkle Flecken an Schulter und Becken.",
+   "didaktischer_kern": "Direkte, kurze Wege zum Ball und zurück in die zentrale, ausbalancierte Position, ohne Zappeln und Umwege. Ruhe in der Bewegung ist Effizienz. Belege: „Der Experte bewegt sich in klaren, direkten Wegen zum Ball und zurück, ohne Zappeln, ohne Umwege.“ / „Wer nach jedem Schlag zügig in eine zentrale, ausbalancierte Position zurückkehrt, hat kürzere Wege“ / Reflexion: „nach jedem Schlag ruhig und zügig in eine zentrale Position zurückzukehren“.",
+   "soll_pose": "Zwei Panels nebeneinander, beide streng seitlich, beide Figuren rechtshändig mit Blick nach rechts zum Ball. Gleicher Start (Mittelmarke am Boden) und gleiches Ziel (Ballpunkt rechts vorn) in beiden Panels. LINKS (effizient, volle --tinte): Am Start eine blasse Geisterfigur in Bereitschaftsstellung (Füße schulterbreit, Knie leicht gebeugt, Gewicht auf den Ballen, Schläger vor dem Körper in Brusthöhe, Kopf oben). Am Ziel die volle Figur im kontrollierten Ausfallschritt mit dem schlagseitigen (rechten) Fuß voran: vorderes Schienbein senkrecht, Knie über dem Sprunggelenk, vorderer Oberschenkel ca. 30–40° zur Horizontalen; hinteres Bein gestreckt, Ferse angehoben, auf dem Fußballen; Rumpf aufrecht bis höchstens 15° vorgeneigt; Kopf auf gleicher Höhe wie beim Start. Schlagarm nach vorn gestreckt, Schläger etwa in Brusthöhe, Schlägerkopf oben, Schlagfläche zum Ball, Treffpunkt deutlich vor dem vorderen Fuß. Freier Arm nach hinten-unten zur Balance. Am Boden nur zwei Fußabdrücke zwischen Start und Ziel (Nachstellschritt + Ausfall), dazu ein glatter Pfeil hin und ein gestrichelter Rückkehrpfeil zur Mittelmarke. RECHTS (hektisch, --tinte-3, ca. 50 %): dieselbe Strecke mit 5–6 kleinen Fußabdrücken im Zickzack samt Überschießen hinter das Ziel. Die Figur kommt aus dem Gleichgewicht an: Rumpf weit über das vordere Knie gekippt, Knie über die Zehen hinaus, hinteres Bein schleift nach, Schlagarm weit nach hinten ausgeholt („zu weites Ausholen“), freier Arm fuchtelt nach oben, Kopf tiefer als beim Start.",
+   "figuren": "2 Darstellungen derselben Person: links effizient (mit blasser Startphase), rechts hektisch (blass)",
+   "requisiten": [
+    "Crossminton-Schläger (beide Figuren)",
+    "Mittelmarke am Boden",
+    "Ballpunkt bzw. kleiner Speeder am Ziel",
+    "Fußabdrücke"
+   ],
+   "bewegungszeichen": "Nötig: Fußabdrücke (links 2, rechts 5–6 im Zickzack), links ein glatter Hinweg-Pfeil plus gestrichelter Rückweg zur Mitte, links eine Geisterphase am Start. Optional links eine flache Kopfhöhen-Linie als Zeichen für Ruhe. Weg sollen die frei schwebenden „Zitterstriche“ (sie lesen sich als Frieren oder Elektrisieren) und der Pfeil, der die Bodenlinie überdeckt. Die Trennlinie mindestens in --tinte-3 statt --linie.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Die „effiziente“ Figur steht reglos in Grundstellung. Gezeigt wird gar keine Bewegung, also auch keine ökonomische. Der einzige Pfeil liegt unter der Ferse auf der Bodenlinie.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die beiden Kernhandlungen des Textes fehlen: der direkte Weg zum Ball und die Rückkehr in die zentrale Position. Die rechte Figur wirkt eher zitternd als umständlich laufend.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Arme als gerade Einzelsegmente ohne Ellbogen, Knie praktisch gestreckt. Rechts kippt der Rumpf seitlich, und die Opazität-Überlagerung erzeugt dunkle Flecken an Schulter und Becken (im PNG sichtbar).",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Beide Figuren ohne Schläger, obwohl Crossminton-Laufwege gemeint sind (Laufen zum Ball und Schlag gehören zusammen).",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Trennlinie in --linie im Hellmodus kaum sichtbar, beide Figuren aus demselben steifen Baukasten, viel Leerraum oben.",
+     "schwere": 1
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "L",
+   "pose_familie": "Ausfallschritt (mit Bereitschaft als Geisterphase)",
+   "sequenz_mit": "",
+   "caption_de": "effizient statt hektisch",
+   "caption_ok": true
+  },
+  {
+   "id": "G-043",
+   "baustein": "verstaendigung_im_paar (bausteine.doppel-thema.json, Fortgeschritten, Domäne Mentales, spielform doppel, Reflexionsaufgabe)",
+   "motiv": "Zwei Strichfiguren stehen frontal Seite an Seite auf derselben Bodenlinie. Die rechte streckt einen dreigliedrigen Arm quer vor dem Körper zur Bildmitte und zeigt dort ein blaues „V“ (gemeint: verdecktes Handzeichen hinter dem Rücken). Zwischen den Köpfen ein grauer gepunkteter Bogen („Blickkontakt“). Die linke Figur hat nur einen Arm. Keine Schläger, kein Speeder, kein Feld.",
+   "didaktischer_kern": "Kurze, laute, eindeutige Zurufe in der Rallye („Meiner!“) klären in Sekundenbruchteilen, wer den Ball nimmt, und verhindern, dass beide zum selben Ball laufen. Belege: „Entscheidend ist, dass die Zurufe kurz, laut und eindeutig sind. … Ein klares „Meiner!“ im richtigen Moment verhindert, dass ihr beide zum selben Ball lauft — der teuerste Doppelfehler.“ Ein Handzeichen kommt im Text nicht vor. Die mentale Seite (aufbauen nach Fehlern) trägt der Baustein im Text; das Bild sollte sich auf den Zuruf konzentrieren.",
+   "soll_pose": "Seitliche Profilansicht entlang der Spielrichtung: beide Partner blicken nach rechts zum Gegner (außerhalb des rechten Bildrands), Ordnung vorn/hinten nach Regel 7.4/7.5.1, also hintereinander, nie nebeneinander. Am Boden das eigene Feld als Bodenlinie mit Markierungen für Grundlinie (links), Aufschlaglinie (3 m hinter der Frontlinie) und Frontlinie (rechts). ANGRIFFSSPIELER vorn (rechts, nahe der Frontlinie): Bereitschaft, Füße schulterbreit, Knie gebeugt, Gewicht vorn. Er dreht die Schulter leicht weg und hebt den Schläger aus der Bahn, damit der Mittelball an ihm vorbeigeht. Kopf und Blick bleiben nach vorn zum Gegner, bereit für den nächsten Ball. RÜCKRAUMSPIELER hinten (links, zwischen Grundlinie und Aufschlaglinie): kurzer Schritt nach vorn mit dem schlagseitigen (rechten) Fuß, Knie gebeugt, Rumpf leicht vorgeneigt, Schlagarm vorn-oben, Schläger etwa in Schulterhöhe vor dem Körper, Schlagfläche zum ankommenden Speeder. Freier Arm zur Balance seitlich. Mund geöffnet, darüber eine kräftige Sprechblase mit „Meiner!“ (fett, mit Ausrufezeichen, 2–3 kurze Schallstriche für „laut“). Speeder (Kopf voran) fliegt flach in die Mitte der Tiefe zwischen beide, Treffpunkt vor dem Körper des Rückraumspielers. Regel 7.5.1 einhalten: im Treffmoment steht der grundliniennähere (linke) Fuß des Rückraumspielers deutlich hinter dem grundliniennäheren Fuß des Angriffsspielers. Rechtshänder: im Profil nach rechts zeigt die Figur ihre Schlagseite dem Betrachter.",
+   "figuren": "2: Rückraumspieler (ruft und nimmt den Ball), Angriffsspieler (lässt ihn passieren, bleibt vorn)",
+   "requisiten": [
+    "2 Crossminton-Schläger",
+    "Speeder (Kopf voran, mit Korb)",
+    "Feldmarkierungen am Boden: Grundlinie, Aufschlaglinie, Frontlinie",
+    "Sprechblase „Meiner!“ (sprachabhängig: en „Mine!“, fr « À moi ! », pl „Moja!“)"
+   ],
+   "bewegungszeichen": "Nötig: kurze, gestrichelte Flugbahn des Speeders in die Mitte; kleiner Schrittpfeil des Rückraumspielers nach vorn; Schallstriche an der Sprechblase. Weg sollen der Blickkontakt-Bogen zwischen den Köpfen und das V-Handzeichen. Bodenlinie mit Feldmarken statt neutraler Strichlinie.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Partner stehen Seite an Seite auf gleicher Tiefe. Das widerspricht der festen Ordnung vorn/hinten im Crossminton-Doppel (Regel 7.4, Positionsregel 7.5.1) und dem ausdrücklichen Doppel-Fallstrick im Repo.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Das verdeckte Handzeichen steht nirgends im Baustein (Text: Absprache vor dem Aufschlag, Zurufe „Meiner!“/„Deiner!“/„Lass!“, Feedback, Aufbauen nach Fehlern). Es ist eine Badminton- bzw. Tennis-Doppel-Konvention und lenkt vom Kern ab.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "„Hinter dem Rücken“ ist in der frontal lesbaren Strichfigur nicht darstellbar. Der Arm kreuzt VOR dem Körper zum Partner, das blaue V liest sich als Victory- oder Peace-Zeichen bzw. als Häkchen.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Die linke Figur hat nur einen Arm. Der Signalarm der rechten Figur ist dreigliedrig, überlang (reicht bis zur Bildmitte) und knickt auf Hüfthöhe ab.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Dieselbe Komposition wie G-047 und G-053 (zwei frontale Klonfiguren, Bogen zwischen den Köpfen). Die drei Grafiken sind kaum zu unterscheiden. Keine Schläger, kein Speeder, kein Feld.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Doppel-Staffel im Profil (Bereitschaft + kurzer Ausfallschritt)",
+   "sequenz_mit": "",
+   "caption_de": "„Meiner!“ · kurz, laut, eindeutig",
+   "caption_ok": false
+  },
+  {
+   "id": "G-047",
+   "baustein": "sich_absprechen (bausteine.doppel-beginner.json, Beginner, Domäne Mentales, spielform doppel, Reflexionsaufgabe)",
+   "motiv": "Zwei identische Strichfiguren stehen frontal nebeneinander in steifer A-Pose (Arme schräg nach unten, ohne Ellbogen). Zwischen den Köpfen ein blauer gepunkteter Bogen mit drei Punkten (wirkt wie „…“). Keine Schläger, kein Speeder, keine Zuwendung zueinander. Die Füße ragen über die Bodenlinie.",
+   "didaktischer_kern": "Im Doppel überhaupt reden: vor dem Punkt kurz das Wichtigste klären („Ein Satz genügt“), freundlich und positiv. Belege: „Das Wichtigste ist, überhaupt zu reden.“ / „Vor dem Punkt klärt ihr kurz das Wichtigste: Wer schlägt auf, wer nimmt im Zweifel die Mitte, worauf achtet ihr? Ein Satz genügt.“ / „Bleib laut, bleib positiv.“",
+   "soll_pose": "Dreiviertelansicht von schräg vorn, beide Partner im eigenen Feld kurz vor dem Aufschlag nahe der Aufschlaglinie, einander zugewandt auf etwa einen Meter Abstand, entspannt. RÜCKRAUMSPIELER/AUFSCHLÄGER (links): hält den Speeder in der freien (linken) Hand auf Brusthöhe, denn nach Regel 7.4/2.1.5 schlägt der Rückraumspieler auf. Schläger in der rechten Hand locker gesenkt, Schlägerkopf zeigt schräg zum Boden. Aufrechter Stand, Füße hüftbreit, Knie locker. Kopf zum Partner, Mund offen, darüber eine kleine Sprechblase mit 2–3 abstrakten Textzeilen statt Wörtern (ein Satz, sprachneutral). ANGRIFFSSPIELER (rechts): Oberkörper zum Partner gedreht, Füße schon halb Richtung Frontlinie (er geht gleich nach vorn), nickt leicht. Freie Hand mit erhobenem Daumen oder offener Handfläche auf Brusthöhe, Schläger locker in der rechten Hand. Gesamtanmutung freundlich und zugewandt, Schultern locker, kein Grimm. Die Ordnung danach (vorn/hinten) kann ein kleiner Pfeil vom Angriffsspieler zur Frontlinie andeuten. Im Bild niemals beide fertig Seite an Seite in Spielposition.",
+   "figuren": "2: Rückraumspieler und Aufschläger (spricht, hält den Speeder), Angriffsspieler (hört zu, bestätigt)",
+   "requisiten": [
+    "2 Crossminton-Schläger (locker gesenkt)",
+    "Speeder in der freien Hand des Aufschlägers",
+    "Sprechblase mit abstrakten Zeilen",
+    "angedeutete Aufschlag- und Frontlinie am Boden"
+   ],
+   "bewegungszeichen": "Nötig: nur die Sprechblase. Optional ein kleiner gestrichelter Pfeil des Angriffsspielers Richtung Frontlinie (nach der Absprache geht er nach vorn). Weg soll der gepunktete Bogen mit drei Punkten über den Köpfen (liest sich als Schweigen, Nachdenken oder Telepathie, also das Gegenteil von „Bleib laut“).",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Gezeigt wird kein Reden: kein offener Mund, keine Sprechblase, keine Zuwendung. Die Figuren stehen wie Fremde frontal nebeneinander. Der Punkte-Bogen liest sich als „…“, also eher Schweigen als Absprache.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Nebeneinander auf gleicher Höhe wirkt wie eine Seite-an-Seite-Formation. Zwischen den Punkten ist das zwar kein Positionsfehler, das Bild verfestigt aber ausgerechnet im Beginner-Doppel die Badminton-Vorstellung statt der Ordnung vorn/hinten (Regel 7.4/7.5.1).",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Kopierte Klonfiguren in A-Pose, Arme ohne Ellbogen, Beine ohne Knie, Füße ragen mit den Rundkappen über die Bodenlinie.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Weder Schläger noch Speeder noch Feldbezug. Die natürliche Verankerung (der Aufschläger hält den Speeder) fehlt.",
+     "schwere": 1
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Symmetrisch, statisch, banal, praktisch austauschbar mit G-043 und G-053.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Stand-Dreiviertel, einander zugewandt (Gespräch)",
+   "sequenz_mit": "",
+   "caption_de": "kurz absprechen · als Paar",
+   "caption_ok": true
+  },
+  {
+   "id": "G-053",
+   "baustein": "blindes_verstaendnis (bausteine.doppel-experte.json, Experte, Domäne Mentales, spielform doppel, Reflexionsaufgabe)",
+   "motiv": "Zwei gleiche Strichfiguren laufen nebeneinander nach rechts (Scherenschritt), unter jeder ein paralleler blauer Pfeil nach rechts, zwischen den Köpfen ein blasser gepunkteter Bogen („Wahrnehmungsband“). Der Rumpf ist entgegen der Laufrichtung nach hinten geneigt. Keine Schläger, kein Speeder.",
+   "didaktischer_kern": "Den Partner lesen und die Lücke füllen, die er öffnet, ohne hinzusehen. Beide schauen auf Speeder und Gegner, nicht aufeinander, und ergänzen sich wie zwei Hände derselben Person. Belege: „Sie ahnen, was der andere tut, bevor er es tut, und decken einander, ohne hinzusehen.“ / „Wohin er startet, welchen Ball er nimmt, welchen Raum er verlässt. Aus diesem Lesen heraus füllst du automatisch die Lücke, die er öffnet“ / „musst nicht kontrollierend hinsehen“.",
+   "soll_pose": "Seitliche Profilansicht entlang der Spielrichtung, beide Partner blicken nach rechts zum Gegner, Ordnung vorn/hinten. Am Boden das eigene Feld mit Grundlinie (links), Aufschlaglinie und Frontlinie (rechts). Ein Augenblick, zwei gleichzeitige Bewegungen: ANGRIFFSSPIELER (rechts) startet zu einem kurzen Ball vor die Frontlinie, im Ausfallschritt mit dem rechten Fuß voran, vorderes Knie über dem Sprunggelenk, Rumpf aufrecht bis leicht vorgeneigt, Schlagarm nach vorn-unten gestreckt, Schläger knapp über Kniehöhe vor dem vorderen Fuß, Treffpunkt vor dem Körper, freier Arm hinten zur Balance. RÜCKRAUMSPIELER (links) rückt gleichzeitig mit einem Nachstellschritt in die frei werdende Mitte der Tiefe nach: Knie gebeugt, Gewicht auf den Ballen, Rumpf leicht vorgeneigt, Schläger vor dem Körper in Brusthöhe bereit; seine Startposition als blasse Geisterfigur. Beide Köpfe nach vorn zum Speeder bzw. Gegner gerichtet; zwei gepunktete Blicklinien laufen nach vorn, keine zum Partner. Regel 7.5.1: der grundliniennähere Fuß des Rückraumspielers bleibt hinter dem des Angriffsspielers. Optional eine dezente elastische Verbindung auf Hüfthöhe zwischen den Körpern (nicht zwischen den Köpfen) als Bild für „zwei Hände derselben Person“.",
+   "figuren": "2: Angriffsspieler (startet zum kurzen Ball), Rückraumspieler (füllt die Lücke, mit Geisterphase)",
+   "requisiten": [
+    "2 Crossminton-Schläger",
+    "Speeder (Kopf voran) vor der Frontlinie",
+    "Feldmarkierungen am Boden"
+   ],
+   "bewegungszeichen": "Nötig: je ein Bewegungspfeil am Boden, beide in --primaer und mit gleicher Startmarke (Gleichzeitigkeit); Geisterphase des Rückraumspielers; zwei Blicklinien nach vorn. Weg soll das Band zwischen den Köpfen (behauptet Hinsehen bzw. Kommunikation, also das Gegenteil). Die parallelen Seitwärtspfeile entfallen, weil sie die Badminton-Seitwärtsverschiebung zeigen.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Beide Partner laufen nebeneinander parallel seitwärts. Das ist die Seite-an-Seite-Verschiebung aus dem Badminton, die das Crossminton-Doppel mit fester Ordnung vorn/hinten (Regel 7.4/7.5.1) gerade nicht kennt.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Das Band zwischen den Köpfen ist dasselbe Zeichen wie in G-047 (Absprache) und G-043 (Blickkontakt). Es behauptet eine Kopf-zu-Kopf-Verbindung, während der Baustein „ohne hinzusehen“ meint. Die Köpfe sind nicht auf den Speeder gerichtet.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Gezeigt wird Gleichschritt (beide tun dasselbe), keine Antizipation (einer öffnet einen Raum, der andere füllt ihn).",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Rumpf entgegen der Laufrichtung nach hinten geneigt (Schulter links der Hüfte), Beine als gestreckte Schere, Arme ohne Ellbogen im Hampelmann-V. Wirkt wie gezogen oder bremsend.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Klonfiguren, keine Schläger, kein Speeder, kein Feld. Austauschbar mit G-043 und G-047.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "L",
+   "pose_familie": "Doppel-Staffel im Profil (Ausfallschritt + Nachstellschritt)",
+   "sequenz_mit": "",
+   "caption_de": "blindes Verständnis · ohne hinzusehen",
+   "caption_ok": true
+  },
+  {
+   "id": "G-054",
+   "baustein": "draussen_spielen (bausteine.outdoor-thema.json, Fortgeschritten, typ umgebungs_baustein, Rahmen-Einstieg der Outdoor-Reihe, Reflexionsaufgabe)",
+   "motiv": "Eine einzelne Strichfigur steht mittig in steifer A-Pose auf einer durchgezogenen Horizontlinie. In der rechten Hand hängt ein kurzer Schläger kopfüber auf Kniehöhe. Oben rechts eine blaue Sonne mit acht Strahlen, links ein grauer Bogen als „Wolke“. Kein Feld, kein Speeder, kein Wind.",
+   "didaktischer_kern": "Draußen ist Crossminton in seinem Ursprung: kein Netz, zwei Felder mit Passierzone dazwischen, und die Bedingungen (vor allem Wind) muss man lesen, bevor man spielt. Belege: „Es kennt kein Netz; zwischen den beiden Feldern liegt die Passierzone“ / „Der wichtigste Unterschied ist der Wind.“ / „Draußen spielst du mit den Bedingungen, nicht gegen sie.“ / Reflexion: „zuerst die Bedingungen bewusst zu lesen, bevor du losspielst“.",
+   "soll_pose": "Erhöhte Dreiviertel-Rückansicht (ca. 30° von oben) entlang der Court-Achse, von hinter dem nahen Feld. Unten das nahe Feld als Trapez (Quadrat in Perspektive), oben-mittig das ferne Feld deutlich kleiner. Dazwischen die Passierzone als offene Rasenfläche ohne Netz, ohne Pfosten, sichtbar länger als ein Feld tief ist (12,8 m Abstand gegenüber 5,5 m Feldtiefe). SPIELER im nahen Feld (Rückansicht Dreiviertel, rechtshändig): entspannte Bereitschaft in der Feldmitte, Füße schulterbreit, Knie locker gebeugt, Rumpf aufrecht, Schläger in der rechten Hand vor dem Körper auf Hüft- bis Brusthöhe, Schlägerkopf oben. In der freien Hand der Speeder. Kopf zur Seite gedreht zu einer kleinen Fahne oder einem Baum am Rand der Passierzone, deren Tuch bzw. Krone sich im Wind neigt: er liest die Bedingungen. Im fernen Feld klein ein Gegenüber in Bereitschaft. Wind als 2–3 geschwungene Strichlinien quer über die Passierzone. Sonne oben rechts als Kontur, nicht in Akzentfarbe. Untergrund: kurze Grasbüschel an den Feldrändern. Rückfall-Variante bei Aufwand M: seitliche Fernansicht mit zwei kurzen, dick markierten Feldabschnitten am Boden und langer leerer Mitte, je eine kleine Figur pro Feld, Windlinien im Zwischenraum.",
+   "figuren": "2: Spieler im nahen Feld (liest den Wind, Hauptfigur), Gegenüber im fernen Feld (klein, Nebenfigur)",
+   "requisiten": [
+    "2 Crossminton-Schläger",
+    "Speeder in der freien Hand",
+    "zwei Felder mit Linien, Passierzone ohne Netz",
+    "Fahne oder Baum als Windanzeiger",
+    "Grasandeutung",
+    "Sonne (Kontur)"
+   ],
+   "bewegungszeichen": "Nötig: Windlinien über der Passierzone, geneigte Fahne bzw. Baumkrone. Optional ein kurzer Blickpfeil vom Kopf zur Fahne. Weg sollen der einzelne graue Bogen als „Wolke“ (liest sich als Fehlstrich oder Augenbraue) und die harte Horizontlinie als einziges Bodenzeichen.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Beide Kernaussagen fehlen: weder die Felder samt Passierzone ohne Netz (erster Absatz) noch der Wind als „wichtigster Unterschied“ (zweiter Absatz) sind dargestellt. Die Caption „offenes Feld“ steht über einem Bild ohne Feld.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Steife A-Pose mit gestreckten Knien und Armen ohne Ellbogen. Die im aria-label behauptete „entspannte, anpassungsfähige Haltung“ ist nicht erkennbar.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Schläger hängt kopfüber auf Kniehöhe, der Schaft ist kürzer als der Kopf (22 zu 26 Einheiten), ein Griff fehlt. Er wirkt wie eine Lupe. Es gibt keinen Speeder und kein Gegenüber.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Figur mittig im Leerraum, eine Sonne in Akzentblau wirkt wie ein UI-Icon, die „Wolke“ ist ein einzelner Bogen. Insgesamt banal.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "L",
+   "pose_familie": "Bereitschaft (Szene, Rückansicht Dreiviertel)",
+   "sequenz_mit": "",
+   "caption_de": "draußen · kein Netz, Bedingungen lesen",
+   "caption_ok": false
+  },
+  {
+   "id": "G-056",
+   "baustein": "sonne_blendung (bausteine.outdoor-thema.json, Fortgeschritten, typ umgebungs_baustein, witterung sonne_blendung, Reflexionsaufgabe)",
+   "motiv": "Eine Strichfigur im Gehschritt hält die Hand an die Stirn (Salut-Pose), die Hand verschmilzt mit dem Kopf zu einem Klumpen. Der andere Arm hängt schräg. Oben rechts eine blaue Sonne mit nur vier Strahlen, drei hellblaue Blendstrahlen laufen zum Speeder, der als blauer Punkt vor dem Gesicht sitzt. Kein Schläger.",
+   "didaktischer_kern": "Wissen, wo die Sonne steht, nicht hineinschauen, den Kopf leicht drehen und den hohen Speeder aus dem Augenwinkel nehmen oder früher abfangen, bevor er in den grellen Bereich steigt. Kappe oder Sonnenbrille helfen. Belege: „Statt direkt in die Sonne zu blicken, drehst du den Kopf leicht und nimmst den Speeder aus dem Augenwinkel oder fängst ihn früher ab, bevor er in den grellen Bereich steigt.“ / „Ein Schirm an der Kappe oder eine Sonnenbrille können die Blendung mindern.“ / „Besonders bei hohen Bällen kann sie dich blenden“.",
+   "soll_pose": "Körper frontal zum Betrachter, Kopf nach oben-rechts gedreht. Rechtshänder in seitlicher Überkopf-Vorbereitung, linke Schulter zum ankommenden Ball (Ball und Gegner kommen von rechts oben). Füße etwa schulterbreit, Gewicht auf dem hinteren (rechten) Bein, Knie leicht gebeugt, Rumpf aufrecht, minimal nach hinten gestreckt. Schlagarm (rechts, im Bild links) angewinkelt, Ellbogen etwa auf Schulterhöhe, Schläger hinter dem Kopf aufgestellt (Schlägerkopf nach oben, Fläche seitlich). Freier (linker) Arm gestreckt nach oben-rechts zum Speeder zeigend; die Hand darf dabei zwischen Auge und Sonne liegen. Kopf: Blick nach oben-rechts zum Speeder, das Gesicht 10–15° von der Sonne weggedreht, sodass die Sichtlinie knapp NEBEN der Sonnenscheibe vorbeiführt. Kappe mit Schirm nach vorn-oben. Sonne oben rechts auf ca. 45–55° Höhe (nicht tief am Horizont), mit einem Blendkegel, der auf die AUGEN zuläuft. Die Flugbahn des Speeders als gestrichelter Bogen von rechts: der Abschnitt im Blendkegel blass, der Speeder selbst (Kopf voran, mit Korb) voll gezeichnet an der Stelle, an der die Bahn den Kegel noch NICHT erreicht hat (früh abfangen). Treffpunkt: hoch, leicht vor dem Körper. Phase: Vorbereitung unmittelbar vor dem Treffen.",
+   "figuren": "1: Spieler in Überkopf-Vorbereitung",
+   "requisiten": [
+    "Crossminton-Schläger",
+    "Speeder (Kopf voran, mit Korb)",
+    "Kappe mit Schirm",
+    "Sonne mit Blendkegel"
+   ],
+   "bewegungszeichen": "Nötig: gestrichelte Flugbahn mit blassem Abschnitt im Blendkegel, Blendkegel zu den Augen, gepunktete Sichtlinie vom Auge zum Speeder knapp an der Sonne vorbei. Weg sollen die Blendstrahlen zum Speeder (die Blendung trifft den Spieler, nicht den Ball) und die abgebrochenen Einzelstrahlen. Sonne nicht in --primaer (Akzent gehört der Sichtlinie bzw. Abfangstelle).",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Ohne Schläger und in Salut-Pose mit der Hand an der Stirn lässt sich kein hoher Ball spielen. Der Text empfiehlt Kopfdrehen, Augenwinkel, früheres Abfangen und Kappe bzw. Sonnenbrille, kein Abschirmen mit der Hand. Die Caption „Augen abschirmen“ führt daher in die falsche Richtung.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Hand-Kreis und Kopf überlappen zu einem Klumpen (Profil wie Kopf mit Auswuchs oder Zipfelmütze), ein Hals fehlt. Der freie Arm hängt kraftlos, die Beine stehen im Gehschritt: wirkt seltsam.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Blendstrahlen enden am Speeder statt an den Augen, die Kopfdrehung ist nicht sichtbar, das Gegenmittel „früher abfangen“ fehlt.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Speeder ist ein Punkt und als Speeder nicht erkennbar. aria-label und Katalog sprechen von „tiefer Sonne“, der Text von hohen Bällen; im Bild steht die Sonne hoch. Die Beschreibungen widersprechen sich.",
+     "schwere": 1
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Sonne in Akzentblau mit nur vier ungleich verteilten Strahlen, einer davon mitten in der Blendung. Wirkt unfertig.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Überkopf (Vorbereitung)",
+   "sequenz_mit": "",
+   "caption_de": "Sonne · Kopf drehen, früh abfangen",
+   "caption_ok": false
+  },
+  {
+   "id": "G-057",
+   "baustein": "naesse_sicherer_stand (bausteine.outdoor-thema.json, Fortgeschritten, typ umgebungs_baustein, witterung naesse, Domäne Athletik, Reflexionsaufgabe)",
+   "motiv": "Eine frontale Strichfigur steht in extrem weitem Grätschstand mit fast gestreckten, nach außen gespreizten Beinen. Die Arme bilden eine Raute mit den Händen im Schritt, der Schläger hängt senkrecht zwischen den Beinen auf Schritt- bis Kniehöhe. Ein blauer Punkt als Schwerpunkt sitzt auf dem Schaft. Graue Tropfen schweben neben der Figur in der Luft, darunter zwei Bodenlinien (blau gepunktet und grau gestrichelt).",
+   "didaktischer_kern": "Bei Nässe zählt der Halt: Tempo bewusst zurücknehmen, kürzere, kontrollierte Schritte, keine ruckartigen Richtungswechsel, Schuhe mit gutem Profil, glatte Stellen umspielen. Belege: „Du nimmst deshalb das Tempo bewusst etwas zurück, machst kürzere, kontrollierte Schritte und vermeidest ruckartige Richtungswechsel, bei denen der Fuß wegrutschen könnte.“ / „Geeignetes Schuhwerk mit gutem Profil hilft“ / „wie auf einem frisch gewischten Flur — mit kurzen, sicheren Schritten“. Von „breitem Stand“ steht im Text nichts.",
+   "soll_pose": "Streng seitlich, Blick nach rechts, Rechtshänder, Phase: Aufsetzen des vorderen Fußes in einem kurzen Schritt. Schrittlänge kurz (etwa 1,5 Fußlängen). Der vordere (rechte) Fuß setzt mit der ganzen Sohle flach auf, nahe unter Knie und Hüfte (nicht weit vor dem Körper). Der hintere Fuß drückt leicht über den Ballen ab. Knie weich gebeugt (ca. 20–30°), Hüfte minimal abgesenkt, Körperschwerpunkt (Hüfte) über der Mitte zwischen beiden Füßen. Rumpf aufrecht, höchstens 10° vorgeneigt. Kopf oben, Blick nach vorn ins Spiel. Schlagarm vor dem Körper, Ellbogen locker gebeugt, Schläger auf Hüft- bis Brusthöhe, Schlägerkopf oben (Bereitschaft). Freier Arm leicht seitlich abgespreizt zur Balance. Schuh mit sichtbarem Sohlenprofil (Zickzack-Kante). Boden: flache Pfützen (liegende Ellipsen mit kurzen Spiegelungsstrichen), eine direkt am Aufsetzpunkt, eine abseits, die der Weg erkennbar umgeht. Optional blass im Hintergrund dieselbe Figur mit langem Ausfallschritt, deren vorderer Fuß mit einer Rutschspur wegschießt (falsches Muster, ohne Rot).",
+   "figuren": "1 Spieler (optional blasse Gegenfigur mit langem, rutschendem Schritt)",
+   "requisiten": [
+    "Crossminton-Schläger",
+    "Schuh mit Profil",
+    "flache Pfützen am Boden"
+   ],
+   "bewegungszeichen": "Nötig: kurzer Schrittpfeil am Boden (kurz, gerade), Pfützen mit Spiegelungsstrichen. Optional: Rutschspur der blassen Gegenfigur. Weg sollen die in der Luft schwebenden Tropfen (lesen sich als Regen oder Schweiß, nicht als nasser Boden), die blaue Standbreiten-Linie als zweite Bodenlinie und der Schwerpunkt-Punkt auf dem Schläger.",
+   "maengel": [
+    {
+     "art": "anatomie",
+     "beschreibung": "Reiter- bzw. Grätschstand mit nach außen gespreizten, fast gestreckten Beinen, Knie nicht über den Füßen, Hände treffen sich im Schritt, der Schläger hängt senkrecht zwischen den Beinen. Das ist die seltsamste Anmutung der Serie, unfreiwillig komisch bis anzüglich lesbar.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Caption und Pose behaupten „breiter Stand“, der Text verlangt kurze, kontrollierte Schritte. Ein sehr weiter Stand ist auf nassem Grund ungünstig: die Füße drücken schräg nach außen und rutschen eher in den Spagat.",
+     "schwere": 2
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Tropfen schweben auf Kniehöhe neben der Figur (Regen statt Nässe am Boden). Zwei konkurrierende Bodenlinien, Profil, Pfützen und Schrittlänge fehlen.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Frontal-symmetrisch und statisch, der Schläger wirkt wie ein Pendel oder eine Lampe.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Lauf (kurzer Schritt) mit Bereitschafts-Armhaltung",
+   "sequenz_mit": "",
+   "caption_de": "nasser Boden · kurze, sichere Schritte",
+   "caption_ok": false
+  },
+  {
+   "id": "G-058",
+   "baustein": "hitze (bausteine.outdoor-thema.json, Fortgeschritten, typ umgebungs_baustein, witterung hitze, Domäne Athletik, Reflexionsaufgabe)",
+   "motiv": "Eine Strichfigur in steifer A-Pose steht unter einer großen blauen Sonne direkt über dem Kopf (wie Heiligenschein oder Lampe). Daneben eine blau umrandete, halb gefüllte Flasche, fast so groß wie der Oberkörper, mit zwei Strichen als „Deckel“ (wirkt wie ein Milchkarton mit Antennen). Caption: „Tempo drosseln, trinken“.",
+   "didaktischer_kern": "Körpersignale ernst nehmen und die Bedingungen klug nutzen: Satzpausen im Schatten verbringen, Kräfte über das Match einteilen. Ausdrücklich keine Trink- oder Belastungsvorgaben. Belege: „Die Pausen zwischen den Sätzen verbringst du möglichst im Schatten. Du teilst dir die Kräfte über das Match ein“ / „Starke Erschöpfung, Schwindel, Übelkeit … verlangen eine Pause“ / „Diese App gibt dir keine Trink-, Ernährungs- oder Belastungsvorgaben.“",
+   "soll_pose": "Seitliche bis leicht Dreiviertel-Ansicht, Satzpause. Der Spieler sitzt auf einer Bank im Schatten eines Baums oder Sonnenschirms: aufrecht sitzend, Füße flach auf dem Boden, Unterarme locker auf den Oberschenkeln, Schultern gesenkt und entspannt, Kopf neutral bis leicht gesenkt (ruhiges Durchatmen). Optional ein Handtuch über dem Nacken. Der Schläger lehnt an der Bank, Schlägerkopf oben. Der Schatten ist als ruhige, leicht getönte Fläche am Boden unter Bank und Krone sichtbar (die Krone bzw. der Schirm darf den Akzent tragen). Die Sonne steht hoch, schräg oben, außerhalb des Schattens. Daneben rechts eine sonnige Feldecke mit Feldlinie und 2–3 senkrechten Hitzeflimmer-Wellenlinien. Flasche nur optional, klein und neutral in --tinte-3 auf der Bank, nicht akzentuiert und nicht in der Caption.",
+   "figuren": "1: Spieler in der Satzpause (sitzend)",
+   "requisiten": [
+    "Bank",
+    "Baum oder Sonnenschirm mit Schattenfläche",
+    "Crossminton-Schläger (angelehnt)",
+    "optional Handtuch",
+    "optional kleine neutrale Flasche",
+    "Feldecke in der Sonne"
+   ],
+   "bewegungszeichen": "Keine Bewegungspfeile. Nötig: Schattenfläche, Hitzeflimmern über dem sonnigen Feld. Weg sollen die Akzentfarbe auf der Flasche und die Sonne direkt über dem Kopf.",
+   "maengel": [
+    {
+     "art": "sachlich",
+     "beschreibung": "Die Caption „trinken“ (en „drink“, fr „boire“, pl „pić“) samt blau akzentuierter Flasche ist eine Trinkvorgabe. Der Baustein schließt genau das aus: „Diese App gibt dir keine Trink-, Ernährungs- oder Belastungsvorgaben.“ Das verletzt den Gesundheitsrahmen.",
+     "schwere": 3
+    },
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Kernhandlungen Schatten, Pause und Kräfte einteilen fehlen. „Tempo drosseln“ ist an einer stehenden Figur nicht ablesbar.",
+     "schwere": 2
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "A-Pose ohne Knie- und Ellbogenbeugung, ohne Schläger. Die „ruhige, bedachte Haltung“ ist nicht von einem beliebigen Stehen zu unterscheiden.",
+     "schwere": 2
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Flasche überproportional (Höhe 84 gegen Rumpf 56) und mit zwei Antennen-Strichen als Deckel. Die blaue Sonne über dem Kopf wirkt wie ein Heiligenschein. Unausgewogene Komposition.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "B",
+   "aufwand": "M",
+   "pose_familie": "Sitzen/Pause",
+   "sequenz_mit": "",
+   "caption_de": "Hitze · Schatten, Kräfte einteilen",
+   "caption_ok": false
+  },
+  {
+   "id": "G-062",
+   "baustein": "funplay (bausteine.modus-thema.json, Beginner, Domäne Technik, typ modus_baustein, regulär im Kompetenzpfad, Übungsteil „Gemeinsam halten“, Voraussetzung vorhand_drive)",
+   "motiv": "Zwei einarmige Strichfiguren mit stocksteifen, gespreizten Beinen stehen sich gegenüber. Ihre gestreckten Arme mit kurzen Schlägern treffen sich fast in der Bildmitte, die Schlägerköpfe sind liegende, fast runde Ellipsen. Zwischen den Schlägern zwei Bögen (einer oben, einer unten) mit Pfeilspitzen, darüber ein dunkler Punkt als Speeder.",
+   "didaktischer_kern": "Kooperativ halten statt Punkte spielen: auf mittlerer Distanz den Speeder flach und ruhig hin und her spielen, Kontrolle vor Kraft, Kontakte am Stück zählen. Belege: „Das Ziel ist, den Speeder gemeinsam so lange wie möglich im Spiel zu halten … Kein Court, keine Zählung, kein Gegeneinander.“ / „geht Kontrolle vor Kraft“ / Übung: „Stellt euch auf mittlere Distanz gegenüber, ohne Court.“ – „Spielt den Speeder flach und ruhig hin und her.“ – „Zählt gemeinsam die Kontakte am Stück.“",
+   "soll_pose": "Streng seitlich, zwei Spielende einander zugewandt auf klar sichtbarer mittlerer Distanz: Figuren kleiner als heute (ca. 100 Einheiten hoch), Fußabstand mindestens zwei Körperhöhen, also eindeutig mehr als Armlänge. Nur Bodenlinie, kein Feld. LINKS (Blick nach rechts, Rechtshänder, Schlagseite zum Betrachter), Phase Treffmoment des Vorhand-Drives: Schritt mit dem linken Fuß nach vorn, Gewicht auf dem vorderen Fuß, Knie leicht gebeugt, Rumpf in Schlagrichtung gedreht und aufrecht. Schlagarm vor dem Körper mit locker gebeugtem Ellbogen, kompakt, Handgelenk ruhig. Schlägerfläche annähernd senkrecht zum Partner, Treffpunkt auf Hüft- bis Brusthöhe deutlich VOR dem Körper. Freier Arm vor dem Körper zur Balance. RECHTS (Blick nach links), Phase Bereitschaft: Füße schulterbreit, Knie leicht gebeugt, Gewicht auf den Ballen, Schläger mit beiden Händen bzw. Schlaghand vor dem Körper auf Brusthöhe, Schlägerkopf oben (so ist der Schläger auch von der abgewandten Seite sichtbar), freundlich-entspannte Haltung. Ein flacher, ruhiger Bogen vom Schläger links zum Schläger rechts, Scheitel nur knapp über Kopfhöhe, darauf der Speeder (Kopf voran nach rechts). Darunter eine zweite, dünn gestrichelte flache Bahn mit Pfeil nach links für die Rückrichtung. Über der Mitte ein kleiner Kontaktzähler (Zahl oder Strichliste), sprachneutral.",
+   "figuren": "2: Spielende links (im Vorhand-Drive, Treffmoment), Spielende rechts (in Bereitschaft)",
+   "requisiten": [
+    "2 Crossminton-Schläger (ovaler Kopf, Schaft, Griff mit Griffband)",
+    "Speeder (Kopf voran, mit Korb)",
+    "Bodenlinie ohne Feld",
+    "kleiner Kontaktzähler"
+   ],
+   "bewegungszeichen": "Nötig: eine flache Hinflugbahn (durchgezogen, mit Speeder) und eine flache Rückbahn (gestrichelt), Kontaktzähler. Weg sollen die beiden Kreisbögen über und unter den Schlägern (lesen sich als Recycling- oder Tauschsymbol, der untere ist keine mögliche Flugbahn) und der losgelöste Punkt-Speeder.",
+   "maengel": [
+    {
+     "art": "didaktik",
+     "beschreibung": "Die Schlägerköpfe berühren sich fast in der Bildmitte. Statt „mittlerer Distanz“ zeigt das Bild Armlänge, und die Bahn aus zwei Kreisbögen über und unter den Schlägern liest sich als Recycling-Symbol, nicht als flaches Hin und Her.",
+     "schwere": 3
+    },
+    {
+     "art": "anatomie",
+     "beschreibung": "Jede Figur hat nur einen Arm, und dieser ist ein einziges gerades Segment. Die Beine stehen als stocksteifes umgekehrtes V ohne Kniebeuge, der Rumpf ist überlang. Wirkt wie zwei Zirkel.",
+     "schwere": 3
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Schlägerkopf als liegende, fast runde Ellipse (Pfanne oder Lupe) mit nach oben zeigender Fläche, Schaft kurz, kein Griff. Beim flachen Drive steht die Fläche annähernd senkrecht zum Partner, und der Treffpunkt liegt vor dem eigenen Körper, nicht in der Mitte zwischen beiden.",
+     "schwere": 2
+    },
+    {
+     "art": "sachlich",
+     "beschreibung": "Der Speeder ist als Punkt nicht erkennbar und steht neben der Bahn statt auf ihr.",
+     "schwere": 1
+    },
+    {
+     "art": "aesthetik",
+     "beschreibung": "Spiegelbildlich-statische Komposition ohne Bewegungsphase. Der Leitbaustein einer Beginner-Spielform wirkt banal.",
+     "schwere": 2
+    }
+   ],
+   "prioritaet": "A",
+   "aufwand": "M",
+   "pose_familie": "Vorhand-Drive (Treffmoment) + Bereitschaft",
+   "sequenz_mit": "",
+   "caption_de": "gemeinsam halten · Kontrolle vor Kraft",
+   "caption_ok": true
+  }
+ ],
+ "querbefunde": [
+  "Figurenbau: Alle Ganzfiguren (G-002 bis G-008, G-010, G-011) haben weder Schulter- noch Hüftbreite. Arme und Beine entspringen je einem Punkt, und es gibt keine Hände und keine Füße. Gerade die Kernaussagen zu Füßen (Fußballen, Fersen knapp gelöst, ein Fuß am Boden, Knie über dem Sprunggelenk) und zu Händen (Griff, Handrücken bei der Rückhand) lassen sich so nicht zeigen. Empfehlung: ein einheitlicher Figuren-Baukasten mit Schulter- und Hüftlinie, einfachen Füßen (Ferse und Ballen unterscheidbar), Fausthandschuh-Händen, Hals und einer dezenten Blickrichtung am Kopf (Kerbe oder versetzter Hals). Die Blickrichtung ist didaktisch relevant: Speeder im Blick beim Überkopf, Gegner im Blick beim Split-Step.",
+  "Tiefe und Händigkeit: Vordere und hintere Gliedmaßen sind gleich schwarz. Welches Bein vorn steht und welcher Arm der freie ist, bleibt deshalb mehrdeutig, besonders in G-003, G-005, G-006, G-010 und G-011. Empfehlung: die abgewandten Gliedmaßen durchgängig heller tönen (z. B. tinte-3 oder tinte mit ca. 55 % Deckung). Alle Figuren werden als Rechtshänder gezeichnet, mit der rechten Hand als Schlaghand: Vorhand mit linkem Fuß vorn, Rückhand mit rechtem Fuß vorn, Aufschlag mit linkem Fuß vorn, Ausfallschritt mit dem Schlägerbein vorn.",
+  "Proportionen und Maßstab sind uneinheitlich. Die frontalen Figuren sind ca. 190 Einheiten hoch, die seitlichen ca. 158; die Kopfradien liegen bei 14–16. Bei den seitlichen Figuren nimmt der Kopf ca. 18 % der Körperhöhe ein, real sind es etwa 13 %, und die Beine sind mit ca. 44 % zu kurz (real etwa 50 %). Zusammen mit 14–15 Einheiten Strichstärke wirken sie wie gedrungene Kindermännchen, während der Schläger mit 5,5 Einheiten wie Draht wirkt. Empfehlung: eine feste Figurenhöhe für alle Ganzfiguren (etwa 175–185 Einheiten stehend in der 300er-viewBox), Kopf ca. 1/7 der Körperhöhe, Gliedmaßen ca. 10–11 Einheiten, gern leicht verjüngt und mit sanft gebogenen statt hart geknickten Segmenten.",
+  "Schläger: In jeder Ansicht ist der Kopf ein offenes Oval in der Bildebene. In allen Seitenansichten zeigt die Schlagfläche dadurch zur Betrachterin statt zum Ziel (G-003, G-004, G-006, G-010, G-011), und der kurze Schaft wirkt wie eine Kelle (die CSS-Klasse heißt auch so). Empfehlung: eine wiederverwendbare Schläger-Komponente in Squash-Anmutung. Gesamtlänge etwa ein Drittel der Körperhöhe, Kopf ca. 45 % der Länge als ovaler, besaiteter Kopf mit Herz bzw. Schaft, ein Griff mit Griffband und Griffende. Sie braucht korrekte Verkürzung (seitlich auf die Fläche gesehen ein schmales Hochoval mit sichtbarer Rahmenstärke) und optional eine leicht getönte Saitenfläche. Zur Länge: data/regeln.json nennt in Regel 1.2 höchstens 61 cm (ICO), der Auftrag 58 cm. Für die Zeichnung ist das unerheblich, vor jeder Bemaßung sollte es geklärt werden.",
+  "Speeder: Überall ist er ein blauer Punkt in derselben Farbe wie der Schläger, und in G-006 und G-008 verschmelzen beide zu einer Form (Rassel- bzw. Schnuller-Lesart). Ohne Kappe und Korb sind Kernaussagen wie „der GANZE Speeder unter der Hand“ (G-006) und die Fallrichtung „Kappe nach unten“ (G-005) nicht darstellbar. Empfehlung: eine Speeder-Komponente mit den bereits vorhandenen Tokens --speeder-kappe und --speeder-korb, wie in G-064 bis G-067. Sie ist um etwa das Zweifache vergrößert, aber in allen Bildern gleich groß, fliegt immer Kappe voran und liegt beim Treffen mit der Kappe an der Besaitung. Bei G-003, G-004 und G-009 fehlt der Speeder bisher ganz.",
+  "Schablonen-Recycling: Die Paare G-002/G-007, G-003/G-004, G-010/G-011 und G-005/G-006 sind koordinatengleich oder nur um wenige Einheiten verschoben. Die Bilder eines Paares unterscheiden sich praktisch nur durch Pfeile, damit trägt keines seine eigene didaktische Aussage. Beim Neuzeichnen soll man je Posenfamilie EINEN sauberen Rig bauen (Bereitschaft, Grundschlag, Unterhand-Aufschlag, Überkopf) und die Varianten bewusst sichtbar abwandeln. G-004 wird dabei als echtes Spiegelbild von G-003 mit Ziel links angelegt.",
+  "Schläger im Schritt: In G-002 und G-007 hängt der Schläger senkrecht zwischen den Beinen, in G-005 liegt der Kopf vor den Oberschenkeln. Das ist die stärkste Ursache für die „seltsame Anmutung“, eine unfreiwillig anzügliche Lesart. In der Bereitschaft gehört der Schläger mit dem Kopf nach oben vor die Brust, beim Ausholen zum Aufschlag hinter das hintere Bein.",
+  "Flugbahnen sind sachlich falsch skaliert. Der Clear in G-010 und der Smash in G-011 landen etwa 1–1,5 Körperlängen vor der Figur, im Crossminton also in der neutralen Zone (zwischen den Feldern liegen 12,8 m, Regel 1.3). Das widerspricht den Bausteintexten, den BAD- und TEN-Deltas und den Fehlerbildern fb_smash_treffpunkt und fb_ueberkopf_clear_treffpunkt. Empfehlung: Bahnen verlassen das Bild noch in der Luft (optional mit Bruch- bzw. Zonenmarke), Winkel dürfen didaktisch übertrieben sein, aber nicht unmöglich. Dazu ein einheitliches Pfeilvokabular über alle Bilder: Speederbahn gepunktet in primaer mit Spitze, Körperweg durchgezogen in tinte-3, Rückweg gestrichelt in tinte-3, frühere Phasen als Geisterbild in tinte-3 mit ca. 35 % Deckung. Heute nutzt nur G-009 Geister, und die Strichmuster von Boden und Pfeilen kollidieren (G-008).",
+  "Bodenlinie: Sie ist kurz gestrichelt und passt nicht zu den Füßen. In G-008 schweben die Füße ca. 16 Einheiten darüber, in G-010 und G-011 schwebt der vordere Fuß; in G-009 steht sogar eine Nahaufnahme des Unterarms auf einer Bodenlinie. Empfehlung: Bei Ganzfiguren ist der Boden eine dünne durchgezogene Linie oder ein flacher Schatten genau auf Fußhöhe, Strichelung bleibt den Bahnen vorbehalten; Nahaufnahmen haben keinen Boden.",
+  "Captions: G-001 (43 Zeichen) und G-009 (44 Zeichen) sind im PNG an beiden Bildrändern abgeschnitten, ebenso G-009.fr (46). Die Faustregel in CLAUDE.md, „Caption ≤ ~46 Zeichen“, ist für 12px/600 in der Render-Schrift zu großzügig: Bei breiten deutschen Buchstaben liegt die Grenze bei etwa 41–42 Zeichen, und die Breite hängt an der Systemschrift. Empfehlung: Captions höchstens ca. 38 Zeichen, und im Render-Skript die Textbreite messen statt Zeichen zu zählen. Zu prüfen sind auch die Grenzfälle G-001.pl (45), G-002.en (45) und G-002.fr (46). Inhaltlich zu ändern sind die Captions von G-005, G-009, G-010 und G-011 (Vorschläge in den Mängeln).",
+  "Technik Fallback-PNGs: Alle elf PNGs samt en/fr/pl-Varianten haben 2560 × 2560 px (je ca. 105–170 kB). G-030 dagegen hat 600 × 600, wie CLAUDE.md es für render-svg.mjs mit Größe aus der viewBox beschreibt. Die hier betroffenen Dateien stammen offenbar aus dem alten Lauf. Nach dem Neuzeichnen alle vier Sprachfassungen neu rendern; dabei G-064 gegenprüfen, das trotz viewBox 300 × 340 quadratisch in 2560 × 2560 vorliegt. Die var()-Fallbacks der SVGs nennen für --tinte-3 noch #6b7686, das Token in css/app.css steht inzwischen auf #656f7e; die Hell-PNGs weichen also leicht vom Live-Bild ab.",
+  "Rahmenbedingungen für die Neuzeichnung (aus CLAUDE.md und den Tests): Der style-Block darf nur Klassenselektoren enthalten, ohne @media und ohne Kommentare im Stilblock (Test [22]). Farben laufen ausschließlich über Tokens mit Hell-Fallback (--tinte, --tinte-3, --primaer, --primaer-tief, Speeder-Tokens), Ampelfarben nie dekorativ. Inhalt und aria-label je SVG werden neu formuliert und die en/fr/pl-Zwillinge über gen-en/fr/pl.mjs neu erzeugt, mit byte-identischer Geometrie. Grafiken bleiben nahezu quadratisch, weil die Deckelung auf der Breite sitzt (max-width 26 rem). Dateinamen und G-Nummern bleiben unverändert.",
+  "Wiederverwendbare Teile zwischen meinen Grafiken: Die Hand im Universalgriff aus G-001 sollte in G-009 und in jeder Ganzfigur dieselbe sein; der Griff wird in allen Schlägen gezeigt, es gibt kein Umgreifen. Die Bereitschaftspose aus G-002 ist der Ausgangspunkt für G-007, das Split-Step-Geisterbild aus G-007 kann in G-008 als Startposition in der Feldmitte erscheinen. G-010 und G-011 teilen Kamera, Figur und Maßstab und unterscheiden sich nur in Treffpunkt, Flächenwinkel, Rumpfvorlage und Bahn. Sinnvolle Reihenfolge: zuerst Figuren-Rig, Schläger- und Speeder-Komponente, dann G-002/G-007, G-001, G-003/G-004, G-005/G-006, G-008, G-010/G-011, G-009.",
+  "Ein Skelett für alles: G-012, G-015, G-017, G-018, G-019 und G-022 (ebenso G-003, G-010, G-011 außerhalb dieses Pakets) teilen Kopf-, Rumpf- und Beinkoordinaten, nur der Schlagarm wechselt. Deshalb sehen alle Schläge gleich aus. Die Beine stehen als fast gestreckter Zirkelschritt (Kniewinkel 165–175°), es gibt weder Gewichtstransfer noch Rumpfdrehung. Der Rumpf ist durchweg 5–13° nach HINTEN geneigt (Kopf hinter der Hüfte); bei Vorwärtsschlägen wirkt das wie Zurückweichen oder Kippen. G-032 ist nahezu deckungsgleich mit G-002 und G-007.",
+  "Der freie Arm ist fast überall ein Stummel: ein Segment ohne Ellbogen, 28–34 Einheiten gegen 51–63 beim Schlagarm, endet auf Taillenhöhe (G-012, G-015, G-016, G-017, G-018, G-019, G-020, G-022, G-033, G-034). Er ist inaktiv nach vorn-unten gerichtet, statt seine Aufgabe zu zeigen: Überkopf zum Speeder zeigen, Drive Balance vorn, Smash vor der Brust einziehen.",
+  "Keine Füße, keine Hände, unsaubere Gelenke: Rundkappen statt Füßen, darum sind Ballen, Fersenhub und Fußstellung nicht darstellbar, obwohl G-032 und G-034 genau davon handeln. Der Bodenkontakt ist inkonsistent (G-032 schwebt ca. 9 E., G-033 und G-022 versinken 3 E., in G-012 schwebt ein Fuß, der andere versinkt). Der Kopf schwebt mit Lücke (G-032, G-033) oder ein Arm wächst durch ihn (G-016). Das Schultergelenk sitzt 8–10 E. unter dem Halsansatz, die Arme wachsen so aus der Brust.",
+  "Vorschlag Figurenkanon für die Neuzeichnung (Körperhöhe H ≈ 160 E. in der 300er-viewBox): Kopf ≈ H/7,5, Schulter bei 0,82 H, Hüftgelenk bei 0,52 H, Knie bei 0,28 H; Oberarm 0,19 H, Unterarm 0,15 H, Hand 0,10 H; Oberschenkel 0,245 H, Unterschenkel 0,25 H; Fuß 0,15 H lang, mit Ferse und Ballen sichtbar. Gliedmaßen schlanker als heute (stroke 14 bei Kopfradius 14 ergibt Piktogramm-/WC-Schild-Anmutung), der Rumpf als Form (Brustkorb und Becken) statt als Linie.",
+  "Schläger: Gesamtlänge heute ≈ 0,25 H (≈ 43 cm bei 1,75 m), der Kopf macht ca. 2/3 der Länge aus und ist ein leerer Ring, ein Griff fehlt. Das liest sich als Lupe oder Handspiegel. Soll: ≈ 0,33 H (58 cm). Regel 1.2 in data/regeln.json erlaubt bis 61 cm und 650 cm²; die 58 cm der Vorgabe sind das gängige Maß, beides ist widerspruchsfrei. Ovaler Kopf ≈ 27 × 21 cm (≈ 45 % der Länge), kurzer Schaft, Griff ≈ 20 cm mit Griffband in der Hand, Endkappe unter der Hand sichtbar, Besaitung als feines Gitter oder Tönung. Der Winkel der Schlagfläche muss über die Verkürzung der Ellipse lesbar sein, sonst tragen G-012, G-018 und G-019 ihre Aussage nicht.",
+  "Der Speeder fehlt in 10 von 11 Bildern; nur G-015 hat einen blauen Punkt. Die Flugbahnen beginnen im Nichts. Soll: ein einheitliches Speeder-Icon (halbrunde Schlagkappe plus kegelförmiger Korb, ≈ 2× überskaliert auf 10–12 E.), die Kappe immer in Flugrichtung, beim ankommenden Speeder zum Spieler, im Treffpunkt auf der Bespannung.",
+  "Crossminton-Geometrie: Es gibt kein Netz, die Passierzone misst 12,8 m (Regel 1.3). Die Bahnen landen in Reichweite des Spielers (G-012, Stopp-Zweig in G-017, G-020; ebenso G-011) und erzeugen Badminton-Netzspiel-Anmutung. Die senkrechte Linie in G-012 wirkt wie ein Netz. Regel für alle: Bahnen verlassen das Bild oder tragen ein Bruchzeichen „≈ 12,8 m“, Court-Linien sind nur Bodenmarken, Zielzonen liegen hinter der Frontlinie, nicht auf ihr (Regel 11.6.2). Die asymmetrische Speederkurve (lange Steigung, steiler Fall) beibehalten; G-012 und G-019 machen das schon richtig.",
+  "Es fehlt eine Darstellungskonvention, Händigkeit und Ansicht wechseln implizit. Vorschlag: durchgehend Rechtshänder, Spielrichtung nach rechts. Seitansichten zeigen die rechte (Schlag-)Körperseite; die Überkopf-Seitstellung wird als Dreiviertel-Ansicht von vorn gezeigt (Brust zum Betrachter, linke Schulter zum Ziel). Der Drive-Treffpunkt liegt einheitlich auf Hüft- bis Brusthöhe vor dem vorderen Fuß wie im Text von vorhand_drive; heute liegt er in G-012, G-018, G-019 und G-022 auf Schulter- oder Kopfhöhe.",
+  "Hilfszeichen liegen auf der Figur: Wischlinien auf dem Arm (G-018), Lot durch Kopf und Rumpf (G-022), Abdruckpfeil durch den Oberschenkel (G-034), ein Arm verschmilzt mit dem Kopf (G-016). Regel: Zeichen nie über die Figur legen, mindestens eine Strichbreite Abstand halten. Bewegung lieber über Geisterphasen in --tinte-3 mit reduzierter Deckkraft zeigen als über zusätzliche Pfeile.",
+  "Farbhierarchie: --primaer trägt zugleich Schläger, Flugbahn, Bewegungsstriche und Hilfslinien (G-022 Lot, G-032 Tempostriche), alles Blaue konkurriert. Laut CI ist die Hauptfarbe Akzent. Vorschlag: --primaer nur für das eine didaktische Element (Flugbahn oder Treffpunkt), Schläger in Tintentönen mit höchstens einem Akzent an der Schlagfläche, Hilfslinien und Geister in --tinte-3.",
+  "Sequenzen: G-016/G-017 zeigen verschiedene Vorbereitungen, obwohl Text und Katalog „identisch“ verlangen. G-018/G-019 sind identisch, unterscheiden sich aber fast nur im Pfeil. Regel: Folgebilder aus EINER Vorlage zeichnen, deckungsgleich bis auf das didaktisch Gemeinte, und dieser Unterschied (Schlagfläche, Ausschwunglänge, Taktleiste) muss deutlich sichtbar sein. Nicht als Sequenz verbunden, aber stilistisch zusammen zu halten: G-012 (Stopp aus Drive-Vorbereitung) und G-017 (Stopp-Zweig aus Überkopf-Vorbereitung); G-015 als Grundlage von G-020 (gleiche Art, den hohen Treffpunkt zu zeigen).",
+  "Gesundheitsrahmen in den Athletikbildern (G-032, G-033, G-034) und in G-020: keine Extremwinkel (Knie nie unter 90° und immer über den Zehen, keine durchgedrückten Gelenke), keine Geräte für Sprungtraining, Landungen immer federnd zeigen, Dehnung ohne Zug am Handgelenk und ohne hochgezogene Schulter. G-033 zeigt heute eine nicht ausführbare Bewegung, das ist der heikelste Fall.",
+  "Technik: Alle 11 PNG-Fallbacks liegen in 2560×2560 (104–132 KB) vor; sie wurden vor dem viewBox-Fix in scratchpad/render-svg.mjs gerendert (Soll 600×600). Bei der Neuzeichnung neu rendern und die en/fr/pl-Zwillinge mitziehen (Geometrie byte-identisch). Die Caption von G-012 steht mit 46 Zeichen am Limit; die fr/pl-Fassungen nach der Neuzeichnung erneut prüfen.",
+  "Beschriftung: Laufzeit-alt UND figcaption sind das Label aus labels/de.json (z. B. „Leitgrafik: der Stopp“). verbessereGrafiken überschreibt damit die beschreibende aria-label im SVG. Screenreader hören also nur einen Titel, Sehende lesen zwei Beschriftungen (die .st-Caption im Bild und die figcaption). Bei der Neuzeichnung entscheiden: entweder ein beschreibender alt-Text in die Labels (vier Sprachen) oder die Caption im Bild streichen.",
+  "Priorität für den Neuzeichen-Durchgang: zuerst die Kopiervorlage (Figurenkanon, Schläger, Speeder-Icon, Konvention), dann die A-Fälle G-032, G-033, G-012 und das Paar G-016/G-017. Die übrigen Seitstand-Drive-Bilder (G-018, G-019, G-022) lassen sich danach mit geringem Aufwand aus einer Drive-Vorlage ableiten.",
+  "Ein Baukasten für alle Figuren: gerader senkrechter Rumpf, Arme als einzelne gerade Segmente ohne Ellbogen, Beine fast ohne Knie, meist frontale A-Pose. Keine Figur steht in einer echten Bereitschaftsstellung (Knie gebeugt, Gewicht auf den Ballen, Schläger vorn), auch nicht in Spielszenen. Empfehlung: ein gemeinsames Figur-Rig mit festen Proportionen (Kopf, Rumpf, Ober-/Unterarm, Ober-/Unterschenkel), sichtbaren Gelenken und einheitlicher Strichstärke. Heute schwanken die Werte: Strich 12 / 14 / 20, Kopfradius 12–15, Figurhöhe ca. 140–185 Einheiten.",
+  "Crossminton ohne Crossminton-Material: G-036, G-043, G-047, G-053, G-056 und G-058 zeigen Spielende ohne Schläger. Wo Schläger vorkommen (G-054, G-057, G-062), sind sie zu kurz, ohne Griff und pfannen- oder lupenartig, oder sie hängen kopfüber bzw. zwischen den Beinen. Regel: Jede spielende Figur trägt den Schläger in einer zur Phase passenden Haltung. Proportion etwa ein Drittel der Körperhöhe, ovaler Kopf etwas länger als breit, rund 40–45 % der Gesamtlänge, Griff mit Griffband. Achtung, Maßkonflikt: Der Auftrag nennt max. 58 cm, das Repo (regeln.json 1.2 und Baustein der_schlaeger) nennt max. 61 cm Länge und 650 cm² Kopf. Vor dem Zeichnen klären, welche Quelle gilt.",
+  "Der Speeder ist nie erkennbar: als Punkt in G-056 und G-062, in G-054 fehlt er ganz. In Figurgröße wäre er maßstäblich ca. 4–5 Einheiten groß, also unsichtbar. Empfehlung: ein einheitliches, bewusst übergroßes Speeder-Piktogramm (runde Schlagkappe plus kegeliger Korb, Kopf in Flugrichtung), gern über die vorhandenen Produkt-Tokens --speeder-korb/--speeder-kappe.",
+  "G-043, G-047 und G-053 sind dieselbe Grafik: zwei frontale Klonfiguren Seite an Seite mit einem gepunkteten Bogen zwischen den Köpfen. Derselbe Bogen bedeutet einmal Blickkontakt (G-043), einmal Absprache (G-047) und einmal Wahrnehmung ohne Hinsehen (G-053), im letzten Fall das Gegenteil des Gemeinten. Außerdem widerspricht das Nebeneinander der festen Ordnung vorn/hinten (Regel 7.4/7.5.1). Vorschlag: die drei als Stufenleiter einer Familie zeichnen, gleiche Profilansicht entlang der Spielrichtung mit Feldmarken am Boden, unterschieden nur durch das Motiv. Beginner: Absprache vor dem Punkt mit abstrakter Sprechblase, der Aufschläger hält den Speeder. Fortgeschritten: Zuruf „Meiner!“ in der Rallye. Experte: gleichzeitiges Ergänzen, beide Blicklinien nach vorn.",
+  "Nicht in meinem Satz, aber für die Doppel-Familie relevant: G-045 (wer_nimmt_den_ball) zeigt die beiden Partner als Punkte links und rechts auf gleicher Tiefe. Auch das ist eine Seite-an-Seite-Aufstellung und sollte von wem auch immer G-045 betreut gegen Regel 7.4/7.5.1 geprüft werden.",
+  "Die Sonne ist in G-054, G-056 und G-058 in --primaer gezeichnet. Eine blaue Sonne liest sich als UI-Icon oder Mond und zieht den Akzent (laut CI für die Aktion reserviert) auf ein Umgebungselement weg vom didaktischen Kern (Sichtlinie, Schatten, Abfangpunkt). Empfehlung nach dem Speeder-Präzedenzfall in CLAUDE.md: ein eigenes Token (z. B. --sonne) in hell und dunkel, ausdrücklich nicht --signal-gelb, oder eine neutrale Kontur.",
+  "Den Outdoor-Bildern G-054, G-056, G-057 und G-058 fehlt der Court. Die Identität von Outdoor-Crossminton (kein Netz, zwei Felder mit Passierzone dazwischen) kommt in der ganzen Reihe nicht vor. G-054 sollte sie als Rahmenbild etablieren; die übrigen brauchen mindestens eine Feldlinie bzw. Feldecke als Anker.",
+  "Gesundheitsrahmen: In G-058 widerspricht die Caption „trinken“ (in allen vier Sprachen) der ausdrücklichen Aussage des Bausteins, keine Trinkvorgaben zu machen. Die Caption „breiter Stand“ in G-057 steht nicht im Text, der kurze Schritte verlangt, und ist auf nassem Grund biomechanisch fraglich. Für G-035 keine Tiefsprung-, Kasten- oder Hürdenbilder, weil der Text strukturiertes Sprungtraining an qualifizierte Anleitung verweist.",
+  "Beschreibungen stimmen nicht mit dem Bild oder Text überein: aria-labels und Katalogeinträge in images/grafik-prompts.md behaupten Dinge, die im Bild nicht vorkommen. Beispiele: „von hinten“ (G-043/G-047, in Strichfiguren nicht darstellbar), „gespiegelte“ Pfeile (G-053, tatsächlich parallel), „tiefe Sonne“ (G-056, widerspricht dem Text „hohe Bälle“), „entspannte, anpassungsfähige Haltung“ (G-054). Beim Neuzeichnen gehören aria-label im SVG, Katalogeintrag, Caption und das Label unter grafiken in labels/<sprache>.json mit dazu, je in de/en/fr/pl. Neue sichtbare Texte (z. B. „Meiner!“ in G-043) müssen in die Übersetzungsmaps von gen-en/gen-fr/gen-pl (fr « À moi ! », pl „Moja!“ laut Glossar bzw. Bestand).",
+  "Caption-Breite: G-035 (de) ist mit ca. 43 sichtbaren Zeichen in fett 12px schon breiter als die 300er-viewBox und im PNG beidseitig abgeschnitten. Die Faustregel „≤ ~46 Zeichen“ aus CLAUDE.md ist für 600er-Bold zu großzügig; praktisch liegen ca. 40 Zeichen bzw. eine gemessene Breite ≤ 270 Einheiten sicher. Alle hier vorgeschlagenen neuen Captions bleiben bei höchstens ca. 40 Zeichen.",
+  "Technik: Alle 40 PNG-Fallbacks dieser zehn Grafiken (de/en/fr/pl) liegen in 2560 × 2560 statt 600 × 600 vor (ca. 72–157 KB je Datei). Das ist genau der in CLAUDE.md beschriebene Render-Fehler (Größe nicht aus der viewBox). Beim Neuzeichnen mit dem korrigierten scratchpad/render-svg.mjs neu rendern.",
+  "Bodenlinien uneinheitlich: Mal gestrichelt, mal durchgezogen, mal doppelt (G-057). Füße ragen mit den Rundkappen über die Linie (G-043/G-047/G-054/G-058) oder schweben darüber (G-035). Empfehlung: eine durchgezogene Bodenlinie als Standfläche, auf der die Sohlen aufliegen; Strichlinien nur für gedachte Linien wie Aufschlaglinie oder Sichtlinie.",
+  "Bewegungsdarstellung fehlt fast überall: Neun der zehn Figuren stehen still (Ausnahme: der angedeutete Laufschritt in G-053), obwohl die Bausteine Bewegung lehren (Ökonomie, Reaktivkraft, kurze Schritte, Zuruf mit Schritt, Ergänzen im Doppel, Drive). Ein gemeinsames Vokabular hilft: blasse Geisterphase für Start bzw. Ende, Fußabdrücke für Wege, gestrichelte Flugbahn mit Speeder-Piktogramm, gepunktete Blicklinie. Falsche Muster blass in --tinte-3, nie in Rot (Ampel bleibt Zustand).",
+  "Händigkeit und Ansicht als Konvention festlegen: Rechtshänder im Profil mit Blick nach rechts zeigen die Schlagseite dem Betrachter. Für die Gegenfigur mit Blick nach links die Bereitschaftshaltung mit Schläger vor dem Körper wählen, damit der Schläger sichtbar bleibt, statt sie stillschweigend zur Linkshänderin zu machen. Ausfallschritte immer mit dem schlagseitigen Fuß voran (Baustein beinarbeit_system)."
+ ]
+}
