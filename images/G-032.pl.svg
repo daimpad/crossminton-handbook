@@ -15,7 +15,7 @@
     .s-wegv{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round}
     .s-mkg{fill:var(--tinte-3,#656f7e)}
     .s-feld{fill:var(--tinte-3,#656f7e);opacity:.07}
-    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.75;stroke-linecap:round}
+    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
     .s-basis{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6}
     .s-druck{fill:var(--primaer-dunkel,#1e8bd6)}
     .s-kegel{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round}

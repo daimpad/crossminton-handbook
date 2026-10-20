@@ -283,7 +283,7 @@ Two doubles partners moving in perfect anticipation without looking at each othe
 **G-054** · `images/G-054.png` · `draussen_spielen` · Fortgeschritten  
 *Leitgrafik: Draußen spielen*  
 A single player on an outdoor crossminton court without a net, open sky and a simple ground surface indicated, relaxed adaptable stance. Illustrates the outdoor setting in general.
-*Generiert (Welle 7): erhöhte Dreiviertel-Rückansicht entlang der Spielrichtung, die Felder gegenüber den Figuren stilisiert wie in G-008/G-032. Zwei Felder ohne Netz, dazwischen die 12,8 m lange Passierzone, auch verkürzt länger als ein Feld. Der Spieler im nahen Feld steht locker, den Schläger seitlich, und schaut (Blicklinie) zur Fahne an einem hohen Mast hinter dem fernen Feld; die Fahne weht nach links, der Blick geht über das kleine Gegenüber hinweg. Sonne als Umriss, Windlinien, Bäume am Horizont, Grasbüschel. Caption: „draußen · kein Netz, Bedingungen lesen“.*
+*Generiert (Welle 7): erhöhte Dreiviertel-Rückansicht entlang der Spielrichtung, die Felder gegenüber den Figuren stilisiert wie in G-008/G-032. Zwei Felder ohne Netz, dazwischen die 12,8 m lange Passierzone, auch verkürzt länger als ein Feld. Der Spieler im nahen Feld steht locker, den Schläger seitlich, den freien Arm mit Luft zum Bein, und schaut (Blicklinie) zur Fahne an einem hohen Mast hinter dem fernen Feld; die Fahne weht nach links, der Blick geht über das kleine Gegenüber hinweg. Sonne als Umriss, Windlinien, Bäume am Horizont, Grasbüschel. Caption: „draußen · kein Netz, Bedingungen lesen“.*
 
 **G-055** · `images/G-055.png` · `wind_lesen_nutzen` · Fortgeschritten  
 *Leitgrafik: Wind lesen und nutzen*  
@@ -292,17 +292,17 @@ Top-down diagram of an outdoor court with wind-direction arrows sweeping across 
 **G-056** · `images/G-056.png` · `sonne_blendung` · Fortgeschritten  
 *Leitgrafik: Sonne und Blendung*  
 A single player shading the eyes against a low sun while tracking a high speeder, sun and glare rays indicated in one corner, adjusted head position. Illustrates dealing with sun and glare.
-*Generiert (Welle 7): Profil, Überkopf-Vorbereitung mit Schildmütze (`figur({ muetze: true })`), der Schläger hinter der Schulter. Die Sonne steht rechts, ein blasser Keil zeigt die Blendung bis zu den Augen. Die Flugbahn kommt von rechts unten, steigt über die Sonne und ist im Blendbereich nur blass gepunktet; danach ist der Speeder wieder voll gezeichnet, Kappe voran. Die Blicklinie geht über den Keil hinweg zum Speeder: Kopf drehen statt hineinschauen, die Bahn vorher gelesen. Caption: „Sonne · Kopf drehen, Bahn früh lesen“.*
+*Generiert (Welle 7): Profil, Überkopf-Vorbereitung in Trophäenhaltung mit Schirmmütze (`figur({ muetze: true })`), der Arm hinter dem Kopf frei. Die Sonne steht rechts, drei Strahlen mit Pfeilspitzen reichen bis kurz vor die Augen (ein Keil mit der Spitze am Auge las sich als Sichtkegel, also als „schaut hinein“). Die Flugbahn kommt von rechts unten, führt mitten durch die Sonne und ist im Blendbereich nur blass gepunktet; danach ist der Speeder wieder voll gezeichnet, Kappe voran. Die Blicklinie geht an den Strahlen vorbei zum Speeder: Kopf drehen statt hineinschauen, die Bahn vorher gelesen. Caption: „Sonne · Kopf drehen, Bahn früh lesen“.*
 
 **G-057** · `images/G-057.png` · `naesse_sicherer_stand` · Fortgeschritten  
 *Leitgrafik: Nässe und sicherer Stand*  
 A single player with a widened, cautious stance on a damp surface, small water droplets and a secure low centre of gravity indicated. Illustrates a safe stance in wet conditions.
-*Generiert (Welle 7): Profil, ein kurzer, kontrollierter Schritt, leicht in den Knien, der Schläger vor dem Körper (der Baustein verlangt kurze Schritte, keinen breiten Stand). Unter der Bodenlinie die Schrittfolge: der aktuelle Schritt kräftig, zwei gleich kurze davor gestrichelt. Vor der Figur eine Pfütze, auf die sie nicht tritt, leichter Regen, ein Profil an der Schuhsohle. Caption: „nasser Boden · kurze, sichere Schritte“.*
+*Generiert (Welle 7): erhöhte Kamera wie G-032, die Figur geht mit kurzen, kontrollierten Schritten nach rechts hinten, leicht in den Knien, der Schläger vor dem Körper (der Baustein verlangt kurze Schritte, keinen breiten Stand). Hinter ihr liegen die Abdrücke dicht, voraus eine Pfütze als unregelmäßige Wasserfläche mit offenen Regenringen; der gestrichelte Weg biegt vorn um sie herum. Ein glattes Oval mit Rand wäre in der Serie die Ziel- und Basismarke (G-008, G-012, G-032) — die erste Fassung so gezeichnet, und die Schritte führten hinein. Leichter Regen in `--tinte-3`. Caption: „nasser Boden · kurze, sichere Schritte“.*
 
 **G-058** · `images/G-058.png` · `hitze` · Fortgeschritten  
 *Leitgrafik: Hitze*  
 A single player pacing themselves in heat, sun high overhead, a sunshade nearby for the breaks in the shade, calm and measured posture. Illustrates managing play in heat without any drinking or dosage advice (health frame).
-*Generiert (Welle 7): der Spieler sitzt in der Pause auf einer Bank im Schatten eines Sonnenschirms, die Unterarme auf den Oberschenkeln, der Kopf gesenkt, der Schläger lehnt am Bankende; der hintere Arm stützt sich verdeckt auf die Bank. Die Sonne hoch rechts, über der Feldlinie flimmert die Luft. Keine Trinkflasche (keine Trinkvorgaben, Gesundheitsrahmen). Caption: „Hitze · Schatten, Kräfte einteilen“.*
+*Generiert (Welle 7): der Spieler sitzt in der Pause auf einer Bank im Schatten eines Sonnenschirms, ein Unterarm auf dem Oberschenkel, der Kopf gesenkt, der Schläger lehnt am Bankende; der hintere Arm stützt sich verdeckt auf die Bank, die Sitzfläche liegt vor dem Gesäß. Die Sonne hoch und leicht rechts, der Schatten darunter, über der Feldlinie flimmert die Luft. Keine Trinkflasche (keine Trinkvorgaben, Gesundheitsrahmen). Caption: „Hitze · Schatten, Kräfte einteilen“.*
 
 **G-059** · `images/G-059.png` · `verschiedene_boeden` · Fortgeschritten  
 *Leitgrafik: Verschiedene Böden*  
