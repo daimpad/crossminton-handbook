@@ -252,9 +252,11 @@ export function figur(pose) {
       const m = proj(add(a.W, mul(a.hd, 0.22))), sp = proj(add(a.W, mul(a.hd, 0.56)));
       hand = [kapsel(W2, P.rHandgelenk * H * g, m, 0.15 * H * g), kapsel(m, 0.145 * H * g, sp, 0.09 * H * g)];
     } else if (a.art === 'daumen') {
-      // Daumen hoch: Faust, der Daumen steht senkrecht nach oben (Welt, nicht Unterarm). Dicke und
-      // Länge so, dass er als 150-px-Miniatur noch zu sehen ist (Prüfung Welle 5).
-      const d1 = proj(add(a.griff, [0, 0.08, 0])), d2 = proj(add(a.griff, [0, 0.46, 0]));
+      // Daumen hoch: Faust, der Daumen steht senkrecht nach oben (Welt, nicht Unterarm), etwas zur
+      // Handgelenkseite versetzt — mittig auf der Faust las er sich wie ein erhobener Zeigefinger.
+      // Dicke und Länge so, dass er als 150-px-Miniatur noch zu sehen ist (Prüfung Welle 5).
+      const fuss = add(a.griff, mul(a.hd, -0.08));
+      const d1 = proj(add(fuss, [0, 0.08, 0])), d2 = proj(add(fuss, [0, 0.46, 0]));
       hand = [kapsel(W2, P.rHandgelenk * H * g, G2, P.rFaust * H * g), kapsel(d1, 0.105 * H * g, d2, 0.09 * H * g)];
     }
     return { teile, hand, G2, W2, S2, E2 };
