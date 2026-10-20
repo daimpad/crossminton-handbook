@@ -1,10 +1,4 @@
 {
- "G-003": {
-  "aria": "Der Vorhand-Drive: Gewicht auf dem vorderen Fuß, Oberkörper zur Schlagrichtung gedreht, kompakter, flacher Treffpunkt klar vor dem Körper.",
-  "texts": [
-   "flach und direkt · vor dem Körper"
-  ]
- },
  "G-005": {
   "aria": "Aufschlag, Bild 1: die freie Hand lässt den Speeder auf Hüfthöhe fallen, der Schlagarm ist tief bereit, von unten nach vorn zu schwingen.",
   "texts": [
@@ -21,12 +15,6 @@
   "aria": "Der Smash: hoher Treffpunkt über und vor dem Kopf, aggressiver Schlag nach unten, die Flugbahn führt steil und gerade ins gegnerische Feld.",
   "texts": [
    "hoher Treffpunkt · steil nach unten"
-  ]
- },
- "G-012": {
-  "aria": "Der Stopp: große Vorbereitung, aber weicher, abgebremster Kontakt — der Speeder überquert knapp die neutrale Zone und fällt kurz hinter die vordere Linie.",
-  "texts": [
-   "kurz und weich · fällt knapp hinter die Linie"
   ]
  },
  "G-013": {
@@ -61,28 +49,10 @@
    "eine Vorbereitung, zwei Möglichkeiten"
   ]
  },
- "G-018": {
-  "aria": "Tempowechsel, Bild 1: ein schneller, harter Schlag mit deutlicher Bewegungsunschärfe und flacher, schneller Flugbahn — hohes Tempo.",
-  "texts": [
-   "hohes Tempo · flach und schnell"
-  ]
- },
- "G-019": {
-  "aria": "Tempowechsel, Bild 2: fast identische Vorbereitung, nun ein langsamer, hoher, weicher Schlag mit sanftem Bogen — ein bewusster Bruch im Rhythmus.",
-  "texts": [
-   "gebrochener Rhythmus · hoch und weich"
-  ]
- },
  "G-021": {
   "aria": "Präzision an die Linien: der Speeder landet genau auf einer Ecklinie am äußersten Rand des Feldes; enge Zielzonen in den Ecken und ein dünner Pfeil zeigen die punktgenaue Platzierung mit minimalem Rand.",
   "texts": [
    "genau auf die Linie · minimaler Rand"
-  ]
- },
- "G-022": {
-  "aria": "Konstanz unter Höchstdruck: ein sauberer, ausbalancierter Schlag mit ruhiger Haltung — stabile Basis, ruhiger Kopf, kontrolliertes Ausschwingen, verlässlich wiederholbar.",
-  "texts": [
-   "ruhig und wiederholbar · unter Druck"
   ]
  },
  "G-023": {

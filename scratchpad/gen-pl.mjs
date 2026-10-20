@@ -5,20 +5,15 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const M = {
-  'G-003': { aria: 'Drive forhendowy: ciężar na przedniej stopie, tułów obrócony w kierunku uderzenia, zwarty, płaski punkt kontaktu wyraźnie przed ciałem.', texts: ['płasko i bezpośrednio · przed ciałem'] },
   'G-005': { aria: 'Serwis, obraz 1: wolna ręka upuszcza speedera na wysokości bioder, ramię uderzające jest nisko, gotowe do zamachu od dołu do przodu.', texts: ['speeder spada na wysokość bioder'] },
   'G-006': { aria: 'Serwis, obraz 2: rakieta trafia speedera od dołu, cały speeder jest w punkcie kontaktu wyraźnie poniżej dłoni uderzającej.', texts: ['punkt kontaktu poniżej dłoni'] },
   'G-011': { aria: 'Smecz: wysoki punkt kontaktu nad i przed głową, agresywne uderzenie w dół, tor lotu prowadzi stromo i prosto w pole przeciwnika.', texts: ['wysoki kontakt · stromo w dół'] },
-  'G-012': { aria: 'Skrót: duży zamach, ale miękki, wyhamowany kontakt — speeder ledwo przekracza strefę neutralną i spada tuż za przednią linią.', texts: ['krótko i miękko · tuż za linią'] },
   'G-013': { aria: 'Podcięcie: ukośna powierzchnia rakiety muska speedera z boku zamiast trafić go prosto; wygięte linie ruchu pokazują tnący tor i powstającą rotację.', texts: ['powierzchnia muska · podcięcie i rotacja'] },
   'G-014': { aria: 'System pracy nóg: wyrywać się z centralnej bazy w rogi i natychmiast wracać do środka.', texts: ['Baza', 'w róg — powrót do środka'] },
   'G-015': { aria: 'Brać speedera wcześnie: kontakt w najwyższym, najwcześniejszym punkcie wyraźnie przed i nad ciałem; blady niższy punkt kontaktu pokazuje, gdzie trafiłby wolniejszy gracz.', texts: ['wcześnie i wysoko — skradziony czas'] },
   'G-016': { aria: 'Zwód, obraz 1: celowo neutralne, identyczne przygotowanie, które nic nie zdradza — pełny zamach do tyłu, spokojne ciało, żadnego zdecydowanego uderzenia.', texts: ['?', 'to samo przygotowanie — nic nie zdradzić'] },
   'G-017': { aria: 'Zwód, obraz 2: to samo przygotowanie, z którego odgałęziają się dwa różne uderzenia — płaski, szybki drive i krótki, miękki skrót; wybór zapada dopiero w ostatniej chwili.', texts: ['jedno przygotowanie, dwie możliwości'] },
-  'G-018': { aria: 'Zmiana tempa, obraz 1: szybkie, mocne uderzenie z wyraźnym rozmyciem ruchu i płaskim, szybkim torem lotu — wysokie tempo.', texts: ['wysokie tempo · płasko i szybko'] },
-  'G-019': { aria: 'Zmiana tempa, obraz 2: niemal identyczne przygotowanie, teraz powolne, wysokie, miękkie uderzenie z łagodnym łukiem — celowe złamanie rytmu.', texts: ['złamany rytm · wysoko i miękko'] },
   'G-021': { aria: 'Precyzja przy liniach: speeder ląduje dokładnie na linii narożnej na skrajnym brzegu pola; ciasne strefy celu w rogach i cienka strzałka pokazują umiejscowienie co do punktu z minimalnym marginesem.', texts: ['dokładnie na linię · minimalny margines'] },
-  'G-022': { aria: 'Stałość pod najwyższą presją: czyste, zrównoważone uderzenie ze spokojną postawą — stabilna baza, spokojna główka, kontrolowane wyprowadzenie, niezawodnie powtarzalne.', texts: ['spokojnie i powtarzalnie · pod presją'] },
   'G-023': { aria: 'Cel gry: zagrać speedera nad strefą neutralną w pole przeciwnika.', texts: ['pole przeciwnika', 'STREFA NEUTRALNA', 'twoje pole'] },
   'G-024': { aria: 'Pozycja centralna: ze środka pola drogi do wszystkich czterech rogów są jednakowo krótkie.', texts: ['Środek', 'jednakowo szybko do każdego rogu'] },
   'G-025': { aria: 'Długość i głębia: zagrać krótką piłkę na przednią linię lub głęboką piłkę na linię końcową.', texts: ['głęboko — na linię końcową', 'krótko — na linię przednią'] },

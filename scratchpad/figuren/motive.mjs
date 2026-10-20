@@ -558,7 +558,7 @@ export function baue(id, sprache) {
 }
 // Motive, an denen noch gezeichnet wird: nicht ausgeliefert, nicht im Gate, nie nach images/
 // geschrieben (nur mit --ziel in einen Arbeitsordner). Fertig = aus dieser Menge streichen.
-export const IN_ARBEIT = new Set(['G-003', 'G-012', 'G-018', 'G-019', 'G-022', 'G-062']);
+export const IN_ARBEIT = new Set([]);
 const ALLE = () => [...Object.keys(MOTIVE), ...(G001 ? ['G-001'] : []), ...(G009 ? ['G-009'] : [])].filter((id) => TEXTE[id]).sort();
 export const IDS = () => ALLE().filter((id) => !IN_ARBEIT.has(id));
 
