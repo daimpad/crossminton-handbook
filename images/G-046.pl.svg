@@ -3,13 +3,13 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .zone{fill:var(--primaer,#38a4f1);opacity:.08}
     .sp{fill:var(--primaer,#38a4f1)}
-    .geg{fill:var(--tinte-3,#6b7686)}
+    .geg{fill:var(--tinte-3,#656f7e)}
     .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
     .mk{fill:var(--primaer,#38a4f1)}
     .badge{fill:var(--tinte,#16202b)}
     .bt{fill:var(--flaeche,#fff);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,sans-serif;letter-spacing:.5px;text-anchor:middle}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker></defs>
   <rect class="zone" x="55" y="230" width="190" height="100"/>

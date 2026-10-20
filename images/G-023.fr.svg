@@ -6,7 +6,7 @@
     .marker{fill:var(--primaer,#38a4f1)}
     .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1px;text-anchor:middle}
-    .subtext{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="tarw" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto">

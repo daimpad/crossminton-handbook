@@ -3,15 +3,15 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .zone{fill:var(--primaer,#38a4f1);opacity:.08}
     .serve{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4;stroke-dasharray:9 6}
-    .dim{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1}
-    .ext{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:.8;opacity:.7}
-    .arw{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
-    .brk{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.1}
+    .dim{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1}
+    .ext{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:.8;opacity:.7}
+    .arw{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.1}
+    .brk{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.1}
     .feldtext{fill:var(--tinte,#16202b);font:700 15px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1.5px;text-anchor:middle}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1px;text-anchor:middle}
     .acctext{fill:var(--primaer-tief,#1568ad);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
-    .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
-    .dimtext{fill:var(--tinte-3,#6b7686);font:600 12.5px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .dimtext{fill:var(--tinte-3,#656f7e);font:600 12.5px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="arw" viewBox="0 0 10 10" markerWidth="8.5" markerHeight="8.5" refX="5" refY="5" orient="auto-start-reverse">
