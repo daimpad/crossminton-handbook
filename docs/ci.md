@@ -107,7 +107,7 @@ Gelesen nur von den Grafiken in `images/`, je hell und in beiden Dunkel-Blöcken
 
 ### PNG-Fallback
 
-Zu jedem SVG liegt ein PNG in doppelter viewBox-Größe, gerendert mit den Hellwerten. Es steht da, bis das SVG geladen ist, offline auch dauerhaft. Die Diagramme sind transparent. Wer mit `--flaeche-2` freistellt — die Personengrafiken mit ihrem Freistellungsrand, die Speeder-Tafeln mit dem Halo hinter den Beschriftungen —, steht auf deckendem `--flaeche-2`, weil das Freigestellte auf dunklem Grund als heller Saum stünde. Im Dunkelmodus erscheint ihr PNG darum als helle, lesbare Kachel.
+Zu jedem SVG liegt ein PNG in doppelter viewBox-Größe, gerendert mit den Hellwerten. Es steht da, bis das SVG geladen ist, offline auch dauerhaft. Jedes PNG steht auf deckendem `--flaeche-2`. Im Dunkelmodus erscheint es darum als helle, lesbare Kachel; transparent stünden dunkle Linien auf dunklem Grund, und was mit `--flaeche-2` freistellt (Freistellungsrand der Figuren, Halo hinter den Beschriftungen der Speeder-Tafeln), als heller Saum.
 
 ## Typografie
 

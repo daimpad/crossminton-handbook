@@ -531,34 +531,42 @@ export function begrenzeStil(css, bereich) {
 
 // Nach dem Rendern aufrufen: ersetzt das PNG durch das Inline-SVG (theme-fähig). Scheitert
 // der Abruf (offline vor dem ersten SWR-Caching), bleibt das PNG stehen. Idempotent.
+// Die Grafiken einer Seite laden parallel — der Reihe nach kam jede erst nach der vorigen.
 export async function verbessereGrafiken(wurzel) {
   if (!wurzel || typeof fetch !== 'function' || typeof document === 'undefined') return;
-  for (const figur of wurzel.querySelectorAll('figure[data-grafik-svg]')) {
-    const url = figur.getAttribute('data-grafik-svg');
-    figur.removeAttribute('data-grafik-svg');
-    try {
-      let markup = svgZwischenspeicher.get(url);
-      if (markup == null) {
-        const antwort = await fetch(url);
-        if (!antwort.ok) throw new Error(String(antwort.status));
-        markup = await antwort.text();
-        svgZwischenspeicher.set(url, markup);
-      }
-      const bild = figur.querySelector('img.grafik-bild');
-      const gestell = document.createElement('div');
-      gestell.innerHTML = markup;
-      const svg = gestell.querySelector('svg');
-      if (bild && svg) {
-        svg.setAttribute('class', 'grafik-bild grafik-svg');
-        vereinzele(svg, gestell);
-        // Übersetzten Alt-Text als Zugänglichkeitsnamen übernehmen (bei text-freien
-        // Piktogrammen trägt das Inline-SVG sonst nur die deutsche aria-label).
-        const alt = bild.getAttribute('alt');
-        if (alt) svg.setAttribute('aria-label', alt);
-        bild.replaceWith(svg);
-      }
-    } catch {
-      /* PNG bleibt als Fallback stehen */
+  await Promise.all([...wurzel.querySelectorAll('figure[data-grafik-svg]')].map(tauscheGrafik));
+}
+
+async function tauscheGrafik(figur) {
+  const url = figur.getAttribute('data-grafik-svg');
+  figur.removeAttribute('data-grafik-svg');
+  try {
+    let markup = svgZwischenspeicher.get(url);
+    if (markup == null) {
+      const antwort = await fetch(url);
+      if (!antwort.ok) throw new Error(String(antwort.status));
+      markup = await antwort.text();
+      svgZwischenspeicher.set(url, markup);
     }
+    const bild = figur.querySelector('img.grafik-bild');
+    const gestell = document.createElement('div');
+    gestell.innerHTML = markup;
+    const svg = gestell.querySelector('svg');
+    if (bild && svg) {
+      svg.setAttribute('class', 'grafik-bild grafik-svg');
+      vereinzele(svg, gestell);
+      // Seitenverhältnis für die Deckelung der längeren Seite (css/app.css, .grafik-bild)
+      const [, , breite, hoehe] = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+      if (breite > 0 && hoehe > 0) svg.style.setProperty('--hoch', (hoehe / breite).toFixed(3));
+      // Die Datei trägt eine Beschreibung in ihrer Sprache (aria-label); die Bildunterschrift
+      // steht ohnehin darunter. Nur wenn die Datei nicht in der aktiven Sprache vorliegt (die
+      // deutsche Basis als Rückfall), gilt der übersetzte Alt-Text als Name.
+      const inSprache = /\.[a-z]{2}\.svg$/.test(url) || sprache() === 'de';
+      const alt = bild.getAttribute('alt');
+      if (alt && (!inSprache || !svg.getAttribute('aria-label'))) svg.setAttribute('aria-label', alt);
+      bild.replaceWith(svg);
+    }
+  } catch {
+    /* PNG bleibt als Fallback stehen */
   }
 }
