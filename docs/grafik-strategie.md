@@ -318,6 +318,12 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
    - In G-032 stimmten Maßstab, Hütchen und Spur nicht zusammen; der Rückweg ist jetzt gestrichelt und grau.
    - In G-020 flog der Speeder quer zur Bahn. Er fliegt jetzt Kappe voran entlang der Bahn, wie überall sonst.
 
+   **Welle 2** (Grundschlag: G-003, G-012, G-018, G-019, G-022, G-062), Bögen in `docs/grafik-strategie/welle2-hell.png` und `welle2-dunkel.png`. Die unabhängige Prüfung gab alle sechs mit Änderung frei. Der schwerste Befund lag im Generator, nicht in einem Motiv:
+   - **Die Schlagfläche zeigte zur Betrachterin statt zum Ziel.** `schlaeger3d` spannt die Fläche aus Achse und Querrichtung auf; eine Flächenrichtung, die schief zur Achse eingegeben war, wurde dabei stillschweigend gedreht, und die Bespannung hing an der rohen Eingabe statt an der gezeichneten Normale. So lasen sich mehrere Schläger als „Lupe“, genau der Sachfehler aus Abschnitt 3. Jetzt misst der Generator an der gezeichneten Normale und warnt ab `|achse·flaeche| > 0,2`; der Drive nutzt eine senkrechte Fläche zum Ziel. In G-043 aus dem Piloten ist die Bespannung dadurch sichtbar geworden, die Geometrie ist unverändert.
+   - G-018 zeigt jetzt wirklich den Durchschwung, G-019 dieselbe Vorbereitung mit derselben Spur, die im Treffpunkt endet; die Taktleisten haben denselben Grundtakt.
+   - G-022: beide Knie gebeugt, drei gepunktete Bahnen statt Bogen und Sehne, ein Bruchzeichen vor dem Ziel. G-062: Bruchzeichen für die mittlere Distanz und ein ruhiger Drive statt der Pose des harten Drives. G-012: Speeder frei vom Schläger, Ausholen auf Hüfthöhe.
+   - Texte: „drive de coup droit“ und „drive forhendowy“ wie in Labels und Bausteinen, „Speeder“ im Englischen groß.
+
    **Wenn der Pilot nicht überzeugt,** gibt es höchstens eine Nachbesserungsrunde. Danach entscheidet die Projektverantwortliche zwischen drei Wegen:
    - Richtung C an denselben neun Motiven, Generator und Gate bleiben dabei nutzbar;
    - Richtung A nur für Ganzfiguren, die Nahaufnahmen bleiben schematisch;

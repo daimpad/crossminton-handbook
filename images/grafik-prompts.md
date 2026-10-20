@@ -13,7 +13,7 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 - Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 67 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
 - **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
 - **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap → deren `.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
-- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), der Hand-Nahaufnahme (`hand.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert) und Welle 1 mit **G-007, G-032**; die übrigen 21 Personengrafiken folgen in Wellen.
+- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), der Hand-Nahaufnahme (`hand.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert), Welle 1 mit **G-007, G-032** und Welle 2 mit **G-003, G-012, G-018, G-019, G-022, G-062**; die übrigen 15 Personengrafiken folgen in Wellen.
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
@@ -47,6 +47,7 @@ A single player shown from the front in the crossminton ready position: feet sli
 **G-003** · `images/G-003.png` · `vorhand_drive` · Beginner  
 *Leitgrafik: der Vorhand-Drive*  
 A single player from the side hitting a forehand drive in crossminton. Weight shifted onto the front foot, torso rotated toward the hitting direction, racket meeting the speeder in a compact arc clearly in front of the body, wrist held firm and quiet. Flat, direct swing path.
+*Generiert (Welle 2): Dreiviertel von schräg vorn auf der Schlägerseite, Ziel rechts. Gewicht auf dem vorderen Fuß, Treffpunkt auf Hüfthöhe vor dem Körper, die Fläche als schmales Hochoval zum Ziel. Eine kurze Spur zeigt den kompakten Bogen, die Bahn verlässt das Bild flach nach rechts.*
 
 **G-004** · `images/G-004.png` · `rueckhand` · Beginner  
 *Leitgrafik: die Rückhand*  
@@ -88,6 +89,7 @@ A single player from the side hitting a smash in crossminton. High contact point
 **G-012** · `images/G-012.png` · `kurzes_spiel_stopp` · Fortgeschritten  
 *Leitgrafik: der Stopp*  
 A single player from the side playing a soft stop/drop shot in crossminton. The preparation looks like a firm shot, but the contact is gentle and decelerated. A short, soft trajectory arc shows the speeder barely clearing the passing zone and dropping just behind the front line of the opposite square. Emphasis on the light, cushioned touch and quiet racket; implied contrast between big preparation and soft contact.
+*Generiert (Welle 2): Profil quer zur Spielrichtung, zwei Personen. Links der Spieler im Treffmoment, die Fläche leicht geöffnet; blass dahinter der Ausholweg des harten Drives auf Hüfthöhe (dieselbe Vorbereitung ist die Täuschung). Die Bodenlinie ist mit Bruchzeichen und „12,8 m“ gestaucht, ein Netz gibt es nicht. Die Bahn steigt flach, fällt steil und endet in einer Zielmarke am Boden knapp hinter der vorderen Linie des Gegnerfelds; der Gegner steht blass und tief an seiner Grundlinie.*
 
 **G-013** · `images/G-013.png` · `schnitt_spin` · Fortgeschritten  
 *Leitgrafik: der Schnitt*  
@@ -112,10 +114,12 @@ The same player and identical preparation as before, now with two divergent dash
 **G-018** · `images/G-018.png` · `tempo_rhythmus_wechsel` · Experte  
 *Tempowechsel, Bild 1: das hohe Tempo*  
 A single player from the side hitting a fast, hard crossminton shot, with strong motion blur and a flat, fast straight trajectory arrow, conveying high pace.
+*Generiert (Welle 2): harter Drive im Durchschwung, der Arm über den Treffpunkt hinaus nach vorn gezogen. Die Spur beginnt hinter der Hüfte wie in G-019 und läuft am Treffpunkt vorbei weiter (keine Bewegungsunschärfe, keine Speedlines). Der Speeder ist schon weit voraus, die Bahn flach; eine Taktleiste darunter zeigt den gleichmäßigen Takt.*
 
 **G-019** · `images/G-019.png` · `tempo_rhythmus_wechsel` · Experte  
 *Tempowechsel, Bild 2: der gebrochene Rhythmus*  
 The same player from the side with a near-identical preparation, now hitting a slow, high, soft shot — a gentle high arc trajectory arrow and a relaxed, decelerated contact — illustrating a deliberate break in tempo from the same-looking setup.
+*Generiert (Welle 2): Beine, Rumpf und Spur deckungsgleich mit G-018, aber die Spur endet am Schläger: die Hand bleibt im Treffpunkt stehen, die Fläche ist sichtbar nach oben geöffnet. Die Bahn steigt weich und verlässt das Bild oben rechts. In der Taktleiste folgt auf denselben Grundtakt eine Lücke.*
 
 **G-020** · `images/G-020.png` · `sprung_smash` · Experte  
 *Leitgrafik: Der Sprung-Smash*  
@@ -129,6 +133,7 @@ A top-down diagram of a crossminton square with the speeder landing exactly on a
 **G-022** · `images/G-022.png` · `konstanz_unter_hoechstdruck` · Experte  
 *Leitgrafik: Konstanz unter Höchstdruck*  
 A single player from the side executing a clean, textbook-perfect, balanced crossminton stroke with calm, composed posture — steady base, quiet head, controlled follow-through. The image conveys reliability and composure, a repeatable stroke held together under pressure rather than a flashy one. Minimal, controlled, balanced.
+*Generiert (Welle 2): ruhiger, lehrbuchhafter Drive mit stabiler Basis, beide Knie gebeugt. Drei gepunktete, fast deckungsgleiche Bahnen enden in derselben engen Zielmarke; ein Bruchzeichen über dem Bündel sagt, dass das Ziel im Feld gegenüber liegt. Die Anzeigetafel „15:15“ ist der Druck.*
 
 ## Taktik (G-023–031)
 
@@ -304,10 +309,9 @@ A clean multi-panel reference sheet of crossminton umpire hand signals (in; out;
 Die zwei `modus_baustein`-Spielformen (Spez. 13.2). Beide als theme-fähiges Inline-SVG
 im Hausstil, mit `en`/`fr`/`pl`-Varianten.
 
-**G-062** · `images/G-062.svg` · `funplay` · Zwei Strichfiguren auf mittlerer Distanz,
-einander zugewandt, **ohne Court-Rechteck** (nur eine angedeutete Bodenlinie — Funplay
-kennt kein Feld). Die Bahn läuft flach in beide Richtungen (zwei Bögen mit Pfeilspitzen),
-der Speeder sitzt oben in der Mitte. Caption: „gemeinsam halten · Kontrolle vor Kraft".
+**G-062** · `images/G-062.svg` · `funplay` · Beginner  
+*Grafik: Funplay — gemeinsam halten*  
+*Generiert (Welle 2): zwei Spielende auf mittlerer Distanz, ohne Court; die Bodenlinie ist in der Mitte gebrochen, weil der Abstand im Figurmaßstab nicht ins Bild passt. Links ein ruhiger Vorhand-Drive im Treffmoment, rechts die Partnerin in Bereitschaft. Die Bahn läuft flach hin und gestrichelt zurück, eine Strichliste darüber zählt die Kontakte am Stück. Caption: „gemeinsam halten · Kontrolle vor Kraft“.*
 
 **G-063** · `images/G-063.svg` · `mehrfeld` · Aufsicht: das eigene Match als zwei
 Felder oben/unten in `--primaer` mit durchgezogener eigener Bahn, zwei fremde Matches
