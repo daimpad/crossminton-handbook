@@ -3,9 +3,9 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .reach{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.9}
     .marker{fill:var(--primaer,#38a4f1)}
-    .eckpkt{fill:var(--tinte-3,#6b7686)}
+    .eckpkt{fill:var(--tinte-3,#656f7e)}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
-    .subtext{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .subtext{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="rarw" viewBox="0 0 10 10" markerWidth="7.5" markerHeight="7.5" refX="6.5" refY="5" orient="auto">

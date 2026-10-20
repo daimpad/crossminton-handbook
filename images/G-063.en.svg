@@ -4,9 +4,9 @@
     .eigen{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3}
     .zone{fill:var(--primaer,#38a4f1);opacity:.08}
     .bahn{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
-    .fremd{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:6 5;opacity:.75}
+    .fremd{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:6 5;opacity:.75}
     .achtung{fill:none;stroke:var(--primaer-tief,#1568ad);stroke-width:2.4;stroke-dasharray:4 4}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
 
   <!-- gemeinsames Zentrum: hier kreuzen sich die Bahnen -->

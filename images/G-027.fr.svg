@@ -3,7 +3,7 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .opt{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.8}
     .marker{fill:var(--primaer,#38a4f1)}
-    .ziel{fill:var(--tinte-3,#6b7686)}
+    .ziel{fill:var(--tinte-3,#656f7e)}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
   </style>
   <defs><marker id="ah" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="marker"/></marker></defs>

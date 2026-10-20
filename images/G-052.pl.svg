@@ -6,7 +6,7 @@
     .rot{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
     .mk{fill:var(--primaer,#38a4f1)}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
-    .st{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>

@@ -5,6 +5,7 @@
 // scratchpad/figuren/motive.mjs erzeugt. Die übrigen Grafiken folgen älteren Regeln (Test [22]).
 // Was nur im Browser messbar ist (Caption-Breite, Kontrast), prüft scratchpad/figuren/gate.mjs.
 import { createHash } from 'node:crypto';
+import { inflateSync } from 'node:zlib';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -31,6 +32,28 @@ export function hellWerte(css) {
   const block = css.slice(css.indexOf(':root {'), css.indexOf('\n}', css.indexOf(':root {')));
   return Object.fromEntries([...block.matchAll(/(--[a-z0-9-]+):\s*([^;]+);/g)].map(([, k, v]) => [k, v.trim().toLowerCase()]));
 }
+
+// Deckender Grund der Personengrafik-PNGs: der Hellwert von --flaeche-2 (wie .grafik-bild hell).
+// Im Dunkelmodus steht das PNG damit als helle Kachel, bis das SVG da ist — lesbar, statt dunkle
+// Figuren mit hellem Saum auf dunklem Grund.
+export const PNG_GRUND = '#f1f5fb';
+
+// Erstes Pixel einer PNG-Datei als [r, g, b, a]. Im ersten Pixel der ersten Zeile ändert kein
+// PNG-Filter etwas (kein linker und kein oberer Nachbar), die Rohbytes sind also der Farbwert.
+export function pngEcke(buf) {
+  if (pngGroesse(buf) === null) return null;
+  const typ = buf[25], teile = [];
+  for (let i = 8; i < buf.length;) {
+    const l = buf.readUInt32BE(i), art = buf.toString('ascii', i + 4, i + 8);
+    if (art === 'IDAT') teile.push(buf.subarray(i + 8, i + 8 + l));
+    i += 12 + l;
+  }
+  const roh = inflateSync(Buffer.concat(teile));
+  if (typ === 6) return [...roh.subarray(1, 5)];
+  if (typ === 2) return [...roh.subarray(1, 4), 255];
+  return null;
+}
+const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
 // Breite × Höhe aus dem IHDR-Kopf einer PNG-Datei
 export function pngGroesse(buf) {
@@ -92,6 +115,7 @@ export async function pruefeGrafiken({ wurzel = WURZEL, erzeuge = null } = {}) {
   const bild = (n) => join(wurzel, 'images', n);
   const hell = hellWerte(readFileSync(join(wurzel, 'css/app.css'), 'utf8'));
   for (const t of TOKENS) if (!hell[t]) fehler.push(`Token ${t} fehlt im :root von css/app.css`);
+  if (hell['--flaeche-2'] !== PNG_GRUND) fehler.push(`PNG_GRUND ${PNG_GRUND} ist nicht mehr der Hellwert von --flaeche-2 (${hell['--flaeche-2']})`);
   const stand = existsSync(join(wurzel, PNG_STAND)) ? JSON.parse(readFileSync(join(wurzel, PNG_STAND), 'utf8')) : {};
   const ids = readdirSync(join(wurzel, 'images'))
     .filter((n) => /^G-\d{3}\.svg$/.test(n) && readFileSync(bild(n), 'utf8').includes('data-quelle="figuren"'))
@@ -117,8 +141,10 @@ export async function pruefeGrafiken({ wurzel = WURZEL, erzeuge = null } = {}) {
       // PNG: vorhanden, doppelte viewBox-Größe, aus genau diesem SVG-Stand gerendert
       if (!existsSync(bild(`${n}.png`))) { fehler.push(`${n}.png fehlt`); continue; }
       const [, vb, vh] = svg.match(/viewBox="0 0 (\d+) (\d+)"/) ?? [];
-      const g = pngGroesse(readFileSync(bild(`${n}.png`)));
+      const png = readFileSync(bild(`${n}.png`)), g = pngGroesse(png);
       if (!g || g[0] !== 2 * vb || g[1] !== 2 * vh) fehler.push(`${n}.png ist ${g ? g.join('×') : 'kein PNG'} statt ${2 * vb}×${2 * vh}`);
+      const ecke = pngEcke(png);
+      if (!ecke || ecke[3] !== 255 || ecke.slice(0, 3).join() !== hexRgb(PNG_GRUND).join()) fehler.push(`${n}.png steht nicht auf deckendem ${PNG_GRUND} (Ecke ${ecke ? ecke.join(',') : '?'})`);
       if (stand[`${n}.svg`] !== hash(svg)) fehler.push(`${n}.png ist älter als ${n}.svg (scratchpad/render-svg.mjs ${n})`);
     }
   }

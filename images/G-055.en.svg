@@ -2,13 +2,13 @@
   <style>
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .zone{fill:var(--primaer,#38a4f1);opacity:.08}
-    .wind{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round}
+    .wind{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round}
     .traj{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.8}
     .mk{fill:var(--primaer,#38a4f1)}
-    .mkg{fill:var(--tinte-3,#6b7686)}
+    .mkg{fill:var(--tinte-3,#656f7e)}
     .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,sans-serif;text-anchor:middle}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="ah" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="6.5" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" class="mk"/></marker>

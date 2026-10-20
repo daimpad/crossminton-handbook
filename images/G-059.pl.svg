@@ -3,8 +3,8 @@
     .rahmen{fill:none;stroke:var(--tinte,#16202b);stroke-width:2}
     .s1{fill:var(--primaer,#38a4f1);opacity:.10}
     .s2{fill:var(--primaer,#38a4f1);opacity:.18}
-    .s3{fill:var(--tinte-3,#6b7686);opacity:.14}
-    .s4{fill:var(--tinte-3,#6b7686);opacity:.22}
+    .s3{fill:var(--tinte-3,#656f7e);opacity:.14}
+    .s4{fill:var(--tinte-3,#656f7e);opacity:.22}
     .fuss{fill:var(--tinte,#16202b);opacity:.55}
     .lab{fill:var(--tinte,#16202b);font:700 13px/1 system-ui,sans-serif;text-anchor:middle}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}

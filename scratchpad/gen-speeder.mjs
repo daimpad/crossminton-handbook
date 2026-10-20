@@ -36,15 +36,15 @@ const STIL = `  <style>
     .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
     .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
     .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
-    .masz{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1.2}
-    .hilfslinie{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
-    .achse{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
-    .pfeil{fill:var(--tinte-3,#6b7686)}
+    .masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .hilfslinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
+    .achse{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
+    .pfeil{fill:var(--tinte-3,#656f7e)}
     .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
-    .teil{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif}
-    .teilr{fill:var(--tinte-3,#6b7686);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif}
+    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
     <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto">
