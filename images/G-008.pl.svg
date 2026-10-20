@@ -24,7 +24,7 @@
     .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
     .s-mkg{fill:var(--tinte-3,#656f7e)}
     .s-feld{fill:var(--tinte-3,#656f7e);opacity:.07}
-    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.75;stroke-linecap:round}
+    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
     .s-basis{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
