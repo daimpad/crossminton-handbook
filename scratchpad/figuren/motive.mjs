@@ -8,8 +8,8 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { figur, datei, buehne, add, sub, mul, f, pt, winkel2d, esc, len } from './figur.mjs';
-import { speeder, schatten, spur, pfeil, druck, feld, feldProfil, sprechblase } from './bauteile.mjs';
+import { figur, datei, buehne, add, sub, mul, lerp, f, pt, winkel2d, esc, len } from './figur.mjs';
+import { speeder, schatten, spur, pfeil, druck, feld, feldProfil, sprechblase, winkel, huetchen } from './bauteile.mjs';
 import { G001, G009 } from './hand.mjs';
 import { TEXTE, SPRACHEN } from './texte.mjs';
 
@@ -26,6 +26,14 @@ export const POSEN = {
     schlaeger: { hand: 'R', achse: [-0.25, 0.85, 0.45], flaeche: [0.2, -0.45, 1] },
   },
 };
+// Split-Step-Landung: breiter und tiefer als die Grundposition, Fersen deutlich oben,
+// Rumpf etwas weiter vor, Schläger unverändert locker vor dem Körper.
+POSEN.split = {
+  ...POSEN.bereit, neig: 30, kopf: { neig: -28 },
+  beinR: { ober: [0.55, -0.8, 1.6], unter: [0.1, -1, -0.75], fuss: [0.3, -0.42, 1] },
+  beinL: { ober: [-0.55, -0.8, 1.6], unter: [-0.1, -1, -0.75], fuss: [-0.16, -0.42, 1] },
+  armL: { ober: [-0.35, -1, 0.4], unter: [0.4, 0.3, 0.9], hand: [0.5, 0.4, 0.75], art: 'offen' },
+};
 const REPO = resolve(HIER, '..', '..');
 
 export const MOTIVE = {
@@ -38,6 +46,69 @@ export const MOTIVE = {
       datei: datei({
         aria: t.aria, caption: t.cap, captionY: 268,
         inhalt: [schatten([152, 239], 62, 6.5), fg.svg, druck(fg.punkte.ballenR), druck(fg.punkte.ballenL)].join('\n  '),
+      }),
+    };
+  },
+  // Beinarbeit, Bild 1: der Split-Step, gezeigt in der LANDUNG — auf sie kommt es an. Gegenüber
+  // der Grundposition (G-002) breiter, tiefer, Fersen deutlich oben. Der kleine Federweg steht als
+  // kurzer Auf-ab-Pfeil daneben (ein großer Sprungpfeil widerspräche „klein“), die vier Winkel am
+  // Boden sagen: aus dieser Landung geht es in jede Richtung.
+  'G-007': (t) => {
+    const fg = figur({ ...POSEN.split, ort: [146, 230], H: 26, blick: 70, kamera: 12 });
+    const m = lerp(fg.punkte.ballenR, fg.punkte.ballenL, 0.5), y = 233;
+    const rx = 78, ry = 14;
+    const wink = [[m[0] + rx, y, 90], [m[0] - rx, y, -90], [m[0], y + ry, 0], [m[0], y - ry - 9, 180]]
+      .map(([x, yy, w]) => winkel({ p: [x, yy], w, g: 6.5, q: w === 0 || w === 180 ? 0.55 : 0.45 })).join('');
+    // zwei Hälften statt marker-start: orient="auto" ließe beide Spitzen nach oben zeigen
+    const pf = [92, 168], auf = (r) => `M${f(pf[0])},${f(pf[1] + r * 2)}L${f(pf[0])},${f(pf[1] + r * 15)}`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 270,
+        defs: pfeil('p007a'),
+        inhalt: [
+          schatten([m[0] + 2, y], 66, 6.5),
+          `<path class="s-chev" d="${wink}"/>`,
+          fg.svg, druck(fg.punkte.ballenR), druck(fg.punkte.ballenL),
+          `<path class="s-rot" d="${auf(-1)}" marker-end="url(#p007a)"/>`, `<path class="s-rot" d="${auf(1)}" marker-end="url(#p007a)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Schnelle Füße: dieselbe Landung in der Feldmitte, dann der Antritt zum Hütchen in der
+  // vorderen linken Ecke und zurück (Übungsteil). Die Spur aus vielen kleinen Kontakten ist die
+  // Aussage — kurze, schnelle Bodenkontakte statt weniger großer Schritte.
+  'G-032': (t) => {
+    const b = buehne({ horizont: -20, nahY: 250, mitteX: 150, H0: 23, abstand: 4 });
+    const st = b.stelle(156, 1.7);
+    const fg = figur({ ...POSEN.split, ort: st.ort, H: st.H, blick: 58, kamera: 16 });
+    const ecken = [[22, 0.35], [278, 0.35], [44, 3.4], [256, 3.4]].map(([x, z]) => b.boden(x, z));
+    const ziel = ecken[0];
+    // Kontakte im Wechsel links/rechts der Laufachse, zum Ziel hin etwas größer (näher)
+    const kontakte = [];
+    const von = b.boden(132, 1.35), n = 7;
+    for (let i = 0; i < n; i++) {
+      const t0 = (i + 0.6) / (n + 0.4), p0 = lerp(von, add(ziel, [16, -3]), t0), v = i % 2 ? 9 : -9;
+      kontakte.push(`<ellipse class="s-druck" cx="${f(p0[0])}" cy="${f(p0[1] + v * 0.45)}" rx="${f(3.4 + t0 * 1.4)}" ry="${f(1.3 + t0 * 0.5)}"/>`);
+    }
+    const rueck = `M${pt(add(ziel, [22, 6]))} Q ${pt(b.boden(110, 0.35))} ${pt(b.boden(146, 1.15))}`;
+    const hin = `M${pt(add(von, [-4, -2]))} L${pt(add(ziel, [12, -6]))}`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 272,
+        defs: pfeil('p032') + pfeil('g032', 's-mkg', 3.8),
+        inhalt: [
+          feld(b, { x0: 6, x1: 294, z0: 0, z1: 3.9, linien: [] }),
+          `<ellipse class="s-basis" cx="${f(b.boden(150, 1.7)[0])}" cy="${f(b.boden(150, 1.7)[1])}" rx="${f(26 * b.s(1.7))}" ry="${f(8 * b.s(1.7))}"/>`,
+          ...ecken.slice(1).map((e, i) => huetchen(e, 12 * b.s([0.35, 3.4, 3.4][i]))),
+          `<path class="s-wegv" d="${hin}" marker-end="url(#g032)"/>`,
+          ...kontakte,
+          `<path class="s-weg" d="${rueck}" marker-end="url(#p032)"/>`,
+          huetchen(ziel, 12 * b.s(0.35)),
+          schatten([fg.punkte.huefte[0] + 2, st.ort[1] + 1], 44 * b.s(1.7), 5),
+          fg.svg, druck(fg.punkte.ballenR), druck(fg.punkte.ballenL),
+        ].join('\n  '),
       }),
     };
   },
@@ -232,7 +303,8 @@ export const MOTIVE = {
       ort: [88, 252], H: 20, blick: 64, kamera: 6, neig: 6, seit: -10, heben: 1.1, kopf: { neig: -28 }, art: 'luft',
       beinR: { ober: [0.05, -1, -0.15], unter: [0, -0.35, -1], fuss: [0, -0.9, -0.2] },
       beinL: { ober: [-0.05, -1, 0.5], unter: [0, -1, 0.05], fuss: [0, -0.9, 0.6] },
-      armR: { ober: [0.35, 1, 0.4], unter: [0.12, 1, 0.6], hand: [0.05, 0.85, 1], vor: true },
+      // Schlagarm deutlich vor dem Kopf: senkrecht nach oben schnitt er die Kopfkante
+      armR: { ober: [0.4, 0.75, 1], unter: [0.1, 0.8, 1], hand: [0.05, 0.6, 1], vor: true },
       armL: { ober: [-0.1, -0.6, 1], unter: [0.95, 0.2, 0.25], art: 'faust' },
       schlaeger: { hand: 'R', achse: [0, 0.75, 1], flaeche: [0, -0.9, 0.6] },
     });

@@ -31,7 +31,7 @@ export function faust({ geist = false } = {}) {
   const ruecken = glatt([[-50, -4], [-38, -8.5], [-25, -8], [-15, -5.5], [-7, -2], [-1, 3.5], [-9, 7.5], [-21, 11.5], [-34, 12.5], [-48, 9.5]], 0.55);
   // Daumen: liegt auf der oberen Kante und steigt leicht an — oberer Schenkel des V. Er ist
   // kurz und verjüngt sich bis zur Kuppe, die sich schon über die Kante legt.
-  const daumen = [[-34, -5.5, 6.8], [-19, -10.5, 5.6], [-7.5, -13.8, 5], [1, -14.6, 4.6]];
+  const daumen = [[-34, -5.5, 6.8], [-20, -9.6, 5.6], [-8.5, -11.8, 5], [0.5, -11, 4.6]];
   const teile = [];
   for (const fi of [...finger, zeige]) {
     const k = kette(fi);
@@ -44,7 +44,7 @@ export function faust({ geist = false } = {}) {
   // V: Hautfalte zwischen Daumen und Zeigefinger, Spitze zum Griffende, Öffnung zum Kopf.
   // Als Punkte im lokalen Rahmen, damit das Motiv die Marke in Bildkoordinaten zeichnet
   // (gleiche Strichstärke bei jedem Maßstab).
-  return { hand: teile.join(''), v: [[0.5, -10], [-13.5, -5.6], [7, -2]] };
+  return { hand: teile.join(''), v: [[0.5, -6.6], [-12, -5.6], [7.5, -1.4]] };
 }
 
 // Schläger im lokalen Griffrahmen: Griff mit Griffband, Hals, Schaft, Kopf (Rahmen + Saiten).
@@ -68,7 +68,7 @@ export function schlaeger({ griffVon = -58, griffBis = 30, kopfMitte = 150, kopf
 }
 
 // Unterarm vom Handgelenk aus dem Bild, mit Auslauf (Verlauf zur Fläche)
-const UNTERARM = (id, von = [-48, 5], bis = [-78, 9]) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${von[0]}" y1="${von[1]}" x2="${bis[0]}" y2="${bis[1]}"><stop offset="0" class="s-ag0"/><stop offset="1" class="s-ag1"/></linearGradient>`;
+const UNTERARM = (id, von = [-48, 5], bis = [-78, 9]) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${von[0]}" y1="${von[1]}" x2="${bis[0]}" y2="${bis[1]}"><stop offset="0" class="s-ag0"/><stop offset="0.45" class="s-ag0"/><stop offset="1" class="s-ag1"/></linearGradient>`;
 const unterarm = (id, ende = [-80, 10], rEnde = 14.2) => `<path fill="url(#${id})" d="${kapsel([-44, 4], 13, ende, rEnde)}"/>`;
 
 const r1 = (n) => Math.round(n * 10) / 10;
@@ -105,7 +105,7 @@ export function G009(t) {
   const tf = (a) => `translate(${P0[0]} ${P0[1]}) rotate(${a}) scale(${S}) translate(${-HG[0]} ${-HG[1]})`;
   const treff = phase(A);
   const kopfM = 140, kopfL = 58;
-  const hGeist = faust({ geist: true }), h = faust();
+  const h = faust();
   // Bahn des Schlägerkopfs: Kreisbogen um das Handgelenk, Pfeil endet VOR dem Kopf
   const r = (kopfM + kopfL * 0.55 - HG[0]) * S;
   const bogen = (von, bis) => { const a = (von * Math.PI) / 180, b = (bis * Math.PI) / 180; return `M${f(P0[0] + r * Math.cos(a))},${f(P0[1] + r * Math.sin(a))} A${f(r)},${f(r)} 0 0 1 ${f(P0[0] + r * Math.cos(b))},${f(P0[1] + r * Math.sin(b))}`; };
@@ -122,7 +122,7 @@ export function G009(t) {
   const spWinkel = (Math.atan2(fl[0], fl[1]) * 180) / Math.PI;
   const flugbahn = `<path class="s-bahn2" d="M${pt(add(sp, mul(fl, 14)))}L${pt(add(sp, mul(fl, 44)))}" marker-end="url(#p009)"/>`;
   const inhalt = [
-    `<g transform="${tf(A - ZURUECK)}">`, schlaeger({ geist: true, kopfMitte: kopfM, kopfL, kopfB: 17 }), hGeist.hand, `</g>`,
+    `<g transform="${tf(A - ZURUECK)}">`, schlaeger({ geist: true, kopfMitte: kopfM, kopfL, kopfB: 17 }), `</g>`,
     bahn, `<path class="s-tempo" d="${tempo}"/>`,
     `<g transform="${tf(A)}">`, unterarm('u009', [-128, 18], 15.5), schlaeger({ kopfMitte: kopfM, kopfL, kopfB: 9 }), h.hand, `</g>`,
     dreh,

@@ -410,6 +410,8 @@ export const STIL = {
   's-rot': `fill:none;stroke:${AKZ};stroke-width:2.6;stroke-linecap:round`,
   's-x3': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round',
   's-tempo': `fill:none;stroke:${AKZ};stroke-width:2;stroke-linecap:round;opacity:.5`,
+  's-chev': `fill:none;stroke:${AKZ};stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round`,
+  's-kegel': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round',
   's-schnitt': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.2;stroke-linecap:round',
   's-ag0': 'stop-color:var(--tinte,#16202b);stop-opacity:1',
   's-ag1': 'stop-color:var(--tinte,#16202b);stop-opacity:0',

@@ -13,7 +13,7 @@ Zentrale, durchnummerierte Sammlung aller Bild-Prompts der App. Jede Nummer `G-X
 - Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback) vor; alle 67 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Nutzen die CI-Tokens (`var(--tinte)`/`var(--primaer)`/`var(--tinte-3)` mit Hell-Fallback), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und winzig.
 - **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
 - **Rezept (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2×, transparent, `omitBackground`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap → deren `.png` rendern. `scratchpad/montage.mjs [--dark]` kachelt mehrere zur Sichtprüfung.
-- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), der Hand-Nahaufnahme (`hand.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053**; die übrigen 23 Personengrafiken folgen in Wellen.
+- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), der Hand-Nahaufnahme (`hand.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert) und Welle 1 mit **G-007, G-032**; die übrigen 21 Personengrafiken folgen in Wellen.
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
@@ -64,6 +64,7 @@ A single player from the side at the moment of a crossminton serve contact. The 
 **G-007** · `images/G-007.png` · `beinarbeit` · Beginner  
 *Beinarbeit, Bild 1: der Split-Step*  
 A single player from the front in the central position of the square, performing a small split-step: a low springy hop, landing on the balls of both feet, knees bent, ready to push off in any direction. Motion lines suggesting the light upward hop.
+*Generiert (Welle 1): die LANDUNG des Split-Steps in Dreiviertelansicht — breiter und tiefer als die Grundposition G-002, Fersen deutlich oben, Akzentmarken unter beiden Fußballen. Ein kurzer Auf-ab-Pfeil zeigt den kleinen Federweg (ein großer Sprungpfeil widerspräche „klein“), vier Winkel am Boden die Richtungen, in die es aus der Landung geht.*
 
 **G-008** · `images/G-008.png` · `beinarbeit` · Beginner  
 *Beinarbeit, Bild 2: der Bewegungskreislauf*  
@@ -73,7 +74,7 @@ A single player from a slightly elevated angle showing the movement cycle in one
 **G-009** · `images/G-009.png` · `handgelenk_peitsche` · Fortgeschritten  
 *Leitgrafik: der Handgelenk-Schnapp*  
 Close-up of a forearm, wrist and racket head from the side, showing the whip-like wrist action of an advanced crossminton stroke. The wrist is first laid back (cocked), then snaps forward; depict the snap with a curved motion arc and a slight blur at the racket head to convey speed. The forearm stays relatively quiet while wrist and racket head accelerate. Loose, relaxed grip. Focus on wrist and racket head; forearm entering from the edge of the frame.
-*Generiert (Pilot): Unterarm von links unten, dieselbe Hand wie G-001. Blass die Ausholphase mit zurückgelegtem Handgelenk und offener Fläche, kräftig der Treffmoment mit hochkant stehender Fläche; Pfeil um den Unterarm (Eindrehen), Bahn des Kopfs mit Pfeil vor dem Kopf, Speeder geht ab. Anders als der Prompt oben verlangt der Bausteintext das Eindrehen des Unterarms — die Caption sagt darum „Unterarm dreht ein“.*
+*Generiert (Pilot, nachgebessert): Unterarm von links unten, dieselbe Hand wie G-001. Blass die Ausholphase mit zurückgelegtem Handgelenk und offener Fläche (nur der Schläger — eine blasse Geisterhand lag hinter der kräftigen und machte die Stelle unruhig), kräftig der Treffmoment mit hochkant stehender Fläche; Pfeil um den Unterarm (Eindrehen), Bahn des Kopfs mit Pfeil vor dem Kopf, Speeder geht ab. Anders als der Prompt oben verlangt der Bausteintext das Eindrehen des Unterarms — die Caption sagt darum „Unterarm dreht ein“.*
 
 **G-010** · `images/G-010.png` · `ueberkopf_clear` · Fortgeschritten  
 *Leitgrafik: der Überkopfschlag*  
@@ -172,6 +173,7 @@ Top-down diagram of the opposite square with one corner marked as a weakness and
 **G-032** · `images/G-032.png` · `schnelle_fuesse` · Beginner  
 *Leitgrafik: Schnelle Füße*  
 A single player from the front doing a quick-feet footwork drill in crossminton, low athletic stance on the balls of the feet, small rapid steps suggested by light motion lines at the feet, knees bent, ready to change direction. Emphasis on fast, light ground contact.
+*Generiert (Welle 1): Feld in Perspektive mit vier Hütchen und Mittenmarke; die Figur in der Split-Step-Landung in der Mitte. Zum vorderen linken Hütchen führt eine Spur vieler kleiner Bodenkontakte (die Aussage: kurze, schnelle Kontakte statt großer Schritte), gestrichelt der Rückweg zur Mitte.*
 
 **G-033** · `images/G-033.png` · `beweglichkeit_und_schulter` · Beginner  
 *Leitgrafik: Beweglichkeit und die Schulter*  

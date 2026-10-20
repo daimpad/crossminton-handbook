@@ -1,27 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Schnelle Füße: tiefe, athletische Haltung auf den Fußballen, kleine schnelle Schritte, angedeutet durch leichte Bewegungslinien an den Füßen, bereit zum Richtungswechsel.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Schnelle Füße: aus der Landung des Split-Steps in der Feldmitte mit kurzen, schnellen Schritten zu einem Hütchen in der Ecke und zurück zur Mitte. Viele kleine Bodenkontakte statt weniger großer Schritte.">
   <style>
-    .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
-    .kopf{fill:var(--tinte,#16202b)}
-    .schaft{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5;stroke-linecap:round}
-    .kelle{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:5.5}
-    .tempo{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3;stroke-linecap:round}
-    .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
-    .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-k{fill:var(--tinte,#16202b)}
+    .s-f{fill:var(--tinte-2,#5a6675)}
+    .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    .s-weg{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3;stroke-dasharray:8 6;stroke-linecap:round}
+    .s-wegv{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round}
+    .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-mkg{fill:var(--tinte-3,#656f7e)}
+    .s-feld{fill:var(--tinte-3,#656f7e);opacity:.07}
+    .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.75;stroke-linecap:round}
+    .s-basis{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6}
+    .s-druck{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-kegel{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
-  <circle class="kopf" cx="150" cy="66" r="15"/>
-  <path class="fig" d="M150,90 L150,148"/>
-  <path class="fig" d="M150,104 L126,116 L140,142"/>
-  <path class="fig" d="M150,104 L174,116 L160,142"/>
-  <!-- tiefe Haltung, kurze schnelle Schritte -->
-  <path class="fig" d="M150,148 L128,182 L124,214"/>
-  <path class="fig" d="M150,148 L172,182 L176,214"/>
-  <line class="schaft" x1="150" y1="142" x2="150" y2="170"/>
-  <ellipse class="kelle" cx="150" cy="186" rx="11" ry="15"/>
-  <!-- Bewegungslinien an den Füßen (schnelle Schritte) -->
-  <path class="tempo" d="M100,208 L118,208"/>
-  <path class="tempo" d="M96,220 L116,220"/>
-  <path class="tempo" d="M182,208 L200,208"/>
-  <path class="tempo" d="M184,220 L204,220"/>
-  <line class="boden" x1="92" y1="230" x2="208" y2="230"/>
-  <text class="st" x="150" y="262">schnelle, leichte Füße auf den Ballen</text>
+  <defs><marker id="p032" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"/></marker><marker id="g032" viewBox="0 0 10 10" markerWidth="3.8" markerHeight="3.8" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"/></marker></defs>
+  <path class="s-feld" d="M6,250L294,250L222.9,116.7L77.1,116.7Z"/><path class="s-linie" d="M6,250L294,250L222.9,116.7L77.1,116.7Z"/>
+  <ellipse class="s-basis" cx="150" cy="169.5" rx="18.2" ry="5.6"/>
+  <path class="s-kegel" d="M260.9,228.3Q267.7,230.5 274.5,228.3L269.3,217.2Q267.7,215.4 266.1,217.2Z"/>
+  <path class="s-kegel" d="M88.7,125.9Q92.7,127.2 96.7,125.9L94.3,119.5Q92.7,117.7 91.1,119.5Z"/>
+  <path class="s-kegel" d="M203.3,125.9Q207.3,127.2 211.3,125.9L208.9,119.5Q207.3,117.7 205.7,119.5Z"/>
+  <path class="s-wegv" d="M132.5,179.9 L44.3,222.3" marker-end="url(#g032)"/>
+  <ellipse class="s-druck" cx="129.4" cy="181.3" rx="3.5" ry="1.3"/>
+  <ellipse class="s-druck" cx="117.5" cy="195.3" rx="3.7" ry="1.4"/>
+  <ellipse class="s-druck" cx="105.5" cy="193.1" rx="3.9" ry="1.5"/>
+  <ellipse class="s-druck" cx="93.6" cy="207" rx="4.1" ry="1.5"/>
+  <ellipse class="s-druck" cx="81.7" cy="204.8" rx="4.3" ry="1.6"/>
+  <ellipse class="s-druck" cx="69.8" cy="218.8" rx="4.5" ry="1.7"/>
+  <ellipse class="s-druck" cx="57.8" cy="216.5" rx="4.6" ry="1.7"/>
+  <path class="s-weg" d="M54.3,234.3 Q 113.2,228.3 146.9,189.7" marker-end="url(#p032)"/>
+  <path class="s-kegel" d="M25.5,228.3Q32.3,230.5 39.1,228.3L33.9,217.2Q32.3,215.4 30.7,217.2Z"/>
+  <ellipse class="s-schw" cx="156.2" cy="170.5" rx="30.9" ry="5"/><ellipse class="s-sch" cx="156.2" cy="170.5" rx="19.8" ry="3.1"/>
+  <g class="s-f"><path d="M155.1,128.8L165.1,134.1A5.2,5.2 0 1 0 169.8,124.9L159.6,119.9A5,5 0 0 0 155.1,128.8Z"/><path d="M165.5,134.3L182.2,141.7A3.6,3.6 0 0 0 185.7,135.3L170.4,125.2A5.2,5.2 0 1 0 165.5,134.3Z"/><path d="M181.1,135.8L175.9,141A4.1,4.1 0 1 0 182.1,146.4L186.6,140.5A3.6,3.6 0 0 0 181.1,135.8Z"/><path d="M175.1,142.2L168.4,156.4A2.1,2.1 0 0 0 171.9,158.7L182,146.5A4.1,4.1 0 1 0 175.1,142.2Z"/><path d="M169.3,155.5L167.2,156.6A2.6,2.6 0 1 0 170.4,160.5L171.9,158.7A2.1,2.1 0 0 0 169.3,155.5Z"/><path d="M167.2,161.2L176.6,166.2A2.4,2.4 0 0 0 178.9,161.9L169.7,156.7A2.6,2.6 0 1 0 167.2,161.2Z"/><path d="M176.9,166.3L181.5,168A1.7,1.7 0 0 0 183.2,165.1L179.2,162.1A2.4,2.4 0 1 0 176.9,166.3Z"/></g>
+  <g class="s-f"><path d="M171.1,97L173.6,115.2A2.6,2.6 0 0 0 178.7,114.9L179.1,96.5A4,4 0 1 0 171.1,97Z"/><path d="M174.5,116.7L177.3,119.3A3,3 0 1 0 180.8,114.5L177.4,112.6A2.6,2.6 0 0 0 174.5,116.7Z"/><path d="M177.9,119.7L185.8,123.9A1.8,1.8 0 0 0 187.9,121L181.4,114.9A3,3 0 1 0 177.9,119.7Z"/></g>
+  <g class="s-f"><path d="M185.3,123.4L186.4,124.8A2.4,2.4 0 1 0 188.7,120.9L187,120.6A1.8,1.8 0 0 0 185.3,123.4Z"/><path d="M187.8,125.6L190.5,126.2A1.5,1.5 0 0 0 191.9,123.8L190,121.7A2.3,2.3 0 1 0 187.8,125.6Z"/></g>
+  <g class="s-k"><path d="M174.7,96.3C176.5,97.8 176.9,98.8 177.6,100.7C178.4,102.7 179.2,103.5 178.6,106C177.9,108.5 176.9,110.3 174.4,113.2C171.9,116.2 168.6,117.6 165.9,120.9C163.2,124.2 162.8,127 160.9,129.5C158.9,132.1 158.1,132.5 156.2,133.6C154.3,134.6 153.1,134.9 151.4,134.7C149.8,134.6 148.9,134.1 147.9,132.8C146.9,131.5 146.6,130.3 146.6,128.2C146.6,126.2 146.6,125.2 148,122.4C149.4,119.5 151.9,117.8 153.6,114C155.4,110.2 155.5,107 156.6,103.3C157.8,99.6 158.1,97.5 159.5,95.4C160.9,93.3 161.8,93.4 163.6,92.9C165.4,92.4 166.4,92.2 168.6,92.8C170.8,93.5 172.9,94.7 174.7,96.3Z"/><path d="M147.5,130.7L154.2,137.5A5.2,5.2 0 1 0 161.4,130.1L154.5,123.6A5,5 0 0 0 147.5,130.7Z"/><path d="M154.3,137.6L165.6,147.9A3.6,3.6 0 0 0 171,143.1L162,130.8A5.2,5.2 0 1 0 154.3,137.6Z"/><path d="M165.6,142.6L159.7,148.1A4.1,4.1 0 1 0 165.6,153.8L170.8,147.6A3.6,3.6 0 0 0 165.6,142.6Z"/><path d="M158.9,149.1L150.4,164.3A2.1,2.1 0 0 0 153.8,166.7L165.5,153.9A4.1,4.1 0 1 0 158.9,149.1Z"/><path d="M151.2,163.5L149.5,164.5A2.6,2.6 0 1 0 153.1,168L154.1,166.4A2.1,2.1 0 0 0 151.2,163.5Z"/><path d="M149.2,168.6L156,174.6A2.4,2.4 0 0 0 159.2,171L152.6,164.8A2.6,2.6 0 1 0 149.2,168.6Z"/><path d="M156.3,174.8L159.8,177A1.7,1.7 0 0 0 162.1,174.5L159.5,171.2A2.4,2.4 0 1 0 156.3,174.8Z"/></g>
+  <g class="s-k"><ellipse cx="172.8" cy="84.8" rx="6.5" ry="8.1" transform="rotate(1.8 172.8 84.8)"/><path d="M174.4,93L176.2,92.9A2.1,2.1 0 0 0 178,91.5L178.6,89.9A4.8,4.8 0 1 0 174.4,93Z"/></g>
+  <g class="s-x"><path d="M157.4,102.3L156.1,124.3A2.6,2.6 0 0 0 161.2,125L165.3,103.2A4,4 0 1 0 157.4,102.3Z"/><path d="M157.9,127L163.3,128.5A3,3 0 1 0 164.5,122.7L159,121.9A2.6,2.6 0 0 0 157.9,127Z"/><path d="M163.8,128.6L176.7,130.2A1.8,1.8 0 0 0 177.4,126.8L165,122.8A3,3 0 1 0 163.8,128.6Z"/><path d="M176.2,130.1L179,131.3A2.7,2.7 0 1 0 179.5,126.1L176.5,126.7A1.8,1.8 0 0 0 176.2,130.1Z"/></g>
+  <g class="s-k"><path d="M157.4,102.3L156.1,124.3A2.6,2.6 0 0 0 161.2,125L165.3,103.2A4,4 0 1 0 157.4,102.3Z"/><path d="M157.9,127L163.3,128.5A3,3 0 1 0 164.5,122.7L159,121.9A2.6,2.6 0 0 0 157.9,127Z"/><path d="M163.8,128.6L176.7,130.2A1.8,1.8 0 0 0 177.4,126.8L165,122.8A3,3 0 1 0 163.8,128.6Z"/></g>
+  <path class="s-rf" d="M209.8,113.3C209.6,113.2 209.4,113.2 209.2,113.3C209,113.3 208.8,113.3 208.5,113.4C208.2,113.4 207.9,113.5 207.6,113.6C207.3,113.7 206.9,113.8 206.5,113.9C206.2,114 205.8,114.1 205.4,114.3C205,114.4 204.5,114.6 204.1,114.7C203.7,114.9 203.2,115.1 202.8,115.3C202.4,115.5 201.9,115.7 201.5,115.9C201,116.1 200.6,116.3 200.1,116.5C199.7,116.7 199.3,116.9 198.8,117.2C198.4,117.4 198,117.6 197.6,117.8C197.2,118 196.9,118.3 196.5,118.5C196.1,118.7 195.8,118.9 195.5,119.1C195.2,119.3 194.9,119.5 194.7,119.7C194.4,119.9 194.2,120.1 194,120.2C193.8,120.4 193.7,120.5 193.5,120.7C193.4,120.8 193.3,121 193.3,121.1C193.2,121.2 193.2,121.3 193.2,121.4C193.2,121.4 193.3,121.5 193.4,121.6C193.5,121.6 193.6,121.6 193.7,121.7C193.9,121.7 194.1,121.7 194.3,121.7C194.5,121.6 194.8,121.6 195,121.5C195.3,121.5 195.6,121.4 195.9,121.3C196.3,121.3 196.6,121.2 197,121C197.4,120.9 197.7,120.8 198.2,120.6C198.6,120.5 199,120.3 199.4,120.2C199.8,120 200.3,119.8 200.7,119.6C201.2,119.4 201.6,119.2 202.1,119C202.5,118.8 203,118.6 203.4,118.4C203.8,118.2 204.3,118 204.7,117.8C205.1,117.5 205.5,117.3 205.9,117.1C206.3,116.9 206.7,116.7 207,116.5C207.4,116.2 207.7,116 208,115.8C208.3,115.6 208.6,115.4 208.8,115.2C209.1,115.1 209.3,114.9 209.5,114.7C209.7,114.5 209.8,114.4 210,114.2C210.1,114.1 210.2,114 210.2,113.9C210.3,113.7 210.3,113.6 210.3,113.6C210.3,113.5 210.2,113.4 210.1,113.4C210.1,113.3 209.9,113.3 209.8,113.3Z"/><path class="s-rs" d="M196.8,121L209.7,114.2M194.3,121.4L209.2,113.6M193.8,120.7L206.8,113.9M200.1,119.8L195.4,119.3M204.4,117.7L199.1,117.2M208.1,115.6L203.5,115.1"/><path class="s-rh" d="M195.4,121.5L193.2,121.9L193,121.3"/><path class="s-rsch" d="M186,125.7L193.2,121.9"/><path class="s-rr" d="M209.8,113.3C209.6,113.2 209.4,113.2 209.2,113.3C209,113.3 208.8,113.3 208.5,113.4C208.2,113.4 207.9,113.5 207.6,113.6C207.3,113.7 206.9,113.8 206.5,113.9C206.2,114 205.8,114.1 205.4,114.3C205,114.4 204.5,114.6 204.1,114.7C203.7,114.9 203.2,115.1 202.8,115.3C202.4,115.5 201.9,115.7 201.5,115.9C201,116.1 200.6,116.3 200.1,116.5C199.7,116.7 199.3,116.9 198.8,117.2C198.4,117.4 198,117.6 197.6,117.8C197.2,118 196.9,118.3 196.5,118.5C196.1,118.7 195.8,118.9 195.5,119.1C195.2,119.3 194.9,119.5 194.7,119.7C194.4,119.9 194.2,120.1 194,120.2C193.8,120.4 193.7,120.5 193.5,120.7C193.4,120.8 193.3,121 193.3,121.1C193.2,121.2 193.2,121.3 193.2,121.4C193.2,121.4 193.3,121.5 193.4,121.6C193.5,121.6 193.6,121.6 193.7,121.7C193.9,121.7 194.1,121.7 194.3,121.7C194.5,121.6 194.8,121.6 195,121.5C195.3,121.5 195.6,121.4 195.9,121.3C196.3,121.3 196.6,121.2 197,121C197.4,120.9 197.7,120.8 198.2,120.6C198.6,120.5 199,120.3 199.4,120.2C199.8,120 200.3,119.8 200.7,119.6C201.2,119.4 201.6,119.2 202.1,119C202.5,118.8 203,118.6 203.4,118.4C203.8,118.2 204.3,118 204.7,117.8C205.1,117.5 205.5,117.3 205.9,117.1C206.3,116.9 206.7,116.7 207,116.5C207.4,116.2 207.7,116 208,115.8C208.3,115.6 208.6,115.4 208.8,115.2C209.1,115.1 209.3,114.9 209.5,114.7C209.7,114.5 209.8,114.4 210,114.2C210.1,114.1 210.2,114 210.2,113.9C210.3,113.7 210.3,113.6 210.3,113.6C210.3,113.5 210.2,113.4 210.1,113.4C210.1,113.3 209.9,113.3 209.8,113.3Z"/><path class="s-rg" d="M176.1,130.9L186,125.7"/>
+  <g class="s-k"><path d="M176.2,130.1L179,131.3A2.7,2.7 0 1 0 179.5,126.1L176.5,126.7A1.8,1.8 0 0 0 176.2,130.1Z"/></g>
+  <ellipse class="s-druck" cx="157.6" cy="177.1" rx="6" ry="1.9"/>
+  <ellipse class="s-druck" cx="177.7" cy="168.4" rx="6" ry="1.9"/>
+  <text class="st" x="150" y="272">schnelle, leichte Füße auf den Ballen</text>
 </svg>

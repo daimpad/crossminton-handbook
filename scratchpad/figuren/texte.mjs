@@ -24,6 +24,12 @@ export const TEXTE = {
     fr: { aria: 'Le revers : poids sur le pied côté raquette, le buste s\'ouvre vers la direction de frappe, la raquette passe tout près du corps vers l\'avant.', cap: 'tout près du corps · frappe devant' },
     pl: { aria: 'Bekhend: ciężar na stopie po stronie rakiety, tułów otwiera się w kierunku uderzenia, rakieta prowadzona blisko ciała do przodu.', cap: 'blisko ciała · punkt kontaktu z przodu' },
   },
+  'G-007': {
+    de: { aria: 'Beinarbeit, Bild 1: der Split-Step in der Landung nach einem kleinen, federnden Hüpfer. Beide Fußballen setzen gleichzeitig auf, die Fersen bleiben oben, die Knie sind tief gebeugt. Winkel am Boden zeigen: aus dieser Landung geht es in jede Richtung.', cap: 'kleiner federnder Hüpfer · auf die Ballen' },
+    en: { aria: 'Footwork, image 1: the split-step, landing after a small, springy hop. Both balls of the feet touch down at the same time, the heels stay up, the knees are deeply bent. Chevrons on the ground show that from this landing you can go in any direction.', cap: 'a small springy hop · onto the balls' },
+    fr: { aria: 'Jeu de jambes, image 1 : le split-step, à la réception d\'un petit saut élastique. L\'avant des deux pieds se pose en même temps, les talons restent levés, les genoux sont bien fléchis. Des chevrons au sol montrent que de cette réception on part dans toutes les directions.', cap: 'petit saut élastique · sur l\'avant des pieds' },
+    pl: { aria: 'Praca nóg, obraz 1: split-step w chwili lądowania po małym, sprężystym podskoku. Przodostopia obu stóp dotykają podłoża jednocześnie, pięty zostają w górze, kolana są mocno ugięte. Znaki na podłożu pokazują, że z tego lądowania ruszasz w każdym kierunku.', cap: 'mały sprężysty podskok · na przodostopie' },
+  },
   'G-008': {
     de: { aria: 'Beinarbeit, Bild 2: der Bewegungskreislauf — mit einem Ausfallschritt in die Ecke den Speeder spielen und auf gebogenem Weg zurück zur zentralen Position in der Mitte.', cap: 'zur Ecke ausfallen — zurück zur Mitte' },
     en: { aria: 'Footwork, image 2: the movement cycle — lunge into the corner to play the speeder and return on a curved path to the central position in the middle.', cap: 'lunge to the corner — back to the middle' },
@@ -47,6 +53,12 @@ export const TEXTE = {
     en: { aria: 'The jump smash: the player hits at the top of the jump, legs in a scissor position, and drives the speeder steeply forward and down. Faint beside it, the soft landing on the balls of both feet, ready to play on.', cap: 'in the jump · steeply downward' },
     fr: { aria: 'Le smash sauté : le joueur frappe au sommet du saut, jambes en ciseaux, et envoie le speeder raide vers l\'avant et vers le bas. En pâle à côté, la réception souple sur l\'avant des deux pieds, prêt à rejouer.', cap: 'en sautant · raide vers le bas' },
     pl: { aria: 'Smecz z wyskoku: gracz trafia w najwyższym punkcie wyskoku, nogi w nożycach, i bije speedera stromo do przodu w dół. Obok blado miękkie lądowanie na przodostopiu obu stóp, w gotowości do dalszej gry.', cap: 'z wyskoku · stromo w dół' },
+  },
+  'G-032': {
+    de: { aria: 'Schnelle Füße: aus der Landung des Split-Steps in der Feldmitte mit kurzen, schnellen Schritten zu einem Hütchen in der Ecke und zurück zur Mitte. Viele kleine Bodenkontakte statt weniger großer Schritte.', cap: 'schnelle, leichte Füße auf den Ballen' },
+    en: { aria: 'Fast feet: from the split-step landing in the middle of the court, short quick steps to a cone in the corner and back to the middle. Many small ground contacts instead of a few big steps.', cap: 'fast, light feet on the balls' },
+    fr: { aria: 'Pieds rapides : depuis la réception du split-step au centre du terrain, de petits pas rapides jusqu\'à un plot dans le coin, puis retour au centre. Beaucoup de petits appuis plutôt que quelques grands pas.', cap: 'pieds rapides et légers sur l\'avant' },
+    pl: { aria: 'Szybkie stopy: z lądowania po split-stepie na środku pola krótkimi, szybkimi krokami do pachołka w rogu i z powrotem na środek. Wiele małych kontaktów z podłożem zamiast kilku dużych kroków.', cap: 'szybkie, lekkie stopy na przodostopiu' },
   },
   'G-043': {
     de: { aria: 'Verständigung im Paar: zwei Doppelpartner hintereinander im eigenen Feld, beide mit Blick zum Gegner. Der Rückraumspieler ruft „Meiner!“ und nimmt den Speeder, der Angriffsspieler vorn lässt ihn vorbei.', cap: '„Meiner!“ · kurz, laut, eindeutig', ruf: 'Meiner!' },
