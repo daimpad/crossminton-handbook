@@ -124,7 +124,7 @@ Die App läuft vollständig im Browser — keine Anmeldung, keine Installation n
 
 Der Fortschritt bleibt auf dem eigenen Gerät (lokal im Browser) und wird nirgendwo hochgeladen. Es gibt kein Konto, das man anlegen müsste.
 
-Dazu **63 Diagramme** — Schlagbewegungen, Feldpositionen, Laufwege, Doppel-Formationen — als Vektorgrafiken, die sich an helles und dunkles Design anpassen.
+Dazu **67 Grafiken** — Schlagbewegungen, Feldpositionen, Laufwege, Doppel-Formationen, die Speeder-Konstruktion — als Vektorgrafiken, die sich an helles und dunkles Design anpassen und in allen vier Sprachen beschriftet sind.
 
 ### Bedienbar auch ohne Maus
 

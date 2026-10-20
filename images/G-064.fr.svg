@@ -12,8 +12,8 @@
     .pfeil{fill:var(--tinte-3,#656f7e)}
     .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
-    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif}
-    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>

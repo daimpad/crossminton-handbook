@@ -66,9 +66,9 @@ Darüber liegen orthogonale Achsen: `spielform` (Doppel über alle drei Stufen, 
 
 ## Grafiksystem
 
-Alle **63 Diagramme** sind hand-gezeichnetes Inline-SVG, durchnummeriert (`G-001` …) und im Katalog [`../images/grafik-prompts.md`](../images/grafik-prompts.md) dokumentiert. Sie nutzen ausschließlich CI-Tokens (`var(--tinte)`, `var(--primaer)`) und kippen darum automatisch mit dem Hell-/Dunkel-Umschalter.
+Alle **67 Grafiken** sind Inline-SVG, durchnummeriert (`G-001` …) und im Katalog [`../images/grafik-prompts.md`](../images/grafik-prompts.md) dokumentiert: **32 Personengrafiken** im Stil „Dynamische Silhouette“, erzeugt von einem Figurengenerator in `scratchpad/figuren/` (Strategie in [`grafik-strategie.md`](grafik-strategie.md)), und **35 hand-gezeichnete Diagramme**. Sie nutzen ausschließlich CI-Tokens (Farbrollen und Kontraste in [`ci.md`](ci.md)) und kippen darum automatisch mit dem Hell-/Dunkel-Umschalter. Geprüft werden sie statisch von `scripts/grafik-gate.mjs` (Test [26]) und im Browser von `scratchpad/figuren/gate.mjs` und `scratchpad/textgrenzen.mjs`.
 
-Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht rendert zuerst das PNG als sofort sichtbaren Fallback und tauscht es nach dem Rendern gegen das Inline-SVG. Beschriftungen sind übersetzt — zu jeder Grafik existiert ein `G-XXX.<sprache>.svg`/`.png`-Zwilling für `en`, `fr`, `pl`. Integration über das optionale Feld `grafik: ["G-XXX"]` je Baustein (Liste, Sequenzen tragen mehrere); 61 der Grafiken hängen an einem Baustein, zwei sind Referenzgrafiken im Regeln-Reiter.
+Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht rendert zuerst das PNG als sofort sichtbaren Fallback und tauscht es nach dem Rendern gegen das Inline-SVG. Beschriftungen sind übersetzt — zu jeder Grafik existiert ein `G-XXX.<sprache>.svg`/`.png`-Zwilling für `en`, `fr`, `pl`. Integration über das optionale Feld `grafik: ["G-XXX"]` je Baustein (Liste, Sequenzen tragen mehrere); 65 der Grafiken hängen an einem Baustein (59 Bausteine, Sequenzen tragen mehrere), zwei sind Referenzgrafiken im Regeln-Reiter.
 
 ## Fortschritt, Werkzeuge, Offline
 

@@ -42,8 +42,8 @@ const STIL = `  <style>
     .pfeil{fill:var(--tinte-3,#656f7e)}
     .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
-    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif}
-    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -181,9 +181,9 @@ ${stiele.join('\n')}
   <text class="ico" x="${MX}" y="293">ICO 47–53</text>
 
   <!-- Kragen -->
-  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L52,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
-  <text class="teilr" x="48" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
-  <text class="teilr" x="48" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
+  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L60,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
+  <text class="teilr" x="56" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
+  <text class="teilr" x="56" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
 
   <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
   <path class="hilfslinie" d="M${MX - R_ENDRING},${Y_KRAGEN_UNTEN} L26,${Y_KRAGEN_UNTEN}"/>
@@ -233,12 +233,13 @@ ${stiele.join('\n')}
 
   <path class="masz" d="M${MX},${Y_KAPPE_OBEN - 2} L${MX + 46},34"/>
   <text class="teil" x="232" y="30">Loch ⌀ 4</text>
-  <path class="masz" d="M${MX + 34},${Y_KRAGEN_OBEN + 10} L246,${Y_KRAGEN_OBEN + 4}"/>
-  <text class="teil" x="250" y="${Y_KRAGEN_OBEN + 8}">Endring ⌀ 19</text>
-  <path class="masz" d="M${MX + rk},${Y_KRAGEN_UNTEN - 6} L246,${Y_KRAGEN_UNTEN + 16}"/>
-  <text class="teil" x="250" y="${Y_KRAGEN_UNTEN + 20}">Pressring</text>
-  <path class="masz" d="M${MX + 50},${(Y_KRAGEN_UNTEN + Y_RAND) / 2} L246,${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 12}"/>
-  <text class="teil" x="250" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 16}">Querrippe</text>
+  <path class="masz" d="M${MX + 34},${Y_KRAGEN_OBEN + 10} L234,${Y_KRAGEN_OBEN + 4}"/>
+  <text class="teil" x="238" y="${Y_KRAGEN_OBEN + 8}">Endring</text>
+  <text class="teil" x="238" y="${Y_KRAGEN_OBEN + 21}">⌀ 19</text>
+  <path class="masz" d="M${MX + rk},${Y_KRAGEN_UNTEN - 6} L234,${Y_KRAGEN_UNTEN + 16}"/>
+  <text class="teil" x="238" y="${Y_KRAGEN_UNTEN + 20}">Pressring</text>
+  <path class="masz" d="M${MX + 50},${(Y_KRAGEN_UNTEN + Y_RAND) / 2} L234,${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 12}"/>
+  <text class="teil" x="238" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 16}">Querrippe</text>
 
   <path class="masz" d="M${MX - rk - 12},${Y_KRAGEN_UNTEN + 34} L74,${Y_KRAGEN_UNTEN + 22}"/>
   <text class="teil" x="6" y="${Y_KRAGEN_UNTEN + 26}">Längsstiel</text>
