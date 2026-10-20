@@ -21,7 +21,7 @@ for (const id of ids.length ? ids : IDS()) {
   const befunde = [], hinweise = [];
   for (const s of SPRACHEN) {
     const r = baue(id, s);
-    if (s === 'de') for (const w of r.figuren.flatMap((fg) => fg.warnungen)) hinweise.push(`Modell: ${w}`);
+    if (s === 'de') for (const w of r.figuren.flatMap((fg) => fg.warnungen)) (w.startsWith('Gesundheitsrahmen') ? befunde : hinweise).push(`Modell: ${w}`);
     await seite.setContent(`<!doctype html><meta charset="utf8"><style>${STELLVERTRETER}</style><body style="margin:0">${r.datei}</body>`);
     const m = await seite.evaluate(() => {
       const svg = document.querySelector('svg'); const [, , w, h] = svg.getAttribute('viewBox').split(' ').map(Number);

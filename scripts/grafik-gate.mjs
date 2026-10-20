@@ -125,7 +125,7 @@ export async function pruefeGrafiken({ wurzel = WURZEL, erzeuge = null } = {}) {
   return { ids, fehler, warnungen };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const { baue } = await import('../scratchpad/figuren/motive.mjs');
   const { ids, fehler, warnungen } = await pruefeGrafiken({ erzeuge: (id, s) => baue(id, s).datei });
   for (const w of warnungen) console.log(`  Hinweis: ${w}`);

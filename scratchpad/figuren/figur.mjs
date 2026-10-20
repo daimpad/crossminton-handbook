@@ -295,6 +295,21 @@ export function figur(pose) {
     const d = Math.min(abstandStrecke(kopfM, a.S2, a.E2) - P.rSchulter * H * g, abstandStrecke(kopfM, a.E2, a.W2) - P.rEllbogen * H * g);
     if (d < kopfR2 * 0.5) warnungen.push(`Arm ${s} verdeckt den Kopf (Abstand ${f(d)} < ${f(kopfR2 * 0.5)})`);
   }
+  // Gesundheitsrahmen (docs/grafik-strategie.md, Abschnitt 6): Kniewinkel nie unter 90°, das Knie
+  // ragt in Blickrichtung nicht über die Zehenspitze. Gilt für jedes Bein mit Bodenkontakt; in der
+  // Luft (art 'luft') darf ein Bein angezogen sein. scratchpad/figuren/gate.mjs bricht daran ab.
+  if ((pose.art ?? 'stehend') !== 'luft') {
+    for (const s of ['R', 'L']) {
+      const b = beine[s], a1 = sub(b.H, b.K), a2 = sub(b.A, b.K);
+      const kw = (Math.acos(Math.max(-1, Math.min(1, dot(a1, a2) / (len(a1) * len(a2))))) * 180) / Math.PI;
+      if (kw < 90) warnungen.push(`Gesundheitsrahmen: Kniewinkel ${s} ${f(kw)}° < 90°`);
+      // Ein nachgezogenes Bein (Sprunggelenk deutlich hinter der Hüfte, wie das hintere Bein im
+      // Drive) hat sein Knie zwangsläufig vor der Fußspitze; die Regel meint das belastete Bein.
+      const nachgezogen = dot(sub(b.A, b.H), becken.F) < -0.4;
+      const vor = dot(sub(b.K, b.spitze), becken.F);
+      if (vor > 0.05 && !nachgezogen) warnungen.push(`Gesundheitsrahmen: Knie ${s} ${f(vor)} H vor der Fußspitze`);
+    }
+  }
   // Schwerpunkt grob: zwischen Hüfte und Halsansatz, näher an der Hüfte (Beine und Rumpf).
   const fussX = ['R', 'L'].flatMap((s) => [proj(beine[s].ferse)[0], proj(beine[s].spitze)[0]]);
   const sx = lerp(proj(HM), proj(N), 0.3)[0];
@@ -343,7 +358,9 @@ export function schlaeger3d({ griff, achse, flaeche, proj, H, geist = false }) {
   const unten = add(mitte, mul(achse, -a * 0.94));
   const hals = proj(at(0.98)), hl = proj(add(unten, mul(quer, -b * 0.4))), hr = proj(add(unten, mul(quer, b * 0.4)));
   const ende = proj(at(-0.3)), griffEnde = proj(at(0.44));
-  const p = geist ? 's-g' : 's-r';
+  // geist: true = blasse Begleitphase einer Geisterfigur; 'kontur' = eine Phase, die allein die
+  // Aussage trägt (Ausholen, Schwungweg) — dann volle Kontur mit 3:1 (Leitfaden, Kontrast).
+  const p = geist === 'kontur' ? 's-z' : geist ? 's-g' : 's-r';
   return [
     geist ? '' : `<path class="s-rf" d="${ellipse()}"/>`,
     saiten ? `<path class="s-rs" d="${saiten}"/>` : '',
@@ -377,6 +394,10 @@ export const STIL = {
   's-gh': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.45;stroke-linecap:round;stroke-linejoin:round',
   's-gsch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.2;opacity:.45;stroke-linecap:round',
   's-gg': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:4;opacity:.35;stroke-linecap:round',
+  's-zr': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;opacity:.85',
+  's-zh': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.85;stroke-linecap:round;stroke-linejoin:round',
+  's-zsch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.2;opacity:.85;stroke-linecap:round',
+  's-zg': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:4;opacity:.7;stroke-linecap:round',
   's-korb': 'fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round',
   's-kappe': 'fill:var(--speeder-kappe,#e2402a)',
   's-sch': 'fill:var(--schatten-boden,#16202b2e)',
@@ -384,8 +405,10 @@ export const STIL = {
   's-spur': `fill:${AKZ};opacity:.18`,
   's-bahn': `fill:none;stroke:${AKZ};stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round`,
   's-bahn2': `fill:none;stroke:${AKZ};stroke-width:2.2;stroke-dasharray:6 5;stroke-linecap:round`,
+  's-bahnz': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round',
   's-bahng': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:.1 5.5;stroke-linecap:round',
   's-weg': `fill:none;stroke:${AKZ};stroke-width:3;stroke-dasharray:8 6;stroke-linecap:round`,
+  's-wegg': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-dasharray:8 6;stroke-linecap:round',
   's-wegv': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round',
   's-blick': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-dasharray:.1 5;stroke-linecap:round',
   's-mk': `fill:${AKZ}`,
@@ -410,6 +433,14 @@ export const STIL = {
   's-rot': `fill:none;stroke:${AKZ};stroke-width:2.6;stroke-linecap:round`,
   's-x3': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round',
   's-tempo': `fill:none;stroke:${AKZ};stroke-width:2;stroke-linecap:round;opacity:.5`,
+  's-chev': `fill:none;stroke:${AKZ};stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round`,
+  's-kegel': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round',
+  's-tafel': 'fill:var(--flaeche,#ffffff);stroke:var(--tinte-3,#656f7e);stroke-width:1.6',
+  's-zahl': 'fill:var(--tinte,#16202b);font:800 15px/1 system-ui,sans-serif;text-anchor:middle',
+  's-ring': `fill:none;stroke:${AKZ};stroke-width:2.4`,
+  's-strich': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.2;stroke-linecap:round',
+  's-bruch': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round',
+  's-fern': 'opacity:.55',
   's-schnitt': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.2;stroke-linecap:round',
   's-ag0': 'stop-color:var(--tinte,#16202b);stop-opacity:1',
   's-ag1': 'stop-color:var(--tinte,#16202b);stop-opacity:0',

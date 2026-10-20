@@ -29,6 +29,20 @@ export function spur({ c, r, von, bis, breite = 10, schritte = 28, start = 0.08 
   return `<path class="s-spur" d="M${[...aussen, ...innen.reverse()].map(pt).join('L')}Z"/>`;
 }
 
+// Bewegungsspur entlang einer quadratischen Kurve p0 → p1 (Kontrollpunkt c), zum Ende breiter.
+// Für flache Schwünge, die kein Kreisbogen um die Schulter sind (Drive auf Hüfthöhe).
+export function spurKurve({ p0, c, p1, breite = 10, schritte = 28, start = 0.08 }) {
+  const aussen = [], innen = [];
+  for (let i = 0; i <= schritte; i++) {
+    const t = i / schritte, u = 1 - t;
+    const p = [u * u * p0[0] + 2 * u * t * c[0] + t * t * p1[0], u * u * p0[1] + 2 * u * t * c[1] + t * t * p1[1]];
+    const d = norm([2 * u * (c[0] - p0[0]) + 2 * t * (p1[0] - c[0]), 2 * u * (c[1] - p0[1]) + 2 * t * (p1[1] - c[1])]);
+    const n = [-d[1], d[0]], w = breite * (start + (1 - start) * Math.pow(t, 1.4));
+    aussen.push(add(p, mul(n, w * 0.5))); innen.push(add(p, mul(n, -w * 0.5)));
+  }
+  return `<path class="s-spur" d="M${[...aussen, ...innen.reverse()].map(pt).join('L')}Z"/>`;
+}
+
 // Pfeilspitze als Marker (id wird zur Laufzeit präfixiert, url(#…) zieht vereinzele() mit)
 export const pfeil = (id, kls = 's-mk', g = 4.4) => `<marker id="${id}" viewBox="0 0 10 10" markerWidth="${g}" markerHeight="${g}" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="${kls}"/></marker>`;
 
@@ -75,3 +89,18 @@ export function sprechblase({ c, b, h, spitze, text, schall = true }) {
 // Gebogene Bahn als kubische Kurve, optional mit Pfeil
 export const bahn = (kls, punkte, marker) => `<path class="${kls}" d="M${pt(punkte[0])} C ${punkte.slice(1).map(pt).join(' ')}"${marker ? ` marker-end="url(#${marker})"` : ''}/>`;
 export const strecke = (a, b) => sub(b, a);
+
+// Richtungswinkel am Boden: ein flaches „>" bei p, das in Richtung w (Bildwinkel wie dir()) zeigt.
+// q staucht die Höhe, damit es in der Bodenebene liegt.
+export function winkel({ p, w, g = 6, q = 1 }) {
+  const u = dir(w), n = [-u[1], u[0]];
+  const a = add(p, [(-u[0] * g + n[0] * g) , (-u[1] * g + n[1] * g) * q]);
+  const b = add(p, [(-u[0] * g - n[0] * g), (-u[1] * g - n[1] * g) * q]);
+  return `M${pt(a)}L${pt(p)}L${pt(b)}`;
+}
+
+// Hütchen als Bodenmarke: kleiner Kegel mit runder Spitze, Fuß als flache Ellipse.
+export function huetchen(p, h = 11) {
+  const b = h * 0.62;
+  return `<path class="s-kegel" d="M${f(p[0] - b)},${f(p[1])}Q${f(p[0])},${f(p[1] + b * 0.32)} ${f(p[0] + b)},${f(p[1])}L${f(p[0] + 1.6)},${f(p[1] - h)}Q${f(p[0])},${f(p[1] - h - 1.8)} ${f(p[0] - 1.6)},${f(p[1] - h)}Z"/>`;
+}
