@@ -1,11 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Chaleur : un joueur répartit ses forces par la chaleur, le soleil haut au-dessus de la tête, une bouteille d'eau à côté, posture calme et mesurée.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Chaleur : un joueur répartit ses forces par la chaleur, le soleil haut au-dessus de la tête, un parasol à côté pour les pauses à l'ombre, posture calme et mesurée.">
   <style>
     .fig{fill:none;stroke:var(--tinte,#16202b);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
     .kopf{fill:var(--tinte,#16202b)}
     .sonne{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:3.4;stroke-linecap:round}
     .sonnef{fill:var(--primaer,#38a4f1)}
-    .flasche{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
-    .wasser{fill:var(--primaer,#38a4f1);opacity:.35}
+    .s-schirm{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .s-schirmf{fill:var(--tinte-3,#656f7e);opacity:.18}
+    .s-schatten{fill:var(--tinte-3,#656f7e);opacity:.28}
     .boden{fill:none;stroke:var(--tinte-3,#6b7686);stroke-width:2.6;stroke-dasharray:5 6}
     .st{fill:var(--tinte-3,#6b7686);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
@@ -27,11 +28,12 @@
   <path class="fig" d="M130,128 L150,154"/>
   <path class="fig" d="M130,172 L114,208 L108,242"/>
   <path class="fig" d="M130,172 L146,208 L152,242"/>
-  <!-- Wasserflasche daneben -->
-  <path class="flasche" d="M212,150 L206,160 L206,224 L238,224 L238,160 L232,150 Z"/>
-  <line class="flasche" x1="217" y1="150" x2="217" y2="140"/>
-  <line class="flasche" x1="227" y1="150" x2="227" y2="140"/>
-  <rect class="wasser" x="206" y="186" width="32" height="38"/>
+  <!-- Sonnenschirm daneben: Schatten für die Pausen -->
+  <ellipse class="s-schatten" cx="222" cy="245" rx="36" ry="5"/>
+  <path class="s-schirmf" d="M184,130 Q222,84 260,130 Q250,136 241,130 Q231,136 222,130 Q212,136 203,130 Q193,136 184,130 Z"/>
+  <path class="s-schirm" d="M184,130 Q222,84 260,130 Q250,136 241,130 Q231,136 222,130 Q212,136 203,130 Q193,136 184,130 Z"/>
+  <line class="s-schirm" x1="222" y1="100" x2="222" y2="94"/>
+  <line class="s-schirm" x1="222" y1="130" x2="222" y2="244"/>
   <line class="boden" x1="90" y1="246" x2="250" y2="246"/>
-  <text class="st" x="150" y="274">chaleur · réduire le tempo, boire</text>
+  <text class="st" x="150" y="274">chaleur · ombre, répartir ses forces</text>
 </svg>

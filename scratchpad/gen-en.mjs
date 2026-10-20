@@ -36,7 +36,7 @@ const M = {
   'G-054': { cap: 'playing outdoors · open court', aria: 'Playing outdoors: a player on a court without a net under open sky with a simple ground surface, a relaxed, adaptable stance.' },
   'G-056': { cap: 'against the sun · shield the eyes', aria: 'Sun and glare: a player shields the eyes against a low sun while tracking a high speeder; sun and glare rays in one corner, adjusted head position.' },
   'G-057': { cap: 'wet ground · a wide, secure stance', aria: 'Wet conditions and a secure stance: a player with a widened, cautious stance on damp ground, suggested water droplets and a low, secure centre of gravity.' },
-  'G-058': { cap: 'heat · ease the pace, drink', aria: 'Heat: a player paces themselves in the heat, the sun high overhead, a water bottle nearby, a calm and measured posture.' },
+  'G-058': { cap: 'heat · shade, pace yourself', aria: 'Heat: a player paces themselves in the heat, the sun high overhead, a sunshade nearby for the breaks in the shade, a calm and measured posture.' },
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
