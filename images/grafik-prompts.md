@@ -271,7 +271,7 @@ A single player with a widened, cautious stance on a damp surface, small water d
 
 **G-058** · `images/G-058.png` · `hitze` · Fortgeschritten  
 *Leitgrafik: Hitze*  
-A single player pacing themselves in heat, sun high overhead, a water bottle nearby and a calm, measured posture. Illustrates managing play in heat.
+A single player pacing themselves in heat, sun high overhead, a sunshade nearby for the breaks in the shade, calm and measured posture. Illustrates managing play in heat without any drinking or dosage advice (health frame).
 
 **G-059** · `images/G-059.png` · `verschiedene_boeden` · Fortgeschritten  
 *Leitgrafik: Verschiedene Böden*  

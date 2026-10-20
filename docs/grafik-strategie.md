@@ -1,6 +1,6 @@
 # Personengrafiken neu zeichnen: Strategie
 
-**Stand:** Oktober 2026 · **Status:** Strategie steht. Stilentscheidung, Sofortmaßnahmen und Pilot stehen aus.
+**Stand:** Oktober 2026 · **Status:** Strategie steht, die Kernentscheidungen sind getroffen (Abschnitt 11), die Sofortmaßnahmen sind umgesetzt. Als Nächstes folgen Fundament und Pilot.
 
 Die Grafiken mit Personen wirken banal und teilweise seltsam. Dieses Dokument legt fest, wie alle 32 dieser Grafiken neu entstehen. Der Schwerpunkt liegt auf der Ästhetik. Didaktik, Sachrichtigkeit und die technischen Regeln der App dürfen dabei nicht leiden. Es stützt sich auf drei Grundlagen:
 
@@ -70,13 +70,13 @@ Priorität A heißt: Leitgrafik eines zentralen Beginner-Bausteins oder auffäll
 | Nr. | Baustein | Welle | Prio | Aufwand | Wichtigster Befund |
 | --- | --- | --- | --- | --- | --- |
 | G-001 | griff | Nahaufnahme | A | L | Hand liest sich als Rechen, das V schwebt als umgekehrter Winkel neben dem Zeigefinger |
-| G-002 | grundposition | Bereitschaft | A | M | Schläger hängt kopfüber im Schritt, keine Füße, keine Vorneigung |
+| G-002 | grundposition | Bereitschaft und Beinarbeit | A | M | Schläger hängt kopfüber im Schritt, keine Füße, keine Vorneigung |
 | G-003 | vorhand_drive | Grundschlag | A | L | Treffpunkt auf Schulterhöhe statt Hüfthöhe, Schlagfläche zeigt zur Betrachterin |
 | G-004 | rueckhand | Grundschlag | A | L | Kaum von G-003 zu unterscheiden, tiefer Ellbogen zeigt das Fehlerbild |
 | G-005 | aufschlag | Aufschlag | A | M | Schlägerkopf vor den Oberschenkeln, Speeder ist ein Punkt, Caption mehrdeutig |
 | G-006 | aufschlag | Aufschlag | A | M | Speeder überlappt den Rahmen, Kernaussage „ganz unterhalb der Hand“ nicht prüfbar |
-| G-007 | beinarbeit | Bereitschaft | A | M | Schläger hängt zwischen den Beinen wie in G-002 |
-| G-008 | beinarbeit | Bewegung | A | L | Zentrale Position schwebt in der Luft, Füße schweben über dem Boden |
+| G-007 | beinarbeit | Bereitschaft und Beinarbeit | A | M | Schläger hängt zwischen den Beinen wie in G-002 |
+| G-008 | beinarbeit | Bereitschaft und Beinarbeit | A | L | Zentrale Position schwebt in der Luft, Füße schweben über dem Boden |
 | G-009 | handgelenk_peitsche | Nahaufnahme | B | M | Caption „Unterarm bleibt ruhig“ widerspricht dem Text, der das Eindrehen verlangt |
 | G-010 | ueberkopf_clear | Überkopf | B | M | Bahn landet in der neutralen Zone, Treffpunkt zu weit vorn |
 | G-011 | smash | Überkopf | A | S | Bahn endet etwa 1,5 m vor der Figur, Caption lädt zum Fehlbild ein |
@@ -88,11 +88,11 @@ Priorität A heißt: Leitgrafik eines zentralen Beginner-Bausteins oder auffäll
 | G-019 | tempo_rhythmus_wechsel | Grundschlag | B | S | Unterschied zu G-018 liegt fast nur im Pfeil |
 | G-020 | sprung_smash | Überkopf | B | L | Bahn endet etwa 1,5 m vor der Figur, statt über die 12,8 m zu fliegen |
 | G-022 | konstanz_unter_hoechstdruck | Grundschlag | B | M | Mischansicht aus frontalen Beinen und seitlichem Arm |
-| G-032 | schnelle_fuesse | Bereitschaft | A | M | Schläger hängt aus dem Schritt, Figur fast deckungsgleich mit G-002 |
-| G-033 | beweglichkeit_und_schulter | Bewegung | A | M | Gezeigte Bewegung ist nicht ausführbar, Caption trifft den Text nicht |
-| G-034 | explosivitaet | Bewegung | B | L | Abdruckbein ohne Streckung, Pfeil durch den Oberschenkel |
+| G-032 | schnelle_fuesse | Bereitschaft und Beinarbeit | A | M | Schläger hängt aus dem Schritt, Figur fast deckungsgleich mit G-002 |
+| G-033 | beweglichkeit_und_schulter | Athletik | A | M | Gezeigte Bewegung ist nicht ausführbar, Caption trifft den Text nicht |
+| G-034 | explosivitaet | Athletik | B | L | Abdruckbein ohne Streckung, Pfeil durch den Oberschenkel |
 | G-035 | reaktivkraft_bodenkontakt | Nahaufnahme | A | M | Fuß berührt den Boden nicht, Caption abgeschnitten |
-| G-036 | bewegungsoekonomie | Bewegung | B | L | Die „effiziente“ Figur steht reglos, beide ohne Schläger |
+| G-036 | bewegungsoekonomie | Athletik | B | L | Die „effiziente“ Figur steht reglos, beide ohne Schläger |
 | G-043 | verstaendigung_im_paar | Doppel | A | L | Partner Seite an Seite, Widerspruch zu Regel 7.4/7.5.1 |
 | G-047 | sich_absprechen | Doppel | A | M | Kein Gespräch erkennbar, Nebeneinander wirkt wie Seite an Seite |
 | G-053 | blindes_verstaendnis | Doppel | A | L | Partner laufen parallel seitwärts, das Badminton-Muster |
@@ -290,10 +290,11 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
 
 ## 8. Vorgehen in Phasen
 
-0. **Sofortmaßnahmen**, unabhängig von der Stilentscheidung und als eigener kleiner PR:
-   - G-058: Caption und `aria-label` in allen vier Sprachen ohne Trinkvorgabe, über die bestehenden Skripte;
-   - Druckfehler: Die Druckregel und die übrigen `.kopf`-Regeln in `css/app.css` werden auf die Kopfzeile selbst beschränkt (`header.kopf`), damit die Köpfe der heutigen Figuren im Druck erhalten bleiben;
-   - `CACHE` erhöhen.
+0. **Sofortmaßnahmen** (erledigt, als eigener PR direkt nach der Strategie):
+   - G-058: Ein Sonnenschirm ersetzt die Flasche, Caption und `aria-label` kommen in allen vier Sprachen ohne Trinkvorgabe aus. Die Übersetzungsskripte, `svg-de-quelle.json`, `grafik-de-strings.json` und der Katalogeintrag sind nachgezogen, die PNGs neu in 600 × 600;
+   - Druckfehler: Die Kopfzeilen-Regeln in `css/app.css` lesen `header.kopf` statt `.kopf`. Im Browser bestätigt, dass die Köpfe der Figuren im Druck bleiben und die Kopfzeile hell wie dunkel, mobil wie Desktop unverändert ist;
+   - veraltete Übersetzungsskripte: `gen-fr.mjs` und `gen-pl.mjs` führten für G-039, G-041 und G-052 noch die Badminton-Texte. Ein Lauf hätte die korrigierten Doppelgrafiken zurückgesetzt. Die Einträge spiegeln jetzt den Dateistand, alle drei Skripte laufen ohne Abweichung;
+   - `CACHE` auf v64.
 1. **Entscheidungen** aus Abschnitt 11.
 2. **Fundament:**
    - Generator heben und die Mängel aus Abschnitt 5 beheben: Schatten, Rumpf, Freistellung, Kopf, Kollision, Escaping, Schreiben beim Import;
@@ -313,16 +314,16 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
 
    | Welle | Familie | Grafiken | baut auf |
    | --- | --- | --- | --- |
-   | 1 | Bereitschaft | G-002, G-007, G-032 | Grundpose |
+   | 1 | Bereitschaft und Beinarbeit | G-002, G-007, G-008, G-032 | Grundpose; G-008 kommt fertig aus dem Pilot |
    | 2 | Grundschlag | G-003, G-004, G-012, G-018, G-019, G-022, G-062 | 1 |
    | 3 | Aufschlag | G-005, G-006 | 2 |
-   | 4 | Bewegung und Athletik | G-008, G-033, G-034, G-036 | 1, liefert ausfallen, abspringen, landen |
+   | 4 | Athletik | G-033, G-034, G-036 | 1, liefert abspringen und landen |
    | 5 | Doppel | G-043, G-047, G-053 | 1 und 4, gemeinsame Kamera |
    | 6 | Überkopf und Sprung | G-010, G-011, G-015, G-016, G-017, G-020 | 2 und 4 |
    | 7 | Draußen | G-054, G-056, G-057, G-058 | 1, 2 und das Feld aus 5 |
    | 8 | Nahaufnahmen | G-001, G-009, G-035 | Hand-Modul aus dem Pilot |
 
-5. **Versionierung:** genau ein PR je Schritt, also Sofortmaßnahmen, Fundament, Pilot, je eine Welle und Abschluss. Jeder Grafik-PR erhöht `CACHE` und enthält den Prüfbogen seiner Welle. Ob die Wellen einzeln live gehen oder gesammelt, ist Entscheidung 3 in Abschnitt 11.
+5. **Versionierung:** genau ein PR je Schritt, also Sofortmaßnahmen, Fundament, Pilot, je eine Welle und Abschluss. Jeder Grafik-PR erhöht `CACHE` und enthält den Prüfbogen seiner Welle. Die Wellen gehen einzeln live (Entscheidung 3 in Abschnitt 11). Die Sofortmaßnahmen kamen als eigener PR direkt nach der Strategie.
 6. **Abschluss:**
    - Gate, alle Pflichtprüfungen aus `CLAUDE.md` und ein Browser-Durchlauf nach dem `verify`-Skill in allen vier Sprachen, hell und dunkel, mobil und Desktop, mit gedrosseltem Netz und offline;
    - Dokumentation nachziehen und alle Zahlen neu aus dem Bestand bestimmen, nicht abschreiben:
@@ -351,20 +352,23 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
 | Der Pilot überzeugt nicht | höchstens eine Nachbesserungsrunde, dann einer der drei Wege aus Abschnitt 8 |
 | Die dunklen Figurflächen wirken neben den hellen Diagrammen zu schwer | Kontextbogen in Phase 2; als Ausweichstufe `--tinte-2` für die nahe Seite testen |
 | Badminton-Gewohnheit schleicht sich ein: Seite an Seite, Netz, kurze Bahnen | feste Prüfzeilen gegen Regel 1.3, 7.4 und 7.5.1 bei jeder Doppel- und Schlaggrafik; kein Test fängt das |
-| Alte Übersetzungsskripte überschreiben neue Zwillinge | Einträge löschen, Kennzeichen `data-quelle`, Abbruch der Alt-Skripte |
+| Alte Übersetzungsskripte überschreiben neue Zwillinge | Einträge löschen, Kennzeichen `data-quelle`, Abbruch der Alt-Skripte. Das Risiko ist belegt: für G-039, G-041 und G-052 war es schon eingetreten und ist behoben |
 | Übersetzungen sprengen die Caption | Breite wird in allen vier Sprachen gemessen; Kürzung je Sprache in der Textmap statt Schriftverkleinerung |
 | PNG-Fallback weicht vom SVG ab | Hash in `png-stand.json`, Größenprüfung im statischen Gate, Offline-Prüfung im Durchlauf |
 | Wiederkehrende sehen alte Bilder, oder das Bild springt zurück | `CACHE` in jedem Grafik-PR, `no-cache` für die Grafiken in `.htaccess`, Prüfung mit vorher geladener alter Fassung |
-| Mischstand aus alten und neuen Figuren über Wochen | Entscheidung 3: Wellen einzeln live oder gesammelt |
+| Mischstand aus alten und neuen Figuren über Wochen | bewusst hingenommen (Entscheidung 3). Die Bilder eines Bausteins liegen immer in derselben Welle, eine Sequenz erscheint also nie halb alt, halb neu |
 
 ## 11. Offene Entscheidungen
 
-**Entscheidet die Projektverantwortliche.** Die Empfehlung steht jeweils zuerst.
+**Entschieden** (Oktober 2026):
 
-1. **Stilrichtung:** A Dynamische Silhouette mit den Übernahmen aus B und C (empfohlen). Alternativen sind B oder C pur. Mit A weicht die Grundposition von der Spezifikation ab, die in Anhang B „from the front“ vorsieht, und deren Stilsatz in Abschnitt 10 wird präzisiert. Die Entscheidung schließt deshalb die Anpassung der Spezifikation ein.
-2. **Körpertypen:** zwei Körpertypen im Wechsel, im Doppel zur Unterscheidung der Partner (empfohlen). Alternative ist eine einheitliche, neutral gehaltene Figur.
-3. **Auslieferung:** Die Wellen gehen einzeln live, und ein Mischstand aus alten und neuen Figuren wird hingenommen (empfohlen, weil jede Welle klein und schnell sichtbar bleibt). Alternative ist ein Sammelbranch, der nach der letzten Welle in einem Schritt nach `main` geht.
-4. **Sofortmaßnahmen:** G-058 und der Druckfehler werden sofort behoben (empfohlen). Alternative ist, beides mit der Serie zu erledigen.
+1. **Stilrichtung:** A Dynamische Silhouette mit den Übernahmen aus B und C. Damit weicht die Grundposition von der Spezifikation ab, die in Anhang B „from the front“ vorsieht, und deren Stilsatz in Abschnitt 10 wird präzisiert. Die Anpassung der Spezifikation gehört zum Abschluss.
+2. **Körpertypen:** zwei Körpertypen im Wechsel, im Doppel zur Unterscheidung der Partner.
+3. **Auslieferung:** Die Wellen gehen einzeln live. Ein Mischstand aus alten und neuen Figuren wird für die Dauer der Serie hingenommen.
+4. **Sofortmaßnahmen:** sofort behoben, siehe Abschnitt 8.
+
+**Noch offen.** Bis zur Entscheidung gilt jeweils die Empfehlung, sie steht zuerst.
+
 5. **Alternativtext:** `verbessereGrafiken()` behält das beschreibende `aria-label` der Sprachvariante und ersetzt es nicht mehr durch den kurzen Titel (empfohlen). Die `figcaption` bleibt der Titel. Der Grund für das Überschreiben ist überholt, seit jede Grafik übersetzte Sprachvarianten hat. Alternative ist der heutige Stand, dann genügt im SVG ein kurzes `aria-label`.
 6. **Fachliche Prüfung:** Wer prüft Posen und Grundposition fachlich, etwa eine Trainerin oder ein Trainer? Empfohlen ist eine solche Prüfung am Pilot, insbesondere für G-002 in Dreiviertelansicht mit mittig gehaltenem Schläger.
 7. **Umfang der Caption-Änderungen:** alle zwölf genannten Captions anpassen (empfohlen). Alternative ist, nur die sachlich falschen zu ändern.
