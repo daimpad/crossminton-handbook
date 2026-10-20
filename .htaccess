@@ -60,7 +60,8 @@
   </FilesMatch>
   # Die Grafiken behalten ihren Namen, wenn sie neu gezeichnet werden (G-XXX ist die
   # Identität, nie umbenennen). Ohne Rückfrage sähe ein Besucher die alte Zeichnung,
-  # bis der Browser-Cache abläuft.
+  # bis der Browser-Cache abläuft. Achtung: In der Produktion liefert nginx statische
+  # Dateien direkt aus, dort erreicht diese Regel (wie die für sw.js) heute niemanden.
   <FilesMatch "^G-\d{3}(\.[a-z]{2})?\.(svg|png)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
