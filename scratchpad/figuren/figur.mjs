@@ -151,7 +151,8 @@ function rumpfKontur(N, Hp, H, sinB, cosB, anteilHuefte, k) {
 //   kopf: {neig, dreh} · armR/armL: {ober, unter, hand?, art:'faust'|'offen'|'keine', vor?}
 //   beinR/beinL: {ober, unter, fuss?} · schlaeger: {hand, achse, flaeche}
 //   heben: zusätzliche Höhe über dem Boden in H (Sprung) · ton: 'auto' | 'gleich'
-//   frei: nahe Arme freistellen (Standard true) · geist: als blasse Geisterphase zeichnen
+//   frei: nahe Arme freistellen (Standard true) · geist: true = blasse Geisterphase,
+//     'kontur' = Phase, die eine Aussage trägt: nur der Umriss in --tinte-3 (Leitfaden, Kontrast 3:1)
 //   art: 'stehend' | 'dynamisch' | 'luft' (für die Balance-Prüfung)
 // }
 export function figur(pose) {
@@ -237,7 +238,8 @@ export function figur(pose) {
   const zR = tief(S.R) + tief(HG.R), zL = tief(S.L) + tief(HG.L);
   const gleich = pose.ton === 'gleich' || Math.abs(zR - zL) < 0.35;
   const fern = gleich ? null : zR < zL ? 'R' : 'L';
-  const KN = pose.geist ? 's-gk' : 's-k', KF = pose.geist ? 's-gf' : 's-f';
+  const KN = pose.geist === 'kontur' ? 's-gu' : pose.geist ? 's-gk' : 's-k';
+  const KF = pose.geist === 'kontur' ? 's-gu' : pose.geist ? 's-gf' : 's-f';
   const kls = (s) => (s === fern ? KF : KN);
 
   // Kopf: Ellipse plus Kiefer- und Kinnansatz in Blickrichtung. Ohne Gesicht, aber mit Richtung.
@@ -324,7 +326,12 @@ export function figur(pose) {
   }
 
   return {
-    svg: schichten.join('\n  '), H, proj, warnungen,
+    // Kontur: alle Teile einmal dick in --tinte-3 gestrichen, darüber dieselben Teile in der
+    // Hintergrundfarbe gefüllt — übrig bleibt nur der äußere Umriss, ohne innere Überlappungen.
+    svg: pose.geist === 'kontur'
+      ? schichten.join('\n  ') + '\n  ' + schichten.join('\n  ').replaceAll('class="s-gu"', 'class="s-gi"')
+      : schichten.join('\n  '),
+    H, proj, warnungen,
     punkte: {
       kopf: kopfM, hals: proj(N), huefte: proj(HM), kopfRadius: kopfR2,
       handR: arme.R && proj(arme.R.griff), handL: arme.L && proj(arme.L.griff),
@@ -395,6 +402,8 @@ export const STIL = {
   's-f': 'fill:var(--tinte-2,#5a6675)',
   's-gk': 'fill:var(--tinte-3,#656f7e);opacity:.3',
   's-gf': 'fill:var(--tinte-3,#656f7e);opacity:.2',
+  's-gu': 'fill:var(--tinte-3,#656f7e);stroke:var(--tinte-3,#656f7e);stroke-width:3.2;stroke-linejoin:round',
+  's-gi': 'fill:var(--flaeche-2,#f1f5fb)',
   's-x': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round',
   's-rf': 'fill:var(--primaer,#38a4f1);opacity:.14',
   's-rs': `fill:none;stroke:${AKZ};stroke-width:.8;opacity:.55`,
@@ -465,15 +474,16 @@ export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
 
 // Komplette Datei: nur tatsächlich benutzte Klassen landen im <style>. data-quelle markiert
 // die Datei als generiert — die alten Übersetzungsskripte (gen-en/fr/pl) brechen davor ab.
-export function datei({ aria, caption, captionY, inhalt, defs = '' }) {
+// breite: nur wo zwei Felder nebeneinander bei H ≥ 20 nicht in 300 passen (G-036); nahe quadratisch halten
+export function datei({ aria, caption, captionY, inhalt, defs = '', breite = 300 }) {
   const alles = inhalt + defs;
   const benutzt = Object.entries(STIL).filter(([k]) => k === 'st' || new RegExp(`class="${k}"`).test(alles));
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="${esc(aria)}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breite} 300" role="img" data-quelle="figuren" aria-label="${esc(aria)}">
   <style>
 ${benutzt.map(([k, v]) => `    .${k}{${v}}`).join('\n')}
   </style>
 ${defs ? `  <defs>${defs}</defs>\n` : ''}  ${inhalt}
-  <text class="st" x="150" y="${captionY}">${esc(caption)}</text>
+  <text class="st" x="${breite / 2}" y="${captionY}">${esc(caption)}</text>
 </svg>
 `;
 }

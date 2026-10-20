@@ -8,7 +8,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { figur, datei, buehne, schlaeger3d, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len } from './figur.mjs';
+import { figur, datei, buehne, schlaeger3d, add, sub, mul, lerp, norm, dot, f, pt, winkel2d, esc, len, P } from './figur.mjs';
 import { speeder, schatten, spur, spurKurve, pfeil, druck, feld, feldProfil, sprechblase, winkel, huetchen } from './bauteile.mjs';
 import { G001, G009 } from './hand.mjs';
 import { TEXTE, SPRACHEN } from './texte.mjs';
@@ -93,6 +93,20 @@ const geistSchlaeger = (fg, achse, flaeche) => {
 // Taktleiste: kleine Speeder auf einer Linie — gleichmäßig (schneller Takt) oder mit Lücke (Taktbruch)
 const taktleiste = (xs, y) => `<path class="s-boden" d="M${f(xs[0] - 16)},${f(y + 5)}L${f(xs[xs.length - 1] + 16)},${f(y + 5)}"/>` +
   xs.map((x) => speeder({ p: [x, y], winkel: 90, s: 0.62 })).join('');
+
+// Arm zu einem Zielpunkt führen (Zwei-Gelenk-Kette, Ellbogen zur Polrichtung): liefert ober/unter
+// im Körperrahmen der Figur. ziel und pol sind Weltvektoren; die Schulter kommt aus einem ersten
+// Durchlauf derselben Pose (fg). Reicht der Arm nicht, wird er gestreckt zum Ziel gezeigt.
+const armZiel = (fg, seite, ziel, pol) => {
+  const o = fg.welt.oben, S = fg.welt.arme[seite].S, a = P.oberarm, b = P.unterarm;
+  const zu = sub(ziel, S), d = Math.min(len(zu), a + b - 1e-6), u = norm(zu);
+  const v = norm(sub(pol, mul(u, dot(pol, u))));
+  const ca = (a * a + d * d - b * b) / (2 * a * d), sa = Math.sqrt(Math.max(0, 1 - ca * ca));
+  const E = add(S, add(mul(u, a * ca), mul(v, a * sa)));
+  const W = add(S, mul(u, d));
+  const rahmen = (x) => [dot(x, o.R), dot(x, o.U), dot(x, o.F)];
+  return { ober: rahmen(norm(sub(E, S))), unter: rahmen(norm(sub(W, E))) };
+};
 
 // Gemeinsame Bühne der Aufschlag-Sequenz: dieselbe Kamera und derselbe Boden in Bild 1 und 2.
 // fall: Abstand des Fallwegs vor dem Handpunkt (unter den Fingerspitzen) — G-006 trifft genau dort.
@@ -607,6 +621,171 @@ export const MOTIVE = {
           fg.svg,
           speeder({ p: sp, winkel: 0 }),
           `<path class="s-bahn" d="${bahn}" marker-end="url(#p006)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Beweglichkeit und Schulter: nach dem Spiel die hintere Schulter des Schlagarms sanft dehnen
+  // (Übungsteil). Frontal, leicht zur linken Seite gedreht, damit die greifende Hand vorn liegt.
+  // Der Schlagarm liegt quer vor der Brust, die linke Hand fasst ihn knapp oberhalb des Ellbogens
+  // und zieht sanft zur linken Schulter; Schultern tief, Rumpf dreht nicht mit. Der Schläger liegt
+  // neben dem rechten Fuß am Boden: „nach dem Spiel“, und er macht den Schlagarm eindeutig. Eine
+  // weiche Sichel an der Rückseite der rechten Schulter zeigt die Zone des leichten Ziehens, ein
+  // kurzer Pfeil über dem Oberarm die Zugrichtung. Kein Schmerzsymbol.
+  'G-033': (t) => {
+    const basis = {
+      ort: [150, 246], H: 24, blick: -12, kamera: 14, art: 'stehend',
+      beinR: { ober: [0.14, -1, 0.07], unter: [0.03, -1, -0.07], fuss: [0.2, -0.04, 1] },
+      beinL: { ober: [-0.14, -1, 0.07], unter: [-0.03, -1, -0.07], fuss: [-0.2, -0.04, 1] },
+      armR: { ober: [-0.95, -0.04, 0.3], unter: [-0.96, 0.02, -0.05], hand: [-0.95, -0.1, -0.05], vor: true },
+      armL: { ober: [-0.1, -1, 0.1], unter: [0, -1, 0.2], art: 'faust', vor: true },
+    };
+    const probe = figur(basis);
+    const aR = probe.welt.arme.R, o = probe.welt.oben;
+    // knapp oberhalb des Ellbogens, auf der Vorderseite des Oberarms
+    const ziel = add(lerp(aR.S, aR.E, 0.78), add(mul(o.F, 0.12), mul(o.U, 0.04)));
+    const fg = figur({ ...basis, armL: { ...armZiel(probe, 'L', ziel, mul(o.U, -1)), art: 'faust', vor: true } });
+    const b = fg.welt.becken, fuss = fg.welt.beine.R;
+    const boden = fuss.ferse[1] - P.rFerse;
+    const griff = add([fuss.ferse[0], boden, fuss.ferse[2]], add(mul(b.R, 0.7), mul(b.F, -0.25)));
+    const schl = schlaeger3d({ griff, achse: norm(add(mul(b.F, 1), mul(b.R, 0.45))), flaeche: [0, 1, 0], proj: fg.proj, H: fg.H });
+    const sR = fg.punkte.schulterR;
+    // Zugpfeil über dem Unterarm, rechts neben dem Kopf, eine Strichbreite Abstand: der Arm wird
+    // sanft Richtung linke Schulter gezogen (am Schulterende läse er sich als Stoß in die Schulter)
+    const hR = fg.punkte.handR;
+    const zug0 = add(hR, [-26, -13]), zug1 = add(hR, [-8, -13]);
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274,
+        defs: pfeil('p033'),
+        inhalt: [
+          schatten([150, fg.punkte.boden + 1], 46, 5.5),
+          schl,
+          fg.svg,
+          spur({ c: sR, r: 11, von: 215, bis: 300, breite: 9 }),
+          `<path class="s-rot" d="M${pt(zug0)} L${pt(zug1)}" marker-end="url(#p033)"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Explosivität: die Feder als Bewegungsfolge von links nach rechts, ein Sprung nach oben mit
+  // kleinem Vorwärtsanteil wie zum hohen Ball. Einfedern (Kontur), Absprung in Dreifachstreckung
+  // (volle Figur, Fußspitzen eben vom Boden), weiche Landung auf den Ballen (Kontur) — die beiden
+  // Konturphasen tragen die Aussage („vordehnen, sofort strecken“ und „weich landen“). Die
+  // Schwerpunktbahn läuft hinter den Figuren: kleine Senke beim Einfedern, flacher Bogen. Keine
+  // Kästen, Hürden oder Tiefsprünge (Gesundheitsrahmen: Prinzip, keine Dosierung).
+  'G-034': (t) => {
+    const y = 250, H = 21, kam = 8;
+    const ein = figur({ ort: [66, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
+      neig: 35, kopf: { neig: -24 },
+      beinR: { ober: [0.12, -0.6, 0.8], unter: [0.02, -1, -0.25], fuss: [0.15, -0.04, 1] },
+      beinL: { ober: [-0.12, -0.6, 0.8], unter: [-0.02, -1, -0.25], fuss: [-0.15, -0.04, 1] },
+      armR: { ober: [0.12, -1, -0.12], unter: [0.06, -1, -0.2] },
+      armL: { ober: [-0.12, -1, -0.12], unter: [-0.06, -1, -0.2], art: 'offen' } });
+    const ab = figur({ ort: [150, y], H, blick: 90, kamera: kam, art: 'luft', heben: 0.22,
+      neig: 10, kopf: { neig: -14 },
+      beinR: { ober: [0.1, -1, -0.17], unter: [0.04, -1, -0.17], fuss: [0.08, -1, 0.42] },
+      beinL: { ober: [-0.1, -1, -0.17], unter: [-0.04, -1, -0.17], fuss: [-0.08, -1, 0.42] },
+      armR: { ober: [0.18, 0.55, 0.82], unter: [0.1, 0.75, 0.66], vor: true },
+      armL: { ober: [-0.18, 0.55, 0.82], unter: [-0.1, 0.75, 0.66], art: 'offen' },
+      schlaeger: { hand: 'R', achse: [0, 1, 0.15], flaeche: [0, -0.15, 1] } });
+    const lan = figur({ ort: [232, y], H, blick: 90, kamera: kam, art: 'dynamisch', geist: 'kontur',
+      neig: 20, kopf: { neig: -12 },
+      beinR: { ober: [0.12, -0.85, 0.55], unter: [0.02, -1, -0.3], fuss: [0.15, -0.3, 1] },
+      beinL: { ober: [-0.12, -0.85, 0.55], unter: [-0.02, -1, -0.3], fuss: [-0.15, -0.3, 1] },
+      armR: { ober: [0.15, -0.8, 0.5], unter: [0.1, 0.35, 1] },
+      armL: { ober: [-0.15, -0.75, 0.55], unter: [-0.1, 0.1, 1], art: 'offen' } });
+    const schlEin = geistSchlaeger(ein, [0.1, -0.85, -0.5], [0, 0.5, -0.85]);
+    const schlLan = geistSchlaeger(lan, [0.05, 1, 0.05], [0, -0.05, 1]);
+    const h1 = ein.punkte.huefte, h2 = ab.punkte.huefte, h3 = lan.punkte.huefte;
+    // Schwerpunkt: aus dem Einfedern kurz tiefer, dann ein flacher Bogen über den Absprung
+    const bahn = `M${pt(add(h1, [-14, -6]))} Q ${pt(add(h1, [-2, 9]))} ${pt(add(h1, [14, 2]))} Q ${pt([h2[0], h2[1] - 30])} ${pt(add(h3, [-6, -2]))}`;
+    // vordehnen ↓, sofort strecken ↑ — neben der Konturphase, nicht auf ihr
+    const dp = add(h1, [-46, -2]), halb = (r) => `M${f(dp[0])},${f(dp[1] + r * 2)}L${f(dp[0])},${f(dp[1] + r * 13)}`;
+    // Dämpfungsbogen unter den Ballen der Landung
+    const b1 = lan.punkte.ballenR, b2 = lan.punkte.ballenL, bm = lerp(b1, b2, 0.5);
+    const daempf = `M${f(bm[0] - 16)},${f(y + 6)} Q ${f(bm[0])},${f(y + 13)} ${f(bm[0] + 16)},${f(y + 6)}`;
+    return {
+      figuren: [ein, ab, lan], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 280,
+        defs: pfeil('p034'),
+        inhalt: [
+          `<path class="s-boden" d="M8,${y + 0.5}L292,${y + 0.5}"/>`,
+          schatten([150, y + 1], 28, 3.5),
+          `<path class="s-bahng" d="${bahn}"/>`,
+          ein.svg, schlEin, lan.svg, schlLan,
+          ab.svg,
+          `<path class="s-rot" d="${halb(-1)}" marker-end="url(#p034)"/>`, `<path class="s-rot" d="${halb(1)}" marker-end="url(#p034)"/>`,
+          `<path class="s-rot" d="${daempf}"/>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Bewegungsökonomie: zwei Felder, beide streng seitlich, Blick nach rechts, gleicher Start (Mittel-
+  // marke) und gleiches Ziel (Speeder rechts vorn). Links effizient: am Start als Kontur die
+  // Bereitschaft, am Ziel die volle Figur im kontrollierten Ausfallschritt (rechter Fuß vorn,
+  // Schienbein senkrecht, Rumpf aufrecht, Treffpunkt vor dem vorderen Fuß); am Boden nur zwei
+  // Abdrücke, ein glatter Weg hin und gestrichelt zurück zur Mitte. Rechts hektisch, als Kontur:
+  // fünf kleine Abdrücke im Zickzack und einer über das Ziel hinaus, die Figur kippt über das
+  // vordere Bein, holt weit aus, der freie Arm fuchtelt — das Knie bleibt aber hinter der
+  // Fußspitze, auch im Gegenbeispiel (Gesundheitsrahmen).
+  'G-036': (t) => {
+    // 330 breit: zwei Felder zu 165 — Startphase, Ausfallschritt und Treffpunkt brauchen bei H = 20
+    // mehr als 150 Einheiten (der Schläger ragte sonst ins rechte Feld)
+    const y = 226, H = 20, kam = 7, breite = 165;
+    const lunge = {
+      blick: 90, kamera: kam, H, art: 'dynamisch', neig: 10, kopf: { neig: -6 },
+      beinR: { ober: [0.08, -0.55, 0.83], unter: [0.02, -1, 0], fuss: [0.1, -0.04, 1] },
+      beinL: { ober: [-0.1, -0.75, -0.65], unter: [-0.05, -0.8, -0.6], fuss: [-0.1, -0.55, 0.83] },
+      armR: { ober: [0.12, -0.25, 0.97], unter: [0.05, 0.05, 1], vor: true },
+      armL: { ober: [-0.1, -0.75, -0.65], unter: [-0.05, -0.6, -0.8], art: 'offen' },
+      schlaeger: { hand: 'R', achse: [0.1, 0.8, 0.6], flaeche: [0, -0.6, 0.8] },
+    };
+    const hektisch = {
+      blick: 90, kamera: kam, H, art: 'dynamisch', neig: 42, kopf: { neig: -18 }, geist: 'kontur',
+      beinR: { ober: [0.08, -0.55, 0.83], unter: [0.02, -1, 0.08], fuss: [0.1, -0.04, 1] },
+      beinL: { ober: [-0.06, -0.9, -0.42], unter: [-0.03, -0.45, -0.9], fuss: [-0.05, -0.9, 0.4] },
+      armR: { ober: [0.2, 0.25, -0.95], unter: [0.1, 0.6, -0.8] },
+      armL: { ober: [-0.3, 0.85, 0.35], unter: [-0.2, 0.95, -0.15], art: 'offen' },
+    };
+    const panel = (x0, eff) => {
+      const start = x0 + 22;
+      const ghost = figur({ ...POSEN.bereit, ort: [start, y], H, blick: 90, kamera: kam, geist: 'kontur' });
+      const fg = figur({ ...(eff ? lunge : hektisch), ort: [start + 38, y] });
+      const ziel = eff ? add(fg.punkte.schlaegerKopf, [8, 0]) : null;
+      return { start, ghost, fg, ziel };
+    };
+    const L = panel(0, true), R = panel(breite, false);
+    const schlR = geistSchlaeger(R.fg, [0.1, 0.4, -0.92], [0, 0.92, 0.4]);
+    // Ziel rechts an derselben Stelle wie links (gleiche Aufgabe)
+    const zielR = add(L.ziel, [breite, 0]);
+    // Ziel und Speeder bleiben im eigenen Feld (mindestens 10 Einheiten vor der Trennlinie)
+    if (L.ziel[0] + 14 > breite) L.fg.warnungen.push(`Speeder links ragt an die Trennlinie (${f(L.ziel[0])})`);
+    const marke = (x) => `<ellipse class="s-basis" cx="${f(x)}" cy="${f(y + 1)}" rx="9" ry="2.6"/>`;
+    const abdruck = (x, dy, kls) => `<ellipse class="${kls}" cx="${f(x)}" cy="${f(y + 1 + dy)}" rx="4.6" ry="1.6"/>`;
+    const vorneL = L.fg.punkte.ballenR[0];
+    const spurL = [lerp([L.start, 0], [vorneL, 0], 0.45)[0], vorneL].map((x) => abdruck(x, 0, 's-druck')).join('');
+    const zick = [0.16, 0.32, 0.48, 0.64, 0.8, 1.08].map((t0, i) => abdruck(R.start + t0 * (zielR[0] - R.start), i % 2 ? 3.2 : -2.2, 's-mkg')).join('');
+    const hin = `M${f(L.start + 8)},${f(y + 12)}L${f(vorneL - 6)},${f(y + 12)}`;
+    const zurueck = `M${f(vorneL - 10)},${f(y + 21)}L${f(L.start + 4)},${f(y + 21)}`;
+    return {
+      figuren: [L.fg, R.fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 274, breite: 2 * breite,
+        defs: pfeil('p036', 's-mkg', 3.8),
+        inhalt: [
+          `<path class="s-linie" d="M${breite},34L${breite},${y + 26}"/>`,
+          `<path class="s-boden" d="M6,${y + 0.5}L${breite - 8},${y + 0.5}M${breite + 8},${y + 0.5}L${2 * breite - 6},${y + 0.5}"/>`,
+          marke(L.start), marke(R.start),
+          spurL, zick,
+          `<path class="s-wegv" d="${hin}" marker-end="url(#p036)"/>`,
+          `<path class="s-wegg" d="${zurueck}" marker-end="url(#p036)"/>`,
+          L.ghost.svg, R.ghost.svg,
+          R.fg.svg, schlR,
+          L.fg.svg,
+          speeder({ p: L.ziel, winkel: 270 }), speeder({ p: zielR, winkel: 270 }),
         ].join('\n  '),
       }),
     };
