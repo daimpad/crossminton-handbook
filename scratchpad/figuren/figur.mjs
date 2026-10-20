@@ -148,7 +148,7 @@ function rumpfKontur(N, Hp, H, sinB, cosB, anteilHuefte, k) {
 //   H: Kopfhöhe px (Standard 25) · kamera: Blickhöhe in Grad (Standard 8) · koerper: 'a' | 'b'
 //   blick · huefte (Becken gegen blick) · schulter (Oberkörper gegen Becken)
 //   neig: Vorneigung des Rumpfs (+ = nach vorn) · seit: Seitneigung (+ = zur rechten Seite)
-//   kopf: {neig, dreh} · armR/armL: {ober, unter, hand?, art:'faust'|'offen'|'keine', vor?}
+//   kopf: {neig, dreh} · armR/armL: {ober, unter, hand?, art:'faust'|'offen'|'daumen'|'keine', vor?}
 //   beinR/beinL: {ober, unter, fuss?} · schlaeger: {hand, achse, flaeche}
 //   heben: zusätzliche Höhe über dem Boden in H (Sprung) · ton: 'auto' | 'gleich'
 //   frei: nahe Arme freistellen (Standard true) · geist: true = blasse Geisterphase,
@@ -251,6 +251,13 @@ export function figur(pose) {
     else if (a.art === 'offen') {
       const m = proj(add(a.W, mul(a.hd, 0.22))), sp = proj(add(a.W, mul(a.hd, 0.56)));
       hand = [kapsel(W2, P.rHandgelenk * H * g, m, 0.15 * H * g), kapsel(m, 0.145 * H * g, sp, 0.09 * H * g)];
+    } else if (a.art === 'daumen') {
+      // Daumen hoch: Faust, der Daumen steht senkrecht nach oben (Welt, nicht Unterarm), etwas zur
+      // Handgelenkseite versetzt — mittig auf der Faust las er sich wie ein erhobener Zeigefinger.
+      // Dicke und Länge so, dass er als 150-px-Miniatur noch zu sehen ist (Prüfung Welle 5).
+      const fuss = add(a.griff, mul(a.hd, -0.08));
+      const d1 = proj(add(fuss, [0, 0.08, 0])), d2 = proj(add(fuss, [0, 0.46, 0]));
+      hand = [kapsel(W2, P.rHandgelenk * H * g, G2, P.rFaust * H * g), kapsel(d1, 0.105 * H * g, d2, 0.09 * H * g)];
     }
     return { teile, hand, G2, W2, S2, E2 };
   };
@@ -341,6 +348,9 @@ export function figur(pose) {
       if (vor > 0.05 && !nachgezogen) warnungen.push(`Gesundheitsrahmen: Knie ${s} ${f(vor)} H vor der Fußspitze`);
     }
   }
+  // Rumpfdrehung: mehr als etwa 60° zwischen Becken und Schultern schafft kein Körper, und die
+  // Rumpfkontur folgt den Schultern — die Figur wird bauchig (G-047 mit −95°, Prüfung Welle 5).
+  if (Math.abs(pose.schulter ?? 0) > 60) warnungen.push(`Rumpf um ${f(pose.schulter)}° gegen das Becken gedreht (höchstens 60°)`);
   // Schlagfläche: flaeche muss senkrecht zur achse stehen, sonst zeichnet schlaeger3d eine andere
   // Fläche als gemeint (die Fläche zeigte zur Betrachterin statt zum Ziel, Prüfung Welle 2).
   if (sch) {
@@ -481,6 +491,7 @@ export const STIL = {
   's-druck': `fill:${AKZ}`,
   's-blase': 'fill:var(--flaeche,#ffffff);stroke:var(--tinte,#16202b);stroke-width:2;stroke-linejoin:round',
   's-ruf': 'fill:var(--tinte,#16202b);font:800 15px/1 system-ui,sans-serif;text-anchor:middle',
+  's-zeile': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:3;stroke-linecap:round',
   's-schall': `fill:none;stroke:${AKZ};stroke-width:2.2;stroke-linecap:round`,
   's-lab': 'fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif',
   's-griff': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round',

@@ -11,7 +11,6 @@ const M = {
   'G-017': { cap: 'one preparation, two options', aria: 'Deception, image 2: the same preparation, with two different shots branching from it — a flat fast drive and a short soft drop; the choice is made only at the last moment.' },
   'G-021': { cap: 'right onto the line · minimal margin', aria: 'Precision to the lines: the speeder lands exactly on a corner line at the very edge of the court; tight target zones and a thin arrow show pinpoint placement with minimal margin.' },
   'G-035': { cap: 'short ground contact · fast rebound', aria: 'Reactive strength: the short, springy ground contact of foot and lower leg — minimal contact time, shown by a small compression arc and a fast rebound arrow.' },
-  'G-047': { cap: 'a quick word · as a pair', aria: 'Agreeing as a pair: two doubles partners from behind briefly agree with a simple cue between points, relaxed posture — basic communication as a pair.' },
   'G-054': { cap: 'playing outdoors · open court', aria: 'Playing outdoors: a player on a court without a net under open sky with a simple ground surface, a relaxed, adaptable stance.' },
   'G-056': { cap: 'against the sun · shield the eyes', aria: 'Sun and glare: a player shields the eyes against a low sun while tracking a high speeder; sun and glare rays in one corner, adjusted head position.' },
   'G-057': { cap: 'wet ground · a wide, secure stance', aria: 'Wet conditions and a secure stance: a player with a widened, cautious stance on damp ground, suggested water droplets and a low, secure centre of gravity.' },

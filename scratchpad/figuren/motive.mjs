@@ -510,6 +510,52 @@ export const MOTIVE = {
     };
   },
 
+  // Sich absprechen: dieselbe Kamera wie G-043/G-053 (Profil entlang der Spielrichtung, links die
+  // Grundlinie). Vor dem Aufschlag, einander zugewandt: der Rückraumspieler steht hinter der
+  // Aufschlaglinie, hält den Speeder und sagt in einem Satz das Wichtigste (Regel 7.4: er schlägt
+  // auf); der Angriffsspieler steht vor der Linie, die Füße schon nach vorn, und bestätigt mit
+  // Nicken und Daumen hoch.
+  'G-047': (t) => {
+    const boden = 238;
+    const hinten = figur({
+      ort: [86, boden], H: 21, blick: 58, kamera: 8, neig: 4, seit: 3, kopf: { dreh: 12, neig: -4 }, koerper: 'b',
+      beinR: { ober: [0.12, -1, 0.22], unter: [0.02, -1, -0.3], fuss: [0.15, -0.05, 1] },
+      beinL: { ober: [-0.12, -1, 0.2], unter: [-0.02, -1, -0.12], fuss: [-0.1, -0.05, 1] },
+      armR: { ober: [0.12, -1, 0.3], unter: [0.05, -0.9, 0.45], hand: [0.05, -0.8, 0.6] },
+      armL: { ober: [-0.1, -0.92, 0.3], unter: [0.12, 0.85, 0.55], hand: [0.1, 0.6, 0.8] },
+      schlaeger: { hand: 'R', achse: [0.1, -0.85, 0.55], flaeche: [0.98, 0.115, 0] },
+    });
+    const vorn = figur({
+      // Drehung verteilt auf Füße, Becken, Rumpf und Hals (mit −95° allein im Rumpf wurde die Figur
+      // bauchig); der Daumen hoch steht neben dem Rumpf — die offene Hand zeigte genau auf den
+      // Speeder und las sich wie „gib her“ (Prüfung Welle 5)
+      ort: [206, boden], H: 21, blick: 20, schulter: -60, kamera: 8, neig: 4, kopf: { dreh: -30, neig: 12 }, koerper: 'a',
+      beinR: { ober: [0.12, -1, 0.22], unter: [0.02, -1, -0.12], fuss: [-0.15, -0.05, 1] },
+      beinL: { ober: [-0.12, -1, 0.2], unter: [-0.02, -1, -0.12], fuss: [-0.65, -0.05, 0.75] },
+      armR: { ober: [0.15, -1, 0.1], unter: [0.05, -0.95, 0.3] },
+      armL: { ober: [0.2, -0.85, 0.55], unter: [0.85, 0.5, 0.3], hand: [0.85, 0.5, 0.3], art: 'daumen', vor: true },
+      schlaeger: { hand: 'R', achse: [0.05, -0.9, 0.4], flaeche: [1, 0.055, 0] },
+    });
+    const kh = hinten.punkte.kopf, sp = add(hinten.punkte.handL, [0, 11]);
+    const fuss = Math.max(vorn.punkte.spitzeR[0], vorn.punkte.spitzeL[0]);
+    return {
+      figuren: [hinten, vorn], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 270,
+        defs: pfeil('p047', 's-mkg'),
+        inhalt: [
+          feldProfil({ y: boden + 1, x0: 10, x1: 290, marken: [14, 140, 286] }),
+          schatten([86, boden + 1], 30, 4.2), schatten([206, boden + 1], 30, 4.2),
+          `<path class="s-wegg" d="M${f(fuss + 6)},${f(boden + 9)}L${f(278)},${f(boden + 9)}" marker-end="url(#p047)"/>`,
+          vorn.svg,
+          hinten.svg,
+          speeder({ p: sp, winkel: 0 }),
+          sprechblase({ c: [kh[0] + 30, kh[1] - 44], b: 60, h: 30, spitze: add(kh, [9, -14]), schall: false, zeilen: [1, 0.62] }),
+        ].join('\n  '),
+      }),
+    };
+  },
+
   // Blindes Verständnis: derselbe Aufbau wie G-043. Der Angriffsspieler startet zum kurzen Ball,
   // der Rückraumspieler rückt im selben Augenblick in die Mitte nach (Geist = Startposition).
   // Beide Blicklinien gehen nach vorn, keine zum Partner.
@@ -537,7 +583,7 @@ export const MOTIVE = {
         aria: t.aria, caption: t.cap, captionY: 270,
         defs: pfeil('p053'),
         inhalt: [
-          feldProfil({ y: boden + 1, x0: 10, x1: 290, marken: [14, 132, 286] }),
+          feldProfil({ y: boden + 1, x0: 10, x1: 290, marken: [14, 140, 286] }),
           schatten([94, boden + 1], 30, 4.2), schatten([204, boden + 1], 40, 4.6),
           startH.svg,
           `<path class="s-blick" d="${blick(hinten, [292, hinten.punkte.kopf[1] + 18])}"/>`,

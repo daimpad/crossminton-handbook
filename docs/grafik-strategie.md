@@ -335,6 +335,13 @@ Die übrigen 35 Grafiken bleiben bei ihren bisherigen Wegen. Ihre fr- und pl-Zwi
    - G-034: der Doppelpfeil lag auf der Absprungfigur. Die Phasen stehen weiter auseinander, der Pfeil in der Lücke, der Scheitel der Schwerpunktbahn nach dem Absprung.
    - G-036: Text und Bild zählten verschiedene Schritte. Links ist es jetzt ein einziger Ausfallschritt mit dem hinteren Fuß auf der Marke, beide Hälften beginnen mit derselben Grundposition ohne Schläger, rechts führen fünf Zickzack-Abdrücke bis zum vorderen Fuß. Der hochgerissene freie Arm der hektischen Figur verschmolz im Umriss mit dem Kopf; er fliegt jetzt nach hinten weg, der Speeder hängt ungetroffen vor ihr.
 
+   **Welle 5** (Doppel: G-047; G-043 und G-053 kamen fertig aus dem Pilot), Bögen in `docs/grafik-strategie/welle5-hell.png` und `welle5-dunkel.png`. G-047 nimmt die Kamera von G-043/G-053: Profil entlang der Spielrichtung, vor dem Aufschlag einander zugewandt, der Rückraumspieler mit dem Speeder hinter der Aufschlaglinie (Regel 7.4), eine Sprechblase mit zwei abstrakten Zeilen statt Wörtern. Die Prüfung gab sie mit Änderung frei:
+   - **Die offene Hand des Angriffsspielers zeigte genau auf den Speeder** und las sich wie „gib her“, als wolle er aufschlagen. Er hebt jetzt den Daumen, neben dem Rumpf (vor der Brust verschwand die Faust in der Silhouette); dafür kennt `figur()` die Handart `daumen`. Die zweite Prüfrunde bestätigte das; der Daumen sitzt seitdem zur Handgelenkseite versetzt, mittig auf der Faust las er sich wie ein erhobener Zeigefinger.
+   - **Der Rumpf war um 95° gegen das Becken gedreht**, die Kontur folgte den Schultern, die Figur wurde bauchig. Die Zuwendung verteilt sich jetzt auf Füße, Becken, Rumpf und Hals (−60° Rumpf), und `figur()` warnt ab 60°.
+   - Texte: „linia serwisowa“ wie im Bestand, im Englischen ein Satz ohne finites Verb und „the way forward“ ersetzt. Der Rückraumspieler steht mit Spielbein lockerer, die Hand am Speeder ist sichtbar.
+   - G-053 setzte die Aufschlaglinie bei 132, G-043 und G-047 bei 140; die Marke ist angeglichen, sonst ist G-053 unverändert.
+   - Offen für später: die Rumpfkontur sollte zur Hüfte hin der Beckenrichtung folgen und der Tiefenton der Beine nach dem Becken statt nach den Schultern gehen. Das änderte auch G-004 und G-043 und bleibt darum einer eigenen Runde vorbehalten.
+
    **Wenn der Pilot nicht überzeugt,** gibt es höchstens eine Nachbesserungsrunde. Danach entscheidet die Projektverantwortliche zwischen drei Wegen:
    - Richtung C an denselben neun Motiven, Generator und Gate bleiben dabei nutzbar;
    - Richtung A nur für Ganzfiguren, die Nahaufnahmen bleiben schematisch;
