@@ -1,6 +1,7 @@
-// Rendert G-XXX.svg → G-XXX.png (2×, Hell-Fallback-Werte). Transparent, außer bei den generierten
-// Personengrafiken (data-quelle="figuren"): die stehen auf deckendem --flaeche-2, weil ihr
-// Freistellungsrand in --flaeche-2 gemalt ist und auf dunklem Grund als heller Saum stünde.
+// Rendert G-XXX.svg → G-XXX.png (2× der viewBox, Hell-Fallback-Werte) auf deckendem --flaeche-2
+// (PNG_GRUND): das PNG ist eine Hell-Zeichnung und steht da, bis das SVG geladen ist. Transparent
+// stünden im Dunkelmodus dunkle Linien auf dunklem Grund, und was mit --flaeche-2 freistellt
+// (Freistellungsrand der Figuren, Halo hinter Beschriftungen), als heller Saum.
 // Aufruf: node scratchpad/render-svg.mjs G-001 G-002 G-010
 import pw from '/opt/node22/lib/node_modules/playwright/index.js';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -22,7 +23,7 @@ for (const id of ids) {
   // Fensterbreite, und das PNG kaeme in 2560 statt 600 Pixeln heraus.
   const [, , vbBreite, vbHoehe] = (svg.match(/viewBox="([^"]+)"/)?.[1] || '0 0 300 300').split(/[\s,]+/).map(Number);
   await page.setContent(
-    `<!doctype html><meta charset="utf8"><style>svg{display:block;width:${vbBreite}px;height:${vbHoehe}px}${figuren ? STELLVERTRETER + `svg{background:${PNG_GRUND}}` : ''}</style><body style="margin:0">${svg}</body>`,
+    `<!doctype html><meta charset="utf8"><style>svg{display:block;width:${vbBreite}px;height:${vbHoehe}px}${figuren ? STELLVERTRETER : ''}svg{background:${PNG_GRUND}}</style><body style="margin:0">${svg}</body>`,
     { waitUntil: 'networkidle' },
   );
   const el = await page.$('svg');

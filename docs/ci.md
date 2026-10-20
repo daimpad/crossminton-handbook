@@ -43,13 +43,58 @@ Für Text wird die abgedunkelte (hell) bzw. aufgehellte (dunkel) Variante `--sig
 | Fläche 2 | `#f1f5fb` | `#1f2c3a` | `--flaeche-2` |
 | Text | `#16202b` | `#e8eef5` | `--tinte` |
 | Text leise | `#5a6675` | `#a2b2c4` | `--tinte-2` |
-| Text sehr leise | `#8a94a3` | `#7f8ea0` | `--tinte-3` |
+| Text sehr leise | `#656f7e` | `#8795a6` | `--tinte-3` |
 | Linie | `#e9eef6` | `#273543` | `--linie` |
 | Linie stark | `#dae3ee` | `#3a4b5e` | `--linie-stark` |
 
+## Grafiken
+
+Die 67 Grafiken in `images/` sind Inline-SVG und lesen dieselben Tokens wie die Oberfläche; sie kippen darum mit dem Thema, ohne eigene `@media`-Regel. 32 davon sind Personengrafiken im Stil „Dynamische Silhouette“, erzeugt von `scratchpad/figuren/` (Strategie in `docs/grafik-strategie.md`); die übrigen 35 sind Diagramme (Feld, Bahnen, Zonen, Regelskizzen, die Speeder-Konstruktionszeichnung).
+
+### Farbrollen
+
+| Rolle | Variable |
+| --- | --- |
+| Körper, nahe Seite | `--tinte` |
+| Körper, ferne Seite; Sohle, Mütze, Stangen | `--tinte-2` |
+| Geisterphasen und Umrisse, Laufwege, Blicklinien, Pfeile, Feld- und Bodenlinien, Sonne, Caption | `--tinte-3` |
+| Akzent: das eine didaktische Element und sein Werkzeug (Schläger, Flugbahn, Feder, Treffpunkt) | `--primaer-dunkel` |
+| Ortsmarke am Boden, Schirm, Griff-Fläche in Nahaufnahmen (mit Rand in `--primaer-dunkel`) | `--primaer-weich` |
+| Freistellungsrand, Füllung von Umrissfiguren, Halo hinter Linien und Beschriftungen | `--flaeche-2` |
+| Bodenschatten | `--schatten-boden` |
+| Speeder | `--speeder-korb`, `--speeder-kappe`, `--speeder-kappe-tief` |
+
+- **Die Hauptfarbe trägt genau ein Element** je Bild, Hilfslinien bekommen sie nie. In den Personengrafiken ist das `--primaer-dunkel`, denn `--primaer` erreicht auf `--flaeche-2` hell nur 2,48:1; die älteren Diagramme nutzen `--primaer` weiter für ihre Bahnen und Pfeile.
+- **Ampelfarben sind tabu.** Rot, Gelb und Grün bedeuten in der App einen Zustand (offen, Hinweis, erledigt), in einer Grafik würden sie ihn behaupten.
+- **Keine harten Farben**, kein `rgb()`, kein `style=`-Attribut. Jedes Token steht als `var(--token,#hellwert)`; der Fallback ist der Hellwert aus `:root`, denn mit ihm entsteht das PNG. `scripts/grafik-gate.mjs` prüft das für die Personengrafiken.
+- Die geplanten Tokens `--grafik-akzent` und `--sonne` sind entfallen: Akzent ist `--primaer-dunkel`, die Sonne ein Umriss in `--tinte-3`.
+
+### Kontrast
+
+Jedes Element, das eine Aussage trägt, erreicht hell und dunkel mindestens **3:1 gegen `--flaeche-2`** (den Grund von `.grafik-bild`) und gegen die Fläche, vor der es liegt (WCAG 1.4.11). Gemessen:
+
+| Token gegen `--flaeche-2` | Hell | Dunkel |
+| --- | --- | --- |
+| `--tinte` | 15,05:1 | 12,15:1 |
+| `--tinte-2` | 5,34:1 | 6,56:1 |
+| `--tinte-3` | 4,65:1 | 4,65:1 |
+| `--tinte-3` mit Deckkraft 0,8 (Feldlinien `s-linie`) | 3,19:1 | 3,52:1 |
+| `--primaer-dunkel` | 3,36:1 | 6,92:1 |
+| `--primaer` | 2,48:1 | 5,98:1 |
+| `--speeder-kappe` | 3,84:1 | 5,03:1 |
+| `--speeder-korb` | 1,52:1 | 10,26:1 |
+
+- Der helle Korb trägt seinen Kontrast über die Kontur, nie über die Fläche.
+- Zwei Paare unter 3:1 lassen sich nicht über ein anderes Token lösen: `--tinte-2` gegen `--tinte` (hell 2,82:1, dunkel 1,85:1) und Blasses über Deckkraft (ein Speeder mit 40 % kam hell auf 1,2:1). Getrennt wird dort mit einer Naht oder einem Halo in `--flaeche-2`, ein gedachter Gegenstand steht als deckender Umriss.
+- Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 268 Dateien).
+
+### Die Speeder-Ausnahme
+
+Der Speeder trägt seine echten Farben (Typ MATCH: gelber Korb, rote Kappe) über eigene Tokens. Sie laufen bewusst **nicht** über `--signal-gelb`/`--signal-rot`: die Ampel bedeutet einen Zustand, am Speeder ist die Farbe eine Sacheigenschaft. Wer weitere Produktfarben braucht, legt ebenso eigene Tokens an.
+
 ### Grafik-Tokens
 
-Gelesen nur von den Grafiken in `images/`. Die Personengrafiken (`scratchpad/figuren/`) nutzen als Akzent `--primaer-dunkel`, denn `--primaer` erreicht auf `--flaeche-2` nur 2,48:1, `--primaer-dunkel` dagegen 3,36:1 hell und 6,92:1 dunkel (WCAG 1.4.11).
+Gelesen nur von den Grafiken in `images/`, je hell und in beiden Dunkel-Blöcken von `css/app.css` gesetzt:
 
 | Rolle | Hell | Dunkel | Variable |
 | --- | --- | --- | --- |
@@ -58,7 +103,11 @@ Gelesen nur von den Grafiken in `images/`. Die Personengrafiken (`scratchpad/fig
 | Speeder-Kappe tief | `#a82412` | `#ffa593` | `--speeder-kappe-tief` |
 | Bodenschatten | `#16202b2e` | `#00000066` | `--schatten-boden` |
 
-Die Speeder-Farben sind eine Sacheigenschaft des Balls und laufen darum nicht über die Signalfarben.
+`--schatten-boden` ist ein eigenes Token, weil ein Verlauf über `--tinte` im Dunkeln zum Lichthof wurde.
+
+### PNG-Fallback
+
+Zu jedem SVG liegt ein PNG in doppelter viewBox-Größe, gerendert mit den Hellwerten. Es steht da, bis das SVG geladen ist, offline auch dauerhaft. Jedes PNG steht auf deckendem `--flaeche-2`. Im Dunkelmodus erscheint es darum als helle, lesbare Kachel; transparent stünden dunkle Linien auf dunklem Grund, und was mit `--flaeche-2` freistellt (Freistellungsrand der Figuren, Halo hinter den Beschriftungen der Speeder-Tafeln), als heller Saum.
 
 ## Typografie
 

@@ -12,8 +12,8 @@
     .pfeil{fill:var(--tinte-3,#656f7e)}
     .maszzahl{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
-    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif}
-    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end}
+    .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -53,12 +53,13 @@
 
   <path class="masz" d="M168,52 L214,34"/>
   <text class="teil" x="232" y="30">Otwór ⌀ 4</text>
-  <path class="masz" d="M202,109 L246,103"/>
-  <text class="teil" x="250" y="107">Pierścień końcowy ⌀ 19</text>
-  <path class="masz" d="M213,123 L246,145"/>
-  <text class="teil" x="250" y="149">Pierścień zaciskowy</text>
-  <path class="masz" d="M218,181.5 L246,193.5"/>
-  <text class="teil" x="250" y="197.5">Żebro poprzeczne</text>
+  <path class="masz" d="M202,109 L234,103"/>
+  <text class="teil" x="238" y="107">Pierścień końcowy</text>
+  <text class="teil" x="238" y="120">⌀ 19</text>
+  <path class="masz" d="M213,123 L234,145"/>
+  <text class="teil" x="238" y="149">Pierścień zaciskowy</text>
+  <path class="masz" d="M218,181.5 L234,193.5"/>
+  <text class="teil" x="238" y="197.5">Żebro poprzeczne</text>
 
   <path class="masz" d="M111,163 L74,151"/>
   <text class="teil" x="6" y="155">Żebro</text>

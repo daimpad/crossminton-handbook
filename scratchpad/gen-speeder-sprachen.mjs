@@ -52,7 +52,8 @@ const KARTE = {
     },
     text: {
       'Loch ⌀ 4': { en: 'Hole ⌀ 4', fr: 'Trou ⌀ 4', pl: 'Otwór ⌀ 4' },
-      'Endring ⌀ 19': { en: 'End ring ⌀ 19', fr: "Bague d'extrémité ⌀ 19", pl: 'Pierścień końcowy ⌀ 19' },
+      // Maß in eigener Zeile wie „Kragen / ⌀ 30“ in G-065: in einer Zeile lief es fr/pl über den Rand
+      'Endring': { en: 'End ring', fr: "Bague d'extrémité", pl: 'Pierścień końcowy' },
       'Pressring': { en: 'Press ring', fr: 'Bague de serrage', pl: 'Pierścień zaciskowy' },
       'Querrippe': { en: 'Cross rib', fr: 'Nervure transversale', pl: 'Żebro poprzeczne' },
       'Längsstiel': { en: 'Rib', fr: 'Nervure', pl: 'Żebro' },

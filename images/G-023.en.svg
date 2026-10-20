@@ -4,7 +4,7 @@
     .zone{fill:var(--primaer,#38a4f1);opacity:.08}
     .traj{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.8}
     .marker{fill:var(--primaer,#38a4f1)}
-    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
+    .s-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
     .zonetext{fill:var(--primaer-tief,#1568ad);font:700 13px/1 system-ui,'Segoe UI',sans-serif;letter-spacing:1px;text-anchor:middle}
     .subtext{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
   </style>
@@ -21,7 +21,7 @@
   <!-- Flugbahn von deinem Feld über die Zone ins gegnerische Feld -->
   <path class="traj" d="M150,442 C 150,360 96,250 110,132" marker-end="url(#tarw)"/>
   <circle class="marker" cx="150" cy="442" r="6"/>
-  <circle class="ring" cx="110" cy="120" r="13"/>
+  <circle class="s-ring" cx="110" cy="120" r="13"/>
 
   <text class="subtext"  x="150" y="66">opponent's field</text>
   <text class="zonetext" x="150" y="285">NEUTRAL ZONE</text>

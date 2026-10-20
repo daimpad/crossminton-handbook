@@ -21,7 +21,7 @@ import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
 import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { NUR_ENTWICKLUNG } from '../scripts/auslieferung.mjs';
-import { pruefeGrafiken } from '../scripts/grafik-gate.mjs';
+import { pruefeGrafiken, pngEcke, pngGroesse, PNG_GRUND } from '../scripts/grafik-gate.mjs';
 import { baue as baueFigurenmotiv, IDS as figurenIds } from '../scratchpad/figuren/motive.mjs';
 import { VERSION } from '../js/version.js';
 import { seiteMeta, seiteName, seiteSchema } from '../js/seo.js';
@@ -788,6 +788,19 @@ pruefe('Regeln-Referenzgrafiken G-060/G-061: Label vorhanden, an keinem Baustein
 pruefe('logo-speeder.svg und grafik-prompts.md liegen in images/', existsSync(join(wurzel, 'images', 'logo-speeder.svg')) && existsSync(join(wurzel, 'images', 'grafik-prompts.md')));
 pruefe('SVG_GRAFIKEN: jede Diagramm-Grafik hat .svg UND .png (Inline-SVG + PNG-Fallback)', SVG_GRAFIKEN.size >= 3 && [...SVG_GRAFIKEN].every((g) => existsSync(join(wurzel, 'images', `${g}.svg`)) && existsSync(join(wurzel, 'images', `${g}.png`))));
 pruefe('GRAFIK_SPRACHEN: jede Diagramm-Grafik hat je Sprache einen .svg- UND .png-Zwilling (übersetzte Diagramme)', GRAFIK_SPRACHEN.size >= 1 && [...GRAFIK_SPRACHEN].every((lang) => [...SVG_GRAFIKEN].every((g) => existsSync(join(wurzel, 'images', `${g}.${lang}.svg`)) && existsSync(join(wurzel, 'images', `${g}.${lang}.png`)))));
+// Jedes PNG ist der Fallback seines SVG: doppelte viewBox-Größe und deckender heller Grund
+// (--flaeche-2), sonst stünden im Dunkelmodus dunkle Linien auf dunklem Grund, bis das SVG da ist.
+{
+  const pngs = readdirSync(join(wurzel, 'images')).filter((n) => /^G-\d{3}(\.[a-z]{2})?\.png$/.test(n));
+  const grund = [1, 3, 5].map((i) => parseInt(PNG_GRUND.slice(i, i + 2), 16)).join();
+  const falsch = pngs.filter((n) => {
+    const png = readFileSync(join(wurzel, 'images', n));
+    const [, w, h] = readFileSync(join(wurzel, 'images', n.replace(/\.png$/, '.svg')), 'utf8').match(/viewBox="0 0 (\d+) (\d+)"/) ?? [];
+    const g = pngGroesse(png), e = pngEcke(png);
+    return !g || g[0] !== 2 * w || g[1] !== 2 * h || !e || e[3] !== 255 || e.slice(0, 3).join() !== grund;
+  });
+  pruefe(`alle ${pngs.length} Grafik-PNGs: doppelte viewBox-Größe, deckender Grund ${PNG_GRUND}`, pngs.length === 268 && falsch.length === 0, falsch.slice(0, 8).join(', '));
+}
 // Jeder Basis-Baustein trägt ein Icon (BAUSTEIN_ICONS in js/oberflaeche.js) — Doppel/Outdoor/Experte inklusive.
 pruefe('alle Basis-Bausteine tragen ein Icon (BAUSTEIN_ICONS vollständig)', (() => {
   const ohne = daten.bausteine.filter((b) => bausteinIcon(b.id) === '').map((b) => b.id);

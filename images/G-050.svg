@@ -3,7 +3,7 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .geg{fill:var(--tinte-3,#656f7e)}
     .luecke{fill:var(--primaer,#38a4f1);opacity:.15}
-    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
+    .s-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.2}
     .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
     .mk{fill:var(--primaer,#38a4f1)}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
@@ -15,7 +15,7 @@
   <circle class="geg" cx="200" cy="140" r="10"/>
   <text class="st" x="96" y="76">Gegner</text>
   <circle class="luecke" cx="150" cy="182" r="26"/>
-  <circle class="ring" cx="150" cy="182" r="26"/>
+  <circle class="s-ring" cx="150" cy="182" r="26"/>
   <path class="pf" d="M150,288 L150,214" marker-end="url(#ah)"/>
   <text class="zt" x="150" y="186">Lücke</text>
 </svg>

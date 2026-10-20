@@ -121,6 +121,5 @@ LICENSE                              MIT (Software)
 ## Bewusste Ausbaustufen (strukturell vorgehalten, nicht umgesetzt)
 
 - Schlanke Server-Komponente für geräteübergreifenden Fortschritt.
-- Funktionales Sprach-Umschalten für die Zielsprachen (Struktur angelegt; die Sprachanzeige im Header ist derzeit rein darstellend, der Umschalter im Profil funktional für de/en/fr/pl).
 - Abschluss-Status `beherrscht` (Mastery): im Zustandsraum vorgesehen, heute inaktiv — Aktivierung ohne Datenmigration.
-- Regelbasierte Generierung von Trainingseinheiten; Grafiken (Platzhalter mit Bildunterschriften sind eingebaut, KI-Prompts siehe Spezifikation, Anhang B).
+- Bildmotive für die bewusst bildlosen Bereiche (abstrakte Taktik, Mentales, konditionelle Athletik, Trainer-Ebene, Spielmodi); die 67 vorhandenen Grafiken und ihr Katalog stehen in `images/grafik-prompts.md`, die regelbasierte Generierung ist als Trainingsplan umgesetzt.

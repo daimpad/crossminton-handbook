@@ -3,7 +3,7 @@
     .linie{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
     .sp{fill:var(--primaer,#38a4f1)}
     .spw{fill:var(--tinte-3,#656f7e);opacity:.65}
-    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
+    .s-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.6}
     .ball{fill:var(--tinte,#16202b)}
     .pf{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:2.4}
     .pfg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2}
@@ -23,7 +23,7 @@
   <!-- links nimmt (Ring), rechts lässt (blass) -->
   <path class="pf" d="M104,168 L138,124" marker-end="url(#ah)"/>
   <circle class="sp" cx="100" cy="174" r="11"/>
-  <circle class="ring" cx="100" cy="174" r="16"/>
+  <circle class="s-ring" cx="100" cy="174" r="16"/>
   <circle class="spw" cx="204" cy="174" r="11"/>
   <text class="zt" x="86"  y="210">brać</text>
   <text class="st" x="212" y="210">zostawić</text>

@@ -6,7 +6,7 @@
     .mk{fill:var(--primaer,#38a4f1)}
     .mkg{fill:var(--tinte-3,#656f7e)}
     .basis{fill:var(--primaer,#38a4f1)}
-    .ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.6;opacity:.5}
+    .s-ring{fill:none;stroke:var(--primaer,#38a4f1);stroke-width:1.6;opacity:.5}
     .zt{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
     .st{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
@@ -21,7 +21,7 @@
   <!-- und zurück zur Mitte -->
   <path class="zur" d="M84,96 C 110,120 120,128 138,138" marker-end="url(#ag)"/>
   <path class="zur" d="M212,184 C 188,164 178,156 162,146" marker-end="url(#ag)"/>
-  <circle class="ring" cx="150" cy="140" r="17"/>
+  <circle class="s-ring" cx="150" cy="140" r="17"/>
   <circle class="basis" cx="150" cy="140" r="8"/>
   <text class="st" x="150" y="120">Basis</text>
   <text class="zt" x="150" y="272">raus zur Ecke — zurück zur Mitte</text>
