@@ -12,6 +12,8 @@ const M = {
 };
 
 const V = {
+  "G-061": {"aria":"Umpire hand signals: IN, OUT, timeout, let, change of ends and serve fault as an overview.","texts":["IN — in the field","OUT — beside it","Timeout (T)","Let","Change of ends","Serve fault"]},
+  "G-060": {"aria":"Dimensioned Crossminton court: two fields 5.50 by 5.50 m, neutral zone 12.80 m, serve line 3.00 m from the front line.","texts":["PLAYING FIELD","serving zone","serve line","PLAYING FIELD","serving zone","NEUTRAL ZONE","no net — the Speeder must cross over","5.50 m","5.50 m","12.80 m","3.00 m"]},
   "G-051": {"aria":"Getting your partner in position: your own stroke sets your partner up in a better attacking position.","texts":["your stroke","partner","get your partner in position"]},
   "G-014": {"aria":"The footwork system: break out from the central base into the corners and return to the center at once.","texts":["base","out to the corner — back to the center"]},
   "G-026": {"aria":"The opponent's backhand: play the Speeder deliberately into the opponent's backhand corner.","texts":["opponent","backhand"]},

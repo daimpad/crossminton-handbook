@@ -5,7 +5,7 @@
     .kappe{fill:var(--speeder-kappe,#e2402a)}
     .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
     .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
-    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .korbflaeche{fill:var(--speeder-korb-flaeche,#f1e7b5)}
     .masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .hilfslinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
     .achse{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
@@ -14,6 +14,7 @@
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
     .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilk{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -69,16 +70,16 @@
   <text class="ico" x="132" y="293">ICO 47–53</text>
 
   <!-- Kragen -->
-  <path class="masz" d="M87,114 L60,114"/>
-  <text class="teilr" x="56" y="111">Collerette</text>
-  <text class="teilr" x="56" y="124">⌀ 30</text>
+  <path class="masz" d="M87,114 L70,114"/>
+  <text class="teilr" x="66" y="111">Collerette</text>
+  <text class="teilr" x="66" y="124">⌀ 30</text>
 
   <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
   <path class="hilfslinie" d="M103.5,129 L26,129"/>
   <path class="hilfslinie" d="M57,234 L26,234"/>
   <path class="masz" d="M32,129 L32,234" marker-start="url(#mp2)" marker-end="url(#mp)"/>
   <text class="maszzahl" x="14" y="178.5">35</text>
-  <text class="teil" x="2" y="191.5">Jupe</text>
+  <text class="teil" x="4" y="191.5">Jupe</text>
 
   <text class="st" x="150" y="326">Cotes en mm · fenêtre ICO en bleu</text>
 </svg>

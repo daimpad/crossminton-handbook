@@ -35,7 +35,7 @@ const STIL = `  <style>
     .kappe{fill:var(--speeder-kappe,#e2402a)}
     .kappenlinie{fill:none;stroke:var(--speeder-kappe-tief,#a82412);stroke-width:2;stroke-linecap:round}
     .stiel{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.5;opacity:.45}
-    .korbflaeche{fill:var(--speeder-korb,#f0c400);opacity:.28}
+    .korbflaeche{fill:var(--speeder-korb-flaeche,#f1e7b5)}
     .masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .hilfslinie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:4 4;opacity:.85}
     .achse{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:9 4 2 4;opacity:.7}
@@ -44,6 +44,7 @@ const STIL = `  <style>
     .ico{fill:var(--primaer-tief,#1568ad);font:600 10px/1 system-ui,sans-serif;text-anchor:middle}
     .teil{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .teilr{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,sans-serif;text-anchor:end;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .teilk{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>
   <defs>
@@ -181,16 +182,16 @@ ${stiele.join('\n')}
   <text class="ico" x="${MX}" y="293">ICO 47–53</text>
 
   <!-- Kragen -->
-  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L60,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
-  <text class="teilr" x="56" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
-  <text class="teilr" x="56" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
+  <path class="masz" d="M${MX - R_KRAGEN},${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2} L70,${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2}"/>
+  <text class="teilr" x="66" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 - 3}">Kragen</text>
+  <text class="teilr" x="66" y="${(Y_KRAGEN_OBEN + Y_KRAGEN_UNTEN) / 2 + 10}">⌀ 30</text>
 
   <!-- Korblaenge 35: die Strecke, ueber die der Konus den Winkel aufspannt -->
   <path class="hilfslinie" d="M${MX - R_ENDRING},${Y_KRAGEN_UNTEN} L26,${Y_KRAGEN_UNTEN}"/>
   <path class="hilfslinie" d="M${MX - R_RAND},${Y_RAND} L26,${Y_RAND}"/>
   <path class="masz" d="M32,${Y_KRAGEN_UNTEN} L32,${Y_RAND}" marker-start="url(#mp2)" marker-end="url(#mp)"/>
   <text class="maszzahl" x="14" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 - 3}">35</text>
-  <text class="teil" x="2" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 10}">Korb</text>
+  <text class="teil" x="4" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 10}">Korb</text>
 
   <text class="st" x="150" y="326">Maße in mm · blau das ICO-Fenster</text>`;
   writeFileSync(`${ZIEL}/G-065.svg`, svg(340,
@@ -234,12 +235,12 @@ ${stiele.join('\n')}
   <path class="masz" d="M${MX},${Y_KAPPE_OBEN - 2} L${MX + 46},34"/>
   <text class="teil" x="232" y="30">Loch ⌀ 4</text>
   <path class="masz" d="M${MX + 34},${Y_KRAGEN_OBEN + 10} L234,${Y_KRAGEN_OBEN + 4}"/>
-  <text class="teil" x="238" y="${Y_KRAGEN_OBEN + 8}">Endring</text>
-  <text class="teil" x="238" y="${Y_KRAGEN_OBEN + 21}">⌀ 19</text>
+  <text class="teilk" x="238" y="${Y_KRAGEN_OBEN + 8}">Endring</text>
+  <text class="teilk" x="238" y="${Y_KRAGEN_OBEN + 21}">⌀ 19</text>
   <path class="masz" d="M${MX + rk},${Y_KRAGEN_UNTEN - 6} L234,${Y_KRAGEN_UNTEN + 16}"/>
-  <text class="teil" x="238" y="${Y_KRAGEN_UNTEN + 20}">Pressring</text>
+  <text class="teilk" x="238" y="${Y_KRAGEN_UNTEN + 20}">Pressring</text>
   <path class="masz" d="M${MX + 50},${(Y_KRAGEN_UNTEN + Y_RAND) / 2} L234,${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 12}"/>
-  <text class="teil" x="238" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 16}">Querrippe</text>
+  <text class="teilk" x="238" y="${(Y_KRAGEN_UNTEN + Y_RAND) / 2 + 16}">Querrippe</text>
 
   <path class="masz" d="M${MX - rk - 12},${Y_KRAGEN_UNTEN + 34} L74,${Y_KRAGEN_UNTEN + 22}"/>
   <text class="teil" x="6" y="${Y_KRAGEN_UNTEN + 26}">Längsstiel</text>
@@ -257,17 +258,19 @@ ${stiele.join('\n')}
 // Draufsicht auf die Korboeffnung: 16 Stiele, 22,5 Grad Teilung.
 {
   const cx = 146, cy = 136, rA = 84, rI = 30;
-  const stiele = [], welle = [];
+  const stiele = [], welle = [], rand = [];
   for (let i = 0; i < 16; i++) {
     const t = (i * 22.5 * Math.PI) / 180, t2 = ((i + 1) * 22.5 * Math.PI) / 180, tm = (t + t2) / 2;
     stiele.push(`  <path class="stiel" d="M${(cx + rI * Math.cos(t)).toFixed(1)},${(cy + rI * Math.sin(t)).toFixed(1)} L${(cx + rA * Math.cos(t)).toFixed(1)},${(cy + rA * Math.sin(t)).toFixed(1)}"/>`);
     welle.push(`  <path class="kontur" d="M${(cx + rA * Math.cos(t)).toFixed(1)},${(cy + rA * Math.sin(t)).toFixed(1)} Q${(cx + (rA - 8) * Math.cos(tm)).toFixed(1)},${(cy + (rA - 8) * Math.sin(tm)).toFixed(1)} ${(cx + rA * Math.cos(t2)).toFixed(1)},${(cy + rA * Math.sin(t2)).toFixed(1)}"/>`);
+    rand.push(`${i ? '' : `M${(cx + rA * Math.cos(t)).toFixed(1)},${(cy + rA * Math.sin(t)).toFixed(1)} `}Q${(cx + (rA - 8) * Math.cos(tm)).toFixed(1)},${(cy + (rA - 8) * Math.sin(tm)).toFixed(1)} ${(cx + rA * Math.cos(t2)).toFixed(1)},${(cy + rA * Math.sin(t2)).toFixed(1)}`);
   }
   // Teilungswinkel: Bogen zwischen zwei benachbarten Stielen, oben rechts
   const ra = 56, ta = -3 * 22.5, tb = -2 * 22.5;
   const bx1 = cx + ra * Math.cos((ta * Math.PI) / 180), by1 = cy + ra * Math.sin((ta * Math.PI) / 180);
   const bx2 = cx + ra * Math.cos((tb * Math.PI) / 180), by2 = cy + ra * Math.sin((tb * Math.PI) / 180);
-  const inhalt = `  <circle class="korbflaeche" cx="${cx}" cy="${cy}" r="${rA}"/>
+  // Die Korbfläche folgt dem welligen Öffnungsrand; ein Kreis mit rA stand zwischen den Bögen über
+  const inhalt = `  <path class="korbflaeche" d="${rand.join(' ')} Z"/>
 ${stiele.join('\n')}
 ${welle.join('\n')}
   <circle class="kappe" cx="${cx}" cy="${cy}" r="${rI}"/>

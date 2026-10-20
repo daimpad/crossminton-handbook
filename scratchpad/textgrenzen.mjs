@@ -9,17 +9,23 @@
 // scratchpad/figuren/gate.mjs prüft Breite und Ränder nur für die generierten Personengrafiken;
 // dieses Skript deckt auch die übrigen Diagramme und ihre Sprachzwillinge ab.
 //   node scratchpad/textgrenzen.mjs
+// Zweiter Lauf mit DejaVu Sans, der breitesten Systemschrift, die system-ui treffen kann (Linux-
+// Desktops, rund 10–20 % breiter als Liberation): dort zählt nur, dass nichts über den Rand läuft —
+// die 250er-Grenze gilt für die Stellvertreterschrift.
+//   node scratchpad/textgrenzen.mjs --dejavu
 import pw from '/opt/node22/lib/node_modules/playwright/index.js';
 import { readFileSync, readdirSync } from 'node:fs';
 import { STELLVERTRETER } from '../scripts/grafik-gate.mjs';
 const dir = new URL('../images/', import.meta.url).pathname;
+const DEJAVU = process.argv.includes('--dejavu');
+const SCHRIFT = DEJAVU ? "svg text{font-family:'DejaVu Sans',sans-serif !important}" : STELLVERTRETER;
 const dateien = readdirSync(dir).filter((n) => /^G-\d{3}(\.\w\w)?\.svg$/.test(n)).sort();
 const browser = await pw.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const page = await browser.newPage();
 const max = {}, aus = [], kreuzt = [];
 for (const n of dateien) {
   const svg = readFileSync(dir + n, 'utf8');
-  await page.setContent(`<!doctype html><meta charset="utf8"><style>${STELLVERTRETER}</style><body style="margin:0">${svg}</body>`);
+  await page.setContent(`<!doctype html><meta charset="utf8"><style>${SCHRIFT}</style><body style="margin:0">${svg}</body>`);
   const r = await page.evaluate(() => {
     const s = document.querySelector('svg'), [, , w, h] = s.getAttribute('viewBox').split(/[\s,]+/).map(Number);
     const formen = [...s.querySelectorAll('path,line,circle,rect,ellipse,polyline,polygon')]
@@ -38,17 +44,18 @@ for (const n of dateien) {
           if (treffer) break;
         }
       }
-      return { st: t.classList.contains('st'), x0: b.x, x1: b.x + b.width, bw: b.width, txt: t.textContent, treffer };
+      return { st: t.classList.contains('st'), x0: b.x, x1: b.x + b.width, bw: b.width, txt: t.textContent, treffer, gedreht: t.hasAttribute('transform') };
     });
     return { w, h, t: texte };
   });
   for (const t of r.t) {
     if (t.st) max[n] = Math.max(max[n] || 0, t.bw);
-    if (t.x0 < 2 || t.x1 > r.w - 2) aus.push(`${n}: „${t.txt}“ ${Math.round(t.x0)}–${Math.round(t.x1)} von ${r.w}`);
+    if (!t.gedreht && (t.x0 < 2 || t.x1 > r.w - 2)) aus.push(`${n}: „${t.txt}“ ${Math.round(t.x0)}–${Math.round(t.x1)} von ${r.w}`);
     if (t.treffer) kreuzt.push(`${n}: „${t.txt}“ ← ${t.treffer}`);
   }
 }
-const breit = Object.entries(max).filter(([, b]) => b > 250).map(([n, b]) => `${n} ${Math.round(b)}`);
+const breit = DEJAVU ? [] : Object.entries(max).filter(([, b]) => b > 250).map(([n, b]) => `${n} ${Math.round(b)}`);
+if (DEJAVU) console.log('Schrift: DejaVu Sans (nur Ränder und Kreuzungen zählen)');
 console.log('Dateien', dateien.length, 'mit .st-Caption', Object.keys(max).length, 'breiteste', Math.round(Math.max(...Object.values(max))));
 console.log('Caption > 250:', breit.length, breit.join(', '));
 console.log('Text über den Rand:', aus.length); aus.forEach((a) => console.log('  ' + a));

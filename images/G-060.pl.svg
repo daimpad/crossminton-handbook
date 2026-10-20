@@ -34,7 +34,7 @@
   <text class="feldtext" x="171" y="403">POLE GRY</text>
   <text class="subtext"  x="171" y="497">strefa serwisu</text>
   <text class="zonetext" x="171" y="268">STREFA NEUTRALNA</text>
-  <text class="subtext"  x="171" y="315">bez siatki — speeder musi przelecieć</text>
+  <text class="subtext"  x="171" y="320">bez siatki — speeder musi przelecieć</text>
 
   <line class="ext" x1="76"  y1="46" x2="76"  y2="26"/>
   <line class="ext" x1="266" y1="46" x2="266" y2="26"/>

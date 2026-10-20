@@ -34,14 +34,13 @@ const M = {
   'G-055': { aria: "Lire et exploiter le vent : le vent décale le speeder sur le côté, c'est pourquoi tu vises volontairement contre la dérive.", texts: ['Vent →', 'cible', "viser contre la dérive"] },
   'G-059': { aria: "Différentes surfaces : sable, gazon, terre battue et gazon synthétique demandent chacun un autre jeu de jambes.", texts: ['Sable', 'Gazon', "Terre battue", "Gazon synth.", "chaque sol — son jeu de jambes"] },
   'G-060': { aria: "Terrain de Crossminton coté : deux terrains de 5,50 sur 5,50 m, zone neutre de 12,80 m, ligne de service à 3,00 m de la ligne avant.", texts: ['TERRAIN', "zone de service", "ligne de service", 'TERRAIN', "zone de service", "ZONE NEUTRE", "pas de filet — le speeder doit passer", "5,50 m", "5,50 m", "12,80 m", "3,00 m"] },
-  'G-061': { aria: "Gestes de l'arbitre : IN, OUT, temps mort, let, changement de côtés et faute de service en aperçu.", texts: ["IN — dedans", "OUT — à côté", "temps mort (T)", 'let', "changement de côté", "faute de service"] },
+  'G-061': { aria: "Gestes de l'arbitre : IN, OUT, temps mort, let, changement de côtés et faute de service en aperçu.", texts: ["IN — dedans", "OUT — à côté", "temps mort (T)", 'let', "changer de côté", "faute de service"] },
 };
 
 // Schrift-Nachzug NUR im fr-SVG bei französischer Überlänge (Ring-16-Regel:
 // „Position/Größe nachziehen"). Reduziert font:<w> <px> in der genannten Klasse.
 const TWEAKS = {
   'G-040': [{ cls: 'st', px: 11 }],   // Umlauf-Caption "à tour de rôle : 1 → 2 → 3 → 4"
-  'G-061': [{ cls: 'cap', px: 10 }], // 3-Spalten-Handzeichen-Grid, längere fr-Label („changement de côté“ passt bei 10,5 nicht in den Rahmen)
 };
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

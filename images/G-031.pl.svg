@@ -7,7 +7,7 @@
     .oeffnen{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:7 5}
     .marker{fill:var(--primaer,#38a4f1)}
     .gegner{fill:var(--tinte-3,#656f7e)}
-    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 12px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
+    .zonetext{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:middle}
     .subtext{fill:var(--tinte-3,#656f7e);font:600 11px/1 system-ui,'Segoe UI',sans-serif;text-anchor:end}
   </style>
   <defs>
@@ -16,15 +16,15 @@
   </defs>
 
   <rect class="linie" x="52" y="42" width="196" height="196"/>
-  <circle class="ziel" cx="86" cy="80" r="32"/>
-  <circle class="s-ring" cx="86" cy="80" r="32"/>
+  <circle class="ziel" cx="91" cy="81" r="34"/>
+  <circle class="s-ring" cx="91" cy="81" r="34"/>
 
   <!-- eine Öffnungs-Ecke, dann immer wieder auf die Schwäche -->
   <path class="oeffnen" d="M150,288 C 190,230 214,150 214,116" marker-end="url(#ahg)"/>
-  <path class="traj" d="M150,288 C 118,236 96,150 90,116" marker-end="url(#ah)"/>
-  <path class="traj" d="M150,288 C 126,244 100,160 84,116" marker-end="url(#ah)"/>
+  <path class="traj" d="M150,288 C 118,236 98,152 93,119" marker-end="url(#ah)"/>
+  <path class="traj" d="M150,288 C 126,244 102,162 87,119" marker-end="url(#ah)"/>
 
   <circle class="gegner" cx="150" cy="150" r="8"/>
-  <text class="zonetext" x="86"  y="84">słabość</text>
-  <text class="subtext"  x="204" y="150">otwierać</text>
+  <text class="zonetext" x="91"  y="85">słabość</text>
+  <text class="subtext"  x="190" y="196">otwierać</text>
 </svg>
