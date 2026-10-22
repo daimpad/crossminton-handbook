@@ -1213,22 +1213,70 @@ details summary {
 
 details[open] summary { margin-bottom: 0.5rem; }
 
+/* Fußnavigation: zwei gleich breite Blätterkarten (zurück links, weiter rechts) und darunter
+   zentriert „Zur Liste". Jede Karte hält ihre Spalte, auch wenn die andere fehlt (Anfang oder
+   Ende einer Reihe) — so springt nichts. Schmal einspaltig, zurück vor weiter. */
 .baustein-fussnav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
 }
-.baustein-fussnav .fussnav-seite {
+.blaetter {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  box-shadow: var(--schatten-karte);
+  color: var(--tinte);
+  text-decoration: none;
+  transition: box-shadow var(--uebergang), border-color var(--uebergang), transform var(--uebergang);
 }
-/* Rechte Gruppe (nächster Baustein + „Zur Liste"-CTA) rechtsbündig, auch wenn links leer ist. */
-.baustein-fussnav .fussnav-rechts { justify-content: flex-end; margin-left: auto; }
+.blaetter-zurueck { grid-column: 1; }
+.blaetter-weiter { grid-column: 2; text-align: right; align-items: flex-end; }
+.blaetter-richtung {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--tinte-3);
+}
+.blaetter-titel { font-weight: 600; line-height: 1.3; }
+.blaetter-akzent { border-color: var(--primaer); background: var(--primaer-weich); }
+.blaetter-akzent .blaetter-richtung { color: var(--primaer-tief); }
+.blaetter:focus-visible { outline: 2px solid var(--fokus); outline-offset: 2px; }
+.baustein-zur-liste {
+  grid-column: 1 / -1;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  font-weight: 600;
+  color: var(--primaer-tief);
+  text-decoration: none;
+  border-radius: var(--radius-klein);
+}
+.baustein-zur-liste .fa-solid { color: inherit; }
+.baustein-zur-liste:focus-visible { outline: 2px solid var(--fokus); outline-offset: 2px; }
+@media (hover: hover) {
+  .blaetter:hover { border-color: var(--primaer); box-shadow: var(--schatten-weich); }
+  .baustein-zur-liste:hover { text-decoration: underline; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .blaetter:hover { transform: translateY(-1px); }
+}
+@media (max-width: 30rem) {
+  .baustein-fussnav { grid-template-columns: 1fr; }
+  .blaetter-weiter, .blaetter-zurueck { grid-column: 1; }
+}
 
 /* ---------- Trainer-Layer / Fehlerbilder ---------- */
 
@@ -1382,9 +1430,18 @@ details[open] summary { margin-bottom: 0.5rem; }
 
 .regel-verweise { margin: 0.7rem 0 0; font-size: 0.9rem; }
 .regel-verweise-titel { color: var(--tinte-2); }
-/* „Siehe auch" unter den Aufgabenteilen einer Baustein-Seite (Feld querverweis). */
-.siehe-auch { margin: 1.2rem 0 0; font-size: 0.95rem; }
-.siehe-auch-titel { color: var(--tinte-2); }
+/* „Siehe auch" unter den Aufgabenteilen einer Baustein-Seite (Feld querverweis): eine ruhige
+   Karte mit kleiner Überschrift und Baustein-Chips statt einer losen, umbrechenden Linkzeile. */
+.siehe-auch-titel {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tinte-2);
+}
+.siehe-auch-liste { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.siehe-auch-liste .chip { font-size: 0.85rem; padding: 0.3rem 0.8rem; white-space: normal; }
 .regel-verweis { display: inline-flex; align-items: center; gap: 0.3rem; margin-right: 0.6rem; white-space: nowrap; }
 .regel-verweis .fa-arrow-right { font-size: 0.75em; }
 

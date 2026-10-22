@@ -159,10 +159,14 @@ function sieheAuchHtml(daten, baustein) {
     .filter(Boolean)
     .map(
       (ziel) =>
-        `<a href="#/baustein/${esc(ziel.id)}?kontext=${encodeURIComponent(heimatKontext(ziel))}">${esc(label('baustein', ziel.id))}</a>`,
+        `<a class="chip chip-baustein" href="#/baustein/${esc(ziel.id)}?kontext=${encodeURIComponent(heimatKontext(ziel))}">${esc(label('baustein', ziel.id))}</a>`,
     );
   if (links.length === 0) return '';
-  return `<p class="siehe-auch"><span class="siehe-auch-titel">${esc(t('siehe_auch'))}:</span> ${links.join(', ')}</p>`;
+  return `
+    <section class="karte siehe-auch">
+      <h2 class="siehe-auch-titel">${esc(t('siehe_auch'))}</h2>
+      <ul class="siehe-auch-liste">${links.map((a) => `<li>${a}</li>`).join('')}</ul>
+    </section>`;
 }
 
 // Domänen-Hue für den Baustein-Hero (analog zu den Startseiten-Kacheln): färbt
@@ -279,18 +283,26 @@ export function renderBaustein(el, daten, bausteinId, kontext) {
     : '';
 
   const listeHref = kontextZuListe(kontext);
-  // Fußnav: links der Rückweg (vorheriger), rechts als CTA „Zur Liste" plus der
-  // nächste Baustein. „Zur Liste" ist bewusst ein sichtbarer Knopf (kein leiser),
-  // rechts gruppiert — der klare Ausweg zurück in die Übersicht.
+  // Fußnav: zwei gleich breite Blätterkarten (links zurück, rechts weiter) mit kleiner
+  // Richtungszeile über dem Titel, darunter zentriert „Zur Liste" als Ausweg in die
+  // Übersicht. Jede Karte behält ihre Spalte, auch wenn die andere fehlt — so springt
+  // nichts, wenn man am Anfang oder Ende einer Reihe steht. Ist der Baustein
+  // abgeschlossen, trägt „Weiter" den Akzent.
+  const blaetter = (station, richtung) => {
+    const weiter = richtung === 'weiter';
+    const pfeil = `<i class="fa-solid ${weiter ? 'fa-arrow-right' : 'fa-arrow-left'}" aria-hidden="true"></i>`;
+    const kicker = weiter ? `${esc(t('weiter'))} ${pfeil}` : `${pfeil} ${esc(t('zurueck'))}`;
+    const akzent = weiter && station.status?.absolviert;
+    return `<a class="blaetter ${weiter ? 'blaetter-weiter' : 'blaetter-zurueck'}${akzent ? ' blaetter-akzent' : ''}" href="#/baustein/${esc(station.baustein.id)}?kontext=${encodeURIComponent(kontext)}">
+          <span class="blaetter-richtung">${kicker}</span>
+          <span class="blaetter-titel">${esc(label('baustein', station.baustein.id))}</span>
+        </a>`;
+  };
   const fussNavigation = `
     <nav class="baustein-fussnav" aria-label="${esc(t('baustein_navigation'))}">
-      <div class="fussnav-seite">
-        ${vorherige ? `<a class="knopf knopf-sekundaer" href="#/baustein/${esc(vorherige.baustein.id)}?kontext=${encodeURIComponent(kontext)}"><span aria-hidden="true">←</span> ${esc(label('baustein', vorherige.baustein.id))}</a>` : ''}
-      </div>
-      <div class="fussnav-seite fussnav-rechts">
-        ${naechste ? `<a class="knopf ${station.status.absolviert ? 'knopf-primaer' : 'knopf-sekundaer'}" href="#/baustein/${esc(naechste.baustein.id)}?kontext=${encodeURIComponent(kontext)}">${esc(label('baustein', naechste.baustein.id))} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>` : ''}
-        <a class="knopf knopf-sekundaer baustein-zur-liste" href="${esc(listeHref)}">${esc(t('zur_liste'))}</a>
-      </div>
+      ${vorherige ? blaetter(vorherige, 'zurueck') : ''}
+      ${naechste ? blaetter({ ...naechste, status: station.status }, 'weiter') : ''}
+      <a class="baustein-zur-liste" href="${esc(listeHref)}"><i class="fa-solid fa-list" aria-hidden="true"></i> ${esc(t('zur_liste'))}</a>
     </nav>`;
 
   // Floating-Aktionen (Teilen + Merken): schweben unten rechts über der Navigation.

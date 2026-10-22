@@ -82,6 +82,8 @@
 .fa-xmark::before { content: '\f00d'; }
 .fa-medal::before { content: '\f5a2'; }
 .fa-arrow-right::before { content: '\f061'; }
+.fa-arrow-left::before { content: '\f060'; }
+.fa-list::before { content: '\f03a'; }
 .fa-play::before { content: '\f04b'; }
 .fa-check::before { content: '\f00c'; }
 .fa-minus::before { content: '\f068'; }
