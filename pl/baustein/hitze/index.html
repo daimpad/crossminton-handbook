@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Upał — Podręcznik Crossmintona</title>
+  <meta name="description" content="W upale gra także ciało. Mecz w pełnym słońcu wymaga więcej niż ta sama gra w chłodnej hali — i tu uważność na siebie samego stoi ponad wszystkim. Ten moduł wyo …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/pl/baustein/hitze">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Upał — Podręcznik Crossmintona">
+  <meta property="og:description" content="W upale gra także ciało. Mecz w pełnym słońcu wymaga więcej niż ta sama gra w chłodnej hali — i tu uważność na siebie samego stoi ponad wszystkim. Ten moduł wyo …">
+  <meta property="og:url" content="https://crossminton-handbook.de/pl/baustein/hitze">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Upał — Podręcznik Crossmintona">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Upał — Podręcznik Crossmintona">
+  <meta name="twitter:description" content="W upale gra także ciało. Mecz w pełnym słońcu wymaga więcej niż ta sama gra w chłodnej hali — i tu uważność na siebie samego stoi ponad wszystkim. Ten moduł wyo …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/hitze">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/hitze">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/hitze">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/hitze">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/hitze">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Podręcznik Crossmintona","item":"https://crossminton-handbook.de/pl"},{"@type":"ListItem","position":2,"name":"Gra na zewnątrz","item":"https://crossminton-handbook.de/pl/pfad/umgebung"},{"@type":"ListItem","position":3,"name":"Upał","item":"https://crossminton-handbook.de/pl/baustein/hitze"}]},{"@type":"LearningResource","name":"Upał","description":"W upale gra także ciało. Mecz w pełnym słońcu wymaga więcej niż ta sama gra w chłodnej hali — i tu uważność na siebie samego stoi ponad wszystkim. Ten moduł wyo …","url":"https://crossminton-handbook.de/pl/baustein/hitze","inLanguage":"pl","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"lesson","educationalLevel":"Zaawansowany","about":[{"@type":"Thing","name":"Przygotowanie fizyczne"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/pl" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/pl/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-teal baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-fire " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Upał</h1>
+        <p class="marke-hero-untertitel">Przygotowanie fizyczne · Zaawansowany</p>
+      </div>
+    </section>
+      <p class="chip-zeile"><span class="chip">Upał</span></p>
+      <div class="banner-hinweis">Zalecane wcześniej: <a href="/pl/baustein/draussen_spielen?kontext=kompetenz">Gra na zewnątrz</a>, <a href="/pl/baustein/durchhalten?kontext=kompetenz">Wytrwać</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Objaśnienie</h2><span class="chip chip-rot">do zrobienia</span></div>
+      
+      
+      <p>W upale gra także ciało. Mecz w pełnym słońcu wymaga więcej niż ta sama gra w chłodnej hali — i tu uważność na siebie samego stoi ponad wszystkim. Ten moduł wyostrza spojrzenie na znaki, zamiast dawać ci zalecenia.</p><p>Pierwszą zasadą jest traktować sygnały własnego ciała poważnie. Silne wyczerpanie, zawroty głowy, mdłości albo słabnięcie koncentracji mogą być w upale znakami przegrzania — wymagają przerwy, nie zaciskania zębów. Przebijanie się przez upał nie jest znakiem siły.</p><p>Drugą zasadą jest mądrze wykorzystywać warunki. Przerwy między setami spędzasz w miarę możliwości w cieniu. Rozkładasz siły na mecz, zamiast grać każdą wymianę na maksa. I jeśli to możliwe, nie planujesz najintensywniejszej gry na najgorętsze godziny dnia.</p><p>Tu obowiązuje jasna granica ramy zdrowotnej: ta aplikacja nie daje ci zaleceń co do picia, odżywiania ani obciążenia. Przy wszystkim, co wykracza poza normalną grę — utrzymującym się złym samopoczuciu, oznakach udaru cieplnego —, porada lekarska lub fachowa jest właściwym adresem. Uważać na siebie to doświadczenie, nie słabość.</p><p>Twoje ciało jest w upale jak silnik, który się przegrzewa. Kto ma wskaźnik temperatury na oku i w porę chłodzi, dojeżdża — kto go ignoruje, zostaje na trasie.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Upał: słońce stoi wysoko, nad polem drga powietrze. W przerwie gracz siedzi na ławce w cieniu parasola, przedramię na udzie, głowa opuszczona; rakieta opiera się o koniec ławki." class="grafik-bild grafik-svg" id="g-svg-317" style="--hoch: 1.000;">
+  <style>
+    #g-svg-317 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-317 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-317 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-317 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-317 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-317 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-317 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-317 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-317 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-317 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-317 .s-sonne{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round}
+    #g-svg-317 .s-stange{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.4;stroke-linecap:round}
+    #g-svg-317 .s-schirm{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.6;stroke-linejoin:round}
+    #g-svg-317 .s-bank{fill:var(--tinte-3,#656f7e)}
+    #g-svg-317 .s-flimmer{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    #g-svg-317 .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
+    #g-svg-317 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-317 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <ellipse class="s-sch" cx="96" cy="246" rx="78" ry="7"></ellipse>
+  <path class="s-boden" d="M8,244.5L292,244.5"></path>
+  <path class="s-linie" d="M206,244.5L292,244.5M206,241.5L206,247.5"></path>
+  <path class="s-flimmer" d="M232,236 q 5,-8 0,-16 q -5,-8 0,-16 q 5,-8 0,-16M252,236 q 5,-8 0,-16 q -5,-8 0,-16 q 5,-8 0,-16M272,236 q 5,-8 0,-16 q -5,-8 0,-16 q 5,-8 0,-16"></path>
+  <path class="s-sonne" d="M222,28a14,14 0 1 0 28,0a14,14 0 1 0 -28,0ZM254,28L260,28M248.7,40.7L253,45M236,46L236,52M223.3,40.7L219,45M218,28L212,28M223.3,15.3L219,11M236,10L236,4M248.7,15.3L253,11"></path>
+  <path class="s-stange" d="M100,244L100,64"></path><path class="s-schirm" d="M26,84 Q 100,36 174,84 Q 137,76 100,84 Q 63,76 26,84Z"></path>
+  <path class="s-rf" d="M79.1,183.9C78.6,183.9 78.1,184 77.5,184.1C77,184.2 76.5,184.4 75.9,184.6C75.4,184.8 74.9,185.1 74.3,185.4C73.8,185.8 73.3,186.2 72.8,186.6C72.3,187 71.9,187.5 71.4,188C71,188.5 70.6,189 70.2,189.6C69.8,190.2 69.4,190.8 69.1,191.5C68.7,192.1 68.4,192.8 68.2,193.5C67.9,194.2 67.7,194.9 67.5,195.6C67.3,196.3 67.2,197 67.1,197.7C67,198.5 66.9,199.2 66.9,199.9C66.9,200.6 66.9,201.3 67,202C67.1,202.7 67.2,203.4 67.3,204C67.5,204.6 67.7,205.3 67.9,205.9C68.1,206.4 68.4,207 68.7,207.5C69,208 69.3,208.5 69.7,208.9C70.1,209.3 70.5,209.7 70.9,210C71.3,210.4 71.8,210.6 72.3,210.9C72.7,211.1 73.2,211.3 73.7,211.4C74.2,211.5 74.8,211.5 75.3,211.5C75.8,211.5 76.4,211.5 76.9,211.4C77.4,211.3 78,211.1 78.5,210.9C79,210.6 79.6,210.4 80.1,210C80.6,209.7 81.1,209.3 81.6,208.9C82.1,208.5 82.6,208 83,207.5C83.5,207 83.9,206.4 84.3,205.9C84.7,205.3 85,204.6 85.4,204C85.7,203.4 86,202.7 86.2,202C86.5,201.3 86.7,200.6 86.9,199.9C87.1,199.2 87.2,198.5 87.3,197.7C87.4,197 87.5,196.3 87.5,195.6C87.5,194.9 87.5,194.2 87.4,193.5C87.4,192.8 87.3,192.1 87.1,191.5C87,190.8 86.8,190.2 86.5,189.6C86.3,189 86,188.5 85.7,188C85.4,187.5 85.1,187 84.7,186.6C84.4,186.2 84,185.8 83.5,185.4C83.1,185.1 82.7,184.8 82.2,184.6C81.7,184.4 81.2,184.2 80.7,184.1C80.2,184 79.7,183.9 79.1,183.9Z"></path><path class="s-rs" d="M80.7,208.9L83.8,186.6M75.4,210.6L79,184.9M70.6,208.9L73.7,186.6M84.2,204.6L68.3,204.6M86.4,197.7L68,197.7M86.2,190.8L70.2,190.8"></path><path class="s-rh" d="M79.4,210.7L75.2,212.5L71.4,210.7"></path><path class="s-rsch" d="M73.4,224.9L75.2,212.5"></path><path class="s-rr" d="M79.1,183.9C78.6,183.9 78.1,184 77.5,184.1C77,184.2 76.5,184.4 75.9,184.6C75.4,184.8 74.9,185.1 74.3,185.4C73.8,185.8 73.3,186.2 72.8,186.6C72.3,187 71.9,187.5 71.4,188C71,188.5 70.6,189 70.2,189.6C69.8,190.2 69.4,190.8 69.1,191.5C68.7,192.1 68.4,192.8 68.2,193.5C67.9,194.2 67.7,194.9 67.5,195.6C67.3,196.3 67.2,197 67.1,197.7C67,198.5 66.9,199.2 66.9,199.9C66.9,200.6 66.9,201.3 67,202C67.1,202.7 67.2,203.4 67.3,204C67.5,204.6 67.7,205.3 67.9,205.9C68.1,206.4 68.4,207 68.7,207.5C69,208 69.3,208.5 69.7,208.9C70.1,209.3 70.5,209.7 70.9,210C71.3,210.4 71.8,210.6 72.3,210.9C72.7,211.1 73.2,211.3 73.7,211.4C74.2,211.5 74.8,211.5 75.3,211.5C75.8,211.5 76.4,211.5 76.9,211.4C77.4,211.3 78,211.1 78.5,210.9C79,210.6 79.6,210.4 80.1,210C80.6,209.7 81.1,209.3 81.6,208.9C82.1,208.5 82.6,208 83,207.5C83.5,207 83.9,206.4 84.3,205.9C84.7,205.3 85,204.6 85.4,204C85.7,203.4 86,202.7 86.2,202C86.5,201.3 86.7,200.6 86.9,199.9C87.1,199.2 87.2,198.5 87.3,197.7C87.4,197 87.5,196.3 87.5,195.6C87.5,194.9 87.5,194.2 87.4,193.5C87.4,192.8 87.3,192.1 87.1,191.5C87,190.8 86.8,190.2 86.5,189.6C86.3,189 86,188.5 85.7,188C85.4,187.5 85.1,187 84.7,186.6C84.4,186.2 84,185.8 83.5,185.4C83.1,185.1 82.7,184.8 82.2,184.6C81.7,184.4 81.2,184.2 80.7,184.1C80.2,184 79.7,183.9 79.1,183.9Z"></path><path class="s-rg" d="M71,241.9L73.4,224.9"></path>
+  <path class="s-bank" d="M84,206.4L88,206.4L88,244L84,244ZM142,206.4L146,206.4L146,244L142,244Z"></path>
+  <g class="s-f"><path d="M120.9,199.6L136.3,201.4A7.4,7.4 0 1 0 137.8,186.8L122.4,185.4A7.1,7.1 0 0 0 120.9,199.6Z"></path><path d="M137,201.5L161.5,201.9A5.2,5.2 0 0 0 162.6,191.6L138.5,186.9A7.4,7.4 0 1 0 137,201.5Z"></path><path d="M156.4,196.6L156.1,208.6A5.9,5.9 0 1 0 167.8,208.2L166.8,196.2A5.2,5.2 0 0 0 156.4,196.6Z"></path><path d="M156.4,210.3L164.2,237.9A3,3 0 0 0 170,236.8L167.8,208.3A5.9,5.9 0 1 0 156.4,210.3Z"></path><path d="M165.1,234.8L161.7,237.9A3.7,3.7 0 1 0 167.2,242.5L169.6,238.6A3,3 0 0 0 165.1,234.8Z"></path><path d="M163.7,244.3L178.1,245.7A3.5,3.5 0 0 0 178.9,238.8L164.6,237A3.7,3.7 0 1 0 163.7,244.3Z"></path><path d="M178.6,245.7L185.3,245.4A2.4,2.4 0 0 0 185.9,240.7L179.4,238.9A3.5,3.5 0 1 0 178.6,245.7Z"></path></g>
+  <g class="s-f"><path d="M127.2,143L121.6,171.1A3.7,3.7 0 0 0 128.7,173L138.3,146.1A5.8,5.8 0 1 0 127.2,143Z"></path><path d="M121.6,171.3L120.5,179.1A4.3,4.3 0 1 0 129,179.7L128.9,171.8A3.7,3.7 0 0 0 121.6,171.3Z"></path><path d="M120.5,179.8L120.9,198.1A2.5,2.5 0 0 0 125.9,198.4L128.9,180.4A4.3,4.3 0 1 0 120.5,179.8Z"></path></g>
+  <g class="s-f"><path d="M121.1,197.1L119.5,201.1A3.9,3.9 0 1 0 126.9,201.6L125.9,197.4A2.5,2.5 0 0 0 121.1,197.1Z"></path></g>
+  <g class="s-k"><path d="M131.8,137.8C134.7,139.1 135.3,140.2 137.1,142.7C138.8,145.1 140.2,145.9 140.5,150C140.8,154.1 140.5,157.3 138.6,163.2C136.7,169.1 133.1,173.1 131,179.5C128.9,185.9 129.4,190.3 127.9,195.2C126.4,200.1 125.6,201.3 123.6,204C121.6,206.6 120.2,207.7 118.1,208.5C115.9,209.2 114.6,209 112.9,207.6C111.2,206.3 110.4,204.8 109.6,201.7C108.8,198.6 108.4,197.2 109,192.2C109.6,187.1 112,183.2 112.7,176.5C113.3,169.9 112.3,165.1 112.3,158.9C112.3,152.7 111.9,149.4 112.8,145.5C113.6,141.6 114.6,141.2 116.6,139.4C118.5,137.5 119.4,136.6 122.5,136.3C125.5,136 128.9,136.5 131.8,137.8Z"></path><path d="M113.1,201.7L127,203.9A7.4,7.4 0 1 0 129.1,189.3L115.1,187.6A7.1,7.1 0 0 0 113.1,201.7Z"></path><path d="M127.8,204L149.7,205.1A5.2,5.2 0 0 0 151.2,195L130,189.5A7.4,7.4 0 1 0 127.8,204Z"></path><path d="M144.8,199.5L143.7,211.5A5.9,5.9 0 1 0 155.4,212L155.1,199.9A5.2,5.2 0 0 0 144.8,199.5Z"></path><path d="M143.8,213.3L149.6,241.3A3,3 0 0 0 155.5,240.7L155.4,212.1A5.9,5.9 0 1 0 143.8,213.3Z"></path><path d="M150.5,238.5L147.3,241.5A3.7,3.7 0 1 0 153,246L155.1,242.1A3,3 0 0 0 150.5,238.5Z"></path><path d="M149.3,247.8L162.7,249.5A3.5,3.5 0 0 0 163.6,242.7L150.4,240.5A3.7,3.7 0 1 0 149.3,247.8Z"></path><path d="M163.2,249.5L169.4,249.4A2.4,2.4 0 0 0 170.1,244.7L164.1,242.8A3.5,3.5 0 1 0 163.2,249.5Z"></path></g>
+  <g class="s-k"><ellipse cx="134.1" cy="125" rx="9.2" ry="11.5" transform="rotate(24.5 134.1 125)"></ellipse><path d="M132.3,136.8L134.8,137.4A3,3 0 0 0 138,136.4L139.6,134.3A6.9,6.9 0 1 0 132.3,136.8Z"></path></g>
+  <g class="s-x"><path d="M111.2,150.3L119.7,181.1A3.7,3.7 0 0 0 126.9,179.6L122.4,147.9A5.8,5.8 0 1 0 111.2,150.3Z"></path><path d="M121.2,183.2L127.5,187.3A4.3,4.3 0 1 0 131.6,179.9L124.8,176.8A3.7,3.7 0 0 0 121.2,183.2Z"></path><path d="M128.1,187.7L144.1,194.7A2.5,2.5 0 0 0 146.6,190.3L132.2,180.3A4.3,4.3 0 1 0 128.1,187.7Z"></path><path d="M143.3,194.1L146,197.1A3.9,3.9 0 1 0 149.6,190.6L145.6,189.9A2.5,2.5 0 0 0 143.3,194.1Z"></path></g>
+  <g class="s-k"><path d="M111.2,150.3L119.7,181.1A3.7,3.7 0 0 0 126.9,179.6L122.4,147.9A5.8,5.8 0 1 0 111.2,150.3Z"></path><path d="M121.2,183.2L127.5,187.3A4.3,4.3 0 1 0 131.6,179.9L124.8,176.8A3.7,3.7 0 0 0 121.2,183.2Z"></path><path d="M128.1,187.7L144.1,194.7A2.5,2.5 0 0 0 146.6,190.3L132.2,180.3A4.3,4.3 0 1 0 128.1,187.7Z"></path></g>
+  <g class="s-k"><path d="M143.3,194.1L146,197.1A3.9,3.9 0 1 0 149.6,190.6L145.6,189.9A2.5,2.5 0 0 0 143.3,194.1Z"></path></g>
+  <path class="s-bank" d="M78,201.4L152,201.4L152,210.4L78,210.4Z"></path>
+  <text class="st" x="150" y="274">upał · cień, rozkładaj siły</text>
+</svg>
+        <figcaption class="leise">Grafika główna: upał</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="hitze" aria-pressed="false">
+      Odhacz jako przeczytane
+    </button></div>
+    </section>
+      
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Zadanie refleksyjne</h2><span class="chip chip-rot">do zrobienia</span></div>
+        <p>Pomyśl o grze w upale: traktujesz znaki ostrzegawcze jak zawroty głowy, mdłości czy silne wyczerpanie poważnie, czy je bagatelizujesz? Postanów sobie w upale spędzać przerwy w cieniu, rozkładać siły i przy oznakach przegrzania robić przerwę zamiast grać dalej. I uświadom sobie: przy utrzymującym się złym samopoczuciu porada lekarska lub fachowa jest właściwym adresem.</p>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="reflexionsaufgabe" data-baustein="hitze" aria-pressed="false">
+      Odhacz jako przyswojone
+    </button></div>
+      </section>
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Klasyfikacja</summary>
+      <dl>
+        <dt>Cele gry</dt><dd>Temperatura, Regeneracja w secie i meczu</dd>
+        
+        
+        <dt>Pogoda</dt><dd>Upał</dd>
+        <dt>Wymagania wstępne</dt><dd><a href="/pl/baustein/draussen_spielen?kontext=kompetenz">Gra na zewnątrz</a>, <a href="/pl/baustein/durchhalten?kontext=kompetenz">Wytrwać</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Nawigacja modułów">
+      
+      
+      <a class="baustein-zur-liste" href="/pl/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Do listy</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Działania">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Udostępnij" title="Udostępnij">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Zapisz" title="Zapisz">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/pl/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/pl/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/pl/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/pl/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/pl/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/pl/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/pl/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/pl/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/pl/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/pl/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/pl/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/pl/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/pl/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/pl/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/pl/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/pl/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/pl/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

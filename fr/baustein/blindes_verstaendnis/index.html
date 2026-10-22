@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>L'entente aveugle — Manuel de Crossminton</title>
+  <meta name="description" content="Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/fr/baustein/blindes_verstaendnis">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="L'entente aveugle — Manuel de Crossminton">
+  <meta property="og:description" content="Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre …">
+  <meta property="og:url" content="https://crossminton-handbook.de/fr/baustein/blindes_verstaendnis">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="L'entente aveugle — Manuel de Crossminton">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="L'entente aveugle — Manuel de Crossminton">
+  <meta name="twitter:description" content="Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/blindes_verstaendnis">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/blindes_verstaendnis">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/blindes_verstaendnis">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/blindes_verstaendnis">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/blindes_verstaendnis">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Manuel de Crossminton","item":"https://crossminton-handbook.de/fr"},{"@type":"ListItem","position":2,"name":"Parcours thématique","item":"https://crossminton-handbook.de/fr/pfad/themen"},{"@type":"ListItem","position":3,"name":"Mental","item":"https://crossminton-handbook.de/fr/pfad/themen/mentales"},{"@type":"ListItem","position":4,"name":"L'entente aveugle","item":"https://crossminton-handbook.de/fr/baustein/blindes_verstaendnis"}]},{"@type":"LearningResource","name":"L'entente aveugle","description":"Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre …","url":"https://crossminton-handbook.de/fr/baustein/blindes_verstaendnis","inLanguage":"fr","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"lesson","educationalLevel":"Expert","about":[{"@type":"Thing","name":"Mental"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/fr" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/fr/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-violett baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-link " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>L'entente aveugle</h1>
+        <p class="marke-hero-untertitel">Mental · Expert</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommandé avant : <a href="/fr/baustein/verstaendigung_im_paar?kontext=kompetenz">La communication en paire</a>, <a href="/fr/baustein/paar_als_system?kontext=kompetenz">La paire comme système</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explication</h2><span class="chip chip-rot">à faire</span></div>
+      
+      
+      <p>Le plus haut niveau du jeu en double ne demande presque plus de mots. Les paires bien rodées développent une entente aveugle : elles pressentent ce que l'autre fait avant qu'il ne le fasse, et se couvrent sans regarder. Cette entente est le couronnement silencieux du jeu commun.</p><p>Son cœur, c'est l'anticipation du partenaire. Tu lis aussi le mouvement de ton partenaire, pas seulement l'adversaire et le speeder : vers où il part, quelle balle il prend, quel espace il quitte. À partir de cette lecture, tu combles automatiquement la brèche qu'il ouvre — avant même qu'un mot ne puisse être dit.</p><p>Le fondement de cette entente, c'est la confiance. Tu comptes sur le fait que ton partenaire prend sa balle, et tu n'as pas à regarder pour contrôler. Cette confiance te libère pour te concentrer sur ta propre tâche. Une paire qui se fait confiance joue plus calmement et plus vite qu'une qui se rassure sans cesse.</p><p>L'entente aveugle ne se force pas — elle grandit en jouant ensemble au fil du temps. Plus vous jouez souvent ensemble, plus vous intériorisez les schémas et les réactions de l'autre, jusqu'à ce que la coordination se fasse sans mots. C'est le fruit d'un travail commun patient.</p><p>Un double bien rodé, c'est comme deux mains d'une même personne. Elles n'ont pas à se concerter — l'une sait ce que fait l'autre, et elles s'emboîtent comme une évidence.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Entente aveugle : deux partenaires de double l'un derrière l'autre, tous deux le regard vers le speeder. Le joueur d'attaque part sur la balle courte, et au même instant le joueur de fond monte dans l'espace libéré, sans regarder." class="grafik-bild grafik-svg" id="g-svg-231" style="--hoch: 1.000;">
+  <style>
+    #g-svg-231 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-231 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-231 .s-gk{fill:var(--tinte-3,#656f7e);opacity:.3}
+    #g-svg-231 .s-gf{fill:var(--tinte-3,#656f7e);opacity:.2}
+    #g-svg-231 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-231 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-231 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-231 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-231 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-231 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-231 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-231 .s-gr{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;opacity:.45}
+    #g-svg-231 .s-gh{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.45;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-231 .s-gsch{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.2;opacity:.45;stroke-linecap:round}
+    #g-svg-231 .s-gg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:4;opacity:.35;stroke-linecap:round}
+    #g-svg-231 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-231 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-231 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-231 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-231 .s-weg{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3;stroke-dasharray:8 6;stroke-linecap:round}
+    #g-svg-231 .s-blick{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-dasharray:.1 5;stroke-linecap:round}
+    #g-svg-231 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-231 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-231 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-231-p053" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker></defs>
+  <path class="s-boden" d="M10,239L290,239M14,235.5L14,242.5M140,235.5L140,242.5M286,235.5L286,242.5"></path>
+  <ellipse class="s-schw" cx="94" cy="239" rx="30" ry="4.2"></ellipse><ellipse class="s-sch" cx="94" cy="239" rx="19.2" ry="2.6"></ellipse>
+  <ellipse class="s-schw" cx="204" cy="239" rx="40" ry="4.6"></ellipse><ellipse class="s-sch" cx="204" cy="239" rx="25.6" ry="2.9"></ellipse>
+  <g class="s-gf"><path d="M33.3,167.6L43.4,177.8A6.2,6.2 0 1 0 52.1,169L41.7,159.1A6,6 0 0 0 33.3,167.6Z"></path><path d="M43.4,177.9L60.1,194.5A4.3,4.3 0 0 0 66.7,188.8L52.8,169.8A6.2,6.2 0 1 0 43.4,177.9Z"></path><path d="M59.4,189.2L53.8,199.1A4.9,4.9 0 1 0 62.6,203.5L67.2,193.1A4.3,4.3 0 0 0 59.4,189.2Z"></path><path d="M53.3,200.5L47.9,224.9A2.5,2.5 0 0 0 52.7,226.4L62.6,203.5A4.9,4.9 0 1 0 53.3,200.5Z"></path><path d="M49.1,223.3L45.9,225.1A3.4,3.4 0 1 0 50.4,229.9L52.4,226.9A2.5,2.5 0 0 0 49.1,223.3Z"></path><path d="M46.5,231.2L60.1,235.7A3.2,3.2 0 0 0 62.1,229.7L48.7,224.9A3.4,3.4 0 1 0 46.5,231.2Z"></path><path d="M61.5,235.8L68.1,234.9A2.2,2.2 0 0 0 68.1,230.6L61.5,229.6A3.2,3.2 0 1 0 61.5,235.8Z"></path></g>
+  <g class="s-gf"><path d="M51.3,123.2L53.4,151.4A3.1,3.1 0 0 0 59.5,151.3L61,123.1A4.8,4.8 0 1 0 51.3,123.2Z"></path><path d="M55.9,154.2L60.7,155.1A3.6,3.6 0 1 0 61.4,148L56.4,148.1A3.1,3.1 0 0 0 55.9,154.2Z"></path><path d="M61.5,155.2L73,154.8A2.1,2.1 0 0 0 73.4,150.6L62.2,148.1A3.6,3.6 0 1 0 61.5,155.2Z"></path></g>
+  <g class="s-gf"><path d="M72.4,154.7L75,155.3A2.9,2.9 0 1 0 74.6,149.7L72.2,150.6A2.1,2.1 0 0 0 72.4,154.7Z"></path><path d="M76.5,155.1L80.4,153.8A1.7,1.7 0 0 0 80.1,150.5L76.2,149.7A2.8,2.8 0 1 0 76.5,155.1Z"></path></g>
+  <g class="s-gk"><path d="M61.6,118.6C63.2,120.2 62.9,121.1 63.3,123.5C63.7,125.8 64.2,126.6 63.5,130.3C62.7,134 62.3,137 59.5,141.9C56.7,146.8 52.9,149.6 49.6,154.8C46.2,159.9 45.1,163.8 42.6,167.7C40.1,171.6 39.1,172.5 36.9,174.5C34.7,176.4 33.4,177.1 31.7,177.4C30,177.7 29.3,177.4 28.6,175.9C27.8,174.5 27.6,173.1 28,170.3C28.4,167.5 28.5,166.2 30.4,162C32.4,157.8 35.2,154.8 37.7,149.2C40.2,143.7 41.1,139.5 43.1,134.2C45.1,129 46,126.2 47.6,122.8C49.1,119.5 49.4,119.1 50.8,117.6C52.3,116.2 52.8,115.3 55,115.5C57.1,115.7 59.9,117 61.6,118.6Z"></path><path d="M29.8,169.6L38.9,180.7A6.2,6.2 0 1 0 48.3,172.7L39,161.9A6,6 0 0 0 29.8,169.6Z"></path><path d="M38.9,180.7L53.8,198.9A4.3,4.3 0 0 0 60.9,194L49,173.6A6.2,6.2 0 1 0 38.9,180.7Z"></path><path d="M53.4,194L47.6,204A4.9,4.9 0 1 0 56.4,208.5L61.1,197.9A4.3,4.3 0 0 0 53.4,194Z"></path><path d="M47.1,205.3L41.4,230A2.5,2.5 0 0 0 46.1,231.6L56.4,208.5A4.9,4.9 0 1 0 47.1,205.3Z"></path><path d="M42.6,228.4L39.5,230.2A3.4,3.4 0 1 0 44,234.9L45.9,232A2.5,2.5 0 0 0 42.6,228.4Z"></path><path d="M40,236.2L52.7,241.2A3.2,3.2 0 0 0 55.1,235.3L42.5,230A3.4,3.4 0 1 0 40,236.2Z"></path><path d="M54.1,241.4L60.3,240.8A2.2,2.2 0 0 0 60.6,236.4L54.5,235.1A3.2,3.2 0 1 0 54.1,241.4Z"></path></g>
+  <g class="s-gk"><ellipse cx="59.3" cy="103.8" rx="8.4" ry="10.5" transform="rotate(-1 59.3 103.8)"></ellipse><path d="M62.9,114.1L65.2,113.5A2.7,2.7 0 0 0 67.3,111.3L67.7,108.9A6.3,6.3 0 1 0 62.9,114.1Z"></path></g>
+  <g class="s-gk"><path d="M46.5,127L48.4,156.3A3.1,3.1 0 0 0 54.5,156.3L56.2,127A4.8,4.8 0 1 0 46.5,127Z"></path><path d="M50.9,159.1L57.5,160.3A3.6,3.6 0 1 0 58.3,153.2L51.6,153A3.1,3.1 0 0 0 50.9,159.1Z"></path><path d="M58.1,160.4L73.6,160.7A2.1,2.1 0 0 0 74.1,156.4L58.8,153.3A3.6,3.6 0 1 0 58.1,160.4Z"></path></g>
+  <path class="s-gh" d="M95.8,145.9L94.2,146.2L95.2,144.6"></path><path class="s-gsch" d="M85.1,152.9L94.2,146.2"></path><path class="s-gr" d="M115.1,130.7C115.1,130.6 115,130.6 114.9,130.6C114.7,130.6 114.6,130.6 114.4,130.6C114.2,130.7 113.9,130.7 113.7,130.8C113.4,131 113.1,131.1 112.7,131.3C112.4,131.4 112,131.6 111.6,131.8C111.2,132.1 110.8,132.3 110.3,132.6C109.9,132.8 109.4,133.1 108.9,133.4C108.4,133.8 107.9,134.1 107.4,134.4C106.9,134.8 106.3,135.2 105.8,135.5C105.3,135.9 104.7,136.3 104.2,136.7C103.7,137.1 103.1,137.5 102.6,137.9C102.1,138.3 101.6,138.7 101.1,139.1C100.6,139.5 100.1,139.9 99.7,140.2C99.2,140.6 98.8,141 98.4,141.4C98,141.7 97.6,142.1 97.3,142.4C96.9,142.8 96.6,143.1 96.3,143.4C96.1,143.7 95.8,143.9 95.6,144.2C95.4,144.4 95.2,144.7 95.1,144.9C95,145 94.9,145.2 94.9,145.4C94.8,145.5 94.8,145.6 94.9,145.7C94.9,145.8 95,145.8 95.1,145.8C95.2,145.9 95.4,145.8 95.6,145.8C95.8,145.8 96,145.7 96.3,145.6C96.6,145.5 96.9,145.3 97.2,145.2C97.6,145 98,144.8 98.4,144.6C98.8,144.4 99.2,144.1 99.7,143.8C100.1,143.6 100.6,143.3 101.1,143C101.6,142.7 102.1,142.3 102.6,142C103.1,141.6 103.6,141.3 104.2,140.9C104.7,140.5 105.2,140.1 105.8,139.7C106.3,139.3 106.8,138.9 107.3,138.5C107.8,138.1 108.4,137.7 108.8,137.3C109.3,136.9 109.8,136.6 110.3,136.2C110.7,135.8 111.2,135.4 111.6,135C112,134.7 112.3,134.3 112.7,134C113,133.7 113.4,133.3 113.6,133C113.9,132.8 114.2,132.5 114.4,132.2C114.6,132 114.7,131.8 114.9,131.6C115,131.4 115.1,131.2 115.1,131.1C115.1,130.9 115.2,130.8 115.1,130.7Z"></path><path class="s-gg" d="M72.6,162.2L85.1,152.9"></path>
+  <g class="s-gk"><path d="M73.1,160.6L76.8,161.6A3.3,3.3 0 1 0 76.6,155.3L73,156.5A2.1,2.1 0 0 0 73.1,160.6Z"></path></g>
+  <path class="s-blick" d="M110.7,92.1 L292,109.1"></path>
+  <path class="s-blick" d="M225.6,116.8 L285.2,198.1"></path>
+  <circle class="s-mk" cx="60" cy="250" r="2.6"></circle><path class="s-weg" d="M66,250 L104,250" marker-end="url(#g-svg-231-p053)"></path>
+  <circle class="s-mk" cx="176" cy="250" r="2.6"></circle><path class="s-weg" d="M182,250 L246,250" marker-end="url(#g-svg-231-p053)"></path>
+  <g class="s-f"><path d="M81.7,151.8L78.3,164.4A6.2,6.2 0 1 0 90.3,167.5L93.3,154.7A6,6 0 0 0 81.7,151.8Z"></path><path d="M78.4,164.3L71.6,187.3A4.3,4.3 0 0 0 79.7,190.4L89.9,168.7A6.2,6.2 0 1 0 78.4,164.3Z"></path><path d="M71.9,186.5L66.5,196.6A4.9,4.9 0 1 0 75.4,200.8L79.7,190.2A4.3,4.3 0 0 0 71.9,186.5Z"></path><path d="M66,197.9L61.1,222.7A2.5,2.5 0 0 0 65.9,224.1L75.4,200.7A4.9,4.9 0 1 0 66,197.9Z"></path><path d="M62.6,220.8L59.8,222A3.4,3.4 0 1 0 63.8,227.1L65.6,224.6A2.5,2.5 0 0 0 62.6,220.8Z"></path><path d="M59.3,228L71.5,235.4A3.2,3.2 0 0 0 74.9,230.1L62.9,222.3A3.4,3.4 0 1 0 59.3,228Z"></path><path d="M73.5,235.8L80,235.1A2.2,2.2 0 0 0 80.1,230.7L73.7,229.6A3.2,3.2 0 1 0 73.5,235.8Z"></path></g>
+  <g class="s-f"><path d="M96.4,111.8L101.9,139.6A3.1,3.1 0 0 0 108,138.8L106,110.5A4.8,4.8 0 1 0 96.4,111.8Z"></path><path d="M104.8,142.1L109.6,142.4A3.6,3.6 0 1 0 109.3,135.3L104.5,136A3.1,3.1 0 0 0 104.8,142.1Z"></path><path d="M110.5,142.3L121.5,140.3A2.1,2.1 0 0 0 121.3,136.1L110.1,135.2A3.6,3.6 0 1 0 110.5,142.3Z"></path></g>
+  <g class="s-f"><path d="M121,140.3L123.5,140.5A2.9,2.9 0 1 0 122.3,135.1L120.1,136.3A2.1,2.1 0 0 0 121,140.3Z"></path><path d="M125,140.1L128.6,138.3A1.7,1.7 0 0 0 127.8,135L123.9,134.8A2.8,2.8 0 1 0 125,140.1Z"></path></g>
+  <g class="s-k"><path d="M105.8,105.6C107.6,107 107.4,108 108.1,110.3C108.7,112.5 109.3,113.2 109,117C108.7,120.8 108.7,123.9 106.6,129.1C104.4,134.3 101,137.5 98.3,143.1C95.5,148.6 95,152.6 92.9,156.8C90.9,161 90,162 88.1,164.2C86.2,166.4 84.9,167.3 83.3,167.8C81.7,168.3 80.9,168.1 80,166.8C79.1,165.4 78.7,164 78.8,161.2C78.8,158.4 78.7,157.1 80.1,152.6C81.5,148.2 84,144.9 85.8,139C87.6,133.2 88,129 89.3,123.5C90.7,118 91.3,115.1 92.4,111.6C93.5,108.1 93.7,107.6 95,106C96.3,104.4 96.7,103.5 98.8,103.4C101,103.3 103.9,104.3 105.8,105.6Z"></path><path d="M78.8,157.7L83.6,171.3A6.2,6.2 0 1 0 95.2,167L90.1,153.6A6,6 0 0 0 78.8,157.7Z"></path><path d="M83.5,171.1L91.1,194.4A4.3,4.3 0 0 0 99.6,192.4L95.5,168.2A6.2,6.2 0 1 0 83.5,171.1Z"></path><path d="M91,192.2L88.7,203.1A4.9,4.9 0 1 0 98.4,204.7L99.6,193.5A4.3,4.3 0 0 0 91,192.2Z"></path><path d="M88.6,204.6L91,230.4A2.5,2.5 0 0 0 96.1,230.4L98.4,204.6A4.9,4.9 0 1 0 88.6,204.6Z"></path><path d="M92.3,228L89.1,229.9A3.4,3.4 0 1 0 93.6,234.6L95.6,231.5A2.5,2.5 0 0 0 92.3,228Z"></path><path d="M89.8,235.9L103.2,240.2A3.2,3.2 0 0 0 105.2,234.3L91.9,229.6A3.4,3.4 0 1 0 89.8,235.9Z"></path><path d="M104.5,240.4L110.9,239.6A2.2,2.2 0 0 0 111.1,235.3L104.7,234.1A3.2,3.2 0 1 0 104.5,240.4Z"></path></g>
+  <g class="s-k"><ellipse cx="101.7" cy="91.1" rx="8.4" ry="10.5" transform="rotate(-7.9 101.7 91.1)"></ellipse><path d="M106.5,101L108.7,100.1A2.7,2.7 0 0 0 110.5,97.7L110.6,95.3A6.3,6.3 0 1 0 106.5,101Z"></path></g>
+  <g class="s-x"><path d="M91.6,115.5L96.9,144.4A3.1,3.1 0 0 0 103,143.6L101.2,114.3A4.8,4.8 0 1 0 91.6,115.5Z"></path><path d="M99.7,146.9L106.4,147.4A3.6,3.6 0 1 0 106.4,140.2L99.7,140.7A3.1,3.1 0 0 0 99.7,146.9Z"></path><path d="M107,147.4L122.7,145.9A2.1,2.1 0 0 0 122.7,141.7L107,140.2A3.6,3.6 0 1 0 107,147.4Z"></path><path d="M122.1,145.9L125.9,146.5A3.3,3.3 0 1 0 125,140.3L121.6,141.9A2.1,2.1 0 0 0 122.1,145.9Z"></path></g>
+  <g class="s-k"><path d="M91.6,115.5L96.9,144.4A3.1,3.1 0 0 0 103,143.6L101.2,114.3A4.8,4.8 0 1 0 91.6,115.5Z"></path><path d="M99.7,146.9L106.4,147.4A3.6,3.6 0 1 0 106.4,140.2L99.7,140.7A3.1,3.1 0 0 0 99.7,146.9Z"></path><path d="M107,147.4L122.7,145.9A2.1,2.1 0 0 0 122.7,141.7L107,140.2A3.6,3.6 0 1 0 107,147.4Z"></path></g>
+  <path class="s-rf" d="M160.3,111.3C160.3,111.2 160.2,111.2 160.1,111.2C159.9,111.2 159.8,111.2 159.6,111.2C159.4,111.3 159.1,111.4 158.8,111.5C158.6,111.7 158.3,111.8 157.9,112C157.6,112.2 157.3,112.4 156.9,112.7C156.5,113 156.1,113.3 155.7,113.6C155.2,113.9 154.8,114.2 154.3,114.6C153.9,115 153.4,115.3 152.9,115.8C152.5,116.2 152,116.6 151.5,117C151,117.4 150.5,117.9 150.1,118.3C149.6,118.8 149.1,119.2 148.6,119.7C148.2,120.2 147.7,120.6 147.3,121.1C146.8,121.5 146.4,122 146,122.4C145.6,122.9 145.2,123.3 144.9,123.7C144.5,124.1 144.2,124.5 143.9,124.9C143.6,125.3 143.3,125.6 143.1,126C142.9,126.3 142.7,126.6 142.5,126.9C142.3,127.2 142.2,127.4 142.1,127.7C142,127.9 142,128.1 141.9,128.2C141.9,128.4 141.9,128.5 142,128.6C142.1,128.7 142.2,128.7 142.3,128.7C142.4,128.7 142.6,128.7 142.8,128.6C143,128.6 143.2,128.5 143.5,128.4C143.8,128.2 144.1,128.1 144.4,127.9C144.7,127.7 145.1,127.4 145.5,127.2C145.8,126.9 146.3,126.6 146.7,126.3C147.1,126 147.5,125.7 148,125.3C148.4,124.9 148.9,124.5 149.4,124.1C149.9,123.7 150.4,123.3 150.8,122.9C151.3,122.4 151.8,122 152.3,121.5C152.8,121.1 153.2,120.6 153.7,120.2C154.2,119.7 154.6,119.3 155.1,118.8C155.5,118.3 155.9,117.9 156.3,117.5C156.7,117 157.1,116.6 157.5,116.2C157.8,115.8 158.1,115.4 158.4,115C158.7,114.6 159,114.2 159.2,113.9C159.5,113.6 159.7,113.3 159.8,113C160,112.7 160.1,112.5 160.2,112.2C160.3,112 160.4,111.8 160.4,111.7C160.4,111.5 160.4,111.4 160.3,111.3Z"></path><path class="s-rh" d="M143,128.7L141.4,129.1L142.1,127.4"></path><path class="s-rsch" d="M133.1,136.9L141.4,129.1"></path><path class="s-rr" d="M160.3,111.3C160.3,111.2 160.2,111.2 160.1,111.2C159.9,111.2 159.8,111.2 159.6,111.2C159.4,111.3 159.1,111.4 158.8,111.5C158.6,111.7 158.3,111.8 157.9,112C157.6,112.2 157.3,112.4 156.9,112.7C156.5,113 156.1,113.3 155.7,113.6C155.2,113.9 154.8,114.2 154.3,114.6C153.9,115 153.4,115.3 152.9,115.8C152.5,116.2 152,116.6 151.5,117C151,117.4 150.5,117.9 150.1,118.3C149.6,118.8 149.1,119.2 148.6,119.7C148.2,120.2 147.7,120.6 147.3,121.1C146.8,121.5 146.4,122 146,122.4C145.6,122.9 145.2,123.3 144.9,123.7C144.5,124.1 144.2,124.5 143.9,124.9C143.6,125.3 143.3,125.6 143.1,126C142.9,126.3 142.7,126.6 142.5,126.9C142.3,127.2 142.2,127.4 142.1,127.7C142,127.9 142,128.1 141.9,128.2C141.9,128.4 141.9,128.5 142,128.6C142.1,128.7 142.2,128.7 142.3,128.7C142.4,128.7 142.6,128.7 142.8,128.6C143,128.6 143.2,128.5 143.5,128.4C143.8,128.2 144.1,128.1 144.4,127.9C144.7,127.7 145.1,127.4 145.5,127.2C145.8,126.9 146.3,126.6 146.7,126.3C147.1,126 147.5,125.7 148,125.3C148.4,124.9 148.9,124.5 149.4,124.1C149.9,123.7 150.4,123.3 150.8,122.9C151.3,122.4 151.8,122 152.3,121.5C152.8,121.1 153.2,120.6 153.7,120.2C154.2,119.7 154.6,119.3 155.1,118.8C155.5,118.3 155.9,117.9 156.3,117.5C156.7,117 157.1,116.6 157.5,116.2C157.8,115.8 158.1,115.4 158.4,115C158.7,114.6 159,114.2 159.2,113.9C159.5,113.6 159.7,113.3 159.8,113C160,112.7 160.1,112.5 160.2,112.2C160.3,112 160.4,111.8 160.4,111.7C160.4,111.5 160.4,111.4 160.3,111.3Z"></path><path class="s-rg" d="M121.8,147.5L133.1,136.9"></path>
+  <g class="s-k"><path d="M122.1,145.9L125.9,146.5A3.3,3.3 0 1 0 125,140.3L121.6,141.9A2.1,2.1 0 0 0 122.1,145.9Z"></path></g>
+  <g class="s-f"><path d="M189.8,172.9L182.2,183.3A6.7,6.7 0 1 0 193.2,191L200.5,180.4A6.5,6.5 0 0 0 189.8,172.9Z"></path><path d="M182.2,183.3L167.6,203.1A4.7,4.7 0 0 0 174.7,209.3L192.3,192A6.7,6.7 0 1 0 182.2,183.3Z"></path><path d="M169.8,201.5L158.4,205.6A5.4,5.4 0 1 0 162.6,215.5L173.5,210.1A4.7,4.7 0 0 0 169.8,201.5Z"></path><path d="M157.3,206.2L136.8,219.5A2.7,2.7 0 0 0 139.3,224.4L162.2,215.7A5.4,5.4 0 1 0 157.3,206.2Z"></path><path d="M137.2,219.3L134.7,220.4A3.4,3.4 0 1 0 138.6,225.7L140.4,223.6A2.7,2.7 0 0 0 137.2,219.3Z"></path><path d="M134,226.1L145.1,235A3.2,3.2 0 0 0 149.1,230.1L138.2,220.9A3.4,3.4 0 1 0 134,226.1Z"></path><path d="M147.5,235.7L154,234.8A2.2,2.2 0 0 0 154.1,230.5L147.6,229.4A3.2,3.2 0 1 0 147.5,235.7Z"></path></g>
+  <g class="s-f"><path d="M210.5,128.9L182.1,129.4A3.4,3.4 0 0 0 181.8,136.1L210,139.3A5.3,5.3 0 1 0 210.5,128.9Z"></path><path d="M183.6,129.7L177.1,126.6A3.9,3.9 0 1 0 174.2,133.8L181.1,135.9A3.4,3.4 0 0 0 183.6,129.7Z"></path><path d="M176.5,126.4L160.3,121.7A2.3,2.3 0 0 0 158.6,126L173.6,133.6A3.9,3.9 0 1 0 176.5,126.4Z"></path></g>
+  <g class="s-f"><path d="M160.9,122L157,119.6A3.2,3.2 0 1 0 154.8,125.3L159.2,126.2A2.3,2.3 0 0 0 160.9,122Z"></path><path d="M156,119.3L149.2,117.8A1.9,1.9 0 0 0 147.8,121.3L153.8,124.9A3,3 0 1 0 156,119.3Z"></path></g>
+  <g class="s-k"><path d="M215.5,129.5C217.2,131 216.9,131.9 217.5,134.2C218,136.5 218.8,137.3 218.4,141C218,144.8 217.8,147.9 215.4,153C213.1,158.2 209.6,161.3 206.6,166.7C203.6,172.2 202.7,176 200.5,180.2C198.3,184.3 197.4,185.3 195.5,187.5C193.5,189.6 192.3,190.5 190.7,191C189.2,191.4 188.4,191.1 187.6,189.8C186.8,188.5 186.6,187.1 186.8,184.3C187,181.5 187.1,180.2 188.6,175.8C190.2,171.4 192.5,168.1 194.5,162.3C196.5,156.5 197.1,152.3 198.6,146.9C200.1,141.4 200.8,138.5 202.1,135.1C203.3,131.6 203.7,131.2 205,129.6C206.3,128 206.7,127.1 208.8,127.1C210.9,127.1 213.7,128.1 215.5,129.5Z"></path><path d="M190,184.7L203.3,191.3A6.7,6.7 0 1 0 209.1,179.2L195.7,173A6.5,6.5 0 0 0 190,184.7Z"></path><path d="M203.6,191.4L225.2,200.9A4.7,4.7 0 0 0 229.7,192.7L210,179.7A6.7,6.7 0 1 0 203.6,191.4Z"></path><path d="M222.4,196.5L222.1,207.5A5.4,5.4 0 1 0 232.8,207.1L231.8,196.2A4.7,4.7 0 0 0 222.4,196.5Z"></path><path d="M222.4,209.2L230,234.2A2.7,2.7 0 0 0 235.4,233.1L232.8,207.1A5.4,5.4 0 1 0 222.4,209.2Z"></path><path d="M230.8,231.4L227.5,234.4A3.4,3.4 0 1 0 232.6,238.6L235,234.8A2.7,2.7 0 0 0 230.8,231.4Z"></path><path d="M229.8,240.2L243.8,240.1A3.2,3.2 0 0 0 243.8,233.8L229.8,233.5A3.4,3.4 0 1 0 229.8,240.2Z"></path><path d="M244.2,240.1L250.6,239.2A2.2,2.2 0 0 0 250.7,234.9L244.2,233.9A3.2,3.2 0 1 0 244.2,240.1Z"></path></g>
+  <g class="s-k"><ellipse cx="216.6" cy="115.8" rx="8.4" ry="10.5" transform="rotate(14.1 216.6 115.8)"></ellipse><path d="M217.4,126.6L219.8,126.7A2.7,2.7 0 0 0 222.4,125.1L223.4,122.8A6.3,6.3 0 1 0 217.4,126.6Z"></path></g>
+  <g class="s-x"><path d="M202.7,142.9L225.1,160.7A3.4,3.4 0 0 0 229.6,155.7L209.7,135.1A5.3,5.3 0 1 0 202.7,142.9Z"></path><path d="M224.4,160L228.7,165.9A3.9,3.9 0 1 0 234.6,160.9L229.6,155.7A3.4,3.4 0 0 0 224.4,160Z"></path><path d="M229.1,166.4L241.1,178.3A2.3,2.3 0 0 0 244.7,175.4L235,161.4A3.9,3.9 0 1 0 229.1,166.4Z"></path><path d="M240.6,177.5L242,181.3A3.6,3.6 0 1 0 247.4,177.1L244.1,174.8A2.3,2.3 0 0 0 240.6,177.5Z"></path></g>
+  <g class="s-k"><path d="M202.7,142.9L225.1,160.7A3.4,3.4 0 0 0 229.6,155.7L209.7,135.1A5.3,5.3 0 1 0 202.7,142.9Z"></path><path d="M224.4,160L228.7,165.9A3.9,3.9 0 1 0 234.6,160.9L229.6,155.7A3.4,3.4 0 0 0 224.4,160Z"></path><path d="M229.1,166.4L241.1,178.3A2.3,2.3 0 0 0 244.7,175.4L235,161.4A3.9,3.9 0 1 0 229.1,166.4Z"></path></g>
+  <path class="s-rf" d="M275.2,215.7C275.6,215.4 275.9,215.1 276.2,214.7C276.5,214.3 276.8,213.9 277,213.5C277.2,213 277.4,212.6 277.5,212.1C277.7,211.6 277.8,211 277.8,210.5C277.9,210 277.9,209.4 277.8,208.8C277.8,208.3 277.7,207.7 277.6,207.1C277.4,206.5 277.3,205.9 277.1,205.3C276.9,204.8 276.6,204.2 276.3,203.6C276,203 275.7,202.5 275.3,201.9C275,201.4 274.6,200.8 274.2,200.3C273.7,199.8 273.3,199.3 272.8,198.9C272.3,198.4 271.8,198 271.3,197.6C270.8,197.2 270.3,196.9 269.7,196.6C269.2,196.3 268.6,196 268.1,195.8C267.5,195.5 267,195.3 266.4,195.2C265.8,195 265.3,194.9 264.7,194.9C264.2,194.8 263.7,194.8 263.1,194.9C262.6,194.9 262.1,195 261.6,195.1C261.2,195.2 260.7,195.4 260.3,195.6C259.9,195.9 259.5,196.1 259.1,196.4C258.7,196.7 258.4,197.1 258.1,197.4C257.8,197.8 257.5,198.2 257.3,198.7C257.1,199.1 256.9,199.6 256.8,200.1C256.7,200.6 256.6,201.1 256.5,201.6C256.5,202.2 256.5,202.7 256.5,203.3C256.5,203.9 256.6,204.4 256.7,205C256.9,205.6 257,206.2 257.3,206.8C257.5,207.4 257.7,208 258,208.5C258.3,209.1 258.6,209.7 259,210.2C259.3,210.8 259.7,211.3 260.2,211.8C260.6,212.3 261,212.8 261.5,213.2C262,213.7 262.5,214.1 263,214.5C263.5,214.9 264,215.2 264.6,215.5C265.1,215.9 265.7,216.1 266.2,216.4C266.8,216.6 267.4,216.8 267.9,216.9C268.5,217.1 269,217.2 269.6,217.2C270.1,217.3 270.7,217.3 271.2,217.3C271.7,217.2 272.2,217.1 272.7,217C273.2,216.9 273.6,216.7 274,216.5C274.5,216.3 274.9,216 275.2,215.7Z"></path><path class="s-rs" d="M257.2,201.2L270.2,216.7M259.7,197.1L274.7,215M264.2,195.4L277.2,211M257.6,205.8L268.6,196.7M260.8,211.3L273.5,200.8M265.7,215.4L276.7,206.4"></path><path class="s-rh" d="M256.8,199.3L258.5,195.8L262.4,194.7"></path><path class="s-rsch" d="M251.3,187.1L258.5,195.8"></path><path class="s-rr" d="M275.2,215.7C275.6,215.4 275.9,215.1 276.2,214.7C276.5,214.3 276.8,213.9 277,213.5C277.2,213 277.4,212.6 277.5,212.1C277.7,211.6 277.8,211 277.8,210.5C277.9,210 277.9,209.4 277.8,208.8C277.8,208.3 277.7,207.7 277.6,207.1C277.4,206.5 277.3,205.9 277.1,205.3C276.9,204.8 276.6,204.2 276.3,203.6C276,203 275.7,202.5 275.3,201.9C275,201.4 274.6,200.8 274.2,200.3C273.7,199.8 273.3,199.3 272.8,198.9C272.3,198.4 271.8,198 271.3,197.6C270.8,197.2 270.3,196.9 269.7,196.6C269.2,196.3 268.6,196 268.1,195.8C267.5,195.5 267,195.3 266.4,195.2C265.8,195 265.3,194.9 264.7,194.9C264.2,194.8 263.7,194.8 263.1,194.9C262.6,194.9 262.1,195 261.6,195.1C261.2,195.2 260.7,195.4 260.3,195.6C259.9,195.9 259.5,196.1 259.1,196.4C258.7,196.7 258.4,197.1 258.1,197.4C257.8,197.8 257.5,198.2 257.3,198.7C257.1,199.1 256.9,199.6 256.8,200.1C256.7,200.6 256.6,201.1 256.5,201.6C256.5,202.2 256.5,202.7 256.5,203.3C256.5,203.9 256.6,204.4 256.7,205C256.9,205.6 257,206.2 257.3,206.8C257.5,207.4 257.7,208 258,208.5C258.3,209.1 258.6,209.7 259,210.2C259.3,210.8 259.7,211.3 260.2,211.8C260.6,212.3 261,212.8 261.5,213.2C262,213.7 262.5,214.1 263,214.5C263.5,214.9 264,215.2 264.6,215.5C265.1,215.9 265.7,216.1 266.2,216.4C266.8,216.6 267.4,216.8 267.9,216.9C268.5,217.1 269,217.2 269.6,217.2C270.1,217.3 270.7,217.3 271.2,217.3C271.7,217.2 272.2,217.1 272.7,217C273.2,216.9 273.6,216.7 274,216.5C274.5,216.3 274.9,216 275.2,215.7Z"></path><path class="s-rg" d="M241.3,175.2L251.3,187.1"></path>
+  <g class="s-k"><path d="M240.6,177.5L242,181.3A3.6,3.6 0 1 0 247.4,177.1L244.1,174.8A2.3,2.3 0 0 0 240.6,177.5Z"></path></g>
+  <path class="s-korb" d="M283.4,205.4L293.6,203.4Q294.9,209.1 292.6,214.5L282.9,210.8Z"></path><path class="s-kappe" d="M276,207.8a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <text class="st" x="150" y="270">entente aveugle · sans se regarder</text>
+</svg>
+        <figcaption class="leise">Illustration : l'entente aveugle</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="blindes_verstaendnis" aria-pressed="false">
+      Cocher comme lu
+    </button></div>
+    </section>
+      
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Tâche de réflexion</h2><span class="chip chip-rot">à faire</span></div>
+        <p>Réfléchis à l'entente avec ton partenaire attitré : pressens-tu ses mouvements, ou dois-tu sans cesse regarder et te rassurer ? Comptes-tu sur le fait qu'il prend sa balle ? L'entente aveugle ne grandit qu'en jouant ensemble — propose-toi de jouer régulièrement avec un partenaire attitré et de veiller consciemment à lire son mouvement et à lui faire confiance, au lieu de contrôler.</p>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="reflexionsaufgabe" data-baustein="blindes_verstaendnis" aria-pressed="false">
+      Cocher comme retenu
+    </button></div>
+      </section>
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Objectifs de jeu</dt><dd>Solutions spécifiques au double</dd>
+        
+        
+        
+        <dt>Prérequis</dt><dd><a href="/fr/baustein/verstaendigung_im_paar?kontext=kompetenz">La communication en paire</a>, <a href="/fr/baustein/paar_als_system?kontext=kompetenz">La paire comme système</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Navigation entre modules">
+      
+      
+      <a class="baustein-zur-liste" href="/fr/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Vers la liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Partager" title="Partager">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Enregistrer" title="Enregistrer">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/fr/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/fr/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/fr/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/fr/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/fr/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/fr/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/fr/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/fr/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/fr/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/fr/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/fr/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/fr/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/fr/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/fr/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/fr/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

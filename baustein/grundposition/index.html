@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Die Grundposition — Crossminton-Handbuch</title>
+  <meta name="description" content="Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus star …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/baustein/grundposition">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Die Grundposition — Crossminton-Handbuch">
+  <meta property="og:description" content="Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus star …">
+  <meta property="og:url" content="https://crossminton-handbook.de/baustein/grundposition">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Die Grundposition — Crossminton-Handbuch">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Die Grundposition — Crossminton-Handbuch">
+  <meta name="twitter:description" content="Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus star …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/grundposition">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/grundposition">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/grundposition">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/grundposition">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/grundposition">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton-Handbuch","item":"https://crossminton-handbook.de/"},{"@type":"ListItem","position":2,"name":"Themenpfad","item":"https://crossminton-handbook.de/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technik","item":"https://crossminton-handbook.de/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"Die Grundposition","item":"https://crossminton-handbook.de/baustein/grundposition"}]},{"@type":"LearningResource","name":"Die Grundposition","description":"Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus star …","url":"https://crossminton-handbook.de/baustein/grundposition","inLanguage":"de","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Einsteiger","about":[{"@type":"Thing","name":"Technik"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-person " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Die Grundposition</h1>
+        <p class="marke-hero-untertitel">Technik · Einsteiger</p>
+      </div>
+    </section>
+      
+      
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Erklärteil</h2><span class="chip chip-rot">offen</span></div>
+      
+      
+      <p>Zwischen zwei Schlägen gibt es einen Moment, in dem du auf alles vorbereitet sein musst. Dieser Moment hat eine Haltung — die Grundposition. Aus ihr heraus startest du in jede Richtung.</p><p>Denk an einen Torwart vor dem Elfmeter: leicht geladen, wach, sprungbereit. Genau diese Spannung suchst du. Füße etwas mehr als schulterbreit, Knie leicht gebeugt, das Gewicht nach vorn auf die Fußballen verlagert — die Fersen berühren den Boden kaum. Den Schläger hältst du locker vor dem Körper, die Schultern bleiben entspannt.</p><p>Das ist aktive Bereitschaft, keine Ruhestellung. Der tiefe, leicht nach vorn geneigte Stand bringt dich schneller in Bewegung als jede aufrechte Haltung. Wer flach auf den Fersen steht, verliert den ersten Schritt.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Die Grundposition: Füße etwas mehr als schulterbreit, Knie gebeugt, Gewicht auf den Fußballen, Schläger locker vor dem Körper." class="grafik-bild grafik-svg" id="g-svg-3" style="--hoch: 1.000;">
+  <style>
+    #g-svg-3 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-3 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-3 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-3 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-3 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-3 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-3 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-3 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-3 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-3 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-3 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-3 .s-druck{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-3 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <ellipse class="s-schw" cx="152" cy="239" rx="62" ry="6.5"></ellipse><ellipse class="s-sch" cx="152" cy="239" rx="39.7" ry="4"></ellipse>
+  <g class="s-f"><path d="M144.7,152L157.1,165.2A8.3,8.3 0 1 0 169,153.7L156.2,140.8A8.1,8.1 0 0 0 144.7,152Z"></path><path d="M157.2,165.4L178.2,186.5A5.9,5.9 0 0 0 187.2,179L169.9,154.7A8.3,8.3 0 1 0 157.2,165.4Z"></path><path d="M177.2,179.6L171,191.2A6.6,6.6 0 1 0 183.1,196.8L187.8,184.5A5.9,5.9 0 0 0 177.2,179.6Z"></path><path d="M170.4,193.2L165.4,222.2A3.4,3.4 0 0 0 171.8,224.1L183,196.9A6.6,6.6 0 1 0 170.4,193.2Z"></path><path d="M166.9,219.9L163.3,222.1A4.2,4.2 0 1 0 168.8,228.2L171.4,224.8A3.4,3.4 0 0 0 166.9,219.9Z"></path><path d="M163.9,229.5L179.5,236.1A3.9,3.9 0 0 0 182.6,229L167.2,221.9A4.2,4.2 0 1 0 163.9,229.5Z"></path><path d="M181.3,236.4L188.9,235.9A2.7,2.7 0 0 0 189.3,230.5L181.9,228.7A3.9,3.9 0 1 0 181.3,236.4Z"></path></g>
+  <g class="s-f"><path d="M169,98.2L173.2,132.2A4.2,4.2 0 0 0 181.5,131.7L182,97.5A6.5,6.5 0 1 0 169,98.2Z"></path><path d="M175.3,135.3L178.8,137.2A4.8,4.8 0 1 0 182,128.3L178.1,127.6A4.2,4.2 0 0 0 175.3,135.3Z"></path><path d="M180.5,137.8L189.5,139A2.9,2.9 0 0 0 191.4,133.7L183.6,128.9A4.8,4.8 0 1 0 180.5,137.8Z"></path></g>
+  <g class="s-f"><path d="M187.9,138.2L188.9,139.2A3.9,3.9 0 1 0 189.9,132.9L188.6,133.6A2.9,2.9 0 0 0 187.9,138.2Z"></path><path d="M193.1,139.9L195.3,139A2.3,2.3 0 0 0 195.9,135L194.1,133.5A3.8,3.8 0 1 0 193.1,139.9Z"></path></g>
+  <g class="s-k"><path d="M175.7,94.4C178.7,96.6 179.1,98.1 180.4,101.1C181.8,104.2 183.1,105.4 182.4,109.8C181.6,114.1 180.4,117.3 176.7,122.8C173,128.4 168.1,131.5 164.1,137.5C160.1,143.5 159.6,148.3 156.7,152.9C153.8,157.6 152.5,158.6 149.6,160.7C146.8,162.9 144.9,163.6 142.3,163.7C139.7,163.8 138.3,163.2 136.7,161.3C135.2,159.3 134.5,157.5 134.5,154C134.4,150.6 134.3,149 136.3,143.9C138.2,138.9 141.9,135.5 144.3,128.8C146.8,122.1 146.8,116.8 148.3,110.3C149.9,103.9 150.3,100.3 152.3,96.5C154.3,92.7 155.5,92.6 158.2,91.3C160.9,90 162.3,89.4 165.8,90C169.3,90.6 172.8,92.2 175.7,94.4Z"></path><path d="M134.6,154.1L143.3,168.8A8.3,8.3 0 1 0 157.5,160L148.3,145.6A8.1,8.1 0 0 0 134.6,154.1Z"></path><path d="M143.4,168.9L158.3,193A5.9,5.9 0 0 0 168.7,187.7L158.2,161.4A8.3,8.3 0 1 0 143.4,168.9Z"></path><path d="M158.2,187L151.5,198.8A6.6,6.6 0 1 0 163.4,204.6L168.6,192.2A5.9,5.9 0 0 0 158.2,187Z"></path><path d="M150.8,200.7L144.6,230.2A3.4,3.4 0 0 0 151,232.3L163.3,204.7A6.6,6.6 0 1 0 150.8,200.7Z"></path><path d="M146,228.1L142.9,230.2A4.2,4.2 0 1 0 148.8,235.9L150.8,232.7A3.4,3.4 0 0 0 146,228.1Z"></path><path d="M143.2,237.2L156.3,244.7A3.9,3.9 0 0 0 160.3,238L147.4,230.1A4.2,4.2 0 1 0 143.2,237.2Z"></path><path d="M158.3,245.2L164.7,245.1A2.7,2.7 0 0 0 165.6,239.8L159.6,237.6A3.9,3.9 0 1 0 158.3,245.2Z"></path></g>
+  <g class="s-k"><ellipse cx="171.9" cy="76" rx="10.4" ry="13" transform="rotate(-0.9 171.9 76)"></ellipse><path d="M175.6,89L178.3,88.5A3.4,3.4 0 0 0 181,86.1L181.7,83.4A7.8,7.8 0 1 0 175.6,89Z"></path></g>
+  <g class="s-x"><path d="M149.4,105.2L150.4,141.4A4.2,4.2 0 0 0 158.7,141.7L162.4,105.7A6.5,6.5 0 1 0 149.4,105.2Z"></path><path d="M153.7,145.3L162.5,147.2A4.8,4.8 0 1 0 163.8,137.7L154.8,137.1A4.2,4.2 0 0 0 153.7,145.3Z"></path><path d="M163.2,147.3L184.1,148.2A2.9,2.9 0 0 0 184.9,142.5L164.5,137.8A4.8,4.8 0 1 0 163.2,147.3Z"></path><path d="M183.3,148.1L188.1,149.6A4.4,4.4 0 1 0 188.2,141.2L183.4,142.6A2.9,2.9 0 0 0 183.3,148.1Z"></path></g>
+  <g class="s-k"><path d="M149.4,105.2L150.4,141.4A4.2,4.2 0 0 0 158.7,141.7L162.4,105.7A6.5,6.5 0 1 0 149.4,105.2Z"></path><path d="M153.7,145.3L162.5,147.2A4.8,4.8 0 1 0 163.8,137.7L154.8,137.1A4.2,4.2 0 0 0 153.7,145.3Z"></path><path d="M163.2,147.3L184.1,148.2A2.9,2.9 0 0 0 184.9,142.5L164.5,137.8A4.8,4.8 0 1 0 163.2,147.3Z"></path></g>
+  <path class="s-rf" d="M235.6,114.1C235.4,114.1 235.1,114 234.8,114C234.5,114 234.1,114.1 233.7,114.1C233.3,114.2 232.8,114.3 232.3,114.5C231.8,114.6 231.3,114.8 230.7,115C230.1,115.2 229.5,115.4 228.9,115.7C228.3,116 227.7,116.3 227,116.6C226.3,116.9 225.7,117.2 225,117.6C224.3,118 223.6,118.4 222.9,118.8C222.2,119.2 221.5,119.6 220.9,120C220.2,120.4 219.5,120.9 218.9,121.3C218.2,121.8 217.6,122.2 217,122.6C216.3,123.1 215.8,123.5 215.2,124C214.7,124.4 214.1,124.9 213.7,125.3C213.2,125.7 212.7,126.1 212.3,126.5C211.9,126.9 211.6,127.3 211.3,127.7C211,128 210.7,128.4 210.5,128.7C210.3,129 210.2,129.3 210.1,129.5C210,129.8 209.9,130 209.9,130.2C209.9,130.4 210,130.6 210.1,130.7C210.2,130.9 210.4,131 210.6,131C210.9,131.1 211.1,131.1 211.5,131.1C211.8,131.1 212.2,131.1 212.6,131C213,130.9 213.4,130.8 213.9,130.7C214.4,130.5 215,130.4 215.5,130.2C216.1,130 216.7,129.7 217.3,129.5C217.9,129.2 218.6,128.9 219.2,128.6C219.9,128.3 220.6,127.9 221.3,127.6C221.9,127.2 222.6,126.8 223.3,126.4C224,126 224.7,125.6 225.4,125.2C226.1,124.7 226.7,124.3 227.4,123.9C228,123.4 228.7,123 229.3,122.5C229.9,122.1 230.5,121.6 231,121.2C231.6,120.7 232.1,120.3 232.6,119.9C233.1,119.5 233.5,119 233.9,118.6C234.3,118.2 234.7,117.9 235,117.5C235.3,117.1 235.5,116.8 235.7,116.5C235.9,116.2 236.1,115.9 236.2,115.6C236.3,115.4 236.3,115.1 236.3,114.9C236.3,114.7 236.2,114.6 236.1,114.4C236,114.3 235.8,114.2 235.6,114.1Z"></path><path class="s-rs" d="M215.2,130L235.3,116.4M211.5,130.4L234.7,114.7M210.9,128.8L231,115.1M220.2,127.8L213.5,125.8M227,123.7L219.2,121.4M232.7,119.4L226,117.4"></path><path class="s-rh" d="M213.1,131L209.8,131.6L209.7,130"></path><path class="s-rsch" d="M198.6,139.2L209.8,131.6"></path><path class="s-rr" d="M235.6,114.1C235.4,114.1 235.1,114 234.8,114C234.5,114 234.1,114.1 233.7,114.1C233.3,114.2 232.8,114.3 232.3,114.5C231.8,114.6 231.3,114.8 230.7,115C230.1,115.2 229.5,115.4 228.9,115.7C228.3,116 227.7,116.3 227,116.6C226.3,116.9 225.7,117.2 225,117.6C224.3,118 223.6,118.4 222.9,118.8C222.2,119.2 221.5,119.6 220.9,120C220.2,120.4 219.5,120.9 218.9,121.3C218.2,121.8 217.6,122.2 217,122.6C216.3,123.1 215.8,123.5 215.2,124C214.7,124.4 214.1,124.9 213.7,125.3C213.2,125.7 212.7,126.1 212.3,126.5C211.9,126.9 211.6,127.3 211.3,127.7C211,128 210.7,128.4 210.5,128.7C210.3,129 210.2,129.3 210.1,129.5C210,129.8 209.9,130 209.9,130.2C209.9,130.4 210,130.6 210.1,130.7C210.2,130.9 210.4,131 210.6,131C210.9,131.1 211.1,131.1 211.5,131.1C211.8,131.1 212.2,131.1 212.6,131C213,130.9 213.4,130.8 213.9,130.7C214.4,130.5 215,130.4 215.5,130.2C216.1,130 216.7,129.7 217.3,129.5C217.9,129.2 218.6,128.9 219.2,128.6C219.9,128.3 220.6,127.9 221.3,127.6C221.9,127.2 222.6,126.8 223.3,126.4C224,126 224.7,125.6 225.4,125.2C226.1,124.7 226.7,124.3 227.4,123.9C228,123.4 228.7,123 229.3,122.5C229.9,122.1 230.5,121.6 231,121.2C231.6,120.7 232.1,120.3 232.6,119.9C233.1,119.5 233.5,119 233.9,118.6C234.3,118.2 234.7,117.9 235,117.5C235.3,117.1 235.5,116.8 235.7,116.5C235.9,116.2 236.1,115.9 236.2,115.6C236.3,115.4 236.3,115.1 236.3,114.9C236.3,114.7 236.2,114.6 236.1,114.4C236,114.3 235.8,114.2 235.6,114.1Z"></path><path class="s-rg" d="M183.2,149.6L198.6,139.2"></path>
+  <g class="s-k"><path d="M183.3,148.1L188.1,149.6A4.4,4.4 0 1 0 188.2,141.2L183.4,142.6A2.9,2.9 0 0 0 183.3,148.1Z"></path></g>
+  <ellipse class="s-druck" cx="158.2" cy="245.7" rx="6" ry="1.9"></ellipse>
+  <ellipse class="s-druck" cx="181" cy="236.9" rx="6" ry="1.9"></ellipse>
+  <text class="st" x="150" y="268">Knie gebeugt · Gewicht auf den Fußballen</text>
+</svg>
+        <figcaption class="leise">Leitgrafik: die Grundposition</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="grundposition" aria-pressed="false">
+      Als gelesen abhaken
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Übungsteil</h2><span class="chip chip-rot">offen</span></div>
+        
+        <h3 class="ue-titel">Laden und losstarten</h3><div class="ue-block"><h4>Ziel</h4><p>Deine Grundposition sieht nicht nur gut aus — sie macht dich tatsächlich schneller.</p></div><div class="ue-block"><h4>So gehst du vor</h4><ol class="schrittliste"><li>Nimm die Grundposition ein: Füße etwas mehr als schulterbreit, Knie leicht gebeugt, Gewicht auf die Fußballen, Schläger locker vor dem Körper.</li><li>Wähle eine Richtung — vor, zurück, links oder rechts.</li><li>Starte explosiv einen einzigen Schritt in diese Richtung.</li><li>Kehre in die Grundposition zurück.</li><li>Wiederhole, jedes Mal in eine andere Richtung.</li></ol></div><div class="ue-block"><h4>Selbstkontrolle</h4><p>Wie leicht kommt der erste Schritt? Wenn du dich abstoßen kannst, ohne dich vorher aufzurichten, stimmt die Haltung. Musst du dich erst hochdrücken oder das Gewicht verlagern, standest du zu passiv — zu aufrecht, zu flach auf den Fersen.</p></div><div class="ue-block"><h4>Abschluss</h4><p>Die Grundposition ist dein Startblock. Ob sie funktioniert, merkst du erst in der Bewegung.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="grundposition" aria-pressed="false">
+      Als erledigt abhaken
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Einordnung</summary>
+      <dl>
+        <dt>Spielziele</dt><dd>Wiederholte Antrittsschnelligkeit</dd>
+        
+        
+        
+        
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Baustein-Navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Zur Liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Aktionen">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Teilen" title="Teilen">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Merken" title="Merken">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

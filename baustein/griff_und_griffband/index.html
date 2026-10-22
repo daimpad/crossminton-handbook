@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Griff &amp; Griffband — Crossminton-Handbuch</title>
+  <meta name="description" content="Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Tennis: Wenn du den …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/baustein/griff_und_griffband">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Griff &amp; Griffband — Crossminton-Handbuch">
+  <meta property="og:description" content="Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Tennis: Wenn du den …">
+  <meta property="og:url" content="https://crossminton-handbook.de/baustein/griff_und_griffband">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Griff &amp; Griffband — Crossminton-Handbuch">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Griff &amp; Griffband — Crossminton-Handbuch">
+  <meta name="twitter:description" content="Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Tennis: Wenn du den …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/griff_und_griffband">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/griff_und_griffband">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/griff_und_griffband">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/griff_und_griffband">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/griff_und_griffband">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton-Handbuch","item":"https://crossminton-handbook.de/"},{"@type":"ListItem","position":2,"name":"Themenpfad","item":"https://crossminton-handbook.de/pfad/themen"},{"@type":"ListItem","position":3,"name":"Ausrüstung","item":"https://crossminton-handbook.de/pfad/themen/ausruestung"},{"@type":"ListItem","position":4,"name":"Griff & Griffband","item":"https://crossminton-handbook.de/baustein/griff_und_griffband"}]},{"@type":"LearningResource","name":"Griff & Griffband","description":"Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Tennis: Wenn du den …","url":"https://crossminton-handbook.de/baustein/griff_und_griffband","inLanguage":"de","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"lesson","educationalLevel":"Fortgeschritten","about":[{"@type":"Thing","name":"Ausrüstung"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-schiefer baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-hand " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Griff &amp; Griffband</h1>
+        <p class="marke-hero-untertitel">Ausrüstung · Fortgeschritten</p>
+      </div>
+    </section>
+      
+      
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Erklärteil</h2><span class="chip chip-rot">offen</span></div>
+      
+      
+      <p>Die Griffstärke ist eine unauffällige Größe mit großer Wirkung — auf dein Handgelenk und auf deine Gesundheit. Die Faustregel stammt aus dem Tennis: Wenn du den Schläger normal greifst, sollte zwischen deinen Fingerspitzen und dem Handballen etwa die Breite deines Zeigefingers Platz bleiben. Anders gesagt berührt der Daumen den Griff, ohne die anderen Finger zu überlappen.</p><p>Der gefährliche Fehler geht nach unten. Ist der Griff zu dünn, bohren sich die Fingerspitzen in den Ballen, und du musst den Schläger dauerhaft fest umklammern, damit er sich beim Schlag nicht verdreht. Diese ständige Anspannung wandert in den Unterarm und gilt als einer der Hauptauslöser des Tennisarms. Für dein Spiel hat das eine unmittelbare Folge: Der lockere Griff ist die Voraussetzung für die Peitsche aus dem Handgelenk. Ein zu dünner Griff macht diese Lockerheit unmöglich — dann arbeitet das Material gegen deine Technik.</p><p>Für den Griff gibt es drei Arten von Band. Das Basisband ist werkseitig aufgezogen, etwa 1,8 Millimeter dick, dämpft Vibrationen und hält lange. Das Overgrip ist mit 0,4 bis 0,7 Millimetern dünn, wird darübergewickelt und ist ein Verschleißteil. Ein Frotteeband ist dicker und saugt Schweiß wie ein Handtuch — die richtige Wahl für stark schwitzende Hände, oft zusammen mit etwas Griffpuder.</p><p>Das Overgrip ist zugleich dein Werkzeug, um die Griffstärke fein einzustellen: Jede Lage vergrößert den Durchmesser. Wenn du weißt, dass du ohnehin ein Overgrip nutzt, wähle den Schläger von vornherein eine Nummer dünner. Umgekehrt kannst du ein Overgrip direkt auf den nackten Griff wickeln, um besonders dünn zu greifen. Als Obergrenze gilt: Basisband plus ein Overgrip; alles darüber wird zu dick.</p><p>Overgrips sind Verschleißteile. Nach ein paar Wochen lassen sie in der Griffigkeit nach — dann wechselst du sie, statt gleich das teurere Basisband zu erneuern. Das Basisband hält je nach Beanspruchung etwa ein halbes Jahr. Und weil der Griff die Stelle ist, an der Schweiß und Hand am längsten zusammenkommen, halte ihn sauber und tausch ihn, wenn er abgegriffen ist.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Zwei Griffe im Schnitt, mit Blick auf das Griffende, und die Hand als Band darum. Links ist der Griff zu dünn: dieselbe Hand reicht so weit herum, dass sich die Fingerspitzen in den Handballen drücken. Rechts passt er: zwischen Fingerspitzen und Handballen bleibt etwa die Breite eines Zeigefingers frei." class="grafik-bild grafik-svg" id="g-svg-39" style="--hoch: 1.000;">
+  <style>
+    #g-svg-39 .s-griff{fill:var(--flaeche,#fff);stroke:var(--tinte-2,#5a6675);stroke-width:1.6;stroke-linejoin:round}
+    #g-svg-39 .s-hand{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2;stroke-linejoin:round}
+    #g-svg-39 .s-kerbe{fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.6;stroke-linecap:round}
+    #g-svg-39 .s-links{text-anchor:start}
+    #g-svg-39 .s-rechts{text-anchor:end}
+    #g-svg-39 .s-druck{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    #g-svg-39 .s-finger{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2}
+    #g-svg-39 .s-rahmen{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    #g-svg-39 .s-saiten{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:0.6;opacity:.7}
+    #g-svg-39 .s-schaft{fill:none;stroke:var(--tinte-3,#656f7e);stroke-linecap:round}
+    #g-svg-39 .s-cmkopf{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.4}
+    #g-svg-39 .s-cmsaiten{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:0.7;opacity:.55}
+    #g-svg-39 .s-cmschaft{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-linecap:round}
+    #g-svg-39 .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    #g-svg-39 .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    #g-svg-39 .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-39 .s-saite{fill:var(--tinte,#16202b)}
+    #g-svg-39 .s-saite2{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.6}
+    #g-svg-39 .s-bett{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.2;stroke-linecap:round}
+    #g-svg-39 .s-rahmenstueck{fill:var(--tinte-2,#5a6675)}
+    #g-svg-39 .s-faecher{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1;stroke-dasharray:2 3}
+    #g-svg-39 .s-flug{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linecap:round}
+    #g-svg-39 .s-ball{fill:var(--tinte,#16202b)}
+    #g-svg-39 .s-trenner{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:3 4;opacity:.7}
+    #g-svg-39 .s-titel{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-39 .s-name{fill:var(--tinte-2,#5a6675);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-39 .s-name2{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-39 .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    #g-svg-39 .s-teilw{fill:var(--tinte,#16202b);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:3;stroke-linejoin:round}
+    #g-svg-39 .s-zahl{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    #g-svg-39 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="g-svg-39-mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"></path>
+    </marker>
+    <marker id="g-svg-39-ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"></path>
+    </marker>
+  </defs>
+
+  <text class="s-teil" x="150" y="22">Blick auf das Griffende</text>
+  <text class="s-titel" x="80" y="46">zu dünn</text>
+  <text class="s-titel" x="218" y="46">passend</text>
+  <path class="s-trenner" d="M149,140 L149,236"></path>
+  <path class="s-griff" d="M100.7,166.6L88.6,178.7L71.4,178.7L59.3,166.6L59.3,149.4L71.4,137.3L88.6,137.3L100.7,149.4Z"></path>
+  <path class="s-griff" d="M249,170.9L230.9,189L205.1,189L187,170.9L187,145.1L205.1,127L230.9,127L249,145.1Z"></path>
+  <path class="s-hand" d="M105.3,112.1L109.2,114.7L112.8,117.7L116.2,120.9L119.2,124.4L121.9,128.2L124.2,132.1L126.2,136.3L127.7,140.6L128.9,144.9L129.7,149.4L130.1,153.9L130.1,158.4L129.6,162.8L128.8,167.2L127.6,171.5L126,175.6L124.1,179.6L121.7,183.3L119,186.7L116,189.8L112.7,192.6L109.3,195.1L105.6,197.2L101.8,199L97.9,200.4L93.9,201.5L89.9,202.2L85.9,202.5L81.9,202.5L77.9,202.1L74,201.3L70.3,200.2L66.7,198.8L63.2,197.1L60,195.1L57,192.8L54.2,190.3L51.7,187.6L49.4,184.7L47.5,181.6L45.7,178.5L44.1,175.3L42.7,172L41.7,168.6L41,165.1L40.7,161.6L40.6,158.1L40.8,154.6L41.4,151.1L42.3,147.7L43.4,144.4L44.9,141.2L46.6,138.2L48.6,135.4L50.8,132.7L53.3,130.3L55.9,128.1L58.7,126.1L61.7,124.4L64.8,123L68,121.9L71.3,121.1L74.7,120.5L78.1,120.3L81.4,120.4L84.8,120.8L88.1,121.4L85.3,134.2L83.1,133.8L80.9,133.6L78.7,133.6L76.6,133.8L74.4,134.2L72.3,134.8L70.3,135.6L68.3,136.6L66.5,137.7L64.7,139L63.1,140.4L61.6,142L60.2,143.7L59,145.6L58,147.5L57.1,149.5L56.5,151.6L56,153.7L55.7,155.9L55.6,158L55.7,160.2L56,162.4L56.5,164.5L57.2,166.6L58,168.6L59.1,170.5L60.3,172.3L61.6,174L63.1,175.6L64.8,177.1L66.5,178.3L68.4,179.5L70.4,180.4L72.4,181.2L74.5,181.8L76.7,182.2L78.8,182.4L81,182.4L83.2,182.2L85.3,181.8L87.5,181.2L89.5,180.5L91.5,179.5L93.3,178.4L95.1,177.2L96.8,175.7L98.3,174.2L99.7,172.5L100.9,170.6L101.9,168.7L102.8,166.7L103.5,164.7L104,162.5L104.3,160.4L104.4,158.2L104.3,156L104,153.8L103.6,151.7L102.9,149.6L102.1,147.6L101.1,145.7L99.9,143.8L98.5,142.1L97,140.5L95.4,139.1L93.7,137.8L91.8,136.6A14,14 0 0 1 105.3,112.1Z"></path>
+  <path class="s-kerbe" d="M54,162.8L43,164.9M75.4,132L73.8,122.7"></path>
+  <path class="s-hand" d="M83.5,110.4L87.7,111L91.8,112L95.8,113.3L99.7,115L103.4,117L106.9,119.3L110.1,121.9L113.1,124.8L115.9,127.9L118.3,131.3L120.5,134.8L122.3,138.5L123.7,142.4L124.9,146.4L125.6,150.4A5.9,5.9 0 0 1 114,152.3L113.4,149.3L112.5,146.4L111.3,143.6L109.9,140.9L108.3,138.3L106.4,135.8L104.4,133.6L102.1,131.5L99.7,129.7L97.1,128L94.3,126.6L91.5,125.5L88.6,124.6L85.6,124L82.5,123.6Z"></path>
+  <path class="s-hand" d="M248.7,102.3L252.3,104.7L255.7,107.3L258.9,110.1L261.9,113.1L264.7,116.2L267.2,119.6L269.5,123.1L271.6,126.7L273.4,130.5L274.9,134.3L276.2,138.3L277.2,142.3L277.9,146.3L278.4,150.4L278.6,154.5L278.5,158.6L278.1,162.6L277.4,166.6L276.3,170.5L274.9,174.3L273.3,177.9L271.5,181.4L269.5,184.8L267.2,188L264.8,191L262.1,193.8L259.3,196.4L256.4,198.8L253.3,201L250.1,203L246.8,204.7L243.4,206.2L240,207.4L236.5,208.4L232.9,209.2L229.4,209.7L225.8,209.9L222.3,210L218.8,209.7L215.3,209.2L211.9,208.8L208.5,208.2L205.2,207.3L201.9,206.3L198.8,205L195.7,203.5L192.7,201.8L189.9,200L187.2,197.9L184.7,195.7L182.3,193.3L180.1,190.7L178,188L176.2,185.2L174.5,182.3L173.1,179.3L171.8,176.2L170.8,173L170,169.8L169.4,166.5L169.1,163.2L168.9,159.9L169,156.6L169.3,153.3L169.8,150.1L170.5,146.9L171.5,143.8L172.6,140.7L174,137.7L175.5,134.9L177.3,132.1L179.2,129.5L181.3,127L183.5,124.7L185.9,122.5L188.4,120.5L191,118.7L193.8,117.1L196.6,115.6L199.6,114.4A5.9,5.9 0 0 1 204.1,125.2L202,126.2L199.9,127.4L197.9,128.6L195.9,130.1L194.1,131.6L192.4,133.3L190.8,135.1L189.3,136.9L187.9,138.9L186.7,141L185.7,143.1L184.7,145.3L184,147.6L183.3,149.9L182.9,152.2L182.6,154.6L182.4,157L182.4,159.4L182.6,161.8L182.9,164.2L183.4,166.5L184.1,168.8L184.9,171.1L185.8,173.2L186.9,175.4L188.2,177.4L189.5,179.4L191,181.2L192.7,183L194.4,184.7L196.2,186.2L198.2,187.6L200.2,188.8L202.3,190L204.5,190.9L206.8,191.8L209.1,192.5L211.4,193L213.8,193.3L216.1,193.6L218.5,193.6L220.9,193.5L223.3,193.2L225.7,192.8L228,192.2L230.2,191.4L232.5,190.5L234.6,189.5L236.7,188.3L238.7,187L240.6,185.5L242.4,183.9L244.1,182.2L245.6,180.4L247.1,178.5L248.4,176.5L249.6,174.4L250.6,172.3L251.5,170.1L252.2,167.8L252.8,165.5L253.2,163.1L253.5,160.7L253.6,158.3L253.5,155.9L253.3,153.6L252.9,151.2L252.4,148.9L251.7,146.6L250.9,144.3L249.9,142.2L248.7,140.1L247.5,138L246.1,136.1L244.5,134.3L242.9,132.5L241.1,130.9L239.2,129.4L237.3,128.1L235.2,126.8A14,14 0 0 1 248.7,102.3Z"></path>
+  <path class="s-kerbe" d="M204.2,193L200.1,203.4M180.4,158.5L170.9,158.6"></path>
+  <path class="s-druck" d="M116.5,110.3l5,-5M123.5,114.3l7,-3M112.5,105.3l2,-7"></path>
+  <circle class="s-finger" cx="220.3" cy="113.5" r="9.5"></circle>
+  <text class="s-teil" x="80" y="76">kein Platz</text>
+  <text class="s-teil" x="220.3" y="80">1 Finger</text>
+  <text class="s-teil s-links" x="257.3" y="103.5">Ballen</text>
+  <text class="s-teil s-rechts" x="186.2" y="103.6">Fingerspitzen</text>
+  <text class="st" x="150" y="268">ein Finger Platz bis zum Ballen</text>
+</svg>
+        <figcaption class="leise">Griffstärke: ein Finger Platz zwischen Fingerspitzen und Ballen</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="griff_und_griffband" aria-pressed="false">
+      Als gelesen abhaken
+    </button></div>
+    </section>
+      
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Reflexionsaufgabe</h2><span class="chip chip-rot">offen</span></div>
+        <p>Greif deinen Schläger, wie du ihn im Spiel hältst, und schieb einen Finger zwischen Fingerspitzen und Handballen: Passt dein Zeigefinger gut hinein, oder ist es enger? Achte im nächsten Ballwechsel darauf, ob du den Griff umklammern musst, damit er nicht wegdreht — ein Zeichen, dass er dir zu dünn ist. Und prüf dein Overgrip: Ist es noch griffig, oder ist es Zeit für ein frisches?</p>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="reflexionsaufgabe" data-baustein="griff_und_griffband" aria-pressed="false">
+      Als mitgenommen abhaken
+    </button></div>
+      </section>
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Einordnung</summary>
+      <dl>
+        
+        
+        
+        
+        
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Baustein-Navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Zur Liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Aktionen">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Teilen" title="Teilen">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Merken" title="Merken">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

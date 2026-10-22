@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Der Aufschlag — Crossminton-Handbuch</title>
+  <meta name="description" content="Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt a …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/baustein/aufschlag">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Der Aufschlag — Crossminton-Handbuch">
+  <meta property="og:description" content="Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt a …">
+  <meta property="og:url" content="https://crossminton-handbook.de/baustein/aufschlag">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Der Aufschlag — Crossminton-Handbuch">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Der Aufschlag — Crossminton-Handbuch">
+  <meta name="twitter:description" content="Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt a …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/aufschlag">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/aufschlag">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/aufschlag">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/aufschlag">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/aufschlag">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton-Handbuch","item":"https://crossminton-handbook.de/"},{"@type":"ListItem","position":2,"name":"Themenpfad","item":"https://crossminton-handbook.de/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technik","item":"https://crossminton-handbook.de/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"Der Aufschlag","item":"https://crossminton-handbook.de/baustein/aufschlag"}]},{"@type":"LearningResource","name":"Der Aufschlag","description":"Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt a …","url":"https://crossminton-handbook.de/baustein/aufschlag","inLanguage":"de","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Einsteiger","about":[{"@type":"Thing","name":"Technik"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-baseball " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Der Aufschlag</h1>
+        <p class="marke-hero-untertitel">Technik · Einsteiger</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Empfohlen vorher: <a href="/baustein/griff?kontext=kompetenz">Der Universalgriff</a>, <a href="/baustein/grundposition?kontext=kompetenz">Die Grundposition</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Erklärteil</h2><span class="chip chip-rot">offen</span></div>
+      
+      
+      <p>Der Aufschlag eröffnet jeden Ballwechsel. Er ist der einzige Schlag, den du in aller Ruhe vorbereitest — kein Gegner setzt dich unter Druck, der Speeder liegt allein in deiner Hand. Genau das macht ihn zum idealen ersten Schlag.</p><p>Du hältst den Speeder frei vor dir und lässt ihn fallen. Während er sinkt, führst du den Schläger von unten nach vorn und triffst ihn im Fallen. Der entscheidende Punkt: Der ganze Speeder ist im Moment des Treffens unterhalb deiner Schlaghand. Diese eine Vorgabe formt die ganze Bewegung — du schlägst von unten, nicht von oben. Ein Aufschlag über Schulterhöhe ist kein gültiger Aufschlag.</p><p>Dazu zwei Bedingungen, die den Aufschlag gültig machen: Ein Fuß bleibt während der Bewegung am Boden, und du schlägst aus der hinteren Zone deines Feldes. Solange du diese beiden einhältst, zählt dein Aufschlag.</p><p>Für den ersten Kontakt darfst du es dir leichter machen: Lass den Speeder aus Hüfthöhe fallen und triff ihn tief, knapp bevor er den Boden erreicht. So gewöhnst du dich an den Fallzeitpunkt. Sitzt das Timing, hebst du den Treffpunkt an — so weit, wie die Regel es erlaubt: bis knapp unterhalb der Schlaghand.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Aufschlag, Bild 1: seitlich gesehen, das Gewicht auf dem hinteren Fuß. Die freie Hand hat den Speeder auf Hüfthöhe vor dem Körper eben losgelassen, er fällt mit der Kappe nach unten. Der Schlagarm hängt locker nach hinten unten ausgeholt, der Schläger hinter dem Bein. Ein Bogenpfeil zeigt den kommenden Schwung von unten nach vorn; beide Füße stehen hinter der Aufschlaglinie." class="grafik-bild grafik-svg" id="g-svg-5" style="--hoch: 1.000;">
+  <style>
+    #g-svg-5 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-5 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-5 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-5 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-5 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-5 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-5 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-5 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-5 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-5 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-5 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-5 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-5 .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    #g-svg-5 .s-bahnz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    #g-svg-5 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-5 .s-mkg{fill:var(--tinte-3,#656f7e)}
+    #g-svg-5 .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
+    #g-svg-5 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-5 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-5-p005" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker><marker id="g-svg-5-q005" viewBox="0 0 10 10" markerWidth="4" markerHeight="4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"></path></marker></defs>
+  <path class="s-boden" d="M18,244.5L284,244.5"></path><path class="s-linie" d="M185.7,239.5L185.7,249.5"></path>
+  <ellipse class="s-schw" cx="139.5" cy="245" rx="43" ry="5.5"></ellipse><ellipse class="s-sch" cx="139.5" cy="245" rx="27.5" ry="3.4"></ellipse>
+  <path class="s-bahnz" d="M83.4,208.1 Q 82.4,226.1 100.3,228.1" marker-end="url(#g-svg-5-q005)"></path>
+  <g class="s-f"><path d="M122,155.5L129.1,170.3A7.7,7.7 0 1 0 142.9,163.5L135.4,148.9A7.4,7.4 0 0 0 122,155.5Z"></path><path d="M129.1,170.3L141,195.2A5.4,5.4 0 0 0 151,191.4L143.4,164.9A7.7,7.7 0 1 0 129.1,170.3Z"></path><path d="M140.5,192.7L140.1,205.2A6.1,6.1 0 1 0 152.3,204.9L151.2,192.4A5.4,5.4 0 0 0 140.5,192.7Z"></path><path d="M140.3,207.1L148.5,235.8A3.1,3.1 0 0 0 154.6,234.7L152.3,204.9A6.1,6.1 0 1 0 140.3,207.1Z"></path><path d="M149.5,232.6L145.7,235.8A3.8,3.8 0 1 0 151.4,240.8L154.1,236.6A3.1,3.1 0 0 0 149.5,232.6Z"></path><path d="M148,242.6L164,243.5A3.6,3.6 0 0 0 164.5,236.3L148.5,234.9A3.8,3.8 0 1 0 148,242.6Z"></path><path d="M164.5,243.4L171.9,242.9A2.5,2.5 0 0 0 172.3,237.9L165,236.3A3.6,3.6 0 1 0 164.5,243.4Z"></path></g>
+  <g class="s-f"><path d="M129.8,103.4L143.7,133.6A3.8,3.8 0 0 0 150.8,130.8L141,99.1A6,6 0 1 0 129.8,103.4Z"></path><path d="M144.4,134.6L150,140.6A4.4,4.4 0 1 0 156,134L149.5,129A3.8,3.8 0 0 0 144.4,134.6Z"></path><path d="M150.6,141L165.8,152.5A2.6,2.6 0 0 0 169.4,148.6L156.5,134.5A4.4,4.4 0 1 0 150.6,141Z"></path></g>
+  <g class="s-f"><path d="M165,151.4L167,156.1A3.6,3.6 0 1 0 172.9,152.2L169.3,148.5A2.6,2.6 0 0 0 165,151.4Z"></path><path d="M167.7,157.1L173.2,163A2.2,2.2 0 0 0 176.7,160.6L173.5,153.3A3.5,3.5 0 1 0 167.7,157.1Z"></path></g>
+  <g class="s-k"><path d="M135.6,94.1C138.4,95.2 138.7,96.3 140.4,98.7C142.1,101.1 143.4,101.8 144,106C144.7,110.3 145,113.7 143.7,120C142.4,126.4 139.3,130.9 137.6,137.8C135.9,144.7 136.4,149.2 135.2,154.4C134.1,159.7 133.3,161 131.7,164C130,166.9 128.7,168.2 126.8,169.2C124.9,170.1 123.8,170 122.2,168.8C120.6,167.5 119.7,166 118.9,162.9C118,159.7 117.6,158.3 117.9,153C118.2,147.7 120.1,143.3 120.4,136.3C120.7,129.3 119.6,124.5 119.4,118C119.1,111.5 118.7,108.1 119.2,103.9C119.7,99.8 120.3,99.2 121.8,97.1C123.3,95 123.8,93.9 126.6,93.3C129.3,92.7 132.8,93 135.6,94.1Z"></path><path d="M115.9,155.8L117.7,171.9A7.7,7.7 0 1 0 132.9,169.9L130.6,153.9A7.4,7.4 0 0 0 115.9,155.8Z"></path><path d="M117.7,171.8L120.5,199.8A5.4,5.4 0 0 0 131.3,199.6L133,171.5A7.7,7.7 0 1 0 117.7,171.8Z"></path><path d="M121.3,196.5L114.6,207.6A6.1,6.1 0 1 0 125.4,213.3L130.8,201.6A5.4,5.4 0 0 0 121.3,196.5Z"></path><path d="M113.9,209.3L107.1,237A3.1,3.1 0 0 0 112.9,239.1L125.3,213.4A6.1,6.1 0 1 0 113.9,209.3Z"></path><path d="M108,235.4L104.7,238.5A3.8,3.8 0 1 0 110.6,243.2L112.9,239.2A3.1,3.1 0 0 0 108,235.4Z"></path><path d="M106.8,245.1L120.7,246.9A3.6,3.6 0 0 0 121.7,239.8L107.9,237.5A3.8,3.8 0 1 0 106.8,245.1Z"></path><path d="M121.2,246.9L127.7,246.8A2.5,2.5 0 0 0 128.4,241.8L122.2,239.9A3.6,3.6 0 1 0 121.2,246.9Z"></path></g>
+  <g class="s-k"><ellipse cx="138.5" cy="80.9" rx="9.6" ry="12" transform="rotate(24.7 138.5 80.9)"></ellipse><path d="M137,93.2L139.7,93.9A3.1,3.1 0 0 0 142.9,92.6L144.5,90.4A7.2,7.2 0 1 0 137,93.2Z"></path></g>
+  <g class="s-x"><path d="M117.6,105.1L109.1,137.2A3.8,3.8 0 0 0 116.4,139.6L128.9,108.9A6,6 0 1 0 117.6,105.1Z"></path><path d="M109.4,136.4L105.7,143.6A4.4,4.4 0 1 0 113.9,147.1L116.5,139.4A3.8,3.8 0 0 0 109.4,136.4Z"></path><path d="M105.4,144.3L99.7,162.3A2.6,2.6 0 0 0 104.5,164.4L113.6,147.8A4.4,4.4 0 1 0 105.4,144.3Z"></path><path d="M100.3,161.3L97.3,164.6A4.1,4.1 0 1 0 104.3,167.9L104.8,163.5A2.6,2.6 0 0 0 100.3,161.3Z"></path></g>
+  <g class="s-k"><path d="M117.6,105.1L109.1,137.2A3.8,3.8 0 0 0 116.4,139.6L128.9,108.9A6,6 0 1 0 117.6,105.1Z"></path><path d="M109.4,136.4L105.7,143.6A4.4,4.4 0 1 0 113.9,147.1L116.5,139.4A3.8,3.8 0 0 0 109.4,136.4Z"></path><path d="M105.4,144.3L99.7,162.3A2.6,2.6 0 0 0 104.5,164.4L113.6,147.8A4.4,4.4 0 1 0 105.4,144.3Z"></path></g>
+  <path class="s-rf" d="M73.1,212.3C73.2,212.5 73.4,212.6 73.5,212.6C73.7,212.7 73.9,212.7 74.1,212.7C74.3,212.7 74.6,212.6 74.9,212.5C75.1,212.3 75.4,212.1 75.8,211.9C76.1,211.7 76.4,211.4 76.8,211.1C77.1,210.7 77.5,210.4 77.8,210C78.2,209.5 78.6,209.1 79,208.6C79.4,208.1 79.8,207.6 80.2,207C80.6,206.5 81,205.9 81.4,205.3C81.8,204.7 82.2,204.1 82.6,203.4C83,202.8 83.3,202.2 83.7,201.5C84.1,200.9 84.4,200.2 84.7,199.5C85.1,198.9 85.4,198.2 85.7,197.6C86,196.9 86.2,196.3 86.5,195.7C86.7,195.1 86.9,194.5 87.1,193.9C87.3,193.3 87.5,192.8 87.6,192.3C87.8,191.8 87.9,191.3 87.9,190.8C88,190.4 88.1,190 88.1,189.6C88.1,189.3 88.1,188.9 88,188.7C88,188.4 87.9,188.2 87.8,188C87.7,187.8 87.5,187.7 87.3,187.6C87.2,187.6 87,187.5 86.8,187.6C86.5,187.6 86.3,187.7 86,187.8C85.7,188 85.4,188.1 85.1,188.4C84.8,188.6 84.5,188.9 84.1,189.2C83.8,189.5 83.4,189.9 83,190.3C82.6,190.7 82.3,191.2 81.9,191.7C81.5,192.2 81.1,192.7 80.7,193.2C80.3,193.8 79.9,194.4 79.5,195C79.1,195.6 78.7,196.2 78.3,196.8C77.9,197.5 77.5,198.1 77.2,198.8C76.8,199.4 76.5,200.1 76.1,200.8C75.8,201.4 75.5,202.1 75.2,202.7C74.9,203.4 74.6,204 74.4,204.6C74.2,205.2 73.9,205.8 73.7,206.4C73.5,207 73.4,207.5 73.2,208C73.1,208.5 73,209 72.9,209.5C72.9,209.9 72.8,210.3 72.8,210.7C72.8,211 72.8,211.3 72.9,211.6C72.9,211.9 73,212.1 73.1,212.3Z"></path><path class="s-rh" d="M86.5,187.4L88.3,187.2L88.2,190.1"></path><path class="s-rsch" d="M94.9,176.3L88.3,187.2"></path><path class="s-rr" d="M73.1,212.3C73.2,212.5 73.4,212.6 73.5,212.6C73.7,212.7 73.9,212.7 74.1,212.7C74.3,212.7 74.6,212.6 74.9,212.5C75.1,212.3 75.4,212.1 75.8,211.9C76.1,211.7 76.4,211.4 76.8,211.1C77.1,210.7 77.5,210.4 77.8,210C78.2,209.5 78.6,209.1 79,208.6C79.4,208.1 79.8,207.6 80.2,207C80.6,206.5 81,205.9 81.4,205.3C81.8,204.7 82.2,204.1 82.6,203.4C83,202.8 83.3,202.2 83.7,201.5C84.1,200.9 84.4,200.2 84.7,199.5C85.1,198.9 85.4,198.2 85.7,197.6C86,196.9 86.2,196.3 86.5,195.7C86.7,195.1 86.9,194.5 87.1,193.9C87.3,193.3 87.5,192.8 87.6,192.3C87.8,191.8 87.9,191.3 87.9,190.8C88,190.4 88.1,190 88.1,189.6C88.1,189.3 88.1,188.9 88,188.7C88,188.4 87.9,188.2 87.8,188C87.7,187.8 87.5,187.7 87.3,187.6C87.2,187.6 87,187.5 86.8,187.6C86.5,187.6 86.3,187.7 86,187.8C85.7,188 85.4,188.1 85.1,188.4C84.8,188.6 84.5,188.9 84.1,189.2C83.8,189.5 83.4,189.9 83,190.3C82.6,190.7 82.3,191.2 81.9,191.7C81.5,192.2 81.1,192.7 80.7,193.2C80.3,193.8 79.9,194.4 79.5,195C79.1,195.6 78.7,196.2 78.3,196.8C77.9,197.5 77.5,198.1 77.2,198.8C76.8,199.4 76.5,200.1 76.1,200.8C75.8,201.4 75.5,202.1 75.2,202.7C74.9,203.4 74.6,204 74.4,204.6C74.2,205.2 73.9,205.8 73.7,206.4C73.5,207 73.4,207.5 73.2,208C73.1,208.5 73,209 72.9,209.5C72.9,209.9 72.8,210.3 72.8,210.7C72.8,211 72.8,211.3 72.9,211.6C72.9,211.9 73,212.1 73.1,212.3Z"></path><path class="s-rg" d="M103.9,161.3L94.9,176.3"></path>
+  <g class="s-k"><path d="M100.3,161.3L97.3,164.6A4.1,4.1 0 1 0 104.3,167.9L104.8,163.5A2.6,2.6 0 0 0 100.3,161.3Z"></path></g>
+  <path class="s-korb" d="M174.3,179.3L171.4,169.3Q177,167.5 182.6,169.3L179.7,179.3Z"></path><path class="s-kappe" d="M173.2,182.7a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <path class="s-bahn" d="M177,190.3 L177,205.3" marker-end="url(#g-svg-5-p005)"></path>
+  <text class="st" x="150" y="274">aus Hüfthöhe fallen lassen</text>
+</svg>
+        <figcaption class="leise">Aufschlag, Bild 1: der Speeder fällt</figcaption>
+      </figure>
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Aufschlag, Bild 2: derselbe Blick im Treffmoment. Das Gewicht ist auf den vorderen Fuß gewandert, die hintere Ferse hebt sich, der Ballen bleibt am Boden. Der Schlagarm ist von hinten unten nach vorn geschwungen, der Schläger hängt steil nach unten, der Kopf knapp vor und unter der Hand, die Fläche leicht geöffnet nach vorn. Der ganze Speeder liegt unterhalb der gestrichelten Linie auf Höhe der Schlaghand; die Bahn steigt flach und lang aus dem Bild." class="grafik-bild grafik-svg" id="g-svg-6" style="--hoch: 1.000;">
+  <style>
+    #g-svg-6 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-6 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-6 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-6 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-6 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-6 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-6 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-6 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-6 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-6 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-6 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-6 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-6 .s-spur{fill:var(--primaer-dunkel,#1e8bd6);opacity:.18}
+    #g-svg-6 .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    #g-svg-6 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-6 .s-linie{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.8;stroke-linecap:round}
+    #g-svg-6 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-6 .s-hilf{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.4;stroke-dasharray:5 4}
+    #g-svg-6 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-6-p006" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker></defs>
+  <path class="s-boden" d="M18,244.5L284,244.5"></path><path class="s-linie" d="M185.7,239.5L185.7,249.5"></path>
+  <ellipse class="s-schw" cx="140.6" cy="245" rx="43" ry="5.5"></ellipse><ellipse class="s-sch" cx="140.6" cy="245" rx="27.5" ry="3.4"></ellipse>
+  <path class="s-spur" d="M84.1,206.5L86.2,208.7L88.4,210.8L90.7,212.8L92.9,214.7L95.3,216.4L97.7,218L100.2,219.5L102.7,220.8L105.3,222L108,223L110.8,223.9L113.6,224.7L116.5,225.3L119.5,225.7L122.5,226.1L125.7,226.2L128.8,226.2L132.1,226.1L135.4,225.8L138.8,225.3L142.2,224.7L145.8,224L149.3,223L153,222L156.7,220.7L160.4,219.4L164.2,217.8L168.1,216.2L162.5,205.6L159.1,207.6L155.8,209.5L152.6,211.2L149.4,212.8L146.2,214.2L143.1,215.5L140.1,216.7L137.1,217.7L134.1,218.5L131.1,219.2L128.3,219.8L125.4,220.2L122.6,220.5L119.8,220.6L117,220.6L114.3,220.4L111.7,220.1L109,219.6L106.4,218.9L103.8,218.1L101.3,217.2L98.8,216.1L96.3,214.8L93.9,213.3L91.5,211.7L89.2,209.9L87,208L84.8,205.8Z"></path>
+  <path class="s-hilf" d="M116.1,169.4L202.3,169.4"></path>
+  <g class="s-f"><path d="M140.6,153.2L145.5,168.2A7.7,7.7 0 1 0 160,163.2L154.7,148.4A7.4,7.4 0 0 0 140.6,153.2Z"></path><path d="M145.5,168.1L153.6,193.8A5.4,5.4 0 0 0 164.1,191.4L160.4,164.8A7.7,7.7 0 1 0 145.5,168.1Z"></path><path d="M153.6,190.4L149.4,202.6A6.1,6.1 0 1 0 161.1,205.9L164,193.3A5.4,5.4 0 0 0 153.6,190.4Z"></path><path d="M149.1,204.5L148.4,233.8A3.1,3.1 0 0 0 154.5,234.6L161.1,206A6.1,6.1 0 1 0 149.1,204.5Z"></path><path d="M149.5,231.5L145.7,234.8A3.8,3.8 0 1 0 151.4,239.8L154.1,235.6A3.1,3.1 0 0 0 149.5,231.5Z"></path><path d="M148,241.5L164,242.4A3.6,3.6 0 0 0 164.5,235.2L148.5,233.9A3.8,3.8 0 1 0 148,241.5Z"></path><path d="M164.5,242.4L171.9,241.9A2.5,2.5 0 0 0 172.3,236.9L165,235.3A3.6,3.6 0 1 0 164.5,242.4Z"></path></g>
+  <g class="s-f"><path d="M154.4,98.7L146.1,123.9A3.8,3.8 0 0 0 153.1,126.9L165.4,103.3A6,6 0 1 0 154.4,98.7Z"></path><path d="M148.1,121.6L141.9,124.5A4.4,4.4 0 1 0 146.2,132.2L151.9,128.3A3.8,3.8 0 0 0 148.1,121.6Z"></path><path d="M141.1,125L128.1,134.4A2.6,2.6 0 0 0 130.7,139L145.5,132.6A4.4,4.4 0 1 0 141.1,125Z"></path></g>
+  <g class="s-f"><path d="M129.2,134L124.6,134.8A3.6,3.6 0 1 0 127.2,141.3L131.1,138.8A2.6,2.6 0 0 0 129.2,134Z"></path><path d="M123.4,135.4L117.3,139.2A2.2,2.2 0 0 0 118.9,143.1L125.9,141.7A3.5,3.5 0 1 0 123.4,135.4Z"></path></g>
+  <g class="s-k"><path d="M161.5,94.6C164.1,96 164.3,97.2 165.7,99.7C167.1,102.3 168.3,103.1 168.5,107.4C168.6,111.7 168.5,115.1 166.5,121.2C164.5,127.3 160.8,131.4 158.3,137.9C155.8,144.5 155.8,149.1 154.1,154.1C152.3,159.1 151.4,160.3 149.4,163C147.4,165.7 146,166.9 144,167.6C142,168.3 140.8,168.1 139.4,166.7C138,165.2 137.3,163.7 136.8,160.4C136.3,157.2 136.1,155.8 137,150.6C137.9,145.4 140.3,141.3 141.5,134.4C142.6,127.6 142.1,122.7 142.6,116.2C143.1,109.8 143.1,106.4 144.1,102.4C145,98.3 145.7,97.9 147.5,96C149.2,94 149.8,93 152.6,92.8C155.4,92.5 158.9,93.2 161.5,94.6Z"></path><path d="M134.9,152.4L132.5,168A7.7,7.7 0 1 0 147.7,170.1L149.6,154.4A7.4,7.4 0 0 0 134.9,152.4Z"></path><path d="M132.5,167.9L127.9,195.9A5.4,5.4 0 0 0 138.3,198.5L147.4,171.6A7.7,7.7 0 1 0 132.5,167.9Z"></path><path d="M129,193.3L120.7,203.4A6.1,6.1 0 1 0 130.5,210.7L137.7,199.7A5.4,5.4 0 0 0 129,193.3Z"></path><path d="M119.8,205L109,230.9A3.1,3.1 0 0 0 114.4,233.9L130.4,210.8A6.1,6.1 0 1 0 119.8,205Z"></path><path d="M110.2,229.5L107.3,231.2A3.8,3.8 0 1 0 112.6,236.6L114.4,233.8A3.1,3.1 0 0 0 110.2,229.5Z"></path><path d="M107.3,237.7L119.3,245.5A3.6,3.6 0 0 0 123.3,239.5L111.6,231.3A3.8,3.8 0 1 0 107.3,237.7Z"></path><path d="M121.4,246L127.5,245.7A2.5,2.5 0 0 0 128.1,240.8L122.3,239A3.6,3.6 0 1 0 121.4,246Z"></path></g>
+  <g class="s-k"><ellipse cx="166.8" cy="82.7" rx="9.6" ry="12" transform="rotate(36 166.8 82.7)"></ellipse><path d="M163.1,94.6L165.6,95.6A3.1,3.1 0 0 0 169,95L170.9,93.1A7.2,7.2 0 1 0 163.1,94.6Z"></path></g>
+  <g class="s-x"><path d="M142.3,107.6L150,140.2A3.8,3.8 0 0 0 157.6,138.9L154.2,105.6A6,6 0 1 0 142.3,107.6Z"></path><path d="M150.1,140.5L152.6,148.4A4.4,4.4 0 1 0 160.8,145.1L157.2,137.7A3.8,3.8 0 0 0 150.1,140.5Z"></path><path d="M152.9,149.1L161.6,166.3A2.6,2.6 0 0 0 166.5,164.4L161.1,145.8A4.4,4.4 0 1 0 152.9,149.1Z"></path><path d="M161.4,165.5L162,170A4.1,4.1 0 1 0 169,166.6L165.9,163.3A2.6,2.6 0 0 0 161.4,165.5Z"></path></g>
+  <g class="s-k"><path d="M142.3,107.6L150,140.2A3.8,3.8 0 0 0 157.6,138.9L154.2,105.6A6,6 0 1 0 142.3,107.6Z"></path><path d="M150.1,140.5L152.6,148.4A4.4,4.4 0 1 0 160.8,145.1L157.2,137.7A3.8,3.8 0 0 0 150.1,140.5Z"></path><path d="M152.9,149.1L161.6,166.3A2.6,2.6 0 0 0 166.5,164.4L161.1,145.8A4.4,4.4 0 1 0 152.9,149.1Z"></path></g>
+  <path class="s-rf" d="M170.5,222.1C170.7,222.1 170.8,222.1 171,222.1C171.2,222 171.4,221.9 171.5,221.7C171.7,221.5 171.8,221.3 172,221C172.1,220.7 172.2,220.3 172.3,219.9C172.5,219.5 172.6,219.1 172.6,218.6C172.7,218.1 172.8,217.6 172.9,217C172.9,216.4 173,215.8 173,215.2C173,214.5 173,213.9 173,213.2C173,212.5 173,211.8 173,211C173,210.3 172.9,209.6 172.9,208.8C172.8,208.1 172.7,207.3 172.6,206.6C172.5,205.8 172.4,205.1 172.3,204.4C172.2,203.7 172.1,202.9 171.9,202.3C171.8,201.6 171.6,200.9 171.5,200.3C171.3,199.6 171.1,199 171,198.5C170.8,197.9 170.6,197.4 170.4,196.9C170.2,196.4 170,196 169.8,195.6C169.6,195.2 169.4,194.9 169.2,194.6C169.1,194.3 168.9,194.1 168.7,193.9C168.5,193.8 168.3,193.7 168.1,193.6C167.9,193.6 167.7,193.6 167.5,193.6C167.4,193.7 167.2,193.8 167,194C166.9,194.2 166.7,194.4 166.6,194.7C166.5,195 166.3,195.4 166.2,195.8C166.1,196.2 166,196.6 165.9,197.1C165.8,197.6 165.7,198.1 165.7,198.7C165.6,199.3 165.6,199.9 165.6,200.5C165.5,201.2 165.5,201.8 165.5,202.5C165.5,203.2 165.5,204 165.6,204.7C165.6,205.4 165.6,206.1 165.7,206.9C165.8,207.6 165.8,208.4 165.9,209.1C166,209.9 166.1,210.6 166.2,211.3C166.4,212.1 166.5,212.8 166.6,213.5C166.8,214.1 166.9,214.8 167.1,215.4C167.2,216.1 167.4,216.7 167.6,217.2C167.8,217.8 168,218.3 168.1,218.8C168.3,219.3 168.5,219.7 168.7,220.1C168.9,220.5 169.1,220.8 169.3,221.1C169.5,221.4 169.7,221.6 169.9,221.8C170.1,221.9 170.3,222 170.5,222.1Z"></path><path class="s-rh" d="M166.7,194.1L168,192.7L169.6,194.9"></path><path class="s-rsch" d="M166.9,179.9L168,192.7"></path><path class="s-rr" d="M170.5,222.1C170.7,222.1 170.8,222.1 171,222.1C171.2,222 171.4,221.9 171.5,221.7C171.7,221.5 171.8,221.3 172,221C172.1,220.7 172.2,220.3 172.3,219.9C172.5,219.5 172.6,219.1 172.6,218.6C172.7,218.1 172.8,217.6 172.9,217C172.9,216.4 173,215.8 173,215.2C173,214.5 173,213.9 173,213.2C173,212.5 173,211.8 173,211C173,210.3 172.9,209.6 172.9,208.8C172.8,208.1 172.7,207.3 172.6,206.6C172.5,205.8 172.4,205.1 172.3,204.4C172.2,203.7 172.1,202.9 171.9,202.3C171.8,201.6 171.6,200.9 171.5,200.3C171.3,199.6 171.1,199 171,198.5C170.8,197.9 170.6,197.4 170.4,196.9C170.2,196.4 170,196 169.8,195.6C169.6,195.2 169.4,194.9 169.2,194.6C169.1,194.3 168.9,194.1 168.7,193.9C168.5,193.8 168.3,193.7 168.1,193.6C167.9,193.6 167.7,193.6 167.5,193.6C167.4,193.7 167.2,193.8 167,194C166.9,194.2 166.7,194.4 166.6,194.7C166.5,195 166.3,195.4 166.2,195.8C166.1,196.2 166,196.6 165.9,197.1C165.8,197.6 165.7,198.1 165.7,198.7C165.6,199.3 165.6,199.9 165.6,200.5C165.5,201.2 165.5,201.8 165.5,202.5C165.5,203.2 165.5,204 165.6,204.7C165.6,205.4 165.6,206.1 165.7,206.9C165.8,207.6 165.8,208.4 165.9,209.1C166,209.9 166.1,210.6 166.2,211.3C166.4,212.1 166.5,212.8 166.6,213.5C166.8,214.1 166.9,214.8 167.1,215.4C167.2,216.1 167.4,216.7 167.6,217.2C167.8,217.8 168,218.3 168.1,218.8C168.3,219.3 168.5,219.7 168.7,220.1C168.9,220.5 169.1,220.8 169.3,221.1C169.5,221.4 169.7,221.6 169.9,221.8C170.1,221.9 170.3,222 170.5,222.1Z"></path><path class="s-rg" d="M165.5,162.3L166.9,179.9"></path>
+  <g class="s-k"><path d="M161.4,165.5L162,170A4.1,4.1 0 1 0 169,166.6L165.9,163.3A2.6,2.6 0 0 0 161.4,165.5Z"></path></g>
+  <path class="s-korb" d="M175.6,202.5L172.7,192.5Q178.3,190.7 183.9,192.5L181,202.5Z"></path><path class="s-kappe" d="M174.5,205.9a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <path class="s-bahn" d="M184.3,204.9 Q 254.3,180.9 296,174.9" marker-end="url(#g-svg-6-p006)"></path>
+  <text class="st" x="150" y="274">Treffpunkt unterhalb der Schlaghand</text>
+</svg>
+        <figcaption class="leise">Aufschlag, Bild 2: Treffpunkt unterhalb der Schlaghand</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="aufschlag" aria-pressed="false">
+      Als gelesen abhaken
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Übungsteil</h2><span class="chip chip-rot">offen</span></div>
+        
+        <h3 class="ue-titel">Fallen lesen, dann treffen</h3><div class="ue-block"><h4>Ziel</h4><p>Den Moment finden, in dem du den fallenden Speeder sauber triffst.</p></div><div class="ue-block"><h4>So gehst du vor — Teil 1</h4><ol class="schrittliste"><li>Halte den Speeder frei vor dir, etwa auf Hüfthöhe.</li><li>Lass ihn fallen und schlag noch nicht — schau nur zu, wie er sinkt.</li><li>Wiederhole ein paar Mal, bis du ein Gefühl dafür hast, wie schnell und wohin er fällt.</li></ol></div><div class="ue-block"><h4>So gehst du vor — Teil 2</h4><ol class="schrittliste"><li>Lass den Speeder wieder fallen.</li><li>Führe den Schläger von unten nach vorn und triff ihn tief, kurz bevor er den Boden erreicht.</li><li>Kümmere dich noch nicht um ein Ziel — es zählt allein, dass du ihn sauber triffst.</li></ol></div><div class="ue-block"><h4>Selbstkontrolle</h4><p>Triffst du den Speeder gleichmäßig, oder mal zu früh, mal zu spät? Streut der Treffmoment, gib dem Fallen noch etwas mehr Aufmerksamkeit, bevor du schlägst.</p></div><div class="ue-block"><h4>Abschluss</h4><p>Der Aufschlag gelingt über das Timing, nicht über Kraft. Sobald du den Fallpunkt zuverlässig triffst, kommt das Zielen fast von allein — den Treffpunkt hebst du später an, das Ziel setzt du dir später.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="aufschlag" aria-pressed="false">
+      Als erledigt abhaken
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Einordnung</summary>
+      <dl>
+        <dt>Spielziele</dt><dd>Aufschlag-/Rückschlag-Eröffnung, Längen- und Tiefensteuerung</dd>
+        
+        
+        
+        <dt>Voraussetzungen</dt><dd><a href="/baustein/griff?kontext=kompetenz">Der Universalgriff</a>, <a href="/baustein/grundposition?kontext=kompetenz">Die Grundposition</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Baustein-Navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Zur Liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Aktionen">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Teilen" title="Teilen">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Merken" title="Merken">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

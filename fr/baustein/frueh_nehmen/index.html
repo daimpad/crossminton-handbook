@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prendre le speeder tôt — Manuel de Crossminton</title>
+  <meta name="description" content="Le temps est la ressource la plus précieuse au Crossminton. L'expert le vole à l'adversaire en prenant le speeder plus tôt que celui-ci ne s'y attend — au point …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/fr/baustein/frueh_nehmen">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Prendre le speeder tôt — Manuel de Crossminton">
+  <meta property="og:description" content="Le temps est la ressource la plus précieuse au Crossminton. L'expert le vole à l'adversaire en prenant le speeder plus tôt que celui-ci ne s'y attend — au point …">
+  <meta property="og:url" content="https://crossminton-handbook.de/fr/baustein/frueh_nehmen">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Prendre le speeder tôt — Manuel de Crossminton">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prendre le speeder tôt — Manuel de Crossminton">
+  <meta name="twitter:description" content="Le temps est la ressource la plus précieuse au Crossminton. L'expert le vole à l'adversaire en prenant le speeder plus tôt que celui-ci ne s'y attend — au point …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/frueh_nehmen">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/frueh_nehmen">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/frueh_nehmen">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/frueh_nehmen">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/frueh_nehmen">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Manuel de Crossminton","item":"https://crossminton-handbook.de/fr"},{"@type":"ListItem","position":2,"name":"Parcours thématique","item":"https://crossminton-handbook.de/fr/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technique","item":"https://crossminton-handbook.de/fr/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"Prendre le speeder tôt","item":"https://crossminton-handbook.de/fr/baustein/frueh_nehmen"}]},{"@type":"LearningResource","name":"Prendre le speeder tôt","description":"Le temps est la ressource la plus précieuse au Crossminton. L'expert le vole à l'adversaire en prenant le speeder plus tôt que celui-ci ne s'y attend — au point …","url":"https://crossminton-handbook.de/fr/baustein/frueh_nehmen","inLanguage":"fr","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Expert","about":[{"@type":"Thing","name":"Technique"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/fr" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/fr/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-bolt " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Prendre le speeder tôt</h1>
+        <p class="marke-hero-untertitel">Technique · Expert</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommandé avant : <a href="/fr/baustein/beinarbeit_system?kontext=kompetenz">Le système de jeu de jambes</a>, <a href="/fr/baustein/handgelenk_peitsche?kontext=kompetenz">Le coup de poignet : le fouet</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explication</h2><span class="chip chip-rot">à faire</span></div>
+      
+      
+      <p>Le temps est la ressource la plus précieuse au Crossminton. L'expert le vole à l'adversaire en prenant le speeder plus tôt que celui-ci ne s'y attend — au point le plus haut et le plus précoce, au lieu de le laisser descendre.</p><p>Qui frappe le speeder tôt réduit dramatiquement le temps de réaction de l'adversaire. Chaque fraction de seconde que tu joues plus tôt manque à l'adversaire pour se replacer et revenir. Un échange équilibré devient un échange où tu as constamment un pas d'avance.</p><p>Prendre tôt exige trois choses ensemble. La lecture précoce de la trajectoire, pour que tu reconnaisses le speeder tôt et partes avant même qu'il ne soit frappé. Le jeu de jambes rapide, qui te met en position à temps. Et la frappe compacte, exécutée aussitôt sans long armé. Si l'une manque, tu arrives trop tard.</p><p>L'interception est particulièrement efficace : tu prends déjà à l'avant, en l'air, une balle que l'adversaire n'attend que derrière toi. Cela le surprend doublement — il a moins de temps et ne s'y attend pas.</p><p>Imagine que tu attrapes une balle en train de tomber, au lieu d'attendre qu'elle rebondisse. Qui saisit toujours au point le plus haut dicte le rythme — l'autre court derrière, essoufflé.</p><p>Prendre tôt est aussi le fondement de bien d'autres frappes expertes : le point de frappe précoce rend ta feinte plus dangereuse et ton attaque plus rapide.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Prendre le speeder tôt : le joueur entre dans la balle, le pied du côté de la raquette devant, et frappe de façon compacte au point le plus haut, nettement devant et au-dessus du corps. La trajectoire qui arrive descend depuis le haut à droite, passe par ce point de frappe précoce et continue jusque juste devant le buste, où un speeder en contour montre le point de frappe tardif ; l'écart entre les deux est le temps que l'adversaire perd. Le speeder repart à plat vers l'avant." class="grafik-bild grafik-svg" id="g-svg-204" style="--hoch: 1.000;">
+  <style>
+    #g-svg-204 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-204 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-204 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-204 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-204 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-204 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-204 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-204 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-204 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-204 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-204 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-204 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-204 .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    #g-svg-204 .s-bahng{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:.1 5.5;stroke-linecap:round}
+    #g-svg-204 .s-wegv{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-linecap:round}
+    #g-svg-204 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-204 .s-mkg{fill:var(--tinte-3,#656f7e)}
+    #g-svg-204 .s-spk{fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linejoin:round}
+    #g-svg-204 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-204 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-204-p015" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker><marker id="g-svg-204-g015" viewBox="0 0 10 10" markerWidth="3.6" markerHeight="3.6" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"></path></marker></defs>
+  <path class="s-boden" d="M8,250.5L292,250.5"></path>
+  <ellipse class="s-schw" cx="104" cy="251" rx="48" ry="5"></ellipse><ellipse class="s-sch" cx="104" cy="251" rx="30.7" ry="3.1"></ellipse>
+  <path class="s-bahng" d="M298,18 Q 122.4,37.3 136.4,146.9"></path>
+  <path class="s-spk" d="M133.7,147.3L129.6,137.7Q134.9,135.2 140.7,136.3L139.1,146.6Z"></path><path class="s-spk" d="M133.1,150.3a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <g class="s-f"><path d="M86.2,168.9L80.3,180.9A6.7,6.7 0 1 0 92.4,186.6L97.9,174.4A6.5,6.5 0 0 0 86.2,168.9Z"></path><path d="M80.3,180.9L69.1,203.3A4.7,4.7 0 0 0 77.1,208.2L91.8,187.8A6.7,6.7 0 1 0 80.3,180.9Z"></path><path d="M69.8,202.2L61.7,210.9A5.4,5.4 0 1 0 69.9,217.8L77.1,208.2A4.7,4.7 0 0 0 69.8,202.2Z"></path><path d="M60.8,212.1L49.4,234.6A2.7,2.7 0 0 0 54,237.6L69.8,217.9A5.4,5.4 0 1 0 60.8,212.1Z"></path><path d="M50.7,233.4L48,234.7A3.4,3.4 0 1 0 52,239.9L53.9,237.6A2.7,2.7 0 0 0 50.7,233.4Z"></path><path d="M47.6,240.5L59.4,248.5A3.2,3.2 0 0 0 63,243.3L51.4,235A3.4,3.4 0 1 0 47.6,240.5Z"></path><path d="M61.6,249L68.2,248.1A2.2,2.2 0 0 0 68.2,243.7L61.6,242.8A3.2,3.2 0 1 0 61.6,249Z"></path></g>
+  <g class="s-f"><path d="M95.6,129.4L105.6,154.2A3.4,3.4 0 0 0 112,152.2L105.5,126.1A5.3,5.3 0 1 0 95.6,129.4Z"></path><path d="M106.5,155.5L111.8,160.3A3.9,3.9 0 1 0 116.6,154.2L110.6,150.2A3.4,3.4 0 0 0 106.5,155.5Z"></path><path d="M112.4,160.7L126.5,169.7A2.3,2.3 0 0 0 129.3,166.1L117.1,154.6A3.9,3.9 0 1 0 112.4,160.7Z"></path></g>
+  <g class="s-f"><path d="M125.8,169.1L128,172.3A3.6,3.6 0 1 0 132.2,167L128.5,165.6A2.3,2.3 0 0 0 125.8,169.1Z"></path></g>
+  <g class="s-k"><path d="M106.4,121.2C108.2,122.3 107.8,123.2 108.5,125.4C109.3,127.6 110,128.3 110.1,132.1C110.2,135.9 110.7,139.1 109.2,144.6C107.6,150.1 104.7,153.8 102.5,159.6C100.3,165.5 99.8,169.4 98.2,173.9C96.5,178.4 95.9,179.5 94.3,181.9C92.7,184.4 91.7,185.4 90.4,186.2C89,186.9 88.3,186.7 87.5,185.5C86.7,184.4 86.4,183 86.3,180.2C86.2,177.4 86.1,176.1 87.1,171.5C88,166.9 89.7,163.2 91,157.2C92.3,151.1 92.5,146.8 93.3,141.2C94.2,135.5 94.6,132.6 95.3,128.9C96,125.3 96.1,124.8 97,123C97.9,121.1 98,120.1 99.8,119.8C101.7,119.4 104.7,120.1 106.4,121.2Z"></path><path d="M86.6,177L94.6,189.1A6.7,6.7 0 1 0 105.7,181.5L97.3,169.6A6.5,6.5 0 0 0 86.6,177Z"></path><path d="M94.6,189.1L108,209.3A4.7,4.7 0 0 0 116.3,204.7L106.4,182.6A6.7,6.7 0 1 0 94.6,189.1Z"></path><path d="M107.3,206.4L106.7,217.5A5.4,5.4 0 1 0 117.4,217.4L116.7,206.4A4.7,4.7 0 0 0 107.3,206.4Z"></path><path d="M106.9,219.2L113.8,244.3A2.7,2.7 0 0 0 119.1,243.4L117.4,217.4A5.4,5.4 0 1 0 106.9,219.2Z"></path><path d="M114.6,241.5L111.3,244.4A3.4,3.4 0 1 0 116.3,248.8L118.7,245.1A2.7,2.7 0 0 0 114.6,241.5Z"></path><path d="M113.4,250.3L127.6,250.9A3.2,3.2 0 0 0 128,244.6L113.7,243.6A3.4,3.4 0 1 0 113.4,250.3Z"></path><path d="M128,250.9L134.6,250.3A2.2,2.2 0 0 0 134.9,245.9L128.3,244.7A3.2,3.2 0 1 0 128,250.9Z"></path></g>
+  <g class="s-k"><ellipse cx="102" cy="107.1" rx="8.4" ry="10.5" transform="rotate(-10.1 102 107.1)"></ellipse><path d="M107.3,116.6L109.5,115.7A2.7,2.7 0 0 0 111.2,113.1L111.1,110.7A6.3,6.3 0 1 0 107.3,116.6Z"></path></g>
+  <g class="s-x"><path d="M103.7,135L126.2,116.9A3.4,3.4 0 0 0 122.4,111.4L97.7,126.4A5.3,5.3 0 1 0 103.7,135Z"></path><path d="M127,116L130.7,109.8A3.9,3.9 0 1 0 123.8,106.4L121,113A3.4,3.4 0 0 0 127,116Z"></path><path d="M131,109.3L137.1,93.6A2.3,2.3 0 0 0 133,91.6L124.1,105.8A3.9,3.9 0 1 0 131,109.3Z"></path><path d="M136.3,94.6L139.5,92.2A3.6,3.6 0 1 0 133.9,88.3L132.7,92.1A2.3,2.3 0 0 0 136.3,94.6Z"></path></g>
+  <g class="s-k"><path d="M103.7,135L126.2,116.9A3.4,3.4 0 0 0 122.4,111.4L97.7,126.4A5.3,5.3 0 1 0 103.7,135Z"></path><path d="M127,116L130.7,109.8A3.9,3.9 0 1 0 123.8,106.4L121,113A3.4,3.4 0 0 0 127,116Z"></path><path d="M131,109.3L137.1,93.6A2.3,2.3 0 0 0 133,91.6L124.1,105.8A3.9,3.9 0 1 0 131,109.3Z"></path></g>
+  <path class="s-rf" d="M164,51.7C163.9,51.7 163.7,51.7 163.5,51.8C163.4,51.8 163.1,52 162.9,52.1C162.7,52.3 162.4,52.4 162.1,52.7C161.8,52.9 161.5,53.2 161.2,53.5C160.8,53.8 160.5,54.1 160.1,54.5C159.8,54.8 159.4,55.2 159,55.7C158.6,56.1 158.2,56.5 157.8,57C157.4,57.5 157,58 156.6,58.5C156.2,59 155.8,59.5 155.5,60C155.1,60.5 154.7,61.1 154.3,61.6C153.9,62.1 153.5,62.7 153.2,63.2C152.8,63.7 152.5,64.2 152.2,64.8C151.9,65.3 151.6,65.8 151.3,66.3C151,66.7 150.8,67.2 150.5,67.6C150.3,68.1 150.1,68.5 149.9,68.9C149.8,69.3 149.6,69.6 149.5,70C149.4,70.3 149.3,70.6 149.2,70.8C149.2,71.1 149.2,71.3 149.2,71.5C149.2,71.7 149.2,71.8 149.3,71.9C149.4,72 149.5,72.1 149.6,72.1C149.7,72.1 149.9,72.1 150.1,72C150.3,71.9 150.5,71.8 150.7,71.7C151,71.5 151.2,71.3 151.5,71.1C151.8,70.9 152.1,70.6 152.5,70.3C152.8,70 153.1,69.7 153.5,69.3C153.8,68.9 154.2,68.5 154.6,68.1C155,67.7 155.4,67.2 155.8,66.8C156.2,66.3 156.6,65.8 157,65.3C157.4,64.8 157.8,64.3 158.2,63.8C158.6,63.2 158.9,62.7 159.3,62.2C159.7,61.6 160.1,61.1 160.4,60.6C160.8,60.1 161.1,59.5 161.4,59C161.7,58.5 162,58 162.3,57.5C162.6,57 162.9,56.6 163.1,56.1C163.3,55.7 163.5,55.3 163.7,54.9C163.9,54.5 164,54.1 164.1,53.8C164.2,53.5 164.3,53.2 164.4,52.9C164.4,52.7 164.5,52.5 164.4,52.3C164.4,52.1 164.4,52 164.3,51.9C164.3,51.8 164.2,51.7 164,51.7Z"></path><path class="s-rh" d="M151,71.6L149.1,72.8L149,71.3"></path><path class="s-rsch" d="M142.6,81.9L149.1,72.8"></path><path class="s-rr" d="M164,51.7C163.9,51.7 163.7,51.7 163.5,51.8C163.4,51.8 163.1,52 162.9,52.1C162.7,52.3 162.4,52.4 162.1,52.7C161.8,52.9 161.5,53.2 161.2,53.5C160.8,53.8 160.5,54.1 160.1,54.5C159.8,54.8 159.4,55.2 159,55.7C158.6,56.1 158.2,56.5 157.8,57C157.4,57.5 157,58 156.6,58.5C156.2,59 155.8,59.5 155.5,60C155.1,60.5 154.7,61.1 154.3,61.6C153.9,62.1 153.5,62.7 153.2,63.2C152.8,63.7 152.5,64.2 152.2,64.8C151.9,65.3 151.6,65.8 151.3,66.3C151,66.7 150.8,67.2 150.5,67.6C150.3,68.1 150.1,68.5 149.9,68.9C149.8,69.3 149.6,69.6 149.5,70C149.4,70.3 149.3,70.6 149.2,70.8C149.2,71.1 149.2,71.3 149.2,71.5C149.2,71.7 149.2,71.8 149.3,71.9C149.4,72 149.5,72.1 149.6,72.1C149.7,72.1 149.9,72.1 150.1,72C150.3,71.9 150.5,71.8 150.7,71.7C151,71.5 151.2,71.3 151.5,71.1C151.8,70.9 152.1,70.6 152.5,70.3C152.8,70 153.1,69.7 153.5,69.3C153.8,68.9 154.2,68.5 154.6,68.1C155,67.7 155.4,67.2 155.8,66.8C156.2,66.3 156.6,65.8 157,65.3C157.4,64.8 157.8,64.3 158.2,63.8C158.6,63.2 158.9,62.7 159.3,62.2C159.7,61.6 160.1,61.1 160.4,60.6C160.8,60.1 161.1,59.5 161.4,59C161.7,58.5 162,58 162.3,57.5C162.6,57 162.9,56.6 163.1,56.1C163.3,55.7 163.5,55.3 163.7,54.9C163.9,54.5 164,54.1 164.1,53.8C164.2,53.5 164.3,53.2 164.4,52.9C164.4,52.7 164.5,52.5 164.4,52.3C164.4,52.1 164.4,52 164.3,51.9C164.3,51.8 164.2,51.7 164,51.7Z"></path><path class="s-rg" d="M133.7,94.5L142.6,81.9"></path>
+  <g class="s-k"><path d="M136.3,94.6L139.5,92.2A3.6,3.6 0 1 0 133.9,88.3L132.7,92.1A2.3,2.3 0 0 0 136.3,94.6Z"></path></g>
+  <path class="s-korb" d="M168.9,62.4L158.5,61.7Q158.7,55.9 162.3,51.2L170.7,57.3Z"></path><path class="s-kappe" d="M169.2,61a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <path class="s-bahn" d="M175.8,62.9 L296,100.9" marker-end="url(#g-svg-204-p015)"></path>
+  <path class="s-wegv" d="M177.2,71.3L149.6,143.4" marker-start="url(#g-svg-204-g015)" marker-end="url(#g-svg-204-g015)"></path>
+  <text class="st" x="150" y="274">tôt et haut — du temps volé</text>
+</svg>
+        <figcaption class="leise">Illustration : prendre le speeder tôt</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="frueh_nehmen" aria-pressed="false">
+      Cocher comme lu
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Exercice</h2><span class="chip chip-rot">à faire</span></div>
+        
+        <h3 class="ue-titel">Saisir au point le plus haut</h3><div class="ue-block"><h4>Objectif</h4><p>Frapper le speeder plus tôt et plus haut pour retirer du temps à l'adversaire.</p></div><div class="ue-block"><h4>Comment procéder</h4><ol class="schrittliste"><li>Fais-toi distribuer des balles et frappe-les volontairement au point le plus précoce et le plus haut, au lieu de les laisser descendre.</li><li>Veille à partir tôt — lis la trajectoire déjà au mouvement de celui qui distribue.</li><li>Travaille l'interception : des balles que tu prendrais normalement derrière toi, frappe-les déjà à l'avant, en l'air.</li><li>Garde la frappe compacte, sans long armé.</li><li>Augmente le rythme de la distribution dès que la frappe précoce réussit de façon fiable.</li></ol></div><div class="ue-block"><h4>Auto-contrôle</h4><p>Frappes-tu vraiment le speeder plus tôt que d'habitude, ou le laisses-tu descendre par habitude ? Passes-tu à temps avec la frappe compacte, ou armes-tu trop loin ? Prendre tôt ne réussit que lorsque la lecture, les jambes et la frappe compacte jouent ensemble.</p></div><div class="ue-block"><h4>Conclusion</h4><p>Qui prend le speeder tôt dicte le rythme. Ce temps volé est l'un des plus grands avantages du jeu expert.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="frueh_nehmen" aria-pressed="false">
+      Cocher comme fait
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Objectifs de jeu</dt><dd>Reconnaître le moment de transition, Dosage du rythme et de la puissance, Lecture précoce de la trajectoire</dd>
+        
+        
+        
+        <dt>Prérequis</dt><dd><a href="/fr/baustein/beinarbeit_system?kontext=kompetenz">Le système de jeu de jambes</a>, <a href="/fr/baustein/handgelenk_peitsche?kontext=kompetenz">Le coup de poignet : le fouet</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Navigation entre modules">
+      
+      
+      <a class="baustein-zur-liste" href="/fr/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Vers la liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Partager" title="Partager">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Enregistrer" title="Enregistrer">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/fr/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/fr/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/fr/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/fr/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/fr/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/fr/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/fr/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/fr/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/fr/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/fr/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/fr/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/fr/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/fr/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/fr/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/fr/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>
