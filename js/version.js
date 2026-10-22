@@ -15,4 +15,4 @@
 // Der Wert unten ist der Ruhezustand: lokal und in jedem Branch, in dem der
 // Workflow noch nicht lief, steht hier `lokal` — ehrlicher als eine erfundene
 // Nummer. Die Ansicht blendet das Datum dann weg.
-export const VERSION = { commit: '33234c0', datum: '2026-10-22' };
+export const VERSION = { commit: 'd31dc44', datum: '2026-10-22' };
