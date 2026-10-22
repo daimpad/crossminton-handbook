@@ -532,6 +532,7 @@ export const STIL = {
   's-zeile': 'fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:3;stroke-linecap:round',
   's-schall': `fill:none;stroke:${AKZ};stroke-width:2.2;stroke-linecap:round`,
   's-lab': 'fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif',
+  's-labf': 'fill:var(--tinte,#16202b);font:800 11px/1 system-ui,sans-serif',
   's-griff': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round',
   's-band': `fill:none;stroke:${AKZ};stroke-width:1.3;opacity:.4`,
   's-rr2': `fill:none;stroke:${AKZ};stroke-width:4.4`,

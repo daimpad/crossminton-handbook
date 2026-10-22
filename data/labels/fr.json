@@ -693,7 +693,10 @@
     "G-067": "Vue de dessus dans l'ouverture de la jupe : 16 nervures",
     "G-068": "Taille du manche : un doigt de place entre le bout des doigts et le talon de la main",
     "G-069": "Raquettes comparées : badminton, Crossminton, squash",
-    "G-070": "Cordage : épaisseur de la corde et tension"
+    "G-070": "Cordage : épaisseur de la corde et tension",
+    "G-071": "Marge de sécurité : à l'intérieur plutôt que sur la ligne",
+    "G-072": "Hauteur de frappe : attaque au-dessus de la tête, défense sous les hanches",
+    "G-073": "Déplacements : avant-arrière contre toutes les directions"
   },
   "vokabeln": {
     "domaene": {

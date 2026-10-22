@@ -693,7 +693,10 @@
     "G-067": "Widok z góry w otwór spódniczki: 16 żeber",
     "G-068": "Grubość rączki: palec przerwy między opuszkami a nasadą dłoni",
     "G-069": "Rakiety w porównaniu: badminton, crossminton, squash",
-    "G-070": "Naciąg: grubość struny i twardość"
+    "G-070": "Naciąg: grubość struny i twardość",
+    "G-071": "Margines bezpieczeństwa: do środka zamiast na linię",
+    "G-072": "Wysokość uderzenia: atak nad głową, obrona poniżej bioder",
+    "G-073": "Ruch: przód-tył kontra każdy kierunek"
   },
   "vokabeln": {
     "domaene": {

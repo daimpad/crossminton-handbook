@@ -1,5 +1,6 @@
-// Erzeugt die Ausrüstungs-Grafiken G-068 (Griffstärke), G-069 (Schläger im Vergleich) und
-// G-070 (Saitenstärke und Härte der Bespannung) in allen vier Sprachen.
+// Erzeugt die Diagramme der Welle A in allen vier Sprachen: die Ausrüstungs-Grafiken G-068
+// (Griffstärke), G-069 (Schläger im Vergleich), G-070 (Saitenstärke und Härte der Bespannung),
+// G-073 (Schuhe: Laufwege im Vergleich) und das Taktik-Diagramm G-071 (Fehler vermeiden).
 //   node scratchpad/gen-ausruestung.mjs
 // Anders als die Speeder-Tafeln stehen die Texte hier direkt im Generator (TEXTE), je Sprache;
 // die Geometrie hängt nie an der Sprache, die vier Fassungen unterscheiden sich nur im Text.
@@ -19,6 +20,13 @@
 //         68 bzw. 68,6 cm). Der Crossminton-Kopf mit 30 × 26 cm hat 612 cm² (≤ 650).
 //   G-070 die_bespannung: Saite bis etwa 1,25 mm, Badminton rund 0,65 mm (Maßstab 40 je mm);
 //         Trampolin-Modell: weich → mehr Kraft, hart → mehr Kontrolle.
+//   G-071 fehler_vermeiden: Punkte gehen verloren, wenn der Speeder ins Aus oder in die
+//         Passierzone geht; sicher spielen heißt, ihn mit Sicherheitsabstand nach innen zu
+//         setzen statt auf die Linie. Feld 5,5 m = 180 Einheiten, Abstand nach innen 24 (gut
+//         70 cm, ein Schritt).
+//   G-073 schuhe_finden: Badminton- und Squashschuhe sind für vor und zurück gebaut (Netz,
+//         Frontwand); das Crossminton-Feld ist ein Quadrat mit vier gleichwertigen Ecken um ein
+//         Zentrum, gefragt ist der sichere Ausfallschritt in jede Richtung.
 import { writeFileSync } from 'node:fs';
 
 const ZIEL = 'images';
@@ -60,6 +68,27 @@ const STIL = `  <style>
     .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
   </style>`;
 
+// Zusätzliche Klassen der späteren Diagramme (G-071, G-073). Diese Grafiken bekommen nur die
+// Klassen, die sie benutzen (stilFuer); G-068–G-070 behalten ihren Stilblock unverändert.
+const STIL_NEU = `    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .s-sicher{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.4;stroke-dasharray:5 4}
+    .s-risiko{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-dasharray:5 4}
+    .s-kreuz{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.4;stroke-linecap:round}
+    .s-punkt{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-spieler{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2}
+    .s-weg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.6;stroke-linecap:round}
+    .s-wegn{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2;stroke-linecap:round;opacity:.8}
+    .s-wegc{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linecap:round}
+    .s-wand{fill:none;stroke:var(--tinte,#16202b);stroke-width:5;stroke-linecap:round}
+    .s-zone{fill:var(--tinte-3,#656f7e);font:700 10px/1 system-ui,sans-serif;letter-spacing:.5px;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-tsicher{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:4;stroke-linejoin:round}`;
+
+function stilFuer(inhalt) {
+  const benutzt = new Set([...inhalt, MARKER].join('\n').match(/class="[^"]*"/g).flatMap((k) => k.slice(7, -1).split(' ')));
+  const zeilen = (STIL.split('\n').slice(1, -1).join('\n') + '\n' + STIL_NEU).split('\n');
+  return `  <style>\n${zeilen.filter((z) => benutzt.has(z.trim().slice(1, z.trim().indexOf('{')))).join('\n')}\n  </style>`;
+}
+
 const MARKER = `  <defs>
     <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
       <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
@@ -69,9 +98,9 @@ const MARKER = `  <defs>
     </marker>
   </defs>`;
 
-const datei = (breite, hoehe, aria, inhalt) =>
+const datei = (breite, hoehe, aria, inhalt, stil = STIL) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breite} ${hoehe}" role="img" aria-label="${aria}">
-${STIL}
+${stil}
 ${MARKER}
 
 ${inhalt.join('\n')}
@@ -256,6 +285,68 @@ function G070(t) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// G-071 Fehler vermeiden: das gegnerische Feld von oben, davor die Passierzone. Der sichere Ball
+// landet einen Schritt innerhalb der Linien, die knappen landen im Aus oder in der Zone.
+
+const kreuz = (x, y, r = 5) => `M${P(x - r, y - r)}L${P(x + r, y + r)}M${P(x + r, y - r)}L${P(x - r, y + r)}`;
+
+function G071(t) {
+  const F = [60, 30, 180], IN = 24; // Feld x, y, Kante; Sicherheitsabstand
+  const unten = F[1] + F[2], ab = [150, 270];
+  const sicher = [128, 124], aus = [264, 98], zone = [222, 238];
+  const inhalt = [
+    `  <rect class="s-sicher" x="${F[0] + IN}" y="${F[1] + IN}" width="${F[2] - 2 * IN}" height="${F[2] - 2 * IN}"/>`,
+    `  <rect class="s-feld" x="${F[0]}" y="${F[1]}" width="${F[2]}" height="${F[2]}"/>`,
+    text('s-teil', 150, F[1] + 16, t.linie),
+    text('s-tsicher', 150, F[1] + IN + 20, t.sicher),
+    text('s-teilw', 150, F[1] + IN + 33, t.schritt),
+    `  <text class="s-zone" x="16" y="${unten + 26}">${t.zone}</text>`,
+    `  <path class="s-risiko" d="M${P(...ab)} Q${P(246, 190)} ${P(aus[0] - 2, aus[1] + 4)}"/>`,
+    `  <path class="s-risiko" d="M${P(...ab)} Q${P(196, 236)} ${P(zone[0] - 4, zone[1] + 2)}"/>`,
+    `  <path class="s-flug" d="M${P(...ab)} Q${P(132, 200)} ${P(sicher[0], sicher[1] + 9)}" marker-end="url(#ma)"/>`,
+    `  <circle class="s-punkt" cx="${sicher[0]}" cy="${sicher[1]}" r="5.5"/>`,
+    `  <path class="s-kreuz" d="${kreuz(...aus)}${kreuz(...zone)}"/>`,
+    text('s-teil', aus[0] + 2, aus[1] - 11, t.aus),
+    text('st', 150, 290, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
+// G-073 Schuhe: Laufwege von oben. Links Badminton/Squash (vor und zurück, zum Netz bzw. zur
+// Frontwand), rechts das Crossminton-Quadrat (vier gleichwertige Ecken, Ausfallschritt in jede
+// Richtung).
+
+function G073(t) {
+  const L = [76, 146], R = [222, 146];
+  const pfeil = (klasse, von, nach, marker) => `  <path class="${klasse}" d="M${P(...von)}L${P(...nach)}"${marker ? ` marker-end="url(#${marker})"` : ''}/>`;
+  const zu = (c, dx, dy, k = 1) => [c[0] + dx * k, c[1] + dy * k];
+  const inhalt = [
+    text('s-name', L[0], 34, t.links),
+    text('s-name2', R[0], 34, t.rechts),
+    `  <path class="s-trenner" d="M149,52 L149,236"/>`,
+    // Badminton/Squash: schmales, langes Feld, die Wand (Netz/Frontwand) oben
+    `  <rect class="s-feld" x="${L[0] - 38}" y="62" width="76" height="160"/>`,
+    `  <path class="s-wand" d="M${L[0] - 38},62 L${L[0] + 38},62"/>`,
+    text('s-teil', L[0], 54, t.wand),
+    pfeil('s-weg', zu(L, 0, -12), zu(L, 0, -64), 'mp'),
+    pfeil('s-weg', zu(L, 0, 12), zu(L, 0, 64), 'mp'),
+    pfeil('s-wegn', zu(L, -12, 0), zu(L, -28, 0), 'mp'),
+    pfeil('s-wegn', zu(L, 12, 0), zu(L, 28, 0), 'mp'),
+    `  <circle class="s-spieler" cx="${L[0]}" cy="${L[1]}" r="7.5"/>`,
+    // Crossminton: Quadrat, vier gleichwertige Ecken, Wege in jede Richtung
+    `  <rect class="s-feld" x="${R[0] - 62}" y="${R[1] - 62}" width="124" height="124"/>`,
+    ...[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([x, y]) => pfeil('s-wegc', zu(R, x * 9, y * 9), zu(R, x * 44, y * 44), 'ma')),
+    ...[[-1, 0], [1, 0], [0, -1], [0, 1]].map(([x, y]) => pfeil('s-wegc', zu(R, x * 12, y * 12), zu(R, x * 46, y * 46), 'ma')),
+    `  <circle class="s-spieler" cx="${R[0]}" cy="${R[1]}" r="7.5"/>`,
+    text('s-titel', L[0], 248, t.vorzurueck),
+    text('s-titel', R[0], 248, t.jederichtung),
+    text('st', 150, 284, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
 
 export const TEXTE = {
   'G-068': {
@@ -324,9 +415,53 @@ export const TEXTE = {
       weich: 'miękki', kraft: 'więcej siły', hart: 'twardy', kontrolle: 'więcej kontroli', cap: 'gruba struna · twardość jako regulacja',
     },
   },
+  'G-071': {
+    de: {
+      aria: 'Das gegnerische Feld von oben, davor die Passierzone. Ein Schritt innerhalb der Linien liegt das sichere Zielgebiet, dorthin fliegt der sichere Ball. Zwei knappe Bälle gehen daneben: einer landet knapp hinter der Seitenlinie im Aus, einer zu kurz in der Passierzone. Beides sind eigene Fehler.',
+      linie: 'knapp an der Linie: riskant', sicher: 'sicher', schritt: 'ein Schritt nach innen', zone: 'Passierzone', aus: 'Aus',
+      cap: 'innen spielen, nicht auf die Linie',
+    },
+    en: {
+      aria: 'The opponent\'s field from above, with the neutral zone in front of it. One step inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.',
+      linie: 'close to the line: risky', sicher: 'safe', schritt: 'one step inside', zone: 'neutral zone', aus: 'out',
+      cap: 'play inside, not onto the line',
+    },
+    fr: {
+      aria: 'Le terrain adverse vu de dessus, avec la zone neutre devant. Un pas à l\'intérieur des lignes se trouve la zone cible sûre, où part la balle sûre. Deux balles trop justes manquent : l\'une tombe juste derrière la ligne de côté, dehors, l\'autre trop court dans la zone neutre. Ce sont deux fautes directes.',
+      linie: 'près de la ligne : risqué', sicher: 'sûr', schritt: 'un pas à l\'intérieur', zone: 'zone neutre', aus: 'dehors',
+      cap: 'jouer à l\'intérieur, pas sur la ligne',
+    },
+    pl: {
+      aria: 'Pole przeciwnika z góry, przed nim strefa neutralna. Krok w głąb od linii leży bezpieczny obszar docelowy, tam leci pewna piłka. Dwie ryzykowne piłki chybiają: jedna ląduje tuż za linią boczną na aucie, druga za krótko w strefie neutralnej. Obie to własne błędy.',
+      linie: 'tuż przy linii: ryzyko', sicher: 'pewnie', schritt: 'krok w głąb pola', zone: 'strefa neutralna', aus: 'aut',
+      cap: 'graj do środka, nie na linię',
+    },
+  },
+  'G-073': {
+    de: {
+      aria: 'Laufwege von oben im Vergleich. Links ein Badminton- oder Squashfeld: lang und schmal, die Wege führen vor zum Netz oder zur Frontwand und zurück, zur Seite nur kurz. Rechts das Crossminton-Feld: ein Quadrat mit vier gleichwertigen Ecken, die Wege führen aus der Mitte gleich weit in jede Richtung, zur Seite und diagonal. Darum braucht der Schuh seitlichen Halt.',
+      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'Netz · Frontwand', vorzurueck: 'vor und zurück', jederichtung: 'in jede Richtung',
+      cap: 'seitlicher Halt zählt',
+    },
+    en: {
+      aria: 'Movement paths from above, compared. On the left a badminton or squash court: long and narrow, the paths go forward to the net or the front wall and back, only briefly to the side. On the right the Crossminton field: a square with four equal corners, the paths lead from the centre equally far in every direction, sideways and diagonally. That is why the shoe needs lateral support.',
+      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'net · front wall', vorzurueck: 'forward and back', jederichtung: 'in every direction',
+      cap: 'lateral support matters',
+    },
+    fr: {
+      aria: 'Déplacements vus de dessus, comparés. À gauche un terrain de badminton ou de squash : long et étroit, les déplacements vont vers le filet ou le mur avant et reviennent, sur le côté seulement un peu. À droite le terrain de crossminton : un carré aux quatre coins équivalents, les déplacements partent du centre aussi loin dans toutes les directions, sur le côté et en diagonale. C\'est pourquoi la chaussure doit offrir un maintien latéral.',
+      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'filet · mur avant', vorzurueck: 'avant et arrière', jederichtung: 'dans tous les sens',
+      cap: 'le maintien latéral compte',
+    },
+    pl: {
+      aria: 'Drogi ruchu z góry, w porównaniu. Po lewej kort do badmintona lub squasha: długi i wąski, drogi prowadzą do przodu, do siatki lub ściany frontowej, i z powrotem, w bok tylko krótko. Po prawej pole do crossmintona: kwadrat z czterema równorzędnymi narożnikami, drogi prowadzą ze środka równie daleko w każdą stronę, w bok i po skosie. Dlatego but potrzebuje bocznego oparcia.',
+      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'siatka · ściana', vorzurueck: 'przód i tył', jederichtung: 'w każdą stronę',
+      cap: 'liczy się boczne oparcie',
+    },
+  },
 };
 
-const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070 };
+const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073 };
 for (const [id, bau] of Object.entries(BAU)) {
   for (const s of SPRACHEN) {
     const name = `${ZIEL}/${id}${s === 'de' ? '' : '.' + s}.svg`;

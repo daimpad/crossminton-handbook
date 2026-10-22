@@ -694,7 +694,10 @@
     "G-067": "Top view into the skirt opening: 16 ribs",
     "G-068": "Grip size: one finger of room between fingertips and heel of the hand",
     "G-069": "Rackets compared: badminton, Crossminton, squash",
-    "G-070": "Stringing: string gauge and tension"
+    "G-070": "Stringing: string gauge and tension",
+    "G-071": "Safety margin: inside rather than on the line",
+    "G-072": "Contact height: attack above the head, defense below the hips",
+    "G-073": "Movement: forward and back versus every direction"
   },
   "vokabeln": {
     "domaene": {
