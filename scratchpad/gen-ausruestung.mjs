@@ -1,0 +1,336 @@
+// Erzeugt die Ausrüstungs-Grafiken G-068 (Griffstärke), G-069 (Schläger im Vergleich) und
+// G-070 (Saitenstärke und Härte der Bespannung) in allen vier Sprachen.
+//   node scratchpad/gen-ausruestung.mjs
+// Anders als die Speeder-Tafeln stehen die Texte hier direkt im Generator (TEXTE), je Sprache;
+// die Geometrie hängt nie an der Sprache, die vier Fassungen unterscheiden sich nur im Text.
+//
+// Stilregeln wie bei den übrigen Grafiken: Farben nur als var(--token, #hellwert), Klassen mit
+// dem Präfix s- (außer der Caption .st), der Stilblock nur aus Klassenselektoren (Test [22]).
+// Akzent (--primaer-dunkel) trägt genau das eine didaktische Element je Bild.
+//
+// SACHGRUNDLAGE (Texte der Bausteine, nicht erfunden):
+//   G-068 griff_und_griffband: zwischen Fingerspitzen und Handballen etwa ein Zeigefinger
+//         Platz; zu dünn → die Fingerspitzen bohren sich in den Ballen. Dieselbe Hand auf
+//         einem dünneren Griff reicht weiter herum: die Länge der Hand ist in beiden
+//         Fassungen gleich (LAENGE), nur der Griff wechselt.
+//   G-069 der_schlaeger: höchstens 61 cm lang, Kopf höchstens 650 cm²; kürzer als der
+//         Squashschläger, robuster als der Badmintonschläger. Maßstab 3 Einheiten je cm.
+//         Vergleichslängen: Badminton 67,5 cm, Squash 68,5 cm (übliche Längen, Regelgrenzen
+//         68 bzw. 68,6 cm). Der Crossminton-Kopf mit 30 × 26 cm hat 612 cm² (≤ 650).
+//   G-070 die_bespannung: Saite bis etwa 1,25 mm, Badminton rund 0,65 mm (Maßstab 40 je mm);
+//         Trampolin-Modell: weich → mehr Kraft, hart → mehr Kontrolle.
+import { writeFileSync } from 'node:fs';
+
+const ZIEL = 'images';
+const SPRACHEN = ['de', 'en', 'fr', 'pl'];
+const r1 = (n) => Math.round(n * 10) / 10;
+const P = (x, y) => `${r1(x)},${r1(y)}`;
+
+const STIL = `  <style>
+    .s-griff{fill:var(--flaeche,#fff);stroke:var(--tinte-2,#5a6675);stroke-width:1.6;stroke-linejoin:round}
+    .s-hand{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2;stroke-linejoin:round}
+    .s-kerbe{fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.6;stroke-linecap:round}
+    .s-links{text-anchor:start}
+    .s-rechts{text-anchor:end}
+    .s-druck{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    .s-finger{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2}
+    .s-rahmen{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    .s-saiten{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:0.6;opacity:.7}
+    .s-schaft{fill:none;stroke:var(--tinte-3,#656f7e);stroke-linecap:round}
+    .s-cmkopf{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.4}
+    .s-cmsaiten{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:0.7;opacity:.55}
+    .s-cmschaft{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-linecap:round}
+    .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-saite{fill:var(--tinte,#16202b)}
+    .s-saite2{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.6}
+    .s-bett{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.2;stroke-linecap:round}
+    .s-rahmenstueck{fill:var(--tinte-2,#5a6675)}
+    .s-faecher{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1;stroke-dasharray:2 3}
+    .s-flug{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linecap:round}
+    .s-ball{fill:var(--tinte,#16202b)}
+    .s-trenner{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:3 4;opacity:.7}
+    .s-titel{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name{fill:var(--tinte-2,#5a6675);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name2{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .s-teilw{fill:var(--tinte,#16202b);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:3;stroke-linejoin:round}
+    .s-zahl{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>`;
+
+const MARKER = `  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>`;
+
+const datei = (breite, hoehe, aria, inhalt) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breite} ${hoehe}" role="img" aria-label="${aria}">
+${STIL}
+${MARKER}
+
+${inhalt.join('\n')}
+</svg>
+`;
+
+const text = (klasse, x, y, t) => `  <text class="${klasse}" x="${r1(x)}" y="${r1(y)}">${t}</text>`;
+
+// ---------------------------------------------------------------------------------------------
+// G-068 Griffstärke: zwei Griffe im Schnitt (Blick auf das Griffende), die Hand als Band darum.
+
+const RAD = Math.PI / 180;
+const polar = (c, r, w) => [c[0] + r * Math.cos(w * RAD), c[1] + r * Math.sin(w * RAD)];
+// Achteckiger Griff (Kanten oben/unten waagerecht)
+const achteck = (c, r) => `M${Array.from({ length: 8 }, (_, i) => P(...polar(c, r, 22.5 + 45 * i))).join('L')}Z`;
+
+// Die Hand als Band um den Griff: beginnt am Handballen (dick) und läuft im Uhrzeigersinn um den
+// Griff bis zu den Fingerspitzen (dünner). Innen liegt sie am Griff an, s = 0 … 1 entlang der Hand.
+// Die Länge der Hand ist in beiden Fassungen gleich; auf dem dünnen Griff reicht sie darum weiter
+// herum — über eine volle Runde hinaus, und die Fingerspitzen liegen auf dem Ballen.
+const K = 1.12;              // Maßstab der Griffgrafik
+const LAENGE = 214 * K;      // Länge der Hand entlang der Mittellinie
+const MITTE = 8 * K;         // Abstand der Mittellinie von der Innenkante
+const dicke = (s) => K * (s < 0.22 ? 25 - s * 14 : s < 0.5 ? 21.9 - (s - 0.22) * 28 : 14 - (s - 0.5) * 7);
+
+// Ein Abschnitt des Bandes von s0 bis s1 als geschlossener Pfad mit runden Enden (nur wo die Hand
+// wirklich endet). hub hebt den Abschnitt nach außen, damit er auf dem Ballen aufliegt.
+function abschnitt(c, rInnen, wStart, bogen, s0, s1, { hub = 0, kappe0 = false, kappe1 = false } = {}) {
+  const n = Math.max(8, Math.round((s1 - s0) * 80)), aussen = [], innen = [];
+  for (let i = 0; i <= n; i++) {
+    const s = s0 + ((s1 - s0) * i) / n, w = wStart + bogen * s;
+    innen.push(polar(c, rInnen + hub, w));
+    aussen.push(polar(c, rInnen + hub + dicke(s), w));
+  }
+  const bogenZu = (a, b) => { const r = Math.hypot(a[0] - b[0], a[1] - b[1]) / 2; return `A${r1(r)},${r1(r)} 0 0 1 ${P(...b)}`; };
+  return `M${aussen.map((p) => P(...p)).join('L')}` + (kappe1 ? bogenZu(aussen[n], innen[n]) : `L${P(...innen[n])}`) +
+    `L${innen.slice(0, n).reverse().map((p) => P(...p)).join('L')}` + (kappe0 ? bogenZu(innen[0], aussen[0]) : '') + 'Z';
+}
+
+// Fingergelenke als schmale Kerben quer über das Band (Freistellung in --flaeche-2)
+const kerben = (c, rInnen, wStart, bogen, liste, hub = 0) => liste.map((s) => {
+  const w = wStart + bogen * s, a = polar(c, rInnen + hub + 2, w), b = polar(c, rInnen + hub + dicke(s) - 2, w);
+  return `M${P(...a)}L${P(...b)}`;
+}).join('');
+
+// Leere Kerben-Liste ergibt keinen Pfad (ein leeres d wäre ungültig)
+const kerbenPfad = (d) => (d ? [`  <path class="s-kerbe" d="${d}"/>`] : []);
+
+function hand(c, rInnen, wStart) {
+  const bogen = (LAENGE / (rInnen + MITTE)) / RAD;
+  const voll = 360 / bogen; // s, bei dem die Hand eine volle Runde erreicht
+  const teile = [];
+  if (voll >= 1) {
+    teile.push(`  <path class="s-hand" d="${abschnitt(c, rInnen, wStart, bogen, 0, 1, { kappe0: true, kappe1: true })}"/>`);
+    teile.push(...kerbenPfad(kerben(c, rInnen, wStart, bogen, [0.56, 0.78])));
+  } else {
+    // Bis kurz vor die volle Runde am Griff, der Rest liegt außen auf dem Ballen.
+    const knick = voll - 0.04;
+    teile.push(`  <path class="s-hand" d="${abschnitt(c, rInnen, wStart, bogen, 0, knick, { kappe0: true })}"/>`);
+    teile.push(...kerbenPfad(kerben(c, rInnen, wStart, bogen, [0.56, 0.78].filter((s) => s < knick))));
+    teile.push(`  <path class="s-hand" d="${abschnitt(c, rInnen, wStart, bogen, knick - 0.02, 1, { hub: 9 * K, kappe1: true })}"/>`);
+    teile.push(...kerbenPfad(kerben(c, rInnen, wStart, bogen, [0.56, 0.78].filter((s) => s >= knick), 9 * K)));
+  }
+  return { teile, wEnde: wStart + bogen, bogen };
+}
+
+function G068(t) {
+  const L = [80, 158], R = [218, 158];
+  const rL = 20 * K, rR = 30 * K; // Griff: zu dünn / passend
+  const iL = rL + 2, iR = rR + 2; // Innenkante der Hand
+  // Passend: die Lücke liegt oben; Ballen rechts davon, Fingerspitzen links.
+  const bogenR = (LAENGE / (iR + MITTE)) / RAD;
+  const startR = -90 + (360 - bogenR) / 2 + 3;
+  const hR = hand(R, iR, startR);
+  const hL = hand(L, iL, startR);
+  const mf = polar(R, iR + MITTE, -90 + 3);
+  // Druckzeichen an der Stelle, wo die Fingerspitzen auf dem Ballen liegen
+  const dp = polar(L, iL + 38, startR + 14);
+  const druck = `M${P(dp[0] - 6, dp[1] - 2)}l5,-5M${P(dp[0] + 1, dp[1] + 2)}l7,-3M${P(dp[0] - 10, dp[1] - 7)}l2,-7`;
+  const ballen = polar(R, iR + 26, startR + 6), spitze = polar(R, iR + 22, hR.wEnde - 6);
+  const inhalt = [
+    text('s-teil', 150, 22, t.blick),
+    text('s-titel', L[0], 46, t.zuduenn),
+    text('s-titel', R[0], 46, t.passend),
+    `  <path class="s-trenner" d="M149,140 L149,236"/>`,
+    `  <path class="s-griff" d="${achteck(L, rL)}"/>`,
+    `  <path class="s-griff" d="${achteck(R, rR)}"/>`,
+    ...hL.teile,
+    ...hR.teile,
+    `  <path class="s-druck" d="${druck}"/>`,
+    `  <circle class="s-finger" cx="${r1(mf[0])}" cy="${r1(mf[1])}" r="${r1(8.5 * K)}"/>`,
+    text('s-teil', L[0], 76, t.keinplatz),
+    text('s-teil', mf[0], 80, t.finger),
+    `  <text class="s-teil s-links" x="${r1(ballen[0] + 4)}" y="${r1(ballen[1] - 4)}">${t.ballen}</text>`,
+    `  <text class="s-teil s-rechts" x="${r1(spitze[0] - 4)}" y="${r1(spitze[1] - 4)}">${t.spitzen}</text>`,
+    text('st', 150, 268, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt);
+}
+
+// ---------------------------------------------------------------------------------------------
+// G-069 Schläger im Vergleich, maßstäblich (3 Einheiten je cm), Kopf oben.
+
+const CM = 3, BASIS = 236;
+function schlaeger(x, { laenge, kopfL, kopfB, griffL, griffB, schaftB, rahmen, kopfKlasse, saitenKlasse, schaftKlasse }) {
+  const unten = BASIS, oben = BASIS - laenge * CM;
+  const ry = (kopfL * CM) / 2, rx = (kopfB * CM) / 2, cy = oben + ry;
+  const griffOben = unten - griffL * CM, gb = (griffB * CM) / 2;
+  let saiten = '';
+  for (let i = 1; i < 7; i++) { const q = -rx + (2 * rx * i) / 7, h = ry * Math.sqrt(1 - (q / rx) ** 2) * 0.93; saiten += `M${P(x + q, cy - h)}L${P(x + q, cy + h)}`; }
+  for (let i = 1; i < 9; i++) { const q = -ry + (2 * ry * i) / 9, w = rx * Math.sqrt(1 - (q / ry) ** 2) * 0.93; saiten += `M${P(x - w, cy + q)}L${P(x + w, cy + q)}`; }
+  return [
+    `  <path class="${schaftKlasse}" stroke-width="${schaftB}" d="M${P(x, cy + ry)}L${P(x, griffOben)}"/>`,
+    `  <rect class="${kopfKlasse}" x="${r1(x - gb)}" y="${r1(griffOben)}" width="${r1(2 * gb)}" height="${r1(unten - griffOben)}" rx="${r1(gb * 0.6)}"/>`,
+    `  <ellipse class="${kopfKlasse}" cx="${r1(x)}" cy="${r1(cy)}" rx="${r1(rx)}" ry="${r1(ry)}" stroke-width="${rahmen}"/>`,
+    `  <path class="${saitenKlasse}" d="${saiten}"/>`,
+  ].join('\n');
+}
+
+function G069(t) {
+  const xB = 62, xC = 190, xS = 304;
+  const cm = { laenge: 61, kopfL: 30, kopfB: 26, griffL: 19, griffB: 3, schaftB: 7, rahmen: 3.4, kopfKlasse: 's-cmkopf', saitenKlasse: 's-cmsaiten', schaftKlasse: 's-cmschaft' };
+  const oben = BASIS - cm.laenge * CM, kopfMitte = oben + (cm.kopfL * CM) / 2;
+  const xM = 140;
+  const inhalt = [
+    schlaeger(xB, { laenge: 67.5, kopfL: 25, kopfB: 20, griffL: 20, griffB: 2.6, schaftB: 2.2, rahmen: 1.6, kopfKlasse: 's-rahmen', saitenKlasse: 's-saiten', schaftKlasse: 's-schaft' }),
+    schlaeger(xS, { laenge: 68.5, kopfL: 27, kopfB: 21.5, griffL: 24, griffB: 2.8, schaftB: 4, rahmen: 2.4, kopfKlasse: 's-rahmen', saitenKlasse: 's-saiten', schaftKlasse: 's-schaft' }),
+    schlaeger(xC, cm),
+    `  <path class="s-masz" d="M${P(xM - 8, oben)}L${P(xC - 8, oben)}M${P(xM - 8, BASIS)}L${P(xC - 30, BASIS)}"/>`,
+    `  <path class="s-masz" d="M${P(xM, oben + 2)}L${P(xM, BASIS - 2)}" marker-start="url(#mp)" marker-end="url(#mp)"/>`,
+    text('s-zahl', xM, (oben + BASIS) / 2 + 4, t.laenge),
+    text('s-teilw', xC, kopfMitte - 3, t.kopf),
+    text('s-teilw', xC, kopfMitte + 10, t.flaeche),
+    text('s-name', xB, 254, t.badminton),
+    text('s-name2', xC, 254, t.crossminton),
+    text('s-name', xS, 254, t.squash),
+    text('st', 180, 286, t.cap),
+  ];
+  return datei(360, 300, t.aria, inhalt);
+}
+
+// ---------------------------------------------------------------------------------------------
+// G-070 Bespannung: oben die Saite im Querschnitt (40 Einheiten je mm), unten das Trampolin-Modell.
+
+function bett(cx, tiefe, faecher, flugLaenge) {
+  const y0 = 200, halb = 56, ballY = y0 + tiefe - 7;
+  const kurve = `M${P(cx - halb, y0)} Q${P(cx, y0 + tiefe * 2)} ${P(cx + halb, y0)}`;
+  const spitze = [cx, ballY - 14 - flugLaenge];
+  const w = faecher * RAD, r = flugLaenge + 14;
+  const facher = `M${P(cx, ballY - 8)} L${P(cx + r * Math.sin(-w), ballY - 8 - r * Math.cos(w))} A${r1(r)},${r1(r)} 0 0 1 ${P(cx + r * Math.sin(w), ballY - 8 - r * Math.cos(w))} Z`;
+  return [
+    `  <path class="s-faecher" d="${facher}"/>`,
+    `  <rect class="s-rahmenstueck" x="${r1(cx - halb - 8)}" y="${y0 - 6}" width="8" height="12" rx="2"/>`,
+    `  <rect class="s-rahmenstueck" x="${r1(cx + halb)}" y="${y0 - 6}" width="8" height="12" rx="2"/>`,
+    `  <path class="s-bett" d="${kurve}"/>`,
+    `  <circle class="s-ball" cx="${r1(cx)}" cy="${r1(ballY)}" r="6"/>`,
+    `  <path class="s-flug" d="M${P(cx, ballY - 10)}L${P(...spitze)}" marker-end="url(#ma)"/>`,
+  ].join('\n');
+}
+
+function G070(t) {
+  const MM = 40;
+  const cC = [100, 74], cB = [212, 74];
+  const inhalt = [
+    text('s-teil', 150, 22, t.querschnitt),
+    `  <circle class="s-saite" cx="${cC[0]}" cy="${cC[1]}" r="${r1(1.25 * MM / 2)}"/>`,
+    `  <circle class="s-saite2" cx="${cB[0]}" cy="${cB[1]}" r="${r1(0.65 * MM / 2)}"/>`,
+    text('s-name2', cC[0], 118, t.crossminton),
+    text('s-zahl', cC[0], 132, t.dickeC),
+    text('s-name', cB[0], 118, t.badminton),
+    text('s-zahl', cB[0], 132, t.dickeB),
+    `  <path class="s-trenner" d="M24,146 L276,146"/>`,
+    bett(82, 22, 22, 46),
+    bett(218, 8, 10, 30),
+    text('s-titel', 82, 238, t.weich),
+    text('s-teil', 82, 251, t.kraft),
+    text('s-titel', 218, 238, t.hart),
+    text('s-teil', 218, 251, t.kontrolle),
+    text('st', 150, 282, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt);
+}
+
+// ---------------------------------------------------------------------------------------------
+
+export const TEXTE = {
+  'G-068': {
+    de: {
+      aria: 'Zwei Griffe im Schnitt, mit Blick auf das Griffende, und die Hand als Band darum. Links ist der Griff zu dünn: dieselbe Hand reicht so weit herum, dass sich die Fingerspitzen in den Handballen drücken. Rechts passt er: zwischen Fingerspitzen und Handballen bleibt etwa die Breite eines Zeigefingers frei.',
+      blick: 'Blick auf das Griffende', zuduenn: 'zu dünn', passend: 'passend', keinplatz: 'kein Platz',
+      finger: '1 Finger', ballen: 'Ballen', spitzen: 'Fingerspitzen', cap: 'ein Finger Platz bis zum Ballen',
+    },
+    en: {
+      aria: 'Two handles in cross-section, seen from the end of the handle, with the hand as a band around them. On the left the handle is too thin: the same hand reaches so far round that the fingertips press into the heel of the hand. On the right it fits: about the width of an index finger stays free between the fingertips and the heel of the hand.',
+      blick: 'looking at the end of the handle', zuduenn: 'too thin', passend: 'right size', keinplatz: 'no room',
+      finger: '1 finger', ballen: 'heel', spitzen: 'fingertips', cap: 'one finger of room to the heel of the hand',
+    },
+    fr: {
+      aria: 'Deux manches en coupe, vus depuis le bout du manche, avec la main comme une bande autour. À gauche, le manche est trop fin : la même main fait le tour si loin que le bout des doigts s\'enfonce dans le talon de la main. À droite, il convient : entre le bout des doigts et le talon de la main reste à peu près la largeur d\'un index.',
+      blick: 'vue sur le bout du manche', zuduenn: 'trop fin', passend: 'adapté', keinplatz: 'pas de place',
+      finger: '1 doigt', ballen: 'talon', spitzen: 'bout des doigts', cap: 'un doigt de place jusqu\'au talon',
+    },
+    pl: {
+      aria: 'Dwie rączki w przekroju, widziane od końca rączki, z dłonią jako opaską wokół nich. Po lewej rączka jest za cienka: ta sama dłoń sięga tak daleko, że opuszki palców wbijają się w nasadę dłoni. Po prawej pasuje: między opuszkami a nasadą dłoni zostaje mniej więcej szerokość palca wskazującego.',
+      blick: 'widok na koniec rączki', zuduenn: 'za cienka', passend: 'w sam raz', keinplatz: 'brak miejsca',
+      finger: '1 palec', ballen: 'nasada', spitzen: 'opuszki', cap: 'palec przerwy do nasady dłoni',
+    },
+  },
+  'G-069': {
+    de: {
+      aria: 'Drei Schläger maßstäblich nebeneinander. Links ein Badmintonschläger, lang und filigran, rechts ein Squashschläger, ebenfalls lang. In der Mitte der Crossminton-Schläger: kürzer, mit kräftigerem Rahmen. Die Regeln erlauben höchstens 61 Zentimeter Länge und einen Kopf von höchstens 650 Quadratzentimetern.',
+      laenge: 'max. 61 cm', kopf: 'Kopf', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      cap: 'kürzer als Squash, robuster als Badminton',
+    },
+    en: {
+      aria: 'Three rackets side by side, to scale. On the left a badminton racket, long and delicate; on the right a squash racket, also long. In the middle the Crossminton racket: shorter, with a sturdier frame. The rules allow a length of at most 61 centimetres and a head of at most 650 square centimetres.',
+      laenge: 'max. 61 cm', kopf: 'head', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      cap: 'squash: longer · badminton: more fragile',
+    },
+    fr: {
+      aria: 'Trois raquettes côte à côte, à l\'échelle. À gauche une raquette de badminton, longue et fine ; à droite une raquette de squash, longue elle aussi. Au milieu la raquette de crossminton : plus courte, avec un cadre plus robuste. Le règlement autorise une longueur de 61 centimètres au plus et une tête de 650 centimètres carrés au plus.',
+      laenge: 'max. 61 cm', kopf: 'tête', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      cap: 'plus courte qu\'au squash, plus robuste',
+    },
+    pl: {
+      aria: 'Trzy rakiety obok siebie, w skali. Po lewej rakieta do badmintona, długa i delikatna, po prawej rakieta do squasha, również długa. Pośrodku rakieta do crossmintona: krótsza, z mocniejszą ramą. Przepisy dopuszczają długość najwyżej 61 centymetrów i główkę najwyżej 650 centymetrów kwadratowych.',
+      laenge: 'maks. 61 cm', kopf: 'główka', flaeche: 'maks. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      cap: 'krótsza niż do squasha, mocniejsza',
+    },
+  },
+  'G-070': {
+    de: {
+      aria: 'Oben zwei Saiten im Querschnitt, vergrößert: die Crossminton-Saite mit bis zu 1,25 Millimetern ist fast doppelt so dick wie die Badmintonsaite mit rund 0,65 Millimetern. Unten das Trampolin-Modell: Eine weiche Bespannung gibt tief nach und schleudert den Speeder weit, aber gestreut zurück, also mehr Kraft. Eine harte gibt wenig nach, der Speeder fliegt kürzer und genauer, also mehr Kontrolle.',
+      querschnitt: 'Saite im Querschnitt, vergrößert', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'bis 1,25 mm', dickeB: 'ca. 0,65 mm',
+      weich: 'weich', kraft: 'mehr Kraft', hart: 'hart', kontrolle: 'mehr Kontrolle', cap: 'dicke Saite · Härte als Stellschraube',
+    },
+    en: {
+      aria: 'Above, two strings in cross-section, magnified: the Crossminton string of up to 1.25 millimetres is almost twice as thick as the badminton string of about 0.65 millimetres. Below, the trampoline model: a soft stringing gives deeply and sends the Speeder back far but scattered, so more power. A hard one gives little, the Speeder flies shorter and more precisely, so more control.',
+      querschnitt: 'string in cross-section, magnified', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'up to 1.25 mm', dickeB: 'approx. 0.65 mm',
+      weich: 'soft', kraft: 'more power', hart: 'hard', kontrolle: 'more control', cap: 'thick string · tension as the key setting',
+    },
+    fr: {
+      aria: 'En haut, deux cordes en coupe, agrandies : la corde de crossminton, jusqu\'à 1,25 millimètre, est presque deux fois plus épaisse que la corde de badminton, d\'environ 0,65 millimètre. En bas, le modèle du trampoline : un cordage souple cède profondément et renvoie le speeder loin mais de façon dispersée, donc plus de puissance. Un cordage dur cède peu, le speeder part plus court et plus précis, donc plus de contrôle.',
+      querschnitt: 'corde en coupe, agrandie', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'jusqu\'à 1,25 mm', dickeB: 'env. 0,65 mm',
+      weich: 'souple', kraft: 'plus de puissance', hart: 'dur', kontrolle: 'plus de contrôle', cap: 'corde épaisse · la tension comme réglage',
+    },
+    pl: {
+      aria: 'U góry dwie struny w przekroju, powiększone: struna do crossmintona, do 1,25 milimetra, jest prawie dwa razy grubsza niż struna do badmintona, około 0,65 milimetra. Na dole model trampoliny: miękki naciąg ugina się głęboko i odbija speedera daleko, ale z rozrzutem, czyli więcej siły. Twardy ugina się mało, speeder leci krócej i dokładniej, czyli więcej kontroli.',
+      querschnitt: 'struna w przekroju, powiększona', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'do 1,25 mm', dickeB: 'ok. 0,65 mm',
+      weich: 'miękki', kraft: 'więcej siły', hart: 'twardy', kontrolle: 'więcej kontroli', cap: 'gruba struna · twardość jako regulacja',
+    },
+  },
+};
+
+const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070 };
+for (const [id, bau] of Object.entries(BAU)) {
+  for (const s of SPRACHEN) {
+    const name = `${ZIEL}/${id}${s === 'de' ? '' : '.' + s}.svg`;
+    writeFileSync(name, bau(TEXTE[id][s]));
+  }
+  console.log('geschrieben', id);
+}
