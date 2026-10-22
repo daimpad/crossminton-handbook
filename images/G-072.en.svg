@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Attack and defense by contact height: a player stands in the ready position with three height bands in front of him. Above the head is attack: hit there, the Speeder goes steeply from above, downwards. Below the hips is defense: there the Speeder has to be played upwards to keep the rally alive. In between lies the zone where the role tips.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Attack and defense by contact height: a player stands in the ready position with three height bands in front. Hit above the head, you are usually attacking: from there the Speeder goes steeply from above, downwards. Hit low, below the hips, you are usually under pressure and defending: there the Speeder has to be played upwards to keep the rally alive. Contact height is a pointer, not a fixed rule. In between lies the zone where the role tips.">
   <style>
     .s-k{fill:var(--tinte,#16202b)}
     .s-f{fill:var(--tinte-2,#5a6675)}
@@ -45,8 +45,8 @@
   <path class="s-bahng" d="M133,217.5 L154,181.5" marker-end="url(#q072)"/>
   <text class="s-labf" x="170" y="36">Attack</text>
   <text class="s-lab" x="170" y="50">from above, down</text>
-  <text class="s-lab" x="170" y="144.5">in between, it tips</text>
+  <text class="s-lab" x="170" y="144.5">in between, it can tip</text>
   <text class="s-labf" x="170" y="202.9">Defense</text>
   <text class="s-lab" x="170" y="216.9">play it up</text>
-  <text class="st" x="150" y="286">contact height shows your role</text>
+  <text class="st" x="150" y="286">contact height hints at your role</text>
 </svg>

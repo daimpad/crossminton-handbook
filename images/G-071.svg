@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Das gegnerische Feld von oben, davor die Passierzone. Ein Schritt innerhalb der Linien liegt das sichere Zielgebiet, dorthin fliegt der sichere Ball. Zwei knappe Bälle gehen daneben: einer landet knapp hinter der Seitenlinie im Aus, einer zu kurz in der Passierzone. Beides sind eigene Fehler.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Das gegnerische Feld von oben, davor die Passierzone. Mit Sicherheitsabstand innerhalb der Linien liegt das sichere Zielgebiet, dorthin fliegt der sichere Ball. Zwei knappe Bälle gehen daneben: einer landet knapp hinter der Seitenlinie im Aus, einer zu kurz in der Passierzone. Beides sind eigene Fehler.">
   <style>
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
     .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
@@ -27,7 +27,7 @@
   <rect class="s-feld" x="60" y="30" width="180" height="180"/>
   <text class="s-teil" x="150" y="46">knapp an der Linie: riskant</text>
   <text class="s-tsicher" x="150" y="74">sicher</text>
-  <text class="s-teilw" x="150" y="87">ein Schritt nach innen</text>
+  <text class="s-teilw" x="150" y="87">Sicherheitsabstand</text>
   <text class="s-zone" x="16" y="236">Passierzone</text>
   <path class="s-risiko" d="M150,270 Q246,190 262,102"/>
   <path class="s-risiko" d="M150,270 Q196,236 218,240"/>

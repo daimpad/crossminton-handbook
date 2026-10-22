@@ -691,18 +691,20 @@
     "G-065": "Speeder z profilu z wymiarami ICO w milimetrach",
     "G-066": "Przekrój podłużny speedera: ścianka, pierścienie i główka",
     "G-067": "Widok z góry w otwór spódniczki: 16 żeber",
-    "G-068": "Grubość rączki: palec przerwy między opuszkami a nasadą dłoni",
+    "G-068": "Grubość rączki: miejsce na palec między czubkami palców a kłębem dłoni",
     "G-069": "Rakiety w porównaniu: badminton, crossminton, squash",
     "G-070": "Naciąg: grubość struny i twardość",
     "G-071": "Margines bezpieczeństwa: do środka zamiast na linię",
-    "G-072": "Wysokość uderzenia: atak nad głową, obrona poniżej bioder",
+    "G-072": "Wysokość uderzenia: nad głową zwykle atak, nisko poniżej bioder zwykle obrona",
     "G-073": "Ruch: przód-tył kontra każdy kierunek",
     "G-074": "Łańcuch siły: od nóg przez tułów do uderzenia",
     "G-075": "Rozgrzewka w trzech krokach: rozgrzej się, w ruchu, blisko gry",
     "G-076": "Wczesny start: kto czyta przygotowanie, jest wcześniej przy piłce",
     "G-077": "Snowminton: krótkie, pewne kroki na śniegu",
     "G-078": "Beachminton: szeroki rozkrok na piasku",
-    "G-079": "Blackminton: Night Speeder i tor punktu światła"
+    "G-079": "Blackminton: Night Speeder i tor punktu światła",
+    "G-080": "Zasada warstw: pot na zewnątrz, powietrze pomiędzy, wiatr i wilgoć z dala",
+    "G-081": "Snowminton, Beachminton, Blackminton: inne otoczenie, te same zasady"
   },
   "vokabeln": {
     "domaene": {

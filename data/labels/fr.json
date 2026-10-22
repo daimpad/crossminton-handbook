@@ -695,14 +695,16 @@
     "G-069": "Raquettes comparées : badminton, Crossminton, squash",
     "G-070": "Cordage : épaisseur de la corde et tension",
     "G-071": "Marge de sécurité : à l'intérieur plutôt que sur la ligne",
-    "G-072": "Hauteur de frappe : attaque au-dessus de la tête, défense sous les hanches",
+    "G-072": "Hauteur de frappe : au-dessus de la tête plutôt l'attaque, bas sous les hanches plutôt la défense",
     "G-073": "Déplacements : avant-arrière contre toutes les directions",
     "G-074": "Chaîne de force : des jambes au tronc jusqu'à la frappe",
     "G-075": "S'échauffer en trois étapes : se réchauffer, bouger, proche du jeu",
     "G-076": "Départ précoce : qui lit la préparation est plus tôt sur la balle",
     "G-077": "Snowminton : des pas courts et sûrs sur la neige",
     "G-078": "Beachminton : appuis larges dans le sable",
-    "G-079": "Blackminton : le Night Speeder et la trajectoire du point lumineux"
+    "G-079": "Blackminton : le Night Speeder et la trajectoire du point lumineux",
+    "G-080": "Principe des couches : la sueur sort, l'air reste entre les couches, vent et humidité dehors",
+    "G-081": "Snowminton, Beachminton, Blackminton : autre environnement, mêmes règles"
   },
   "vokabeln": {
     "domaene": {

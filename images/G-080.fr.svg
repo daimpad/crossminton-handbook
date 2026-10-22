@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Le principe des couches en coupe. En bas la peau, au-dessus une fine couche de base, une épaisse couche chaude qui emprisonne l'air et, en haut, une couche de protection. Des flèches montrent la sueur qui passe de la peau vers l'extérieur à travers les couches. D'en haut, le vent et l'humidité frappent la couche de protection et n'iront pas plus loin.">
+  <style>
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-flug{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linecap:round}
+    .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-weg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.6;stroke-linecap:round}
+    .s-tlinks{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5;stroke-linejoin:round}
+    .s-tleise{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-schale{fill:var(--tinte-2,#5a6675)}
+    .s-schicht{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-haut{fill:var(--tinte-3,#656f7e)}
+    .s-luft{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <text class="s-teil" x="80" y="40">vent, humidité</text>
+  <path class="s-weg" d="M36,50 L48,92" marker-end="url(#mp)"/>
+  <path class="s-weg" d="M80,50 L92,92" marker-end="url(#mp)"/>
+  <path class="s-weg" d="M124,50 L136,92" marker-end="url(#mp)"/>
+  <rect class="s-schale" x="20" y="100" width="120" height="14" rx="2"/>
+  <rect class="s-schicht" x="20" y="118" width="120" height="72" rx="2"/>
+  <circle class="s-luft" cx="62" cy="124" r="5"/>
+  <circle class="s-luft" cx="98" cy="124" r="5"/>
+  <circle class="s-luft" cx="26" cy="142" r="5"/>
+  <circle class="s-luft" cx="62" cy="142" r="5"/>
+  <circle class="s-luft" cx="98" cy="142" r="5"/>
+  <circle class="s-luft" cx="132" cy="142" r="5"/>
+  <circle class="s-luft" cx="62" cy="160" r="5"/>
+  <circle class="s-luft" cx="98" cy="160" r="5"/>
+  <circle class="s-luft" cx="26" cy="178" r="5"/>
+  <circle class="s-luft" cx="62" cy="178" r="5"/>
+  <circle class="s-luft" cx="98" cy="178" r="5"/>
+  <circle class="s-luft" cx="132" cy="178" r="5"/>
+  <rect class="s-schicht" x="20" y="194" width="120" height="12" rx="2"/>
+  <rect class="s-haut" x="20" y="210" width="120" height="22" rx="2"/>
+  <path class="s-flug" d="M44,208 L44,134" marker-end="url(#ma)"/>
+  <path class="s-flug" d="M80,208 L80,134" marker-end="url(#ma)"/>
+  <path class="s-flug" d="M116,208 L116,134" marker-end="url(#ma)"/>
+  <text class="s-tlinks" x="150" y="104">couche de protection</text>
+  <text class="s-tleise" x="150" y="117">arrête vent et humidité</text>
+  <text class="s-tlinks" x="150" y="151">couche chaude</text>
+  <text class="s-tleise" x="150" y="164">emprisonne l'air</text>
+  <text class="s-tlinks" x="150" y="198">couche de base</text>
+  <text class="s-tleise" x="150" y="211">éloigne la sueur</text>
+  <text class="s-tlinks" x="150" y="229">peau</text>
+  <text class="st" x="150" y="280">retirer et remettre des couches</text>
+</svg>

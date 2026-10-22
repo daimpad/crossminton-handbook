@@ -5,6 +5,7 @@ Die Produktion auf netcup läuft unter Plesk: **nginx vorn, Apache dahinter**. Z
 > **Stand 22.10.2026:** Das Feld „Zusätzliche nginx-Anweisungen" ist in diesem Plesk-Paket **nicht freigegeben**, die Seite „Apache & nginx" endet nach dem nginx-Caching. Die Direktiven bleiben als Vorlage, falls es freigeschaltet wird oder die Domain umzieht. Umgesetzt ist stattdessen:
 > - **Schrägstrich-301:** `DirectorySlash Off` in der `.htaccess` (s. „Alternative ohne nginx" unten). Vorher in `rules/.htaccess` erprobt: `/rules` antwortete mit 403 statt 301, kein 500.
 > - **Cache-Control:** in Plesk „Statische Dateien direkt durch nginx bedienen" abhaken und unter „Zusätzliche Header" (Apache-Einstellungen, „Eigenen Wert eingeben") die eine Zeile `Cache-Control: no-cache` eintragen. Dann liefert Apache alles aus und setzt die Kopfzeile überall. Ob das eingetragen ist, zeigt nur `curl -sI` (Prüfschleife unten).
+> - **Nachgemessen am 22.10.2026, beides wirkt:** `/`, `/baustein/griff`, `/regeln`, `/en` und `/suche` antworten mit `200` ohne Umleitung; HTML, JS, CSS, SVG, JSON, XML, `sw.js` und `js/version.js` tragen `Cache-Control: no-cache` (die HTML-Antworten zweimal, aus `.htaccess` und aus der Plesk-Kopfzeile — unschädlich). Die Snapshots kommen mit eigenem Titel und Canonical (`/baustein/griff` → „Der Universalgriff“, Canonical ohne Schrägstrich), eine fehlende Datei mit Endung mit ehrlichem `404`. Eine unbekannte Route ohne Endung bekommt die Hülle mit `200` und Canonical auf die Wurzel (Regel 4, so gewollt).
 
 ## Befund (gemessen am 20.10.2026)
 

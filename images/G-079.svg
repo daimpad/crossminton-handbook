@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. Links ein Night Speeder im Profil, die Kappe oben: Sie ist durchsichtig, und in ihr steckt ein Speedlight, ein Knicklicht, das rund drei Stunden leuchtet. Rechts unten die Flugbahn im Dunkeln als Folge von Lichtpunkten, die zum Speeder hin kräftiger werden. Mehr als diesen Punkt sieht man nachts nicht, man folgt seiner Bahn.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. Links ein Night Speeder im Profil, die Kappe oben: Sie ist durchsichtig, und in ihr steckt ein Speedlight, ein Knicklicht, das rund drei Stunden leuchtet. Rechts unten die Flugbahn im Dunkeln als Folge von Lichtpunkten, die zur aktuellen Position hin kräftiger werden. Mehr als diesen Punkt sieht man nachts nicht, man folgt seiner Bahn.">
   <style>
     .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .s-pfeil{fill:var(--tinte-3,#656f7e)}

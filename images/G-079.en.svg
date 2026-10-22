@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. On the left a Night Speeder in profile, cap on top: the cap is transparent, and a Speedlight sits inside it, a glow stick that shines for about three hours. Bottom right, the flight path in the dark as a series of light points that grow stronger towards the Speeder. At night you see nothing but this point and follow its path.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. On the left a Night Speeder in profile, cap on top: the cap is transparent, and a Speedlight sits inside it, a glow stick that shines for about three hours. Bottom right, the flight path in the dark as a series of light points that grow stronger towards its current position. At night you see nothing but this point and follow its path.">
   <style>
     .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .s-pfeil{fill:var(--tinte-3,#656f7e)}

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Laufwege von oben im Vergleich. Links ein Badminton- oder Squashfeld: lang und schmal, die Wege führen vor zum Netz oder zur Frontwand und zurück, zur Seite nur kurz. Rechts das Crossminton-Feld: ein Quadrat mit vier gleichwertigen Ecken, die Wege führen aus der Mitte gleich weit in jede Richtung, zur Seite und diagonal. Darum braucht der Schuh seitlichen Halt.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Laufwege von oben im Vergleich. Links ein Badminton- oder Squashfeld: länger als breit, die Hauptwege führen vor zum Netz oder zur Frontwand und zurück, zur Seite kürzer. Rechts das Crossminton-Feld: ein Quadrat mit vier gleichwertigen Ecken, die Wege führen aus der Mitte gleich weit in jede Richtung, zur Seite und diagonal. Darum braucht der Schuh seitlichen Halt.">
   <style>
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
     .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
@@ -27,13 +27,13 @@
   <text class="s-name" x="76" y="34">Badminton · Squash</text>
   <text class="s-name2" x="222" y="34">Crossminton</text>
   <path class="s-trenner" d="M149,52 L149,236"/>
-  <rect class="s-feld" x="38" y="62" width="76" height="160"/>
-  <path class="s-wand" d="M38,62 L114,62"/>
-  <text class="s-teil" x="76" y="54">Netz · Frontwand</text>
+  <rect class="s-feld" x="24" y="70" width="104" height="146"/>
+  <path class="s-wand" d="M24,70 L128,70"/>
+  <text class="s-teil" x="76" y="62">Netz · Frontwand</text>
   <path class="s-weg" d="M76,134L76,82" marker-end="url(#mp)"/>
   <path class="s-weg" d="M76,158L76,210" marker-end="url(#mp)"/>
-  <path class="s-wegn" d="M64,146L48,146" marker-end="url(#mp)"/>
-  <path class="s-wegn" d="M88,146L104,146" marker-end="url(#mp)"/>
+  <path class="s-wegn" d="M64,146L36,146" marker-end="url(#mp)"/>
+  <path class="s-wegn" d="M88,146L116,146" marker-end="url(#mp)"/>
   <circle class="s-spieler" cx="76" cy="146" r="7.5"/>
   <rect class="s-feld" x="160" y="84" width="124" height="124"/>
   <path class="s-wegc" d="M213,137L178,102" marker-end="url(#ma)"/>

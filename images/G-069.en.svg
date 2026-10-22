@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Three rackets side by side, to scale. On the left a badminton racket, long and delicate; on the right a squash racket, also long. In the middle the Crossminton racket: shorter, with a sturdier frame. The rules allow a length of at most 61 centimetres and a head of at most 650 square centimetres.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Three rackets side by side, to scale. On the left a badminton racket, long and delicate; on the right a squash racket, also long. In the middle the Crossminton racket: shorter, with a sturdier frame. The rules allow a length of at most 61 centimeters and a head of at most 650 square centimeters.">
   <style>
     .s-griff{fill:var(--flaeche,#fff);stroke:var(--tinte-2,#5a6675);stroke-width:1.6;stroke-linejoin:round}
     .s-hand{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2;stroke-linejoin:round}
@@ -57,9 +57,9 @@
   <path class="s-masz" d="M140,55L140,234" marker-start="url(#mp)" marker-end="url(#mp)"/>
   <text class="s-zahl" x="140" y="148.5">max. 61 cm</text>
   <text class="s-teilw" x="190" y="95">head</text>
-  <text class="s-teilw" x="190" y="108">max. 650 cm²</text>
+  <text class="s-teilw" x="190" y="108">≤ 650 cm²</text>
   <text class="s-name" x="62" y="254">Badminton</text>
   <text class="s-name2" x="190" y="254">Crossminton</text>
   <text class="s-name" x="304" y="254">Squash</text>
-  <text class="st" x="180" y="286">squash: longer · badminton: more fragile</text>
+  <text class="st" x="180" y="286">shorter than squash, sturdier</text>
 </svg>

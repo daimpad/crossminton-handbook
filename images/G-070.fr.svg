@@ -43,7 +43,7 @@
 
   <text class="s-teil" x="150" y="22">corde en coupe, agrandie</text>
   <circle class="s-saite" cx="100" cy="74" r="25"/>
-  <circle class="s-saite2" cx="212" cy="74" r="13"/>
+  <circle class="s-saite" cx="212" cy="74" r="13"/>
   <text class="s-name2" x="100" y="118">Crossminton</text>
   <text class="s-zahl" x="100" y="132">jusqu'à 1,25 mm</text>
   <text class="s-name" x="212" y="118">Badminton</text>
@@ -61,6 +61,7 @@
   <path class="s-bett" d="M162,200 Q218,216 274,200"/>
   <circle class="s-ball" cx="218" cy="201" r="6"/>
   <path class="s-flug" d="M218,191L218,157" marker-end="url(#ma)"/>
+  <text class="s-teil" x="150" y="172">tension du cordage</text>
   <text class="s-titel" x="82" y="238">souple</text>
   <text class="s-teil" x="82" y="251">plus de puissance</text>
   <text class="s-titel" x="218" y="238">dur</text>
