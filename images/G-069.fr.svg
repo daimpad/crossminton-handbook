@@ -57,7 +57,7 @@
   <path class="s-masz" d="M140,55L140,234" marker-start="url(#mp)" marker-end="url(#mp)"/>
   <text class="s-zahl" x="140" y="148.5">max. 61 cm</text>
   <text class="s-teilw" x="190" y="95">tête</text>
-  <text class="s-teilw" x="190" y="108">max. 650 cm²</text>
+  <text class="s-teilw" x="190" y="108">≤ 650 cm²</text>
   <text class="s-name" x="62" y="254">Badminton</text>
   <text class="s-name2" x="190" y="254">Crossminton</text>
   <text class="s-name" x="304" y="254">Squash</text>

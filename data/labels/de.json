@@ -696,14 +696,16 @@
     "G-069": "Schläger im Vergleich: Badminton, Crossminton, Squash",
     "G-070": "Bespannung: Saitendicke und Härte",
     "G-071": "Sicherheitsabstand: lieber innen als auf die Linie",
-    "G-072": "Treffhöhe: Angriff über dem Kopf, Verteidigung unter der Hüfte",
+    "G-072": "Treffhöhe: über dem Kopf meist Angriff, tief unter der Hüfte meist Verteidigung",
     "G-073": "Laufwege: vor und zurück gegen in jede Richtung",
     "G-074": "Kraftkette: von den Beinen über den Rumpf in den Schlag",
     "G-075": "Aufwärmen in drei Schritten: warm werden, bewegen, spielnah",
     "G-076": "Früher Start: Wer die Vorbereitung liest, ist eher am Ball",
     "G-077": "Snowminton: kurze, sichere Schritte auf Schnee",
     "G-078": "Beachminton: breiter Stand im Sand",
-    "G-079": "Blackminton: der Night Speeder und die Bahn des Lichtpunkts"
+    "G-079": "Blackminton: der Night Speeder und die Bahn des Lichtpunkts",
+    "G-080": "Schichtprinzip: Schweiß nach außen, Luft dazwischen, Wind und Nässe draußen",
+    "G-081": "Snowminton, Beachminton, Blackminton: andere Umgebung, dasselbe Regelwerk"
   },
   "vokabeln": {
     "domaene": {

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The opponent's field from above, with the neutral zone in front of it. One step inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The opponent's field from above, with the neutral zone in front of it. With a safety margin inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.">
   <style>
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
     .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
@@ -27,7 +27,7 @@
   <rect class="s-feld" x="60" y="30" width="180" height="180"/>
   <text class="s-teil" x="150" y="46">close to the line: risky</text>
   <text class="s-tsicher" x="150" y="74">safe</text>
-  <text class="s-teilw" x="150" y="87">one step inside</text>
+  <text class="s-teilw" x="150" y="87">safety margin</text>
   <text class="s-zone" x="16" y="236">neutral zone</text>
   <path class="s-risiko" d="M150,270 Q246,190 262,102"/>
   <path class="s-risiko" d="M150,270 Q196,236 218,240"/>

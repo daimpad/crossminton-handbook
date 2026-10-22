@@ -696,14 +696,16 @@
     "G-069": "Rackets compared: badminton, Crossminton, squash",
     "G-070": "Stringing: string gauge and tension",
     "G-071": "Safety margin: inside rather than on the line",
-    "G-072": "Contact height: attack above the head, defense below the hips",
+    "G-072": "Contact height: above the head usually attack, low below the hips usually defense",
     "G-073": "Movement: forward and back versus every direction",
-    "G-074": "Chain of force: from the legs through the trunk into the shot",
+    "G-074": "Chain of force: from the legs through the core into the shot",
     "G-075": "Warming up in three steps: warm up, move, game-like",
     "G-076": "Early start: reading the preparation gets you to the ball sooner",
     "G-077": "Snowminton: short, safe steps on snow",
     "G-078": "Beachminton: a wide stance in the sand",
-    "G-079": "Blackminton: the Night Speeder and the path of the point of light"
+    "G-079": "Blackminton: the Night Speeder and the path of the point of light",
+    "G-080": "Layering: sweat moves out, air stays in between, wind and wet stay out",
+    "G-081": "Snowminton, Beachminton, Blackminton: a different setting, the same rules"
   },
   "vokabeln": {
     "domaene": {

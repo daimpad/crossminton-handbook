@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. À gauche, un Night Speeder de profil, la coiffe en haut : elle est transparente et contient un Speedlight, un bâton lumineux qui éclaire environ trois heures. En bas à droite, la trajectoire dans l'obscurité, une suite de points lumineux de plus en plus nets vers le speeder. La nuit, on ne voit que ce point et on suit sa trajectoire.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. À gauche, un Night Speeder de profil, le capuchon en haut : il est transparent et contient un Speedlight, un bâton lumineux qui éclaire environ trois heures. En bas à droite, la trajectoire dans l'obscurité, une suite de points lumineux de plus en plus nets vers sa position actuelle. La nuit, on ne voit que ce point et on suit sa trajectoire.">
   <style>
     .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
@@ -32,7 +32,7 @@
   <path class="s-kappeklar" d="M48.199999999999996,89 L48.199999999999996,68.59 Q48.199999999999996,50 82,50 Q115.80000000000001,50 115.80000000000001,68.59 L115.80000000000001,89 Z"/>
   <path class="s-licht" d="M78,60 h8 v47 a4,4 0 0 1 -8,0 Z"/>
   <path class="s-masz" d="M119.8,64 L136,56M89,96 L136,102"/>
-  <text class="s-tlinks" x="140" y="60">coiffe transparente</text>
+  <text class="s-tlinks" x="140" y="60">capuchon transparent</text>
   <text class="s-tlinks" x="140" y="106">Speedlight</text>
   <text class="s-tleise" x="140" y="120">bâton lumineux, env. 3 h</text>
   <circle class="s-punkt1" cx="168" cy="252" r="2"/>

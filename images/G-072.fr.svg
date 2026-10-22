@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Attaque et défense selon la hauteur de frappe : un joueur est en position de base, devant lui trois bandes de hauteur. Au-dessus de la tête, c'est l'attaque : frappé là, le speeder part de haut en bas, en descente raide. Sous les hanches, c'est la défense : là, il faut jouer le speeder vers le haut pour maintenir l'échange en vie. Entre les deux se trouve la zone où le rôle bascule.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Attaque et défense selon la hauteur de frappe : un joueur est en position de base, devant lui trois bandes de hauteur. Frappé au-dessus de la tête, tu es le plus souvent en attaque : de là, le speeder part de haut en bas, en descente raide. Frappé bas, sous les hanches, tu es le plus souvent sous pression et en défense : là, il faut jouer le speeder vers le haut pour maintenir l'échange en vie. La hauteur de frappe est un repère, pas un critère fixe. Entre les deux se trouve la zone où le rôle bascule.">
   <style>
     .s-k{fill:var(--tinte,#16202b)}
     .s-f{fill:var(--tinte-2,#5a6675)}
@@ -48,5 +48,5 @@
   <text class="s-lab" x="170" y="144.5">ici, ça bascule</text>
   <text class="s-labf" x="170" y="202.9">Défense</text>
   <text class="s-lab" x="170" y="216.9">jouer vers le haut</text>
-  <text class="st" x="150" y="286">la hauteur de frappe montre ton rôle</text>
+  <text class="st" x="150" y="286">la hauteur de frappe, un indice du rôle</text>
 </svg>

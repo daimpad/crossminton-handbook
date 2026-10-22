@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, świetlik chemiczny, który świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę speedera. Nocą widać tylko ten punkt i podąża się za jego torem.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, światło chemiczne, które świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę jego obecnej pozycji. Nocą widać tylko ten punkt i podąża się za jego torem.">
   <style>
     .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
@@ -34,7 +34,7 @@
   <path class="s-masz" d="M119.8,64 L136,56M89,96 L136,102"/>
   <text class="s-tlinks" x="140" y="60">przezroczysta nakładka</text>
   <text class="s-tlinks" x="140" y="106">Speedlight</text>
-  <text class="s-tleise" x="140" y="120">świetlik, około 3 godzin</text>
+  <text class="s-tleise" x="140" y="120">światło chemiczne, ok. 3 h</text>
   <circle class="s-punkt1" cx="168" cy="252" r="2"/>
   <circle class="s-punkt1" cx="182.5" cy="234.6" r="2.3"/>
   <circle class="s-punkt1" cx="197" cy="218.5" r="2.5"/>

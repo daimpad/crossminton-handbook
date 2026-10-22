@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Le terrain adverse vu de dessus, avec la zone neutre devant. Un pas à l'intérieur des lignes se trouve la zone cible sûre, où part la balle sûre. Deux balles trop justes manquent : l'une tombe juste derrière la ligne de côté, dehors, l'autre trop court dans la zone neutre. Ce sont deux fautes directes.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Le terrain adverse vu de dessus, avec la zone neutre devant. Avec une marge de sécurité à l'intérieur des lignes se trouve la zone cible sûre, où part la balle sûre. Deux balles trop justes manquent : l'une tombe juste derrière la ligne de côté, dehors, l'autre trop court dans la zone neutre. Ce sont deux fautes directes.">
   <style>
     .s-pfeil{fill:var(--tinte-3,#656f7e)}
     .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
@@ -27,7 +27,7 @@
   <rect class="s-feld" x="60" y="30" width="180" height="180"/>
   <text class="s-teil" x="150" y="46">près de la ligne : risqué</text>
   <text class="s-tsicher" x="150" y="74">sûr</text>
-  <text class="s-teilw" x="150" y="87">un pas à l'intérieur</text>
+  <text class="s-teilw" x="150" y="87">marge de sécurité</text>
   <text class="s-zone" x="16" y="236">zone neutre</text>
   <path class="s-risiko" d="M150,270 Q246,190 262,102"/>
   <path class="s-risiko" d="M150,270 Q196,236 218,240"/>

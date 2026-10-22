@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Angriff und Verteidigung an der Treffhöhe: Ein Spieler steht in der Grundposition, vor ihm liegen drei Höhenbänder. Über dem Kopf ist Angriff: Dort getroffen, geht der Speeder steil von oben nach unten. Unter der Hüfte ist Verteidigung: Dort muss der Speeder nach oben gespielt werden, damit der Ballwechsel am Leben bleibt. Dazwischen liegt der Bereich, in dem die Rolle kippt.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Angriff und Verteidigung an der Treffhöhe: Ein Spieler steht in der Grundposition, vor ihm liegen drei Höhenbänder. Über dem Kopf getroffen, bist du meist im Angriff: Von dort geht der Speeder steil von oben nach unten. Tief unter der Hüfte getroffen, bist du meist unter Druck und in der Verteidigung: Dort muss der Speeder nach oben gespielt werden, damit der Ballwechsel am Leben bleibt. Die Treffhöhe ist ein Anhaltspunkt, kein festes Kriterium. Dazwischen liegt der Bereich, in dem die Rolle kippt.">
   <style>
     .s-k{fill:var(--tinte,#16202b)}
     .s-f{fill:var(--tinte-2,#5a6675)}
@@ -48,5 +48,5 @@
   <text class="s-lab" x="170" y="144.5">dazwischen kippt es</text>
   <text class="s-labf" x="170" y="202.9">Verteidigung</text>
   <text class="s-lab" x="170" y="216.9">nach oben spielen</text>
-  <text class="st" x="150" y="286">die Treffhöhe zeigt die Rolle</text>
+  <text class="st" x="150" y="286">die Treffhöhe als Hinweis auf die Rolle</text>
 </svg>

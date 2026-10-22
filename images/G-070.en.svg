@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Above, two strings in cross-section, magnified: the Crossminton string of up to 1.25 millimetres is almost twice as thick as the badminton string of about 0.65 millimetres. Below, the trampoline model: a soft stringing gives deeply and sends the Speeder back far but scattered, so more power. A hard one gives little, the Speeder flies shorter and more precisely, so more control.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Above, two strings in cross-section, magnified: the Crossminton string of up to 1.25 millimeters is almost twice as thick as the badminton string of about 0.65 millimeters. Below, the trampoline model: a soft stringing gives deeply and sends the Speeder back far but scattered, so more power. A hard one gives little, the Speeder flies shorter and more precisely, so more control.">
   <style>
     .s-griff{fill:var(--flaeche,#fff);stroke:var(--tinte-2,#5a6675);stroke-width:1.6;stroke-linejoin:round}
     .s-hand{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2;stroke-linejoin:round}
@@ -43,7 +43,7 @@
 
   <text class="s-teil" x="150" y="22">string in cross-section, magnified</text>
   <circle class="s-saite" cx="100" cy="74" r="25"/>
-  <circle class="s-saite2" cx="212" cy="74" r="13"/>
+  <circle class="s-saite" cx="212" cy="74" r="13"/>
   <text class="s-name2" x="100" y="118">Crossminton</text>
   <text class="s-zahl" x="100" y="132">up to 1.25 mm</text>
   <text class="s-name" x="212" y="118">Badminton</text>
@@ -61,6 +61,7 @@
   <path class="s-bett" d="M162,200 Q218,216 274,200"/>
   <circle class="s-ball" cx="218" cy="201" r="6"/>
   <path class="s-flug" d="M218,191L218,157" marker-end="url(#ma)"/>
+  <text class="s-teil" x="150" y="172">stringing tension</text>
   <text class="s-titel" x="82" y="238">soft</text>
   <text class="s-teil" x="82" y="251">more power</text>
   <text class="s-titel" x="218" y="238">hard</text>

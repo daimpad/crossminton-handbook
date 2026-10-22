@@ -1394,7 +1394,7 @@ export const MOTIVE = {
   // (Gesundheitsrahmen); der Ausfallschritt bleibt locker, nicht tief.
   'G-075': (t) => {
     const y = 222, H = 19, kam = 8;
-    const trab = figur({ ort: [54, y], H, blick: 90, kamera: kam, art: 'dynamisch', neig: 8, kopf: { neig: -6 },
+    const trab = figur({ ort: [64, y], H, blick: 90, kamera: kam, art: 'dynamisch', neig: 8, kopf: { neig: -6 },
       frei_fuss: ['R'],
       beinL: { ober: [-0.1, -1, 0.3], unter: [0, -1, -0.08], fuss: [-0.1, -0.05, 1] },
       beinR: { ober: [0.1, -1, -0.35], unter: [0.05, 0.12, -1], fuss: [0.05, -0.9, -0.3] },
@@ -1416,10 +1416,10 @@ export const MOTIVE = {
         defs: pfeil('q075', 's-mkg', 3.8),
         inhalt: [
           `<path class="s-boden" d="M12,${y}L288,${y}"/>`,
-          schatten([58, y + 1], 34, 3.5), schatten([150, y + 1], 44, 3.5), schatten([234, y + 1], 40, 3.5),
+          schatten([68, y + 1], 34, 3.5), schatten([150, y + 1], 44, 3.5), schatten([234, y + 1], 40, 3.5),
           trab.svg, ausfall.svg, schatten3.svg,
           zwischen(101), zwischen(194),
-          titel(54, 1, t.eins), unter(54, t.eins2),
+          titel(58, 1, t.eins), unter(58, t.eins2),
           titel(150, 2, t.zwei), unter(150, t.zwei2),
           titel(242, 3, t.drei), unter(242, t.drei2),
         ].join('\n  '),
@@ -1435,8 +1435,8 @@ export const MOTIVE = {
     const st = b.stelle(150, 1.85);
     const fg = figur({
       ort: st.ort, H: st.H, blick: 104, kamera: 16, neig: 8, kopf: { neig: -4 }, art: 'dynamisch', koerper: 'a',
-      beinR: { ober: [0.12, -1, 0.42], unter: [0.04, -1, -0.15], fuss: [0.1, -0.04, 1] },
-      beinL: { ober: [-0.12, -1, -0.12], unter: [-0.02, -1, -0.7], fuss: [-0.05, -0.5, 1] },
+      beinR: { ober: [0.2, -1, 0.5], unter: [0.05, -1, -0.42], fuss: [0.1, -0.04, 1] },
+      beinL: { ober: [-0.2, -1, 0.05], unter: [-0.05, -1, -0.62], fuss: [-0.05, -0.5, 1] },
       armR: { ober: [0.3, -0.85, 0.42], unter: [0.1, 0.45, 0.9], hand: [0.05, 0.6, 0.8] },
       armL: { ober: [-0.7, -0.65, -0.1], unter: [-0.45, -0.8, 0.1], art: 'offen' },
       schlaeger: { hand: 'R', achse: [0.02, 0.75, 0.66], flaeche: [0.85, -0.35, 0.38] },
@@ -1481,7 +1481,10 @@ export const MOTIVE = {
     const boden = 232, H = 22;
     const fg = figur({ ...POSEN.split, ort: [150, boden], H, blick: 14, kamera: 10, neig: 22, kopf: { neig: -16 },
       beinR: { ober: [0.58, -0.8, 0.4], unter: [0.16, -1, -0.15], fuss: [0.35, -0.05, 1] },
-      beinL: { ober: [-0.58, -0.8, 0.4], unter: [-0.16, -1, -0.15], fuss: [-0.35, -0.05, 1] } });
+      beinL: { ober: [-0.58, -0.8, 0.4], unter: [-0.16, -1, -0.15], fuss: [-0.35, -0.05, 1] },
+      // Schläger seitlich vor der Brust, Kopf hoch: frontal gesehen sonst stark verkürzt
+      armR: { ober: [0.2, -1, 0.45], unter: [-0.45, 0.6, 0.65], hand: [-0.45, 0.7, 0.55] },
+      schlaeger: { hand: 'R', achse: [-0.45, 0.88, 0.15], flaeche: [0.15, -0.05, 1] } });
     const p = fg.punkte;
     const sand = `M0,${boden - 22}C70,${boden - 30} 150,${boden - 16} 300,${boden - 26}L300,300L0,300Z`;
     const huegel = (q, b) => `M${f(q[0] - b)},${f(boden + 6)}C${f(q[0] - b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b)},${f(boden + 6)}Z`;

@@ -2,7 +2,7 @@
 // (Griffstärke), G-069 (Schläger im Vergleich), G-070 (Saitenstärke und Härte der Bespannung),
 // G-073 (Schuhe: Laufwege im Vergleich), das Taktik-Diagramm G-071 (Fehler vermeiden) und aus
 // Welle B das Athletik-Diagramm G-076 (antizipative Schnelligkeit), aus Welle C die Night-Speeder-
-// Tafel G-079 (Blackminton).
+// Tafel G-079 (Blackminton) und danach G-080 (Schichtprinzip) und G-081 (Spielarten im Überblick).
 //   node scratchpad/gen-ausruestung.mjs
 // Anders als die Speeder-Tafeln stehen die Texte hier direkt im Generator (TEXTE), je Sprache;
 // die Geometrie hängt nie an der Sprache, die vier Fassungen unterscheiden sich nur im Text.
@@ -36,6 +36,11 @@
 //         gedrückt wird; es leuchtet rund drei Stunden. Im Dunkeln bleibt vom Speeder nur der
 //         Lichtpunkt, dessen Bahn man liest. Schlagkappe oben wie in G-065 (2 Einheiten je mm:
 //         Kappe ⌀26 × 15, Kragen ⌀30 × 10, Korb ⌀19 → ⌀50 über 35 mm).
+//   G-080 funktionskleidung: Schichtprinzip — dünne Basisschicht führt den Schweiß von der Haut
+//         weg, eine wärmende Schicht schließt Luft ein, bei Wind oder Nässe eine Schutzschicht
+//         obenauf; Schichten lassen sich ab- und wieder anlegen.
+//   G-081 spielarten_ueberblick: Snow-, Beach- und Blackminton verändern die Umgebung (Boden,
+//         Temperatur, Licht), das Regelwerk bleibt dasselbe.
 import { writeFileSync } from 'node:fs';
 
 const ZIEL = 'images';
@@ -108,7 +113,16 @@ const STIL_NEU = `    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width
     .s-licht{fill:var(--primaer-dunkel,#1e8bd6)}
     .s-punkt1{fill:var(--primaer-dunkel,#1e8bd6);opacity:.3}
     .s-punkt2{fill:var(--primaer-dunkel,#1e8bd6);opacity:.6}
-    .s-tleise{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}`;
+    .s-tleise{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-schale{fill:var(--tinte-2,#5a6675)}
+    .s-schicht{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-haut{fill:var(--tinte-3,#656f7e)}
+    .s-luft{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-klammer{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2;stroke-linejoin:round}
+    .s-kachel{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-symbol{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    .s-flocke{fill:var(--tinte-3,#656f7e)}`;
 
 function stilFuer(inhalt) {
   const benutzt = new Set([...inhalt, MARKER].join('\n').match(/class="[^"]*"/g).flatMap((k) => k.slice(7, -1).split(' ')));
@@ -294,7 +308,7 @@ function G070(t) {
   const inhalt = [
     text('s-teil', 150, 22, t.querschnitt),
     `  <circle class="s-saite" cx="${cC[0]}" cy="${cC[1]}" r="${r1(1.25 * MM / 2)}"/>`,
-    `  <circle class="s-saite2" cx="${cB[0]}" cy="${cB[1]}" r="${r1(0.65 * MM / 2)}"/>`,
+    `  <circle class="s-saite" cx="${cB[0]}" cy="${cB[1]}" r="${r1(0.65 * MM / 2)}"/>`,
     text('s-name2', cC[0], 118, t.crossminton),
     text('s-zahl', cC[0], 132, t.dickeC),
     text('s-name', cB[0], 118, t.badminton),
@@ -302,6 +316,7 @@ function G070(t) {
     `  <path class="s-trenner" d="M24,146 L276,146"/>`,
     bett(82, 22, 22, 46),
     bett(218, 8, 10, 30),
+    text('s-teil', 150, 172, t.haerte),
     text('s-titel', 82, 238, t.weich),
     text('s-teil', 82, 251, t.kraft),
     text('s-titel', 218, 238, t.hart),
@@ -313,7 +328,7 @@ function G070(t) {
 
 // ---------------------------------------------------------------------------------------------
 // G-071 Fehler vermeiden: das gegnerische Feld von oben, davor die Passierzone. Der sichere Ball
-// landet einen Schritt innerhalb der Linien, die knappen landen im Aus oder in der Zone.
+// landet mit Sicherheitsabstand innerhalb der Linien, die knappen landen im Aus oder in der Zone.
 
 const kreuz = (x, y, r = 5) => `M${P(x - r, y - r)}L${P(x + r, y + r)}M${P(x + r, y - r)}L${P(x - r, y + r)}`;
 
@@ -352,14 +367,15 @@ function G073(t) {
     text('s-name', L[0], 34, t.links),
     text('s-name2', R[0], 34, t.rechts),
     `  <path class="s-trenner" d="M149,52 L149,236"/>`,
-    // Badminton/Squash: schmales, langes Feld, die Wand (Netz/Frontwand) oben
-    `  <rect class="s-feld" x="${L[0] - 38}" y="62" width="76" height="160"/>`,
-    `  <path class="s-wand" d="M${L[0] - 38},62 L${L[0] + 38},62"/>`,
-    text('s-teil', L[0], 54, t.wand),
+    // Badminton/Squash: länger als breit (Badminton-Einzelhälfte 5,18 × 6,7 m, Squash 6,4 × 9,75 m,
+    // hier dazwischen 1 : 1,4), die Wand (Netz/Frontwand) oben
+    `  <rect class="s-feld" x="${L[0] - 52}" y="70" width="104" height="146"/>`,
+    `  <path class="s-wand" d="M${L[0] - 52},70 L${L[0] + 52},70"/>`,
+    text('s-teil', L[0], 62, t.wand),
     pfeil('s-weg', zu(L, 0, -12), zu(L, 0, -64), 'mp'),
     pfeil('s-weg', zu(L, 0, 12), zu(L, 0, 64), 'mp'),
-    pfeil('s-wegn', zu(L, -12, 0), zu(L, -28, 0), 'mp'),
-    pfeil('s-wegn', zu(L, 12, 0), zu(L, 28, 0), 'mp'),
+    pfeil('s-wegn', zu(L, -12, 0), zu(L, -40, 0), 'mp'),
+    pfeil('s-wegn', zu(L, 12, 0), zu(L, 40, 0), 'mp'),
     `  <circle class="s-spieler" cx="${L[0]}" cy="${L[1]}" r="7.5"/>`,
     // Crossminton: Quadrat, vier gleichwertige Ecken, Wege in jede Richtung
     `  <rect class="s-feld" x="${R[0] - 62}" y="${R[1] - 62}" width="124" height="124"/>`,
@@ -451,6 +467,99 @@ function G079(t) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// G-080 Schichtprinzip: Schnitt durch die Kleidung, unten die Haut, darüber Basis-, Wärme- und
+// Schutzschicht. Der Schweiß wandert von der Haut nach außen (Akzent), die Wärmeschicht hält Luft,
+// Wind und Nässe enden an der Schutzschicht.
+
+function G080(t) {
+  const x0 = 20, x1 = 140, xl = 150;
+  const band = (klasse, y, h) => `  <rect class="${klasse}" x="${x0}" y="${y}" width="${x1 - x0}" height="${h}" rx="2"/>`;
+  const luft = [];
+  for (const [i, y] of [124, 142, 160, 178].entries()) {
+    for (const x of i % 2 ? [26, 62, 98, 132] : [62, 98]) luft.push(`  <circle class="s-luft" cx="${x}" cy="${y}" r="5"/>`);
+  }
+  const inhalt = [
+    text('s-teil', 80, 40, t.wind),
+    ...[0, 1, 2].map((i) => `  <path class="s-weg" d="M${36 + i * 44},50 L${48 + i * 44},92" marker-end="url(#mp)"/>`),
+    band('s-schale', 100, 14),
+    band('s-schicht', 118, 72),
+    ...luft,
+    band('s-schicht', 194, 12),
+    band('s-haut', 210, 22),
+    ...[44, 80, 116].map((x) => `  <path class="s-flug" d="M${x},208 L${x},134" marker-end="url(#ma)"/>`),
+    `  <text class="s-tlinks" x="${xl}" y="104">${t.schale}</text>`,
+    `  <text class="s-tleise" x="${xl}" y="117">${t.schaleW}</text>`,
+    `  <text class="s-tlinks" x="${xl}" y="151">${t.waerme}</text>`,
+    `  <text class="s-tleise" x="${xl}" y="164">${t.waermeW}</text>`,
+    `  <text class="s-tlinks" x="${xl}" y="198">${t.basis}</text>`,
+    `  <text class="s-tleise" x="${xl}" y="211">${t.basisW}</text>`,
+    `  <text class="s-tlinks" x="${xl}" y="229">${t.haut}</text>`,
+    text('st', 150, 280, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
+// G-081 Spielarten im Überblick: drei Kacheln (Schnee, Sand, Dunkelheit) unter einer Klammer
+// „dasselbe Regelwerk“ — der Akzent liegt auf dem, was gleich bleibt.
+
+function G081(t) {
+  const kx = [12, 108, 204], B = 84, y0 = 92, H = 100;
+  const mitte = kx.map((x) => x + B / 2);
+  const schnee = (x) => {
+    const c = [x + 42, 128];
+    let d = '';
+    for (const w of [90, 30, 150]) {
+      const a = polar(c, 18, w), b = polar(c, 18, w + 180);
+      d += `M${P(...a)}L${P(...b)}`;
+      for (const e of [a, b]) {
+        const m = [c[0] + (e[0] - c[0]) * 0.62, c[1] + (e[1] - c[1]) * 0.62];
+        const ww = Math.atan2(e[1] - c[1], e[0] - c[0]) / RAD;
+        d += `M${P(...polar(m, 6, ww + 145))}L${P(...m)}L${P(...polar(m, 6, ww - 145))}`;
+      }
+    }
+    return [
+      `  <path class="s-symbol" d="${d}"/>`,
+      ...[[14, 104], [70, 108], [20, 152], [66, 156]].map(([dx, y]) => `  <circle class="s-flocke" cx="${x + dx}" cy="${y}" r="1.8"/>`),
+      `  <path class="s-boden" d="M${x + 8},176 Q${x + 26},168 ${x + 42},174 Q${x + 60},180 ${x + 76},172"/>`,
+    ];
+  };
+  const sand = (x) => {
+    const c = [x + 54, 118];
+    let d = '';
+    for (let i = 0; i < 8; i++) d += `M${P(...polar(c, 13, 45 * i))}L${P(...polar(c, 19, 45 * i))}`;
+    return [
+      `  <circle class="s-symbol" cx="${c[0]}" cy="${c[1]}" r="8"/>`,
+      `  <path class="s-symbol" d="${d}"/>`,
+      `  <path class="s-boden" d="M${x + 8},176 Q${x + 24},152 ${x + 40},168 Q${x + 56},150 ${x + 76},170"/>`,
+    ];
+  };
+  const dunkel = (x) => {
+    const punkte = [];
+    for (let i = 0; i < 6; i++) {
+      const u = i / 5;
+      punkte.push([x + 14 + 52 * u, 170 - 56 * u - 20 * u * (1 - u), u]);
+    }
+    const [lx, ly] = punkte[5];
+    return [
+      ...punkte.slice(0, -1).map(([px, py, u]) => `  <circle class="s-flocke" cx="${r1(px)}" cy="${r1(py)}" r="${r1(1.6 + 2 * u)}"/>`),
+      `  <circle class="s-glimm" cx="${r1(lx)}" cy="${r1(ly)}" r="11"/>`,
+      `  <circle class="s-ball" cx="${r1(lx)}" cy="${r1(ly)}" r="4.5"/>`,
+    ];
+  };
+  const inhalt = [
+    `  <path class="s-klammer" d="M${mitte[0]},${y0 - 8} L${mitte[0]},${y0 - 18} L${mitte[2]},${y0 - 18} L${mitte[2]},${y0 - 8}M${mitte[1]},${y0 - 18} L${mitte[1]},${y0 - 8}"/>`,
+    text('s-akzenth', 150, y0 - 26, t.regeln),
+    ...kx.map((x) => `  <rect class="s-kachel" x="${x}" y="${y0}" width="${B}" height="${H}" rx="10"/>`),
+    ...schnee(kx[0]), ...sand(kx[1]), ...dunkel(kx[2]),
+    ...t.namen.map((n, i) => text('s-titel', mitte[i], 212, n)),
+    ...t.umgebung.map((n, i) => text('s-name', mitte[i], 228, n)),
+    text('st', 150, 280, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
 
 export const TEXTE = {
   'G-068': {
@@ -470,30 +579,30 @@ export const TEXTE = {
       finger: '1 doigt', ballen: 'talon', spitzen: 'bout des doigts', cap: 'un doigt de place jusqu\'au talon',
     },
     pl: {
-      aria: 'Dwie rączki w przekroju, widziane od końca rączki, z dłonią jako opaską wokół nich. Po lewej rączka jest za cienka: ta sama dłoń sięga tak daleko, że opuszki palców wbijają się w nasadę dłoni. Po prawej pasuje: między opuszkami a nasadą dłoni zostaje mniej więcej szerokość palca wskazującego.',
+      aria: 'Dwie rączki w przekroju, widziane od końca rączki, z dłonią jako opaską wokół nich. Po lewej rączka jest za cienka: ta sama dłoń sięga tak daleko, że czubki palców wbijają się w kłąb dłoni. Po prawej pasuje: między czubkami palców a kłębem dłoni zostaje mniej więcej szerokość palca wskazującego.',
       blick: 'widok na koniec rączki', zuduenn: 'za cienka', passend: 'w sam raz', keinplatz: 'brak miejsca',
-      finger: '1 palec', ballen: 'nasada', spitzen: 'opuszki', cap: 'palec przerwy do nasady dłoni',
+      finger: '1 palec', ballen: 'kłąb', spitzen: 'czubki palców', cap: 'miejsce na palec do kłębu dłoni',
     },
   },
   'G-069': {
     de: {
       aria: 'Drei Schläger maßstäblich nebeneinander. Links ein Badmintonschläger, lang und filigran, rechts ein Squashschläger, ebenfalls lang. In der Mitte der Crossminton-Schläger: kürzer, mit kräftigerem Rahmen. Die Regeln erlauben höchstens 61 Zentimeter Länge und einen Kopf von höchstens 650 Quadratzentimetern.',
-      laenge: 'max. 61 cm', kopf: 'Kopf', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      laenge: 'max. 61 cm', kopf: 'Kopf', flaeche: '≤ 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
       cap: 'kürzer als Squash, robuster als Badminton',
     },
     en: {
-      aria: 'Three rackets side by side, to scale. On the left a badminton racket, long and delicate; on the right a squash racket, also long. In the middle the Crossminton racket: shorter, with a sturdier frame. The rules allow a length of at most 61 centimetres and a head of at most 650 square centimetres.',
-      laenge: 'max. 61 cm', kopf: 'head', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
-      cap: 'squash: longer · badminton: more fragile',
+      aria: 'Three rackets side by side, to scale. On the left a badminton racket, long and delicate; on the right a squash racket, also long. In the middle the Crossminton racket: shorter, with a sturdier frame. The rules allow a length of at most 61 centimeters and a head of at most 650 square centimeters.',
+      laenge: 'max. 61 cm', kopf: 'head', flaeche: '≤ 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      cap: 'shorter than squash, sturdier',
     },
     fr: {
       aria: 'Trois raquettes côte à côte, à l\'échelle. À gauche une raquette de badminton, longue et fine ; à droite une raquette de squash, longue elle aussi. Au milieu la raquette de crossminton : plus courte, avec un cadre plus robuste. Le règlement autorise une longueur de 61 centimètres au plus et une tête de 650 centimètres carrés au plus.',
-      laenge: 'max. 61 cm', kopf: 'tête', flaeche: 'max. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      laenge: 'max. 61 cm', kopf: 'tête', flaeche: '≤ 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
       cap: 'plus courte qu\'au squash, plus robuste',
     },
     pl: {
       aria: 'Trzy rakiety obok siebie, w skali. Po lewej rakieta do badmintona, długa i delikatna, po prawej rakieta do squasha, również długa. Pośrodku rakieta do crossmintona: krótsza, z mocniejszą ramą. Przepisy dopuszczają długość najwyżej 61 centymetrów i główkę najwyżej 650 centymetrów kwadratowych.',
-      laenge: 'maks. 61 cm', kopf: 'główka', flaeche: 'maks. 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
+      laenge: 'maks. 61 cm', kopf: 'główka', flaeche: '≤ 650 cm²', badminton: 'Badminton', crossminton: 'Crossminton', squash: 'Squash',
       cap: 'krótsza niż do squasha, mocniejsza',
     },
   },
@@ -501,65 +610,65 @@ export const TEXTE = {
     de: {
       aria: 'Oben zwei Saiten im Querschnitt, vergrößert: die Crossminton-Saite mit bis zu 1,25 Millimetern ist fast doppelt so dick wie die Badmintonsaite mit rund 0,65 Millimetern. Unten das Trampolin-Modell: Eine weiche Bespannung gibt tief nach und schleudert den Speeder weit, aber gestreut zurück, also mehr Kraft. Eine harte gibt wenig nach, der Speeder fliegt kürzer und genauer, also mehr Kontrolle.',
       querschnitt: 'Saite im Querschnitt, vergrößert', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'bis 1,25 mm', dickeB: 'ca. 0,65 mm',
-      weich: 'weich', kraft: 'mehr Kraft', hart: 'hart', kontrolle: 'mehr Kontrolle', cap: 'dicke Saite · Härte als Stellschraube',
+      haerte: 'Härte der Bespannung', weich: 'weich', kraft: 'mehr Kraft', hart: 'hart', kontrolle: 'mehr Kontrolle', cap: 'dicke Saite · Härte als Stellschraube',
     },
     en: {
-      aria: 'Above, two strings in cross-section, magnified: the Crossminton string of up to 1.25 millimetres is almost twice as thick as the badminton string of about 0.65 millimetres. Below, the trampoline model: a soft stringing gives deeply and sends the Speeder back far but scattered, so more power. A hard one gives little, the Speeder flies shorter and more precisely, so more control.',
+      aria: 'Above, two strings in cross-section, magnified: the Crossminton string of up to 1.25 millimeters is almost twice as thick as the badminton string of about 0.65 millimeters. Below, the trampoline model: a soft stringing gives deeply and sends the Speeder back far but scattered, so more power. A hard one gives little, the Speeder flies shorter and more precisely, so more control.',
       querschnitt: 'string in cross-section, magnified', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'up to 1.25 mm', dickeB: 'approx. 0.65 mm',
-      weich: 'soft', kraft: 'more power', hart: 'hard', kontrolle: 'more control', cap: 'thick string · tension as the key setting',
+      haerte: 'stringing tension', weich: 'soft', kraft: 'more power', hart: 'hard', kontrolle: 'more control', cap: 'thick string · tension as the key setting',
     },
     fr: {
       aria: 'En haut, deux cordes en coupe, agrandies : la corde de crossminton, jusqu\'à 1,25 millimètre, est presque deux fois plus épaisse que la corde de badminton, d\'environ 0,65 millimètre. En bas, le modèle du trampoline : un cordage souple cède profondément et renvoie le speeder loin mais de façon dispersée, donc plus de puissance. Un cordage dur cède peu, le speeder part plus court et plus précis, donc plus de contrôle.',
       querschnitt: 'corde en coupe, agrandie', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'jusqu\'à 1,25 mm', dickeB: 'env. 0,65 mm',
-      weich: 'souple', kraft: 'plus de puissance', hart: 'dur', kontrolle: 'plus de contrôle', cap: 'corde épaisse · la tension comme réglage',
+      haerte: 'tension du cordage', weich: 'souple', kraft: 'plus de puissance', hart: 'dur', kontrolle: 'plus de contrôle', cap: 'corde épaisse · la tension comme réglage',
     },
     pl: {
       aria: 'U góry dwie struny w przekroju, powiększone: struna do crossmintona, do 1,25 milimetra, jest prawie dwa razy grubsza niż struna do badmintona, około 0,65 milimetra. Na dole model trampoliny: miękki naciąg ugina się głęboko i odbija speedera daleko, ale z rozrzutem, czyli więcej siły. Twardy ugina się mało, speeder leci krócej i dokładniej, czyli więcej kontroli.',
       querschnitt: 'struna w przekroju, powiększona', crossminton: 'Crossminton', badminton: 'Badminton', dickeC: 'do 1,25 mm', dickeB: 'ok. 0,65 mm',
-      weich: 'miękki', kraft: 'więcej siły', hart: 'twardy', kontrolle: 'więcej kontroli', cap: 'gruba struna · twardość jako regulacja',
+      haerte: 'twardość naciągu', weich: 'miękki', kraft: 'więcej siły', hart: 'twardy', kontrolle: 'więcej kontroli', cap: 'gruba struna · twardość jako regulacja',
     },
   },
   'G-071': {
     de: {
-      aria: 'Das gegnerische Feld von oben, davor die Passierzone. Ein Schritt innerhalb der Linien liegt das sichere Zielgebiet, dorthin fliegt der sichere Ball. Zwei knappe Bälle gehen daneben: einer landet knapp hinter der Seitenlinie im Aus, einer zu kurz in der Passierzone. Beides sind eigene Fehler.',
-      linie: 'knapp an der Linie: riskant', sicher: 'sicher', schritt: 'ein Schritt nach innen', zone: 'Passierzone', aus: 'Aus',
+      aria: 'Das gegnerische Feld von oben, davor die Passierzone. Mit Sicherheitsabstand innerhalb der Linien liegt das sichere Zielgebiet, dorthin fliegt der sichere Ball. Zwei knappe Bälle gehen daneben: einer landet knapp hinter der Seitenlinie im Aus, einer zu kurz in der Passierzone. Beides sind eigene Fehler.',
+      linie: 'knapp an der Linie: riskant', sicher: 'sicher', schritt: 'Sicherheitsabstand', zone: 'Passierzone', aus: 'Aus',
       cap: 'innen spielen, nicht auf die Linie',
     },
     en: {
-      aria: 'The opponent\'s field from above, with the neutral zone in front of it. One step inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.',
-      linie: 'close to the line: risky', sicher: 'safe', schritt: 'one step inside', zone: 'neutral zone', aus: 'out',
+      aria: 'The opponent\'s field from above, with the neutral zone in front of it. With a safety margin inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.',
+      linie: 'close to the line: risky', sicher: 'safe', schritt: 'safety margin', zone: 'neutral zone', aus: 'out',
       cap: 'play inside, not onto the line',
     },
     fr: {
-      aria: 'Le terrain adverse vu de dessus, avec la zone neutre devant. Un pas à l\'intérieur des lignes se trouve la zone cible sûre, où part la balle sûre. Deux balles trop justes manquent : l\'une tombe juste derrière la ligne de côté, dehors, l\'autre trop court dans la zone neutre. Ce sont deux fautes directes.',
-      linie: 'près de la ligne : risqué', sicher: 'sûr', schritt: 'un pas à l\'intérieur', zone: 'zone neutre', aus: 'dehors',
+      aria: 'Le terrain adverse vu de dessus, avec la zone neutre devant. Avec une marge de sécurité à l\'intérieur des lignes se trouve la zone cible sûre, où part la balle sûre. Deux balles trop justes manquent : l\'une tombe juste derrière la ligne de côté, dehors, l\'autre trop court dans la zone neutre. Ce sont deux fautes directes.',
+      linie: 'près de la ligne : risqué', sicher: 'sûr', schritt: 'marge de sécurité', zone: 'zone neutre', aus: 'dehors',
       cap: 'jouer à l\'intérieur, pas sur la ligne',
     },
     pl: {
-      aria: 'Pole przeciwnika z góry, przed nim strefa neutralna. Krok w głąb od linii leży bezpieczny obszar docelowy, tam leci pewna piłka. Dwie ryzykowne piłki chybiają: jedna ląduje tuż za linią boczną na aucie, druga za krótko w strefie neutralnej. Obie to własne błędy.',
-      linie: 'tuż przy linii: ryzyko', sicher: 'pewnie', schritt: 'krok w głąb pola', zone: 'strefa neutralna', aus: 'aut',
+      aria: 'Pole przeciwnika z góry, przed nim strefa neutralna. Z zapasem od linii, wewnątrz pola, leży bezpieczny obszar docelowy, tam leci pewna piłka. Dwie ryzykowne piłki chybiają: jedna ląduje tuż za linią boczną na aucie, druga za krótko w strefie neutralnej. Obie to własne błędy.',
+      linie: 'tuż przy linii: ryzyko', sicher: 'pewnie', schritt: 'zapas od linii', zone: 'strefa neutralna', aus: 'aut',
       cap: 'graj do środka, nie na linię',
     },
   },
   'G-073': {
     de: {
-      aria: 'Laufwege von oben im Vergleich. Links ein Badminton- oder Squashfeld: lang und schmal, die Wege führen vor zum Netz oder zur Frontwand und zurück, zur Seite nur kurz. Rechts das Crossminton-Feld: ein Quadrat mit vier gleichwertigen Ecken, die Wege führen aus der Mitte gleich weit in jede Richtung, zur Seite und diagonal. Darum braucht der Schuh seitlichen Halt.',
+      aria: 'Laufwege von oben im Vergleich. Links ein Badminton- oder Squashfeld: länger als breit, die Hauptwege führen vor zum Netz oder zur Frontwand und zurück, zur Seite kürzer. Rechts das Crossminton-Feld: ein Quadrat mit vier gleichwertigen Ecken, die Wege führen aus der Mitte gleich weit in jede Richtung, zur Seite und diagonal. Darum braucht der Schuh seitlichen Halt.',
       links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'Netz · Frontwand', vorzurueck: 'vor und zurück', jederichtung: 'in jede Richtung',
       cap: 'seitlicher Halt zählt',
     },
     en: {
-      aria: 'Movement paths from above, compared. On the left a badminton or squash court: long and narrow, the paths go forward to the net or the front wall and back, only briefly to the side. On the right the Crossminton field: a square with four equal corners, the paths lead from the centre equally far in every direction, sideways and diagonally. That is why the shoe needs lateral support.',
+      aria: 'Movement paths from above, compared. On the left a badminton or squash court: longer than it is wide, the main paths go forward to the net or the front wall and back, shorter ones to the side. On the right the Crossminton field: a square with four equal corners, the paths lead from the center equally far in every direction, sideways and diagonally. That is why the shoe needs lateral support.',
       links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'net · front wall', vorzurueck: 'forward and back', jederichtung: 'in every direction',
       cap: 'lateral support matters',
     },
     fr: {
-      aria: 'Déplacements vus de dessus, comparés. À gauche un terrain de badminton ou de squash : long et étroit, les déplacements vont vers le filet ou le mur avant et reviennent, sur le côté seulement un peu. À droite le terrain de crossminton : un carré aux quatre coins équivalents, les déplacements partent du centre aussi loin dans toutes les directions, sur le côté et en diagonale. C\'est pourquoi la chaussure doit offrir un maintien latéral.',
+      aria: 'Déplacements vus de dessus, comparés. À gauche un terrain de badminton ou de squash : plus long que large, les déplacements principaux vont vers le filet ou le mur avant et reviennent, ceux sur le côté sont plus courts. À droite le terrain de crossminton : un carré aux quatre coins équivalents, les déplacements partent du centre aussi loin dans toutes les directions, sur le côté et en diagonale. C\'est pourquoi la chaussure doit offrir un maintien latéral.',
       links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'filet · mur avant', vorzurueck: 'avant et arrière', jederichtung: 'dans tous les sens',
       cap: 'le maintien latéral compte',
     },
     pl: {
-      aria: 'Drogi ruchu z góry, w porównaniu. Po lewej kort do badmintona lub squasha: długi i wąski, drogi prowadzą do przodu, do siatki lub ściany frontowej, i z powrotem, w bok tylko krótko. Po prawej pole do crossmintona: kwadrat z czterema równorzędnymi narożnikami, drogi prowadzą ze środka równie daleko w każdą stronę, w bok i po skosie. Dlatego but potrzebuje bocznego oparcia.',
-      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'siatka · ściana', vorzurueck: 'przód i tył', jederichtung: 'w każdą stronę',
+      aria: 'Drogi ruchu z góry, w porównaniu. Po lewej kort do badmintona lub squasha: dłuższy niż szerszy, główne drogi prowadzą do przodu, do siatki lub przedniej ściany, i z powrotem, w bok krócej. Po prawej pole do crossmintona: kwadrat z czterema równorzędnymi narożnikami, drogi prowadzą ze środka równie daleko w każdą stronę, w bok i po skosie. Dlatego but potrzebuje bocznego oparcia.',
+      links: 'Badminton · Squash', rechts: 'Crossminton', wand: 'siatka · ściana przednia', vorzurueck: 'przód i tył', jederichtung: 'w każdą stronę',
       cap: 'liczy się boczne oparcie',
     },
   },
@@ -591,29 +700,77 @@ export const TEXTE = {
   },
   'G-079': {
     de: {
-      aria: 'Blackminton. Links ein Night Speeder im Profil, die Kappe oben: Sie ist durchsichtig, und in ihr steckt ein Speedlight, ein Knicklicht, das rund drei Stunden leuchtet. Rechts unten die Flugbahn im Dunkeln als Folge von Lichtpunkten, die zum Speeder hin kräftiger werden. Mehr als diesen Punkt sieht man nachts nicht, man folgt seiner Bahn.',
+      aria: 'Blackminton. Links ein Night Speeder im Profil, die Kappe oben: Sie ist durchsichtig, und in ihr steckt ein Speedlight, ein Knicklicht, das rund drei Stunden leuchtet. Rechts unten die Flugbahn im Dunkeln als Folge von Lichtpunkten, die zur aktuellen Position hin kräftiger werden. Mehr als diesen Punkt sieht man nachts nicht, man folgt seiner Bahn.',
       kappe: 'durchsichtige Kappe', licht: 'Speedlight', dauer: 'Knicklicht, leuchtet ca. 3 h', folgen: 'dem Lichtpunkt folgen',
       cap: 'nachts bleibt nur die Bahn des Lichts',
     },
     en: {
-      aria: 'Blackminton. On the left a Night Speeder in profile, cap on top: the cap is transparent, and a Speedlight sits inside it, a glow stick that shines for about three hours. Bottom right, the flight path in the dark as a series of light points that grow stronger towards the Speeder. At night you see nothing but this point and follow its path.',
+      aria: 'Blackminton. On the left a Night Speeder in profile, cap on top: the cap is transparent, and a Speedlight sits inside it, a glow stick that shines for about three hours. Bottom right, the flight path in the dark as a series of light points that grow stronger towards its current position. At night you see nothing but this point and follow its path.',
       kappe: 'transparent cap', licht: 'Speedlight', dauer: 'glow stick, lasts about 3 h', folgen: 'follow the point of light',
       cap: 'at night only the path of light remains',
     },
     fr: {
-      aria: 'Blackminton. À gauche, un Night Speeder de profil, la coiffe en haut : elle est transparente et contient un Speedlight, un bâton lumineux qui éclaire environ trois heures. En bas à droite, la trajectoire dans l\'obscurité, une suite de points lumineux de plus en plus nets vers le speeder. La nuit, on ne voit que ce point et on suit sa trajectoire.',
-      kappe: 'coiffe transparente', licht: 'Speedlight', dauer: 'bâton lumineux, env. 3 h', folgen: 'suivre le point lumineux',
+      aria: 'Blackminton. À gauche, un Night Speeder de profil, le capuchon en haut : il est transparent et contient un Speedlight, un bâton lumineux qui éclaire environ trois heures. En bas à droite, la trajectoire dans l\'obscurité, une suite de points lumineux de plus en plus nets vers sa position actuelle. La nuit, on ne voit que ce point et on suit sa trajectoire.',
+      kappe: 'capuchon transparent', licht: 'Speedlight', dauer: 'bâton lumineux, env. 3 h', folgen: 'suivre le point lumineux',
       cap: 'la nuit, il ne reste que la trace lumineuse',
     },
     pl: {
-      aria: 'Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, świetlik chemiczny, który świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę speedera. Nocą widać tylko ten punkt i podąża się za jego torem.',
-      kappe: 'przezroczysta nakładka', licht: 'Speedlight', dauer: 'świetlik, około 3 godzin', folgen: 'podążaj za punktem światła',
+      aria: 'Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, światło chemiczne, które świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę jego obecnej pozycji. Nocą widać tylko ten punkt i podąża się za jego torem.',
+      kappe: 'przezroczysta nakładka', licht: 'Speedlight', dauer: 'światło chemiczne, ok. 3 h', folgen: 'podążaj za punktem światła',
       cap: 'nocą zostaje tylko tor światła',
+    },
+  },
+  'G-080': {
+    de: {
+      aria: 'Schichtprinzip im Schnitt. Unten die Haut, darüber eine dünne Basisschicht, eine dicke Wärmeschicht mit eingeschlossener Luft und oben eine Schutzschicht. Pfeile zeigen den Schweiß, der von der Haut durch die Schichten nach außen wandert. Von oben treffen Wind und Nässe auf die Schutzschicht und kommen nicht weiter.',
+      wind: 'Wind, Nässe', schale: 'Schutzschicht', schaleW: 'hält Wind und Nässe ab', waerme: 'Wärmeschicht', waermeW: 'schließt Luft ein',
+      basis: 'Basisschicht', basisW: 'führt Schweiß weg', haut: 'Haut',
+      cap: 'Schichten nach Bedarf an- und ablegen',
+    },
+    en: {
+      aria: 'The layering principle in cross-section. At the bottom the skin, above it a thin base layer, a thick warming layer with trapped air and on top a protective layer. Arrows show the sweat moving from the skin outward through the layers. From above, wind and wet hit the protective layer and get no further.',
+      wind: 'wind, wet', schale: 'protective layer', schaleW: 'keeps out wind and wet', waerme: 'warming layer', waermeW: 'traps air',
+      basis: 'base layer', basisW: 'carries sweat away', haut: 'skin',
+      cap: 'put layers on and take them off',
+    },
+    fr: {
+      aria: 'Le principe des couches en coupe. En bas la peau, au-dessus une fine couche de base, une épaisse couche chaude qui emprisonne l\'air et, en haut, une couche de protection. Des flèches montrent la sueur qui passe de la peau vers l\'extérieur à travers les couches. D\'en haut, le vent et l\'humidité frappent la couche de protection et n\'iront pas plus loin.',
+      wind: 'vent, humidité', schale: 'couche de protection', schaleW: 'arrête vent et humidité', waerme: 'couche chaude', waermeW: 'emprisonne l\'air',
+      basis: 'couche de base', basisW: 'éloigne la sueur', haut: 'peau',
+      cap: 'retirer et remettre des couches',
+    },
+    pl: {
+      aria: 'Zasada warstw w przekroju. Na dole skóra, nad nią cienka warstwa bazowa, gruba warstwa grzejąca z uwięzionym powietrzem, a na wierzchu warstwa ochronna. Strzałki pokazują pot, który wędruje od skóry przez warstwy na zewnątrz. Z góry wiatr i wilgoć uderzają w warstwę ochronną i nie przechodzą dalej.',
+      wind: 'wiatr, wilgoć', schale: 'warstwa ochronna', schaleW: 'zatrzymuje wiatr i wilgoć', waerme: 'warstwa grzejąca', waermeW: 'więzi powietrze',
+      basis: 'warstwa bazowa', basisW: 'odprowadza pot', haut: 'skóra',
+      cap: 'zdejmuj i nakładaj warstwy',
+    },
+  },
+  'G-081': {
+    de: {
+      aria: 'Drei Kacheln nebeneinander: Snowminton mit Schneeflocke über verschneitem Boden, Beachminton mit Sonne über Sanddünen, Blackminton mit einer Bahn aus Lichtpunkten im Dunkeln. Eine Klammer über allen dreien sagt: dasselbe Regelwerk. Es ändert sich nur die Umgebung, also Boden, Temperatur oder Licht.',
+      regeln: 'dasselbe Regelwerk', namen: ['Snowminton', 'Beachminton', 'Blackminton'], umgebung: ['Schnee, Kälte', 'Sand, Hitze', 'Dunkelheit'],
+      cap: 'es ändert sich nur die Umgebung',
+    },
+    en: {
+      aria: 'Three tiles side by side: Snowminton with a snowflake over snowy ground, Beachminton with the sun over sand dunes, Blackminton with a path of light points in the dark. A bracket over all three says: the same rules. Only the setting changes, that is the ground, the temperature or the light.',
+      regeln: 'the same rules', namen: ['Snowminton', 'Beachminton', 'Blackminton'], umgebung: ['snow, cold', 'sand, heat', 'darkness'],
+      cap: 'only the setting changes',
+    },
+    fr: {
+      aria: 'Trois vignettes côte à côte : le Snowminton avec un flocon au-dessus d\'un sol enneigé, le Beachminton avec le soleil au-dessus des dunes, le Blackminton avec une trajectoire de points lumineux dans l\'obscurité. Une accolade au-dessus des trois indique : les mêmes règles. Seul l\'environnement change, c\'est-à-dire le sol, la température ou la lumière.',
+      regeln: 'les mêmes règles', namen: ['Snowminton', 'Beachminton', 'Blackminton'], umgebung: ['neige, froid', 'sable, chaleur', 'obscurité'],
+      cap: 'seul l\'environnement change',
+    },
+    pl: {
+      aria: 'Trzy kafelki obok siebie: Snowminton z płatkiem śniegu nad zaśnieżonym podłożem, Beachminton ze słońcem nad wydmami, Blackminton z torem punktów świetlnych w ciemności. Klamra nad wszystkimi trzema mówi: te same zasady. Zmienia się tylko otoczenie, czyli podłoże, temperatura albo światło.',
+      regeln: 'te same zasady', namen: ['Snowminton', 'Beachminton', 'Blackminton'], umgebung: ['śnieg, zimno', 'piasek, upał', 'ciemność'],
+      cap: 'zmienia się tylko otoczenie',
     },
   },
 };
 
-const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073, 'G-076': G076, 'G-079': G079 };
+const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073, 'G-076': G076, 'G-079': G079, 'G-080': G080, 'G-081': G081 };
 for (const [id, bau] of Object.entries(BAU)) {
   for (const s of SPRACHEN) {
     const name = `${ZIEL}/${id}${s === 'de' ? '' : '.' + s}.svg`;
