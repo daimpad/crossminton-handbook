@@ -1,6 +1,10 @@
 # nginx-Direktiven für die Produktion (Plesk)
 
-Die Produktion auf netcup läuft unter Plesk: **nginx vorn, Apache dahinter**. Zwei Dinge, die die `.htaccess` regeln soll, kommen dort nicht an. Die Direktiven unten holen sie nach. Sie gehören in Plesk, nicht ins Repository: Plesk schreibt die nginx-Konfiguration selbst, eine Datei im Repo würde nie gelesen.
+Die Produktion auf netcup läuft unter Plesk: **nginx vorn, Apache dahinter**. Zwei Dinge, die die `.htaccess` regeln soll, kamen dort nicht an. Die Direktiven unten holen sie nach. Sie gehören in Plesk, nicht ins Repository: Plesk schreibt die nginx-Konfiguration selbst, eine Datei im Repo würde nie gelesen.
+
+> **Stand 22.10.2026:** Das Feld „Zusätzliche nginx-Anweisungen" ist in diesem Plesk-Paket **nicht freigegeben**, die Seite „Apache & nginx" endet nach dem nginx-Caching. Die Direktiven bleiben als Vorlage, falls es freigeschaltet wird oder die Domain umzieht. Umgesetzt ist stattdessen:
+> - **Schrägstrich-301:** `DirectorySlash Off` in der `.htaccess` (s. „Alternative ohne nginx" unten). Vorher in `rules/.htaccess` erprobt: `/rules` antwortete mit 403 statt 301, kein 500.
+> - **Cache-Control:** in Plesk „Statische Dateien direkt durch nginx bedienen" abhaken und unter „Zusätzliche Header" (Apache-Einstellungen, „Eigenen Wert eingeben") die eine Zeile `Cache-Control: no-cache` eintragen. Dann liefert Apache alles aus und setzt die Kopfzeile überall. Ob das eingetragen ist, zeigt nur `curl -sI` (Prüfschleife unten).
 
 ## Befund (gemessen am 20.10.2026)
 
@@ -80,4 +84,4 @@ Nachbau mit nginx 1.24 vor Apache 2.4.58 wie bei Plesk: nginx liefert die Dateie
 
 ## Alternative ohne nginx
 
-`DirectorySlash Off` in der `.htaccess` (vor `RewriteEngine On`) beseitigt den 301 in Apache selbst; im Nachbau geprüft. Die Direktive verlangt `AllowOverride Indexes`. Erlaubt Plesk das nicht, antwortet die **ganze Seite mit 500**, bis der nächste Deploy die Zeile wieder entfernt. Darum der Weg über nginx, den Plesk vor dem Laden prüft. Die Kopfzeilen löst die Alternative ohnehin nicht, solange nginx die statischen Dateien ausliefert.
+`DirectorySlash Off` in der `.htaccess` (vor `RewriteEngine On`) beseitigt den 301 in Apache selbst; im Nachbau geprüft. Die Direktive verlangt `AllowOverride Indexes`. Erlaubt Plesk das nicht, antwortet die **ganze Seite mit 500**, bis der nächste Deploy die Zeile wieder entfernt. Darum wurde sie zuerst in einer `.htaccess` im Ordner `rules/` erprobt, wo ein 500 nur `/rules` getroffen hätte (die PDFs liefert nginx direkt aus): Ergebnis 403 statt 301, also erlaubt. Seitdem steht sie in der Haupt-`.htaccess`. Die Kopfzeilen löst sie nicht, solange nginx die statischen Dateien ausliefert.
