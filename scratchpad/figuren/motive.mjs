@@ -1308,6 +1308,43 @@ export const MOTIVE = {
       }),
     };
   },
+  // Umschalten (umschalten): die Treffhöhe als Kriterium. Eine Figur in Grundposition, davor drei
+  // Höhenbänder: über dem Kopf Angriff (der Speeder geht von oben nach unten), unter der Hüfte
+  // Verteidigung (der Speeder muss hoch, der Ballwechsel bleibt am Leben), dazwischen kippt es.
+  // Die Bandgrenzen kommen aus der Figur selbst (Scheitel und Hüfte), nicht aus festen Zahlen.
+  'G-072': (t) => {
+    const y = 258;
+    const fg = figur({ ...POSEN.bereit, ort: [70, y], H: 22, blick: 80, kamera: 7 });
+    const scheitel = fg.punkte.kopf[1] - fg.punkte.kopfRadius - 6, huefte = fg.punkte.huefte[1];
+    const x0 = 12, x1 = 292, oben = 14, xl = 170;
+    const hoch = [122, (oben + scheitel) / 2 - 2], tief = [128, (huefte + y) / 2 + 8];
+    const lab = (yy, txt, k = 's-lab') => `<text class="${k}" x="${xl}" y="${f(yy)}">${esc(txt)}</text>`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 286,
+        defs: pfeil('p072') + pfeil('q072', 's-mkg', 4.4),
+        inhalt: [
+          `<path class="s-spur" d="M${x0},${oben}L${x1},${oben}L${x1},${f(scheitel)}L${x0},${f(scheitel)}Z"/>`,
+          `<path class="s-feld" d="M${x0},${f(huefte)}L${x1},${f(huefte)}L${x1},${y}L${x0},${y}Z"/>`,
+          `<path class="s-hilf" d="M${x0},${f(scheitel)}L${x1},${f(scheitel)}M${x0},${f(huefte)}L${x1},${f(huefte)}"/>`,
+          `<path class="s-boden" d="M${x0},${y}L${x1},${y}"/>`,
+          schatten([74, y + 1], 46, 4.5),
+          fg.svg,
+          speeder({ p: hoch, winkel: winkel2d([19, 36]) }),
+          `<path class="s-bahn" d="M${pt(add(hoch, [5, 10]))} L${pt(add(hoch, [24, 46]))}" marker-end="url(#p072)"/>`,
+          speeder({ p: tief, winkel: winkel2d([21, -36]) }),
+          `<path class="s-bahng" d="M${pt(add(tief, [5, -10]))} L${pt(add(tief, [26, -46]))}" marker-end="url(#q072)"/>`,
+          lab(oben + 22, t.angriff, 's-labf'),
+          lab(oben + 36, t.angriff2),
+          lab((scheitel + huefte) / 2 + 4, t.mitte),
+          lab(huefte + 22, t.verteidigung, 's-labf'),
+          lab(huefte + 36, t.verteidigung2),
+        ].join('\n  '),
+      }),
+    };
+  },
+
 };
 
 // Sonne als Umriss mit acht Strahlen (Draußen-Motive): ein Zeichen für die Bedingung, kein Licht.

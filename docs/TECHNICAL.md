@@ -6,7 +6,7 @@ Technischer Überblick zum Crossminton-Handbuch. Die verbindliche, vollständige
 
 Die App ist eine inhaltsgetriebene, statische Web-App: Der gesamte Lernstoff liegt in versionierten JSON-Dateien, die Oberfläche rendert daraus Pfade, Bausteine und Reiter. **Kein Build-Schritt, keine Server-Komponente, keine npm-Laufzeitabhängigkeiten** — ES-Module direkt im Browser. Fortschritt lebt in `localStorage`; ein Konto gibt es nicht.
 
-Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (841 UI-Labels, 863 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
+Quellsprache ist Deutsch. Oberfläche **und** Inhalte liegen vollständig in `de`, `en`, `fr` und `pl` vor (844 UI-Labels, 863 Inhaltsknoten, je 100 %). Die Sprachliste steht als `ZIELSPRACHEN`/`SPRACHEN` in `js/i18n.js` — eine Quelle für App und Skripte.
 
 ## Datenmodell: der Baustein
 
@@ -66,9 +66,9 @@ Darüber liegen orthogonale Achsen: `spielform` (Doppel über alle drei Stufen, 
 
 ## Grafiksystem
 
-Alle **67 Grafiken** sind Inline-SVG, durchnummeriert (`G-001` …) und im Katalog [`../images/grafik-prompts.md`](../images/grafik-prompts.md) dokumentiert: **32 Personengrafiken** im Stil „Dynamische Silhouette“, erzeugt von einem Figurengenerator in `scratchpad/figuren/` (Strategie in [`grafik-strategie.md`](grafik-strategie.md)), und **35 hand-gezeichnete Diagramme**. Sie nutzen ausschließlich CI-Tokens (Farbrollen und Kontraste in [`ci.md`](ci.md)) und kippen darum automatisch mit dem Hell-/Dunkel-Umschalter. Geprüft werden sie statisch von `scripts/grafik-gate.mjs` (Test [26]) und im Browser von `scratchpad/figuren/gate.mjs` und `scratchpad/textgrenzen.mjs`.
+Alle **67 Grafiken** sind Inline-SVG, durchnummeriert (`G-001` …) und im Katalog [`../images/grafik-prompts.md`](../images/grafik-prompts.md) dokumentiert: **33 Personengrafiken** im Stil „Dynamische Silhouette“, erzeugt von einem Figurengenerator in `scratchpad/figuren/` (Strategie in [`grafik-strategie.md`](grafik-strategie.md)), und **35 hand-gezeichnete Diagramme**. Sie nutzen ausschließlich CI-Tokens (Farbrollen und Kontraste in [`ci.md`](ci.md)) und kippen darum automatisch mit dem Hell-/Dunkel-Umschalter. Geprüft werden sie statisch von `scripts/grafik-gate.mjs` (Test [26]) und im Browser von `scratchpad/figuren/gate.mjs` und `scratchpad/textgrenzen.mjs`.
 
-Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht setzt nach dem Rendern das Inline-SVG ein; das PNG lädt nur, wenn das SVG nicht zu holen ist. Beschriftungen sind übersetzt — zu jeder Grafik existiert ein `G-XXX.<sprache>.svg`/`.png`-Zwilling für `en`, `fr`, `pl`. Integration über das optionale Feld `grafik: ["G-XXX"]` je Baustein (Liste, Sequenzen tragen mehrere); 68 der Grafiken hängen an einem Baustein (62 Bausteine, Sequenzen tragen mehrere), zwei sind Referenzgrafiken im Regeln-Reiter.
+Je Grafik liegen `G-XXX.svg` **und** `G-XXX.png` vor: die Ansicht setzt nach dem Rendern das Inline-SVG ein; das PNG lädt nur, wenn das SVG nicht zu holen ist. Beschriftungen sind übersetzt — zu jeder Grafik existiert ein `G-XXX.<sprache>.svg`/`.png`-Zwilling für `en`, `fr`, `pl`. Integration über das optionale Feld `grafik: ["G-XXX"]` je Baustein (Liste, Sequenzen tragen mehrere); 71 der Grafiken hängen an einem Baustein (65 Bausteine, Sequenzen tragen mehrere), zwei sind Referenzgrafiken im Regeln-Reiter.
 
 ## Fortschritt, Werkzeuge, Offline
 
