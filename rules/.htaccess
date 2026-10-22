@@ -1,0 +1,9 @@
+# Probe: Darf diese Domain DirectorySlash in einer .htaccess setzen?
+# (docs/plesk-nginx.md, Abschnitt „Alternative ohne nginx")
+#
+# Erlaubt → /rules antwortet mit 403 statt mit 301 auf /rules/.
+# Nicht erlaubt → /rules und /rules/ antworten mit 500 — nur hier, die PDFs
+# liefert nginx direkt aus, an ihnen ändert sich nichts.
+# Fällt die Probe positiv aus, wandert die Zeile in die Haupt-.htaccess und
+# diese Datei wird wieder gelöscht.
+DirectorySlash Off
