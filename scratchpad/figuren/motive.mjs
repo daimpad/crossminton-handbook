@@ -1426,6 +1426,91 @@ export const MOTIVE = {
       }),
     };
   },
+  // Snowminton (snowminton): dieselbe Bühne wie G-057 (Nässe), weil der Text dieselbe Bewegungsregel
+  // nennt — kurze, sichere Schritte, breiter Stand, keine ruckartigen Wechsel. Statt Wasser und Regen
+  // liegt Schnee: eine Schneedecke als Fläche mit welligem Rand und Flocken in der Luft. Die
+  // Abdrücke hinter der Figur liegen dicht. Keine Kälte-Werte (Gesundheitsrahmen).
+  'G-077': (t) => {
+    const b = buehne({ horizont: -20, nahY: 300, mitteX: 150, H0: 30, abstand: 4.2 });
+    const st = b.stelle(150, 1.85);
+    const fg = figur({
+      ort: st.ort, H: st.H, blick: 104, kamera: 16, neig: 8, kopf: { neig: -4 }, art: 'dynamisch', koerper: 'a',
+      beinR: { ober: [0.12, -1, 0.42], unter: [0.04, -1, -0.15], fuss: [0.1, -0.04, 1] },
+      beinL: { ober: [-0.12, -1, -0.12], unter: [-0.02, -1, -0.7], fuss: [-0.05, -0.5, 1] },
+      armR: { ober: [0.3, -0.85, 0.42], unter: [0.1, 0.45, 0.9], hand: [0.05, 0.6, 0.8] },
+      armL: { ober: [-0.7, -0.65, -0.1], unter: [-0.45, -0.8, 0.1], art: 'offen' },
+      schlaeger: { hand: 'R', achse: [0.02, 0.75, 0.66], flaeche: [0.85, -0.35, 0.38] },
+    });
+    const achse = (u) => [40 + 150 * u, 0.95 + 1.5 * u];
+    const tritte = Array.from({ length: 7 }, (_, i) => {
+      const [x, z] = achse(0.12 + i * 0.075), seite = i % 2 ? 1 : -1;
+      const q0 = b.boden(x + seite * 7, z - seite * 0.05), k = b.s(z);
+      return `<ellipse class="s-tritt" cx="${f(q0[0])}" cy="${f(q0[1])}" rx="${f(5 * k)}" ry="${f(2 * k)}" transform="rotate(-20 ${f(q0[0])} ${f(q0[1])})"/>`;
+    }).join('');
+    // Schneedecke: Fläche mit welligem hinterem Rand (wie Verwehungen)
+    const rand = Array.from({ length: 31 }, (_, i) => [i * 10, b.boden(150, 3.6)[1] + 3 * Math.sin(i * 1.3) + 2 * Math.cos(i * 2.1)]);
+    const decke = `M0,300L300,300L${rand.slice().reverse().map(pt).join('L')}Z`;
+    const flocke = (x, y, r) => {
+      let d = '';
+      for (let i = 0; i < 3; i++) { const w = (i * Math.PI) / 3 + 0.3; d += `M${f(x - r * Math.cos(w))},${f(y - r * Math.sin(w))}L${f(x + r * Math.cos(w))},${f(y + r * Math.sin(w))}`; }
+      return d;
+    };
+    const flocken = [[30, 30, 4], [70, 70, 3], [212, 22, 4.5], [250, 58, 3.5], [276, 104, 4], [44, 118, 3.5], [120, 18, 3], [286, 22, 3]].map((q) => flocke(...q)).join('');
+    const [lx, lz] = achse(0.32), lab = b.boden(lx, lz - 0.32);
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 280,
+        defs: '',
+        inhalt: [
+          `<path class="s-feld" d="${decke}"/>`,
+          tritte,
+          schatten([fg.punkte.huefte[0] + 2, st.ort[1] + 1], 40 * b.s(1.85), 5),
+          fg.svg,
+          `<path class="s-wind" d="${flocken}"/>`,
+          `<text class="s-lab" x="${f(lab[0])}" y="${f(lab[1] + 22)}" text-anchor="middle">${esc(t.schritte)}</text>`,
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Beachminton (beachminton): breiter, tiefer Stand im Sand, die Füße sinken ein (Sandhügel über
+  // den Füßen: deckend in --flaeche-2, darüber dieselbe Sandtönung wie die Fläche). Die Sonne steht
+  // hoch (Umriss wie G-056/G-058). Unter der Figur die Maßlinie „breiter Stand“. Keine Trink- oder
+  // Belastungsvorgaben (Gesundheitsrahmen).
+  'G-078': (t) => {
+    const boden = 232, H = 22;
+    const fg = figur({ ...POSEN.split, ort: [150, boden], H, blick: 14, kamera: 10, neig: 22, kopf: { neig: -16 },
+      beinR: { ober: [0.58, -0.8, 0.4], unter: [0.16, -1, -0.15], fuss: [0.35, -0.05, 1] },
+      beinL: { ober: [-0.58, -0.8, 0.4], unter: [-0.16, -1, -0.15], fuss: [-0.35, -0.05, 1] } });
+    const p = fg.punkte;
+    const sand = `M0,${boden - 22}C70,${boden - 30} 150,${boden - 16} 300,${boden - 26}L300,300L0,300Z`;
+    const huegel = (q, b) => `M${f(q[0] - b)},${f(boden + 6)}C${f(q[0] - b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b)},${f(boden + 6)}Z`;
+    const fuesse = [lerp(p.fersR, p.spitzeR, 0.45), lerp(p.fersL, p.spitzeL, 0.45)];
+    const huegelD = fuesse.map((q) => huegel(q, 17)).join('');
+    const kante = fuesse.map((q) => { const b = 17; return `M${f(q[0] - b)},${f(boden + 6)}C${f(q[0] - b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b * 0.5)},${f(q[1] - 7)} ${f(q[0] + b)},${f(boden + 6)}`; }).join('');
+    let n = 0;
+    const koerner = [];
+    for (let y = boden - 12; y < 262; y += 11) for (let x = 10 + (n++ % 3) * 9; x < 294; x += 29 + ((x * 7 + y) % 11)) koerner.push(`M${x},${y}h0.1`);
+    const xl = fuesse[1][0], xr = fuesse[0][0], ym = boden + 18;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 284,
+        defs: pfeil('p078', 's-mkg', 3.6) + pfeil('q078', 's-mkg', 3.6).replace('orient="auto"', 'orient="auto-start-reverse"'),
+        inhalt: [
+          sonneUmriss([252, 46], 16),
+          `<path class="s-feld" d="${sand}"/>`,
+          `<path class="s-blick" d="${koerner.join('')}"/>`,
+          fg.svg,
+          `<path class="s-x" d="${huegelD}"/>`,
+          `<path class="s-feld" d="${huegelD}"/>`,
+          `<path class="s-boden" d="${kante}"/>`,
+          `<path class="s-hilf" d="M${f(xl)},${ym}L${f(xr)},${ym}" marker-start="url(#q078)" marker-end="url(#p078)"/>`,
+          `<text class="s-lab" x="${f((xl + xr) / 2)}" y="${ym + 16}" text-anchor="middle">${esc(t.stand)}</text>`,
+        ].join('\n  '),
+      }),
+    };
+  },
 };
 
 // Sonne als Umriss mit acht Strahlen (Draußen-Motive): ein Zeichen für die Bedingung, kein Licht.

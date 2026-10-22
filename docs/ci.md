@@ -88,7 +88,7 @@ Jedes Element, das eine Aussage trägt, erreicht hell und dunkel mindestens **3:
 - Der helle Korb trägt seinen Kontrast über die Kontur, nie über die Fläche.
 - Zwei Paare unter 3:1 lassen sich nicht über ein anderes Token lösen: `--tinte-2` gegen `--tinte` (hell 2,82:1, dunkel 1,85:1) und Blasses über Deckkraft (ein Speeder mit 40 % kam hell auf 1,2:1). Getrennt wird dort mit einer Naht oder einem Halo in `--flaeche-2`, ein gedachter Gegenstand steht als deckender Umriss.
 - Keine Linie läuft durch eine Beschriftung: der Text wird versetzt oder bekommt einen Halo (`paint-order: stroke`, Breite 4–5) in der Farbe seines Grundes. `scratchpad/textgrenzen.mjs` meldet jede Kreuzung ohne Halo.
-- Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 304 Dateien). Mit DejaVu Sans, der breitesten Schrift, die `system-ui` treffen kann, läuft ebenfalls nichts über den Rand (`textgrenzen.mjs --dejavu`).
+- Beschriftungen in der Grafik nutzen `--tinte-3` oder dunkler; eine Caption ist höchstens 250 Einheiten breit, gemessen mit Liberation Sans als Stellvertreter für `system-ui` (`scratchpad/textgrenzen.mjs` prüft alle 316 Dateien). Mit DejaVu Sans, der breitesten Schrift, die `system-ui` treffen kann, läuft ebenfalls nichts über den Rand (`textgrenzen.mjs --dejavu`).
 
 ### Die Speeder-Ausnahme
 

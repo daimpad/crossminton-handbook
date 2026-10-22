@@ -1,7 +1,8 @@
 // Erzeugt die Diagramme der Welle A in allen vier Sprachen: die Ausrüstungs-Grafiken G-068
 // (Griffstärke), G-069 (Schläger im Vergleich), G-070 (Saitenstärke und Härte der Bespannung),
 // G-073 (Schuhe: Laufwege im Vergleich), das Taktik-Diagramm G-071 (Fehler vermeiden) und aus
-// Welle B das Athletik-Diagramm G-076 (antizipative Schnelligkeit).
+// Welle B das Athletik-Diagramm G-076 (antizipative Schnelligkeit), aus Welle C die Night-Speeder-
+// Tafel G-079 (Blackminton).
 //   node scratchpad/gen-ausruestung.mjs
 // Anders als die Speeder-Tafeln stehen die Texte hier direkt im Generator (TEXTE), je Sprache;
 // die Geometrie hängt nie an der Sprache, die vier Fassungen unterscheiden sich nur im Text.
@@ -31,6 +32,10 @@
 //   G-076 antizipative_schnelligkeit: wer die Vorbereitung des Gegners liest, startet früher und
 //         ist eher am Ball, ohne schneller zu laufen. Beide Laufwege sind darum gleich lang
 //         (gleiches Tempo), nur der Start liegt verschieden.
+//   G-079 blackminton: Night Speeder mit durchsichtiger Kappe, in die ein Speedlight (Knicklicht)
+//         gedrückt wird; es leuchtet rund drei Stunden. Im Dunkeln bleibt vom Speeder nur der
+//         Lichtpunkt, dessen Bahn man liest. Schlagkappe oben wie in G-065 (2 Einheiten je mm:
+//         Kappe ⌀26 × 15, Kragen ⌀30 × 10, Korb ⌀19 → ⌀50 über 35 mm).
 import { writeFileSync } from 'node:fs';
 
 const ZIEL = 'images';
@@ -94,7 +99,16 @@ const STIL_NEU = `    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width
     .s-spaet{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:1.4}
     .s-start{fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte,#16202b);stroke-width:1.8}
     .s-tlinks{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5;stroke-linejoin:round}
-    .s-akzenth{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}`;
+    .s-akzenth{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-kappeklar{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    .s-kragen{fill:var(--tinte-2,#5a6675)}
+    .s-korbfl{fill:var(--speeder-korb-flaeche,#f1e7b5);stroke:var(--speeder-korb,#f0c400);stroke-width:1.8;stroke-linejoin:round}
+    .s-stiel{fill:none;stroke:var(--speeder-korb,#f0c400);stroke-width:1.3}
+    .s-glimm{fill:var(--primaer-weich,#e8f3fe)}
+    .s-licht{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-punkt1{fill:var(--primaer-dunkel,#1e8bd6);opacity:.3}
+    .s-punkt2{fill:var(--primaer-dunkel,#1e8bd6);opacity:.6}
+    .s-tleise{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}`;
 
 function stilFuer(inhalt) {
   const benutzt = new Set([...inhalt, MARKER].join('\n').match(/class="[^"]*"/g).flatMap((k) => k.slice(7, -1).split(' ')));
@@ -395,6 +409,48 @@ function G076(t) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// G-079 Blackminton: links der Night Speeder im Profil (Kappe oben, durchsichtig, darin das
+// Speedlight mit Glimmen), rechts unten die Bahn des Lichtpunkts als Punktfolge, die zum Ende hin
+// kräftiger wird — so sieht man ihn im Dunkeln.
+
+function G079(t) {
+  const MM = 2.6, cx = 82, y0 = 50;
+  const yK = y0 + 15 * MM, yR = yK + 10 * MM, yE = yR + 35 * MM;
+  const rK = 13 * MM, rR = 15 * MM, rE = 9.5 * MM, rO = 25 * MM;
+  const kappe = `M${cx - rK},${yK} L${cx - rK},${y0 + rK * 0.55} Q${cx - rK},${y0} ${cx},${y0} Q${cx + rK},${y0} ${cx + rK},${y0 + rK * 0.55} L${cx + rK},${yK} Z`;
+  const korb = `M${cx - rE},${yR} L${cx - rO},${yE} Q${cx},${yE + 8} ${cx + rO},${yE} L${cx + rE},${yR} Z`;
+  let stiele = '';
+  for (const u of [-0.66, -0.33, 0, 0.33, 0.66]) stiele += `M${r1(cx + u * rE)},${yR} L${r1(cx + u * rO)},${r1(yE + (1 - u * u) * 7)}`;
+  const licht = `M${cx - 4},${y0 + 10} h8 v${yR - y0 - 18} a4,4 0 0 1 -8,0 Z`;
+  // Lichtspur: Punkte auf einem Bogen, das letzte ist der leuchtende Speeder
+  const spur = [];
+  const n = 9;
+  for (let i = 0; i < n; i++) {
+    const u = i / (n - 1), x = 168 + 116 * u, y = 252 - 104 * u - 40 * u * (1 - u);
+    spur.push([x, y, u]);
+  }
+  const [lx, ly] = spur[n - 1];
+  const inhalt = [
+    `  <circle class="s-glimm" cx="${cx}" cy="${y0 + 34}" r="44"/>`,
+    `  <path class="s-korbfl" d="${korb}"/>`,
+    `  <path class="s-stiel" d="${stiele}"/>`,
+    `  <rect class="s-kragen" x="${cx - rR}" y="${yK}" width="${2 * rR}" height="${yR - yK}" rx="3"/>`,
+    `  <path class="s-kappeklar" d="${kappe}"/>`,
+    `  <path class="s-licht" d="${licht}"/>`,
+    `  <path class="s-masz" d="M${r1(cx + rK + 4)},${y0 + 14} L136,${y0 + 6}M${cx + 7},${y0 + 46} L136,${y0 + 52}"/>`,
+    `  <text class="s-tlinks" x="140" y="${y0 + 10}">${t.kappe}</text>`,
+    `  <text class="s-tlinks" x="140" y="${y0 + 56}">${t.licht}</text>`,
+    `  <text class="s-tleise" x="140" y="${y0 + 70}">${t.dauer}</text>`,
+    ...spur.slice(0, -1).map(([x, y, u]) => `  <circle class="${u < 0.5 ? 's-punkt1' : 's-punkt2'}" cx="${r1(x)}" cy="${r1(y)}" r="${r1(2 + 2 * u)}"/>`),
+    `  <circle class="s-glimm" cx="${r1(lx)}" cy="${r1(ly)}" r="13"/>`,
+    `  <circle class="s-licht" cx="${r1(lx)}" cy="${r1(ly)}" r="5.5"/>`,
+    text('s-akzenth', 206, 266, t.folgen),
+    text('st', 150, 288, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
 
 export const TEXTE = {
   'G-068': {
@@ -533,9 +589,31 @@ export const TEXTE = {
       cap: 'ruszaj wcześniej, zamiast biec szybciej',
     },
   },
+  'G-079': {
+    de: {
+      aria: 'Blackminton. Links ein Night Speeder im Profil, die Kappe oben: Sie ist durchsichtig, und in ihr steckt ein Speedlight, ein Knicklicht, das rund drei Stunden leuchtet. Rechts unten die Flugbahn im Dunkeln als Folge von Lichtpunkten, die zum Speeder hin kräftiger werden. Mehr als diesen Punkt sieht man nachts nicht, man folgt seiner Bahn.',
+      kappe: 'durchsichtige Kappe', licht: 'Speedlight', dauer: 'Knicklicht, leuchtet ca. 3 h', folgen: 'dem Lichtpunkt folgen',
+      cap: 'nachts bleibt nur die Bahn des Lichts',
+    },
+    en: {
+      aria: 'Blackminton. On the left a Night Speeder in profile, cap on top: the cap is transparent, and a Speedlight sits inside it, a glow stick that shines for about three hours. Bottom right, the flight path in the dark as a series of light points that grow stronger towards the Speeder. At night you see nothing but this point and follow its path.',
+      kappe: 'transparent cap', licht: 'Speedlight', dauer: 'glow stick, lasts about 3 h', folgen: 'follow the point of light',
+      cap: 'at night only the path of light remains',
+    },
+    fr: {
+      aria: 'Blackminton. À gauche, un Night Speeder de profil, la coiffe en haut : elle est transparente et contient un Speedlight, un bâton lumineux qui éclaire environ trois heures. En bas à droite, la trajectoire dans l\'obscurité, une suite de points lumineux de plus en plus nets vers le speeder. La nuit, on ne voit que ce point et on suit sa trajectoire.',
+      kappe: 'coiffe transparente', licht: 'Speedlight', dauer: 'bâton lumineux, env. 3 h', folgen: 'suivre le point lumineux',
+      cap: 'la nuit, il ne reste que la trace lumineuse',
+    },
+    pl: {
+      aria: 'Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, świetlik chemiczny, który świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę speedera. Nocą widać tylko ten punkt i podąża się za jego torem.',
+      kappe: 'przezroczysta nakładka', licht: 'Speedlight', dauer: 'świetlik, około 3 godzin', folgen: 'podążaj za punktem światła',
+      cap: 'nocą zostaje tylko tor światła',
+    },
+  },
 };
 
-const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073, 'G-076': G076 };
+const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073, 'G-076': G076, 'G-079': G079 };
 for (const [id, bau] of Object.entries(BAU)) {
   for (const s of SPRACHEN) {
     const name = `${ZIEL}/${id}${s === 'de' ? '' : '.' + s}.svg`;
