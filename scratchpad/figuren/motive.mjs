@@ -1345,6 +1345,87 @@ export const MOTIVE = {
     };
   },
 
+  // Rumpfstabilität (rumpfstabilitaet): die Kraftkette im Smash. Dieselbe Pose wie G-011, die Kette
+  // läuft vom Ballen des hinteren Fußes über Knie, Hüfte und Schulter zum Ellbogen, Handgelenk und
+  // Schlägerkopf. Das Glied Hüfte–Schulter ist die Brücke (Akzent): Ist es fest, kommt die Kraft
+  // der Beine im Schlag an. Pfeil am Ende zeigt die Richtung der Kraft.
+  'G-074': (t) => {
+    const fg = figur({
+      ort: [160, 256], H: 25, blick: 50, kamera: 6, neig: 11, seit: -14, kopf: { neig: -32, dreh: -6 }, art: 'dynamisch',
+      beinR: { ober: [0.08, -1, -0.62], unter: [0, -1, -0.72], fuss: [0, -0.9, 1] },
+      beinL: { ober: [-0.04, -1, 0.5], unter: [0, -1, -0.02], fuss: [-0.08, -0.06, 1] },
+      armR: { ober: [0.75, 0.68, 0.35], unter: [0.35, 0.8, 0.5], hand: [0.3, 0.8, 0.52], vor: true },
+      armL: { ober: [-0.2, -0.85, 0.5], unter: [0.9, 0.05, 0.45], art: 'faust' },
+      schlaeger: { hand: 'R', achse: [0.15, 0.85, 0.5], flaeche: [-0.92, -0.07, 0.39] },
+    });
+    const p = fg.punkte;
+    const kette = [p.ballenR, p.knieR, p.huefte, p.schulterR, p.ellbogenR, p.handgelenkR, p.schlaegerKopf];
+    const linie = `M${kette.map(pt).join(' L')}`;
+    const knoten = [p.ballenR, p.knieR, p.ellbogenR, p.handgelenkR].map((q) => `<circle class="s-knoten" cx="${f(q[0])}" cy="${f(q[1])}" r="3.6"/>`).join('');
+    const knotenA = [p.huefte, p.schulterR].map((q) => `<circle class="s-knotena" cx="${f(q[0])}" cy="${f(q[1])}" r="4.2"/>`).join('');
+    const rumpfMitte = lerp(p.huefte, p.schulterR, 0.5);
+    const lab = (k, q, txt, dx, dy = 4, anker = 'start') => `<text class="${k}" x="${f(q[0] + dx)}" y="${f(q[1] + dy)}" text-anchor="${anker}">${esc(txt)}</text>`;
+    return {
+      figuren: [fg], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 280,
+        defs: pfeil('p074', 's-mkg', 4),
+        inhalt: [
+          schatten([176, 257], 54, 5.5),
+          fg.svg,
+          speeder({ p: add(p.schlaegerKopf, [13, 3]), winkel: 72 }),
+          `<path class="s-kettex" d="${linie}"/>`,
+          `<path class="s-kette" d="${linie}" marker-end="url(#p074)"/>`,
+          `<path class="s-kettex" d="M${pt(p.huefte)} L${pt(p.schulterR)}"/>`,
+          `<path class="s-bruecke" d="M${pt(p.huefte)} L${pt(p.schulterR)}"/>`,
+          knoten, knotenA,
+          lab('s-labf', p.knieR, t.beine, -12, 4, 'end'),
+          lab('s-labakz', rumpfMitte, t.rumpf, -16, 4, 'end'),
+          lab('s-lab', rumpfMitte, t.bruecke, -16, 17, 'end'),
+          lab('s-labf', p.ellbogenR, t.arm, -12, 6, 'end'),
+          lab('s-labf', p.handgelenkR, t.handgelenk, -12, 2, 'end'),
+        ].join('\n  '),
+      }),
+    };
+  },
+  // Richtig aufwärmen (richtig_aufwaermen): die drei Schritte des Übungsteils nebeneinander —
+  // locker traben (Kreislauf), ein lockerer Ausfallschritt (bewegte Vorbereitung), ein
+  // Schattenschlag ohne Speeder (spielnah). Bewusst ohne Zeiten und Wiederholungszahlen
+  // (Gesundheitsrahmen); der Ausfallschritt bleibt locker, nicht tief.
+  'G-075': (t) => {
+    const y = 222, H = 19, kam = 8;
+    const trab = figur({ ort: [54, y], H, blick: 90, kamera: kam, art: 'dynamisch', neig: 8, kopf: { neig: -6 },
+      frei_fuss: ['R'],
+      beinL: { ober: [-0.1, -1, 0.3], unter: [0, -1, -0.08], fuss: [-0.1, -0.05, 1] },
+      beinR: { ober: [0.1, -1, -0.35], unter: [0.05, 0.12, -1], fuss: [0.05, -0.9, -0.3] },
+      armR: { ober: [0.15, -1, -0.35], unter: [0.05, 0.25, 1], art: 'faust' },
+      armL: { ober: [-0.15, -1, 0.35], unter: [-0.05, 0.75, 0.7], art: 'faust' } });
+    const ausfall = figur({ ort: [150, y], H, blick: 90, kamera: kam, art: 'dynamisch', neig: 6, kopf: { neig: -4 },
+      beinR: { ober: [0.08, -0.45, 1], unter: [0, -1, 0.05], fuss: [0.06, -0.02, 1] },
+      beinL: { ober: [-0.08, -1, -0.65], unter: [0, -0.55, -1], fuss: [0, -0.8, 1] },
+      armR: { ober: [0.18, -1, 0.05], unter: [0.12, -0.9, 0.35], art: 'offen' },
+      armL: { ober: [-0.18, -1, 0.05], unter: [-0.12, -0.9, 0.35], art: 'offen' } });
+    const schatten3 = figur({ ...POSEN.driveRuhig, ort: [230, y], H, blick: 90, kamera: kam });
+    const titel = (x, n, txt) => `<text class="s-labf" x="${x}" y="${y + 26}" text-anchor="middle">${n} · ${esc(txt)}</text>`;
+    const unter = (x, txt) => `<text class="s-lab" x="${x}" y="${y + 40}" text-anchor="middle">${esc(txt)}</text>`;
+    const zwischen = (x) => `<path class="s-wegg" d="M${x - 9},${y - 56} L${x + 9},${y - 56}" marker-end="url(#q075)"/>`;
+    return {
+      figuren: [trab, ausfall, schatten3], zeichen: [],
+      datei: datei({
+        aria: t.aria, caption: t.cap, captionY: 290,
+        defs: pfeil('q075', 's-mkg', 3.8),
+        inhalt: [
+          `<path class="s-boden" d="M12,${y}L288,${y}"/>`,
+          schatten([58, y + 1], 34, 3.5), schatten([150, y + 1], 44, 3.5), schatten([234, y + 1], 40, 3.5),
+          trab.svg, ausfall.svg, schatten3.svg,
+          zwischen(101), zwischen(194),
+          titel(54, 1, t.eins), unter(54, t.eins2),
+          titel(150, 2, t.zwei), unter(150, t.zwei2),
+          titel(242, 3, t.drei), unter(242, t.drei2),
+        ].join('\n  '),
+      }),
+    };
+  },
 };
 
 // Sonne als Umriss mit acht Strahlen (Draußen-Motive): ein Zeichen für die Bedingung, kein Licht.

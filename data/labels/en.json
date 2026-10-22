@@ -697,7 +697,10 @@
     "G-070": "Stringing: string gauge and tension",
     "G-071": "Safety margin: inside rather than on the line",
     "G-072": "Contact height: attack above the head, defense below the hips",
-    "G-073": "Movement: forward and back versus every direction"
+    "G-073": "Movement: forward and back versus every direction",
+    "G-074": "Chain of force: from the legs through the trunk into the shot",
+    "G-075": "Warming up in three steps: warm up, move, game-like",
+    "G-076": "Early start: reading the preparation gets you to the ball sooner"
   },
   "vokabeln": {
     "domaene": {

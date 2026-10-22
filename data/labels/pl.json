@@ -696,7 +696,10 @@
     "G-070": "Naciąg: grubość struny i twardość",
     "G-071": "Margines bezpieczeństwa: do środka zamiast na linię",
     "G-072": "Wysokość uderzenia: atak nad głową, obrona poniżej bioder",
-    "G-073": "Ruch: przód-tył kontra każdy kierunek"
+    "G-073": "Ruch: przód-tył kontra każdy kierunek",
+    "G-074": "Łańcuch siły: od nóg przez tułów do uderzenia",
+    "G-075": "Rozgrzewka w trzech krokach: rozgrzej się, w ruchu, blisko gry",
+    "G-076": "Wczesny start: kto czyta przygotowanie, jest wcześniej przy piłce"
   },
   "vokabeln": {
     "domaene": {

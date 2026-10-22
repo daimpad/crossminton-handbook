@@ -122,4 +122,4 @@ LICENSE                              MIT (Software)
 
 - Schlanke Server-Komponente für geräteübergreifenden Fortschritt.
 - Abschluss-Status `beherrscht` (Mastery): im Zustandsraum vorgesehen, heute inaktiv — Aktivierung ohne Datenmigration.
-- Bildmotive für die bewusst bildlosen Bereiche (abstrakte Taktik, Mentales, konditionelle Athletik, Trainer-Ebene, Spielmodi); die 73 vorhandenen Grafiken und ihr Katalog stehen in `images/grafik-prompts.md`, die regelbasierte Generierung ist als Trainingsplan umgesetzt.
+- Bildmotive für die bewusst bildlosen Bereiche (abstrakte Taktik, Mentales, konditionelle Athletik, Trainer-Ebene, Spielmodi); die 76 vorhandenen Grafiken und ihr Katalog stehen in `images/grafik-prompts.md`, die regelbasierte Generierung ist als Trainingsplan umgesetzt.
