@@ -533,6 +533,13 @@ export const STIL = {
   's-schall': `fill:none;stroke:${AKZ};stroke-width:2.2;stroke-linecap:round`,
   's-lab': 'fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif',
   's-labf': 'fill:var(--tinte,#16202b);font:800 11px/1 system-ui,sans-serif',
+  // Kraftkette (G-074): Linie und Knoten über der Figur, mit Freistellung; der Rumpf als Brücke im Akzent
+  's-kettex': 'fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round',
+  's-kette': 'fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-linecap:round;stroke-linejoin:round',
+  's-bruecke': `fill:none;stroke:${AKZ};stroke-width:5;stroke-linecap:round`,
+  's-knoten': 'fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte-3,#656f7e);stroke-width:1.8',
+  's-knotena': `fill:var(--flaeche-2,#f1f5fb);stroke:${AKZ};stroke-width:2.4`,
+  's-labakz': 'fill:var(--primaer-tief,#1568ad);font:800 11px/1 system-ui,sans-serif',
   's-griff': 'fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round',
   's-band': `fill:none;stroke:${AKZ};stroke-width:1.3;opacity:.4`,
   's-rr2': `fill:none;stroke:${AKZ};stroke-width:4.4`,

@@ -1,6 +1,7 @@
 // Erzeugt die Diagramme der Welle A in allen vier Sprachen: die Ausrüstungs-Grafiken G-068
 // (Griffstärke), G-069 (Schläger im Vergleich), G-070 (Saitenstärke und Härte der Bespannung),
-// G-073 (Schuhe: Laufwege im Vergleich) und das Taktik-Diagramm G-071 (Fehler vermeiden).
+// G-073 (Schuhe: Laufwege im Vergleich), das Taktik-Diagramm G-071 (Fehler vermeiden) und aus
+// Welle B das Athletik-Diagramm G-076 (antizipative Schnelligkeit).
 //   node scratchpad/gen-ausruestung.mjs
 // Anders als die Speeder-Tafeln stehen die Texte hier direkt im Generator (TEXTE), je Sprache;
 // die Geometrie hängt nie an der Sprache, die vier Fassungen unterscheiden sich nur im Text.
@@ -27,6 +28,9 @@
 //   G-073 schuhe_finden: Badminton- und Squashschuhe sind für vor und zurück gebaut (Netz,
 //         Frontwand); das Crossminton-Feld ist ein Quadrat mit vier gleichwertigen Ecken um ein
 //         Zentrum, gefragt ist der sichere Ausfallschritt in jede Richtung.
+//   G-076 antizipative_schnelligkeit: wer die Vorbereitung des Gegners liest, startet früher und
+//         ist eher am Ball, ohne schneller zu laufen. Beide Laufwege sind darum gleich lang
+//         (gleiches Tempo), nur der Start liegt verschieden.
 import { writeFileSync } from 'node:fs';
 
 const ZIEL = 'images';
@@ -81,7 +85,16 @@ const STIL_NEU = `    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width
     .s-wegc{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linecap:round}
     .s-wand{fill:none;stroke:var(--tinte,#16202b);stroke-width:5;stroke-linecap:round}
     .s-zone{fill:var(--tinte-3,#656f7e);font:700 10px/1 system-ui,sans-serif;letter-spacing:.5px;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
-    .s-tsicher{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:4;stroke-linejoin:round}`;
+    .s-tsicher{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:4;stroke-linejoin:round}
+    .s-achse{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:1.6}
+    .s-marke{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2;stroke-dasharray:3 4}
+    .s-lauf{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:7;stroke-linecap:round}
+    .s-laufg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:7;stroke-linecap:round}
+    .s-reserve{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.4;stroke-dasharray:2 3}
+    .s-spaet{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:1.4}
+    .s-start{fill:var(--flaeche-2,#f1f5fb);stroke:var(--tinte,#16202b);stroke-width:1.8}
+    .s-tlinks{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5;stroke-linejoin:round}
+    .s-akzenth{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}`;
 
 function stilFuer(inhalt) {
   const benutzt = new Set([...inhalt, MARKER].join('\n').match(/class="[^"]*"/g).flatMap((k) => k.slice(7, -1).split(' ')));
@@ -347,6 +360,41 @@ function G073(t) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// G-076 Antizipative Schnelligkeit: oben die Zeitachse mit drei Augenblicken (der Gegner holt aus,
+// er trifft, der Speeder ist bei dir), darunter zwei gleich lange Laufwege. Wer die Vorbereitung
+// liest, startet beim Ausholen und ist vor dem Speeder da; wer auf den Ball wartet, startet erst
+// nach dem Treffen und kommt zu spät — bei gleichem Tempo.
+
+function G076(t) {
+  const xA = 62, xT = 142, xS = 244, WEG = 124;
+  const y0 = 70, y1 = 142, y2 = 218;
+  const lauf = (klasse, x, y) => [
+    `  <path class="${klasse}" d="M${x},${y} L${x + WEG},${y}"/>`,
+    `  <circle class="s-start" cx="${x}" cy="${y}" r="5"/>`,
+  ];
+  const inhalt = [
+    `  <path class="s-achse" d="M24,${y0} L280,${y0}" marker-end="url(#mp)"/>`,
+    ...[xA, xT, xS].map((x) => `  <path class="s-achse" d="M${x},${y0 - 6} L${x},${y0 + 6}"/>`),
+    `  <path class="s-marke" d="M${xT},${y0 - 20} L${xT},${y0 - 8}"/>`,
+    `  <path class="s-marke" d="M${xA},${y0 + 8} L${xA},${y1 + 10}M${xT},${y0 + 8} L${xT},${y2 + 10}M${xS},${y0 + 8} L${xS},${y2 + 16}"/>`,
+    text('s-teil', xA, y0 - 14, t.ausholen),
+    text('s-teil', xT, y0 - 26, t.trifft),
+    text('s-teil', xS, y0 - 14, t.ankunft),
+    text('s-teil', 280, y0 + 18, t.zeit),
+    `  <text class="s-tlinks" x="24" y="${y1 - 18}">${t.liest}</text>`,
+    ...lauf('s-lauf', xA, y1),
+    `  <path class="s-reserve" d="M${xA + WEG + 6},${y1} L${xS - 2},${y1}"/>`,
+    text('s-akzenth', (xA + WEG + xS) / 2, y1 + 22, t.reserve),
+    `  <text class="s-tlinks" x="24" y="${y2 - 18}">${t.wartet}</text>`,
+    ...lauf('s-laufg', xT, y2),
+    `  <path class="s-spaet" d="M${xS},${y2 + 14} L${xT + WEG},${y2 + 14}M${xT + WEG},${y2 + 9} L${xT + WEG},${y2 + 19}"/>`,
+    text('s-name', (xS + xT + WEG) / 2 + 8, y2 + 30, t.spaet),
+    text('st', 150, 284, t.cap),
+  ];
+  return datei(300, 300, t.aria, inhalt, stilFuer(inhalt));
+}
+
+// ---------------------------------------------------------------------------------------------
 
 export const TEXTE = {
   'G-068': {
@@ -459,9 +507,35 @@ export const TEXTE = {
       cap: 'liczy się boczne oparcie',
     },
   },
+  'G-076': {
+    de: {
+      aria: 'Eine Zeitachse mit drei Augenblicken: der Gegner holt aus, der Gegner trifft, der Speeder ist bei dir. Darunter zwei gleich lange Laufwege, also dasselbe Tempo. Wer die Vorbereitung des Gegners liest, startet schon beim Ausholen und steht bereit, bevor der Speeder ankommt. Wer auf den Ball wartet, startet erst nach dem Treffen und kommt zu spät.',
+      ausholen: 'Gegner holt aus', trifft: 'Gegner trifft', ankunft: 'Speeder bei dir', zeit: 'Zeit',
+      liest: 'liest die Vorbereitung', wartet: 'wartet auf den Ball', reserve: 'Zeit übrig', spaet: 'zu spät',
+      cap: 'früher starten statt schneller laufen',
+    },
+    en: {
+      aria: 'A timeline with three moments: the opponent winds up, the opponent hits, the Speeder reaches you. Below, two runs of equal length, so the same pace. Whoever reads the opponent\'s preparation starts as the opponent winds up and is ready before the Speeder arrives. Whoever waits for the ball only starts after the hit and is too late.',
+      ausholen: 'opponent winds up', trifft: 'opponent hits', ankunft: 'Speeder arrives', zeit: 'time',
+      liest: 'reads the preparation', wartet: 'waits for the ball', reserve: 'time to spare', spaet: 'too late',
+      cap: 'start earlier instead of running faster',
+    },
+    fr: {
+      aria: 'Une ligne du temps avec trois instants : l\'adversaire arme, l\'adversaire frappe, le speeder arrive sur toi. En dessous, deux déplacements de même longueur, donc à la même vitesse. Qui lit la préparation de l\'adversaire part dès l\'armé et est prêt avant l\'arrivée du speeder. Qui attend la balle ne part qu\'après la frappe et arrive trop tard.',
+      ausholen: 'armé adverse', trifft: 'frappe adverse', ankunft: 'le speeder arrive', zeit: 'temps',
+      liest: 'lit la préparation', wartet: 'attend la balle', reserve: 'du temps en plus', spaet: 'trop tard',
+      cap: 'partir plus tôt plutôt que courir plus vite',
+    },
+    pl: {
+      aria: 'Oś czasu z trzema momentami: przeciwnik bierze zamach, przeciwnik uderza, speeder jest przy tobie. Pod nią dwie drogi tej samej długości, czyli to samo tempo. Kto czyta przygotowanie przeciwnika, rusza już przy zamachu i jest gotowy, zanim speeder dotrze. Kto czeka na piłkę, rusza dopiero po uderzeniu i spóźnia się.',
+      ausholen: 'zamach przeciwnika', trifft: 'uderzenie przeciwnika', ankunft: 'speeder przy tobie', zeit: 'czas',
+      liest: 'czyta przygotowanie', wartet: 'czeka na piłkę', reserve: 'zapas czasu', spaet: 'za późno',
+      cap: 'ruszaj wcześniej, zamiast biec szybciej',
+    },
+  },
 };
 
-const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073 };
+const BAU = { 'G-068': G068, 'G-069': G069, 'G-070': G070, 'G-071': G071, 'G-073': G073, 'G-076': G076 };
 for (const [id, bau] of Object.entries(BAU)) {
   for (const s of SPRACHEN) {
     const name = `${ZIEL}/${id}${s === 'de' ? '' : '.' + s}.svg`;
