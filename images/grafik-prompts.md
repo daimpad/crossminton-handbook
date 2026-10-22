@@ -2,28 +2,28 @@
 
 Zentraler, durchnummerierter Katalog aller Grafiken der App. Jede Nummer `G-XXX` steht für genau ein Bild: `G-XXX.svg` (Inline-SVG, theme-fähig) mit PNG-Fallback `G-XXX.png` und den Sprachzwillingen `G-XXX.en/.fr/.pl` (je `.svg` und `.png`). Die Zuordnung Baustein ↔ Nummer ↔ Datei ↔ Katalogeintrag bleibt stabil; Nummern werden nie umbenannt.
 
-**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–067).
+**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–070).
 
 **Gemeinsamer Stil (umgesetzt):** reduzierte Vektorzeichnung ausschließlich aus CI-Tokens, ohne Hintergrund (der Grund kommt von `.grafik-bild`), kurze Caption unten, keine Fotorealistik, keine Marken oder Logos. Zwei Familien:
 
 - **Personengrafiken (32)** im Stil „Dynamische Silhouette“: gefüllte Körper mit fester Proportionstabelle, nahe Seite `--tinte`, ferne Seite `--tinte-2`, Freistellungsrand in `--flaeche-2`; der Akzent `--primaer-dunkel` liegt nur auf dem einen didaktischen Element und seinem Werkzeug (Schläger, Bahn, Treffpunkt); Geisterphasen als Umriss in `--tinte-3`, Bodenschatten in `--schatten-boden`, der Speeder in seinen Originalfarben. Erzeugt von `scratchpad/figuren/`, Regeln in `docs/grafik-strategie.md`.
-- **Diagramme (35)**: Feld, Zonen, Bahnen, Regelskizzen und die Speeder-Konstruktionszeichnung als flache Linienzeichnung, Akzent `--primaer`.
+- **Diagramme (38)**: Feld, Zonen, Bahnen, Regelskizzen, die Speeder-Konstruktionszeichnung und die Ausrüstungs-Vergleiche (Griff, Schläger, Bespannung) als flache Linienzeichnung, Akzent `--primaer`.
 
 Farbrollen und gemessene Kontraste stehen in `docs/ci.md`, Abschnitt „Grafiken“. Der englische Prompt-Vorspann, mit dem der Katalog begann, galt einer KI-Bilderzeugung, die nie eingesetzt wurde: *illustrative, reduced vector-style drawing, clean flat lines, minimal detail, limited flat colour palette, no background or plain white background, easily abstractable, instructional sports-diagram aesthetic.*
 
 **Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
 
-**Alle 67 Grafiken sind theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG**. Die Figur-, Griff- und Szenenmotive waren zuerst abstrakte Rundkappen-Strichfiguren; seit Oktober 2026 sind alle 32 durch generierte Personengrafiken ersetzt. Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
+**Alle 70 Grafiken sind theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG**. Die Figur-, Griff- und Szenenmotive waren zuerst abstrakte Rundkappen-Strichfiguren; seit Oktober 2026 sind alle 32 durch generierte Personengrafiken ersetzt. Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
 
-- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback in doppelter viewBox-Größe auf deckendem `--flaeche-2`) vor; alle 67 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Sie nutzen CI-Tokens mit Hell-Fallback (`var(--tinte,#16202b)` …), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und klein.
+- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback in doppelter viewBox-Größe auf deckendem `--flaeche-2`) vor; alle 70 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Sie nutzen CI-Tokens mit Hell-Fallback (`var(--tinte,#16202b)` …), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und klein.
 - **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
-- **Rezept für Diagramme (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2× der viewBox, auf deckendem `--flaeche-2`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap (die Speeder-Tafeln `gen-speeder.mjs` + `gen-speeder-sprachen.mjs`) → deren `.png` rendern. `scratchpad/textgrenzen.mjs` misst danach alle Beschriftungen (Caption ≤ 250, nichts über den Rand, keine Linie durch einen Text ohne Halo), `scratchpad/figuren/werkzeug/bogen.mjs` kachelt hell und dunkel zur Sichtprüfung.
+- **Rezept für Diagramme (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2× der viewBox, auf deckendem `--flaeche-2`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap (die Speeder-Tafeln `gen-speeder.mjs` + `gen-speeder-sprachen.mjs`, die Ausrüstungs-Vergleiche G-068–G-070 `gen-ausruestung.mjs`, das alle vier Sprachen aus einer Quelle schreibt) → deren `.png` rendern. `scratchpad/textgrenzen.mjs` misst danach alle Beschriftungen (Caption ≤ 250, nichts über den Rand, keine Linie durch einen Text ohne Halo), `scratchpad/figuren/werkzeug/bogen.mjs` kachelt hell und dunkel zur Sichtprüfung.
 - **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), den Nahaufnahmen von Hand und Bein (`hand.mjs`, `bein.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert), Welle 1 mit **G-007, G-032**, Welle 2 mit **G-003, G-012, G-018, G-019, G-022, G-062**, Welle 3 mit **G-005, G-006**, Welle 4 mit **G-033, G-034, G-036**, Welle 5 mit **G-047**, Welle 6 mit **G-011, G-015, G-016, G-017**, Welle 7 mit **G-054, G-056, G-057, G-058** und Welle 8 mit **G-035** (Nahaufnahme des Beins, `bein.mjs`); damit sind alle 32 Personengrafiken generiert.
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
 
-Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor**, zwei **Referenzgrafiken** im Regeln-Reiter und die **Speeder-Konstruktionszeichnung** in der Ausrüstung.
+Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor**, zwei **Referenzgrafiken** im Regeln-Reiter und die **Speeder-Konstruktionszeichnung** sowie Griff, Schläger und Bespannung in der Ausrüstung.
 
 Bewusst **ohne Leitgrafik** bleiben:
 
@@ -31,7 +31,7 @@ Bewusst **ohne Leitgrafik** bleiben:
 - **Abstrakte Taktik** — `fehler_vermeiden`, `umschalten`, `gegner_lesen_muster`, `doppel_grundlagen`, `engen_satz_fuehren`, `der_matchplan`, `dem_gegner_aufzwingen`, `matchverlauf_steuern`, `entscheidender_punkt`.
 - **Konditionelle Athletik** — `warum_athletik_dein_spiel_traegt`, `richtig_aufwaermen`, `durchhalten`, `erholen`, `gezielt_trainieren`, `rumpfstabilitaet`, `intervallausdauer`, `belastung_steuern_regenerieren`, `form_ueber_die_saison`, `antizipative_schnelligkeit`, `langfristig_belastbar` — Belastungs-/Regenerationsthemen ohne sinnvolles Einzelbild (Gesundheitsrahmen).
 - **Trainer-Trainingsgestaltung** — Meta-Ebene, kein Lernbild.
-- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht; G-062/G-063 sind inzwischen an die Spielformen vergeben, neue Nummern ab G-068). Der Grafik-Test zählt aktuell 59 Bausteine mit Grafik und 65 Referenzen.
+- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht; G-062/G-063 sind inzwischen an die Spielformen vergeben, neue Nummern ab G-071). Der Grafik-Test zählt aktuell 62 Bausteine mit Grafik und 68 Referenzen.
 
 Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer Durchgang vorgesehen.
 
@@ -340,7 +340,7 @@ Das gemeinsame Zentrum ist als gestrichelter Kreis mit leichter Tönung markiert
 Caption: „im Zentrum kreuzen sich die Bahnen" — die Zentrum-Beschriftung steht bewusst
 **nicht** im Bild (die kreuzenden Bahnen schneiden sie unlesbar).
 
-## Ausrüstung (G-064–067)
+## Ausrüstung (G-064–070)
 
 Die Speeder-Konstruktionszeichnung — die **erste Bebilderung der Ausrüstungs-Domäne**,
 die zuvor über alle sieben Bausteine bildlos war. Vorlage war eine vierteilige
@@ -390,3 +390,28 @@ Außenansicht: Loch ⌀4 in der Kappe, Endring ⌀19, Pressring am Kragen, Querr
 **G-067** · `images/G-067.svg` · `der_speeder` · Draufsicht in die Korböffnung:
 16 Längsstiele im Winkelabstand 22,5°, der wellenförmige Rand als Bogenkette zwischen
 den Stielen, die Schlagkappe dahinter. Caption: „16 Längsstiele · Teilung 22,5°".
+
+### Griff, Schläger, Bespannung (G-068–070)
+
+Drei Vergleichsdiagramme für die übrigen Ausrüstungs-Bausteine, erzeugt von
+`scratchpad/gen-ausruestung.mjs`: Geometrie gerechnet, alle vier Sprachen aus einer
+Quelle (`TEXTE` im Skript), Akzent `--primaer-dunkel` auf dem jeweils richtigen bzw.
+crossminton-eigenen Teil.
+
+**G-068** · `images/G-068.svg` · `griff_und_griffband` · Zwei Griffe im Schnitt mit
+Blick auf das Griffende, die Hand als Band gleicher Länge darum. Links zu dünn: die
+Fingerspitzen drücken in den Ballen (Überlappung, Druckmarke). Rechts passend: zwischen
+Fingerspitzen und Ballen bleibt ein Messkreis von einer Fingerbreite frei, wie im
+Erklärteil („die Breite deines Zeigefingers"). Caption: „ein Finger Platz bis zum Ballen".
+
+**G-069** · `images/G-069.svg` · `der_schlaeger` · Drei Schläger maßstäblich (3 Einheiten
+je cm, gemeinsame Grundlinie): Badminton 67,5 cm, Crossminton höchstens 61 cm mit
+kräftigerem Rahmen und Kopf bis 650 cm² (Maßlinie, Akzent), Squash 68,5 cm, als einzige
+360 breit wie G-066. Caption: „kürzer als Squash, robuster als Badminton".
+
+**G-070** · `images/G-070.svg` · `die_bespannung` · Oben zwei Saiten im Querschnitt
+(40 Einheiten je mm): Crossminton bis 1,25 mm gegen Badminton rund 0,65 mm. Unten das
+Trampolin-Modell: weich gibt tief nach, der Speeder fliegt weit, aber gestreut (Fächer) —
+mehr Kraft; hart gibt wenig nach, kürzer und genauer — mehr Kontrolle. Kein kg-Wert
+(Gesundheitsrahmen: Prinzip statt Dosierung). Caption: „dicke Saite · Härte als
+Stellschraube".
