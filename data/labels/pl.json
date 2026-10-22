@@ -699,7 +699,10 @@
     "G-073": "Ruch: przód-tył kontra każdy kierunek",
     "G-074": "Łańcuch siły: od nóg przez tułów do uderzenia",
     "G-075": "Rozgrzewka w trzech krokach: rozgrzej się, w ruchu, blisko gry",
-    "G-076": "Wczesny start: kto czyta przygotowanie, jest wcześniej przy piłce"
+    "G-076": "Wczesny start: kto czyta przygotowanie, jest wcześniej przy piłce",
+    "G-077": "Snowminton: krótkie, pewne kroki na śniegu",
+    "G-078": "Beachminton: szeroki rozkrok na piasku",
+    "G-079": "Blackminton: Night Speeder i tor punktu światła"
   },
   "vokabeln": {
     "domaene": {

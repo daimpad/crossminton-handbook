@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Blackminton. Po lewej Night Speeder z profilu, nakładką do góry: jest przezroczysta, a w środku tkwi Speedlight, świetlik chemiczny, który świeci około trzech godzin. W prawym dolnym rogu tor lotu w ciemności jako ciąg punktów świetlnych, coraz wyraźniejszych w stronę speedera. Nocą widać tylko ten punkt i podąża się za jego torem.">
+  <style>
+    .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-tlinks{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:5;stroke-linejoin:round}
+    .s-akzenth{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-kappeklar{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    .s-kragen{fill:var(--tinte-2,#5a6675)}
+    .s-korbfl{fill:var(--speeder-korb-flaeche,#f1e7b5);stroke:var(--speeder-korb,#f0c400);stroke-width:1.8;stroke-linejoin:round}
+    .s-stiel{fill:none;stroke:var(--speeder-korb,#f0c400);stroke-width:1.3}
+    .s-glimm{fill:var(--primaer-weich,#e8f3fe)}
+    .s-licht{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-punkt1{fill:var(--primaer-dunkel,#1e8bd6);opacity:.3}
+    .s-punkt2{fill:var(--primaer-dunkel,#1e8bd6);opacity:.6}
+    .s-tleise{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <circle class="s-glimm" cx="82" cy="84" r="44"/>
+  <path class="s-korbfl" d="M57.3,115 L17,206 Q82,214 147,206 L106.7,115 Z"/>
+  <path class="s-stiel" d="M65.7,115 L39.1,210M73.8,115 L60.6,212.2M82,115 L82,213M90.2,115 L103.5,212.2M98.3,115 L124.9,210"/>
+  <rect class="s-kragen" x="43" y="89" width="78" height="26" rx="3"/>
+  <path class="s-kappeklar" d="M48.199999999999996,89 L48.199999999999996,68.59 Q48.199999999999996,50 82,50 Q115.80000000000001,50 115.80000000000001,68.59 L115.80000000000001,89 Z"/>
+  <path class="s-licht" d="M78,60 h8 v47 a4,4 0 0 1 -8,0 Z"/>
+  <path class="s-masz" d="M119.8,64 L136,56M89,96 L136,102"/>
+  <text class="s-tlinks" x="140" y="60">przezroczysta nakładka</text>
+  <text class="s-tlinks" x="140" y="106">Speedlight</text>
+  <text class="s-tleise" x="140" y="120">świetlik, około 3 godzin</text>
+  <circle class="s-punkt1" cx="168" cy="252" r="2"/>
+  <circle class="s-punkt1" cx="182.5" cy="234.6" r="2.3"/>
+  <circle class="s-punkt1" cx="197" cy="218.5" r="2.5"/>
+  <circle class="s-punkt1" cx="211.5" cy="203.6" r="2.8"/>
+  <circle class="s-punkt2" cx="226" cy="190" r="3"/>
+  <circle class="s-punkt2" cx="240.5" cy="177.6" r="3.3"/>
+  <circle class="s-punkt2" cx="255" cy="166.5" r="3.5"/>
+  <circle class="s-punkt2" cx="269.5" cy="156.6" r="3.8"/>
+  <circle class="s-glimm" cx="284" cy="148" r="13"/>
+  <circle class="s-licht" cx="284" cy="148" r="5.5"/>
+  <text class="s-akzenth" x="206" y="266">podążaj za punktem światła</text>
+  <text class="st" x="150" y="288">nocą zostaje tylko tor światła</text>
+</svg>

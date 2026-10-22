@@ -2,23 +2,23 @@
 
 Zentraler, durchnummerierter Katalog aller Grafiken der App. Jede Nummer `G-XXX` steht für genau ein Bild: `G-XXX.svg` (Inline-SVG, theme-fähig) mit PNG-Fallback `G-XXX.png` und den Sprachzwillingen `G-XXX.en/.fr/.pl` (je `.svg` und `.png`). Die Zuordnung Baustein ↔ Nummer ↔ Datei ↔ Katalogeintrag bleibt stabil; Nummern werden nie umbenannt.
 
-**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–070); danach fortlaufend ohne Reiterbindung: G-071 (Taktik), G-072 (Taktik), G-073 (Ausrüstung), G-074–076 (Athletik).
+**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–070); danach fortlaufend ohne Reiterbindung: G-071 (Taktik), G-072 (Taktik), G-073 (Ausrüstung), G-074–076 (Athletik), G-077–079 (Spielmodi).
 
 **Gemeinsamer Stil (umgesetzt):** reduzierte Vektorzeichnung ausschließlich aus CI-Tokens, ohne Hintergrund (der Grund kommt von `.grafik-bild`), kurze Caption unten, keine Fotorealistik, keine Marken oder Logos. Zwei Familien:
 
-- **Personengrafiken (35)** im Stil „Dynamische Silhouette“: gefüllte Körper mit fester Proportionstabelle, nahe Seite `--tinte`, ferne Seite `--tinte-2`, Freistellungsrand in `--flaeche-2`; der Akzent `--primaer-dunkel` liegt nur auf dem einen didaktischen Element und seinem Werkzeug (Schläger, Bahn, Treffpunkt); Geisterphasen als Umriss in `--tinte-3`, Bodenschatten in `--schatten-boden`, der Speeder in seinen Originalfarben. Erzeugt von `scratchpad/figuren/`, Regeln in `docs/grafik-strategie.md`.
-- **Diagramme (41)**: Feld, Zonen, Bahnen, Regelskizzen, die Speeder-Konstruktionszeichnung, die Ausrüstungs-Vergleiche (Griff, Schläger, Bespannung, Laufwege für die Schuhe), der Sicherheitsabstand (G-071) und die Zeitleiste des frühen Starts (G-076) als flache Linienzeichnung, Akzent `--primaer`.
+- **Personengrafiken (37)** im Stil „Dynamische Silhouette“: gefüllte Körper mit fester Proportionstabelle, nahe Seite `--tinte`, ferne Seite `--tinte-2`, Freistellungsrand in `--flaeche-2`; der Akzent `--primaer-dunkel` liegt nur auf dem einen didaktischen Element und seinem Werkzeug (Schläger, Bahn, Treffpunkt); Geisterphasen als Umriss in `--tinte-3`, Bodenschatten in `--schatten-boden`, der Speeder in seinen Originalfarben. Erzeugt von `scratchpad/figuren/`, Regeln in `docs/grafik-strategie.md`.
+- **Diagramme (42)**: Feld, Zonen, Bahnen, Regelskizzen, die Speeder-Konstruktionszeichnung, die Ausrüstungs-Vergleiche (Griff, Schläger, Bespannung, Laufwege für die Schuhe), der Sicherheitsabstand (G-071) die Zeitleiste des frühen Starts (G-076) und die Night-Speeder-Tafel (G-079) als flache Linienzeichnung, Akzent `--primaer`.
 
 Farbrollen und gemessene Kontraste stehen in `docs/ci.md`, Abschnitt „Grafiken“. Der englische Prompt-Vorspann, mit dem der Katalog begann, galt einer KI-Bilderzeugung, die nie eingesetzt wurde: *illustrative, reduced vector-style drawing, clean flat lines, minimal detail, limited flat colour palette, no background or plain white background, easily abstractable, instructional sports-diagram aesthetic.*
 
 **Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
 
-**Alle 76 Grafiken sind theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG**. Die Figur-, Griff- und Szenenmotive waren zuerst abstrakte Rundkappen-Strichfiguren; seit Oktober 2026 sind alle 32 durch generierte Personengrafiken ersetzt. Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
+**Alle 79 Grafiken sind theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG**. Die Figur-, Griff- und Szenenmotive waren zuerst abstrakte Rundkappen-Strichfiguren; seit Oktober 2026 sind alle 32 durch generierte Personengrafiken ersetzt. Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
 
-- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback in doppelter viewBox-Größe auf deckendem `--flaeche-2`) vor; alle 76 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Sie nutzen CI-Tokens mit Hell-Fallback (`var(--tinte,#16202b)` …), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und klein.
+- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback in doppelter viewBox-Größe auf deckendem `--flaeche-2`) vor; alle 79 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Sie nutzen CI-Tokens mit Hell-Fallback (`var(--tinte,#16202b)` …), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und klein.
 - **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
 - **Rezept für Diagramme (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2× der viewBox, auf deckendem `--flaeche-2`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap (die Speeder-Tafeln `gen-speeder.mjs` + `gen-speeder-sprachen.mjs`, die Ausrüstungs-Vergleiche G-068–G-070 `gen-ausruestung.mjs`, das alle vier Sprachen aus einer Quelle schreibt) → deren `.png` rendern. `scratchpad/textgrenzen.mjs` misst danach alle Beschriftungen (Caption ≤ 250, nichts über den Rand, keine Linie durch einen Text ohne Halo), `scratchpad/figuren/werkzeug/bogen.mjs` kachelt hell und dunkel zur Sichtprüfung.
-- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), den Nahaufnahmen von Hand und Bein (`hand.mjs`, `bein.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert), Welle 1 mit **G-007, G-032**, Welle 2 mit **G-003, G-012, G-018, G-019, G-022, G-062**, Welle 3 mit **G-005, G-006**, Welle 4 mit **G-033, G-034, G-036**, Welle 5 mit **G-047**, Welle 6 mit **G-011, G-015, G-016, G-017**, Welle 7 mit **G-054, G-056, G-057, G-058** und Welle 8 mit **G-035** (Nahaufnahme des Beins, `bein.mjs`); damit sind alle 32 Personengrafiken generiert. Dazu kamen **G-072** (Welle A2, Treffhöhe beim Umschalten) sowie **G-074** und **G-075** (Welle B, Kraftkette und Aufwärmfolge).
+- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), den Nahaufnahmen von Hand und Bein (`hand.mjs`, `bein.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert), Welle 1 mit **G-007, G-032**, Welle 2 mit **G-003, G-012, G-018, G-019, G-022, G-062**, Welle 3 mit **G-005, G-006**, Welle 4 mit **G-033, G-034, G-036**, Welle 5 mit **G-047**, Welle 6 mit **G-011, G-015, G-016, G-017**, Welle 7 mit **G-054, G-056, G-057, G-058** und Welle 8 mit **G-035** (Nahaufnahme des Beins, `bein.mjs`); damit sind alle 32 Personengrafiken generiert. Dazu kamen **G-072** (Welle A2, Treffhöhe beim Umschalten) sowie **G-074** und **G-075** (Welle B, Kraftkette und Aufwärmfolge) und **G-077**/**G-078** (Welle C, Snow- und Beachminton).
 - Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
 
 ## Abdeckung (Audit)
@@ -31,7 +31,7 @@ Bewusst **ohne Leitgrafik** bleiben:
 - **Abstrakte Taktik** — `gegner_lesen_muster`, `doppel_grundlagen`, `engen_satz_fuehren`, `der_matchplan`, `dem_gegner_aufzwingen`, `matchverlauf_steuern`, `entscheidender_punkt`.
 - **Konditionelle Athletik** — `warum_athletik_dein_spiel_traegt`, `durchhalten`, `erholen`, `gezielt_trainieren`, `intervallausdauer`, `belastung_steuern_regenerieren`, `form_ueber_die_saison`, `langfristig_belastbar` — Belastungs-/Regenerationsthemen ohne sinnvolles Einzelbild (Gesundheitsrahmen).
 - **Trainer-Trainingsgestaltung** — Meta-Ebene, kein Lernbild.
-- **Spielmodi** (`spielarten_ueberblick`, `snowminton`, `beachminton`, `blackminton`) — vorerst bildlos; die Umgebungs-Varianten sind gute Kandidaten für spätere Atmosphäre-Motive (Schnee/Sand/Nacht; G-062/G-063 sind inzwischen an die Spielformen vergeben, neue Nummern ab G-077). Der Grafik-Test zählt aktuell 68 Bausteine mit Grafik und 74 Referenzen.
+- **Spielmodi-Rahmen** (`spielarten_ueberblick`) — ordnet nur ein; die drei Varianten sind seit Welle C bebildert (G-077–079), neue Nummern ab G-080. Der Grafik-Test zählt aktuell 71 Bausteine mit Grafik und 77 Referenzen.
 
 Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer Durchgang vorgesehen.
 
@@ -465,3 +465,26 @@ trifft, der Speeder ist bei dir) und darunter zwei gleich lange Laufwege, also d
 Tempo: wer die Vorbereitung liest, startet beim Ausholen und hat Zeit übrig (Akzent); wer
 auf den Ball wartet, startet nach dem Treffen und kommt zu spät (`--tinte-3`). Caption:
 „früher starten statt schneller laufen".
+
+---
+
+## Welle C: Spielmodi (G-077–079)
+
+**G-077** · `images/G-077.svg` · `snowminton` · Fortgeschritten · Personengrafik. Dieselbe
+Bühne wie G-057 (Nässe), weil der Text dieselbe Bewegungsregel nennt: kurze, sichere
+Schritte, breiter Stand. Eine Schneedecke über die ganze Breite mit welliger Kante,
+dicht gesetzte Abdrücke hinter der Figur, Flocken in `--tinte-3`. Keine Kälte-Werte
+(Gesundheitsrahmen). Caption: „kurze, sichere Schritte im Schnee".
+
+**G-078** · `images/G-078.svg` · `beachminton` · Fortgeschritten · Personengrafik. Fast
+frontal, damit der breite Stand sichtbar wird; die Füße sinken in den Sand (deckende Hügel
+in `--flaeche-2`, darüber die Sandtönung, oben eine feine Kante), lockere Sandkörner,
+die Sonne als Umriss oben rechts, unter der Figur die Maßlinie „breiter Stand". Keine
+Trink- oder Belastungsvorgaben. Caption: „breit stehen, kurze Wege im Sand".
+
+**G-079** · `images/G-079.svg` · `blackminton` · Fortgeschritten · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Links der Night Speeder im Profil, Kappe oben wie in
+G-065 (2,6 Einheiten je mm): die Kappe durchsichtig, darin das Speedlight als Knicklicht
+im Akzent mit Glimmen, Korb und Längsstiele in den Speeder-Tokens. Rechts unten die Bahn
+im Dunkeln als Punktfolge, die zum leuchtenden Speeder hin kräftiger wird. Caption:
+„nachts bleibt nur die Bahn des Lichts".
