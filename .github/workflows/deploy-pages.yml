@@ -46,7 +46,12 @@ jobs:
 
   bauen:
     needs: test
-    runs-on: ubuntu-latest
+    # Fest auf 24.04, nicht ubuntu-latest: Der Job installiert Chromium über Playwright
+    # 1.56.1, und das unterstützt Ubuntu 26.04 nicht. Seit GitHub ubuntu-latest auf
+    # 26.04 umgestellt hat, brach der Deploy dort ab („Playwright does not support
+    # chromium on ubuntu26.04-x64") und die Produktion blieb auf dem alten Stand.
+    # Erst zusammen mit einer Playwright-Version anheben, die 26.04 kennt.
+    runs-on: ubuntu-24.04
     outputs:
       stand: ${{ steps.stempel.outputs.kurz }}
     steps:
