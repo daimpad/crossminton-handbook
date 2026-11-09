@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The wrist snap: the whip — Crossminton Handbook</title>
+  <meta name="description" content="At beginner level you deliberately kept the wrist quiet and drew the power from arm, shoulder and legs. That was the foundation. Now you build on it the movemen …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/en/baustein/handgelenk_peitsche">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="The wrist snap: the whip — Crossminton Handbook">
+  <meta property="og:description" content="At beginner level you deliberately kept the wrist quiet and drew the power from arm, shoulder and legs. That was the foundation. Now you build on it the movemen …">
+  <meta property="og:url" content="https://crossminton-handbook.de/en/baustein/handgelenk_peitsche">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The wrist snap: the whip — Crossminton Handbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The wrist snap: the whip — Crossminton Handbook">
+  <meta name="twitter:description" content="At beginner level you deliberately kept the wrist quiet and drew the power from arm, shoulder and legs. That was the foundation. Now you build on it the movemen …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/handgelenk_peitsche">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/handgelenk_peitsche">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/handgelenk_peitsche">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/handgelenk_peitsche">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/handgelenk_peitsche">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton Handbook","item":"https://crossminton-handbook.de/en"},{"@type":"ListItem","position":2,"name":"Topic path","item":"https://crossminton-handbook.de/en/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technique","item":"https://crossminton-handbook.de/en/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"The wrist snap: the whip","item":"https://crossminton-handbook.de/en/baustein/handgelenk_peitsche"}]},{"@type":"LearningResource","name":"The wrist snap: the whip","description":"At beginner level you deliberately kept the wrist quiet and drew the power from arm, shoulder and legs. That was the foundation. Now you build on it the movemen …","url":"https://crossminton-handbook.de/en/baustein/handgelenk_peitsche","inLanguage":"en","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Advanced","about":[{"@type":"Thing","name":"Technique"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/en" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/en/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-bolt " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>The wrist snap: the whip</h1>
+        <p class="marke-hero-untertitel">Technique · Advanced</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommended first: <a href="/en/baustein/vorhand_drive?kontext=kompetenz">The forehand drive</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explanation</h2><span class="chip chip-rot">open</span></div>
+      
+      
+      <p>At beginner level you deliberately kept the wrist quiet and drew the power from arm, shoulder and legs. That was the foundation. Now you build on it the movement that gives the stroke its real pace: the snap of the wrist. The whip that was always promised.</p><p>Picture how a whip cracks: the handle barely moves, but enormous speed arises at the end of the cord. Your stroke works exactly the same way. Arm and body get the racket moving, and in the last moment before contact the forearm rotates in and the wrist snaps forward. This final snap multiplies the head speed of the racket without you expending more effort.</p><p>The key is the timing. The snap comes late — just before the contact point, not earlier. Too early, and the acceleration fizzles out before the Speeder is there. Right at the moment of contact the tension releases from the loosely held wrist.</p><p>And here the loose grip you've practiced from the start pays off. A tense wrist can't snap. Only a loose hand that firms up briefly at the moment of contact produces the whip. It firms only for the brief moment of contact, then you release again.</p><p>From now on this movement is in almost every hard stroke — in the drive, the clear, the smash. It's the transition from the controlled basic stroke to a powerful game.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="The wrist snap in close-up: faint, the backswing with the wrist laid back; bold, the moment of contact. The forearm has rotated in, the wrist has snapped forward, and the Speeder flies off." class="grafik-bild grafik-svg" id="g-svg-108" style="--hoch: 1.000;">
+  <style>
+    #g-svg-108 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-108 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-108 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-108 .s-zr{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;opacity:.85}
+    #g-svg-108 .s-zsch{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.2;opacity:.85;stroke-linecap:round}
+    #g-svg-108 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-108 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-108 .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    #g-svg-108 .s-bahn2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-dasharray:6 5;stroke-linecap:round}
+    #g-svg-108 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-108 .s-griff{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.2;stroke-linejoin:round}
+    #g-svg-108 .s-band{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.3;opacity:.4}
+    #g-svg-108 .s-rr2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:4.4}
+    #g-svg-108 .s-rh2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-108 .s-rsch2{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:6;stroke-linecap:round}
+    #g-svg-108 .s-rot{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linecap:round}
+    #g-svg-108 .s-x3{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.5;stroke-linejoin:round}
+    #g-svg-108 .s-tempo{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2;stroke-linecap:round;opacity:.5}
+    #g-svg-108 .s-ag0{stop-color:var(--tinte,#16202b);stop-opacity:1}
+    #g-svg-108 .s-ag1{stop-color:var(--tinte,#16202b);stop-opacity:0}
+    #g-svg-108 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><linearGradient id="g-svg-108-u009" gradientUnits="userSpaceOnUse" x1="-92" y1="11" x2="-126" y2="17"><stop offset="0" class="s-ag0"></stop><stop offset="0.45" class="s-ag0"></stop><stop offset="1" class="s-ag1"></stop></linearGradient><marker id="g-svg-108-p009" viewBox="0 0 10 10" markerWidth="4.4" markerHeight="4.4" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker><marker id="g-svg-108-p009b" viewBox="0 0 10 10" markerWidth="3.6" markerHeight="3.6" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mk"></path></marker></defs>
+  <g transform="translate(104 204) rotate(-86) scale(0.82) translate(44 -4)">
+  <path class="s-zsch" d="M-58,0 L82,0"></path><ellipse class="s-zr" cx="140" cy="0" rx="58" ry="17"></ellipse>
+  </g>
+  <path class="s-bahn" d="M134.7,29.7 A177,177 0 0 1 249,102.5" marker-end="url(#g-svg-108-p009)"></path>
+  <path class="s-tempo" d="M225.9,101.7 A159.1,159.1 0 0 1 238.9,119.7M212,113.3 A141,141 0 0 1 223.6,129.3M198.2,124.9 A123,123 0 0 1 208.3,138.8"></path>
+  <g transform="translate(104 204) rotate(-28) scale(0.82) translate(44 -4)">
+  <path fill="url(#g-svg-108-u009)" d="M-45.8,-8.9L-130.1,2.6A15.5,15.5 0 1 0 -125,33.2L-41.5,16.8A13,13 0 0 0 -45.8,-8.9Z"></path>
+  <ellipse class="s-rf" cx="140" cy="0" rx="58" ry="9"></ellipse><path class="s-rs" d="M98.5,-6L181.5,-6M87.5,-3L192.5,-3M84.3,0L195.7,0M87.5,3L192.5,3M98.5,6L181.5,6M96.5,-5.6L96.5,5.6M111,-7.3L111,7.3M125.5,-8.2L125.5,8.2M140,-8.5L140,8.5M154.5,-8.2L154.5,8.2M169,-7.3L169,7.3M183.5,-5.6L183.5,5.6"></path><ellipse class="s-rr2" cx="140" cy="0" rx="58" ry="9"></ellipse><path class="s-rh2" d="M60,0 L86,-4.95 M60,0 L86,4.95"></path><path class="s-rsch2" d="M30,0 L60,0"></path><path class="s-griff" d="M-58,-11.6 L30,-10 L30,10 L-58,11.6 Q-65,0 -58,-11.6Z"></path><path class="s-band" d="M-52,10L-44,-10M-42,10L-34,-10M-32,10L-24,-10M-22,10L-14,-10M-12,10L-4,-10M-2,10L6,-10M8,10L16,-10M18,10L26,-10"></path>
+  <g class="s-x3"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"></path><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"></path></g><g class="s-k"><path d="M-33.4,11.2L-29.5,19A4.5,4.5 0 0 0 -21.3,15.4L-24.4,7.2A4.9,4.9 0 1 0 -33.4,11.2Z"></path><path d="M-29.5,14.9L-32.5,20.6A4,4 0 0 0 -25.8,24.9L-21.9,19.7A4.5,4.5 0 1 0 -29.5,14.9Z"></path></g><g class="s-x3"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"></path><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"></path></g><g class="s-k"><path d="M-25.7,8.1L-20.4,17.9A5,5 0 0 0 -11.5,13.4L-16.1,3.3A5.4,5.4 0 1 0 -25.7,8.1Z"></path><path d="M-20.6,13.4L-23.6,20.1A4.5,4.5 0 0 0 -15.7,24.4L-11.8,18.2A5,5 0 1 0 -20.6,13.4Z"></path></g><g class="s-x3"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"></path><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"></path></g><g class="s-k"><path d="M-17.5,4.4L-11.1,15.6A5.3,5.3 0 0 0 -1.7,10.7L-7.3,-1A5.8,5.8 0 1 0 -17.5,4.4Z"></path><path d="M-11.5,11.2L-14.5,19.3A4.8,4.8 0 0 0 -5.7,23.2L-1.8,15.4A5.3,5.3 0 1 0 -11.5,11.2Z"></path></g><g class="s-x3"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"></path><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"></path><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"></path></g><g class="s-k"><path d="M-4.9,6.5L8.3,11A5.3,5.3 0 0 0 12.1,1.1L-0.7,-4.3A5.8,5.8 0 1 0 -4.9,6.5Z"></path><path d="M5.7,9L11.1,16.8A4.8,4.8 0 0 0 19.2,11.7L14.6,3.4A5.3,5.3 0 1 0 5.7,9Z"></path><path d="M10.5,12.3L8,19A4.3,4.3 0 0 0 15.8,22.6L19.2,16.3A4.8,4.8 0 1 0 10.5,12.3Z"></path></g><g class="s-k"><path d="M-50,-4C-48.2,-7.3 -42.6,-7.8 -38,-8.5C-33.4,-9.2 -29.2,-8.5 -25,-8C-20.8,-7.4 -18.3,-6.6 -15,-5.5C-11.7,-4.4 -9.6,-3.6 -7,-2C-4.4,-0.3 -0.6,1.8 -1,3.5C-1.4,5.2 -5.3,6 -9,7.5C-12.7,9 -16.4,10.6 -21,11.5C-25.6,12.4 -29,12.9 -34,12.5C-38.9,12.1 -45.1,12.5 -48,9.5C-50.9,6.5 -51.8,-0.7 -50,-4Z"></path><path d="M-31.6,0.8L-18,-4.4A5.6,5.6 0 0 0 -21.1,-15.1L-35.4,-12.2A6.8,6.8 0 1 0 -31.6,0.8Z"></path><path d="M-18.7,-4.2L-7.3,-6.9A5,5 0 0 0 -9.2,-16.8L-20.8,-15.1A5.6,5.6 0 1 0 -18.7,-4.2Z"></path><path d="M-8.7,-6.8L0.3,-6.4A4.6,4.6 0 0 0 1.1,-15.6L-7.8,-16.8A5,5 0 1 0 -8.7,-6.8Z"></path></g>
+  </g>
+  <path class="s-rot" d="M68.2,222.9L66.8,219.9L65.9,217.2L65.6,214.9L66,213.3L66.9,212.3L68.3,212.1L70.2,212.6L72.5,213.9L75,215.8L77.5,218.2L80,221L82.3,224.1L84.2,227.2L85.7,230.3L86.6,233L87,235.3L86.7,237L85.8,238L84.4,238.3L82.6,237.9" marker-end="url(#g-svg-108-p009b)"></path>
+  <path class="s-bahn2" d="M247.9,153.3L262,179.7" marker-end="url(#g-svg-108-p009)"></path>
+  <path class="s-korb" d="M238.9,142.2L231.7,134.7Q235.8,130.5 241.6,129.4L243.7,139.6Z"></path><path class="s-kappe" d="M239.1,143.9a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <text class="st" x="150" y="274">snap late · the forearm rotates in</text>
+</svg>
+        <figcaption class="leise">Key graphic: the wrist snap</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="handgelenk_peitsche" aria-pressed="false">
+      Mark as read
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Exercise</h2><span class="chip chip-rot">open</span></div>
+        
+        <h3 class="ue-titel">Time the snap</h3><div class="ue-block"><h4>Goal</h4><p>Let the wrist snap at the right moment — late, released, at the contact point.</p></div><div class="ue-block"><h4>How to do it</h4><ol class="schrittliste"><li>Take the base position, universal grip, wrist loose.</li><li>Play a forehand drive as usual — but this time, in the last moment before the contact point, let the wrist snap forward.</li><li>Start slowly and deliberately exaggerate the snap to find the feel.</li><li>Then bring a Speeder in: tossed to yourself, dropped to hip height, hit in the arc with a snap.</li><li>Only increase the pace once the snap reliably comes at the moment of contact.</li></ol></div><div class="ue-block"><h4>Progression</h4><p>Alternate between a compact stroke without a snap and one with a snap. Do you feel the difference in pace for the same effort? Then the whip is working.</p></div><div class="ue-block"><h4>Self-check</h4><p>Watch the sound and the feel: a well-timed snap feels effortless and the Speeder flies noticeably faster. If the power comes from a tense arm instead of the released snap, take the pace out and find the timing again first.</p></div><div class="ue-block"><h4>Wrap-up</h4><p>The whip is an ingredient that from now on goes into your hard strokes, not a single stroke. Give it time — clean timing beats raw power.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="handgelenk_peitsche" aria-pressed="false">
+      Mark as done
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Playing goals</dt><dd>Pace and power control</dd>
+        
+        
+        
+        <dt>Prerequisites</dt><dd><a href="/en/baustein/vorhand_drive?kontext=kompetenz">The forehand drive</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Module navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/en/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Back to list</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Share" title="Share">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Save" title="Save">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/en/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/en/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/en/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/en/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/en/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/en/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/en/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/en/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/en/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/en/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/en/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/en/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/en/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/en/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

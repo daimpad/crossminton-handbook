@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Trois raquettes côte à côte, à l'échelle. À gauche une raquette de badminton, longue et fine ; à droite une raquette de squash, longue elle aussi. Au milieu la raquette de crossminton : plus courte, avec un cadre plus robuste. Le règlement autorise une longueur de 61 centimètres au plus et une tête de 650 centimètres carrés au plus.">
+  <style>
+    .s-griff{fill:var(--flaeche,#fff);stroke:var(--tinte-2,#5a6675);stroke-width:1.6;stroke-linejoin:round}
+    .s-hand{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2;stroke-linejoin:round}
+    .s-kerbe{fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:1.6;stroke-linecap:round}
+    .s-links{text-anchor:start}
+    .s-rechts{text-anchor:end}
+    .s-druck{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    .s-finger{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2}
+    .s-rahmen{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    .s-saiten{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:0.6;opacity:.7}
+    .s-schaft{fill:none;stroke:var(--tinte-3,#656f7e);stroke-linecap:round}
+    .s-cmkopf{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:3.4}
+    .s-cmsaiten{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:0.7;opacity:.55}
+    .s-cmschaft{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-linecap:round}
+    .s-masz{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-saite{fill:var(--tinte,#16202b)}
+    .s-saite2{fill:none;stroke:var(--tinte,#16202b);stroke-width:1.6}
+    .s-bett{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.2;stroke-linecap:round}
+    .s-rahmenstueck{fill:var(--tinte-2,#5a6675)}
+    .s-faecher{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1;stroke-dasharray:2 3}
+    .s-flug{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linecap:round}
+    .s-ball{fill:var(--tinte,#16202b)}
+    .s-trenner{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:3 4;opacity:.7}
+    .s-titel{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name{fill:var(--tinte-2,#5a6675);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name2{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .s-teilw{fill:var(--tinte,#16202b);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:3;stroke-linejoin:round}
+    .s-zahl{fill:var(--tinte,#16202b);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <path class="s-schaft" stroke-width="2.2" d="M62,108.5L62,176"/>
+  <rect class="s-rahmen" x="58.1" y="176" width="7.8" height="60" rx="2.3"/>
+  <ellipse class="s-rahmen" cx="62" cy="71" rx="30" ry="37.5" stroke-width="1.6"/>
+  <path class="s-saiten" d="M40.6,46.6L40.6,95.4M49.1,39.5L49.1,102.5M57.7,36.5L57.7,105.5M66.3,36.5L66.3,105.5M74.9,39.5L74.9,102.5M83.4,46.6L83.4,95.4M44.5,41.8L79.5,41.8M38.8,50.2L85.2,50.2M35.7,58.5L88.3,58.5M34.3,66.8L89.7,66.8M34.3,75.2L89.7,75.2M35.7,83.5L88.3,83.5M38.8,91.8L85.2,91.8M44.5,100.2L79.5,100.2"/>
+  <path class="s-schaft" stroke-width="4" d="M304,111.5L304,164"/>
+  <rect class="s-rahmen" x="299.8" y="164" width="8.4" height="72" rx="2.5"/>
+  <ellipse class="s-rahmen" cx="304" cy="71" rx="32.3" ry="40.5" stroke-width="2.4"/>
+  <path class="s-saiten" d="M281,44.6L281,97.4M290.2,37L290.2,105M299.4,33.7L299.4,108.3M308.6,33.7L308.6,108.3M317.8,37L317.8,105M327,44.6L327,97.4M285.1,39.5L322.9,39.5M279.1,48.5L328.9,48.5M275.7,57.5L332.3,57.5M274.2,66.5L333.8,66.5M274.2,75.5L333.8,75.5M275.7,84.5L332.3,84.5M279.1,93.5L328.9,93.5M285.1,102.5L322.9,102.5"/>
+  <path class="s-cmschaft" stroke-width="7" d="M190,143L190,179"/>
+  <rect class="s-cmkopf" x="185.5" y="179" width="9" height="57" rx="2.7"/>
+  <ellipse class="s-cmkopf" cx="190" cy="98" rx="39" ry="45" stroke-width="3.4"/>
+  <path class="s-cmsaiten" d="M162.1,68.7L162.1,127.3M173.3,60.2L173.3,135.8M184.4,56.6L184.4,139.4M195.6,56.6L195.6,139.4M206.7,60.2L206.7,135.8M217.9,68.7L217.9,127.3M167.2,63L212.8,63M159.8,73L220.2,73M155.8,83L224.2,83M154,93L226,93M154,103L226,103M155.8,113L224.2,113M159.8,123L220.2,123M167.2,133L212.8,133"/>
+  <path class="s-masz" d="M132,53L182,53M132,236L160,236"/>
+  <path class="s-masz" d="M140,55L140,234" marker-start="url(#mp)" marker-end="url(#mp)"/>
+  <text class="s-zahl" x="140" y="148.5">max. 61 cm</text>
+  <text class="s-teilw" x="190" y="95">tête</text>
+  <text class="s-teilw" x="190" y="108">≤ 650 cm²</text>
+  <text class="s-name" x="62" y="254">Badminton</text>
+  <text class="s-name2" x="190" y="254">Crossminton</text>
+  <text class="s-name" x="304" y="254">Squash</text>
+  <text class="st" x="180" y="286">plus courte qu'au squash, plus robuste</text>
+</svg>

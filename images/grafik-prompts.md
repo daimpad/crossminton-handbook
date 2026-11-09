@@ -1,0 +1,525 @@
+# Grafik-Prompts — Crossminton-Handbuch
+
+Zentraler, durchnummerierter Katalog aller Grafiken der App. Jede Nummer `G-XXX` steht für genau ein Bild: `G-XXX.svg` (Inline-SVG, theme-fähig) mit PNG-Fallback `G-XXX.png` und den Sprachzwillingen `G-XXX.en/.fr/.pl` (je `.svg` und `.png`). Die Zuordnung Baustein ↔ Nummer ↔ Datei ↔ Katalogeintrag bleibt stabil; Nummern werden nie umbenannt.
+
+**Nummernkreis nach Reitern:** Technik (G-001–022), Taktik (G-023–031), Athletik & Kondition (G-032–036), Doppel (G-037–053), Outdoor (G-054–059), Regeln (G-060–061), Spielformen (G-062–063), Ausrüstung (G-064–070); danach fortlaufend ohne Reiterbindung: G-071 (Taktik), G-072 (Taktik), G-073 (Ausrüstung), G-074–076 (Athletik), G-077–079 (Spielmodi), G-080 (Ausrüstung), G-081 (Spielmodi).
+
+**Gemeinsamer Stil (umgesetzt):** reduzierte Vektorzeichnung ausschließlich aus CI-Tokens, ohne Hintergrund (der Grund kommt von `.grafik-bild`), kurze Caption unten, keine Fotorealistik, keine Marken oder Logos. Zwei Familien:
+
+- **Personengrafiken (37)** im Stil „Dynamische Silhouette“: gefüllte Körper mit fester Proportionstabelle, nahe Seite `--tinte`, ferne Seite `--tinte-2`, Freistellungsrand in `--flaeche-2`; der Akzent `--primaer-dunkel` liegt nur auf dem einen didaktischen Element und seinem Werkzeug (Schläger, Bahn, Treffpunkt); Geisterphasen als Umriss in `--tinte-3`, Bodenschatten in `--schatten-boden`, der Speeder in seinen Originalfarben. Erzeugt von `scratchpad/figuren/`, Regeln in `docs/grafik-strategie.md`.
+- **Diagramme (44)**: Feld, Zonen, Bahnen, Regelskizzen, die Speeder-Konstruktionszeichnung, die Ausrüstungs-Vergleiche (Griff, Schläger, Bespannung, Laufwege für die Schuhe), der Sicherheitsabstand (G-071) die Zeitleiste des frühen Starts (G-076) die Night-Speeder-Tafel (G-079), das Schichtprinzip (G-080) und die Spielarten im Überblick (G-081) als flache Linienzeichnung, Akzent `--primaer`.
+
+Farbrollen und gemessene Kontraste stehen in `docs/ci.md`, Abschnitt „Grafiken“. Der englische Prompt-Vorspann, mit dem der Katalog begann, galt einer KI-Bilderzeugung, die nie eingesetzt wurde: *illustrative, reduced vector-style drawing, clean flat lines, minimal detail, limited flat colour palette, no background or plain white background, easily abstractable, instructional sports-diagram aesthetic.*
+
+**Integration:** je Baustein ein optionales Feld `grafik: ["G-XXX"]` (Liste, mehrere Bilder je Baustein möglich); der Loader zieht darüber die Bilddatei und zeigt sie in der Baustein-Ansicht. Bausteine ohne Eintrag zeigen kein Bild (siehe Abdeckung).
+
+**Alle 81 Grafiken sind theme-fähiges Inline-SVG.** Ursprünglich war eine Trennlinie vorgesehen (Raum/Geometrie als SVG vs. Körper/Textur als KI-PNG); umgesetzt wurde stattdessen **durchgängig SVG**. Die Figur-, Griff- und Szenenmotive waren zuerst abstrakte Rundkappen-Strichfiguren; seit Oktober 2026 sind alle 32 durch generierte Personengrafiken ersetzt. Das hält den Stil einheitlich, buildfrei und grotesk-frei (keine unheimliche KI-Anatomie) und ist in Hell/Dunkel automatisch lesbar.
+
+- Jede Nummer liegt als **`G-XXX.svg` UND `G-XXX.png`** (Render-Fallback in doppelter viewBox-Größe auf deckendem `--flaeche-2`) vor; alle 81 stehen im `SVG_GRAFIKEN`-Set (`js/oberflaeche.js`). Sie nutzen CI-Tokens mit Hell-Fallback (`var(--tinte,#16202b)` …), kippen mit dem `data-theme`-Umschalter, sind gestochen scharf und klein.
+- **Texttragend → Sprach-Zwilling:** weil jedes SVG eine kurze deutsche Caption + `aria-label` trägt, liegt zu jeder Nummer ein **`G-XXX.<sprache>.svg`/`.png`** je en/fr/pl (nur `<text>`+`aria-label` übersetzt, Geometrie byte-identisch), geladen über `GRAFIK_SPRACHEN`. Alle drei Sprachen sind vollständig; ohne Variante fiele es sauber auf de zurück.
+- **Rezept für Diagramme (buildfrei):** SVG mit Token-`var()` schreiben → `scratchpad/render-svg.mjs G-XXX` rendert das `.png` (2× der viewBox, auf deckendem `--flaeche-2`, Hell-Fallback-Werte) → `scratchpad/gen-en.mjs` / `gen-fr.mjs` / `gen-pl.mjs` erzeugen die Zwillinge aus der Übersetzungsmap (die Speeder-Tafeln `gen-speeder.mjs` + `gen-speeder-sprachen.mjs`, die Ausrüstungs-Vergleiche G-068–G-070 `gen-ausruestung.mjs`, das alle vier Sprachen aus einer Quelle schreibt) → deren `.png` rendern. `scratchpad/textgrenzen.mjs` misst danach alle Beschriftungen (Caption ≤ 250, nichts über den Rand, keine Linie durch einen Text ohne Halo), `scratchpad/figuren/werkzeug/bogen.mjs` kachelt hell und dunkel zur Sichtprüfung.
+- **Personengrafiken werden generiert, nicht gezeichnet** (Stil „Dynamische Silhouette“, `docs/grafik-strategie.md`). Ein Figurengenerator mit fester Proportionstabelle (`scratchpad/figuren/figur.mjs`), Bauteilen für Speeder, Schatten, Bahnen und Feld (`bauteile.mjs`), den Nahaufnahmen von Hand und Bein (`hand.mjs`, `bein.mjs`) und einer Komposition je Grafik (`motive.mjs`) erzeugt alle vier Sprachen auf einmal; die Texte stehen allein in `texte.mjs`. Diese Dateien tragen `data-quelle="figuren"`, die Übersetzungsskripte `gen-en/fr/pl.mjs` brechen vor ihnen ab. Neu erzeugen: `node scratchpad/figuren/motive.mjs G-XXX`, dann `node scratchpad/render-svg.mjs G-XXX G-XXX.en G-XXX.fr G-XXX.pl`. Geprüft wird statisch über `scripts/grafik-gate.mjs` (Test [26]) und gemessen über `scratchpad/figuren/gate.mjs`. Stand: der Pilot mit **G-001, G-002, G-004, G-008, G-009, G-010, G-020, G-043, G-053** (abgenommen, G-001/G-009/G-020 nachgebessert), Welle 1 mit **G-007, G-032**, Welle 2 mit **G-003, G-012, G-018, G-019, G-022, G-062**, Welle 3 mit **G-005, G-006**, Welle 4 mit **G-033, G-034, G-036**, Welle 5 mit **G-047**, Welle 6 mit **G-011, G-015, G-016, G-017**, Welle 7 mit **G-054, G-056, G-057, G-058** und Welle 8 mit **G-035** (Nahaufnahme des Beins, `bein.mjs`); damit sind alle 32 Personengrafiken generiert. Dazu kamen **G-072** (Welle A2, Treffhöhe beim Umschalten) sowie **G-074** und **G-075** (Welle B, Kraftkette und Aufwärmfolge) und **G-077**/**G-078** (Welle C, Snow- und Beachminton).
+- Die **AI-Prompts unten bleiben als Motiv-/Redaktionsreferenz** stehen (welches Motiv jede Nummer zeigt) — sie sind nicht mehr die Produktionsquelle.
+
+## Abdeckung (Audit)
+
+Bebildert sind die Reiter, in denen ein zentrales Bild das Verständnis trägt: **Technik** (alle Bausteine), die **illustrierbare Taktik-Auswahl**, **bewegungsnahe Athletik-Bausteine**, das **Doppel** über alle drei Stufen, **Outdoor**, zwei **Referenzgrafiken** im Regeln-Reiter und die **Speeder-Konstruktionszeichnung** sowie die ganze Ausrüstung (Griff, Schläger, Bespannung, Schuhe, Schichtprinzip).
+
+Bewusst **ohne Leitgrafik** bleiben:
+
+- **Mentales** (alle Stufen) — reflexiv/abstrakt; ein Motorik-Bild trüge nichts bei. Kandidaten für spätere Metapher-Motive.
+- **Abstrakte Taktik** — `gegner_lesen_muster`, `doppel_grundlagen`, `engen_satz_fuehren`, `der_matchplan`, `dem_gegner_aufzwingen`, `matchverlauf_steuern`, `entscheidender_punkt`.
+- **Konditionelle Athletik** — `warum_athletik_dein_spiel_traegt`, `durchhalten`, `erholen`, `gezielt_trainieren`, `intervallausdauer`, `belastung_steuern_regenerieren`, `form_ueber_die_saison`, `langfristig_belastbar` — Belastungs-/Regenerationsthemen ohne sinnvolles Einzelbild (Gesundheitsrahmen).
+- **Trainer-Trainingsgestaltung** — Meta-Ebene, kein Lernbild.
+
+Neue Nummern ab G-082. Der Grafik-Test zählt aktuell 73 Bausteine mit Grafik und 79 Referenzen. Für Metapher-/Schema-Motive der abstrakten Bausteine ist ein eigener, späterer Durchgang vorgesehen.
+
+---
+
+## Technik (G-001–022)
+
+**G-001** · `images/G-001.png` · `griff` · Beginner  
+*Leitgrafik: der Universalgriff mit V-Stellung*  
+Close-up of a hand holding a crossminton racket handle in a neutral universal grip, viewed from above and slightly to the side so the top of the hand is visible. The grip resembles a relaxed handshake; a clear V-shape is formed between thumb and index finger, aligned with the top edge of the handle. Fingers relaxed, not clenched. Focus on the hand and upper handle; the rest of the racket fades out or is cropped.
+*Generiert (Pilot): Schrägansicht von oben hinten auf die rechte Hand, Griff steigt nach rechts oben, Kopf hochkant angeschnitten. Durch die Kerbe zwischen Daumen und Zeigefinger scheint die obere Griffkante, der Akzent liegt auf ihren Kanten — das V, Spitze zum Griffende.*
+
+**G-002** · `images/G-002.png` · `grundposition` · Beginner  
+*Leitgrafik: die Grundposition*  
+A single player shown from the front in the crossminton ready position: feet slightly more than shoulder-width apart, knees bent, weight forward on the balls of the feet, heels barely touching the ground, torso slightly inclined forward, racket held loosely in front of the body, shoulders relaxed. Alert, spring-loaded posture. Full figure, centered.
+*Generiert (Pilot): Dreiviertelansicht, Knie gebeugt, leicht vorgeneigt, Fersen knapp gelöst; Akzentmarken unter beiden Fußballen.*
+
+**G-003** · `images/G-003.png` · `vorhand_drive` · Beginner  
+*Leitgrafik: der Vorhand-Drive*  
+A single player from the side hitting a forehand drive in crossminton. Weight shifted onto the front foot, torso rotated toward the hitting direction, racket meeting the speeder in a compact arc clearly in front of the body, wrist held firm and quiet. Flat, direct swing path.
+*Generiert (Welle 2): Dreiviertel von schräg vorn auf der Schlägerseite, Ziel rechts. Gewicht auf dem vorderen Fuß, Treffpunkt auf Hüfthöhe vor dem Körper, die Fläche als schmales Hochoval zum Ziel. Eine kurze Spur zeigt den kompakten Bogen, die Bahn verlässt das Bild flach nach rechts.*
+
+**G-004** · `images/G-004.png` · `rueckhand` · Beginner  
+*Leitgrafik: die Rückhand*  
+A single player from the side hitting a backhand in crossminton, mirrored to the non-racket side of the body. Weight shifted onto the racket-side foot, torso opening toward the hitting direction, racket guided close past the body and meeting the speeder in front of the body. Compact swing.
+*Generiert (Pilot): Rückhand auf der Nicht-Schlägerseite, rechter Fuß vorn, Treffpunkt vor dem Körper, Schwungspur von der linken Hüfte, flache Bahn nach links.*
+
+**G-005** · `images/G-005.png` · `aufschlag` · Beginner  
+*Aufschlag, Bild 1: der Speeder fällt*  
+A single player from the side, about to serve in crossminton. The non-racket hand releases the speeder at hip height; the speeder is falling. Racket arm prepared low, ready to swing forward from below. One foot clearly on the ground. Calm, prepared stance.
+*Generiert (Welle 3): reine Seitenansicht (leicht zur Betrachterin gedreht), Ziel rechts, unmittelbar nach dem Loslassen. Gewicht hinten, beide Füße flach hinter der Aufschlaglinie (Bodenmarke). Die freie Hand hat den Speeder auf Hüfthöhe vor dem Körper eben losgelassen, er fällt Kappe voran senkrecht (kurzer Fallweg). Der Schlagarm hängt wie ein Pendel nach hinten unten, der Schläger hinter dem Bein auf Kniehöhe — vor dem Schritt liegt nichts. Ein kurzer Bogenpfeil hinter dem hinteren Bein deutet den kommenden Schwung von hinten unten nach vorn an.*
+
+**G-006** · `images/G-006.png` · `aufschlag` · Beginner  
+*Aufschlag, Bild 2: Treffpunkt unterhalb der Schlaghand*  
+A single player from the side at the moment of a crossminton serve contact. The racket meets the speeder from below; the entire speeder is clearly below the level of the racket hand at the point of impact. Forward, uninterrupted swing. One foot on the ground.
+*Generiert (Welle 3): dieselbe Kamera und derselbe Boden wie G-005, Treffmoment. Das Gewicht ist vorn, der vordere Fuß steht wie in Bild 1, die hintere Ferse hebt sich. Der Schlagarm ist fast gestreckt nach vorn geschwungen, die Hand auf Hüfthöhe; der Schläger hängt steil nach unten, der Kopf knapp vor und unter der Hand, die Fläche leicht geöffnet zum Ziel. Eine gestrichelte Linie auf Höhe der Schlaghand beginnt hinter dem Körper und reicht über den Speeder hinaus — der ganze Speeder liegt darunter, die Kappe vor der Fläche, genau auf dem Fallweg aus Bild 1. Eine Spur zeigt den Schwungweg aus Bild 1, die Bahn startet flach und läuft lang aus dem Bild.*
+
+**G-007** · `images/G-007.png` · `beinarbeit` · Beginner  
+*Beinarbeit, Bild 1: der Split-Step*  
+A single player from the front in the central position of the square, performing a small split-step: a low springy hop, landing on the balls of both feet, knees bent, ready to push off in any direction. Motion lines suggesting the light upward hop.
+*Generiert (Welle 1): die LANDUNG des Split-Steps in Dreiviertelansicht — breiter und tiefer als die Grundposition G-002, Fersen deutlich oben, Akzentmarken unter beiden Fußballen. Ein kurzer Auf-ab-Pfeil zeigt den kleinen Federweg (ein großer Sprungpfeil widerspräche „klein“), vier Winkel am Boden die Richtungen, in die es aus der Landung geht.*
+
+**G-008** · `images/G-008.png` · `beinarbeit` · Beginner  
+*Beinarbeit, Bild 2: der Bewegungskreislauf*  
+A single player from a slightly elevated angle showing the movement cycle in one square: a lunge step reaching toward one corner to play the speeder, with a curved arrow indicating the return path back to the central position in the middle of the square.
+*Generiert (Pilot): Feld in Perspektive, Ausfallschritt in die vordere Ecke, blass die Bereitschaft in der Mitte, Hinweg durchgezogen, Rückweg gestrichelt zur Mittenmarke.*
+
+**G-009** · `images/G-009.png` · `handgelenk_peitsche` · Fortgeschritten  
+*Leitgrafik: der Handgelenk-Schnapp*  
+Close-up of a forearm, wrist and racket head from the side, showing the whip-like wrist action of an advanced crossminton stroke. The wrist is first laid back (cocked), then snaps forward; depict the snap with a curved motion arc and a slight blur at the racket head to convey speed. The forearm stays relatively quiet while wrist and racket head accelerate. Loose, relaxed grip. Focus on wrist and racket head; forearm entering from the edge of the frame.
+*Generiert (Pilot, nachgebessert): Unterarm von links unten, dieselbe Hand wie G-001. Blass die Ausholphase mit zurückgelegtem Handgelenk und offener Fläche (nur der Schläger — eine blasse Geisterhand lag hinter der kräftigen und machte die Stelle unruhig), kräftig der Treffmoment mit hochkant stehender Fläche; Pfeil um den Unterarm (Eindrehen), Bahn des Kopfs mit Pfeil vor dem Kopf, Speeder geht ab. Anders als der Prompt oben verlangt der Bausteintext das Eindrehen des Unterarms — die Caption sagt darum „Unterarm dreht ein“.*
+
+**G-010** · `images/G-010.png` · `ueberkopf_clear` · Fortgeschritten  
+*Leitgrafik: der Überkopfschlag*  
+A single player from the side hitting an overhead clear in crossminton. Full upward extension: contact point high above and slightly in front of the head, hitting arm stretched up, body elongated, clear forward follow-through. A curved trajectory arrow shows a high, deep arc travelling far into the back of the opposite square. Powerful but controlled posture.
+*Generiert (Pilot): seitlich gestellt, voll gestreckt, Treffpunkt hoch und leicht vor dem Körper; zwei Bahnen verlassen das Bild, defensiv hoch und weit, offensiv flacher (mit Legende).*
+
+**G-011** · `images/G-011.png` · `smash` · Fortgeschritten  
+*Leitgrafik: der Smash*  
+A single player from the side hitting a smash in crossminton. High contact point above and in front of the head, aggressive downward swing, body driving forward and down. A straight, steep trajectory arrow points sharply downward toward the opposite square. Explosive, committed posture; the speeder angled steeply down.
+*Generiert (Welle 6): dieselbe Figur, Kamera und Position wie G-010, damit beide als Paar lesbar sind. Treffmoment mit dem Arm gut 30° vor der Senkrechten, der Kontakt vor dem Kopf über der vorderen Schulter, die Fläche geschlossen nach vorn unten; der Rumpf klappt nach vorn, das Gewicht liegt vorn, der hintere Fuß steht auf dem Ballen, der freie Arm ist vor den Bauch gezogen. Die Bahn läuft etwa 18° unter der Waagerechten lang nach vorn unten aus dem Bild (bei 12,8 m neutraler Zone landet ein Smash nie vor der eigenen Figur), zwei blasse Linien daneben zeigen andere Winkel. Caption: „vor dem Kopf treffen · nach vorn unten“.*
+
+**G-012** · `images/G-012.png` · `kurzes_spiel_stopp` · Fortgeschritten  
+*Leitgrafik: der Stopp*  
+A single player from the side playing a soft stop/drop shot in crossminton. The preparation looks like a firm shot, but the contact is gentle and decelerated. A short, soft trajectory arc shows the speeder barely clearing the passing zone and dropping just behind the front line of the opposite square. Emphasis on the light, cushioned touch and quiet racket; implied contrast between big preparation and soft contact.
+*Generiert (Welle 2): Profil quer zur Spielrichtung, zwei Personen. Links der Spieler im Treffmoment, die Fläche leicht geöffnet; blass dahinter der Ausholweg des harten Drives auf Hüfthöhe (dieselbe Vorbereitung ist die Täuschung). Die Bodenlinie ist mit Bruchzeichen und „12,8 m“ gestaucht, ein Netz gibt es nicht. Die Bahn steigt flach, fällt steil und endet in einer Zielmarke am Boden knapp hinter der vorderen Linie des Gegnerfelds; der Gegner steht blass und tief an seiner Grundlinie.*
+
+**G-013** · `images/G-013.png` · `schnitt_spin` · Fortgeschritten  
+*Leitgrafik: der Schnitt*  
+Close-up of a racket face meeting the speeder with a slicing, brushing motion in crossminton. The racket face is angled and moves across the speeder rather than straight through it; curved motion lines indicate the brushing cut and the resulting spin on the speeder. Focus on the contact point, the angled racket face and the slicing path.
+
+**G-014** · `images/G-014.png` · `beinarbeit_system` · Fortgeschritten  
+*Leitgrafik: das Beinarbeit-System*  
+A single player from a slightly elevated top-down angle in the center of one square, illustrating the footwork system of advanced crossminton. From a central base position (with a small split-step indicated), several curved arrows fan out to the corners and sides of the square and back, showing the repeating pattern of pushing off to reach the speeder and recovering to base. Balanced, spring-loaded center posture; clean diagrammatic arrows.
+
+**G-015** · `images/G-015.png` · `frueh_nehmen` · Experte  
+*Leitgrafik: Den Speeder früh nehmen*  
+A single player from the side taking the speeder at the earliest, highest possible point in crossminton, contact clearly in front of and above the body, meeting the speeder on the rise. A ghosted lower contact point with a small arrow indicates where a slower player would have hit, emphasizing the stolen time. Compact, early, assertive stance.
+*Generiert (Welle 6): Seitansicht, Treffmoment am Ende eines Schritts in den Ball hinein, der schlagseitige Fuß vorn, hintere Ferse oben; kompakter Schlag mit leicht gebeugtem Ellbogen, Treffpunkt klar vor und über dem Kopf, die Kappe zeigt in Abflugrichtung. Die ankommende Bahn sinkt gepunktet von rechts oben durch den frühen Treffpunkt weiter bis dicht vor den Oberkörper, wo ein Speeder im Umriss (deckend, `kontur`) den späten Treffpunkt zeigt; ein Doppelpfeil zwischen beiden steht für die gestohlene Zeit. Die abgehende Bahn läuft flach nach vorn aus dem Bild. Caption: „früh und hoch — gestohlene Zeit“.*
+
+**G-016** · `images/G-016.png` · `taeuschung` · Experte  
+*Täuschung, Bild 1: die identische Vorbereitung*  
+A single player from the side in the preparation phase of an advanced crossminton stroke, with a deliberately neutral, identical preparation that gives nothing away — full backswing, poised body, "poker face" stance. The posture reads as ambiguous, not committed to any particular shot.
+*Generiert (Welle 6): Dreiviertelansicht von vorn, Seitstellung zum Ziel rechts, Kopf im Profil zum Speeder. Ende der Ausholbewegung: Ellbogen auf Schulterhöhe, Unterarm senkrecht, Schläger hoch hinter der Schulter, Gewicht auf dem hinteren Bein, freier Arm gestreckt zum ankommenden Speeder. Nur die ankommende Bahn ist zu sehen, kein Fragezeichen: die Neutralität trägt die Pose. Die Pose steht als `POSEN.taeuschungAus` für beide Bilder. Caption: „gleiche Vorbereitung — nichts verraten“.*
+
+**G-017** · `images/G-017.png` · `taeuschung` · Experte  
+*Täuschung, Bild 2: die späte Entscheidung*  
+The same player and identical preparation as before, now with two divergent dashed trajectory arrows branching from the racket — one flat and fast (a hard drive), one short and soft (a drop) — illustrating that the same preparation can produce different shots, chosen only at the last moment. Branching arrows clearly diverging.
+*Generiert (Welle 6): dieselbe Figur aus derselben Vorlage, die Ausholposition aus G-016 deckungsgleich als Umriss (`geist: 'kontur'`, sie trägt die Aussage „eine Vorbereitung“). Im Treffmoment drehen Hüfte und Schultern zum Ziel, das Gewicht geht nach vorn (die Hüfte rückt vor, beide Füße bleiben, wo sie in G-016 standen), die Fläche ist neutral. Ab dem Speeder trennen sich zwei Wege: der harte Schlag als kräftige Linie flach und lang aus dem Bild, der Stopp gepunktet in dieselbe Richtung, früh an Höhe verlierend, er verlässt das Bild noch im Flug (er muss die 12,8 m überbrücken und landet nie in Reichweite). Ein Kreis am Speeder markiert die Entscheidung. Caption: „eine Vorbereitung, zwei Möglichkeiten“.*
+
+**G-018** · `images/G-018.png` · `tempo_rhythmus_wechsel` · Experte  
+*Tempowechsel, Bild 1: das hohe Tempo*  
+A single player from the side hitting a fast, hard crossminton shot, with strong motion blur and a flat, fast straight trajectory arrow, conveying high pace.
+*Generiert (Welle 2): harter Drive im Durchschwung, der Arm über den Treffpunkt hinaus nach vorn gezogen. Die Spur beginnt hinter der Hüfte wie in G-019 und läuft am Treffpunkt vorbei weiter (keine Bewegungsunschärfe, keine Speedlines). Der Speeder ist schon weit voraus, die Bahn flach; eine Taktleiste darunter zeigt den gleichmäßigen Takt.*
+
+**G-019** · `images/G-019.png` · `tempo_rhythmus_wechsel` · Experte  
+*Tempowechsel, Bild 2: der gebrochene Rhythmus*  
+The same player from the side with a near-identical preparation, now hitting a slow, high, soft shot — a gentle high arc trajectory arrow and a relaxed, decelerated contact — illustrating a deliberate break in tempo from the same-looking setup.
+*Generiert (Welle 2): Beine, Rumpf und Spur deckungsgleich mit G-018, aber die Spur endet am Schläger: die Hand bleibt im Treffpunkt stehen, die Fläche ist sichtbar nach oben geöffnet. Die Bahn steigt weich und verlässt das Bild oben rechts. In der Taktleiste folgt auf denselben Grundtakt eine Lücke.*
+
+**G-020** · `images/G-020.png` · `sprung_smash` · Experte  
+*Leitgrafik: Der Sprung-Smash*  
+A single player in the air at the apex of a jump, hitting a jump smash in crossminton. Elevated contact point high above the head, steep downward trajectory arrow toward the opposite square, athletic airborne posture with the hitting arm extended. Controlled elevation; body balanced for a soft landing.
+*Generiert (Pilot): Treffen im höchsten Punkt, Beine in Schrittstellung, steile Bahn nach unten; blass daneben die weiche Landung auf beiden Ballen, gepunktet der Weg des Schwerpunkts.*
+
+**G-021** · `images/G-021.png` · `praezision_an_die_linien` · Experte  
+*Leitgrafik: Präzision an die Linien*  
+A top-down diagram of a crossminton square with the speeder landing exactly on a corner line at the very edge of the square. Small tight target zones marked in the corners and along the lines, with a thin arrow showing the speeder threaded precisely to the edge, illustrating minimal margin and pinpoint placement.
+
+**G-022** · `images/G-022.png` · `konstanz_unter_hoechstdruck` · Experte  
+*Leitgrafik: Konstanz unter Höchstdruck*  
+A single player from the side executing a clean, textbook-perfect, balanced crossminton stroke with calm, composed posture — steady base, quiet head, controlled follow-through. The image conveys reliability and composure, a repeatable stroke held together under pressure rather than a flashy one. Minimal, controlled, balanced.
+*Generiert (Welle 2): ruhiger, lehrbuchhafter Drive mit stabiler Basis, beide Knie gebeugt. Drei gepunktete, fast deckungsgleiche Bahnen enden in derselben engen Zielmarke; ein Bruchzeichen über dem Bündel sagt, dass das Ziel im Feld gegenüber liegt. Die Anzeigetafel „15:15“ ist der Druck.*
+
+## Taktik (G-023–031)
+
+**G-023** · `images/G-023.png` · `spielziel_verstehen` · Beginner  
+*Leitgrafik: Das Spielziel verstehen*  
+Top-down diagram of the full crossminton court (two squares separated by the passing zone), with a trajectory arrow carrying the speeder across the passing zone to land inside the far square. Illustrates the basic goal: cross the zone, land in the opposite square.
+
+**G-024** · `images/G-024.png` · `zentrale_position` · Beginner  
+*Leitgrafik: Zentrale Position und Feldkontrolle*  
+Top-down diagram of one square with a single player marker at the central recovery position, and thin arrows radiating outward to all four corners, showing roughly equal reach to every part of the court from that base. Emphasize the balanced central spot.
+
+**G-025** · `images/G-025.png` · `laenge_tiefe` · Beginner  
+*Leitgrafik: Länge und Tiefe als einfachste Waffe*  
+Top-down diagram of the opposite square with two target zones marked — one short near the front line, one deep near the back line — and two trajectory arrows showing a short drop versus a deep clear. Illustrates varying length and depth.
+
+**G-026** · `images/G-026.png` · `rueckhand_des_gegners` · Beginner  
+*Leitgrafik: Die Rückhand des Gegners lesen*  
+Top-down diagram of the opposite square with the opponent marked and their backhand corner highlighted as a target zone, and an arrow directing the speeder to that backhand corner. Illustrates targeting the opponent's backhand.
+
+**G-027** · `images/G-027.png` · `aufschlag_taktisch` · Beginner  
+*Leitgrafik: Den Aufschlag taktisch nutzen*  
+Top-down diagram showing serve placement options from the serve zone: thin arrows to different target points in the opposite square (corners and body), illustrating tactical variety in the serve.
+
+**G-028** · `images/G-028.png` · `punkt_aufbauen` · Fortgeschritten  
+*Leitgrafik: Den Punkt aufbauen — lang und kurz*  
+Top-down diagram of a rally being constructed: numbered trajectory arrows (1, 2, 3) moving the opponent from corner to corner across their square, ending with an opening. Illustrates building the point by moving the opponent.
+
+**G-029** · `images/G-029.png` · `smash_vorbereiten` · Fortgeschritten  
+*Leitgrafik: Den Smash vorbereiten*  
+Top-down diagram of a setup: a deep, pressing shot forces the opponent to send back a weak high ball (upward arrow), which is then put away with a steep downward smash arrow. Illustrates forcing the lift, then finishing.
+
+**G-030** · `images/G-030.png` · `gegner_typen_gegenrezepte` · Experte  
+*Leitgrafik: Gegner-Typen und Gegenrezepte*  
+Schematic three-panel diagram of opponent archetypes — an attacker, a defender/retriever, and a slow mover — each with a short counter-strategy indication (slow the pace; move corner to corner; wide angles). Clean schematic.
+
+**G-031** · `images/G-031.png` · `schwaeche_systematisch_angreifen` · Experte  
+*Leitgrafik: Eine Schwäche systematisch angreifen*  
+Top-down diagram of the opposite square with one corner marked as a weakness and several repeated arrows returning to that corner, plus one or two other arrows opening it up. Illustrates systematically attacking a single weak zone.
+
+## Athletik & Kondition (G-032–036)
+
+**G-032** · `images/G-032.png` · `schnelle_fuesse` · Beginner  
+*Leitgrafik: Schnelle Füße*  
+A single player from the front doing a quick-feet footwork drill in crossminton, low athletic stance on the balls of the feet, small rapid steps suggested by light motion lines at the feet, knees bent, ready to change direction. Emphasis on fast, light ground contact.
+*Generiert (Welle 1): Feld in Perspektive mit vier Hütchen und Mittenmarke; die Figur in der Split-Step-Landung in der Mitte. Zum vorderen linken Hütchen führt eine Spur vieler kleiner Bodenkontakte (die Aussage: kurze, schnelle Kontakte statt großer Schritte), gestrichelt der Rückweg zur Mitte.*
+
+**G-033** · `images/G-033.png` · `beweglichkeit_und_schulter` · Beginner  
+*Leitgrafik: Beweglichkeit und die Schulter*  
+A single player performing a gentle shoulder and torso mobility movement, one arm circling along a curved motion arc across the shoulder, relaxed upright posture. Warm-up character, smooth range of motion.
+*Generiert (Welle 4): frontal, leicht zur linken Seite gedreht, nach dem Spiel — der Schläger liegt neben dem rechten Fuß. Der Schlagarm liegt waagerecht in Schulterhöhe quer vor der Brust, die linke Hand fasst ihn knapp oberhalb des Ellbogens und zieht sanft heran; Schultern tief, Rumpf dreht nicht mit. Eine weiche Sichel an der Rückseite der rechten Schulter zeigt die Zone des leichten Ziehens, ein kurzer Pfeil über dem Unterarm die Zugrichtung. Kein Schmerzsymbol. Caption: „hintere Schulter sanft dehnen“.*
+
+**G-034** · `images/G-034.png` · `explosivitaet` · Fortgeschritten  
+*Leitgrafik: Explosivität und Sprungkraft*  
+A single player pushing off explosively from a low loaded stance toward one corner, a strong upward-forward motion arrow from the driving leg, dynamic athletic posture conveying power and jump strength.
+*Generiert (Welle 4): Seitansicht als Bewegungsfolge von links nach rechts: das Einfedern als Kontur (Knie über 90°, über den Zehen), der Absprung als volle Figur in Dreifachstreckung mit den Fußspitzen eben vom Boden, die Arme mit dem Schläger nach vorn oben, die weiche Landung auf den Ballen als Kontur. Ein Doppelpfeil in der Lücke zwischen Einfedern und Absprung (vordehnen, sofort strecken), eine gepunktete Schwerpunktbahn hinter den Figuren mit dem Scheitel nach dem Absprung, ein Dämpfungsbogen unter der Landung. Keine Kästen oder Tiefsprünge. Caption: „einfedern · strecken · weich landen“.*
+
+**G-035** · `images/G-035.png` · `reaktivkraft_bodenkontakt` · Experte  
+*Leitgrafik: Reaktivkraft — der schnelle Bodenkontakt*  
+Close-up side view of a player's foot and lower leg at a short, springy ground contact — minimal contact time shown by a small compression arc and a quick rebound arrow, illustrating reactive strength and a stiff, elastic bounce.
+*Generiert (Welle 8): Nahaufnahme ohne Ganzkörper-Figur (`scratchpad/figuren/bein.mjs`, wie die Hand in `hand.mjs`), streng seitlich, das Bein von der Oberschenkelmitte bis zu den Zehen, der Oberschenkel blendet nach oben aus. Gezeigt ist der tiefste Punkt des Kontakts: Knie leicht gebeugt, Schienbein nach vorn geneigt, der Schuh steht nur mit dem Vorfuß auf der durchgezogenen Bodenlinie, die Ferse schwebt eine Fingerbreite darüber; eine helle Naht trennt die Sohle vom Schuh. Die Achillessehne ist als Feder im Akzent gezeichnet. Zwei Umrissfüße zeigen Anflug (links oben, im Sprunggelenk gestreckt, Zehen nach unten zur Vorfußlandung) und Abflug (rechts oben, nach dem Abdruck noch stärker gestreckt), die zwei Pfeile dazwischen bilden ein enges V. Der alte Fuß berührte den Boden nicht, das Bein war ein „L“, die Caption abgeschnitten. Kein Sprungkasten, keine Hürde, kein Tiefsprung (Gesundheitsrahmen). Caption: „kurzer Kontakt · federnd statt schwer“.*
+
+**G-036** · `images/G-036.png` · `bewegungsoekonomie` · Experte  
+*Leitgrafik: Bewegungsökonomie — effizient statt hektisch*  
+Side-by-side contrast of one player moving efficiently — a smooth, minimal, economical path with a clean short arrow — versus a faded hectic version with scattered extra motion lines. Illustrates economical, unhurried movement.
+*Generiert (Welle 4): zwei Bildhälften in einer 330 × 300 breiten Grafik (bei H ≥ 20 passt die Szene nicht in 150 Einheiten), gleicher Start an der Mittelmarke und derselbe Speeder vorn rechts. Beide beginnen mit der Grundposition als Kontur ohne Schläger, die Mittelmarke unter ihren Füßen. Links effizient: die volle Figur in einem einzigen kontrollierten Ausfallschritt, der hintere Fuß noch auf der Marke, das vordere Schienbein senkrecht, Schläger wie im Drive mit der Fläche zum Ziel, Treffpunkt vor dem vorderen Fuß; am Boden ein glatter Weg hin und gestrichelt zurück zur Mitte. Rechts hektisch als Kontur: fünf kleine Zickzack-Abdrücke bis zum vorderen Fuß, die Figur kippt über das vordere Bein, holt mit dem Schläger weit nach hinten oben aus und reißt den freien Arm nach hinten; der Speeder hängt ungetroffen vor ihr. Das Knie bleibt hinter der Fußspitze.*
+
+## Doppel (G-037–053)
+
+**G-037** · `images/G-037.png` · `doppel_als_eigenes_spiel` · Fortgeschritten  
+*Leitgrafik: Das Doppel als eigenes Spiel*  
+Top-down diagram of a crossminton court set for doubles — two players in each of the two opposing squares (four players total), separated by the passing zone. Emphasize the shared square: two players occupying one square as a pair. Simple distinct markers for players, clean court outline.
+
+**G-038** · `images/G-038.png` · `angriff_im_paar` · Fortgeschritten  
+*Leitgrafik: Angriff im Paar*  
+Top-down diagram of one square showing the doubles attacking formation: one player positioned forward near the front line (attacker) and the partner positioned behind (back-space player), a clear front-back stagger. Distinct markers for the two roles; an arrow suggesting the forward attacking orientation.
+
+**G-039** · `images/G-039.png` · `verteidigung_im_paar` · Fortgeschritten  
+*Leitgrafik: Verteidigung im Paar*  
+Top-down diagram of one square (front line at the top) showing the Crossminton doubles defence: both players have dropped deeper and spread wider, but the front/back order holds (position rule 7.5.1) — one in the shaded front zone, one in the back zone, a dashed line between the two covered areas. No side-by-side formation (that is the badminton habit the BAD deltas tell players to drop).
+
+**G-040** · `images/G-040.png` · `aufschlag_rueckschlag_doppel` · Fortgeschritten  
+*Leitgrafik: Aufschlag und Rückschlag im Doppel*  
+Top-down diagram of both squares illustrating the doubles serve rotation: four players as distinct markers (two per side), with numbered arrows 1–4 showing the serve passing in the fixed sequence from the first server to the opposing attacker, then to each partner in turn and back. Clear numbered rotation arrows (text labels optional, may be added manually).
+
+**G-041** · `images/G-041.png` · `das_umschalten_im_doppel` · Fortgeschritten  
+*Leitgrafik: Das Umschalten im Doppel*  
+Top-down diagram showing the switch between attack and defence in Crossminton doubles: on the left the front-back attacking stagger, on the right the defence with both players deeper and wider in a diagonal stagger — the front/back order is kept (position rule 7.5.1), there is no side-by-side rotation. Two small states linked by switching arrows.
+
+**G-042** · `images/G-042.png` · `bewegung_als_einheit` · Fortgeschritten  
+*Leitgrafik: Bewegung als Einheit*  
+Top-down diagram of one square showing the two doubles partners moving together as a connected unit — both shifting in the same direction to cover the speeder, maintaining constant spacing, with a subtle connecting band between the pair and parallel movement arrows.
+
+**G-043** · `images/G-043.png` · `verstaendigung_im_paar` · Fortgeschritten  
+*Leitgrafik: Verständigung im Paar*  
+A pair of crossminton doubles partners shown from behind, communicating between points — one giving a discreet hand signal behind the back, with brief eye contact or a short cue suggested by a small signal motif. Conveys coordination and communication as a pair. Clean instructional style.
+*Generiert (Pilot): Profil, beide Partner hintereinander (Rückraum hinten, Angriff vorn — Regel 7.4/7.5.1). Der Rückraumspieler ruft „Meiner!“ und holt aus, der Angriffsspieler lässt den Speeder vorbei. Das frühere Motiv (verdecktes Handzeichen) widersprach dem Bausteintext, der auf kurze, laute Zurufe setzt.*
+
+**G-044** · `images/G-044.png` · `erste_schritte_doppel` · Beginner  
+*Leitgrafik: Erste Schritte im Doppel*  
+Top-down diagram of one square with two beginner partners taking their first steps as a pair, comfortable spacing, simple distinct markers and a friendly connecting line between them. Illustrates the very first doubles setup.
+
+**G-045** · `images/G-045.png` · `wer_nimmt_den_ball` · Beginner  
+*Leitgrafik: Wer nimmt den Ball*  
+Top-down diagram of one doubles square with an incoming speeder in the middle between the two partners, one partner clearly stepping in to take it (highlighted) while the other yields, a small call motif. Illustrates who takes the ball.
+
+**G-046** · `images/G-046.png` · `aufschlag_im_doppel_einfach` · Beginner  
+*Leitgrafik: Aufschlag im Doppel, einfach*  
+Top-down diagram of both squares showing a simple doubles serve in fixed order: four player markers, a single numbered arrow showing the underarm serve crossing the passing zone. Clean, beginner-friendly.
+
+**G-047** · `images/G-047.png` · `sich_absprechen` · Beginner  
+*Leitgrafik: Sich absprechen*  
+Two doubles partners shown from behind between points, briefly agreeing with a simple gesture or short cue, relaxed friendly posture. Illustrates basic communication as a pair.
+*Generiert (Welle 5): dieselbe Kamera wie G-043 und G-053, Profil entlang der Spielrichtung mit Grundlinie, Aufschlaglinie und Frontlinie am Boden. Vor dem Aufschlag, einander zugewandt: links der Rückraumspieler hinter der Aufschlaglinie, er schlägt gleich auf (Regel 7.4), hält den Speeder mit der Kappe nach unten in der freien Hand und spricht (Sprechblase mit zwei abstrakten Zeilen, sprachneutral); rechts der Angriffsspieler vor der Linie, die Füße schon nach vorn, Becken, Rumpf und Kopf zum Partner gedreht, nickt und hebt den Daumen neben dem Rumpf (eine offene Hand zeigte auf den Speeder und las sich wie „gib her“). Beide Schläger locker gesenkt, der Rückraumspieler mit Spielbein. Ein gestrichelter Pfeil am Boden zeigt seinen Weg nach vorn. Caption: „kurz absprechen · als Paar“.*
+
+**G-048** · `images/G-048.png` · `einander_platz_lassen` · Beginner  
+*Leitgrafik: Einander Platz lassen*  
+Top-down diagram of one doubles square where the two partners move along an invisible connecting band, keeping clear space between them, with parallel movement arrows and a dashed spacing line. Illustrates leaving each other room.
+
+**G-049** · `images/G-049.png` · `paar_als_system` · Experte  
+*Leitgrafik: Das Paar als System*  
+Top-down diagram of one square where the two partners act as one connected system — a clear connecting band, coordinated arrows and shared coverage of the whole square. Illustrates the pair as a single unit.
+
+**G-050** · `images/G-050.png` · `gegnerisches_paar_lesen` · Experte  
+*Leitgrafik: Das gegnerische Paar lesen*  
+Top-down diagram of the opposite doubles square with the opposing pair marked and small read-cues (formation, gaps) highlighted, an eye or focus motif on the reading player. Illustrates reading the opposing pair.
+
+**G-051** · `images/G-051.png` · `partner_in_position_bringen` · Experte  
+*Leitgrafik: Den Partner in Position bringen*  
+Top-down diagram of one square where one partner's shot (arrow) sets up the other partner, moving them into an attacking position along a curved positioning arrow. Illustrates bringing the partner into position.
+
+**G-052** · `images/G-052.png` · `nahtlos_umschalten` · Experte  
+*Leitgrafik: Nahtlos umschalten*  
+Top-down diagram of one square ("front" marked above the top edge): the attacking positions (solid — front player close up, rear player pushing) and the defending positions (hollow — both deeper and wider), each linked by a double-headed arrow. Both move at once and the front/back order stays. Illustrates seamless switching within the fixed Crossminton roles.
+
+**G-053** · `images/G-053.png` · `blindes_verstaendnis` · Experte  
+*Leitgrafik: Blindes Verständnis*  
+Two doubles partners moving in perfect anticipation without looking at each other, mirrored coordinated movement arrows and a subtle shared-awareness motif. Illustrates blind, instinctive understanding.
+*Generiert (Pilot): hintereinander, beide mit Blick nach vorn; der Angriffsspieler startet zum kurzen Ball, der Rückraumspieler rückt im selben Augenblick in die frei werdende Mitte nach, blass die Ausgangslage.*
+
+## Outdoor (G-054–059)
+
+**G-054** · `images/G-054.png` · `draussen_spielen` · Fortgeschritten  
+*Leitgrafik: Draußen spielen*  
+A single player on an outdoor crossminton court without a net, open sky and a simple ground surface indicated, relaxed adaptable stance. Illustrates the outdoor setting in general.
+*Generiert (Welle 7): erhöhte Dreiviertel-Rückansicht entlang der Spielrichtung, die Felder gegenüber den Figuren stilisiert wie in G-008/G-032. Zwei Felder ohne Netz, dazwischen die 12,8 m lange Passierzone, auch verkürzt länger als ein Feld. Der Spieler im nahen Feld steht locker, den Schläger seitlich, den freien Arm mit Luft zum Bein, und schaut (Blicklinie) zur Fahne an einem hohen Mast hinter dem fernen Feld; die Fahne weht nach links, der Blick geht über das kleine Gegenüber hinweg. Sonne als Umriss, Windlinien, Bäume am Horizont, Grasbüschel. Caption: „draußen · kein Netz, Bedingungen lesen“.*
+
+**G-055** · `images/G-055.png` · `wind_lesen_nutzen` · Fortgeschritten  
+*Leitgrafik: Wind lesen und nutzen*  
+Top-down diagram of an outdoor court with wind-direction arrows sweeping across the field and a trajectory adjusted against the drift, a small wind motif. Illustrates reading and using the wind.
+
+**G-056** · `images/G-056.png` · `sonne_blendung` · Fortgeschritten  
+*Leitgrafik: Sonne und Blendung*  
+A single player shading the eyes against a low sun while tracking a high speeder, sun and glare rays indicated in one corner, adjusted head position. Illustrates dealing with sun and glare.
+*Generiert (Welle 7): Profil, Überkopf-Vorbereitung in Trophäenhaltung mit Schirmmütze (`figur({ muetze: true })`), der Arm hinter dem Kopf frei. Die Sonne steht rechts, drei Strahlen mit Pfeilspitzen reichen bis kurz vor die Augen (ein Keil mit der Spitze am Auge las sich als Sichtkegel, also als „schaut hinein“). Die Flugbahn kommt von rechts unten, führt mitten durch die Sonne und ist im Blendbereich nur blass gepunktet; danach ist der Speeder wieder voll gezeichnet, Kappe voran. Die Blicklinie geht an den Strahlen vorbei zum Speeder: Kopf drehen statt hineinschauen, die Bahn vorher gelesen. Caption: „Sonne · Kopf drehen, Bahn früh lesen“.*
+
+**G-057** · `images/G-057.png` · `naesse_sicherer_stand` · Fortgeschritten  
+*Leitgrafik: Nässe und sicherer Stand*  
+A single player with a widened, cautious stance on a damp surface, small water droplets and a secure low centre of gravity indicated. Illustrates a safe stance in wet conditions.
+*Generiert (Welle 7): erhöhte Kamera wie G-032, die Figur geht mit kurzen, kontrollierten Schritten nach rechts hinten, leicht in den Knien, der Schläger vor dem Körper (der Baustein verlangt kurze Schritte, keinen breiten Stand). Hinter ihr liegen die Abdrücke dicht, voraus eine Pfütze als unregelmäßige Wasserfläche mit offenen Regenringen; der gestrichelte Weg biegt vorn um sie herum. Ein glattes Oval mit Rand wäre in der Serie die Ziel- und Basismarke (G-008, G-012, G-032) — die erste Fassung so gezeichnet, und die Schritte führten hinein. Leichter Regen in `--tinte-3`. Caption: „nasser Boden · kurze, sichere Schritte“.*
+
+**G-058** · `images/G-058.png` · `hitze` · Fortgeschritten  
+*Leitgrafik: Hitze*  
+A single player pacing themselves in heat, sun high overhead, a sunshade nearby for the breaks in the shade, calm and measured posture. Illustrates managing play in heat without any drinking or dosage advice (health frame).
+*Generiert (Welle 7): der Spieler sitzt in der Pause auf einer Bank im Schatten eines Sonnenschirms, ein Unterarm auf dem Oberschenkel, der Kopf gesenkt, der Schläger lehnt am Bankende; der hintere Arm stützt sich verdeckt auf die Bank, die Sitzfläche liegt vor dem Gesäß. Die Sonne hoch und leicht rechts, der Schatten darunter, über der Feldlinie flimmert die Luft. Keine Trinkflasche (keine Trinkvorgaben, Gesundheitsrahmen). Caption: „Hitze · Schatten, Kräfte einteilen“.*
+
+**G-059** · `images/G-059.png` · `verschiedene_boeden` · Fortgeschritten  
+*Leitgrafik: Verschiedene Böden*  
+A small comparison strip of different ground surfaces — sand, grass, ash, artificial turf — each a simple textured patch with a foot icon, illustrating adapting footwork to different surfaces.
+
+## Regeln (G-060–061)
+
+**G-060** · `images/G-060.png` · — (Regeln-Referenz, ohne Baustein) · —  
+*Referenzgrafik: das bemaßte Spielfeld*  
+Precise top-down technical diagram of a crossminton court: two 5.5 x 5.5 m squares separated by a 12.8 m passing zone, serve line 3 m from the front line, dimensions labeled. Clean instructional blueprint style, transparent/white background.
+
+**G-061** · `images/G-061.png` · — (Regeln-Referenz, ohne Baustein) · —  
+*Referenzgrafik: die Schiedsrichter-Handzeichen*  
+A clean multi-panel reference sheet of crossminton umpire hand signals (in; out; time-out 'T'; repeated play; change of ends; service-line fault), each panel a simple line figure with a caption slot. Reduced vector reference style, transparent/white background.
+
+## Spielformen (G-062–063)
+
+Die zwei `modus_baustein`-Spielformen (Spez. 13.2). Beide als theme-fähiges Inline-SVG
+im Hausstil, mit `en`/`fr`/`pl`-Varianten.
+
+**G-062** · `images/G-062.svg` · `funplay` · Beginner  
+*Grafik: Funplay — gemeinsam halten*  
+*Generiert (Welle 2): zwei Spielende auf mittlerer Distanz, ohne Court; die Bodenlinie ist in der Mitte gebrochen, weil der Abstand im Figurmaßstab nicht ins Bild passt. Links ein ruhiger Vorhand-Drive im Treffmoment, rechts die Partnerin in Bereitschaft. Die Bahn läuft flach hin und gestrichelt zurück, eine Strichliste darüber zählt die Kontakte am Stück. Caption: „gemeinsam halten · Kontrolle vor Kraft“.*
+
+**G-063** · `images/G-063.svg` · `mehrfeld` · Aufsicht: das eigene Match als zwei
+Felder oben/unten in `--primaer` mit durchgezogener eigener Bahn, zwei fremde Matches
+links/rechts in `--tinte`, deren Bahnen gestrichelt queren, plus zwei querende Diagonalen.
+Das gemeinsame Zentrum ist als gestrichelter Kreis mit leichter Tönung markiert.
+Caption: „im Zentrum kreuzen sich die Bahnen" — die Zentrum-Beschriftung steht bewusst
+**nicht** im Bild (die kreuzenden Bahnen schneiden sie unlesbar).
+
+## Ausrüstung (G-064–070)
+
+Die Speeder-Konstruktionszeichnung — die **erste Bebilderung der Ausrüstungs-Domäne**,
+die zuvor über alle sieben Bausteine bildlos war. Vorlage war eine vierteilige
+Konstruktionszeichnung (A perspektivisch, B Profil, C Längsschnitt, D Draufsicht).
+
+**Bewusst vier eigenständige Grafiken statt einer 2×2-Tafel.** Die Vorlage ordnet ihre
+Tafeln zweispaltig an; das ist auf einem Telefon unlesbar. Als vier Figuren stapelt die
+App sie von sich aus einspaltig (`.grafik-platzhalter` ist `width:100%`), also ohne
+CSS-Ausnahme responsiv — und jede Tafel trägt ihre eigene Beschriftung und
+Sprachvarianten.
+
+**Maßstab 3 Einheiten je mm**, Schlagkappe oben wie in Tafel B der Vorlage:
+Gesamthöhe 60 mm = 180 u, Korb ⌀50 = r75, Kragen ⌀30 = r45, Schlagkappe ⌀26 = r39.
+
+**Der Konuswinkel 47,8° bezieht sich auf den Endring ⌀19, nicht auf den Kragen ⌀30.**
+Über die Korblänge 35 mm ergibt ⌀19 → ⌀50 exakt `2·atan(15,5/35) = 47,8°`; vom Kragen aus
+wären es nur 31,9°. Damit ist die Vorlage in sich stimmig. Die Geometrie hält den Wert
+ein, statt ihn bloß anzuschreiben: Kappe 15 mm (⌀26), Kragen 10 mm (⌀30), dann setzen die
+Längsstiele am Endring ⌀19 an, und der Konus läuft über 35 mm auf ⌀50. Bemaßt wird über
+den rechnerischen **Konus-Scheitel** — der Bogen liegt auf beiden Flanken auf, ist also
+nachrechenbar statt dekorativ.
+
+**Farben sind die Originalfarben des Typs MATCH** (gelber Korb, rote Schlagkappe) und
+laufen über **eigene Tokens** `--speeder-korb` / `--speeder-kappe` / `--speeder-kappe-tief`
+in `css/app.css`, NICHT über `--signal-gelb`/`--signal-rot`. Die Ampel bedeutet in dieser
+App einen Zustand (offen / Hinweis / erledigt); am Speeder ist die Farbe eine
+Sacheigenschaft des Balls. Beides auf denselben Token zu legen hieße die Ampel zu
+verwässern. Hell/Dunkel kippen über die Tokens mit wie überall.
+
+**G-064** · `images/G-064.svg` · `deine_ausruestung` · Perspektivische Übersicht,
+bewusst **unbemaßt** (wie Tafel A der Vorlage): Schlagkappe oben, Kragen als Ellipse,
+darunter der geöffnete Korb aus Längsstielen. Drei Verweise benennen die Baugruppen.
+Caption: „Schlagkappe, Kragen und Korb".
+
+**G-065** · `images/G-065.svg` · `der_speeder` · Profil mit den ICO-Maßen — die
+eigentliche Lehr-Aussage: Gesamthöhe 60 (57–63), Korb ⌀50 (47–53), Schlagkappe ⌀26
+(25–27), Kragen ⌀30, Korblänge 35 und der Konuswinkel 47,8° über den Scheitel. Das
+Toleranzfenster steht in `--primaer-tief` unter dem Nennmaß.
+Caption: „Maße in mm · blau das ICO-Fenster".
+
+**G-066** · `images/G-066.svg` · `der_speeder` · Längsschnitt, als einziger **360 breit**
+(die linke Beschriftungsspalte passt bei 300 nicht). Die Korbwand ist als Band mit
+Wandstärke gerastert, damit es als Schnitt lesbar bleibt und nicht als zweite
+Außenansicht: Loch ⌀4 in der Kappe, Endring ⌀19, Pressring am Kragen, Querrippe,
+Öffnungsrand nach innen gebogen. Caption: „Längsschnitt: Wand, Ring, Schlagkappe".
+
+**G-067** · `images/G-067.svg` · `der_speeder` · Draufsicht in die Korböffnung:
+16 Längsstiele im Winkelabstand 22,5°, der wellenförmige Rand als Bogenkette zwischen
+den Stielen, die Schlagkappe dahinter. Caption: „16 Längsstiele · Teilung 22,5°".
+
+### Griff, Schläger, Bespannung (G-068–070)
+
+Drei Vergleichsdiagramme für die übrigen Ausrüstungs-Bausteine, erzeugt von
+`scratchpad/gen-ausruestung.mjs`: Geometrie gerechnet, alle vier Sprachen aus einer
+Quelle (`TEXTE` im Skript), Akzent `--primaer-dunkel` auf dem jeweils richtigen bzw.
+crossminton-eigenen Teil.
+
+**G-068** · `images/G-068.svg` · `griff_und_griffband` · Zwei Griffe im Schnitt mit
+Blick auf das Griffende, die Hand als Band gleicher Länge darum. Links zu dünn: die
+Fingerspitzen drücken in den Ballen (Überlappung, Druckmarke). Rechts passend: zwischen
+Fingerspitzen und Ballen bleibt ein Messkreis von einer Fingerbreite frei, wie im
+Erklärteil („die Breite deines Zeigefingers"). Caption: „ein Finger Platz bis zum Ballen".
+
+**G-069** · `images/G-069.svg` · `der_schlaeger` · Drei Schläger maßstäblich (3 Einheiten
+je cm, gemeinsame Grundlinie): Badminton 67,5 cm, Crossminton höchstens 61 cm mit
+kräftigerem Rahmen und Kopf bis 650 cm² (im Kopf als „≤ 650 cm²“, damit nichts den Rahmen berührt; Maßlinie, Akzent), Squash 68,5 cm, als einzige
+360 breit wie G-066. Caption: „kürzer als Squash, robuster als Badminton".
+
+**G-070** · `images/G-070.svg` · `die_bespannung` · Oben zwei Saiten im Querschnitt
+(40 Einheiten je mm): Crossminton bis 1,25 mm gegen Badminton rund 0,65 mm. Unten das
+Trampolin-Modell: weich gibt tief nach, der Speeder fliegt weit, aber gestreut (Fächer) —
+mehr Kraft; hart gibt wenig nach, kürzer und genauer — mehr Kontrolle. Eine eigene
+Zwischenzeile „Härte der Bespannung“ trennt die Hälften, sonst las sich „Crossminton =
+weich, Badminton = hart“ aus den übereinanderstehenden Spalten. Beide Saiten gefüllt. Kein kg-Wert
+(Gesundheitsrahmen: Prinzip statt Dosierung). Caption: „dicke Saite · Härte als
+Stellschraube".
+
+---
+
+## Welle A2: Taktik und Schuhe (G-071–073)
+
+**G-071** · `images/G-071.svg` · `fehler_vermeiden` · Beginner · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Das gegnerische Feld von oben, davor die Passierzone.
+Mit Sicherheitsabstand innerhalb der Linien (24 von 180 Einheiten; beschriftet als
+„Sicherheitsabstand“, kein Maß, weil der Text keins nennt) liegt das sichere
+Zielgebiet in `--primaer-weich` mit gestrichelter Kante; der sichere Ball (Akzent) landet
+darin. Zwei knappe Bälle gestrichelt in `--tinte-3`: einer knapp hinter der Seitenlinie
+(„Aus“), einer zu kurz in der Passierzone, beide mit Kreuz — kein Rot, die Ampel bleibt dem
+Zustand vorbehalten. Caption: „innen spielen, nicht auf die Linie".
+
+**G-072** · `images/G-072.svg` · `umschalten` · Fortgeschritten · Personengrafik aus
+`scratchpad/figuren/` (Motiv in `motive.mjs`, Texte in `texte.mjs`). Eine Figur in
+Grundposition vor drei Höhenbändern, deren Grenzen aus der Figur kommen (Scheitel und
+Hüfte): darüber Angriff (`s-spur`, der Speeder geht steil von oben nach unten, Akzentbahn),
+darunter Verteidigung (`s-feld`, der Speeder muss nach oben, Bahn in `--tinte-3`),
+dazwischen „kippt es“. Beide Speeder fliegen Kappe voran (`winkel2d` aus der Bahn).
+Die Treffhöhe ist ein Anhaltspunkt, kein Kriterium — der Text definiert Angriff über „von
+oben nach unten spielen können“, und ohne Netz kann auch ein flacher Drive aus Hüfthöhe
+angreifen; Bildunterschrift und aria sagen darum „meist“. Caption: „die Treffhöhe als
+Hinweis auf die Rolle".
+
+**G-073** · `images/G-073.svg` · `schuhe_finden` · Beginner · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Laufwege von oben: links ein Badminton-/Squashfeld,
+annähernd maßstäblich länger als breit (1 : 1,4 zwischen Badminton-Einzelhälfte 1 : 1,3 und
+Squash 1 : 1,5), Netz bzw. Frontwand oben, die Wege vor und zurück kräftig, zur Seite
+kürzer und dünner; rechts das Crossminton-Quadrat, aus der Mitte acht gleich lange Wege in
+jede Richtung (Akzent). Caption: „seitlicher Halt zählt".
+
+---
+
+## Welle B: Athletik (G-074–076)
+
+**G-074** · `images/G-074.svg` · `rumpfstabilitaet` · Fortgeschritten · Personengrafik
+(`motive.mjs`). Dieselbe Smash-Pose wie G-011, darüber die Kraftkette als Linie mit
+Knoten: Ballen des hinteren Fußes, Knie, Hüfte, Schulter, Ellbogen, Handgelenk,
+Schlägerkopf. Das Glied Hüfte–Schulter ist die Brücke (Akzent, Knoten im Akzent), die
+übrigen Glieder in `--tinte-3`, alles mit Freistellung über der Figur; Beschriftungen
+links, wo die Kette entlangläuft. Englisch heißt der Rumpf hier wie im Bausteintext
+*core*, nicht *trunk*. Caption: „der Rumpf trägt die Kraft weiter".
+
+**G-075** · `images/G-075.svg` · `richtig_aufwaermen` · Beginner · Personengrafik. Die drei
+Schritte des Übungsteils nebeneinander, Seitansicht: locker traben (der hintere Fuß hebt
+zur Ferse, Kniewinkel über 90°), ein lockerer Ausfallschritt, ein Schattenschlag mit dem
+Schläger ohne Speeder. Bewusst ohne Zeiten oder Wiederholungszahlen (Gesundheitsrahmen).
+Caption: „warm werden, nicht müde werden".
+
+**G-076** · `images/G-076.svg` · `antizipative_schnelligkeit` · Experte · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Zeitachse mit drei Augenblicken (der Gegner holt aus,
+trifft, der Speeder ist bei dir) und darunter zwei gleich lange Laufwege, also dasselbe
+Tempo: wer die Vorbereitung liest, startet beim Ausholen und hat Zeit übrig (Akzent); wer
+auf den Ball wartet, startet nach dem Treffen und kommt zu spät (`--tinte-3`). Caption:
+„früher starten statt schneller laufen".
+
+---
+
+## Welle C: Spielmodi (G-077–079)
+
+**G-077** · `images/G-077.svg` · `snowminton` · Fortgeschritten · Personengrafik. Dieselbe
+Bühne wie G-057 (Nässe), weil der Text dieselbe Bewegungsregel nennt: kurze, sichere
+Schritte, breiter Stand. Eine Schneedecke über die ganze Breite mit welliger Kante,
+dicht gesetzte Abdrücke hinter der Figur, Flocken in `--tinte-3`. Keine Kälte-Werte
+(Gesundheitsrahmen). Caption: „kurze, sichere Schritte im Schnee".
+
+**G-078** · `images/G-078.svg` · `beachminton` · Fortgeschritten · Personengrafik. Fast
+frontal, damit der breite Stand sichtbar wird; die Füße sinken in den Sand (deckende Hügel
+in `--flaeche-2`, darüber die Sandtönung, oben eine feine Kante), lockere Sandkörner,
+die Sonne als Umriss oben rechts, unter der Figur die Maßlinie „breiter Stand". Keine
+Trink- oder Belastungsvorgaben. Caption: „breit stehen, kurze Wege im Sand".
+
+**G-079** · `images/G-079.svg` · `blackminton` · Fortgeschritten · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Links der Night Speeder im Profil, Kappe oben wie in
+G-065 (2,6 Einheiten je mm): die Kappe durchsichtig, darin das Speedlight als Knicklicht
+im Akzent mit Glimmen, Korb und Längsstiele in den Speeder-Tokens. Rechts unten die Bahn
+im Dunkeln als Punktfolge, die zur aktuellen Position hin kräftiger wird. Caption:
+„nachts bleibt nur die Bahn des Lichts".
+
+---
+
+## Nachtrag: die letzten Rahmen (G-080–081)
+
+**G-080** · `images/G-080.svg` · `funktionskleidung` · Beginner · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Das Schichtprinzip im Schnitt: unten die Haut, darüber
+die dünne Basisschicht, die dicke Wärmeschicht mit eingeschlossener Luft (Ringe) und oben
+die Schutzschicht. Drei Pfeile im Akzent führen den Schweiß von der Haut nach außen; Wind
+und Nässe treffen von oben auf die Schutzschicht. Keine Temperatur- oder Materialwerte.
+Caption: „Schichten nach Bedarf an- und ablegen".
+
+**G-081** · `images/G-081.svg` · `spielarten_ueberblick` · Fortgeschritten · Diagramm aus
+`scratchpad/gen-ausruestung.mjs`. Drei Kacheln nebeneinander — Schneeflocke über
+verschneitem Boden, Sonne über Dünen, eine Bahn aus Lichtpunkten im Dunkeln —, darunter
+die Namen und die Umgebung (Schnee/Kälte, Sand/Hitze, Dunkelheit). Die Klammer
+„dasselbe Regelwerk" über allen dreien trägt den Akzent: es ändert sich nur die Umgebung.
+Die Sonne bleibt ein Umriss in `--tinte-2`, nie Signal-Gelb. Caption: „es ändert sich nur
+die Umgebung".
+
+Geprüft in einer unabhängigen Sach- und Bildprüfung (Oktober 2026) über G-068–079, alle vier
+Sprachen hell und dunkel. Daraus geändert: die Proportionen in G-073, die relativierte
+Treffhöhe in G-072, Zwischenzeile und Flächenangabe in G-069/G-070, der angeschnittene Fuß
+in G-075, die Kniebeuge in G-077, der Schläger in G-078 (seitlich vor der Brust statt
+verkürzt), und Begriffe, die vom Bausteintext abwichen (en *core*, fr *capuchon*, pl
+*czubki palców*/*kłąb*/*światło chemiczne*/*ściana przednia*/*zamach na sucho*, en
+US-Schreibweise). Bewusst belassen: die Schneefläche in G-077 (sie folgt der Bühne von
+G-057; ein hellerer Schnee kippte im Dunkelmodus ins Dunkle).

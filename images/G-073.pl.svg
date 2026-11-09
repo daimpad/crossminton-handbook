@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Drogi ruchu z góry, w porównaniu. Po lewej kort do badmintona lub squasha: dłuższy niż szerszy, główne drogi prowadzą do przodu, do siatki lub przedniej ściany, i z powrotem, w bok krócej. Po prawej pole do crossmintona: kwadrat z czterema równorzędnymi narożnikami, drogi prowadzą ze środka równie daleko w każdą stronę, w bok i po skosie. Dlatego but potrzebuje bocznego oparcia.">
+  <style>
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-trenner{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1;stroke-dasharray:3 4;opacity:.7}
+    .s-titel{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name{fill:var(--tinte-2,#5a6675);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name2{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .s-spieler{fill:var(--tinte,#16202b);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2}
+    .s-weg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2.6;stroke-linecap:round}
+    .s-wegn{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.2;stroke-linecap:round;opacity:.8}
+    .s-wegc{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linecap:round}
+    .s-wand{fill:none;stroke:var(--tinte,#16202b);stroke-width:5;stroke-linecap:round}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <text class="s-name" x="76" y="34">Badminton · Squash</text>
+  <text class="s-name2" x="222" y="34">Crossminton</text>
+  <path class="s-trenner" d="M149,52 L149,236"/>
+  <rect class="s-feld" x="24" y="70" width="104" height="146"/>
+  <path class="s-wand" d="M24,70 L128,70"/>
+  <text class="s-teil" x="76" y="62">siatka · ściana przednia</text>
+  <path class="s-weg" d="M76,134L76,82" marker-end="url(#mp)"/>
+  <path class="s-weg" d="M76,158L76,210" marker-end="url(#mp)"/>
+  <path class="s-wegn" d="M64,146L36,146" marker-end="url(#mp)"/>
+  <path class="s-wegn" d="M88,146L116,146" marker-end="url(#mp)"/>
+  <circle class="s-spieler" cx="76" cy="146" r="7.5"/>
+  <rect class="s-feld" x="160" y="84" width="124" height="124"/>
+  <path class="s-wegc" d="M213,137L178,102" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M231,137L266,102" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M213,155L178,190" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M231,155L266,190" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M210,146L176,146" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M234,146L268,146" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M222,134L222,100" marker-end="url(#ma)"/>
+  <path class="s-wegc" d="M222,158L222,192" marker-end="url(#ma)"/>
+  <circle class="s-spieler" cx="222" cy="146" r="7.5"/>
+  <text class="s-titel" x="76" y="248">przód i tył</text>
+  <text class="s-titel" x="222" y="248">w każdą stronę</text>
+  <text class="st" x="150" y="284">liczy się boczne oparcie</text>
+</svg>

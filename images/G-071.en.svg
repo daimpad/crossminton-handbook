@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="The opponent's field from above, with the neutral zone in front of it. With a safety margin inside the lines lies the safe target area, where the safe ball goes. Two tight balls miss: one lands just beyond the sideline, out, and one falls short into the neutral zone. Both are your own errors.">
+  <style>
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-flug{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4;stroke-linecap:round}
+    .s-teil{fill:var(--tinte-3,#656f7e);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:3;stroke-linejoin:round}
+    .s-teilw{fill:var(--tinte,#16202b);font:600 10px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:3;stroke-linejoin:round}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-feld{fill:none;stroke:var(--tinte,#16202b);stroke-width:2.4}
+    .s-sicher{fill:var(--primaer-weich,#e8f3fe);stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:1.4;stroke-dasharray:5 4}
+    .s-risiko{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-dasharray:5 4}
+    .s-kreuz{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2.4;stroke-linecap:round}
+    .s-punkt{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-zone{fill:var(--tinte-3,#656f7e);font:700 10px/1 system-ui,sans-serif;letter-spacing:.5px;text-anchor:start;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-tsicher{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--primaer-weich,#e8f3fe);stroke-width:4;stroke-linejoin:round}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <rect class="s-sicher" x="84" y="54" width="132" height="132"/>
+  <rect class="s-feld" x="60" y="30" width="180" height="180"/>
+  <text class="s-teil" x="150" y="46">close to the line: risky</text>
+  <text class="s-tsicher" x="150" y="74">safe</text>
+  <text class="s-teilw" x="150" y="87">safety margin</text>
+  <text class="s-zone" x="16" y="236">neutral zone</text>
+  <path class="s-risiko" d="M150,270 Q246,190 262,102"/>
+  <path class="s-risiko" d="M150,270 Q196,236 218,240"/>
+  <path class="s-flug" d="M150,270 Q132,200 128,133" marker-end="url(#ma)"/>
+  <circle class="s-punkt" cx="128" cy="124" r="5.5"/>
+  <path class="s-kreuz" d="M259,93L269,103M269,93L259,103M217,233L227,243M227,233L217,243"/>
+  <text class="s-teil" x="266" y="87">out</text>
+  <text class="st" x="150" y="290">play inside, not onto the line</text>
+</svg>

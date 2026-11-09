@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Warming up properly — Crossminton Handbook</title>
+  <meta name="description" content="The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. W …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/en/baustein/richtig_aufwaermen">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Warming up properly — Crossminton Handbook">
+  <meta property="og:description" content="The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. W …">
+  <meta property="og:url" content="https://crossminton-handbook.de/en/baustein/richtig_aufwaermen">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Warming up properly — Crossminton Handbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Warming up properly — Crossminton Handbook">
+  <meta name="twitter:description" content="The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. W …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/richtig_aufwaermen">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/richtig_aufwaermen">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/richtig_aufwaermen">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/richtig_aufwaermen">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/richtig_aufwaermen">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton Handbook","item":"https://crossminton-handbook.de/en"},{"@type":"ListItem","position":2,"name":"Topic path","item":"https://crossminton-handbook.de/en/pfad/themen"},{"@type":"ListItem","position":3,"name":"Fitness","item":"https://crossminton-handbook.de/en/pfad/themen/athletik_kondition"},{"@type":"ListItem","position":4,"name":"Warming up properly","item":"https://crossminton-handbook.de/en/baustein/richtig_aufwaermen"}]},{"@type":"LearningResource","name":"Warming up properly","description":"The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. W …","url":"https://crossminton-handbook.de/en/baustein/richtig_aufwaermen","inLanguage":"en","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Beginner","about":[{"@type":"Thing","name":"Fitness"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/en" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/en/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-teal baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-fire " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Warming up properly</h1>
+        <p class="marke-hero-untertitel">Fitness · Beginner</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommended first: <a href="/en/baustein/warum_athletik_dein_spiel_traegt?kontext=kompetenz">Why fitness carries your game</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explanation</h2><span class="chip chip-rot">open</span></div>
+      
+      
+      <p>The first hard sprint from a standstill, the first fully stretched backhand — if your body isn't prepared for it, those are the moments when something tweaks. Warming up ensures your body is ready before the game gets serious.</p><p>Good warming up does two things. It gets the circulation going and the muscles up to temperature — warm muscles work more smoothly and tear less often. And it prepares exactly the movements you're about to need: lunges, turns, arm swings.</p><p>That's why a few minutes of running alone isn't enough. After getting warm, movements that resemble the game belong in it — loose lunges, trunk rotations, arm circles, a few shadow strokes without a Speeder. That way you wake the muscles you're about to demand.</p><p>You wouldn't rush a cold car straight onto the highway. The engine needs a moment to reach operating temperature. Your body just the same.</p><p>A rule to finish: warming up means getting warm, not getting tired. It should make you ready, not drain you.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="The short warm-up sequence in three steps side by side. First, easy jogging until the body gets slightly warm. Second, dynamic preparation, here a loose forward lunge. Third, game-like, a shadow stroke with the racket but without a Speeder. Warming up should get you ready, not tired." class="grafik-bild grafik-svg" id="g-svg-98" style="--hoch: 1.000;">
+  <style>
+    #g-svg-98 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-98 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-98 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-98 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-98 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-98 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-98 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-98 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-98 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-98 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-98 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-98 .s-wegg{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:3;stroke-dasharray:8 6;stroke-linecap:round}
+    #g-svg-98 .s-mkg{fill:var(--tinte-3,#656f7e)}
+    #g-svg-98 .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;opacity:.55;stroke-linecap:round}
+    #g-svg-98 .s-lab{fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif}
+    #g-svg-98 .s-labf{fill:var(--tinte,#16202b);font:800 11px/1 system-ui,sans-serif}
+    #g-svg-98 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <defs><marker id="g-svg-98-q075" viewBox="0 0 10 10" markerWidth="3.8" markerHeight="3.8" refX="5" refY="5" orient="auto"><path d="M1,1.2 L9.4,5 L1,8.8 Z" class="s-mkg"></path></marker></defs>
+  <path class="s-boden" d="M12,222L288,222"></path>
+  <ellipse class="s-schw" cx="68" cy="223" rx="34" ry="3.5"></ellipse><ellipse class="s-sch" cx="68" cy="223" rx="21.8" ry="2.2"></ellipse>
+  <ellipse class="s-schw" cx="150" cy="223" rx="44" ry="3.5"></ellipse><ellipse class="s-sch" cx="150" cy="223" rx="28.2" ry="2.2"></ellipse>
+  <ellipse class="s-schw" cx="234" cy="223" rx="40" ry="3.5"></ellipse><ellipse class="s-sch" cx="234" cy="223" rx="25.6" ry="2.2"></ellipse>
+  <g class="s-f"><path d="M58.5,150L62.9,161.8A6.1,6.1 0 1 0 74.2,157.4L69.5,145.7A5.9,5.9 0 0 0 58.5,150Z"></path><path d="M62.8,161.7L70,182.1A4.3,4.3 0 0 0 78.3,179.9L74.6,158.7A6.1,6.1 0 1 0 62.8,161.7Z"></path><path d="M69.9,179.6L67.4,189.5A4.8,4.8 0 1 0 76.9,191.3L78.3,181.2A4.3,4.3 0 0 0 69.9,179.6Z"></path><path d="M67.3,191L68.9,214.2A2.5,2.5 0 0 0 73.8,214.4L76.9,191.3A4.8,4.8 0 1 0 67.3,191Z"></path><path d="M69.7,212.2L66.7,214.9A3,3 0 1 0 71.3,218.8L73.4,215.3A2.5,2.5 0 0 0 69.7,212.2Z"></path><path d="M68.7,220.2L81.5,220.4A2.9,2.9 0 0 0 81.7,214.7L68.9,214.1A3,3 0 1 0 68.7,220.2Z"></path><path d="M81.9,220.4L87.8,219.8A2,2 0 0 0 87.9,215.8L82.1,214.8A2.9,2.9 0 1 0 81.9,220.4Z"></path></g>
+  <g class="s-f"><path d="M64.3,108.5L71.1,133.1A3,3 0 0 0 77,131.9L73.6,106.6A4.8,4.8 0 1 0 64.3,108.5Z"></path><path d="M75.7,134.8L81.1,131A3.5,3.5 0 1 0 76.7,125.6L71.9,130.1A3,3 0 0 0 75.7,134.8Z"></path><path d="M81.6,130.7L92.6,119.9A2.1,2.1 0 0 0 90,116.7L77.2,125.2A3.5,3.5 0 1 0 81.6,130.7Z"></path></g>
+  <g class="s-f"><path d="M91.9,120.4L95.3,119.1A3.2,3.2 0 1 0 91.4,114.3L89.4,117.3A2.1,2.1 0 0 0 91.9,120.4Z"></path></g>
+  <g class="s-k"><path d="M73.8,101.8C75.4,102.7 75.1,103.6 75.9,105.5C76.7,107.4 77.4,108 77.8,111.4C78.1,114.8 78.7,117.6 77.7,122.7C76.7,127.7 74.3,131.2 72.7,136.6C71,142 70.8,145.6 69.6,149.7C68.4,153.8 67.9,154.9 66.7,157.2C65.4,159.5 64.6,160.5 63.4,161.2C62.2,162 61.6,161.9 60.8,160.8C60,159.8 59.6,158.6 59.3,156.1C59.1,153.6 58.9,152.5 59.5,148.3C60,144.1 61.4,140.6 62.1,135.1C62.9,129.6 62.8,125.7 63.2,120.6C63.6,115.5 63.8,112.8 64.2,109.5C64.7,106.2 64.7,105.7 65.4,104C66.1,102.3 66.1,101.4 67.7,101C69.4,100.5 72.1,100.9 73.8,101.8Z"></path><path d="M58.3,148.3L54.9,160.2A6.1,6.1 0 1 0 66.7,163.3L69.7,151.3A5.9,5.9 0 0 0 58.3,148.3Z"></path><path d="M55,160.1L48.3,181.8A4.3,4.3 0 0 0 56.3,184.9L66.3,164.5A6.1,6.1 0 1 0 55,160.1Z"></path><path d="M53.1,178.8L42,177.1A4.8,4.8 0 1 0 41,186.8L52.2,187.3A4.3,4.3 0 0 0 53.1,178.8Z"></path><path d="M41.3,177.1L18.9,176.8A2.5,2.5 0 0 0 18.4,181.7L40.2,186.7A4.8,4.8 0 1 0 41.3,177.1Z"></path><path d="M16.6,180.1L16.9,181A3,3 0 1 0 20.1,177L19.2,176.9A2.5,2.5 0 0 0 16.6,180.1Z"></path><path d="M16.8,179.1L12.9,191.3A2.9,2.9 0 0 0 18.4,193.1L22.6,181A3,3 0 1 0 16.8,179.1Z"></path><path d="M15.2,189.4L9.3,190.4A2,2 0 0 0 9.4,194.3L15.3,195A2.9,2.9 0 1 0 15.2,189.4Z"></path></g>
+  <g class="s-k"><ellipse cx="72.3" cy="89.4" rx="7.6" ry="9.5" transform="rotate(2 72.3 89.4)"></ellipse><path d="M75.2,98.8L77.3,98.4A2.5,2.5 0 0 0 79.3,96.4L79.7,94.3A5.7,5.7 0 1 0 75.2,98.8Z"></path></g>
+  <g class="s-x"><path d="M64.5,109.6L54,134A3,3 0 0 0 59.4,136.7L72.9,113.9A4.8,4.8 0 1 0 64.5,109.6Z"></path><path d="M56.8,138.2L63.4,138A3.5,3.5 0 1 0 62.7,131.1L56.3,132.2A3,3 0 0 0 56.8,138.2Z"></path><path d="M64,138L79.1,135.1A2.1,2.1 0 0 0 78.7,130.9L63.3,131A3.5,3.5 0 1 0 64,138Z"></path><path d="M78.2,135.1L81.8,135.8A3.2,3.2 0 1 0 81.2,129.7L77.8,131.1A2.1,2.1 0 0 0 78.2,135.1Z"></path></g>
+  <g class="s-k"><path d="M64.5,109.6L54,134A3,3 0 0 0 59.4,136.7L72.9,113.9A4.8,4.8 0 1 0 64.5,109.6Z"></path><path d="M56.8,138.2L63.4,138A3.5,3.5 0 1 0 62.7,131.1L56.3,132.2A3,3 0 0 0 56.8,138.2Z"></path><path d="M64,138L79.1,135.1A2.1,2.1 0 0 0 78.7,130.9L63.3,131A3.5,3.5 0 1 0 64,138Z"></path></g>
+  <g class="s-k"><path d="M78.2,135.1L81.8,135.8A3.2,3.2 0 1 0 81.2,129.7L77.8,131.1A2.1,2.1 0 0 0 78.2,135.1Z"></path></g>
+  <g class="s-f"><path d="M144.9,160.4L138.8,170.7A6.1,6.1 0 1 0 149.4,176.7L155.2,166.2A5.9,5.9 0 0 0 144.9,160.4Z"></path><path d="M138.9,170.6L127.2,190A4.3,4.3 0 0 0 134.2,194.9L148.7,177.7A6.1,6.1 0 1 0 138.9,170.6Z"></path><path d="M129.2,188.2L119,192.6A4.8,4.8 0 1 0 123.2,201.3L132.9,195.9A4.3,4.3 0 0 0 129.2,188.2Z"></path><path d="M118,193.1L99.8,206.3A2.5,2.5 0 0 0 102.3,210.6L122.8,201.5A4.8,4.8 0 1 0 118,193.1Z"></path><path d="M100.2,206.1L97.9,207.1A3,3 0 1 0 101.5,211.9L103.1,209.9A2.5,2.5 0 0 0 100.2,206.1Z"></path><path d="M97.3,212.3L107.5,220.1A2.9,2.9 0 0 0 111.1,215.7L101.1,207.5A3,3 0 1 0 97.3,212.3Z"></path><path d="M109.7,220.7L115.6,219.8A2,2 0 0 0 115.6,215.9L109.7,215A2.9,2.9 0 1 0 109.7,220.7Z"></path></g>
+  <g class="s-f"><path d="M148.7,122.6L149,147.8A3,3 0 0 0 155,148.2L158.2,123.2A4.8,4.8 0 1 0 148.7,122.6Z"></path><path d="M149,148.4L150.3,154.7A3.5,3.5 0 1 0 157,152.8L154.9,146.8A3,3 0 0 0 149,148.4Z"></path><path d="M150.5,155.2L155.8,169.1A2.1,2.1 0 0 0 159.8,168L157.2,153.3A3.5,3.5 0 1 0 150.5,155.2Z"></path></g>
+  <g class="s-f"><path d="M155.7,168.5L156,172.5A2.9,2.9 0 1 0 161.4,170.9L159.6,167.4A2.1,2.1 0 0 0 155.7,168.5Z"></path><path d="M156.4,173.4L159,179A1.7,1.7 0 0 0 162.2,178.1L161.6,171.9A2.8,2.8 0 1 0 156.4,173.4Z"></path></g>
+  <g class="s-k"><path d="M158.1,117C159.8,117.8 159.5,118.7 160.4,120.6C161.2,122.5 162,123 162.4,126.4C162.9,129.8 163.6,132.6 162.8,137.7C161.9,142.7 159.6,146.3 158.2,151.8C156.8,157.2 156.7,160.8 155.7,165C154.6,169.1 154.1,170.2 153,172.5C151.8,174.9 151,175.9 149.8,176.7C148.7,177.5 148,177.4 147.2,176.4C146.3,175.4 145.9,174.3 145.6,171.8C145.2,169.3 145.1,168.1 145.5,163.9C145.9,159.7 147.1,156.2 147.6,150.7C148.2,145.1 148,141.3 148.2,136.1C148.5,131 148.5,128.3 148.8,125C149.1,121.6 149.2,121.2 149.8,119.5C150.4,117.7 150.4,116.8 152,116.3C153.7,115.8 156.4,116.1 158.1,117Z"></path><path d="M147,170.4L158.6,177.2A6.1,6.1 0 1 0 164.6,166.7L152.8,160.2A5.9,5.9 0 0 0 147,170.4Z"></path><path d="M158.8,177.4L177.9,187.6A4.3,4.3 0 0 0 182.5,180.4L165.4,167.2A6.1,6.1 0 1 0 158.8,177.4Z"></path><path d="M175.7,183.6L175.1,193.5A4.8,4.8 0 1 0 184.7,193.5L184.2,183.6A4.3,4.3 0 0 0 175.7,183.6Z"></path><path d="M175.2,195L181.3,217.8A2.5,2.5 0 0 0 186.1,217L184.7,193.5A4.8,4.8 0 1 0 175.2,195Z"></path><path d="M182,215.3L179,218A3,3 0 1 0 183.6,221.9L185.7,218.4A2.5,2.5 0 0 0 182,215.3Z"></path><path d="M181,223.3L193.9,223.5A2.9,2.9 0 0 0 194,217.8L181.1,217.2A3,3 0 1 0 181,223.3Z"></path><path d="M194.2,223.4L200.2,222.8A2,2 0 0 0 200.3,218.8L194.4,217.8A2.9,2.9 0 1 0 194.2,223.4Z"></path></g>
+  <g class="s-k"><ellipse cx="156.6" cy="104.7" rx="7.6" ry="9.5" transform="rotate(2 156.6 104.7)"></ellipse><path d="M159.5,114.1L161.6,113.6A2.5,2.5 0 0 0 163.6,111.7L164,109.6A5.7,5.7 0 1 0 159.5,114.1Z"></path></g>
+  <g class="s-x"><path d="M148.7,126.9L149,153.4A3,3 0 0 0 155,153.7L158.2,127.4A4.8,4.8 0 1 0 148.7,126.9Z"></path><path d="M149,153.9L150.3,160.4A3.5,3.5 0 1 0 157.1,158.6L154.9,152.3A3,3 0 0 0 149,153.9Z"></path><path d="M150.4,161L155.8,175.4A2.1,2.1 0 0 0 159.8,174.3L157.2,159.1A3.5,3.5 0 1 0 150.4,161Z"></path><path d="M155.7,174.8L156,178.9A2.9,2.9 0 1 0 161.4,177.4L159.7,173.7A2.1,2.1 0 0 0 155.7,174.8Z"></path><path d="M156.4,179.8L159,185.6A1.7,1.7 0 0 0 162.2,184.7L161.6,178.4A2.8,2.8 0 1 0 156.4,179.8Z"></path></g>
+  <g class="s-k"><path d="M148.7,126.9L149,153.4A3,3 0 0 0 155,153.7L158.2,127.4A4.8,4.8 0 1 0 148.7,126.9Z"></path><path d="M149,153.9L150.3,160.4A3.5,3.5 0 1 0 157.1,158.6L154.9,152.3A3,3 0 0 0 149,153.9Z"></path><path d="M150.4,161L155.8,175.4A2.1,2.1 0 0 0 159.8,174.3L157.2,159.1A3.5,3.5 0 1 0 150.4,161Z"></path></g>
+  <g class="s-k"><path d="M155.7,174.8L156,178.9A2.9,2.9 0 1 0 161.4,177.4L159.7,173.7A2.1,2.1 0 0 0 155.7,174.8Z"></path><path d="M156.4,179.8L159,185.6A1.7,1.7 0 0 0 162.2,184.7L161.6,178.4A2.8,2.8 0 1 0 156.4,179.8Z"></path></g>
+  <g class="s-f"><path d="M225,153.6L231.7,164.5A6.1,6.1 0 1 0 242,158L234.9,147.3A5.9,5.9 0 0 0 225,153.6Z"></path><path d="M231.7,164.5L242.8,182.9A4.3,4.3 0 0 0 250.4,179.1L242.5,159.1A6.1,6.1 0 1 0 231.7,164.5Z"></path><path d="M242.2,179.9L240.3,189.8A4.8,4.8 0 1 0 249.9,191.1L250.7,181A4.3,4.3 0 0 0 242.2,179.9Z"></path><path d="M240.3,191.3L243.3,214.4A2.5,2.5 0 0 0 248.2,214.3L249.9,191A4.8,4.8 0 1 0 240.3,191.3Z"></path><path d="M244.1,212.3L241.1,215A3,3 0 1 0 245.7,218.9L247.8,215.4A2.5,2.5 0 0 0 244.1,212.3Z"></path><path d="M243.1,220.3L255.9,220.4A2.9,2.9 0 0 0 256,214.7L243.2,214.2A3,3 0 1 0 243.1,220.3Z"></path><path d="M256.2,220.4L262.2,219.6A2,2 0 0 0 262.3,215.7L256.4,214.7A2.9,2.9 0 1 0 256.2,220.4Z"></path></g>
+  <g class="s-f"><path d="M230.7,113.6L249.4,126.5A3,3 0 0 0 253.3,121.8L236.7,106.2A4.8,4.8 0 1 0 230.7,113.6Z"></path><path d="M250.8,127L256.1,127.6A3.5,3.5 0 1 0 256.2,120.6L251,121A3,3 0 0 0 250.8,127Z"></path><path d="M256.8,127.6L269,126.5A2.1,2.1 0 0 0 269.1,122.3L257,120.7A3.5,3.5 0 1 0 256.8,127.6Z"></path></g>
+  <g class="s-f"><path d="M268.4,126.5L271,127A2.9,2.9 0 1 0 270.6,121.6L268.2,122.4A2.1,2.1 0 0 0 268.4,126.5Z"></path><path d="M272.4,126.9L276.3,125.6A1.7,1.7 0 0 0 276.1,122.3L272.1,121.5A2.8,2.8 0 1 0 272.4,126.9Z"></path></g>
+  <g class="s-k"><path d="M238.1,104.1C239.8,104.9 239.5,105.8 240.4,107.7C241.2,109.6 242,110.1 242.4,113.5C242.9,116.9 243.6,119.7 242.8,124.8C241.9,129.9 239.6,133.4 238.2,138.9C236.8,144.3 236.7,147.9 235.7,152.1C234.6,156.2 234.1,157.3 233,159.6C231.8,162 231,163 229.8,163.8C228.7,164.6 228,164.5 227.2,163.5C226.3,162.5 225.9,161.4 225.6,158.9C225.2,156.4 225.1,155.2 225.5,151C225.9,146.8 227.1,143.3 227.6,137.8C228.2,132.2 228,128.4 228.2,123.2C228.5,118.1 228.5,115.4 228.8,112.1C229.1,108.7 229.2,108.3 229.8,106.6C230.4,104.8 230.4,103.9 232,103.4C233.7,102.9 236.4,103.2 238.1,104.1Z"></path><path d="M224.2,151.7L222.5,164A6.1,6.1 0 1 0 234.6,165.5L235.9,153.1A5.9,5.9 0 0 0 224.2,151.7Z"></path><path d="M222.5,163.9L219,186.2A4.3,4.3 0 0 0 227.3,188.2L234.3,166.7A6.1,6.1 0 1 0 222.5,163.9Z"></path><path d="M220.4,183.7L212.3,191A4.8,4.8 0 1 0 219.1,197.8L226.4,189.8A4.3,4.3 0 0 0 220.4,183.7Z"></path><path d="M211.4,192L199.3,211.2A2.5,2.5 0 0 0 203.1,214.3L219,198A4.8,4.8 0 1 0 211.4,192Z"></path><path d="M200.3,210.3L197.9,211.5A3,3 0 1 0 201.6,216.1L203.3,214.1A2.5,2.5 0 0 0 200.3,210.3Z"></path><path d="M197.5,216.7L207.8,224A2.9,2.9 0 0 0 211.1,219.4L201.1,211.8A3,3 0 1 0 197.5,216.7Z"></path><path d="M209.7,224.5L215.3,223.9A2,2 0 0 0 215.5,220L210,218.9A2.9,2.9 0 1 0 209.7,224.5Z"></path></g>
+  <g class="s-k"><ellipse cx="239.9" cy="92.7" rx="7.6" ry="9.5" transform="rotate(18.2 239.9 92.7)"></ellipse><path d="M240.1,102.5L242.2,102.7A2.5,2.5 0 0 0 244.6,101.3L245.6,99.4A5.7,5.7 0 1 0 240.1,102.5Z"></path></g>
+  <g class="s-x"><path d="M230.1,117.3L248.9,135.6A3,3 0 0 0 253.5,131.6L237.2,111A4.8,4.8 0 1 0 230.1,117.3Z"></path><path d="M249.7,136.2L255.5,139.2A3.5,3.5 0 1 0 258.3,132.8L252.1,130.6A3,3 0 0 0 249.7,136.2Z"></path><path d="M256,139.4L270.5,144.2A2.1,2.1 0 0 0 272.2,140.4L258.8,133A3.5,3.5 0 1 0 256,139.4Z"></path><path d="M270.1,144L273.2,145.9A3.2,3.2 0 1 0 274.6,139.9L271,140.2A2.1,2.1 0 0 0 270.1,144Z"></path></g>
+  <g class="s-k"><path d="M230.1,117.3L248.9,135.6A3,3 0 0 0 253.5,131.6L237.2,111A4.8,4.8 0 1 0 230.1,117.3Z"></path><path d="M249.7,136.2L255.5,139.2A3.5,3.5 0 1 0 258.3,132.8L252.1,130.6A3,3 0 0 0 249.7,136.2Z"></path><path d="M256,139.4L270.5,144.2A2.1,2.1 0 0 0 272.2,140.4L258.8,133A3.5,3.5 0 1 0 256,139.4Z"></path></g>
+  <path class="s-rf" d="M296.2,126.3C296.3,126.7 296.4,127.1 296.4,127.5C296.5,127.9 296.5,128.4 296.5,128.9C296.5,129.3 296.4,129.8 296.4,130.2C296.3,130.7 296.3,131.2 296.2,131.6C296.1,132.1 295.9,132.6 295.8,133C295.6,133.5 295.5,133.9 295.3,134.3C295.1,134.8 294.9,135.2 294.6,135.6C294.4,136 294.2,136.3 293.9,136.7C293.6,137 293.4,137.4 293.1,137.7C292.8,138 292.5,138.2 292.2,138.5C291.9,138.7 291.6,138.9 291.3,139.1C291,139.3 290.7,139.4 290.3,139.5C290,139.6 289.7,139.7 289.4,139.7C289.1,139.7 288.8,139.7 288.5,139.7C288.2,139.6 287.9,139.6 287.6,139.4C287.3,139.3 287.1,139.2 286.8,139C286.6,138.8 286.3,138.6 286.1,138.3C285.9,138.1 285.7,137.8 285.5,137.5C285.3,137.2 285.2,136.9 285,136.5C284.9,136.1 284.8,135.8 284.7,135.4C284.6,135 284.5,134.5 284.5,134.1C284.4,133.7 284.4,133.2 284.4,132.8C284.4,132.3 284.5,131.8 284.5,131.4C284.6,130.9 284.7,130.4 284.8,130C284.9,129.5 285,129.1 285.1,128.6C285.3,128.1 285.5,127.7 285.6,127.3C285.8,126.8 286.1,126.4 286.3,126C286.5,125.6 286.8,125.3 287,124.9C287.3,124.6 287.5,124.2 287.8,123.9C288.1,123.6 288.4,123.4 288.7,123.1C289,122.9 289.3,122.7 289.6,122.5C289.9,122.4 290.3,122.2 290.6,122.1C290.9,122 291.2,121.9 291.5,121.9C291.8,121.9 292.1,121.9 292.4,121.9C292.7,122 293,122.1 293.3,122.2C293.6,122.3 293.8,122.4 294.1,122.6C294.3,122.8 294.6,123 294.8,123.3C295,123.5 295.2,123.8 295.4,124.1C295.6,124.4 295.7,124.8 295.9,125.1C296,125.5 296.1,125.9 296.2,126.3Z"></path><path class="s-rs" d="M284.9,130.6L294.2,123.3M285.1,135L295.8,126.6M286.7,138.3L296,131M286.2,127L289,139.1M288.9,123.8L292,137.8M292,122.5L294.7,134.6"></path><path class="s-rh" d="M284.3,132L284.3,135.7L285.7,138.1"></path><path class="s-rsch" d="M279.1,139.7L284.3,135.7"></path><path class="s-rr" d="M296.2,126.3C296.3,126.7 296.4,127.1 296.4,127.5C296.5,127.9 296.5,128.4 296.5,128.9C296.5,129.3 296.4,129.8 296.4,130.2C296.3,130.7 296.3,131.2 296.2,131.6C296.1,132.1 295.9,132.6 295.8,133C295.6,133.5 295.5,133.9 295.3,134.3C295.1,134.8 294.9,135.2 294.6,135.6C294.4,136 294.2,136.3 293.9,136.7C293.6,137 293.4,137.4 293.1,137.7C292.8,138 292.5,138.2 292.2,138.5C291.9,138.7 291.6,138.9 291.3,139.1C291,139.3 290.7,139.4 290.3,139.5C290,139.6 289.7,139.7 289.4,139.7C289.1,139.7 288.8,139.7 288.5,139.7C288.2,139.6 287.9,139.6 287.6,139.4C287.3,139.3 287.1,139.2 286.8,139C286.6,138.8 286.3,138.6 286.1,138.3C285.9,138.1 285.7,137.8 285.5,137.5C285.3,137.2 285.2,136.9 285,136.5C284.9,136.1 284.8,135.8 284.7,135.4C284.6,135 284.5,134.5 284.5,134.1C284.4,133.7 284.4,133.2 284.4,132.8C284.4,132.3 284.5,131.8 284.5,131.4C284.6,130.9 284.7,130.4 284.8,130C284.9,129.5 285,129.1 285.1,128.6C285.3,128.1 285.5,127.7 285.6,127.3C285.8,126.8 286.1,126.4 286.3,126C286.5,125.6 286.8,125.3 287,124.9C287.3,124.6 287.5,124.2 287.8,123.9C288.1,123.6 288.4,123.4 288.7,123.1C289,122.9 289.3,122.7 289.6,122.5C289.9,122.4 290.3,122.2 290.6,122.1C290.9,122 291.2,121.9 291.5,121.9C291.8,121.9 292.1,121.9 292.4,121.9C292.7,122 293,122.1 293.3,122.2C293.6,122.3 293.8,122.4 294.1,122.6C294.3,122.8 294.6,123 294.8,123.3C295,123.5 295.2,123.8 295.4,124.1C295.6,124.4 295.7,124.8 295.9,125.1C296,125.5 296.1,125.9 296.2,126.3Z"></path><path class="s-rg" d="M272,145.4L279.1,139.7"></path>
+  <g class="s-k"><path d="M270.1,144L273.2,145.9A3.2,3.2 0 1 0 274.6,139.9L271,140.2A2.1,2.1 0 0 0 270.1,144Z"></path></g>
+  <path class="s-wegg" d="M92,166 L110,166" marker-end="url(#g-svg-98-q075)"></path>
+  <path class="s-wegg" d="M185,166 L203,166" marker-end="url(#g-svg-98-q075)"></path>
+  <text class="s-labf" x="58" y="248" text-anchor="middle">1 · warm up</text>
+  <text class="s-lab" x="58" y="262" text-anchor="middle">easy jog</text>
+  <text class="s-labf" x="150" y="248" text-anchor="middle">2 · move</text>
+  <text class="s-lab" x="150" y="262" text-anchor="middle">lunge</text>
+  <text class="s-labf" x="242" y="248" text-anchor="middle">3 · game-like</text>
+  <text class="s-lab" x="242" y="262" text-anchor="middle">shadow stroke</text>
+  <text class="st" x="150" y="290">warm up, don't wear out</text>
+</svg>
+        <figcaption class="leise">Warming up in three steps: warm up, move, game-like</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="richtig_aufwaermen" aria-pressed="false">
+      Mark as read
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Exercise</h2><span class="chip chip-rot">open</span></div>
+        
+        <h3 class="ue-titel">The short warm-up sequence</h3><div class="ue-block"><h4>Goal</h4><p>Get the body match-ready before play — circulation, warmth, movement preparation.</p></div><div class="ue-block"><h4>How to do it</h4><ol class="schrittliste"><li>First get the circulation going: a few minutes of easy running, jogging or jumping rope until you get slightly warm.</li><li>Then dynamic preparation: loose lunges forward and to the side, trunk rotations, arm and shoulder circles.</li><li>Finally, game-like: a few shadow strokes without a Speeder — forehand, backhand, serve motion — and a few small sprints.</li></ol></div><div class="ue-block"><h4>Self-check</h4><p>You're well warmed up when you feel slightly warm and mobile, but still fresh. If you get out of breath or tire, it was too much. Make sure to include especially the shoulder of your hitting arm and the legs.</p></div><div class="ue-block"><h4>Wrap-up</h4><p>This sequence takes only a few minutes and belongs before every match and every training session. It's the cheapest insurance against injury you have.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="richtig_aufwaermen" aria-pressed="false">
+      Mark as done
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Playing goals</dt><dd>Repeated acceleration speed</dd>
+        
+        
+        
+        <dt>Prerequisites</dt><dd><a href="/en/baustein/warum_athletik_dein_spiel_traegt?kontext=kompetenz">Why fitness carries your game</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Module navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/en/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Back to list</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Share" title="Share">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Save" title="Save">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/en/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/en/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/en/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/en/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/en/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/en/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/en/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/en/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/en/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/en/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/en/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/en/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/en/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/en/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Consistency under maximum pressure — Crossminton Handbook</title>
+  <meta name="description" content="In the end it is the most reliable stroke that marks the expert, not the most spectacular. Consistency under maximum pressure is the technical robustness to hol …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/en/baustein/konstanz_unter_hoechstdruck">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Consistency under maximum pressure — Crossminton Handbook">
+  <meta property="og:description" content="In the end it is the most reliable stroke that marks the expert, not the most spectacular. Consistency under maximum pressure is the technical robustness to hol …">
+  <meta property="og:url" content="https://crossminton-handbook.de/en/baustein/konstanz_unter_hoechstdruck">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Consistency under maximum pressure — Crossminton Handbook">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Consistency under maximum pressure — Crossminton Handbook">
+  <meta name="twitter:description" content="In the end it is the most reliable stroke that marks the expert, not the most spectacular. Consistency under maximum pressure is the technical robustness to hol …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/konstanz_unter_hoechstdruck">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/konstanz_unter_hoechstdruck">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/konstanz_unter_hoechstdruck">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/konstanz_unter_hoechstdruck">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/konstanz_unter_hoechstdruck">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Crossminton Handbook","item":"https://crossminton-handbook.de/en"},{"@type":"ListItem","position":2,"name":"Topic path","item":"https://crossminton-handbook.de/en/pfad/themen"},{"@type":"ListItem","position":3,"name":"Technique","item":"https://crossminton-handbook.de/en/pfad/themen/technik"},{"@type":"ListItem","position":4,"name":"Consistency under maximum pressure","item":"https://crossminton-handbook.de/en/baustein/konstanz_unter_hoechstdruck"}]},{"@type":"LearningResource","name":"Consistency under maximum pressure","description":"In the end it is the most reliable stroke that marks the expert, not the most spectacular. Consistency under maximum pressure is the technical robustness to hol …","url":"https://crossminton-handbook.de/en/baustein/konstanz_unter_hoechstdruck","inLanguage":"en","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"exercise","educationalLevel":"Expert","about":[{"@type":"Thing","name":"Technique"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/en" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/en/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-blau baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-anchor " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Consistency under maximum pressure</h1>
+        <p class="marke-hero-untertitel">Technique · Expert</p>
+      </div>
+    </section>
+      
+      <div class="banner-hinweis">Recommended first: <a href="/en/baustein/taeuschung?kontext=kompetenz">Deception — hiding your intent</a>, <a href="/en/baustein/praezision_an_die_linien?kontext=kompetenz">Precision to the lines</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explanation</h2><span class="chip chip-rot">open</span></div>
+      
+      
+      <p>In the end it is the most reliable stroke that marks the expert, not the most spectacular. Consistency under maximum pressure is the technical robustness to hold your quality exactly when it counts most — on the decisive point, in the tight set, against the strongest opponent.</p><p>Under pressure, many players' technique falls apart. The grip tenses up, the movement becomes hectic, the practiced precision breaks down. The expert keeps their technique stable, no matter how high the stakes. This robustness is not a stroke of its own; it is the ability to call up all your strokes cleanly even under load.</p><p>It comes about in two ways. The first is deep automation: a stroke you've played cleanly a thousand times runs on its own under pressure too — the technique holds because it no longer has to think. The second is smart shot selection: under maximum pressure you choose the stroke you master most safely, instead of seeking the riskiest. The best expert knows their most reliable strokes and reaches for them at the decisive moment.</p><p>Here technique touches the mental. The steady hand under pressure comes from practiced technique and mental composure together — you'll find the mental side in the mental area, the technical you build here.</p><p>Consistency under pressure is like a well-built bridge in a storm. It doesn't have to be the most beautiful — it has to hold when the load is greatest. That is exactly what distinguishes the expert from the brilliant but unreliable player.</p><p>This robustness is the quiet core of mastery: the quality that holds even in the hardest moment, not the one crazy stroke.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Consistency under maximum pressure: at 15:15 the player plays a calm, textbook forehand drive from a stable base, both knees bent, the grip loose. Three almost identical trajectories end in the same tight target: the shot comes back reliably." class="grafik-bild grafik-svg" id="g-svg-128" style="--hoch: 1.000;">
+  <style>
+    #g-svg-128 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-128 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-128 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-128 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-128 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-128 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-128 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-128 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-128 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-128 .s-korb{fill:var(--speeder-korb,#f0c400);stroke:var(--tinte-2,#5a6675);stroke-width:.9;stroke-linejoin:round}
+    #g-svg-128 .s-kappe{fill:var(--speeder-kappe,#e2402a)}
+    #g-svg-128 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-128 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-128 .s-bahn{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-dasharray:.1 6.5;stroke-linecap:round}
+    #g-svg-128 .s-bahng{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:2;stroke-dasharray:.1 5.5;stroke-linecap:round}
+    #g-svg-128 .s-mk{fill:var(--primaer-dunkel,#1e8bd6)}
+    #g-svg-128 .s-tafel{fill:var(--flaeche,#ffffff);stroke:var(--tinte-3,#656f7e);stroke-width:1.6}
+    #g-svg-128 .s-zahl{fill:var(--tinte,#16202b);font:800 15px/1 system-ui,sans-serif;text-anchor:middle}
+    #g-svg-128 .s-ring{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.4}
+    #g-svg-128 .s-bruch{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.8;stroke-linecap:round}
+    #g-svg-128 .s-luecke{fill:none;stroke:var(--flaeche-2,#f1f5fb);stroke-width:8}
+    #g-svg-128 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <rect class="s-tafel" x="220" y="18" width="62" height="28" rx="6"></rect><text class="s-zahl" x="251" y="37">15:15</text>
+  <ellipse class="s-schw" cx="80" cy="247" rx="54" ry="5.5"></ellipse><ellipse class="s-sch" cx="80" cy="247" rx="34.6" ry="3.4"></ellipse>
+  <g class="s-f"><path d="M69.4,163.3L77.6,176.7A7.4,7.4 0 1 0 90.1,168.8L81.5,155.6A7.1,7.1 0 0 0 69.4,163.3Z"></path><path d="M77.6,176.7L91.3,199.1A5.2,5.2 0 0 0 100.5,194.5L90.7,170.1A7.4,7.4 0 1 0 77.6,176.7Z"></path><path d="M90.6,195.5L88.4,207.4A5.9,5.9 0 1 0 100,208.9L100.9,196.8A5.2,5.2 0 0 0 90.6,195.5Z"></path><path d="M88.3,209.3L92,237.2A3,3 0 0 0 98,237L100,208.9A5.9,5.9 0 1 0 88.3,209.3Z"></path><path d="M93,234.5L89.4,237.7A3.7,3.7 0 1 0 94.9,242.5L97.5,238.4A3,3 0 0 0 93,234.5Z"></path><path d="M91.6,244.2L107.3,244.7A3.5,3.5 0 0 0 107.6,237.8L92,236.8A3.7,3.7 0 1 0 91.6,244.2Z"></path><path d="M107.7,244.7L114.9,244A2.4,2.4 0 0 0 115.2,239.2L108,237.8A3.5,3.5 0 1 0 107.7,244.7Z"></path></g>
+  <g class="s-f"><path d="M78.2,115.1L102.9,131A3.7,3.7 0 0 0 107.3,125.1L85.1,105.9A5.8,5.8 0 1 0 78.2,115.1Z"></path><path d="M104.2,131.5L109.6,132.5A4.3,4.3 0 1 0 110.2,124L104.7,124.2A3.7,3.7 0 0 0 104.2,131.5Z"></path><path d="M110.6,132.5L123.4,131.7A2.5,2.5 0 0 0 123.7,126.7L111.2,124.1A4.3,4.3 0 1 0 110.6,132.5Z"></path></g>
+  <g class="s-f"><path d="M122.4,131.6L124.7,132.4A3.5,3.5 0 1 0 124.5,126L122.3,126.9A2.5,2.5 0 0 0 122.4,131.6Z"></path><path d="M126.9,132.3L130.5,131A2.1,2.1 0 0 0 130.5,127.1L126.8,126A3.3,3.3 0 1 0 126.9,132.3Z"></path></g>
+  <g class="s-k"><path d="M84,103.8C86.3,104.9 86.3,106 87.6,108.3C88.9,110.6 89.9,111.2 90.4,115.3C91,119.4 91.6,122.7 90.4,128.8C89.3,134.9 86.3,139.2 84.6,145.8C82.9,152.3 83,156.7 81.8,161.7C80.5,166.7 79.9,168 78.3,170.8C76.8,173.6 75.7,174.8 74.1,175.7C72.5,176.6 71.6,176.5 70.4,175.3C69.1,174.1 68.5,172.7 67.9,169.7C67.3,166.6 67,165.3 67.5,160.2C67.9,155.1 69.6,150.9 70.1,144.2C70.7,137.5 70.1,132.9 70.2,126.7C70.3,120.5 70.2,117.2 70.7,113.2C71.1,109.2 71.4,108.7 72.5,106.7C73.6,104.6 73.8,103.6 76.1,103C78.4,102.4 81.7,102.8 84,103.8Z"></path><path d="M65.5,161L63,175.9A7.4,7.4 0 1 0 77.5,178.1L79.6,163.1A7.1,7.1 0 0 0 65.5,161Z"></path><path d="M63,175.8L57.9,202.7A5.2,5.2 0 0 0 67.9,205.4L77.2,179.6A7.4,7.4 0 1 0 63,175.8Z"></path><path d="M59.6,199.8L49.9,208.3A5.9,5.9 0 1 0 58.1,216.7L66.8,207.2A5.2,5.2 0 0 0 59.6,199.8Z"></path><path d="M48.8,209.5L34.2,232.3A3,3 0 0 0 38.8,236L57.9,216.8A5.9,5.9 0 1 0 48.8,209.5Z"></path><path d="M35.4,231.2L32.7,232.5A3.7,3.7 0 1 0 37.3,238.1L39.1,235.7A3,3 0 0 0 35.4,231.2Z"></path><path d="M32.1,238.7L43.5,247.9A3.5,3.5 0 0 0 48,242.6L36.8,233A3.7,3.7 0 1 0 32.1,238.7Z"></path><path d="M46,248.7L52.2,248.2A2.4,2.4 0 0 0 52.7,243.5L46.6,241.9A3.5,3.5 0 1 0 46,248.7Z"></path></g>
+  <g class="s-k"><ellipse cx="85.8" cy="90.2" rx="9.2" ry="11.5" transform="rotate(18.1 85.8 90.2)"></ellipse><path d="M85.9,102.1L88.5,102.3A3,3 0 0 0 91.5,100.7L92.7,98.4A6.9,6.9 0 1 0 85.9,102.1Z"></path></g>
+  <g class="s-x"><path d="M70.7,119.8L91.9,142.7A3.7,3.7 0 0 0 97.6,138.1L79.6,112.6A5.8,5.8 0 1 0 70.7,119.8Z"></path><path d="M92.7,143.4L99.4,147.3A4.3,4.3 0 1 0 103.1,139.6L95.9,136.8A3.7,3.7 0 0 0 92.7,143.4Z"></path><path d="M100.1,147.6L117,153.9A2.5,2.5 0 0 0 119.2,149.4L103.8,140A4.3,4.3 0 1 0 100.1,147.6Z"></path><path d="M116.5,153.6L120,155.9A3.9,3.9 0 1 0 121.9,148.8L117.7,149A2.5,2.5 0 0 0 116.5,153.6Z"></path></g>
+  <g class="s-k"><path d="M70.7,119.8L91.9,142.7A3.7,3.7 0 0 0 97.6,138.1L79.6,112.6A5.8,5.8 0 1 0 70.7,119.8Z"></path><path d="M92.7,143.4L99.4,147.3A4.3,4.3 0 1 0 103.1,139.6L95.9,136.8A3.7,3.7 0 0 0 92.7,143.4Z"></path><path d="M100.1,147.6L117,153.9A2.5,2.5 0 0 0 119.2,149.4L103.8,140A4.3,4.3 0 1 0 100.1,147.6Z"></path></g>
+  <path class="s-rf" d="M141.4,133.6C141.5,134.1 141.5,134.6 141.5,135.1C141.6,135.7 141.6,136.2 141.5,136.8C141.5,137.3 141.5,137.9 141.4,138.4C141.3,139 141.3,139.5 141.1,140.1C141,140.7 140.9,141.2 140.8,141.7C140.6,142.3 140.5,142.8 140.3,143.3C140.1,143.8 139.9,144.3 139.7,144.8C139.5,145.2 139.2,145.7 139,146.1C138.8,146.5 138.5,146.9 138.3,147.2C138,147.6 137.7,147.9 137.5,148.1C137.2,148.4 136.9,148.6 136.6,148.8C136.4,149 136.1,149.2 135.8,149.3C135.5,149.4 135.2,149.4 135,149.5C134.7,149.5 134.4,149.4 134.2,149.4C133.9,149.3 133.7,149.2 133.4,149C133.2,148.9 132.9,148.7 132.7,148.4C132.5,148.2 132.3,147.9 132.1,147.6C132,147.3 131.8,146.9 131.6,146.5C131.5,146.2 131.4,145.7 131.3,145.3C131.2,144.9 131.1,144.4 131,143.9C130.9,143.4 130.9,142.9 130.9,142.4C130.8,141.8 130.8,141.3 130.9,140.7C130.9,140.2 130.9,139.6 131,139.1C131,138.5 131.1,138 131.2,137.4C131.3,136.8 131.5,136.3 131.6,135.8C131.8,135.2 131.9,134.7 132.1,134.2C132.3,133.7 132.5,133.2 132.7,132.7C132.9,132.3 133.1,131.8 133.4,131.4C133.6,131 133.9,130.6 134.1,130.3C134.4,129.9 134.7,129.6 134.9,129.4C135.2,129.1 135.5,128.9 135.8,128.7C136,128.5 136.3,128.3 136.6,128.2C136.9,128.1 137.2,128.1 137.4,128.1C137.7,128 138,128.1 138.2,128.1C138.5,128.2 138.7,128.3 139,128.5C139.2,128.6 139.4,128.8 139.7,129.1C139.9,129.3 140.1,129.6 140.3,129.9C140.4,130.2 140.6,130.6 140.7,131C140.9,131.3 141,131.8 141.1,132.2C141.2,132.6 141.3,133.1 141.4,133.6Z"></path><path class="s-rs" d="M131.4,138.2L139.7,129.9M131.4,143.5L141,134M132.6,147.6L141,139.3M132.6,133.9L134.6,148.7M135,130.2L137.4,147.3M137.8,128.8L139.8,143.6"></path><path class="s-rh" d="M130.8,139.8L130.6,144.2L131.8,147.3"></path><path class="s-rsch" d="M126,148.9L130.6,144.2"></path><path class="s-rr" d="M141.4,133.6C141.5,134.1 141.5,134.6 141.5,135.1C141.6,135.7 141.6,136.2 141.5,136.8C141.5,137.3 141.5,137.9 141.4,138.4C141.3,139 141.3,139.5 141.1,140.1C141,140.7 140.9,141.2 140.8,141.7C140.6,142.3 140.5,142.8 140.3,143.3C140.1,143.8 139.9,144.3 139.7,144.8C139.5,145.2 139.2,145.7 139,146.1C138.8,146.5 138.5,146.9 138.3,147.2C138,147.6 137.7,147.9 137.5,148.1C137.2,148.4 136.9,148.6 136.6,148.8C136.4,149 136.1,149.2 135.8,149.3C135.5,149.4 135.2,149.4 135,149.5C134.7,149.5 134.4,149.4 134.2,149.4C133.9,149.3 133.7,149.2 133.4,149C133.2,148.9 132.9,148.7 132.7,148.4C132.5,148.2 132.3,147.9 132.1,147.6C132,147.3 131.8,146.9 131.6,146.5C131.5,146.2 131.4,145.7 131.3,145.3C131.2,144.9 131.1,144.4 131,143.9C130.9,143.4 130.9,142.9 130.9,142.4C130.8,141.8 130.8,141.3 130.9,140.7C130.9,140.2 130.9,139.6 131,139.1C131,138.5 131.1,138 131.2,137.4C131.3,136.8 131.5,136.3 131.6,135.8C131.8,135.2 131.9,134.7 132.1,134.2C132.3,133.7 132.5,133.2 132.7,132.7C132.9,132.3 133.1,131.8 133.4,131.4C133.6,131 133.9,130.6 134.1,130.3C134.4,129.9 134.7,129.6 134.9,129.4C135.2,129.1 135.5,128.9 135.8,128.7C136,128.5 136.3,128.3 136.6,128.2C136.9,128.1 137.2,128.1 137.4,128.1C137.7,128 138,128.1 138.2,128.1C138.5,128.2 138.7,128.3 139,128.5C139.2,128.6 139.4,128.8 139.7,129.1C139.9,129.3 140.1,129.6 140.3,129.9C140.4,130.2 140.6,130.6 140.7,131C140.9,131.3 141,131.8 141.1,132.2C141.2,132.6 141.3,133.1 141.4,133.6Z"></path><path class="s-rg" d="M119.6,155.2L126,148.9"></path>
+  <g class="s-k"><path d="M116.5,153.6L120,155.9A3.9,3.9 0 1 0 121.9,148.8L117.7,149A2.5,2.5 0 0 0 116.5,153.6Z"></path></g>
+  <path class="s-korb" d="M158.2,141.5L148.2,144.4Q146.4,138.8 148.2,133.2L158.2,136.1Z"></path><path class="s-kappe" d="M157.8,138.8a3.8,3.8 0 1 0 7.6,0a3.8,3.8 0 1 0 -7.6,0Z"></path>
+  <path class="s-bahng" d="M170.2,138.8 Q 215.1,112.8 259,132.8"></path><path class="s-bahng" d="M170.2,138.8 Q 215.1,128.8 259,132.8"></path><path class="s-bahn" d="M170.2,138.8 Q 215.1,120.8 259,132.8"></path>
+  <path class="s-luecke" d="M233.5,117.8L238.5,137.8"></path><path class="s-bruch" d="M229,117.8L234,137.8M238,117.8L243,137.8"></path>
+  <circle class="s-ring" cx="272" cy="132.8" r="11"></circle><circle class="s-mk" cx="272" cy="132.8" r="3.4"></circle>
+  <text class="st" x="150" y="274">calm and repeatable · under pressure</text>
+</svg>
+        <figcaption class="leise">Key graphic: consistency under maximum pressure</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="konstanz_unter_hoechstdruck" aria-pressed="false">
+      Mark as read
+    </button></div>
+    </section>
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2>Exercise</h2><span class="chip chip-rot">open</span></div>
+        
+        <h3 class="ue-titel">Holding quality when it counts</h3><div class="ue-block"><h4>Goal</h4><p>Call up your own strokes cleanly and reliably even under heightened pressure.</p></div><div class="ue-block"><h4>How to do it</h4><ol class="schrittliste"><li>Deliberately build pressure into your training: play for points, set yourself targets you have to hit, simulate tight set scores.</li><li>Watch which strokes break down first under pressure — that's where your work lies.</li><li>In the pressure situations, deliberately choose your most reliable stroke, not the riskiest.</li><li>Repeat your safest strokes so often that they run on their own even under load.</li><li>Watch for a loose grip — tensing up is the first sign of pressure.</li></ol></div><div class="ue-block"><h4>Self-check</h4><p>Does your technique stay clean under pressure, or does it become hectic and cramped? Do you reach for your safest stroke at the decisive moment, or do you seek the risk? Robustness means calling up the practiced quality even when the stakes are high.</p></div><div class="ue-block"><h4>Wrap-up</h4><p>Consistency under maximum pressure is the quiet core of mastery. It crowns the expert technique: the stroke that holds even in the hardest moment wins, not the most brilliant.</p></div>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="uebungsteil" data-baustein="konstanz_unter_hoechstdruck" aria-pressed="false">
+      Mark as done
+    </button></div>
+      </section>
+      
+      
+      
+      
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Playing goals</dt><dd>Consistency under repetition, Target accuracy</dd>
+        
+        
+        
+        <dt>Prerequisites</dt><dd><a href="/en/baustein/taeuschung?kontext=kompetenz">Deception — hiding your intent</a>, <a href="/en/baustein/praezision_an_die_linien?kontext=kompetenz">Precision to the lines</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Module navigation">
+      
+      
+      <a class="baustein-zur-liste" href="/en/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Back to list</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Share" title="Share">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Save" title="Save">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/en/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/en/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/en/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/en/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/en/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/en/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/en/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/en/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/en/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/en/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/en/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/en/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/en/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/en/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/en/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/en/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>

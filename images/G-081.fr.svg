@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Trois vignettes côte à côte : le Snowminton avec un flocon au-dessus d'un sol enneigé, le Beachminton avec le soleil au-dessus des dunes, le Blackminton avec une trajectoire de points lumineux dans l'obscurité. Une accolade au-dessus des trois indique : les mêmes règles. Seul l'environnement change, c'est-à-dire le sol, la température ou la lumière.">
+  <style>
+    .s-pfeil{fill:var(--tinte-3,#656f7e)}
+    .s-apfeil{fill:var(--primaer-dunkel,#1e8bd6)}
+    .s-ball{fill:var(--tinte,#16202b)}
+    .s-titel{fill:var(--tinte,#16202b);font:700 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-name{fill:var(--tinte-2,#5a6675);font:600 11px/1 system-ui,sans-serif;text-anchor:middle}
+    .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+    .s-akzenth{fill:var(--primaer-tief,#1568ad);font:700 11px/1 system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:var(--flaeche-2,#f1f5fb);stroke-width:4;stroke-linejoin:round}
+    .s-glimm{fill:var(--primaer-weich,#e8f3fe)}
+    .s-klammer{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2;stroke-linejoin:round}
+    .s-kachel{fill:var(--flaeche,#fff);stroke:var(--tinte-3,#656f7e);stroke-width:1.2}
+    .s-symbol{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .s-boden{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    .s-flocke{fill:var(--tinte-3,#656f7e)}
+  </style>
+  <defs>
+    <marker id="mp" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="8.5" refY="5" orient="auto-start-reverse">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-pfeil"/>
+    </marker>
+    <marker id="ma" viewBox="0 0 10 10" markerWidth="6" markerHeight="6" refX="8" refY="5" orient="auto">
+      <path d="M1,1 L9,5 L1,9 Z" class="s-apfeil"/>
+    </marker>
+  </defs>
+
+  <path class="s-klammer" d="M54,84 L54,74 L246,74 L246,84M150,74 L150,84"/>
+  <text class="s-akzenth" x="150" y="66">les mêmes règles</text>
+  <rect class="s-kachel" x="12" y="92" width="84" height="100" rx="10"/>
+  <rect class="s-kachel" x="108" y="92" width="84" height="100" rx="10"/>
+  <rect class="s-kachel" x="204" y="92" width="84" height="100" rx="10"/>
+  <path class="s-symbol" d="M54,146L54,110M50.6,134.2L54,139.2L57.4,134.2M57.4,121.8L54,116.8L50.6,121.8M69.6,137L38.4,119M57.7,134.1L63.7,133.6L61.1,128.1M50.3,121.9L44.3,122.4L46.9,127.9M38.4,137L69.6,119M46.9,128.1L44.3,133.6L50.3,134.1M61.1,127.9L63.7,122.4L57.7,121.9"/>
+  <circle class="s-flocke" cx="26" cy="104" r="1.8"/>
+  <circle class="s-flocke" cx="82" cy="108" r="1.8"/>
+  <circle class="s-flocke" cx="32" cy="152" r="1.8"/>
+  <circle class="s-flocke" cx="78" cy="156" r="1.8"/>
+  <path class="s-boden" d="M20,176 Q38,168 54,174 Q72,180 88,172"/>
+  <circle class="s-symbol" cx="162" cy="118" r="8"/>
+  <path class="s-symbol" d="M175,118L181,118M171.2,127.2L175.4,131.4M162,131L162,137M152.8,127.2L148.6,131.4M149,118L143,118M152.8,108.8L148.6,104.6M162,105L162,99M171.2,108.8L175.4,104.6"/>
+  <path class="s-boden" d="M116,176 Q132,152 148,168 Q164,150 184,170"/>
+  <circle class="s-flocke" cx="218" cy="170" r="1.6"/>
+  <circle class="s-flocke" cx="228.4" cy="155.6" r="2"/>
+  <circle class="s-flocke" cx="238.8" cy="142.8" r="2.4"/>
+  <circle class="s-flocke" cx="249.2" cy="131.6" r="2.8"/>
+  <circle class="s-flocke" cx="259.6" cy="122" r="3.2"/>
+  <circle class="s-glimm" cx="270" cy="114" r="11"/>
+  <circle class="s-ball" cx="270" cy="114" r="4.5"/>
+  <text class="s-titel" x="54" y="212">Snowminton</text>
+  <text class="s-titel" x="150" y="212">Beachminton</text>
+  <text class="s-titel" x="246" y="212">Blackminton</text>
+  <text class="s-name" x="54" y="228">neige, froid</text>
+  <text class="s-name" x="150" y="228">sable, chaleur</text>
+  <text class="s-name" x="246" y="228">obscurité</text>
+  <text class="st" x="150" y="280">seul l'environnement change</text>
+</svg>

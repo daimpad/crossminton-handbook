@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Montagepunkt + SPA-Fallback (SEO Tier 2, Baustein 1). Muss vor jedem
+       <link>/<script>, das relative URLs auflöst, laufen — s. ENTWICKLUNG.md
+       für die ausführliche Begründung (verschachtelte Routen brechen relative
+       Pfade). Der Präfix bestimmt sich selbst aus dem Hostnamen (Logik
+       gespiegelt in 404.html) — dieselbe ausgelieferte Datei funktioniert
+       dadurch unverändert auf der Custom Domain (Wurzel) UND auf GitHub
+       Pages (/crossminton-handbook/), ohne einen Wert von Hand zu pflegen. -->
+  <base href="/">
+  <script>
+    (function () {
+      // Beide Ziele bekommen dieselbe _site aus demselben Deploy-Lauf
+      // (deploy-pages.yml) — ein einziger fest codierter Präfix könnte also
+      // nie für beide stimmen. Der Hostname liegt zur Laufzeit vor und
+      // entscheidet ihn zuverlässig.
+      var PRAEFIX = (window.location.hostname === 'daimpad.github.io') ? '/crossminton-handbook' : '';
+      var pfad = window.location.pathname;
+      var wurzel = (PRAEFIX && pfad.indexOf(PRAEFIX + '/') === 0) ? PRAEFIX + '/' : '/';
+      document.querySelector('base').setAttribute('href', wurzel);
+
+      // Kam die Anfrage über den 404-Umweg, steckt die echte Route in ?/… —
+      // zurückschreiben, damit der Router sie sieht. Ohne den Parameter: nichts.
+      var s = window.location.search;
+      if (s.indexOf('?/') === 0) {
+        var roh = s.slice(2).split('&');
+        var route = roh[0].replace(/~and~/g, '&');
+        var rest = roh.slice(1).join('&').replace(/~and~/g, '&');
+        window.history.replaceState({}, '', wurzel + route + (rest ? '?' + rest : '') + window.location.hash);
+      }
+
+      // Modul-Graph vorab laden (s. Kommentar weiter unten am ursprünglichen Ort):
+      // MUSS hier per JS mit dem gerade berechneten `wurzel` geschehen, nicht als
+      // statisches <link rel=modulepreload> im Markup. Grund: Chromiums Preload-
+      // Scanner liest solche Hinweise aus den rohen Antwort-Bytes, BEVOR dieses
+      // Skript läuft — er sähe also den <base>-Platzhalter "/", nicht den hier
+      // berechneten Wert, und würde unter einem Unterpfad-Deploy (GitHub Pages)
+      // durchgehend falsche, wurzel-relative URLs anfragen (404-Rauschen bei
+      // JEDEM Seitenaufruf). Indem wir die <link>-Elemente selbst mit der
+      // bereits korrekten absoluten URL einfügen, bleibt der Vorteil (paralleles
+      // Vorladen des ganzen Graphen) erhalten, ohne das Rateproblem.
+      var GRAPH = [
+        'js/app.js', 'js/i18n.js', 'js/oberflaeche.js', 'js/zustand.js', 'js/daten.js',
+        'js/graph.js', 'js/fortschritt.js', 'js/pfade.js', 'js/aktionen.js', 'js/seo.js',
+        'js/analytics.js', 'js/suche.js', 'js/plan.js', 'js/feedback.js', 'js/version.js',
+        'js/ansichten/heim.js', 'js/ansichten/onboarding.js', 'js/ansichten/pfad.js',
+        'js/ansichten/baustein.js', 'js/ansichten/merkliste.js', 'js/ko-turnier.js',
+        'js/ansichten/ko-turnier.js', 'js/ansichten/training.js', 'js/ansichten/regeln.js',
+        'js/ansichten/info.js', 'js/ansichten/profil.js', 'js/ansichten/zielwahl.js',
+        'js/ansichten/plan.js', 'js/ansichten/suche.js', 'js/ansichten/turnier.js',
+        'js/turniersimulator.js', 'js/ansichten/turniersimulator.js',
+      ];
+      for (var i = 0; i < GRAPH.length; i++) {
+        var l = document.createElement('link');
+        l.rel = 'modulepreload';
+        l.href = wurzel + GRAPH[i];
+        document.head.appendChild(l);
+      }
+    }());
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Snowminton — jouer sur la neige — Manuel de Crossminton</title>
+  <meta name="description" content="Le Snowminton, c'est du Crossminton sur la neige — selon les règles le même jeu, seule la surface du terrain est blanche. On compte, on sert et on change comme …">
+  <meta name="author" content="Damian Paderta">
+  <meta name="theme-color" content="#f5f9fd">
+  <link rel="canonical" href="https://crossminton-handbook.de/fr/baustein/snowminton">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏸</text></svg>">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Social-Vorschau (Open Graph + Twitter/X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Crossminton-Handbuch">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Snowminton — jouer sur la neige — Manuel de Crossminton">
+  <meta property="og:description" content="Le Snowminton, c'est du Crossminton sur la neige — selon les règles le même jeu, seule la surface du terrain est blanche. On compte, on sert et on change comme …">
+  <meta property="og:url" content="https://crossminton-handbook.de/fr/baustein/snowminton">
+  <meta property="og:image" content="https://crossminton-handbook.de/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Snowminton — jouer sur la neige — Manuel de Crossminton">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Snowminton — jouer sur la neige — Manuel de Crossminton">
+  <meta name="twitter:description" content="Le Snowminton, c'est du Crossminton sur la neige — selon les règles le même jeu, seule la surface du terrain est blanche. On compte, on sert et on change comme …">
+  <meta name="twitter:image" content="https://crossminton-handbook.de/images/og-image.png">
+
+  <!-- Strukturierte Daten (schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Crossminton-Handbuch",
+    "alternateName": "Crossminton lernen",
+    "url": "https://crossminton-handbook.de/",
+    "inLanguage": "de",
+    "description": "Kostenloses, werbefreies Handbuch zum Crossminton-Lernen: Technik, Taktik, Regeln, Training und Ausrüstung.",
+    "image": "https://crossminton-handbook.de/images/og-image.png",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isAccessibleForFree": true,
+    "keywords": "Crossminton, Speedminton, Speeder, Technik, Taktik, Regeln, Training, Ausrüstung, Handbuch",
+    "author": { "@type": "Person", "name": "Damian Paderta" }
+  }
+  </script>
+  <link rel="stylesheet" href="css/schriften.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Tracking (GoatCounter, s. js/analytics.js + Datenschutzerklärung): lokal
+       eingecheckte vendor/goatcounter/count.js (ISC-lizenziert) statt des
+       offiziellen //gc.zgo.at/count.js — kein Fremd-CDN, passend zur
+       Architekturregel „Bibliotheken als lokal eingecheckte statische Datei".
+       no_onload, weil die SPA pro echtem Routenwechsel selbst zählt
+       (js/analytics.js aus js/app.js heraus) — ohne das zählte nur der
+       allererste Aufruf. Keine Cookies, keine dauerhafte Kennung. -->
+  <script data-goatcounter="https://crossminton-handbook.goatcounter.com/count"
+          data-goatcounter-settings='{"no_onload": true}'
+          async src="vendor/goatcounter/count.js"></script>
+
+  <!-- Thema vor dem ersten Anstrich setzen (kein Flackern): liest die
+       gespeicherte Einstellung und erzwingt hell/dunkel; 'auto' folgt dem OS.
+       Muss inline und synchron laufen, da Module verzögert geladen werden. -->
+
+  <script>
+    (function () {
+      try {
+        var z = JSON.parse(localStorage.getItem('crossminton.zustand.v1') || '{}');
+        // Standardthema ist hell: ohne gespeicherte Wahl greift 'hell', nur die
+        // ausdrückliche Auswahl 'auto' folgt dem Betriebssystem.
+        var thema = (z && z.einstellungen && z.einstellungen.thema) || 'hell';
+        if (thema === 'hell' || thema === 'dunkel') document.documentElement.dataset.theme = thema;
+        var dunkel = thema === 'dunkel' || (thema === 'auto' && window.matchMedia
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dunkel ? '#0f151c' : '#f5f9fd');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Der Modul-Graph wird jetzt per JS vorgeladen — s. den Kommentar im
+       <base>-Skript oben im <head> für die Begründung (Preload-Scanner vs.
+       Unterpfad-Deploy). -->
+  <link rel="alternate" hreflang="de" href="https://crossminton-handbook.de/baustein/snowminton">
+  <link rel="alternate" hreflang="en" href="https://crossminton-handbook.de/en/baustein/snowminton">
+  <link rel="alternate" hreflang="fr" href="https://crossminton-handbook.de/fr/baustein/snowminton">
+  <link rel="alternate" hreflang="pl" href="https://crossminton-handbook.de/pl/baustein/snowminton">
+  <link rel="alternate" hreflang="x-default" href="https://crossminton-handbook.de/baustein/snowminton">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Manuel de Crossminton","item":"https://crossminton-handbook.de/fr"},{"@type":"ListItem","position":2,"name":"Jouer dehors","item":"https://crossminton-handbook.de/fr/pfad/umgebung"},{"@type":"ListItem","position":3,"name":"Snowminton — jouer sur la neige","item":"https://crossminton-handbook.de/fr/baustein/snowminton"}]},{"@type":"LearningResource","name":"Snowminton — jouer sur la neige","description":"Le Snowminton, c'est du Crossminton sur la neige — selon les règles le même jeu, seule la surface du terrain est blanche. On compte, on sert et on change comme …","url":"https://crossminton-handbook.de/fr/baustein/snowminton","inLanguage":"fr","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by-sa/4.0/","learningResourceType":"lesson","educationalLevel":"Avancé","about":[{"@type":"Thing","name":"Condition physique"}]}]}</script>
+</head>
+<body>
+  <a class="zum-inhalt" href="#ansicht">Zum Inhalt springen</a>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="marke" href="/fr" data-roh="#/">
+        <img class="marke-logo" src="assets/images/speeder.svg" alt="" width="32" height="32">
+        <span class="marke-text">Crossminton-Handbuch</span>
+      </a>
+      <div class="kopf-rechts">
+        <a class="kopf-suche" id="kopf-suche" href="/fr/suche" data-roh="#/suche" aria-label="Suche">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <button class="hamburger" id="hamburger" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue" aria-label="Menü">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="sprach-anzeige" id="sprach-anzeige">
+          <button class="sprach-knopf" id="sprach-knopf" aria-expanded="false" aria-controls="sprach-liste" aria-label="Sprache">
+            <span class="sprach-globus" aria-hidden="true">🌐</span>
+          </button>
+          <ul class="sprach-liste" id="sprach-liste" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="ansicht" tabindex="-1">
+    <article class="baustein">
+      
+      
+    <section class="marke-hero klein hue pf-teal baustein-hero">
+      <span class="marke-hero-icon"><i class="fa-solid fa-mountain " aria-hidden="true"></i></span>
+      <div class="marke-hero-text">
+        <h1>Snowminton — jouer sur la neige</h1>
+        <p class="marke-hero-untertitel">Condition physique · Avancé</p>
+      </div>
+    </section>
+      <p class="chip-zeile"><span class="chip">Froid</span> <span class="chip">Neige</span></p>
+      <div class="banner-hinweis">Recommandé avant : <a href="/fr/baustein/spielarten_ueberblick?kontext=kompetenz">Les variantes de jeu en aperçu</a>, <a href="/fr/baustein/naesse_sicherer_stand?kontext=kompetenz">Humidité et appui sûr</a></div>
+      
+    <section class="abschnitt">
+      <div class="abschnitt-kopf"><h2>Explication</h2><span class="chip chip-rot">à faire</span></div>
+      
+      
+      <p>Le Snowminton, c'est du Crossminton sur la neige — selon les règles le même jeu, seule la surface du terrain est blanche. On compte, on sert et on change comme toujours ; le speeder vole comme d'habitude. Ce qui change, ce sont deux choses : la surface et le froid.</p><p>La neige rend le sol mou et glissant à la fois. Comme déjà sur sol mouillé : le mouvement contrôlé passe avant le tempo maximal. Tu fais des pas plus courts et sûrs, tu évites les changements de direction brusques où le pied glisse, et tu travailles plus par un appui large et stable que par des départs explosifs. La neige tassée porte autrement que la fraîche — tu lis le sol avant le jeu.</p><p>Le froid est le deuxième facteur, et ici l'attention à toi-même prime sur tout. Les muscles froids sont plus vulnérables, c'est pourquoi l'échauffement prend un poids particulier par temps de gel — la comparaison avec le moteur froid devient littérale sur la neige. Tu te tiens au chaud entre les échanges et tu t'habilles en couches que tu peux ouvrir au besoin. Rien d'autre ne change côté équipement : d'autres chaussures et vêtements, adaptés au froid et à la neige.</p><p>Pour les chaussures, l'accroche sur sol glissant et froid compte — la semelle lisse de salle est ici déplacée. Pour les vêtements, le principe des couches du chapitre équipement aide : une couche qui évacue l'humidité du corps, par-dessus une couche chaude et une couche coupe-vent.</p><p>Une limite claire demeure : cette app ne te donne aucune consigne sur des valeurs de protection contre le froid ou la charge. Pour tout ce qui va au-delà d'un jeu prudent — engourdissement, tremblements, sensation de froid persistante —, l'évaluation appartient à des mains compétentes, non à la poursuite du jeu.</p><p>Sur la neige, tu te déplaces comme sur un lac gelé : à pas calmes et sûrs, l'œil pour les endroits glissants. Qui en tient compte joue aussi dans le blanc en sécurité.</p>
+      
+      <figure class="grafik-platzhalter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" data-quelle="figuren" aria-label="Snowminton : un joueur se déplace sur une couche de neige, les genoux légèrement fléchis, la raquette devant le corps. Derrière lui, les traces de pas courts et rapprochés. Des flocons tombent." class="grafik-bild grafik-svg" id="g-svg-239" style="--hoch: 1.000;">
+  <style>
+    #g-svg-239 .s-k{fill:var(--tinte,#16202b)}
+    #g-svg-239 .s-f{fill:var(--tinte-2,#5a6675)}
+    #g-svg-239 .s-x{fill:var(--flaeche-2,#f1f5fb);stroke:var(--flaeche-2,#f1f5fb);stroke-width:2.4;stroke-linejoin:round}
+    #g-svg-239 .s-rf{fill:var(--primaer,#38a4f1);opacity:.14}
+    #g-svg-239 .s-rs{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:.8;opacity:.55}
+    #g-svg-239 .s-rr{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.6;stroke-linejoin:round}
+    #g-svg-239 .s-rh{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+    #g-svg-239 .s-rsch{fill:none;stroke:var(--primaer-dunkel,#1e8bd6);stroke-width:2.8;stroke-linecap:round}
+    #g-svg-239 .s-rg{fill:none;stroke:var(--tinte-2,#5a6675);stroke-width:5.2;stroke-linecap:round}
+    #g-svg-239 .s-sch{fill:var(--schatten-boden,#16202b2e)}
+    #g-svg-239 .s-schw{fill:var(--schatten-boden,#16202b2e);opacity:.5}
+    #g-svg-239 .s-wind{fill:none;stroke:var(--tinte-3,#656f7e);stroke-width:1.6;stroke-linecap:round}
+    #g-svg-239 .s-tritt{fill:var(--tinte-3,#656f7e)}
+    #g-svg-239 .s-feld{fill:var(--tinte-3,#656f7e);opacity:.07}
+    #g-svg-239 .s-lab{fill:var(--tinte-2,#5a6675);font:600 10.5px/1 system-ui,sans-serif}
+    #g-svg-239 .st{fill:var(--tinte-3,#656f7e);font:600 12px/1 system-ui,sans-serif;text-anchor:middle}
+  </style>
+  <path class="s-feld" d="M0,300L300,300L300,157.2L290,151.6L280,148.2L270,152.7L260,153.6L250,153.7L240,153.6L230,148.5L220,150.1L210,156.8L200,153.8L190,149.9L180,151.3L170,151.2L160,153.9L150,156.1L140,149.6L130,148.4L120,154.6L110,154.4L100,152.5L90,152L80,148.9L70,152.2L60,157.3L50,152L40,148.6L30,152.2L20,152.9L10,154.2L0,154.3Z"></path>
+  <ellipse class="s-tritt" cx="72.7" cy="229.8" rx="3.9" ry="1.6" transform="rotate(-20 72.7 229.8)"></ellipse><ellipse class="s-tritt" cx="92.6" cy="229.2" rx="3.9" ry="1.5" transform="rotate(-20 92.6 229.2)"></ellipse><ellipse class="s-tritt" cx="92.7" cy="219.8" rx="3.8" ry="1.5" transform="rotate(-20 92.7 219.8)"></ellipse><ellipse class="s-tritt" cx="111.7" cy="219.3" rx="3.7" ry="1.5" transform="rotate(-20 111.7 219.3)"></ellipse><ellipse class="s-tritt" cx="111.1" cy="210.5" rx="3.6" ry="1.5" transform="rotate(-20 111.1 210.5)"></ellipse><ellipse class="s-tritt" cx="129.3" cy="210" rx="3.6" ry="1.4" transform="rotate(-20 129.3 210)"></ellipse><ellipse class="s-tritt" cx="128.2" cy="202" rx="3.5" ry="1.4" transform="rotate(-20 128.2 202)"></ellipse>
+  <ellipse class="s-schw" cx="152" cy="203.1" rx="27.8" ry="5"></ellipse><ellipse class="s-sch" cx="152" cy="203.1" rx="17.8" ry="3.1"></ellipse>
+  <g class="s-f"><path d="M141.7,122.7L142.5,135A6.7,6.7 0 1 0 155.8,133.9L154.6,121.7A6.5,6.5 0 0 0 141.7,122.7Z"></path><path d="M142.5,134.8L143.5,156.6A4.7,4.7 0 0 0 152.8,157.1L155.7,135.4A6.7,6.7 0 1 0 142.5,134.8Z"></path><path d="M144.5,153.4L137,162.5A5.3,5.3 0 1 0 145.6,168.8L152,159A4.7,4.7 0 0 0 144.5,153.4Z"></path><path d="M136.3,163.7L126.3,186.5A2.7,2.7 0 0 0 131,189.2L145.4,169A5.3,5.3 0 1 0 136.3,163.7Z"></path><path d="M127.3,185.3L124.5,187.1A3.3,3.3 0 1 0 129,191.9L131,189.2A2.7,2.7 0 0 0 127.3,185.3Z"></path><path d="M125.1,193L137.3,197.9A3.1,3.1 0 0 0 139.7,192.1L127.7,186.9A3.3,3.3 0 1 0 125.1,193Z"></path><path d="M139.2,198.1L145.3,196.6A2.2,2.2 0 0 0 145,192.3L138.6,191.9A3.1,3.1 0 1 0 139.2,198.1Z"></path></g>
+  <g class="s-f"><path d="M146.8,74.7L137.6,88.8A3.3,3.3 0 0 0 142.7,93L154.8,81.2A5.2,5.2 0 1 0 146.8,74.7Z"></path><path d="M137.2,89.6L135.7,94.6A3.9,3.9 0 1 0 143.3,96L143.7,90.9A3.3,3.3 0 0 0 137.2,89.6Z"></path><path d="M135.6,95.5L135,107.6A2.3,2.3 0 0 0 139.4,108.4L143.1,96.9A3.9,3.9 0 1 0 135.6,95.5Z"></path></g>
+  <g class="s-f"><path d="M135.2,106.8L133.8,109.7A3.1,3.1 0 1 0 139.8,110.8L139.5,107.6A2.3,2.3 0 0 0 135.2,106.8Z"></path><path d="M133.6,111.1L133.8,116.1A1.9,1.9 0 0 0 137.4,116.7L139.4,112.2A3,3 0 1 0 133.6,111.1Z"></path></g>
+  <g class="s-k"><path d="M160.9,73.9C163.1,74.9 163.2,75.9 164.4,78C165.6,80.1 166.6,80.7 167,84.4C167.4,88.1 167.7,91 166.3,96.4C165,101.8 162.2,105.5 160.4,111.3C158.6,117.1 158.7,121 157.5,125.4C156.2,129.9 155.5,131 154,133.4C152.5,135.9 151.4,136.9 149.8,137.7C148.3,138.4 147.3,138.3 146.1,137.2C144.9,136 144.3,134.7 143.8,132C143.3,129.3 143.1,128 143.6,123.5C144.1,119 145.9,115.3 146.5,109.4C147.1,103.4 146.6,99.2 146.8,93.7C147,88.1 146.9,85.2 147.4,81.6C148,78.1 148.4,77.7 149.6,75.9C150.8,74.1 151.2,73.2 153.4,72.8C155.7,72.4 158.7,72.8 160.9,73.9Z"></path><path d="M145.7,128.4L149.8,141.6A6.7,6.7 0 1 0 162.5,137.4L158,124.3A6.5,6.5 0 0 0 145.7,128.4Z"></path><path d="M149.8,141.5L156.6,164.5A4.7,4.7 0 0 0 165.8,162.6L162.8,138.8A6.7,6.7 0 1 0 149.8,141.5Z"></path><path d="M156.6,161.9L153.4,172.7A5.3,5.3 0 1 0 163.7,175.1L165.7,164A4.7,4.7 0 0 0 156.6,161.9Z"></path><path d="M153.2,174.3L153.8,199.5A2.7,2.7 0 0 0 159.1,200L163.7,175.1A5.3,5.3 0 1 0 153.2,174.3Z"></path><path d="M154.7,197.5L151.4,200.4A3.3,3.3 0 1 0 156.4,204.7L158.8,200.9A2.7,2.7 0 0 0 154.7,197.5Z"></path><path d="M153.6,206.2L167.6,206A3.1,3.1 0 0 0 167.6,199.7L153.6,199.6A3.3,3.3 0 1 0 153.6,206.2Z"></path><path d="M168,206L174.5,205A2.2,2.2 0 0 0 174.5,200.7L168,199.8A3.1,3.1 0 1 0 168,206Z"></path></g>
+  <g class="s-k"><ellipse cx="159.3" cy="60.5" rx="8.3" ry="10.4" transform="rotate(4 159.3 60.5)"></ellipse><path d="M162.9,70.5L164.7,69.9A2.7,2.7 0 0 0 166.4,68.1L167,66.4A6.2,6.2 0 1 0 162.9,70.5Z"></path></g>
+  <g class="s-x"><path d="M154.5,88.6L166.8,115A3.3,3.3 0 0 0 173,112.5L164.1,84.8A5.2,5.2 0 1 0 154.5,88.6Z"></path><path d="M170.7,116.8L177.6,114.8A3.9,3.9 0 1 0 175,107.6L168.4,110.5A3.3,3.3 0 0 0 170.7,116.8Z"></path><path d="M178.2,114.6L193.4,107.4A2.3,2.3 0 0 0 191.9,103.1L175.6,107.4A3.9,3.9 0 1 0 178.2,114.6Z"></path><path d="M193,107.5L196.9,106.6A3.5,3.5 0 1 0 193.4,100.8L190.8,103.8A2.3,2.3 0 0 0 193,107.5Z"></path></g>
+  <g class="s-k"><path d="M154.5,88.6L166.8,115A3.3,3.3 0 0 0 173,112.5L164.1,84.8A5.2,5.2 0 1 0 154.5,88.6Z"></path><path d="M170.7,116.8L177.6,114.8A3.9,3.9 0 1 0 175,107.6L168.4,110.5A3.3,3.3 0 0 0 170.7,116.8Z"></path><path d="M178.2,114.6L193.4,107.4A2.3,2.3 0 0 0 191.9,103.1L175.6,107.4A3.9,3.9 0 1 0 178.2,114.6Z"></path></g>
+  <path class="s-rf" d="M230.3,72.2C230.1,71.9 229.9,71.8 229.6,71.6C229.3,71.5 229,71.4 228.7,71.3C228.3,71.3 227.9,71.2 227.5,71.2C227.1,71.3 226.7,71.3 226.3,71.4C225.8,71.5 225.3,71.6 224.9,71.8C224.4,71.9 223.9,72.1 223.4,72.4C222.8,72.6 222.3,72.8 221.8,73.1C221.3,73.4 220.7,73.8 220.2,74.1C219.7,74.5 219.2,74.9 218.7,75.2C218.2,75.6 217.7,76.1 217.2,76.5C216.7,76.9 216.2,77.4 215.8,77.9C215.3,78.3 214.9,78.8 214.5,79.3C214.1,79.8 213.7,80.3 213.4,80.8C213.1,81.2 212.7,81.7 212.5,82.2C212.2,82.7 212,83.2 211.8,83.6C211.6,84.1 211.4,84.5 211.3,85C211.2,85.4 211.1,85.8 211,86.2C211,86.6 211,86.9 211,87.3C211.1,87.6 211.2,87.9 211.3,88.2C211.4,88.5 211.6,88.7 211.8,88.9C212,89.1 212.2,89.3 212.5,89.5C212.8,89.6 213.1,89.7 213.4,89.8C213.8,89.8 214.2,89.9 214.6,89.9C215,89.8 215.4,89.8 215.8,89.7C216.3,89.6 216.8,89.5 217.2,89.3C217.7,89.2 218.2,89 218.7,88.7C219.2,88.5 219.8,88.2 220.3,87.9C220.8,87.7 221.3,87.3 221.9,87C222.4,86.6 222.9,86.2 223.4,85.8C223.9,85.4 224.4,85 224.9,84.6C225.4,84.1 225.9,83.7 226.3,83.2C226.8,82.8 227.2,82.3 227.6,81.8C228,81.3 228.4,80.8 228.7,80.3C229,79.8 229.3,79.4 229.6,78.9C229.9,78.4 230.1,77.9 230.3,77.5C230.5,77 230.7,76.6 230.8,76.1C230.9,75.7 231,75.3 231.1,74.9C231.1,74.5 231.1,74.2 231,73.8C231,73.5 230.9,73.2 230.8,72.9C230.7,72.6 230.5,72.4 230.3,72.2Z"></path><path class="s-rs" d="M215.5,89.3L230.4,75.8M212.4,88.3L229.7,72.7M211.7,85.3L226.6,71.8M219.5,87.9L213.4,81.6M224.6,84.2L217.5,76.9M228.7,79.5L222.6,73.2"></path><path class="s-rh" d="M213.9,90L211.2,89.5L210.8,86.8"></path><path class="s-rsch" d="M202.8,97L211.2,89.5"></path><path class="s-rr" d="M230.3,72.2C230.1,71.9 229.9,71.8 229.6,71.6C229.3,71.5 229,71.4 228.7,71.3C228.3,71.3 227.9,71.2 227.5,71.2C227.1,71.3 226.7,71.3 226.3,71.4C225.8,71.5 225.3,71.6 224.9,71.8C224.4,71.9 223.9,72.1 223.4,72.4C222.8,72.6 222.3,72.8 221.8,73.1C221.3,73.4 220.7,73.8 220.2,74.1C219.7,74.5 219.2,74.9 218.7,75.2C218.2,75.6 217.7,76.1 217.2,76.5C216.7,76.9 216.2,77.4 215.8,77.9C215.3,78.3 214.9,78.8 214.5,79.3C214.1,79.8 213.7,80.3 213.4,80.8C213.1,81.2 212.7,81.7 212.5,82.2C212.2,82.7 212,83.2 211.8,83.6C211.6,84.1 211.4,84.5 211.3,85C211.2,85.4 211.1,85.8 211,86.2C211,86.6 211,86.9 211,87.3C211.1,87.6 211.2,87.9 211.3,88.2C211.4,88.5 211.6,88.7 211.8,88.9C212,89.1 212.2,89.3 212.5,89.5C212.8,89.6 213.1,89.7 213.4,89.8C213.8,89.8 214.2,89.9 214.6,89.9C215,89.8 215.4,89.8 215.8,89.7C216.3,89.6 216.8,89.5 217.2,89.3C217.7,89.2 218.2,89 218.7,88.7C219.2,88.5 219.8,88.2 220.3,87.9C220.8,87.7 221.3,87.3 221.9,87C222.4,86.6 222.9,86.2 223.4,85.8C223.9,85.4 224.4,85 224.9,84.6C225.4,84.1 225.9,83.7 226.3,83.2C226.8,82.8 227.2,82.3 227.6,81.8C228,81.3 228.4,80.8 228.7,80.3C229,79.8 229.3,79.4 229.6,78.9C229.9,78.4 230.1,77.9 230.3,77.5C230.5,77 230.7,76.6 230.8,76.1C230.9,75.7 231,75.3 231.1,74.9C231.1,74.5 231.1,74.2 231,73.8C231,73.5 230.9,73.2 230.8,72.9C230.7,72.6 230.5,72.4 230.3,72.2Z"></path><path class="s-rg" d="M191.4,107.4L202.8,97"></path>
+  <g class="s-k"><path d="M193,107.5L196.9,106.6A3.5,3.5 0 1 0 193.4,100.8L190.8,103.8A2.3,2.3 0 0 0 193,107.5Z"></path></g>
+  <path class="s-wind" d="M26.2,28.8L33.8,31.2M29.1,26.1L30.9,33.9M32.9,27.3L27.1,32.7M67.1,69.1L72.9,70.9M69.3,67.1L70.7,72.9M72.2,68L67.8,72M207.7,20.7L216.3,23.3M211,17.6L213,26.4M215.3,18.9L208.7,25.1M246.7,57L253.3,59M249.2,54.6L250.8,61.4M252.6,55.6L247.4,60.4M272.2,102.8L279.8,105.2M275.1,100.1L276.9,107.9M278.9,101.3L273.1,106.7M40.7,117L47.3,119M43.2,114.6L44.8,121.4M46.6,115.6L41.4,120.4M117.1,17.1L122.9,18.9M119.3,15.1L120.7,20.9M122.2,16L117.8,20M283.1,21.1L288.9,22.9M285.3,19.1L286.7,24.9M288.2,20L283.8,24"></path>
+  <text class="s-lab" x="101" y="255.1" text-anchor="middle">pas rapprochés</text>
+  <text class="st" x="150" y="280">des pas courts et sûrs dans la neige</text>
+</svg>
+        <figcaption class="leise">Snowminton : des pas courts et sûrs sur la neige</figcaption>
+      </figure>
+      <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="erklaerteil" data-baustein="snowminton" aria-pressed="false">
+      Cocher comme lu
+    </button></div>
+    </section>
+      
+      
+      <section class="abschnitt">
+        <div class="abschnitt-kopf"><h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Tâche de réflexion</h2><span class="chip chip-rot">à faire</span></div>
+        <p>Pense à un match par temps froid ou sur sol glissant : t'es-tu échauffé à fond au préalable, ou y es-tu allé à froid ? Propose-toi, pour la neige, de donner plus de temps à l'échauffement, de t'habiller en couches, de te tenir au chaud entre les échanges et de jouer à petits pas sûrs. Et sois-en conscient : aux signes d'alerte comme l'engourdissement ou une sensation de froid persistante, arrêter est plus sage que continuer — l'évaluation appartient alors à des mains compétentes.</p>
+        <div class="knopf-zeile">
+    <button class="knopf knopf-primaer" data-quittiere="reflexionsaufgabe" data-baustein="snowminton" aria-pressed="false">
+      Cocher comme retenu
+    </button></div>
+      </section>
+      
+      
+      
+    <section class="karte siehe-auch">
+      <h2 class="siehe-auch-titel">Voir aussi</h2>
+      <ul class="siehe-auch-liste"><li><a class="chip chip-baustein" href="/fr/baustein/naesse_sicherer_stand?kontext=umgebung">Humidité et appui sûr</a></li><li><a class="chip chip-baustein" href="/fr/baustein/schuhe_finden?kontext=kompetenz">Trouver ses chaussures</a></li><li><a class="chip chip-baustein" href="/fr/baustein/funktionskleidung?kontext=kompetenz">Les vêtements techniques</a></li><li><a class="chip chip-baustein" href="/fr/baustein/richtig_aufwaermen?kontext=kompetenz">Bien s'échauffer</a></li></ul>
+    </section>
+      
+    <details class="einordnung karte">
+      <summary>Classification</summary>
+      <dl>
+        <dt>Objectifs de jeu</dt><dd>Changement de surface, Température</dd>
+        
+        <dt>Surface</dt><dd>Neige</dd>
+        <dt>Conditions météo</dt><dd>Froid</dd>
+        <dt>Prérequis</dt><dd><a href="/fr/baustein/spielarten_ueberblick?kontext=kompetenz">Les variantes de jeu en aperçu</a>, <a href="/fr/baustein/naesse_sicherer_stand?kontext=kompetenz">Humidité et appui sûr</a></dd>
+      </dl>
+    </details>
+      
+    <nav class="baustein-fussnav" aria-label="Navigation entre modules">
+      
+      
+      <a class="baustein-zur-liste" href="/fr/pfad/kompetenz"><i class="fa-solid fa-list" aria-hidden="true"></i> Vers la liste</a>
+    </nav>
+    </article>
+    
+    <div class="fab-leiste" role="group" aria-label="Actions">
+      <button type="button" class="fab fab-teilen" data-teilen="" aria-label="Partager" title="Partager">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fab fab-merken" data-merken="" aria-pressed="false" aria-label="Enregistrer" title="Enregistrer">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+      </button>
+    </div></main>
+
+  <!-- Screenreader-Ansagen (Quittierungen, Meilensteine): visuell versteckt, höflich vorgelesen. -->
+  <div id="ansage" class="nur-sr" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Kurze Rückmeldungen (Link kopiert, Gemerkt): unten eingeblendet, per role=status angesagt. -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <nav class="fussnav" aria-label="Hauptnavigation">
+    <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen">
+      <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+      <span class="nav-text">Lernen</span>
+    </a>
+    <a href="/fr/training" data-roh="#/training" data-nav="training">
+      <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+      <span class="nav-text">Trainieren</span>
+    </a>
+    <a href="/fr/profil" data-roh="#/profil" data-nav="profil">
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      <span class="nav-text">Profil</span>
+    </a>
+    <button type="button" class="fussnav-mehr" id="mehr-knopf" data-nav="mehr" aria-haspopup="true" aria-expanded="false" aria-controls="hauptmenue">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      <span class="nav-text">Mehr</span>
+    </button>
+  </nav>
+
+  <div class="menue" id="hauptmenue" hidden>
+    <div class="menue-schleier" data-menue-zu></div>
+    <nav class="menue-lade" role="dialog" aria-modal="true" aria-labelledby="menue-titel" tabindex="-1">
+      <div class="menue-kopf">
+        <span class="menue-titel" id="menue-titel">Menü</span>
+        <button class="menue-schliessen" data-menue-zu aria-label="Menü schließen">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <a href="/fr/pfad/themen" data-roh="#/pfad/themen" data-nav="lernen" class="menue-punkt">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <span class="nav-text">Lernen</span>
+      </a>
+      <!-- Der Kompetenzpfad ist das Ergebnis der Onboarding-Frage „Wo stehst du im
+           Spiel?" — ohne diesen Eintrag war er nur im Profil verlinkt und damit
+           praktisch unauffindbar. Ohne gesetzte Stufe zeigt die Route die
+           Stufenwahl, funktioniert also auch ohne Onboarding. -->
+      <a href="/fr/pfad/kompetenz" data-roh="#/pfad/kompetenz" data-nav="kompetenz" class="menue-punkt">
+        <i class="fa-solid fa-stairs" aria-hidden="true"></i>
+        <span class="nav-text">Kompetenzpfad</span>
+      </a>
+      <a href="/fr/training" data-roh="#/training" data-nav="training" class="menue-punkt">
+        <i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
+        <span class="nav-text">Trainieren</span>
+      </a>
+      <a href="/fr/regeln" data-roh="#/regeln" data-nav="regeln" class="menue-punkt">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <span class="nav-text">Regeln</span>
+      </a>
+      <a href="/fr/ausruestung" data-roh="#/ausruestung" data-nav="ausruestung" class="menue-punkt">
+        <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+        <span class="nav-text">Ausrüstung</span>
+      </a>
+      <a href="/fr/merkliste" data-roh="#/merkliste" data-nav="merkliste" class="menue-punkt">
+        <i class="fa-solid fa-star" aria-hidden="true"></i>
+        <span class="nav-text">Merkliste</span>
+        <span class="merk-badge" data-merk-anzahl hidden></span>
+      </a>
+      <a href="/fr/ko-turnier" data-roh="#/ko-turnier" data-nav="ko-turnier" class="menue-punkt">
+        <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+        <span class="nav-text">KO-Turnier</span>
+      </a>
+      <a href="/fr/turniersimulator" data-roh="#/turniersimulator" data-nav="turniersimulator" class="menue-punkt">
+        <i class="fa-solid fa-chart-gantt" aria-hidden="true"></i>
+        <span class="nav-text">Turniersimulator</span>
+      </a>
+      <span class="menue-trenner" role="separator"></span>
+      <div class="menue-knopfleiste">
+        <a href="/fr/profil" data-roh="#/profil" data-nav="profil" class="menue-knopf">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <span class="nav-text">Profil</span>
+        </a>
+        <a href="/fr/suche" data-roh="#/suche" data-nav="suche" class="menue-knopf">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="nav-text">Suche</span>
+        </a>
+        <button type="button" class="menue-knopf menue-knopf-thema" data-thema-zyklus aria-label="Darstellung wechseln">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          <span class="nav-text" data-thema-label>Auto</span>
+        </button>
+      </div>
+      <span class="menue-trenner" role="separator"></span>
+      <a href="/fr/ueber" data-roh="#/ueber" data-nav="ueber" class="menue-punkt">
+        <i class="fa-solid fa-compass" aria-hidden="true"></i>
+        <span class="nav-text">Über</span>
+      </a>
+      <a href="/fr/mitmachen" data-roh="#/mitmachen" data-nav="mitmachen" class="menue-punkt">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span class="nav-text">Mitmachen</span>
+      </a>
+      <div class="menue-rechtliches">
+        <a href="/fr/impressum" data-roh="#/impressum" data-footer="impressum" class="menue-mini">Impressum</a>
+        <span aria-hidden="true">·</span>
+        <a href="/fr/datenschutz" data-roh="#/datenschutz" data-footer="datenschutz" class="menue-mini">Datenschutz</a>
+      </div>
+    </nav>
+  </div>
+
+  <div id="dialog-wurzel"></div>
+
+  <noscript>
+    <div style="max-width:44rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6;color:#16202b">
+      <h1>Crossminton-Handbuch</h1>
+      <p>Crossminton lernen — Schlag für Schlag. Ein kostenloses, werbefreies Handbuch mit kleinen Lern-Bausteinen zu
+        Technik, Taktik, Mentaltraining, Athletik, Regeln, Trainingsplanung, Doppel, Outdoor-Spiel und Ausrüstung
+        (Speeder, Schläger, Bespannung, Schuhe, Kleidung).</p>
+      <p>Die App läuft vollständig im Browser und speichert deinen Fortschritt lokal auf deinem Gerät. Bitte aktiviere
+        JavaScript, um das Handbuch zu nutzen.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Auffangnetz ohne Module: Scheitert das Laden der ES-Module (Netz-/Cache-
+       Störung, sehr alter Browser), bleibt keine leere Seite zurück. WICHTIG:
+       geduldig prüfen statt hart nach 3 s abbrechen — Firefox ohne
+       modulepreload (< 115) lädt den Modul-Graphen im langsameren Import-
+       Wasserfall und braucht mit den JSON-Daten spürbar länger als Chrome.
+       Wir pollen daher ~12 s (alle 400 ms); erst dann EIN automatischer
+       Neuversuch (über sessionStorage gegen Endlosschleifen gesichert), und
+       erst wenn auch der leer bleibt, erscheint die Meldung. So schlägt ein
+       nur langsamer Ladevorgang nicht mehr fälschlich fehl. -->
+  <script>
+    (function () {
+      var MAX = 30; // 30 × 400 ms ≈ 12 s Geduld, bevor aufgegeben wird
+      var ersterFehler = '';
+      function merke(text) { if (!ersterFehler && text) ersterFehler = String(text); }
+      // Modul-LADEfehler blubbern nicht — im Capture eingefangen (z. B. von einer
+      // Erweiterung/Firewall blockiertes <script>, falscher MIME-Typ, 404).
+      window.addEventListener('error', function (e) {
+        if (e && e.target && e.target.nodeName === 'SCRIPT' && e.target.src) {
+          merke('Skript blockiert oder nicht ladbar: ' + e.target.src);
+        } else if (e && e.message) {
+          merke(e.message + (e.filename ? ' (' + e.filename + ':' + e.lineno + ')' : ''));
+        }
+      }, true);
+      // LAUFZEITfehler beim Booten (boot() ist async → Ablehnung).
+      window.addEventListener('unhandledrejection', function (e) {
+        var r = e && e.reason;
+        merke(r && r.message ? r.message : r);
+      });
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]; }); }
+      function geladen() {
+        var ziel = document.getElementById('ansicht');
+        return ziel && ziel.childElementCount > 0;
+      }
+      function pruefe(versuch) {
+        if (geladen()) {
+          try { sessionStorage.removeItem('modul-neuversuch'); } catch (e) {}
+          return;
+        }
+        if (versuch < MAX) {
+          window.setTimeout(function () { pruefe(versuch + 1); }, 400);
+          return;
+        }
+        // Nur ohne konkreten Fehler EINMAL neu laden (echte Netz-/Cache-Aussetzer);
+        // steht ein Fehler fest, sofort zeigen — ein Reload würde nichts ändern.
+        try {
+          if (!ersterFehler && !sessionStorage.getItem('modul-neuversuch')) {
+            sessionStorage.setItem('modul-neuversuch', '1');
+            window.location.reload();
+            return;
+          }
+        } catch (e) {}
+        var ziel = document.getElementById('ansicht');
+        if (ziel) ziel.innerHTML =
+          '<div class="karte">' +
+          '<h1>Die App konnte nicht vollständig geladen werden</h1>' +
+          '<p class="leise">Beim Laden der Skript-Module ist etwas schiefgegangen — häufig eine Browser-Erweiterung, die Skripte blockiert, oder eine kurze Netzwerk-/Cache-Störung. Ein Neuladen oder ein privates Fenster (ohne Erweiterungen) hilft in der Regel.</p>' +
+          (ersterFehler ? '<p class="leise">Technischer Hinweis: <code>' + esc(ersterFehler) + '</code></p>' : '') +
+          '<button class="knopf knopf-primaer" onclick="window.location.reload()">Neu laden</button>' +
+          '</div>';
+      }
+      window.addEventListener('load', function () { pruefe(0); });
+    })();
+  </script>
+</body>
+</html>
