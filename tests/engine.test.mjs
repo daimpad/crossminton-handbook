@@ -19,7 +19,7 @@ import { einheitProfil, erzeugePlan, tauscheEinheit, entferneSession, planNachWo
 import { TEAM_TRENNER, bildePaare, erzeugeTurnier, istAbgeschlossen, mische, platzierungen, rundenName, teamName, traegtSiegerEin, turnierSpielform, turniersieger } from '../js/ko-turnier.js';
 import { pruefeI18nStruktur } from '../scripts/i18n-check.mjs';
 import { ladeDatenAusDateien, pruefeSitemapAktuell } from '../scripts/sitemap.mjs';
-import { loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
+import { CLIENT_ROUTEN, loeseRahmenLinks, mitSprache, sammleRouten, sammleRoutenAlleSprachen } from '../scripts/routen.mjs';
 import { NUR_ENTWICKLUNG } from '../scripts/auslieferung.mjs';
 import { pruefeGrafiken, pngEcke, pngGroesse, PNG_GRUND } from '../scripts/grafik-gate.mjs';
 import { baue as baueFigurenmotiv, IDS as figurenIds } from '../scratchpad/figuren/motive.mjs';
@@ -1347,12 +1347,27 @@ pruefe(
 );
 // Personalisierte/interaktive Ansichten gehören nicht hinein: ohne localStorage
 // zeigen sie nur ein leeres Formular — als Suchtreffer wären sie eine Sackgasse.
-const NICHT_INDEXIERBAR = ['/onboarding', '/pfad/individual', '/plan', '/suche', '/profil', '/merkliste', '/ko-turnier'];
 pruefe(
   'zustandsabhängige Routen bleiben draußen',
-  NICHT_INDEXIERBAR.every((pfad) => !sitemapRouten.some((r) => r.pfad === pfad)),
-  NICHT_INDEXIERBAR.filter((pfad) => sitemapRouten.some((r) => r.pfad === pfad)).join(', '),
+  CLIENT_ROUTEN.every((pfad) => !sitemapRouten.some((r) => r.pfad === pfad)),
+  CLIENT_ROUTEN.filter((pfad) => sitemapRouten.some((r) => r.pfad === pfad)).join(', '),
 );
+// Die .htaccess liefert die Hülle mit Status 200 NUR für diese Routen (Regel 4);
+// jede andere Adresse ohne Snapshot bekommt einen echten 404. Fehlt dort eine
+// Client-Route, antwortete eine gültige Seite mit 404 — steht dort eine zu viel,
+// käme eine unbekannte Adresse wieder als Soft 404 durch.
+{
+  const htaccess = readFileSync(join(wurzel, '.htaccess'), 'utf8');
+  const zeile = htaccess.split('\n').find((z) => /^\s*RewriteCond %\{REQUEST_URI\} \^\/\(\?:\(\?:en\|fr\|pl\)\/\)\?\(\?:/.test(z)) || '';
+  const liste = (zeile.match(/\(\?:([a-z|/-]+)\)\/\?\$/) || [])[1]?.split('|').map((r) => `/${r}`) ?? [];
+  pruefe(
+    '.htaccess Regel 4 nennt genau die CLIENT_ROUTEN',
+    liste.length > 0 && liste.slice().sort().join() === CLIENT_ROUTEN.slice().sort().join(),
+    `htaccess: ${liste.join(', ') || '(Zeile nicht gefunden)'}`,
+  );
+  pruefe('.htaccess: unbekannte Routen → 404 mit der Hülle als ErrorDocument',
+    /^ErrorDocument 404 \/index\.html$/m.test(htaccess) && /RewriteRule \^ - \[R=404,L\]/.test(htaccess));
+}
 // Der SPA-Fallback der .htaccess lässt alles mit Dateiendung als Asset durch —
 // eine punktbehaftete Route bekäme dort einen 404 statt der Hülle.
 pruefe(

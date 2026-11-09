@@ -32,6 +32,11 @@ export const SITE_URL = 'https://crossminton-handbook.de';
 // /onboarding, /pfad/individual, /plan, /suche, /profil, /merkliste, /ko-turnier
 // — sie zeigen ohne localStorage nur ein leeres Formular oder eine rein
 // interaktive Ansicht, also keinen indexierbaren Inhalt.
+// Dieselbe Liste braucht die .htaccess (Regel 4): nur diese Routen bekommen dort
+// die Hülle mit Status 200, jede andere Adresse ohne Snapshot einen echten 404.
+// Test [16] hält beide deckungsgleich.
+export const CLIENT_ROUTEN = ['/onboarding', '/pfad/individual', '/plan', '/suche', '/profil', '/merkliste', '/ko-turnier'];
+
 export function sammleRouten(daten) {
   const liste = [];
   const fuege = (pfad, prioritaet) => liste.push({ pfad, prioritaet });

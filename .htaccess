@@ -26,9 +26,26 @@
   DirectorySlash Off
 </IfModule>
 
+# Unbekannte Adressen bekommen einen echten 404 (Regel 5 unten), ausgeliefert wird
+# dabei trotzdem die App-Hülle: Besucher landen in der App statt auf einer nackten
+# Serverseite, Suchmaschinen sehen den Status. Vorher kam jede Adresse mit 200 und
+# der Startseite zurück — die Search Console meldet das als „Soft 404".
+ErrorDocument 404 /index.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 0. Eine Adresse je Seite. www.crossminton-handbook.de lieferte die ganze Seite ein
+  #    zweites Mal mit Status 200 aus (das Canonical zeigte zwar auf die Hauptadresse,
+  #    aber Google musste jede Seite doppelt abrufen, um das zu lernen). Die Query
+  #    hängt Apache ungefragt wieder an.
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  #    rules/ hält nur die Original-PDFs, ein Verzeichnis ohne Index antwortete mit 403.
+  #    Wer es ansteuert, sucht die Turnierstandards — die stehen unter /turnier.
+  RewriteRule ^rules/?$ https://%{HTTP_HOST}/turnier [R=301,L]
 
   # 1. Prerenderter Snapshot zu dieser Route? Direkt ausliefern.
   #    MUSS vor der Verzeichnis-Regel stehen: /baustein/griff IST seit dem
@@ -54,11 +71,18 @@
   #    nicht die HTML-Hülle mit Status 200, die ein fehlendes Bild verschleiert.
   RewriteRule \.[a-zA-Z0-9]{1,8}$ - [L]
 
-  # 4. Der Rest ist eine App-Route ohne Snapshot (Suche, Profil, Merkliste …):
-  #    die Hülle ausliefern, ohne Weiterleitung.
-  #    Status 200 unter der ursprünglichen URL — der Router liest sie beim Boot
-  #    aus location.pathname und rendert die passende Ansicht.
+  # 4. App-Routen ohne Snapshot — genau die, die scripts/routen.mjs als CLIENT_ROUTEN
+  #    vom Prerendern ausnimmt (ohne gespeicherten Zustand ein leeres Formular), in
+  #    jeder Sprache: die Hülle ausliefern, Status 200 unter der ursprünglichen URL —
+  #    der Router liest sie beim Boot aus location.pathname. Test [16] hält die Liste
+  #    mit CLIENT_ROUTEN deckungsgleich.
+  RewriteCond %{REQUEST_URI} ^/(?:(?:en|fr|pl)/)?(?:onboarding|pfad/individual|plan|suche|profil|merkliste|ko-turnier)/?$
   RewriteRule ^ index.html [L]
+
+  # 5. Alles Übrige gibt es nicht: jede gültige Seite hat einen Snapshot (Regel 1) oder
+  #    steht in Regel 4. Ein echter 404 — ausgeliefert wird über ErrorDocument oben
+  #    trotzdem die Hülle.
+  RewriteRule ^ - [R=404,L]
 </IfModule>
 
 # Die App arbeitet buildfrei mit STABILEN Dateinamen (kein Content-Hashing).
